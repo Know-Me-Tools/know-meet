@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Templates — Know Meet</title>
+<meta name="description" content="Ready-to-use Know Meet layouts: social card, slide cover, email, document cover, app header and avatar." />
+<link rel="icon" type="image/svg+xml" href="logos/know-meet-favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="brand.css" />
+<!-- og:start -->
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/docs/design/brand-template.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Brand templates — Know Meet" />
+<meta property="og:description" content="Social card, slide cover, email, document cover, app header and avatar templates for Know Meet." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/docs/design/brand-template.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Brand templates — Know Meet" />
+<meta name="twitter:description" content="Social card, slide cover, email, document cover, app header and avatar templates for Know Meet." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<style>
+.frame { border-radius: 16px; background: var(--km-card); padding: 24px; display: grid; place-items: center; overflow: hidden; }
+.t { container-type: inline-size; position: relative; overflow: hidden; width: 100%; }
+.t-eyebrow { display: block; font-family: var(--km-font-mono); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #FF6A3D; font-size: max(10px, 1.4cqw); }
+.t-dark-eyebrow { color: #C13E1E; }
+.t-lock { display: block; width: auto; }
+/* OG */
+.t-og { aspect-ratio: 1200 / 630; border-radius: 12px; }
+.t-og-in { position: absolute; left: 6cqw; top: 7cqw; width: 58cqw; display: grid; gap: 2.4cqw; }
+.t-og-in .t-lock { height: 5cqw; }
+.t-og-h { font-family: var(--km-font-display); font-weight: 700; font-size: 5.6cqw; line-height: 1.05; letter-spacing: -0.02em; color: #E8EDF3; margin-top: 4cqw; }
+.t-og-s { font-size: 2.1cqw; color: #A7B0BC; line-height: 1.4; }
+.t-og-url { font-family: var(--km-font-mono); font-size: 1.5cqw; color: #A7B0BC; margin-top: 2cqw; }
+.t-og-mark { position: absolute; right: -8cqw; top: 50%; width: 46cqw; height: 46cqw; transform: translateY(-50%); }
+/* slide */
+.t-slide { aspect-ratio: 16 / 9; border-radius: 12px; }
+.t-slide-in { position: absolute; left: 7cqw; top: 26%; display: grid; gap: 1.6cqw; }
+.t-slide-h { font-family: var(--km-font-display); font-weight: 700; font-size: 8cqw; line-height: 1; letter-spacing: -0.02em; color: #E8EDF3; }
+.t-slide-s { font-size: 2.4cqw; color: #A7B0BC; }
+.t-slide-mark { position: absolute; right: -12cqw; top: 8%; width: 52cqw; height: 52cqw; opacity: .95; }
+.t-slide-foot { position: absolute; left: 7cqw; right: 7cqw; bottom: 6cqw; display: flex; align-items: center; justify-content: space-between; color: #A7B0BC; font-size: 1.4cqw; }
+.t-slide-foot .t-lock { height: 3.2cqw; }
+/* email */
+.t-mail { max-width: 600px; background: #FFFFFF; color: #0B0F14; border-radius: 12px; box-shadow: inset 0 0 0 1px #E5E8ED; }
+.t-mail-head { padding: 24px 32px; background: #F7F7F8; }
+.t-mail-head .t-lock { height: 32px; }
+.t-mail-body { padding: 32px; display: grid; gap: 12px; }
+.t-mail-h { font-family: var(--km-font-display); font-weight: 700; font-size: 26px; line-height: 1.2; }
+.t-mail-p { color: #4B5563; font-size: 16px; line-height: 1.6; }
+.t-mail-btn { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 12px; background: #C13E1E; color: #FFFFFF; font-weight: 600; margin-top: 8px; }
+.t-mail-fine { color: #4B5563; font-size: 13px; margin-top: 12px; }
+/* doc */
+.t-doc { aspect-ratio: 1 / 1.414; max-width: 420px; border-radius: 6px; display: grid; grid-template-rows: auto 1fr auto; padding: 8cqw; }
+.t-doc-mark { width: 16cqw; height: 16cqw; }
+.t-doc-mid { align-self: center; display: grid; gap: 2.4cqw; }
+.t-doc-mid .t-eyebrow { color: #C13E1E; font-size: 3cqw; }
+.t-doc-h { font-family: var(--km-font-display); font-weight: 700; font-size: 8.6cqw; line-height: 1.08; letter-spacing: -0.02em; }
+.t-doc-s { color: #4B5563; font-size: 3.8cqw; }
+.t-doc-foot .t-lock { height: 7cqw; }
+/* header */
+.t-hdr { border-radius: 12px; }
+.t-hdr-in { display: flex; align-items: center; gap: 16px; padding: 12px 20px; min-height: 64px; flex-wrap: wrap; }
+.t-hdr-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--km-font-display); font-weight: 700; font-size: 18px; color: #E8EDF3; }
+.t-hdr-brand b { color: #FF6A3D; }
+.t-hdr-brand svg { width: 28px; height: 28px; }
+.t-hdr-nav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+.t-hdr-nav span { padding: 10px 14px; border-radius: 999px; color: #E8EDF3; font-weight: 600; font-size: 14px; }
+.t-hdr-nav span[aria-current] { background: #2B1A18; color: #FF6A3D; }
+.t-hdr-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 12px; background: #FF6A3D; color: #0B0F14; font-weight: 600; font-size: 14px; }
+/* avatar */
+.t-avatar { max-width: 240px; }
+.t-avatar-img { display: block; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="km" viewBox="0 0 64 64"><circle cx="32" cy="32" r="11" fill="var(--lg-ember)"/><circle cx="32.00" cy="11.00" r="6" fill="var(--lg-fg)"/><circle cx="51.97" cy="25.51" r="6" fill="var(--lg-agent)"/><circle cx="44.34" cy="48.99" r="6" fill="var(--lg-fg)"/><circle cx="19.66" cy="48.99" r="6" fill="var(--lg-fg)"/><circle cx="12.03" cy="25.51" r="6" fill="var(--lg-fg)"/></symbol><symbol id="km-page" viewBox="0 0 64 64"><circle cx="32" cy="32" r="11" fill="var(--km-ember)"/><circle cx="32.00" cy="11.00" r="6" fill="var(--km-fg)"/><circle cx="51.97" cy="25.51" r="6" fill="var(--km-cyan)"/><circle cx="44.34" cy="48.99" r="6" fill="var(--km-fg)"/><circle cx="19.66" cy="48.99" r="6" fill="var(--km-fg)"/><circle cx="12.03" cy="25.51" r="6" fill="var(--km-fg)"/></symbol><symbol id="km-mono" viewBox="0 0 64 64"><circle cx="32" cy="32" r="11" fill="currentColor"/><circle cx="32.00" cy="11.00" r="6" fill="currentColor"/><circle cx="51.97" cy="25.51" r="6" fill="currentColor"/><circle cx="44.34" cy="48.99" r="6" fill="currentColor"/><circle cx="19.66" cy="48.99" r="6" fill="currentColor"/><circle cx="12.03" cy="25.51" r="6" fill="currentColor"/></symbol></defs></svg>
+<header class="doc-top"><div class="doc-top-in">
+  <a class="doc-brand" href="brand-guide.html" aria-label="Know Meet brand guide"><svg aria-hidden="true"><use href="#km-page"/></svg><span>Know <b>Meet</b> · Design</span></a>
+  <nav class="doc-nav" aria-label="Design documents"><a href="brand-guide.html">Brand guide</a><a href="brand-template.html" aria-current="page">Templates</a><a href="mood-board.html">Mood board</a><a href="logo-concepts.html">Logo concepts</a><a href="prototype/index.html">Prototype</a></nav>
+  <button class="theme-btn" type="button" id="theme">Light</button>
+</div></header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="t-hero">
+    <span class="eyebrow">Brand templates</span>
+    <h1 id="t-hero">Start from these</h1>
+    <p class="lede">Six layouts that cover most of what Know Meet puts in front of people outside the product. Each scales with its container, uses only brand tokens and outlined logo files, and can be copied as HTML.</p>
+  </section>
+  <section class="sec" aria-label="Templates"><div class="grid"><article class="panel c12 tpl" aria-labelledby="h-tpl-og">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-og">Social and Open Graph card</h3><span class="mono sub">1200 × 630</span></div>
+  <button class="btn" type="button" data-copy="tpl-og">Copy HTML</button></div>
+  <p>Link previews, social posts and announcement images. Keep the headline under eight words.</p>
+  <div class="frame"><div class="t t-og ground-dark" id="tpl-og"><div class="t-og-in"><img class="t-lock" src="logos/know-meet-lockup-dark.svg" width="243" height="64" alt="Know Meet" /><p class="t-og-h">Meetings where agents do the follow-through.</p><p class="t-og-s">People, persistent dots and LiveKit agents around one shared memory.</p><span class="t-og-url">know-meet · prototype</span></div><svg class="t-og-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#km"/></svg></div></div>
+</article><article class="panel c12 tpl" aria-labelledby="h-tpl-slide">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-slide">Slide cover</h3><span class="mono sub">1920 × 1080 (16:9)</span></div>
+  <button class="btn" type="button" data-copy="tpl-slide">Copy HTML</button></div>
+  <p>Opening slide for decks. The oversized mark bleeds off the right edge; never crop the core.</p>
+  <div class="frame"><div class="t t-slide ground-dark" id="tpl-slide"><div class="t-slide-in"><span class="t-eyebrow">Product review · Q4</span><p class="t-slide-h">Know Meet</p><p class="t-slide-s">Agentic meetings on LiveKit</p></div><svg class="t-slide-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#km"/></svg><div class="t-slide-foot"><img class="t-lock" src="logos/know-meet-lockup-dark.svg" width="243" height="64" alt="Know Meet" /><span>Presenter name · Date</span></div></div></div>
+</article><article class="panel c12 tpl" aria-labelledby="h-tpl-email">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-email">Email header and summary</h3><span class="mono sub">600px wide</span></div>
+  <button class="btn" type="button" data-copy="tpl-email">Copy HTML</button></div>
+  <p>Post-meeting summary and invitation emails. Light ground for mail-client safety.</p>
+  <div class="frame"><div class="t t-mail" id="tpl-email"><div class="t-mail-head"><img class="t-lock" src="logos/know-meet-lockup-light.svg" width="243" height="64" alt="Know Meet" /></div><div class="t-mail-body"><span class="t-eyebrow t-dark-eyebrow">Meeting summary</span><p class="t-mail-h">Partner onboarding review</p><p class="t-mail-p">Your transcript, summary and three action items are ready. Scribe recorded them during the meeting; check them before you act.</p><span class="t-mail-btn">Open the summary</span><p class="t-mail-fine">You received this because you joined the meeting. Recording stored by the host.</p></div></div></div>
+</article><article class="panel c12 tpl" aria-labelledby="h-tpl-doc">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-doc">Document cover</h3><span class="mono sub">A4 portrait (1 : 1.414)</span></div>
+  <button class="btn" type="button" data-copy="tpl-doc">Copy HTML</button></div>
+  <p>Specs, proposals and exported reports.</p>
+  <div class="frame"><div class="t t-doc ground-light" id="tpl-doc"><div class="t-doc-top"><svg class="t-doc-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#km"/></svg></div><div class="t-doc-mid"><span class="t-eyebrow">Specification</span><p class="t-doc-h">Meeting knowledge and agent access</p><p class="t-doc-s">Version 1.0 · Draft for review</p></div><div class="t-doc-foot"><img class="t-lock" src="logos/know-meet-lockup-light.svg" width="243" height="64" alt="Know Meet" /></div></div></div>
+</article><article class="panel c12 tpl" aria-labelledby="h-tpl-header">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-header">App header</h3><span class="mono sub">Full width × 64</span></div>
+  <button class="btn" type="button" data-copy="tpl-header">Copy HTML</button></div>
+  <p>The product app bar: lockup left, navigation, one primary action.</p>
+  <div class="frame"><div class="t t-hdr ground-dark" id="tpl-header"><div class="t-hdr-in"><span class="t-hdr-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#km"/></svg><span>Know <b>Meet</b></span></span><span class="t-hdr-nav"><span aria-current="page">Meetings</span><span>Recordings</span><span>Agents</span><span>Settings</span></span><span class="t-hdr-cta">Start meeting</span></div></div></div>
+</article><article class="panel c12 tpl" aria-labelledby="h-tpl-avatar">
+  <div class="od-row" style="flex-wrap:wrap;justify-content:space-between"><div class="od-stack" style="--od-gap:2px"><h3 id="h-tpl-avatar">Profile avatar</h3><span class="mono sub">1024 × 1024</span></div>
+  <button class="btn" type="button" data-copy="tpl-avatar">Copy HTML</button></div>
+  <p>Social profiles, app stores and workspace avatars.</p>
+  <div class="frame"><div class="t t-avatar" id="tpl-avatar"><img src="logos/know-meet-app-icon.svg" width="1024" height="1024" alt="Know Meet app icon" class="t-avatar-img" /></div></div>
+</article></div></section>
+</main>
+<footer class="doc-foot"><div class="wrap">Know Meet design system v1 · part of the KnowMe family · tokens in <span class="mono">tokens.css</span> and <span class="mono">tokens.json</span></div></footer>
+<script>
+(function () {
+  var b = document.getElementById('theme');
+  function sync() { var t = document.documentElement.dataset.theme; b.textContent = t === 'dark' ? 'Light' : 'Dark'; b.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'); }
+  b.addEventListener('click', function () { var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = t; try { localStorage.setItem('km-meet-theme', t); } catch (_) {} sync(); });
+  sync();
+})();
+</script>
+<script>
+(function () {
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.getAttribute('data-copy'));
+      var html = el.outerHTML;
+      function done(ok) { var t = b.textContent; b.textContent = ok ? 'Copied' : 'Copy failed'; setTimeout(function () { b.textContent = t; }, 1600); }
+      if (navigator.clipboard) navigator.clipboard.writeText(html).then(function () { done(true); }, function () { done(false); });
+      else done(false);
+    });
+  });
+})();
+</script>
+</body>
+</html>

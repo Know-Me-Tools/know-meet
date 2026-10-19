@@ -1,0 +1,1552 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>Meetings · Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="Upcoming meetings from your calendars, scheduling with email and SMS invites, and delivery status." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/dashboard.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Meetings — Know Meet" />
+<meta property="og:description" content="Upcoming meetings from your calendars, scheduling with email and SMS invites, and delivery status." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/dashboard.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Meetings — Know Meet" />
+<meta name="twitter:description" content="Upcoming meetings from your calendars, scheduling with email and SMS invites, and delivery status." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css">
+<style>
+  /* ---- dashboard-local layout (uses shared tokens only) */
+  .dash-tabs { margin: calc(var(--s2) * -1) 0 var(--s5); }
+  .dash-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--s5); align-items: start; }
+  .dash-side { display: grid; gap: var(--s4); align-content: start; }
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--s5); align-items: start; }
+  .split-aside { position: sticky; top: calc(var(--header-h) + var(--s4)); display: grid; gap: var(--s4); }
+  @media (max-width: 1023px) {
+    .dash-grid, .split { grid-template-columns: minmax(0, 1fr); }
+    .split-aside { position: static; }
+  }
+
+  /* live banner */
+  .live-banner {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s4); align-items: center;
+    padding: var(--s4) var(--s5); border-radius: var(--radius-tile);
+    background: var(--ember-soft); color: var(--fg); margin-bottom: var(--s5);
+  }
+  .live-banner h2 { font-size: var(--text-lg); }
+  .live-pip { position: relative; width: 12px; height: 12px; border-radius: 50%; background: var(--ember); }
+  .live-pip::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--ember); animation: live-ring 1.8s var(--ease-out) infinite; }
+  @keyframes live-ring { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.6); opacity: 0; } }
+  @media (max-width: 767px) {
+    .live-banner { grid-template-columns: auto minmax(0, 1fr); }
+    .live-banner .btn-row { grid-column: 1 / -1; }
+  }
+
+  /* toolbar */
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); margin-bottom: var(--s4); }
+  .toolbar .search { position: relative; flex: 1 1 220px; max-width: 360px; }
+  .toolbar .search .ic { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--fg-sub); pointer-events: none; }
+  .toolbar .search .input { padding-left: 42px; min-height: 44px; }
+  .toolbar select.input { min-height: 44px; width: auto; }
+
+  /* meetings list */
+  .day-group { display: grid; gap: var(--s2); }
+  .day-group + .day-group { margin-top: var(--s5); }
+  .day-label { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-sub); }
+  .mt-row {
+    display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: var(--s4); align-items: center;
+    padding: var(--s4); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-card);
+  }
+  .mt-time { display: grid; gap: 2px; }
+  .mt-time strong { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); }
+  .mt-body { display: grid; gap: var(--s2); min-width: 0; }
+  .mt-title { color: var(--fg); font-weight: 600; text-decoration: none; }
+  .mt-title:hover { text-decoration: underline; }
+  .meta-item { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-sub); white-space: nowrap; }
+  .meta-item .ic { width: 16px; height: 16px; }
+  .mt-actions { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; justify-content: flex-end; }
+  @media (max-width: 767px) {
+    .mt-row { grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+    .mt-time { display: flex; align-items: baseline; gap: var(--s2); }
+    .mt-actions { justify-content: flex-start; }
+  }
+  .count-sub { font-size: var(--text-sm); color: var(--fg-sub); margin-left: var(--s2); white-space: nowrap; }
+
+  /* side cards */
+  .cal-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s2) 0; }
+  .cal-row + .cal-row { box-shadow: inset 0 1px 0 var(--muted); padding-top: var(--s3); }
+  .cal-row .lead { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--muted); }
+  .cal-row .body { display: grid; gap: 2px; min-width: 0; }
+  .cal-row .body > * { display: block; }
+  .sync-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-sub); }
+  .sync-status .ic { width: 16px; height: 16px; }
+  .sync-status.ok .ic { color: var(--green-text); }
+  .tally { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+  .tally > div { display: grid; gap: 2px; padding: var(--s3); border-radius: var(--radius); background: var(--card); }
+  .tally > div > * { display: block; }
+  .tally strong { font-family: var(--font-display); font-size: var(--text-xl); font-variant-numeric: tabular-nums; }
+
+  /* spinner */
+  .spin { animation: dash-spin 0.9s linear infinite; }
+  @keyframes dash-spin { to { transform: rotate(360deg); } }
+
+  /* forms */
+  .req { color: var(--ember-text); margin-left: 2px; }
+  .form-stack { display: grid; gap: var(--s4); }
+  .panel h2 { font-size: var(--text-lg); }
+  .field-row-3 { display: grid; gap: var(--s4); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 767px) { .field-row-3 { grid-template-columns: minmax(0, 1fr); } }
+  .sw-label { font-weight: 600; font-size: var(--text-sm); cursor: pointer; }
+  .switch-group > .switch-row + .switch-row { box-shadow: inset 0 1px 0 var(--muted); }
+  .note { display: flex; gap: var(--s2); align-items: flex-start; padding: var(--s3); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); color: var(--fg-sub); }
+  .note .ic { width: 18px; height: 18px; color: var(--cyan-text); margin-top: 1px; }
+  .dial-preview { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); padding: var(--s2) var(--s3); border-radius: var(--radius); background: var(--card); font-family: var(--font-mono); font-size: 13px; margin-top: var(--s2); }
+  .err-summary { display: grid; gap: var(--s2); padding: var(--s4) var(--s5); border-radius: var(--radius-tile); background: var(--red-soft); box-shadow: inset 4px 0 0 var(--red); }
+  .err-summary h2 { font-size: var(--text-lg); display: flex; align-items: center; gap: var(--s2); }
+  .err-summary h2 .ic { color: var(--red-text); }
+  .err-summary ul { margin: 0; padding-left: var(--s5); }
+  .err-summary a { color: var(--fg); font-weight: 500; }
+
+  /* invitee chips */
+  .inv-list { display: grid; gap: var(--s2); }
+  .inv-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: 6px 6px 6px var(--s3); border-radius: var(--radius); background: var(--card); }
+  .inv-item .ic-wrap { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--muted); }
+  .inv-item .body { display: grid; gap: 2px; min-width: 0; }
+  .inv-item .body > * { display: block; }
+  .chan-label { font-size: var(--text-xs); color: var(--fg-sub); }
+  .chan-label b { color: var(--fg); font-weight: 600; }
+
+  /* agent picks */
+  .pick { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: var(--s3); align-items: center; padding: var(--s2) var(--s3); border-radius: var(--radius); background: var(--card); cursor: pointer; min-height: 56px; }
+  .pick input { width: 20px; height: 20px; margin: 0; accent-color: var(--ember-btn); }
+  .pick .body { display: grid; gap: 2px; min-width: 0; }
+  .pick .body > * { display: block; }
+  .pick-grid { display: grid; gap: var(--s2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 599px) { .pick-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* files */
+  .file-drop { display: grid; gap: var(--s2); justify-items: start; padding: var(--s4); border-radius: var(--radius); background: var(--card); box-shadow: inset 0 0 0 1px var(--ring-input); }
+  .file-list { display: grid; gap: var(--s2); }
+  .file-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: 4px 4px 4px var(--s3); border-radius: var(--radius); background: var(--card); }
+  .file-item .body { display: grid; gap: 0; min-width: 0; }
+  .file-item .body > * { display: block; }
+
+  /* previews */
+  .pv { display: grid; gap: var(--s3); }
+  .pv-mail { display: grid; gap: var(--s3); padding: var(--s4); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); }
+  .pv-mail-head { display: grid; gap: 2px; padding-bottom: var(--s3); box-shadow: inset 0 -1px 0 var(--muted); }
+  .pv-mail-head > * { display: block; overflow-wrap: anywhere; }
+  .pv-mail-head .subj { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); color: var(--fg); }
+  .pv-mail p { overflow-wrap: anywhere; }
+  .pv-cta { display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 8px 14px; border-radius: 10px; background: var(--ember-btn); color: var(--on-ember); font-weight: 600; }
+  .pv-dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px var(--s3); margin: 0; }
+  .pv-dl dt { color: var(--fg-sub); }
+  .pv-dl dd { margin: 0; overflow-wrap: anywhere; }
+  .pv-sms-wrap { display: grid; gap: var(--s2); padding: var(--s4); border-radius: var(--radius); background: var(--card); }
+  .pv-sms { justify-self: start; max-width: 100%; padding: 10px 14px; border-radius: 18px 18px 18px 4px; background: var(--muted); font-size: var(--text-sm); white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  /* success + detail */
+  .ok-badge { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--green-soft); color: var(--green-text); }
+  .deliv-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; padding: var(--s3) 0; }
+  .deliv-row + .deliv-row { box-shadow: inset 0 1px 0 var(--muted); }
+  .deliv-row .body { display: grid; gap: var(--s2); min-width: 0; }
+  .detail-head { display: grid; gap: var(--s3); margin-bottom: var(--s5); }
+  .detail-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); color: var(--fg-sub); font-size: var(--text-sm); }
+  .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4); }
+  .detail-grid .wide { grid-column: 1 / -1; }
+  @media (max-width: 899px) { .detail-grid { grid-template-columns: minmax(0, 1fr); } }
+  .status-stack { display: grid; gap: 6px; }
+  .status-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .reason { font-size: var(--text-xs); color: var(--fg-sub); max-width: 34ch; }
+  .agent-line { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s2) 0; }
+  .agent-line + .agent-line { box-shadow: inset 0 1px 0 var(--muted); }
+  .agent-line .body { display: grid; gap: 2px; min-width: 0; }
+  .agent-line .body > * { display: block; }
+  .banner-cancel { display: flex; gap: var(--s2); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--red-soft); color: var(--fg); font-weight: 500; }
+  .banner-cancel .ic { color: var(--red-text); }
+  .table td .who { display: grid; gap: 2px; min-width: 160px; }
+  .table td .who > * { display: block; }
+  .table td.tight { width: 1%; }
+  .table input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--ember-btn); margin: 0; }
+  .row-actions { display: flex; flex-wrap: wrap; gap: var(--s2); justify-content: flex-end; }
+  .steps-plain { display: grid; gap: var(--s3); margin: 0; padding: 0; list-style: none; counter-reset: s; text-align: left; }
+  .steps-plain li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; counter-increment: s; font-size: var(--text-sm); color: var(--fg-sub); }
+  .steps-plain li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--muted); color: var(--fg); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+  .steps-plain b { color: var(--fg); }
+  input[type="file"].sr-only:focus-visible + .btn { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .empty-first { max-width: 640px; margin: 0 auto; padding: var(--s7) var(--s5); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main" id="skip">Skip to content</a>
+<div class="app">
+  <header id="appbar"></header>
+  <main id="main" class="page" tabindex="-1"></main>
+</div>
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var h = KM.h, icon = KM.icon, fmt = KM.fmt, D = KM.data;
+  var main = document.getElementById('main');
+  var MIN = 60000;
+  var STORE_KEY = 'km-dash-state';
+  var LANDLINE_REASON = 'Number cannot receive SMS (landline)';
+  var MAX_FILE_BYTES = 50 * 1024 * 1024;
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var CAL_ACCOUNTS = {
+    google: { label: 'Google Calendar', account: D.user.email },
+    outlook: { label: 'Outlook', account: 'jordan.reyes@outlook.com' }
+  };
+
+  KM.mountAppBar(document.getElementById('appbar'), { active: 'meetings' });
+  document.getElementById('skip').addEventListener('click', function (e) {
+    e.preventDefault(); main.focus();
+  });
+
+  /* ---------------------------------------------------------------- time zones */
+  var LOCAL_TZ = (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; } catch (_) { return 'UTC'; } })();
+  var TZS = [
+    ['America/Los_Angeles', 'Pacific Time — Los Angeles'], ['America/Denver', 'Mountain Time — Denver'],
+    ['America/Chicago', 'Central Time — Chicago'], ['America/New_York', 'Eastern Time — New York'],
+    ['Europe/London', 'London'], ['Europe/Berlin', 'Central Europe — Berlin'],
+    ['Asia/Kolkata', 'India — Kolkata'], ['Asia/Tokyo', 'Tokyo'], ['UTC', 'UTC']
+  ];
+  if (!TZS.some(function (t) { return t[0] === LOCAL_TZ; })) TZS.unshift([LOCAL_TZ, LOCAL_TZ.replace(/_/g, ' ')]);
+  function tzLabel(id) { var t = TZS.filter(function (x) { return x[0] === id; })[0]; return t ? t[1] : id; }
+
+  /* ---------------------------------------------------------------- page state (session) */
+  function loadState() {
+    var empty = { created: [], createdDeliveries: [], cancelled: [], overrides: {}, patch: {}, preReads: {} };
+    try {
+      var raw = sessionStorage.getItem(STORE_KEY);
+      if (!raw) return empty;
+      var s = JSON.parse(raw);
+      return {
+        created: Array.isArray(s.created) ? s.created : [],
+        createdDeliveries: Array.isArray(s.createdDeliveries) ? s.createdDeliveries : [],
+        cancelled: Array.isArray(s.cancelled) ? s.cancelled : [],
+        overrides: s.overrides && typeof s.overrides === 'object' ? s.overrides : {},
+        patch: s.patch && typeof s.patch === 'object' ? s.patch : {},
+        preReads: s.preReads && typeof s.preReads === 'object' ? s.preReads : {}
+      };
+    } catch (_) { return empty; }
+  }
+  var state = loadState();
+  function save() { try { sessionStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (_) { /* storage unavailable */ } }
+  function setState(key, value) { state = Object.assign({}, state, (function () { var o = {}; o[key] = value; return o; })()); save(); }
+
+  /* ---------------------------------------------------------------- meetings */
+  var BASE_EXTRA = {
+    'partner-onboarding': { tz: LOCAL_TZ, dots: ['iris'], description: 'Walk Northwind and Lumen Labs through the partner program and agree on onboarding owners.',
+      preReads: [{ name: 'Partner program overview.pdf', size: 1258291 }, { name: 'Onboarding checklist v3.docx', size: 84210 }] },
+    'cohort-kickoff': { tz: LOCAL_TZ, dots: ['iris'], waitingRoom: true, description: 'Kick off Cohort 2: introductions, schedule and first deliverables.',
+      preReads: [{ name: 'Cohort 2 roster.xlsx', size: 40960 }] },
+    'product-sync': { tz: LOCAL_TZ, dots: ['sol', 'iris'], description: 'Weekly status across roadmap items.', preReads: [] },
+    'pricing-review': { tz: LOCAL_TZ, dots: ['iris'], description: 'Review the pricing model draft before it goes to partners.',
+      preReads: [{ name: 'Pricing model draft.pdf', size: 2306867 }, { name: 'Competitor notes.md', size: 12288 }] }
+  };
+  function baseMeeting(id) {
+    if (D.meeting(id)) return D.meeting(id);
+    return state.created.filter(function (m) { return m.id === id; })[0] || null;
+  }
+  function getMeeting(id) {
+    var base = baseMeeting(id);
+    if (!base) return null;
+    return Object.assign(
+      { transcribe: true, sendSummary: true, waitingRoom: false, dots: [], description: '', tz: LOCAL_TZ, preReads: [] },
+      BASE_EXTRA[id] || {}, base, state.overrides[id] || {},
+      { cancelled: state.cancelled.indexOf(id) > -1 });
+  }
+  function allMeetings() {
+    return D.meetings.concat(state.created).map(function (m) { return getMeeting(m.id); })
+      .sort(function (a, b) { return new Date(a.start) - new Date(b.start); });
+  }
+  function statusOf(m) { return m.cancelled ? 'cancelled' : D.meetingStatus(m); }
+  function endOf(m) { return new Date(new Date(m.start).getTime() + m.durationMin * MIN); }
+  function isHosting(m) { return m.host === D.user.name; }
+  function joinUrl(m) {
+    try { return new URL('join.html#invite?code=' + encodeURIComponent(m.joinCode), location.href).href; }
+    catch (_) { return 'join.html#invite?code=' + encodeURIComponent(m.joinCode); }
+  }
+  function getPreReads(m) { return state.preReads[m.id] || m.preReads || []; }
+  function newCode() {
+    var a = 'abcdefghjkmnpqrstuvwxyz23456789';
+    function part(n) { var s = ''; for (var i = 0; i < n; i++) s += a.charAt(Math.floor(Math.random() * a.length)); return s; }
+    return 'km-' + part(3) + '-' + part(3);
+  }
+
+  /* ---------------------------------------------------------------- deliveries */
+  function buildBaseDeliveries() {
+    var list = [];
+    D.meetings.forEach(function (m) {
+      var sentAt = new Date(new Date(m.start).getTime() - 2 * 24 * 60 * MIN).toISOString();
+      m.invitees.forEach(function (name, i) {
+        var p = D.person(name) || { id: 'self', name: name, email: name === D.user.name ? D.user.email : '', phone: null };
+        var phoneOnly = m.id === 'pricing-review' && p.id === 'dana';
+        var chans = [];
+        if (!phoneOnly && p.email) chans.push('email');
+        if (p.phone && (i % 2 === 0 || phoneOnly)) chans.push('sms');
+        if (m.source !== 'knowme' && p.email && !phoneOnly) chans.push('calendar');
+        chans.forEach(function (ch) {
+          var st = 'delivered', reason = null, landline = false;
+          if (ch === 'email' && i === 0) st = 'opened';
+          if (ch === 'sms' && m.id === 'cohort-kickoff') st = 'queued';
+          if (ch === 'sms' && phoneOnly) { st = 'failed'; reason = LANDLINE_REASON; landline = true; }
+          list.push({ id: m.id + '-' + p.id + '-' + ch, meetingId: m.id, name: p.name, personId: p.id, channel: ch,
+            to: ch === 'sms' ? p.phone : p.email, status: st, reason: reason, landline: landline, sentAt: sentAt });
+        });
+      });
+    });
+    return list;
+  }
+  var BASE_DELIVERIES = buildBaseDeliveries();
+  function deliveries() {
+    return BASE_DELIVERIES.concat(state.createdDeliveries).map(function (d) { return Object.assign({}, d, state.patch[d.id] || {}); })
+      .filter(function (d) { var m = getMeeting(d.meetingId); return m && !m.cancelled; });
+  }
+  function patchDelivery(id, p) {
+    var next = Object.assign({}, state.patch);
+    next[id] = Object.assign({}, next[id] || {}, p);
+    setState('patch', next);
+  }
+  var RESEND_MS = 1100;
+  function resend(d) {
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        var p = d.landline
+          ? { status: 'failed', reason: LANDLINE_REASON, resentAt: new Date().toISOString() }
+          : { status: 'delivered', reason: null, resentAt: new Date().toISOString() };
+        patchDelivery(d.id, p);
+        resolve(Object.assign({}, d, p));
+      }, RESEND_MS);
+    });
+  }
+  function sendEmailInstead(d) {
+    var p = D.person(d.name);
+    var email = p && p.email;
+    return new Promise(function (resolve, reject) {
+      if (!email) { reject(new Error('No email address on file for ' + d.name + '. Add one from Schedule → Edit.')); return; }
+      setTimeout(function () {
+        var existing = deliveries().filter(function (x) { return x.meetingId === d.meetingId && x.name === d.name && x.channel === 'email'; })[0];
+        if (existing) patchDelivery(existing.id, { status: 'delivered', reason: null, resentAt: new Date().toISOString() });
+        else {
+          setState('createdDeliveries', state.createdDeliveries.concat([{ id: d.meetingId + '-' + (p.id || 'x') + '-email-alt', meetingId: d.meetingId,
+            name: d.name, personId: p.id, channel: 'email', to: email, status: 'delivered', reason: null, landline: false, sentAt: new Date().toISOString() }]));
+        }
+        patchDelivery(d.id, { resolvedByEmail: true });
+        resolve(email);
+      }, RESEND_MS);
+    });
+  }
+
+  /* ---------------------------------------------------------------- UI helpers */
+  function render() { KM.clear(main); for (var i = 0; i < arguments.length; i++) if (arguments[i]) main.appendChild(arguments[i]); }
+  function pageHead(o) {
+    return h('header', { class: 'page-head' },
+      h('div', null,
+        o.crumbs ? h('nav', { class: 'crumbs', 'aria-label': 'Breadcrumb' }, o.crumbs) : null,
+        o.eyebrow ? h('span', { class: 'eyebrow', text: o.eyebrow }) : null,
+        h('h1', { text: o.title }),
+        o.sub ? h('p', { class: 'sub', text: o.sub }) : null),
+      o.actions ? h('div', { class: 'actions' }, o.actions) : null);
+  }
+  function crumbsTo(label) {
+    return [h('a', { href: '#upcoming', text: 'Meetings' }), icon('chevron-right'), h('span', { class: 'od-truncate', text: label, title: label, style: 'max-width:40ch' })];
+  }
+  function dashTabs(active) {
+    var items = [['upcoming', 'Upcoming', 'calendar'], ['invites', 'Invites', 'send'], ['schedule', 'Schedule', 'plus']];
+    return h('nav', { class: 'tabs dash-tabs', 'aria-label': 'Meetings sections' },
+      items.map(function (it) {
+        return h('a', { href: '#' + it[0], 'aria-current': active === it[0] ? 'page' : null }, icon(it[2], 'ic-sm'), h('span', { text: it[1] }));
+      }));
+  }
+  function busy(btn, label) {
+    var kids = Array.prototype.slice.call(btn.childNodes);
+    btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+    KM.clear(btn); btn.appendChild(icon('refresh', 'ic-sm spin')); btn.appendChild(h('span', { text: label }));
+    return function restore() {
+      KM.clear(btn); kids.forEach(function (k) { btn.appendChild(k); });
+      btn.disabled = false; btn.removeAttribute('aria-busy');
+    };
+  }
+  var SOURCE = {
+    google: { label: 'Google Calendar', cls: 'chip' },
+    outlook: { label: 'Outlook', cls: 'chip' },
+    knowme: { label: 'KnowMe', cls: 'chip chip-ember' }
+  };
+  function sourceChip(src) {
+    var s = SOURCE[src] || SOURCE.knowme;
+    return h('span', { class: s.cls }, icon(src === 'knowme' ? 'dot' : 'calendar'), h('span', { text: s.label }));
+  }
+  var CHANNEL = { email: ['mail', 'Email'], sms: ['sms', 'SMS'], calendar: ['calendar', 'Calendar'] };
+  function channelChip(ch) { var c = CHANNEL[ch]; return h('span', { class: 'chip' }, icon(c[0]), h('span', { text: c[1] })); }
+  var STATUS = {
+    delivered: ['chip chip-green', 'check', 'Delivered'],
+    opened: ['chip chip-green', 'eye', 'Opened'],
+    queued: ['chip chip-amber', 'clock', 'Queued'],
+    sent: ['chip', 'send', 'Sent'],
+    failed: ['chip chip-red', 'alert', 'Failed']
+  };
+  function statusChip(st) { var s = STATUS[st] || STATUS.sent; return h('span', { class: s[0] }, icon(s[1]), h('span', { text: s[2] })); }
+  function meetingStatusChip(m) {
+    var st = statusOf(m);
+    if (st === 'live') return h('span', { class: 'chip chip-ember' }, h('span', { class: 'pip' }), h('span', { text: 'Live now' }));
+    if (st === 'ended') return h('span', { class: 'chip' }, icon('check'), h('span', { text: 'Ended' }));
+    if (st === 'cancelled') return h('span', { class: 'chip chip-red' }, icon('x'), h('span', { text: 'Cancelled' }));
+    return h('span', { class: 'chip chip-green' }, icon('clock'), h('span', { text: 'Upcoming' }));
+  }
+  function avatarStack(names) {
+    var shown = names.slice(0, 3);
+    return h('span', { class: 'meta-item' },
+      h('span', { class: 'avatar-stack', 'aria-hidden': 'true' }, shown.map(function (n) { return h('span', { class: 'avatar avatar-sm', text: KM.initials(n) }); })),
+      h('span', { text: names.length + (names.length === 1 ? ' invitee' : ' invitees'), title: names.join(', ') }));
+  }
+  function agentChips(m) {
+    return (m.agents || []).filter(function (a) { return a !== 'concierge'; }).map(function (id) {
+      var a = D.agent(id);
+      return a ? h('span', { class: 'chip chip-cyan' }, icon('agent-add'), h('span', { text: a.name })) : null;
+    });
+  }
+  function copyLinkBtn(m, small) {
+    return h('button', { class: 'btn' + (small ? ' btn-sm' : ''), type: 'button', 'aria-label': 'Copy join link for ' + m.title,
+      onclick: function () { KM.copy(joinUrl(m)); } }, icon('link', 'ic-sm'), h('span', { text: 'Copy link' }));
+  }
+  function switchRow(o) {
+    return h('div', { class: 'switch-row' },
+      h('div', { class: 'copy' },
+        h('label', { class: 'sw-label', for: o.id, text: o.label }),
+        o.hint ? h('span', { class: 'small sub' }, o.hint) : null,
+        o.extra || null),
+      h('span', { class: 'switch' },
+        h('input', { type: 'checkbox', role: 'switch', id: o.id, checked: !!o.checked, onchange: o.onchange || null, 'aria-describedby': o.describedBy || null }),
+        h('span', { class: 'track' }), h('span', { class: 'thumb' })));
+  }
+
+  /* ================================================================ gate */
+  var GATE_TITLES = {
+    upcoming: 'Sign in to see your meetings',
+    schedule: 'Sign in to schedule a meeting',
+    meeting: 'Sign in to view this meeting',
+    invites: 'Sign in to see the invites you sent',
+    empty: 'Sign in to set up meetings'
+  };
+  function renderGate(key) {
+    document.title = 'Sign in · Meetings · Know Meet';
+    var host = h('div');
+    render(pageHead({ title: 'Meetings', sub: 'Scheduling, calendars and invites belong to your KnowMe account.' }), host);
+    KM.gate(host, {
+      title: GATE_TITLES[key] || GATE_TITLES.upcoming,
+      reason: 'Scheduling meetings, connecting Google or Outlook calendars, and sending email or SMS invites need an account. People you invite never do. Prefer to skip it? Start a guest meeting — guests get the Concierge and live transcription that is deleted when the meeting ends.',
+      next: 'dashboard.html' + location.hash
+    });
+  }
+
+  /* ================================================================ #upcoming */
+  var FILTERS = [['all', 'All'], ['hosting', 'Hosting'], ['invited', 'Invited']];
+  function renderUpcoming(arg, params) {
+    document.title = 'Meetings · Know Meet';
+    var filter = FILTERS.some(function (f) { return f[0] === params.filter; }) ? params.filter : 'all';
+    var active = allMeetings().filter(function (m) { var s = statusOf(m); return s === 'live' || s === 'upcoming'; });
+    var live = active.filter(function (m) { return statusOf(m) === 'live'; })[0] || null;
+
+    var listHost = h('div', { 'aria-live': 'polite' });
+    var seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Filter meetings' }, FILTERS.map(function (f) {
+      return h('button', { type: 'button', 'aria-pressed': f[0] === filter ? 'true' : 'false', text: f[1], onclick: function () {
+        filter = f[0];
+        KM.$$('button', seg).forEach(function (b) { b.setAttribute('aria-pressed', b.textContent === f[1] ? 'true' : 'false'); });
+        try { history.replaceState(null, '', '#upcoming' + (filter === 'all' ? '' : '?filter=' + filter)); } catch (_) { /* file:// */ }
+        drawList();
+      } });
+    }));
+
+    function drawList() {
+      KM.clear(listHost);
+      var rows = active.filter(function (m) { return m !== live; }).filter(function (m) {
+        if (filter === 'hosting') return isHosting(m);
+        if (filter === 'invited') return !isHosting(m);
+        return true;
+      });
+      if (!rows.length) {
+        listHost.appendChild(h('div', { class: 'empty' },
+          h('div', { class: 'empty-icon' }, icon('calendar')),
+          h('h3', { text: filter === 'all' ? 'Nothing else on the calendar' : (filter === 'hosting' ? 'No upcoming meetings you’re hosting' : 'No upcoming meetings you’re invited to') }),
+          h('p', { text: filter === 'all' ? 'Schedule a meeting and invite people by email or phone number.' : 'Try a different filter, or schedule a new meeting.' }),
+          h('div', { class: 'btn-row' },
+            h('a', { class: 'btn btn-primary btn-sm', href: '#schedule' }, icon('plus', 'ic-sm'), h('span', { text: 'Schedule meeting' })),
+            filter !== 'all' ? h('button', { class: 'btn btn-sm', type: 'button', text: 'Show all', onclick: function () { seg.firstChild.click(); } }) : null)));
+        return;
+      }
+      var groups = [];
+      rows.forEach(function (m) {
+        var label = fmt.relDay(m.start);
+        var g = groups[groups.length - 1];
+        if (!g || g.label !== label) { g = { label: label, items: [] }; groups.push(g); }
+        g.items.push(m);
+      });
+      groups.forEach(function (g, gi) {
+        var hid = 'day-' + gi;
+        listHost.appendChild(h('section', { class: 'day-group', 'aria-labelledby': hid },
+          h('h2', { class: 'day-label', id: hid },
+            g.label, g.label === 'Today' || g.label === 'Tomorrow' ? h('span', { class: 'count-sub', text: fmt.day(g.items[0].start) }) : null),
+          h('ul', { class: 'list' }, g.items.map(function (m) { return h('li', null, meetingRow(m)); }))));
+      });
+    }
+
+    var side = h('aside', { class: 'dash-side', 'aria-label': 'Calendars and delivery' }, calendarsCard(), deliveryCard());
+
+    render(
+      pageHead({ title: 'Meetings', sub: 'Everything on your connected calendars, plus meetings scheduled in KnowMe.',
+        actions: [
+          h('a', { class: 'btn', href: 'meet.html#start' }, icon('cam'), h('span', { text: 'Start now' })),
+          h('a', { class: 'btn btn-primary', href: '#schedule' }, icon('plus'), h('span', { text: 'Schedule meeting' }))] }),
+      dashTabs('upcoming'),
+      live ? liveBanner(live) : null,
+      h('div', { class: 'dash-grid' },
+        h('div', null,
+          h('div', { class: 'toolbar' }, h('h2', { class: 'sr-only', text: 'Upcoming meetings' }), seg,
+            h('span', { class: 'small sub', text: 'Times shown in ' + tzLabel(LOCAL_TZ) })),
+          listHost),
+        side));
+    drawList();
+  }
+
+  function liveBanner(m) {
+    var mins = Math.max(1, Math.round((Date.now() - new Date(m.start).getTime()) / MIN));
+    return h('section', { class: 'live-banner', 'aria-labelledby': 'live-title' },
+      h('span', { class: 'live-pip', 'aria-hidden': 'true' }),
+      h('div', { class: 'od-stack', style: '--od-gap:2px' },
+        h('span', { class: 'eyebrow', text: 'Live now' }),
+        h('h2', { id: 'live-title', class: 'od-truncate', title: m.title, text: m.title }),
+        h('span', { class: 'small sub', text: 'Started ' + mins + ' min ago · ' + m.invitees.length + ' invitees' + (m.record ? ' · Recording on' : '') })),
+      h('div', { class: 'btn-row' },
+        h('a', { class: 'btn btn-ghost btn-sm', href: '#meeting:' + m.id }, h('span', { text: 'Details' })),
+        h('a', { class: 'btn btn-primary', href: 'meet.html#lobby' }, icon('cam'), h('span', { text: 'Join' }))));
+  }
+
+  function meetingRow(m) {
+    var start = new Date(m.start);
+    return h('article', { class: 'mt-row', 'aria-label': m.title + ', ' + fmt.time(start) },
+      h('div', { class: 'mt-time' },
+        h('strong', { class: 'od-nowrap', text: fmt.time(start) }),
+        h('span', { class: 'small sub od-nowrap', text: fmt.mins(m.durationMin) })),
+      h('div', { class: 'mt-body' },
+        h('a', { class: 'mt-title od-truncate', href: '#meeting:' + m.id, title: m.title, text: m.title }),
+        h('div', { class: 'od-cluster' },
+          sourceChip(m.source),
+          avatarStack(m.invitees),
+          m.record ? h('span', { class: 'meta-item' }, icon('record'), h('span', { text: 'Recording on' })) : null,
+          m.dialIn ? h('span', { class: 'meta-item' }, icon('phone-in'), h('span', { text: 'Dial-in' })) : null,
+          isHosting(m) ? null : h('span', { class: 'meta-item' }, icon('user'), h('span', { text: 'Host: ' + m.host })),
+          agentChips(m))),
+      h('div', { class: 'mt-actions' },
+        h('a', { class: 'btn btn-sm', href: 'meet.html#lobby', 'aria-label': 'Join ' + m.title }, icon('cam', 'ic-sm'), h('span', { text: 'Join' })),
+        copyLinkBtn(m, true),
+        h('a', { class: 'icon-btn', href: '#meeting:' + m.id, 'aria-label': 'Open details for ' + m.title, title: 'Details' }, icon('chevron-right'))));
+  }
+
+  var lastSync = new Date(Date.now() - 12 * MIN);
+  function calendarsCard() {
+    var statusEl = h('span', { class: 'sync-status', role: 'status' }, icon('clock'), h('span', { text: 'Last synced ' + fmt.time(lastSync) }));
+    var btn = h('button', { class: 'btn btn-sm', type: 'button' }, icon('refresh', 'ic-sm'), h('span', { text: 'Sync now' }));
+    btn.addEventListener('click', function () {
+      var restore = busy(btn, 'Syncing…');
+      KM.clear(statusEl); statusEl.className = 'sync-status';
+      statusEl.appendChild(h('span', { text: 'Checking Google Calendar and Outlook…' }));
+      setTimeout(function () {
+        restore();
+        lastSync = new Date();
+        KM.clear(statusEl); statusEl.className = 'sync-status ok';
+        statusEl.appendChild(icon('check')); statusEl.appendChild(h('span', { text: 'Synced just now' }));
+      }, 1400);
+    });
+    function calRow(name, account, connected) {
+      return h('li', { class: 'cal-row' },
+        h('span', { class: 'lead' }, icon('calendar', 'ic-sm')),
+        h('span', { class: 'body' },
+          h('strong', { class: 'small', text: name }),
+          h('span', { class: 'xsmall sub od-truncate', title: account, text: account })),
+        connected
+          ? h('span', { class: 'chip chip-green' }, h('span', { class: 'pip' }), h('span', { text: 'Connected' }))
+          : h('a', { class: 'btn btn-sm', href: 'settings.html#calendars' }, h('span', { text: 'Connect' })));
+    }
+    return h('section', { class: 'card', 'aria-labelledby': 'cal-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'cal-title', style: 'font-size:var(--text-lg)', text: 'Connected calendars' }),
+          h('span', { class: 'small sub', text: 'KnowMe adds a join link and dial-in to each event.' }))),
+      h('ul', { class: 'list', style: 'gap:0' },
+        calRow('Google Calendar', CAL_ACCOUNTS.google.account, true),
+        calRow('Outlook', CAL_ACCOUNTS.outlook.account, true),
+        calRow('CalDAV', 'Not connected', false)),
+      h('div', { class: 'od-cluster', style: 'justify-content:space-between' }, statusEl, btn),
+      h('a', { class: 'small', href: 'settings.html#calendars', text: 'Manage calendars' }));
+  }
+
+  function deliveryCard() {
+    var ds = deliveries();
+    var count = function (st) { return ds.filter(function (d) { return d.status === st && !d.resolvedByEmail; }).length; };
+    var failed = count('failed');
+    return h('section', { class: 'card', 'aria-labelledby': 'del-title' },
+      h('div', { class: 'card-head' }, h('div', null,
+        h('h2', { id: 'del-title', style: 'font-size:var(--text-lg)', text: 'Invite delivery' }),
+        h('span', { class: 'small sub', text: 'Email, SMS and calendar invites across upcoming meetings.' }))),
+      h('div', { class: 'tally' },
+        h('div', null, h('strong', { text: String(count('delivered') + count('opened')) }), h('span', { class: 'xsmall sub', text: 'Delivered' })),
+        h('div', null, h('strong', { text: String(count('queued')) }), h('span', { class: 'xsmall sub', text: 'Queued' })),
+        h('div', null, h('strong', { text: String(failed) }), h('span', { class: 'xsmall sub', text: 'Failed' }))),
+      failed ? h('p', { class: 'small', style: 'display:flex;gap:6px;align-items:flex-start' }, icon('alert', 'ic-sm'),
+        h('span', { text: failed === 1 ? '1 SMS invite couldn’t be delivered.' : failed + ' invites couldn’t be delivered.' })) : null,
+      h('a', { class: 'btn btn-sm', href: '#invites' }, h('span', { text: 'Review invites' }), icon('chevron-right', 'ic-sm')));
+  }
+
+  /* ================================================================ #empty */
+  function renderEmpty() {
+    document.title = 'Get started · Meetings · Know Meet';
+    render(
+      pageHead({ title: 'Meetings', sub: 'No calendars connected and no meetings yet.' }),
+      h('section', { class: 'empty empty-center empty-first', 'aria-labelledby': 'empty-title' },
+        h('div', { class: 'empty-icon' }, icon('calendar', 'ic-lg')),
+        h('h2', { id: 'empty-title', text: 'Connect a calendar to see your meetings here' }),
+        h('p', { text: 'Link Google Calendar, Outlook or any CalDAV calendar and your meetings show up in this list. Each event gets a KnowMe join link and phone dial-in details, so invitees can join from the browser or a phone — no account needed.' }),
+        h('ol', { class: 'steps-plain', style: 'margin:var(--s3) 0' },
+          h('li', null, h('span', null, h('b', { text: 'Connect a calendar' }), ' — read your events and add KnowMe links to new ones.')),
+          h('li', null, h('span', null, h('b', { text: 'Schedule and invite' }), ' — by email, by SMS, or both.')),
+          h('li', null, h('span', null, h('b', { text: 'Meet with your agents' }), ' — the transcript and summary go out when the meeting ends.'))),
+        h('div', { class: 'btn-row' },
+          h('a', { class: 'btn btn-primary', href: 'settings.html#calendars' }, icon('calendar'), h('span', { text: 'Connect a calendar' })),
+          h('a', { class: 'btn', href: '#schedule' }, icon('plus'), h('span', { text: 'Schedule a meeting' })))));
+  }
+
+  /* ================================================================ #schedule */
+  function isoDate(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function hhmm(d) { return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function phoneDigits(v) { return String(v).replace(/[\s().\-]/g, ''); }
+  function knownPersonFor(value) {
+    var v = String(value).toLowerCase();
+    var pd = phoneDigits(value).replace(/^\+?1?/, '');
+    return D.people.filter(function (p) {
+      return p.email.toLowerCase() === v || (pd.length >= 10 && phoneDigits(p.phone).replace(/^\+?1?/, '') === pd);
+    })[0] || null;
+  }
+  /* → {ok, error, invitee} */
+  function parseInvitee(raw) {
+    var v = String(raw || '').replace(/^\s+|\s+$/g, '');
+    if (!v) return { ok: false, error: '' };
+    var known = knownPersonFor(v);
+    if (EMAIL_RE.test(v)) {
+      return { ok: true, invitee: { key: v.toLowerCase(), value: v, kind: 'email', name: known ? known.name : v,
+        email: v, phone: known ? known.phone : null } };
+    }
+    var digits = phoneDigits(v);
+    if (/^\+?\d+$/.test(digits)) {
+      var bare = digits.replace(/^\+/, '');
+      if (bare.length === 10 && digits.charAt(0) !== '+') digits = '+1' + bare;
+      else if (digits.charAt(0) !== '+') digits = '+' + bare;
+      if (bare.length < 10 || bare.length > 15) {
+        return { ok: false, error: '“' + v + '” doesn’t look like a full phone number. Include the country code, like +1 415 555 0142.' };
+      }
+      return { ok: true, invitee: { key: digits, value: v, kind: 'phone', name: known ? known.name : v,
+        email: known ? known.email : null, phone: digits } };
+    }
+    if (v.indexOf('@') > -1) return { ok: false, error: '“' + v + '” isn’t a complete email address. Use the form name@company.com.' };
+    return { ok: false, error: '“' + v + '” isn’t an email or phone number. Enter an address like name@company.com or a number with country code, like +1 415 555 0142.' };
+  }
+  function channelsFor(inv) {
+    var c = [];
+    if (inv.email) c.push('email');
+    if (inv.phone) c.push('sms');
+    return c;
+  }
+  function channelText(inv) {
+    var c = channelsFor(inv);
+    if (c.length === 2) return 'Email invite + SMS via Telnyx';
+    return c[0] === 'sms' ? 'SMS via Telnyx' : 'Email invite';
+  }
+
+  function renderSchedule(arg, params) {
+    var editing = params.edit ? getMeeting(params.edit) : null;
+    if (params.edit && (!editing || editing.cancelled)) { renderNotFound(params.edit); return; }
+    document.title = (editing ? 'Edit meeting' : 'Schedule meeting') + ' · Know Meet';
+    var signedUser = KM.auth.get();
+    var hostName = signedUser ? signedUser.name : D.user.name;
+    var tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+
+    var form = {
+      code: editing ? editing.joinCode : newCode(),
+      invitees: editing ? editing.invitees.map(function (n) {
+        var p = D.person(n);
+        if (p) return { key: p.email.toLowerCase(), value: p.email, kind: 'email', name: p.name, email: p.email, phone: p.phone };
+        var r = parseInvitee(n === D.user.name ? D.user.email : n);
+        return r.ok ? Object.assign({}, r.invitee, { name: n }) : null;
+      }).filter(Boolean) : [],
+      files: editing ? getPreReads(editing).slice() : []
+    };
+
+    /* ---- fields */
+    function errEl(id) { return h('p', { class: 'field-error', id: id + '-err' }, icon('alert', 'ic-sm'), h('span')); }
+    function setErr(id, msg) {
+      var input = document.getElementById(id), e = document.getElementById(id + '-err');
+      if (!e) return;
+      e.lastChild.textContent = msg || '';
+      e.classList.toggle('show', !!msg);
+      if (input) {
+        if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+        var hint = input.getAttribute('data-hint');
+        input.setAttribute('aria-describedby', [hint, msg ? id + '-err' : null].filter(Boolean).join(' ') || id + '-err');
+      }
+    }
+    function labelReq(forId, text) { return h('label', { for: forId }, text, h('span', { class: 'req', 'aria-hidden': 'true', text: '*' })); }
+
+    var fTitle = h('input', { class: 'input', id: 'f-title', type: 'text', required: true, maxlength: '120', autocomplete: 'off', placeholder: 'e.g. Partner onboarding review' });
+    var fDate = h('input', { class: 'input', id: 'f-date', type: 'date', required: true, min: isoDate(new Date()) });
+    var fTime = h('input', { class: 'input', id: 'f-time', type: 'time', required: true, step: '300' });
+    var fDur = h('select', { class: 'input', id: 'f-duration' }, [15, 30, 45, 60, 90, 120].map(function (n) { return h('option', { value: String(n), text: fmt.mins(n) }); }));
+    var fTz = h('select', { class: 'input', id: 'f-tz' }, TZS.map(function (t) { return h('option', { value: t[0], text: t[1] }); }));
+    var fDesc = h('textarea', { class: 'input', id: 'f-desc', rows: '3', maxlength: '1000', placeholder: 'Agenda, goals, anything invitees should know.' });
+    var fInv = h('input', { class: 'input', id: 'f-invitee', type: 'text', autocomplete: 'off', inputmode: 'email', list: 'people-list',
+      placeholder: 'name@company.com or +1 415 555 0142', 'data-hint': 'f-invitee-hint', 'aria-describedby': 'f-invitee-hint' });
+    var fCal = h('select', { class: 'input', id: 'f-calendar' },
+      h('option', { value: 'google', text: 'Google Calendar — ' + CAL_ACCOUNTS.google.account }),
+      h('option', { value: 'outlook', text: 'Outlook — ' + CAL_ACCOUNTS.outlook.account }),
+      h('option', { value: 'none', text: 'Don’t add to a calendar' }));
+    var fFiles = h('input', { id: 'f-files', type: 'file', multiple: true, class: 'sr-only',
+      accept: '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.md,.txt,.csv,.png,.jpg' });
+
+    fTitle.value = editing ? editing.title : '';
+    var startD = editing ? new Date(editing.start) : null;
+    fDate.value = startD ? isoDate(startD) : isoDate(tomorrow);
+    fTime.value = startD ? hhmm(startD) : '10:00';
+    fDur.value = String(editing ? editing.durationMin : 30);
+    if (!fDur.value) fDur.value = '30';
+    fTz.value = editing && editing.tz ? editing.tz : LOCAL_TZ;
+    fDesc.value = editing ? editing.description || '' : '';
+    fCal.value = editing ? (editing.source === 'knowme' ? 'none' : editing.source) : 'google';
+
+    var opt = {
+      record: editing ? !!editing.record : true,
+      transcribe: editing ? editing.transcribe !== false : true,
+      summary: editing ? editing.sendSummary !== false : true,
+      dial: editing ? !!editing.dialIn : true,
+      waiting: editing ? !!editing.waitingRoom : false
+    };
+
+    /* ---- validation */
+    function vTitle() { return fTitle.value.trim() ? '' : 'Add a title so invitees know what the meeting is about.'; }
+    function startDate() { return fDate.value && fTime.value ? new Date(fDate.value + 'T' + fTime.value) : null; }
+    function vDate() {
+      if (!fDate.value) return 'Pick a date for the meeting.';
+      var d = new Date(fDate.value + 'T00:00'); var t = new Date(); t.setHours(0, 0, 0, 0);
+      return d < t ? 'That date has passed. Choose today or a later date.' : '';
+    }
+    function vTime() {
+      if (!fTime.value) return 'Pick a start time.';
+      var s = startDate();
+      return s && !vDate() && s.getTime() < Date.now() ? 'That time has already passed today. Pick a later time, or use Start now for an instant meeting.' : '';
+    }
+    function vInvitees() {
+      if (fInv.value.trim()) { var r = commitInvitee(); if (r) return r; }
+      return form.invitees.length ? '' : 'Add at least one invitee by email address or phone number.';
+    }
+
+    /* ---- invitees */
+    var invList = h('ul', { class: 'inv-list', 'aria-label': 'Invitees added' });
+    var invCount = h('span', { class: 'small sub', 'aria-live': 'polite' });
+    function drawInvitees() {
+      KM.clear(invList);
+      form.invitees.forEach(function (inv, i) {
+        invList.appendChild(h('li', { class: 'inv-item' },
+          h('span', { class: 'ic-wrap' }, icon(inv.kind === 'email' ? 'mail' : 'sms', 'ic-sm')),
+          h('span', { class: 'body' },
+            h('span', { class: 'small od-truncate', title: inv.name !== inv.value ? inv.name + ' — ' + inv.value : inv.value },
+              inv.name !== inv.value ? h('strong', { text: inv.name + ' ' }) : null, h('span', { class: inv.name !== inv.value ? 'sub' : '', text: inv.value })),
+            h('span', { class: 'chan-label' }, 'Will receive: ', h('b', { text: channelText(inv) }),
+              inv.name !== inv.value && channelsFor(inv).length === 2 ? ' (contact on file)' : '')),
+          h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Remove ' + inv.value, onclick: function () {
+            form.invitees = form.invitees.filter(function (_, j) { return j !== i; });
+            drawInvitees(); updatePreview(); fInv.focus();
+            KM.toast('Removed ' + inv.value, 'remove');
+          } }, icon('x', 'ic-sm'))));
+      });
+      invCount.textContent = form.invitees.length ? form.invitees.length + (form.invitees.length === 1 ? ' invitee' : ' invitees') : 'No invitees yet';
+    }
+    /* returns error message or '' */
+    function commitInvitee() {
+      var parts = fInv.value.split(/[,;]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+      if (!parts.length) { setErr('f-invitee', ''); return ''; }
+      var bad = [], added = 0;
+      parts.forEach(function (p) {
+        var r = parseInvitee(p);
+        if (!r.ok) { bad.push({ v: p, e: r.error }); return; }
+        if (form.invitees.some(function (x) { return x.key === r.invitee.key || (r.invitee.email && x.email && x.email.toLowerCase() === r.invitee.email.toLowerCase()); })) {
+          bad.push({ v: p, e: '“' + p + '” is already on the invite list.' }); return;
+        }
+        form.invitees = form.invitees.concat([r.invitee]); added++;
+      });
+      fInv.value = bad.map(function (b) { return b.v; }).join(', ');
+      if (added) { drawInvitees(); updatePreview(); }
+      var msg = bad.length ? bad[0].e : '';
+      setErr('f-invitee', msg);
+      return msg;
+    }
+    fInv.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); commitInvitee(); }
+    });
+    fInv.addEventListener('blur', function () { commitInvitee(); });
+    var addInvBtn = h('button', { class: 'btn', type: 'button', onclick: function () { commitInvitee(); fInv.focus(); } }, icon('plus', 'ic-sm'), h('span', { text: 'Add' }));
+
+    /* ---- files */
+    var fileList = h('ul', { class: 'file-list', 'aria-label': 'Pre-reads attached' });
+    var fileErr = errEl('f-files');
+    function drawFiles() {
+      KM.clear(fileList);
+      if (!form.files.length) { fileList.appendChild(h('li', { class: 'small sub', text: 'No pre-reads attached.' })); return; }
+      form.files.forEach(function (f, i) {
+        fileList.appendChild(h('li', { class: 'file-item' },
+          icon('book', 'ic-sm'),
+          h('span', { class: 'body' }, h('span', { class: 'small od-truncate', title: f.name, text: f.name }), h('span', { class: 'xsmall sub', text: fmt.bytes(f.size) })),
+          h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Remove ' + f.name, onclick: function () {
+            form.files = form.files.filter(function (_, j) { return j !== i; });
+            drawFiles(); KM.toast('Removed ' + f.name, 'trash');
+          } }, icon('trash', 'ic-sm'))));
+      });
+    }
+    fFiles.addEventListener('change', function () {
+      var tooBig = [];
+      Array.prototype.forEach.call(fFiles.files || [], function (f) {
+        if (f.size > MAX_FILE_BYTES) { tooBig.push(f.name); return; }
+        if (!form.files.some(function (x) { return x.name === f.name; })) form.files = form.files.concat([{ name: f.name, size: f.size }]);
+      });
+      fFiles.value = '';
+      fileErr.lastChild.textContent = tooBig.length ? tooBig.join(', ') + ' is over 50 MB. Share a link to it in the description instead.' : '';
+      fileErr.classList.toggle('show', !!tooBig.length);
+      drawFiles();
+    });
+
+    /* ---- agents */
+    var agentPicks = D.agents.filter(function (a) { return !a.system; }).map(function (a) {
+      var checked = editing ? editing.agents.indexOf(a.id) > -1 : a.id === 'scribe';
+      return h('label', { class: 'pick' },
+        h('input', { type: 'checkbox', name: 'agent', value: a.id, checked: checked, onchange: updatePreview }),
+        h('span', { class: 'agent-glyph agent-glyph-sm', 'aria-hidden': 'true', text: a.mono }),
+        h('span', { class: 'body' },
+          h('strong', { class: 'small', text: a.name }),
+          h('span', { class: 'xsmall sub od-truncate', title: a.desc, text: a.role }),
+          h('span', { class: 'state-line xsmall', 'data-state': a.status }, h('span', { class: 'state-glyph' }),
+            h('span', { text: a.status === 'online' ? 'Online' : 'Offline — joins if online at start' }))));
+    });
+    var irisPick = h('label', { class: 'pick' },
+      h('input', { type: 'checkbox', name: 'dot', value: 'iris', checked: editing ? (editing.dots || []).indexOf('iris') > -1 : true, onchange: updatePreview }),
+      h('span', { class: 'orb orb-xs', 'aria-hidden': 'true' }),
+      h('span', { class: 'body' }, h('strong', { class: 'small', text: 'Iris' }), h('span', { class: 'xsmall sub', text: 'Your dot · private memory' })));
+
+    /* ---- options */
+    var dialPreview = h('div', { class: 'dial-preview', id: 'dial-preview' },
+      h('span', null, icon('phone-in', 'ic-sm'), ' ', D.telnyx.dialIn[0].number + ' (' + D.telnyx.dialIn[0].region + ')'),
+      h('span', { text: D.telnyx.dialIn[1].number + ' (' + D.telnyx.dialIn[1].region + ')' }),
+      h('span', { text: 'PIN ' + D.meetings[0].dialIn.pin }));
+    function optSwitch(key, id, label, hint, extra) {
+      var row = switchRow({ id: id, label: label, hint: hint, checked: opt[key], extra: extra, onchange: function (e) {
+        opt[key] = e.target.checked;
+        if (key === 'dial') dialPreview.hidden = !opt.dial;
+        updatePreview();
+      } });
+      return row;
+    }
+    dialPreview.hidden = !opt.dial;
+
+    /* ---- preview */
+    var pvTo = h('span'), pvSubj = h('span', { class: 'subj' }), pvBody = h('div', { class: 'pv' });
+    var pvSms = h('p', { class: 'pv-sms' }), pvSmsMeta = h('span', { class: 'xsmall sub' });
+    function selectedAgents() {
+      return KM.$$('input[name="agent"]:checked', main).map(function (i) { return i.value; });
+    }
+    function updatePreview() {
+      var title = fTitle.value.trim() || 'Untitled meeting';
+      var s = startDate();
+      var when = s && !isNaN(s) ? fmt.date(s) + ' – ' + fmt.time(new Date(s.getTime() + Number(fDur.value) * MIN)) : 'Date and time not set';
+      var tz = tzLabel(fTz.value);
+      var link = joinUrl({ joinCode: form.code });
+      var firstEmail = form.invitees.filter(function (i) { return i.email; })[0];
+      pvTo.textContent = 'To: ' + (firstEmail ? firstEmail.email + (form.invitees.filter(function (i) { return i.email; }).length > 1 ? ' and others' : '') : 'email invitees');
+      pvSubj.textContent = 'Invitation: ' + title + ' · ' + (s && !isNaN(s) ? fmt.day(s) : 'date to be set');
+      var agentNames = selectedAgents().map(function (id) { return D.agent(id).name; });
+      var irisOn = KM.$('input[name="dot"]', main) && KM.$('input[name="dot"]', main).checked;
+      if (irisOn) agentNames.push('Iris (' + hostName.split(' ')[0] + '’s dot)');
+      KM.clear(pvBody);
+      pvBody.appendChild(h('p', { text: hostName + ' invited you to a Know Meet video meeting.' }));
+      pvBody.appendChild(h('span', { class: 'pv-cta' }, icon('cam', 'ic-sm'), h('span', { text: 'Join in browser' })));
+      pvBody.appendChild(h('dl', { class: 'pv-dl' },
+        h('dt', { text: 'When' }), h('dd', { text: when + ' (' + tz + ')' }),
+        h('dt', { text: 'Link' }), h('dd', { class: 'mono', text: link }),
+        opt.dial ? [h('dt', { text: 'Dial in' }), h('dd', { text: D.telnyx.dialIn[0].number + ', PIN ' + D.meetings[0].dialIn.pin })] : null,
+        agentNames.length ? [h('dt', { text: 'Agents' }), h('dd', { text: 'Concierge, ' + agentNames.join(', ') })] : null));
+      if (fDesc.value.trim()) pvBody.appendChild(h('p', { class: 'od-clamp-3', text: fDesc.value.trim() }));
+      var notices = [];
+      if (opt.record) notices.push('This meeting will be recorded.');
+      if (opt.transcribe) notices.push('Live transcription is on.');
+      if (opt.summary) notices.push('The transcript and summary are sent to participants afterwards.');
+      notices.push('No KnowMe account needed to join.');
+      pvBody.appendChild(h('p', { class: 'sub', text: notices.join(' ') }));
+
+      var sms = hostName + ' invited you to "' + title + '" ' + (s && !isNaN(s) ? fmt.date(s) : '') + '.\nJoin: ' + link +
+        (opt.dial ? '\nDial in: ' + D.telnyx.dialIn[0].number + ' PIN ' + D.meetings[0].dialIn.pin : '') +
+        (opt.record ? '\nThis meeting is recorded.' : '') + '\nReply STOP to opt out.';
+      pvSms.textContent = sms;
+      var segs = sms.length <= 160 ? 1 : Math.ceil(sms.length / 153);
+      var smsCount = form.invitees.filter(function (i) { return i.phone; }).length;
+      pvSmsMeta.textContent = sms.length + ' characters · ' + segs + ' SMS segment' + (segs === 1 ? '' : 's') + ' · from ' + D.telnyx.smsFrom +
+        (smsCount ? ' · to ' + smsCount + (smsCount === 1 ? ' number' : ' numbers') : ' · no phone invitees yet');
+    }
+
+    /* ---- validation wiring */
+    var VALIDATORS = { 'f-title': vTitle, 'f-date': vDate, 'f-time': vTime };
+    Object.keys(VALIDATORS).forEach(function (id) {
+      var el = id === 'f-title' ? fTitle : id === 'f-date' ? fDate : fTime;
+      el.addEventListener('blur', function () { setErr(id, VALIDATORS[id]()); });
+      el.addEventListener('input', function () { if (el.getAttribute('aria-invalid')) setErr(id, VALIDATORS[id]()); updatePreview(); });
+    });
+    [fDur, fTz, fCal].forEach(function (el) { el.addEventListener('change', updatePreview); });
+    fDesc.addEventListener('input', updatePreview);
+
+    var summaryHost = h('div', { tabindex: '-1' });
+    var submitBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon(editing ? 'check' : 'send'), h('span', { text: editing ? 'Save changes' : 'Schedule meeting' }));
+
+    function onSubmit(e) {
+      e.preventDefault();
+      var errors = [];
+      [['f-title', vTitle, 'Title'], ['f-date', vDate, 'Date'], ['f-time', vTime, 'Start time'], ['f-invitee', vInvitees, 'Invitees']].forEach(function (c) {
+        var msg = c[1](); setErr(c[0], msg);
+        if (msg) errors.push({ id: c[0], label: c[2], msg: msg });
+      });
+      KM.clear(summaryHost);
+      if (errors.length) {
+        summaryHost.appendChild(h('div', { class: 'err-summary', role: 'alert' },
+          h('h2', null, icon('alert'), h('span', { text: 'Fix ' + (errors.length === 1 ? '1 thing' : errors.length + ' things') + ' before ' + (editing ? 'saving' : 'scheduling') })),
+          h('ul', null, errors.map(function (er) {
+            return h('li', null, h('a', { href: '#' + er.id, onclick: function (ev) { ev.preventDefault(); var t = document.getElementById(er.id); if (t) t.focus(); } },
+              er.label + ': ' + er.msg));
+          }))));
+        summaryHost.focus();
+        return;
+      }
+      busy(submitBtn, editing ? 'Saving…' : 'Scheduling…');
+      KM.$$('input, select, textarea, button', formEl).forEach(function (el) { if (el !== submitBtn) el.disabled = true; });
+      setTimeout(function () { editing ? finishEdit() : finishCreate(); }, 1300);
+    }
+
+    function collectMeeting(id) {
+      var s = startDate();
+      var agents = ['concierge'].concat(selectedAgents());
+      var dots = KM.$('input[name="dot"]', main).checked ? ['iris'] : [];
+      return {
+        id: id, title: fTitle.value.trim().slice(0, 120), start: s.toISOString(), durationMin: Number(fDur.value),
+        source: fCal.value === 'none' ? 'knowme' : fCal.value, host: editing ? editing.host : D.user.name,
+        invitees: form.invitees.map(function (i) { return i.name; }), dialIn: opt.dial ? D.meetings[0].dialIn : null,
+        agents: agents, dots: dots, record: opt.record, transcribe: opt.transcribe, sendSummary: opt.summary,
+        waitingRoom: opt.waiting, joinCode: form.code, tz: fTz.value, description: fDesc.value.trim().slice(0, 1000),
+        inviteeContacts: form.invitees
+      };
+    }
+    function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 32) || 'meeting'; }
+
+    function finishCreate() {
+      var id = slug(fTitle.value) + '-' + form.code.slice(-3);
+      var m = collectMeeting(id);
+      var now = new Date().toISOString();
+      var dels = [];
+      form.invitees.forEach(function (inv, i) {
+        channelsFor(inv).forEach(function (ch) {
+          dels.push({ id: id + '-' + i + '-' + ch, meetingId: id, name: inv.name, personId: null, channel: ch,
+            to: ch === 'sms' ? inv.phone : inv.email, status: 'delivered', reason: null, landline: false, sentAt: now });
+        });
+        if (fCal.value !== 'none' && inv.email) {
+          dels.push({ id: id + '-' + i + '-calendar', meetingId: id, name: inv.name, personId: null, channel: 'calendar',
+            to: inv.email, status: 'delivered', reason: null, landline: false, sentAt: now });
+        }
+      });
+      setState('created', state.created.concat([m]));
+      setState('createdDeliveries', state.createdDeliveries.concat(dels));
+      if (form.files.length) { var pr = Object.assign({}, state.preReads); pr[id] = form.files; setState('preReads', pr); }
+      renderScheduled(m, false);
+    }
+    function finishEdit() {
+      var m = collectMeeting(editing.id);
+      var ov = Object.assign({}, state.overrides);
+      ov[editing.id] = Object.assign({}, ov[editing.id] || {}, {
+        title: m.title, start: m.start, durationMin: m.durationMin, source: m.source, invitees: m.invitees, dialIn: m.dialIn,
+        agents: m.agents, dots: m.dots, record: m.record, transcribe: m.transcribe, sendSummary: m.sendSummary,
+        waitingRoom: m.waitingRoom, tz: m.tz, description: m.description, inviteeContacts: m.inviteeContacts });
+      setState('overrides', ov);
+      var pr = Object.assign({}, state.preReads); pr[editing.id] = form.files; setState('preReads', pr);
+      renderScheduled(getMeeting(editing.id), true);
+    }
+
+    /* ---- assemble */
+    var formEl = h('form', { class: 'form-stack', novalidate: true, onsubmit: onSubmit, 'aria-labelledby': 'sched-h1' },
+      summaryHost,
+      h('p', { class: 'small sub' }, h('span', { class: 'req', 'aria-hidden': 'true', text: '*' }), ' Required'),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-basics' },
+        h('h2', { id: 's-basics', text: 'Details' }),
+        h('div', { class: 'field' }, labelReq('f-title', 'Title'), fTitle, errEl('f-title')),
+        h('div', { class: 'field-row-3' },
+          h('div', { class: 'field' }, labelReq('f-date', 'Date'), fDate, errEl('f-date')),
+          h('div', { class: 'field' }, labelReq('f-time', 'Start time'), fTime, errEl('f-time')),
+          h('div', { class: 'field' }, h('label', { for: 'f-duration', text: 'Duration' }), fDur)),
+        h('div', { class: 'field' }, h('label', { for: 'f-tz', text: 'Time zone' }), fTz),
+        h('div', { class: 'field' }, h('label', { for: 'f-desc', text: 'Description' }), fDesc,
+          h('span', { class: 'hint', text: 'Shown in the email and calendar event. Agents in the room can read it too.' }))),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-inv' },
+        h('div', { class: 'card-head' }, h('div', null, h('h2', { id: 's-inv', text: 'Invitees' })), invCount),
+        h('div', { class: 'field' },
+          labelReq('f-invitee', 'Add people by email or phone number'),
+          h('div', { class: 'input-group' }, fInv, addInvBtn),
+          h('span', { class: 'hint', id: 'f-invitee-hint', text: 'Press Enter or comma to add. Email addresses get an email invite; phone numbers get an SMS via Telnyx; people with both on file get both. Invitees don’t need an account.' }),
+          errEl('f-invitee')),
+        h('datalist', { id: 'people-list' }, D.people.map(function (p) { return h('option', { value: p.email, label: p.name }); })),
+        invList),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-cal' },
+        h('h2', { id: 's-cal', text: 'Calendar' }),
+        h('div', { class: 'field' }, h('label', { for: 'f-calendar', text: 'Add to calendar' }), fCal),
+        h('p', { class: 'note' }, icon('info'), h('span', { text: 'The KnowMe join link and dial-in details are inserted into the calendar event, so they appear for everyone who gets it.' }))),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-opt' },
+        h('h2', { id: 's-opt', text: 'Meeting options' }),
+        h('div', { class: 'switch-group' },
+          optSwitch('record', 'opt-record', 'Record automatically', 'Room Composite recording of all participants, saved to your storage and pinned to IPFS. Everyone sees a recording notice.'),
+          optSwitch('transcribe', 'opt-transcribe', 'Live transcription', 'Transcript feeds the meeting’s knowledge base for every agent in the room.'),
+          optSwitch('summary', 'opt-summary', 'Send transcript & summary after the meeting',
+            ['Emailed to participants, with an SMS link for phone invitees. ', h('a', { href: 'settings.html#delivery', text: 'Delivery settings' })]),
+          optSwitch('dial', 'opt-dialin', 'Allow phone dial-in', 'Callers dial in to the room — inbound only.', dialPreview),
+          optSwitch('waiting', 'opt-waiting', 'Waiting room', 'You admit each person before they enter.'))),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-agents' },
+        h('div', { class: 'card-head' },
+          h('div', null, h('h2', { id: 's-agents', text: 'Agents to bring' }),
+            h('span', { class: 'small sub', text: 'Concierge is always in the room. Pick the registered agents and dots to dispatch at start.' })),
+          h('a', { class: 'small', href: 'agents.html#registry', text: 'Manage agents' })),
+        h('fieldset', { style: 'border:0;margin:0;padding:0;min-width:0' },
+          h('legend', { class: 'sr-only', text: 'Agents and dots' }),
+          h('div', { class: 'pick-grid' }, agentPicks, irisPick))),
+
+      h('section', { class: 'panel', 'aria-labelledby': 's-know' },
+        h('h2', { id: 's-know', text: 'Knowledge' }),
+        h('div', { class: 'file-drop' },
+          fFiles,
+          h('label', { for: 'f-files', class: 'btn btn-sm' }, icon('upload', 'ic-sm'), h('span', { text: 'Attach pre-reads' })),
+          h('span', { class: 'small sub', text: 'Added to this meeting’s knowledge base so agents can cite them. Up to 50 MB each.' })),
+        fileErr,
+        fileList),
+
+      h('div', { class: 'btn-row', style: 'justify-content:flex-end' },
+        h('a', { class: 'btn btn-ghost', href: editing ? '#meeting:' + editing.id : '#upcoming', text: 'Cancel' }),
+        submitBtn));
+
+    var preview = h('aside', { class: 'split-aside', 'aria-labelledby': 'pv-title' },
+      h('section', { class: 'panel', 'aria-live': 'off' },
+        h('div', null, h('h2', { id: 'pv-title', text: 'Invite preview' }), h('span', { class: 'small sub', text: 'What recipients will see. Updates as you type.' })),
+        h('div', { class: 'stack-sm' },
+          h('span', { class: 'eyebrow eyebrow-sub', text: 'Email' }),
+          h('div', { class: 'pv-mail' },
+            h('div', { class: 'pv-mail-head' }, h('span', { class: 'xsmall sub', text: 'From: ' + hostName + ' via Know Meet' }), h('span', { class: 'xsmall sub' }, pvTo), pvSubj),
+            pvBody)),
+        h('div', { class: 'stack-sm' },
+          h('span', { class: 'eyebrow eyebrow-sub', text: 'SMS via Telnyx' }),
+          h('div', { class: 'pv-sms-wrap' }, pvSms, pvSmsMeta))));
+
+    render(
+      pageHead({ crumbs: editing ? crumbsTo(editing.title) : null, title: editing ? 'Edit meeting' : 'Schedule a meeting',
+        sub: editing ? 'Invitees are notified of changes by the same channels as their invite.' : 'Invite anyone by email or phone. They join from the link or by dialing in — no account needed.' }),
+      editing ? null : dashTabs('schedule'),
+      h('div', { class: 'split' }, formEl, preview));
+    main.querySelector('h1').id = 'sched-h1';
+    drawInvitees(); drawFiles(); updatePreview();
+  }
+
+  function renderScheduled(m, wasEdit) {
+    document.title = (wasEdit ? 'Changes saved' : 'Meeting scheduled') + ' · Know Meet';
+    var contacts = m.inviteeContacts || [];
+    var calName = m.source === 'knowme' ? null : CAL_ACCOUNTS[m.source];
+    var smsChips = [];
+    var rows = contacts.map(function (inv) {
+      var chips = [];
+      if (inv.email) chips.push(h('span', { class: 'status-line' }, channelChip('email'), statusChip('sent'), h('span', { class: 'xsmall sub od-truncate', text: inv.email })));
+      if (inv.phone) {
+        var st = h('span', { class: 'status-line' }, channelChip('sms'), statusChip('queued'), h('span', { class: 'xsmall sub od-nowrap', text: inv.phone }));
+        smsChips.push(st);
+        chips.push(st);
+      }
+      if (calName && inv.email) chips.push(h('span', { class: 'status-line' }, channelChip('calendar'), statusChip('delivered'), h('span', { class: 'xsmall sub', text: 'On the calendar invite' })));
+      return h('li', { class: 'deliv-row' },
+        h('span', { class: 'avatar avatar-sm', 'aria-hidden': 'true', text: KM.initials(inv.name) }),
+        h('div', { class: 'body' }, h('strong', { class: 'small od-truncate', title: inv.name, text: inv.name }), h('div', { class: 'status-stack' }, chips)));
+    });
+    var liveRegion = h('p', { class: 'sr-only', role: 'status', 'aria-live': 'polite' });
+    render(
+      pageHead({ crumbs: crumbsTo(m.title), title: wasEdit ? 'Changes saved' : 'Meeting scheduled',
+        sub: m.title + ' · ' + fmt.date(m.start) + ' (' + tzLabel(m.tz) + ')' }),
+      h('div', { class: 'split' },
+        h('section', { class: 'panel', 'aria-labelledby': 'ok-title' },
+          h('div', { class: 'od-row', style: '--od-gap:16px' }, h('span', { class: 'ok-badge' }, icon('check', 'ic-lg')),
+            h('div', null, h('h2', { id: 'ok-title', text: wasEdit ? 'Invitees are being notified' : 'Invites are on their way' }),
+              h('p', { class: 'small sub', text: 'Delivery status updates here and on the meeting page.' }))),
+          h('div', { class: 'note' }, icon(calName ? 'calendar' : 'info'),
+            h('span', { text: calName ? 'Calendar event ' + (wasEdit ? 'updated' : 'created') + ' in ' + calName.label + ' — ' + calName.account + ', with the KnowMe link and dial-in details.' : 'Not added to a calendar. Invites were sent directly by email and SMS.' })),
+          h('h3', { text: 'Per-invitee delivery' }),
+          h('ul', { class: 'list', style: 'gap:0' }, rows),
+          liveRegion,
+          h('div', { class: 'btn-row' },
+            h('a', { class: 'btn btn-primary', href: '#meeting:' + m.id }, h('span', { text: 'Open meeting details' }), icon('chevron-right', 'ic-sm')),
+            wasEdit ? null : h('a', { class: 'btn', href: '#schedule', onclick: function (e) { e.preventDefault(); router.refresh(); } }, icon('plus', 'ic-sm'), h('span', { text: 'Schedule another' })),
+            h('a', { class: 'btn btn-ghost', href: '#upcoming', text: 'Back to meetings' }))),
+        h('aside', { class: 'split-aside' },
+          h('section', { class: 'card', 'aria-labelledby': 'ok-join' },
+            h('h2', { id: 'ok-join', style: 'font-size:var(--text-lg)', text: 'Join info' }),
+            h('dl', { class: 'kv' },
+              h('dt', { text: 'Link' }), h('dd', { text: joinUrl(m) }),
+              h('dt', { text: 'Code' }), h('dd', { text: m.joinCode }),
+              m.dialIn ? [h('dt', { text: 'Dial in' }), h('dd', { text: m.dialIn.number + ' · PIN ' + m.dialIn.pin })] : null),
+            copyLinkBtn(m, true)))));
+    KM.toast(wasEdit ? 'Changes saved' : 'Meeting scheduled', 'check');
+    if (smsChips.length) {
+      setTimeout(function () {
+        smsChips.forEach(function (line) { line.replaceChild(statusChip('delivered'), line.children[1]); });
+        liveRegion.textContent = 'SMS invites delivered.';
+      }, 1800);
+    }
+  }
+
+  /* ================================================================ #meeting:<id> */
+  function renderNotFound(id) {
+    document.title = 'Meeting not found · Know Meet';
+    render(
+      pageHead({ crumbs: crumbsTo('Not found'), title: 'Meeting not found' }),
+      h('section', { class: 'empty', 'aria-labelledby': 'nf-title' },
+        h('div', { class: 'empty-icon' }, icon('search')),
+        h('h2', { id: 'nf-title', style: 'font-size:var(--text-lg)', text: 'We couldn’t find that meeting' }),
+        h('p', null, 'There is no meeting with the id ', h('code', { text: String(id || '').slice(0, 60) || '(none)' }),
+          '. It may have been cancelled, or the link was copied incompletely.'),
+        h('div', { class: 'btn-row' },
+          h('a', { class: 'btn btn-primary', href: '#upcoming', text: 'Back to meetings' }),
+          h('a', { class: 'btn', href: '#schedule', text: 'Schedule a meeting' }))));
+  }
+
+  function renderMeeting(id) {
+    var m = id ? getMeeting(id) : null;
+    if (!m) { renderNotFound(id); return; }
+    document.title = m.title + ' · Know Meet';
+    var st = statusOf(m);
+    var start = new Date(m.start), end = endOf(m);
+    var canChange = st === 'upcoming';
+
+    var actions = [];
+    if (st === 'live' || st === 'upcoming') actions.push(h('a', { class: 'btn btn-primary', href: 'meet.html#lobby' }, icon('cam'), h('span', { text: 'Join' })));
+    if (!m.cancelled) actions.push(copyLinkBtn(m, false));
+    if (canChange) {
+      actions.push(h('a', { class: 'btn', href: '#schedule?edit=' + encodeURIComponent(m.id) }, icon('edit'), h('span', { text: 'Edit' })));
+      actions.push(h('button', { class: 'btn btn-ghost', type: 'button', onclick: function () {
+        KM.confirm({
+          title: 'Cancel “' + (m.title.length > 60 ? m.title.slice(0, 57) + '…' : m.title) + '”?',
+          body: 'All ' + m.invitees.length + ' invitees are told by email and SMS, and the calendar event is removed. The join link stops working. This can’t be undone.',
+          confirmLabel: 'Cancel meeting', cancelLabel: 'Keep meeting', danger: true
+        }).then(function (ok) {
+          if (!ok) return;
+          setState('cancelled', state.cancelled.concat([m.id]));
+          KM.toast('Meeting cancelled — invitees notified', 'check');
+          router.go('upcoming');
+        });
+      } }, icon('trash'), h('span', { text: 'Cancel meeting' })));
+    }
+
+    var head = h('header', { class: 'detail-head' },
+      h('nav', { class: 'crumbs', 'aria-label': 'Breadcrumb' }, crumbsTo(m.title)),
+      h('h1', { text: m.title, style: 'overflow-wrap:anywhere' }),
+      h('div', { class: 'detail-meta' },
+        meetingStatusChip(m),
+        h('span', { class: 'od-nowrap', text: fmt.day(start) }),
+        h('span', { class: 'od-nowrap', text: fmt.time(start) + ' – ' + fmt.time(end) }),
+        h('span', { text: tzLabel(m.tz) }),
+        sourceChip(m.source),
+        h('span', { text: 'Host: ' + (isHosting(m) ? 'You' : m.host) })),
+      m.description ? h('p', { class: 'sub prose', text: m.description }) : null,
+      m.cancelled ? h('p', { class: 'banner-cancel' }, icon('alert'), h('span', { text: 'This meeting was cancelled. Invitees were notified and the join link no longer works.' })) : null,
+      actions.length ? h('div', { class: 'btn-row' }, actions) : null);
+
+    render(head, h('div', { class: 'detail-grid' },
+      joinInfoCard(m),
+      recordingCard(m, canChange || st === 'live'),
+      inviteesCard(m),
+      agentsCard(m, canChange),
+      preReadsCard(m, !m.cancelled && st !== 'ended')));
+  }
+
+  function joinInfoCard(m) {
+    function copyBtn(label, value) {
+      return h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy ' + label, title: 'Copy', onclick: function () { KM.copy(value); } }, icon('copy', 'ic-sm'));
+    }
+    var dl = h('dl', { class: 'kv' },
+      h('dt', { text: 'Join link' }), h('dd', null, h('span', { text: joinUrl(m) }), copyBtn('join link', joinUrl(m))),
+      h('dt', { text: 'Join code' }), h('dd', null, h('span', { text: m.joinCode }), copyBtn('join code', m.joinCode)));
+    if (m.dialIn) {
+      D.telnyx.dialIn.forEach(function (n) {
+        dl.appendChild(h('dt', { text: 'Dial-in (' + n.region + ')' }));
+        dl.appendChild(h('dd', null, h('span', { class: 'od-nowrap', text: n.number }), copyBtn(n.region + ' dial-in number', n.number)));
+      });
+      dl.appendChild(h('dt', { text: 'PIN' }));
+      dl.appendChild(h('dd', null, h('span', { class: 'od-nowrap', text: m.dialIn.pin }), copyBtn('PIN', m.dialIn.pin.replace(/\s/g, ''))));
+    } else {
+      dl.appendChild(h('dt', { text: 'Dial-in' }));
+      dl.appendChild(h('dd', { class: 'plain', text: 'Off for this meeting. Turn it on from Edit.' }));
+    }
+    return h('section', { class: 'card', 'aria-labelledby': 'ji-title' },
+      h('h2', { id: 'ji-title', style: 'font-size:var(--text-lg)', text: 'Join info' }),
+      dl,
+      m.dialIn ? h('p', { class: 'xsmall sub', text: 'Phone callers dial in to the room and enter the PIN. KnowMe never places outbound calls.' }) : null);
+  }
+
+  function recordingCard(m, editable) {
+    function toggle(key, label) {
+      return function (e) {
+        var ov = Object.assign({}, state.overrides);
+        var p = {}; p[key] = e.target.checked;
+        ov[m.id] = Object.assign({}, ov[m.id] || {}, p);
+        setState('overrides', ov);
+        KM.toast(label + (e.target.checked ? ' on' : ' off') + ' for this meeting', 'check');
+      };
+    }
+    var rows = h('div', { class: 'switch-group' },
+      switchRow({ id: 'd-rec', label: 'Record automatically', hint: 'Room Composite (all participants, one layout) · MP4', checked: m.record, onchange: toggle('record', 'Recording') }),
+      switchRow({ id: 'd-tr', label: 'Live transcription', hint: 'Feeds the meeting’s knowledge base', checked: m.transcribe, onchange: toggle('transcribe', 'Live transcription') }),
+      switchRow({ id: 'd-sum', label: 'Send transcript & summary', hint: ['Email + SMS link after the meeting · ', h('a', { href: 'settings.html#delivery', text: 'Delivery settings' })], checked: m.sendSummary, onchange: toggle('sendSummary', 'Transcript & summary delivery') }));
+    if (!editable) KM.$$('input', rows).forEach(function (i) { i.disabled = true; });
+    return h('section', { class: 'card', 'aria-labelledby': 'rec-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'rec-title', style: 'font-size:var(--text-lg)', text: 'Recording & transcript' }),
+          h('span', { class: 'small sub', text: 'Saved to KnowMe-managed S3 storage, then pinned to IPFS.' })),
+        h('a', { class: 'small', href: 'settings.html#recording', text: 'Defaults' })),
+      rows,
+      editable ? null : h('p', { class: 'xsmall sub', text: 'These settings can’t be changed for a meeting that has ended or was cancelled.' }));
+  }
+
+  function inviteesCard(m) {
+    var host = h('div');
+    function draw() {
+      KM.clear(host);
+      var ds = deliveries().filter(function (d) { return d.meetingId === m.id; });
+      var names = [];
+      ds.forEach(function (d) { if (names.indexOf(d.name) < 0) names.push(d.name); });
+      m.invitees.forEach(function (n) { if (names.indexOf(n) < 0) names.push(n); });
+      if (!names.length) {
+        host.appendChild(h('div', { class: 'empty' }, h('h3', { text: 'No invitees' }), h('p', { text: 'Add people from Edit.' })));
+        return;
+      }
+      var tbody = h('tbody');
+      names.forEach(function (name) {
+        var mine = ds.filter(function (d) { return d.name === name; });
+        var person = D.person(name);
+        var contacts = [];
+        mine.forEach(function (d) { if (d.to && contacts.indexOf(d.to) < 0) contacts.push(d.to); });
+        if (!contacts.length && person) contacts.push(person.email);
+        var failed = mine.filter(function (d) { return d.status === 'failed' && !d.resolvedByEmail; })[0];
+        var resendBtn = h('button', { class: 'btn btn-sm', type: 'button', 'aria-label': 'Resend invite to ' + name }, icon('refresh', 'ic-sm'), h('span', { text: 'Resend' }));
+        resendBtn.addEventListener('click', function () {
+          busy(resendBtn, 'Resending…');
+          Promise.all(mine.map(resend)).then(function (res) {
+            var stillFailed = res.filter(function (r) { return r.status === 'failed'; }).length;
+            KM.toast(stillFailed ? 'Email/calendar resent. SMS still undeliverable — send email instead.' : 'Invite resent to ' + name, stillFailed ? 'alert' : 'check');
+            draw();
+          });
+        });
+        var actionsCell = h('div', { class: 'row-actions' });
+        if (failed && failed.landline) {
+          var alt = h('button', { class: 'btn btn-sm btn-primary', type: 'button' }, icon('mail', 'ic-sm'), h('span', { text: 'Send email instead' }));
+          alt.addEventListener('click', function () {
+            busy(alt, 'Sending…');
+            sendEmailInstead(failed).then(function (email) { KM.toast('Email invite sent to ' + email, 'check'); draw(); },
+              function (err) { KM.toast(err.message, 'alert'); draw(); });
+          });
+          actionsCell.appendChild(alt);
+        }
+        if (mine.length) actionsCell.appendChild(resendBtn);
+        tbody.appendChild(h('tr', null,
+          h('td', null, h('div', { class: 'who' }, h('strong', { text: name }), contacts.map(function (c) { return h('span', { class: 'xsmall sub', text: c }); }))),
+          h('td', null, h('div', { class: 'chips' }, mine.length ? mine.map(function (d) { return channelChip(d.channel); }) : h('span', { class: 'small sub', text: m.cancelled ? 'Cancellation sent' : 'No invite sent' }))),
+          h('td', null, h('div', { class: 'status-stack' }, mine.map(function (d) {
+            return h('div', null,
+              h('div', { class: 'status-line' }, h('span', { class: 'xsmall sub', text: CHANNEL[d.channel][1] }),
+                d.resolvedByEmail ? h('span', { class: 'chip' }, icon('mail'), h('span', { text: 'Failed · sent email instead' })) : statusChip(d.status)),
+              d.status === 'failed' && !d.resolvedByEmail ? h('p', { class: 'reason', text: d.reason + '. Send an email invite instead.' }) : null,
+              d.resentAt ? h('p', { class: 'reason', text: 'Resent just now' }) : null);
+          }))),
+          h('td', { class: 'tight' }, actionsCell)));
+      });
+      host.appendChild(h('div', { class: 'table-wrap' }, h('table', { class: 'table' },
+        h('caption', { class: 'sr-only', text: 'Invitees and delivery status' }),
+        h('thead', null, h('tr', null, h('th', { scope: 'col', text: 'Invitee' }), h('th', { scope: 'col', text: 'Channels' }), h('th', { scope: 'col', text: 'Status' }), h('th', { scope: 'col' }, h('span', { class: 'sr-only', text: 'Actions' })))),
+        tbody)));
+    }
+    draw();
+    return h('section', { class: 'card wide', 'aria-labelledby': 'inv-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'inv-title', style: 'font-size:var(--text-lg)', text: 'Invitees' }),
+          h('span', { class: 'small sub', text: 'Email, SMS (via Telnyx) and calendar delivery. Invitees never need an account.' })),
+        h('a', { class: 'small', href: '#invites', text: 'All invites' })),
+      host);
+  }
+
+  function agentsCard(m, editable) {
+    var list = h('ul', { class: 'list', style: 'gap:0' });
+    var concierge = D.agent('concierge');
+    list.appendChild(h('li', { class: 'agent-line' },
+      h('span', { class: 'agent-glyph agent-glyph-sm is-system', 'aria-hidden': 'true', text: concierge.mono }),
+      h('span', { class: 'body' }, h('strong', { class: 'small', text: 'Concierge' }), h('span', { class: 'xsmall sub', text: 'System agent · always present, and the only agent guests get' })),
+      h('span', { class: 'chip chip-ember', text: 'Always' })));
+    (m.agents || []).filter(function (id) { return id !== 'concierge'; }).forEach(function (id) {
+      var a = D.agent(id); if (!a) return;
+      list.appendChild(h('li', { class: 'agent-line' },
+        h('span', { class: 'agent-glyph agent-glyph-sm', 'aria-hidden': 'true', text: a.mono }),
+        h('span', { class: 'body' }, h('a', { class: 'small', href: 'agents.html#detail:' + a.id, text: a.name }), h('span', { class: 'xsmall sub od-truncate', title: a.desc, text: a.role + ' · ' + a.worker })),
+        h('span', { class: 'state-line xsmall', 'data-state': a.status }, h('span', { class: 'state-glyph' }), h('span', { text: a.status === 'online' ? 'Online' : 'Offline' }))));
+    });
+    (m.dots || []).forEach(function (id) {
+      var d = D.dot(id); if (!d) return;
+      list.appendChild(h('li', { class: 'agent-line' },
+        h('span', { class: d.orbClass + ' orb-xs', 'aria-hidden': 'true' }),
+        h('span', { class: 'body' }, id === 'iris' ? h('a', { class: 'small', href: 'agents.html#dot:iris', text: d.name }) : h('strong', { class: 'small', text: d.name }),
+          h('span', { class: 'xsmall sub', text: d.ownerLabel + ' · private memory' })),
+        h('span', { class: 'chip', text: 'Dot' })));
+    });
+    return h('section', { class: 'card', 'aria-labelledby': 'ag-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'ag-title', style: 'font-size:var(--text-lg)', text: 'Agents & dots scheduled' }),
+          h('span', { class: 'small sub', text: 'Dispatched into the room when the meeting starts.' })),
+        editable ? h('a', { class: 'small', href: '#schedule?edit=' + encodeURIComponent(m.id), text: 'Change' }) : null),
+      list);
+  }
+
+  function preReadsCard(m, editable) {
+    var listEl = h('ul', { class: 'file-list' });
+    var input = h('input', { id: 'd-files', type: 'file', multiple: true, class: 'sr-only' });
+    function setFiles(files) { var pr = Object.assign({}, state.preReads); pr[m.id] = files; setState('preReads', pr); }
+    function draw() {
+      KM.clear(listEl);
+      var files = getPreReads(m);
+      if (!files.length) { listEl.appendChild(h('li', { class: 'small sub', text: 'No pre-reads yet. Attach documents so agents can cite them during the meeting.' })); return; }
+      files.forEach(function (f, i) {
+        listEl.appendChild(h('li', { class: 'file-item' },
+          icon('book', 'ic-sm'),
+          h('span', { class: 'body' }, h('span', { class: 'small od-truncate', title: f.name, text: f.name }), h('span', { class: 'xsmall sub', text: fmt.bytes(f.size) + ' · in meeting knowledge' })),
+          editable ? h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Remove ' + f.name, onclick: function () {
+            KM.confirm({ title: 'Remove “' + f.name + '”?', body: 'Agents in this meeting will no longer be able to cite it.', confirmLabel: 'Remove', danger: true })
+              .then(function (ok) { if (!ok) return; setFiles(getPreReads(m).filter(function (_, j) { return j !== i; })); draw(); KM.toast('Pre-read removed', 'trash'); });
+          } }, icon('trash', 'ic-sm')) : h('span')));
+      });
+    }
+    input.addEventListener('change', function () {
+      var cur = getPreReads(m), skipped = 0;
+      Array.prototype.forEach.call(input.files || [], function (f) {
+        if (f.size > MAX_FILE_BYTES) { skipped++; return; }
+        if (!cur.some(function (x) { return x.name === f.name; })) cur = cur.concat([{ name: f.name, size: f.size }]);
+      });
+      input.value = '';
+      setFiles(cur); draw();
+      KM.toast(skipped ? skipped + ' file over 50 MB skipped — others added' : 'Added to meeting knowledge', skipped ? 'alert' : 'check');
+    });
+    draw();
+    return h('section', { class: 'card', 'aria-labelledby': 'pr-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'pr-title', style: 'font-size:var(--text-lg)', text: 'Pre-reads in knowledge' }),
+          h('span', { class: 'small sub', text: 'Every agent in the room, including Concierge, can search these.' })),
+        editable ? h('div', null, input, h('label', { for: 'd-files', class: 'btn btn-sm' }, icon('upload', 'ic-sm'), h('span', { text: 'Add' }))) : null),
+      listEl);
+  }
+
+  /* ================================================================ #invites */
+  function renderInvites() {
+    document.title = 'Invites · Know Meet';
+    var f = { channel: 'all', status: 'all', q: '' };
+    var selected = {};
+    var tbodyHost = h('div');
+    var countEl = h('span', { class: 'small sub', role: 'status' });
+    var resendSelBtn = h('button', { class: 'btn btn-sm btn-primary', type: 'button', disabled: true }, icon('refresh', 'ic-sm'), h('span', { text: 'Resend selected (0)' }));
+    var resendFailedBtn = h('button', { class: 'btn btn-sm', type: 'button' }, icon('alert', 'ic-sm'), h('span', { text: 'Resend failed' }));
+
+    function rows() {
+      var q = f.q.toLowerCase();
+      return deliveries().filter(function (d) {
+        var m = getMeeting(d.meetingId);
+        if (f.channel !== 'all' && d.channel !== f.channel) return false;
+        if (f.status !== 'all') {
+          if (f.status === 'failed' && !(d.status === 'failed' && !d.resolvedByEmail)) return false;
+          if (f.status !== 'failed' && d.status !== f.status) return false;
+        }
+        if (q && (d.name + ' ' + (d.to || '') + ' ' + m.title).toLowerCase().indexOf(q) < 0) return false;
+        return true;
+      }).sort(function (a, b) {
+        var fa = a.status === 'failed' && !a.resolvedByEmail ? 0 : 1, fb = b.status === 'failed' && !b.resolvedByEmail ? 0 : 1;
+        return fa - fb || new Date(getMeeting(a.meetingId).start) - new Date(getMeeting(b.meetingId).start);
+      });
+    }
+    function selCount() { return Object.keys(selected).filter(function (k) { return selected[k]; }).length; }
+    function syncBulk() {
+      var n = selCount();
+      resendSelBtn.disabled = !n;
+      resendSelBtn.lastChild.textContent = 'Resend selected (' + n + ')';
+      var failedN = deliveries().filter(function (d) { return d.status === 'failed' && !d.resolvedByEmail; }).length;
+      resendFailedBtn.disabled = !failedN;
+      resendFailedBtn.lastChild.textContent = 'Resend failed (' + failedN + ')';
+    }
+    function resendMany(list, btn) {
+      if (!list.length) return;
+      var restore = busy(btn, 'Resending ' + list.length + '…');
+      Promise.all(list.map(resend)).then(function (res) {
+        restore();
+        var still = res.filter(function (r) { return r.status === 'failed'; }).length;
+        var ok = res.length - still;
+        KM.toast((ok ? 'Resent ' + ok + (ok === 1 ? ' invite' : ' invites') : 'Nothing resent') + (still ? '. ' + still + ' SMS still undeliverable — send email instead.' : ''), still ? 'alert' : 'check');
+        selected = {};
+        draw();
+      });
+    }
+    resendSelBtn.addEventListener('click', function () {
+      resendMany(deliveries().filter(function (d) { return selected[d.id]; }), resendSelBtn);
+    });
+    resendFailedBtn.addEventListener('click', function () {
+      resendMany(deliveries().filter(function (d) { return d.status === 'failed' && !d.resolvedByEmail; }), resendFailedBtn);
+    });
+
+    function draw() {
+      KM.clear(tbodyHost);
+      var list = rows();
+      countEl.textContent = list.length + (list.length === 1 ? ' invite' : ' invites');
+      Object.keys(selected).forEach(function (k) { if (!list.some(function (d) { return d.id === k; })) delete selected[k]; });
+      syncBulk();
+      if (!list.length) {
+        tbodyHost.appendChild(h('div', { class: 'empty' },
+          h('div', { class: 'empty-icon' }, icon('filter')),
+          h('h3', { text: 'No invites match these filters' }),
+          h('p', { text: 'Try another channel or status, or clear the search.' }),
+          h('button', { class: 'btn btn-sm', type: 'button', text: 'Clear filters', onclick: function () {
+            f = { channel: 'all', status: 'all', q: '' };
+            chanSeg.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false'); });
+            statusSel.value = 'all'; search.value = '';
+            draw();
+          } })));
+        return;
+      }
+      var allBox = h('input', { type: 'checkbox', 'aria-label': 'Select all ' + list.length + ' shown invites' });
+      var allSel = list.every(function (d) { return selected[d.id]; });
+      allBox.checked = allSel;
+      allBox.indeterminate = !allSel && list.some(function (d) { return selected[d.id]; });
+      allBox.addEventListener('change', function () {
+        list.forEach(function (d) { selected[d.id] = allBox.checked; });
+        draw();
+      });
+      var tbody = h('tbody');
+      list.forEach(function (d) {
+        var m = getMeeting(d.meetingId);
+        var isFailed = d.status === 'failed' && !d.resolvedByEmail;
+        var box = h('input', { type: 'checkbox', 'aria-label': 'Select invite to ' + d.name + ' by ' + CHANNEL[d.channel][1] + ' for ' + m.title });
+        box.checked = !!selected[d.id];
+        box.addEventListener('change', function () { selected[d.id] = box.checked; syncBulk(); allBox.checked = list.every(function (x) { return selected[x.id]; }); allBox.indeterminate = !allBox.checked && selCount() > 0; });
+        var actions = h('div', { class: 'row-actions' });
+        if (isFailed && d.landline) {
+          var alt = h('button', { class: 'btn btn-sm btn-primary', type: 'button', 'aria-label': 'Send email instead to ' + d.name }, icon('mail', 'ic-sm'), h('span', { text: 'Send email instead' }));
+          alt.addEventListener('click', function () {
+            busy(alt, 'Sending…');
+            sendEmailInstead(d).then(function (email) { KM.toast('Email invite sent to ' + email, 'check'); draw(); },
+              function (err) { KM.toast(err.message, 'alert'); draw(); });
+          });
+          actions.appendChild(alt);
+        }
+        var rb = h('button', { class: 'btn btn-sm', type: 'button', 'aria-label': 'Resend ' + CHANNEL[d.channel][1] + ' invite to ' + d.name }, icon('refresh', 'ic-sm'), h('span', { text: 'Resend' }));
+        rb.addEventListener('click', function () {
+          busy(rb, 'Resending…');
+          resend(d).then(function (r) {
+            KM.toast(r.status === 'failed' ? 'SMS still undeliverable — this number is a landline. Send email instead.' : 'Invite resent to ' + d.name, r.status === 'failed' ? 'alert' : 'check');
+            draw();
+          });
+        });
+        actions.appendChild(rb);
+        tbody.appendChild(h('tr', null,
+          h('td', { class: 'tight' }, box),
+          h('td', null, h('div', { class: 'who' }, h('strong', { text: d.name }), h('span', { class: 'xsmall sub', text: d.to || '' }))),
+          h('td', null, h('a', { class: 'od-truncate', style: 'max-width:28ch', href: '#meeting:' + m.id, title: m.title, text: m.title }),
+            h('span', { class: 'xsmall sub od-nowrap', text: fmt.date(m.start) })),
+          h('td', null, channelChip(d.channel)),
+          h('td', null,
+            d.resolvedByEmail ? h('span', { class: 'chip' }, icon('mail'), h('span', { text: 'Failed · email sent instead' })) : statusChip(d.status),
+            isFailed ? h('p', { class: 'reason', text: d.reason + '. Suggestion: send an email invite instead.' }) : null),
+          h('td', null, h('span', { class: 'small od-nowrap', text: d.resentAt ? 'Resent ' + fmt.time(d.resentAt) : fmt.date(d.sentAt) })),
+          h('td', { class: 'tight' }, actions)));
+      });
+      tbodyHost.appendChild(h('div', { class: 'table-wrap' }, h('table', { class: 'table' },
+        h('caption', { class: 'sr-only', text: 'Sent invites with delivery status' }),
+        h('thead', null, h('tr', null,
+          h('th', { scope: 'col', class: 'tight' }, allBox),
+          h('th', { scope: 'col', text: 'Invitee' }), h('th', { scope: 'col', text: 'Meeting' }), h('th', { scope: 'col', text: 'Channel' }),
+          h('th', { scope: 'col', text: 'Status' }), h('th', { scope: 'col', text: 'Sent' }), h('th', { scope: 'col' }, h('span', { class: 'sr-only', text: 'Actions' })))),
+        tbody)));
+    }
+
+    var CH = [['all', 'All'], ['email', 'Email'], ['sms', 'SMS'], ['calendar', 'Calendar']];
+    var chanSeg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Filter by channel' }, CH.map(function (c) {
+      return h('button', { type: 'button', 'aria-pressed': c[0] === 'all' ? 'true' : 'false', text: c[1], onclick: function (e) {
+        f = Object.assign({}, f, { channel: c[0] });
+        KM.$$('button', chanSeg).forEach(function (b) { b.setAttribute('aria-pressed', b === e.currentTarget ? 'true' : 'false'); });
+        draw();
+      } });
+    }));
+    var statusSel = h('select', { class: 'input', id: 'inv-status', onchange: function () { f = Object.assign({}, f, { status: statusSel.value }); draw(); } },
+      [['all', 'Any status'], ['delivered', 'Delivered'], ['opened', 'Opened'], ['queued', 'Queued'], ['failed', 'Failed']].map(function (s) { return h('option', { value: s[0], text: s[1] }); }));
+    var search = h('input', { class: 'input', type: 'search', id: 'inv-search', placeholder: 'Search name, email, phone or meeting', autocomplete: 'off',
+      oninput: function () { f = Object.assign({}, f, { q: search.value.trim() }); draw(); } });
+
+    render(
+      pageHead({ title: 'Invites', sub: 'Every invite you’ve sent for upcoming meetings, with delivery status by email, SMS and calendar.',
+        actions: [h('a', { class: 'btn btn-primary', href: '#schedule' }, icon('plus'), h('span', { text: 'Schedule meeting' }))] }),
+      dashTabs('invites'),
+      h('div', { class: 'toolbar' },
+        chanSeg,
+        h('div', { class: 'od-cluster' },
+          h('label', { class: 'sr-only', for: 'inv-status', text: 'Status' }), statusSel,
+          h('div', { class: 'search' }, icon('search', 'ic-sm'), h('label', { class: 'sr-only', for: 'inv-search', text: 'Search invites' }), search))),
+      h('div', { class: 'toolbar' }, countEl, h('div', { class: 'btn-row' }, resendFailedBtn, resendSelBtn)),
+      tbodyHost);
+    draw();
+  }
+
+  /* ================================================================ router */
+  function guard(key, fn) {
+    return function (arg, params) {
+      if (!KM.auth.isSignedIn()) { renderGate(key); return; }
+      fn(arg, params || {});
+    };
+  }
+  var router = KM.route({
+    upcoming: guard('upcoming', renderUpcoming),
+    schedule: guard('schedule', renderSchedule),
+    meeting: guard('meeting', renderMeeting),
+    invites: guard('invites', renderInvites),
+    empty: guard('empty', renderEmpty)
+  }, 'upcoming');
+  KM.auth.onChange(function () { router.refresh(); });
+})();
+</script>
+</body>
+</html>

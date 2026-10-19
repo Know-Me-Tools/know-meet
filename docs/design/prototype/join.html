@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>You’re invited — Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="Join a Know Meet meeting in your browser or by phone. No account needed." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/join.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="You’re invited — Know Meet" />
+<meta property="og:description" content="Join a Know Meet meeting in your browser or by phone. No account needed." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/join.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="You’re invited — Know Meet" />
+<meta name="twitter:description" content="Join a Know Meet meeting in your browser or by phone. No account needed." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css">
+<style>
+  .j-top { display: flex; align-items: center; gap: var(--s3); max-width: 1120px; margin: 0 auto; padding: var(--s3) var(--s5); min-height: var(--header-h); }
+  .j-top .spacer { flex: 1 1 auto; }
+  .j-wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: var(--s5) var(--s5) var(--s8); }
+  .j-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  .j-main { display: grid; gap: var(--s5); padding: var(--s6); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-card); min-width: 0; }
+  .j-side { display: grid; gap: var(--s4); min-width: 0; }
+  .host-line { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; }
+  .host-line .who { display: grid; gap: 2px; min-width: 0; }
+  .host-line .who > * { display: block; }
+  .host-line .who span { color: var(--fg-sub); font-size: var(--text-sm); }
+  .j-title { font-size: var(--text-display); line-height: 1.05; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+  .fact { display: grid; gap: 2px; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--card); min-width: 0; }
+  .fact > * { display: block; }
+  .fact .k { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-sub); }
+  .fact .v { font-weight: 600; overflow-wrap: anywhere; }
+  .fact .s { font-size: var(--text-sm); color: var(--fg-sub); }
+  .via { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-sub); }
+  .via .chip[aria-current="true"] { background: var(--ember-soft); color: var(--ember-text); }
+  .req { color: var(--ember-text); margin-left: 2px; }
+  .devices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+  .device { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--card); }
+  .device .copy { display: grid; }
+  .device .copy > * { display: block; }
+  .device .copy small { color: var(--fg-sub); font-size: var(--text-xs); }
+  .consent { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); padding: var(--s4); border-radius: var(--radius); background: var(--amber-soft); }
+  .consent > .ic { color: var(--amber-text); margin-top: 2px; }
+  .consent h2 { font-size: var(--text-base); }
+  .consent p { font-size: var(--text-sm); margin-top: 4px; }
+  .join-row { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; }
+  .join-row .btn-primary { min-height: 52px; padding: 0 var(--s6); font-size: var(--text-base); }
+  .side-card { display: grid; gap: var(--s3); padding: var(--s5); border-radius: var(--radius-tile); background: var(--surface); box-shadow: var(--shadow-card); }
+  .side-card h2 { font-size: var(--text-lg); display: flex; align-items: center; gap: var(--s2); }
+  .side-card p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .dial { display: grid; gap: var(--s2); }
+  .dial li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2); align-items: center; padding: var(--s2) var(--s2) var(--s2) var(--s4); border-radius: var(--radius); background: var(--card); }
+  .dial li > div { display: grid; min-width: 0; }
+  .dial li > div > * { display: block; }
+  .dial a { font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--fg); text-decoration: none; overflow-wrap: anywhere; }
+  .dial a:hover { color: var(--ember-text); text-decoration: underline; }
+  .dial small { color: var(--fg-sub); font-size: var(--text-xs); }
+  .pin { font-family: var(--font-mono); font-size: 20px; font-weight: 600; letter-spacing: 0.08em; }
+  .phone-head { display: flex; align-items: center; gap: var(--s3); }
+  .phone-head .phone-glyph { width: 44px; border-radius: 12px; }
+  .center-card { display: grid; justify-items: center; text-align: center; gap: var(--s4); width: min(100%, 580px); margin: var(--s6) auto 0; padding: var(--s7) var(--s6); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-card); }
+  .center-card p { color: var(--fg-sub); max-width: 46ch; }
+  .center-card .badge { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: var(--muted); color: var(--fg); }
+  .center-card .badge.warn { background: var(--amber-soft); color: var(--amber-text); }
+  .center-card .badge.err { background: var(--red-soft); color: var(--red-text); }
+  .wait { position: relative; display: grid; place-items: center; width: 120px; height: 120px; }
+  .wait .orb { width: 64px; }
+  .wait .ring { position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--ember); opacity: 0; animation: wait-ring 2.4s var(--ease-out) infinite; }
+  .wait .ring:nth-child(2) { animation-delay: 1.2s; }
+  @keyframes wait-ring { from { transform: scale(0.55); opacity: 0.7; } to { transform: scale(1); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .wait .ring { animation: none !important; opacity: 0.35; transform: none; } .wait .ring:nth-child(2) { display: none; } }
+  .wait-status { display: inline-flex; align-items: center; gap: var(--s2); font-weight: 600; }
+  .options { display: grid; gap: var(--s2); width: 100%; text-align: left; }
+  .options li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); padding: var(--s4); border-radius: var(--radius); background: var(--card); align-items: start; }
+  .options li .ic { color: var(--ember-text); margin-top: 2px; }
+  .options li strong { display: block; }
+  .options li span.d { display: block; color: var(--fg-sub); font-size: var(--text-sm); margin-top: 2px; }
+  .options li a { font-size: var(--text-sm); font-weight: 600; }
+  .code-form { display: grid; gap: 6px; width: 100%; text-align: left; }
+  .code-form label { font-weight: 600; font-size: var(--text-sm); }
+  .code-form .input { font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .code-form .hint { font-size: var(--text-sm); color: var(--fg-sub); }
+  .j-foot { max-width: 1120px; margin: 0 auto; padding: 0 var(--s5) var(--s6); color: var(--fg-sub); font-size: var(--text-xs); display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+  .j-foot a { color: var(--fg-sub); }
+  .spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin 0.8s linear infinite; flex: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 1023px) {
+    .j-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .j-top, .j-wrap, .j-foot { padding-left: var(--s4); padding-right: var(--s4); }
+    .j-main { padding: var(--s5) var(--s4); }
+    .facts { grid-template-columns: minmax(0, 1fr); }
+    .devices { grid-template-columns: minmax(0, 1fr); }
+    .center-card { padding: var(--s6) var(--s4); }
+    .join-row .btn { width: 100%; }
+  }
+  @media (max-width: 420px) { .j-top .chip { display: none; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="j-top">
+  <a class="brand" href="index.html" aria-label="Know Meet home"><span data-ic-brand></span><span class="brand-word" aria-hidden="true">Know <b>Meet</b></span></a>
+  <span class="spacer"></span>
+  <span class="chip chip-green"><span data-ic="check"></span>No account needed</span>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><span data-ic="sun"></span></button>
+</header>
+<main id="main" class="j-wrap"><div id="view"></div></main>
+<footer class="j-foot">
+  <span>Prototype — joining, dial-in and admission are simulated.</span>
+  <a href="screens.html">All screens</a>
+</footer>
+
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var KM = window.KM, h = KM.h, icon = KM.icon, fmt = KM.fmt, D = KM.data;
+  KM.$$('[data-ic]').forEach(function (s) { s.parentNode.replaceChild(icon(s.getAttribute('data-ic'), s.getAttribute('data-ic-class') || ''), s); });
+  KM.$$('[data-ic-brand]').forEach(function (s) { s.parentNode.replaceChild(KM.brandMark(), s); });
+  KM.theme.sync();
+
+  var view = KM.$('#view');
+  var CODE_RE = /^km-[a-z0-9]{3}-[a-z0-9]{3}$/;
+  var NAME_KEY = 'km-invitee', ADMIT_MS = 4000;
+  var DEFAULT_MEETING = 'product-sync'; /* hosted by Avery Chen */
+  var timers = [];
+  var router;
+
+  function later(fn, ms) { var t = setTimeout(fn, ms); timers.push(t); return t; }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+  function q(obj) {
+    var parts = [];
+    Object.keys(obj).forEach(function (k) { if (obj[k] != null && obj[k] !== '') parts.push(k + '=' + encodeURIComponent(obj[k])); });
+    return parts.length ? '?' + parts.join('&') : '';
+  }
+  function loadPrefs() {
+    var p = { name: '', cam: true, mic: true };
+    try { var raw = sessionStorage.getItem(NAME_KEY); if (raw) { var o = JSON.parse(raw); p.name = String(o.name || '').slice(0, 80); p.cam = o.cam !== false; p.mic = o.mic !== false; } } catch (_) { /* storage unavailable */ }
+    return p;
+  }
+  function savePrefs(p) { try { sessionStorage.setItem(NAME_KEY, JSON.stringify(p)); } catch (_) { /* storage unavailable */ } }
+  function byCode(code) { return D.meetings.filter(function (m) { return m.joinCode === code; })[0] || null; }
+  function resolve(p) {
+    var m = null;
+    if (p.code) m = byCode(String(p.code).toLowerCase());
+    if (!m && p.meeting) m = D.meeting(p.meeting);
+    return m || D.meeting(DEFAULT_MEETING);
+  }
+  function hostOf(m) {
+    var person = D.person(m.host);
+    if (person) return person;
+    if (m.host === D.user.name) return { name: D.user.name, email: D.user.email, initials: fmt.initials(D.user.name), org: 'Northwind' };
+    return { name: m.host, email: '', initials: fmt.initials(m.host) };
+  }
+  function busy(btn, label) {
+    btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+    KM.clear(btn).appendChild(h('span', { class: 'spin', 'aria-hidden': 'true' }));
+    btn.appendChild(h('span', { text: label }));
+  }
+  function inviteUrl(m) {
+    try { return new URL('join.html#invite?code=' + m.joinCode, location.href).href; } catch (_) { return 'join.html#invite?code=' + m.joinCode; }
+  }
+
+  /* ---------- .ics generation (RFC 5545) */
+  function icsDate(d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+  function fold(line) {
+    var out = [];
+    while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74); }
+    out.push(line);
+    return out.join('\r\n');
+  }
+  function downloadIcs(m) {
+    var start = new Date(m.start), end = D.meetingEnd(m), host = hostOf(m), url = inviteUrl(m);
+    var dial = D.telnyx.dialIn.map(function (d) { return d.region + ' ' + d.number; }).join(' / ');
+    var desc = host.name + ' invited you to a Know Meet meeting.\n\nJoin in your browser: ' + url +
+      '\n\nJoin by phone (audio only): ' + dial + '\nPIN: ' + m.dialIn.pin + '#' +
+      '\n\nThis meeting may be recorded and transcribed. A transcript and summary are sent to participants after it ends.';
+    var lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//KnowMe//Know Meet//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + m.id + '-' + icsDate(start) + '@knowme-meet',
+      'DTSTAMP:' + icsDate(new Date()),
+      'DTSTART:' + icsDate(start),
+      'DTEND:' + icsDate(end),
+      'SUMMARY:' + icsEsc(m.title),
+      'DESCRIPTION:' + icsEsc(desc),
+      'LOCATION:' + icsEsc(url),
+      'URL:' + url,
+      host.email ? 'ORGANIZER;CN=' + icsEsc(host.name) + ':mailto:' + host.email : null,
+      'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(m.title + ' starts in 10 minutes'), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].filter(Boolean).map(fold).join('\r\n') + '\r\n';
+    try {
+      var blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
+      var href = URL.createObjectURL(blob);
+      var a = h('a', { href: href, download: m.id + '.ics', style: 'display:none' });
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(href); }, 1000);
+      KM.toast('Calendar file downloaded — open it to add the meeting', 'calendar');
+    } catch (e) {
+      KM.toast('Couldn’t create the calendar file in this browser. Copy the link instead.', 'alert');
+    }
+  }
+
+  /* ---------- shared code form (wrong-code + expired) */
+  function codeForm(initial, idSuffix) {
+    var id = 'code-' + idSuffix;
+    var input = h('input', { class: 'input', id: id, type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', placeholder: 'km-4fq-82x', maxlength: '20', required: true, 'aria-required': 'true', 'aria-describedby': id + '-hint ' + id + '-err' });
+    input.value = initial || '';
+    var err = h('span', { class: 'field-error', id: id + '-err', role: 'alert' }, icon('alert', 'ic-sm'), h('span', { class: 'msg' }));
+    var btn = h('button', { class: 'btn btn-primary', type: 'submit' }, h('span', { text: 'Find meeting' }));
+    function set(msg) { err.querySelector('.msg').textContent = msg; err.classList.toggle('show', !!msg); if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid'); return !msg; }
+    function norm() { return input.value.trim().toLowerCase().replace(/\s+/g, ''); }
+    function fmtErr(v, req) {
+      if (!v) return req ? 'Enter the code from your invite, for example km-4fq-82x.' : '';
+      if (!CODE_RE.test(v)) return 'Codes look like km-4fq-82x: “km”, then two groups of three letters or numbers, joined by hyphens.';
+      return '';
+    }
+    input.addEventListener('blur', function () { set(fmtErr(norm(), false)); });
+    input.addEventListener('input', function () { if (input.getAttribute('aria-invalid')) set(fmtErr(norm(), false)); });
+    var form = h('form', { class: 'code-form', novalidate: true },
+      h('label', { for: id }, 'Meeting code', h('span', { class: 'req', 'aria-hidden': 'true', text: '*' })),
+      h('div', { class: 'input-group' }, input, btn),
+      h('span', { class: 'hint', id: id + '-hint', text: 'Find it in your invite email, SMS or calendar event.' }),
+      err);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = norm();
+      if (!set(fmtErr(v, true))) { input.focus(); return; }
+      input.value = v;
+      if (!byCode(v)) {
+        set('No meeting uses ' + v + '. Check each character against your invite — 0 and o, or 1 and l, are easy to mix up.');
+        input.focus();
+        return;
+      }
+      busy(btn, 'Opening…');
+      later(function () { router.go('invite' + q({ code: v })); }, 400);
+    });
+    return { form: form, input: input };
+  }
+
+  /* ---------- #invite */
+  function viewInvite(p) {
+    var m = resolve(p);
+    if (p.code && !byCode(String(p.code).toLowerCase())) { router.go('wrong-code' + q({ code: p.code })); return; }
+    var status = D.meetingStatus(m);
+    if (status === 'ended') { viewExpired(p, m); return; }
+    document.title = 'You’re invited: ' + m.title + ' — Know Meet';
+    var host = hostOf(m);
+    var via = ['email', 'sms', 'calendar'].indexOf(p.via) > -1 ? p.via : 'email';
+    var prefs = loadPrefs();
+    var end = D.meetingEnd(m);
+
+    /* name field */
+    var nameInput = h('input', { class: 'input', id: 'guest-name', type: 'text', autocomplete: 'name', required: true, 'aria-required': 'true', maxlength: '80', placeholder: 'e.g. Sam Patel', 'aria-describedby': 'guest-name-hint guest-name-err' });
+    nameInput.value = prefs.name;
+    var nameErr = h('span', { class: 'field-error', id: 'guest-name-err' }, icon('alert', 'ic-sm'), h('span', { class: 'msg' }));
+    function vName() {
+      var v = nameInput.value.trim();
+      var msg = !v ? 'Enter your name so ' + host.name.split(' ')[0] + ' knows who’s asking to join.' : (v.length < 2 ? 'Use at least 2 characters.' : '');
+      nameErr.querySelector('.msg').textContent = msg;
+      nameErr.classList.toggle('show', !!msg);
+      if (msg) nameInput.setAttribute('aria-invalid', 'true'); else nameInput.removeAttribute('aria-invalid');
+      return !msg;
+    }
+    nameInput.addEventListener('blur', vName);
+    nameInput.addEventListener('input', function () { if (nameInput.getAttribute('aria-invalid')) vName(); });
+
+    /* device toggles */
+    function deviceToggle(key, onIcon, offIcon, label) {
+      var inp = h('input', { type: 'checkbox', id: 'dev-' + key, role: 'switch' });
+      inp.checked = prefs[key];
+      var glyph = h('span', { class: 'lead', 'aria-hidden': 'true' }, icon(prefs[key] ? onIcon : offIcon));
+      var stateText = h('small', { text: prefs[key] ? 'On when you join' : 'Off when you join' });
+      inp.addEventListener('change', function () {
+        prefs[key] = inp.checked;
+        KM.setIcon(glyph, inp.checked ? onIcon : offIcon);
+        stateText.textContent = inp.checked ? 'On when you join' : 'Off when you join';
+        savePrefs({ name: nameInput.value.trim(), cam: prefs.cam, mic: prefs.mic });
+      });
+      return h('div', { class: 'device' }, glyph,
+        h('label', { class: 'copy', for: 'dev-' + key }, h('strong', { text: label }), stateText),
+        h('span', { class: 'switch' }, inp, h('span', { class: 'track' }), h('span', { class: 'thumb' })));
+    }
+
+    var joinBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('cam'), h('span', { text: 'Join in browser' }));
+    var form = h('form', { class: 'stack', novalidate: true, 'aria-label': 'Join in browser' },
+      h('div', { class: 'field' },
+        h('label', { for: 'guest-name' }, 'Your name', h('span', { class: 'req', 'aria-hidden': 'true', text: '*' })),
+        nameInput,
+        h('span', { class: 'hint', id: 'guest-name-hint', text: 'Shown on your video tile and in the transcript.' }),
+        nameErr),
+      h('fieldset', { class: 'stack-sm', style: 'border:0;padding:0;margin:0' },
+        h('legend', { class: 'small', style: 'font-weight:600;margin-bottom:6px', text: 'Start with' }),
+        h('div', { class: 'devices' }, deviceToggle('cam', 'cam', 'cam-off', 'Camera'), deviceToggle('mic', 'mic', 'mic-off', 'Microphone'))),
+      h('section', { class: 'consent', 'aria-labelledby': 'consent-title' },
+        icon('record'),
+        h('div', null,
+          h('h2', { id: 'consent-title', text: 'This meeting may be recorded and transcribed' }),
+          h('p', { text: m.record
+            ? host.name + ' has recording turned on. KnowMe transcribes the conversation live and may record everyone in one combined video. When the meeting ends, the transcript and a summary with action items are sent to all participants by email and SMS.'
+            : 'KnowMe transcribes the conversation live, and the host can start a recording during the meeting. When the meeting ends, the transcript and a summary with action items are sent to all participants by email and SMS.' }),
+          h('p', { text: 'By joining, you consent to being transcribed and, if the host starts it, recorded. You’ll see a notice in the room when recording starts, and you can keep your camera off or join by phone instead.' }))),
+      h('div', { class: 'join-row' }, joinBtn,
+        h('button', { class: 'btn', type: 'button', onclick: function () { downloadIcs(m); } }, icon('calendar'), h('span', { text: 'Add to calendar' }))));
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!vName()) { nameInput.focus(); return; }
+      var nm = nameInput.value.trim();
+      savePrefs({ name: nm, cam: prefs.cam, mic: prefs.mic });
+      busy(joinBtn, 'Opening lobby…');
+      later(function () {
+        location.href = 'meet.html#lobby' + q({ meeting: m.id, name: nm, cam: prefs.cam ? '1' : '0', mic: prefs.mic ? '1' : '0' });
+      }, 600);
+    });
+
+    var statusChip = status === 'live'
+      ? h('span', { class: 'chip chip-green' }, h('span', { class: 'pip' }), 'In progress now')
+      : h('span', { class: 'chip' }, icon('clock'), 'Starts ' + fmt.relDay(m.start).replace(/^(Today|Tomorrow)$/, function (x) { return x.toLowerCase(); }) + ' at ' + fmt.time(m.start));
+
+    var main = h('section', { class: 'j-main', 'aria-labelledby': 'meeting-title' },
+      h('div', { class: 'host-line' },
+        h('span', { class: 'avatar avatar-cyan', 'aria-hidden': 'true', text: host.initials || fmt.initials(host.name) }),
+        h('div', { class: 'who' },
+          h('strong', { text: host.name + ' invited you' }),
+          h('span', { text: host.org ? host.org + (host.email ? ' · ' + host.email : '') : (host.email || 'Host') })),
+        statusChip),
+      h('h1', { id: 'meeting-title', class: 'j-title', text: m.title }),
+      h('div', { class: 'facts' },
+        h('div', { class: 'fact' }, h('span', { class: 'k', text: 'When' }), h('span', { class: 'v', text: fmt.relDay(m.start) }), h('span', { class: 's', text: fmt.day(m.start) })),
+        h('div', { class: 'fact' }, h('span', { class: 'k', text: 'Time' }), h('span', { class: 'v od-nowrap', text: fmt.time(m.start) + ' – ' + fmt.time(end) }), h('span', { class: 's', text: 'Your local time' })),
+        h('div', { class: 'fact' }, h('span', { class: 'k', text: 'Duration' }), h('span', { class: 'v', text: fmt.mins(m.durationMin) }), h('span', { class: 's', text: (m.invitees.length + 1) + ' people invited' }))),
+      h('p', { class: 'via' }, 'Invitation sent via',
+        [['email', 'mail', 'Email'], ['sms', 'sms', 'SMS'], ['calendar', 'calendar', 'Calendar']].map(function (c) {
+          return h('span', { class: 'chip', 'aria-current': c[0] === via ? 'true' : null }, icon(c[1]), c[2], c[0] === via ? h('span', { class: 'sr-only', text: ' (how you opened this)' }) : null);
+        }),
+        h('span', { text: '— you don’t need a KnowMe account.' })),
+      form);
+
+    var phone = h('section', { class: 'side-card', 'aria-labelledby': 'phone-title' },
+      h('div', { class: 'phone-head' },
+        h('span', { class: 'phone-glyph', 'aria-hidden': 'true' }, icon('phone-in')),
+        h('h2', { id: 'phone-title', text: 'Join by phone' })),
+      h('p', { text: 'Call one of these numbers and enter the PIN followed by #. Phone callers join audio-only: you’ll hear everyone, including the agents, and appear as a phone tile.' }),
+      h('ul', { class: 'dial' }, D.telnyx.dialIn.map(function (d) {
+        return h('li', null,
+          h('div', null, h('small', { text: d.region }), h('a', { href: 'tel:' + d.number.replace(/[^\d+]/g, ''), text: d.number })),
+          h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy ' + d.region + ' dial-in number', onclick: function () { KM.copy(d.number); } }, icon('copy')));
+      })),
+      h('div', { class: 'dial' },
+        h('div', { style: 'display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 8px 8px 16px;border-radius:12px;background:var(--card)' },
+          h('div', { style: 'display:grid' }, h('small', { class: 'xsmall sub', text: 'Meeting PIN' }), h('span', { class: 'pin', text: m.dialIn.pin + ' #' })),
+          h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy meeting PIN', onclick: function () { KM.copy(m.dialIn.pin.replace(/\s/g, '') + '#'); } }, icon('copy')))),
+      h('button', { class: 'btn btn-sm', type: 'button', onclick: function () {
+        KM.copy(m.title + '\n' + D.telnyx.dialIn.map(function (d) { return d.region + ': ' + d.number; }).join('\n') + '\nPIN: ' + m.dialIn.pin + '#');
+      } }, icon('copy', 'ic-sm'), h('span', { text: 'Copy all dial-in details' })));
+
+    var link = h('section', { class: 'side-card', 'aria-labelledby': 'link-title' },
+      h('h2', { id: 'link-title' }, icon('link'), 'Meeting link'),
+      h('p', null, 'Code ', h('code', { text: m.joinCode }), ' · works in any modern browser on desktop or phone.'),
+      h('div', { class: 'btn-row' },
+        h('button', { class: 'btn btn-sm', type: 'button', onclick: function () { KM.copy(inviteUrl(m)); } }, icon('copy', 'ic-sm'), h('span', { text: 'Copy link' })),
+        h('button', { class: 'btn btn-sm', type: 'button', onclick: function () { downloadIcs(m); } }, icon('download', 'ic-sm'), h('span', { text: 'Download .ics' }))));
+
+    KM.clear(view).appendChild(h('div', { class: 'j-grid' }, main, h('aside', { class: 'j-side', 'aria-label': 'Other ways to join' }, phone, link)));
+  }
+
+  /* ---------- #waiting */
+  function viewWaiting(p) {
+    var m = resolve(p), host = hostOf(m), prefs = loadPrefs();
+    var who = (p.name || prefs.name || 'Guest').slice(0, 80);
+    document.title = 'Waiting for the host — Know Meet';
+    var statusLine = h('p', { class: 'wait-status', role: 'status', 'aria-live': 'polite' }, h('span', { text: 'Waiting for ' + host.name + ' to let you in…' }));
+    var leave = h('button', { class: 'btn', type: 'button' }, icon('leave'), h('span', { text: 'Leave waiting room' }));
+    function admitLater() {
+      later(function () {
+        KM.clear(statusLine).appendChild(icon('check'));
+        statusLine.appendChild(h('span', { text: host.name + ' let you in. Opening the lobby…' }));
+        leave.disabled = true;
+        later(function () { location.href = 'meet.html#lobby' + q({ meeting: m.id, name: who }); }, 900);
+      }, ADMIT_MS);
+    }
+    leave.addEventListener('click', function () {
+      clearTimers();
+      KM.confirm({ title: 'Leave the waiting room?', body: host.name + ' won’t see you waiting any more. You can come back any time from your invite link.', confirmLabel: 'Leave', cancelLabel: 'Keep waiting', danger: true })
+        .then(function (ok) { if (ok) router.go('invite' + q({ code: m.joinCode })); else admitLater(); });
+    });
+    KM.clear(view).appendChild(h('section', { class: 'center-card', 'aria-labelledby': 'wait-title' },
+      h('div', { class: 'wait', 'aria-hidden': 'true' }, h('span', { class: 'ring' }), h('span', { class: 'ring' }), h('span', { class: 'orb orb--cyan' })),
+      h('span', { class: 'eyebrow', text: 'Waiting room' }),
+      h('h1', { id: 'wait-title', text: 'The host will let you in soon' }),
+      h('p', null, 'You’re asking to join ', h('strong', { text: m.title }), ' as ', h('strong', { text: who }), '. ' + host.name + ' has been notified. Keep this page open.'),
+      statusLine,
+      h('div', { class: 'chips' },
+        h('span', { class: 'chip' }, icon(prefs.cam ? 'cam' : 'cam-off'), prefs.cam ? 'Camera on' : 'Camera off'),
+        h('span', { class: 'chip' }, icon(prefs.mic ? 'mic' : 'mic-off'), prefs.mic ? 'Mic on' : 'Mic off')),
+      h('div', { class: 'btn-row', style: 'justify-content:center' }, leave)));
+    admitLater();
+  }
+
+  /* ---------- #expired */
+  function viewExpired(p, given) {
+    var m = given || (p.code ? byCode(String(p.code).toLowerCase()) : null) || (p.meeting ? D.meeting(p.meeting) : null);
+    var host = m ? hostOf(m) : D.person('avery');
+    document.title = 'Meeting ended — Know Meet';
+    var mail = host && host.email ? 'mailto:' + host.email + '?subject=' + encodeURIComponent('New link for ' + (m ? m.title : 'our KnowMe meeting')) + '&body=' + encodeURIComponent('Hi ' + host.name.split(' ')[0] + ', my Know Meet link has expired. Could you send a new one?') : null;
+    var cf = codeForm('', 'expired');
+    KM.clear(view).appendChild(h('section', { class: 'center-card', 'aria-labelledby': 'exp-title' },
+      h('div', { class: 'badge warn', 'aria-hidden': 'true' }, icon('clock', 'ic-lg')),
+      h('h1', { id: 'exp-title', text: 'This meeting has ended' }),
+      h('p', { text: m
+        ? 'The link for “' + m.title + '” on ' + fmt.date(m.start) + ' is no longer active. The meeting has ended or the host closed the link.'
+        : 'This invite link has expired. The meeting has ended or the host closed the link.' }),
+      h('ul', { class: 'options' },
+        h('li', null, icon('mail'), h('div', null,
+          h('strong', { text: 'Ask ' + (host ? host.name : 'the host') + ' for a new link' }),
+          h('span', { class: 'd', text: 'If the meeting was rescheduled, the host can send a fresh invite by email, SMS or calendar.' }),
+          mail ? h('a', { href: mail, text: 'Email ' + host.name.split(' ')[0] }) : null)),
+        h('li', null, icon('send'), h('div', null,
+          h('strong', { text: 'Watch for the summary' }),
+          h('span', { class: 'd', text: 'If you took part, the transcript and summary arrive by email or SMS shortly after the meeting ends.' }))),
+        h('li', null, icon('cam'), h('div', null,
+          h('strong', { text: 'Start your own meeting' }),
+          h('span', { class: 'd', text: 'No account needed — you’ll get the Concierge and live transcription.' }),
+          h('a', { href: 'meet.html#start', text: 'Start a meeting' })))),
+      h('div', { class: 'divider', style: 'width:100%' }),
+      h('h2', { class: 'small', style: 'justify-self:start;font-size:var(--text-base)', text: 'Have a different code?' }),
+      cf.form));
+  }
+
+  /* ---------- #wrong-code */
+  function viewWrongCode(p) {
+    var tried = String(p.code || '').toLowerCase().slice(0, 20);
+    document.title = 'Code not found — Know Meet';
+    var cf = codeForm(tried, 'retry');
+    KM.clear(view).appendChild(h('section', { class: 'center-card', 'aria-labelledby': 'wc-title' },
+      h('div', { class: 'badge err', 'aria-hidden': 'true' }, icon('search', 'ic-lg')),
+      h('h1', { id: 'wc-title', text: 'We couldn’t find that meeting' }),
+      tried
+        ? h('p', null, 'No meeting uses the code ', h('code', { text: tried }), '. Check it against your invite and try again.')
+        : h('p', { text: 'Enter the meeting code from your invite to find the meeting.' }),
+      cf.form,
+      h('ul', { class: 'options' },
+        h('li', null, icon('info'), h('div', null,
+          h('strong', { text: 'Where to find the code' }),
+          h('span', { class: 'd', text: 'It’s in the invite email, the SMS, or the calendar event description — or just open the link in the invite.' }))),
+        h('li', null, icon('cam'), h('div', null,
+          h('strong', { text: 'Start your own meeting instead' }),
+          h('a', { href: 'meet.html#start', text: 'Start a meeting' }))))));
+    if (tried) later(function () { cf.input.focus(); cf.input.select(); }, 0);
+  }
+
+  router = KM.route({
+    invite: function (_, p) { clearTimers(); viewInvite(p); },
+    waiting: function (_, p) { clearTimers(); viewWaiting(p); },
+    expired: function (_, p) { clearTimers(); viewExpired(p); },
+    'wrong-code': function (_, p) { clearTimers(); viewWrongCode(p); }
+  }, 'invite');
+})();
+</script>
+</body>
+</html>
