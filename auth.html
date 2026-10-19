@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>Sign in — Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="Sign in to bring registered LiveKit agents, record meetings, connect calendars and keep transcripts." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/auth.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Sign in — Know Meet" />
+<meta property="og:description" content="Sign in to bring registered LiveKit agents, record meetings, connect calendars and keep transcripts." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/auth.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sign in — Know Meet" />
+<meta name="twitter:description" content="Sign in to bring registered LiveKit agents, record meetings, connect calendars and keep transcripts." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css">
+<style>
+  .auth-top { display: flex; align-items: center; gap: var(--s3); max-width: 1120px; margin: 0 auto; padding: var(--s3) var(--s5); min-height: var(--header-h); }
+  .auth-top .spacer { flex: 1 1 auto; }
+  .auth-top .back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--s3); border-radius: var(--radius); color: var(--fg-sub); font-size: var(--text-sm); font-weight: 600; text-decoration: none; }
+  .auth-top .back:hover { color: var(--fg); background: var(--card-hov); }
+  .auth-shell { width: 100%; max-width: 1040px; margin: 0 auto; padding: var(--s6) var(--s5) var(--s8); display: grid; justify-content: center; grid-template-columns: minmax(0, 480px); gap: var(--s6); align-items: start; }
+  .auth-shell.two { grid-template-columns: minmax(0, 480px) minmax(0, 400px); }
+  .auth-panel { display: grid; gap: var(--s5); padding: var(--s6); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-card); min-width: 0; }
+  .auth-head { display: grid; gap: var(--s2); }
+  .auth-head .mark { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--card); margin-bottom: var(--s2); }
+  .auth-head .mark .brand-mark { width: 30px; height: 30px; }
+  .auth-head .mark.ok { background: var(--green-soft); color: var(--green-text); }
+  .auth-head .mark.mail { background: var(--ember-soft); color: var(--ember-text); }
+  .auth-head p { color: var(--fg-sub); }
+  .auth-form { display: grid; gap: var(--s4); }
+  .req { color: var(--ember-text); margin-left: 2px; }
+  .label-row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); flex-wrap: wrap; }
+  .linkish { border: 0; background: none; padding: 4px 0; min-height: 32px; color: var(--ember-text); font-size: var(--text-sm); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .pw-wrap { position: relative; }
+  .pw-wrap .input { padding-right: 56px; }
+  .pw-wrap .icon-btn { position: absolute; right: 2px; top: 2px; }
+  .sso { display: grid; gap: var(--s2); }
+  .or { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--s3); color: var(--fg-sub); font-size: var(--text-sm); }
+  .or::before, .or::after { content: ""; height: 1px; background: var(--muted); }
+  .err-summary { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s2) var(--s3); padding: var(--s4); border-radius: var(--radius); background: var(--red-soft); box-shadow: inset 3px 0 0 var(--red); }
+  .err-summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .err-summary > .ic { color: var(--red-text); margin-top: 2px; }
+  .err-summary h2 { font-size: var(--text-base); }
+  .err-summary p { font-size: var(--text-sm); margin-top: 4px; }
+  .err-summary .btn-row { grid-column: 2; margin-top: var(--s2); }
+  .notice { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); }
+  .notice .grow { flex: 1 1 200px; }
+  .auth-foot { display: grid; gap: var(--s2); padding-top: var(--s4); box-shadow: inset 0 1px 0 var(--muted); font-size: var(--text-sm); color: var(--fg-sub); }
+  .auth-foot p { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+  .why { display: grid; gap: var(--s4); padding: var(--s5) 0; }
+  .why h2 { font-size: var(--text-xl); }
+  .why ul { display: grid; gap: var(--s4); }
+  .why li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; }
+  .why li .bubble { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--surface); color: var(--ember-text); }
+  .why li strong { display: block; font-family: var(--font-display); font-weight: 600; }
+  .why li span.d { display: block; color: var(--fg-sub); font-size: var(--text-sm); }
+  .guest-box { display: grid; gap: var(--s3); padding: var(--s4); border-radius: var(--radius-tile); background: var(--surface); }
+  .guest-box p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .addr { font-weight: 600; color: var(--fg); overflow-wrap: anywhere; }
+  .hint-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); padding: var(--s4); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); color: var(--fg-sub); }
+  .hint-box .ic { color: var(--fg); }
+  .cooldown { font-size: var(--text-sm); color: var(--fg-sub); }
+  .terms details { font-size: var(--text-sm); color: var(--fg-sub); padding-left: 32px; }
+  .terms summary { cursor: pointer; color: var(--ember-text); font-weight: 600; min-height: 32px; display: flex; align-items: center; }
+  .terms details p { margin-top: var(--s2); }
+  .pw-rules { display: grid; gap: 2px; font-size: var(--text-sm); color: var(--fg-sub); }
+  .pw-rules li { display: flex; align-items: center; gap: 6px; }
+  .pw-rules li[data-ok="true"] { color: var(--fg); }
+  .pw-rules li[data-ok="true"] .ic { color: var(--green-text); }
+  .btn[aria-busy="true"] { cursor: progress; }
+  .spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin 0.8s linear infinite; flex: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 899px) {
+    .auth-shell.two { grid-template-columns: minmax(0, 480px); }
+    .why { padding: 0; }
+  }
+  @media (max-width: 599px) {
+    .auth-top { padding: var(--s2) var(--s4); }
+    .auth-top .back span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .auth-shell { padding: var(--s4) var(--s4) var(--s7); }
+    .auth-panel { padding: var(--s5) var(--s4); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="auth-top">
+  <a class="brand" href="index.html" aria-label="Know Meet home"><span data-ic-brand></span><span class="brand-word" aria-hidden="true">Know <b>Meet</b></span></a>
+  <span class="spacer"></span>
+  <a class="back" href="index.html"><span data-ic="home"></span><span>Back to home</span></a>
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme"><span data-ic="sun"></span></button>
+</header>
+<main id="main"><div id="view"></div></main>
+
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var KM = window.KM, h = KM.h, icon = KM.icon;
+  KM.$$('[data-ic]').forEach(function (s) { s.parentNode.replaceChild(icon(s.getAttribute('data-ic'), s.getAttribute('data-ic-class') || ''), s); });
+  KM.$$('[data-ic-brand]').forEach(function (s) { s.parentNode.replaceChild(KM.brandMark(), s); });
+  KM.theme.sync();
+
+  var view = KM.$('#view');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var LOAD_MS = 900, SSO_MS = 1200, COOLDOWN_S = 30;
+  var timers = [];
+  var router;
+
+  function later(fn, ms) { var t = setTimeout(fn, ms); timers.push(t); return t; }
+  function every(fn, ms) { var t = setInterval(fn, ms); timers.push(t); return t; }
+  function clearTimers() { timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; }
+
+  /* only same-site page targets are allowed as ?next= */
+  function safeNext(n) { return n && /^[a-z][a-z0-9-]*\.html(#[^\s<>"']*)?$/i.test(n) ? n : 'dashboard.html'; }
+  function q(obj) {
+    var parts = [];
+    Object.keys(obj).forEach(function (k) { if (obj[k]) parts.push(k + '=' + encodeURIComponent(obj[k])); });
+    return parts.length ? '?' + parts.join('&') : '';
+  }
+  function nameFromEmail(email) {
+    if (!email) return KM.data.user.name;
+    if (email.toLowerCase() === KM.data.user.email) return KM.data.user.name;
+    var local = email.split('@')[0].replace(/\+.*$/, '');
+    var words = local.split(/[._-]+/).filter(Boolean).map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); });
+    return words.join(' ') || KM.data.user.name;
+  }
+
+  /* ---------- field helpers */
+  function makeField(o) {
+    var id = o.id, errId = id + '-err', hintId = o.hint ? id + '-hint' : null;
+    var input = o.input || h('input', { class: 'input', id: id, name: id, type: o.type || 'text', autocomplete: o.autocomplete || null,
+      required: o.required ? true : null, 'aria-required': o.required ? 'true' : null, inputmode: o.inputmode || null,
+      placeholder: o.placeholder || null, 'aria-describedby': [hintId, errId].filter(Boolean).join(' ') });
+    if (o.value) input.value = o.value;
+    var err = h('span', { class: 'field-error', id: errId }, icon('alert', 'ic-sm'), h('span', { class: 'msg' }));
+    var labelEl = h('label', { for: id }, o.label, o.required ? h('span', { class: 'req', 'aria-hidden': 'true', text: '*' }) : null);
+    var wrap = h('div', { class: 'field' },
+      o.labelExtra ? h('div', { class: 'label-row' }, labelEl, o.labelExtra) : labelEl,
+      o.control || input,
+      o.hint ? h('span', { class: 'hint', id: hintId }, o.hint) : null,
+      err);
+    var f = {
+      wrap: wrap, input: input,
+      set: function (msg) {
+        err.querySelector('.msg').textContent = msg || '';
+        err.classList.toggle('show', !!msg);
+        if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+        return !msg;
+      },
+      validate: function () { return f.set(o.validate ? o.validate(input.value.trim(), input) : ''); }
+    };
+    input.addEventListener('blur', function () { if (input.value.trim() || input.getAttribute('aria-invalid') === 'true') f.validate(); });
+    input.addEventListener('input', function () { if (input.getAttribute('aria-invalid') === 'true') f.validate(); });
+    return f;
+  }
+  function vEmail(v) {
+    if (!v) return 'Enter your email address.';
+    if (!EMAIL_RE.test(v)) return 'Enter an email like name@company.com — it needs an @ and a domain.';
+    return '';
+  }
+  function passwordControl(id, autocomplete, describedBy) {
+    var input = h('input', { class: 'input', id: id, name: id, type: 'password', autocomplete: autocomplete, required: true, 'aria-required': 'true', 'aria-describedby': describedBy });
+    var toggle = h('button', { class: 'icon-btn', type: 'button', 'aria-pressed': 'false', 'aria-controls': id, 'aria-label': 'Show password' }, icon('eye'));
+    toggle.addEventListener('click', function () {
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      toggle.setAttribute('aria-pressed', show ? 'true' : 'false');
+      toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      KM.setIcon(toggle, show ? 'eye-off' : 'eye');
+    });
+    return { input: input, control: h('div', { class: 'pw-wrap' }, input, toggle) };
+  }
+  function busy(btn, label) {
+    var kids = Array.prototype.slice.call(btn.childNodes);
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    KM.clear(btn).appendChild(h('span', { class: 'spin', 'aria-hidden': 'true' }));
+    btn.appendChild(h('span', { text: label }));
+    return function restore() { btn.disabled = false; btn.removeAttribute('aria-busy'); KM.clear(btn); kids.forEach(function (k) { btn.appendChild(k); }); };
+  }
+  function shell(two) {
+    KM.clear(view);
+    var s = h('div', { class: 'auth-shell' + (two ? ' two' : '') });
+    view.appendChild(s);
+    return s;
+  }
+  function head(o) {
+    return h('div', { class: 'auth-head' },
+      h('div', { class: 'mark' + (o.tone ? ' ' + o.tone : ''), 'aria-hidden': 'true' }, o.icon ? icon(o.icon, 'ic-lg') : KM.brandMark()),
+      o.eyebrow ? h('span', { class: 'eyebrow', text: o.eyebrow }) : null,
+      h('h1', { text: o.title }),
+      o.sub ? h('p', null, o.sub) : null);
+  }
+  function signedInNotice() {
+    var u = KM.auth.get();
+    if (!u) return null;
+    return h('div', { class: 'notice', role: 'status' },
+      h('span', { class: 'avatar avatar-sm avatar-ember', 'aria-hidden': 'true', text: u.initials }),
+      h('span', { class: 'grow' }, 'You’re already signed in as ', h('strong', { text: u.email }), '.'),
+      h('a', { class: 'btn btn-sm', href: 'dashboard.html', text: 'Go to meetings' }),
+      h('button', { class: 'btn btn-ghost btn-sm', type: 'button', text: 'Sign out', onclick: function () { KM.auth.signOut(); KM.toast('Signed out', 'log-out'); router.refresh(); } }));
+  }
+  function finishSignIn(user, next) {
+    try { KM.auth.signIn(user); } catch (e) { KM.toast(e.message || 'Couldn’t sign in. Try again.', 'alert'); return false; }
+    location.href = safeNext(next);
+    return true;
+  }
+  function cooldownResend(btn, line, onSend) {
+    var left = COOLDOWN_S;
+    function tick() {
+      if (left > 0) {
+        btn.disabled = true;
+        line.textContent = 'You can resend in ' + left + 's.';
+        left -= 1;
+      } else {
+        btn.disabled = false;
+        line.textContent = 'Didn’t get it? You can send it again now.';
+      }
+    }
+    tick();
+    var iv = every(tick, 1000);
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      onSend();
+      left = COOLDOWN_S;
+      tick();
+    });
+    return iv;
+  }
+
+  /* ---------- why sign in (aside) */
+  function whyAside(next) {
+    var items = [
+      ['agent-add', 'Agents in your meetings', 'Bring your dot Iris and dispatch registered agents like Scribe and Researcher. Guests only get the Concierge.'],
+      ['record', 'Recording and delivery', 'Record with Room Composite egress to your storage, and have the transcript, summary and action items sent to everyone at close.'],
+      ['calendar', 'Calendars and scheduling', 'Connect Google Calendar, Microsoft 365 / Outlook or iCloud / CalDAV, and send invites by email, SMS and calendar.']
+    ];
+    return h('aside', { class: 'why', 'aria-labelledby': 'why-title' },
+      h('span', { class: 'eyebrow', text: 'Why sign in' }),
+      h('h2', { id: 'why-title', text: 'Your account is what lets KnowMe remember.' }),
+      h('ul', null, items.map(function (it) {
+        return h('li', null, h('span', { class: 'bubble', 'aria-hidden': 'true' }, icon(it[0])),
+          h('div', null, h('strong', { text: it[1] }), h('span', { class: 'd', text: it[2] })));
+      })),
+      h('div', { class: 'guest-box' },
+        h('p', { text: 'In a hurry? Guests can start or join a meeting right now with the Concierge and live transcription. The transcript is deleted when the meeting ends.' }),
+        h('a', { class: 'btn', href: 'meet.html#start' }, icon('cam'), h('span', { text: 'Continue as guest' }))));
+  }
+
+  /* ---------- #sign-in and #sign-in-error */
+  function viewSignIn(params, isError) {
+    document.title = (isError ? 'Sign-in problem' : 'Sign in') + ' — Know Meet';
+    var next = params.next || '';
+    var s = shell(true);
+
+    var email = makeField({ id: 'email', label: 'Email', type: 'email', autocomplete: 'email', inputmode: 'email', required: true,
+      value: params.email || '', placeholder: 'you@company.com', validate: vEmail });
+    var pw = passwordControl('password', 'current-password', 'password-err');
+    var forgot = h('button', { class: 'linkish', type: 'button', text: 'Forgot password?' });
+    var pass = makeField({ id: 'password', label: 'Password', required: true, input: pw.input, control: pw.control, labelExtra: forgot,
+      validate: function (v) { return v ? '' : 'Enter your password. It’s case-sensitive.'; } });
+
+    var submit = h('button', { class: 'btn btn-primary btn-block', type: 'submit' }, h('span', { text: 'Sign in' }));
+    var magicBtn = h('button', { class: 'btn btn-block', type: 'button' }, icon('mail'), h('span', { text: 'Email me a sign-in link' }));
+    var ssoStatus = h('p', { class: 'sr-only', role: 'status', 'aria-live': 'polite' });
+
+    function goMagic() {
+      if (!email.validate()) {
+        email.set(email.input.value.trim() ? vEmail(email.input.value.trim()) : 'Enter your email first so we know where to send the sign-in link.');
+        email.input.focus();
+        return;
+      }
+      router.go('magic-link-sent' + q({ email: email.input.value.trim(), next: next }));
+    }
+    magicBtn.addEventListener('click', goMagic);
+    forgot.addEventListener('click', goMagic);
+
+    function ssoButton(provider) {
+      var b = h('button', { class: 'btn btn-block', type: 'button' }, h('span', { text: 'Continue with ' + provider }));
+      b.addEventListener('click', function () {
+        KM.$$('.sso .btn', s).forEach(function (x) { x.disabled = true; });
+        busy(b, 'Redirecting to ' + provider + '…');
+        ssoStatus.textContent = 'Redirecting to ' + provider + ' to sign in.';
+        later(function () { finishSignIn({ name: KM.data.user.name, email: KM.data.user.email }, next); }, SSO_MS);
+      });
+      return b;
+    }
+
+    var form = h('form', { class: 'auth-form', novalidate: true, 'aria-labelledby': 'form-title' },
+      h('h2', { id: 'form-title', class: 'sr-only', text: 'Sign in with email' }),
+      email.wrap, pass.wrap, submit, magicBtn);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok1 = email.validate(), ok2 = pass.validate();
+      if (!ok1) { email.input.focus(); return; }
+      if (!ok2) { pass.input.focus(); return; }
+      var addr = email.input.value.trim();
+      if (pass.input.value === 'wrong') {
+        router.go('sign-in-error' + q({ email: addr, next: next }));
+        return;
+      }
+      busy(submit, 'Signing in…');
+      later(function () { finishSignIn({ name: nameFromEmail(addr), email: addr }, next); }, LOAD_MS);
+    });
+
+    var summary = null;
+    if (isError) {
+      summary = h('div', { class: 'err-summary', role: 'alert', tabindex: '-1', 'aria-labelledby': 'err-title' },
+        icon('alert'),
+        h('div', null,
+          h('h2', { id: 'err-title', text: 'That email and password don’t match' }),
+          h('p', { text: 'Check the email for typos and re-enter your password — it’s case-sensitive. If you can’t remember it, we can email you a one-time sign-in link instead, then you can set a new password in Settings.' })),
+        h('div', { class: 'btn-row' },
+          h('button', { class: 'btn btn-sm', type: 'button', onclick: goMagic }, icon('mail', 'ic-sm'), h('span', { text: 'Email me a sign-in link' })),
+          h('a', { class: 'btn btn-ghost btn-sm', href: '#sign-up' + q({ email: params.email, next: next }), text: 'Create an account' })));
+      pass.set('Re-enter your password for this email.');
+    }
+
+    s.appendChild(h('section', { class: 'auth-panel', 'aria-labelledby': 'auth-title' },
+      (function () { var hd = head({ title: 'Sign in to Know Meet', sub: 'Pick up your meetings, agents and recordings.' }); hd.querySelector('h1').id = 'auth-title'; return hd; })(),
+      signedInNotice(),
+      summary,
+      h('div', { class: 'sso' }, ssoButton('Google'), ssoButton('Microsoft'), ssoStatus),
+      h('div', { class: 'or', 'aria-hidden': 'true' }, h('span', { text: 'or with email' })),
+      form,
+      h('div', { class: 'auth-foot' },
+        h('p', null, 'New to KnowMe?', h('a', { href: '#sign-up' + q({ next: next }), text: 'Create an account' })),
+        h('p', null, 'Just need a quick call?', h('a', { href: 'meet.html#start', text: 'Continue as guest' })))));
+    s.appendChild(whyAside(next));
+
+    if (isError) later(function () { summary.focus(); }, 0);
+  }
+
+  /* ---------- #sign-up */
+  function viewSignUp(params) {
+    document.title = 'Create account — Know Meet';
+    var next = params.next || '';
+    var s = shell(false);
+    var name = makeField({ id: 'name', label: 'Full name', required: true, autocomplete: 'name', value: params.name || '',
+      validate: function (v) { return v ? (v.length > 80 ? 'Use 80 characters or fewer.' : '') : 'Enter your name as you’d like others in the meeting to see it.'; } });
+    var email = makeField({ id: 'email', label: 'Work email', type: 'email', autocomplete: 'email', inputmode: 'email', required: true,
+      value: params.email || '', placeholder: 'you@company.com', validate: vEmail });
+    var pw = passwordControl('password', 'new-password', 'password-hint password-err');
+    var rules = h('ul', { class: 'pw-rules', id: 'password-hint' },
+      h('li', { 'data-rule': 'len' }, icon('check', 'ic-sm'), h('span', { text: 'At least 10 characters' })),
+      h('li', { 'data-rule': 'num' }, icon('check', 'ic-sm'), h('span', { text: 'Includes a number' })));
+    function checkRules(v) {
+      var len = v.length >= 10, num = /\d/.test(v);
+      rules.querySelector('[data-rule="len"]').setAttribute('data-ok', len ? 'true' : 'false');
+      rules.querySelector('[data-rule="num"]').setAttribute('data-ok', num ? 'true' : 'false');
+      return { len: len, num: num };
+    }
+    pw.input.addEventListener('input', function () { checkRules(pw.input.value); });
+    var pass = makeField({ id: 'password', label: 'Password', required: true, input: pw.input, control: h('div', { class: 'stack-sm' }, pw.control, rules),
+      validate: function (v) {
+        var r = checkRules(pw.input.value);
+        if (!pw.input.value) return 'Create a password with at least 10 characters, including a number.';
+        if (!r.len) return 'Add ' + (10 - pw.input.value.length) + ' more character' + (10 - pw.input.value.length === 1 ? '' : 's') + ' — passwords need at least 10.';
+        if (!r.num) return 'Add at least one number (0–9).';
+        return '';
+      } });
+    checkRules('');
+
+    var terms = h('input', { type: 'checkbox', id: 'terms', required: true, 'aria-required': 'true', 'aria-describedby': 'terms-err' });
+    var termsErr = h('span', { class: 'field-error', id: 'terms-err' }, icon('alert', 'ic-sm'), h('span', { class: 'msg' }));
+    function vTerms() {
+      termsErr.querySelector('.msg').textContent = terms.checked ? '' : 'Agree to the terms to create your account.';
+      termsErr.classList.toggle('show', !terms.checked);
+      if (terms.checked) terms.removeAttribute('aria-invalid'); else terms.setAttribute('aria-invalid', 'true');
+      return terms.checked;
+    }
+    terms.addEventListener('change', function () { if (terms.getAttribute('aria-invalid')) vTerms(); });
+
+    var submit = h('button', { class: 'btn btn-primary btn-block', type: 'submit' }, h('span', { text: 'Create account' }));
+    var form = h('form', { class: 'auth-form', novalidate: true },
+      name.wrap, email.wrap, pass.wrap,
+      h('div', { class: 'field terms' },
+        h('label', { class: 'check-row', for: 'terms' }, terms,
+          h('span', null, 'I agree to the KnowMe terms of service and privacy notice', h('span', { class: 'req', 'aria-hidden': 'true', text: '*' }))),
+        h('details', null, h('summary', { text: 'What you’re agreeing to' }),
+          h('p', { text: 'KnowMe stores your account details, the meetings you host, and — only when you turn them on — recordings, transcripts and summaries in KnowMe-managed or your own storage. You decide who receives meeting summaries in Delivery settings, and you can delete your recordings at any time.' })),
+        termsErr),
+      submit);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var a = name.validate(), b = email.validate(), c = pass.validate(), d = vTerms();
+      var firstBad = !a ? name.input : !b ? email.input : !c ? pass.input : !d ? terms : null;
+      if (firstBad) { firstBad.focus(); return; }
+      busy(submit, 'Creating account…');
+      later(function () { router.go('check-email' + q({ email: email.input.value.trim(), name: name.input.value.trim(), next: next })); }, LOAD_MS);
+    });
+
+    s.appendChild(h('section', { class: 'auth-panel', 'aria-labelledby': 'auth-title' },
+      (function () { var hd = head({ title: 'Create your KnowMe account', sub: 'Turn on agents, recording, delivery and calendars for the meetings you host.' }); hd.querySelector('h1').id = 'auth-title'; return hd; })(),
+      h('p', { class: 'small sub' }, 'Fields marked ', h('span', { class: 'req', text: '*' }), ' are required.'),
+      form,
+      h('div', { class: 'auth-foot' },
+        h('p', null, 'Already have an account?', h('a', { href: '#sign-in' + q({ next: next }), text: 'Sign in' })),
+        h('p', null, 'Not ready?', h('a', { href: 'meet.html#start', text: 'Continue as guest' })))));
+  }
+
+  /* ---------- #check-email */
+  function viewCheckEmail(params) {
+    document.title = 'Check your email — Know Meet';
+    var addr = EMAIL_RE.test(params.email || '') ? params.email : KM.data.user.email;
+    var name = params.name || nameFromEmail(addr);
+    var next = params.next || '';
+    var s = shell(false);
+    var verify = h('button', { class: 'btn btn-primary btn-block', type: 'button' }, icon('check'), h('span', { text: 'I’ve verified my email' }));
+    var resend = h('button', { class: 'btn', type: 'button' }, icon('refresh'), h('span', { text: 'Resend email' }));
+    var line = h('p', { class: 'cooldown', 'aria-live': 'polite' });
+    verify.addEventListener('click', function () {
+      busy(verify, 'Checking verification…');
+      later(function () { finishSignIn({ name: name, email: addr }, next); }, LOAD_MS);
+    });
+    cooldownResend(resend, line, function () { KM.toast('Verification email sent again to ' + addr, 'mail'); });
+
+    s.appendChild(h('section', { class: 'auth-panel', 'aria-labelledby': 'auth-title' },
+      (function () { var hd = head({ title: 'Check your email', icon: 'mail', tone: 'mail', sub: ['We sent a verification link to ', h('span', { class: 'addr', text: addr }), '. Open it to finish creating your account.'] }); hd.querySelector('h1').id = 'auth-title'; return hd; })(),
+      h('div', { class: 'hint-box' }, icon('info'),
+        h('span', { text: 'The email comes from Know Meet. If it isn’t in your inbox within a minute, check spam or promotions. The link expires in 24 hours.' })),
+      verify,
+      h('div', { class: 'btn-row' }, resend,
+        h('a', { class: 'btn btn-ghost', href: '#sign-up' + q({ name: name, email: addr, next: next }) }, icon('edit'), h('span', { text: 'Change email' }))),
+      line));
+  }
+
+  /* ---------- #magic-link-sent */
+  function viewMagic(params) {
+    document.title = 'Sign-in link sent — Know Meet';
+    var addr = EMAIL_RE.test(params.email || '') ? params.email : KM.data.user.email;
+    var next = params.next || '';
+    var s = shell(false);
+    var resend = h('button', { class: 'btn', type: 'button' }, icon('refresh'), h('span', { text: 'Send a new link' }));
+    var line = h('p', { class: 'cooldown', 'aria-live': 'polite' });
+    cooldownResend(resend, line, function () { KM.toast('New sign-in link sent to ' + addr + '. The earlier link no longer works.', 'mail'); });
+
+    s.appendChild(h('section', { class: 'auth-panel', 'aria-labelledby': 'auth-title' },
+      (function () { var hd = head({ title: 'Check your inbox', icon: 'send', tone: 'ok', sub: ['We emailed a one-time sign-in link to ', h('span', { class: 'addr', text: addr }), '.'] }); hd.querySelector('h1').id = 'auth-title'; return hd; })(),
+      h('div', { class: 'hint-box' }, icon('mail'),
+        h('span', { text: 'Open the email on this device and select “Sign in to Know Meet”. The link works once and expires in 15 minutes; you’ll land back where you started.' })),
+      h('div', { class: 'btn-row' }, resend,
+        h('a', { class: 'btn btn-ghost', href: '#sign-in' + q({ email: addr, next: next }) }, icon('edit'), h('span', { text: 'Use a different email' }))),
+      line,
+      h('div', { class: 'auth-foot' },
+        h('p', null, 'Prefer your password?', h('a', { href: '#sign-in' + q({ email: addr, next: next }), text: 'Sign in with password' })),
+        h('p', null, 'Need to talk now?', h('a', { href: 'meet.html#start', text: 'Continue as guest' })))));
+  }
+
+  router = KM.route({
+    'sign-in': function (_, p) { clearTimers(); viewSignIn(p, false); },
+    'sign-in-error': function (_, p) { clearTimers(); viewSignIn(p, true); },
+    'sign-up': function (_, p) { clearTimers(); viewSignUp(p); },
+    'check-email': function (_, p) { clearTimers(); viewCheckEmail(p); },
+    'magic-link-sent': function (_, p) { clearTimers(); viewMagic(p); }
+  }, 'sign-in');
+
+  window.addEventListener('pageshow', function (e) { if (e.persisted) router.refresh(); });
+})();
+</script>
+</body>
+</html>

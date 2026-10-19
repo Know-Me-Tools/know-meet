@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Know Meet — Logo concepts</title>
+<!-- og:start -->
+<meta name="description" content="Three logo directions for Know Meet and why Gathering was chosen." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/docs/design/logo-concepts.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Logo concepts — Know Meet" />
+<meta property="og:description" content="Three logo directions for Know Meet and why Gathering was chosen." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/docs/design/logo-concepts.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Logo concepts — Know Meet" />
+<meta name="twitter:description" content="Three logo directions for Know Meet and why Gathering was chosen." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<style>
+/* OD-LAYOUT-PRIMITIVES v1 — structure only: display, flex/grid, overflow, wrapping, ratio.
+   Put this @layer first; product CSS outside the layer always wins. */
+@layer od-layout {
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }
+  .od-nowrap  { white-space: nowrap; }
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; }
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+/* /OD-LAYOUT-PRIMITIVES v1 */
+
+:root {
+  color-scheme: dark;
+  --bg: #0B0F14; --bg-2: #111620; --surface: #161D29; --card: #1C2535; --muted: #253044;
+  --fg: #E8EDF3; --fg-sub: #A7B0BC; --ember-text: #FF6A3D; --ember-soft: #2B1A18;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --r: 12px; --r-lg: 20px;
+  --ink: #0B0F14; --paper: #FFFFFF;
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #F7F7F8; --bg-2: #FFFFFF; --surface: #FFFFFF; --card: #F2F4F7; --muted: #E5E8ED;
+  --fg: #0B0F14; --fg-sub: #4B5563; --ember-text: #C13E1E; --ember-soft: #FBE8E1;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.015em; line-height: 1.15; }
+a { color: var(--ember-text); }
+:focus-visible { outline: 2px solid #FF6A3D; outline-offset: 2px; border-radius: 6px; }
+.eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ember-text); }
+.sub { color: var(--fg-sub); }
+.mono { font-family: var(--font-mono); font-size: 13px; }
+
+.wrap { width: min(1200px, 100%); margin: 0 auto; padding: 0 32px; }
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.theme-btn { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 14px; border: 0; border-radius: var(--r); background: var(--card); color: var(--fg); font: 600 14px var(--font-body); cursor: pointer; }
+.intro { display: grid; gap: 16px; padding: 48px 0 32px; max-width: 760px; }
+.intro h1 { font-size: clamp(36px, 3vw + 18px, 60px); font-weight: 700; }
+.intro p { font-size: 18px; color: var(--fg-sub); max-width: 64ch; }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 48px; }
+.jump a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 8px; border-radius: 999px; background: var(--card); color: var(--fg); text-decoration: none; font-weight: 600; }
+.jump a svg { width: 28px; height: 28px; }
+.jump a .pan-dark { border-radius: 50%; padding: 2px; }
+
+/* panels: fixed grounds independent of the page theme */
+.pan-dark  { --lg-fg: #E8EDF3; --lg-ember: #FF6A3D; --lg-agent: #00C2DC; background: #0B0F14; color: #E8EDF3; }
+.pan-light { --lg-fg: #0B0F14; --lg-ember: #E04E28; --lg-agent: #0891B2; background: #FFFFFF; color: #0B0F14; }
+[data-theme="light"] .pan-light { box-shadow: inset 0 0 0 1px #E5E8ED; }
+[data-theme="dark"] .pan-dark { box-shadow: inset 0 0 0 1px #1F2D40; }
+
+.concept { padding: 64px 0; border-top: 1px solid var(--muted); }
+.c-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: end; margin-bottom: 32px; }
+.c-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(56px, 4vw + 24px, 96px); line-height: .9; color: var(--ember-text); }
+.c-head h2 { font-size: clamp(28px, 1.5vw + 18px, 40px); }
+.c-head p { color: var(--fg-sub); font-size: 18px; max-width: 60ch; margin-top: 8px; }
+
+.stage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stage > div { display: grid; place-items: center; min-height: 320px; border-radius: var(--r-lg); padding: 32px; }
+.stage svg { width: min(200px, 60%); height: auto; aspect-ratio: 1; }
+
+.rows { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.blk { border-radius: var(--r-lg); padding: 24px; display: grid; gap: 16px; align-content: start; }
+.blk .lbl { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .78; }
+.span-6 { grid-column: span 6; } .span-4 { grid-column: span 4; } .span-8 { grid-column: span 8; } .span-12 { grid-column: span 12; }
+
+.lockup { display: flex; align-items: center; gap: 14px; }
+.lockup svg { width: 52px; height: 52px; flex: none; }
+.word { font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
+.pan-dark .word b { color: #FF6A3D; } .pan-light .word b { color: #C13E1E; }
+.word b { font-weight: 700; }
+
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px; }
+.sizes figure { margin: 0; display: grid; justify-items: center; gap: 8px; }
+.sizes figcaption { font-family: var(--font-mono); font-size: 11px; opacity: .78; }
+
+.icons { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px; }
+.app-icon { display: block; }
+
+.monos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.monos div { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--r); }
+.monos svg { width: 50%; height: auto; aspect-ratio: 1; }
+.m-ink { background: #FFFFFF; color: #0B0F14; box-shadow: inset 0 0 0 1px #E5E8ED; }
+.m-white { background: #0B0F14; color: #FFFFFF; }
+.m-ember { background: #C13E1E; color: #FFFFFF; }
+
+.why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.why section { background: var(--surface); border-radius: var(--r-lg); padding: 24px; display: grid; gap: 8px; align-content: start; }
+[data-theme="light"] .why section { box-shadow: 0 1px 2px rgba(11,15,20,.06); }
+.why h3 { font-size: 18px; }
+.why p, .why li { color: var(--fg-sub); }
+.why ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+.compare { padding: 64px 0; border-top: 1px solid var(--muted); display: grid; gap: 24px; }
+.compare h2 { font-size: clamp(28px, 1.5vw + 18px, 40px); }
+.table-wrap { overflow-x: auto; border-radius: var(--r-lg); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+th, td { text-align: left; padding: 14px 20px; vertical-align: top; }
+thead th { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-sub); }
+tbody tr + tr td, tbody tr + tr th { border-top: 1px solid var(--muted); }
+tbody th { font-weight: 600; }
+.rate { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; }
+.rate i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.r3 i { background: #22C55E; } .r2 i { background: #F59E0B; transform: rotate(45deg); border-radius: 2px; } .r1 i { background: transparent; box-shadow: inset 0 0 0 2px var(--fg-sub); }
+.choose { background: var(--ember-soft); border-radius: var(--r-lg); padding: 24px; display: grid; gap: 8px; max-width: 760px; }
+.choose code { font-family: var(--font-mono); font-size: 14px; }
+footer { padding: 32px 0 64px; color: var(--fg-sub); font-size: 14px; }
+
+@media (max-width: 1023px) {
+  .span-6, .span-4, .span-8 { grid-column: span 12; }
+}
+@media (max-width: 767px) {
+  .wrap { padding: 0 16px; }
+  .stage { grid-template-columns: 1fr; }
+  .stage > div { min-height: 240px; }
+  .why { grid-template-columns: 1fr; }
+  .c-head { grid-template-columns: 1fr; gap: 8px; }
+  .word { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="s-gathering" viewBox="0 0 64 64"><circle cx="32" cy="32" r="11" fill="var(--lg-ember)"/><circle cx="32.00" cy="11.00" r="6" fill="var(--lg-fg)"/><circle cx="51.97" cy="25.51" r="6" fill="var(--lg-agent)"/><circle cx="44.34" cy="48.99" r="6" fill="var(--lg-fg)"/><circle cx="19.66" cy="48.99" r="6" fill="var(--lg-fg)"/><circle cx="12.03" cy="25.51" r="6" fill="var(--lg-fg)"/></symbol>
+<symbol id="m-gathering" viewBox="0 0 64 64"><circle cx="32" cy="32" r="11" fill="currentColor"/><circle cx="32.00" cy="11.00" r="6" fill="currentColor"/><circle cx="51.97" cy="25.51" r="6" fill="currentColor"/><circle cx="44.34" cy="48.99" r="6" fill="currentColor"/><circle cx="19.66" cy="48.99" r="6" fill="currentColor"/><circle cx="12.03" cy="25.51" r="6" fill="currentColor"/></symbol>
+<symbol id="s-bridge" viewBox="0 0 64 64"><path d="M12 54 V30 A10 10 0 0 1 32 30 A10 10 0 0 1 52 30 V54" fill="none" stroke="var(--lg-fg)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 30 V36" fill="none" stroke="var(--lg-fg)" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="50" r="6.5" fill="var(--lg-ember)"/></symbol>
+<symbol id="m-bridge" viewBox="0 0 64 64"><path d="M12 54 V30 A10 10 0 0 1 32 30 A10 10 0 0 1 52 30 V54" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 30 V36" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><circle cx="32" cy="50" r="6.5" fill="currentColor"/></symbol>
+<symbol id="s-grid" viewBox="0 0 64 64"><rect x="4" y="4" width="26" height="26" rx="7" fill="var(--lg-fg)"/><rect x="34" y="4" width="26" height="26" rx="7" fill="var(--lg-fg)"/><rect x="4" y="34" width="26" height="26" rx="7" fill="var(--lg-fg)"/><rect x="36" y="36" width="22" height="22" rx="5" fill="none" stroke="var(--lg-fg)" stroke-width="4"/><circle cx="47" cy="47" r="6" fill="var(--lg-ember)"/></symbol>
+<symbol id="m-grid" viewBox="0 0 64 64"><rect x="4" y="4" width="26" height="26" rx="7" fill="currentColor"/><rect x="34" y="4" width="26" height="26" rx="7" fill="currentColor"/><rect x="4" y="34" width="26" height="26" rx="7" fill="currentColor"/><rect x="36" y="36" width="22" height="22" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="47" cy="47" r="6" fill="currentColor"/></symbol>
+
+</defs></svg>
+
+<div class="wrap">
+  <header class="top">
+    <span class="brand"><svg width="28" height="28" class="pan-dark" style="border-radius:8px;padding:3px" aria-hidden="true"><use href="#s-gathering"/></svg>Know Meet · logo concepts</span>
+    <button class="theme-btn" type="button" id="theme" aria-label="Switch page theme">Light page</button>
+  </header>
+
+  <section class="intro" aria-labelledby="t-intro">
+    <span class="eyebrow">Round 1 · decided</span>
+    <h1 id="t-intro">Three marks for Know Meet</h1>
+    <p style="color:var(--fg);font-weight:600">Selected: A · Gathering. See the <a href="brand-guide.html">brand guide</a> for the final mark and its rules.</p>
+    <p>Each concept is built from what the product actually is: the KnowMe ember dot, persistent dots and agents sitting in the meeting, shared versus private conversation, and the video grid. Every mark is shown on dark and light, as a lockup, an app icon, at favicon sizes and in one colour, so you can judge it where it will really live.</p>
+  </section>
+
+  <nav class="jump" aria-label="Concepts">
+    <a href="#gathering"><svg class="pan-dark" aria-hidden="true"><use href="#s-gathering"/></svg>A · Gathering</a>
+    <a href="#bridge"><svg class="pan-dark" aria-hidden="true"><use href="#s-bridge"/></svg>B · Bridge</a>
+    <a href="#grid"><svg class="pan-dark" aria-hidden="true"><use href="#s-grid"/></svg>C · Grid</a>
+    <a href="#compare">Compare</a>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <article class="concept" id="gathering" aria-labelledby="t-gathering">
+    <div class="c-head">
+      <span class="c-num" aria-hidden="true">A</span>
+      <div>
+        <span class="eyebrow">Concept A</span>
+        <h2 id="t-gathering">Gathering</h2>
+        <p>An ember core — the meeting’s shared memory — with five participants around it. One of them is cyan: an agent sitting among the people.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="pan-dark"><svg viewBox="0 0 64 64" role="img" aria-label="Gathering symbol on dark"><use href="#s-gathering"/></svg></div>
+      <div class="pan-light"><svg viewBox="0 0 64 64" role="img" aria-label="Gathering symbol on light"><use href="#s-gathering"/></svg></div>
+    </div>
+
+    <div class="rows">
+      <div class="blk pan-dark span-6"><span class="lbl">Lockup · dark</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-gathering"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Lockup · light</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-gathering"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-dark span-6"><span class="lbl">Small sizes · dark</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Small sizes · light</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-gathering"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">App icon</span><div class="icons"><svg class="app-icon" width="120" height="120" viewBox="0 0 1024 1024" role="img" aria-label="Gathering app icon at 120px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-gathering"/></svg></g></svg><svg class="app-icon" width="64" height="64" viewBox="0 0 1024 1024" role="img" aria-label="Gathering app icon at 64px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-gathering"/></svg></g></svg><svg class="app-icon" width="32" height="32" viewBox="0 0 1024 1024" role="img" aria-label="Gathering app icon at 32px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-gathering"/></svg></g></svg></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">One colour</span><div class="monos">
+        <div class="m-ink"><svg viewBox="0 0 64 64" role="img" aria-label="Gathering in ink on white"><use href="#m-gathering"/></svg></div>
+        <div class="m-white"><svg viewBox="0 0 64 64" role="img" aria-label="Gathering in white on ink"><use href="#m-gathering"/></svg></div>
+        <div class="m-ember"><svg viewBox="0 0 64 64" role="img" aria-label="Gathering in white on ember"><use href="#m-gathering"/></svg></div>
+      </div></div>
+    </div>
+
+    <div class="why">
+      <section><h3>What it says</h3><p>The centre is the same ember dot that sits at the heart of the KnowMe K. Here it becomes the thing everyone gathers around: the meeting’s knowledge, which every person, dot and agent in the room can draw on.</p></section>
+      <section><h3>Tie to KnowMe</h3><p>It is a direct descendant of the parent mark, so Know Meet reads as part of the KnowMe family without needing the K.</p></section>
+      <section><h3>Works well</h3><ul><li>The closest family tie to KnowMe.</li><li>Tells the “people and agents together” story in one shape.</li><li>Animates naturally: the ring can breathe or pulse to show a dot listening, thinking or speaking.</li></ul></section>
+      <section><h3>Watch out for</h3><ul><li>Dot clusters are common in collaboration and AI branding, so it needs the wordmark early on.</li><li>It does not say “video” on its own.</li><li>At 16 px the five outer dots merge slightly; still recognisable as a ring.</li></ul></section>
+    </div>
+    <p class="sub" style="margin-top:16px">Files: <span class="mono">logos/gathering-symbol-dark.svg · logos/gathering-symbol-light.svg · logos/gathering-lockup-dark.svg · logos/gathering-lockup-light.svg · logos/gathering-mono.svg · logos/gathering-app-icon.svg</span></p>
+  </article>
+  <article class="concept" id="bridge" aria-labelledby="t-bridge">
+    <div class="c-head">
+      <span class="c-num" aria-hidden="true">B</span>
+      <div>
+        <span class="eyebrow">Concept B</span>
+        <h2 id="t-bridge">Bridge</h2>
+        <p>Two arches make the M of Meet. They share a middle leg, and where they meet sits the ember dot — the point where two conversations become one.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="pan-dark"><svg viewBox="0 0 64 64" role="img" aria-label="Bridge symbol on dark"><use href="#s-bridge"/></svg></div>
+      <div class="pan-light"><svg viewBox="0 0 64 64" role="img" aria-label="Bridge symbol on light"><use href="#s-bridge"/></svg></div>
+    </div>
+
+    <div class="rows">
+      <div class="blk pan-dark span-6"><span class="lbl">Lockup · dark</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-bridge"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Lockup · light</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-bridge"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-dark span-6"><span class="lbl">Small sizes · dark</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Small sizes · light</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-bridge"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">App icon</span><div class="icons"><svg class="app-icon" width="120" height="120" viewBox="0 0 1024 1024" role="img" aria-label="Bridge app icon at 120px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-bridge"/></svg></g></svg><svg class="app-icon" width="64" height="64" viewBox="0 0 1024 1024" role="img" aria-label="Bridge app icon at 64px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-bridge"/></svg></g></svg><svg class="app-icon" width="32" height="32" viewBox="0 0 1024 1024" role="img" aria-label="Bridge app icon at 32px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-bridge"/></svg></g></svg></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">One colour</span><div class="monos">
+        <div class="m-ink"><svg viewBox="0 0 64 64" role="img" aria-label="Bridge in ink on white"><use href="#m-bridge"/></svg></div>
+        <div class="m-white"><svg viewBox="0 0 64 64" role="img" aria-label="Bridge in white on ink"><use href="#m-bridge"/></svg></div>
+        <div class="m-ember"><svg viewBox="0 0 64 64" role="img" aria-label="Bridge in white on ember"><use href="#m-bridge"/></svg></div>
+      </div></div>
+    </div>
+
+    <div class="why">
+      <section><h3>What it says</h3><p>Each arch is a person, or a conversation: the room’s group chat and a private one-to-one, people and agents. The shared leg and the dot below it are where they connect.</p></section>
+      <section><h3>Tie to KnowMe</h3><p>It borrows the rounded, heavy strokes of the KnowMe K’s arms and keeps the ember dot as the meeting point, so it sits alongside the parent mark as a sibling monogram.</p></section>
+      <section><h3>Works well</h3><ul><li>The most ownable shape of the three: a monogram no other meeting app uses.</li><li>Works as a letter, so it pairs well with the wordmark and in tight UI spaces.</li><li>Calm and confident; suits a product meant for serious work meetings.</li></ul></section>
+      <section><h3>Watch out for</h3><ul><li>Says less about agents and dots than A or C; that story has to come from elsewhere.</li><li>Built from strokes, so the final version needs outlining for production.</li><li>At 16 px the arches thicken; the dot stays visible.</li></ul></section>
+    </div>
+    <p class="sub" style="margin-top:16px">Files: <span class="mono">logos/bridge-symbol-dark.svg · logos/bridge-symbol-light.svg · logos/bridge-lockup-dark.svg · logos/bridge-lockup-light.svg · logos/bridge-mono.svg · logos/bridge-app-icon.svg</span></p>
+  </article>
+  <article class="concept" id="grid" aria-labelledby="t-grid">
+    <div class="c-head">
+      <span class="c-num" aria-hidden="true">C</span>
+      <div>
+        <span class="eyebrow">Concept C</span>
+        <h2 id="t-grid">Grid</h2>
+        <p>A two-by-two call grid. Three tiles are people; the fourth holds a dot instead of a face — an agent in the meeting.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="pan-dark"><svg viewBox="0 0 64 64" role="img" aria-label="Grid symbol on dark"><use href="#s-grid"/></svg></div>
+      <div class="pan-light"><svg viewBox="0 0 64 64" role="img" aria-label="Grid symbol on light"><use href="#s-grid"/></svg></div>
+    </div>
+
+    <div class="rows">
+      <div class="blk pan-dark span-6"><span class="lbl">Lockup · dark</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-grid"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Lockup · light</span><div class="lockup"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#s-grid"/></svg><span class="word">Know <b>Meet</b></span></div></div>
+      <div class="blk pan-dark span-6"><span class="lbl">Small sizes · dark</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">Small sizes · light</span><div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>16px</figcaption></figure><figure><svg width="24" height="24" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>24px</figcaption></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>32px</figcaption></figure><figure><svg width="48" height="48" aria-hidden="true"><use href="#s-grid"/></svg><figcaption>48px</figcaption></figure></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">App icon</span><div class="icons"><svg class="app-icon" width="120" height="120" viewBox="0 0 1024 1024" role="img" aria-label="Grid app icon at 120px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-grid"/></svg></g></svg><svg class="app-icon" width="64" height="64" viewBox="0 0 1024 1024" role="img" aria-label="Grid app icon at 64px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-grid"/></svg></g></svg><svg class="app-icon" width="32" height="32" viewBox="0 0 1024 1024" role="img" aria-label="Grid app icon at 32px"><rect width="1024" height="1024" rx="220" fill="#0B0F14"/><g class="pan-dark" style="background:none"><svg x="208" y="208" width="608" height="608" viewBox="0 0 64 64"><use href="#s-grid"/></svg></g></svg></div></div>
+      <div class="blk pan-light span-6"><span class="lbl">One colour</span><div class="monos">
+        <div class="m-ink"><svg viewBox="0 0 64 64" role="img" aria-label="Grid in ink on white"><use href="#m-grid"/></svg></div>
+        <div class="m-white"><svg viewBox="0 0 64 64" role="img" aria-label="Grid in white on ink"><use href="#m-grid"/></svg></div>
+        <div class="m-ember"><svg viewBox="0 0 64 64" role="img" aria-label="Grid in white on ember"><use href="#m-grid"/></svg></div>
+      </div></div>
+    </div>
+
+    <div class="why">
+      <section><h3>What it says</h3><p>This is the product’s difference stated plainly: a normal video meeting, except one of the participants is an agent or a persistent dot. The open tile is the same shape the room uses for agent tiles.</p></section>
+      <section><h3>Tie to KnowMe</h3><p>The tie to KnowMe is the ember dot alone, so it relies on colour and the wordmark more than A does.</p></section>
+      <section><h3>Works well</h3><ul><li>Instantly reads as a video meeting, even to someone who has never heard of Know Meet.</li><li>The crispest of the three at 16 px.</li><li>Maps directly onto the product UI: the logo is literally the room.</li></ul></section>
+      <section><h3>Watch out for</h3><ul><li>Grid icons are close to other conferencing apps, so the ember dot has to carry the distinction.</li><li>The weakest visual link to the KnowMe K.</li><li>A literal icon can feel less like a brand mark over time.</li></ul></section>
+    </div>
+    <p class="sub" style="margin-top:16px">Files: <span class="mono">logos/grid-symbol-dark.svg · logos/grid-symbol-light.svg · logos/grid-lockup-dark.svg · logos/grid-lockup-light.svg · logos/grid-mono.svg · logos/grid-app-icon.svg</span></p>
+  </article>
+
+  <section class="compare" id="compare" aria-labelledby="t-compare">
+    <span class="eyebrow">Side by side</span>
+    <h2 id="t-compare">How the three compare</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Quality</th><th scope="col">A · Gathering</th><th scope="col">B · Bridge</th><th scope="col">C · Grid</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Says “meeting” at a glance</th><td><span class="rate r2"><i aria-hidden="true"></i>Partly</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Partly</span></td><td><span class="rate r3"><i aria-hidden="true"></i>Clearly</span></td></tr>
+          <tr><th scope="row">Says “agents and dots are here”</th><td><span class="rate r3"><i aria-hidden="true"></i>Clearly</span></td><td><span class="rate r1"><i aria-hidden="true"></i>Weakly</span></td><td><span class="rate r3"><i aria-hidden="true"></i>Clearly</span></td></tr>
+          <tr><th scope="row">Family tie to the KnowMe mark</th><td><span class="rate r3"><i aria-hidden="true"></i>Strong</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Medium</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Medium</span></td></tr>
+          <tr><th scope="row">Reads at 16 px</th><td><span class="rate r2"><i aria-hidden="true"></i>Good</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Good</span></td><td><span class="rate r3"><i aria-hidden="true"></i>Very good</span></td></tr>
+          <tr><th scope="row">Distinct from other meeting apps</th><td><span class="rate r2"><i aria-hidden="true"></i>Medium</span></td><td><span class="rate r3"><i aria-hidden="true"></i>High</span></td><td><span class="rate r1"><i aria-hidden="true"></i>Lower</span></td></tr>
+          <tr><th scope="row">Can animate for agent states</th><td><span class="rate r3"><i aria-hidden="true"></i>Naturally</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Dot only</span></td><td><span class="rate r2"><i aria-hidden="true"></i>Agent tile</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub">Ratings are design judgement, not measurement. Dot, diamond and ring shapes repeat the rating in the legend so it never depends on colour.</p>
+    <div class="choose">
+      <strong>To choose</strong>
+      <p>Reply with <code>A</code>, <code>B</code> or <code>C</code>, plus any change you want (for example “B, but with a cyan dot”). The brand guide, template, mood board, screens and README are then built around that mark.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Standalone SVG files for every concept are in <span class="mono">docs/design/logos/</span>: symbol (dark and light), horizontal lockup (dark and light), one-colour symbol and app icon. Wordmarks are live text in Space Grotesk until a direction is chosen and outlined.
+</footer>
+
+<script>
+(function () {
+  var b = document.getElementById('theme');
+  function sync() { var t = document.documentElement.dataset.theme; b.textContent = t === 'dark' ? 'Light page' : 'Dark page'; b.setAttribute('aria-label', t === 'dark' ? 'Switch page to light theme' : 'Switch page to dark theme'); }
+  b.addEventListener('click', function () {
+    var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem('km-meet-theme', t); } catch (_) {}
+    sync();
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
