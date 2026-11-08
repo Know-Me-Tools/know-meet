@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
-# Rebuilds the GitHub Pages mirror on the gh-pages branch, laid out like the IPNS site:
-#   /               -> docs/design/prototype (home, screens, every page)
-#   /docs/design/   -> brand guide, template, mood board, logos, tokens
+# Rebuilds the GitHub Pages mirror on the gh-pages branch, laid out like the IPNS
+# site (see scripts/build-site.sh).
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 SITE="$(mktemp -d)"
 trap 'rm -rf "$SITE"' EXIT
-mkdir -p "$SITE/docs/design"
-cp -R docs/design/prototype/. "$SITE/"
-rsync -a --exclude prototype --exclude publish-ipfs.sh --exclude '*.artifact.json' --exclude .DS_Store docs/design/ "$SITE/docs/design/"
+scripts/build-site.sh "$SITE"
 touch "$SITE/.nojekyll"
 SRC="$(git rev-parse --short HEAD)"
 git -C "$SITE" init -q -b gh-pages

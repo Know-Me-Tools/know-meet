@@ -11,6 +11,9 @@ screen.
 Live, always-latest copy (IPNS):
 https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/
 
+Pinned build of the home page (immutable CID, content identical to `prototype/index.html`):
+https://ipfs.prometheusags.ai/ipfs/bafybeigaqukvi2iiexaukw3vakyshrmfnp6rnd3ci6323eqmouensdeo6e/
+
 Mirror on GitHub Pages (republish with `scripts/publish-pages.sh` in the know-meet repo):
 https://know-me-tools.github.io/know-meet/
 
@@ -36,7 +39,7 @@ state with a direct link. The main pages:
 
 | Page | Covers |
 |---|---|
-| `index.html` | Home: start as a guest, join with a code, features, guest vs signed-in |
+| `index.html` | Home ("Meetings where agents do the follow-through"): start as a guest, sign in, join with a code, a sample room, what happens in a meeting (dots, registered agents, private panel, shared knowledge, recording, delivery at close, IPFS recall, calendars, invites), guest vs signed-in table, the Concierge, the four-step meeting flow |
 | `meet.html` | Start, lobby, signed-in room, guest room (Concierge only), recording consent, live transcript, invites (email, SMS, link, calendar, dial-in), group and private chat with files, end and post-meeting processing |
 | `join.html` | Invitee landing (no account), waiting room, expired link, wrong code |
 | `auth.html` | Sign in, sign up, check email, magic link, sign-in error |
@@ -78,10 +81,20 @@ paused (static, greyscale). Everything stops under reduced motion.
 this"). Agents have names and jobs and say what they did. Errors give the cause,
 then the fix.
 
-**Product scope reflected in the screens.** LiveKit carries all real-time media;
-recording is LiveKit Egress Room Composite to S3-compatible storage, then pinned
-to IPFS. Telnyx is used only for SMS and inbound phone dial-in. Guests get the
-Concierge and an ephemeral transcript; everything else needs sign-in.
+**Product scope reflected in the screens.** LiveKit carries all real-time media,
+and agents join rooms as real participants. Recording uses LiveKit Egress Room
+Composite (MP4 or HLS) after in-room consent. It is written to S3-compatible
+storage, either managed by KnowMe or the user's own bucket, then pinned to IPFS,
+and the CID is kept with the transcript. Uploaded files and transcript segments
+feed one shared meeting knowledge base that every agent in the room can read.
+Each user also has a private agent panel that only they see. On close, the
+transcript, summary and action items go to every participant by email
+(attachments) or SMS (link), following their delivery settings. Calendars cover
+Google, Microsoft 365 / Outlook and iCloud / CalDAV. Telnyx is used only for SMS
+and for inbound phone dial-in, which is a SIP trunk, audio-only, with a PIN.
+Guests get the Concierge, phone dial-in for their invitees, and a live transcript
+that is deleted when the meeting ends. Everything else needs sign-in, and invitees
+never need an account.
 
 ## Using the system
 
@@ -94,15 +107,26 @@ Concierge and an ephemeral transcript; everything else needs sign-in.
 
 ## Publishing
 
-`publish-ipfs.sh` (project root) uploads the prototype and this folder as one
-linked directory and points the `know-meet` IPNS name at it, so the IPNS link above
-always serves the latest build.
+The published site has this layout: the prototype pages and `assets/` at `/`, and
+this folder at `/docs/design/`. The GitHub Pages mirror uses the same layout.
+
+`scripts/build-site.sh` stages that layout into a temporary folder, and both
+publish scripts use it, so the two copies cannot drift apart.
+
+`scripts/publish-ipfs.sh` uploads the staged site as one linked tree. It pins the
+result, points the `know-meet` IPNS name at it, and prints the new CID, so the
+IPNS link above always serves the latest build. Optional overrides: `IPFS_RPC`,
+`IPNS_KEY`, `GATEWAY`. With `DRY_RUN=1` it lists the files it would upload and
+sends nothing.
 
 ```sh
 export IPFS_RPC_USER=…   # never commit these
 export IPFS_RPC_PASS=…
-./publish-ipfs.sh
+./scripts/publish-ipfs.sh
 ```
+
+To refresh the mirror, run `scripts/publish-pages.sh`. It force-pushes the staged
+site to `gh-pages`.
 
 ## Known limits
 
