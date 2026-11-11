@@ -127,6 +127,72 @@ these states as logged design-lead exceptions. Ratios are in
 **Flat 2.0 exception:** TD-45 and TD-46 make the 1px inset input ring the one
 permitted line in the system. It is input-only: it applies to `.input`, the
 shadcn `--input` variable and Flutter's `InputDecorationTheme`, and must not be
-reused for cards, dividers or other components.
+reused for cards, dividers or other components. **Superseded on 2026-11-11 by D-6
+(section E): there is no ring at all; the ring colours became the `control` fill.**
 
-Result: dark 173 keys, light 38 keys.
+Result (v1.2.0): dark 173 keys, light 38 keys.
+
+## E. Operator design answers of 2026-11-11 (tokens.json v1.3.0)
+
+Decision log: `.kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md`,
+"operator design answers (round-5 questions)". D-6 = Flat 2.0 with no strokes and
+fill-only WCAG (supersedes the D-5 input-ring exception, section D, TD-45/TD-46);
+D-7 = size tokens; D-8 = adaptive layout and its motion. Rules in `DESIGN.md`;
+ratios in [contrast-record.md](contrast-record.md). The frozen prototype is not
+edited, so each prototype-visible change below is logged as a fidelity adjudication
+in `tests/fidelity/oracle/thresholds.json`.
+
+### E1. Removed tokens
+
+| ID | Token | Was | Why |
+|---|---|---|---|
+| TD-48 | `ring-input` | dark `#64718A`, light `#858F9E` | D-6 bans the input ring. The two values live on as the `control` fill. |
+| TD-49 | `seg-pressed-shadow` | `0 1px 2px rgba(0, 0, 0, 0.2)` | Pressed segment is now a `selected` fill with a check icon. |
+| TD-50 | `drop-outline` | dark `#253044`, light `#CBD2DB` | Dashed outline removed; the drop zone is a `control` fill. |
+
+### E2. Changed values
+
+| ID | Theme | Token | v1.2.0 | v1.3.0 | Why |
+|---|---|---|---|---|---|
+| TD-47 | dark | `ember-btn` | `#FF6A3D` | `#FA5F30` | White focus fill on a primary button 2.84 -> 3.11; `on-ember` label 6.75 -> 6.17. Brand `ember` (`#FF6A3D`) is unchanged for the mark, orb and graphics. |
+| TD-51 | dark | `switch-track` | `#253044` | `#64718A` | Off track vs row 1.27 -> 3.43 (= `control`) |
+
+### E3. New colour roles (D-6)
+
+| ID | Token(s) | Dark | Light |
+|---|---|---|---|
+| TD-52 | `control`, `control-hov`, `on-control`, `control-placeholder` | `#64718A`, `#5C6880`, `#FFFFFF`, `#F5F7FA` | `#858F9E`, `#7C8696`, `#0B0F14`, `#1C2230` |
+| TD-53 | `control-invalid`, `on-control-invalid` | `#DC2626`, `#FFFFFF` | inherited |
+| TD-54 | `selected`, `on-selected` | `#FA5F30`, `#0B0F14` | `#C13E1E`, `#FFFFFF` |
+| TD-55 | `focus`, `on-focus`, `focus-placeholder` | `#FFFFFF`, `#0B0F14`, `#4B5563` | `#0B0F14`, `#FFFFFF`, `#C3CAD4` |
+| TD-56 | `slider-thumb` | `#FFFFFF` | `#0B0F14` |
+| TD-57 | `pip-green`, `pip-amber`, `pip-red` | `#22C55E`, `#F59E0B`, `#EF4444` | `#166534`, `#B45309`, `#DC2626` |
+| TD-58 | `speak-person`, `speak-agent`, `speak-phone`, `on-speak` | `#E8532A`, `#0891B2`, `#15803D`, `#0B0F14` | inherited (theme-invariant) |
+
+### E4. New size, window and motion tokens (D-7, D-8)
+
+| ID | Tokens |
+|---|---|
+| TD-59 | `size-target-min` 24, `size-target` 44, `size-control-h` 48, `size-control-h-sm` 36, `size-input-pad-x` 14, `size-input-pad-y` 12, `size-select-pad-end` 40, `size-textarea-min-h` 96, `size-check` 20 (prototype literals in km.css `.input`, `.btn-sm`, `.check-row`) |
+| TD-60 | `size-switch-w` 48, `size-switch-h` 28, `size-switch-thumb` 22, `size-switch-thumb-inset` 3, `size-switch-travel` 20 (km.css `.switch`) |
+| TD-61 | `size-dialog-w` 560, `size-sheet-w` 440, `size-toast-w` 440 (km.css `dialog`, `.sheet`, `.toasts`); `size-tooltip-max-w` 320, `size-tooltip-pad-x` 12, `size-tooltip-pad-y` 8 (new: tooltip = toast style, operator) |
+| TD-62 | `size-slider-track-h` 6, `size-slider-thumb` 20, `size-pip` 8, `size-speak-badge` 24 (new components with no prototype source) |
+| TD-63 | `size-nav-bar-h` 64, `size-nav-rail-w` 80, `size-nav-indicator-w` 56, `size-nav-indicator-h` 32; `window-medium` 600, `window-expanded` 1024 (min-width) |
+| TD-64 | `measure-empty` 46ch (km.css `.empty p`; S-07/D-3 kept one-off decorative sizes local, this one is a reusable measure) |
+| TD-65 | `dur-nav-morph` 280ms, `dur-nav-label` 150ms, `dur-reflow` 200ms, `ease-layout` `cubic-bezier(0.2, 0, 0, 1)` |
+
+The generator gained three categories for these (`size` -> `--spacing-*`, `measure`
+-> `--container-*`, `window` -> `--breakpoint-medium` / `--breakpoint-expanded`;
+Flutter `KmTokens.size*`, `KmTokens.window*`, `KmTokens.measureEmptyCh`).
+
+### E5. Prototype lines removed by D-6 (rules, not tokens)
+
+App bar bottom rule, tab-list rule and 2px tab underline, table header and row rules,
+sheet-footer and account-menu rules, code-block ring, avatar-stack cut-out ring,
+account-button expanded ring, paused/offline glyph ring, input/checkbox/radio rings,
+switch focus outline, drop-zone dashed outline, room tile speaking rings (3px inset
+ember/cyan/green), knowledge-row flash ring. Replacements are in `DESIGN.md`.
+Room side-panel rings (`.recips`, `.pipe-step`, `.opt`) are out of this phase's scope
+(D-2) and follow the same rules when they come in.
+
+Result: dark 224 keys, light 49 keys.

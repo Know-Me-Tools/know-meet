@@ -10,17 +10,23 @@ import '../../shared/ui/ui.dart';
 import 'km_app_bar.dart';
 import 'km_destinations.dart';
 import 'km_nav_bars.dart';
+import 'km_nav_morph.dart';
 import 'km_skip_link.dart';
+import 'km_window_class.dart';
 
-/// Initial open state of the frame's popovers. Production always starts
-/// closed; the golden suite opens them to render `frame.nav-open` and
-/// `frame.account-menu-open` without a tap.
-enum KmFrameOverlay { none, nav, accountMenu }
+/// Initial open state of the frame's popover. Production always starts
+/// closed; the golden suite opens the account menu for
+/// `frame.account-menu-open` without a tap. (The hamburger nav panel is
+/// retired: DESIGN.md "Adaptive layout", ADJ-2.)
+enum KmFrameOverlay { none, accountMenu }
 
 /// The app frame for the signed-in app pages and home (go_router
-/// ShellRoute). Navigation placement follows the mobile-navigation skill:
-/// bottom bar below 600px, rail at 600px and wider, both from
-/// [kmDestinations]; the selected destination is derived from [location].
+/// ShellRoute). Navigation follows DESIGN.md "Adaptive layout" and the
+/// mobile-navigation skill, by window width only: bottom bar below 600,
+/// rail from 600, inline app-bar links from 1024, all from
+/// [kmDestinations]; the current destination is derived from [location].
+/// Crossing a width class animates once ([KmNavMorph]); reduced motion is
+/// instant.
 class KmAppFrame extends ConsumerStatefulWidget {
   const KmAppFrame({
     super.key,
@@ -38,11 +44,25 @@ class KmAppFrame extends ConsumerStatefulWidget {
   ConsumerState<KmAppFrame> createState() => _KmAppFrameState();
 }
 
-class _KmAppFrameState extends ConsumerState<KmAppFrame> {
+class _KmAppFrameState extends ConsumerState<KmAppFrame> with TickerProviderStateMixin {
   final FocusNode _mainFocus = FocusNode(debugLabel: 'km-main');
   final FocusNode _accountFocus = FocusNode(debugLabel: 'km-account-button');
-  final FocusNode _navToggleFocus = FocusNode(debugLabel: 'km-nav-toggle');
+  final GlobalKey _mainKey = GlobalKey(debugLabel: 'km-main-subtree');
+  late final List<FocusNode> _navFocus = <FocusNode>[
+    for (final KmDestination d in kmDestinations) FocusNode(debugLabel: 'km-nav-${d.label}'),
+  ];
+  late final KmNavMorph _morph = KmNavMorph(vsync: this, onSettled: () => setState(() {}));
   late KmFrameOverlay _overlay = widget.initialOverlay;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _morph.update(
+      KmWindowClass.of(context),
+      instant: MediaQuery.disableAnimationsOf(context),
+      focusNodes: _navFocus,
+    );
+  }
 
   @override
   void didUpdateWidget(KmAppFrame oldWidget) {
@@ -52,18 +72,21 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> {
 
   @override
   void dispose() {
+    _morph.dispose();
     _mainFocus.dispose();
     _accountFocus.dispose();
-    _navToggleFocus.dispose();
+    for (final FocusNode n in _navFocus) {
+      n.dispose();
+    }
     super.dispose();
   }
 
   void _set(KmFrameOverlay next, {bool returnFocus = false}) {
     final KmFrameOverlay previous = _overlay;
     setState(() => _overlay = next);
-    if (!returnFocus || next != KmFrameOverlay.none) return;
-    if (previous == KmFrameOverlay.accountMenu) _accountFocus.requestFocus();
-    if (previous == KmFrameOverlay.nav) _navToggleFocus.requestFocus();
+    if (returnFocus && next == KmFrameOverlay.none && previous == KmFrameOverlay.accountMenu) {
+      _accountFocus.requestFocus();
+    }
   }
 
   void _go(String path) {
@@ -78,12 +101,22 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> {
         .select(dark ? ThemePreference.light : ThemePreference.dark);
   }
 
+  KmNavProps _props({bool interactive = true}) => KmNavProps(
+    location: widget.location,
+    onSelect: (KmDestination d) => _go(d.path),
+    focusNodes: interactive ? _navFocus : null,
+    labelOpacity: interactive ? _morph.labelOpacity : kAlwaysCompleteAnimation,
+  );
+
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
     final KmUser? user = ref.watch(sessionControllerProvider);
+    final KmWindowClass wc = _morph.current;
+    final EdgeInsets safe = MediaQuery.paddingOf(context);
     final double width = MediaQuery.sizeOf(context).width;
-    final bool compact = width < 600;
+    // DESIGN.md: the bar hides while the on-screen keyboard is open.
+    final bool keyboard = MediaQuery.viewInsetsOf(context).bottom > 0;
     final Widget main = Semantics(
       container: true,
       explicitChildNodes: true,
@@ -103,31 +136,32 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> {
       },
       child: Scaffold(
         backgroundColor: p.bg,
-        bottomNavigationBar: compact
+        bottomNavigationBar: wc == KmWindowClass.compact && !keyboard
             ? FocusTraversalOrder(
                 order: const NumericFocusOrder(4),
-                child: KmBottomBar(
-                  location: widget.location,
-                  onSelect: (KmDestination d) => _go(d.path),
+                child: _morph.enter(
+                  KmWindowClass.compact,
+                  KmBottomBar(props: _props()),
                 ),
               )
             : null,
-        body: SafeArea(
-          bottom: false,
-          child: FocusTraversalGroup(
-            policy: OrderedTraversalPolicy(),
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    FocusTraversalOrder(
-                      order: const NumericFocusOrder(1),
+        body: FocusTraversalGroup(
+          policy: OrderedTraversalPolicy(),
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  FocusTraversalOrder(
+                    order: const NumericFocusOrder(1),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: safe.top),
                       child: KmAppBar(
                         user: user,
-                        navOpen: _overlay == KmFrameOverlay.nav,
                         menuOpen: _overlay == KmFrameOverlay.accountMenu,
                         accountButtonFocus: _accountFocus,
-                        navToggleFocus: _navToggleFocus,
+                        inlineNav: wc == KmWindowClass.expanded
+                            ? KmInlineNav(props: _props())
+                            : null,
                         onHome: () => _go('/'),
                         onStart: () => _go(user == null ? '/meet/room-guest' : '/meet/room'),
                         onToggleTheme: _toggleTheme,
@@ -137,80 +171,77 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> {
                               ? KmFrameOverlay.none
                               : KmFrameOverlay.accountMenu,
                         ),
-                        onToggleNav: () => _set(
-                          _overlay == KmFrameOverlay.nav
-                              ? KmFrameOverlay.none
-                              : KmFrameOverlay.nav,
-                        ),
                       ),
                     ),
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          if (!compact)
-                            FocusTraversalOrder(
-                              order: const NumericFocusOrder(2),
-                              child: KmNavRail(
-                                location: widget.location,
-                                onSelect: (KmDestination d) => _go(d.path),
-                              ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        // Constant child structure, so the page subtree is
+                        // never remounted by a class change.
+                        if (wc == KmWindowClass.medium)
+                          FocusTraversalOrder(
+                            order: const NumericFocusOrder(2),
+                            child: _morph.enter(
+                              KmWindowClass.medium,
+                              KmNavRail(props: _props()),
                             ),
-                          Expanded(
-                            child: FocusTraversalOrder(
-                              order: const NumericFocusOrder(3),
-                              child: main,
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        Expanded(
+                          child: FocusTraversalOrder(
+                            order: const NumericFocusOrder(3),
+                            child: KeyedSubtree(
+                              key: _mainKey,
+                              child: _morph.reflow(main),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              ..._morph.outgoing(
+                bar: KmBottomBar(props: _props(interactive: false)),
+                rail: KmNavRail(props: _props(interactive: false)),
+                railTop: safe.top + KmTokens.headerH,
+              ),
+              if (_overlay != KmFrameOverlay.none)
+                Positioned.fill(
+                  top: safe.top + KmTokens.headerH,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => _set(KmFrameOverlay.none),
+                    child: const SizedBox.expand(),
+                  ),
                 ),
-                if (_overlay != KmFrameOverlay.none)
-                  Positioned.fill(
-                    top: KmTokens.headerH,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () => _set(KmFrameOverlay.none),
-                      child: const SizedBox.expand(),
+              if (_overlay == KmFrameOverlay.accountMenu && user != null)
+                Positioned(
+                  top: safe.top + KmTokens.headerH - KmTokens.s2,
+                  right: width <= KmTokens.bp899 ? KmTokens.s4 : KmTokens.s5,
+                  child: FocusTraversalOrder(
+                    order: const NumericFocusOrder(1.5),
+                    child: KmAccountMenu(
+                      user: user,
+                      onSettings: () => _go('/settings'),
+                      onSignOut: () {
+                        _set(KmFrameOverlay.none);
+                        ref.read(sessionControllerProvider.notifier).signOut();
+                      },
                     ),
                   ),
-                if (_overlay == KmFrameOverlay.nav)
-                  Positioned(
-                    top: KmTokens.headerH + 4,
-                    left: KmTokens.s3,
-                    right: KmTokens.s3,
-                    child: FocusTraversalOrder(
-                      order: const NumericFocusOrder(1.5),
-                      child: KmNavPanel(
-                        location: widget.location,
-                        onSelect: (KmDestination d) => _go(d.path),
-                      ),
-                    ),
-                  ),
-                if (_overlay == KmFrameOverlay.accountMenu && user != null)
-                  Positioned(
-                    top: KmTokens.headerH - KmTokens.s2,
-                    right: width <= KmTokens.bp899 ? KmTokens.s4 + 52 : KmTokens.s5,
-                    child: FocusTraversalOrder(
-                      order: const NumericFocusOrder(1.5),
-                      child: KmAccountMenu(
-                        user: user,
-                        onSettings: () => _go('/settings'),
-                        onSignOut: () {
-                          _set(KmFrameOverlay.none);
-                          ref.read(sessionControllerProvider.notifier).signOut();
-                        },
-                      ),
-                    ),
-                  ),
-                FocusTraversalOrder(
-                  order: const NumericFocusOrder(0),
-                  child: KmSkipLink(onActivate: _mainFocus.requestFocus),
                 ),
-              ],
-            ),
+              FocusTraversalOrder(
+                order: const NumericFocusOrder(0),
+                child: KmSkipLink(
+                  top: safe.top,
+                  onActivate: _mainFocus.requestFocus,
+                ),
+              ),
+            ],
           ),
         ),
       ),

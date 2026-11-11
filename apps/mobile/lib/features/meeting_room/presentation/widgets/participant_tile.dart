@@ -100,6 +100,13 @@ class _TileHead extends StatelessWidget {
                 child: chip ?? const SizedBox.shrink(),
               ),
             ),
+            // DESIGN.md "Speaking on a room tile": a solid badge in the head
+            // replaces the 3px inset ring. Dots and agents use speak-agent.
+            if (r.state == RoomAgentState.speaking && r.kind != RoomParticipantKind.human) ...<Widget>[
+              const SizedBox(width: KmTokens.s2),
+              const KmSpeakBadge(speaker: KmSpeaker.agent),
+              if (action != null) const SizedBox(width: KmTokens.s1),
+            ],
             ?action,
           ],
         ),
@@ -237,14 +244,8 @@ class _StateLine extends StatelessWidget {
             ),
         ],
       ),
-      RoomAgentState.paused => Container(
-        width: 10,
-        height: 10,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: p.fgSub, width: 2),
-        ),
-      ),
+      // D-6: a filled square (round dot means live), not a ring.
+      RoomAgentState.paused => const KmPausedGlyph(size: 10),
     };
     return Row(
       mainAxisSize: MainAxisSize.min,

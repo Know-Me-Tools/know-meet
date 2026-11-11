@@ -202,20 +202,32 @@ class MeetingCard extends StatelessWidget {
               label: m.title,
               excludeSemantics: true,
               onTap: () => context.go('/dashboard/meeting/${m.id}'),
-              child: InkWell(
+              child: KmInteractive(
                 onTap: () => context.go('/dashboard/meeting/${m.id}'),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 44),
-                  child: Align(
+                builder: (BuildContext context, Set<WidgetState> s) {
+                  final KmStateColors c = KmStateColors.resolve(
+                    p,
+                    s,
+                    rest: Colors.transparent,
+                    restOn: p.fg,
+                    hover: p.cardHov,
+                  );
+                  return KmFillBox(
+                    colors: c,
+                    radius: KmTokens.radius6,
+                    constraints: const BoxConstraints(minHeight: 44),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       m.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: KmText.body(context).copyWith(fontWeight: KmTokens.fontWeightSemibold),
+                      style: KmText.body(context).copyWith(
+                        fontWeight: KmTokens.fontWeightSemibold,
+                        color: c.on,
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
             Wrap(

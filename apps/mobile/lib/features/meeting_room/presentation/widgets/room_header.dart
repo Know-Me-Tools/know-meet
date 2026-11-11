@@ -33,13 +33,19 @@ class RoomHeader extends ConsumerWidget {
               label: 'Know Meet home',
               excludeSemantics: true,
               onTap: () => context.go('/'),
-              child: InkWell(
+              child: KmInteractive(
                 onTap: () => context.go('/'),
-                borderRadius: BorderRadius.circular(KmTokens.radius8),
-                child: const SizedBox.square(
-                  dimension: 44,
-                  child: Center(child: KmBrandMark()),
-                ),
+                builder: (BuildContext context, Set<WidgetState> s) {
+                  final bool focused = s.contains(WidgetState.focused);
+                  return KmFillBox(
+                    colors: KmStateColors(focused ? p.focus : Colors.transparent, p.onFocus),
+                    radius: KmTokens.radius8,
+                    width: KmTokens.sizeTarget,
+                    height: KmTokens.sizeTarget,
+                    alignment: Alignment.center,
+                    child: KmBrandMark(color: focused ? p.onFocus : null),
+                  );
+                },
               ),
             ),
             SizedBox(width: phone ? KmTokens.s2 : KmTokens.s3),
@@ -61,11 +67,7 @@ class RoomHeader extends ConsumerWidget {
                     children: <Widget>[
                       if (room.transcribing) ...<Widget>[
                         ExcludeSemantics(
-                          child: Container(
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(color: p.green, shape: BoxShape.circle),
-                          ),
+                          child: const KmPip(KmPipTone.green),
                         ),
                         const SizedBox(width: 6),
                       ],

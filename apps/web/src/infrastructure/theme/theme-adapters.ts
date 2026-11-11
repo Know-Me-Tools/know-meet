@@ -35,11 +35,27 @@ export function createMediaQuerySystemTheme(view: Window): SystemTheme {
   };
 }
 
-/** Token CSS: dark on :root, light on [data-theme="light"]. */
+/**
+ * Token CSS: dark on :root, light on [data-theme="light"]. `color-scheme` follows
+ * so native controls and scrollbars match (theme-behaviour.md). public/theme-init.js
+ * does the same before first paint; this keeps it in step afterwards.
+ */
 export function createDocumentThemeApplier(root: HTMLElement): ThemeApplier {
   return {
     apply: (theme: Theme) => {
       root.dataset["theme"] = theme;
+      root.style.colorScheme = theme;
     },
   };
+}
+
+/** Cross-tab sync (theme-behaviour.md "Switching"): another tab's choice applies here. */
+export function subscribeToStoredTheme(view: Window, onTheme: (theme: Theme) => void): () => void {
+  const listener = (event: StorageEvent) => {
+    if (event.key !== THEME_STORAGE_KEY) return;
+    const theme = parseTheme(event.newValue);
+    if (theme !== null) onTheme(theme);
+  };
+  view.addEventListener("storage", listener);
+  return () => view.removeEventListener("storage", listener);
 }

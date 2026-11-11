@@ -2,7 +2,8 @@
 // km.css form fields: `.field` (6px stack), `.field label`, `.hint`,
 // `.field-error` (fg text with a red alert icon: the icon and the copy carry the
 // error, never colour alone). Choice cards (FieldLabel wrapping a Field) separate
-// by fill and turn ember-soft when checked; Flat 2.0, no borders.
+// by fill and turn ember-soft when checked (supplementary: the indicator carries
+// state); a focused choice card takes the whole `focus` fill (D-6, no outline).
 // Forms that compose these should move focus to the first FieldError on a failed
 // submit (decision log 16.4, defect F6); that behaviour belongs to the form, not here.
 import { cva, type VariantProps } from "class-variance-authority";
@@ -18,7 +19,7 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
     <fieldset
       data-slot="field-set"
       className={cn(
-        "m-0 flex min-w-0 flex-col gap-s4 border-0 p-0 has-[>[data-slot=checkbox-group]]:gap-s3 has-[>[data-slot=radio-group]]:gap-s3",
+        "m-0 flex min-w-0 flex-col gap-s4 p-0 has-[>[data-slot=checkbox-group]]:gap-s3 has-[>[data-slot=radio-group]]:gap-s3",
         className,
       )}
       {...props}
@@ -104,7 +105,7 @@ function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>)
       data-slot="field-label"
       className={cn(
         "group/field-label peer/field-label flex w-fit gap-s2 group-data-[disabled=true]/field:opacity-50",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-base has-[>[data-slot=field]]:bg-surface has-[>[data-slot=field]]:shadow-(--shadow-card) has-[>[data-slot=field]]:transition-colors has-[>[data-slot=field]]:duration-(--dur-fast) has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-accent has-[>[data-slot=field]]:has-data-checked:bg-ember-soft has-[>[data-slot=field]]:has-[:focus-visible]:outline-2 has-[>[data-slot=field]]:has-[:focus-visible]:outline-offset-2 has-[>[data-slot=field]]:has-[:focus-visible]:outline-ring *:data-[slot=field]:p-s4",
+        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-base has-[>[data-slot=field]]:bg-surface has-[>[data-slot=field]]:shadow-(--shadow-card) has-[>[data-slot=field]]:transition-colors has-[>[data-slot=field]]:duration-(--dur-fast) has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-accent has-[>[data-slot=field]]:has-data-checked:bg-ember-soft has-[>[data-slot=field]]:has-[:focus-visible]:bg-focus! has-[>[data-slot=field]]:has-[:focus-visible]:text-on-focus! *:data-[slot=field]:p-s4",
         className,
       )}
       {...props}

@@ -156,10 +156,10 @@ class _TitleField extends StatelessWidget {
           label: 'Title, required',
           child: TextField(
             onChanged: onChanged,
-            style: KmText.body(context),
-            decoration: const InputDecoration(
-              hintText: 'e.g. Partner onboarding review',
-              constraints: BoxConstraints(minHeight: 48),
+            style: kmFieldStyle(context),
+            decoration: kmFieldDecoration(
+              context,
+              placeholder: 'e.g. Partner onboarding review',
             ),
           ),
         ),
@@ -202,10 +202,10 @@ class _InviteesPanel extends StatelessWidget {
                 child: Semantics(
                   label: 'Add people by email or phone number, required',
                   child: TextField(
-                    style: KmText.body(context),
-                    decoration: const InputDecoration(
-                      hintText: 'name@company.com or +1 415 555 0142',
-                      constraints: BoxConstraints(minHeight: 48),
+                    style: kmFieldStyle(context),
+                    decoration: kmFieldDecoration(
+                      context,
+                      placeholder: 'e.g. name@company.com or +1 415 555 0142',
                     ),
                   ),
                 ),

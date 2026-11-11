@@ -1,7 +1,8 @@
 // TJ-ARCH-MOB-001 compliant
-// km.css `.sheet`: a 440px right-side slide-over on bg-2 with the float shadow;
-// header / scrolling body (SheetBody, `.sheet-body`) / footer rows. The footer
-// sits above a 1px muted rule as in the prototype. Enter uses --dur-panel with
+// km.css `.sheet`: a `size-sheet-w` (440px, at most 100vw - 32px) side slide-over
+// on bg-2 with the float shadow; header / scrolling body (SheetBody, `.sheet-body`)
+// / footer rows. Flat 2.0 (D-6): the footer rule is gone; spacing (s3) separates
+// it. Enter uses --dur-panel with
 // ease-out, exit --dur-exit with ease-in. Other sides keep the same surface.
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { XIcon } from "lucide-react";
@@ -64,8 +65,8 @@ function SheetContent({
         data-side={side}
         className={cn(
           "fixed z-(--z-sheet) grid grid-rows-[auto_minmax(0,1fr)_auto] bg-popover text-popover-foreground shadow-(--shadow-float) outline-none transition-transform duration-(--dur-panel) ease-out data-ending-style:duration-(--dur-exit) data-ending-style:ease-in",
-          "data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:w-[min(440px,100vw)] data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full",
-          "data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:w-[min(440px,100vw)] data-[side=left]:data-ending-style:-translate-x-full data-[side=left]:data-starting-style:-translate-x-full",
+          "data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:w-[min(var(--spacing-size-sheet-w),calc(100vw-32px))] data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full",
+          "data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:w-[min(var(--spacing-size-sheet-w),calc(100vw-32px))] data-[side=left]:data-ending-style:-translate-x-full data-[side=left]:data-starting-style:-translate-x-full",
           "data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:max-h-[85dvh] data-[side=top]:data-ending-style:-translate-y-full data-[side=top]:data-starting-style:-translate-y-full",
           "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:max-h-[85dvh] data-[side=bottom]:rounded-t-lg data-[side=bottom]:data-ending-style:translate-y-full data-[side=bottom]:data-starting-style:translate-y-full",
           className,
@@ -109,7 +110,7 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="sheet-footer"
-      className={cn(overlayFooterClass, "row-start-3 shadow-[0_-1px_0_var(--muted)]", className)}
+      className={cn(overlayFooterClass, "row-start-3", className)}
       {...props}
     />
   );

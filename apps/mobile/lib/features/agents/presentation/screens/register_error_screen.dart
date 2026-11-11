@@ -107,8 +107,8 @@ class _RegisterErrorScreenState extends ConsumerState<RegisterErrorScreen> {
                   label: causes[i].$1,
                   description: causes[i].$2,
                   value: _checked.contains(i),
-                  onChanged: (bool? v) => setState(() {
-                    if (v ?? false) {
+                  onChanged: (bool v) => setState(() {
+                    if (v) {
                       _checked.add(i);
                     } else {
                       _checked.remove(i);

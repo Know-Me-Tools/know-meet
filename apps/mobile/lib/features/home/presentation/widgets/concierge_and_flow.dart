@@ -150,40 +150,51 @@ class _FlowCard extends StatelessWidget {
         label: '${step.number} ${step.title}. ${step.body} ${step.linkLabel}',
         excludeSemantics: true,
         onTap: open,
-        child: Material(
-          color: p.surface,
-          borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: open,
-            child: Padding(
+        child: KmInteractive(
+          onTap: open,
+          builder: (BuildContext context, Set<WidgetState> s) {
+            final KmStateColors c = KmStateColors.resolve(
+              p,
+              s,
+              rest: p.surface,
+              restOn: p.fg,
+              hover: p.cardHov,
+            );
+            final bool focused = s.contains(WidgetState.focused);
+            final Color accent = focused ? c.on : p.emberText;
+            return KmFillBox(
+              colors: c,
+              radius: KmTokens.radiusTile,
               padding: const EdgeInsets.all(KmTokens.s5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    step.number,
-                    style: KmText.mono(context).copyWith(color: p.emberText),
-                  ),
+                  Text(step.number, style: KmText.mono(context).copyWith(color: accent)),
                   const SizedBox(height: KmTokens.s3),
-                  Text(step.title, style: KmText.displayAt(context, size: KmTokens.textLg)),
+                  Text(
+                    step.title,
+                    style: KmText.displayAt(context, size: KmTokens.textLg, color: c.on),
+                  ),
                   const SizedBox(height: KmTokens.s2),
-                  Text(step.body, style: KmText.sub(context).copyWith(fontSize: KmTokens.text15)),
+                  Text(
+                    step.body,
+                    style: KmText.sub(context).copyWith(
+                      fontSize: KmTokens.text15,
+                      color: focused ? c.on : p.fgSub,
+                    ),
+                  ),
                   const SizedBox(height: KmTokens.s4),
                   Row(
                     children: <Widget>[
-                      Text(
-                        step.linkLabel,
-                        style: KmText.label(context).copyWith(color: p.emberText),
-                      ),
+                      Text(step.linkLabel, style: KmText.label(context).copyWith(color: accent)),
                       const SizedBox(width: KmTokens.s2),
-                      Icon(LucideIcons.chevronRight, size: 16, color: p.emberText),
+                      Icon(LucideIcons.chevronRight, size: 16, color: accent),
                     ],
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

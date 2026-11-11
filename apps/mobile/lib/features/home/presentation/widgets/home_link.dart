@@ -21,22 +21,28 @@ class HomeLink extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 44),
-          child: Align(
-            widthFactor: 1,
-            child: Text(
-              label,
-              style: base.copyWith(
-                color: p.emberText,
-                decoration: TextDecoration.underline,
-                decorationColor: p.emberText,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final bool focused = s.contains(WidgetState.focused);
+          final Color fg = focused ? p.onFocus : p.emberText;
+          return KmFillBox(
+            colors: KmStateColors(focused ? p.focus : Colors.transparent, fg),
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+            child: Align(
+              widthFactor: 1,
+              child: Text(
+                label,
+                style: base.copyWith(
+                  color: fg,
+                  decoration: TextDecoration.underline,
+                  decorationColor: fg,
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

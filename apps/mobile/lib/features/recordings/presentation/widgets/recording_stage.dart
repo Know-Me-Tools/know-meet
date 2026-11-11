@@ -165,18 +165,26 @@ class RecordingStage extends StatelessWidget {
                 label: 'Play recording',
                 excludeSemantics: true,
                 onTap: onPlay,
-                child: Material(
-                  color: p.emberBtn,
-                  shape: const CircleBorder(),
-                  elevation: 0,
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: onPlay,
-                    child: SizedBox.square(
-                      dimension: 64,
-                      child: Icon(LucideIcons.play, size: 28, color: p.onEmber),
-                    ),
-                  ),
+                // Primary-button row of the state table, round; focus fill.
+                child: KmInteractive(
+                  onTap: onPlay,
+                  builder: (BuildContext context, Set<WidgetState> s) {
+                    final KmStateColors c = KmStateColors.resolve(
+                      p,
+                      s,
+                      rest: p.emberBtn,
+                      restOn: p.onEmber,
+                      hover: p.emberBtnHov,
+                    );
+                    return KmFillBox(
+                      colors: c,
+                      shape: BoxShape.circle,
+                      width: 64,
+                      height: 64,
+                      alignment: Alignment.center,
+                      child: Icon(LucideIcons.play, size: 28, color: c.on),
+                    );
+                  },
                 ),
               ),
             ),
@@ -218,11 +226,17 @@ class _VideoTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: p.card,
         borderRadius: BorderRadius.circular(KmTokens.radius),
-        border: speaking ? Border.all(color: p.ember, width: 2) : null,
       ),
       child: Stack(
         children: <Widget>[
           Center(child: face),
+          // D-6: speaking is a badge in the tile head, not a 2px ring.
+          if (speaking)
+            Positioned(
+              top: 6,
+              right: 6,
+              child: KmSpeakBadge(speaker: mono != null ? KmSpeaker.agent : KmSpeaker.person),
+            ),
           if (showName)
             Positioned(
               left: 6,

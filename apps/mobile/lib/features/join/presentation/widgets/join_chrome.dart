@@ -30,18 +30,26 @@ class JoinHeader extends ConsumerWidget {
                 label: 'Know Meet home',
                 excludeSemantics: true,
                 onTap: () => context.go('/'),
-                child: InkWell(
+                child: KmInteractive(
                   onTap: () => context.go('/'),
-                  child: const SizedBox(
-                    height: 44,
-                    child: Row(
-                      children: <Widget>[
-                        KmBrandMark(),
-                        SizedBox(width: 10),
-                        KmBrandWord(size: 16),
-                      ],
-                    ),
-                  ),
+                  builder: (BuildContext context, Set<WidgetState> s) {
+                    final KmPalette p = context.km;
+                    final bool focused = s.contains(WidgetState.focused);
+                    return KmFillBox(
+                      colors: KmStateColors(focused ? p.focus : Colors.transparent, p.onFocus),
+                      radius: KmTokens.radius8,
+                      height: KmTokens.sizeTarget,
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          KmBrandMark(color: focused ? p.onFocus : null),
+                          const SizedBox(width: 10),
+                          KmBrandWord(size: 16, color: focused ? p.onFocus : null),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
               const Spacer(),
@@ -94,24 +102,27 @@ class JoinLink extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 44),
-          child: Align(
-            widthFactor: 1,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.emberText);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
             alignment: Alignment.centerLeft,
             child: Text(
               label,
               style: KmText.small(context).copyWith(
-                color: p.emberText,
+                color: c.on,
                 fontWeight: KmTokens.fontWeightSemibold,
                 decoration: TextDecoration.underline,
-                decorationColor: p.emberText,
+                decorationColor: c.on,
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

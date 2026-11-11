@@ -55,13 +55,13 @@ function AvatarFallback({ className, ...props }: AvatarPrimitive.Fallback.Props)
   );
 }
 
-/** Presence or role marker on the avatar edge, ringed with the page ground. */
+/** Presence or role marker on the avatar edge (Flat 2.0: no cut-out ring). */
 function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="avatar-badge"
       className={cn(
-        "absolute right-0 bottom-0 z-(--z-raised) inline-flex items-center justify-center rounded-round bg-primary text-primary-foreground shadow-[0_0_0_2px_var(--background)] select-none",
+        "absolute right-0 bottom-0 z-(--z-raised) inline-flex items-center justify-center rounded-round bg-primary text-primary-foreground select-none",
         "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
         "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
         "group-data-[size=lg]/avatar:size-3.5 group-data-[size=lg]/avatar:[&>svg]:size-2.5",
@@ -72,13 +72,13 @@ function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   );
 }
 
-/** km.css `.avatar-stack`: 8px overlap, each avatar ringed with the surface. */
+/** km.css `.avatar-stack` under D-6: avatars sit 4px apart with no overlap or ring. */
 function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group"
       className={cn(
-        "group/avatar-group inline-flex -space-x-2 *:data-[slot=avatar]:shadow-[0_0_0_2px_var(--surface)] *:data-[slot=avatar]:rounded-round",
+        "group/avatar-group inline-flex gap-s1 *:data-[slot=avatar]:rounded-round",
         className,
       )}
       {...props}
@@ -91,7 +91,7 @@ function AvatarGroupCount({ className, ...props }: React.ComponentProps<"div">) 
     <div
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-10 shrink-0 items-center justify-center rounded-round bg-muted font-mono text-xs font-semibold text-muted-foreground shadow-[0_0_0_2px_var(--surface)] group-has-data-[size=lg]/avatar-group:size-16 group-has-data-[size=sm]/avatar-group:size-8 [&>svg]:size-4",
+        "relative flex size-10 shrink-0 items-center justify-center rounded-round bg-muted font-mono text-xs font-semibold text-muted-foreground group-has-data-[size=lg]/avatar-group:size-16 group-has-data-[size=sm]/avatar-group:size-8 [&>svg]:size-4",
         className,
       )}
       {...props}

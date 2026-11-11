@@ -1,11 +1,16 @@
 // TJ-ARCH-MOB-001 compliant
-// The prototype has no tooltip. This borrows the toast treatment (km.css `.toast`:
-// inverted fg/bg, radius, float shadow) so transient overlays read as one family.
-// Open design question for design-lead: confirm or give tooltips their own role.
+// Tooltip = toast style (operator 2026-11-11, DESIGN.md): `fg` fill with `bg`
+// text, 14px medium, radius 12, `size-tooltip-pad-y` x `size-tooltip-pad-x`
+// padding, max width `size-tooltip-max-w` (never wider than the viewport minus
+// 32px), float shadow, no arrow. Opens after 500ms hover or at once on focus,
+// closes on Escape (Base UI, SC 1.4.13). Never the only copy of information.
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { cn } from "#lib/utils";
 
-function TooltipProvider({ delay = 0, ...props }: TooltipPrimitive.Provider.Props) {
+/** DESIGN.md: tooltips appear after 500ms of hover. */
+const TOOLTIP_HOVER_DELAY_MS = 500;
+
+function TooltipProvider({ delay = TOOLTIP_HOVER_DELAY_MS, ...props }: TooltipPrimitive.Provider.Props) {
   return <TooltipPrimitive.Provider data-slot="tooltip-provider" delay={delay} {...props} />;
 }
 
@@ -20,7 +25,7 @@ function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {
 function TooltipContent({
   className,
   side = "top",
-  sideOffset = 6,
+  sideOffset = 8,
   align = "center",
   alignOffset = 0,
   children,
@@ -39,13 +44,12 @@ function TooltipContent({
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(
-            "inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-8 bg-foreground px-s3 py-1.5 text-xs leading-140 font-medium text-background shadow-(--shadow-float) duration-(--dur-fast) ease-out has-data-[slot=kbd]:pr-1.5 data-open:animate-in data-open:fade-in-0 data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-closed:animate-out data-closed:fade-out-0",
+            "inline-flex w-fit max-w-[min(var(--spacing-size-tooltip-max-w),calc(100vw-32px))] origin-(--transform-origin) items-center gap-1.5 rounded-base bg-foreground px-size-tooltip-pad-x py-size-tooltip-pad-y text-sm leading-140 font-medium text-background shadow-(--shadow-float) duration-(--dur-fast) ease-out has-data-[slot=kbd]:pr-1.5 data-open:animate-in data-open:fade-in-0 data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-closed:animate-out data-closed:fade-out-0",
             className,
           )}
           {...props}
         >
           {children}
-          <TooltipPrimitive.Arrow className="size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-2 bg-foreground fill-foreground data-[side=bottom]:top-1 data-[side=left]:top-1/2! data-[side=left]:-right-1 data-[side=left]:-translate-y-1/2 data-[side=right]:top-1/2! data-[side=right]:-left-1 data-[side=right]:-translate-y-1/2 data-[side=top]:-bottom-2.5" />
         </TooltipPrimitive.Popup>
       </TooltipPrimitive.Positioner>
     </TooltipPrimitive.Portal>

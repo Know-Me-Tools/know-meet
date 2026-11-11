@@ -1,7 +1,7 @@
 // TJ-ARCH-MOB-001 compliant
 // km.css `.table-wrap` / `.table`: the wrapper scrolls inside its own surface
-// (radius-tile); headers are mono uppercase labels; rows separate with a 1px
-// muted inset line, the one rule the prototype uses for tabular data. Numeric
+// (radius-tile); headers are mono uppercase labels on a `bg-2` header row. Flat
+// 2.0 (D-6): no row rules; body rows alternate transparent and `surface`. Numeric
 // columns: pass `className="text-right tabular-nums"` (km.css `.num`).
 import type * as React from "react";
 import { cn } from "#lib/utils";
@@ -10,11 +10,11 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
-      className="relative w-full max-w-full overflow-x-auto rounded-tile bg-surface shadow-(--shadow-card)"
+      className="relative w-full max-w-full overflow-x-auto rounded-tile"
     >
       <table
         data-slot="table"
-        className={cn("w-full caption-bottom border-collapse text-sm", className)}
+        className={cn("w-full caption-bottom text-sm", className)}
         {...props}
       />
     </div>
@@ -22,14 +22,14 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
 }
 
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead data-slot="table-header" className={cn(className)} {...props} />;
+  return <thead data-slot="table-header" className={cn("bg-bg-2", className)} {...props} />;
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
       data-slot="table-body"
-      className={cn("[&>tr+tr>td]:shadow-[inset_0_1px_0_var(--muted)]", className)}
+      className={cn("[&>tr:nth-child(even)>td]:bg-surface", className)}
       {...props}
     />
   );
@@ -39,7 +39,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   return (
     <tfoot
       data-slot="table-footer"
-      className={cn("font-semibold [&>tr>td]:shadow-[inset_0_1px_0_var(--muted)]", className)}
+      className={cn("bg-bg-2 font-semibold", className)}
       {...props}
     />
   );
@@ -63,7 +63,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "px-s4 py-s3 text-left align-middle font-mono text-11 font-semibold tracking-table whitespace-nowrap text-muted-foreground uppercase shadow-[inset_0_-1px_0_var(--muted)] [&:has([role=checkbox])]:pr-0",
+        "px-s4 py-s3 text-left align-middle font-mono text-11 font-semibold tracking-table whitespace-nowrap text-muted-foreground uppercase [&:has([role=checkbox])]:pr-0",
         className,
       )}
       {...props}

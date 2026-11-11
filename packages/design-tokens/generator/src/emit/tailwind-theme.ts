@@ -31,6 +31,13 @@ function themeName(key: string, category: Category): string | null {
       return `spacing-${key}`;
     case "layout":
       return key === "page-max" ? `container-${key}` : `spacing-${key}`;
+    case "size":
+      return `spacing-${key}`;
+    case "measure":
+      return `container-${key}`;
+    case "window":
+      // window-medium -> --breakpoint-medium: min-width variants medium: and expanded:.
+      return `breakpoint-${key.replace(/^window-/, "")}`;
     default:
       return null;
   }

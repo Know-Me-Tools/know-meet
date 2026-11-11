@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import '../../shared/ui/ui.dart';
 
 /// `.skip-link`: the first focus stop. Invisible until focused, then shown
-/// top-left; activating it moves focus to the main content.
+/// top-left on the `focus` fill (D-6: focus is a fill); activating it moves
+/// focus to the main content.
 class KmSkipLink extends StatefulWidget {
-  const KmSkipLink({super.key, required this.onActivate});
+  const KmSkipLink({super.key, required this.onActivate, this.top = 0});
 
   final VoidCallback onActivate;
+
+  /// The top safe-area inset.
+  final double top;
 
   @override
   State<KmSkipLink> createState() => _KmSkipLinkState();
@@ -22,31 +26,32 @@ class _KmSkipLinkState extends State<KmSkipLink> {
     final KmPalette p = context.km;
     return Positioned(
       left: KmTokens.s4,
-      top: _focused ? KmTokens.s2 : -100,
+      top: _focused ? widget.top + KmTokens.s2 : -100,
       child: Semantics(
         link: true,
         label: 'Skip to content',
         excludeSemantics: true,
         onTap: widget.onActivate,
-        child: InkWell(
+        child: KmInteractive(
           key: const ValueKey<String>('km-skip-link'),
           onFocusChange: (bool f) => setState(() => _focused = f),
           onTap: widget.onActivate,
-          borderRadius: BorderRadius.circular(KmTokens.radius),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4, vertical: KmTokens.s2),
-            decoration: BoxDecoration(
-              color: p.emberBtn,
-              borderRadius: BorderRadius.circular(KmTokens.radius),
-            ),
-            child: Text(
-              'Skip to content',
-              style: KmText.body(context).copyWith(
-                color: p.onEmber,
-                fontWeight: KmTokens.fontWeightSemibold,
+          builder: (BuildContext context, Set<WidgetState> s) {
+            final KmStateColors c = KmStateColors(p.focus, p.onFocus);
+            return KmFillBox(
+              colors: c,
+              constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4),
+              child: Text(
+                'Skip to content',
+                style: KmText.body(context).copyWith(
+                  color: c.on,
+                  fontWeight: KmTokens.fontWeightSemibold,
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

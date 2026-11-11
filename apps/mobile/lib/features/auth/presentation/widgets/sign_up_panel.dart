@@ -57,7 +57,7 @@ class _SignUpPanelState extends State<SignUpPanel> {
         KmCheckRow(
           label: 'I agree to the KnowMe terms of service and privacy notice *',
           value: _agreed,
-          onChanged: (bool? v) => setState(() => _agreed = v ?? false),
+          onChanged: (bool v) => setState(() => _agreed = v),
         ),
         Padding(
           padding: const EdgeInsets.only(left: KmTokens.s6),
@@ -69,18 +69,21 @@ class _SignUpPanelState extends State<SignUpPanel> {
               label: 'What you’re agreeing to',
               excludeSemantics: true,
               onTap: () => setState(() => _termsOpen = !_termsOpen),
-              child: InkWell(
+              child: KmInteractive(
                 onTap: () => setState(() => _termsOpen = !_termsOpen),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 44),
-                  child: Align(
-                    widthFactor: 1,
+                builder: (BuildContext context, Set<WidgetState> s) {
+                  final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.emberText);
+                  return KmFillBox(
+                    colors: c,
+                    constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+                    padding: const EdgeInsets.symmetric(horizontal: KmTokens.s2),
+                    alignment: Alignment.centerLeft,
                     child: Text(
                       'What you’re agreeing to',
-                      style: KmText.label(context).copyWith(color: p.emberText),
+                      style: KmText.label(context).copyWith(color: c.on),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ),

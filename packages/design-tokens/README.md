@@ -46,9 +46,17 @@ the same releases (see `fonts/README.md`); that is mobile-engineer work.
 - `--card`, `--muted` and `--radius` keep their Know Meet meaning. The
   prototype's `.card` container is `surface`, so a Card primitive uses
   `bg-surface`; shadcn's `bg-card` is the raised fill (`.btn`, `.input`).
-- Flat 2.0: shadcn `--border` and `--sidebar-border` are `transparent`. The only
-  line is the input ring (`--input` = `ring-input`), an input-only exception
-  approved in D-5.
+- Flat 2.0 (D-6, 2026-11-11): no lines at all. shadcn `--border` and
+  `--sidebar-border` are `transparent`; `--input` is the control **fill**
+  (`control`) and `--ring` is the focus **fill** (`focus`). Use `bg-input` and
+  `bg-ring text-on-focus`; never `border-*`, `ring-*` or `outline-*`. Rules are in
+  the root `DESIGN.md`.
+- Sizes (`size-*`) become `--spacing-size-*` (`px-size-input-pad-x`,
+  `w-size-dialog-w`), `measure-*` becomes `--container-measure-*`, and the adaptive
+  window classes become min-width variants `medium:` (600) and `expanded:` (1024).
+  Flutter gets `KmTokens.size*`, `KmTokens.windowMedium/windowExpanded` and the
+  `kmControlFill`/`kmControlText`/`kmControlPlaceholder` resolvers in
+  `km_theme.g.dart`.
 - Breakpoints become min-width Tailwind breakpoints one pixel above the
   prototype's max-width queries: `max-bp768:` reproduces `@media (max-width: 767px)`.
 - The radius token `radius` (12px) is `rounded-base`.

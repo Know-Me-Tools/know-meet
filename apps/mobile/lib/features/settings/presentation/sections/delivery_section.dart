@@ -111,22 +111,28 @@ class DeliverySection extends StatelessWidget {
                     label: 'connect Telnyx SMS',
                     excludeSemantics: true,
                     onTap: () => context.go('/settings/telnyx-sms'),
-                    child: InkWell(
+                    child: KmInteractive(
                       onTap: () => context.go('/settings/telnyx-sms'),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(minHeight: 44),
-                        child: Align(
-                          widthFactor: 1,
-                          child: Text(
-                            'connect Telnyx SMS',
-                            style: TextStyle(
-                              color: p.emberText,
-                              decoration: TextDecoration.underline,
-                              decorationColor: p.emberText,
+                      builder: (BuildContext context, Set<WidgetState> s) {
+                        final bool focused = s.contains(WidgetState.focused);
+                        final Color fg = focused ? p.onFocus : p.emberText;
+                        return KmFillBox(
+                          colors: KmStateColors(focused ? p.focus : Colors.transparent, fg),
+                          radius: KmTokens.radius4,
+                          constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+                          child: Align(
+                            widthFactor: 1,
+                            child: Text(
+                              'connect Telnyx SMS',
+                              style: TextStyle(
+                                color: fg,
+                                decoration: TextDecoration.underline,
+                                decorationColor: fg,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                   const Text('.'),

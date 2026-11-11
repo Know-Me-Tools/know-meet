@@ -30,9 +30,11 @@ shad.ThemeData kmShadcnTheme(m.ThemeData material) {
     accentForeground: p.fg,
     destructive: p.dangerBtn,
     destructiveForeground: p.onDanger,
-    border: p.muted,
-    input: p.ringInput,
-    ring: p.ember,
+    // D-6: no strokes. shadcn's `border` has no Flat 2.0 role; `input` and
+    // `ring` are fills (control and focus), as on the web (DESIGN.md).
+    border: const m.Color(0x00000000),
+    input: p.control,
+    ring: p.focus,
     chart1: p.ember,
     chart2: p.cyan,
     chart3: p.green,

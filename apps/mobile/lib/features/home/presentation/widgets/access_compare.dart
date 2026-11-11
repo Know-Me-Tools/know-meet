@@ -34,10 +34,10 @@ class AccessCompare extends StatelessWidget {
           container: true,
           explicitChildNodes: true,
           child: Container(
+            // The table carries its own row fills (bg-2 header, alternating
+            // body rows), so the frame is only the rounded clip.
             decoration: BoxDecoration(
-              color: p.surface,
               borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-              boxShadow: p.shadowCard,
             ),
             clipBehavior: Clip.antiAlias,
             child: Table(
@@ -47,10 +47,10 @@ class AccessCompare extends StatelessWidget {
                 2: FlexColumnWidth(1),
               },
               children: <TableRow>[
+                // D-6: header row on `bg-2`, body rows alternate
+                // transparent and `surface`; no rules.
                 TableRow(
-                  decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(color: p.muted)),
-                  ),
+                  decoration: BoxDecoration(color: p.bg2),
                   children: const <Widget>[
                     _HeadCell('Capability'),
                     _HeadCell('Guest'),
@@ -59,9 +59,9 @@ class AccessCompare extends StatelessWidget {
                 ),
                 for (int i = 0; i < rows.length; i++)
                   TableRow(
-                    decoration: i == 0
-                        ? null
-                        : BoxDecoration(border: Border(top: BorderSide(color: p.muted))),
+                    decoration: BoxDecoration(
+                      color: i.isOdd ? p.surface : Colors.transparent,
+                    ),
                     children: <Widget>[
                       _NameCell(rows[i]),
                       _ValueCell(included: rows[i].guestIncluded, note: rows[i].guestNote),

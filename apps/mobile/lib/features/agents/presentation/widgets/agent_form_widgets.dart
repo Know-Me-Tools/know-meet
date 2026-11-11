@@ -13,10 +13,10 @@ final class AgentOption<T> {
   final String description;
 }
 
-/// `.option`: a radio or checkbox card. The selected card carries the 2px
-/// ember ring; the indicator shape also changes, so the state never relies
-/// on colour alone. Announced as a checked/unchecked control named by its
-/// title and description.
+/// `.option`: a radio or checkbox card, the kit [KmChoiceCard] (D-6: the
+/// indicator carries the state, the `ember-soft` fill is supplementary, no
+/// ring). Announced as a checked/unchecked control named by its title and
+/// description.
 class AgentOptionCard extends StatelessWidget {
   const AgentOptionCard({
     super.key,
@@ -40,108 +40,14 @@ class AgentOptionCard extends StatelessWidget {
   final bool onCard;
 
   @override
-  Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    final BorderRadius radius = BorderRadius.circular(KmTokens.radius);
-    return Semantics(
-      container: true,
-      checked: selected,
-      inMutuallyExclusiveGroup: !multi,
-      label: description.isEmpty ? title : '$title. $description',
-      onTap: onTap,
-      excludeSemantics: true,
-      child: Material(
-        color: onCard ? p.card : p.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: radius,
-          side: selected ? BorderSide(color: p.ember, width: 2) : BorderSide.none,
-        ),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: radius,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 44),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4, vertical: KmTokens.s3),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: multi
-                        ? _CheckMark(selected: selected)
-                        : _RadioMark(selected: selected),
-                  ),
-                  const SizedBox(width: KmTokens.s3),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(title, style: KmText.label(context)),
-                        if (description.isNotEmpty) ...<Widget>[
-                          const SizedBox(height: 2),
-                          Text(description, style: KmText.smallSub(context)),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _RadioMark extends StatelessWidget {
-  const _RadioMark({required this.selected});
-
-  final bool selected;
-
-  @override
-  Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    return Container(
-      width: 20,
-      height: 20,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: selected ? p.emberBtn : p.muted,
-        border: Border.all(color: selected ? p.emberBtn : p.ringInput),
-      ),
-      child: selected
-          ? Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: p.onEmber),
-            )
-          : null,
-    );
-  }
-}
-
-class _CheckMark extends StatelessWidget {
-  const _CheckMark({required this.selected});
-
-  final bool selected;
-
-  @override
-  Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    return Container(
-      width: 20,
-      height: 20,
-      decoration: BoxDecoration(
-        color: selected ? p.emberBtn : p.muted,
-        borderRadius: BorderRadius.circular(KmTokens.radius4),
-        border: Border.all(color: selected ? p.emberBtn : p.ringInput),
-      ),
-      child: selected ? Icon(LucideIcons.check, size: 14, color: p.onEmber) : null,
-    );
-  }
+  Widget build(BuildContext context) => KmChoiceCard(
+    title: title,
+    description: description,
+    selected: selected,
+    onTap: onTap,
+    multi: multi,
+    onCard: onCard,
+  );
 }
 
 /// `fieldset.fs`: legend, optional hint, then single-select option cards.
@@ -197,7 +103,7 @@ class AgentOptionGroup<T> extends StatelessWidget {
   }
 }
 
-/// A labelled dropdown styled by the generated input theme (`select.input`).
+/// A labelled select on the `control` fill (`select.input`, kit [KmSelect]).
 class AgentSelectField<T> extends StatelessWidget {
   const AgentSelectField({
     super.key,
@@ -214,25 +120,16 @@ class AgentSelectField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        ExcludeSemantics(child: Text(label, style: KmText.label(context))),
+        KmFieldLabel(label),
         const SizedBox(height: 6),
-        Semantics(
+        KmSelect<T>(
           label: label,
-          child: DropdownButtonFormField<T>(
-            initialValue: value,
-            onChanged: onChanged,
-            dropdownColor: p.bg2,
-            iconEnabledColor: p.fgSub,
-            style: KmText.body(context).copyWith(color: p.fg),
-            items: <DropdownMenuItem<T>>[
-              for (final (T v, String text) in options)
-                DropdownMenuItem<T>(value: v, child: Text(text)),
-            ],
-          ),
+          value: value,
+          options: options,
+          onChanged: (T v) => onChanged(v),
         ),
       ],
     );

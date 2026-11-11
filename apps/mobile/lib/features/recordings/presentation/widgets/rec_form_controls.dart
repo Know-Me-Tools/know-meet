@@ -44,13 +44,11 @@ class _RecSearchFieldState extends State<RecSearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    final TextStyle base = KmText.body(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ExcludeSemantics(child: Text(widget.label, style: KmText.label(context))),
+        KmFieldLabel(widget.label),
         const SizedBox(height: 6),
         Semantics(
           label: widget.label,
@@ -59,14 +57,11 @@ class _RecSearchFieldState extends State<RecSearchField> {
             onChanged: widget.onChanged,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.search,
-            style: base.copyWith(color: p.fg),
-            decoration: InputDecoration(
-              hintText: widget.placeholder,
-              hintStyle: base.copyWith(color: p.fgSub.withValues(alpha: 0.85)),
-              prefixIcon: ExcludeSemantics(
-                child: Icon(LucideIcons.search, size: 20, color: p.fgSub),
-              ),
-              constraints: const BoxConstraints(minHeight: 48),
+            style: kmFieldStyle(context),
+            decoration: kmFieldDecoration(
+              context,
+              placeholder: widget.placeholder,
+              prefixIcon: const ExcludeSemantics(child: Icon(LucideIcons.search, size: 20)),
             ),
           ),
         ),
@@ -86,6 +81,7 @@ class RecSelect<T> extends StatelessWidget {
     required this.onChanged,
     this.showLabel = true,
     this.dense = false,
+    this.width,
   });
 
   final String label;
@@ -96,54 +92,35 @@ class RecSelect<T> extends StatelessWidget {
   /// False for a visually hidden label (`.sr-only`).
   final bool showLabel;
 
-  /// `.ctrl-row select.input`: 36px tall, small text.
+  /// `.ctrl-row select.input`: small text (the target stays >= 44px).
   final bool dense;
+
+  /// Fixed width. [KmSelect] fills its parent, and this select sits in a
+  /// Wrap or Row that gives it no width; the default fits the longest
+  /// option ("Longest first", "1.25×").
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    final TextStyle text = (dense ? KmText.small(context) : KmText.body(context))
-        .copyWith(color: p.fg);
+    // D-6: the select sits on the `control` fill; focus is the `focus` fill.
+    final Widget select = SizedBox(
+      width: width ?? (dense ? 104 : 200),
+      child: KmSelect<T>(
+        label: label,
+        value: value,
+        options: options,
+        onChanged: onChanged,
+        dense: dense,
+      ),
+    );
+    if (!showLabel) return select;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        if (showLabel) ...<Widget>[
-          ExcludeSemantics(child: Text(label, style: KmText.label(context))),
-          const SizedBox(height: 6),
-        ],
-        Semantics(
-          label: label,
-          child: Container(
-            constraints: BoxConstraints(minHeight: dense ? 36 : 48),
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: dense ? 10 : 14, right: 10),
-            decoration: BoxDecoration(
-              color: p.card,
-              borderRadius: BorderRadius.circular(KmTokens.radius),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<T>(
-                value: value,
-                isDense: true,
-                style: text,
-                dropdownColor: p.bg2,
-                borderRadius: BorderRadius.circular(KmTokens.radius),
-                icon: Padding(
-                  padding: const EdgeInsets.only(left: KmTokens.s3),
-                  child: Icon(LucideIcons.chevronDown, size: 16, color: p.fgSub),
-                ),
-                items: <DropdownMenuItem<T>>[
-                  for (final (T v, String l) in options)
-                    DropdownMenuItem<T>(value: v, child: Text(l, style: text)),
-                ],
-                onChanged: (T? v) {
-                  if (v != null) onChanged(v);
-                },
-              ),
-            ),
-          ),
-        ),
+        KmFieldLabel(label),
+        const SizedBox(height: 6),
+        select,
       ],
     );
   }

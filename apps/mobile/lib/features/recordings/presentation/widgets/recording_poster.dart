@@ -138,14 +138,7 @@ class _Tile extends StatelessWidget {
     final Color bg = agent ? p.cyanSoft : (main ? p.tile2 : p.tile);
     final Color fg = agent ? p.cyanText : (main ? p.fg : p.fgSub);
     final double size = compact ? (main ? 14 : 10) : (main ? 18 : 13);
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(compact ? 5 : KmTokens.radius8),
-        border: main ? Border.all(color: p.ember, width: 2) : null,
-      ),
-      child: Text(
+    final Widget label = Text(
         text,
         maxLines: 1,
         style: agent
@@ -156,7 +149,29 @@ class _Tile extends StatelessWidget {
                 color: fg,
               )
             : KmText.displayAt(context, size: size, color: fg),
+    );
+    // D-6: the main speaker is marked by a speaking badge, not a 2px ring
+    // (compact list posters are too small for the 24px badge; the `tile-2`
+    // fill still sets the main tile apart there).
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(compact ? 5 : KmTokens.radius8),
       ),
+      child: main && !compact
+          ? Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Center(child: label),
+                const Positioned(
+                  top: 4,
+                  right: 4,
+                  child: KmSpeakBadge(speaker: KmSpeaker.person),
+                ),
+              ],
+            )
+          : label,
     );
   }
 }

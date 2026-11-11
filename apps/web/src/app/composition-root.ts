@@ -8,12 +8,15 @@ import {
 import { registerNoteEntities } from "../infrastructure/entities/register-note-entities";
 import { createStaticCapabilitySource } from "../infrastructure/http/http-capability-source";
 import { loadPlatformAdapters } from "../infrastructure/platform/platform-adapters";
+import { createLocalStorageSession } from "../infrastructure/session/local-session";
 import {
   createDocumentThemeApplier,
   createLocalStorageThemePreference,
   createMediaQuerySystemTheme,
+  subscribeToStoredTheme,
 } from "../infrastructure/theme/theme-adapters";
 import type { AppServices } from "./app-services";
+import { createWidthClassStore } from "./frame/width-class-store";
 
 /**
  * The only place adapters meet use cases. Theme is resolved and applied first,
@@ -27,6 +30,11 @@ export async function composeApp(view: Window): Promise<AppServices> {
     system: createMediaQuerySystemTheme(view),
     applier: createDocumentThemeApplier(view.document.documentElement),
   });
+  // Lives as long as the page; another tab's choice applies here (theme-behaviour.md).
+  subscribeToStoredTheme(view, (next) => {
+    if (next !== theme.getState().theme) theme.getState().setTheme(next);
+  });
+  const layout = createWidthClassStore(view);
   const platform = await loadPlatformAdapters();
   const feed = createNoteFeed(platform.notes);
   const capabilities = createCapabilityCatalog([
@@ -37,5 +45,7 @@ export async function composeApp(view: Window): Promise<AppServices> {
   return {
     theme,
     notes: { createNote: (title) => feed.create(title), draftStore: createNoteDraftStore() },
+    session: createLocalStorageSession(view),
+    layout,
   };
 }

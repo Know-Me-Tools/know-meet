@@ -133,15 +133,19 @@ class _Table extends StatelessWidget {
       label: 'Delivery status per participant and channel',
       child: ClipRRect(
         borderRadius: BorderRadius.circular(KmTokens.radiusTile),
+        // D-6 table: no rules. Header row `bg-2`; body rows alternate
+        // transparent and `surface`.
         child: ColoredBox(
-          color: p.surface,
+          color: Colors.transparent,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ExcludeSemantics(
-                  child: Row(
+                  child: ColoredBox(
+                    color: p.bg2,
+                    child: Row(
                     children: <Widget>[
                       cell(0, Text('PARTICIPANT', style: head)),
                       cell(1, Text('CHANNEL', style: head)),
@@ -150,14 +154,12 @@ class _Table extends StatelessWidget {
                       cell(4, const SizedBox.shrink()),
                     ],
                   ),
-                ),
-                for (final DeliveryRow row in rows) ...<Widget>[
-                  SizedBox(
-                    width: _cols.fold<double>(0, (double a, double b) => a + b),
-                    height: 1,
-                    child: ColoredBox(color: p.muted),
                   ),
-                  Row(
+                ),
+                for (final (int i, DeliveryRow row) in rows.indexed) ...<Widget>[
+                  ColoredBox(
+                    color: i.isOdd ? p.surface : Colors.transparent,
+                    child: Row(
                       children: <Widget>[
                         cell(
                           0,
@@ -224,6 +226,7 @@ class _Table extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
                 ],
               ],
             ),

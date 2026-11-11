@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/ui/ui.dart';
 import '../settings_providers.dart';
 
-/// `.switches`: switch rows separated by the `--muted` rule.
+/// `.switches`: switch rows separated by spacing ([KmRule], D-6: no line).
 class SettingsSwitchList extends StatelessWidget {
   const SettingsSwitchList({super.key, required this.children});
 
@@ -76,8 +76,7 @@ class SettingsCheckToggle extends ConsumerWidget {
       label: label,
       description: description,
       value: ref.watch(settingsTogglesProvider)[toggleKey] ?? false,
-      onChanged: (bool? v) =>
-          ref.read(settingsTogglesProvider.notifier).toggle(toggleKey, v ?? false),
+      onChanged: (bool v) => ref.read(settingsTogglesProvider.notifier).toggle(toggleKey, v),
     );
   }
 }
@@ -100,7 +99,7 @@ class _SettingsLocalCheckState extends State<SettingsLocalCheck> {
   Widget build(BuildContext context) => KmCheckRow(
     label: widget.label,
     value: _value,
-    onChanged: (bool? v) => setState(() => _value = v ?? false),
+    onChanged: (bool v) => setState(() => _value = v),
   );
 }
 
@@ -113,7 +112,8 @@ final class SettingsRadioOption {
   final String? description;
 }
 
-/// A labelled radio group (`legend` + radio rows). Selection is local.
+/// A labelled radio group (`legend` + fill-only radio rows). Selection is
+/// local.
 class SettingsRadioGroup extends StatefulWidget {
   const SettingsRadioGroup({
     super.key,
@@ -133,13 +133,8 @@ class SettingsRadioGroup extends StatefulWidget {
 class _SettingsRadioGroupState extends State<SettingsRadioGroup> {
   late String _value = widget.initial;
 
-  void _select(String? v) {
-    if (v != null) setState(() => _value = v);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Semantics(
       container: true,
       label: widget.legend,
@@ -149,44 +144,14 @@ class _SettingsRadioGroupState extends State<SettingsRadioGroup> {
         children: <Widget>[
           ExcludeSemantics(child: Text(widget.legend, style: KmText.label(context))),
           const SizedBox(height: 6),
-          RadioGroup<String>(
-            groupValue: _value,
-            onChanged: _select,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                for (final SettingsRadioOption o in widget.options)
-                  MergeSemantics(
-                    child: InkWell(
-                      onTap: () => _select(o.value),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(minHeight: 44),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Radio<String>(value: o.value, activeColor: p.emberBtn),
-                            const SizedBox(width: KmTokens.s2),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(o.label, style: KmText.body(context)),
-                                    if (o.description != null)
-                                      Text(o.description!, style: KmText.smallSub(context)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
+          for (final SettingsRadioOption o in widget.options)
+            KmChoiceRow(
+              kind: KmIndicatorKind.radio,
+              label: o.label,
+              description: o.description,
+              checked: o.value == _value,
+              onTap: () => setState(() => _value = o.value),
             ),
-          ),
         ],
       ),
     );

@@ -11,7 +11,7 @@ import type * as React from "react";
 import { cn } from "#lib/utils";
 
 const cardVariants = cva(
-  "group/card grid min-w-0 content-start gap-s3 bg-surface p-s5 text-card-foreground shadow-(--shadow-card) max-bp768:p-s4 [a&]:no-underline [a&]:transition-colors [a&]:duration-(--dur-fast) [a&]:hover:bg-accent",
+  "group/card grid min-w-0 content-start gap-s3 bg-surface p-s5 text-card-foreground shadow-(--shadow-card) max-bp768:p-s4 [a&]:no-underline [a&]:transition-colors [a&]:duration-(--dur-fast) [a&]:hover:bg-accent outline-none focus-visible:bg-focus! focus-visible:text-on-focus! focus-visible:[&_*]:text-on-focus!",
   {
     variants: {
       variant: {

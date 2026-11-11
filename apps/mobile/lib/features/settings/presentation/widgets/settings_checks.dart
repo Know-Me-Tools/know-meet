@@ -112,13 +112,20 @@ class SettingsLinkCard extends StatelessWidget {
       label: '$title, $detail',
       onTap: onTap,
       excludeSemantics: true,
-      child: Material(
-        color: p.surface,
-        borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-          child: Padding(
+      child: KmInteractive(
+        onTap: onTap,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: p.surface,
+            restOn: p.fg,
+            hover: p.cardHov,
+          );
+          final bool focused = s.contains(WidgetState.focused);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radiusTile,
             padding: const EdgeInsets.all(KmTokens.s4),
             child: Row(
               children: <Widget>[
@@ -128,12 +135,15 @@ class SettingsLinkCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(title, style: KmText.h3(context).copyWith(fontSize: KmTokens.textBase)),
+                      Text(
+                        title,
+                        style: KmText.h3(context).copyWith(fontSize: KmTokens.textBase, color: c.on),
+                      ),
                       Text(
                         detail,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: KmText.smallSub(context),
+                        style: KmText.small(context).copyWith(color: focused ? c.on : p.fgSub),
                       ),
                     ],
                   ),
@@ -141,11 +151,11 @@ class SettingsLinkCard extends StatelessWidget {
                 const SizedBox(width: KmTokens.s3),
                 chip,
                 const SizedBox(width: KmTokens.s2),
-                Icon(LucideIcons.chevronRight, size: 18, color: p.fgSub),
+                Icon(LucideIcons.chevronRight, size: 18, color: focused ? c.on : p.fgSub),
               ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

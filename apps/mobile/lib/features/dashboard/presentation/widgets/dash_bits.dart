@@ -132,33 +132,18 @@ class AvatarStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> shown = names.take(3).toList();
-    final KmPalette p = context.km;
+    // D-6: no 2px cut-out ring; avatars sit 4px apart without overlapping.
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        SizedBox(
-          width: shown.isEmpty ? 0 : 32 + (shown.length - 1) * 24.0,
-          height: 32,
-          child: Stack(
-            children: <Widget>[
-              for (int i = 0; i < shown.length; i++)
-                Positioned(
-                  left: i * 24.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: <BoxShadow>[BoxShadow(color: p.surface, spreadRadius: 2)],
-                    ),
-                    child: KmAvatar(
-                      DashFormat.initials(shown[i]),
-                      size: 32,
-                      tone: KmAvatarTone.onSurface,
-                    ),
-                  ),
-                ),
-            ],
+        for (int i = 0; i < shown.length; i++) ...<Widget>[
+          if (i > 0) const SizedBox(width: 4),
+          KmAvatar(
+            DashFormat.initials(shown[i]),
+            size: 32,
+            tone: KmAvatarTone.onSurface,
           ),
-        ),
+        ],
         const SizedBox(width: 6),
         Text(
           '${names.length} ${names.length == 1 ? 'invitee' : 'invitees'}',
@@ -186,24 +171,33 @@ class DashLink extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      // Link row of the state table: text identifies it; hover `card-hov`,
+      // keyboard focus is the `focus` fill with `on-focus` text.
+      child: KmInteractive(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(KmTokens.radius6),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
-          child: Align(
-            widthFactor: 1,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: Colors.transparent,
+            restOn: p.emberText,
+            hover: p.cardHov,
+          );
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius6,
+            constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
             alignment: Alignment.centerLeft,
             child: Text(
               label,
               style: base.copyWith(
-                color: p.emberText,
+                color: c.on,
                 decoration: TextDecoration.underline,
-                decorationColor: p.emberText,
+                decorationColor: c.on,
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -263,11 +257,11 @@ class CopyLinkButton extends StatelessWidget {
   );
 }
 
-/// A 1px `--muted` separator between rows inside a card.
+/// Separation between rows inside a card. D-6 (Flat 2.0): spacing, never a
+/// 1px line.
 class DashRowRule extends StatelessWidget {
   const DashRowRule({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      SizedBox(height: 1, width: double.infinity, child: ColoredBox(color: context.km.muted));
+  Widget build(BuildContext context) => const SizedBox(height: KmTokens.s1, width: double.infinity);
 }

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'km_palette_of.dart';
 import 'km_text.dart';
 
-/// Avatar tones (`.avatar`, `.avatar-ember`, `.avatar-cyan`).
-enum KmAvatarTone { neutral, onSurface, ember, cyan }
+/// Avatar tones (`.avatar`, `.avatar-ember`, `.avatar-cyan`); [selected]
+/// and [focus] are the account button's open and keyboard-focus fills
+/// (D-6: they replace the expanded ring).
+enum KmAvatarTone { neutral, onSurface, ember, cyan, selected, focus }
 
 /// `.avatar`: initials in a circle. Decorative by default: the person's name
 /// is always in adjacent text, so the initials are excluded from semantics.
@@ -29,6 +31,8 @@ class KmAvatar extends StatelessWidget {
       KmAvatarTone.onSurface => (p.muted, p.fg),
       KmAvatarTone.ember => (p.emberSoft, p.emberText),
       KmAvatarTone.cyan => (p.cyanSoft, p.cyanText),
+      KmAvatarTone.selected => (p.selected, p.onSelected),
+      KmAvatarTone.focus => (p.focus, p.onFocus),
     };
     final double font = size >= 64 ? 22 : (size <= 32 ? 12 : (size <= 36 ? 13 : 15));
     return ExcludeSemantics(

@@ -33,7 +33,7 @@ class SettingsField extends StatelessWidget {
   final bool optional;
   final bool mono;
 
-  /// Read-only value shown without the input ring (prototype readonly).
+  /// Read-only value on the `surface` fill (prototype readonly).
   final bool readOnly;
 
   /// Password-type input with a reveal button beside it. Never prefilled.
@@ -50,7 +50,6 @@ class SettingsField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    final TextStyle base = mono ? KmText.mono(context) : KmText.body(context);
     final Widget input = Semantics(
       label: required ? '$label, required' : label,
       child: TextFormField(
@@ -60,17 +59,12 @@ class SettingsField extends StatelessWidget {
         keyboardType: keyboardType,
         maxLines: secret ? 1 : maxLines,
         minLines: maxLines > 1 ? maxLines : null,
-        style: base.copyWith(color: p.fg),
-        decoration: InputDecoration(
-          hintText: placeholder,
-          hintStyle: base.copyWith(color: p.fgSub.withValues(alpha: 0.85)),
-          fillColor: readOnly ? p.surface : p.card,
-          enabledBorder: readOnly
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(KmTokens.radius),
-                  borderSide: BorderSide.none,
-                )
-              : null,
+        style: kmFieldStyle(context, mono: mono, readOnly: readOnly),
+        decoration: kmFieldDecoration(
+          context,
+          placeholder: placeholder,
+          mono: mono,
+          readOnly: readOnly,
           suffixIcon: copyable && value != null
               ? KmIconButton(
                   icon: LucideIcons.copy,
@@ -78,7 +72,6 @@ class SettingsField extends StatelessWidget {
                   onPressed: () => Clipboard.setData(ClipboardData(text: value!)),
                 )
               : null,
-          constraints: const BoxConstraints(minHeight: 48),
         ),
       ),
     );
@@ -126,30 +119,13 @@ class SettingsLabel extends StatelessWidget {
   final bool optional;
 
   @override
-  Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    return ExcludeSemantics(
-      child: Text.rich(
-        TextSpan(
-          text: text,
-          style: KmText.label(context),
-          children: <InlineSpan>[
-            if (required) TextSpan(text: ' *', style: TextStyle(color: p.emberText)),
-            if (optional)
-              TextSpan(
-                text: ' (optional)',
-                style: TextStyle(color: p.fgSub, fontWeight: KmTokens.fontWeightRegular),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+      KmFieldLabel(text, required: required, optional: optional);
 }
 
-/// Prototype `selectField()`: label, hint, then a dropdown styled as an
-/// input. The selection is local to the field (static screens).
-class SettingsSelect extends StatelessWidget {
+/// Prototype `selectField()`: label, hint, then a [KmSelect] on the
+/// `control` fill. The selection is local to the field (static screens).
+class SettingsSelect extends StatefulWidget {
   const SettingsSelect({
     super.key,
     required this.label,
@@ -168,39 +144,29 @@ class SettingsSelect extends StatelessWidget {
   final List<String> options;
 
   @override
+  State<SettingsSelect> createState() => _SettingsSelectState();
+}
+
+class _SettingsSelectState extends State<SettingsSelect> {
+  late String _value = widget.value;
+
+  @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        SettingsLabel(label, required: required),
-        if (hint != null) ...<Widget>[
+        SettingsLabel(widget.label, required: widget.required),
+        if (widget.hint != null) ...<Widget>[
           const SizedBox(height: 6),
-          Text(hint!, style: KmText.smallSub(context)),
+          Text(widget.hint!, style: KmText.smallSub(context)),
         ],
         const SizedBox(height: 6),
-        Semantics(
-          label: label,
-          child: DropdownButtonFormField<String>(
-            initialValue: value,
-            isExpanded: true,
-            dropdownColor: p.bg2,
-            icon: Icon(Icons.arrow_drop_down, color: p.fgSub),
-            style: KmText.body(context).copyWith(color: p.fg),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(KmTokens.radius),
-                borderSide: BorderSide.none,
-              ),
-              constraints: const BoxConstraints(minHeight: 48),
-            ),
-            items: <DropdownMenuItem<String>>[
-              for (final String o in options)
-                DropdownMenuItem<String>(value: o, child: Text(o)),
-            ],
-            onChanged: (String? _) {},
-          ),
+        KmSelect<String>(
+          label: widget.required ? '${widget.label}, required' : widget.label,
+          value: _value,
+          options: <(String, String)>[for (final String o in widget.options) (o, o)],
+          onChanged: (String v) => setState(() => _value = v),
         ),
       ],
     );

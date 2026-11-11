@@ -24,8 +24,16 @@ const Map<String, String> _frameStates = <String, String>{
   'frame.appbar-signed-out': '/',
   'frame.appbar-signed-in': '/dashboard/upcoming',
   'frame.account-menu-open': '/dashboard/upcoming',
+  // Retired by DESIGN.md "Adaptive layout" (ADJ-2): the hamburger no longer
+  // exists. Still in the inventory until bdd-quality replaces them, so they
+  // keep a location; their goldens are not rendered (coverage_test.dart).
   'frame.nav-collapsed': '/',
   'frame.nav-open': '/',
+  // ADJ-2 replacements (requested from bdd-quality): bottom bar at 375,
+  // rail at 768, inline links at 1024, on an app page with a current item.
+  'frame.nav-bar': '/dashboard/upcoming',
+  'frame.nav-rail': '/dashboard/upcoming',
+  'frame.nav-links': '/dashboard/upcoming',
   'frame.skip-link-focused': '/',
   'frame.theme-toggle': '/',
 };

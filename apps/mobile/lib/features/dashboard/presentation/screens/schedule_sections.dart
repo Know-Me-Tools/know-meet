@@ -25,29 +25,16 @@ class _DashSelectState extends State<DashSelect> {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        ExcludeSemantics(child: Text(widget.label, style: KmText.label(context))),
+        KmFieldLabel(widget.label),
         const SizedBox(height: 6),
-        Semantics(
+        KmSelect<String>(
           label: widget.label,
-          child: DropdownButtonFormField<String>(
-            initialValue: _value,
-            isExpanded: true,
-            dropdownColor: p.bg2,
-            style: KmText.body(context),
-            icon: Icon(LucideIcons.chevronDown, size: 18, color: p.fgSub),
-            items: <DropdownMenuItem<String>>[
-              for (final String o in widget.options)
-                DropdownMenuItem<String>(
-                  value: o,
-                  child: Text(o, maxLines: 1, overflow: TextOverflow.ellipsis),
-                ),
-            ],
-            onChanged: (String? v) => setState(() => _value = v ?? _value),
-          ),
+          value: _value,
+          options: <(String, String)>[for (final String o in widget.options) (o, o)],
+          onChanged: (String v) => setState(() => _value = v),
         ),
       ],
     );
@@ -227,41 +214,49 @@ class _Pick extends StatelessWidget {
       label: '$label, ${lines.join(', ')}',
       excludeSemantics: true,
       onTap: () => onChanged(!value),
-      child: Material(
-        color: p.card,
-        borderRadius: BorderRadius.circular(KmTokens.radius),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(KmTokens.radius),
-          onTap: () => onChanged(!value),
-          child: ConstrainedBox(
+      child: KmInteractive(
+        onTap: () => onChanged(!value),
+        builder: (BuildContext context, Set<WidgetState> s) {
+          // Text identifies the row (card fill); focus fills the whole row.
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: p.card,
+            restOn: p.fg,
+            hover: p.cardHov,
+          );
+          final bool focused = s.contains(WidgetState.focused);
+          return KmFillBox(
+            colors: c,
             constraints: const BoxConstraints(minHeight: 56),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: KmTokens.s1, vertical: KmTokens.s2),
-              child: Row(
-                children: <Widget>[
-                  Checkbox(
-                    value: value,
-                    onChanged: (bool? v) => onChanged(v ?? false),
-                    activeColor: p.emberBtn,
-                    checkColor: p.onEmber,
+            padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3, vertical: KmTokens.s2),
+            child: Row(
+              children: <Widget>[
+                KmIndicator(
+                  kind: KmIndicatorKind.checkbox,
+                  checked: value,
+                  states: s.difference(<WidgetState>{WidgetState.focused, WidgetState.hovered}),
+                ),
+                const SizedBox(width: KmTokens.s3),
+                leading,
+                const SizedBox(width: KmTokens.s3),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(label, style: KmText.label(context).copyWith(color: c.on)),
+                      for (final String l in lines)
+                        Text(
+                          l,
+                          style: KmText.xsmall(context).copyWith(color: focused ? c.on : p.fgSub),
+                        ),
+                    ],
                   ),
-                  leading,
-                  const SizedBox(width: KmTokens.s3),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(label, style: KmText.label(context)),
-                        for (final String l in lines)
-                          Text(l, style: KmText.xsmall(context).copyWith(color: p.fgSub)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -273,7 +268,6 @@ class KnowledgePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return KmCard(
       panel: true,
       child: Column(
@@ -281,30 +275,11 @@ class KnowledgePanel extends StatelessWidget {
         children: <Widget>[
           Semantics(header: true, child: Text('Knowledge', style: KmText.h3(context))),
           const SizedBox(height: KmTokens.s3),
-          Container(
-            padding: const EdgeInsets.all(KmTokens.s4),
-            decoration: BoxDecoration(
-              color: p.card,
-              borderRadius: BorderRadius.circular(KmTokens.radius),
-              border: Border.all(color: p.ringInput),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                KmButton(
-                  label: 'Attach pre-reads',
-                  icon: LucideIcons.upload,
-                  variant: KmButtonVariant.ghost,
-                  size: KmButtonSize.small,
-                  onPressed: () {},
-                ),
-                const SizedBox(height: KmTokens.s2),
-                Text(
-                  'Added to this meeting’s knowledge base so agents can cite them. Up to 50 MB each.',
-                  style: KmText.smallSub(context),
-                ),
-              ],
-            ),
+          // D-6: the ringed attach box is a drop zone on the `control` fill.
+          KmDropZone(
+            label: 'Attach pre-reads',
+            hint: 'Added to this meeting’s knowledge base so agents can cite them. Up to 50 MB each.',
+            onBrowse: () {},
           ),
           const SizedBox(height: KmTokens.s3),
           Text('No pre-reads attached.', style: KmText.smallSub(context)),

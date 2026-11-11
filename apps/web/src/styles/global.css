@@ -1,8 +1,9 @@
 /* TJ-ARCH-MOB-001 compliant */
 /* Global stylesheet. The shared kit (@know-meet/ui, c08) owns Tailwind 4, the
    generated Know Meet tokens (c04), the data-theme dark variant and the base
-   layer; this app adds nothing on top yet. Never add colour or font values here. */
+   layer; this app adds the frame layout (c09). Never add colour or font values here. */
 @import "@know-meet/ui/globals.css";
+@import "./frame.css";
 
 /* This app's own sources (relative to this file); the kit registers its own. */
 @source "..";

@@ -89,7 +89,6 @@ class _ActionItems extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final KmPalette p = context.km;
     final List<bool> done = ref.watch(actionItemsDoneProvider(recordingId));
     final int open = done.where((bool d) => !d).length;
     return KmCard(
@@ -106,7 +105,8 @@ class _ActionItems extends ConsumerWidget {
             ],
           ),
           for (int i = 0; i < actions.length; i++) ...<Widget>[
-            if (i > 0) SizedBox(height: 1, child: ColoredBox(color: p.muted)),
+            // D-6: items separate by spacing, not a rule.
+            if (i > 0) const SizedBox(height: KmTokens.s1),
             _Todo(
               item: actions[i],
               done: i < done.length && done[i],
@@ -137,39 +137,49 @@ class _Todo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: MergeSemantics(
-              child: InkWell(
+            child: Semantics(
+              checked: done,
+              label: '${item.title}, ${item.owner}',
+              excludeSemantics: true,
+              onTap: () => onChanged(!done),
+              // Fill-only checkbox; keyboard focus fills the indicator.
+              child: KmInteractive(
                 onTap: () => onChanged(!done),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Checkbox(
-                      value: done,
-                      onChanged: (bool? v) => onChanged(v ?? false),
-                      activeColor: p.emberBtn,
-                      checkColor: p.onEmber,
-                    ),
-                    const SizedBox(width: KmTokens.s2),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              item.title,
-                              style: KmText.body(context).copyWith(
-                                fontWeight: KmTokens.fontWeightMedium,
-                                color: done ? p.fgSub : p.fg,
-                                decoration: done ? TextDecoration.lineThrough : null,
-                              ),
-                            ),
-                            Text(item.owner, style: KmText.smallSub(context)),
-                          ],
+                builder: (BuildContext context, Set<WidgetState> s) => ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: KmIndicator(
+                          kind: KmIndicatorKind.checkbox,
+                          checked: done,
+                          states: s,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: KmTokens.s3),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                item.title,
+                                style: KmText.body(context).copyWith(
+                                  fontWeight: KmTokens.fontWeightMedium,
+                                  color: done ? p.fgSub : p.fg,
+                                  decoration: done ? TextDecoration.lineThrough : null,
+                                ),
+                              ),
+                              Text(item.owner, style: KmText.smallSub(context)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

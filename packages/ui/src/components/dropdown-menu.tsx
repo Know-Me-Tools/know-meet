@@ -11,7 +11,7 @@ const menuSurfaceClass =
   "z-(--z-menu) grid max-h-(--available-height) max-w-[calc(100vw-32px)] origin-(--transform-origin) content-start gap-0.5 overflow-x-hidden overflow-y-auto rounded-tile bg-popover p-s2 text-popover-foreground shadow-(--shadow-float) outline-none duration-(--dur) ease-out data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-open:slide-in-from-top-1 data-[side=top]:data-open:slide-in-from-bottom-1 data-[side=left]:data-open:slide-in-from-right-1 data-[side=right]:data-open:slide-in-from-left-1 data-closed:animate-out data-closed:fade-out-0 data-closed:duration-(--dur-exit) data-closed:ease-in";
 
 const menuItemClass =
-  "group/dropdown-menu-item relative flex min-h-11 w-full cursor-default items-center gap-s2 rounded-10 px-s3 text-left text-sm font-medium text-foreground no-underline select-none data-highlighted:bg-accent data-inset:pl-10 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5";
+  "group/dropdown-menu-item relative flex min-h-11 w-full cursor-default items-center gap-s2 rounded-10 px-s3 text-left text-sm font-medium text-foreground no-underline select-none outline-none data-highlighted:bg-accent focus-visible:bg-focus! focus-visible:text-on-focus! data-inset:pl-10 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5";
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />;

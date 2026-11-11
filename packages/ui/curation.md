@@ -44,27 +44,27 @@ components.
 | Component            | Prototype source                                                            | Notes                                                                                                                                                          |
 | -------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | button               | `.btn`, `.btn-primary`, `.btn-danger`, `.btn-ghost`, `.btn-sm`, `.icon-btn` | shadcn names kept: `default` = primary, `secondary`/`outline` = `.btn` (Flat 2.0: no outline), `ghost` + `icon` = `.icon-btn`. 44px by default, 36px for `sm`. |
-| input                | `.input`                                                                    | 48px, card fill, D-5 1px `ring-input`; focus is a 2px ember inset ring, invalid a 2px red one.                                                                 |
+| input                | `.input`                                                                    | v1.3.0: `size-control-h`, `control` fill + `on-control`, hover `control-hov`, invalid `control-invalid`, focus `focus` fill (no ring). |
 | textarea             | `textarea.input`                                                            | 96px minimum, vertical resize.                                                                                                                                 |
 | native-select        | `select.input`                                                              | Full width with a chevron. The prototype uses native selects for every picker.                                                                                 |
 | label                | `.field label`                                                              | 14px semibold.                                                                                                                                                 |
 | field                | `.field`, `.hint`, `.field-error`                                           | The error is fg text with a red icon, so colour is never the only signal. Choice cards use a fill (ember-soft when checked), not a border.                     |
-| checkbox             | `.check-row` checkbox                                                       | 20px, ring-input boundary, ember when checked.                                                                                                                 |
-| radio-group          | settings/agents native radios                                               | 20px, ring-input boundary, ember when checked.                                                                                                                 |
-| switch               | `.switch` with D-5 colours                                                  | 48×28 track, 22px thumb, using the `switch-track`, `switch-thumb` and `switch-thumb-on` tokens.                                                                |
+| checkbox             | `.check-row` checkbox                                                       | v1.3.0: `size-check`, `control` box, checked `selected` + tick, focus `focus` fill. |
+| radio-group          | settings/agents native radios                                               | v1.3.0: `size-check` disc, checked `selected` + `size-pip` dot, focus `focus` fill. |
+| switch               | `.switch`                                                                   | v1.3.0 size tokens; on track `ember-btn`; focus: track `focus`, thumb `on-focus`. |
 | card                 | `.card`, `.card-raised`, `.panel`, `.card-head`, `.stat` (`size="sm"`)      | Explicit `variant` instead of boolean props. `CardTitle` is an h3 that can be overridden with `render`.                                                        |
 | badge                | `.chip-*`, `.lock-badge`                                                    | Adds `BadgePip` (8px status dot).                                                                                                                              |
-| separator            | `.divider`                                                                  | 1px muted.                                                                                                                                                     |
-| tabs                 | `.tabs` (default) and `.seg` (`variant="segmented"`)                        | Adds `TabsCount` (`.count`).                                                                                                                                   |
-| toggle, toggle-group | `.seg button[aria-pressed]`, pressed `.icon-btn`                            | The group is the muted 4px-padded track.                                                                                                                       |
-| table                | `.table-wrap`, `.table`                                                     | Scrolls inside its own surface; mono uppercase headers.                                                                                                        |
+| separator            | `.divider`                                                                  | Flat 2.0: renders as spacing (transparent), keeps role=separator. |
+| tabs                 | `.tabs` (default) and `.seg` (`variant="segmented"`)                        | v1.3.0: no list rule/underline; active is a `selected` pill; segmented track `control` with a leading check on the active segment. |
+| toggle, toggle-group | `.seg button[aria-pressed]`, pressed `.icon-btn`                            | v1.3.0: `control` track, pressed `selected` + leading check; standalone chip rests on `control`. |
+| table                | `.table-wrap`, `.table`                                                     | v1.3.0: no rules; header row `bg-2`, body rows alternate transparent/`surface`. |
 | avatar               | `.avatar`, `-sm`, `-lg`, `-ember`, `-cyan`, `.avatar-stack`                 | New `tone` prop. Muted fill inside cards and items.                                                                                                            |
 | dialog               | `dialog`, `.dlg-*`                                                          | Adds `DialogBody` (the scrolling row). 560px, bg-2, radius-lg, float shadow, scrim.                                                                            |
 | alert-dialog         | `KM.confirm`                                                                | Same surface as dialog. Cancel is the raised `.btn`.                                                                                                           |
 | sheet                | `.sheet`, `.sheet-*`                                                        | Adds `SheetBody`. 440px, enters on `--dur-panel`/ease-out and exits on `--dur-exit`/ease-in.                                                                   |
 | dropdown-menu        | `.menu`, `.menu-item`                                                       | Defaults changed to `align="end"` and `sideOffset={8}`, as in the account menu.                                                                                |
-| navigation-menu      | `.appnav a`                                                                 | Pill links. The current page is ember-soft. The collapsing mobile nav is c09.                                                                                  |
-| tooltip              | none (see Q2)                                                               | Uses the inverted toast treatment.                                                                                                                             |
+| navigation-menu      | `.appnav a`                                                                 | Pill links; current is `selected`/`on-selected`. The adaptive bar/rail/inline nav is the c09 frame. |
+| tooltip              | none (operator 2026-11-11: toast style)                                     | `fg` fill, `bg` text, 14px medium, radius 12, `size-tooltip-*`, 500ms delay, no arrow. |
 | toast                | `.toasts`, `.toast`                                                         | Centred and inverted; timing comes from motion tokens.                                                                                                         |
 | breadcrumb           | `.crumbs`                                                                   |                                                                                                                                                                |
 | empty                | `.empty`, `.empty-center` (`align`)                                         | `EmptyTitle` is an h3.                                                                                                                                         |
@@ -191,3 +191,52 @@ a local defect, fixed in place.
    component constants.
 5. **Light status pips** (green 2.88, amber 2.80) and the pressed segment remain
    below 3:1. Accepted under D-5, revisit at c13.
+
+## Tokens v1.3.0 migration and c09 frame audit (2026-11-11, round 5b)
+
+Scope: D-6 Flat 2.0 (no border, outline, ring or stroke anywhere; boundaries and
+focus by fill), D-7 size tokens, D-8 adaptive frame. Supersedes the D-5 notes above
+(questions 2, 3 and 4 are answered: tooltip = toast style, no checkbox/radio ring,
+sizes tokenised).
+
+- Kit: every focusable control takes `focus-visible:bg-focus! text-on-focus!`
+  (`lib/focus.ts`); text controls share `lib/field-control.ts` (`control`,
+  `control-hov`, `control-invalid`, `focus`, `focus-placeholder`). `globals.css`
+  sets `outline: none` on `:focus-visible` plus a zero-specificity focus-fill
+  fallback for any focusable element no component styles, and a forced-colors-only
+  outline (the one place fills are dropped by the OS).
+- 29 uncurated components in `apps/web/src/presentation/components/ui` had 180
+  stroke utilities removed mechanically; removed focus rings became the focus fill,
+  removed invalid rings became `control-invalid`; slider rebuilt to the DESIGN.md table.
+- `impeccable context --target apps/web/src/app/frame/app-bar.tsx` loaded PRODUCT.md
+  and DESIGN.md. `impeccable detect --json apps/web/src/app/frame
+  apps/web/src/styles/frame.css packages/ui/src/components` returned `[]`. Source
+  scan only (VLBV): no build, render, typecheck or screenshot ran.
+
+| # | Dimension | Score | Key finding |
+|---|---|---|---|
+| 1 | Accessibility | 3 | One `nav aria-label="Primary"` in every class, skip link first, labelled theme/account/window controls, focus is a fill everywhere. Open: focused TabsContent and code-block fill the whole region (spec-consistent, visually heavy). |
+| 2 | Performance | 3 | Resize morph is transform/opacity only (UA group width/height keyframes stripped). Each crossing snapshots `main`; long pages cost one large snapshot. |
+| 3 | Theming | 4 | No hex, no `dark:` in new code; durations and breakpoints read from tokens at runtime. |
+| 4 | Responsive | 3 | Bar < 600, rail 600-1023, inline >= 1024 from `--window-*`; safe areas on bar, rail, app bar. Not rendered at 375/768/1024/1440. |
+| 5 | Implementation integrity | 3 | Frame layout lives in `apps/web/src/styles/frame.css` (data-attribute states) rather than utilities; a few DESIGN.md geometry literals remain (24px icon, 48px bar item, 1280px app-bar measure, 96px mac-lights slot). |
+| **Total** | | **16/20** | Good |
+
+Findings (polish applied where marked):
+
+- [P1] Rendered proof missing: flat-controls, motion and fidelity features need the
+  c13 boundary run (computed-style probe, VT animation check, captures).
+- [P1] Focus-fill contrast on code blocks: a focused `code-block` turns `focus`
+  white while shiki token colours stay dark-theme hues; check at c13 or exempt the
+  code body from the fallback.
+- [P2] TabsContent focus fills the whole panel (DESIGN.md "interactive card" rule
+  applied); design-lead may prefer a smaller indicator.
+- [P2] Choice-card indicators keep their state fill inside a focused card through a
+  components-layer `!important` rule in `globals.css` (layer order beats utilities).
+- [P2] Code-block, sidebar and other uncurated components were migrated mechanically;
+  curate before c11 uses them.
+- [P3] Toast offset above the bottom bar reads `--km-bottom-bar-h`, set by
+  `frame.css` only while the bar is shown.
+- Polished in place: standalone toggle chip rests on `control`; caret follows the
+  control text colour; body theme transition uses `dur` + `ease-standard`; drawer
+  scrim uses `bg-scrim`; table/sheet/avatar/menu rules removed.

@@ -85,29 +85,34 @@ class AuthLink extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 44),
-          child: Align(
-            widthFactor: 1,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.emberText);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            alignment: Alignment.center,
             child: Text(
               label,
               style: KmText.small(context).copyWith(
-                color: p.emberText,
+                color: c.on,
                 fontWeight: KmTokens.fontWeightMedium,
                 decoration: TextDecoration.underline,
-                decorationColor: p.emberText,
+                decorationColor: c.on,
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-/// `.or`: "or with email" between two rules.
+/// `.or`: "or with email", centred in its own spacing (D-6: the two rules
+/// on either side are removed; separation is by space).
 class OrDivider extends StatelessWidget {
   const OrDivider({super.key, required this.label});
 
@@ -115,26 +120,16 @@ class OrDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget rule = Expanded(child: Container(height: 1, color: context.km.muted));
     return ExcludeSemantics(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: KmTokens.s4),
-        child: Row(
-          children: <Widget>[
-            rule,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3),
-              child: Text(label, style: KmText.smallSub(context)),
-            ),
-            rule,
-          ],
-        ),
+        child: Center(child: Text(label, style: KmText.smallSub(context))),
       ),
     );
   }
 }
 
-/// `.auth-foot`: a rule, then "prompt + link" lines.
+/// `.auth-foot`: spacing (the kit rule renders as space), then "prompt + link" lines.
 class AuthFoot extends StatelessWidget {
   const AuthFoot({super.key, required this.lines});
 

@@ -66,7 +66,7 @@ class TranscriptPanel extends ConsumerWidget {
         KmCheckRow(
           label: 'Follow playback',
           value: follow,
-          onChanged: (bool? v) => ref.read(transcriptFollowProvider.notifier).set(v ?? false),
+          onChanged: ref.read(transcriptFollowProvider.notifier).set,
         ),
         const SizedBox(height: KmTokens.s2),
         Wrap(
@@ -199,13 +199,22 @@ class _LineButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 2),
-        child: Material(
-          color: current ? p.emberSoft : Colors.transparent,
-          borderRadius: BorderRadius.circular(KmTokens.radius),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(KmTokens.radius),
-            onTap: onTap,
-            child: Padding(
+        // List row: text identifies it. The current line keeps its
+        // `ember-soft` fill (supplementary; announced as selected); hover
+        // `card-hov`; keyboard focus fills the row with `focus`.
+        child: KmInteractive(
+          onTap: onTap,
+          builder: (BuildContext context, Set<WidgetState> s) {
+            final KmStateColors c = KmStateColors.resolve(
+              p,
+              s,
+              rest: current ? p.emberSoft : Colors.transparent,
+              restOn: p.fg,
+              hover: p.cardHov,
+            );
+            final bool focused = s.contains(WidgetState.focused);
+            return KmFillBox(
+              colors: c,
               padding: const EdgeInsets.all(KmTokens.s3),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,7 +228,7 @@ class _LineButton extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: KmTokens.fontMono,
                           fontSize: KmTokens.textXs,
-                          color: current ? p.emberText : p.fgSub,
+                          color: focused ? c.on : (current ? p.emberText : p.fgSub),
                           fontFeatures: const <FontFeature>[FontFeature.tabularFigures()],
                         ),
                       ),
@@ -234,21 +243,24 @@ class _LineButton extends StatelessWidget {
                           spacing: 6,
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: <Widget>[
-                            Text(line.speaker, style: KmText.label(context)),
+                            Text(line.speaker, style: KmText.label(context).copyWith(color: c.on)),
                             if (line.agent) const KmChip('Agent', tone: KmChipTone.cyan),
                           ],
                         ),
                         Text.rich(
                           TextSpan(children: _highlight(context, line.text, query)),
-                          style: KmText.small(context).copyWith(height: KmTokens.leadingBubble),
+                          style: KmText.small(context).copyWith(
+                            height: KmTokens.leadingBubble,
+                            color: c.on,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

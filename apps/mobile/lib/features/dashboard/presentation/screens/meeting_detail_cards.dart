@@ -218,7 +218,6 @@ class AgentsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     final AgentSummary? concierge = repository.agent('concierge');
     final List<Widget> lines = <Widget>[
       _AgentLine(
@@ -259,7 +258,8 @@ class AgentsCard extends StatelessWidget {
           ),
           const SizedBox(height: KmTokens.s2),
           for (int i = 0; i < lines.length; i++) ...<Widget>[
-            if (i > 0) SizedBox(height: 1, child: ColoredBox(color: p.muted)),
+            // D-6: rows separate by spacing, not a rule.
+            if (i > 0) const SizedBox(height: KmTokens.s1),
             lines[i],
           ],
         ],
@@ -312,17 +312,11 @@ class _StateLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
-          width: 10,
-          height: 10,
-          decoration: online
-              ? BoxDecoration(color: p.green, shape: BoxShape.circle)
-              : BoxDecoration(shape: BoxShape.circle, border: Border.all(color: p.fgSub, width: 2)),
-        ),
+        // Round pip = live; filled square = offline (D-6: no ring glyph).
+        if (online) const KmPip(KmPipTone.green) else const KmPausedGlyph(),
         const SizedBox(width: KmTokens.s2),
         Text(
           online ? 'Online' : 'Offline',

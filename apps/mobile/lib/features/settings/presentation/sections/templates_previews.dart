@@ -44,7 +44,6 @@ class EmailPreview extends StatelessWidget {
         decoration: BoxDecoration(
           color: p.card,
           borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-          border: Border.all(color: p.muted),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -152,7 +151,6 @@ class SmsPreview extends StatelessWidget {
         decoration: BoxDecoration(
           color: p.bg2,
           borderRadius: BorderRadius.circular(KmTokens.radius28),
-          border: Border.all(color: p.muted),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

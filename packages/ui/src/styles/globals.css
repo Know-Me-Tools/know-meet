@@ -34,6 +34,10 @@
     font-size: var(--text-base);
     line-height: var(--leading-body);
     -webkit-font-smoothing: antialiased;
+    /* theme-behaviour.md: only body animates the theme switch. */
+    transition:
+      background-color var(--dur) var(--ease-standard),
+      color var(--dur) var(--ease-standard);
   }
 
   h1,
@@ -51,10 +55,56 @@
     text-underline-offset: 3px;
   }
 
-  /* km.css base: one focus treatment everywhere (ember, 2px, offset 2px). */
+  /* Flat 2.0 focus (DESIGN.md, D-6): keyboard focus is a fill, never an outline.
+     Kit components set their own `focus-visible:bg-focus!` (lib/focus.ts); this
+     zero-specificity fallback gives every other focusable element the same fill so
+     focus is never invisible. Elements focused only programmatically
+     (tabindex="-1", e.g. main after the skip link) are excluded. */
   :focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
+    outline: none;
+  }
+
+  :where(
+      a[href],
+      button,
+      input,
+      select,
+      textarea,
+      summary,
+      [role="button"],
+      [role="link"],
+      [role="tab"],
+      [role="menuitem"],
+      [role="option"],
+      [role="checkbox"],
+      [role="radio"],
+      [role="switch"],
+      [tabindex]:not([tabindex="-1"])
+    ):focus-visible {
+    background-color: var(--focus);
+    color: var(--on-focus);
+  }
+
+  /* Choice card (DESIGN.md): the focused card takes the focus fill, and the
+     radio/checkbox inside keeps its state fill so state stays visible. Layer
+     order makes this !important beat the indicator's own focus utility. */
+  [data-slot="field-label"] :is([data-slot="checkbox"], [data-slot="radio-group-item"]):focus-visible {
+    background-color: var(--control) !important;
+    color: var(--on-control) !important;
+  }
+
+  [data-slot="field-label"] :is([data-slot="checkbox"], [data-slot="radio-group-item"])[data-checked]:focus-visible {
+    background-color: var(--selected) !important;
+    color: var(--on-selected) !important;
+  }
+
+  /* Forced colours drop every fill, so the system draws a focus outline there
+     only. This is the one outline in the product and never renders otherwise. */
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
   }
 
   ::selection {
@@ -64,7 +114,7 @@
 
   input,
   textarea {
-    caret-color: var(--ember);
+    caret-color: currentColor; /* on-control / on-focus: legible on every control fill */
   }
 
   [hidden] {

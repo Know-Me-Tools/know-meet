@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'km_palette_of.dart';
+import 'km_states.dart';
 import 'km_text.dart';
 
 /// `.page`: the scrolling content column of an app screen, capped at
@@ -134,19 +135,26 @@ class _Crumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Text text = Text(crumb.label, style: KmText.smallSub(context));
-    if (crumb.onTap == null) return text;
+    final KmPalette p = context.km;
+    if (crumb.onTap == null) return Text(crumb.label, style: KmText.smallSub(context));
     return Semantics(
       link: true,
       label: crumb.label,
       excludeSemantics: true,
       onTap: crumb.onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: crumb.onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 24),
-          child: Align(widthFactor: 1, child: text),
-        ),
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTargetMin),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            alignment: Alignment.center,
+            child: Text(crumb.label, style: KmText.small(context).copyWith(color: c.on)),
+          );
+        },
       ),
     );
   }
@@ -196,7 +204,7 @@ class KmSection extends StatelessWidget {
 }
 
 /// `.sidenav` at phone width: a horizontally scrolling row of section pills;
-/// the current one is ember and announced as selected.
+/// the current one is a `selected` pill and announced as selected.
 class KmSideNav<T> extends StatelessWidget {
   const KmSideNav({
     super.key,
@@ -233,30 +241,25 @@ class KmSideNav<T> extends StatelessWidget {
                   label: text,
                   excludeSemantics: true,
                   onTap: () => onSelect(value),
-                  child: Material(
-                    color: value == current ? p.emberSoft : Colors.transparent,
-                    borderRadius: BorderRadius.circular(KmTokens.radius),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(KmTokens.radius),
-                      onTap: () => onSelect(value),
-                      child: Container(
-                        constraints: const BoxConstraints(minHeight: 44),
+                  child: KmInteractive(
+                    onTap: () => onSelect(value),
+                    selected: value == current,
+                    builder: (BuildContext context, Set<WidgetState> s) {
+                      final KmStateColors c = KmStateColors.quiet(p, s);
+                      return KmFillBox(
+                        colors: c,
+                        constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
                         padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            Icon(icon, size: 20, color: value == current ? p.emberText : p.fgSub),
+                            Icon(icon, size: 20, color: c.on),
                             const SizedBox(width: KmTokens.s3),
-                            Text(
-                              text,
-                              style: KmText.label(context).copyWith(
-                                color: value == current ? p.emberText : p.fgSub,
-                              ),
-                            ),
+                            Text(text, style: KmText.label(context).copyWith(color: c.on)),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
               ),

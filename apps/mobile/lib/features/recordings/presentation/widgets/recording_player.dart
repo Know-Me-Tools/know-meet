@@ -193,24 +193,15 @@ class _Scrubber extends StatelessWidget {
             ),
           ),
         ),
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            activeTrackColor: p.emberBtn,
-            inactiveTrackColor: p.muted,
-            thumbColor: p.emberBtn,
-            overlayColor: p.emberSoft,
-            trackHeight: 4,
-          ),
-          child: Semantics(
-            label: 'Seek',
-            child: Slider(
-              value: t.clamp(0, total).toDouble(),
-              max: total.toDouble(),
-              semanticFormatterCallback: (double v) =>
-                  '${RecordingFormat.duration(v.round())} of ${RecordingFormat.duration(total)}',
-              onChanged: (double v) => onSeek(v.round()),
-            ),
-          ),
+        // D-6 slider: `control` track, `selected` range, `slider-thumb`;
+        // keyboard focus turns the track `focus`.
+        KmSlider(
+          label: 'Seek',
+          value: t.clamp(0, total).toDouble(),
+          max: total.toDouble(),
+          semanticFormatterCallback: (double v) =>
+              '${RecordingFormat.duration(v.round())} of ${RecordingFormat.duration(total)}',
+          onChanged: (double v) => onSeek(v.round()),
         ),
       ],
     );
@@ -227,7 +218,6 @@ class _ChapterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    final Color fg = current ? p.emberText : p.fg;
     final String at = RecordingFormat.duration(chapter.start);
     return Semantics(
       button: true,
@@ -236,43 +226,47 @@ class _ChapterChip extends StatelessWidget {
       excludeSemantics: true,
       onTap: onTap,
       // 32px chip (`.chapters .chip`) inside a 44px tap target (a11y gate).
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+      child: KmInteractive(
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Material(
-            color: current ? p.emberSoft : p.muted,
-            borderRadius: BorderRadius.circular(KmTokens.radiusPill),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(KmTokens.radiusPill),
-              onTap: onTap,
-              child: Container(
-                constraints: const BoxConstraints(minHeight: 32),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      at,
-                      style: TextStyle(
-                        fontFamily: KmTokens.fontMono,
-                        fontSize: KmTokens.text11,
-                        fontWeight: KmTokens.fontWeightMedium,
-                        color: fg,
-                      ),
+        selected: current,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: p.muted,
+            restOn: p.fg,
+            hover: p.cardHov,
+          );
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: KmFillBox(
+              colors: c,
+              radius: KmTokens.radiusPill,
+              constraints: const BoxConstraints(minHeight: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    at,
+                    style: TextStyle(
+                      fontFamily: KmTokens.fontMono,
+                      fontSize: KmTokens.text11,
+                      fontWeight: KmTokens.fontWeightMedium,
+                      color: c.on,
                     ),
-                    const SizedBox(width: 6),
-                    Text(
-                      chapter.title,
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(color: fg),
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    chapter.title,
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(color: c.on),
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

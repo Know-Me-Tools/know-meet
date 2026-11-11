@@ -67,9 +67,11 @@ class KmChip extends StatelessWidget {
       KmChipTone.neutral => (p.muted, p.fg, p.fg),
       KmChipTone.ember => (p.emberSoft, p.emberText, p.emberText),
       KmChipTone.cyan => (p.cyanSoft, p.cyanText, p.cyanText),
-      KmChipTone.green => (p.greenSoft, p.fg, p.green),
-      KmChipTone.amber => (p.amberSoft, p.fg, p.amber),
-      KmChipTone.red => (p.redSoft, p.fg, p.red),
+      // Status pips use the pip-* roles (light: darker text hues, so they
+      // pass on their soft chip).
+      KmChipTone.green => (p.greenSoft, p.fg, p.pipGreen),
+      KmChipTone.amber => (p.amberSoft, p.fg, p.pipAmber),
+      KmChipTone.red => (p.redSoft, p.fg, p.pipRed),
     };
     return Container(
       constraints: const BoxConstraints(minHeight: 28),
@@ -83,8 +85,8 @@ class KmChip extends StatelessWidget {
         children: <Widget>[
           if (pip) ...<Widget>[
             Container(
-              width: 8,
-              height: 8,
+              width: KmTokens.sizePip,
+              height: KmTokens.sizePip,
               decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
             ),
             const SizedBox(width: 6),
@@ -139,20 +141,14 @@ class KmLockBadge extends StatelessWidget {
   }
 }
 
-/// A 1px `--muted` rule (`.divider`, `.menu-id` underline). The prototype's
-/// one sanctioned separator between groups inside a surface.
+/// `.divider` / `Separator` under Flat 2.0 (D-6): spacing, never a line.
+/// Kept as a widget so group separation stays one decision in the kit.
 class KmRule extends StatelessWidget {
   const KmRule({super.key, this.vertical = KmTokens.s4});
 
+  /// Space above and below the (invisible) rule.
   final double vertical;
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.symmetric(vertical: vertical),
-    child: SizedBox(
-      height: 1,
-      width: double.infinity,
-      child: ColoredBox(color: context.km.muted),
-    ),
-  );
+  Widget build(BuildContext context) => SizedBox(height: vertical * 2);
 }

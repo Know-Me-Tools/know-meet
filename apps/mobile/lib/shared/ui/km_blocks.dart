@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'km_palette_of.dart';
+import 'km_states.dart';
 import 'km_text.dart';
 
 /// `.list-row`: leading / body (title + meta) / trailing. At phone width the
@@ -29,49 +30,73 @@ class KmListRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
     final bool phone = MediaQuery.sizeOf(context).width <= KmTokens.bp767;
-    final Widget body = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Text(title, style: KmText.body(context).copyWith(fontWeight: KmTokens.fontWeightSemibold)),
-        for (final String line in meta ?? const <String>[])
-          Padding(
-            padding: const EdgeInsets.only(top: 2),
-            child: Text(line, style: KmText.smallSub(context)),
+    Widget layout(KmStateColors c) {
+      final bool focused = c.fill == p.focus;
+      final Widget body = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            title,
+            style: KmText.body(context).copyWith(
+              fontWeight: KmTokens.fontWeightSemibold,
+              color: c.on,
+            ),
           ),
-      ],
-    );
-    final Widget top = Row(
-      children: <Widget>[
-        if (leading != null) ...<Widget>[leading!, const SizedBox(width: KmTokens.s3)],
-        Expanded(child: body),
-        if (trailing != null && !phone) ...<Widget>[
-          const SizedBox(width: KmTokens.s3),
-          trailing!,
+          for (final String line in meta ?? const <String>[])
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text(
+                line,
+                style: KmText.small(context).copyWith(color: focused ? c.on : p.fgSub),
+              ),
+            ),
         ],
-      ],
-    );
-    final Widget content = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4, vertical: KmTokens.s3),
-      child: phone && trailing != null
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[top, const SizedBox(height: KmTokens.s3), trailing!],
-            )
-          : top,
-    );
-    final Widget surface = Material(
-      color: p.surface,
-      borderRadius: BorderRadius.circular(KmTokens.radius),
-      clipBehavior: Clip.antiAlias,
-      child: onTap == null ? content : InkWell(onTap: onTap, child: content),
-    );
-    if (onTap == null) return surface;
+      );
+      final Widget top = Row(
+        children: <Widget>[
+          if (leading != null) ...<Widget>[leading!, const SizedBox(width: KmTokens.s3)],
+          Expanded(child: body),
+          if (trailing != null && !phone) ...<Widget>[
+            const SizedBox(width: KmTokens.s3),
+            trailing!,
+          ],
+        ],
+      );
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4, vertical: KmTokens.s3),
+        child: phone && trailing != null
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[top, const SizedBox(height: KmTokens.s3), trailing!],
+              )
+            : top,
+      );
+    }
+
+    final KmStateColors rest = KmStateColors(p.surface, p.fg);
+    if (onTap == null) {
+      return KmFillBox(colors: rest, child: layout(rest));
+    }
+    // Interactive row: text identifies it; hover `card-hov`, keyboard focus
+    // fills the whole row with `focus` and turns all text `on-focus`.
     return Semantics(
       button: true,
       label: semanticLabel ?? title,
       onTap: onTap,
-      child: surface,
+      child: KmInteractive(
+        onTap: onTap,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: p.surface,
+            restOn: p.fg,
+            hover: p.cardHov,
+          );
+          return KmFillBox(colors: c, child: layout(c));
+        },
+      ),
     );
   }
 }
@@ -147,10 +172,14 @@ class KmEmptyState extends StatelessWidget {
           const SizedBox(height: KmTokens.s3),
           Semantics(header: true, child: Text(title, style: KmText.h3(context))),
           const SizedBox(height: KmTokens.s3),
-          Text(
-            body,
-            textAlign: centered ? TextAlign.center : TextAlign.start,
-            style: KmText.smallSub(context),
+          ConstrainedBox(
+            // `measure-empty` (46ch): 46 advances of "0" in the body style.
+            constraints: BoxConstraints(maxWidth: _ch(context) * KmTokens.measureEmptyCh),
+            child: Text(
+              body,
+              textAlign: centered ? TextAlign.center : TextAlign.start,
+              style: KmText.smallSub(context),
+            ),
           ),
           if (actions.isNotEmpty) ...<Widget>[
             const SizedBox(height: KmTokens.s3),
@@ -160,6 +189,18 @@ class KmEmptyState extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Width of one `ch` (the advance of "0") in the small body style.
+double _ch(BuildContext context) {
+  final TextPainter tp = TextPainter(
+    text: TextSpan(text: '0', style: KmText.smallSub(context)),
+    textDirection: TextDirection.ltr,
+    textScaler: MediaQuery.textScalerOf(context),
+  )..layout();
+  final double w = tp.width;
+  tp.dispose();
+  return w;
 }
 
 /// `.stat`: numeral + caption.
@@ -236,7 +277,7 @@ class KmKeyValues extends StatelessWidget {
   }
 }
 
-/// `.code`: a monospace block with the input ring.
+/// `.code`: a monospace block on the `surface` fill (D-6: the ring is gone).
 class KmCodeBlock extends StatelessWidget {
   const KmCodeBlock(this.code, {super.key});
 
@@ -249,9 +290,8 @@ class KmCodeBlock extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: KmTokens.s4, vertical: KmTokens.s3),
       decoration: BoxDecoration(
-        color: p.bg,
+        color: p.surface,
         borderRadius: BorderRadius.circular(KmTokens.radius),
-        border: Border.all(color: p.ringInput),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

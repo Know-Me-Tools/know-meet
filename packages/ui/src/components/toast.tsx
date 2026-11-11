@@ -1,6 +1,7 @@
 // TJ-ARCH-MOB-001 compliant
 // km.css `.toasts` / `.toast`: a centred stack 32px above the bottom (16px under
-// 768px), max 440px; each toast is inverted (fg fill, bg text), radius, float
+// 768px, plus the bottom bar `--km-bottom-bar-h` when the frame shows one), max
+// `size-toast-w`; actions focus to the page ground (inverted surface); each toast is inverted (fg fill, bg text), radius, float
 // shadow. Base UI stacking and swipe mechanics are kept; timings use the motion
 // tokens (--dur in with --ease-out).
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 import type * as React from "react";
 import { Button } from "#components/button";
+import { invertedFocusFillClass } from "#lib/focus";
 import { cn } from "#lib/utils";
 
 const toast = ToastPrimitive.createToastManager();
@@ -31,7 +33,7 @@ function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {
     <ToastPrimitive.Viewport
       data-slot="toast-viewport"
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-s6 z-(--z-toast) mx-auto w-[min(440px,calc(100vw-32px))] outline-none max-bp768:bottom-s4",
+        "pointer-events-none fixed inset-x-0 bottom-s6 z-(--z-toast) mx-auto w-[min(var(--spacing-size-toast-w),calc(100vw-32px))] outline-none max-bp768:bottom-[calc(var(--km-bottom-bar-h,0px)+var(--spacing-s4))]",
         className,
       )}
       {...props}
@@ -110,6 +112,7 @@ function ToastAction({
       render={render}
       className={cn(
         "shrink-0 text-background underline underline-offset-[3px] hover:not-disabled:bg-[color-mix(in_srgb,var(--background)_14%,transparent)]",
+        invertedFocusFillClass,
         className,
       )}
       {...props}
@@ -130,6 +133,7 @@ function ToastClose({
       render={render}
       className={cn(
         "relative shrink-0 text-background after:absolute after:-inset-2 after:content-[''] hover:not-disabled:bg-[color-mix(in_srgb,var(--background)_14%,transparent)]",
+        invertedFocusFillClass,
         className,
       )}
       {...props}

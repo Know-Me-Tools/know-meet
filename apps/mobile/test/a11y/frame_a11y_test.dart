@@ -19,7 +19,7 @@ const ValueKey<String> _start = ValueKey<String>('km-start-meeting');
 const ValueKey<String> _theme = ValueKey<String>('km-theme-toggle');
 const ValueKey<String> _signIn = ValueKey<String>('km-sign-in');
 const ValueKey<String> _account = ValueKey<String>('km-account-button');
-const ValueKey<String> _navToggle = ValueKey<String>('km-nav-toggle');
+const ValueKey<String> _railMeetings = ValueKey<String>('km-nav-/dashboard');
 
 Future<void> _tab(WidgetTester tester) async {
   await tester.sendKeyEvent(LogicalKeyboardKey.tab);
@@ -35,12 +35,14 @@ void main() {
       signedIn: true,
       overlay: KmFrameOverlay.accountMenu,
     );
-    kmA11yGate('frame.nav-open', overlay: KmFrameOverlay.nav);
+    kmA11yGate('frame.nav-bar', signedIn: true);
+    kmA11yGate('frame.nav-rail', signedIn: true, width: 768);
+    kmA11yGate('frame.nav-links', signedIn: true, width: 1024);
     kmA11yGate('frame.appbar-signed-out', width: 768);
   });
 
   group('focus traversal order', () {
-    testWidgets('guest: skip link, brand, start, theme, sign in, menu', (
+    testWidgets('guest: skip link, brand, start, theme, sign in', (
       WidgetTester tester,
     ) async {
       setKmViewport(tester, width: 375);
@@ -51,7 +53,6 @@ void main() {
         _start,
         _theme,
         _signIn,
-        _navToggle,
       ]) {
         await _tab(tester);
         expect(focusIsWithin(key), isTrue, reason: 'expected focus on $key');
@@ -69,7 +70,25 @@ void main() {
         _start,
         _theme,
         _account,
-        _navToggle,
+      ]) {
+        await _tab(tester);
+        expect(focusIsWithin(key), isTrue, reason: 'expected focus on $key');
+      }
+    });
+
+    testWidgets('medium: the rail follows the app bar, before the page', (
+      WidgetTester tester,
+    ) async {
+      setKmViewport(tester, width: 768);
+      await pumpKmApp(tester, stateId: 'dashboard.upcoming', signedIn: true);
+      for (final ValueKey<String> key in <ValueKey<String>>[
+        _skip,
+        _brand,
+        _start,
+        _theme,
+        _account,
+        const ValueKey<String>('km-nav-/'),
+        _railMeetings,
       ]) {
         await _tab(tester);
         expect(focusIsWithin(key), isTrue, reason: 'expected focus on $key');
@@ -105,58 +124,45 @@ void main() {
     });
   });
 
-  group('navigation placement (mobile-navigation skill)', () {
-    testWidgets('bottom bar below 600px, selection derived from the route', (
-      WidgetTester tester,
-    ) async {
-      final SemanticsHandle semantics = tester.ensureSemantics();
-      setKmViewport(tester, width: 375);
-      await pumpKmApp(tester, stateId: 'dashboard.upcoming', signedIn: true);
-      expect(find.byType(KmBottomBar), findsOneWidget);
-      expect(find.byType(KmNavRail), findsNothing);
-      final Finder meetings = find.descendant(
-        of: find.byType(KmBottomBar),
-        matching: find.bySemanticsLabel('Meetings'),
-      );
-      expect(
-        tester.getSemantics(meetings),
-        containsSemantics(label: 'Meetings', isButton: true, isSelected: true),
-      );
-      semantics.dispose();
-    });
-
-    testWidgets('rail at 600px and wider', (WidgetTester tester) async {
-      setKmViewport(tester, width: 768);
-      await pumpKmApp(tester, stateId: 'dashboard.upcoming', signedIn: true);
-      expect(find.byType(KmNavRail), findsOneWidget);
-      expect(find.byType(KmBottomBar), findsNothing);
-    });
-  });
+  // Placement, anatomy, targets and the resize morph: adaptive_nav_test.dart.
 
   group('reduced motion (MediaQuery.disableAnimations)', () {
-    testWidgets('the nav menu appears without animation when disabled', (
+    testWidgets('the account menu appears without animation when disabled', (
       WidgetTester tester,
     ) async {
       setKmViewport(tester, width: 375);
-      await pumpKmApp(tester, stateId: 'index.default');
-      await tester.tap(find.byKey(_navToggle));
+      await pumpKmApp(tester, stateId: 'settings.account', signedIn: true);
+      await tester.tap(find.byKey(_account));
       await tester.pump();
-      expect(find.byType(KmNavPanel), findsOneWidget);
+      expect(find.byType(KmAccountMenu), findsOneWidget);
       expect(tester.hasRunningAnimations, isFalse);
     });
 
-    testWidgets('the nav menu pops in when animations are allowed', (
+    testWidgets('the account menu pops in when animations are allowed', (
       WidgetTester tester,
     ) async {
       setKmViewport(tester, width: 375, disableAnimations: false);
       // A page with no looping animation (Home's dots breathe), so the
       // initial settle completes.
       await pumpKmApp(tester, stateId: 'settings.account', signedIn: true);
-      await tester.tap(find.byKey(_navToggle));
+      await tester.tap(find.byKey(_account));
       await tester.pump();
       expect(tester.hasRunningAnimations, isTrue);
       await tester.pumpAndSettle();
     });
+  });
+
+  testWidgets('the account button shows open by the selected fill, not a ring', (
+    WidgetTester tester,
+  ) async {
+    setKmViewport(tester, width: 375);
+    await pumpKmApp(tester, stateId: 'dashboard.upcoming', signedIn: true);
+    await tester.tap(find.byKey(_account));
+    await tester.pumpAndSettle();
+    final KmAvatar avatar = tester.widget<KmAvatar>(
+      find.descendant(of: find.byKey(_account), matching: find.byType(KmAvatar)),
+    );
+    expect(avatar.tone, KmAvatarTone.selected);
   });
 
   testWidgets('theme toggle switches theme and icon (sun in dark, moon in light)', (

@@ -42,16 +42,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     required this.dangerBtn,
     required this.dangerBtnHov,
     required this.onDanger,
+    required this.control,
+    required this.controlHov,
+    required this.onControl,
+    required this.controlPlaceholder,
+    required this.controlInvalid,
+    required this.onControlInvalid,
+    required this.selected,
+    required this.onSelected,
+    required this.focus,
+    required this.onFocus,
+    required this.focusPlaceholder,
+    required this.sliderThumb,
+    required this.pipGreen,
+    required this.pipAmber,
+    required this.pipRed,
+    required this.speakPerson,
+    required this.speakAgent,
+    required this.speakPhone,
+    required this.onSpeak,
     required this.scrim,
     required this.shadowFloat,
     required this.shadowCard,
-    required this.ringInput,
     required this.switchTrack,
     required this.switchThumb,
     required this.switchThumbOn,
     required this.switchThumbShadow,
-    required this.segPressedShadow,
-    required this.dropOutline,
     required this.mediaBg,
     required this.onMedia,
     required this.mediaFootScrim,
@@ -72,7 +88,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     fg: Color(0xFFE8EDF3),
     fgSub: Color(0xFFA7B0BC),
     ember: Color(0xFFFF6A3D),
-    emberBtn: Color(0xFFFF6A3D),
+    emberBtn: Color(0xFFFA5F30),
     emberBtnHov: Color(0xFFFF8159),
     onEmber: Color(0xFF0B0F14),
     emberText: Color(0xFFFF6A3D),
@@ -93,16 +109,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     dangerBtn: Color(0xFFDC2626),
     dangerBtnHov: Color(0xFFB91C1C),
     onDanger: Color(0xFFFFFFFF),
+    control: Color(0xFF64718A),
+    controlHov: Color(0xFF5C6880),
+    onControl: Color(0xFFFFFFFF),
+    controlPlaceholder: Color(0xFFF5F7FA),
+    controlInvalid: Color(0xFFDC2626),
+    onControlInvalid: Color(0xFFFFFFFF),
+    selected: Color(0xFFFA5F30),
+    onSelected: Color(0xFF0B0F14),
+    focus: Color(0xFFFFFFFF),
+    onFocus: Color(0xFF0B0F14),
+    focusPlaceholder: Color(0xFF4B5563),
+    sliderThumb: Color(0xFFFFFFFF),
+    pipGreen: Color(0xFF22C55E),
+    pipAmber: Color(0xFFF59E0B),
+    pipRed: Color(0xFFEF4444),
+    speakPerson: Color(0xFFE8532A),
+    speakAgent: Color(0xFF0891B2),
+    speakPhone: Color(0xFF15803D),
+    onSpeak: Color(0xFF0B0F14),
     scrim: Color(0xA305080C),
     shadowFloat: <BoxShadow>[BoxShadow(color: Color(0x7A000000), offset: Offset(0.0, 24.0), blurRadius: 54.5596)],
     shadowCard: <BoxShadow>[],
-    ringInput: Color(0xFF64718A),
-    switchTrack: Color(0xFF253044),
+    switchTrack: Color(0xFF64718A),
     switchThumb: Color(0xFFE8EDF3),
     switchThumbOn: Color(0xFF0B0F14),
     switchThumbShadow: <BoxShadow>[],
-    segPressedShadow: <BoxShadow>[BoxShadow(color: Color(0x33000000), offset: Offset(0.0, 1.0), blurRadius: 0.866)],
-    dropOutline: Color(0xFF253044),
     mediaBg: Color(0xFF000000),
     onMedia: Color(0xFFFFFFFF),
     mediaFootScrim: Color(0x8C000000),
@@ -144,16 +176,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     dangerBtn: Color(0xFFDC2626),
     dangerBtnHov: Color(0xFFB91C1C),
     onDanger: Color(0xFFFFFFFF),
+    control: Color(0xFF858F9E),
+    controlHov: Color(0xFF7C8696),
+    onControl: Color(0xFF0B0F14),
+    controlPlaceholder: Color(0xFF1C2230),
+    controlInvalid: Color(0xFFDC2626),
+    onControlInvalid: Color(0xFFFFFFFF),
+    selected: Color(0xFFC13E1E),
+    onSelected: Color(0xFFFFFFFF),
+    focus: Color(0xFF0B0F14),
+    onFocus: Color(0xFFFFFFFF),
+    focusPlaceholder: Color(0xFFC3CAD4),
+    sliderThumb: Color(0xFF0B0F14),
+    pipGreen: Color(0xFF166534),
+    pipAmber: Color(0xFFB45309),
+    pipRed: Color(0xFFDC2626),
+    speakPerson: Color(0xFFE8532A),
+    speakAgent: Color(0xFF0891B2),
+    speakPhone: Color(0xFF15803D),
+    onSpeak: Color(0xFF0B0F14),
     scrim: Color(0x660B0F14),
     shadowFloat: <BoxShadow>[BoxShadow(color: Color(0x290B0F14), offset: Offset(0.0, 24.0), blurRadius: 54.5596)],
     shadowCard: <BoxShadow>[BoxShadow(color: Color(0x0F0B0F14), offset: Offset(0.0, 1.0), blurRadius: 0.866), BoxShadow(color: Color(0x080B0F14), offset: Offset(0.0, 1.0), blurRadius: 0.0)],
-    ringInput: Color(0xFF858F9E),
     switchTrack: Color(0xFF858F9E),
     switchThumb: Color(0xFFFFFFFF),
     switchThumbOn: Color(0xFFFFFFFF),
     switchThumbShadow: <BoxShadow>[BoxShadow(color: Color(0x330B0F14), offset: Offset(0.0, 1.0), blurRadius: 0.866)],
-    segPressedShadow: <BoxShadow>[BoxShadow(color: Color(0x33000000), offset: Offset(0.0, 1.0), blurRadius: 0.866)],
-    dropOutline: Color(0xFFCBD2DB),
     mediaBg: Color(0xFF000000),
     onMedia: Color(0xFFFFFFFF),
     mediaFootScrim: Color(0x8C000000),
@@ -194,16 +242,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
   final Color dangerBtn;
   final Color dangerBtnHov;
   final Color onDanger;
+  final Color control;
+  final Color controlHov;
+  final Color onControl;
+  final Color controlPlaceholder;
+  final Color controlInvalid;
+  final Color onControlInvalid;
+  final Color selected;
+  final Color onSelected;
+  final Color focus;
+  final Color onFocus;
+  final Color focusPlaceholder;
+  final Color sliderThumb;
+  final Color pipGreen;
+  final Color pipAmber;
+  final Color pipRed;
+  final Color speakPerson;
+  final Color speakAgent;
+  final Color speakPhone;
+  final Color onSpeak;
   final Color scrim;
   final List<BoxShadow> shadowFloat;
   final List<BoxShadow> shadowCard;
-  final Color ringInput;
   final Color switchTrack;
   final Color switchThumb;
   final Color switchThumbOn;
   final List<BoxShadow> switchThumbShadow;
-  final List<BoxShadow> segPressedShadow;
-  final Color dropOutline;
   final Color mediaBg;
   final Color onMedia;
   final Color mediaFootScrim;
@@ -245,16 +309,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     Color? dangerBtn,
     Color? dangerBtnHov,
     Color? onDanger,
+    Color? control,
+    Color? controlHov,
+    Color? onControl,
+    Color? controlPlaceholder,
+    Color? controlInvalid,
+    Color? onControlInvalid,
+    Color? selected,
+    Color? onSelected,
+    Color? focus,
+    Color? onFocus,
+    Color? focusPlaceholder,
+    Color? sliderThumb,
+    Color? pipGreen,
+    Color? pipAmber,
+    Color? pipRed,
+    Color? speakPerson,
+    Color? speakAgent,
+    Color? speakPhone,
+    Color? onSpeak,
     Color? scrim,
     List<BoxShadow>? shadowFloat,
     List<BoxShadow>? shadowCard,
-    Color? ringInput,
     Color? switchTrack,
     Color? switchThumb,
     Color? switchThumbOn,
     List<BoxShadow>? switchThumbShadow,
-    List<BoxShadow>? segPressedShadow,
-    Color? dropOutline,
     Color? mediaBg,
     Color? onMedia,
     Color? mediaFootScrim,
@@ -295,16 +375,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       dangerBtn: dangerBtn ?? this.dangerBtn,
       dangerBtnHov: dangerBtnHov ?? this.dangerBtnHov,
       onDanger: onDanger ?? this.onDanger,
+      control: control ?? this.control,
+      controlHov: controlHov ?? this.controlHov,
+      onControl: onControl ?? this.onControl,
+      controlPlaceholder: controlPlaceholder ?? this.controlPlaceholder,
+      controlInvalid: controlInvalid ?? this.controlInvalid,
+      onControlInvalid: onControlInvalid ?? this.onControlInvalid,
+      selected: selected ?? this.selected,
+      onSelected: onSelected ?? this.onSelected,
+      focus: focus ?? this.focus,
+      onFocus: onFocus ?? this.onFocus,
+      focusPlaceholder: focusPlaceholder ?? this.focusPlaceholder,
+      sliderThumb: sliderThumb ?? this.sliderThumb,
+      pipGreen: pipGreen ?? this.pipGreen,
+      pipAmber: pipAmber ?? this.pipAmber,
+      pipRed: pipRed ?? this.pipRed,
+      speakPerson: speakPerson ?? this.speakPerson,
+      speakAgent: speakAgent ?? this.speakAgent,
+      speakPhone: speakPhone ?? this.speakPhone,
+      onSpeak: onSpeak ?? this.onSpeak,
       scrim: scrim ?? this.scrim,
       shadowFloat: shadowFloat ?? this.shadowFloat,
       shadowCard: shadowCard ?? this.shadowCard,
-      ringInput: ringInput ?? this.ringInput,
       switchTrack: switchTrack ?? this.switchTrack,
       switchThumb: switchThumb ?? this.switchThumb,
       switchThumbOn: switchThumbOn ?? this.switchThumbOn,
       switchThumbShadow: switchThumbShadow ?? this.switchThumbShadow,
-      segPressedShadow: segPressedShadow ?? this.segPressedShadow,
-      dropOutline: dropOutline ?? this.dropOutline,
       mediaBg: mediaBg ?? this.mediaBg,
       onMedia: onMedia ?? this.onMedia,
       mediaFootScrim: mediaFootScrim ?? this.mediaFootScrim,
@@ -350,16 +446,32 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       dangerBtn: Color.lerp(dangerBtn, other.dangerBtn, t) ?? dangerBtn,
       dangerBtnHov: Color.lerp(dangerBtnHov, other.dangerBtnHov, t) ?? dangerBtnHov,
       onDanger: Color.lerp(onDanger, other.onDanger, t) ?? onDanger,
+      control: Color.lerp(control, other.control, t) ?? control,
+      controlHov: Color.lerp(controlHov, other.controlHov, t) ?? controlHov,
+      onControl: Color.lerp(onControl, other.onControl, t) ?? onControl,
+      controlPlaceholder: Color.lerp(controlPlaceholder, other.controlPlaceholder, t) ?? controlPlaceholder,
+      controlInvalid: Color.lerp(controlInvalid, other.controlInvalid, t) ?? controlInvalid,
+      onControlInvalid: Color.lerp(onControlInvalid, other.onControlInvalid, t) ?? onControlInvalid,
+      selected: Color.lerp(selected, other.selected, t) ?? selected,
+      onSelected: Color.lerp(onSelected, other.onSelected, t) ?? onSelected,
+      focus: Color.lerp(focus, other.focus, t) ?? focus,
+      onFocus: Color.lerp(onFocus, other.onFocus, t) ?? onFocus,
+      focusPlaceholder: Color.lerp(focusPlaceholder, other.focusPlaceholder, t) ?? focusPlaceholder,
+      sliderThumb: Color.lerp(sliderThumb, other.sliderThumb, t) ?? sliderThumb,
+      pipGreen: Color.lerp(pipGreen, other.pipGreen, t) ?? pipGreen,
+      pipAmber: Color.lerp(pipAmber, other.pipAmber, t) ?? pipAmber,
+      pipRed: Color.lerp(pipRed, other.pipRed, t) ?? pipRed,
+      speakPerson: Color.lerp(speakPerson, other.speakPerson, t) ?? speakPerson,
+      speakAgent: Color.lerp(speakAgent, other.speakAgent, t) ?? speakAgent,
+      speakPhone: Color.lerp(speakPhone, other.speakPhone, t) ?? speakPhone,
+      onSpeak: Color.lerp(onSpeak, other.onSpeak, t) ?? onSpeak,
       scrim: Color.lerp(scrim, other.scrim, t) ?? scrim,
       shadowFloat: BoxShadow.lerpList(shadowFloat, other.shadowFloat, t) ?? const <BoxShadow>[],
       shadowCard: BoxShadow.lerpList(shadowCard, other.shadowCard, t) ?? const <BoxShadow>[],
-      ringInput: Color.lerp(ringInput, other.ringInput, t) ?? ringInput,
       switchTrack: Color.lerp(switchTrack, other.switchTrack, t) ?? switchTrack,
       switchThumb: Color.lerp(switchThumb, other.switchThumb, t) ?? switchThumb,
       switchThumbOn: Color.lerp(switchThumbOn, other.switchThumbOn, t) ?? switchThumbOn,
       switchThumbShadow: BoxShadow.lerpList(switchThumbShadow, other.switchThumbShadow, t) ?? const <BoxShadow>[],
-      segPressedShadow: BoxShadow.lerpList(segPressedShadow, other.segPressedShadow, t) ?? const <BoxShadow>[],
-      dropOutline: Color.lerp(dropOutline, other.dropOutline, t) ?? dropOutline,
       mediaBg: Color.lerp(mediaBg, other.mediaBg, t) ?? mediaBg,
       onMedia: Color.lerp(onMedia, other.onMedia, t) ?? onMedia,
       mediaFootScrim: Color.lerp(mediaFootScrim, other.mediaFootScrim, t) ?? mediaFootScrim,
@@ -502,6 +614,36 @@ abstract final class KmTokens {
   static const double headerH = 64.0;
   static const double pageMax = 1200.0;
   static const double rsW = 400.0;
+  static const double sizeTargetMin = 24.0;
+  static const double sizeTarget = 44.0;
+  static const double sizeControlH = 48.0;
+  static const double sizeControlHSm = 36.0;
+  static const double sizeInputPadX = 14.0;
+  static const double sizeInputPadY = 12.0;
+  static const double sizeSelectPadEnd = 40.0;
+  static const double sizeTextareaMinH = 96.0;
+  static const double sizeCheck = 20.0;
+  static const double sizeSwitchW = 48.0;
+  static const double sizeSwitchH = 28.0;
+  static const double sizeSwitchThumb = 22.0;
+  static const double sizeSwitchThumbInset = 3.0;
+  static const double sizeSwitchTravel = 20.0;
+  static const double sizeSliderTrackH = 6.0;
+  static const double sizeSliderThumb = 20.0;
+  static const double sizePip = 8.0;
+  static const double sizeSpeakBadge = 24.0;
+  static const double sizeDialogW = 560.0;
+  static const double sizeSheetW = 440.0;
+  static const double sizeToastW = 440.0;
+  static const double sizeTooltipMaxW = 320.0;
+  static const double sizeTooltipPadX = 12.0;
+  static const double sizeTooltipPadY = 8.0;
+  static const double sizeNavBarH = 64.0;
+  static const double sizeNavRailW = 80.0;
+  static const double sizeNavIndicatorW = 56.0;
+  static const double sizeNavIndicatorH = 32.0;
+  /// 46ch: multiply by the advance width of "0" in the body font.
+  static const double measureEmptyCh = 46.0;
   /// Prototype @media (max-width: 380px).
   static const double bp380 = 380.0;
   /// Prototype @media (max-width: 420px).
@@ -518,6 +660,10 @@ abstract final class KmTokens {
   static const double bp1023 = 1023.0;
   /// Prototype @media (max-width: 1199px).
   static const double bp1199 = 1199.0;
+  /// Adaptive window class: width >= 600px (DESIGN.md, Adaptive layout).
+  static const double windowMedium = 600.0;
+  /// Adaptive window class: width >= 1024px (DESIGN.md, Adaptive layout).
+  static const double windowExpanded = 1024.0;
   static const int zRaised = 1;
   static const int zStickyTools = 5;
   static const int zRoomScrim = 15;
@@ -535,11 +681,15 @@ abstract final class KmTokens {
   static const Duration dur = Duration(milliseconds: 240);
   static const Duration durPanel = Duration(milliseconds: 280);
   static const Duration durExit = Duration(milliseconds: 190);
+  static const Duration durNavMorph = Duration(milliseconds: 280);
+  static const Duration durNavLabel = Duration(milliseconds: 150);
+  static const Duration durReflow = Duration(milliseconds: 200);
   static const Curve easeOut = Cubic(0.16, 1.0, 0.3, 1.0);
   static const Curve easeIn = Cubic(0.55, 0.0, 0.75, 0.25);
   static const Curve easeStandard = Curves.ease;
   static const Curve easeInOut = Curves.easeInOut;
   static const Curve easeLinear = Curves.linear;
+  static const Curve easeLayout = Cubic(0.2, 0.0, 0.0, 1.0);
   static const Duration dotBreathe = Duration(milliseconds: 3200);
   static const Duration dotThink = Duration(milliseconds: 900);
   static const Duration dotThinkBreathe = Duration(milliseconds: 1200);

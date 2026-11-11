@@ -75,7 +75,8 @@ class _InviteFormState extends State<InviteForm> {
   }
 }
 
-/// `.device`: icon, label + state line, switch. One merged, named control.
+/// `.device`: icon, label + state line, switch. The whole row is one named
+/// switch; keyboard focus fills the switch track with `focus` (D-6).
 class _DeviceRow extends StatelessWidget {
   const _DeviceRow({
     required this.label,
@@ -94,31 +95,37 @@ class _DeviceRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    return MergeSemantics(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(KmTokens.s4, KmTokens.s2, KmTokens.s3, KmTokens.s2),
-        decoration: BoxDecoration(
-          color: p.card,
-          borderRadius: BorderRadius.circular(KmTokens.radius),
-        ),
-        child: Row(
-          children: <Widget>[
-            ExcludeSemantics(child: Icon(on ? onIcon : offIcon, size: 20, color: p.fg)),
-            const SizedBox(width: KmTokens.s4),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(label, style: KmText.displayAt(context, size: KmTokens.textBase)),
-                  Text(
-                    on ? 'On when you join' : 'Off when you join',
-                    style: KmText.xsmall(context).copyWith(color: p.fgSub),
-                  ),
-                ],
+    final String state = on ? 'On when you join' : 'Off when you join';
+    return Semantics(
+      toggled: on,
+      label: '$label. $state',
+      excludeSemantics: true,
+      onTap: () => onChanged(!on),
+      child: KmInteractive(
+        onTap: () => onChanged(!on),
+        builder: (BuildContext context, Set<WidgetState> s) => Container(
+          constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+          padding: const EdgeInsets.fromLTRB(KmTokens.s4, KmTokens.s2, KmTokens.s3, KmTokens.s2),
+          decoration: BoxDecoration(
+            color: p.card,
+            borderRadius: BorderRadius.circular(KmTokens.radius),
+          ),
+          child: Row(
+            children: <Widget>[
+              Icon(on ? onIcon : offIcon, size: 20, color: p.fg),
+              const SizedBox(width: KmTokens.s4),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(label, style: KmText.displayAt(context, size: KmTokens.textBase)),
+                    Text(state, style: KmText.xsmall(context).copyWith(color: p.fgSub)),
+                  ],
+                ),
               ),
-            ),
-            Switch(value: on, onChanged: onChanged),
-          ],
+              KmSwitchTrack(on: on, states: s),
+            ],
+          ),
         ),
       ),
     );

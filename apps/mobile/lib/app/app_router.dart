@@ -32,7 +32,7 @@ String kmInitialLocation(Ref ref) {
 }
 
 /// The frame popover open at start. Always closed in production; the golden
-/// suite opens it for `frame.nav-open` and `frame.account-menu-open`.
+/// suite opens it for `frame.account-menu-open`.
 @Riverpod(keepAlive: true)
 KmFrameOverlay kmInitialFrameOverlay(Ref ref) => KmFrameOverlay.none;
 

@@ -1,14 +1,24 @@
 // TJ-ARCH-MOB-001 compliant
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart' as shad;
 
 import 'km_palette_of.dart';
+import 'km_states.dart';
+
+/// DESIGN.md (Safe areas and targets): 36px `sm` buttons only where the
+/// pointer is fine. Flutter has no `pointer` media query, so the desktop
+/// targets stand in for it; touch platforms always get the 44px target.
+bool kmFinePointer() => switch (defaultTargetPlatform) {
+  TargetPlatform.macOS || TargetPlatform.windows || TargetPlatform.linux => true,
+  _ => false,
+};
 
 /// Prototype button variants (km.css `.btn`, `.btn-primary`, `.btn-ghost`,
 /// `.btn-danger`).
 enum KmButtonVariant { primary, secondary, ghost, danger }
 
-/// `.btn` (44px) or `.btn-sm` (36px).
+/// `.btn` (44px) or `.btn-sm` (36px with a fine pointer, else 44px).
 enum KmButtonSize { normal, small }
 
 /// A shadcn_flutter [shad.Button] styled from the Know Meet palette.
@@ -45,12 +55,15 @@ class KmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool small = size == KmButtonSize.small;
-    final double minHeight = small ? 36 : 44;
+    final double minHeight =
+        small && kmFinePointer() ? KmTokens.sizeControlHSm : KmTokens.sizeTarget;
     final double iconSize = small ? 16 : 20;
     final Widget button = shad.Button(
       style: KmButtonStyle(variant: variant, size: size, iconOnly: !showLabel),
       onPressed: onPressed,
       focusNode: focusNode,
+      // D-6: focus is the `focus` fill (decoration below), never a ring.
+      disableFocusOutline: true,
       alignment: Alignment.center,
       leading: icon == null ? null : Icon(icon, size: iconSize),
       trailing: trailingIcon == null
@@ -97,19 +110,11 @@ class KmButtonStyle implements shad.AbstractButtonStyle {
   @override
   shad.ButtonStateProperty<Decoration> get decoration =>
       (BuildContext context, Set<WidgetState> states) {
-        final KmPalette p = context.km;
-        final bool hover = states.contains(WidgetState.hovered);
+        final KmStateColors c = _colors(context.km, states);
         final bool disabled = states.contains(WidgetState.disabled);
-        final Color fill = switch (variant) {
-          KmButtonVariant.primary => hover ? p.emberBtnHov : p.emberBtn,
-          KmButtonVariant.secondary => hover ? p.cardHov : p.card,
-          KmButtonVariant.ghost => hover ? p.cardHov : Colors.transparent,
-          KmButtonVariant.danger => hover ? p.dangerBtnHov : p.dangerBtn,
-        };
         return BoxDecoration(
-          color: disabled ? fill.withValues(alpha: fill.a * 0.5) : fill,
+          color: disabled ? c.fill.withValues(alpha: c.fill.a * 0.5) : c.fill,
           borderRadius: BorderRadius.circular(_small ? KmTokens.radius10 : KmTokens.radius),
-          boxShadow: variant == KmButtonVariant.secondary ? p.shadowCard : null,
         );
       };
 
@@ -148,19 +153,27 @@ class KmButtonStyle implements shad.AbstractButtonStyle {
   shad.ButtonStateProperty<EdgeInsetsGeometry> get margin =>
       (BuildContext context, Set<WidgetState> states) => EdgeInsets.zero;
 
+  /// DESIGN.md state table rows for the four button variants; focus wins.
+  KmStateColors _colors(KmPalette p, Set<WidgetState> states) => switch (variant) {
+    KmButtonVariant.primary => KmStateColors.resolve(p, states,
+        rest: p.emberBtn, restOn: p.onEmber, hover: p.emberBtnHov),
+    KmButtonVariant.secondary => KmStateColors.resolve(p, states,
+        rest: p.card, restOn: p.fg, hover: p.cardHov),
+    KmButtonVariant.ghost => KmStateColors.resolve(p, states,
+        rest: Colors.transparent, restOn: p.fg, hover: p.cardHov),
+    KmButtonVariant.danger => KmStateColors.resolve(p, states,
+        rest: p.dangerBtn, restOn: p.onDanger, hover: p.dangerBtnHov),
+  };
+
   Color _foreground(BuildContext context, Set<WidgetState> states) {
-    final KmPalette p = context.km;
-    final Color c = switch (variant) {
-      KmButtonVariant.primary => p.onEmber,
-      KmButtonVariant.danger => p.onDanger,
-      KmButtonVariant.secondary || KmButtonVariant.ghost => p.fg,
-    };
+    final Color c = _colors(context.km, states).on;
     return states.contains(WidgetState.disabled) ? c.withValues(alpha: 0.5) : c;
   }
 }
 
-/// `.icon-btn`: 44px square, transparent; [selected] mirrors
-/// `aria-expanded="true"` / `aria-pressed="true"`.
+/// `.icon-btn`: 44px square, transparent. [selected] (`aria-pressed`) is the
+/// `selected` fill; [expanded] (`aria-expanded`) is `card-hov`; keyboard
+/// focus is the `focus` fill with an `on-focus` icon.
 class KmIconButton extends StatelessWidget {
   const KmIconButton({
     super.key,
@@ -187,12 +200,14 @@ class KmIconButton extends StatelessWidget {
   final bool? expanded;
   final double size;
   final FocusNode? focusNode;
+
+  /// Resting icon colour. Defaults to the ambient [IconTheme] colour, so an
+  /// icon button inside a field or fill pairs with that fill's `on-*` role.
   final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    final bool active = (selected ?? false) || (expanded ?? false);
+    final Color rest = color ?? IconTheme.of(context).color ?? context.km.fg;
     return Semantics(
       container: true,
       button: true,
@@ -205,11 +220,16 @@ class KmIconButton extends StatelessWidget {
         child: SizedBox.square(
           dimension: size,
           child: shad.Button(
-            style: _IconButtonStyle(active: active),
+            style: _IconButtonStyle(
+              pressed: selected ?? false,
+              expanded: expanded ?? false,
+              color: rest,
+            ),
             onPressed: onPressed,
             focusNode: focusNode,
+            disableFocusOutline: true,
             alignment: Alignment.center,
-            child: Icon(icon, size: 20, color: color ?? p.fg),
+            child: Icon(icon, size: 20),
           ),
         ),
       ),
@@ -218,16 +238,30 @@ class KmIconButton extends StatelessWidget {
 }
 
 class _IconButtonStyle implements shad.AbstractButtonStyle {
-  const _IconButtonStyle({required this.active});
+  const _IconButtonStyle({required this.pressed, required this.expanded, required this.color});
 
-  final bool active;
+  final bool pressed;
+  final bool expanded;
+
+  /// Resting icon colour.
+  final Color color;
+
+  KmStateColors _colors(BuildContext context, Set<WidgetState> states) {
+    final KmPalette p = context.km;
+    return KmStateColors.resolve(
+      p,
+      <WidgetState>{...states, if (pressed) WidgetState.selected},
+      rest: expanded ? p.cardHov : Colors.transparent,
+      restOn: color,
+      hover: p.cardHov,
+      hoverOn: p.fg,
+    );
+  }
 
   @override
   shad.ButtonStateProperty<Decoration> get decoration =>
       (BuildContext context, Set<WidgetState> states) => BoxDecoration(
-        color: active || states.contains(WidgetState.hovered)
-            ? context.km.cardHov
-            : Colors.transparent,
+        color: _colors(context, states).fill,
         borderRadius: BorderRadius.circular(KmTokens.radius),
       );
 
@@ -247,7 +281,7 @@ class _IconButtonStyle implements shad.AbstractButtonStyle {
   @override
   shad.ButtonStateProperty<IconThemeData> get iconTheme =>
       (BuildContext context, Set<WidgetState> states) =>
-          IconThemeData(color: context.km.fg, size: 20);
+          IconThemeData(color: _colors(context, states).on, size: 20);
 
   @override
   shad.ButtonStateProperty<EdgeInsetsGeometry> get margin =>

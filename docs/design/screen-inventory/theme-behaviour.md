@@ -29,13 +29,14 @@ OS change while open; only an explicit toggle or another tab changes it.
   and scrollbars follow it.
 - Light-only rules outside the token blocks: km.css `.switch .track` and
   `.switch .thumb` (now tokens `switch-track`, `switch-thumb`,
-  `switch-thumb-shadow`), room.css `.drop` outline (`drop-outline`), and five
+  `switch-thumb-shadow`), room.css `.drop` outline (`drop-outline`, removed in v1.3.0 by D-6), and five
   index.html rules that swap a surface for `--card` or `--muted` (`.mini`,
   `.mtile .tag span`, `.cid`, `.concierge .glyph-wrap`, `.concierge .chip`).
   Those five are component decisions for the home page, not tokens; c10 must
   reproduce them.
-- Light adds a card shadow (`shadow-card`) and a visible input ring
-  (`ring-input`); dark has neither. Light uses darker ember for buttons and small
+- Light adds a card shadow (`shadow-card`); the prototype's light input ring
+  (`ring-input`) was removed in tokens v1.3.0 (D-6: control boundaries are fills in
+  both themes, see the root `DESIGN.md`). Light uses darker ember for buttons and small
   text (`ember-btn`, `ember-text` `#C13E1E`) and keeps brand ember `#E04E28` for
   graphics only.
 

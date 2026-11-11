@@ -14,7 +14,7 @@ import type * as React from "react";
 import { cn } from "#lib/utils";
 
 const badgeVariants = cva(
-  "group/badge inline-flex min-h-7 w-fit shrink-0 items-center gap-1.5 rounded-pill border-0 px-2.5 text-xs leading-heading font-semibold whitespace-nowrap text-foreground no-underline [button&]:cursor-pointer [&>svg]:pointer-events-none [&>svg]:size-3.5",
+  "group/badge inline-flex min-h-7 w-fit shrink-0 items-center gap-1.5 rounded-pill px-2.5 outline-none focus-visible:bg-focus! focus-visible:text-on-focus! text-xs leading-heading font-semibold whitespace-nowrap text-foreground no-underline [button&]:cursor-pointer [&>svg]:pointer-events-none [&>svg]:size-3.5",
   {
     variants: {
       variant: {

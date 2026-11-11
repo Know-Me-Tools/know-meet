@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../theme/generated/km_theme.g.dart';
+import '../theme/generated/tokens.g.dart';
 import '../shared/ui/km_font_axis.dart';
 
 part 'app_theme.g.dart';
@@ -16,9 +17,47 @@ typedef KmThemeFactory =
 /// (`KM_GOLDEN_THEME_OVERRIDE=stock-dark`); production never does.
 @Riverpod(keepAlive: true)
 KmThemeFactory kmThemeFactory(Ref ref) =>
-    (Brightness brightness, double viewportWidth) => withDisplayFontVariations(
-      buildKmTheme(brightness, viewportWidth: viewportWidth),
+    (Brightness brightness, double viewportWidth) => withKmInteraction(
+      withDisplayFontVariations(buildKmTheme(brightness, viewportWidth: viewportWidth)),
+      viewportWidth: viewportWidth,
     );
+
+/// App-level interaction rules the generated theme does not carry
+/// (DESIGN.md, Flat 2.0): no ink ripples or translucent focus/hover
+/// overlays anywhere (the kit swaps fills instead), and tooltips in the
+/// toast style (operator 2026-11-11). Toasts are `size-toast-w` wide, never
+/// wider than the window less 32 (DESIGN.md "Sizes").
+ThemeData withKmInteraction(ThemeData theme, {double viewportWidth = 375}) {
+  final KmPalette? p = theme.extension<KmPalette>();
+  if (p == null) return theme;
+  final double toastW = viewportWidth - 2 * KmTokens.s4 < KmTokens.sizeToastW
+      ? viewportWidth - 2 * KmTokens.s4
+      : KmTokens.sizeToastW;
+  return theme.copyWith(
+    snackBarTheme: theme.snackBarTheme.copyWith(width: toastW),
+    splashFactory: NoSplash.splashFactory,
+    splashColor: const Color(0x00000000),
+    highlightColor: const Color(0x00000000),
+    hoverColor: const Color(0x00000000),
+    tooltipTheme: TooltipThemeData(
+      waitDuration: const Duration(milliseconds: 500),
+      constraints: const BoxConstraints(maxWidth: KmTokens.sizeTooltipMaxW),
+      padding: const EdgeInsets.symmetric(
+        horizontal: KmTokens.sizeTooltipPadX,
+        vertical: KmTokens.sizeTooltipPadY,
+      ),
+      decoration: BoxDecoration(
+        color: p.fg,
+        borderRadius: BorderRadius.circular(KmTokens.radius),
+        boxShadow: p.shadowFloat,
+      ),
+      textStyle: theme.textTheme.bodyMedium?.copyWith(
+        color: p.bg,
+        fontWeight: KmTokens.fontWeightMedium,
+      ),
+    ),
+  );
+}
 
 /// Space Grotesk ships as one variable file (wght 300-700, pubspec.yaml).
 /// Flutter does not map `fontWeight` onto the `wght` axis of a variable font,

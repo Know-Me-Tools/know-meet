@@ -140,9 +140,9 @@ class InvitesView extends ConsumerWidget {
           KmCheckRow(
             label: 'Select all ${rows.length} shown invites',
             value: rows.every((InviteDelivery d) => selected.contains(d.id)),
-            onChanged: (bool? v) => ref
+            onChanged: (bool v) => ref
                 .read(inviteSelectionProvider.notifier)
-                .setAll(rows.map((InviteDelivery d) => d.id), v ?? false),
+                .setAll(rows.map((InviteDelivery d) => d.id), v),
           ),
           const SizedBox(height: KmTokens.s2),
           for (final InviteDelivery d in rows) ...<Widget>[
@@ -181,25 +181,12 @@ class _StatusSelect extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    return Semantics(
-      label: 'Status',
-      child: DropdownButtonFormField<DeliveryStatus?>(
-        key: ValueKey<DeliveryStatus?>(value),
-        initialValue: value,
-        isExpanded: true,
-        dropdownColor: p.bg2,
-        style: KmText.body(context),
-        icon: Icon(LucideIcons.chevronDown, size: 18, color: p.fgSub),
-        items: <DropdownMenuItem<DeliveryStatus?>>[
-          for (final (DeliveryStatus? s, String label) in _options)
-            DropdownMenuItem<DeliveryStatus?>(value: s, child: Text(label)),
-        ],
-        onChanged: onChanged,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => KmSelect<DeliveryStatus?>(
+    label: 'Status',
+    value: value,
+    options: _options,
+    onChanged: onChanged,
+  );
 }
 
 class _SearchField extends StatelessWidget {
@@ -209,16 +196,15 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Semantics(
       label: 'Search invites',
       child: TextField(
         onChanged: onChanged,
-        style: KmText.body(context),
-        decoration: InputDecoration(
-          hintText: 'Search name, email, phone or meeting',
-          prefixIcon: Icon(LucideIcons.search, size: 16, color: p.fgSub),
-          constraints: const BoxConstraints(minHeight: 44),
+        style: kmFieldStyle(context),
+        decoration: kmFieldDecoration(
+          context,
+          placeholder: 'e.g. name, email, phone or meeting',
+          prefixIcon: const ExcludeSemantics(child: Icon(LucideIcons.search, size: 16)),
         ),
       ),
     );
@@ -254,17 +240,10 @@ class _InviteCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Semantics(
+              KmCheckbox(
                 label: 'Select invite to ${d.name} by $channel for ${meeting.title}',
-                checked: selected,
-                excludeSemantics: true,
-                onTap: () => onSelect(!selected),
-                child: Checkbox(
-                  value: selected,
-                  onChanged: (bool? v) => onSelect(v ?? false),
-                  activeColor: p.emberBtn,
-                  checkColor: p.onEmber,
-                ),
+                value: selected,
+                onChanged: onSelect,
               ),
               const SizedBox(width: KmTokens.s2),
               Expanded(

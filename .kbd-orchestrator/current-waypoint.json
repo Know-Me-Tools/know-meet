@@ -2,10 +2,10 @@
   "schemaVersion": "5",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 198,
-  "derivedRevision": 198,
+  "sourceRevision": 202,
+  "derivedRevision": 202,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 198
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 202
   },
   "conflictCount": 0,
   "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
@@ -28,12 +28,12 @@
   "stageId": "execute",
   "stageStatus": "IN_PROGRESS",
   "completionMetric": "implementation",
-  "implementationCompleted": 10,
+  "implementationCompleted": 11,
   "implementationTotal": 16,
   "planRevision": 1,
-  "revision": 198,
+  "revision": 202,
   "exactNextCommand": "/kbd-assess hybrid-shell-foundation",
   "nextChange": "c16-agentic-core-gates",
   "nextTask": "16.1",
-  "updatedAt": "2026-11-11T11:35:42.614788Z"
+  "updatedAt": "2026-11-11T16:18:21.097586Z"
 }

@@ -164,11 +164,11 @@ class _Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    return Container(
+    // D-6: speaking is a badge in the tile head, not a ring.
+    final Widget tile = Container(
       decoration: BoxDecoration(
         color: p.tile,
         borderRadius: BorderRadius.circular(KmTokens.radius10),
-        border: speaking ? Border.all(color: p.cyan, width: 2) : null,
       ),
       padding: const EdgeInsets.all(6),
       child: Column(
@@ -188,6 +188,13 @@ class _Tile extends StatelessWidget {
           ),
         ],
       ),
+    );
+    if (!speaking) return tile;
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(child: tile),
+        const Positioned(top: 4, right: 4, child: KmSpeakBadge(speaker: KmSpeaker.person)),
+      ],
     );
   }
 }

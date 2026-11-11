@@ -1,27 +1,56 @@
 // TJ-ARCH-MOB-001 compliant
+// c09 9.1 route tree: the in-scope routes of docs/design/screen-inventory/
+// route-inventory.json at the paths in tests/fidelity/oracle/app-state-map.json.
+// Sub-states are URL hashes (`/dashboard#schedule`), read by the screens (c10/c11).
 import { createRootRoute, createRoute, createRouter } from "@tanstack/react-router";
 import { NotesScreen } from "../presentation/notes/notes-screen";
-import { AppFrame } from "./app-frame";
-import { HomePlaceholder, RouteError, RouteNotFound } from "./route-fallbacks";
+import { AppFrame } from "./frame/app-frame";
+import { FocusedLayout, FramedLayout, RoomLayout } from "./frame/layouts";
+import { RouteError, RouteNotFound } from "./route-fallbacks";
+import { ScreenPlaceholder } from "./routes/screen-placeholder";
 
-// Code-based route tree. c09 extends it with the in-scope routes in
-// tests/fidelity/oracle/app-state-map.json (paths, hash sub-states).
 const rootRoute = createRootRoute({ component: AppFrame });
 
-const homeRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: HomePlaceholder,
+const framed = createRoute({ getParentRoute: () => rootRoute, id: "framed", component: FramedLayout });
+const focused = createRoute({ getParentRoute: () => rootRoute, id: "focused", component: FocusedLayout });
+const room = createRoute({ getParentRoute: () => rootRoute, id: "room", component: RoomLayout });
+
+const placeholder = (title: string) => () => <ScreenPlaceholder title={title} />;
+
+const homeRoute = createRoute({ getParentRoute: () => framed, path: "/", component: placeholder("Know Meet") });
+const dashboardRoute = createRoute({
+  getParentRoute: () => framed,
+  path: "dashboard",
+  component: placeholder("Meetings"),
+});
+const agentsRoute = createRoute({ getParentRoute: () => framed, path: "agents", component: placeholder("Agents") });
+const recordingsRoute = createRoute({
+  getParentRoute: () => framed,
+  path: "recordings",
+  component: placeholder("Recordings"),
+});
+const settingsRoute = createRoute({
+  getParentRoute: () => framed,
+  path: "settings",
+  component: placeholder("Settings"),
+});
+/** Generator baseline notes demo (PEM + BFF/Tauri adapters), kept off the nav. */
+const notesRoute = createRoute({ getParentRoute: () => framed, path: "notes", component: NotesScreen });
+
+const authRoute = createRoute({ getParentRoute: () => focused, path: "auth", component: placeholder("Sign in") });
+const joinRoute = createRoute({
+  getParentRoute: () => focused,
+  path: "join",
+  component: placeholder("Join a meeting"),
 });
 
-/** Generator baseline notes demo (PEM + BFF/Tauri adapters), kept off the home route. */
-const notesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "notes",
-  component: NotesScreen,
-});
+const meetRoute = createRoute({ getParentRoute: () => room, path: "meet", component: placeholder("Meeting room") });
 
-const routeTree = rootRoute.addChildren([homeRoute, notesRoute]);
+const routeTree = rootRoute.addChildren([
+  framed.addChildren([homeRoute, dashboardRoute, agentsRoute, recordingsRoute, settingsRoute, notesRoute]),
+  focused.addChildren([authRoute, joinRoute]),
+  room.addChildren([meetRoute]),
+]);
 
 export function createAppRouter() {
   return createRouter({

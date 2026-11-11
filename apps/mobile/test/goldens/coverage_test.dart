@@ -6,10 +6,15 @@ import 'package:sovereign_hybrid_mobile/app/state_locations.dart';
 
 import '../support/km_inventory.dart';
 
-/// In-scope states c12 does not render in a phone layout, with the reason
-/// (flutter-golden-provenance.json `comparisonSource.states`). Empty: every
-/// in-scope state has a golden.
-const Map<String, String> kmStatesNotRendered = <String, String>{};
+/// In-scope states with no golden, with the reason
+/// (flutter-golden-provenance.json `comparisonSource.states`).
+const Map<String, String> kmStatesNotRendered = <String, String>{
+  'frame.nav-collapsed':
+      'Retired by DESIGN.md "Adaptive layout" (thresholds.json ADJ-2): the hamburger '
+      'no longer exists. Replaced by frame.nav-bar / nav-rail / nav-links, pending '
+      'the inventory update by bdd-quality.',
+  'frame.nav-open': 'Retired with frame.nav-collapsed (ADJ-2).',
+};
 
 /// Provenance check (not tagged golden, so it runs on the per-change path):
 /// every in-scope inventory state is declared in a golden test file or

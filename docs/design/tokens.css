@@ -19,7 +19,7 @@
   --km-fg: #E8EDF3;
   --km-fg-sub: #A7B0BC;
   --km-ember: #FF6A3D;
-  --km-ember-btn: #FF6A3D;
+  --km-ember-btn: #FA5F30;
   --km-ember-btn-hov: #FF8159;
   --km-on-ember: #0B0F14;
   --km-ember-text: #FF6A3D;
@@ -40,20 +40,36 @@
   --km-danger-btn: #DC2626;
   --km-danger-btn-hov: #B91C1C;
   --km-on-danger: #FFFFFF;
+  --km-control: #64718A;
+  --km-control-hov: #5C6880;
+  --km-on-control: #FFFFFF;
+  --km-control-placeholder: #F5F7FA;
+  --km-control-invalid: #DC2626;
+  --km-on-control-invalid: #FFFFFF;
+  --km-selected: #FA5F30;
+  --km-on-selected: #0B0F14;
+  --km-focus: #FFFFFF;
+  --km-on-focus: #0B0F14;
+  --km-focus-placeholder: #4B5563;
+  --km-slider-thumb: #FFFFFF;
+  --km-pip-green: #22C55E;
+  --km-pip-amber: #F59E0B;
+  --km-pip-red: #EF4444;
+  --km-speak-person: #E8532A;
+  --km-speak-agent: #0891B2;
+  --km-speak-phone: #15803D;
+  --km-on-speak: #0B0F14;
   --km-scrim: rgba(5, 8, 12, 0.64);
   /* shadow */
   --km-shadow-float: 0 24px 64px rgba(0, 0, 0, 0.48);
   --km-shadow-card: none;
   /* colour */
-  --km-ring-input: #64718A;
-  --km-switch-track: #253044;
+  --km-switch-track: #64718A;
   --km-switch-thumb: #E8EDF3;
   --km-switch-thumb-on: #0B0F14;
   /* shadow */
   --km-switch-thumb-shadow: none;
-  --km-seg-pressed-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   /* colour */
-  --km-drop-outline: #253044;
   --km-media-bg: #000000;
   --km-on-media: #FFFFFF;
   --km-media-foot-scrim: rgba(0, 0, 0, 0.55);
@@ -149,6 +165,37 @@
   --km-header-h: 64px;
   --km-page-max: 1200px;
   --km-rs-w: 400px;
+  /* component sizes (D-7) */
+  --km-size-target-min: 24px;
+  --km-size-target: 44px;
+  --km-size-control-h: 48px;
+  --km-size-control-h-sm: 36px;
+  --km-size-input-pad-x: 14px;
+  --km-size-input-pad-y: 12px;
+  --km-size-select-pad-end: 40px;
+  --km-size-textarea-min-h: 96px;
+  --km-size-check: 20px;
+  --km-size-switch-w: 48px;
+  --km-size-switch-h: 28px;
+  --km-size-switch-thumb: 22px;
+  --km-size-switch-thumb-inset: 3px;
+  --km-size-switch-travel: 20px;
+  --km-size-slider-track-h: 6px;
+  --km-size-slider-thumb: 20px;
+  --km-size-pip: 8px;
+  --km-size-speak-badge: 24px;
+  --km-size-dialog-w: 560px;
+  --km-size-sheet-w: 440px;
+  --km-size-toast-w: 440px;
+  --km-size-tooltip-max-w: 320px;
+  --km-size-tooltip-pad-x: 12px;
+  --km-size-tooltip-pad-y: 8px;
+  --km-size-nav-bar-h: 64px;
+  --km-size-nav-rail-w: 80px;
+  --km-size-nav-indicator-w: 56px;
+  --km-size-nav-indicator-h: 32px;
+  /* text measures */
+  --km-measure-empty: 46ch;
   /* breakpoints (max-width; reference only, var() cannot be used in @media) */
   --km-bp-380: 380px;
   --km-bp-420: 420px;
@@ -158,6 +205,9 @@
   --km-bp-899: 899px;
   --km-bp-1023: 1023px;
   --km-bp-1199: 1199px;
+  /* adaptive window classes (min-width; reference only, var() cannot be used in @media) */
+  --km-window-medium: 600px;
+  --km-window-expanded: 1024px;
   /* z-index */
   --km-z-raised: 1;
   --km-z-sticky-tools: 5;
@@ -177,12 +227,16 @@
   --km-dur: 240ms;
   --km-dur-panel: 280ms;
   --km-dur-exit: 190ms;
+  --km-dur-nav-morph: 280ms;
+  --km-dur-nav-label: 150ms;
+  --km-dur-reflow: 200ms;
   /* easing */
   --km-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --km-ease-in: cubic-bezier(0.55, 0, 0.75, 0.25);
   --km-ease-standard: ease;
   --km-ease-in-out: ease-in-out;
   --km-ease-linear: linear;
+  --km-ease-layout: cubic-bezier(0.2, 0, 0, 1);
   /* motion durations */
   --km-dot-breathe: 3.2s;
   --km-dot-think: 0.9s;
@@ -232,13 +286,24 @@
   --km-red: #DC2626;
   --km-red-text: #B91C1C;
   --km-red-soft: rgba(220, 38, 38, 0.1);
+  --km-control: #858F9E;
+  --km-control-hov: #7C8696;
+  --km-on-control: #0B0F14;
+  --km-control-placeholder: #1C2230;
+  --km-selected: #C13E1E;
+  --km-on-selected: #FFFFFF;
+  --km-focus: #0B0F14;
+  --km-on-focus: #FFFFFF;
+  --km-focus-placeholder: #C3CAD4;
+  --km-slider-thumb: #0B0F14;
+  --km-pip-green: #166534;
+  --km-pip-amber: #B45309;
+  --km-pip-red: #DC2626;
   --km-scrim: rgba(11, 15, 20, 0.4);
   --km-shadow-float: 0 24px 64px rgba(11, 15, 20, 0.16);
   --km-shadow-card: 0 1px 2px rgba(11, 15, 20, 0.06), 0 1px 1px rgba(11, 15, 20, 0.03);
-  --km-ring-input: #858F9E;
   --km-switch-track: #858F9E;
   --km-switch-thumb: #FFFFFF;
   --km-switch-thumb-on: #FFFFFF;
   --km-switch-thumb-shadow: 0 1px 2px rgba(11, 15, 20, 0.2);
-  --km-drop-outline: #CBD2DB;
 }

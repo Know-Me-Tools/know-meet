@@ -3,6 +3,7 @@
 library;
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sovereign_hybrid_mobile/app/frame/km_app_frame.dart';
 
@@ -19,8 +20,32 @@ void main() {
     overlay: KmFrameOverlay.accountMenu,
     fullPage: false,
   );
-  kmGolden('frame.nav-collapsed', fullPage: false);
-  kmGolden('frame.nav-open', overlay: KmFrameOverlay.nav, fullPage: false);
+  // frame.nav-collapsed and frame.nav-open are retired (ADJ-2; listed in
+  // coverage_test.dart). Their replacements, one per width class, on an app
+  // page with a current destination (DESIGN.md "Adaptive layout"):
+  kmGolden('frame.nav-bar', signedIn: true, fullPage: false, widths: const <double>[375]);
+  kmGolden('frame.nav-rail', signedIn: true, fullPage: false, widths: const <double>[768]);
+  kmGolden('frame.nav-links', signedIn: true, fullPage: false, widths: const <double>[1024]);
+  // Keyboard focus on the current bar item: the D-6 focus fill.
+  kmGolden(
+    'frame.nav-bar-focused',
+    signedIn: true,
+    fullPage: false,
+    widths: const <double>[375],
+    interact: (WidgetTester tester) async {
+      for (int i = 0; i < 60; i++) {
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pump();
+        final BuildContext? c = FocusManager.instance.primaryFocus?.context;
+        bool hit = false;
+        c?.visitAncestorElements((Element e) {
+          hit = e.widget.key == const ValueKey<String>('km-nav-/dashboard');
+          return !hit;
+        });
+        if (hit) return;
+      }
+    },
+  );
   kmGolden(
     'frame.skip-link-focused',
     fullPage: false,

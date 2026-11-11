@@ -31,46 +31,60 @@ class RecordingCard extends StatelessWidget {
       label: '${r.title}, ${_metaLine(r)}',
       excludeSemantics: true,
       onTap: open,
-      child: Material(
-        color: p.surface,
-        borderRadius: BorderRadius.circular(KmTokens.radiusTile),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: open,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              RecordingPoster(r),
-              Padding(
-                padding: const EdgeInsets.all(KmTokens.s4),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      r.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: KmText.displayAt(context, size: KmTokens.textBase),
+      // Interactive card: text identifies it; hover `card-hov`; keyboard
+      // focus fills the whole card with `focus` and turns all text `on-focus`.
+      child: KmInteractive(
+        onTap: open,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: p.surface,
+            restOn: p.fg,
+            hover: p.cardHov,
+          );
+          final Color sub = s.contains(WidgetState.focused) ? c.on : p.fgSub;
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(KmTokens.radiusTile),
+            child: KmFillBox(
+              colors: c,
+              radius: KmTokens.radiusTile,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  RecordingPoster(r),
+                  Padding(
+                    padding: const EdgeInsets.all(KmTokens.s4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          r.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: KmText.displayAt(context, size: KmTokens.textBase, color: c.on),
+                        ),
+                        const SizedBox(height: KmTokens.s2),
+                        Text(_metaLine(r), style: KmText.small(context).copyWith(color: sub)),
+                        if (r.owner == RecordingOwner.shared) ...<Widget>[
+                          const SizedBox(height: KmTokens.s2),
+                          Text(
+                            'Shared with you by ${r.host}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: KmText.xsmall(context).copyWith(color: sub),
+                          ),
+                        ],
+                        const SizedBox(height: KmTokens.s2),
+                        RecordingChips(r),
+                      ],
                     ),
-                    const SizedBox(height: KmTokens.s2),
-                    Text(_metaLine(r), style: KmText.smallSub(context)),
-                    if (r.owner == RecordingOwner.shared) ...<Widget>[
-                      const SizedBox(height: KmTokens.s2),
-                      Text(
-                        'Shared with you by ${r.host}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: KmText.xsmall(context).copyWith(color: p.fgSub),
-                      ),
-                    ],
-                    const SizedBox(height: KmTokens.s2),
-                    RecordingChips(r),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

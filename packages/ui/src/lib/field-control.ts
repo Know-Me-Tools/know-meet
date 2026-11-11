@@ -1,6 +1,7 @@
 // TJ-ARCH-MOB-001 compliant
-// One text-control look shared by Input, Textarea and NativeSelect (km.css `.input`).
-// The 1px inset ring is the D-5 Flat 2.0 exception (ring-input, SC 1.4.11); focus
-// thickens it to 2px ember, invalid to 2px red, read-only drops to the surface fill.
+// One text-control look shared by Input, Textarea and NativeSelect (DESIGN.md
+// "State order", tokens v1.3.0 / D-6): `control` fill with `on-control` text, hover
+// `control-hov`, invalid `control-invalid` (the error line below carries the
+// message), focus `focus` + `on-focus` with the `focus-placeholder`. No ring.
 export const fieldControlClass =
-  "w-full min-w-0 rounded-base border-0 bg-card px-3.5 py-s3 text-base text-foreground shadow-[inset_0_0_0_1px_var(--input)] transition-shadow duration-(--dur-fast) ease-standard outline-none placeholder:text-muted-foreground placeholder:opacity-85 focus-visible:shadow-[inset_0_0_0_2px_var(--ring)] focus-visible:outline-none aria-invalid:shadow-[inset_0_0_0_2px_var(--red)] read-only:bg-surface disabled:cursor-not-allowed disabled:opacity-50";
+  "w-full min-w-0 rounded-base bg-control px-size-input-pad-x py-size-input-pad-y text-base text-on-control caret-current outline-none transition-colors duration-(--dur-fast) ease-standard placeholder:text-control-placeholder hover:not-disabled:bg-control-hov aria-invalid:bg-control-invalid aria-invalid:text-on-control-invalid aria-invalid:placeholder:text-on-control-invalid focus-visible:bg-focus! focus-visible:text-on-focus! focus-visible:placeholder:text-focus-placeholder! disabled:cursor-not-allowed disabled:opacity-50";

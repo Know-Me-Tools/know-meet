@@ -116,18 +116,17 @@ class _CtlButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
     final bool pressedPanel = ctl.tone == _CtlTone.panel && (ctl.pressed ?? false);
-    final Color bg = switch (ctl.tone) {
-      _CtlTone.off => p.redSoft,
-      _CtlTone.leave => p.dangerBtn,
-      _ when pressedPanel => p.emberSoft,
-      _ => p.card,
+    // DESIGN.md: a pressed control is the `selected` fill; hover `card-hov`
+    // (leave: `danger-btn-hov`); keyboard focus is the `focus` fill.
+    KmStateColors colors(Set<WidgetState> s) => switch (ctl.tone) {
+      _CtlTone.leave => KmStateColors.resolve(p, s,
+          rest: p.dangerBtn, restOn: p.onDanger, hover: p.dangerBtnHov),
+      _CtlTone.off => KmStateColors.resolve(p, s,
+          rest: p.redSoft, restOn: p.fg, hover: p.cardHov),
+      _ => KmStateColors.resolve(p, s,
+          rest: p.card, restOn: p.fg, hover: p.cardHov),
     };
-    final Color fg = switch (ctl.tone) {
-      _CtlTone.leave => p.onDanger,
-      _ when pressedPanel => p.emberText,
-      _ => p.fg,
-    };
-    final Widget body = Column(
+    Widget body(Color fg) => Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Icon(ctl.icon, size: 20, color: fg),
@@ -150,22 +149,22 @@ class _CtlButton extends StatelessWidget {
       label: ctl.label,
       excludeSemantics: true,
       onTap: () {},
-      child: Material(
-        color: bg,
-        borderRadius: BorderRadius.circular(KmTokens.radius),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: () {},
-          child: Stack(
+      child: KmInteractive(
+        onTap: () {},
+        selected: pressedPanel,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = colors(s);
+          return Stack(
             children: <Widget>[
-              Container(
+              KmFillBox(
+                colors: c,
                 constraints: BoxConstraints(
                   minWidth: showLabel ? 64 : 48,
                   minHeight: showLabel ? 56 : 48,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: showLabel ? 8 : 12, vertical: 6),
-                alignment: Alignment.center,
-                child: body,
+                // Shrink-wraps inside the Wrap (an alignment would fill the run).
+                child: Align(widthFactor: 1, heightFactor: 1, child: body(c.on)),
               ),
               if (ctl.locked)
                 Positioned(
@@ -179,8 +178,8 @@ class _CtlButton extends StatelessWidget {
                   ),
                 ),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }

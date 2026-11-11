@@ -35,12 +35,13 @@ never self-approving; changing a golden, its prototype baseline or
 
 ## Coverage (c12)
 
-All 70 in-scope inventory states have a golden declaration, in both themes
-at 375 (oracle) and 768 (tablet check):
+68 of the 70 in-scope inventory states have a golden declaration, in both
+themes at 375 (oracle) and 768 (tablet check); the 2 retired nav states are
+recorded in `kmStatesNotRendered`:
 
 | File | States |
 | --- | --- |
-| `frame_golden_test.dart` | 7 `frame.*` |
+| `frame_golden_test.dart` | 5 inventory `frame.*` plus 4 adaptive-nav states (ADJ-2) |
 | `public_golden_test.dart` | `index.default`, 5 `auth.*`, 4 `join.*` |
 | `dashboard_golden_test.dart` | 9 `dashboard.*` (incl. the signed-out gate) |
 | `agents_golden_test.dart` | 14 `agents.*` |
@@ -60,10 +61,22 @@ scroll height); frame states and the meeting room are viewport captures.
 
 ## Known differences from the prototype (for design-lead review)
 
-- **Navigation bar.** The mobile-navigation skill puts the five destinations
-  in a bottom bar below 600px and a rail from 600px. The prototype has
-  neither; it only has the app-bar menu, which is kept. Every app-page golden
-  therefore has an extra 64px bar at the bottom (375) or an 88px rail (768).
+Logged as fidelity adjudications in `tests/fidelity/oracle/thresholds.json`;
+those cells compare against design-lead replacement baselines, never the
+frozen prototype images.
+
+- **Adaptive navigation (ADJ-1, D-8).** Bottom bar below 600, rail from 600,
+  inline app-bar links from 1024 (DESIGN.md "Adaptive layout"). The
+  prototype's hamburger and nav panel are retired (ADJ-2): `frame.nav-collapsed`
+  and `frame.nav-open` have no golden (`coverage_test.dart`), replaced by
+  `frame.nav-bar` (375), `frame.nav-rail` (768), `frame.nav-links` (1024) and
+  `frame.nav-bar-focused` (375, keyboard focus fill), pending the inventory
+  update by bdd-quality.
+- **Flat 2.0 fills (ADJ-3, D-6).** No borders, rings or rules: inputs,
+  selects, checkboxes, radios, switches, segmented controls and drop zones on
+  the `control` fill; selected nav item and tab are a `selected` pill; app
+  bar, tab-list, table and menu rules removed; speaking rings are a speaking
+  badge; dark primary buttons use `ember-btn` `#FA5F30`.
 - Tables that overflow 375px in the prototype (dashboard invites, agent
   activity) are stacked cards on phone.
 - Fonts render through Flutter's text stack; Space Grotesk weights use an

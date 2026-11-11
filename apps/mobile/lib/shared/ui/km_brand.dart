@@ -8,9 +8,12 @@ import 'km_text.dart';
 /// core with five participants around it, one of them a cyan agent.
 /// Decorative: the brand link around it carries the accessible name.
 class KmBrandMark extends StatelessWidget {
-  const KmBrandMark({super.key, this.size = 28});
+  const KmBrandMark({super.key, this.size = 28, this.color});
 
   final double size;
+
+  /// Overrides the foreground participants (e.g. `on-focus` on a focus fill).
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class KmBrandMark extends StatelessWidget {
     return ExcludeSemantics(
       child: CustomPaint(
         size: Size.square(size),
-        painter: _MarkPainter(ember: p.ember, cyan: p.cyan, fg: p.fg),
+        painter: _MarkPainter(ember: p.ember, cyan: p.cyan, fg: color ?? p.fg),
       ),
     );
   }
@@ -62,9 +65,13 @@ class _MarkPainter extends CustomPainter {
 
 /// `.brand-word`: "Know" in the foreground colour, "Meet" in ember text.
 class KmBrandWord extends StatelessWidget {
-  const KmBrandWord({super.key, this.size = 18});
+  const KmBrandWord({super.key, this.size = 18, this.color});
 
   final double size;
+
+  /// One colour for both words (e.g. `on-focus` on a focus fill, where the
+  /// ember "Meet" would not meet 4.5:1).
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +79,7 @@ class KmBrandWord extends StatelessWidget {
       context,
       size: size,
       weight: KmTokens.fontWeightBold,
+      color: color,
     );
     return ExcludeSemantics(
       child: Text.rich(
@@ -79,7 +87,7 @@ class KmBrandWord extends StatelessWidget {
           text: 'Know ',
           style: base,
           children: <InlineSpan>[
-            TextSpan(text: 'Meet', style: base.copyWith(color: context.km.emberText)),
+            TextSpan(text: 'Meet', style: base.copyWith(color: color ?? context.km.emberText)),
           ],
         ),
         maxLines: 1,

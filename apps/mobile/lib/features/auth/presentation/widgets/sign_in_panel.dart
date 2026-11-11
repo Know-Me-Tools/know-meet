@@ -91,9 +91,10 @@ class _ErrorSummary extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(KmTokens.s4),
         decoration: BoxDecoration(
+          // D-6: the `red-soft` fill, alert icon and heading carry the
+          // error; the 2px red outline is removed.
           color: p.redSoft,
           borderRadius: BorderRadius.circular(KmTokens.radius),
-          border: Border.all(color: p.red, width: 2),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

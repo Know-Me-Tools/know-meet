@@ -1,8 +1,9 @@
 // TJ-ARCH-MOB-001 compliant
-// km.css `.appnav`: 44px pill links, sub text, card-hov hover; the current page
-// (`aria-current="page"` or Base UI `data-active`) is ember-soft with ember text.
+// km.css `.appnav` on tokens v1.3.0 (DESIGN.md "Inline links"): 44px pill links,
+// sub text, card-hov hover; the current page (`aria-current="page"` or Base UI
+// `data-active`) is `selected` with `on-selected` text; focus is the `focus` fill.
 // Popups use the `.menu` surface (bg-2, radius-tile, float shadow) and items the
-// `.menu-item` look. The collapsing mobile nav (<900px) is app-frame work (c09).
+// `.menu-item` look. The adaptive bar/rail/inline nav lives in the app frame (c09).
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
 import { cva } from "class-variance-authority";
 import { ChevronDownIcon } from "lucide-react";
@@ -57,7 +58,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group/navigation-menu-trigger inline-flex min-h-11 w-max items-center justify-center gap-s2 rounded-pill border-0 bg-transparent px-3.5 text-sm font-semibold whitespace-nowrap text-muted-foreground no-underline transition-[background-color,color] duration-(--dur-fast) ease-standard hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 aria-[current=page]:bg-ember-soft aria-[current=page]:text-ember-text data-active:bg-ember-soft data-active:text-ember-text data-popup-open:bg-accent data-popup-open:text-foreground data-open:bg-accent data-open:text-foreground",
+  "group/navigation-menu-trigger inline-flex min-h-size-target w-max items-center justify-center gap-s2 rounded-pill bg-transparent px-3.5 text-sm font-semibold whitespace-nowrap text-muted-foreground no-underline transition-[background-color,color] duration-(--dur-fast) ease-standard hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 aria-[current=page]:bg-selected aria-[current=page]:text-on-selected data-active:bg-selected data-active:text-on-selected outline-none focus-visible:bg-focus! focus-visible:text-on-focus! data-popup-open:bg-accent data-popup-open:text-foreground data-open:bg-accent data-open:text-foreground",
 );
 
 function NavigationMenuTrigger({

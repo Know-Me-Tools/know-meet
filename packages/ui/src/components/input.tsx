@@ -1,5 +1,5 @@
 // TJ-ARCH-MOB-001 compliant
-// km.css `.input`: 48px, card fill, D-5 1px input ring, 2px ember focus ring.
+// km.css `.input` on tokens v1.3.0: `size-control-h` tall, `control` fill, focus fill (no ring).
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import type * as React from "react";
 import { fieldControlClass } from "#lib/field-control";
@@ -12,7 +12,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       data-slot="input"
       className={cn(
         fieldControlClass,
-        "min-h-12 file:mr-s2 file:inline-flex file:border-0 file:bg-transparent file:text-sm file:font-semibold file:text-foreground",
+        "min-h-size-control-h file:mr-s2 file:inline-flex file:bg-transparent file:text-sm file:font-semibold file:text-current",
         className,
       )}
       {...props}

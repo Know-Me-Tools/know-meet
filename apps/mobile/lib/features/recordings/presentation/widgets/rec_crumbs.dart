@@ -35,19 +35,27 @@ class RecCrumbs extends StatelessWidget {
   }
 
   Widget _crumb(BuildContext context, String label, VoidCallback? onTap) {
-    final Text text = Text(label, style: KmText.smallSub(context));
-    if (onTap == null) return text;
+    if (onTap == null) return Text(label, style: KmText.smallSub(context));
+    final KmPalette p = context.km;
     return Semantics(
       link: true,
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      // Link: quiet at rest, `card-hov` hover, `focus` fill on focus.
+      child: KmInteractive(
         onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 24),
-          child: Align(widthFactor: 1, child: text),
-        ),
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTargetMin),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            alignment: Alignment.center,
+            child: Text(label, style: KmText.small(context).copyWith(color: c.on)),
+          );
+        },
       ),
     );
   }

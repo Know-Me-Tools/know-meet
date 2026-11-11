@@ -24,12 +24,12 @@ function NativeSelect({ className, size = "default", ...props }: NativeSelectPro
         data-size={size}
         className={cn(
           fieldControlClass,
-          "min-h-12 appearance-none pr-10 disabled:opacity-100 data-[size=sm]:min-h-9 data-[size=sm]:rounded-10 data-[size=sm]:py-1.5 data-[size=sm]:text-sm",
+          "peer/select min-h-size-control-h appearance-none pr-size-select-pad-end disabled:opacity-100 data-[size=sm]:min-h-size-control-h-sm data-[size=sm]:rounded-10 data-[size=sm]:py-1.5 data-[size=sm]:text-sm",
         )}
         {...props}
       />
       <ChevronDownIcon
-        className="pointer-events-none absolute top-1/2 right-s4 size-4 -translate-y-1/2 text-muted-foreground select-none"
+        className="pointer-events-none absolute top-1/2 right-s4 size-4 -translate-y-1/2 text-on-control select-none peer-aria-invalid/select:text-on-control-invalid peer-focus-visible/select:text-on-focus"
         aria-hidden="true"
         data-slot="native-select-icon"
       />

@@ -63,8 +63,8 @@ class AgentNotice extends StatelessWidget {
   }
 }
 
-/// `.state-line`: a shaped glyph (filled circle online, hollow offline)
-/// beside the status words.
+/// `.state-line`: a shaped glyph (round `pip-green` dot online, filled
+/// `fg-sub` square offline; D-6 replaces the hollow ring) beside the words.
 class AgentStateLine extends StatelessWidget {
   const AgentStateLine({super.key, required this.online, required this.label});
 
@@ -73,20 +73,11 @@ class AgentStateLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ExcludeSemantics(
-          child: Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: online ? p.green : Colors.transparent,
-              border: online ? null : Border.all(color: p.fgSub, width: 2),
-            ),
-          ),
+          child: online ? const KmPip(KmPipTone.green) : const KmPausedGlyph(),
         ),
         const SizedBox(width: KmTokens.s2),
         Flexible(
@@ -100,7 +91,8 @@ class AgentStateLine extends StatelessWidget {
   }
 }
 
-/// Online / Offline chip; offline uses the hollow pip (`.pip-hollow`).
+/// Online / Offline chip; offline uses the filled `fg-sub` square (D-6
+/// replaces the hollow pip ring).
 class AgentStatusChip extends StatelessWidget {
   const AgentStatusChip({super.key, required this.online});
 
@@ -120,14 +112,7 @@ class AgentStatusChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: p.fgSub, width: 2),
-            ),
-          ),
+          const ExcludeSemantics(child: KmPausedGlyph()),
           const SizedBox(width: 6),
           Text('Offline', style: Theme.of(context).textTheme.labelMedium!.copyWith(color: p.fg)),
         ],
@@ -255,7 +240,7 @@ class AgentRequiredNote extends StatelessWidget {
 }
 
 /// A ghost text link (`a` in prose), underlined in ember, with a 24px
-/// minimum target.
+/// minimum target; hover `card-hov`, keyboard focus the `focus` fill.
 class AgentLink extends StatelessWidget {
   const AgentLink(this.label, {super.key, required this.onTap});
 
@@ -270,19 +255,25 @@ class AgentLink extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 24),
-          child: Text(
-            label,
-            style: KmText.small(context).copyWith(
-              color: p.emberText,
-              decoration: TextDecoration.underline,
-              decorationColor: p.emberText,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.emberText);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius4,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTargetMin),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              label,
+              style: KmText.small(context).copyWith(
+                color: c.on,
+                decoration: TextDecoration.underline,
+                decorationColor: c.on,
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -318,12 +309,19 @@ class AgentCrumbs extends StatelessWidget {
                 label: crumbs[i].label,
                 excludeSemantics: true,
                 onTap: crumbs[i].onTap,
-                child: InkWell(
+                child: KmInteractive(
                   onTap: crumbs[i].onTap,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(minHeight: 24),
-                    child: Align(widthFactor: 1, child: Text(crumbs[i].label, style: style)),
-                  ),
+                  builder: (BuildContext context, Set<WidgetState> s) {
+                    final KmStateColors c = KmStateColors.quiet(p, s);
+                    return KmFillBox(
+                      colors: c,
+                      radius: KmTokens.radius4,
+                      constraints: const BoxConstraints(minHeight: KmTokens.sizeTargetMin),
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      alignment: Alignment.center,
+                      child: Text(crumbs[i].label, style: style.copyWith(color: c.on)),
+                    );
+                  },
                 ),
               ),
           ],

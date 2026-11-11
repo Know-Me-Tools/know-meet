@@ -197,21 +197,20 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        ExcludeSemantics(child: Text('Search agents', style: KmText.label(context))),
+        const KmFieldLabel('Search agents'),
         const SizedBox(height: 6),
         Semantics(
           label: 'Search agents',
           child: TextField(
             controller: controller,
-            style: KmText.body(context).copyWith(color: p.fg),
-            decoration: InputDecoration(
-              hintText: 'Name, role, worker or owner',
-              prefixIcon: Icon(LucideIcons.search, size: 20, color: p.fgSub),
-              constraints: const BoxConstraints(minHeight: 48),
+            style: kmFieldStyle(context),
+            decoration: kmFieldDecoration(
+              context,
+              placeholder: 'e.g. Scribe, note-taker or a worker name',
+              prefixIcon: const ExcludeSemantics(child: Icon(LucideIcons.search, size: 20)),
             ),
           ),
         ),
@@ -235,7 +234,10 @@ class _DotRow extends StatelessWidget {
       leading: KmOrb(paused: dot.paused),
       title: dot.name,
       semanticLabel: '${dot.name}, your dot, ${dot.paused ? 'paused' : 'active'}, $join',
-      meta: Text('Your dot · private memory · $join', style: KmText.smallSub(context)),
+      meta: (Color color) => Text(
+        'Your dot · private memory · $join',
+        style: KmText.small(context).copyWith(color: color),
+      ),
       chip: dot.paused
           ? const KmChip('Paused', tone: KmChipTone.amber, pip: true)
           : const KmChip('Active', tone: KmChipTone.green, pip: true),

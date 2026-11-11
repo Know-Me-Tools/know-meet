@@ -1,8 +1,8 @@
 // TJ-ARCH-MOB-001 compliant
 import 'package:flutter/material.dart';
 
-import 'km_motion.dart';
 import 'km_palette_of.dart';
+import 'km_states.dart';
 import 'km_text.dart';
 
 /// One option of a [KmSegmented] or [KmTabs].
@@ -17,8 +17,10 @@ class KmOption<T> {
   final int? count;
 }
 
-/// `.seg`: segmented control (`button[aria-pressed]`). Each option is a
-/// toggle button announced with its selected state.
+/// `.seg`: segmented control (`button[aria-pressed]`) on a `control` track.
+/// Segments are transparent with `on-control` text; the pressed segment is
+/// `selected` with `on-selected` text **and a leading check icon** (state is
+/// never colour alone); keyboard focus is the `focus` fill.
 class KmSegmented<T> extends StatelessWidget {
   const KmSegmented({
     super.key,
@@ -44,7 +46,7 @@ class KmSegmented<T> extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: p.muted,
+          color: p.control,
           borderRadius: BorderRadius.circular(KmTokens.radius),
         ),
         child: Wrap(
@@ -74,47 +76,51 @@ class _SegButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    final Color fg = pressed ? p.fg : p.fgSub;
     return Semantics(
       button: true,
       toggled: pressed,
       label: option.label,
       excludeSemantics: true,
       onTap: onTap,
-      child: Material(
-        color: pressed ? p.card : Colors.transparent,
-        borderRadius: BorderRadius.circular(KmTokens.radius9),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(KmTokens.radius9),
-          child: Container(
-            constraints: const BoxConstraints(minHeight: 36),
+      child: KmInteractive(
+        onTap: onTap,
+        selected: pressed,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.resolve(
+            p,
+            s,
+            rest: Colors.transparent,
+            restOn: p.onControl,
+            hover: p.controlHov,
+          );
+          final IconData? lead = pressed ? Icons.check : option.icon;
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radius9,
+            // 36px segment inside the 4px track padding: the 44px target.
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget - 8),
             padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3),
-            decoration: pressed
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(KmTokens.radius9),
-                    boxShadow: p.segPressedShadow,
-                  )
-                : null,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (option.icon != null) ...<Widget>[
-                  Icon(option.icon, size: 16, color: fg),
+                if (lead != null) ...<Widget>[
+                  Icon(lead, size: 16, color: c.on),
                   const SizedBox(width: 6),
                 ],
-                Text(option.label, style: KmText.label(context).copyWith(color: fg)),
+                Text(option.label, style: KmText.label(context).copyWith(color: c.on)),
               ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-/// `.tabs[role=tablist]`: horizontally scrolling tabs with an ember
-/// underline on the selected tab; each tab is announced as selected or not.
+/// `.tabs[role=tablist]`: horizontally scrolling tabs. Text identifies each
+/// tab (`fg-sub`, transparent); the selected tab is a `selected` pill with
+/// `on-selected` text (replaces the 2px ember underline); hover `card-hov`;
+/// focus `focus`. No tab-list rule. Each tab is announced as selected or not.
 class KmTabs<T> extends StatelessWidget {
   const KmTabs({
     super.key,
@@ -129,23 +135,20 @@ class KmTabs<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final KmPalette p = context.km;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: p.muted)),
-      ),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: <Widget>[
-            for (final KmOption<T> t in tabs)
-              _Tab(
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          for (final KmOption<T> t in tabs)
+            Padding(
+              padding: const EdgeInsets.only(right: 2),
+              child: _Tab(
                 option: t,
                 selected: t.value == selected,
                 onTap: () => onChanged(t.value),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -161,7 +164,6 @@ class _Tab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
-    final Color fg = selected ? p.fg : p.fgSub;
     final String name = option.count == null ? option.label : '${option.label}, ${option.count}';
     return Semantics(
       button: true,
@@ -169,49 +171,40 @@ class _Tab extends StatelessWidget {
       label: name,
       excludeSemantics: true,
       onTap: onTap,
-      child: InkWell(
+      child: KmInteractive(
         onTap: onTap,
-        child: AnimatedContainer(
-          duration: KmMotion.of(context, KmTokens.durFast),
-          constraints: const BoxConstraints(minHeight: 44),
-          padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: selected ? p.ember : Colors.transparent,
-                width: 2,
-              ),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (option.icon != null) ...<Widget>[
-                Icon(option.icon, size: 16, color: fg),
-                const SizedBox(width: 6),
-              ],
-              Text(option.label, style: KmText.label(context).copyWith(color: fg)),
-              if (option.count != null) ...<Widget>[
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: p.muted,
-                    borderRadius: BorderRadius.circular(KmTokens.radiusPill),
-                  ),
-                  child: Text(
+        selected: selected,
+        builder: (BuildContext context, Set<WidgetState> s) {
+          final KmStateColors c = KmStateColors.quiet(p, s);
+          return KmFillBox(
+            colors: c,
+            radius: KmTokens.radiusPill,
+            constraints: const BoxConstraints(minHeight: KmTokens.sizeTarget),
+            padding: const EdgeInsets.symmetric(horizontal: KmTokens.s3),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (option.icon != null) ...<Widget>[
+                  Icon(option.icon, size: 16, color: c.on),
+                  const SizedBox(width: 6),
+                ],
+                Text(option.label, style: KmText.label(context).copyWith(color: c.on)),
+                if (option.count != null) ...<Widget>[
+                  const SizedBox(width: 6),
+                  Text(
                     '${option.count}',
                     style: TextStyle(
                       fontFamily: KmTokens.fontMono,
                       fontSize: KmTokens.text11,
-                      color: p.fgSub,
+                      fontWeight: KmTokens.fontWeightSemibold,
+                      color: c.on,
                     ),
                   ),
-                ),
+                ],
               ],
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

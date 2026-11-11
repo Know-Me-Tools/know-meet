@@ -296,9 +296,10 @@ class AgentDangerPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(KmTokens.s4),
       decoration: BoxDecoration(
+        // D-6: no red outline; the heading and its alert icon identify the
+        // zone, and controls stay on an allowed (measured) surface.
         color: p.surface,
         borderRadius: BorderRadius.circular(KmTokens.radiusLg),
-        border: Border.all(color: p.redSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
