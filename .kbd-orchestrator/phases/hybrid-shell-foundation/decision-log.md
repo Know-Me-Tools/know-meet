@@ -151,3 +151,7 @@ Provenance: user (explicit form answers, Travis James).
 
 - 16.3 (600 interleaved paired runs, non-profiling, render-complete, bootstrap CIs): O meaningfully lower on TTFT (15/15 scenarios, both engines), Chromium main-thread task time (long-markdown −1.6 s), scripting and heap; H heap grows +0.89 MB/min in a 30-min soak vs O +0.15 (n.s.). Against O: Chromium long tasks +77 ms (long-markdown) / +67 ms (huge-table); WebKit one ~1 s frame gap per 20 KB stream (worst input latency +908 ms, cause unknown) — must be fixed before c08/8.3 ships O.
 - 16.1 minimised re-run with background throttling disabled could not run: macOS screen locked (loginwindow frontmost); runs quarantined. Measurement fix chosen: correct the harness's clamped 20 ms settle poll rather than switching the pass rule.
+
+## 2026-11-11 — operator: "merge now" — PR #3 merged (ebd4cd5)
+
+- Merged with red CI, by operator instruction; all failures are known VLBV-deferred items: (1) repo rules — the 38-finding Biome backlog; (2) flutter analyze — build_runner .g.dart files not generated yet (c14); (3) webview2 gate — pnpm minimum-release-age policy rejected 2 lockfile entries published <24 h ago in the spike; re-run the gate after the age window passes.
