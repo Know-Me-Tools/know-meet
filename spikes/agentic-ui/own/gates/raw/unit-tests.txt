@@ -1,0 +1,35 @@
+✔ rAF paused: the first token is published within the deadline (3.163542ms)
+✔ rAF paused: a steady stream keeps publishing (bounded lag, no stall) (0.652958ms)
+✔ hidden page: deltas publish on the next task (0.311ms)
+✔ boundary commits are unchanged: deltas never commit, boundaries commit once per microtask (0.7665ms)
+✔ text deltas accumulate and RUN_FINISHED completes the message (0.7795ms)
+✔ ordering violations are protocol errors and never change text (0.903584ms)
+✔ chunked tool calls assemble and close when another event arrives (4.384459ms)
+✔ an interrupt gates its tool call; approval is idempotent and yields one resume (0.832958ms)
+✔ a decision after expiresAt expires instead of resolving (0.097625ms)
+✔ JSON patch supports test, move, copy and remove without mutating input (0.52425ms)
+✔ Streamdown 2.7.1 default rehype chain is raw -> sanitize -> harden(allow-all) (1.096625ms)
+✔ O's harden options are origin-scoped, with no wildcard, no data images, no extra protocols (0.232167ms)
+✔ an empty policy allows no http(s) link or image at all (0.600083ms)
+✔ enumerated link and image matrix: default vs O (1.304667ms)
+✔ focused: flushes on the next frame and cancels the deadline timer (5.550291ms)
+✔ rAF paused: the deadline flushes within deadlineMs (0.262875ms)
+✔ rAF paused for a whole stream: every publish stays within the bound (3.385625ms)
+✔ requests while a flush is pending coalesce into one flush (3.516875ms)
+✔ hidden page: flushes on the next task, never waits for a frame (0.406041ms)
+✔ becoming hidden while waiting for a frame flushes on the next task (5.261ms)
+✔ timers throttled too: a request after the due time flushes on the next task (0.355958ms)
+✔ delayed request: not before the delay, then frame-or-deadline (0.249167ms)
+✔ delayed request with rAF paused flushes by delay + deadline (0.291959ms)
+✔ cancel drops a pending flush; dispose stops visibility handling (0.214375ms)
+✔ rejects a non-positive deadline (0.314416ms)
+✔ frames survive arbitrary chunk boundaries and CRLF (1.308708ms)
+✔ invalid JSON is still delivered as a frame for the decoder to reject (0.107125ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 493.675459

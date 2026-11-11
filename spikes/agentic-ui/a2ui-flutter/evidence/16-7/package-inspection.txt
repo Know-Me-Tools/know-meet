@@ -1,0 +1,88 @@
+# ag_ui 0.3.0 source inspection, 2026-11-10 (pub cache: /Users/gqadonis/.pub-cache/hosted/pub.dev/ag_ui-0.3.0)
+## pub.dev API
+0.1.0 2025-09-21T21:52:03.047298Z {'http': '^1.1.0', 'meta': '^1.17.0'}
+0.3.0 2026-06-24T22:39:40.562345Z {'http': '^1.1.0', 'meta': '^1.17.0'}
+{"publisherId":"community.ag-ui.com"}
+{"grantedPoints":140,"maxPoints":160,"likeCount":6,"downloadCount30Days":16163,"tags":["publisher:community.ag-ui.com","has:topic","sdk:dart","sdk:flutter","platform:android","platform:ios","platform:windows","platform:linux","platform:macos","platform:web","runtime:native-aot","runtime:native-jit","runtime:web","is:null-safe","is:wasm-ready","is:dart3-compatible","license:mit","license:fsf-libre","license:osi-approved","topic:agent","topic:ai","topic:llm","topic:protocol","topic:streaming"]}
+## LICENSE
+MIT License
+
+Copyright (c) 2025
+## EventType enum (wire names)
+TEXT_MESSAGE_START TEXT_MESSAGE_CONTENT TEXT_MESSAGE_END TEXT_MESSAGE_CHUNK THINKING_TEXT_MESSAGE_START THINKING_TEXT_MESSAGE_CONTENT THINKING_TEXT_MESSAGE_END TOOL_CALL_START TOOL_CALL_ARGS TOOL_CALL_END TOOL_CALL_CHUNK TOOL_CALL_RESULT THINKING_START THINKING_CONTENT THINKING_END STATE_SNAPSHOT STATE_DELTA MESSAGES_SNAPSHOT ACTIVITY_SNAPSHOT ACTIVITY_DELTA RAW CUSTOM RUN_STARTED RUN_FINISHED RUN_ERROR STEP_STARTED STEP_FINISHED REASONING_START REASONING_MESSAGE_START REASONING_MESSAGE_CONTENT REASONING_MESSAGE_END REASONING_MESSAGE_CHUNK REASONING_END REASONING_ENCRYPTED_VALUE 
+## @ag-ui/core 1.0.4 types missing in Dart (grep -c across lib/)
+SUBAGENT_STARTED: 0
+SUBAGENT_FINISHED: 0
+SUBAGENT_ERROR: 0
+outcome: 3
+resume: 6
+interrupt: 1
+## RunFinishedEvent fields
+1892:final class RunFinishedEvent extends BaseEvent {
+1893-  final String threadId;
+1894-  final String runId;
+1911-  final dynamic result;
+## SimpleRunAgentInput fields
+class SimpleRunAgentInput {
+  final String? threadId;
+  final String? runId;
+  final String? parentRunId;
+  final List<Message>? messages;
+  final List<Tool>? tools;
+  final List<Context>? context;
+  final dynamic state;
+  final Map<String, dynamic>? config;
+  final Map<String, dynamic>? metadata;
+  final dynamic forwardedProps;
+
+## Cancellation limitation
+  /// Send request with cancellation support.
+  ///
+  /// **Known limitation**: cancellation only drops the response at the
+  /// Dart completer level — the underlying HTTP connection is NOT aborted.
+  /// The `http.Client` interface does not expose per-request abort; closing
+  /// the shared `_httpClient` would affect all concurrent requests. In
+  /// practice the OS/server timeout eventually cleans up the socket. A
+  /// future refactor to per-request `IOClient` instances could add true
+  /// abort support.
+  ///
+  /// Late-arriving responses or errors from the HTTP future after
+## POST runs: no Last-Event-ID reconnect (SseClient reconnect is GET-only)
+      // Add Last-Event-ID header if we have one (for reconnection)
+      if (_lastEventId != null) {
+        requestHeaders['Last-Event-ID'] = _lastEventId!;
+      }
+
+      // Create the request
+      final request = http.Request('GET', url);
+      request.headers.addAll(requestHeaders);
+      final sseClient = SseClient(
+        idleTimeout: config.connectionTimeout,
+        backoffStrategy: config.backoffStrategy,
+        maxDataCodeUnits: _streamAdapter.maxDataCodeUnits,
+      );
+      _activeStreams[runId] = sseClient;
+
+      // Parse SSE from response stream
+      final sseStream = sseClient.parseStream(
+        streamedResponse.stream,
+        headers: streamedResponse.headers,
+      );
+
+      // Transform to AG-UI events
+      yield* _transformSseStream(sseStream, runId);
+## Exports (SseParser not exported)
+export 'src/types/types.dart';
+export 'src/events/events.dart';
+export 'src/encoder/encoder.dart';
+export 'src/encoder/decoder.dart';
+export 'src/encoder/stream_adapter.dart';
+export 'src/encoder/errors.dart' hide ValidationError;
+export 'src/sse/sse_client.dart';
+export 'src/sse/sse_message.dart';
+export 'src/sse/backoff_strategy.dart';
+export 'src/client/client.dart';
+export 'src/client/config.dart';
+export 'src/client/errors.dart';
+export 'src/client/validators.dart';
+export 'src/encoder/client_codec.dart';

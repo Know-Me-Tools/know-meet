@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<title>Agents — Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="Register LiveKit agents, configure dispatch and knowledge access, and manage your persistent dots." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/agents.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Agents — Know Meet" />
+<meta property="og:description" content="Register LiveKit agents, configure dispatch and knowledge access, and manage your persistent dots." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/agents.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Agents — Know Meet" />
+<meta name="twitter:description" content="Register LiveKit agents, configure dispatch and knowledge access, and manage your persistent dots." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css" />
+<style>
+  /* ---- page-local: agents.html (uses shared tokens only) */
+  .req { color: var(--ember-text); }
+  .h3 { font-size: var(--text-lg); }
+  .form-note { font-size: var(--text-sm); color: var(--fg-sub); }
+
+  .toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s4); align-items: end; margin-bottom: var(--s5); }
+  .search-wrap { position: relative; }
+  .search-wrap .ic { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--fg-sub); pointer-events: none; }
+  .search-wrap .input { padding-left: 44px; }
+  .result-count { font-size: var(--text-sm); color: var(--fg-sub); min-height: 1.5em; }
+
+  .sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s2) var(--s4); }
+  .sec-head > div { display: grid; gap: 2px; min-width: 0; }
+  .sec-head p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .row-meta { display: flex; flex-wrap: wrap; gap: 2px var(--s3); color: var(--fg-sub); font-size: var(--text-sm); }
+  .row-meta > span { min-width: 0; overflow-wrap: anywhere; }
+  .row-meta .mono { color: var(--fg); }
+  .row-chev { color: var(--fg-sub); }
+  .pip-hollow { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 2px var(--fg-sub); }
+
+  /* wizard */
+  .wiz-steps { margin: 0 0 var(--s6); }
+  .wiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s6); align-items: start; }
+  .wiz-form { display: grid; gap: var(--s5); align-content: start; }
+  .wiz-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s3); margin-top: var(--s6); padding-top: var(--s5); box-shadow: inset 0 1px 0 var(--muted); }
+  .wiz-foot .btn-row { margin-left: auto; }
+  .preview { position: sticky; top: calc(var(--header-h) + var(--s5)); }
+  .preview-tile { display: grid; justify-items: center; gap: var(--s3); padding: var(--s6) var(--s4); border-radius: var(--radius-tile); background: var(--bg); text-align: center; }
+  .preview-tile .agent-glyph { width: 84px; }
+  .preview-tile > * { max-width: 100%; }
+
+  .fs { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s2); min-width: 0; }
+  .fs-legend { padding: 0; margin-bottom: var(--s1); font-weight: 600; font-size: var(--text-sm); }
+  .options { display: grid; gap: var(--s2); }
+  .options-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .option { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-card); cursor: pointer; transition: background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
+  .card .option, .panel .option { background: var(--card); }
+  .option input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--ember-btn); }
+  .option:has(input:checked) { box-shadow: inset 0 0 0 2px var(--ember); }
+  .option:has(input:focus-visible) { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .option input:focus-visible { outline: none; }
+  @media (hover: hover) { .option:hover { background: var(--card-hov); } }
+  .option-copy { display: grid; gap: 2px; min-width: 0; }
+  .option-title { font-weight: 600; font-size: var(--text-sm); }
+  .option-desc { color: var(--fg-sub); font-size: var(--text-sm); }
+
+  .reveal { display: grid; gap: var(--s4); padding: var(--s4); border-radius: var(--radius-tile); background: var(--surface); }
+  .notice { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--cyan-soft); color: var(--fg); font-size: var(--text-sm); }
+  .notice .ic { color: var(--cyan-text); margin-top: 1px; }
+  .notice-warn { background: var(--amber-soft); }
+  .notice-warn .ic { color: var(--amber-text); }
+  .notice-danger { background: var(--red-soft); }
+  .notice-danger .ic { color: var(--red-text); }
+  .notice > div { display: grid; gap: var(--s1); min-width: 0; }
+  .code-wrap { display: grid; gap: var(--s2); }
+  .code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); }
+
+  /* connection test */
+  .checks { display: grid; gap: var(--s2); }
+  .check { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--card); }
+  .check-ic { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--muted); color: var(--fg-sub); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+  .check-ic .ic { width: 16px; height: 16px; stroke-width: 2.25; }
+  .check-body { display: grid; gap: 2px; min-width: 0; }
+  .check-body > * { display: block; }
+  .check-title { font-weight: 600; font-size: var(--text-sm); }
+  .check-detail { color: var(--fg-sub); font-size: var(--text-sm); overflow-wrap: anywhere; }
+  .check-status { font-size: var(--text-sm); font-weight: 600; color: var(--fg-sub); white-space: nowrap; }
+  .check[data-state="running"] .check-ic { background: var(--amber-soft); color: var(--amber-text); }
+  .check[data-state="running"] .check-ic .ic { animation: spin 1s linear infinite; }
+  .check[data-state="running"] .check-status { color: var(--amber-text); }
+  .check[data-state="passed"] .check-ic { background: var(--green-soft); color: var(--green-text); }
+  .check[data-state="passed"] .check-status { color: var(--green-text); }
+  .check[data-state="failed"] .check-ic { background: var(--red-soft); color: var(--red-text); }
+  .check[data-state="failed"] .check-status { color: var(--red-text); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .success-panel { display: grid; gap: var(--s3); padding: var(--s5); border-radius: var(--radius-tile); background: var(--green-soft); }
+  .success-panel h2 { display: flex; align-items: center; gap: var(--s2); }
+  .success-panel h2 .ic { color: var(--green-text); }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); }
+  .summary-grid .card { gap: var(--s2); }
+  .summary-grid .kv { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .summary-grid .kv dd + dt { margin-top: var(--s2); }
+
+  /* detail */
+  .detail-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s5); align-items: center; margin-bottom: var(--s5); }
+  .detail-head .agent-glyph { width: 72px; }
+  .detail-head .titles { display: grid; gap: var(--s2); min-width: 0; }
+  .detail-head .titles > * { min-width: 0; }
+  .meta-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); color: var(--fg-sub); font-size: var(--text-sm); }
+  .worker-pill { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; }
+  .worker-pill code { overflow-wrap: anywhere; }
+  .worker-pill .icon-btn { width: 36px; height: 36px; }
+  .tab-panel { padding-top: var(--s5); }
+  .tab-panel:focus-visible { outline-offset: 4px; }
+  .danger-panel { box-shadow: inset 0 0 0 1px var(--red-soft); }
+  .danger-panel h2 { display: flex; align-items: center; gap: var(--s2); }
+  .danger-panel h2 .ic { color: var(--red-text); }
+  .dirty-note { font-size: var(--text-sm); color: var(--fg-sub); }
+
+  /* concierge */
+  .hero-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s5); align-items: center; }
+  .hero-row .agent-glyph { width: 84px; }
+  .feature-ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--ember-soft); color: var(--ember-text); }
+  .feature-ic.cyan { background: var(--cyan-soft); color: var(--cyan-text); }
+  .plain-list { display: grid; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+  .plain-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s2); align-items: start; font-size: var(--text-sm); }
+  .plain-list li .ic { width: 18px; height: 18px; margin-top: 1px; }
+  .plain-list .yes .ic { color: var(--green-text); }
+  .plain-list .no .ic { color: var(--red-text); }
+  .cta-panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s5); align-items: center; }
+
+  /* dots */
+  .dot-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s4); align-items: start; }
+  .dot-card .orb { width: 64px; }
+  .dot-card .body { display: grid; gap: var(--s2); min-width: 0; }
+  .dot-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s5); align-items: center; margin-bottom: var(--s5); }
+  .dot-head .orb { width: 72px; }
+  .dot-head .titles { display: grid; gap: var(--s2); min-width: 0; }
+  .memory-text { color: var(--fg); font-size: var(--text-sm); overflow-wrap: anywhere; }
+  .two-col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+
+  .gate-extra { font-size: var(--text-sm); }
+
+  @media (max-width: 1023px) {
+    .wiz-grid { grid-template-columns: minmax(0, 1fr); }
+    .preview { position: static; }
+    .summary-grid { grid-template-columns: minmax(0, 1fr); }
+    .two-col { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .toolbar { grid-template-columns: minmax(0, 1fr); }
+    .options-3 { grid-template-columns: minmax(0, 1fr); }
+    .detail-head { grid-template-columns: auto minmax(0, 1fr); gap: var(--s4); }
+    .detail-head .agent-glyph { width: 56px; }
+    .detail-head .head-actions { grid-column: 1 / -1; }
+    .hero-row { grid-template-columns: minmax(0, 1fr); }
+    .cta-panel { grid-template-columns: minmax(0, 1fr); }
+    .check { grid-template-columns: auto minmax(0, 1fr); }
+    .check-status { grid-column: 2; }
+    .wiz-foot .btn-row { margin-left: 0; width: 100%; }
+    .wiz-foot .btn-row .btn { flex: 1 1 auto; }
+    .dot-head .orb { width: 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .check[data-state="running"] .check-ic .ic { animation: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <header id="appbar"></header>
+  <main id="main" class="page" tabindex="-1"></main>
+</div>
+
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var h = KM.h;
+  var icon = KM.icon;
+  var D = KM.data;
+  var main = document.getElementById('main');
+
+  KM.mountAppBar(document.getElementById('appbar'), { active: 'agents' });
+
+  /* ------------------------------------------------------------ constants */
+  var STATE_KEY = 'km-agents-state-v1';
+  var DRAFT_KEY = 'km-agent-draft-v1';
+  var SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  var GLYPH_RE = /^[A-Za-z0-9]{2}$/;
+  var STEP_MS = 900;
+  var SAVE_MS = 700;
+  var FAIL_WORKER = 'missing-worker';
+  var STEPS = ['Identity', 'Worker & dispatch', 'Permissions & knowledge', 'Test & finish'];
+
+  var MEDIA = {
+    speak: { label: 'Speak and listen', desc: 'Hears the room and can talk. Can also post to meeting chat.' },
+    listen: { label: 'Listen only', desc: 'Hears the room and reads granted knowledge. Never speaks or posts.' },
+    chat: { label: 'Chat only', desc: 'Hears the room and replies in meeting chat, never out loud.' }
+  };
+  var KNOWLEDGE = {
+    shared: { label: 'Shared meeting knowledge', desc: 'Includes the live transcript and anything participants add to the meeting’s knowledge.' },
+    files: { label: 'Shared knowledge plus host-only files', desc: 'Also reads files the host has kept private to their own agents.' },
+    none: { label: 'None', desc: 'Gets no transcript or files from KnowMe. Works only from what it hears.' }
+  };
+  var DISPATCH = {
+    me: { label: 'Only me', desc: 'Only you can bring it into meetings you host.' },
+    anyone: { label: 'Anyone in meetings I host', desc: 'Any participant in a meeting you host can dispatch it.' }
+  };
+  var AUTOJOIN = {
+    never: { label: 'Never — on request', desc: 'Joins only when someone dispatches it.' },
+    mine: { label: 'My meetings', desc: 'Joins every meeting you host as soon as it starts.' },
+    tagged: { label: 'Meetings tagged…', desc: 'Joins meetings you host that carry a tag you choose.' }
+  };
+
+  /* Per-agent configuration for the sample registry (fictional). */
+  var CONFIG = {
+    concierge: { project: 'managed', media: 'speak', knowledge: 'shared', dispatch: 'system', autoJoin: 'always' },
+    scribe: { project: 'managed', media: 'listen', knowledge: 'shared', dispatch: 'anyone', autoJoin: 'mine' },
+    researcher: { project: 'managed', media: 'speak', knowledge: 'files', dispatch: 'me', autoJoin: 'never' },
+    facilitator: { project: 'managed', media: 'speak', knowledge: 'shared', dispatch: 'anyone', autoJoin: 'tagged', tag: 'workshop' },
+    translator: { project: 'own', url: 'wss://lumenlabs-voice.livekit.cloud', media: 'speak', knowledge: 'shared', dispatch: 'me', autoJoin: 'never' }
+  };
+
+  var live = D.meeting('partner-onboarding');
+  var ACTIVITY = {
+    concierge: [
+      { meeting: 'Partner onboarding review', date: live.start, min: null, outcome: 'live' },
+      { meeting: 'Partner onboarding review', date: '2026-10-14T16:00:00', min: 46, outcome: 'done' },
+      { meeting: 'Design critique', date: '2026-10-09T11:00:00', min: 31, outcome: 'done' },
+      { meeting: 'Vendor security call', date: '2026-10-02T15:30:00', min: 52, outcome: 'done' }
+    ],
+    scribe: [
+      { meeting: 'Partner onboarding review', date: live.start, min: null, outcome: 'live' },
+      { meeting: 'Partner onboarding review', date: '2026-10-14T16:00:00', min: 46, outcome: 'done' },
+      { meeting: 'Design critique', date: '2026-10-09T11:00:00', min: 31, outcome: 'done' }
+    ],
+    researcher: [
+      { meeting: 'Partner onboarding review', date: live.start, min: null, outcome: 'live' },
+      { meeting: 'Partner onboarding review', date: '2026-10-14T16:00:00', min: 38, outcome: 'done' },
+      { meeting: 'Vendor security call', date: '2026-10-02T15:30:00', min: 52, outcome: 'done' }
+    ],
+    facilitator: [
+      { meeting: 'Weekly product sync', date: '2026-10-12T10:00:00', min: 28, outcome: 'done' },
+      { meeting: 'Weekly product sync', date: '2026-10-05T10:00:00', min: 30, outcome: 'done' }
+    ],
+    translator: [
+      { meeting: 'Weekly product sync', date: '2026-10-12T10:00:00', min: 0, outcome: 'failed' },
+      { meeting: 'Design critique', date: '2026-10-09T11:00:00', min: 24, outcome: 'done' }
+    ]
+  };
+  var OUTCOME = {
+    live: { label: 'In meeting now', cls: 'chip chip-cyan' },
+    done: { label: 'Completed', cls: 'chip chip-green' },
+    failed: { label: 'Worker offline — not joined', cls: 'chip chip-red' }
+  };
+
+  var MEMORIES = [
+    { id: 'm-1014', meeting: 'Partner onboarding review', date: '2026-10-14T16:46:00', text: 'Marcus owns the partner API checklist; you offered to review it before Friday.' },
+    { id: 'm-1012', meeting: 'Weekly product sync', date: '2026-10-12T10:30:00', text: 'Pricing review moved to later this week; Avery will bring two options.' },
+    { id: 'm-1009', meeting: 'Design critique', date: '2026-10-09T11:31:00', text: 'You preferred the grid layout for recordings; Dana is sharing revised mocks.' },
+    { id: 'm-1002', meeting: 'Vendor security call', date: '2026-10-02T16:22:00', text: 'You asked to revisit data-retention terms before signing anything.' }
+  ];
+  var VOICES = [
+    { value: 'warm', label: 'Warm (default)' },
+    { value: 'calm', label: 'Calm' },
+    { value: 'bright', label: 'Bright' },
+    { value: 'low', label: 'Low' }
+  ];
+
+  /* ------------------------------------------------------------ storage */
+  function readJSON(key) {
+    try { var raw = window.localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch (_) { return null; }
+  }
+  function writeJSON(key, val) {
+    try {
+      if (val == null) window.localStorage.removeItem(key);
+      else window.localStorage.setItem(key, JSON.stringify(val));
+    } catch (_) { /* storage unavailable — state stays in memory for this visit */ }
+  }
+  function str(v, max) { return typeof v === 'string' ? v.slice(0, max || 200) : ''; }
+  function pick(v, allowed, fallback) { return Object.prototype.hasOwnProperty.call(allowed, v) ? v : fallback; }
+
+  function sanitizeAdded(a) {
+    if (!a || typeof a !== 'object' || !SLUG_RE.test(str(a.worker, 48))) return null;
+    return {
+      id: a.worker, worker: a.worker, name: str(a.name, 40) || a.worker, role: str(a.role, 40), desc: str(a.desc, 200),
+      mono: GLYPH_RE.test(str(a.mono, 2)) ? a.mono.toUpperCase() : 'AG', system: false, status: 'online',
+      owner: str(a.owner, 80) || 'You', project: a.project === 'own' ? 'own' : 'managed', url: str(a.url, 200),
+      media: pick(a.media, MEDIA, 'speak'), knowledge: pick(a.knowledge, KNOWLEDGE, 'shared'),
+      dispatch: pick(a.dispatch, DISPATCH, 'me'), autoJoin: pick(a.autoJoin, AUTOJOIN, 'never'), tag: str(a.tag, 32),
+      added: true
+    };
+  }
+  function loadState() {
+    var s = readJSON(STATE_KEY) || {};
+    var added = Array.isArray(s.added) ? s.added.map(sanitizeAdded).filter(Boolean) : [];
+    var removed = Array.isArray(s.removed) ? s.removed.filter(function (x) { return typeof x === 'string'; }) : [];
+    var overrides = s.overrides && typeof s.overrides === 'object' ? s.overrides : {};
+    var iris = s.iris && typeof s.iris === 'object' ? s.iris : {};
+    return {
+      added: added,
+      removed: removed,
+      overrides: overrides,
+      iris: {
+        name: str(iris.name, 24) || 'Iris',
+        voice: pick(iris.voice, { warm: 1, calm: 1, bright: 1, low: 1 }, 'warm'),
+        join: iris.join === 'ask' ? 'ask' : 'always',
+        speak: iris.speak === 'never' ? 'never' : 'asked',
+        scope: {
+          summaries: iris.scope ? iris.scope.summaries !== false : true,
+          conversations: iris.scope ? iris.scope.conversations !== false : true,
+          files: iris.scope ? iris.scope.files === true : false
+        },
+        paused: iris.paused === true,
+        byDefault: iris.byDefault !== false,
+        forgotten: Array.isArray(iris.forgotten) ? iris.forgotten.filter(function (x) { return typeof x === 'string'; }) : []
+      }
+    };
+  }
+  var state = loadState();
+  function setState(patch) {
+    state = Object.assign({}, state, patch);
+    writeJSON(STATE_KEY, state);
+  }
+  function setIris(patch) { setState({ iris: Object.assign({}, state.iris, patch) }); }
+
+  /* Draft: non-secret fields persist; key/secret live in memory only. */
+  var EMPTY_DRAFT = { name: '', desc: '', role: '', glyph: '', project: 'managed', url: '', agentName: '', media: 'speak', knowledge: 'shared', dispatch: 'me', autoJoin: 'never', tag: '' };
+  function loadDraft() {
+    var d = readJSON(DRAFT_KEY) || {};
+    return {
+      name: str(d.name, 40), desc: str(d.desc, 200), role: str(d.role, 40), glyph: str(d.glyph, 2),
+      project: d.project === 'own' ? 'own' : 'managed', url: str(d.url, 200), agentName: str(d.agentName, 48),
+      media: pick(d.media, MEDIA, 'speak'), knowledge: pick(d.knowledge, KNOWLEDGE, 'shared'),
+      dispatch: pick(d.dispatch, DISPATCH, 'me'), autoJoin: pick(d.autoJoin, AUTOJOIN, 'never'), tag: str(d.tag, 32)
+    };
+  }
+  var draft = loadDraft();
+  var secrets = { apiKey: '', apiSecret: '' };
+  var lastRegistered = null;
+  var lastFailure = null;
+  function setDraft(k, v) {
+    var next = Object.assign({}, draft);
+    next[k] = v;
+    draft = next;
+    writeJSON(DRAFT_KEY, draft);
+  }
+  function resetDraft() {
+    draft = Object.assign({}, EMPTY_DRAFT);
+    secrets = { apiKey: '', apiSecret: '' };
+    writeJSON(DRAFT_KEY, null);
+  }
+
+  /* ------------------------------------------------------------ agents model */
+  function allAgents() {
+    var base = D.agents
+      .filter(function (a) { return state.removed.indexOf(a.id) === -1; })
+      .map(function (a) { return Object.assign({}, a, CONFIG[a.id] || {}, state.overrides[a.id] || {}); });
+    var extra = state.added
+      .filter(function (a) { return state.removed.indexOf(a.id) === -1; })
+      .map(function (a) { return Object.assign({}, a, state.overrides[a.id] || {}); });
+    return base.concat(extra);
+  }
+  function findAgent(id) {
+    var list = allAgents();
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+  function activityFor(a) { return ACTIVITY[a.id] ? ACTIVITY[a.id].slice() : []; }
+  function lastDispatchedText(a) {
+    var act = activityFor(a);
+    if (!act.length) return 'Not dispatched yet';
+    if (act[0].outcome === 'live') return 'In a meeting now';
+    return 'Last dispatched ' + KM.fmt.relDay(act[0].date);
+  }
+  function currentUserName() { var u = KM.auth.get(); return u ? u.name : 'You'; }
+
+  /* ------------------------------------------------------------ UI helpers */
+  function render(title) {
+    document.title = title + ' — Know Meet';
+    KM.clear(main);
+    for (var i = 1; i < arguments.length; i++) if (arguments[i]) main.appendChild(arguments[i]);
+  }
+  function crumbs(items) {
+    var parts = [];
+    items.forEach(function (it, i) {
+      if (i) parts.push(icon('chevron-right'));
+      parts.push(it.href ? h('a', { href: it.href, text: it.label }) : h('span', { 'aria-current': 'page', text: it.label }));
+    });
+    return h('nav', { class: 'crumbs', 'aria-label': 'Breadcrumb' }, parts);
+  }
+  function pageHead(o) {
+    return h('header', { class: 'page-head' },
+      h('div', null,
+        o.crumbs ? crumbs(o.crumbs) : null,
+        o.eyebrow ? h('span', { class: 'eyebrow', text: o.eyebrow }) : null,
+        h('h1', { text: o.title }),
+        o.lede ? h('p', { class: 'lede', text: o.lede }) : null),
+      o.actions ? h('div', { class: 'actions' }, o.actions) : null);
+  }
+  function statusChip(status) {
+    return status === 'online'
+      ? h('span', { class: 'chip chip-green' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Online')
+      : h('span', { class: 'chip' }, h('span', { class: 'pip-hollow', 'aria-hidden': 'true' }), 'Offline');
+  }
+  function stateLine(status, label) {
+    return h('span', { class: 'state-line', 'data-state': status }, h('span', { class: 'state-glyph', 'aria-hidden': 'true' }), label);
+  }
+  function glyph(a, small) {
+    return h('span', { class: 'agent-glyph' + (small ? ' agent-glyph-sm' : '') + (a.system ? ' is-system' : ''), 'aria-hidden': 'true', text: a.mono });
+  }
+  function notice(kind, iconName, children) {
+    return h('div', { class: 'notice' + (kind ? ' notice-' + kind : '') }, icon(iconName), h('div', null, children));
+  }
+
+  /* Text field with persistent label, on-blur validation and inline error. */
+  function field(o) {
+    var hintId = o.hint ? o.id + '-hint' : null;
+    var errId = o.id + '-err';
+    var errText = h('span');
+    var err = h('p', { class: 'field-error', id: errId }, icon('alert', 'ic-sm'), errText);
+    var attrs = {
+      class: 'input' + (o.mono ? ' mono' : ''), id: o.id, name: o.id,
+      type: o.textarea || o.select ? null : (o.type || 'text'),
+      required: o.required || null, 'aria-required': o.required ? 'true' : null,
+      'aria-describedby': [hintId, errId].filter(Boolean).join(' '),
+      placeholder: o.placeholder || null, maxlength: o.maxlength || null,
+      autocomplete: o.autocomplete || 'off', spellcheck: o.mono ? 'false' : null,
+      autocapitalize: o.mono ? 'off' : null, readonly: o.readonly || null, inputmode: o.inputmode || null
+    };
+    var input;
+    if (o.select) {
+      input = h('select', attrs, o.select.map(function (opt) { return h('option', { value: opt.value, text: opt.label }); }));
+    } else {
+      input = h(o.textarea ? 'textarea' : 'input', attrs);
+    }
+    input.value = o.value || '';
+    var label = h('label', { for: o.id }, o.label, o.required ? h('span', { class: 'req', 'aria-hidden': 'true', text: ' *' }) : null);
+    var control = input;
+    if (o.secret) {
+      var toggle = h('button', { class: 'btn btn-sm', type: 'button', 'aria-pressed': 'false', 'aria-label': 'Show ' + o.label },
+        icon('eye', 'ic-sm'), h('span', { text: 'Show' }));
+      toggle.addEventListener('click', function () {
+        var showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        toggle.setAttribute('aria-pressed', showing ? 'false' : 'true');
+        toggle.setAttribute('aria-label', (showing ? 'Show ' : 'Hide ') + o.label);
+        KM.setIcon(toggle, showing ? 'eye' : 'eye-off');
+        toggle.lastChild.textContent = showing ? 'Show' : 'Hide';
+      });
+      control = h('div', { class: 'input-group' }, input, toggle);
+    } else if (o.addon) {
+      control = h('div', { class: 'input-group' }, input, o.addon);
+    }
+    var wrap = h('div', { class: 'field' }, label, control, o.hint ? h('p', { class: 'hint', id: hintId }, o.hint) : null, err);
+    function setErr(msg) {
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      errText.textContent = msg || '';
+      err.classList.toggle('show', !!msg);
+    }
+    function check() {
+      var msg = o.validate ? o.validate(String(input.value).trim()) : '';
+      setErr(msg);
+      return !msg;
+    }
+    input.addEventListener('blur', function () { if (!input.readOnly) check(); });
+    input.addEventListener(o.select ? 'change' : 'input', function () {
+      if (o.onInput) o.onInput(input.value);
+      if (input.getAttribute('aria-invalid') === 'true') check();
+    });
+    return { wrap: wrap, input: input, check: check, setErr: setErr };
+  }
+
+  function optionGroup(o) {
+    var errId = o.name + '-err';
+    var errText = h('span');
+    var err = h('p', { class: 'field-error', id: errId }, icon('alert', 'ic-sm'), errText);
+    var fs = h('fieldset', { class: 'fs' },
+      h('legend', { class: 'fs-legend' }, o.legend, o.required ? h('span', { class: 'req', 'aria-hidden': 'true', text: ' *' }) : null),
+      o.hint ? h('p', { class: 'hint small sub' }, o.hint) : null,
+      h('div', { class: 'options' + (o.cols === 3 ? ' options-3' : '') }, Object.keys(o.options).map(function (key) {
+        var opt = o.options[key];
+        var input = h('input', { type: o.multi ? 'checkbox' : 'radio', name: o.name, value: key,
+          checked: (o.multi ? !!o.value[key] : o.value === key) || null,
+          disabled: o.disabled || null });
+        input.addEventListener('change', function () { if (o.onChange) o.onChange(key, input.checked); });
+        return h('label', { class: 'option' }, input,
+          h('span', { class: 'option-copy' },
+            h('span', { class: 'option-title', text: opt.label }),
+            opt.desc ? h('span', { class: 'option-desc', text: opt.desc }) : null));
+      })),
+      err);
+    return {
+      wrap: fs,
+      setErr: function (msg) { errText.textContent = msg || ''; err.classList.toggle('show', !!msg); }
+    };
+  }
+
+  function switchRow(o) {
+    var descId = o.desc ? o.id + '-desc' : null;
+    var input = h('input', { type: 'checkbox', role: 'switch', id: o.id, 'aria-describedby': descId, checked: o.checked || null, disabled: o.disabled || null });
+    input.addEventListener('change', function () { if (o.onChange) o.onChange(input.checked); });
+    var row = h('div', { class: 'switch-row' },
+      h('div', { class: 'copy' },
+        h('label', { for: o.id, class: 'option-title', text: o.label }),
+        o.desc ? h('span', { class: 'sub small', id: descId, text: o.desc }) : null),
+      h('span', { class: 'switch' }, input, h('span', { class: 'track' }), h('span', { class: 'thumb' })));
+    return { row: row, input: input };
+  }
+
+  /* Simulated async save: loading → success toast. */
+  function busy(btn, label, ms, done) {
+    var original = Array.prototype.slice.call(btn.childNodes);
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    KM.clear(btn);
+    btn.appendChild(icon('refresh', 'ic-sm'));
+    btn.appendChild(h('span', { text: label }));
+    setTimeout(function () {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      KM.clear(btn);
+      original.forEach(function (n) { btn.appendChild(n); });
+      done();
+    }, ms);
+  }
+
+  /* Gate for signed-out visitors on account-only screens. */
+  function gated(title) {
+    if (KM.auth.isSignedIn()) return false;
+    var head = pageHead({ eyebrow: 'Agents', title: title, crumbs: [{ label: 'Agents', href: '#registry' }, { label: title }] });
+    var card = KM.gate(null, {
+      title: 'Sign in to bring agents into meetings',
+      reason: 'Registering LiveKit agents and using dots is optional, and it needs a KnowMe account so your agents, permissions and memory stay yours. Guests still get the Concierge in every meeting.'
+    });
+    card.appendChild(h('p', { class: 'gate-extra' }, 'Joining as a guest? ', h('a', { href: '#concierge', text: 'See what the Concierge does for you' })));
+    render(title, head, card);
+    return true;
+  }
+
+  function notFound(title, message) {
+    render(title,
+      pageHead({ eyebrow: 'Agents', title: title, crumbs: [{ label: 'Agents', href: '#registry' }, { label: 'Not found' }] }),
+      h('section', { class: 'empty', 'aria-label': 'Not found' },
+        h('span', { class: 'empty-icon' }, icon('search')),
+        h('h2', { class: 'h3', text: 'Nothing here' }),
+        h('p', { text: message }),
+        h('div', { class: 'btn-row' },
+          h('a', { class: 'btn btn-primary', href: '#registry' }, icon('agent-add'), h('span', { text: 'Back to agents' })))));
+  }
+
+  /* ============================================================ #registry */
+  function renderRegistry(params) {
+    if (gated('Agents')) return;
+    var q = str(params.q, 80);
+    var status = pick(params.status, { all: 1, online: 1, offline: 1 }, 'all');
+
+    var head = pageHead({
+      eyebrow: 'Agents',
+      title: 'Agents',
+      lede: 'LiveKit Agents workers you can dispatch into your meetings by their agent_name, plus your dots. All of this is optional — every meeting already has the Concierge.',
+      actions: [h('a', { class: 'btn btn-primary', href: '#register:1' }, icon('plus'), h('span', { text: 'Register an agent' }))]
+    });
+
+    var searchInput = h('input', { class: 'input', id: 'agent-search', type: 'search', placeholder: 'Name, role, worker or owner', autocomplete: 'off', value: q });
+    var seg = h('div', { class: 'seg', role: 'group', 'aria-labelledby': 'status-label' });
+    var count = h('p', { class: 'result-count', 'aria-live': 'polite' });
+    var toolbar = h('div', { class: 'toolbar' },
+      h('div', { class: 'field' },
+        h('label', { for: 'agent-search', text: 'Search agents' }),
+        h('div', { class: 'search-wrap' }, icon('search'), searchInput)),
+      h('div', { class: 'field' },
+        h('span', { class: 'label', id: 'status-label', text: 'Status' }),
+        seg));
+    [['all', 'All'], ['online', 'Online'], ['offline', 'Offline']].forEach(function (s) {
+      seg.appendChild(h('button', { type: 'button', 'aria-pressed': String(s[0] === status), dataset: { status: s[0] }, text: s[1],
+        onclick: function () {
+          status = s[0];
+          Array.prototype.forEach.call(seg.children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.status === status)); });
+          update();
+        } }));
+    });
+
+    var yourList = h('div', { class: 'list' });
+    var sysList = h('div', { class: 'list' });
+    var yourSection = h('section', { class: 'section', 'aria-labelledby': 'sec-yours' },
+      h('div', { class: 'sec-head' }, h('div', null, h('h2', { id: 'sec-yours', text: 'Your agents' }),
+        h('p', { text: 'Registered workers you can dispatch. Status reflects whether the worker is connected to LiveKit right now.' }))),
+      yourList);
+    var sysSection = h('section', { class: 'section', 'aria-labelledby': 'sec-system' },
+      h('div', { class: 'sec-head' }, h('div', null, h('h2', { id: 'sec-system', text: 'System agents' }),
+        h('p', { text: 'Provided by KnowMe. Always available, including to guests.' })),
+        h('a', { class: 'btn btn-ghost btn-sm', href: '#concierge' }, icon('info', 'ic-sm'), h('span', { text: 'What guests get' }))),
+      sysList);
+
+    var iris = state.iris;
+    var dotsSection = h('section', { class: 'section', 'aria-labelledby': 'sec-dots' },
+      h('div', { class: 'sec-head' }, h('div', null, h('h2', { id: 'sec-dots', text: 'Your dots' }),
+        h('p', { text: 'Persistent personal agents with private memory.' })),
+        h('a', { class: 'btn btn-ghost btn-sm', href: '#dots' }, h('span', { text: 'Manage dots' }), icon('chevron-right', 'ic-sm'))),
+      h('div', { class: 'list' },
+        h('a', { class: 'list-row', href: '#dot:iris', 'data-state': iris.paused ? 'paused' : 'listening' },
+          h('span', { class: 'orb orb-sm', 'aria-hidden': 'true' }),
+          h('span', { class: 'body' },
+            h('span', { class: 'title od-truncate', text: iris.name }),
+            h('span', { class: 'meta', text: 'Your dot · private memory · ' + (iris.byDefault ? 'joins your meetings by default' : 'joins when you bring it') })),
+          h('span', { class: 'trail' },
+            iris.paused ? h('span', { class: 'chip chip-amber' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Paused')
+                        : h('span', { class: 'chip chip-green' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Active'),
+            icon('chevron-right', 'row-chev')))));
+
+    function row(a) {
+      return h('a', { class: 'list-row', href: '#detail:' + encodeURIComponent(a.id) },
+        glyph(a, true),
+        h('span', { class: 'body' },
+          h('span', { class: 'title od-truncate', title: a.name, text: a.name + (a.role ? ' · ' + a.role : '') }),
+          h('span', { class: 'row-meta' },
+            h('span', null, 'Worker ', h('code', { text: a.worker })),
+            h('span', { text: lastDispatchedText(a) }),
+            h('span', { text: 'Owner: ' + a.owner }))),
+        h('span', { class: 'trail' }, statusChip(a.status), icon('chevron-right', 'row-chev')));
+    }
+
+    function matches(a, needle) {
+      if (status !== 'all' && a.status !== status) return false;
+      if (!needle) return true;
+      return [a.name, a.role, a.worker, a.owner, a.desc].join(' ').toLowerCase().indexOf(needle) > -1;
+    }
+
+    function update() {
+      var needle = String(searchInput.value).trim().toLowerCase();
+      var agents = allAgents();
+      var mine = agents.filter(function (a) { return !a.system; });
+      var mineShown = mine.filter(function (a) { return matches(a, needle); });
+      var sysShown = agents.filter(function (a) { return a.system && matches(a, needle); });
+      KM.clear(yourList);
+      KM.clear(sysList);
+      var filtering = !!needle || status !== 'all';
+
+      if (!mine.length) {
+        yourList.appendChild(h('div', { class: 'empty' },
+          h('span', { class: 'empty-icon' }, icon('agent-add')),
+          h('h3', { text: 'No registered agents yet' }),
+          h('p', { text: 'Register a LiveKit Agents worker by its agent_name and you can dispatch it into any meeting you host.' }),
+          h('a', { class: 'btn btn-primary', href: '#register:1' }, icon('plus'), h('span', { text: 'Register an agent' }))));
+      } else if (!mineShown.length) {
+        yourList.appendChild(h('div', { class: 'empty' },
+          h('span', { class: 'empty-icon' }, icon('filter')),
+          h('h3', { text: 'No agents match these filters' }),
+          h('p', { text: 'Try a different name, role or worker name, or show agents in every status.' }),
+          h('button', { class: 'btn', type: 'button', onclick: clearFilters }, icon('x', 'ic-sm'), h('span', { text: 'Clear filters' }))));
+      } else {
+        mineShown.forEach(function (a) { yourList.appendChild(row(a)); });
+      }
+      if (sysShown.length) sysShown.forEach(function (a) { sysList.appendChild(row(a)); });
+      else sysList.appendChild(h('p', { class: 'small sub', text: 'The Concierge doesn’t match these filters.' }));
+
+      var total = mineShown.length + sysShown.length;
+      count.textContent = filtering ? total + (total === 1 ? ' agent matches' : ' agents match') : (mine.length + sysShown.length) + ' agents';
+      var qs = [];
+      if (needle) qs.push('q=' + encodeURIComponent(String(searchInput.value).trim()));
+      if (status !== 'all') qs.push('status=' + status);
+      try { history.replaceState(null, '', '#registry' + (qs.length ? '?' + qs.join('&') : '')); } catch (_) { /* file:// may block */ }
+    }
+    function clearFilters() {
+      searchInput.value = '';
+      status = 'all';
+      Array.prototype.forEach.call(seg.children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.status === 'all')); });
+      update();
+      searchInput.focus();
+    }
+    searchInput.addEventListener('input', update);
+
+    render('Agents', head, toolbar, count, yourSection, sysSection, dotsSection);
+    update();
+  }
+
+  /* ============================================================ wizard */
+  var V = {
+    name: function (v) { return !v ? 'Give the agent a name people will see in the meeting.' : v.length > 40 ? 'Keep the name to 40 characters or fewer.' : ''; },
+    desc: function (v) { return v.length > 200 ? 'Keep the description to 200 characters or fewer.' : ''; },
+    role: function (v) { return v.length > 40 ? 'Keep the role to 40 characters or fewer.' : ''; },
+    glyph: function (v) { return !v ? 'Enter two letters or digits for the agent tile, e.g. “SC”.' : !GLYPH_RE.test(v) ? 'Use exactly 2 letters or digits — no spaces or symbols.' : ''; },
+    url: function (v) {
+      if (!v) return 'Enter your LiveKit project URL.';
+      if (!/^wss:\/\/[A-Za-z0-9.-]+(:\d+)?(\/.*)?$/.test(v)) return 'The URL must start with wss:// followed by your project host — copy it from your LiveKit project settings.';
+      return '';
+    },
+    apiKey: function (v) { return !v ? 'Paste the API key from your LiveKit project. Keys aren’t kept in this browser, so re-enter it if you reloaded.' : ''; },
+    apiSecret: function (v) { return !v ? 'Paste the API secret from your LiveKit project. Secrets aren’t kept in this browser, so re-enter it if you reloaded.' : ''; },
+    agentName: function (v) {
+      if (!v) return 'Enter the agent_name your worker registers with.';
+      if (v.length < 3 || v.length > 48) return 'Use 3–48 characters.';
+      if (!SLUG_RE.test(v)) return 'Use lowercase letters, numbers and single hyphens only, e.g. “scribe-notes”.';
+      if (allAgents().some(function (a) { return a.worker === v; })) return 'One of your agents already uses “' + v + '”. Each registration needs its own agent_name.';
+      return '';
+    },
+    tag: function (v) { return !v ? 'Enter the meeting tag that should bring this agent in, e.g. “workshop”.' : !/^[a-z0-9-]{2,32}$/.test(v) ? 'Use 2–32 lowercase letters, numbers or hyphens.' : ''; }
+  };
+  function stepErrors(n) {
+    var out = [];
+    function add(k, v) { var m = V[k](v); if (m) out.push({ step: n, key: k, msg: m }); }
+    if (n === 1) { add('name', draft.name.trim()); add('glyph', draft.glyph.trim()); add('desc', draft.desc.trim()); add('role', draft.role.trim()); }
+    if (n === 2) {
+      if (draft.project === 'own') { add('url', draft.url.trim()); add('apiKey', secrets.apiKey.trim()); add('apiSecret', secrets.apiSecret.trim()); }
+      add('agentName', draft.agentName.trim());
+    }
+    if (n === 3 && draft.autoJoin === 'tagged') add('tag', draft.tag.trim());
+    return out;
+  }
+  var FIELD_LABEL = { name: 'Name', desc: 'Description', role: 'Role', glyph: 'Glyph letters', url: 'Project URL', apiKey: 'API key', apiSecret: 'API secret', agentName: 'agent_name', tag: 'Meeting tag' };
+
+  function stepper(cur) {
+    return h('ol', { class: 'steps wiz-steps', 'aria-label': 'Registration progress' }, STEPS.map(function (s, i) {
+      var n = i + 1;
+      var done = n < cur;
+      return h('li', { 'aria-current': n === cur ? 'step' : null, 'data-done': done ? 'true' : null },
+        h('span', { class: 'step-n', 'aria-hidden': 'true' }, done ? icon('check', 'ic-sm') : String(n)),
+        h('span', { class: 'step-label' },
+          h('span', { class: 'sr-only', text: 'Step ' + n + (done ? ', completed: ' : n === cur ? ', current: ' : ': ') }), s));
+    }));
+  }
+  function wizardFrame(step, body, foot) {
+    var head = pageHead({
+      crumbs: [{ label: 'Agents', href: '#registry' }, { label: 'Register an agent' }],
+      eyebrow: 'Step ' + step + ' of 4 · ' + STEPS[step - 1],
+      title: 'Register an agent'
+    });
+    render('Register an agent — ' + STEPS[step - 1], head, stepper(step), body, foot);
+  }
+  function wizFoot(step, onNext, nextLabel) {
+    var back = step > 1
+      ? h('a', { class: 'btn', href: '#register:' + (step - 1) }, h('span', { text: 'Back' }))
+      : h('a', { class: 'btn btn-ghost', href: '#registry' }, h('span', { text: 'Cancel' }));
+    var next = onNext ? h('button', { class: 'btn btn-primary', type: 'submit', form: 'wiz-form' }, h('span', { text: nextLabel || 'Next' }), icon('chevron-right', 'ic-sm')) : null;
+    return h('div', { class: 'wiz-foot' }, back, next ? h('div', { class: 'btn-row' }, next) : null);
+  }
+  function focusFirstInvalid(form) {
+    var bad = form.querySelector('[aria-invalid="true"]');
+    if (bad) bad.focus();
+  }
+
+  function renderWizard(arg, params) {
+    if (gated('Register an agent')) return;
+    var step = parseInt(arg, 10);
+    if (!(step >= 1 && step <= 4)) step = 1;
+    if (step === 1) return wizStep1();
+    if (step === 2) return wizStep2();
+    if (step === 3) return wizStep3();
+    return wizStep4(params);
+  }
+
+  /* ---- step 1: identity */
+  function wizStep1() {
+    var pvGlyph = h('span', { class: 'agent-glyph', 'aria-hidden': 'true' });
+    var pvName = h('strong', { class: 'od-truncate' });
+    var pvRole = h('span', { class: 'sub small od-truncate' });
+    var pvDesc = h('span', { class: 'small sub od-clamp-3' });
+    function refresh() {
+      pvGlyph.textContent = (draft.glyph || KM.initials(draft.name) || '?').slice(0, 2).toUpperCase();
+      pvName.textContent = draft.name || 'Agent name';
+      pvName.title = draft.name;
+      pvRole.textContent = draft.role || 'Role';
+      pvDesc.textContent = draft.desc || 'A short description helps people decide when to dispatch it.';
+      pvDesc.title = draft.desc;
+    }
+    var fName = field({ id: 'a-name', label: 'Name', required: true, value: draft.name, maxlength: 40, placeholder: 'e.g. Scribe', validate: V.name,
+      hint: 'Shown on the agent’s tile and in the participant list.',
+      onInput: function (v) { setDraft('name', v); refresh(); } });
+    var fDesc = field({ id: 'a-desc', label: 'Description', textarea: true, value: draft.desc, maxlength: 200, validate: V.desc,
+      placeholder: 'What does it do in a meeting?', hint: 'Up to 200 characters. Hosts see this when choosing agents.',
+      onInput: function (v) { setDraft('desc', v); refresh(); } });
+    var fRole = field({ id: 'a-role', label: 'Role', value: draft.role, maxlength: 40, placeholder: 'e.g. Note-taker', validate: V.role,
+      onInput: function (v) { setDraft('role', v); refresh(); } });
+    var fGlyph = field({ id: 'a-glyph', label: 'Glyph letters', required: true, value: draft.glyph, maxlength: 2, mono: true, validate: V.glyph,
+      placeholder: 'SC', hint: 'Two letters or digits shown on the tile while the agent has no video.',
+      onInput: function (v) { var up = v.toUpperCase(); if (up !== v) fGlyph.input.value = up; setDraft('glyph', up); refresh(); } });
+    fName.input.addEventListener('blur', function () {
+      if (!draft.glyph && draft.name.trim()) {
+        var g = KM.initials(draft.name).replace(/[^A-Z0-9]/g, '');
+        if (g.length === 1) g = (draft.name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2)).toUpperCase();
+        if (GLYPH_RE.test(g)) { fGlyph.input.value = g; setDraft('glyph', g); refresh(); }
+      }
+    });
+
+    var form = h('form', { id: 'wiz-form', class: 'wiz-form', novalidate: true },
+      h('p', { class: 'form-note' }, 'Fields marked ', h('span', { class: 'req', 'aria-hidden': 'true', text: '*' }), h('span', { class: 'sr-only', text: 'with an asterisk' }), ' are required.'),
+      fName.wrap, fRole.wrap, fDesc.wrap, fGlyph.wrap);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = [fName, fGlyph, fDesc, fRole].map(function (f) { return f.check(); }).every(Boolean);
+      if (!ok) { focusFirstInvalid(form); return; }
+      router.go('register:2');
+    });
+
+    var preview = h('aside', { class: 'card preview', 'aria-labelledby': 'pv-title' },
+      h('h2', { class: 'eyebrow eyebrow-sub', id: 'pv-title', text: 'Tile preview' }),
+      h('div', { class: 'preview-tile' }, pvGlyph, pvName, pvRole, stateLine('offline', 'Offline until its worker connects')),
+      pvDesc);
+    refresh();
+    wizardFrame(1, h('div', { class: 'wiz-grid' }, form, preview), wizFoot(1, true));
+  }
+
+  /* ---- step 2: LiveKit worker & dispatch */
+  function snippetText() {
+    var name = draft.agentName.trim() || 'your-agent-name';
+    var url = draft.project === 'own' ? (draft.url.trim() || 'wss://<your-project>.livekit.cloud') : D.livekit.url;
+    var display = (draft.name.trim() || 'a helpful meeting agent').replace(/["\\]/g, '');
+    return [
+      '# worker.py — minimal LiveKit Agents worker for KnowMe',
+      '# Environment (names only — never commit the values):',
+      '#   LIVEKIT_URL=' + url,
+      '#   LIVEKIT_API_KEY',
+      '#   LIVEKIT_API_SECRET',
+      'from livekit.agents import Agent, AgentSession, JobContext, WorkerOptions, cli',
+      '',
+      '',
+      'async def entrypoint(ctx: JobContext):',
+      '    await ctx.connect()',
+      '    session = AgentSession()  # add your STT, LLM and TTS (or a realtime model)',
+      '    await session.start(room=ctx.room, agent=Agent(instructions="You are ' + display + '."))',
+      '',
+      '',
+      'if __name__ == "__main__":',
+      '    cli.run_app(WorkerOptions(',
+      '        entrypoint_fnc=entrypoint,',
+      '        agent_name="' + name + '",  # explicit dispatch: KnowMe calls this name',
+      '    ))'
+    ].join('\n');
+  }
+  function wizStep2() {
+    var code = h('pre', { class: 'code', tabindex: '0', 'aria-label': 'Python worker example' });
+    function refreshCode() { code.textContent = snippetText(); }
+
+    var managedUrl = field({ id: 'lk-managed-url', label: 'Project URL', value: D.livekit.url, readonly: true, mono: true,
+      hint: h('span', null, 'Run your worker with this project’s LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET. Find them in ',
+        h('a', { href: 'settings.html#livekit', text: 'Settings › LiveKit' }), '.'),
+      addon: h('button', { class: 'btn btn-sm', type: 'button', 'aria-label': 'Copy project URL', onclick: function () { KM.copy(D.livekit.url); } }, icon('copy', 'ic-sm'), h('span', { text: 'Copy' })) });
+    var fUrl = field({ id: 'lk-url', label: 'Project URL', required: true, value: draft.url, mono: true, placeholder: 'wss://your-project.livekit.cloud', validate: V.url,
+      inputmode: 'url', onInput: function (v) { setDraft('url', v.trim()); refreshCode(); } });
+    var fKey = field({ id: 'lk-key', label: 'API key', required: true, type: 'password', secret: true, value: secrets.apiKey, mono: true, validate: V.apiKey,
+      autocomplete: 'off', onInput: function (v) { secrets = Object.assign({}, secrets, { apiKey: v }); } });
+    var fSecret = field({ id: 'lk-secret', label: 'API secret', required: true, type: 'password', secret: true, value: secrets.apiSecret, mono: true, validate: V.apiSecret,
+      autocomplete: 'off', onInput: function (v) { secrets = Object.assign({}, secrets, { apiSecret: v }); } });
+    var ownBox = h('div', { class: 'reveal', id: 'own-project' },
+      fUrl.wrap, h('div', { class: 'field-row' }, fKey.wrap, fSecret.wrap),
+      notice('', 'shield', [h('strong', { text: 'Stored server-side only' }),
+        h('span', { text: 'Your key and secret are sent to KnowMe once and kept on the server. They’re never shown again — afterwards you’ll only see a masked value, and you can replace them at any time.' })]));
+    var managedBox = h('div', { class: 'reveal', id: 'managed-project' }, managedUrl.wrap);
+
+    function syncProject() {
+      ownBox.hidden = draft.project !== 'own';
+      managedBox.hidden = draft.project === 'own';
+    }
+    var projGroup = optionGroup({ name: 'lk-project', legend: 'LiveKit project', required: true, value: draft.project,
+      options: {
+        managed: { label: 'KnowMe-managed project', desc: 'Your worker connects to the same LiveKit project your meetings run on.' },
+        own: { label: 'My own LiveKit project', desc: 'Your worker runs against your own LiveKit Cloud or self-hosted project.' }
+      },
+      onChange: function (k) { setDraft('project', k); syncProject(); refreshCode(); } });
+
+    var fName = field({ id: 'a-agentname', label: 'agent_name', required: true, value: draft.agentName, mono: true, maxlength: 48, placeholder: 'e.g. scribe-notes', validate: V.agentName,
+      hint: h('span', null, 'KnowMe dispatches your worker by this exact name. It must match ', h('code', { text: 'agent_name' }),
+        ' in your worker’s WorkerOptions (or AgentServer). Lowercase letters, numbers and hyphens.'),
+      onInput: function (v) {
+        var clean = v.toLowerCase();
+        if (clean !== v) fName.input.value = clean;
+        setDraft('agentName', clean.trim());
+        refreshCode();
+      } });
+
+    var form = h('form', { id: 'wiz-form', class: 'wiz-form', novalidate: true },
+      h('p', { class: 'form-note' }, 'Fields marked ', h('span', { class: 'req', 'aria-hidden': 'true', text: '*' }), h('span', { class: 'sr-only', text: 'with an asterisk' }), ' are required.'),
+      projGroup.wrap, managedBox, ownBox, fName.wrap,
+      h('div', { class: 'code-wrap' },
+        h('div', { class: 'code-head' },
+          h('h2', { class: 'h3', text: 'Minimal worker' }),
+          h('button', { class: 'btn btn-sm', type: 'button', onclick: function () { KM.copy(snippetText()); } }, icon('copy', 'ic-sm'), h('span', { text: 'Copy code' }))),
+        h('p', { class: 'small sub' }, 'Start it with ', h('code', { text: 'python worker.py start' }), '. Keep it running so it can accept dispatches.'),
+        code));
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var checks = [fName];
+      if (draft.project === 'own') checks = [fUrl, fKey, fSecret, fName];
+      var ok = checks.map(function (f) { return f.check(); }).every(Boolean);
+      if (!ok) { focusFirstInvalid(form); return; }
+      router.go('register:3');
+    });
+    syncProject();
+    refreshCode();
+    wizardFrame(2, form, wizFoot(2, true));
+  }
+
+  /* ---- step 3: permissions & knowledge */
+  function wizStep3() {
+    var media = optionGroup({ name: 'p-media', legend: 'In meetings it can', value: draft.media, options: MEDIA, cols: 3,
+      onChange: function (k) { setDraft('media', k); } });
+    var know = optionGroup({ name: 'p-knowledge', legend: 'Knowledge access', value: draft.knowledge, options: KNOWLEDGE, cols: 3,
+      onChange: function (k) { setDraft('knowledge', k); } });
+    var disp = optionGroup({ name: 'p-dispatch', legend: 'Who may dispatch it', value: draft.dispatch, options: DISPATCH,
+      onChange: function (k) { setDraft('dispatch', k); } });
+    var fTag = field({ id: 'p-tag', label: 'Meeting tag', required: true, value: draft.tag, mono: true, maxlength: 32, placeholder: 'workshop', validate: V.tag,
+      hint: 'Add this tag when scheduling a meeting to bring the agent in automatically.',
+      onInput: function (v) { var c = v.toLowerCase(); if (c !== v) fTag.input.value = c; setDraft('tag', c.trim()); } });
+    var tagBox = h('div', { class: 'reveal' }, fTag.wrap);
+    var auto = optionGroup({ name: 'p-auto', legend: 'Auto-join', value: draft.autoJoin, options: AUTOJOIN, cols: 3,
+      onChange: function (k) { setDraft('autoJoin', k); tagBox.hidden = k !== 'tagged'; if (k === 'tagged') fTag.input.focus(); } });
+    tagBox.hidden = draft.autoJoin !== 'tagged';
+
+    var form = h('form', { id: 'wiz-form', class: 'wiz-form', novalidate: true },
+      media.wrap, know.wrap, disp.wrap, auto.wrap, tagBox,
+      notice('', 'info', [h('strong', { text: 'Data retention' }),
+        h('span', { text: 'While it’s in a meeting, the agent can read only the knowledge you grant here. Anything your worker stores lives on your infrastructure under your own retention policy. In guest meetings the live transcript is deleted when the meeting ends.' })]));
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (draft.autoJoin === 'tagged' && !fTag.check()) { fTag.input.focus(); return; }
+      router.go('register:4');
+    });
+    wizardFrame(3, form, wizFoot(3, true));
+  }
+
+  /* ---- step 4: test & finish */
+  var testToken = 0;
+  function wizStep4(params) {
+    testToken += 1;
+    var errors = [1, 2, 3].reduce(function (acc, n) { return acc.concat(stepErrors(n)); }, []);
+    var url = draft.project === 'own' ? draft.url : D.livekit.url;
+
+    function sumCard(title, step, rows) {
+      return h('section', { class: 'card', 'aria-labelledby': 'sum-' + step },
+        h('div', { class: 'card-head' },
+          h('h2', { class: 'h3', id: 'sum-' + step, text: title }),
+          h('a', { class: 'btn btn-ghost btn-sm', href: '#register:' + step, 'aria-label': 'Edit ' + title }, icon('edit', 'ic-sm'), h('span', { text: 'Edit' }))),
+        h('dl', { class: 'kv' }, rows.map(function (r) {
+          return [h('dt', { text: r[0] }), h('dd', { class: r[2] ? '' : 'plain' }, r[1] || h('span', { class: 'sub', text: 'Not set' }))];
+        })));
+    }
+    var summary = h('div', { class: 'summary-grid' },
+      sumCard('Identity', 1, [['Name', draft.name], ['Role', draft.role], ['Glyph', draft.glyph, true]]),
+      sumCard('Worker & dispatch', 2, [
+        ['Project', draft.project === 'own' ? 'My own LiveKit project' : 'KnowMe-managed'],
+        ['URL', url, true],
+        ['agent_name', draft.agentName, true]].concat(draft.project === 'own'
+          ? [['API key', secrets.apiKey ? h('span', { class: 'masked', text: '••••••••••••' }) : ''], ['API secret', secrets.apiSecret ? h('span', { class: 'masked', text: '••••••••••••' }) : '']]
+          : [])),
+      sumCard('Permissions', 3, [
+        ['Media', MEDIA[draft.media].label], ['Knowledge', KNOWLEDGE[draft.knowledge].label],
+        ['Dispatch', DISPATCH[draft.dispatch].label],
+        ['Auto-join', draft.autoJoin === 'tagged' ? 'Meetings tagged “' + (draft.tag || '—') + '”' : AUTOJOIN[draft.autoJoin].label]]));
+
+    var blockers = null;
+    if (errors.length) {
+      blockers = notice('warn', 'alert', [
+        h('strong', { text: 'Finish these before testing' }),
+        h('ul', { class: 'plain-list' }, errors.map(function (er) {
+          return h('li', { class: 'no' }, icon('alert'),
+            h('span', null, FIELD_LABEL[er.key] + ': ' + er.msg + ' ', h('a', { href: '#register:' + er.step, text: 'Fix in step ' + er.step })));
+        }))]);
+    }
+
+    var CHECKS = [
+      { title: 'Reach LiveKit project', detail: url },
+      { title: 'Worker registered with agent_name', detail: 'Looking for “' + (draft.agentName || '—') + '”' },
+      { title: 'Test dispatch into sandbox room', detail: 'Private room, no participants other than the agent' },
+      { title: 'Agent joined & responded', detail: 'Waits for the agent to join and answer a test message' }
+    ];
+    var checkEls = CHECKS.map(function (c, i) {
+      var ic = h('span', { class: 'check-ic', 'aria-hidden': 'true', text: String(i + 1) });
+      var st = h('span', { class: 'check-status', text: 'Waiting' });
+      var el = h('li', { class: 'check', 'data-state': 'waiting' }, ic,
+        h('span', { class: 'check-body' }, h('span', { class: 'check-title', text: c.title }), h('span', { class: 'check-detail', text: c.detail })), st);
+      return { el: el, ic: ic, st: st };
+    });
+    function setCheck(i, s) {
+      var c = checkEls[i];
+      var labels = { waiting: 'Waiting', running: 'Checking…', passed: 'Passed', failed: 'Failed', skipped: 'Skipped' };
+      c.el.setAttribute('data-state', s);
+      c.st.textContent = labels[s];
+      KM.clear(c.ic);
+      if (s === 'running') c.ic.appendChild(icon('refresh'));
+      else if (s === 'passed') c.ic.appendChild(icon('check'));
+      else if (s === 'failed') c.ic.appendChild(icon('x'));
+      else c.ic.textContent = String(i + 1);
+    }
+    var live = h('p', { class: 'small sub', 'aria-live': 'polite', text: errors.length ? 'Fix the items above to run the test.' : 'Runs four checks against your worker. Takes a few seconds.' });
+    var runBtn = h('button', { class: 'btn btn-primary', type: 'button', disabled: errors.length ? true : null }, icon('bolt', 'ic-sm'), h('span', { text: 'Run connection test' }));
+    var result = h('div');
+
+    function run() {
+      testToken += 1;
+      var token = testToken;
+      var failAt = draft.agentName === FAIL_WORKER ? 1 : -1;
+      runBtn.disabled = true;
+      runBtn.lastChild.textContent = 'Testing…';
+      KM.clear(result);
+      checkEls.forEach(function (_, i) { setCheck(i, 'waiting'); });
+      function stillHere() { var r = KM.parseHash(); return token === testToken && r.view === 'register' && r.arg === '4'; }
+      function stepAt(i) {
+        if (!stillHere()) return;
+        if (i >= CHECKS.length) return succeed();
+        setCheck(i, 'running');
+        live.textContent = 'Checking: ' + CHECKS[i].title + '…';
+        setTimeout(function () {
+          if (!stillHere()) return;
+          if (i === failAt) {
+            setCheck(i, 'failed');
+            for (var j = i + 1; j < CHECKS.length; j++) setCheck(j, 'skipped');
+            live.textContent = 'Failed: no worker registered with agent_name “' + draft.agentName + '”. Opening details…';
+            lastFailure = { agentName: draft.agentName, url: url };
+            setTimeout(function () { if (stillHere()) router.go('register-error'); }, STEP_MS);
+            return;
+          }
+          setCheck(i, 'passed');
+          stepAt(i + 1);
+        }, STEP_MS);
+      }
+      function succeed() {
+        var rec = sanitizeAdded({
+          worker: draft.agentName, name: draft.name.trim(), role: draft.role.trim(), desc: draft.desc.trim(), mono: draft.glyph,
+          owner: currentUserName(), project: draft.project, url: draft.project === 'own' ? draft.url : '',
+          media: draft.media, knowledge: draft.knowledge, dispatch: draft.dispatch, autoJoin: draft.autoJoin, tag: draft.tag
+        });
+        setState({ added: state.added.filter(function (a) { return a.id !== rec.id; }).concat([rec]), removed: state.removed.filter(function (x) { return x !== rec.id; }) });
+        lastRegistered = rec;
+        resetDraft();
+        runBtn.hidden = true;
+        live.textContent = 'All four checks passed. ' + rec.name + ' is registered.';
+        var title = h('h2', { tabindex: '-1' }, icon('check'), h('span', { text: 'Registered' }));
+        result.appendChild(h('div', { class: 'success-panel' },
+          title,
+          h('p', { text: rec.name + ' is ready. Dispatch it from the Agents panel in any meeting you host, or let its auto-join rule bring it in.' }),
+          h('div', { class: 'btn-row' },
+            h('a', { class: 'btn btn-primary', href: '#detail:' + encodeURIComponent(rec.id) }, h('span', { text: 'View agent' }), icon('chevron-right', 'ic-sm')),
+            h('button', { class: 'btn', type: 'button', onclick: function () { resetDraft(); router.go('register:1'); } }, icon('plus', 'ic-sm'), h('span', { text: 'Register another' })))));
+        KM.toast(rec.name + ' registered', 'check');
+        title.focus();
+      }
+      stepAt(0);
+    }
+    runBtn.addEventListener('click', run);
+
+    var testPanel = h('section', { class: 'panel', 'aria-labelledby': 'test-title' },
+      h('div', { class: 'card-head' },
+        h('div', null, h('h2', { id: 'test-title', text: 'Connection test' }),
+          h('p', { class: 'small sub', text: 'Confirms KnowMe can reach your project and dispatch your worker by agent_name.' })),
+        runBtn),
+      h('ol', { class: 'checks', 'aria-label': 'Test checks' }, checkEls.map(function (c) { return c.el; })),
+      live, result);
+
+    var body = h('div', { class: 'stack' }, blockers, summary, testPanel);
+    wizardFrame(4, body, wizFoot(4, false));
+    if (params && params.autorun === '1' && !errors.length) {
+      try { history.replaceState(null, '', '#register:4'); } catch (_) { /* ignore */ }
+      run();
+    }
+  }
+
+  /* ============================================================ #register-error */
+  function renderRegisterError() {
+    if (gated('Connection test failed')) return;
+    var f = lastFailure || { agentName: draft.agentName || FAIL_WORKER, url: draft.project === 'own' ? (draft.url || D.livekit.url) : D.livekit.url };
+    var head = pageHead({
+      crumbs: [{ label: 'Agents', href: '#registry' }, { label: 'Register an agent', href: '#register:4' }, { label: 'Test failed' }],
+      eyebrow: 'Step 4 of 4 · Test & finish',
+      title: 'Connection test failed'
+    });
+    var explain = h('section', { class: 'panel', 'aria-labelledby': 'err-title' },
+      notice('danger', 'alert', [
+        h('strong', { id: 'err-title' }, 'No worker is registered with agent_name ', h('code', { text: f.agentName }), '.'),
+        h('span', { text: 'KnowMe reached the LiveKit project, but no running worker announced that name, so there was nothing to dispatch. Your registration hasn’t been saved yet.' })]),
+      h('dl', { class: 'kv' },
+        h('dt', { text: 'Project' }), h('dd', { text: f.url }),
+        h('dt', { text: 'agent_name' }), h('dd', { text: f.agentName }),
+        h('dt', { text: 'Passed' }), h('dd', { class: 'plain', text: 'Reach LiveKit project' }),
+        h('dt', { text: 'Failed' }), h('dd', { class: 'plain', text: 'Worker registered with agent_name' }),
+        h('dt', { text: 'Skipped' }), h('dd', { class: 'plain', text: 'Test dispatch, agent response' })));
+
+    var CAUSES = [
+      ['The worker isn’t running', 'Start it with python worker.py start and leave it running while you test.'],
+      ['The names don’t match', 'agent_name in WorkerOptions must equal “' + f.agentName + '” exactly — it’s case-sensitive.'],
+      ['It’s connected to a different project', 'Check that the worker’s LIVEKIT_URL is ' + f.url + '.'],
+      ['Credentials were rejected', 'Make sure LIVEKIT_API_KEY and LIVEKIT_API_SECRET belong to that same project.'],
+      ['It started without agent_name', 'Workers without agent_name are dispatched automatically to every room and can’t be called by name.']
+    ];
+    var checklist = h('section', { class: 'panel', 'aria-labelledby': 'causes-title' },
+      h('div', null, h('h2', { id: 'causes-title', text: 'Likely causes' }),
+        h('p', { class: 'small sub', text: 'Tick each one off as you check it.' })),
+      h('div', { class: 'stack-sm' }, CAUSES.map(function (c, i) {
+        return h('label', { class: 'check-row', for: 'cause-' + i },
+          h('input', { type: 'checkbox', id: 'cause-' + i }),
+          h('span', { class: 'option-copy' }, h('span', { class: 'option-title', text: c[0] }), h('span', { class: 'option-desc', text: c[1] })));
+      })));
+
+    var actions = h('div', { class: 'btn-row' },
+      h('a', { class: 'btn btn-primary', href: '#register:4?autorun=1' }, icon('refresh', 'ic-sm'), h('span', { text: 'Retry test' })),
+      h('a', { class: 'btn', href: '#register:2' }, icon('edit', 'ic-sm'), h('span', { text: 'Edit worker settings' })),
+      h('a', { class: 'btn btn-ghost', href: '#registry' }, h('span', { text: 'Save for later' })));
+    render('Connection test failed', head, h('div', { class: 'two-col' }, explain, checklist), h('div', { class: 'wiz-foot' }, actions));
+  }
+
+  /* ============================================================ #detail:<id> */
+  var DETAIL_TABS = [['overview', 'Overview'], ['activity', 'Activity'], ['settings', 'Settings'], ['danger', 'Danger zone']];
+
+  function projectText(a) { return a.project === 'own' ? (a.url || 'Own LiveKit project') : D.livekit.url; }
+  function autoJoinText(a) {
+    if (a.autoJoin === 'always') return 'Joins every meeting automatically';
+    if (a.autoJoin === 'tagged') return 'Joins meetings tagged “' + (a.tag || '—') + '”';
+    return AUTOJOIN[a.autoJoin] ? AUTOJOIN[a.autoJoin].label : 'On request';
+  }
+
+  function renderDetail(id, params) {
+    if (gated('Agent details')) return;
+    var a = id ? findAgent(id) : null;
+    if (!a) {
+      notFound('Agent not found', 'No agent “' + (id || '') + '” is registered to your account. It may have been unregistered, or the link is mistyped.');
+      return;
+    }
+    var tabs = a.system ? DETAIL_TABS.slice(0, 2) : DETAIL_TABS;
+    var current = tabs.some(function (t) { return t[0] === params.tab; }) ? params.tab : 'overview';
+
+    var head = h('header', { class: 'detail-head' },
+      h('span', { class: 'agent-glyph' + (a.system ? ' is-system' : ''), 'aria-hidden': 'true', text: a.mono }),
+      h('div', { class: 'titles' },
+        crumbs([{ label: 'Agents', href: '#registry' }, { label: a.name }]),
+        h('h1', { class: 'od-truncate', title: a.name, text: a.name }),
+        h('div', { class: 'meta-line' },
+          stateLine(a.status, a.status === 'online' ? 'Online — worker connected' : 'Offline — worker not connected'),
+          a.system ? h('span', { class: 'chip chip-ember', text: 'System agent' }) : h('span', { text: a.role || 'Agent' }),
+          a.paused ? h('span', { class: 'chip chip-amber' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Dispatch paused') : null,
+          h('span', { class: 'worker-pill' }, 'Worker ', h('code', { text: a.worker }),
+            h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy agent_name ' + a.worker, onclick: function () { KM.copy(a.worker); } }, icon('copy', 'ic-sm'))))),
+      a.system
+        ? h('div', { class: 'head-actions' }, h('a', { class: 'btn', href: '#concierge' }, icon('info', 'ic-sm'), h('span', { text: 'What guests get' })))
+        : h('div', { class: 'head-actions' }, h('a', { class: 'btn', href: 'meet.html#room:agents' }, icon('agent-add', 'ic-sm'), h('span', { text: 'Dispatch in a meeting' }))));
+
+    var tablist = h('div', { class: 'tabs', role: 'tablist', 'aria-label': a.name + ' sections' });
+    var panel = h('div', { class: 'tab-panel', role: 'tabpanel', tabindex: '0' });
+    var btns = tabs.map(function (t) {
+      var b = h('button', { type: 'button', role: 'tab', id: 'tab-' + t[0], 'aria-controls': 'agent-panel', dataset: { tab: t[0] } },
+        t[0] === 'danger' ? icon('alert', 'ic-sm') : null, h('span', { text: t[1] }));
+      b.addEventListener('click', function () { select(t[0], true); });
+      tablist.appendChild(b);
+      return b;
+    });
+    panel.id = 'agent-panel';
+    tablist.addEventListener('keydown', function (e) {
+      var i = btns.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % btns.length;
+      else if (e.key === 'ArrowLeft') n = (i - 1 + btns.length) % btns.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = btns.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      btns[n].focus();
+      select(btns[n].dataset.tab, false);
+    });
+
+    function select(key, fromClick) {
+      current = key;
+      btns.forEach(function (b) {
+        var on = b.dataset.tab === key;
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      panel.setAttribute('aria-labelledby', 'tab-' + key);
+      try { history.replaceState(null, '', '#detail:' + encodeURIComponent(a.id) + (key === 'overview' ? '' : '?tab=' + key)); } catch (_) { /* ignore */ }
+      var fresh = findAgent(a.id) || a;
+      KM.clear(panel);
+      if (key === 'overview') panel.appendChild(detailOverview(fresh));
+      else if (key === 'activity') panel.appendChild(detailActivity(fresh));
+      else if (key === 'settings') panel.appendChild(detailSettings(fresh, refreshHead));
+      else panel.appendChild(detailDanger(fresh));
+      if (fromClick) btns.filter(function (b) { return b.dataset.tab === key; })[0].focus();
+    }
+    function refreshHead() {
+      renderDetail(a.id, { tab: 'settings' });
+      var t = document.getElementById('tab-settings');
+      if (t) t.focus();
+    }
+
+    render(a.name, head, tablist, panel);
+    select(current, false);
+  }
+
+  function detailOverview(a) {
+    var rows = [
+      ['agent_name', a.worker, true],
+      ['LiveKit project', projectText(a), true]
+    ];
+    if (a.project === 'own') rows.push(['API key', h('span', { class: 'masked', text: '••••••••••••' }), false]);
+    rows = rows.concat([
+      ['Media', MEDIA[a.media] ? MEDIA[a.media].label : a.media, false],
+      ['Knowledge', KNOWLEDGE[a.knowledge] ? KNOWLEDGE[a.knowledge].label : a.knowledge, false],
+      ['Dispatch', a.dispatch === 'system' ? 'Automatic — present in every meeting' : DISPATCH[a.dispatch].label, false],
+      ['Auto-join', autoJoinText(a), false],
+      ['Owner', a.owner, false]
+    ]);
+    var kv = h('dl', { class: 'kv' }, rows.map(function (r) { return [h('dt', { text: r[0] }), h('dd', { class: r[2] ? '' : 'plain' }, r[1])]; }));
+    var grid = h('div', { class: 'two-col' },
+      h('section', { class: 'card', 'aria-labelledby': 'ov-about' },
+        h('h2', { class: 'h3', id: 'ov-about', text: 'About' }),
+        h('p', { text: a.desc || 'No description yet.' }),
+        a.status === 'offline' ? notice('warn', 'alert', [h('strong', { text: 'Worker offline' }),
+          h('span', { text: 'Dispatches to this agent will fail until its worker reconnects to ' + projectText(a) + '.' })]) : null,
+        a.system ? notice('', 'shield', [h('strong', { text: 'Managed by KnowMe' }),
+          h('span', { text: 'The Concierge can’t be unregistered or reconfigured. It joins every meeting, including guest meetings, and keeps nothing after the meeting ends.' })]) : null),
+      h('section', { class: 'card', 'aria-labelledby': 'ov-config' },
+        h('h2', { class: 'h3', id: 'ov-config', text: 'Configuration' }), kv));
+    return grid;
+  }
+
+  function detailActivity(a) {
+    var act = activityFor(a);
+    if (!act.length) {
+      return h('div', { class: 'empty' },
+        h('span', { class: 'empty-icon' }, icon('clock')),
+        h('h2', { class: 'h3', text: 'No dispatches yet' }),
+        h('p', { text: 'When ' + a.name + ' joins a meeting, it shows up here with how long it stayed and how it went.' }),
+        h('a', { class: 'btn', href: 'dashboard.html#upcoming' }, icon('calendar', 'ic-sm'), h('span', { text: 'See upcoming meetings' })));
+    }
+    return h('div', { class: 'stack' },
+      h('h2', { class: 'h3', text: 'Recent dispatches' }),
+      h('div', { class: 'table-wrap' },
+        h('table', { class: 'table' },
+          h('caption', { class: 'sr-only', text: 'Recent dispatches of ' + a.name }),
+          h('thead', null, h('tr', null,
+            h('th', { scope: 'col', text: 'Meeting' }), h('th', { scope: 'col', text: 'Date' }),
+            h('th', { scope: 'col', class: 'num', text: 'Duration' }), h('th', { scope: 'col', text: 'Outcome' }))),
+          h('tbody', null, act.map(function (r) {
+            var o = OUTCOME[r.outcome];
+            return h('tr', null,
+              h('td', null, h('span', { class: 'od-clamp-2', title: r.meeting, text: r.meeting })),
+              h('td', { class: 'od-nowrap', text: r.outcome === 'live' ? 'Today · ' + KM.fmt.time(r.date) : KM.fmt.date(r.date) }),
+              h('td', { class: 'num od-nowrap', text: r.outcome === 'live' ? 'In progress' : r.min ? KM.fmt.mins(r.min) : '—' }),
+              h('td', null, h('span', { class: o.cls, text: o.label })));
+          })))));
+  }
+
+  function detailSettings(a, onSaved) {
+    var next = { paused: !!a.paused, knowledge: a.knowledge, dispatch: a.dispatch, autoJoin: a.autoJoin, media: a.media };
+    var dirty = h('span', { class: 'dirty-note', 'aria-live': 'polite' });
+    function mark() { dirty.textContent = 'Unsaved changes'; }
+
+    var sAvail = switchRow({ id: 's-avail', label: 'Available for dispatch', checked: !next.paused,
+      desc: 'Turn off to stop new dispatches without unregistering. Meetings it’s already in aren’t affected.',
+      onChange: function (v) { next = Object.assign({}, next, { paused: !v }); mark(); } });
+    var sFiles = switchRow({ id: 's-files', label: 'Read host-only files', checked: next.knowledge === 'files', disabled: next.knowledge === 'none',
+      desc: next.knowledge === 'none' ? 'Knowledge access is off for this agent. Change it by registering again with knowledge access.' : 'Adds files the host keeps private to their agents, on top of shared meeting knowledge and the live transcript.',
+      onChange: function (v) { next = Object.assign({}, next, { knowledge: v ? 'files' : 'shared' }); mark(); } });
+    var sAnyone = switchRow({ id: 's-anyone', label: 'Anyone in meetings I host can dispatch it', checked: next.dispatch === 'anyone',
+      desc: 'When off, only you can bring it into a meeting.',
+      onChange: function (v) { next = Object.assign({}, next, { dispatch: v ? 'anyone' : 'me' }); mark(); } });
+    var sAuto = switchRow({ id: 's-auto', label: 'Join meetings automatically', checked: next.autoJoin !== 'never',
+      desc: a.autoJoin === 'tagged' ? 'Currently joins meetings tagged “' + a.tag + '”. Turning this off means it joins only on request.' : 'Joins every meeting you host as soon as it starts.',
+      onChange: function (v) { next = Object.assign({}, next, { autoJoin: v ? (a.autoJoin === 'tagged' ? 'tagged' : 'mine') : 'never' }); mark(); } });
+    var mediaSel = field({ id: 's-media', label: 'In meetings it can', select: Object.keys(MEDIA).map(function (k) { return { value: k, label: MEDIA[k].label }; }),
+      value: next.media, onInput: function (v) { next = Object.assign({}, next, { media: pick(v, MEDIA, 'speak') }); mark(); } });
+
+    var save = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check', 'ic-sm'), h('span', { text: 'Save settings' }));
+    var form = h('form', { class: 'panel', 'aria-labelledby': 'set-title', novalidate: true },
+      h('h2', { id: 'set-title', class: 'h3', text: 'Settings' }),
+      h('div', null, sAvail.row, sAnyone.row, sAuto.row, sFiles.row),
+      mediaSel.wrap,
+      h('div', { class: 'btn-row' }, save, dirty));
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      busy(save, 'Saving…', SAVE_MS, function () {
+        var ov = Object.assign({}, state.overrides);
+        ov[a.id] = Object.assign({}, ov[a.id] || {}, next);
+        setState({ overrides: ov });
+        dirty.textContent = '';
+        KM.toast(a.name + ' settings saved', 'check');
+        onSaved();
+      });
+    });
+    return form;
+  }
+
+  function detailDanger(a) {
+    var btn = h('button', { class: 'btn btn-danger', type: 'button' }, icon('trash', 'ic-sm'), h('span', { text: 'Unregister ' + a.name }));
+    btn.addEventListener('click', function () {
+      KM.confirm({
+        title: 'Unregister ' + a.name + '?',
+        body: h('div', { class: 'stack-sm' },
+          h('p', { text: 'KnowMe will stop dispatching “' + a.worker + '”. Meetings where it’s present now will lose it at their next agent refresh.' }),
+          h('p', { text: 'Your worker keeps running on your side — stop it there if you no longer need it. You can register it again later.' })),
+        confirmLabel: 'Unregister',
+        danger: true
+      }).then(function (ok) {
+        if (!ok) return;
+        setState({ removed: state.removed.concat([a.id]) });
+        KM.toast(a.name + ' unregistered', 'trash');
+        router.go('registry');
+      });
+    });
+    return h('section', { class: 'panel danger-panel', 'aria-labelledby': 'dz-title' },
+      h('h2', { id: 'dz-title' }, icon('alert'), h('span', { text: 'Danger zone' })),
+      h('div', { class: 'card-head' },
+        h('div', null,
+          h('strong', { text: 'Unregister this agent' }),
+          h('p', { class: 'small sub', text: 'Removes it from your registry and from every meeting’s agent list. Activity history is removed too.' })),
+        btn));
+  }
+
+  /* ============================================================ #concierge (public) */
+  function renderConcierge() {
+    var c = findAgent('concierge') || Object.assign({}, D.agent('concierge'), CONFIG.concierge);
+    var signedIn = KM.auth.isSignedIn();
+    var head = h('header', { class: 'page-head' },
+      h('div', null,
+        crumbs([{ label: 'Agents', href: signedIn ? '#registry' : 'index.html' }, { label: 'Concierge' }]),
+        h('div', { class: 'hero-row' },
+          h('span', { class: 'agent-glyph is-system', 'aria-hidden': 'true', text: c.mono }),
+          h('div', { class: 'stack-sm' },
+            h('span', { class: 'eyebrow', text: 'System agent · provided by KnowMe' }),
+            h('h1', { text: 'Concierge' }),
+            h('p', { class: 'lede', text: 'The one agent that’s in every meeting, including meetings where nobody has an account. It helps guests follow along and shows what agents can do.' })))));
+
+    function feature(ic, title, text, cyan) {
+      return h('article', { class: 'card' },
+        h('span', { class: 'feature-ic' + (cyan ? ' cyan' : ''), 'aria-hidden': 'true' }, icon(ic)),
+        h('h3', { text: title }),
+        h('p', { class: 'small sub', text: text }));
+    }
+    var does = h('section', { class: 'section', 'aria-labelledby': 'cg-does' },
+      h('h2', { id: 'cg-does', text: 'What it does for guests' }),
+      h('div', { class: 'grid-3' },
+        feature('chat', 'Answers questions about the meeting', 'Ask what was decided, who said what, or what you missed. It answers from the live transcript of this meeting.'),
+        feature('agent-add', 'Explains the other agents', 'Describes what registered agents and dots in the room can do, and demonstrates them when the host allows it.', true),
+        feature('cc', 'Works with live transcription', 'Everyone gets live captions. The Concierge reads the same transcript, so its answers match what was said.')));
+
+    var limits = h('section', { class: 'section', 'aria-labelledby': 'cg-limits' },
+      h('h2', { id: 'cg-limits', text: 'What it can’t do' }),
+      h('div', { class: 'two-col' },
+        h('div', { class: 'card' },
+          h('ul', { class: 'plain-list' },
+            h('li', { class: 'no' }, icon('x'), h('span', { text: 'It can’t record the meeting or start a recording.' })),
+            h('li', { class: 'no' }, icon('x'), h('span', { text: 'It doesn’t remember anything after the meeting ends.' })),
+            h('li', { class: 'no' }, icon('x'), h('span', { text: 'It can’t read the host’s private files or anyone’s dot memory.' })),
+            h('li', { class: 'no' }, icon('x'), h('span', { text: 'It can’t be removed, renamed or reconfigured — KnowMe runs it.' })))),
+        h('div', { class: 'card' },
+          h('h3', { text: 'Privacy for guests' }),
+          h('ul', { class: 'plain-list' },
+            h('li', { class: 'yes' }, icon('check'), h('span', { text: 'In guest meetings the live transcript is deleted when the meeting ends.' })),
+            h('li', { class: 'yes' }, icon('check'), h('span', { text: 'Guest meetings aren’t recorded, and no transcript or summary is sent.' })),
+            h('li', { class: 'yes' }, icon('check'), h('span', { text: 'Invitees never need an account to join or to use the Concierge.' }))))));
+
+    var cta = h('section', { class: 'panel cta-panel', 'aria-labelledby': 'cg-cta' },
+      h('div', { class: 'stack-sm' },
+        h('h2', { id: 'cg-cta', text: signedIn ? 'Bring your own agents' : 'Want your own agents in meetings?' }),
+        h('p', { class: 'sub', text: signedIn
+          ? 'Register a LiveKit Agents worker by its agent_name and dispatch it into meetings you host.'
+          : 'Sign in to register LiveKit agents and use your dot. It’s optional — meetings work without it.' })),
+      h('div', { class: 'btn-row' }, signedIn
+        ? [h('a', { class: 'btn btn-primary', href: '#register:1' }, icon('plus', 'ic-sm'), h('span', { text: 'Register an agent' })),
+           h('a', { class: 'btn', href: '#registry' }, h('span', { text: 'Your agents' }))]
+        : [h('a', { class: 'btn btn-primary', href: KM.signInUrl('agents.html#registry') }, icon('user', 'ic-sm'), h('span', { text: 'Sign in to register agents' })),
+           h('a', { class: 'btn', href: 'room.html#start' }, icon('cam', 'ic-sm'), h('span', { text: 'Start a guest meeting' }))]));
+
+    render('Concierge', head, does, limits, h('div', { class: 'section' }, cta));
+  }
+
+  /* ============================================================ #dots */
+  function renderDots() {
+    if (gated('Your dots')) return;
+    var iris = state.iris;
+    var sol = D.dot('sol');
+    var head = pageHead({
+      crumbs: [{ label: 'Agents', href: '#registry' }, { label: 'Dots' }],
+      eyebrow: 'Agents',
+      title: 'Your dots',
+      lede: 'A dot is a persistent personal agent. It keeps a private memory that only its owner can see, and it can come with you into meetings.'
+    });
+
+    var irisCard = h('article', { class: 'card card-raised dot-card', 'data-state': iris.paused ? 'paused' : 'listening', 'aria-labelledby': 'dot-iris' },
+      h('span', { class: 'orb', 'aria-hidden': 'true' }),
+      h('div', { class: 'body' },
+        h('div', { class: 'card-head' },
+          h('div', null, h('h2', { class: 'h3 od-truncate', id: 'dot-iris', title: iris.name, text: iris.name }), h('span', { class: 'sub small', text: 'Your dot' })),
+          iris.paused ? h('span', { class: 'chip chip-amber' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Paused')
+                      : h('span', { class: 'chip chip-green' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Active')),
+        h('p', { class: 'small sub', text: (iris.join === 'always' ? 'Joins your meetings' : 'Asks before joining your meetings') + ' · speaks ' + (iris.speak === 'never' ? 'never' : 'only when asked') + ' · ' + visibleMemories().length + ' meeting memories' }),
+        h('div', { class: 'btn-row' }, h('a', { class: 'btn btn-sm', href: '#dot:iris' }, icon('settings', 'ic-sm'), h('span', { text: 'Iris settings' })))));
+
+    var solCard = h('article', { class: 'card dot-card', 'aria-labelledby': 'dot-sol' },
+      h('span', { class: 'orb orb--cyan', 'aria-hidden': 'true' }),
+      h('div', { class: 'body' },
+        h('div', { class: 'card-head' },
+          h('div', null, h('h2', { class: 'h3', id: 'dot-sol', text: sol.name }), h('span', { class: 'sub small', text: 'Avery’s dot — visible in shared meetings' })),
+          KM.lockBadge('Read-only')),
+        h('p', { class: 'small sub', text: 'You’ll see Sol in meetings you share with ' + sol.owner + '. Only Avery can change its settings or see its memory.' })));
+
+    var byDefault = switchRow({ id: 'dots-default', label: 'Bring ' + iris.name + ' to meetings by default', checked: iris.byDefault,
+      desc: iris.paused ? iris.name + ' is paused, so it won’t join until you resume it.' : 'When off, add ' + iris.name + ' from the Agents panel in each meeting.',
+      onChange: function (v) { setIris({ byDefault: v }); KM.toast(v ? iris.name + ' will join your meetings by default' : iris.name + ' joins only when you bring it', 'check'); } });
+
+    var explain = h('section', { class: 'section', 'aria-labelledby': 'dots-how' },
+      h('h2', { id: 'dots-how', text: 'Dots, registered agents and the Concierge' }),
+      h('div', { class: 'grid-3' },
+        h('article', { class: 'card' }, h('h3', { text: 'Dots' }),
+          h('p', { class: 'small sub', text: 'One per person, always on. Remembers across meetings in a private memory you control and can clear.' })),
+        h('article', { class: 'card' }, h('h3', { text: 'Registered agents' }),
+          h('p', { class: 'small sub', text: 'LiveKit workers you run. Dispatched into a meeting by agent_name, with the permissions you set.' }),
+          h('a', { href: '#registry', class: 'small', text: 'Your agents' })),
+        h('article', { class: 'card' }, h('h3', { text: 'Concierge' }),
+          h('p', { class: 'small sub', text: 'Provided by KnowMe in every meeting, and the only agent guests get. Remembers nothing afterwards.' }),
+          h('a', { href: '#concierge', class: 'small', text: 'About the Concierge' }))));
+
+    render('Your dots', head,
+      h('section', { class: 'section', 'aria-label': 'Dots' }, h('div', { class: 'grid-2' }, irisCard, solCard), h('div', { class: 'panel' }, byDefault.row)),
+      explain);
+  }
+
+  function visibleMemories() {
+    return MEMORIES.filter(function (m) { return state.iris.forgotten.indexOf(m.id) === -1; });
+  }
+
+  /* ============================================================ #dot:iris */
+  function renderDot(id) {
+    if (id !== 'iris') {
+      if (id === 'sol' && KM.auth.isSignedIn()) {
+        notFound('Sol is Avery’s dot', 'Only Avery Chen can open Sol’s settings and memory. You’ll see Sol in meetings you share with Avery.');
+        return;
+      }
+      if (gated('Dot settings')) return;
+      notFound('Dot not found', 'You have one dot, Iris. There’s no dot called “' + (id || '') + '”.');
+      return;
+    }
+    if (gated('Iris')) return;
+    var iris = state.iris;
+
+    var orbWrap = h('span', { 'data-state': iris.paused ? 'paused' : 'listening' }, h('span', { class: 'orb', 'aria-hidden': 'true' }));
+    var statusChipEl = h('span');
+    function paintStatus() {
+      orbWrap.setAttribute('data-state', state.iris.paused ? 'paused' : 'listening');
+      KM.clear(statusChipEl);
+      statusChipEl.appendChild(state.iris.paused
+        ? h('span', { class: 'chip chip-amber' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Paused')
+        : h('span', { class: 'chip chip-green' }, h('span', { class: 'pip', 'aria-hidden': 'true' }), 'Active'));
+    }
+    var title = h('h1', { class: 'od-truncate', title: iris.name, text: iris.name });
+    var head = h('header', { class: 'dot-head' }, orbWrap,
+      h('div', { class: 'titles' },
+        crumbs([{ label: 'Agents', href: '#registry' }, { label: 'Dots', href: '#dots' }, { label: iris.name }]),
+        title,
+        h('div', { class: 'meta-line' }, statusChipEl, h('span', { text: 'Your dot · private memory' }))));
+
+    var pause = switchRow({ id: 'iris-pause', label: 'Pause ' + iris.name, checked: iris.paused,
+      desc: 'While paused, ' + iris.name + ' won’t join meetings or add new memories. Existing memory is kept.',
+      onChange: function (v) { setIris({ paused: v }); paintStatus(); KM.toast(v ? iris.name + ' paused' : iris.name + ' resumed', v ? 'pause' : 'play'); } });
+
+    /* settings form */
+    var form = { name: iris.name, voice: iris.voice, join: iris.join, speak: iris.speak, scope: Object.assign({}, iris.scope) };
+    var fName = field({ id: 'iris-name', label: 'Name', required: true, value: form.name, maxlength: 24,
+      validate: function (v) { return !v ? 'Give your dot a name — people see it in meetings.' : v.length > 24 ? 'Keep it to 24 characters or fewer.' : ''; },
+      onInput: function (v) { form = Object.assign({}, form, { name: v }); } });
+    var fVoice = field({ id: 'iris-voice', label: 'Voice', select: VOICES, value: form.voice,
+      onInput: function (v) { form = Object.assign({}, form, { voice: v }); } });
+    var gJoin = optionGroup({ name: 'iris-join', legend: 'Join behavior', value: form.join,
+      options: { always: { label: 'Always join my meetings', desc: 'Joins as soon as a meeting you’re in starts.' }, ask: { label: 'Ask me first', desc: 'Asks in the lobby before each meeting.' } },
+      onChange: function (k) { form = Object.assign({}, form, { join: k }); } });
+    var gSpeak = optionGroup({ name: 'iris-speak', legend: 'Speak in meetings', value: form.speak,
+      options: { asked: { label: 'Only when asked', desc: 'Speaks when you or someone addresses it by name.' }, never: { label: 'Never', desc: 'Listens and remembers for you, but stays silent.' } },
+      onChange: function (k) { form = Object.assign({}, form, { speak: k }); } });
+    var gScope = optionGroup({ name: 'iris-scope', legend: 'What it may remember', multi: true, value: form.scope,
+      hint: 'Memory is private to you. Nothing is shared with other participants or their dots.',
+      options: {
+        summaries: { label: 'Transcript summaries', desc: 'Decisions and action items from meetings it attends.' },
+        conversations: { label: 'My private agent conversations', desc: 'What you ask it directly, in or out of meetings.' },
+        files: { label: 'Files I upload', desc: 'Documents you add to its memory yourself.' }
+      },
+      onChange: function (k, on) { var s = Object.assign({}, form.scope); s[k] = on; form = Object.assign({}, form, { scope: s }); } });
+
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check', 'ic-sm'), h('span', { text: 'Save settings' }));
+    var settingsForm = h('form', { class: 'panel', 'aria-labelledby': 'iris-set', novalidate: true },
+      h('h2', { id: 'iris-set', text: 'Settings' }),
+      h('div', { class: 'field-row' }, fName.wrap, fVoice.wrap),
+      gJoin.wrap, gSpeak.wrap, gScope.wrap,
+      h('div', { class: 'btn-row' }, saveBtn));
+    settingsForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!fName.check()) { fName.input.focus(); return; }
+      busy(saveBtn, 'Saving…', SAVE_MS, function () {
+        var name = String(form.name).trim();
+        setIris({ name: name, voice: pick(form.voice, { warm: 1, calm: 1, bright: 1, low: 1 }, 'warm'), join: form.join, speak: form.speak, scope: form.scope });
+        title.textContent = name;
+        title.title = name;
+        KM.toast(name + '’s settings saved', 'check');
+      });
+    });
+
+    /* memory list */
+    var memList = h('div', { class: 'list' });
+    var memCount = h('span', { class: 'sub small' });
+    function paintMemories() {
+      var mems = visibleMemories();
+      memCount.textContent = mems.length + (mems.length === 1 ? ' memory' : ' memories');
+      KM.clear(memList);
+      if (!mems.length) {
+        memList.appendChild(h('div', { class: 'empty' },
+          h('span', { class: 'empty-icon' }, icon('book')),
+          h('h3', { text: 'No meeting memories' }),
+          h('p', { text: state.iris.name + ' will add memories from the next meeting it attends, within the scope you set.' })));
+        return;
+      }
+      mems.forEach(function (m) {
+        var forget = h('button', { class: 'btn btn-ghost btn-sm', type: 'button', 'aria-label': 'Forget memory from ' + m.meeting + ', ' + KM.fmt.day(m.date) },
+          icon('trash', 'ic-sm'), h('span', { text: 'Forget' }));
+        forget.addEventListener('click', function () {
+          KM.confirm({ title: 'Forget this memory?', body: h('div', { class: 'stack-sm' },
+              h('p', { text: '“' + m.text + '”' }),
+              h('p', { text: state.iris.name + ' will permanently forget this. It can’t be restored.' })),
+            confirmLabel: 'Forget', danger: true }).then(function (ok) {
+            if (!ok) return;
+            setIris({ forgotten: state.iris.forgotten.concat([m.id]) });
+            paintMemories();
+            KM.toast('Memory forgotten', 'trash');
+            var first = memList.querySelector('button');
+            if (first) first.focus();
+          });
+        });
+        memList.appendChild(h('div', { class: 'list-row' },
+          h('span', { class: 'lead', 'aria-hidden': 'true' }, icon('book')),
+          h('div', { class: 'body' },
+            h('span', { class: 'title od-truncate', title: m.meeting, text: m.meeting }),
+            h('span', { class: 'meta', text: KM.fmt.date(m.date) }),
+            h('p', { class: 'memory-text', text: m.text })),
+          h('div', { class: 'trail' }, forget)));
+      });
+    }
+    var memSection = h('section', { class: 'panel', 'aria-labelledby': 'iris-mem' },
+      h('div', { class: 'sec-head' }, h('div', null, h('h2', { id: 'iris-mem', text: 'Recent meeting memories' }), memCount)),
+      memList);
+
+    paintStatus();
+    paintMemories();
+    render(iris.name, head,
+      h('div', { class: 'panel', style: 'margin-bottom: var(--s5)' }, pause.row),
+      h('div', { class: 'two-col' }, settingsForm, memSection));
+  }
+
+  /* ============================================================ router */
+  var router = KM.route({
+    registry: function (arg, params) { renderRegistry(params); },
+    register: function (arg, params) { renderWizard(arg, params); },
+    'register-error': function () { renderRegisterError(); },
+    detail: function (arg, params) { renderDetail(arg, params); },
+    concierge: function () { renderConcierge(); },
+    dots: function () { renderDots(); },
+    dot: function (arg) { renderDot(arg); }
+  }, 'registry');
+
+  KM.auth.onChange(function () { router.refresh(); });
+})();
+</script>
+</body>
+</html>

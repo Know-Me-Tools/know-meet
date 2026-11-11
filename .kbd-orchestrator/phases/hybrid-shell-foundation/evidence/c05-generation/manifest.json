@@ -1,0 +1,31 @@
+{
+  "generator": "knowme-builder 2.0.0-alpha.5",
+  "generatedAt": "2026-11-09",
+  "scratchRoot": "/tmp/know-meet-gen",
+  "profiles": {
+    "sovereign-hybrid": {
+      "command": "knowme-builder new --json --profile sovereign-hybrid --mode runnable /tmp/know-meet-gen/sovereign-hybrid",
+      "exit": 0,
+      "ok": true,
+      "warnings": [
+        "runnable source generation is not host certification; pass --target and/or --verify-ffi, then execute the emitted build/runtime gates"
+      ],
+      "conflicts": [],
+      "fileCount": 201,
+      "digestListSha256": "1e687a2c59d6c12f38bc24cda829e40ee5d723333c6616669af8efadd130ac8a",
+      "digestList": "c05-generation/sovereign-hybrid.sha256"
+    },
+    "governed-web-shell": {
+      "command": "knowme-builder new --json --profile governed-web-shell --mode runnable /tmp/know-meet-gen/governed-web-shell",
+      "exit": 0,
+      "ok": true,
+      "warnings": [
+        "runnable source generation is not host certification; pass --target and/or --verify-ffi, then execute the emitted build/runtime gates"
+      ],
+      "conflicts": [],
+      "fileCount": 41,
+      "digestListSha256": "86ba920995ba9160b0a360acf962e05bfc203d5a301b7518ff3d9284dd131c90",
+      "digestList": "c05-generation/governed-web-shell.sha256"
+    }
+  }
+}

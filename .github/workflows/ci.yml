@@ -1,0 +1,84 @@
+# Per-change lane (c01). Affected-only on pull requests, full on main.
+# Toolchain pins come from tooling/versions.toml via package.json
+# (packageManager, engines.node) and rust-toolchain.toml; nothing is restated here.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  AFFECTED: ${{ github.event_name == 'pull_request' && '--affected' || '' }}
+
+jobs:
+  rules:
+    name: repo rules, typecheck, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Toolchain pins
+        run: pnpm run verify:toolchain --only node,pnpm,typescript
+      - name: Repo rules (names, lines, colours, secrets, boundaries, Biome, pins)
+        run: node tooling/repo-rules/src/lint-all.ts --skip lint:native
+      - name: Repo-rule negative fixtures
+        run: node --test "tooling/repo-rules/test/**/*.test.ts"
+      # ${AFFECTED:+...} expands to nothing on main and to one --affected flag on pull requests.
+      - name: Typecheck
+        run: pnpm exec turbo run typecheck ${AFFECTED:+"$AFFECTED"} && pnpm exec tsc -p tooling/repo-rules/tsconfig.json
+      - name: Test
+        run: pnpm exec turbo run test ${AFFECTED:+"$AFFECTED"}
+      - name: Build
+        run: pnpm exec turbo run build ${AFFECTED:+"$AFFECTED"}
+
+  rust:
+    name: cargo clippy (zero warnings)
+    runs-on: macos-latest
+    timeout-minutes: 30
+    env:
+      RUSTC_WRAPPER: sccache
+      SCCACHE_GHA_ENABLED: "true"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: mozilla-actions/sccache-action@fc920bf0ec8de6ee65d409111f7ec508035751ba # v0.0.11
+      - name: Install pinned Rust from rust-toolchain.toml
+        run: rustup show active-toolchain || rustup toolchain install
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+
+  flutter:
+    name: flutter analyze (zero infos)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+      - id: pins
+        run: echo "flutter=$(node tooling/repo-rules/src/print-version.ts toolchain flutter)" >> "$GITHUB_OUTPUT"
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: stable
+          flutter-version: ${{ steps.pins.outputs.flutter }}
+          cache: true
+      - working-directory: apps/mobile
+        run: flutter pub get && flutter analyze --fatal-infos --fatal-warnings

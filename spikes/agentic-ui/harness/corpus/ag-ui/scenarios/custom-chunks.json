@@ -1,0 +1,444 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "custom-chunks",
+  "title": "CUSTOM chunk types: km.citation, km.media, km.mermaid, unknown, plus RAW",
+  "description": "CUSTOM events attach parts to message msg-custom-1 (value.messageId). Known names render with their renderer; `km.future-widget` must render the neutral fallback (or be listed with rendering \"fallback\") without crashing; RAW must not render. Media URLs use {{ALLOWED_ORIGIN}}, which the prototype must allow via the `allowMediaOrigin` query parameter.",
+  "tags": [
+    "@custom",
+    "@media"
+  ],
+  "userPrompt": "What did we decide on pricing? Show your sources and the clip.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-custom-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": "The"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " team"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " chose"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " usage-based"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " tiers"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " [1],"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " with"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " risks"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " tracked"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " in"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " spec"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " [2]."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " The"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " whiteboard,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " clip,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " voice"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " note"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " and"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " decision"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " flow"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " are"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-custom-1",
+            "delta": " attached."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-custom-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.citation",
+            "value": {
+              "messageId": "msg-custom-1",
+              "citationId": "cit-1",
+              "index": 1,
+              "title": "Pricing decision notes",
+              "url": "https://know-me.tools/meet/notes/7",
+              "snippet": "The team chose usage-based tiers."
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.citation",
+            "value": {
+              "messageId": "msg-custom-1",
+              "citationId": "cit-2",
+              "index": 2,
+              "title": "Spec 42, risks",
+              "url": "https://know-me.tools/docs/spec-42#risks"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.media",
+            "value": {
+              "messageId": "msg-custom-1",
+              "mediaId": "media-img-1",
+              "kind": "image",
+              "url": "{{ALLOWED_ORIGIN}}/media/whiteboard.png",
+              "mimeType": "image/png",
+              "label": "Whiteboard photo of the pricing tiers"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.media",
+            "value": {
+              "messageId": "msg-custom-1",
+              "mediaId": "media-vid-1",
+              "kind": "video",
+              "url": "{{ALLOWED_ORIGIN}}/media/clip.mp4",
+              "mimeType": "video/mp4",
+              "label": "Clip: the pricing discussion",
+              "posterUrl": "{{ALLOWED_ORIGIN}}/media/poster.png"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.media",
+            "value": {
+              "messageId": "msg-custom-1",
+              "mediaId": "media-aud-1",
+              "kind": "audio",
+              "url": "{{ALLOWED_ORIGIN}}/media/note.wav",
+              "mimeType": "audio/wav",
+              "label": "Voice note from Ana"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.mermaid",
+            "value": {
+              "messageId": "msg-custom-1",
+              "diagramId": "dia-1",
+              "source": "graph TD\n  A[Proposal] --> B{Measured?}\n  B -- yes --> C[Decide]\n  B -- no --> D[Spike]"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "CUSTOM",
+            "name": "km.future-widget",
+            "value": {
+              "messageId": "msg-custom-1",
+              "anything": {
+                "nested": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RAW",
+            "event": {
+              "provider": "livekit-agents",
+              "kind": "metrics",
+              "ttftMs": 412
+            },
+            "source": "livekit-agents"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "What did we decide on pricing? Show your sources and the clip."
+      },
+      {
+        "id": "msg-custom-1",
+        "role": "assistant",
+        "textEquals": "The team chose usage-based tiers [1], with the risks tracked in the spec [2]. The whiteboard, clip, voice note and decision flow are attached.",
+        "status": "complete"
+      }
+    ],
+    "customParts": [
+      {
+        "name": "km.citation",
+        "partId": "cit-1",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.citation",
+        "partId": "cit-2",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.media",
+        "partId": "media-img-1",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.media",
+        "partId": "media-vid-1",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.media",
+        "partId": "media-aud-1",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.mermaid",
+        "partId": "dia-1",
+        "rendering": "renderer"
+      },
+      {
+        "name": "km.future-widget",
+        "rendering": "fallback"
+      }
+    ],
+    "dom": [
+      {
+        "selector": "[data-testid='km-custom-part'][data-part-name='km.citation']",
+        "count": 2
+      },
+      {
+        "selector": "img[alt='Whiteboard photo of the pricing tiers']",
+        "count": 1
+      },
+      {
+        "selector": "video",
+        "count": 1
+      },
+      {
+        "selector": "audio",
+        "count": 1
+      },
+      {
+        "selector": "[data-testid='km-custom-part'][data-part-name='km.mermaid'] svg",
+        "minCount": 1
+      },
+      {
+        "selector": "[data-testid='km-custom-unknown']",
+        "count": 1
+      }
+    ]
+  }
+}

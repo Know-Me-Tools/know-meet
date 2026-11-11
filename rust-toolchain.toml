@@ -1,0 +1,7 @@
+# Derived from tooling/versions.toml [toolchain].rust (sha256 recorded in
+# tooling/versions.source.json). Exact pin, not a floor: the generator's crates
+# declare rust-version = "1.97.1". Bump versions.toml first; check-pins fails on drift.
+[toolchain]
+channel = "1.97.1"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

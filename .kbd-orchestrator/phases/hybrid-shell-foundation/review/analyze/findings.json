@@ -1,0 +1,57 @@
+{
+  "mode": "artifact",
+  "verdict": "PASS",
+  "judge_model": "claude-opus-5-5",
+  "isolation_mode": "harness-native",
+  "producer_model": "claude-opus-5-5",
+  "cross_model_check": "same-model-collision",
+  "findings": [
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "line": 126,
+      "claim": "Neither token-pipeline option can read the declared canonical source as-is, and the analysis does not list the conversion work: Option 1's generator reads TOML, Option 2 assumes a DTCG source, and docs/design/tokens.json is neither.",
+      "evidence": "analysis.md:126 'Either option reads a reconciled source owned by docs/design/ ... tokens.json is upgraded in place ... and stays design-owned and hand-edited'. analysis.md:124 'Option 2: adopt Style Dictionary 5.8.0 with one DTCG JSON source'. docs/design/tokens.json starts with '\"$schema\": \"know-meet-tokens/v1\"', nests colours under 'themes.dark', and has 0 '$value' keys, so it is not DTCG. The package generator reads TOML: gen-design-tokens.mjs:795 banner 'GENERATED FROM assets/templates/design-tokens/tokens.toml', bundles smol-toml, and its Tokens interface (gen-design-tokens.mts:7) expects dark/light{surface,text,accent,status}, space, font, type. The Option 1 extension list (lines 116-121) covers rgba, clamp, fonts, shadcn/web targets, ThemeData and loud failures, but not a JSON or know-meet-tokens/v1 reader or schema mapping. Option 2 would need a preprocessor, or tokens.json rewritten into DTCG, which changes the format of a design-owned file.",
+      "suggested_fix": "Add the input adapter to both options in Q-A8 and build_required: Option 1 needs a know-meet-tokens/v1 JSON reader mapped to the generator's role groups; Option 2 needs either a custom parser/preprocessor or a design-approved DTCG migration of docs/design/tokens.json. Include that cost in the Q-A8 comparison."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "line": 130,
+      "claim": "The round-1 revision left Option-2 wording in the analysis. That wording contradicts the Q-A8 gate and the Option 1 recommendation, so Spec could treat Style Dictionary as already chosen.",
+      "evidence": "analysis.md:115 recommends Option 1, 'vendor and extend the package generator'. But analysis.md:130 still says 'Keep the package's pipeline as reference ... It cannot express the rgba values or clamp() sizes, so it isn't adopted', which is the opposite verdict. The target layout at analysis.md:96 reads 'design-tokens/ # Style Dictionary source + outputs', which presumes Option 2 and places the source in packages/. That conflicts with line 126 ('source owned by docs/design/') and with the Q-A2 recommendation.",
+      "suggested_fix": "Delete or rewrite the line-130 bullet so it is conditional on Option 2. Change the layout comment to 'token generator outputs (CSS vars, Tailwind @theme, Dart); source is docs/design/tokens.json; generator per Q-A8'."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "library-candidates.json",
+      "claim": "cand-018 TanStack Router is adopted without a version, license or maintenance check, and the package source it cites uses a floor range, which the package's own pin discipline forbids.",
+      "evidence": "cand-018 has no 'license' or 'maintenance' fields. The only evidence is references/tauri/patterns.md, which lists '\"@tanstack/react-router\": \"^1.0.0\"'. versions.toml says 'Prefer EXACT pins over floors'. npm current is 1.170.46, and @tanstack/router-plugin requires the matching router version.",
+      "suggested_fix": "Record the version (1.170.46), the MIT license and the release date, and state the exact pin of the router plus its Vite plugin."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "analysis.md",
+      "line": 34,
+      "claim": "Flutter routing and state for the shell (theme-mode persistence) have no candidate entries, although the package prescribes specific libraries.",
+      "evidence": "analysis.md:34 'Flutter routing: follows the package's mobile-navigation skill', and line 35 maps theme switching to 'ThemeMode with persisted preference'. The mobile-navigation skill prescribes 'GoRouter's ShellRoute owns the shell', and the Flutter baseline pubspec pins flutter_riverpod 3.3.1. library-candidates.json has no go_router, riverpod or preference-storage entry or pin (go_router current 18.1.3).",
+      "suggested_fix": "Add go_router (exact pin) and the package's riverpod pin as adopt entries, and name the persistence mechanism for ThemeMode."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "analysis.md",
+      "line": 53,
+      "claim": "Goal 8's typecheck command is not named, and `flutter test` is not listed as the mobile test command.",
+      "evidence": "analysis.md:53 says the lint row 'Defines lint_command and test_command under the TS 7 pin'. No typecheck command is given (typescript 7.0.2 ships bin 'tsc'). Line 31 lists flutter_lints plus dart analyze but no Flutter test runner, although line 40 relies on matchesGoldenFile.",
+      "suggested_fix": "State `tsc --noEmit` (TS 7.0.2) as typecheck, and `flutter test` (including goldens) as part of test_command."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "analysis.md",
+      "line": 10,
+      "claim": "The research-budget accounting differs between the two artifacts.",
+      "evidence": "analysis.md:10 'tier 3: 1 batch covering 11 packages'; library-candidates.json research_budget.queries_used '3': 3.",
+      "suggested_fix": "Reconcile the tier-3 count in one of the two files."
+    }
+  ]
+}

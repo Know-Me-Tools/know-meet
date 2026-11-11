@@ -1,0 +1,37 @@
+{"verdict": null, "n": 9}
+[CRITICAL] The analysis does not cover the mandatory OpenSpec/KBD workflow, allowing downstream planning to bypass the required change lifecycle.
+  EVIDENCE: The goal requires: "Follow the full KBD process (assess → analyze → plan → execute → reflect) with OpenSpec changes; no shortcuts". The file tree contains `openspec/changes`, `openspec/specs`, and `openspec/config.yaml`, but neither analysis.md nor library-candidates.json mentions OpenSpec; the readiness discussion covers only operator questions and implementation dependencies.
+  FIX: Add an explicit process gap and decision requiring the next artifacts to create and validate an `openspec/changes/<change>` proposal, specification deltas, and tasks, with every implementation task traced to a goal before planning or execution.
+
+[CRITICAL] The recommended token-generator adaptation will violate the blocking 500-line limit by copying an 830-plus-line script into a non-exempt path.
+  EVIDENCE: The analysis recommends: "Copy `gen-design-tokens` into `tools/design-tokens/` and extend it", while also stating that the script's "`existsSync` guard is at line 830". The `max-500-lines-per-file` constraint applies to authored files in any language and exempts vendored code only under `**/vendor/**`; `tools/design-tokens/` does not qualify.
+  FIX: Specify that the generator is split into modules of at most 500 lines, or that any unmodified upstream copy is placed under an allowed `**/vendor/**` path while authored extensions remain in separately bounded modules.
+
+[CRITICAL] The fidelity analysis omits two explicitly mandated design sources—the brand guide and `docs/design/live`—so it cannot establish fidelity against the full goal scope.
+  EVIDENCE: The goal requires replication "from docs/design (tokens, brand guide, prototype and live prototype)". The artifact's fidelity section only proposes Playwright captures of "the prototype pages and the shells", and its route decision names prototype screens; it never identifies the brand guide or `docs/design/live`, nor does it distinguish that canonical live source from the forbidden stale root `live/` duplicate.
+  FIX: Add a source-to-acceptance matrix covering tokens.json, the brand guide, `docs/design/prototype`, and `docs/design/live`, explicitly excluding root `live/`, and map palette, typography, spacing, component, theme, and motion requirements from each source to a check.
+
+[CRITICAL] The proposed Goal 8 command set omits any build command, leaving the required `project.json` build-health command undefined.
+  EVIDENCE: The goal requires real build, test, and lint commands in `.kbd-orchestrator/project.json`, and the blocking `build-passes` constraint refers to that project's build-health command. Under "Named commands for Goal 8", the artifact lists only `lint`, `typecheck`, and `test`; no build command is named, despite the decision table claiming pnpm "Defines build, test and lint commands".
+  FIX: Specify the exact build command, working directory, and workspace scope for web, Tauri, and Flutter, including token/code-generation prerequisites, and define the corresponding `project.json` field and artifact-verification step.
+
+[WARNING] Several dependencies adopted by the design are absent from the candidate inventory and therefore have no verdict, compatibility check, maintenance evidence, or complete pin.
+  EVIDENCE: The analysis specifies an `apps/web` "Vite entry", proposes "`go_router` and riverpod 3.3.1 ... plus `shared_preferences`", and allows "Biome (or oxlint)" as the Q-A9 choice. Candidate cand-016 even calls Vitest a "Vite-native test runner matching Vite 8 pin", but candidates 001-018 contain no Vite, go_router, riverpod, shared_preferences, or oxlint candidate; the final version list only says these Flutter packages must be pinned later.
+  FIX: Add candidate records for Vite, go_router, riverpod, shared_preferences, and the oxlint fallback, with exact versions, maintenance status, compatibility against the selected Node/TypeScript/Flutter/Tauri toolchain, licenses, risks, and conditional verdicts.
+
+[WARNING] The Flutter fidelity decision has no design-derived golden oracle, so `matchesGoldenFile` could merely bless the implementation rather than prove design fidelity.
+  EVIDENCE: The artifact selects Flutter's built-in `matchesGoldenFile` for VS-3, but the Build required section only specifies a Playwright prototype-versus-web harness and never explains how expected Flutter goldens are derived from the prototype/live design, who approves them, or which routes, themes, and viewports they cover.
+  FIX: Define a golden-baseline provenance and approval procedure tied to canonical design sources, including the route/theme/viewport matrix and a check that initial goldens are derived from or reviewed against those sources rather than generated solely from the implementation.
+
+[WARNING] Motion and reduced-motion behavior are prescribed without a verification mechanism, so the proposed static screenshot and golden suites cannot prove Goal 6.
+  EVIDENCE: The analysis states that "Motion uses token durations and easing, and respects reduced motion on both platforms", but the fidelity and Build required sections specify only screenshot captures, and the named test command contains no motion or reduced-motion assertion. The accessibility constraint also explicitly requires reduced-motion support.
+  FIX: Add web and Flutter verification for tokenized durations/easing and reduced-motion behavior, including a Playwright `prefers-reduced-motion` scenario and a Flutter test or golden strategy that distinguishes motion-enabled and reduced-motion states.
+
+[WARNING] Q-A6 is treated as having a recommended default even though no default or decision rule is stated, leaving the line-checker exception behavior ambiguous.
+  EVIDENCE: The readiness section says "Q-A4, Q-A5, Q-A6 and Q-A9 have recommended defaults that Spec can adopt unless overridden", but the Q-A6 entry contains only "Exceptions E-L6 and E-L7 (carried over from the assessment)". Meanwhile, Build required says the checker will honor the E-L exception globs even though the blocking constraint describes those documentation exceptions as pending operator decision.
+  FIX: State the exact recommended E-L6/E-L7 handling and glob set, or keep Q-A6 explicitly blocking until the operator approves the exception list; do not instruct the checker to encode an unspecified default.
+
+[WARNING] The proposed test command omits Rust tests even though retained and modified Tauri Rust code is in scope.
+  EVIDENCE: The named test command contains only `vitest run`, `flutter test`, and Playwright, while the analysis requires replacing `src-tauri/src/main.rs` commands with shell-only Rust stubs and names `cargo clippy` for linting but never `cargo test`. Thus the required real test command would not exercise the desktop Rust crate.
+  FIX: Include `cargo test` for `apps/desktop/src-tauri` in the aggregate test command, specify its working directory, and ensure the shell-only command replacement is covered by at least one Rust test or compile-time test target.
+

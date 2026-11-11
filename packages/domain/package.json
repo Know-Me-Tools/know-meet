@@ -1,0 +1,16 @@
+{
+  "name": "@know-meet/domain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Know Meet domain layer: entities, value objects and rules. No framework, UI, Tauri or LiveKit imports.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}

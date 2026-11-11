@@ -1,0 +1,577 @@
+{
+  "prototype": "own",
+  "binary": "../tauri-shell/bin/km-spike-own-a11y-4327",
+  "results": [
+    {
+      "id": "a11y-1 axe idle / mid-stream / settled",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "axe runs: F18 idle, auto mid-stream, F18 finished"
+      ],
+      "runId": "a11y-own-stream-long-markdown-mwbmbz9g",
+      "traces": {},
+      "axe": [
+        {
+          "t": 1111,
+          "label": "F18 idle",
+          "runStatus": "idle",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        },
+        {
+          "t": 4869,
+          "label": "auto mid-stream",
+          "runStatus": "running",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        },
+        {
+          "t": 11323,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a11y-2 transcript aria-busy while streaming and not after",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 140ms=null(idle), 3401ms=true(running), 9231ms=null(finished)"
+      ],
+      "runId": "a11y-own-stream-long-markdown-mwbmbz9g",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-3 streaming text not inside a live region",
+      "prototype": "own",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-own-stream-long-markdown-mwbmbz9g",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-4 live-region announcements throttled and finalized",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "1 announcements during 5.8 s (budget 9); final (180 chars): \"Assistant replied: Meeting summary: agentic UI spike review This is a long, deliberately varied answer used to measure s\""
+      ],
+      "runId": "a11y-own-stream-long-markdown-mwbmbz9g",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "conformance long-markdown (collector compare.ts)",
+      "prototype": "own",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-own-stream-long-markdown-mwbmbz9g",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-5 streaming and approval never steal focus (+ axe with pending approval)",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "focus right after submit: input[type=text]#km-composer-input \"Message\"",
+        "focus placed at 3949 ms; first settle at 4047 ms",
+        "active after settle: input[type=text]#km-composer-input \"Message\"",
+        "aria-busy transitions: 153ms=null(idle), 3752ms=true(running), 4021ms=null(interrupted)",
+        "live-region (1 region, aria-live=polite role=status) changes: 153ms:\"\" | 3752ms:\"Assistant is responding.\" | 4022ms:\"Approval needed: Send the meeting summary to 4 attendees?\""
+      ],
+      "runId": "a11y-own-focus-hitl-approve-mwbmca1r",
+      "traces": {},
+      "axe": [
+        {
+          "t": 4624,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a11y-6 approval can be approved from the keyboard",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 147ms=null(idle), 3760ms=true(running), 4030ms=null(interrupted), 5913ms=true(running), 6045ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 147ms:\"\" | 3760ms:\"Assistant is responding.\" | 4030ms:\"Approval needed: Send the meeting summary to 4 attendees?\" | 5913ms:\"Assistant is responding.\" | 6046ms:\"Assistant replied: Sent the summary to 4 attendees.\"",
+        "decision key: \"Enter\" trusted=true on button[type=button]#km-approval-approve \"Approve\"",
+        "focus after decision: button[type=button]#km-approval-approve \"Approve\"",
+        "reference DOM order (tabindex>=0): summary \"Arguments\" | button[type=button]#km-approval-approve \"Approve\" | button[type=button]#km-approval-reject \"Reject\" | input[type=text]#km-composer-input \"Message\" | button[type=submit]#km-composer-submit \"Send\""
+      ],
+      "runId": "a11y-own-approve-hitl-approve-mwbmcfcx",
+      "traces": {
+        "Tab from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Email \"",
+          "3. Tab -> summary \"Arguments\"",
+          "4. Tab -> button[type=button]#km-approval-approve \"Approve\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4133,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "conformance hitl-approve (collector compare.ts)",
+      "prototype": "own",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-own-approve-hitl-approve-mwbmcfcx",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-7 approval can be rejectd from the keyboard",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 155ms=null(idle), 3751ms=true(running), 4020ms=null(interrupted), 6210ms=true(running), 6352ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 155ms:\"\" | 3751ms:\"Assistant is responding.\" | 4021ms:\"Approval needed: Send the meeting summary to 4 attendees?\" | 6210ms:\"Assistant is responding.\" | 6353ms:\"Assistant replied: OK, I did not send the email.\"",
+        "decision key: \" \" trusted=true on button[type=button]#km-approval-reject \"Reject\"",
+        "focus after decision: button[type=button]#km-approval-reject \"Reject\"",
+        "reference DOM order (tabindex>=0): summary \"Arguments\" | button[type=button]#km-approval-approve \"Approve\" | button[type=button]#km-approval-reject \"Reject\" | input[type=text]#km-composer-input \"Message\" | button[type=submit]#km-composer-submit \"Send\""
+      ],
+      "runId": "a11y-own-reject-hitl-reject-mwbmcm50",
+      "traces": {
+        "Tab from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Email \"",
+          "3. Tab -> summary \"Arguments\"",
+          "4. Tab -> button[type=button]#km-approval-approve \"Approve\"",
+          "5. Tab -> button[type=button]#km-approval-reject \"Reject\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4124,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "conformance hitl-reject (collector compare.ts)",
+      "prototype": "own",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-own-reject-hitl-reject-mwbmcm50",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-8 run errors use role=alert",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "alert: {\"count\":1,\"visible\":true,\"text\":\"The assistant hit an error (RECORDING_UNAVAILABLE): The recording store is unavailable.\"}",
+        "aria-busy transitions: 153ms=null(idle), 2927ms=true(running), 3025ms=null(error)",
+        "live-region (1 region, aria-live=polite role=status) changes: 153ms:\"\" | 2927ms:\"Assistant is responding.\" | 3026ms:\"Error: The recording store is unavailable.\""
+      ],
+      "runId": "a11y-own-alert-run-error-mwbmct97",
+      "traces": {},
+      "axe": [
+        {
+          "t": 3429.0000000000005,
+          "label": "F18 error",
+          "runStatus": "error",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": [
+        "composer received \"Fetch last week’s recording.\" for typed \"Fetch last week's recording.\""
+      ]
+    },
+    {
+      "id": "conformance run-error (collector compare.ts)",
+      "prototype": "own",
+      "pass": false,
+      "details": [
+        "FAIL messages[0].text: expected \"Fetch last week's recording.\", got \"Fetch last week’s recording.\"",
+        "typed prompt arrived as \"Fetch last week’s recording.\" (expected \"Fetch last week's recording.\")"
+      ],
+      "runId": "a11y-own-alert-run-error-mwbmct97",
+      "traces": {},
+      "axe": [],
+      "warnings": [
+        "composer received \"Fetch last week’s recording.\" for typed \"Fetch last week's recording.\""
+      ]
+    },
+    {
+      "id": "a2ui/button-actions-roundtrip",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): accept_btn, decline_btn",
+        "plain Tab reached: accept_btn, decline_btn; Option+Tab reached: none",
+        "\"Accept\" -> consent_accept {\"meetingId\":\"m-981\",\"scope\":\"audio+video\"}",
+        "\"Decline\" -> consent_decline {\"meetingId\":\"m-981\"}",
+        "aria-busy transitions: 147ms=null(idle), 4525ms=true(running), 4653ms=null(finished), 8640ms=true(running), 8746ms=null(finished), 9156ms=true(running), 9262ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 147ms:\"\" | 4525ms:\"Assistant is responding.\" | 4654ms:\"Assistant replied: Here is the button actions roundtrip surf\" | 8640ms:\"Assistant is responding.\" | 8746ms:\"Assistant replied: Received action consent accept.\" | 9156ms:\"Assistant is responding.\" | 9262ms:\"Assistant replied: Received action consent decline.\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-button-actions-roundtrip-mwbmcxo2",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> button[type=button]#a2ui:accept_btn \"Allow recording\"",
+          "4. Tab -> button[type=button]#a2ui:decline_btn \"Don't record\"",
+          "5. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5496,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [
+            "color-contrast (serious): 1 node(s) - Elements must meet minimum color contrast ratio thresholds"
+          ],
+          "nodes": [
+            "color-contrast: [\"p[data-a2ui-id=\\\"accept_label\\\"]\"]"
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/card-with-action",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): add_btn",
+        "plain Tab reached: add_btn; Option+Tab reached: none",
+        "\"Add the agent\" -> add_agent {\"agentId\":\"scribe\"}",
+        "aria-busy transitions: 169ms=null(idle), 3906ms=true(running), 4033ms=null(finished), 7637ms=true(running), 7743ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 169ms:\"\" | 3906ms:\"Assistant is responding.\" | 4033ms:\"Assistant replied: Here is the card with action surface.\" | 7637ms:\"Assistant is responding.\" | 7743ms:\"Assistant replied: Received action add agent.\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-card-with-action-mwbmd6k5",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> button[type=button]#a2ui:add_btn \"Add to meeting\"",
+          "4. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4804,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [
+            "color-contrast (serious): 1 node(s) - Elements must meet minimum color contrast ratio thresholds"
+          ],
+          "nodes": [
+            "color-contrast: [\"p[data-a2ui-id=\\\"add_label\\\"]\"]"
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/form-validation",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): name_field, email_field, phone_field, role_picker, agree_box, submit_btn",
+        "plain Tab reached: name_field, email_field, phone_field, role_picker, agree_box, submit_btn; Option+Tab reached: name_field, email_field, phone_field",
+        "\"Valid form: the action fires with bound context.\" -> invite_guest {\"email\":\"ana@know-me.tools\",\"name\":\"Ana\",\"role\":[\"guest\"]}",
+        "aria-busy transitions: 143ms=null(idle), 3803ms=true(running), 3951ms=null(finished), 16835ms=true(running), 16941ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 143ms:\"\" | 3803ms:\"Assistant is responding.\" | 3951ms:\"Assistant replied: Here is the form validation surface.\" | 16835ms:\"Assistant is responding.\" | 16941ms:\"Assistant replied: Received action invite guest.\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-form-validation-mwbmdeax",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "4. Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "5. Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "6. Tab -> input[type=checkbox]#a2ui:role_picker \"Guest\"",
+          "7. Tab -> input[type=checkbox]#a2ui:role_picker \"Co-host\"",
+          "8. Tab -> input[type=checkbox]#a2ui:agree_box \"Guest may be recorded\"",
+          "9. Tab -> button[type=button]#a2ui:submit_btn \"Send invite\"",
+          "10. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "3. opt+Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "4. opt+Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "5. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4783,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [
+            "color-contrast (serious): 1 node(s) - Elements must meet minimum color contrast ratio thresholds"
+          ],
+          "nodes": [
+            "color-contrast: [\"p[data-a2ui-id=\\\"submit_label\\\"]\"]"
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/form-validation keyboard-only submit",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "keys: 18 trusted=true",
+        "sent invite_guest {\"email\":\"ana@know-me.tools\",\"name\":\"Ana\",\"role\":[\"guest\"]}"
+      ],
+      "runId": "a11y-own-a2ui-keyboard-a2ui-form-validation-mwbmdt63",
+      "traces": {
+        "keyboard-only form": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "4. Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "5. Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "6. Tab -> input[type=checkbox]#a2ui:role_picker \"Guest\"",
+          "7. Tab -> input[type=checkbox]#a2ui:role_picker \"Co-host\"",
+          "8. Tab -> input[type=checkbox]#a2ui:agree_box \"Guest may be recorded\"",
+          "9. Tab -> button[type=button]#a2ui:submit_btn \"Send invite\""
+        ]
+      },
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/incremental-update-delete",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): none",
+        "plain Tab reached: none; Option+Tab reached: none",
+        "aria-busy transitions: 156ms=null(idle), 5027ms=true(running), 5155ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 156ms:\"\" | 5027ms:\"Assistant is responding.\" | 5156ms:\"Assistant replied: Here is the incremental update delete sur\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-incremental-update-delete-mwbme1bj",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5940,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/list-template",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): none",
+        "plain Tab reached: none; Option+Tab reached: none",
+        "aria-busy transitions: 137ms=null(idle), 3958ms=true(running), 4086ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 137ms:\"\" | 3958ms:\"Assistant is responding.\" | 4086ms:\"Assistant replied: Here is the list template surface.\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-list-template-mwbme9ay",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4940,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/media-image-video-audio",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): none",
+        "plain Tab reached: clip, voice; Option+Tab reached: clip, voice",
+        "aria-busy transitions: 149ms=null(idle), 4737ms=true(running), 4907ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 149ms:\"\" | 4737ms:\"Assistant is responding.\" | 4907ms:\"Assistant replied: Here is the media image video audio surfa\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-media-image-video-audio-mwbmegkx",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> video#a2ui:clip \"Video\"",
+          "4. Tab -> video#a2ui:clip \"Video\"",
+          "5. Tab -> audio#a2ui:voice \"Voice note\"",
+          "6. Tab -> audio#a2ui:voice \"Voice note\"",
+          "7. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> video#a2ui:clip \"Video\"",
+          "3. opt+Tab -> audio#a2ui:voice \"Voice note\"",
+          "4. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5717.000000000001,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": [
+        "Tab press 4 left focus on video#a2ui:clip \"Video\"; pressed again",
+        "Tab press 6 left focus on audio#a2ui:voice \"Voice note\"; pressed again",
+        "Tab press 7 left focus on audio#a2ui:voice \"Voice note\"; pressed again"
+      ]
+    },
+    {
+      "id": "a2ui/nested-layout",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): root, modal_trigger",
+        "plain Tab reached: root, modal_trigger; Option+Tab reached: none",
+        "aria-busy transitions: 142ms=null(idle), 4587ms=true(running), 4715ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 142ms:\"\" | 4587ms:\"Assistant is responding.\" | 4716ms:\"Assistant replied: Here is the nested layout surface.\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-nested-layout-mwbmeqle",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> button[type=button]#a2ui:root \"Agenda\"",
+          "4. Tab -> button[type=button]#a2ui:root \"Notes\"",
+          "5. Tab -> button[type=button]#a2ui:modal_trigger \"Details\"",
+          "6. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5576.000000000001,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/unknown-component-fallback",
+      "prototype": "own",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): none",
+        "plain Tab reached: none; Option+Tab reached: none",
+        "aria-busy transitions: 174ms=null(idle), 4093ms=true(running), 4219ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=status) changes: 174ms:\"\" | 4093ms:\"Assistant is responding.\" | 4220ms:\"Assistant replied: Here is the unknown component fallback su\""
+      ],
+      "runId": "a11y-own-a2ui-a2ui-unknown-component-fallback-mwbmeyzj",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "3. Tab -> input[type=text]#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> body \"Know Meet · Concierge Prototype O Show t\"",
+          "2. opt+Tab -> input[type=text]#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5066,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "failures": []
+}

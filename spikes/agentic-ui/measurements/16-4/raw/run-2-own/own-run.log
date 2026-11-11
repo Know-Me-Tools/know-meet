@@ -1,0 +1,34 @@
+stream: a11y-own-stream-long-markdown-mwbm70ix
+(node:61561) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ERROR timed out after 30000 ms waiting for a11y-state
+focus: a11y-own-focus-hitl-approve-mwbm7zrk
+  PASS a11y-5 streaming and approval never steal focus (+ axe with pending approval)
+approve: a11y-own-approve-hitl-approve-mwbm855w
+  PASS a11y-6 approval can be approved from the keyboard
+  PASS conformance hitl-approve (collector compare.ts)
+reject: a11y-own-reject-hitl-reject-mwbm8c02
+  PASS a11y-7 approval can be rejectd from the keyboard
+  PASS conformance hitl-reject (collector compare.ts)
+alert: a11y-own-alert-run-error-mwbm8izc
+  PASS a11y-8 run errors use role=alert
+  FAIL conformance run-error (collector compare.ts): FAIL messages[0].text: expected "Fetch last week's recording.", got "Fetch last week’s recording."
+a2ui/button-actions-roundtrip: a11y-own-a2ui-a2ui-button-actions-roundtrip-mwbm8nlk
+  FAIL a2ui/button-actions-roundtrip: FAIL A2UI controls not reached by Option+Tab: accept_btn, decline_btn
+a2ui/card-with-action: a11y-own-a2ui-a2ui-card-with-action-mwbm8wdp
+  FAIL a2ui/card-with-action: FAIL A2UI controls not reached by Option+Tab: add_btn
+a2ui/form-validation: a11y-own-a2ui-a2ui-form-validation-mwbm949z
+  FAIL a2ui/form-validation: FAIL A2UI controls not reached by Option+Tab: role_picker, agree_box, submit_btn
+a2ui-keyboard: a11y-own-a2ui-keyboard-a2ui-form-validation-mwbm9j5e
+  PASS a2ui/form-validation keyboard-only submit
+a2ui/incremental-update-delete: a11y-own-a2ui-a2ui-incremental-update-delete-mwbm9rc5
+  PASS a2ui/incremental-update-delete
+a2ui/list-template: a11y-own-a2ui-a2ui-list-template-mwbm9zdp
+  PASS a2ui/list-template
+a2ui/media-image-video-audio: a11y-own-a2ui-a2ui-media-image-video-audio-mwbma6mz
+  PASS a2ui/media-image-video-audio
+a2ui/nested-layout: a11y-own-a2ui-a2ui-nested-layout-mwbmagwb
+  FAIL a2ui/nested-layout: FAIL A2UI controls not reached by Option+Tab: root, modal_trigger
+a2ui/unknown-component-fallback: a11y-own-a2ui-a2ui-unknown-component-fallback-mwbmapch
+  PASS a2ui/unknown-component-fallback
+11/16 pass, 1 errors -> ../measurements/16-4/raw/run-2-own/own-results-mwbmawlc.json

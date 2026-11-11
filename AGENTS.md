@@ -1,0 +1,363 @@
+# Know Meet — agent rules
+
+Know Meet is the KnowMe meeting room: agentic video meetings on LiveKit. This
+repository holds the brand system and design prototypes (`docs/design/`) and, from
+the `hybrid-shell-foundation` phase on, the application shells:
+
+- **Web:** React 19
+- **Desktop:** Tauri, running the *same* React web build
+- **Mobile:** Flutter
+
+These rules apply to every agent and harness: Claude Code, Codex, OpenCode, Kimi
+Code, MiniMax Code, Qwen Code, Zed and any other. `CLAUDE.md` imports this file.
+
+## Process
+
+- Work goes through KBD (`.kbd-orchestrator/`) and OpenSpec (`openspec/`): assess →
+  analyze → plan → execute → reflect. Don't shortcut stages or edit generated KBD
+  JSON by hand.
+- `.kbd-orchestrator/constraints.md` holds the machine-checkable constraints.
+  `.kbd-orchestrator/project.json` holds the build, test and lint commands.
+
+## File naming: kebab-case
+
+- File and directory names are **kebab-case**: lowercase words joined by hyphens,
+  for example `meeting-tile.tsx`, `use-room-state.ts`, `design-tokens/`.
+- The *name of the code symbol* still follows its language: `meeting-tile.tsx`
+  exports `MeetingTile`, and `use-room-state.ts` exports `useRoomState`.
+- **Exceptions**, only where the toolchain requires another form:
+  - **Dart/Flutter source:** `lower_snake_case.dart`, required by the Dart
+    `file_names` lint and import conventions.
+  - **Dart and Rust source directories** under `lib/`, `test/` and `src/` follow the same snake_case rule, because they are module names.
+  - **Rust source modules:** `snake_case.rs`, because hyphens aren't valid module
+    identifiers. Crate package names may stay kebab-case.
+  - **Tool-mandated names:**
+    - Project docs: `README.md`, `LICENSE`, `CHANGELOG.md`, `AGENTS.md`, `CLAUDE.md`
+    - Rust: `Cargo.toml`, `Cargo.lock`, `build.rs`, `main.rs`, `lib.rs`, `mod.rs`
+    - Dart: `pubspec.yaml`, `analysis_options.yaml`
+    - JS tooling: `package.json`, `tsconfig*.json`, `vite.config.ts`,
+      `components.json`, `tauri.conf.json`
+    - Containers: `Dockerfile`
+    - Dotfiles
+    - Generator-owned docs: `PRODUCT.md` (Impeccable), `.agent-team/**/SKILLS.md`
+    - KBD state under `.kbd-orchestrator/**`, which the KBD runtime names
+  - **Native platform scaffolding** created by `flutter create`, Xcode or Gradle
+    (`AppDelegate.swift`, `MainActivity.kt`, `Info.plist`, `AndroidManifest.xml`,
+    Gradle files).
+  - **Files whose names a generator owns**, for example `routeTree.gen.ts`,
+    `*.g.dart`, `*.freezed.dart`.
+  - **AI-harness integration files** that OpenSpec or another tool generates inside
+    `.agents/`, `.claude/`, `.codex/`, `.dsh/`, `.kimi-code/`, `.opencode/`,
+    `.qwen/` or `.zed/` (`SKILL.md`, command files, `.openspec-target`).
+
+## File size: 500 lines maximum
+
+- **No file may exceed 500 lines, in any language.** That covers TypeScript, TSX, CSS,
+  Rust, Dart, shell, config and Markdown.
+- Before creating or extending a file, check its line count. If the change would
+  take it past 500 lines, restructure it into a directory first, in the same change.
+- When a file would pass 500 lines, **don't grow it and don't split it arbitrarily.**
+  Replace it with a **directory named after the function or feature**, and divide
+  the code by clean-architecture responsibility, so each file has one reason to
+  change:
+
+  ```text
+  room-controls/              # was room-controls.tsx (over 500 lines)
+    index.ts                  # public surface: re-exports only
+    domain/                   # entities, value objects, rules (no framework imports)
+    application/              # use cases, state orchestration, ports (interfaces)
+    infrastructure/           # adapters: LiveKit, Tauri IPC, HTTP, storage
+    presentation/             # components, hooks, view models, styles
+  ```
+
+  Use only the layers the feature needs. A small feature may only need
+  `presentation/` and `application/`. Use the same shape in Rust (`mod.rs` / `lib.rs`
+  re-exports) and Dart (a barrel `<feature>.dart` exporting the public files).
+- **Dependencies point inward:** presentation → application → domain, and
+  infrastructure → application/domain. Domain and application code never imports UI
+  frameworks, Tauri, Flutter or the LiveKit SDK.
+- Splitting should make the code *easier to read and reason about*. Name files after
+  what they do (`join-room.ts`, `token-request.ts`), not `utils-2.ts` or `part-b.ts`.
+- **Exceptions** (these can't be meaningfully split):
+  - Lockfiles: `pnpm-lock.yaml`, `Cargo.lock`, `pubspec.lock`.
+  - Generated code: flutter_rust_bridge output, `*.g.dart`, `*.freezed.dart`,
+    `routeTree.gen.ts`, Tauri `gen/` schemas. Regenerate them instead of editing.
+  - Vendored third-party code, for example `assets/vendor/*`.
+  - Native platform project files, for example `project.pbxproj`.
+  - Test fixtures, golden images and recorded snapshot data.
+  - AI-harness skill and command files generated by OpenSpec or other tools (the
+    same harness folders as above). `openspec update` rewrites them, so don't edit
+    or split them.
+  - The frozen design prototypes in `docs/design/prototype/**` and
+    `docs/design/live/**` (operator decision, 2026-11-09), plus the stale root
+    `live/**` folder under a temporary exception until it is removed.
+  - KBD runtime state: `.kbd-orchestrator/**/*.json`, `*.jsonl` and `*.sig`, raw reviewer streams `.kbd-orchestrator/**/review/**/raw-*.txt`, and the agent-team generated manifests `.agent-team/**/team.json` and `state.json` (Markdown there still follows the rule).
+  - `CHANGELOG.md`. Every other long-form doc, OpenSpec specs and READMEs
+    included, follows the 500-line rule: split it by section into a directory with
+    an index.
+- An automated checker (line count plus naming, honouring the exceptions above) will
+  be wired into the lint command, a pre-commit hook and CI during the
+  `hybrid-shell-foundation` phase.
+
+## Design fidelity
+
+- `docs/design/` is the visual source of truth: `tokens.json` / `tokens.css`, the
+  brand guide and the prototypes. Every shell must match it in both dark and light
+  themes.
+- Colours, type, spacing, radii and motion come from the design tokens. Don't add
+  ad-hoc hex values or font stacks in app code.
+- UI primitives come from the shared shadcn/ui component set themed with the
+  tokens. Don't copy components per app.
+- Fidelity is proven with screenshots against the prototypes at 375, 768, 1024 and
+  1440 in both themes. Passing architecture checks alone is not proof.
+
+## Required skills
+
+Load these skills by name before the matching work, in every harness. If a
+harness does not list one, invoke it by name; if it is truly unavailable, say so
+and follow the fallback in the role's instructions. Never imitate a skill you
+did not load.
+
+- **Web and desktop UI design and refinement (Impeccable is mandatory).** Load
+  `impeccable` for any change to how a web or Tauri screen looks or behaves, and
+  run its context step first so `PRODUCT.md` and `DESIGN.md` govern the work.
+  - New surface or flow: `impeccable shape`, then build.
+  - Refining existing UI: the matching command (`critique`, `audit`, `polish`,
+    `layout`, `typeset`, `clarify`, `adapt`, `harden`, `animate`), and
+    `audit` plus `polish` before handoff.
+  - Recording the design system: `impeccable document` or `extract`.
+  - Refinement preserves the incumbent Know Meet design; no redesign without
+    owner approval. Route through `prometheus-ui-ux`; build components with
+    `shadcn`; use `ui-ux-pro-max` for reasoned lookups only, never as a second
+    direction; UI review uses `prometheus-ui-review`.
+- **Agentic UI (decided 2026-11-10: own core).** Agent UIs use Know Meet's own AG-UI core: an SSE transport and a pure reducer on `@ag-ui/core` types in domain/application, with `@prometheus-ags/entity-graph` as the store of record; Streamdown with explicit origin allowlists for markdown; `@a2ui/react` with a Know Meet component catalog for A2UI; shadcn AI Elements patterns themed by the tokens. AG-UI and A2UI are the only wire contracts. Don't add assistant-ui, CopilotKit or another chat framework. Reference implementation: `spikes/agentic-ui/own/`. Product adoption waits on the c16 gates.
+- **React and TypeScript.** Load `vercel-react-best-practices` for every React
+  component, hook or data-loading change, `vercel-composition-patterns` for
+  component APIs and composition, `react-vite-stack` for Vite, routing and app
+  wiring, and `typescript-base-patterns` for non-UI TypeScript. Use
+  `tauri-react-vite` when the change touches the Tauri host or its IPC.
+- **Rust (Tauri host and any Rust crate).** Load `prometheus-rust-workspace`
+  first; it routes Rust skills and owns Cargo timing. Then `rust-best-practices`
+  for general work, `rust-async-patterns` for Tokio and concurrency,
+  `m06-error-handling` for error design, `rust-testing` for tests,
+  `unsafe-checker` for any `unsafe`, and `rust-code-review` or
+  `tokio-async-code-review` for review.
+
+## Never do
+
+- Never commit LiveKit or other secrets. `LIVEKIT_*` values come only from the shell
+  environment and stay server-side. Clients receive short-lived tokens.
+- Never write to `/Users/gqadonis/Projects/hybrid-mobile-architecture-src`. It is a
+  read-only reference.
+- Never call Tauri APIs unguarded in shared web code. Wrap them in an `isTauri()`
+  check, so the plain web build keeps working.
+- Never use `any` in TypeScript.
+- Don't use the root `live/` folder. It's a stale duplicate of
+  `docs/design/live/`, pending removal.
+
+<!-- prometheus-team-routing:start v1 -->
+For every code task, read `.agent-team/project-routing.json`, then its active team manifest and the relevant role instructions. Default to that team, selecting only roles whose responsibilities and ownership match the work. Preserve native permissions, models, concurrency limits and existing project instructions.
+For UI work, load the role-bound `prometheus-ui-ux` or `prometheus-ui-review` skill. Prefer `.agents/UI_UX_PROTOCOL.md` when present; otherwise use the installed `prometheus-ui-ux/references/UI_UX_PROTOCOL.md`. Backend work must not load UI guidance.
+Use native delegation when available. If unavailable, follow the selected role instructions sequentially and report that limitation. Review in the builder context is not independent review. Keep reviewers dormant until the complete implementation phase; allow one batched correction/confirmation cycle. Respect user-only skill invocation restrictions. Zed external ACP agents use their own native configuration; parallel UI threads are not an automatic delegation API.
+Cross-team requests: when work needs another team, run `team-discover` (capabilities, paths) and `team-request`; a same-repo team gets an intake task, any other team gets a `team:<id>` GitHub issue. If this team has a card, run `team-intake` to import open `team:<id>` issues as tasks for its intake role, and triage them before other work.
+<!-- prometheus-team-routing:end -->
+
+<!-- prometheus-base:start v1 -->
+# Agent Operating Rules
+
+Invariants that must survive compaction; detail lives in on-demand rules,
+skills, hooks and references. A hook that enforces a rule here wins. Managed by
+`prometheus-context-bootstrap`: edits inside these markers are overwritten, so
+write project prose outside them.
+
+## Position and authority
+
+- Signed canonical KBD status/decisions and the adopted phase contract are authoritative; `.kbd-orchestrator/current-waypoint.json` is their derived position view.
+- `versions.toml` is authoritative for architecture decisions and dependency pins.
+- READMEs go stale. Do not trust one over the two files above.
+- Read the waypoint at session start. State the current phase before executing.
+- Recover the active phase's `method-context.md` and contract references before dependent work. The index is advisory: resolve canonical identity, selected method/supersession, included value, exclusions, stage authority, evidence freshness, consumed budgets and unresolved effects. State missing or stale references; never guess them.
+
+## Capability inversion
+
+Agent kernels do not write. Mutating actions are gated only in the trusted
+host layer, enforced at the dependency graph where the language allows. If a
+task appears to need a kernel write, stop and surface the conflict.
+
+## Phase order
+
+Task loop: Spec, Plan, Execute, Reflect.
+Evolution loop: Compile, Evaluate, Optimize, Promote.
+
+Name the phase you are in; never execute before a plan exists.
+
+## Verification boundaries
+
+Finish every planned production change in the phase, using static inspection
+and only the narrow compiler checks needed to unblock progress, then run one
+integration gate through the real production path at the final phase boundary.
+Keep reviewer, auditor, verifier and integration-checker roles dormant until
+then. Unit, mock-only, filtered-function and per-edit tests are not completion
+evidence. Per-stack commands live in `.claude/rules/`, loaded on matching reads.
+
+For selected VLBV: define acceptance scenarios before generation, and run no
+generated-code tests, builds, imports, lint, typecheck, hooks or probes during
+it. A task, commit, review request, compiler problem or renamed slice is not the
+value-phase boundary. Surface a conflicting host compiler exception before
+dependent action; never rewrite owner policy or infer permission. Recover the
+latest authorized supersession without reviving retired workflows; keep
+original evidence, candidate identity, consumed budgets and unresolved effects,
+and reconcile uncertain effects before retry. These are instruction-only rules unless
+a named trusted host boundary enforces them. Publication cadence does not
+certify partial value, grant release authority or create a successor.
+
+- `.claude/rules/rust.md` — rust tiers and hard rules
+- `.claude/rules/typescript.md` — typescript tiers and hard rules
+- `.claude/rules/flutter.md` — flutter tiers and hard rules
+- `.claude/rules/python.md` — python tiers and hard rules
+
+## Evidentiary standard
+
+Address observed problems: an operator report, a visible error or log, a
+failing test, or an explicit requirement. Anything else gets one sentence and a
+question, never speculative code. Defensive code (validation, guards, fallbacks,
+retries, timeouts) needs a named failure scenario; hardening at a real trust
+boundary is the exception, and is named in the completion summary.
+
+## Evidence over assertion
+
+Show the command and output, test result or artifact, and the boundary it ran
+at. If a check could not run, say which claims are unverified. An unverified
+claim reported as verified is worse than no check.
+
+## Anti-sycophancy
+
+Review through the `artifact-critic` subagent, which sees the artifact but not
+its generation history; the producer is never the sole judge. Reflections lead
+with the plan-to-delivery delta. If the sycophancy gate blocks a turn, fix the
+finding.
+
+## Learning and memory
+
+Learning is append-only under `.prometheus/` (`session-log.md`, `decisions.md`,
+`gotchas.md`, `postmortems/`, `knowledge/`); mark superseded entries, never
+delete. Record decisions with rationale, defects with root cause, learned
+constraints, phase boundaries and session summaries. Read `gotchas.md` before
+touching a subsystem.
+
+A configured memory server is the primary store; if its write fails, log to
+the files above and continue. Never block a task on it.
+
+## Architecture
+
+- Single-writer build discipline within one build or target directory.
+- Feature-based organization by capability, not by technical layer.
+- Strict layering: UI, then hooks or view models, then stores, then services,
+  then external. Reverse flow only through reactive state or events.
+- Business state lives in explicit, inspectable systems, never in UI components
+  or agent-only memory.
+- Open standards first. Avoid lock-in unless explicitly required.
+- Verify dependency versions against official sources before introducing them.
+  Do not rely on training-era version knowledge.
+
+## Scope
+
+Make the minimum change. Treat adjacent working code as intentional; mention
+unrelated issues rather than fixing them. Confirm intent before destructive or
+hard-to-reverse actions, and prefer a reversible path.
+
+## Skills may be absent
+
+Harnesses drop skill descriptions past a context budget. If an expected skill
+is not listed, invoke it by name or say it is unavailable and proceed from these
+rules. Never invent what an absent skill would have done.
+
+## Communication
+
+Direct and execution-first. Structure claims as statement, mechanism, stakes.
+Short declarative sentences. No marketing language.
+
+Avoid: leverage as a verb, utilize, synergy, roadmap as a verb, journey,
+harness as a verb, delve, revolutionary.
+
+Every significant document names the uncomfortable thing — the scenario that
+hurts the author's own position.
+
+## Done
+
+Done means the stated integration exit criteria pass at the applicable
+boundary. Before declaring it: remove anything unrequested, confirm each guard
+traces to an observed problem or real boundary, and summarize what changed, how
+it was verified, and what remains at risk.
+
+## Execution scaffold
+
+For mixed fleets: smaller models skip these behaviors silently, producing
+plausible output with a fabricated call in it. Omit only when every model that
+reads this file is measured to supply them.
+
+### Before executing
+
+Restate the task in one sentence, and name the phase. If the restatement does
+not match what was asked, stop and ask rather than proceeding on the closer
+reading. Name the files you intend to touch before touching them.
+
+### Do not fabricate
+
+Never invent an API, file path, package name, command flag or configuration
+key. Verify anything not read this session or pinned in `versions.toml`; "I
+could not confirm this exists" is a correct answer. Read a tool's schema before
+calling it; invented arguments fail in ways that look like a broken tool.
+
+### Verification is explicit
+
+Paste the command and its actual output. Never report a result you did not
+observe or describe what a test "should" produce.
+
+### Code output
+
+Never elide code with `...`, `// rest unchanged`, or a similar placeholder in a
+file you are writing. Emit the complete content of every file you write.
+
+When editing, change the minimum span. Do not reformat, reorder imports, or
+rename adjacent symbols while making an unrelated change.
+
+Match the file's existing conventions over your own defaults.
+
+### Complete coherent sets
+
+Batch related work until a production path is complete; do not build or test
+after every edit, and do not start an unrelated subsystem while a set is partial.
+
+### Stop conditions
+
+Stop and ask when: the requirement is ambiguous in a way that changes the
+design, two readings of the task lead to different files, the change would
+break an existing behavior, or you are about to do something hard to reverse.
+
+Stop when the goal is met. Do not continue into adjacent improvements.
+
+### Format contracts
+
+When a format is requested (JSON, table, diff, schema), emit exactly that: no
+preamble, no trailing commentary, no fence unless asked. A parser may read it.
+
+### Self-check before reporting completion
+
+State each of these explicitly, not as a claim that you did them:
+
+1. What changed, file by file.
+2. What was run to verify it, and the observed output.
+3. What was added that was not requested — remove it, or list it and ask.
+4. Which guards trace to an observed failure, and which do not.
+5. What remains unverified, and why.
+
+<!-- profile: mixed — see references/MODEL-PROFILES.md before changing -->
+<!-- prometheus-base:end -->
+
+<!-- uiux-routing:start v1 -->
+## UI/UX routing
+UI, styles, tokens, motion or copy → `prometheus-ui-ux`. Read `.agents/UI_UX_PROTOCOL.md` or its bundled default; preserve design authority.
+All code: detect `.agent-team/project-routing.json` and real team manifests. Preserve selection; adopt a sole team; ask if ambiguous. Use relevant roles, disclosing sequential fallback.
+Backend work loads no UI guidance. Review respects user-only skills and the completed-phase boundary.
+<!-- uiux-routing:end -->

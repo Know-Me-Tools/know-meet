@@ -1,0 +1,78 @@
+{
+ "hybrid-no-profiling": {
+  "initialLoadFiles": [
+   "index.html",
+   "assets/index-CgvHgwl1.js",
+   "assets/rolldown-runtime-vfrPO-fZ.js",
+   "assets/index-GbR0O9d6.css"
+  ],
+  "initialLoad": {
+   "raw": 2514750,
+   "gzip": 726699,
+   "brotli": 596138
+  },
+  "distTotals": {
+   "files": 465,
+   "raw": 16797766,
+   "gzip": 4790299,
+   "brotli": 4237395
+  }
+ },
+ "hybrid-profiling": {
+  "initialLoadFiles": [
+   "index.html",
+   "assets/index-DhsX1UV8.js",
+   "assets/rolldown-runtime-vfrPO-fZ.js",
+   "assets/index-GbR0O9d6.css"
+  ],
+  "initialLoad": {
+   "raw": 2531656,
+   "gzip": 731787,
+   "brotli": 600261
+  },
+  "distTotals": {
+   "files": 465,
+   "raw": 16814672,
+   "gzip": 4795327,
+   "brotli": 4241452
+  }
+ },
+ "own-no-profiling": {
+  "initialLoadFiles": [
+   "index.html",
+   "assets/index-C78M6x0T.js",
+   "assets/rolldown-runtime-COiEfhsA.js",
+   "assets/index-BTitciPw.css"
+  ],
+  "initialLoad": {
+   "raw": 1665010,
+   "gzip": 489649,
+   "brotli": 405277
+  },
+  "distTotals": {
+   "files": 466,
+   "raw": 15951800,
+   "gzip": 4556745,
+   "brotli": 4049898
+  }
+ },
+ "own-profiling": {
+  "initialLoadFiles": [
+   "index.html",
+   "assets/index-rt64f2L4.js",
+   "assets/rolldown-runtime-COiEfhsA.js",
+   "assets/index-BTitciPw.css"
+  ],
+  "initialLoad": {
+   "raw": 1681902,
+   "gzip": 494764,
+   "brotli": 409252
+  },
+  "distTotals": {
+   "files": 466,
+   "raw": 15968692,
+   "gzip": 4561892,
+   "brotli": 4053809
+  }
+ }
+}

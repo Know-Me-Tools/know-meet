@@ -1,0 +1,11 @@
+1794374671171 vo-form: a11y-own-a2ui-keyboard-a2ui-form-validation-mwbocldv (harness http://127.0.0.1:4327)
+1794374678661 MARK tab to name_field, type Ana
+1794374680978 MARK tab to email_field, type not-an-email
+1794374683567 MARK tab to submit_btn (invalid form)
+1794374686056 MARK Enter on submit_btn with invalid email
+1794374689305 MARK after invalid submit: active=button[type=button]#a2ui:submit_btn "Send invite"; actions sent=0; "Enter a valid email" visible=true
+1794374689305 MARK shift+tab back to email_field, replace with ana@know-me.tools
+1794374694138 MARK tab to agree_box, Space
+1794374697119 MARK tab to submit_btn (valid form)
+1794374697960 MARK Enter on submit_btn with valid form
+1794374704262 ERROR app not frontmost (frontmost pid 88777); input refused

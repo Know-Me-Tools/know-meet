@@ -1,0 +1,80 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "media-image-video-audio",
+  "title": "Image, Video and AudioPlayer from allowed and disallowed origins",
+  "description": "Allowed-origin media must render; the image from {{EVIL_ORIGIN}} must be blocked (never requested) and shown as a blocked placeholder.",
+  "surfaceId": "km-recording-media",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-recording-media",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-recording-media",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": [
+              "still",
+              "clip",
+              "voice",
+              "tracker"
+            ]
+          },
+          {
+            "id": "still",
+            "component": "Image",
+            "url": "{{ALLOWED_ORIGIN}}/media/whiteboard.png",
+            "description": "Whiteboard"
+          },
+          {
+            "id": "clip",
+            "component": "Video",
+            "url": "{{ALLOWED_ORIGIN}}/media/clip.mp4",
+            "posterUrl": "{{ALLOWED_ORIGIN}}/media/poster.png"
+          },
+          {
+            "id": "voice",
+            "component": "AudioPlayer",
+            "url": "{{ALLOWED_ORIGIN}}/media/note.wav",
+            "description": "Voice note"
+          },
+          {
+            "id": "tracker",
+            "component": "Image",
+            "url": "{{EVIL_ORIGIN}}/beacon/a2ui-image.png",
+            "description": "Tracking pixel"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "still",
+      "clip",
+      "voice",
+      "tracker"
+    ],
+    "fallbackComponentIds": [],
+    "visibleText": [],
+    "blockedMediaUrls": [
+      "{{EVIL_ORIGIN}}/beacon/a2ui-image.png"
+    ]
+  },
+  "flutterNotes": "a2ui_flutter uses video_player for Video; record whether an origin allowlist hook exists. If not, parity fails on 'tracker'."
+}

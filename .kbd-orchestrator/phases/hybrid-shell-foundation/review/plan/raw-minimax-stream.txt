@@ -1,0 +1,655 @@
+<think>We need produce JSON only findings reviewing plan against packet. Need deeply inspect artifact, goals, prior handoffs, constraints, file tree. Need identify concrete errors that make downstream work wrong. Need line references perhaps derive line numbers from artifact string. Need be precise. We cannot inspect assessment/analysis full, only handoffs. Judge packet. Need likely find contradictions with prior handoff: analysis recommends strip rust-core/Axum/UAR/PEM, but operator decisions "Keep everything generator produces" supersede? Plan says operator decision, and scope cut. We need see consistency.
+
+Let's parse plan carefully and goals/constraints.
+
+Goals:
+- use hybrid package no handrolled substitute
+- Desktop Tauri React19 shared web
+- mobile Flutter iOS/Android
+- web React19 clean architecture
+- shared shadcn
+- perfect fidelity from docs/design tokens, brand guide, prototype and live prototype before feature work
+- Flutter mirrors
+- set real build/test/lint commands project.json
+- full KBD OpenSpec no shortcuts.
+
+Constraints:
+blocking no secrets, token secret server, design tokens single source, reference read-only, max500, kebab, no any, build passes.
+Warnings fidelity etc.
+
+Plan 13 changes.
+
+Potential issues:
+1 c05 generation depends only c01, but c05 imports generated tokens? It says generator? c05 scaffolds generated code perhaps includes token stuff. c06 depends c05,c04. Fine.
+2 c03 depends c01,c02 but captures prototype baselines. "before any generation" c03 and c05 same Round 2 parallel! The explicit recalled lesson and goal say value scenarios/prototype baselines defined before any screen is generated; c03 and c05 execute parallel in Round 2, and c05 generation begins potentially before c03 complete. Also c10/c11 depend c09 but not c03? Task model prerequisites says c03 baselines, but change dependency lists c09 only and round structure: c03 Round2, screens later, so available. Fine.
+3 c04 token generator depends c01,c02. c02 says tokens hand-edited. c04 emits generated files from canonical tokens. Fine.
+4 c07 depends c05,c04; task 7.2 prerequisite c04 Dart output. good.
+5 c12 depends c07, but needs c04 tokens? c07 handles theme perhaps c12 frame themed by generated ThemeData. Change dependency says c07 only; transitive c07 depends c04. okay.
+6 c08 depends c06,c04; c09 depends c08. screens depend c09 only; c03 done earlier. fine.
+7 c13 depends c03 and c06-c12. It runs boundary packet. Could require c05 etc transitively. yes.
+8 task coverage omits VS-7 though c02 says route inventory defines VS-7. Goal list mentions? Plan has VS-1..5,8,9. The assessment likely scenarios included VS-7. In Task model c02.3 "Defines the VS-7 scope". Yet scenario coverage omits VS-7 and c13 records only VS1-5,8,9. If contract boundary likely scenarios. This is concrete missing coverage. Need identify perhaps critical because contract? We know c02 references VS-7, meaning VS-7 exists. c13 doesn't record evidence for it. Could be critical downstream boundary doesn't verify scenario. Need quote evidence. Severity critical likely contract coverage missing.
+
+9 c03 says Gherkin features VS-1 to VS-5, VS-8, VS-9, omits VS-6, VS-7 perhaps intentionally out of scope? But c02 task 2.3 explicitly "Defines the VS-7 scope". This contradiction indicates VS7 scope task, perhaps route scope not validation scenario? It says defines VS-7 scope. If VS-7 is scope statement, maybe no evidence? Need know likely scenario numbering. The prior handoff mentions subset of 68 prototype routes, operator decisions. We can infer VS-7 likely route scope. Plan c02 route inventory and theme notes. Yet boundary should perhaps verify route scope. At minimum missing explicit scenario coverage. Finding.
+
+10 Build/test/lint commands project.json goal. c01 task 1.4 says scripts, hook, CI; prerequisite "delivery-lead updates project.json commands". Does c01 itself include updating `.kbd-orchestrator/project.json`? Scope details says wire scripts; task says delivery-lead updates project.json commands. Goal explicitly set real commands in project.json. Could count covered, but potentially plan c13/build needs commands. The task assignment prerequisite says delivery-lead updates project.json commands. Need assess if clear enough. It says commands introduced c01. c01 details don't explicitly mention project.json, but task 1.4 prereq says delivery-lead updates project.json commands. Could be okay. Yet ordering: c13 depends c01 transitively. Not issue.
+11 Build-passes constraint commands undefined until phase sets them. c01 sets scripts but c05 import might break build, c06 etc. c13 final boundary. Is there intermediate build checks after each? Not explicitly. But goal only set commands. "build-passes checked against commands phase introduces" perhaps final. c13 likely boundary runs. No explicit task to run build/test/lint at each change. Scope c01 scripts, c13 boundary. Could be okay, but acceptance criteria are not explicit per change at all. Plan is change list, each task. Mandate says untestable/ambiguous acceptance criteria. Need find concrete weak criteria. Many tasks don't specify files/tests or measurable outcomes. We need avoid padding; identify impactful.
+
+12 Constraint design-tokens-single-source says brand colors/type/spacing from docs/design/tokens.css / tokens.json; no ad-hoc hex in app UI. Plan c02 reconciles tokens into docs/design/tokens.json, c04 generator emits CSS, Dart, etc. Good. But c08 says components "restyled to match prototype's components in km.css and room.css" potentially copy ad hoc colors/values rather than generated tokens. Yet plan says themed by tokens. Fine.
+
+13 c02 says self-host OFL fonts in packages/design-tokens/fonts. Constraint source tokens. okay.
+14 c05 says apply kebab renames while keeping Dart/Rust exceptions. Also generated code exceptions? Max500 exception generated code etc. c05 import generator output may include files over 500 not necessarily generated markers? "generator output" should be exceptions per constraint: generated code (*.g.dart, *.freezed.dart, routeTree.gen.ts, frb output, src-tauri/gen/**), not all generator output. c05 then likely file split/clean architecture. c06 mapping. BFF etc. The plan says "mapping onto four clean-architecture layers" but c05 imports crates/BFF/UAR/PEM as generated. Does it require max500 all files? c01 line checker. c05 task import fixes. But plan doesn't specify splitting any imported/generated files over 500, except operator "500-line compliance". c05 5.3 kebab and import fixes; maybe "import fixes" vague. c06 four layers applies React. Need see constraints: no authored file >500, oversized becomes feature directory split. Generator output exceptions limited. Plan must ensure. Could be missing dependency/action for line count compliance on imported generator content. c05 applies kebab but not explicitly 500. c06/c07 etc mostly. c05 5.2 perhaps "Import Rust, BFF, UAR and PEM; Cargo workspace"; 5.3 "Kebab-case renames and import fixes." The operator decision says keep everything, restructuring limited to "merging duplicated web and desktop React apps into one bundle, kebab-case and 500-line compliance, and mapping onto four clean-architecture layers." So maybe 500 line compliance is implicit globally. c01 checker and c05 import fixes likely covers. But exact task not obvious. Could report missing acceptance criterion? Need concrete.
+
+15 Kebab case file names: c08 initializes shadcn in packages/ui; many shadcn generated components use names maybe `button.tsx`, okay. Flutter lower snake. Rust snake.
+16 no any TypeScript: no explicit task/check! c01 Biome might enforce no explicit any? Biome has noExplicitAny perhaps enabled. Plan says configure Biome, but does not state enabling noExplicitAny. Constraint blocking. Could c01 line checker? no. c05 generator output may have any; c06 mapping etc. There is no explicit enforcement for `no-any-type`. This is a missing constraint coverage. Similarly secrets checks, token secret server side, reference read-only. Some are process constraints not necessarily changes. But c01 "enforced repo rules" should include line checker only? Details explicitly Biome/ls-lint/line checker. No secret scanners or no-any check. c13 security review might catch secrets and token placement. Still constraint says blocking and plan should cover. Is it enough c13 security review? No server token auth in scope (static screens), no secret. c05 may import BFF with hardcoded? Security review at c13 detects. But plan needs build/test/lint commands maybe no any enforced. Could find.
+
+17 Build passes constraint: c13 boundary runs after implementation. Does c13 explicitly run build? "run contract boundary packet once; record evidence..." likely contract includes build? We don't know. c13 scenarios include VS9 maybe build. Task model 13.1-13.7 evidence. Could infer. Prior handoff analysis says etc. But plan doesn't explicitly state final build/test/lint commands run, only "boundary packet". Since goal set real commands and blocking build-passes, acceptance should explicitly run them. Maybe contract boundary likely. Yet judge only packet; cannot assume. Concrete omission: no explicit task says execute the newly defined build command at any point or acceptance criterion that build passes. Could be warning/critical. Constraint's check points to project.json. The plan must ensure. c01 wires scripts, c13 boundary run, but no line saying build command is run. The contract likely might, but not shown. We only have summary "boundary packet." We can't inspect contract. Could cite absence. Downstream could mark complete without build passing. Likely critical.
+
+18 Constraints no secrets: c05 imports Rust/BFF/UAR/PEM and c13 security review. Need ensure BFF minting tokens server-side if token functionality? Scope static screens, no interactive flows. Yet keep BFF. Token-secret-stays-server-side applies any token/auth change. c13 security review covers. Could be acceptable.
+19 Reference repo read-only: c04 task 4.1 says vendor generator from reference; prerequisite read-only access. It says "Copy and record provenance." Does not explicitly say copy out read-only without modifying. Process.
+20 design prototype fidelity warning includes docs/design/prototype and docs/design/live. Plan references only `index.html`, etc and km.css/room.css, but file_tree only `live/` stale duplicate and `docs/design` (not contents due tree limited). Plan says prototype from docs/design? c02 route inventory, c03 baseline every in-scope route both themes. c10 screens matching `index.html`, `auth.html`, `join.html`—file names exist under stale `live/`, but constraints say live root is stale duplicate and must not be used as source. Plan details don't include paths. It says "matching index.html..." but could refer docs/design/live. Yet c11 too. Recalled lesson says prototype. The plan's c02 token reconciliation from `km.css`; likely docs/design/prototype/km.css. c10 could be ambiguous. The file tree has `live/index.html`, etc at root and `docs/design` directory but no listed contents. Constraints explicitly root live stale and must not be source. If plan uses unqualified `index.html`, likely ambiguity. We can report warning: source path ambiguous and likely stale due plan cites bare filenames matching root live. Concrete. But perhaps plan context clear "prototype" and prior path ownership. Still downstream worker might search root and find stale duplicate. This is a meaningful plan defect.
+21 "docs/design/live" is in constraints path ownership. Plan c03 captures baselines every in-scope route in both themes. Does prototype include live? yes.
+22 "before any feature work" - c03 and c05 parallel. c05 is generation not screen? It generates shell code including likely screens. The plan says value scenarios and baselines before any screen is generated, but c05 generator could generate screens in Round2 concurrent with c03. c06 merges generated React baselines; c10/11 hand-build screens later. "any screen is generated" explicitly recalled lesson. c05 generates sovereign-hybrid and governed-web-shell "runnable mode", likely screens. Since c05 and c03 parallel, ordering violation. Critical.
+23 c04 generator and c05 both Round 2; c05 imports generator output, perhaps token generator? c04 token-generator is repo tooling, c05 scaffold generated code. c05 depends c01 only; c06 needs c04. If c05-generated code includes token files, conflict with c04 outputs? Possibly not.
+24 c03 depends c02 for prototype baselines? Baseline capture only requires routes and themes; c02 route inventory. fine.
+25 c02 route inventory task 2.3 prerequisite says none, but change depends c01,c02? Weird self reference in task model prerequisites: c02 2.3 says none. Change says depends c01,c02 (task 2.3) internally nonsensical: "Depends on: c01, c02 (task 2.3)." A change cannot depend on itself. Likely typo. Could flag ordering ambiguity. More importantly c02 needs perhaps no c01? It says scope design source, depends NONE initially but details says depends? Let's quote exact:
+2. c02... Depends on: NONE.
+Task table c02 2.3 prerequisites none.
+But Execution Round 2 c03,c04,c05, c03 depends c02. Fine. The earlier bullet in c03 says depends c01,c02 (task 2.3). Fine.
+No issue.
+
+26 c03 "Depends on c01,c02 (task 2.3)" though change list dependencies use change IDs, task 2.3 weird. c03 needs route inventory from c02. Fine.
+27 c04 depends c01,c02. Good.
+28 c05 depends c01, but if c05 needs generator installed alpha.5 task 5.1 and c05 owner c01? c01 pins rust but not knowme-builder? Version drift section says "generator must be reinstalled at alpha.5 before c05." c05 handles. good.
+29 Version inconsistency: Trade-offs says installed rustc 1.99.1, tauri-cli 2.10.0, pnpm 11.25.0, Flutter 3.48 beta are realigned in c01. c01 details pin rust 1.97.1, Node 26.5, pnpm11.15, Flutter3.47.5. But no mention tauri-cli pin (task 6.2 prereq tauri-cli 2.11.4). `rust-toolchain.toml` pins rustc but not tauri-cli. Node? pnpm? Flutter? Could use mise/FVM, but details says toolchain pins. It omits tauri-cli 2.11.4, which task 6.2 requires. Analysis handoff says stale builder alpha1 vs alpha5, Flutter beta vs stable. Version drift line specifically tauri CLI and task requires 2.11.4. If c01 doesn't pin it, downstream might use 2.10.0 despite prerequisite. Could be warning/critical. The package's versions.toml presumably includes. Plan says c01 "Pin the toolchain: rust-toolchain.toml 1.97.1, Node..., pnpm..., Flutter..." but omits tauri-cli and knowme-builder alpha.5. c05 reinstalls builder. Tauri CLI could be project dependency package manager? `tauri-cli 2.11.4` as prerequisite likely cargo/npm. Need explicit. This is a concrete mismatch: claims "realigned" but doesn't include tauri-cli. Could flag warning.
+30 "Installed rustc 1.99.1 ... are realigned in c01." Does c01 actually have authorization to change local toolchains? Task 1.2 prereq "Operator approval to change local toolchains." If operator approval absent, c01 blocked. Plan assumes. Fine.
+31 c04 prerequisites "Read-only access to reference repo." Constraints already says path. okay.
+32 c05 ownership gap: proposed owners only architect for crates and build-platform BFF; says UAR/PEM generator's uar folders has no owner, proposed owners omits UAR/PEM. Task 5.0 says assign owners for crates and services/bff, but trade-off explicitly says output for crates, services/bff and generator's `uar` folders has no owner. Thus c05's ownership task fails to assign UAR/PEM output owner. This is concrete missing dependency. Could be critical because implementation ownership unresolved, but task 5.0 "Assign owners for crates/** and services/bff/**", no `uar`. Since operator wants keep UAR/PEM. Critical? Downstream work wrong maybe unowned work. The plan says delivery lead must assign "it" (output) before c05; task 5.0 narrowed two. We can flag warning/critical. Given blocking full team process maybe critical.
+33 c05 owner roles build-platform and architect but task 5.0 operator confirms owners. UAR/PEM perhaps architect? Missing.
+34 c05 task 5.2 "Import Rust, BFF, UAR and PEM; Cargo workspace" depends only rustc, not BFF Node/runtime dependencies or workspace config? c01 sets.
+35 c06 uses clean architecture four layers but maps only web; goal web clean architecture. Fine.
+36 c06 c04 output, tokens. Good.
+37 c07 Flutter app shell goal. c07 imports mobile; c12 screens. c07 depends c04. good.
+38 c07 "keeping flutter_rust_bridge and rust builder" aligns no handrolled.
+39 c08 shadcn set. c08 uses shared. good.
+40 c09 theme toggle uses `km-meet-theme`; where derived from constraints? no. Could be prototype. Fine.
+41 c10 forms render no submit. Goal static screens. good.
+42 c11 meeting room with media stub. goal screen scope.
+43 c12 uses `shadcn_flutter`, library cand009. good.
+44 c13 "security review and independent UI review" includes code review but does it include build/lint/test? boundary packet perhaps.
+45 Full KBD process no shortcuts. Plan commands use /opsx:new but no execution instructions; plan artifact expected. okay.
+46 Date future 2026-11-09 irrelevant current? system current maybe unknown. no.
+47 "Changes to implement: 13" okay.
+48 OpenSpec commands all new. no change specs in packet. Fine.
+49 plan doesn't mention assessment/analysis inputs actually? top does.
+50 design token constraint references `docs/design/tokens.css / tokens.json`; plan only tokens.json, generator emits web CSS likely where? It doesn't specify emitted path `docs/design/tokens.css` vs app package CSS. Constraint says single source tokens.json; generated CSS derived. Fine.
+51 Flutter theme must generated from or mirror tokens.json. c04 generates Dart and ThemeData; c07 wires. good.
+52 no ad-hoc hex: c08 components restyled based km.css/room.css could use values not tokens, but says themed. c01 lint doesn't check hex. There is no explicit lint/check preventing ad-hoc hex, despite blocking constraint. c13 UI review may detect but no explicit acceptance. Could find missing enforcement. The plan says c02 reconciles 17 missing tokens from km.css, perhaps all prototype values tokenized. But c08 "restyled to match" can directly hardcode. No explicit constraint check. A robust plan should mention lint or review. Is this within plan review mandate? "Changes that violate constraints"; if task allows hardcoded colors, that's issue. But not necessarily violation. Need avoid speculative findings.
+53 no `any`: generated code could include `any`; plan has no explicit scan. c01 Biome could catch if configured, but no statement. The constraint is blocking. Need concrete omission.
+54 secrets: no values in repo. c13 security. Could be okay.
+55 token secret server side: static forms no submit, BFF imported though. No endpoint requirements. security review. Maybe okay.
+56 file names. c05 applies renames, c08. c12 Flutter exception. okay.
+57 reference read-only. Task 4.1 copying source into repo is okay, doesn't write reference. c01 tooling could run generator in reference? c05 generator output scratch. no issue.
+58 max 500: line checker task. But no explicit remediation of generated import over500. c06 says four layers; c11 feature folder. c05 5.3 import fixes. Could flag maybe.
+59 no hardcoded secrets in docs? check excludes md for LiveKit but no-hardcoded checks apps packages docs/design/live. c05 BFF could contain example secrets? security review.
+60 Build command in project.json: c01 task 1.4 prereq delivery-lead updates commands. Goal says set once workspace exists. c01 creates workspace, yes. But perhaps commands should be updated after apps imported, not at c01 because app dirs not yet exist. c01 scripts can target glob. Still plausible.
+61 c01 "build, test and lint commands not defined yet... checked against commands this phase introduces." They may be set in c01 before all code. Need perhaps update later. No explicit update after c05/c06/c07. This is a real ordering issue: c01 creates root workspace before apps exist; task 1.4 "delivery-lead updates project.json commands". Later c05 imports BFF (not necessarily pnpm), c06 apps/web, c07 apps/mobile. Build command likely needs encompass all. If set c01 based on skeletal workspace, it may not build imported apps later. Goal says once workspace exists, perhaps root workspace c01 enough? But app not yet. Build-passes final should update. Plan doesn't state. Could report warning/critical: no task revalidates and finalizes project.json after all app surfaces imported.
+62 Version pin Rust mismatch installed vs target. okay.
+63 `Node 26.5.0` maybe nonexistent/current future? Date 2026, likely.
+64 Flutter 3.47.5 stable while installed 3.48 beta. plausible.
+65 pnpm 11.15.0.
+66 Tauri CLI version 2.11.4 not in c01. likely concrete.
+67 candidate library cand ids. Plan c01 lists cand003,010,015,016 likely Biome, ls-lint, etc. analysis handoff says Vitest. c01 wiring lint typecheck test but does not explicitly use Vitest? Library list includes likely. c03 Playwright cand011. c05 builder. Fine.
+68 "18 candidates" c01 list etc. Could be all evaluated in analysis; prior handoff says key verdicts. Plan only lists libraries in details, but no requirement all candidate verdicts reflected. This is plan target, not analyze.
+69 "Library cand-018" c06/c09 perhaps Tauri. no.
+70 Constraint "shadcn-components-not-forked-ad-hoc" warning. c08 says shared kit. screens use shared kit? c10 explicitly; c11 says components likely shared. c12 uses shadcn_flutter. good.
+71 clean architecture boundaries: c06 map. But c05 imports UAR/PEM etc? "Rust core etc." The web only. Domain/application no UI imports. no explicit check. c01 architecture checker? c01 only line checker. Plan calls "architecture-defining" but no automated architecture test. Could be missing acceptance criterion. c06 map perhaps.
+72 accessibility basics: c03 golden and visual, c12 goldens. No explicit accessibility checks except recalled skill and maybe route notes. Plan says bind accessibility gate skill in recalled lessons, but no change/task explicitly runs accessibility gate. Recalled lessons says "changes below bind each of those skills to role that uses them." Yet c13 details only boundary, security, UI review; no explicit accessibility gate. c09 etc no explicit semantic names/focus/reduced motion except theme before paint. The warning constraint says new UI semantic HTML/access names, focus, reduced-motion. Plan goal fidelity includes motion. c03 Gherkin might include VS accessibility? Unknown. But likely plan should include accessibility verification. Prior assessment says package supplies accessibility gate. The claim "changes below bind each ... accessibility gate" is unsupported: no change names an accessibility task or gate except c13 independent UI review possibly not accessibility. This is a concrete internal contradiction. Severity warning. Could downstream omit accessibility. Need cite quote and omission. Maybe critical if constraints warning only, so WARNING.
+73 visual fidelity gate: c13 "independent UI review", c03 baseline. But no explicit screenshot comparison task. c03 captures baselines; c13 records evidence, independent UI review. The warning constraint requires visual comparison at exact widths/themes. Plan c03 captures exactly. c13 evidence scenarios. Could be sufficient.
+74 design source includes live prototype, route inventory. Good.
+75 "before any feature work": c02/c03 then screens. c05 generated shell may violate as noted.
+76 Goal "no hand-rolled substitute for what skill provides": Plan explicitly builds token generator extension, UI components restyled manually, screens manually implemented. Is that violating? They use generator for scaffold; UI screens likely manually code based prototype. "no hand-rolled substitute for what skill provides" means if skill provides components, use them. Plan says shadcn shared; Flutter shadcn. But c11 static screens and c08 components restyled—could be handrolled. Yet package generator generates apps. Likely okay.
+77 Plan says "Keep everything generator produces" including Axum BFF/UAR/PEM, contrary analysis recommendation strip/stub. But operator decisions implement keep everything; explicit operator decision supersedes analysis. No finding.
+78 c05 generates `sovereign-hybrid` and `governed-web-shell` in runnable mode then c06 merges duplicated React baselines. Could duplicate files temporary scratch. okay.
+79 c05 c01 rules. Generated file names renamed. c06 may create new names.
+80 c04 emits Dart ThemeData builder, c07 imports app and wires; c12 frame. good.
+81 token source: c02 hand-edited tokens.json. c04 adapter. good.
+82 `tokens.json` digest freshness. c13 final. good.
+83 Baseline digest freshness. c13.
+84 Boundary only once after c01-c12. c13 dependencies c06-c12 but not explicitly c05? c06/c07 depend c05, c04 etc; c08 etc. c02 via c04/c03. yes all transitive.
+85 c13 operator approval prereq. good.
+86 c13 task 13.8 security uses Claude plus MiniMax; "independent" perhaps producer model same Claude but role. not relevant.
+87 plan lacks tasks for reflect stage? Goal full KBD process. This plan is phase plan for execute; c13 boundary evidence but no "reflect" change or task. However full KBD process likely orchestrator handles reflect after execute, not this phase plan. Do not flag.
+88 no OpenSpec change verification commands (`/opsx:new` only) but artifact plan expected.
+89 acceptance criteria absent as explicit bullet per task. Could find ambiguous "Make missing output folders a hard error", but can test. "restyled to match" relies baseline. "perfectly replicate" subjective but screenshot. c13.
+90 c13 boundary record evidence scenarios but no acceptance thresholds for screenshot comparison. c03 baseline captures baseline from prototype; final should compare. The warning fidelity says visual comparison at widths/themes. Plan doesn't state pass criterion (pixel diff threshold). "independent UI review" could be subjective. Goal says perfectly replicate. Thus acceptance is untestable/ambiguous: c10/c11 "matching", c13 "record evidence" and UI review, but no pixel-diff comparison or threshold. This is likely key finding. Need concrete. c03 defines baselines, but no final task says compare screenshots to baselines. c13 records evidence VS scenarios. Maybe VS scenarios include. We don't have details. Yet plan details say fidelity judged by screenshots against prototype. Recalled lesson explicitly: "Fidelity is judged by screenshots against the prototype, not structure." But tasks don't explicitly say run screenshot diff; c03 capture baseline; c13 evidence likely. It says c13 single boundary run and evidence. Could be implicit VS. Still acceptance threshold absent. Could report warning.
+91 c03 baseline captures static prototype screenshots. How capture if docs/design/live is static HTML? likely. Both themes 4 widths. Good.
+92 VS-7 omitted likely strongest.
+93 Build command final omitted.
+94 max lines exceptions mismatch operator decisions? Operator decisions says "frozen design prototypes exempt; long docs follow the rule; CHANGELOG exempt." Constraint says docs/design/** and long-form docs pending operator decision; c01 line checker E-L1-E-L8. Likely aligns.
+95 c01 ls-lint with E-N1-E-N6. good.
+96 c05 generated files maybe names. c01 exceptions include generator-owned names? Constraint says kebab exceptions "generator-owned names" broad. c05 applies renames anyway.
+97 c05 imports `services/bff`, but owner naming kebab okay.
+98 c07 Flutter app path `apps/mobile` lower.
+99 c08 `packages/ui` shadcn generated `components.json` exception.
+100 c09 TanStack generated routeTree.gen.ts exception.
+101 c10 route names? no.
+102 c12 golden files under test fixtures exception.
+103 c06 `apps/desktop` only `src-tauri`, but desktop app needs package manifest? "holds only src-tauri" perhaps Tauri config inside, web app package includes Tauri dependencies/scripts. Could work. frontendDist path relative to src-tauri config: Tauri `frontendDist` path is relative to tauri.conf.json and should be `../../web/dist` from apps/desktop/src-tauri, not "pointing at apps/web/dist" ambiguous. Plan says "with frontendDist pointing at apps/web/dist" not exact. Could be wrong if literal. But task 6.2. Need know Tauri config semantics. In `apps/desktop/src-tauri/tauri.conf.json`, `frontendDist` relative path to config file, likely `../../web/dist` (apps/desktop/src-tauri -> apps/desktop -> apps, then web? Let's calculate: src-tauri (apps/desktop/src-tauri), ../ = apps/desktop, ../../=apps, then web/dist = ../../web/dist). The plan's phrase could mean target not literal. Not necessarily.
+104 Tauri React shared codebase requirement. yes.
+105 web clean architecture package names. domain/application packages imported into app. Infrastructure in app. presentation. Domain/application no dependencies. okay.
+106 UAR/PEM wiring kept intact. analysis said strip due no use, operator keep. Fine.
+107 c05 import everything but c06 web/desktop baseline; c07 mobile. What about generated Axum BFF and Rust crates? c05. Build.
+108 Axum BFF likely has its own package manager separate; root pnpm workspace needs include services/bff? c05 says one Cargo workspace but not pnpm include. c01 pnpm workspace maybe packages only. c05 import BFF and task "import fixes". c13 build. Could be missing. If root build command needs run BFF, workspace must include it. Not explicit. Potential.
+109 c07 Flutter root workspace not pnpm. root turbo doesn't include.
+110 c05 says apply kebab renames keeping Rust/Dart exceptions, but c05 generates BFF JS with perhaps kebab. okay.
+111 "Install generator alpha.5" c05 scratch generation. Version drift. okay.
+112 c04 vendor generator source package at `packages/design-tokens/generator`, source version/licence. good.
+113 c02 self-host fonts but no check license files? c02 task fonts and licences. good.
+114 `font-src 'self'` CSP but no `style-src`? tokens CSS local. fine.
+115 c09 theme applies before first paint but Flutter persisted theme. good.
+116 c07 "persist theme mode", web c09 perhaps theme toggle only, no explicit persistence! c09 says theme toggle uses `km-meet-theme`, falls back prefers-color-scheme and applies before first paint. Does it persist? `km-meet-theme` perhaps local storage key? It doesn't say persistence. Goal doesn't explicitly require web persistence, Flutter does match maybe. Could be minor.
+117 theme fallback local storage vs prefers. c09 should store. no.
+118 c07 theme persistence but c12 maybe uses same.
+119 c03 baseline capture could accidentally overwrite prototype source? no.
+120 c13 review "single boundary run" and then security/UI reviews. Full boundary run once. good.
+121 no explicit test tasks for generated components / Rust/BFF. c13 boundary maybe. Tests-for-new-features warning says tests exist for new features. c03, golden; no unit tests for generator, workspace, Tauri guards, token generator. c03 includes checks. c13 scenarios. But c04 token generator new functionality lacks unit tests; c05 imported code maybe generator. c07. Warning. Could flag missing tests for token generator output and failure modes. Plan task 4.2 "Make missing output folders a hard error" without test. c03 features maybe VS4 covers token pipeline. Scenario coverage VS4 4.2-4.4,13.4 likely. Fine.
+122 c02 contrast record. good.
+123 no visual screenshot for Flutter? c12 goldens, c03 prototype screenshot baselines (web). c13 maybe cross-platform. Warning constraint shell UI matches prototypes at widths. Flutter at phone layouts perhaps 375 only. no exact mobile widths. Could be okay.
+124 c13 doesn't mention build/test/lint as noted.
+125 constraints file says checker script to be added to lint, pre-commit and CI in this phase. c01 says line checker; task 1.4 scripts hook CI. Good.
+126 no secrets check should be in lint/CI? Constraints are blocking; plan doesn't say. Could c01 "enforced repo rules" include? Detail specifically Biome, ls-lint, line checker. Not secret scanners. Security review c13 only after all implementation, whereas blocking constraints should prevent commits. This is likely a critical omission: c05 imports potentially secret-laden generator/BFF code and c01's precommit/CI does not include secret scanners or no-any check, so violations could land until final review. But plan isn't necessarily expected to implement every check; reviewers manually inspect. Yet goal "follow constraints." A plan should ensure.
+
+Need formulate findings with line numbers. We can derive artifact line numbers. Need output JSON only. We should likely include 5-8 strong findings, not overpad.
+
+Let's reconstruct line numbers exactly. We can number artifact lines. Need likely line references. We can count from given. I'll enumerate carefully.
+
+Artifact:
+1 ===== plan.md =====
+2 # PLAN...
+3 blank
+4 - Project
+5 Date
+6 OpenSpec
+7 Changes
+8 Contract
+9 Inputs
+10 blank
+11 ## Recalled...
+12 blank
+13 - quote package
+14 - Reference-repo lesson
+15 - Package pitfall
+16 blank
+17 ## Operator...
+18 blank
+19 - Keep everything
+20 - Token values
+21 - Token generator
+22 - Screen scope
+23 - 500 exceptions
+24 blank
+25 ## Trade-offs
+26 blank
+27 - keep everything
+28 - Ownership gap
+29 - Deferred
+30 - Version drift
+31 blank
+32 ## CHANGE LIST
+33 blank
+34 1 c01
+35 scope
+36 size
+37 details
+38 2 c02
+39 scope
+40 size
+41 details
+42 3 c03
+43 scope
+44 size
+45 details
+46 4 c04
+47 scope
+48 size
+49 details
+50 Emit:
+51 web
+52 shadcn
+53 tailwind
+54 dart
+55 5 c05
+56 scope
+57 size
+58 details
+59 Rust
+60 BFF
+61 UAR...
+62 blank
+63 Apply renames
+64 6 c06
+65 scope
+66 size
+67 details
+68 feature types
+69 stores
+70 PEM
+71 components
+72 blank
+73 apps desktop
+74 7 c07
+75 scope
+76 size
+77 details
+78 8 c08
+79 scope
+80 size
+81 details
+82 9 c09
+83 scope
+84 size
+85 details
+86 10 c10
+87 scope
+88 size
+89 details
+90 11 c11
+91 scope
+92 size
+93 details
+94 12 c12
+95 scope
+96 size
+97 details
+98 13 c13
+99 scope
+100 size
+101 details
+102 blank
+103 ## EXECUTION
+104 blank
+105 Round1
+106 Round2
+107 Round3
+108 Round4
+109 Round5
+110 Round6
+111 Round7
+112 blank
+113 ## Scenario
+114 blank
+115 table header
+116 divider
+117 VS1
+118 VS2
+119 VS3
+120 VS4
+121 VS5
+122 VS8
+123 VS9
+124 blank
+125 ## TASK MODEL
+126 blank
+127 shared
+128 blank
+129 phase
+130 harness
+131 worker route
+132 reasoning
+133 availability
+134 routes configured
+135 reviewer
+136 codex
+137 blank
+138 table header
+139 divider
+140 c01 1.1
+141 1.2
+142 1.3
+143 1.4
+144 c02 2.1
+145 2.2
+146 2.3
+147 c03 3.1
+148 3.2
+149 3.3
+150 c04 4.1
+151 4.2
+152 4.3
+153 4.4
+154 c05 5.0
+155 5.1
+156 5.2
+157 5.3
+158 c06 6.1
+159 6.2
+160 6.3
+161 c07 7.1
+162 7.2
+163 c08 8.1
+164 8.2
+165 c09 9.1
+166 9.2
+167 c10
+168 c11
+169 c12
+170 c13 13.1
+171 13.8
+172 13.9
+173 blank
+174 ## Contract binding
+175 blank
+176 Identity
+177 freshness
+178 budgets
+179 boundary
+180 blank
+181 ## commands
+182 blank
+183 intro
+184 blank
+185 ```
+186 /opsx c01
+187 c02
+188 c03
+189 c04
+190 c05
+191 c06
+192 c07
+193 c08
+194 c09
+195 c10
+196 c11
+197 c12
+198 c13
+199 ```
+200 blank
+201 PLAN COMPLETE.
+
+Need perhaps line citations to exact sections.
+
+Findings candidates:
+A. Critical ordering c03 vs c05 parallel despite before any generation. Lines 14 and 45/58, 105-106. Evidence quote both. Suggested fix make c05 depend on c03, move c05 later (or split baseline creation ahead).
+B. Critical missing VS-7 coverage. Lines 45 (only VS1-5,8,9), 101 same, table lines 117-123 omits VS7, but line 146 says VS7 scope. Fix add VS7 feature, implementation, evidence row. This is clear.
+C. Critical/warning no final build/test/lint execution / project.json commands not clearly set. Need evidence:
+Goal explicit. c01 details line37 "Wire lint typecheck test scripts..." but not project.json. Task 1.4 line143 prereq says delivery-lead updates project.json commands; c13 line101 only boundary/security/UI, no build command. Constraint build-passes. Could formulate: The plan never makes running the newly defined build/test/lint commands an acceptance criterion, so VS-9 perhaps maybe build scenario. Scenario VS9 maps c05 import and c13 evidence, could include build health. We don't know contract. Maybe not strong enough. We can phrase warning rather than critical. Evidence: "Set real build, test and lint commands in .kbd-orchestrator/project.json" goal; plan c01 says scripts, c13 says boundary only. Yet task prereq acknowledges update project.json. The missing part is execution. c13 boundary likely build. But judge packet only, likely finding accepted.
+D. Critical no-any/secrets/token constraints not operationalized. Could focus specifically `no-any-type`: c01 Biome config not explicitly enables `noExplicitAny`; no scan. But task says "Configure Biome" and no-any is standard Biome rule perhaps if recommended preset. Can't assume. The plan is supposed to enforce repo rules; details says line checker. No mention secret checks. c13 security review may inspect. Could be warning. Evidence concrete omission is harder ("no occurrence"). We can quote c01 details and constraint. Fix add explicit checks to lint/CI for no any and secret patterns, and manual server-side token review. But maybe scope overkill.
+E. Warning ownership gap UAR/PEM omitted. Lines 28 says UAR folder no owner; line154 task only crates/BFF. Fix expand 5.0. This is strong.
+F. Warning/ critical Tauri CLI pin omitted while required 2.11.4. Lines30 says realigned in c01; line37 only Rust/Node/pnpm/Flutter; line159 prerequisite tauri-cli2.11.4. Fix pin tauri CLI too. Strong.
+G. Warning stale live source ambiguity. Lines 89 and92 use bare index.html etc, while constraint says root live stale. Evidence exact. Could say plan must name docs/design/live paths; otherwise workers can use prohibited root live. Strong warning.
+H. Warning accessibility gate claim unsupported. Line13 recalled says bind each skills; plan has no task with accessibility except independent UI review. Could quote absence difficult. It might be in c03 Gherkin or c13. But not explicit. Suggested fix add acceptance gate. This is real.
+I. Warning final visual diff acceptance undefined. Line14 says fidelity judged by screenshots against prototype; c03 captures baseline; c13 only "record evidence" and "independent UI review", no pixel-diff/comparison threshold. Goal says perfectly replicate. Could report. Strong-ish.
+J. Warning max-500 imported generated files not explicitly remediated. Line37 checker, line63 only kebab renames, operator line19/23 says 500 compliance. Since line 19 explicitly says restructuring limited to ... 500 compliance, c05 5.3 "import fixes" may include. Could flag if no explicit. But plan globally says 500 compliance; maybe enough.
+K. Warning c02 route inventory VS7 but c13 omitted.
+L. Critical c03 depends c02 (task2.3) but execution Round2 c03,c04,c05 parallel; c02 Round1 done. fine.
+M. Critical c05 depends c04? c05 generated app may need token generator? c06 uses c04. no.
+N. Potential version conflict: c01 pins rust 1.97.1, task c04 4.4 says Flutter 3.47.5, c05 prereq rustc 1.97.1. okay.
+O. `versions.toml` missing in cited paths. Plan repeatedly says pins come from `versions.toml`, but file tree/cited_paths says MISSING versions.toml. This is huge concrete issue! The plan c01 says "Pin the toolchain: rust-toolchain.toml 1.97.1, Node 26.5.0, pnpm 11.15.0 and Flutter 3.47.5 stable." Task rationale says "Pins come straight from versions.toml". Yet `versions.toml` is MISSING from repo/file tree. How can implementation obtain pins? The plan's version values may come from package/reference not versions.toml. It says package generator package maybe `versions.toml` in reference. Cited paths shows MISSING. Task 1.2 says pins come straight from `versions.toml`, but no path/location. This will block c01. Very strong CRITICAL. Maybe versions.toml lives in read-only reference package, but plan says reference available. File tree doesn't include. They might mean reference package file. Need concrete: cited_paths explicitly MISSING versions.toml. Plan task 1.2 assumes it. Suggested fix identify exact source path in reference or embed versions in plan and record provenance. This is likely intended adversarial catch. Great.
+P. Missing `knowme-ui-failure-analysis.md` cited in recalled lesson, but cited_paths says MISSING. Plan line14 says Reference-repo lesson (`knowme-ui-failure-analysis.md`). No source path. Could be in reference repo. File tree/cited_paths missing. The plan uses lesson, but if inaccessible? The package reference may contain. Plan inputs doesn't list that file. Could flag critical/warning: cited evidence file is missing. But perhaps reference repo has it, and cited_paths only current repo. Plan gives path in reference package? It says `knowme-ui-failure-analysis.md` no path. More concrete missing source means downstream cannot inspect baseline lesson. Could be warning. But desired findings likely target contradictions. Add?
+Q. `CHANGELOG.md` missing but operator decision says exempt; no task to create it. If operator decision says "CHANGELOG.md is exempt" perhaps no requirement to create. no.
+R. `project.json` exists and task 1.4 prereq updates. fine.
+S. Plan says package generator source version and license. good.
+T. "OpenSpec available managed runner" fine.
+U. `team.json` ownership etc.
+V. Plan cites `docs/design/tokens.json`, exists.
+W. design prototype files? cited_paths only tokens. file_tree docs/design but no detail. Plan assumes docs/design/prototype and live; constraints confirm.
+X. stale `live/` root listed, must not use. Plan ambiguity.
+Y. c05 generator output into scratch directory, then import. But constraint max500 exception generated code only specific outputs. Plan says keep everything. Could fail checker for generated arbitrary files. c05 5.3 "import fixes" maybe. no.
+
+Z. Goal "no hand-rolled substitute for what skill provides" but c04 says "Replace TOML reader with tokens.json adapter" and extends; that's modifying vendored generator rather than handrolled. good.
+AA. Plan manually recreates screens rather than using generator? It uses generator outputs then merges and adds screens. Skill provides screen generation likely? The operator says keep everything generator produces, and screen scope. c05 generate runnable mode likely screens. c10/c11 static screens perhaps generator output. Fine.
+AB. Constraint token secret server-side. c06 maps PEM/API adapters into infrastructure, but static screens. If API adapter included, no token. c13 security.
+AC. BFF imported but no environment config. c05 5.2. Could build.
+AD. no hardcoded secrets. no.
+AE. Clean architecture layers only React, not Flutter/Rust. Goal web only. good.
+AF. Tauri and Flutter shells from package. yes.
+
+Strongest findings:
+1 versions.toml missing.
+2 ordering c03/c05.
+3 VS7 missing.
+4 UAR ownership omitted.
+5 tauri-cli pin omission.
+6 stale source ambiguity.
+7 build/test/lint final execution missing.
+8 visual/accessibility acceptance maybe.
+
+Need assess severity carefully.
+
+1 CRITICAL: Task 1.2 cannot execute as specified because source missing, unless from reference. Evidence: cited_paths "MISSING versions.toml"; plan rationale "Pins come straight from versions.toml." Plan already gives exact values in details, so implementation could use plan values. Does missing source make downstream wrong? It can use explicit values. Rationale only, not dependency. Maybe warning rather than critical. But versions may drift and source of truth unclear. The values are in plan, so not blocked. Yet task says source file. Could fix path. Severity WARNING.
+2 CRITICAL ordering clearly downstream screens could generate before acceptance baseline. Goal priority and explicit recalled lesson. c05 scaffold may generate screens; even if not, c05 generates whole shell including UI. Plan calls "scaffolding" and later c10/11 screens. The plan says "before any screen is generated." If c05's generated shell includes screens, parallel violation. Could possibly c05 only scaffold. The phrase "sovereign-hybrid and governed-web-shell in runnable mode" likely generates screens. Strong critical.
+3 VS7 CRITICAL/Warning. c02 says defines scope, but maybe VS7 isn't executable scenario. It calls "VS-7 scope" likely route scope scenario. Boundary omission likely wrong. Use WARNING if uncertain. Goal full contract; likely critical.
+4 UAR ownership WARNING.
+5 tauri pin WARNING.
+6 stale root source WARNING, potentially critical if wrong design fidelity. It can cause downstream use prohibited source. The plan bare filenames likely references prototype paths, but explicit constraint says root live stale. Since plan says "matching index.html" without path and file tree has root live/index.html, real risk. Could be CRITICAL because source wrong. But ambiguity only, WARNING.
+7 build final execution CRITICAL. Need see task 13 scenarios. VS9 likely build: scenario mapping VS9 5.2,13.7. Maybe VS9 is "everything builds". We don't know. c13 "run contract boundary packet", likely includes build health. Since contract has boundary packet. Constraint binding says. Can't assume missing. The plan says c13 evidence for VS9, so likely build scenario. Task 5.2 import build. But no explicit command. Could be warning.
+8 no-any/secrets: c13 security covers. But no-any isn't security. c01 Biome likely catches. Yet no explicit rule. The plan says "Configure Biome" and enforcement. Biome `noExplicitAny` recommended? In Biome v2, recommended includes noExplicitAny perhaps suspicious noExplicitAny is recommended. If so c01 covers. Can't assume.
+9 accessibility: c13 independent UI review could include. no explicit.
+10 screenshot comparison threshold: VS scenarios may define. Plan says c03 define Gherkin features, likely exact acceptance. c13 record evidence. no.
+
+Could inspect wording of prior handoffs for contradictions:
+Analyze handoff: "adopt ... Vitest ...". Plan c01 wires `test` scripts but library list cand IDs includes maybe Vitest. Fine.
+Analyze: "keep Tauri + Flutter hosts with shell-only stubs, strip rust-core/Axum/UAR/PEM". Plan operator decided keep everything. Good.
+"Token generator is operator gate (Q-A8): extend vendored package generator (recommended) or Style Dictionary; either needs converter". Plan uses generator. good.
+"BLOCKED pending Q-A1 restructuring budget, Q-A2 token source, Q-A3 route scope, Q-A8 generator." Operator decisions resolve presumably.
+"Q-A7 bind team." Plan does.
+Assessment: "in-scope subset of 68 prototype routes" plan route inventory c02. good.
+"no shell code." file tree has no package. plan.
+"stale toolchain builder alpha1 vs alpha5, Flutter..." plan.
+"generator token script rejects rgba..." plan.
+Potential missing assessment gap: prototype fidelity has tokens and docs. c02 only reconciles tokens, c03 baseline.
+"bundled fonts/CSP" plan.
+"exception status provisional" operator.
+No issue.
+
+Could use goal clean architecture. c06 maps layers, but c05 imported web/desktop apps perhaps generated components. c06 merges. fine.
+Goal Flutter iOS and Android. c07 says Xcode, Android SDK, app; c12 screens. no actual platform scaffold/build checks. Deferred physical-device but should build iOS/Android? Deferred Windows/Linux only, physical-device deferred. Goal mobile app shell iOS/Android. c13 boundary maybe. No explicit acceptance that both platform targets compile. c13 boundary maybe. Could be a finding: plan imports Flutter app and wires screens but never verifies Android/iOS builds; "physical-device testing deferred" doesn't excuse compile/build. Constraint build-passes root maybe doesn't include Flutter. c07 prerequisite Xcode/Android SDK, but no task runs `flutter build apk`/iOS. Goal explicitly mobile iOS and Android. This is a missing dependency/acceptance criterion. Strong! The constraint build-passes says project build must pass, but root project command may not include Flutter. Plan c13 records VS3 (mobile parity?) but no platform build. The deferred list says Windows/Linux desktop, physical-device, interactive; not Android/iOS build. Need include both mobile targets in build health. Could report CRITICAL/WARNING. Goal says Flutter app shell for iOS and Android; simply importing app may not guarantee both build. c07 setup task should build both. The plan's task 7.1 prereq includes Xcode/Android SDK, suggests intent, but acceptance not explicit. This is a valid untestable gap. However user likely expects adversarial review of plan; identify missing acceptance.
+
+Similarly web and Tauri build not explicit. c06 tauri host. Goal desktop. Need final build both web and Tauri. Build command project.json may include. But no explicit.
+
+Could consolidate finding: final boundary does not state required build matrix (web, Tauri, Flutter iOS, Android), so build-passes could pass only root JS. Evidence goals + c13 details. Suggested fix specify commands. This is strong and concrete.
+
+Let's inspect all constraints for coverage:
+- no-livekit-secrets: c13 security.
+- no-hardcoded-secrets: c13.
+- token-secret: c13 security.
+- design tokens: c02/c04.
+- reference read-only: process.
+- max500: c01 checker.
+- kebab: c01/c05.
+- no-any: c01 Biome? likely.
+- build passes: c13 maybe.
+Warnings:
+- fidelity: c03/c13
+- shadcn: c08
+- clean arch: c06
+- no console log: c01 Biome likely.
+- tests new: c03/c12
+- no stub comments: imported generated output? c01 Biome perhaps; plan static stubs? "media stubbed" might use stub comments, constraint says no TODO/FIXME/STUB comments. Plan says media stubbed, can implement without comment.
+- accessibility: no explicit.
+
+Potential finding about c05 and "keep everything generator produces" vs c07 "move mobile app" and c06 "merge duplicated React baselines" causing modification of generator output. Operator says keep everything, likely okay.
+
+Potential plan uses `rust-toolchain.toml 1.97.1` syntax. Rust toolchain file usually `channel = "1.97.1"`; shorthand in prose. fine.
+Node 26.5 and pnpm pins cannot be in rust file; unspecified mechanism. okay.
+
+Potential `versions.toml` likely resides in reference package and plan task rationale implicitly. Still path should specify.
+
+Potential `token generator` c04 depends c02, but c02 says tokens.json stays hand-edited. c04 output generated CSS etc. Need check generated output doesn't overwrite tokens.json. likely.
+Potential output paths unspecified; c04 emits web CSS but c06 says load token CSS. No explicit artifact path or import path, possible mismatch. But task-level can decide.
+Potential no source file for `km.css` and `room.css`; docs design likely.
+Potential c02 "reconcile 17 missing tokens" exact count prior handoff, good.
+
+Potential c13 "single boundary run" but c03 baseline capture is an earlier boundary? They call baseline capture, not boundary packet. okay.
+Potential operator approval for boundary c13; plan task prerequisite. good.
+
+Potential c03 baseline captures prototype before screens, but to capture need a static server / browser. c01 scripts? Playwright browsers prerequisite. okay.
+
+Potential c03 depends c02 route inventory but the c02 task 2.3 is classified "Route inventory and theme notes" and prerequisites none, yet c03 depends c02. good.
+
+Potential c04 vendor generator task says "Read-only access to reference repo" as prereq, but constraints path is explicitly read-only. good.
+
+Potential c05 generation at alpha.5 with Rust 1.97.1 and current installed rustc 1.99.1. They realign in c01, but c01 task requires operator approval. Fine.
+Potential c05 owner roles assignment unresolved before c05 but change c05 depends only c01, task 5.0 is inside c05. It says delivery lead must assign before c05 runs; but execution schedule Round2 and task 5.0 could happen first. Change dependency list omits an explicit prerequisite, but task order within c05 likely 5.0. Fine.
+Potential task 5.0 says owner "anthropic/claude-sonnet" though "Team-manifest edit by delivery-lead"; provider model maybe worker route. no.
+Potential c12 round4 parallel with c08. c12 depends c07 only, not c08; mobile uses own shadcn_flutter, okay.
+Potential c10/c11 Round6 and c09 Round5. good.
+Potential c13 all. good.
+Potential c06 and c07 Round3 both depend c05. c05 Round2. good.
+Potential c04 and c05 Round2 parallel; c05 "generator" might refer knowme-builder and package generator, distinct. good.
+Potential c03 and c05 same round ordering issue.
+
+VS coverage likely:
+VS-1 fidelity
+VS-2 shared bundle
+VS-3 Flutter
+VS-4 tokens
+VS-5 web build no Tauri
+VS-6 maybe security?
+VS-7 route scope?
+VS-8 tooling
+VS-9 build. Plan includes VS8/9. Omit VS6 and VS7 intentionally perhaps VS6 auth? c02 says VS7 scope. Why omit VS6? Could be interactive flows deferred. Plan says screen scope static and interactive flows deferred. VS6 maybe token security/interactivity. We only know VS7 referenced. We can state at least VS7 absent. If VS7 is route scope, perhaps c02 itself covers and no final evidence needed; but table should list c02.3, c13.7? Yet task IDs in c13 are 13.1-13.7, likely each scenario listed 1-5,8,9 exactly. So VS7 deliberately not in scenario set. If contract includes VS7, plan misses. The text says "Defines the VS-7 scope" (not verifies VS-7). Maybe VS7 is "routes included" and implementation tasks screen list should cover. Still boundary likely contract scenarios. The omission in c13 is concrete inconsistency.
+Could also flag VS-6 absent, but no plan reference proving it exists. Scenario numbering with jump 5 to 8 strongly implies 6,7 exist. Goal packet says prior analysis subset 68 routes. VS7 explicit. VS6 unknown. We should not claim unstated. Could say "VS-7 is referenced but omitted"; avoid VS6.
+Potential plan says "Route inventory and theme notes defines VS-7 scope"; no c13 evidence. Good.
+
+Now c05 generated screens before c03. Does c05 generation necessarily screen generation? "Generate sovereign-hybrid and governed-web-shell in runnable mode" likely those are full templates including screens. Later plan merges duplicated React baselines, implying generated baseline React apps have screens. So evidence strong: c06 "merge duplicated React baselines" means c05 generated UI baselines, potentially screens. The recalled lesson says baseline before any screen generated. c05 parallel c03. Critical.
+Suggested fix split c05 into (a) baseline definition task and (b) generation, or set c05 depends c03. The plan can move c05 to Round3 but c06/c07 then shift. Could say make c03 a hard prerequisite of c05.
+Potential c04 generator outputs tokens before baselines? Baseline is prototype, no.
+
+Stale source issue: c02 says reconcile from `km.css`, c10 bare filenames. Constraints explicitly root live stale. We can cite plan c10 line89 and file tree root live. Fix paths. Warning.
+Could perhaps quote "matching `index.html`, the `auth.html` sign-in views and `join.html`" and constraint "live/ at repo root is stale duplicate ... must not be used". This is precise.
+Also c11 same. One finding cover both lines maybe line89.
+Potential route inventory uses docs design? c02 details says "in-scope route inventory" no explicit source. Could reinforce.
+
+Ownership UAR: quote line28 and line154. The trade-off says "generator's `uar` folders has no owner" and proposed owners only architect crates/build BFF. Task 5.0 says only two. UAR/PEM possibly PEM owner architect? But task omission. Suggested fix explicitly assign all imported paths including UAR/PEM and make task 5.0 predecessor to 5.1. Severity WARNING perhaps.
+Potential "delivery lead must assign it before c05 runs" but task 5.0 is in c05; change dependency says c05 depends c01 only. Execution Round2 begins c05; task 5.0 can be first. However change list task IDs imply order, but no explicit dependency 5.1 on 5.0. It says before c05 runs, task inside c05 contradictory. Could flag ordering: ownership gate must occur before c05, but scheduled inside. Yet likely tasks sequential.
+Also operator confirms owners prerequisite. c05 task 5.1 prereq only builder alpha.5, not 5.0; task 5.2 none. If tasks parallel within change, 5.1 can run before assignment. The plan says ownership before c05. Suggest explicit dependency 5.1-5.3 on 5.0. This is concrete ordering error. Severity WARNING.
+Could combine with missing UAR owner.
+
+Tauri CLI pin:
+Plan says "Version drift ... tauri-cli 2.10.0 ... realigned in c01." c01 details pins Rust/Node/pnpm/Flutter but no tauri-cli. Task 6.2 requires tauri-cli 2.11.4. This is internal contradiction. Severity WARNING. Fix include tauri-cli pin and enforcement in c01, or change prerequisite to actual version.
+Also knowme-builder alpha.5 c05, no pin in c01 but explicit install. okay.
+
+Build matrix:
+Goals and constraints. Plan c01 task 1.4 says delivery lead updates project.json; c13 boundary. We need phrase carefully: It doesn't explicitly say `project.json` commands will be finalized after apps exist, nor run all targets. But perhaps c13 boundary packet unknown. We can cite only plan. "No task names a final build command or target matrix." This is omission; line 101. Severity CRITICAL because build-passes blocking. Suggested fix specify project.json `build_health_command` aggregating web, Tauri, Flutter iOS/Android, and c13 execution. Is it okay to assume root build should include Flutter? Goal includes. At minimum web/Tauri and mobile compile.
+Potential c07 prerequisites Xcode Android SDK strongly indicates builds should happen, but no acceptance.
+Would this be rejected as overreaching because boundary packet contract likely handles? We know plan says "Boundary packet: contract's boundaryPacket" and c13 run it. Contract perhaps includes build. The packet doesn't show contract contents, so can't claim absent. Judge only packet means if contract not included, cannot assert. But plan's explicit goal and constraint can require explicit plan. This reviewer likely expected to flag.
+Could phrase as warning due ambiguity, not critical: "The plan never specifies what command proves build-passes for each required target." Even if boundary packet does, no visible acceptance. But downstream execution should know. Use WARNING.
+Potential user asks findings that make downstream wrong; warnings okay.
+
+Accessibility:
+The plan's recalled lesson line13 says bind accessibility gate, but no task explicitly does. c13 independent UI review may not be accessibility gate. c03 features might include. Without explicit, likely warning. Concrete omission: among 13 changes/tasks, no accessibility gate/semantic/focus/reduced-motion validation. Quote constraint and recalled claim. Suggested fix add a11y checks to c03/c13.
+This is real because goal includes motion/fidelity and warning constraint.
+No console logs/stub comments also no explicit but Biome config might cover noConsole? Biome noConsole is nursery maybe. Could avoid.
+
+Visual threshold:
+c03 baseline captures, c13 evidence. Could add accessibility/fidelity in one finding? Separate.
+Maybe not include visual threshold because c03 defines Gherkin features and contract scenarios could define acceptance. Yet "perfectly replicate" requires. The plan says fidelity judged screenshot against prototype but no task says compare. c13 independent UI review. We can flag as WARNING. But if too many, could be padded. Let's consider output expected likely around 4-6 high-quality findings. Need not list every weakness.
+
+Could include missing VS7 and ordering; these are undeniable.
+Missing versions source; perhaps.
+Ownership.
+Stale path.
+Tauri pin.
+Build matrix.
+Accessibility.
+
+8 findings maybe okay desired oververbosity irrelevant JSON.
+
+Let's make line numbers exact. Need ensure valid JSON, no markdown. `checked_classes` only required if findings empty, so omit when findings nonempty. Output top-level findings only. Each finding fields severity, file "plan.md", line number, claim, evidence, suggested_fix optional. Could file perhaps constraints not allowed? Output file must be artifact file under review. Use plan.md. Findings about goals/constraints still file plan.md because plan defect.
+
+Let's refine each.
+
+Finding 1 ordering:
+severity CRITICAL.
+file plan.md line 106 perhaps execution round. Claim: c05 can generate shell/screens before acceptance baselines are complete, contradicting plan's stated prerequisite and goal.
+Evidence quote: line14 “Value scenarios and prototype baselines are therefore defined in c03, before any screen is generated” and line106 “Round 2 (parallel): c03, c04, c05”; c05 line58 generates runnable scaffolds, later c06 line67 merges generated React baselines.
+Suggested fix: make c05 depend on completion of c03 (especially 3.1-3.3), move to later round, or split non-UI scaffold from screen generation and gate that part.
+Strong.
+
+Finding 2 VS7:
+severity CRITICAL or WARNING. Claim boundary omits a scenario the plan explicitly says it must scope. Evidence line146 "Defines the VS-7 scope"; c03 only VS1-5,8,9 line45; table lacks VS7; c13 records only those. If VS7 might be scope definition, perhaps no evidence needed. Use WARNING? Missing acceptance could let route scope escape validation. Since table explicitly all scenarios, likely critical contract coverage. But severity definition critical downstream wrong. If contract has VS7, yes. We know it exists. Use CRITICAL perhaps. Yet we don't know contract boundary packet. "Defines the VS-7 scope" implies maybe VS7 = route scope, and c02 is implementation; c13 perhaps no need. But scenario coverage table should include. Use WARNING to be conservative. The plan's "Scenario → task coverage" is incomplete. The task c02.3 covers definition, but no implementation tasks for routes? c10/c11 screen list may cover. No final verification. Real.
+Suggested fix add VS7 row with c02.3, relevant screen tasks, c13 evidence.
+
+Finding 3 versions source:
+severity WARNING.
+Claim task 1.2 relies on a missing file without identifying package/reference path.
+Evidence cited_paths "MISSING versions.toml" and task rationale line141 "Pins come straight from versions.toml"; file tree no versions. Although plan states values, provenance/source absent. Could lead drift/wrong pin.
+Suggested fix identify exact read-only source path or embed complete pins in contract/task and record digest.
+Line141. Could mention c01 line37 has explicit values, so maybe source isn't actually needed. Is it worth finding? The plan can simply use values. But task rationale points missing file, and if versions need all dependencies, perhaps incomplete. Still a real weakness, not wrong. Warning.
+
+Finding 4 Tauri CLI:
+severity WARNING.
+Evidence line30 claims realigned tauri-cli, line37 omits, line159 requires 2.11.4. Fix pin.
+Line37 or159. Use line159.
+
+Finding 5 ownership:
+severity WARNING.
+Evidence line28 "generator's uar folders has no owner"; line154 task only crates and BFF. Also c05 task 5.0 says assign before c05 runs but change deps only c01. Could claim UAR/PEM ownership remains undefined.
+Suggested fix task 5.0 cover all generated paths incl UAR/PEM and 5.1-5.3 prerequisites.
+Could severity CRITICAL? Team route needs owned paths. Warning.
+
+Finding 6 stale source:
+severity WARNING or CRITICAL. Plan c10 references bare HTML matching prohibited root live. Evidence constraints and file tree. Use line89. If source ambiguity leads wrong design, could be critical because path ownership says must not. But plan likely shorthand from docs design. Warning.
+Suggested fix spell exact paths docs/design/live/*.html and docs/design/prototype/km.css/room.css; add source check.
+
+Finding 7 build matrix:
+severity CRITICAL perhaps. Claim no task proves all required targets build and project commands finalized after imports. Evidence goals desktop/mobile/web; c01 line143 only "delivery-lead updates project.json commands"; c13 line101 boundary/evidence but no explicit command; c07 import Flutter and no build. Constraint build-passes. The scenario VS9 mapping maybe evidence c13.7, but no description. We can say plan does not define target matrix or acceptance, despite blocking constraint. This could cause final boundary to omit native mobile builds. Suggested fix add project.json commands that build web/Tauri/Android/iOS and run them at c13. Severity CRITICAL due blocking.
+But perhaps project build command could be just web and constraint only "Project build". Yet goals require apps. At least Tauri/Flutter. It says build, test, lint commands singular. Build health could aggregate. We can flag as WARNING if uncertain. The mandate says untestable criteria. I'd use CRITICAL because blocking constraint and explicit goals. Yet reviewers shouldn't overstate. Maybe WARNING because plan might inherit contract boundary. We can phrase concrete: c13 "single boundary run" could include it, but plan not says. A missing explicit acceptance is a real weakness, warning.
+Could mention deferred physical devices doesn't excuse compilation. Good.
+
+Finding 8 accessibility:
+severity WARNING.
+Evidence line13 claims binding accessibility gate, but no change/task mentions semantic HTML, focus, reduced motion, accessibility tooling; c13 only independent UI/security review. This omission means constraint warning not assured. Suggested fix add explicit automated and manual a11y gate to c03/c13.
+Does line13 exact quote include "accessibility gate"? yes recalled lessons: "The hybrid-mobile-architecture package … also supplies skills worth binding: design tokens, UI fidelity, Flutter goldens, accessibility gate, sync doctrine and dependency pinning. The changes below bind each of those skills to the role that uses them." But plan details mention mobile-navigation, titlebar, goldens, token skills, dependency pins. No sync doctrine either! Wait huge: recalled lesson says bind each skill: design tokens, UI fidelity, Flutter goldens, accessibility gate, sync doctrine and dependency pinning. Plan includes:
+- design tokens yes
+- UI fidelity baseline
+- Flutter goldens yes
+- accessibility gate absent
+- sync doctrine absent
+- dependency pinning yes.
+Could flag both accessibility and sync doctrine. But sync doctrine may not be relevant shell? Operator said keep UAR/PEM maybe sync. The plan claims bind each but no task. The goal no handrolled. Could report "The plan claims to bind accessibility and sync-doctrine skills but has no tasks for either." Yet absence difficult, but quote is clear. Focus on accessibility due explicit constraint. Sync maybe not in goals/constraints.
+This is a genuine internal contradiction. Severity WARNING.
+Suggested fix add c03/c13 accessibility gate and c05/c06 sync doctrine acceptance (if required), or remove false claim after documenting not applicable.
+
+Finding 9 visual diff:
+Could skip to avoid overpadding. Maybe combine with accessibility? No.
+Finding 10 no-any enforcement:
+Potential stronger than visual. Constraint blocking. Plan c01 "Configure Biome" but no explicit noExplicitAny. Since Biome's recommended set likely includes noExplicitAny, perhaps covered. Secret scans c13. Skip.
+Finding 11 max500:
+Skip.
+Finding 12 c13 no final build:
+include.
+
+Let's think if there are deeper logical contradictions likely intended by packet:
+- c03 depends on c01,c02 but execution Round2 after c02. okay.
+- c04 c01,c02. round2.
+- c05 c01. round2.
+- c06 c05,c04. round3.
+- c07 c05,c04. round3.
+- c08 c06,c04. round4.
+- c12 c07. round4.
+- c09 c08. round5.
+- c10,c11 c09. round6.
+- c13. okay.
+Only c03/c05 parallel issue.
+- c12 should perhaps depend c03 for baselines/golden oracle. It does c03 transitive? c12 depends c07 only; c07 depends c05,c04; none c03. c03 completed Round2 before c12 Round4, but dependency graph doesn't encode it. c10 and c11 change deps only c09; task prerequisites mention c03 baselines, but c09 doesn't depend c03 either. However schedule ensures. If c03 fails, can c09/c10 proceed? c13 catches, but tasks use baselines. The change dependency omission means orchestration could execute c09 without c03 (though round order fixed). c09 doesn't need baselines; c10/11 do. Task table prerequisites says c03 baselines for c10/11. c12 golden tests need prototype baselines? It says own goldens; likely needs c03. c12 change dependency omits c03 and task prerequisites only c07. Could be a missing dependency. But because round order all prior rounds complete, c03 always done before c12. Yet dependency should be explicit if blocking. Could mention c12 needs c03? It needs in-scope route/theme baselines for Flutter parity. c12 "same frame and screens ... golden tests"; baselines likely necessary. c12 depends c07, and c07 no c03; c03 is earlier in schedule but not dependency. The plan uses schedule as implicit ordering, but orchestrator likely honors rounds. Still.
+- c10/c11 dependencies say c09 only, task prerequisites says c03 baselines. Contradiction. We can flag dependency modeling inconsistency: task model says c03 baseline prereq, change list doesn't. But execution order guarantees c03 earlier. If c03 fails, round2 may block c04/c05 due parallel? Maybe round completion. no.
+- c04 task 4.4 prereq Flutter 3.47.5; c01 may not have actually changed local due approval. fine.
+- c06 6.2 prerequisite tauri CLI not pinned. found.
+- c07 7.1 prerequisite Xcode Android SDK; no task installs. environment.
+- c13 security gateway keys; no livekit keys. no.
+- c13 boundary operator approval. good.
+
+- `VS-5` no-Tauri web smoke includes negative controls. c06 guard. good.
+- `VS-2` identity check at c06 and c09. good.
+- `VS-3` Flutter theme at c07 and c12. good.
+- `VS-4` token generator. good.
+- `VS-8` tooling. good.
+- `VS-9` generated code builds. c05/c13. likely.
+- `VS-1` fidelity screens.
+- VS7 route scope omitted.
+No VS6 perhaps likely "security" not selected. c13 security review separately. okay.
+
+Could there be a contradiction in plan's claim "keep everything</think>
+

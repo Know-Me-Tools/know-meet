@@ -1,0 +1,13 @@
+[package]
+name = "bff"
+version = "0.1.0"
+edition = "2024"
+[dependencies]
+gen_ui_notes = { path = "../../crates/gen-ui-notes" }
+axum = "=0.8.8"
+serde = { version = "=1.0.228", features = ["derive"] }
+tokio = { version = "=1.49.0", features = ["macros", "rt-multi-thread", "net", "signal"] }
+# 0.6.6 (generator pin) conflicts in the shared root workspace: tauri 2.11.3 ->
+# reqwest 0.13 needs tower-http ^0.6.8. 0.6.11 is the version the generated
+# Tauri lockfile already resolved, so one lock serves both (c05, 2026-11-09).
+tower-http = { version = "=0.6.11", features = ["fs"] }

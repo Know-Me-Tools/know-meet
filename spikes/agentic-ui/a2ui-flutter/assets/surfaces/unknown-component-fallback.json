@@ -1,0 +1,75 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-fail-expected",
+    "errorIncludes": [
+      "KmHologram"
+    ]
+  },
+  "id": "unknown-component-fallback",
+  "title": "Unknown component type degrades to a fallback",
+  "description": "One component uses a type absent from the basic catalog. Siblings must still render; the unknown one shows the neutral fallback.",
+  "surfaceId": "km-future-widget",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-future-widget",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-future-widget",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": [
+              "before",
+              "hologram",
+              "after"
+            ]
+          },
+          {
+            "id": "before",
+            "component": "Text",
+            "text": "Before the unknown widget"
+          },
+          {
+            "id": "hologram",
+            "component": "KmHologram",
+            "intensity": 11
+          },
+          {
+            "id": "after",
+            "component": "Text",
+            "text": "After the unknown widget"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "before",
+      "hologram",
+      "after"
+    ],
+    "fallbackComponentIds": [
+      "hologram"
+    ],
+    "visibleText": [
+      "Before the unknown widget",
+      "After the unknown widget"
+    ],
+    "blockedMediaUrls": []
+  },
+  "flutterNotes": "Renderers that reject the whole updateComponents message on an unknown type fail this surface; record the observed behaviour."
+}

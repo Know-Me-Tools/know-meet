@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<title>Know Meet — Live meeting</title>
+<meta name="description" content="Know Meet Live: a real LiveKit video room with your camera and mic, room chat, and the Concierge and agents beside you." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css" />
+<link rel="stylesheet" href="assets/room.css" />
+<link rel="stylesheet" href="assets/live.css" />
+</head>
+<body data-view="start" data-sheet-open="false">
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="appbar"></header>
+
+<main id="main">
+
+<!-- ============================================================ START -->
+<section class="view" id="v-start" aria-labelledby="start-title" hidden>
+  <div class="page">
+    <div class="start-grid">
+      <div class="od-stack" style="--od-gap: 32px">
+        <div class="od-stack" style="--od-gap: 8px">
+          <span class="eyebrow">New meeting · live on LiveKit</span>
+          <h1 id="start-title">Start a meeting</h1>
+          <p class="lede">You get a real LiveKit room and a join code. Share the code and anyone can come in from their browser, no account needed.</p>
+        </div>
+        <form class="start-form" id="start-form" novalidate>
+          <div class="field">
+            <label for="st-title">Meeting name<span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="st-title" maxlength="80" required autocomplete="off" aria-describedby="st-title-hint st-title-error" />
+            <span class="hint" id="st-title-hint">Shown in the room header and on the summary.</span>
+            <span class="field-error" id="st-title-error" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="st-name">Your name<span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="st-name" maxlength="60" required autocomplete="name" aria-describedby="st-name-hint st-name-error" />
+            <span class="hint" id="st-name-hint">Shown on your video tile and in chat.</span>
+            <span class="field-error" id="st-name-error" role="alert"></span>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary btn-lg-touch" type="button" id="st-go"></button>
+          </div>
+        </form>
+      </div>
+      <aside class="panel live-aside" aria-labelledby="whats-real-title">
+        <h2 id="whats-real-title" class="aside-title">What’s live in this build</h2>
+        <ul class="real-list" id="real-list"></ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ LOBBY -->
+<section class="view" id="v-lobby" aria-labelledby="lobby-title" hidden>
+  <div class="page">
+    <div class="lobby-main">
+      <section class="preview-card" aria-label="Camera and microphone check">
+        <div class="preview" id="preview">
+          <div class="preview-empty" id="preview-empty">
+            <div class="avatar" id="preview-initials" aria-hidden="true">?</div>
+            <p id="preview-msg">Your camera is off. Turn it on to check how you look before you join.</p>
+          </div>
+        </div>
+        <div class="device-row">
+          <button class="btn toggle-btn" type="button" id="lb-mic" aria-pressed="true"></button>
+          <button class="btn toggle-btn" type="button" id="lb-cam" aria-pressed="false"></button>
+        </div>
+        <div class="meter" id="meter" hidden>
+          <span id="meter-ic"></span>
+          <div class="meter-track" role="meter" aria-label="Microphone level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="meter-fill" id="meter-fill"></div></div>
+        </div>
+        <div class="dev-grid">
+          <div class="field">
+            <label for="lb-mic-dev">Microphone</label>
+            <select class="input" id="lb-mic-dev"></select>
+          </div>
+          <div class="field">
+            <label for="lb-cam-dev">Camera</label>
+            <select class="input" id="lb-cam-dev"></select>
+          </div>
+        </div>
+        <div class="error-card" id="lb-media-error" role="alert" hidden></div>
+      </section>
+
+      <section class="lobby-info">
+        <div class="od-stack" style="--od-gap: 8px">
+          <span class="eyebrow" id="lobby-eyebrow">Ready to join</span>
+          <h1 id="lobby-title">Meeting</h1>
+          <div class="chips" id="lobby-chips"></div>
+        </div>
+
+        <div class="share-card" id="share-card">
+          <div class="od-stack" style="--od-gap: 4px">
+            <span class="label-sm">Join code</span>
+            <div class="od-row">
+              <span class="code-big od-fill" id="lb-code"></span>
+              <button class="icon-btn" type="button" id="lb-copy-code" aria-label="Copy join code"></button>
+            </div>
+          </div>
+          <div class="link-box">
+            <span class="mono small" id="lb-link"></span>
+            <button class="icon-btn" type="button" id="lb-copy-link" aria-label="Copy join link"></button>
+          </div>
+          <p class="small sub">Anyone with the code or link joins this same LiveKit room from their browser.</p>
+        </div>
+
+        <form id="lb-form" class="od-stack" style="--od-gap: 24px" novalidate>
+          <div class="field">
+            <label for="lb-name">Your name<span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="lb-name" autocomplete="name" required maxlength="60" aria-describedby="lb-name-hint lb-name-error" />
+            <span class="hint" id="lb-name-hint">Shown on your tile and in chat.</span>
+            <span class="field-error" id="lb-name-error" role="alert"></span>
+          </div>
+          <div class="error-card" id="lb-join-error" role="alert" hidden></div>
+          <div class="btn-row">
+            <button class="btn btn-primary btn-lg-touch" type="button" id="lb-join"></button>
+            <a class="btn btn-ghost" href="index.html">Cancel</a>
+          </div>
+          <p class="privacy-note" id="lb-privacy"></p>
+        </form>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ENDED -->
+<section class="view" id="v-ended" aria-labelledby="ended-title" hidden>
+  <div class="page">
+    <div class="od-stack" style="--od-gap: 8px">
+      <span class="eyebrow" id="ended-eyebrow">Meeting ended</span>
+      <h1 id="ended-title">Meeting</h1>
+      <p class="lede" id="ended-lede"></p>
+    </div>
+    <div class="ended-grid">
+      <div class="od-stack" style="--od-gap: 32px">
+        <section aria-labelledby="real-title" class="od-stack" style="--od-gap: 16px">
+          <div class="sec-row">
+            <h2 id="real-title" class="h-sec">From this call</h2>
+            <span class="chip chip-green"><span data-ic="wave"></span>Recorded by LiveKit events</span>
+          </div>
+          <div class="stats" id="ended-stats"></div>
+          <div class="od-stack" style="--od-gap: 8px">
+            <h3 class="h-sub">Who attended</h3>
+            <div class="people-chips" id="ended-people"></div>
+          </div>
+          <div class="od-stack" style="--od-gap: 8px">
+            <h3 class="h-sub">Room chat</h3>
+            <div class="msgs ended-chat" id="ended-chat"></div>
+          </div>
+        </section>
+        <section aria-labelledby="sample-title" class="od-stack" style="--od-gap: 16px">
+          <div class="sec-row">
+            <h2 id="sample-title" class="h-sec">Summary and action items</h2>
+            <span class="chip chip-amber"><span data-ic="info"></span>Sample content</span>
+          </div>
+          <p class="sub small">This build doesn’t run transcription or a summary agent, so this section shows what KnowMe will write. Attendee names come from the real call.</p>
+          <div class="status-card notes" id="ended-notes"></div>
+        </section>
+      </div>
+      <aside class="od-stack" style="--od-gap: 16px" aria-labelledby="pipe-title">
+        <div class="sec-row">
+          <h2 id="pipe-title" class="h-sec">After close</h2>
+          <span class="chip chip-amber"><span data-ic="info"></span>Simulated</span>
+        </div>
+        <div class="pipe" id="ended-pipe"></div>
+        <div class="deliv" id="ended-deliv"></div>
+        <div class="btn-row">
+          <a class="btn btn-primary" id="ended-rejoin" href="room.html#start"><span data-ic="cam"></span><span>Rejoin the room</span></a>
+          <a class="btn" href="room.html#start"><span data-ic="plus"></span><span>New meeting</span></a>
+          <a class="btn btn-ghost" href="index.html">Home</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ NOT CONFIGURED -->
+<section class="view" id="v-offline" aria-labelledby="offline-title" hidden>
+  <div class="page page-narrow">
+    <div class="gate">
+      <div class="gate-icon"><span data-ic="server" data-ic-class="ic-lg"></span></div>
+      <h1 id="offline-title" class="gate-h">The token service isn’t running</h1>
+      <p id="offline-msg">This page needs the local Know Meet server to issue LiveKit access tokens. Open a terminal in the know-meet repo and run <code class="code">./live/start.sh</code>, then open <code class="code">http://localhost:5173/room.html</code>.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" type="button" id="offline-retry"><span data-ic="refresh"></span><span>Try again</span></button>
+        <a class="btn" href="meet.html#start"><span data-ic="play"></span><span>Open the simulated room</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================================================ ROOM (full-screen, outside the page flow) -->
+<div id="v-room" class="view" hidden>
+  <div class="room-head-wrap">
+    <div class="room-head">
+      <a class="brand od-fixed" href="index.html" id="room-brand" aria-label="Know Meet home"></a>
+      <div class="room-title od-fill">
+        <h1 class="od-truncate" id="room-title" tabindex="-1">Meeting</h1>
+        <span class="meta od-truncate" id="room-meta"></span>
+      </div>
+      <span class="conn-chip" id="conn-chip" role="status"></span>
+      <span class="rec-ind" id="rec-ind" hidden><span class="pip" aria-hidden="true"></span><span>REC</span><span id="rec-time">00:00</span></span>
+      <span class="chip chip-ember hide-md" id="guest-chip" hidden>Guest</span>
+      <button class="icon-btn hide-md" type="button" id="room-settings" aria-label="Audio and video settings"></button>
+    </div>
+    <div class="rec-banner" id="rec-banner" role="status" hidden>
+      <span data-ic="record"></span><span>Recording is on for everyone in this room. <strong>Simulated:</strong> no LiveKit egress runs in this build.</span>
+    </div>
+    <div class="audio-banner" id="audio-banner" hidden>
+      <span data-ic="mic-off"></span>
+      <span class="od-fill">Your browser blocked sound from the room until you click.</span>
+      <button class="btn btn-sm btn-primary" type="button" id="audio-start">Turn on sound</button>
+    </div>
+  </div>
+
+  <div class="room-body" id="room-body">
+    <section class="stage" aria-label="Participants">
+      <div class="tile-grid" id="grid"></div>
+    </section>
+    <div class="captions-wrap">
+      <div class="captions" id="captions" aria-live="polite">
+        <span class="cap-who" id="cap-who">Concierge · simulated</span>
+        <span class="cap-text" id="cap-text">Connecting you to the room…</span>
+      </div>
+    </div>
+
+    <aside class="rsheet" id="rsheet" aria-labelledby="rs-title">
+      <div class="rsheet-head">
+        <div>
+          <span class="eyebrow" id="rs-eyebrow">Panel</span>
+          <h2 id="rs-title" tabindex="-1">Panel</h2>
+          <span class="lede-line" id="rs-lede"></span>
+        </div>
+        <button class="icon-btn" type="button" id="rs-close" aria-label="Close panel"></button>
+      </div>
+
+      <!-- chat (real, LiveKit data messages) -->
+      <div class="pane" data-pane="chat">
+        <div class="rsheet-scroll" id="chat-scroll">
+          <div class="msgs" id="chat-msgs" aria-live="polite"></div>
+        </div>
+        <div class="rsheet-foot">
+          <form class="composer" id="chat-form" novalidate>
+            <label for="chat-input">Message everyone</label>
+            <div class="composer-row">
+              <textarea class="input" id="chat-input" rows="1" maxlength="500"></textarea>
+              <button class="btn btn-primary send-btn" type="button" id="chat-send" aria-label="Send message" disabled></button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- people (real participants + simulated agents) -->
+      <div class="pane" data-pane="people">
+        <div class="rsheet-scroll">
+          <div class="k-section">
+            <h3>In the call</h3>
+            <div class="people-list" id="people-real"></div>
+          </div>
+          <div class="k-section">
+            <h3>Agents in the room · simulated</h3>
+            <div class="people-list" id="people-agents"></div>
+          </div>
+        </div>
+        <div class="rsheet-foot">
+          <button class="btn btn-block" type="button" id="people-copy"><span data-ic="link"></span><span>Copy invite link</span></button>
+        </div>
+      </div>
+
+      <!-- concierge (simulated, answers from real room facts) -->
+      <div class="pane" data-pane="concierge">
+        <div class="rsheet-scroll" id="conc-scroll">
+          <p class="tx-note"><span data-ic="info" data-ic-class="ic-sm"></span><span>The Concierge is simulated in this build. It answers from what this page knows about the live room: who is here, for how long, and the chat.</span></p>
+          <div class="msgs" id="conc-msgs"></div>
+          <div class="prompt-list" id="conc-prompts"></div>
+        </div>
+        <div class="rsheet-foot">
+          <form class="composer" id="conc-form" novalidate>
+            <label for="conc-input">Ask the Concierge</label>
+            <div class="composer-row">
+              <textarea class="input" id="conc-input" rows="1" maxlength="300"></textarea>
+              <button class="btn btn-primary send-btn" type="button" id="conc-send" aria-label="Send question to the Concierge" disabled></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="controls" aria-label="Meeting controls">
+    <div class="ctl-group clock-group">
+      <span class="clock" id="clock">00:00</span>
+    </div>
+    <div class="ctl-group">
+      <button class="ctl" type="button" id="ctl-mic" aria-pressed="false"><span class="ctl-label">Mute</span></button>
+      <button class="ctl" type="button" id="ctl-cam" aria-pressed="false"><span class="ctl-label">Stop video</span></button>
+      <button class="ctl ctl-panel" type="button" id="ctl-share" aria-pressed="false"><span class="ctl-label">Share</span></button>
+      <button class="ctl" type="button" id="ctl-rec" aria-pressed="false"><span class="ctl-label">Record</span></button>
+    </div>
+    <div class="ctl-group">
+      <button class="ctl ctl-panel" type="button" id="ctl-chat" aria-pressed="false" aria-controls="rsheet"><span class="ctl-label">Chat</span><span class="badge" id="chat-badge" hidden></span></button>
+      <button class="ctl ctl-panel" type="button" id="ctl-people" aria-pressed="false" aria-controls="rsheet"><span class="ctl-label">People</span><span class="badge" id="people-badge"></span></button>
+      <button class="ctl ctl-panel" type="button" id="ctl-conc" aria-pressed="false" aria-controls="rsheet"><span class="ctl-label">Concierge</span></button>
+      <button class="ctl" type="button" id="ctl-agents"><span class="ctl-label">Add agent</span></button>
+      <button class="ctl ctl-leave" type="button" id="ctl-leave"><span class="ctl-label">Leave</span></button>
+    </div>
+  </nav>
+</div>
+
+<!-- ============================================================ DIALOGS -->
+<dialog id="agents-dlg" aria-labelledby="agents-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <h2 id="agents-title">Add an agent</h2>
+        <p>Agents join as simulated tiles. In production each one is a registered LiveKit agent worker dispatched into this room.</p>
+      </div>
+      <button class="icon-btn" type="button" data-close aria-label="Close"></button>
+    </div>
+    <div class="dlg-body" id="agent-list"></div>
+    <div class="dlg-foot"><button class="btn" type="button" data-close>Done</button></div>
+  </div>
+</dialog>
+
+<dialog id="consent-dlg" aria-labelledby="consent-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <h2 id="consent-title">Start recording?</h2>
+        <p>Everyone in the room sees a recording notice as soon as you start.</p>
+      </div>
+      <button class="icon-btn" type="button" data-close aria-label="Close"></button>
+    </div>
+    <div class="dlg-body">
+      <div class="consent-list" id="consent-list"></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn-ghost" type="button" data-close>Cancel</button>
+      <button class="btn btn-danger" type="button" id="consent-go"><span data-ic="record"></span><span>Start recording</span></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="leave-dlg" aria-labelledby="leave-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <h2 id="leave-title">Leave the meeting?</h2>
+        <p id="leave-sub">The room stays open for everyone else.</p>
+      </div>
+      <button class="icon-btn" type="button" data-close aria-label="Close"></button>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn-ghost" type="button" data-close>Stay</button>
+      <button class="btn" type="button" id="leave-go"><span data-ic="leave"></span><span>Leave</span></button>
+      <button class="btn btn-danger" type="button" id="end-go" hidden><span data-ic="stop"></span><span>End for everyone</span></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="devices-dlg" aria-labelledby="devices-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <h2 id="devices-title">Audio and video</h2>
+        <p>Changes apply straight away to the live call.</p>
+      </div>
+      <button class="icon-btn" type="button" data-close aria-label="Close"></button>
+    </div>
+    <div class="dlg-body od-stack" style="--od-gap: 16px">
+      <div class="field"><label for="dv-mic">Microphone</label><select class="input" id="dv-mic"></select></div>
+      <div class="field"><label for="dv-cam">Camera</label><select class="input" id="dv-cam"></select></div>
+      <div class="field" id="dv-out-field"><label for="dv-out">Speaker</label><select class="input" id="dv-out"></select></div>
+    </div>
+    <div class="dlg-foot"><button class="btn" type="button" data-close>Done</button></div>
+  </div>
+</dialog>
+
+<div id="audio-sink" hidden></div>
+
+<script src="assets/km.js"></script>
+<script src="assets/vendor/livekit-client.umd.js"></script>
+<script src="assets/live-room.js"></script>
+<script src="assets/live-lobby.js"></script>
+</body>
+</html>

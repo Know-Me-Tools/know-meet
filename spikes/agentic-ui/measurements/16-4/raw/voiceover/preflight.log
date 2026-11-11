@@ -1,0 +1,4 @@
+return content of last phrase => Welcome to macOS. VoiceOver is on.
+return bounds of vo cursor => missing value
+return text under cursor of vo cursor => The token service isn’t running heading level 1
+return name => VoiceOver

@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 181,
+  "derivedRevision": 181,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 181
+  },
+  "conflictCount": 0,
+  "updatedAt": "2026-11-11T05:43:18.340409Z",
+  "cursor": [
+    "hybrid-shell-foundation",
+    "execute",
+    "c16-agentic-core-gates",
+    "16.2"
+  ],
+  "root": {
+    "type": "phase",
+    "id": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "status": "ready",
+    "progress": {
+      "done": 8,
+      "total": 16
+    },
+    "children": [
+      {
+        "type": "phase",
+        "id": "hybrid-shell-foundation",
+        "canonicalId": "hybrid-shell-foundation",
+        "status": "PENDING",
+        "progress": {
+          "done": 8,
+          "total": 16
+        },
+        "children": [
+          {
+            "type": "change",
+            "id": "c01-workspace-and-repo-rules",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 6,
+              "total": 6
+            }
+          },
+          {
+            "type": "change",
+            "id": "c02-design-token-reconciliation",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c03-value-scenarios-and-baselines",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c04-token-generator",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "c05-scaffold-generation-import",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 7,
+              "total": 7
+            }
+          },
+          {
+            "type": "change",
+            "id": "c06-web-desktop-single-bundle",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c07-flutter-shell-import",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 2,
+              "total": 2
+            }
+          },
+          {
+            "type": "change",
+            "id": "c08-shared-ui-kit",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c09-app-frame-and-navigation",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 2
+            }
+          },
+          {
+            "type": "change",
+            "id": "c10-public-screens",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c11-app-screens",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 5
+            }
+          },
+          {
+            "type": "change",
+            "id": "c12-flutter-frame-and-screens",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "c13-fidelity-verification-and-evidence",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 10
+            }
+          },
+          {
+            "type": "change",
+            "id": "c14-aggregate-commands",
+            "status": "PENDING",
+            "progress": {
+              "done": 0,
+              "total": 2
+            }
+          },
+          {
+            "type": "change",
+            "id": "c15-agentic-ui-spike",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 6,
+              "total": 6
+            }
+          },
+          {
+            "type": "change",
+            "id": "c16-agentic-core-gates",
+            "status": "BLOCKED",
+            "progress": {
+              "done": 4,
+              "total": 7
+            }
+          }
+        ],
+        "annotations": []
+      }
+    ],
+    "annotations": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "browser": "chromium",
+  "measuredAt": "2026-11-10T15:56:10.632Z",
+  "cases": {
+    "long-markdown": {
+      "runs": [
+        {
+          "settleMs": 5868.799999982119,
+          "renderCompleteMs": 5871.0999999940395,
+          "lagAfterSettleMs": 2.300000011920929,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 5871.9000000059605,
+          "renderCompleteMs": 5873.300000011921,
+          "lagAfterSettleMs": 1.4000000059604645,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 5885.4000000059605,
+          "renderCompleteMs": 5887.0999999940395,
+          "lagAfterSettleMs": 1.699999988079071,
+          "longTaskMsToRender": 0
+        }
+      ],
+      "median": {
+        "settleMs": 5872,
+        "renderCompleteMs": 5873,
+        "lagAfterSettleMs": 2,
+        "longTaskMsToRender": 0
+      }
+    },
+    "hostile/huge-table": {
+      "runs": [
+        {
+          "settleMs": 1154,
+          "renderCompleteMs": 1199.5,
+          "lagAfterSettleMs": 45.5,
+          "longTaskMsToRender": 160
+        },
+        {
+          "settleMs": 1200.0999999940395,
+          "renderCompleteMs": 1238,
+          "lagAfterSettleMs": 37.900000005960464,
+          "longTaskMsToRender": 216
+        },
+        {
+          "settleMs": 1146,
+          "renderCompleteMs": 1194.0999999940395,
+          "lagAfterSettleMs": 48.099999994039536,
+          "longTaskMsToRender": 214
+        }
+      ],
+      "median": {
+        "settleMs": 1154,
+        "renderCompleteMs": 1200,
+        "lagAfterSettleMs": 46,
+        "longTaskMsToRender": 214
+      }
+    }
+  }
+}

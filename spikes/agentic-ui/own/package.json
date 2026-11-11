@@ -1,0 +1,45 @@
+{
+  "name": "@know-meet/agentic-ui-spike-own",
+  "private": true,
+  "version": "0.0.0",
+  "description": "c15 prototype O: own AG-UI client and reducer on @prometheus-ags/entity-graph, Streamdown, @a2ui/react. Standalone: not part of the root pnpm workspace.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@a2ui/react": "0.15.0",
+    "@a2ui/web_core": "0.15.0",
+    "@ag-ui/core": "1.0.4",
+    "@prometheus-ags/entity-graph-core": "4.3.0",
+    "@prometheus-ags/entity-graph-react": "4.3.0",
+    "@streamdown/code": "2.0.0",
+    "@streamdown/math": "1.0.3",
+    "@streamdown/mermaid": "1.0.3",
+    "clsx": "2.1.1",
+    "dompurify": "3.4.17",
+    "katex": "0.16.47",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "streamdown": "2.7.1",
+    "tailwind-merge": "3.7.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "26.6.6",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.3.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2",
+    "vite": "8.3.7"
+  }
+}

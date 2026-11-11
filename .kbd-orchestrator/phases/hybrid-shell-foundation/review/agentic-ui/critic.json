@@ -1,0 +1,183 @@
+{
+  "verdict": "REVISE",
+  "recommended_primary": "assistant-ui full AG-UI runtime, with entity-graph used as a durable conversation and event projection rather than the live UI-state owner",
+  "recommended_stack": "@assistant-ui/react + @assistant-ui/react-ag-ui + @assistant-ui/react-streamdown, shadcn/Base UI presentation, @ag-ui/core wire contracts, entity-graph persistence, and A2UI v1.0 through a shared shadcn catalog",
+  "agrees_with_research": false,
+  "findings": [
+    {
+      "severity": "critical",
+      "claim": "Own+pieces ranks first because it is the only option where state lives in our own store.",
+      "problem": "This is internally false and unsupported. Rank 3 explicitly feeds entity-graph into useExternalStoreRuntime, so that option also keeps state in the Know Meet store. The cited adapter interface shows that external state is possible, although it does not prove that react-ag-ui can be used through it. More importantly, entity-graph ownership is an architectural preference, not one of the hard requirements, and clean architecture permits a UI runtime to own live presentation state. The evidence therefore does not support using this preference to reverse a higher-scoring assistant-ui option.",
+      "fix": "Define explicit ownership for live messages, durable history, tool state and presentation state. Run a bounded assistant-ui-full versus useExternalStoreRuntime spike, then rank the options against measured complexity, protocol churn and state-duplication risk."
+    },
+    {
+      "severity": "critical",
+      "claim": "Own+pieces and assistant-ui both score 3 for R4 streaming markdown.",
+      "problem": "The Streamdown evidence supports GFM, KaTeX, Mermaid, Shiki, remend, rehype-sanitize and rehype-harden. It explicitly contradicts full R4 compliance because raw SVG, video and audio are outside the default allow-list. The research also does not establish that Mermaid-generated SVG is sanitized after Mermaid renders it, configure an image-origin policy, or define accessible media behavior. These are hard requirements, so R4=3 is not earned by either option.",
+      "fix": "Treat Streamdown as the markdown base rather than the complete R4 solution. Build and threat-test an allowlisted media pipeline, sanitize rendered SVG, configure CSP and origin allowlists, define caption/transcript behavior, and run an XSS corpus. Reduce R4 to 2 until those tests pass."
+    },
+    {
+      "severity": "critical",
+      "claim": "Accessibility is covered by shadcn Trace, Questionnaire and Message primitives, with a live region to be added for Own+pieces.",
+      "problem": "S10 and S11 support isolated keyboard and ARIA affordances, but they do not establish an accessible streaming experience. The research admits that Message Scroller live-region behavior is Unknown, and a full assistant-ui audit is also Unknown. Announcing every token through a live region would create screen-reader noise, while mutating a complex markdown subtree can have different AT behavior. R9 is therefore uncovered, not partially solved.",
+      "fix": "Add an R9 acceptance suite: throttled or finalized-content announcements, aria-busy state, focus preservation across stream updates, cancellation announcements, keyboard-only tool approval, zoom and reduced-motion behavior, and automated axe plus manual screen-reader tests."
+    },
+    {
+      "severity": "major",
+      "claim": "The A2UI plan provides a 3 for R2 and the same A2UI JSON renders on web and Flutter.",
+      "problem": "S13 and S14 support that the official React renderer exists and documents v0.9 through v1.0 support. They do not support the parity claim: the official shadcn catalog is only Proposed, a2ui_flutter is Alpha, and the research's own unknowns list says web/Flutter catalog parity is unverified. A custom shadcn catalog is owned work rather than native renderer support, so Own+pieces should not receive the same score as a tested official implementation.",
+      "fix": "Define a shared, versioned A2UI catalog and golden surface corpus. Run the same corpus through @a2ui/react and a2ui_flutter, including actions, validation errors and catalog fallback. Score R2 as 2 until conformance and cross-platform parity pass."
+    },
+    {
+      "severity": "major",
+      "claim": "assistant-ui natively handles 24 AG-UI event types and A2UI v0.9 through v1.0, earning 3 for R1 and R2.",
+      "problem": "S3 is credible evidence that event-parser branches and A2UI code paths exist, but it is not proof of end-to-end protocol conformance. The research does not enumerate all 24 events, record react-ag-ui's @ag-ui/core dependency range, test against protocol 1.0.4, or demonstrate CUSTOM replay, cancellation, reconnection and history behavior. A2UI version strings and changelog references are also weaker than v1.0 conformance fixtures. The clone was of the default branch rather than the published package tag.",
+      "fix": "Build a pinned AG-UI conformance harness using the exact npm tarballs. Test every supported event, ordering, malformed input, disconnect, reconnect, replay, cancellation, tool deferral and CUSTOM round trip. Likewise test representative official A2UI v1.0 JSON and action responses."
+    },
+    {
+      "severity": "major",
+      "claim": "entity-graph's AG-UI bridge, persistence and time travel support Own+pieces' R1 and maturity score.",
+      "problem": "S40 supports the existence of applyAgUiSnapshot, applyAgUiDelta, persistence adapters and time-travel APIs. It also directly limits the bridge to STATE_SNAPSHOT and STATE_DELTA and shows no lifecycle reducer. The disclosed production usage is limited to Note and Capability entities. The claim that Know Meet owns the code does not establish maturity, so R8=2 is unsupported; this part of the composite should be treated as unproven code rather than an existing platform.",
+      "fix": "Score the entity-graph portion of R8 as 1 or Unknown. Define an entity-graph acceptance suite for lifecycle events, persistence recovery, migration and concurrent runs, and assign explicit maintainers and release ownership to the new reducer."
+    },
+    {
+      "severity": "major",
+      "claim": "Own+pieces is viable despite the risk that every streamed token would pass through zustand and Immer.",
+      "problem": "The research correctly identifies this as a major unknown, but still selects the architecture first. No benchmark supports either the optimistic claim that the graph can sustain token-rate writes or the pessimistic claim that it cannot. The proposed fallback of buffering outside the graph would create a second state path and weaken time travel and persistence semantics. Choosing the design before measuring its defining risk is not evidence-based.",
+      "fix": "Make the performance spike a gating experiment: long replies, concurrent tools, cancellations, reconnects and Tauri WebKit/WebView2 runs, with update latency, render counts, memory and graph-commit cost measured. Specify whether the graph stores every token or a committed projection."
+    },
+    {
+      "severity": "major",
+      "claim": "assistant-ui's runtime structurally cannot keep entity-graph as the store of record, and the fallback is to mirror settled messages after each run.",
+      "problem": "The source evidence supports that react-ag-ui has its own controller and that an ExternalStoreAdapter exists. It does not support the absolute claim that no non-forking integration is possible. Conversely, mirroring settled messages is a derived cache rather than a store of record: it can lose raw CUSTOM events, interrupted approvals, activity deltas, exact replay order and transient tool state. The proposed fallback therefore contradicts the architecture claim it is meant to preserve.",
+      "fix": "Do not use settled-message mirroring as the primary fallback. Define a canonical AG-UI event journal or replayable snapshot contract, then test an external-store or custom-transport adapter. If no supported integration exists, record that as a measured limitation rather than an assumed impossibility."
+    },
+    {
+      "severity": "major",
+      "claim": "The requirements matrix establishes the ranking with totals of 25, 27 and 23.",
+      "problem": "The scores are not applied consistently. Own+pieces receives R3=3 for a planned discriminator even though the scale reserves 3 for native or official evidence; it receives R4=3 despite missing required media; R2=3 despite owning the catalog; and R7=3 without Tauri evidence. Own+pieces and AUI-headless both require an own-written AG-UI reducer but receive R1 scores of 2 and 1. The Base UI versus Radix distinction is also treated as material without a demonstrated rendering incompatibility. The totals cannot support a ranking.",
+      "fix": "Rebuild the matrix from demonstrated behavior rather than plans. Separate package capability from integration effort, use Unknown instead of inferred compatibility, define acceptance tests for every hard requirement, and publish a weighted decision model with explicit penalties and unresolved risks."
+    },
+    {
+      "severity": "major",
+      "claim": "Own+pieces can implement tool calls, human-in-the-loop and generative UI by wiring AG-UI events itself.",
+      "problem": "This is an implementation sketch, not a demonstrated HITL design. The hard cases are not named: approval interruption and resume, rejection, cancellation, concurrent approvals, idempotency, tool-result correlation, stale approvals after reconnect and authorization of agent-requested actions. A2UI actions also need an allowlisted command surface rather than arbitrary agent-provided actions.",
+      "fix": "Specify a tool and approval state machine, including pending, approved, rejected, expired, cancelled and failed states. Define idempotency keys, concurrency rules, agent-action allowlists and the AG-UI resume contract before estimating implementation time."
+    },
+    {
+      "severity": "major",
+      "claim": "Every recommended piece is React-19, Vite-friendly and compatible with Tauri, so R7 is 3.",
+      "problem": "Peer ranges support React compatibility and the separate assistant-ui Vite package is more direct evidence for Vite than mere absence of a Next.js dependency. Neither source establishes Tauri compatibility. The research explicitly leaves Tauri behavior Unknown, while @a2ui/web_core introduces Lit, Preact signals and zod 3 into a React 19 application. Bundle size is also unmeasured.",
+      "fix": "Create a minimal Vite application that mounts the A2UI renderer, Streamdown and all media paths, then run it in Tauri on macOS WebKit and Windows WebView2. Capture dependency resolution, CSP behavior, startup cost, memory and production bundle sizes."
+    },
+    {
+      "severity": "major",
+      "claim": "The build is about 7 to 10 engineer-weeks, whereas assistant-ui provides a working AG-UI chat in days.",
+      "problem": "Neither estimate is supported by a common scope. The own-build estimate does not enumerate protocol conformance, security review, A2UI cross-platform parity, Android/iOS interaction behavior, analytics, telemetry or release management. The assistant-ui estimate is an anecdote rather than a measured implementation. Counting 69 releases as evidence of hardening also ignores the cost of absorbing adapter churn.",
+      "fix": "Define a feature-by-feature acceptance matrix and estimate each item with test and review time. Time-box two vertical prototypes, including the performance and accessibility spikes, and compare delivered scope rather than calendar anecdotes."
+    },
+    {
+      "severity": "major",
+      "claim": "The 272,393-byte gzip figure establishes assistant-ui's bundle disadvantage.",
+      "problem": "The Bundlephobia figure describes the whole package with its dependency graph, not the application import graph. It is not a Vite tree-shaken measurement, and the research says every other measurement timed out. The asserted assistant-cloud, zustand and radix-ui burden may differ by entry point and tree-shaking. One noisy package figure cannot decide R7 or R10.",
+      "fix": "Build equivalent Vite entry points for each option, use Rollup or Vite visualizer output and compressed artifacts, and compare initial and route-level bundles. Treat any required cloud runtime as backend coupling, but do not count a merely declared optional dependency as unavoidable runtime cost."
+    },
+    {
+      "severity": "major",
+      "claim": "All versions, dates and protocol-support facts were verified against npm, pub.dev and GitHub on 2026-11-09.",
+      "problem": "The attachment provides mutable landing-page URLs and describes commands whose raw JSON output is not preserved. It does not include registry snapshots, tarball integrity hashes, exact source commit SHAs or checksums for the inspected clones. Consequently, exact latest-version and release-date assertions are not independently reproducible from the citation set, and default-branch code may not match the published packages.",
+      "fix": "Archive npm and pub.dev metadata, package tarball hashes and exact Git commit SHAs with the report. Re-run the comparison from those immutable artifacts, and pin every selected dependency in a lockfile."
+    },
+    {
+      "severity": "major",
+      "claim": "The 69 react-ag-ui releases demonstrate that assistant-ui has hardened the AG-UI behavior.",
+      "problem": "Release count is not a conformance or stability measure. react-ag-ui remains 0.1.2 and @assistant-ui/react remains 0.x, while the research says breaking-change counts were not audited and minor bumps may break. A high release frequency can equally indicate churn. R8=3 therefore overstates the maturity evidence.",
+      "fix": "Audit breaking changes, test against the selected version, define an upgrade policy and pin the adapter. Prefer evidence from conformance tests and production usage over release counts or GitHub stars."
+    },
+    {
+      "severity": "major",
+      "claim": "CopilotKit's control over AG-UI governance is a reason to prefer a custom client layer.",
+      "problem": "The npm metadata supports the governance caveat, but it does not distinguish among candidates that consume the required AG-UI protocol. assistant-ui also depends on AG-UI. Rebuilding a client does not remove that protocol influence, so governance should be recorded as an unavoidable protocol risk rather than used to favor an own implementation.",
+      "fix": "Score protocol governance separately from client-library coupling. Pin the AG-UI schema version, maintain conformance tests and isolate protocol types behind an internal port so a future protocol change does not contaminate the UI."
+    },
+    {
+      "severity": "minor",
+      "claim": "shadcn AI Elements gives a perfect shadcn and token fit, earning R6=3.",
+      "problem": "S10 supports copied-in code, Base UI variants and token use. It does not establish runtime correctness, visual parity with base-nova, or accessible streaming behavior. The patterns are only about four weeks old, so copying code also creates an upstream patch-management burden.",
+      "fix": "Run visual-regression, Base UI and accessibility tests before adopting patterns wholesale. Record which upstream files Know Meet will maintain and how security or accessibility fixes will be backported."
+    },
+    {
+      "severity": "minor",
+      "claim": "The adapter packages are react-ag-ui and @assistant-ui/generative-ui/a2ui.",
+      "problem": "The report uses react-ag-ui without a scope in the recommendation, @assistant-ui/react-ag-ui in the matrix, @assistant-ui/react-generative-ui in the package list and @assistant-ui/generative-ui/a2ui in the A2UI discussion. Those are not interchangeable import paths, and no manifest or source archive is supplied to resolve the inconsistency.",
+      "fix": "Record exact package names, export subpaths, versions and tarball hashes in the final dependency specification."
+    },
+    {
+      "severity": "minor",
+      "claim": "Every recommended piece is MIT- or Apache-2.0-licensed.",
+      "problem": "The citations establish licenses for some core packages, but not every cited shadcn package, plugin, Flutter package or transitive dependency. Repository licenses also do not always equal published-package licenses.",
+      "fix": "Run a software-composition analysis over the exact lockfile, record package-level licenses and include any missing or nonstandard notices before standardization."
+    }
+  ],
+  "missed_candidates": [
+    "Vercel Chat SDK (`chat`, `@chat-adapter/web` and any AG-UI adapter): mentioned only in passing and never compared for AG-UI transport, custom parts, Vite support or shadcn integration.",
+    "TanStack AI and TanStack AI Chat: referenced through @shadcn/helpers mocks but never evaluated for AG-UI, A2UI, human-in-the-loop or tool rendering.",
+    "Vercel AI SDK as a presentation-only client with an AG-UI bridge: the research rejects AI SDK because its native wire format is UIMessage, but that does not exclude using it behind an AG-UI transport without a server runtime.",
+    "json-render's AG-UI path and Chat SDK card integration: left Unknown despite being a current generative-UI candidate and potentially relevant to A2UI-to-shadcn catalog mapping.",
+    "A direct comparison of assistant-ui's ExternalStoreRuntime with a custom AG-UI transport and entity-graph: this was ranked but not evaluated as an actual integration spike."
+  ],
+  "requirement_gaps": [
+    {
+      "req": "R1",
+      "gap": "No lifecycle reducer exists in entity-graph, and assistant-ui's parser coverage has not been demonstrated through a current-version conformance suite. CUSTOM semantics, ordering, cancellation, reconnect, replay and resume remain unverified.",
+      "fill": "Pin the AG-UI version and maintain a golden event-sequence suite. If Own+pieces is retained, implement a pure reducer outside React, persist the raw event journal, and commit throttled or end-of-message projections to entity-graph."
+    },
+    {
+      "req": "R2",
+      "gap": "The shadcn A2UI catalog is unbuilt, the official catalog is only Proposed, and Flutter rendering is Alpha with unknown parity.",
+      "fill": "Create one versioned catalog schema and shared surface corpus, map it to Base UI components, and require identical rendering and action tests in @a2ui/react and a2ui_flutter before treating mobile parity as satisfied."
+    },
+    {
+      "req": "R3",
+      "gap": "The custom-part strategy is described as a planned discriminated union and renderer registry; there is no implementation, unknown-event preservation policy or round-trip test.",
+      "fill": "Define versioned part types, a typed renderer registry, fallback rendering for unknown parts and tests proving that CUSTOM values, activities and assistant data parts survive storage and replay."
+    },
+    {
+      "req": "R4",
+      "gap": "Raw SVG, video and audio are excluded by the default Streamdown policy, and the research does not cover post-render Mermaid sanitization, source allowlists, captions or an XSS corpus.",
+      "fill": "Add an allowlisted media renderer, sanitize rendered SVG with a restricted profile, configure CSP and origin allowlists, support accessible controls and captions, and test streaming fragments, incomplete syntax and hostile markdown."
+    },
+    {
+      "req": "R5",
+      "gap": "HITL is assigned as future work without interruption, rejection, expiry, concurrency, idempotency or action-security semantics. A2UI action authorization is also unspecified.",
+      "fill": "Implement an explicit approval and tool state machine, correlated resumptions, action allowlists, audit events and cancellation behavior; use assistant-ui's tested adapter where it satisfies those contracts."
+    },
+    {
+      "req": "R6",
+      "gap": "The copied shadcn patterns fit base-nova, but assistant-ui's Radix dependency, A2UI component mapping, token coverage and dark-mode behavior have not been demonstrated.",
+      "fill": "Define a CSS-variable and component-contract test suite, use Base UI variants where required, and run visual-regression tests for both chat and A2UI surfaces in all themes."
+    },
+    {
+      "req": "R7",
+      "gap": "React peer compatibility is known, but Tauri WebKit/WebView2 behavior, Lit inside React 19, zod 3 versus zod 4 resolution, CSP and production bundle size are not.",
+      "fill": "Add a pinned Vite compatibility app, verify dependency resolution, run it in both Tauri webviews, and establish initial, route-level and post-streaming bundle and memory budgets."
+    },
+    {
+      "req": "R8",
+      "gap": "The proposed composite layer has no release history, while its Flutter A2UI dependency is Alpha and assistant-ui's adapters remain 0.x.",
+      "fill": "Pin versions, publish the own layer under an internal semver policy, maintain conformance and migration tests, assign upgrade ownership and document a tested fallback that preserves AG-UI and A2UI wire contracts."
+    },
+    {
+      "req": "R9",
+      "gap": "Streaming live-region behavior and a full screen-reader, keyboard and focus audit are missing from every proposed option.",
+      "fill": "Specify throttled announcements and aria-busy transitions, preserve focus during rerenders, support keyboard-only approvals, run axe and manual screen-reader tests, and make R9 a release gate."
+    },
+    {
+      "req": "R10",
+      "gap": "AG-UI governance risk is unavoidable, A2UI mobile is Alpha, and assistant-ui introduces runtime ownership and optional cloud dependencies even though no server is required.",
+      "fill": "Keep AG-UI and A2UI as the only durable wire contracts, isolate protocol adapters behind ports, persist a replayable event journal in entity-graph, prevent cloud-only features from entering the critical path, and avoid assistant-cloud or proprietary persistence schemas."
+    }
+  ],
+  "strongest_counter_case": "assistant-ui full is the strongest alternative because S3 already demonstrates the expensive surface: broad AG-UI event handling, approval flows, A2UI activity conversion and rehydration, custom data parts, reconnect/replay-oriented tests and an ExternalStoreRuntime. It requires no backend runtime. The proposed own build would spend roughly 7 to 10 engineer-weeks recreating those behaviors while entity-graph currently implements only STATE_SNAPSHOT and STATE_DELTA and has no evidence that it can absorb token-rate updates. Clean architecture does not require the graph to own live UI state, and the research does not demonstrate that react-ag-ui cannot be integrated or superseded without a fork. A lower-risk design is to let assistant-ui own the live session, store a replayable AG-UI journal and settled projections in entity-graph, and keep all UI dependencies behind presentation adapters. If entity-graph must remain the canonical live state, that should be established by a useExternalStoreRuntime or custom-transport spike with measured duplicate updates, rather than treated as an automatic reason to make a custom implementation primary. On the present evidence, assistant-ui's faster delivery and hardened edge-case coverage outweigh an unproven desire for a single live-state owner.",
+  "confidence": 0.83
+}

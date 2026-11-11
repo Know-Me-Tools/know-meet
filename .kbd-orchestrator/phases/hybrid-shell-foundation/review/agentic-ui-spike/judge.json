@@ -1,0 +1,88 @@
+{
+  "verdict": "REVISE",
+  "recommended": "O",
+  "agrees_with_report": true,
+  "findings": [
+    {
+      "severity": "major",
+      "claim": "Both paths pass everything.",
+      "problem": "They tie on the executed browser suites and Tauri AG-UI conformance, but both score 42/44 on the Tauri hostile corpus under the current apps/web CSP. The settled-state Tauri axe scans also found one violation for H and two for O, including an O-only target-size violation. Trusted keyboard activation, the full a11y spec, and seven of the eight A2UI golden surfaces were not run in Tauri.",
+      "fix": "State exactly which suites passed and list the Tauri axe results alongside the CSP failures. Reserve 'everything' for the 148 browser checks, and distinguish shared CSP-policy failures from prototype conformance."
+    },
+    {
+      "severity": "major",
+      "claim": "TTFT and total stream time are equivalent, within 21 ms or 1.5% apart from listed exceptions.",
+      "problem": "The 21 ms/1.5% statement concerns total stream time, not TTFT. TTFT differences include Chromium long-markdown at 265 ms for H versus 106 ms for O, Chromium disconnect-reconnect at 165 versus 93 ms, WebKit cancel-mid-stream at 73 versus 12 ms, and Tauri long-markdown at 45 versus 21 ms. O is often faster, so this is not an H-favouring correction, but the report's equivalence claim is false. The total-time exceptions are also incomplete: WebKit huge-table differs by 26 ms, about 2.3%, without being listed.",
+      "fix": "Separate TTFT from total stream time, summarize their distributions independently, and retain the per-scenario table rather than applying the total-time equivalence rule to both metrics."
+    },
+    {
+      "severity": "major",
+      "claim": "O renders approximately 25\u201328 times fewer times on long answers.",
+      "problem": "That ratio is scenario- and browser-specific. For long-markdown it is 27.9\u00d7 in Chromium, 34.5\u00d7 in WebKit, and 26.4\u00d7 in Tauri. For cancel-mid-stream, which also streams the whole 20 KB answer but over about 86.7 seconds, the ratio is only about 3.1\u00d7 on all three engines. The Profilers also wrap different subtree implementations, and commit count is not a direct measure of main-thread cost, responsiveness, or energy use.",
+      "fix": "Name the scenario and engine whenever quoting a ratio, include cancel-mid-stream as a counterexample, and describe commits as an implementation-efficiency signal rather than a demonstrated user-performance win."
+    },
+    {
+      "severity": "major",
+      "claim": "The long-task comparison and the statement that neither prototype crossed the 2,000 ms budget.",
+      "problem": "H's harness metrics are captured at run-status settle, while its deferred Streamdown work can occur afterward. H's huge-table DOM is only 28 nodes at Chromium settle; its supplement records another 46 ms of render lag and 214 ms of long tasks, from separate runs. O's post-settle DOM is already complete. WebKit and WKWebView provide no long-task measurements at all. Thus O's higher accepted Chromium figures are real, but the comparison is not render-complete or cross-engine, and the budget statement only applies to the measured Chromium runs.",
+      "fix": "Measure both prototypes to the same render-complete condition in the same runs, including deferred work, final DOM, input responsiveness, and dropped frames. Qualify all existing long-task claims as Chromium-at-settle measurements and use native tooling for WKWebView."
+    },
+    {
+      "severity": "major",
+      "claim": "O needs about nine fewer engineering-days and no ongoing upstream tracking.",
+      "problem": "The nine-day difference compares estimates produced by different builders, not measured delivery. Their scopes differ: H explicitly includes light-theme and visual-fidelity work that O omits, while O's mandatory entity-graph hardening has no clear priced line item. O still requires tracking of AG-UI, @ag-ui/core, A2UI, Streamdown, React, and entity-graph, in addition to owning protocol changes. H's 0.5 day/week upkeep is likewise an estimate, and the attached evidence does not substantiate the claim that upstream tracking across 69 releases will absorb Know Meet's projector and durable-state work.",
+      "fix": "Use one independent work-breakdown structure with identical scope, including entity-graph changes, hydration, security, themes, Flutter, tests, and annual maintenance. Present ranges and sensitivity rather than treating nine days as a measured advantage, and replace 'no ongoing upstream tracking' with an explicit ownership comparison."
+    },
+    {
+      "severity": "major",
+      "claim": "O keeps one model of run state and establishes entity-graph as the store of record.",
+      "problem": "O avoids assistant-ui's additional run-status model, but it still has a reducer transcript, a LiveTextBuffer overlay, graph projections, and an A2UI MessageProcessor. Its AG-UI graph bridge is lossy, shared state remains canonical in the reducer, and restart recovery was not implemented. Conversely, H has a concrete expiry divergence: the store-backed card expires while assistant-ui's runtime still considers the approval gate open. That is stronger architectural evidence for O than the commit ratio, but neither design has demonstrated reload recovery or production-load durability.",
+      "fix": "Say that O has one canonical reducer for run status, not one representation of all state. Lead the architectural rationale with HITL consistency and mapping complexity, and make reload, interrupt recovery, snapshot reconciliation, and large-graph tests adoption gates."
+    },
+    {
+      "severity": "major",
+      "claim": "WKWebView throttled O's requestAnimationFrame publishing.",
+      "problem": "The cause was not established. The discarded O run reached about 907 ms versus 281 ms for hitl-approve and its commit counts collapsed, but window occlusion could not be observed and focus did not explain the result. Accepted runs brought the application forward and disabled background throttling. This remains an O-specific production risk, and O's latency and commit advantages can vary with window state.",
+      "fix": "Describe the observation without asserting the cause. Test visible-but-unfocused, occluded, background, and multi-window states, and require a scheduler with a non-rAF fallback so transcript status and HITL updates cannot stall."
+    },
+    {
+      "severity": "minor",
+      "claim": "Assistant-ui was bypassed for the store, transport, and A2UI, so it should not be adopted.",
+      "problem": "The library gaps are supported by H's build report, but the bypass framing omits the value that remains: assistant-ui still supplies live message rendering, thread primitives, cancellation integration, the approval seam, and the A2UI action return path. Only 169 lines import assistant-ui, and H wrote 2,554 source lines versus O's 3,151. O also had to build resilient SSE, the A2UI catalog, durable mappings, and presentation behavior. H's nine store commits for 3,459 deltas show that its checkpoint split avoids token-rate store writes. These facts do not erase H's dual-model problem, but 'bypassed' is not proof that the dependency has zero value.",
+      "fix": "Enumerate the assistant-ui responsibilities actually retained and price their replacement. Weigh H's lower authored-line count and O's eight unit tests explicitly, and verify the claimed upstream API limitations against the exact production pin rather than making a blanket library judgement."
+    },
+    {
+      "severity": "major",
+      "claim": "Flutter reaches 58/58 parity, needs roughly 2.5\u20133.5 weeks to parity, and no Dart AG-UI transport exists.",
+      "problem": "The 58 checks cover the A2UI surface harness with a mandatory Know Meet wrapper, not end-to-end mobile agentic-UI parity. Stock Flutter also leaves component ids unaddressable on every surface, and validation and Modal-action behavior still differ from the web contract. The estimate excludes a full mobile AG-UI session stack, streaming markdown, custom chunks, HITL, reconnect, and real accessibility verification. The transport statement is too absolute: a2ui_flutter lacks the transport, but community ag_ui 0.3.0 exists and was not evaluated.",
+      "fix": "Scope the result and estimate to A2UI rendering parity, correct the transport wording, and add an end-to-end Flutter work estimate before treating the cross-platform requirement as covered."
+    },
+    {
+      "severity": "minor",
+      "claim": "The measurements decide the recommendation.",
+      "problem": "Performance evidence alone is inconclusive. Functionality is largely tied; the correct 150,878-byte initial-load advantage has no corresponding startup or time-to-interactive measurement and matters differently for embedded Tauri assets; commit reductions do not translate into lower measured long tasks; and retained heap is broadly similar. Five repeats, fixed H-then-O ordering, uncontrolled desktop load, and one Tauri conformance run further limit precision. O is still a defensible conditional choice because of its canonical HITL/run model and avoidance of H's third hydration mapping, not because measurements demonstrate a decisive UX win.",
+      "fix": "Recast the recommendation as a conditional architecture and ownership decision. Keep H as a credible fallback until O's scheduler, persistence, and store-hardening gates are met."
+    }
+  ],
+  "unmeasured_but_decisive": [
+    "Like-for-like render-complete performance using production, non-profiling bundles: long tasks, dropped frames, input latency, final-render lag, CPU and energy use, and memory over long realistic sessions, including H's deferred work.",
+    "O's behavior in controlled WKWebView window states and Windows WebView2, including a scheduler fallback and proof that run status, errors, and approvals cannot be delayed by throttled animation frames.",
+    "Restart and hydration under faults and load: reload mid-stream, pending and expired HITL interrupts, idempotent resume, reconnect reconciliation, subagent and A2UI state, MESSAGES_SNAPSHOT handling, and large entity-graph transcripts.",
+    "The proposed entity-graph fixes at production graph sizes, including notification counts, whole-graph cloning cost, lossless shared-state representation, and production devtools overhead.",
+    "Trusted keyboard operation and the complete a11y and A2UI suites in Tauri, pending-approval axe scans, and real VoiceOver/NVDA testing, including remediation of O's target-size violation.",
+    "End-to-end Flutter AG-UI transport and product parity for HITL, reconnect, custom chunks, markdown/math/Mermaid/SVG/media, hostile inputs, and accessibility, with its implementation and maintenance cost.",
+    "A normalized delivery and total-cost comparison covering identical scope, protocol ownership, dependency upgrades, entity-graph work, Flutter duplication, and post-bundle-diet startup performance."
+  ],
+  "strongest_case_for_H": "H already owns the Know Meet-specific difficult parts\u2014resilient SSE, ordering, journaling, durable checkpoints, sanitization, media policy, HITL presentation, and the A2UI catalog\u2014while confining assistant-ui imports to a small adapter. It therefore obtains useful live-thread and approval integration without delegating the durable model to the library. H also wrote about 600 fewer source lines, passed the same executed functional suites, had fewer settled-state Tauri axe findings, recorded 0 ms median long tasks on all 12 short Chromium scenarios versus O's 66\u2013135 ms, and had lower accepted long-markdown long-task totals. Its huge-table defer is not free, but the supplement found render completion only 46 ms later in Chromium and 76 ms later in WebKit, with all 400 rows subsequently verified. Most importantly, H does not depend on rAF for publishing and did not exhibit O's unexplained threefold WKWebView latency. Its checkpoint cadence already keeps a 3,459-delta answer to nine store transactions. Assistant-ui can be pinned and upgraded selectively; near-daily releases do not force continuous upgrades, and upstream runtime work may still absorb some protocol and primitive maintenance. O's lower commit count is not evidence of better responsiveness when its long tasks are generally higher and its publishing can slow with window state. If H's approval-expiry divergence is resolved by driving status from the durable store and its hydration adapter proves straightforward, H could deliver better responsiveness with less new protocol code. H should remain the fallback if O's scheduler or persistence gates slip.",
+  "conditions_before_adoption": [
+    "Correct the TTFT, pass-rate, commit-ratio, long-task, Flutter-transport, and maintenance claims, and replace the nine-day headline with a normalized estimate.",
+    "For O, remove sole dependence on rAF for publishing and pass controlled WKWebView window-state and WebView2 tests without status, completion, or HITL stalls.",
+    "Implement and benchmark the required entity-graph hardening, then demonstrate restart recovery, pending-interrupt re-arm/expiry, idempotent resume, and snapshot reconciliation at realistic store sizes.",
+    "Repeat performance comparisons to render-complete with production bundles and include long-session memory, responsiveness, and actual startup measurements.",
+    "Add reducer and transport property/fault-injection tests, explicit AG-UI protocol ownership, and a funded maintenance policy for AG-UI, A2UI, Streamdown, and entity-graph.",
+    "Finish the Streamdown origin/scheme allowlists and CSP changes, then pass trusted-input, full Tauri A2UI/a11y, pending-approval, and real screen-reader checks.",
+    "Produce a separate end-to-end Flutter plan and estimate; do not count the current A2UI-only parity suite as mobile architecture coverage.",
+    "Reopen the H decision if O cannot meet the scheduler and persistence gates within the normalized production budget."
+  ],
+  "confidence": 0.76
+}

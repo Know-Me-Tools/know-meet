@@ -1,0 +1,21 @@
+{
+  "name": "@know-meet/design-tokens",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Know Meet design tokens: generates web CSS variables, the shadcn mapping, the Tailwind 4 theme and Flutter tokens/ThemeData from docs/design/tokens.json.",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./generated/web/tokens.css",
+    "./fonts.css": "./generated/web/fonts.css",
+    "./theme.css": "./generated/web/theme.css",
+    "./shadcn.css": "./generated/web/shadcn.css",
+    "./manifest.json": "./generated/manifest.json",
+    "./fonts/*": "./fonts/*"
+  },
+  "scripts": {
+    "generate": "node generator/src/cli.ts",
+    "build": "node generator/src/cli.ts --check",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test \"generator/test/**/*.test.ts\""
+  }
+}

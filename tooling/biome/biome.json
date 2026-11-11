@@ -1,0 +1,126 @@
+{
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main",
+    "root": "."
+  },
+  "files": {
+    "includes": [
+      "**/apps/**",
+      "**/packages/**",
+      "**/tooling/**",
+      "**/tests/**",
+      "playwright.config.ts",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/build",
+      "!**/coverage",
+      "!**/.turbo",
+      "!**/vendor",
+      "!**/gen",
+      "!**/generated",
+      "!**/*.gen.ts",
+      "!**/*.g.dart",
+      "!**/apps/mobile/ios",
+      "!**/apps/mobile/android",
+      "!**/apps/mobile/macos",
+      "!**/tooling/versions.toml",
+      "!**/tooling/biome",
+      "!**/tests/fidelity/oracle",
+      "!**/tests/fidelity/baselines",
+      "!**/src-tauri/capabilities",
+      "!**/src-tauri/command-manifest.json",
+      "!**/packages/design-tokens/token-generator.config.json"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noConsole": "error"
+      },
+      "style": {
+        "useImportType": "error",
+        "useExportType": "error",
+        "useNodejsImportProtocol": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/domain/**",
+        "**/application/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "react",
+                      "react/**",
+                      "react-dom",
+                      "react-dom/**",
+                      "@tauri-apps/**",
+                      "livekit-client",
+                      "livekit-client/**",
+                      "@livekit/**",
+                      "@radix-ui/**",
+                      "@know-meet/ui",
+                      "@know-meet/ui/**",
+                      "**/infrastructure",
+                      "**/infrastructure/**",
+                      "**/presentation",
+                      "**/presentation/**"
+                    ],
+                    "message": "Clean architecture: domain and application code must not import UI, Tauri, LiveKit or outer layers. Depend on an application-owned port instead."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/tooling/**"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@know-meet/agentic-ui-spike-harness",
+  "private": true,
+  "version": "0.0.0",
+  "description": "c15 shared harness: mock AG-UI SSE endpoint, golden AG-UI and A2UI corpora, hostile markdown/media corpus, Playwright checks and measurement. Standalone: not part of the root pnpm workspace.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "scripts": {
+    "serve": "node src/server/main.ts",
+    "corpus:build": "node src/corpus-authoring/build-corpus.ts",
+    "corpus:validate": "node src/validation/validate-corpus.ts",
+    "check": "playwright test",
+    "measure": "node src/measure/measure.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@a2ui/web_core": "0.15.0",
+    "@ag-ui/core": "1.0.4",
+    "@ag-ui/encoder": "1.0.4",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.0",
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2"
+  }
+}

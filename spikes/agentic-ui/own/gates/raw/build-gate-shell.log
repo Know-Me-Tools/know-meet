@@ -1,0 +1,6 @@
+csp: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:4317
+        Info Looking up installed tauri packages to check mismatched versions...
+   Compiling km-agentic-ui-tauri-shell v0.0.0 (/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/tauri-shell/src-tauri)
+    Finished `release` profile [optimized] target(s) in 40.01s
+       Built application at: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/tauri-shell/src-tauri/target/release/km-agentic-ui-tauri-shell
+built /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/own/gates/bin/km-spike-own-gate

@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  exclude:
+    - rust-builder/**
+    - lib/bridge/generated/**
+    # Symlink to packages/design-tokens/generated/flutter (design-lead output).
+    # Generated code is checked by the token generator's own --check, not here.
+    - lib/theme/generated/**
+    - build/**
+    - android/**
+    - ios/**

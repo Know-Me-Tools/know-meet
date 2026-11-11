@@ -1,0 +1,8 @@
+return output of last phrase => 39:60: execution error: VoiceOver got an error: last phrase doesn’t understand the “output” message. (-1708)
+return content of last phrase => 39:46: execution error: VoiceOver got an error: Can’t get content of last phrase. (-1728)
+return last phrase => 39:50: execution error: VoiceOver got an error: Can’t get last phrase. (-1728)
+return name => VoiceOver
+return version => 10
+return bounds of vo cursor => 39:45: execution error: VoiceOver got an error: Can’t get bounds of vo cursor. (-1728)
+return text under cursor of vo cursor => 39:56: execution error: VoiceOver got an error: Can’t get text under cursor of vo cursor. (-1728)
+voiceover running after cleanup: no

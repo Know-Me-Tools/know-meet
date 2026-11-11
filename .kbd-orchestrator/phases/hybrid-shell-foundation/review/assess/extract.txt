@@ -1,0 +1,37 @@
+{"verdict": null, "n": 9}
+[CRITICAL] The token-source decision presented by the assessment permits a canonical source that violates the blocking design-token constraint.
+  EVIDENCE: The assessment says, “Decide which file is canonical (`km.css` is what actually renders),” lists “Token canonical source: `km.css` ... or `tokens.json`?”, and also offers migration to TOML. The blocking constraint instead requires colors, type and spacing to come from “docs/design/tokens.css / tokens.json” and requires Flutter to generate from or mirror `tokens.json`.
+  FIX: Constrain the decision to `tokens.json` and `tokens.css`: designate `tokens.json` as the editable source and `tokens.css` as generated, then reconcile the prototype values into them. If `km.css` or TOML must become canonical, identify the required blocking-constraint amendment as an explicit operator decision before analysis proceeds.
+
+[CRITICAL] The proposed fidelity oracle does not cover all design sources mandated by Goal 6, so it can pass while omitting required brand-guide or live-prototype fidelity.
+  EVIDENCE: Goal 6 requires replication “from docs/design (tokens, brand guide, prototype and live prototype),” but VS-1 requires identity only “to the prototype,” VS-7 defines scope solely from “the 68 routes in `screens.html`,” and the adopted scenario compares Flutter only with “the prototype.” The assessment itself later says `docs/design/live/` “should be committed before it serves as an oracle,” yet no scenario uses it.
+  FIX: Define an explicit source hierarchy and acceptance matrix covering token values, brand-guide rules, the prototype, and the live prototype for every in-scope route and state; require discrepancies between those sources to be resolved before declaring fidelity achieved.
+
+[CRITICAL] The `no-livekit-secrets-in-repo` PASS overstates what the cited checks can detect.
+  EVIDENCE: The assessment claims that the untracked-file scan found “no matches for the secret or key patterns.” The supplied LiveKit check matches only `LIVEKIT_API_SECRET`, while the fallback check matches lowercase `api_key`; neither regex detects a conventional assignment such as `LIVEKIT_API_KEY="..."`.
+  FIX: Replace the PASS with the actual scope of the checks, expand the blocking check to cover both `LIVEKIT_API_SECRET` and `LIVEKIT_API_KEY` with the supported assignment syntaxes, and add a negative test fixture proving each prohibited assignment is detected.
+
+[WARNING] The proposed acceptance scenarios cannot verify motion, even though motion is an explicit Goal 6 component.
+  EVIDENCE: Goal 6 explicitly includes “motion.” VS-1 is verified through “Screenshots,” VS-3 through Flutter “goldens,” and the required safety checks mention only “WCAG 2.2 AA contrast”; none observes transition timing, easing, keyframes, or animation behavior. The `accessibility-basics` constraint also requires reduced-motion support, which is not covered by any scenario.
+  FIX: Add runtime observations for representative transitions and interactions in both themes, including expected duration, easing and reduced-motion behavior, rather than treating static screenshots and goldens as the complete fidelity oracle.
+
+[WARNING] The assessment's coordination status for the parallel agent-team work is factually stale.
+  EVIDENCE: It states, “No such artifact exists in the repo. Analyze must confirm whether that work is still running.” The packet's file tree contains `.agent-team/know-meet-team` and `.agent-team/project-routing.json`, and the analyze handoff says the parallel session “created .agent-team/know-meet-team (16 roles) and routing blocks” and that “Plan must bind to it.”
+  FIX: Replace the existence question with the current state: verify the existing manifest and routing blocks, identify any missing roles or stale routing, and carry the requirement that Plan bind to that team into the next-stage handoff.
+
+[WARNING] The assessment contradicts itself on whether a screen and state inventory exists, leaving the route oracle ambiguously defined.
+  EVIDENCE: The Spec gap summary says, “No screen and state inventory exists to define ‘perfect replication’,” and the next sentence says, “The prototypes contain one: `docs/design/prototype/screens.html` lists every screen and state.” Elsewhere the assessment treats the entries as “68 routes,” although the cited source is described as screens and states rather than an enumerated route manifest.
+  FIX: State that `screens.html` is a raw design reference rather than a formal inventory, then require a machine-readable inventory that distinguishes routes, screens and states and provides the canonical count and identifiers used for acceptance.
+
+[WARNING] The clean-architecture assessment proposes folder relabeling without assessing the dependency direction required by the project constraint.
+  EVIDENCE: Goal 4 requires “domain / application / infrastructure / presentation boundaries,” and `clean-architecture-boundaries` says domain and application layers must not import UI, Tauri, Flutter or LiveKit SDK code. The assessment only says Plan must define a mapping such as “`data`/`api` → infrastructure” and “`entities` → domain”; it defines no permitted dependency graph, port boundary, or enforcement mechanism.
+  FIX: Specify layer responsibilities and allowed imports, require infrastructure and native adapters to implement application-owned ports, and require architecture tests or lint rules that reject outward imports from domain and application code.
+
+[WARNING] The generator-fit analysis does not verify the explicit React version and mobile-platform requirements of the goals.
+  EVIDENCE: The goals require a “React 19 web app” and a Flutter shell “for iOS and Android.” The assessment names `react-web` and `flutter-mobile` profiles and labels the target “React 19 web shell,” but never reports the generated baselines' React package version or whether their Flutter output contains both iOS and Android scaffolds.
+  FIX: Inspect the generator's actual web and mobile package manifests and platform directories, record the current React version and mobile targets, and add explicit compatibility or pinning work for React 19 and both Flutter platforms.
+
+[WARNING] The four failing generator doctor checks are recorded too vaguely to drive a remediation plan.
+  EVIDENCE: Build health reports that `knowme-builder doctor --json` returned `ok: false` with “4 failing Prometheus health checks,” while the adopted contract says the cause is “UNKNOWN.” No failing check names, diagnostics, ownership, or remediation are provided.
+  FIX: Capture the doctor output with each failing check identifier and diagnostic, map each failure to its cause and remediation, and distinguish stale-installation failures from independent generator or environment failures before defining execution steps.
+

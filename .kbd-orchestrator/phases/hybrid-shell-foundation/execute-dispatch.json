@@ -1,0 +1,14 @@
+{
+  "phaseId": "hybrid-shell-foundation",
+  "contractDigest": "768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855",
+  "method": "VLBV",
+  "round": 1,
+  "dispatchedAt": "2026-11-09",
+  "assignments": [
+    {"role": "build-platform", "change": "c01-workspace-and-repo-rules", "tasks": ["1.1","1.2","1.3","1.4","1.5"], "model": "claude-opus-5-5"},
+    {"role": "design-lead", "change": "c02-design-token-reconciliation", "tasks": ["2.1","2.2","2.3"], "model": "claude-opus-5-5"},
+    {"role": "delivery-lead", "change": "c01-workspace-and-repo-rules", "tasks": ["1.6"], "status": "complete-by-operator-decision"}
+  ],
+  "vlbvNote": "No per-task test runs; generated-code verification happens once at the value-phase boundary. Tool-install verification (1.5) is environment checking, not generated-code verification.",
+  "reviewers": "dormant until the full implementation phase completes"
+}

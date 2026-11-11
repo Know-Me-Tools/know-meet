@@ -1,0 +1,170 @@
+{
+  "streamdown": "2.7.1",
+  "defaultHardenOptions": {
+    "allowedImagePrefixes": [
+      "*"
+    ],
+    "allowedLinkPrefixes": [
+      "*"
+    ],
+    "allowedProtocols": [
+      "*"
+    ],
+    "allowDataImages": true
+  },
+  "oHardenOptions": {
+    "defaultOrigin": "tauri://localhost",
+    "allowedLinkPrefixes": [
+      "https://know-me.tools/"
+    ],
+    "allowedImagePrefixes": [
+      "http://127.0.0.1:4317/"
+    ],
+    "allowedProtocols": [],
+    "allowDataImages": false,
+    "linkBlockPolicy": "text-only",
+    "imageBlockPolicy": "indicator"
+  },
+  "policy": {
+    "baseOrigin": "tauri://localhost",
+    "links": {
+      "origins": [
+        "https://know-me.tools"
+      ],
+      "allowMailto": true
+    },
+    "mediaOrigins": [
+      "http://127.0.0.1:4317"
+    ]
+  },
+  "links": [
+    {
+      "url": "https://know-me.tools/docs/spec-42",
+      "streamdownDefault": "https://know-me.tools/docs/spec-42",
+      "oHarden": "https://know-me.tools/docs/spec-42",
+      "oRendered": "https://know-me.tools/docs/spec-42"
+    },
+    {
+      "url": "https://evil.example/phish",
+      "streamdownDefault": "https://evil.example/phish",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "http://know-me.tools/docs",
+      "streamdownDefault": "http://know-me.tools/docs",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "mailto:team@know-me.tools",
+      "streamdownDefault": "mailto:team@know-me.tools",
+      "oHarden": "mailto:team@know-me.tools",
+      "oRendered": "mailto:team@know-me.tools"
+    },
+    {
+      "url": "javascript:alert(1)",
+      "streamdownDefault": null,
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "data:text/html;base64,PHNjcmlwdD4=",
+      "streamdownDefault": null,
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "vbscript:msgbox(1)",
+      "streamdownDefault": null,
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "irc://irc.example/chan",
+      "streamdownDefault": "irc://irc.example/chan",
+      "oHarden": "irc://irc.example/chan",
+      "oRendered": null
+    },
+    {
+      "url": "xmpp:user@example.com",
+      "streamdownDefault": "xmpp:user@example.com",
+      "oHarden": "xmpp:user@example.com",
+      "oRendered": null
+    },
+    {
+      "url": "blob:tauri://localhost/0f0f",
+      "streamdownDefault": "blob:tauri://localhost/0f0f",
+      "oHarden": "blob:tauri://localhost/0f0f",
+      "oRendered": null
+    },
+    {
+      "url": "file:///etc/passwd",
+      "streamdownDefault": null,
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "/relative/path",
+      "streamdownDefault": "/relative/path",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "#section",
+      "streamdownDefault": "#section",
+      "oHarden": "#section",
+      "oRendered": null
+    }
+  ],
+  "images": [
+    {
+      "url": "http://127.0.0.1:4317/media/whiteboard.png",
+      "streamdownDefault": "http://127.0.0.1:4317/media/whiteboard.png",
+      "oHarden": "http://127.0.0.1:4317/media/whiteboard.png",
+      "oRendered": "http://127.0.0.1:4317/media/whiteboard.png"
+    },
+    {
+      "url": "http://127.0.0.1:4318/beacon/x.png",
+      "streamdownDefault": "http://127.0.0.1:4318/beacon/x.png",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "https://evil.example/pixel.png",
+      "streamdownDefault": "https://evil.example/pixel.png",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "data:image/png;base64,iVBORw0KGgo=",
+      "streamdownDefault": "data:image/png;base64,iVBORw0KGgo=",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "data:image/svg+xml;base64,PHN2Zz4=",
+      "streamdownDefault": "data:image/svg+xml;base64,PHN2Zz4=",
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "blob:tauri://localhost/0f0f",
+      "streamdownDefault": "blob:tauri://localhost/0f0f",
+      "oHarden": "blob:tauri://localhost/0f0f",
+      "oRendered": null
+    },
+    {
+      "url": "javascript:alert(1)",
+      "streamdownDefault": null,
+      "oHarden": null,
+      "oRendered": null
+    },
+    {
+      "url": "/local.png",
+      "streamdownDefault": "/local.png",
+      "oHarden": null,
+      "oRendered": null
+    }
+  ]
+}

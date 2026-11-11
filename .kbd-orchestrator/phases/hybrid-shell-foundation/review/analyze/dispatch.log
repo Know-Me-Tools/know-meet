@@ -1,0 +1,7 @@
+[judge] WARN: canonical judge/producer identity is incomplete; independence is degraded
+[MODEL_ROUTING] phase=adv-review-judge class=frontier model=k3.1-pro producer=claude-opus-5-5
+[judge] retry 2/3: HTTP 000 looks like a timeout
+[judge]        at 300s; escalating timeout to 600s and retrying.
+[judge] ERROR: gateway returned HTTP 500 at http://localhost:4000/v1
+[judge]        body: {"error":{"message":"server error: error code: 524\n","type":"ServerError","param":null,"code":null}}
+exit=3

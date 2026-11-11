@@ -1,0 +1,59 @@
+/* Know Meet tokens (imported by relative path; packages/design-tokens is not modified). */
+@import "tailwindcss";
+@import "../../../../packages/design-tokens/generated/web/fonts.css";
+@import "../../../../packages/design-tokens/generated/web/tokens.css";
+@import "../../../../packages/design-tokens/generated/web/theme.css";
+@import "../../../../packages/design-tokens/generated/web/shadcn.css";
+
+@layer base {
+  html,
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .km-md {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--fg);
+    overflow-wrap: anywhere;
+  }
+  .km-md h1,
+  .km-md h2,
+  .km-md h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .km-md h1 { font-size: var(--text-xl); }
+  .km-md h2 { font-size: var(--text-lg); }
+  .km-md h3 { font-size: var(--text-15); }
+  .km-md a { color: var(--cyan-text); text-decoration: underline; }
+  .km-md ul { list-style: disc; padding-left: 1.25rem; }
+  .km-md ol { list-style: decimal; padding-left: 1.25rem; }
+  .km-md blockquote { border-left: 3px solid var(--muted); padding-left: 0.75rem; color: var(--fg-sub); }
+  .km-md table { width: 100%; border-collapse: collapse; font-size: var(--text-13); }
+  .km-md th,
+  .km-md td { padding: 0.25rem 0.5rem; text-align: left; border-bottom: 1px solid var(--muted); }
+  .km-md pre,
+  .km-code {
+    overflow-x: auto;
+    border-radius: 12px;
+    background: var(--bg);
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-13);
+    white-space: pre-wrap;
+  }
+  .km-md :not(pre) > code { font-family: var(--font-mono); background: var(--muted); border-radius: 6px; padding: 0 0.25rem; }
+  .km-media { max-width: min(100%, 420px); border-radius: 12px; background: var(--media-bg); }
+  .km-mermaid { max-width: 100%; overflow-x: auto; border-radius: 12px; background: #f4f6f9; padding: 0.5rem; color: #0b0f14; }
+  .km-blocked { border-radius: 12px; background: var(--muted); padding: 0.5rem 0.75rem; font-size: var(--text-13); color: var(--fg); }
+  .km-citation a { color: var(--cyan-text); font-size: var(--text-11); text-decoration: none; }
+}

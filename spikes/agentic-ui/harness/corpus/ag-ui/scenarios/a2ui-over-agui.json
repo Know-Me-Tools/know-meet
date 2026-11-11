@@ -1,0 +1,409 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [
+    {
+      "do": "a2ui-click",
+      "surfaceId": "km-room-picker",
+      "componentId": "book_btn"
+    }
+  ],
+  "validity": "valid",
+  "id": "a2ui-over-agui",
+  "title": "A2UI surface over AG-UI activity, with action round-trip",
+  "description": "A2UI 1.0 operations ride in ACTIVITY_SNAPSHOT (activityType \"a2ui-surface\", content.a2ui_operations); an ACTIVITY_DELTA appends an updateDataModel operation. Clicking book_btn must POST a new run whose forwardedProps.a2uiAction.userAction is the A2UI v1.0 action {name, surfaceId, sourceComponentId, timestamp, context}. The continuation run confirms with text and a second ACTIVITY_DELTA.",
+  "tags": [
+    "@a2ui",
+    "@activity"
+  ],
+  "userPrompt": "Find me a room for the 14:00 follow-up.",
+  "a2uiSpecVersion": "1.0",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-a2ui-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": "Atlas"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " is"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " free"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " at"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " 14:00."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " You"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " can"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " book"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " it"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-1",
+            "delta": " here:"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-a2ui-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "ACTIVITY_SNAPSHOT",
+            "messageId": "act-a2ui-1",
+            "activityType": "a2ui-surface",
+            "content": {
+              "a2ui_operations": [
+                {
+                  "version": "1.0",
+                  "createSurface": {
+                    "surfaceId": "km-room-picker",
+                    "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+                    "dataModel": {
+                      "room": {
+                        "name": "Atlas",
+                        "seats": 6
+                      }
+                    }
+                  }
+                },
+                {
+                  "version": "1.0",
+                  "updateComponents": {
+                    "surfaceId": "km-room-picker",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Card",
+                        "child": "body"
+                      },
+                      {
+                        "id": "body",
+                        "component": "Column",
+                        "children": [
+                          "heading",
+                          "seats",
+                          "book_btn"
+                        ]
+                      },
+                      {
+                        "id": "heading",
+                        "component": "Text",
+                        "text": {
+                          "@path": "/room/name"
+                        }
+                      },
+                      {
+                        "id": "seats",
+                        "component": "Text",
+                        "text": "6 seats, screen and whiteboard"
+                      },
+                      {
+                        "id": "book_btn",
+                        "component": "Button",
+                        "child": "book_label",
+                        "variant": "primary",
+                        "action": {
+                          "event": {
+                            "name": "book_room",
+                            "context": {
+                              "room": {
+                                "@path": "/room/name"
+                              },
+                              "slot": "14:00"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "id": "book_label",
+                        "component": "Text",
+                        "text": "Book Atlas at 14:00"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "ACTIVITY_DELTA",
+            "messageId": "act-a2ui-1",
+            "activityType": "a2ui-surface",
+            "patch": [
+              {
+                "op": "add",
+                "path": "/a2ui_operations/-",
+                "value": {
+                  "version": "1.0",
+                  "updateDataModel": {
+                    "surfaceId": "km-room-picker",
+                    "path": "/room/seats",
+                    "value": 8
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "trigger": {
+        "kind": "a2ui-action",
+        "actionName": "book_room"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "ACTIVITY_DELTA",
+            "messageId": "act-a2ui-1",
+            "activityType": "a2ui-surface",
+            "patch": [
+              {
+                "op": "add",
+                "path": "/a2ui_operations/-",
+                "value": {
+                  "version": "1.0",
+                  "updateDataModel": {
+                    "surfaceId": "km-room-picker",
+                    "path": "/room/booked",
+                    "value": true
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-a2ui-2",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-2",
+            "delta": "Booked"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-2",
+            "delta": " Atlas"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-2",
+            "delta": " for"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-a2ui-2",
+            "delta": " 14:00."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-a2ui-2"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Find me a room for the 14:00 follow-up."
+      },
+      {
+        "id": "msg-a2ui-1",
+        "role": "assistant",
+        "textEquals": "Atlas is free at 14:00. You can book it here:",
+        "status": "complete"
+      },
+      {
+        "id": "msg-a2ui-2",
+        "role": "assistant",
+        "textEquals": "Booked Atlas for 14:00.",
+        "status": "complete"
+      }
+    ],
+    "a2uiSurfaces": [
+      {
+        "surfaceId": "km-room-picker",
+        "renderedComponentIds": [
+          "root",
+          "body",
+          "heading",
+          "seats",
+          "book_btn",
+          "book_label"
+        ],
+        "dataModel": {
+          "room": {
+            "name": "Atlas",
+            "seats": 8,
+            "booked": true
+          }
+        }
+      }
+    ],
+    "server": {
+      "requestCount": 2,
+      "a2uiActions": [
+        {
+          "name": "book_room",
+          "surfaceId": "km-room-picker",
+          "context": {
+            "room": "Atlas",
+            "slot": "14:00"
+          }
+        }
+      ]
+    },
+    "dom": [
+      {
+        "selector": "[data-testid='km-a2ui-surface'][data-surface-id='km-room-picker'] [data-a2ui-id='book_btn']",
+        "count": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "label": "before-16-5",
+  "at": "2026-11-10T22:16:26.704Z",
+  "dataFontsInCss": [
+    {
+      "file": "index-DI2BWDTu.css",
+      "dataFontUrls": 1
+    }
+  ],
+  "emittedFontFiles": 65,
+  "rawHtmlParserMarkers": [
+    {
+      "file": "index-B5KV0FZv.js",
+      "parse5Markers": 10,
+      "hastRaw": 2
+    }
+  ],
+  "entryChunks": [
+    {
+      "file": "index-B5KV0FZv.js",
+      "bytes": 1807155,
+      "brotli": 436977
+    }
+  ]
+}

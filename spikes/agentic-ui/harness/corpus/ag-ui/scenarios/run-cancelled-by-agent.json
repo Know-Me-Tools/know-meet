@@ -1,0 +1,118 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "run-cancelled-by-agent",
+  "title": "Agent ends the run with outcome cancelled",
+  "description": "The agent closes an open message implicitly by ending the run with RUN_FINISHED outcome {type: \"cancelled\"}.",
+  "tags": [
+    "@cancel"
+  ],
+  "userPrompt": "Start drafting the follow-up plan.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-acancel-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": "Drafting"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": " follow-up"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": " plan:"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": " first,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-acancel-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "cancelled"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "cancelled",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Start drafting the follow-up plan."
+      },
+      {
+        "id": "msg-acancel-1",
+        "role": "assistant",
+        "textEquals": "Drafting the follow-up plan: first, the",
+        "status": "cancelled"
+      }
+    ]
+  }
+}

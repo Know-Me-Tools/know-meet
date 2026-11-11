@@ -31,6 +31,7 @@ https://know-me-tools.github.io/know-meet/
 | `logos/{gathering,bridge,grid}-*` | Concept-round files, superseded |
 | `og/know-meet-home-1200x630.png` | Screenshot of the home page used as the link-preview image |
 | `prototype/` | A copy of every prototype screen with its `assets/` folder; open `prototype/index.html` or `prototype/screens.html` |
+| `live/` | The prototype with a real LiveKit meeting room (`room.html`) and a local token server; see `live/README.md` |
 
 ## The screens
 

@@ -1,0 +1,148 @@
+/*
+   GENERATED FROM docs/design/tokens.json by @know-meet/design-tokens. DO NOT EDIT.
+   Edit the token source and run: pnpm --filter @know-meet/design-tokens generate
+   Import after tokens.css in the app stylesheet that imports tailwindcss.
+   Default colour palette, font sizes and breakpoints are reset so only
+   Know Meet tokens produce utilities (no ad-hoc colours).
+*/
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --breakpoint-*: initial;
+  --default-font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --default-mono-font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-xs: 12px;
+  --text-13: 13px;
+  --text-sm: 14px;
+  --text-15: 15px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-22: 22px;
+  --text-xl: 24px;
+  --text-34: 34px;
+  --text-2xl: clamp(28px, 2.2vw + 16px, 40px);
+  --text-display: clamp(36px, 3.6vw + 18px, 64px);
+  --text-display-brand: clamp(40px, 4vw + 16px, 72px);
+  --text-stat: clamp(24px, 2vw + 12px, 32px);
+  --text-glyph: clamp(16px, 1.2vw + 8px, 22px);
+  --text-tile-avatar: clamp(22px, 2vw + 8px, 36px);
+  --text-code-inline: 0.88em;
+  --leading-none: 1;
+  --leading-display: 1.04;
+  --leading-105: 1.05;
+  --leading-stat: 1.15;
+  --leading-heading: 1.2;
+  --leading-140: 1.4;
+  --leading-145: 1.45;
+  --leading-body: 1.5;
+  --leading-bubble: 1.55;
+  --leading-code: 1.6;
+  --leading-18px: 18px;
+  --leading-20px: 20px;
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.01em;
+  --tracking-none: 0;
+  --tracking-code: 0.04em;
+  --tracking-label: 0.08em;
+  --tracking-table: 0.1em;
+  --tracking-eyebrow: 0.12em;
+  --tracking-masked: 0.18em;
+  --spacing-s1: 4px;
+  --spacing-s2: 8px;
+  --spacing-s3: 12px;
+  --spacing-s4: 16px;
+  --spacing-s5: 24px;
+  --spacing-s6: 32px;
+  --spacing-s7: 48px;
+  --spacing-s8: 64px;
+  --radius-1: 1px;
+  --radius-2: 2px;
+  --radius-3: 3px;
+  --radius-4: 4px;
+  --radius-5: 5px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-9: 9px;
+  --radius-10: 10px;
+  --radius-base: 12px;
+  --radius-14: 14px;
+  --radius-tile: 16px;
+  --radius-18: 18px;
+  --radius-lg: 20px;
+  --radius-22: 22px;
+  --radius-28: 28px;
+  --radius-pill: 999px;
+  --radius-round: 50%;
+  --spacing-header-h: 64px;
+  --container-page-max: 1200px;
+  --spacing-rs-w: 400px;
+  --breakpoint-bp381: 381px; /* bp-380: max-bp381: = @media (max-width: 380px) */
+  --breakpoint-bp421: 421px; /* bp-420: max-bp421: = @media (max-width: 420px) */
+  --breakpoint-bp481: 481px; /* bp-480: max-bp481: = @media (max-width: 480px) */
+  --breakpoint-bp600: 600px; /* bp-599: max-bp600: = @media (max-width: 599px) */
+  --breakpoint-bp768: 768px; /* bp-767: max-bp768: = @media (max-width: 767px) */
+  --breakpoint-bp900: 900px; /* bp-899: max-bp900: = @media (max-width: 899px) */
+  --breakpoint-bp1024: 1024px; /* bp-1023: max-bp1024: = @media (max-width: 1023px) */
+  --breakpoint-bp1200: 1200px; /* bp-1199: max-bp1200: = @media (max-width: 1199px) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.55, 0, 0.75, 0.25);
+  --ease-standard: ease;
+  --ease-in-out: ease-in-out;
+  --ease-linear: linear;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-hov: var(--card-hov);
+  --color-muted: var(--muted);
+  --color-tile: var(--tile);
+  --color-tile-2: var(--tile-2);
+  --color-fg: var(--fg);
+  --color-fg-sub: var(--fg-sub);
+  --color-ember: var(--ember);
+  --color-ember-btn: var(--ember-btn);
+  --color-ember-btn-hov: var(--ember-btn-hov);
+  --color-on-ember: var(--on-ember);
+  --color-ember-text: var(--ember-text);
+  --color-ember-soft: var(--ember-soft);
+  --color-cyan: var(--cyan);
+  --color-cyan-text: var(--cyan-text);
+  --color-cyan-text-on-tile: var(--cyan-text-on-tile);
+  --color-cyan-soft: var(--cyan-soft);
+  --color-green: var(--green);
+  --color-green-text: var(--green-text);
+  --color-green-soft: var(--green-soft);
+  --color-amber: var(--amber);
+  --color-amber-text: var(--amber-text);
+  --color-amber-soft: var(--amber-soft);
+  --color-red: var(--red);
+  --color-red-text: var(--red-text);
+  --color-red-soft: var(--red-soft);
+  --color-danger-btn: var(--danger-btn);
+  --color-danger-btn-hov: var(--danger-btn-hov);
+  --color-on-danger: var(--on-danger);
+  --color-scrim: var(--scrim);
+  --color-ring-input: var(--ring-input);
+  --color-switch-track: var(--switch-track);
+  --color-switch-thumb: var(--switch-thumb);
+  --color-switch-thumb-on: var(--switch-thumb-on);
+  --color-drop-outline: var(--drop-outline);
+  --color-media-bg: var(--media-bg);
+  --color-on-media: var(--on-media);
+  --color-media-foot-scrim: var(--media-foot-scrim);
+  --color-media-tag-bg: var(--media-tag-bg);
+  --color-media-tag-host: var(--media-tag-host);
+  --color-media-quality-poor: var(--media-quality-poor);
+}

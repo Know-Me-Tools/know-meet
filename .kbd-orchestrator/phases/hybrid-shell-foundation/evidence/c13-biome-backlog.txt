@@ -1,0 +1,1391 @@
+$ biome ci --config-path=tooling/biome --error-on-warnings --no-errors-on-unmatched
+apps/desktop/scripts/tauri-cli.ts:38:80 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    36 │     readonly bin?: string | Readonly<Record<string, string>>;
+    37 │   };
+  > 38 │   const bin = typeof manifest.bin === "string" ? manifest.bin : manifest.bin?.["tauri"];
+       │                                                                                ^^^^^^^
+    39 │   if (bin === undefined) throw new Error("@tauri-apps/cli package.json declares no `tauri` bin");
+    40 │   return join(dirname(packageJsonPath), bin);
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    38 │ ··const·bin·=·typeof·manifest.bin·===·"string"·?·manifest.bin·:·manifest.bin?.["tauri"];
+       │                                                                               --     -- 
+
+apps/web/src/infrastructure/http/decode.ts:10:77 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+     9 │ function isNote(value: unknown): value is Note {
+  > 10 │   return isRecord(value) && typeof value["id"] === "string" && typeof value["title"] === "string";
+       │                                                                             ^^^^^^^
+    11 │ }
+    12 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     8  8 │   
+     9  9 │   function isNote(value: unknown): value is Note {
+    10    │ - ··return·isRecord(value)·&&·typeof·value["id"]·===·"string"·&&·typeof·value["title"]·===·"string";
+       10 │ + ··return·isRecord(value)·&&·typeof·value["id"]·===·"string"·&&·typeof·value.title·===·"string";
+    11 11 │   }
+    12 12 │   
+  
+
+apps/web/src/infrastructure/http/decode.ts:16:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    14 │   return (
+    15 │     isRecord(value) &&
+  > 16 │     typeof value["id"] === "string" &&
+       │                  ^^^^
+    17 │     typeof value["name"] === "string" &&
+    18 │     typeof value["kind"] === "string"
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    14 14 │     return (
+    15 15 │       isRecord(value) &&
+    16    │ - ····typeof·value["id"]·===·"string"·&&
+       16 │ + ····typeof·value.id·===·"string"·&&
+    17 17 │       typeof value["name"] === "string" &&
+    18 18 │       typeof value["kind"] === "string"
+  
+
+apps/web/src/infrastructure/http/decode.ts:17:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    15 │     isRecord(value) &&
+    16 │     typeof value["id"] === "string" &&
+  > 17 │     typeof value["name"] === "string" &&
+       │                  ^^^^^^
+    18 │     typeof value["kind"] === "string"
+    19 │   );
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    15 15 │       isRecord(value) &&
+    16 16 │       typeof value["id"] === "string" &&
+    17    │ - ····typeof·value["name"]·===·"string"·&&
+       17 │ + ····typeof·value.name·===·"string"·&&
+    18 18 │       typeof value["kind"] === "string"
+    19 19 │     );
+  
+
+apps/web/src/infrastructure/http/decode.ts:18:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    16 │     typeof value["id"] === "string" &&
+    17 │     typeof value["name"] === "string" &&
+  > 18 │     typeof value["kind"] === "string"
+       │                  ^^^^^^
+    19 │   );
+    20 │ }
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    16 16 │       typeof value["id"] === "string" &&
+    17 17 │       typeof value["name"] === "string" &&
+    18    │ - ····typeof·value["kind"]·===·"string"
+       18 │ + ····typeof·value.kind·===·"string"
+    19 19 │     );
+    20 20 │   }
+  
+
+apps/web/src/infrastructure/http/decode.ts:41:33 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    39 │ /** The static registry at /capabilities/index.json (schema version 1). */
+    40 │ export function decodeCapabilityRegistry(value: unknown): Capability[] {
+  > 41 │   if (!isRecord(value) || value["schemaVersion"] !== 1) {
+       │                                 ^^^^^^^^^^^^^^^
+    42 │     throw new Error("Unsupported capability registry schema");
+    43 │   }
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    39 39 │   /** The static registry at /capabilities/index.json (schema version 1). */
+    40 40 │   export function decodeCapabilityRegistry(value: unknown): Capability[] {
+    41    │ - ··if·(!isRecord(value)·||·value["schemaVersion"]·!==·1)·{
+       41 │ + ··if·(!isRecord(value)·||·value.schemaVersion·!==·1)·{
+    42 42 │       throw new Error("Unsupported capability registry schema");
+    43 43 │     }
+  
+
+apps/web/src/infrastructure/http/decode.ts:44:35 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    42 │     throw new Error("Unsupported capability registry schema");
+    43 │   }
+  > 44 │   return decodeCapabilities(value["capabilities"]);
+       │                                   ^^^^^^^^^^^^^^
+    45 │ }
+    46 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    42 42 │       throw new Error("Unsupported capability registry schema");
+    43 43 │     }
+    44    │ - ··return·decodeCapabilities(value["capabilities"]);
+       44 │ + ··return·decodeCapabilities(value.capabilities);
+    45 45 │   }
+    46 46 │   
+  
+
+apps/web/src/infrastructure/http/decode.ts:10:42 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+     9 │ function isNote(value: unknown): value is Note {
+  > 10 │   return isRecord(value) && typeof value["id"] === "string" && typeof value["title"] === "string";
+       │                                          ^^^^
+    11 │ }
+    12 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     8  8 │   
+     9  9 │   function isNote(value: unknown): value is Note {
+    10    │ - ··return·isRecord(value)·&&·typeof·value["id"]·===·"string"·&&·typeof·value["title"]·===·"string";
+       10 │ + ··return·isRecord(value)·&&·typeof·value.id·===·"string"·&&·typeof·value["title"]·===·"string";
+    11 11 │   }
+    12 12 │   
+  
+
+apps/web/src/infrastructure/theme/theme-adapters.ts:42:20 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    40 │   return {
+    41 │     apply: (theme: Theme) => {
+  > 42 │       root.dataset["theme"] = theme;
+       │                    ^^^^^^^
+    43 │     },
+    44 │   };
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    40 40 │     return {
+    41 41 │       apply: (theme: Theme) => {
+    42    │ - ······root.dataset["theme"]·=·theme;
+       42 │ + ······root.dataset.theme·=·theme;
+    43 43 │       },
+    44 44 │     };
+  
+
+apps/web/tests/restart.mjs:39:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ Template literals are preferred over string concatenation.
+  
+    37 │   metadata.target_directory,
+    38 │   "debug",
+  > 39 │   "bff" + (process.platform === "win32" ? ".exe" : ""),
+       │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    40 │ );
+    41 │ const data = mkdtempSync(join(tmpdir(), "notes-restart-"));
+  
+  ℹ Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  ℹ Unsafe fix: Use a template literal.
+  
+     37  37 │     metadata.target_directory,
+     38  38 │     "debug",
+     39     │ - ··"bff"·+·(process.platform·===·"win32"·?·".exe"·:·""),
+         39 │ + ··`bff${process.platform·===·"win32"·?·".exe"·:·""}`,
+     40  40 │   );
+     41  41 │   const data = mkdtempSync(join(tmpdir(), "notes-restart-"));
+  
+
+apps/web/tests/restart.mjs:59:24 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ Template literals are preferred over string concatenation.
+  
+    57 │     child.once("exit", (code) => {
+    58 │       clearTimeout(timer);
+  > 59 │       reject(new Error("Server exited: " + code));
+       │                        ^^^^^^^^^^^^^^^^^^^^^^^^
+    60 │     });
+    61 │     child.stderr.on("data", (data) => process.stderr.write(data));
+  
+  ℹ Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  ℹ Unsafe fix: Use a template literal.
+  
+     57  57 │       child.once("exit", (code) => {
+     58  58 │         clearTimeout(timer);
+     59     │ - ······reject(new·Error("Server·exited:·"·+·code));
+         59 │ + ······reject(new·Error(`Server·exited:·${code}`));
+     60  60 │       });
+     61  61 │       child.stderr.on("data", (data) => process.stderr.write(data));
+  
+
+apps/web/tests/restart.mjs:85:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ Template literals are preferred over string concatenation.
+  
+    83 │   // c06: the notes baseline lives at /notes (home is the Know Meet frame). Needs the
+    84 │   // BFF to serve index.html for client routes (request to build-platform).
+  > 85 │   await page.goto(url + "/notes");
+       │                   ^^^^^^^^^^^^^^
+    86 │   if (process.env.EXPECTED_CAPABILITY) {
+    87 │     await page.getByText(process.env.EXPECTED_CAPABILITY, { exact: false }).waitFor();
+  
+  ℹ Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  ℹ Unsafe fix: Use a template literal.
+  
+     83  83 │     // c06: the notes baseline lives at /notes (home is the Know Meet frame). Needs the
+     84  84 │     // BFF to serve index.html for client routes (request to build-platform).
+     85     │ - ··await·page.goto(url·+·"/notes");
+         85 │ + ··await·page.goto(`${url}/notes`);
+     86  86 │     if (process.env.EXPECTED_CAPABILITY) {
+     87  87 │       await page.getByText(process.env.EXPECTED_CAPABILITY, { exact: false }).waitFor();
+  
+
+apps/web/tests/restart.mjs:94:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ Template literals are preferred over string concatenation.
+  
+    92 │   await stop();
+    93 │   url = await start();
+  > 94 │   await page.goto(url + "/notes");
+       │                   ^^^^^^^^^^^^^^
+    95 │   await page.getByText("A note that survives restart", { exact: true }).waitFor();
+    96 │   assert.equal((await page.request.get(url + "/api/runtime")).status(), 503);
+  
+  ℹ Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  ℹ Unsafe fix: Use a template literal.
+  
+     92  92 │     await stop();
+     93  93 │     url = await start();
+     94     │ - ··await·page.goto(url·+·"/notes");
+         94 │ + ··await·page.goto(`${url}/notes`);
+     95  95 │     await page.getByText("A note that survives restart", { exact: true }).waitFor();
+     96  96 │     assert.equal((await page.request.get(url + "/api/runtime")).status(), 503);
+  
+
+apps/web/tests/restart.mjs:96:40 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ Template literals are preferred over string concatenation.
+  
+    94 │   await page.goto(url + "/notes");
+    95 │   await page.getByText("A note that survives restart", { exact: true }).waitFor();
+  > 96 │   assert.equal((await page.request.get(url + "/api/runtime")).status(), 503);
+       │                                        ^^^^^^^^^^^^^^^^^^^^
+    97 │   await page.getByRole("button", { name: "Save note", exact: true }).click();
+    98 │   await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
+  
+  ℹ Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  ℹ Unsafe fix: Use a template literal.
+  
+     94  94 │     await page.goto(url + "/notes");
+     95  95 │     await page.getByText("A note that survives restart", { exact: true }).waitFor();
+     96     │ - ··assert.equal((await·page.request.get(url·+·"/api/runtime")).status(),·503);
+         96 │ + ··assert.equal((await·page.request.get(`${url}/api/runtime`)).status(),·503);
+     97  97 │     await page.getByRole("button", { name: "Save note", exact: true }).click();
+     98  98 │     await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
+  
+
+packages/design-tokens/generator/src/config.ts:107:25 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    105 │   const at = (p: string): string => resolve(dirname(configPath), p);
+    106 │ 
+  > 107 │   const viewports = doc["fluidViewports"];
+        │                         ^^^^^^^^^^^^^^^^
+    108 │   if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
+    109 │     throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    105 105 │     const at = (p: string): string => resolve(dirname(configPath), p);
+    106 106 │   
+    107     │ - ··const·viewports·=·doc["fluidViewports"];
+        107 │ + ··const·viewports·=·doc.fluidViewports;
+    108 108 │     if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
+    109 109 │       throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
+  
+
+packages/design-tokens/generator/src/config.ts:59:23 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    58 │ function fontFaces(fonts: Json, at: (p: string) => string): FontFace[] {
+  > 59 │   const faces = fonts["faces"];
+       │                       ^^^^^^^
+    60 │   if (!Array.isArray(faces) || faces.length === 0) {
+    61 │     throw new ToolError('config: "fonts.faces" must be a non-empty array', EXIT.usage);
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     57  57 │   
+     58  58 │   function fontFaces(fonts: Json, at: (p: string) => string): FontFace[] {
+     59     │ - ··const·faces·=·fonts["faces"];
+         59 │ + ··const·faces·=·fonts.faces;
+     60  60 │     if (!Array.isArray(faces) || faces.length === 0) {
+     61  61 │       throw new ToolError('config: "fonts.faces" must be a non-empty array', EXIT.usage);
+  
+
+packages/design-tokens/generator/src/config.ts:79:15 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    78 │ function brandDocs(outputs: Json, at: (p: string) => string): BrandDocsOutput | null {
+  > 79 │   if (outputs["brandDocs"] === undefined) return null;
+       │               ^^^^^^^^^^^
+    80 │   const brand = obj(outputs, "brandDocs");
+    81 │   const aliases = brand["valueAliases"] ?? {};
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     77  77 │   
+     78  78 │   function brandDocs(outputs: Json, at: (p: string) => string): BrandDocsOutput | null {
+     79     │ - ··if·(outputs["brandDocs"]·===·undefined)·return·null;
+         79 │ + ··if·(outputs.brandDocs·===·undefined)·return·null;
+     80  80 │     const brand = obj(outputs, "brandDocs");
+     81  81 │     const aliases = brand["valueAliases"] ?? {};
+  
+
+packages/design-tokens/generator/src/config.ts:81:25 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    79 │   if (outputs["brandDocs"] === undefined) return null;
+    80 │   const brand = obj(outputs, "brandDocs");
+  > 81 │   const aliases = brand["valueAliases"] ?? {};
+       │                         ^^^^^^^^^^^^^^
+    82 │   if (!isRecord(aliases) || !Object.values(aliases).every((v) => typeof v === "string")) {
+    83 │     throw new ToolError(
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     79  79 │     if (outputs["brandDocs"] === undefined) return null;
+     80  80 │     const brand = obj(outputs, "brandDocs");
+     81     │ - ··const·aliases·=·brand["valueAliases"]·??·{};
+         81 │ + ··const·aliases·=·brand.valueAliases·??·{};
+     82  82 │     if (!isRecord(aliases) || !Object.values(aliases).every((v) => typeof v === "string")) {
+     83  83 │       throw new ToolError(
+  
+
+packages/design-tokens/generator/src/tokens-json-adapter.ts:125:23 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    123 │   }
+    124 │   const strategy = fonts["display-strategy"];
+  > 125 │   const version = doc["version"];
+        │                       ^^^^^^^^^
+    126 │   const name = doc["name"];
+    127 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    123 123 │     }
+    124 124 │     const strategy = fonts["display-strategy"];
+    125     │ - ··const·version·=·doc["version"];
+        125 │ + ··const·version·=·doc.version;
+    126 126 │     const name = doc["name"];
+    127 127 │   
+  
+
+packages/design-tokens/generator/src/tokens-json-adapter.ts:126:20 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    124 │   const strategy = fonts["display-strategy"];
+    125 │   const version = doc["version"];
+  > 126 │   const name = doc["name"];
+        │                    ^^^^^^
+    127 │ 
+    128 │   return {
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    124 124 │     const strategy = fonts["display-strategy"];
+    125 125 │     const version = doc["version"];
+    126     │ - ··const·name·=·doc["name"];
+        126 │ + ··const·name·=·doc.name;
+    127 127 │   
+    128 128 │     return {
+  
+
+tests/fidelity/playwright.config.ts:11:41 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+     9 │ import { cucumberReporter, defineBddConfig } from "playwright-bdd";
+    10 │ 
+  > 11 │ const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
+       │                                         ^^^^^^^^^^^^^^^^^^^^^
+    12 │ const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
+    13 │ const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     9  9 │   import { cucumberReporter, defineBddConfig } from "playwright-bdd";
+    10 10 │   
+    11    │ - const·PREVIEW_PORT·=·Number(process.env["KM_WEB_PREVIEW_PORT"]·??·"4173");
+       11 │ + const·PREVIEW_PORT·=·Number(process.env.KM_WEB_PREVIEW_PORT·??·"4173");
+    12 12 │   const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
+    13 13 │   const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
+  
+
+tests/fidelity/playwright.config.ts:12:30 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    11 │ const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
+  > 12 │ const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
+       │                              ^^^^^^^^^^^^^^^^^
+    13 │ const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
+    14 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    10 10 │   
+    11 11 │   const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
+    12    │ - const·BASE_URL·=·process.env["KM_WEB_BASE_URL"]·??·`http://127.0.0.1:${PREVIEW_PORT}`;
+       12 │ + const·BASE_URL·=·process.env.KM_WEB_BASE_URL·??·`http://127.0.0.1:${PREVIEW_PORT}`;
+    13 13 │   const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
+    14 14 │   
+  
+
+tests/fidelity/playwright.config.ts:13:34 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    11 │ const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
+    12 │ const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
+  > 13 │ const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
+       │                                  ^^^^^^^^^^^^^^^^^
+    14 │ 
+    15 │ const shared = { featuresRoot: "../../features", steps: ["steps/**/*.ts"] } as const;
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    11 11 │   const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
+    12 12 │   const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
+    13    │ - const·EVIDENCE_DIR·=·process.env["KM_EVIDENCE_DIR"]·??·"reports";
+       13 │ + const·EVIDENCE_DIR·=·process.env.KM_EVIDENCE_DIR·??·"reports";
+    14 14 │   
+    15 15 │   const shared = { featuresRoot: "../../features", steps: ["steps/**/*.ts"] } as const;
+  
+
+tests/fidelity/playwright.config.ts:55:26 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    53 │     { name: "cli", testDir: cliDir },
+    54 │   ],
+  > 55 │   webServer: process.env["KM_WEB_BASE_URL"]
+       │                          ^^^^^^^^^^^^^^^^^
+    56 │     ? undefined
+    57 │     : {
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    53 53 │       { name: "cli", testDir: cliDir },
+    54 54 │     ],
+    55    │ - ··webServer:·process.env["KM_WEB_BASE_URL"]
+       55 │ + ··webServer:·process.env.KM_WEB_BASE_URL
+    56 56 │       ? undefined
+    57 57 │       : {
+  
+
+tests/fidelity/steps/repo-and-rust.steps.ts:69:24 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    67 │   process.env["CARGO_TARGET_DIR"] = target.dir;
+    68 │   scenario.cleanups.push(() => {
+  > 69 │     delete process.env["CARGO_TARGET_DIR"];
+       │                        ^^^^^^^^^^^^^^^^^^
+    70 │   });
+    71 │ });
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     67  67 │     process.env["CARGO_TARGET_DIR"] = target.dir;
+     68  68 │     scenario.cleanups.push(() => {
+     69     │ - ····delete·process.env["CARGO_TARGET_DIR"];
+         69 │ + ····delete·process.env.CARGO_TARGET_DIR;
+     70  70 │     });
+     71  71 │   });
+  
+
+tests/fidelity/steps/repo-and-rust.steps.ts:67:15 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    65 │   const target = scratchTempDir("vs9-target");
+    66 │   scenario.cleanups.push(() => target.remove());
+  > 67 │   process.env["CARGO_TARGET_DIR"] = target.dir;
+       │               ^^^^^^^^^^^^^^^^^^
+    68 │   scenario.cleanups.push(() => {
+    69 │     delete process.env["CARGO_TARGET_DIR"];
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     65  65 │     const target = scratchTempDir("vs9-target");
+     66  66 │     scenario.cleanups.push(() => target.remove());
+     67     │ - ··process.env["CARGO_TARGET_DIR"]·=·target.dir;
+         67 │ + ··process.env.CARGO_TARGET_DIR·=·target.dir;
+     68  68 │     scenario.cleanups.push(() => {
+     69  69 │       delete process.env["CARGO_TARGET_DIR"];
+  
+
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:66:7 lint/suspicious/noDocumentCookie ━━━━━━━━━━
+
+  ⚠ Direct assigning to document.cookie is not recommended.
+  
+    65 │       // This sets the cookie to keep the sidebar state.
+  > 66 │       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+       │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    67 │     },
+    68 │     [setOpenProp, open],
+  
+  ℹ Writing to document.cookie directly is error-prone, because the value is a string that must be built and escaped by hand. It is also a synchronous API that can slow the page down.
+  
+  ℹ Consider using the Cookie Store API.
+  
+
+tests/fidelity/steps/web-smoke.steps.ts:76:45 lint/performance/useDomNodeTextContent  FIXABLE  ━━━━━━━━━━
+
+  ⚠ innerText is not recommended for reading DOM node text.
+  
+    74 │       mainVisible: await page.locator(appStateMap.roles.main).first().isVisible(),
+    75 │       appbarVisible: await page.locator(appStateMap.roles.appbar).first().isVisible(),
+  > 76 │       bodyText: (await page.locator("body").innerText()).trim().length,
+       │                                             ^^^^^^^^^
+    77 │     };
+    78 │     observations.set(scenario, observation);
+  
+  ℹ innerText depends on rendered layout and CSS, so it can be slower and produce different results from the DOM tree's text content.
+  
+  ℹ Use textContent when you want the node's text without rendered-text behavior.
+  
+  ℹ Unsafe fix: Use textContent instead.
+  
+     74  74 │         mainVisible: await page.locator(appStateMap.roles.main).first().isVisible(),
+     75  75 │         appbarVisible: await page.locator(appStateMap.roles.appbar).first().isVisible(),
+     76     │ - ······bodyText:·(await·page.locator("body").innerText()).trim().length,
+         76 │ + ······bodyText:·(await·page.locator("body").textContent()).trim().length,
+     77  77 │       };
+     78  78 │       observations.set(scenario, observation);
+  
+
+apps/web/src/presentation/components/ui/breadcrumb.tsx:54:5 lint/a11y/useFocusableInteractive ━━━━━━━━━━
+
+  ✖ The HTML element with the interactive role "link" is not focusable.
+  
+    52 │ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
+    53 │   return (
+  > 54 │     <span
+       │     ^^^^^
+  > 55 │       data-slot="breadcrumb-page"
+        ...
+  > 60 │       {...props}
+  > 61 │     />
+       │     ^^
+    62 │   );
+    63 │ }
+  
+  ℹ A non-interactive HTML element that is not focusable may not be reachable for users that rely on keyboard navigation, even with an added role like "link".
+  
+  ℹ Add a tabIndex attribute to make this element focusable.
+  
+
+apps/web/src/presentation/components/ui/breadcrumb.tsx:56:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <a>
+    <link>
+  
+    54 │     <span
+    55 │       data-slot="breadcrumb-page"
+  > 56 │       role="link"
+       │       ^^^^^^^^^^^
+    57 │       aria-disabled="true"
+    58 │       aria-current="page"
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <a>
+  - <link>
+  
+
+apps/web/src/presentation/components/ui/button-group.tsx:32:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    30 │   return (
+    31 │     <div
+  > 32 │       role="group"
+       │       ^^^^^^^^^^^^
+    33 │       data-slot="button-group"
+    34 │       data-orientation={orientation}
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+apps/web/src/presentation/components/ui/calendar.tsx:115:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+
+  ✖ Do not define component Root inside a function.
+  
+    113 │       }}
+    114 │       components={{
+  > 115 │         Root: ({ className, rootRef, ...props }) => {
+        │         ^^^^
+    116 │           return <div data-slot="calendar" ref={rootRef} className={cn(className)} {...props} />;
+    117 │         },
+  
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
+  
+
+apps/web/src/presentation/components/ui/calendar.tsx:118:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+
+  ✖ Do not define component Chevron inside a function.
+  
+    116 │           return <div data-slot="calendar" ref={rootRef} className={cn(className)} {...props} />;
+    117 │         },
+  > 118 │         Chevron: ({ className, orientation, ...props }) => {
+        │         ^^^^^^^
+    119 │           if (orientation === "left") {
+    120 │             return <ChevronLeftIcon className={cn("size-4", className)} {...props} />;
+  
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
+  
+
+apps/web/src/presentation/components/ui/calendar.tsx:129:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+
+  ✖ Do not define component DayButton inside a function.
+  
+    127 │           return <ChevronDownIcon className={cn("size-4", className)} {...props} />;
+    128 │         },
+  > 129 │         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
+        │         ^^^^^^^^^
+    130 │         WeekNumber: ({ children, ...props }) => {
+    131 │           return (
+  
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
+  
+
+apps/web/src/presentation/components/ui/calendar.tsx:130:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+
+  ✖ Do not define component WeekNumber inside a function.
+  
+    128 │         },
+    129 │         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
+  > 130 │         WeekNumber: ({ children, ...props }) => {
+        │         ^^^^^^^^^^
+    131 │           return (
+    132 │             <td {...props}>
+  
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
+  
+
+apps/web/src/presentation/components/ui/carousel.tsx:147:7 lint/a11y/useSemanticElements ━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    145 │   return (
+    146 │     <div
+  > 147 │       role="group"
+        │       ^^^^^^^^^^^^
+    148 │       aria-roledescription="slide"
+    149 │       data-slot="carousel-item"
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+apps/web/src/presentation/components/ui/carousel.tsx:118:9 lint/a11y/useSemanticElements ━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <section>
+  
+    116 │         onKeyDownCapture={handleKeyDown}
+    117 │         className={cn("relative", className)}
+  > 118 │         role="region"
+        │         ^^^^^^^^^^^^^
+    119 │         aria-roledescription="carousel"
+    120 │         data-slot="carousel"
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <section>
+  
+
+apps/web/src/presentation/components/ui/chart.tsx:86:7 lint/security/noDangerouslySetInnerHtml ━━━━━━━━━━
+
+  ✖ Avoid passing content using the dangerouslySetInnerHTML prop.
+  
+    84 │   return (
+    85 │     <style
+  > 86 │       dangerouslySetInnerHTML={{
+       │       ^^^^^^^^^^^^^^^^^^^^^^^
+    87 │         __html: Object.entries(THEMES)
+    88 │           .map(
+  
+  ⚠ Setting content using code can expose users to cross-site scripting (XSS) attacks
+  
+  ℹ Pass the content as JSX children instead. If you must render HTML, sanitize it first.
+  
+
+apps/web/src/presentation/components/ui/chart.tsx:183:22 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    181 │             return (
+    182 │               <div
+  > 183 │                 key={index}
+        │                      ^^^^^
+    184 │                 className={cn(
+    185 │                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+  
+  ℹ This is the source of the key value.
+  
+    174 │         {payload
+    175 │           .filter((item) => item.type !== "none")
+  > 176 │           .map((item, index) => {
+        │                       ^^^^^
+    177 │             const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
+    178 │             const itemConfig = getPayloadConfigFromPayload(config, item, key);
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/src/presentation/components/ui/chart.tsx:281:20 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    279 │           return (
+    280 │             <div
+  > 281 │               key={index}
+        │                    ^^^^^
+    282 │               className={cn(
+    283 │                 "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground",
+  
+  ℹ This is the source of the key value.
+  
+    273 │       {payload
+    274 │         .filter((item) => item.type !== "none")
+  > 275 │         .map((item, index) => {
+        │                     ^^^^^
+    276 │           const key = `${nameKey ?? item.dataKey ?? "value"}`;
+    277 │           const itemConfig = getPayloadConfigFromPayload(config, item, key);
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/src/presentation/components/ui/code-block.tsx:147:7 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━
+
+  ✖ The HTML element pre is non-interactive. Do not use tabIndex.
+  
+    145 │       data-numbered={lineNumbers || undefined}
+    146 │       dir="ltr"
+  > 147 │       tabIndex={0}
+        │       ^^^^^^^^^^^^
+    148 │       style={{ counterReset: `line ${startLine - 1}`, ...style }}
+    149 │       className={cn(
+  
+  ℹ Adding non-interactive elements to the keyboard navigation flow can confuse users.
+  
+  ℹ Unsafe fix: Remove the tabIndex attribute.
+  
+    145 145 │         data-numbered={lineNumbers || undefined}
+    146 146 │         dir="ltr"
+    147     │ - ······tabIndex={0}
+    148 147 │         style={{ counterReset: `line ${startLine - 1}`, ...style }}
+    149 148 │         className={cn(
+  
+
+apps/web/src/presentation/components/ui/code-block.tsx:163:57 lint/suspicious/noArrayIndexKey ━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    161 │               .replace(/\n$/, "")
+    162 │               .split("\n")
+  > 163 │               .map((line, index) => <CodeBlockLine key={index}>{line}</CodeBlockLine>)
+        │                                                         ^^^^^
+    164 │           : children}
+    165 │       </code>
+  
+  ℹ This is the source of the key value.
+  
+    161 │               .replace(/\n$/, "")
+    162 │               .split("\n")
+  > 163 │               .map((line, index) => <CodeBlockLine key={index}>{line}</CodeBlockLine>)
+        │                           ^^^^^
+    164 │           : children}
+    165 │       </code>
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/src/presentation/components/ui/field.tsx:190:72 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    188 │     return (
+    189 │       <ul className="ml-4 flex list-disc flex-col gap-1">
+  > 190 │         {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
+        │                                                                        ^^^^^
+    191 │       </ul>
+    192 │     );
+  
+  ℹ This is the source of the key value.
+  
+    188 │     return (
+    189 │       <ul className="ml-4 flex list-disc flex-col gap-1">
+  > 190 │         {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
+        │                                   ^^^^^
+    191 │       </ul>
+    192 │     );
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/src/presentation/components/ui/field.tsx:74:7 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    72 │   return (
+    73 │     <div
+  > 74 │       role="group"
+       │       ^^^^^^^^^^^^
+    75 │       data-slot="field"
+    76 │       data-orientation={orientation}
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+apps/web/src/presentation/components/ui/field.tsx:184:30 lint/suspicious/noDoubleEquals  FIXABLE  ━━━━━━━━━━
+
+  ✖ Using == may be unsafe if you are relying on type coercion.
+  
+    182 │     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()];
+    183 │ 
+  > 184 │     if (uniqueErrors?.length == 1) {
+        │                              ^^
+    185 │       return uniqueErrors[0]?.message;
+    186 │     }
+  
+  ℹ == is only allowed when comparing against null.
+  
+  ℹ Unsafe fix: Use === instead.
+  
+    184 │ ····if·(uniqueErrors?.length·===·1)·{
+        │                                +     
+
+apps/web/src/presentation/components/ui/input-group.tsx:15:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    13 │     <div
+    14 │       data-slot="input-group"
+  > 15 │       role="group"
+       │       ^^^^^^^^^^^^
+    16 │       className={cn(
+    17 │         "group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-in...
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+apps/web/src/presentation/components/ui/input-group.tsx:50:5 lint/a11y/useKeyWithClickEvents ━━━━━━━━━━
+
+  ✖ Enforce to have the onClick mouse event with the onKeyUp, the onKeyDown, or the onKeyPress keyboard event.
+  
+    48 │ }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
+    49 │   return (
+  > 50 │     <div
+       │     ^^^^
+  > 51 │       role="group"
+        ...
+  > 61 │       {...props}
+  > 62 │     />
+       │     ^^
+    63 │   );
+    64 │ }
+  
+  ℹ Actions triggered using mouse events should have corresponding keyboard events to account for keyboard-only navigation.
+  
+
+apps/web/src/presentation/components/ui/input-group.tsx:51:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    49 │   return (
+    50 │     <div
+  > 51 │       role="group"
+       │       ^^^^^^^^^^^^
+    52 │       data-slot="input-group-addon"
+    53 │       data-align={align}
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+apps/web/src/presentation/components/ui/input-otp.tsx:75:7 lint/a11y/useSemanticElements ━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <hr>
+  
+    73 │       data-slot="input-otp-separator"
+    74 │       className="flex items-center [&_svg:not([class*='size-'])]:size-4"
+  > 75 │       role="separator"
+       │       ^^^^^^^^^^^^^^^^
+    76 │       {...props}
+    77 │     >
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <hr>
+  
+
+apps/web/src/presentation/components/ui/item.tsx:12:7 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <ol>
+    <ul>
+  
+    10 │   return (
+    11 │     <div
+  > 12 │       role="list"
+       │       ^^^^^^^^^^^
+    13 │       data-slot="item-group"
+    14 │       className={cn(
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <ol>
+  - <ul>
+  
+
+apps/web/src/presentation/components/ui/label.tsx:8:5 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━
+
+  ✖ A form label must be associated with an input.
+  
+     6 │ function Label({ className, ...props }: React.ComponentProps<"label">) {
+     7 │   return (
+   > 8 │     <label
+       │     ^^^^^^
+   > 9 │       data-slot="label"
+        ...
+  > 14 │       {...props}
+  > 15 │     />
+       │     ^^
+    16 │   );
+    17 │ }
+  
+  ℹ Assistive technologies rely on a label being associated with a control to announce it. Without the association, screen reader users cannot tell what the control is for.
+  
+  ℹ Consider adding an accessible text content to the label element.
+  
+  ℹ Consider adding a "for" or "htmlFor" attribute to the label element or moving the input element to inside the label element.
+  
+
+apps/web/src/presentation/components/ui/pagination.tsx:9:12 lint/a11y/noRedundantRoles  FIXABLE  ━━━━━━━━━━
+
+  ✖ Using the role attribute 'navigation' on the 'nav' element is redundant.
+  
+     7 │   return (
+     8 │     <nav
+   > 9 │       role="navigation"
+       │            ^^^^^^^^^^^^
+    10 │       aria-label="pagination"
+    11 │       data-slot="pagination"
+  
+  ℹ The element already has this role because of its semantics, so the attribute has no effect.
+  
+  ℹ Unsafe fix: Remove the role attribute.
+  
+      7   7 │     return (
+      8   8 │       <nav
+      9     │ - ······role="navigation"
+     10   9 │         aria-label="pagination"
+     11  10 │         data-slot="pagination"
+  
+
+apps/web/src/presentation/components/ui/scroll-area.tsx:3:13 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ This import is unused.
+  
+    1 │ import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
+    2 │ import { cn } from "cn";
+  > 3 │ import * as React from "react";
+      │             ^^^^^
+    4 │ 
+    5 │ function ScrollArea({ className, children, ...props }: ScrollAreaPrimitive.Root.Props) {
+  
+  ℹ Unused imports might be the result of an incomplete refactoring.
+  
+  ℹ Unsafe fix: Remove the unused imports.
+  
+     1  1 │   import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
+     2  2 │   import { cn } from "cn";
+     3    │ - import·*·as·React·from·"react";
+     4  3 │   
+     5  4 │   function ScrollArea({ className, children, ...props }: ScrollAreaPrimitive.Root.Props) {
+  
+
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:72:31 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  ✖ This hook specifies more dependencies than necessary: setOpenMobile.
+  
+    71 │   // Helper to toggle the sidebar.
+  > 72 │   const toggleSidebar = React.useCallback(() => {
+       │                               ^^^^^^^^^^^
+    73 │     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
+    74 │   }, [isMobile, setOpen, setOpenMobile]);
+  
+  ℹ This dependency can be removed from the list.
+  
+    72 │   const toggleSidebar = React.useCallback(() => {
+    73 │     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
+  > 74 │   }, [isMobile, setOpen, setOpenMobile]);
+       │                          ^^^^^^^^^^^^^
+    75 │ 
+    76 │   // Adds a keyboard shortcut to toggle the sidebar.
+  
+  ℹ React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+  
+  ℹ Unsafe fix: Remove the extra dependencies from the list.
+  
+    74 │ ··},·[isMobile,·setOpen,·setOpenMobile]);
+       │                        ---------------   
+
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:93:30 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  ✖ This hook specifies more dependencies than necessary: setOpenMobile.
+  
+    91 │   const state = open ? "expanded" : "collapsed";
+    92 │ 
+  > 93 │   const contextValue = React.useMemo<SidebarContextProps>(
+       │                              ^^^^^^^
+    94 │     () => ({
+    95 │       state,
+  
+  ℹ This dependency can be removed from the list.
+  
+    101 │       toggleSidebar,
+    102 │     }),
+  > 103 │     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],
+        │                                                  ^^^^^^^^^^^^^
+    104 │   );
+    105 │ 
+  
+  ℹ React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+  
+  ℹ Unsafe fix: Remove the extra dependencies from the list.
+  
+    103 │ ····[state,·open,·setOpen,·isMobile,·openMobile,·setOpenMobile,·toggleSidebar],
+        │                                                  ---------------               
+
+apps/web/src/presentation/components/ui/slider.tsx:42:18 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    40 │           <SliderPrimitive.Thumb
+    41 │             data-slot="slider-thumb"
+  > 42 │             key={index}
+       │                  ^^^^^
+    43 │             className="relative block size-3 shrink-0 rounded-full border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3 disabled:pointer-events-none disabled:opacity-50"
+    44 │           />
+  
+  ℹ This is the source of the key value.
+  
+    37 │           />
+    38 │         </SliderPrimitive.Track>
+  > 39 │         {Array.from({ length: _values.length }, (_, index) => (
+       │                                                     ^^^^^
+    40 │           <SliderPrimitive.Thumb
+    41 │             data-slot="slider-thumb"
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/src/presentation/lib/highlighter.tsx:96:20 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    94 │           line.map((token, index) => (
+    95 │             <span
+  > 96 │               key={index}
+       │                    ^^^^^
+    97 │               style={token.htmlStyle as React.CSSProperties}
+    98 │               className="text-(--shiki-light) dark:text-(--shiki-dark)"
+  
+  ℹ This is the source of the key value.
+  
+    92 │       return {
+    93 │         lines: tokens.map((line) =>
+  > 94 │           line.map((token, index) => (
+       │                            ^^^^^
+    95 │             <span
+    96 │               key={index}
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the React documentation. 
+  
+
+apps/web/tests/restart.mjs:99:3 lint/suspicious/noConsole  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Don't use console.
+  
+     97 │   await page.getByRole("button", { name: "Save note", exact: true }).click();
+     98 │   await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
+   > 99 │   console.log(
+        │   ^^^^^^^^^^^
+    100 │     "PASS: real browser -> Axum -> Rust SQLite -> process restart recovery; invalid note rejected; UAR unavailable explicitly",
+    101 │   );
+  
+  ℹ The use of console is often reserved for debugging.
+  
+  ℹ Unsafe fix: Remove console.
+  
+     97  97 │     await page.getByRole("button", { name: "Save note", exact: true }).click();
+     98  98 │     await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
+     99     │ - ··console.log(
+    100     │ - ····"PASS:·real·browser·->·Axum·->·Rust·SQLite·->·process·restart·recovery;·invalid·note·rejected;·UAR·unavailable·explicitly",
+    101     │ - ··);
+    102  99 │   } finally {
+    103 100 │     await browser?.close();
+  
+
+tests/fidelity/steps/desktop-bundle.steps.ts:36:62 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    34 │ );
+    35 │ 
+  > 36 │ Then("frontendDist in {string} resolves to {string}", async ({}, conf: string, dist: string) => {
+       │                                                              ^^
+    37 │   const parsed = JSON.parse(readFileSync(repoPath(conf), "utf8")) as {
+    38 │     build?: { frontendDist?: string };
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/fixtures.ts:42:21 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    41 │ export const test = base.extend<Fixtures>({
+  > 42 │   inventory: async ({}, use) => use(loadInventory()),
+       │                     ^^
+    43 │   oracle: async ({}, use) => use(loadOracle()),
+    44 │   manifest: async ({}, use) => use(loadManifest()),
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/fixtures.ts:43:18 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    41 │ export const test = base.extend<Fixtures>({
+    42 │   inventory: async ({}, use) => use(loadInventory()),
+  > 43 │   oracle: async ({}, use) => use(loadOracle()),
+       │                  ^^
+    44 │   manifest: async ({}, use) => use(loadManifest()),
+    45 │   appStateMap: async ({}, use) => use(loadAppStateMap()),
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/fixtures.ts:44:20 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    42 │   inventory: async ({}, use) => use(loadInventory()),
+    43 │   oracle: async ({}, use) => use(loadOracle()),
+  > 44 │   manifest: async ({}, use) => use(loadManifest()),
+       │                    ^^
+    45 │   appStateMap: async ({}, use) => use(loadAppStateMap()),
+    46 │   appTarget: async ({ appStateMap, baseURL }, use) => {
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/fixtures.ts:45:23 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    43 │   oracle: async ({}, use) => use(loadOracle()),
+    44 │   manifest: async ({}, use) => use(loadManifest()),
+  > 45 │   appStateMap: async ({}, use) => use(loadAppStateMap()),
+       │                       ^^
+    46 │   appTarget: async ({ appStateMap, baseURL }, use) => {
+    47 │     const origin = baseURL ?? "";
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/fixtures.ts:61:20 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    59 │     });
+    60 │   },
+  > 61 │   scenario: async ({}, use) => {
+       │                    ^^
+    62 │     const state: ScenarioState = { cleanups: [] };
+    63 │     await use(state);
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/flutter.steps.ts:23:61 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    21 │ let stockThemeRequested = false;
+    22 │ 
+  > 23 │ Given("the Flutter golden provenance rule {string}", async ({}, path: string) => {
+       │                                                             ^^
+    24 │   const rule = JSON.parse(readFileSync(repoPath(path), "utf8")) as {
+    25 │     approver: string;
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+tests/fidelity/steps/motion.steps.ts:48:58 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Unexpected empty object pattern.
+  
+    46 │ }
+    47 │ 
+  > 48 │ Given("the motion tokens are read from {string}", async ({}, path: string) => {
+       │                                                          ^^
+    49 │   expect(path).toBe("docs/design/tokens.json");
+    50 │   for (const token of ["dur", "ease-standard", "ease-out", "dur-reduced-motion"])
+  
+  ℹ An empty pattern does not create any variables, but it can still throw an error for an invalid value.
+  
+  ℹ Add the names you want to extract, or remove the pattern.
+  
+
+Checked 217 files in 79ms. No fixes applied.
+Found 38 errors.
+Found 2 warnings.
+Found 26 infos.
+ci ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Some warnings were emitted while running checks.
+  
+
+[ELIFECYCLE] Command failed with exit code 1.

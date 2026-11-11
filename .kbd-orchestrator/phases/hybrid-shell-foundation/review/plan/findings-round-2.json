@@ -1,0 +1,101 @@
+{
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "line": 27,
+      "claim": "The stale root `live/` tree is left as an unresolved blocker to c01's mandatory 500-line gate.",
+      "evidence": "The plan states: `Root live/ blocks the 500-line check... Recommended: delete it in c01 (task 1.6). Awaiting the operator's answer; the alternative is a temporary exception.` However, c01's task model ends at task 1.5, and the blocking max-500-line constraint does not exempt root `live/`.",
+      "suggested_fix": "Make operator resolution a prerequisite to c01 and add task 1.6 to c01's change details and task model. Prefer deleting root `live/`; if it must remain, obtain an explicit constraint exception and configure the checker for it before c01 can pass."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "line": 42,
+      "claim": "No task or acceptance check enforces the blocking prohibition on TypeScript `any` types.",
+      "evidence": "C01 enumerates its rules as `Configure Biome and ls-lint...` and `Biome import rules... enforce dependency direction`, while task 1.3 is only `Biome, ls-lint, line checker with exception globs`. The plan never binds the constraint `No any type in TypeScript source` to a rule, fixture, or CI gate.",
+      "suggested_fix": "Add an enabled `noExplicitAny` or equivalent repository rule, a negative test fixture, and a CI/lint acceptance check covering all authored TypeScript, including generated React code."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "line": 42,
+      "claim": "The plan does not enforce the blocking prohibition on ad-hoc hex colors in React, Tauri, or Flutter UI code.",
+      "evidence": "C01's complete rule inventory covers kebab-case, line count, secret scans, and dependency direction, but no task scans UI source for hex literals. C08 says components are `themed by the tokens`, and c13 checks contrast, but neither detects a hardcoded color that happens to have acceptable contrast.",
+      "suggested_fix": "Add a repository rule for React/TypeScript/CSS and Flutter/Dart UI sources that rejects hex colors outside the canonical token source and generated token/theme outputs, with narrowly defined exceptions and fixtures."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "line": 132,
+      "claim": "The aggregate build command does not actually build the Flutter application for either required mobile platform.",
+      "evidence": "C14's command list contains only `flutter analyze/test`; it never specifies `flutter build` or an equivalent Android/iOS compile. The plan nevertheless claims the root build will cover Flutter, and the blocking `build-passes` constraint requires the project build to pass.",
+      "suggested_fix": "Add explicit non-signing mobile build targets, such as an Android APK build and an iOS simulator build, to `build_health_command`, and make c13 run them as part of the boundary."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "line": 88,
+      "claim": "The token-secret trace excludes final React and Flutter client surfaces despite the blocking server-side-secret requirement.",
+      "evidence": "Task 5.5 is limited to `every token and LiveKit-secret path in the imported BFF, PEM and Tauri code`, and c13 task 13.8 merely re-checks that trace. React code is remapped in c06 and Flutter code is imported in c07, so the final web and mobile client paths are not explicitly traced after those transformations.",
+      "suggested_fix": "Expand tasks 5.5 and 13.8 to enumerate `apps/web`, the Tauri webview/Rust host, Flutter, and the Rust bridge/PEM paths, and perform the authoritative trace after c06, c07, and c12 are final."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 76,
+      "claim": "The only explicit 500-line inventory and split task is scoped to c05's imports, but React and Flutter files are introduced later without equivalent split tasks.",
+      "evidence": "C05 says `Import every surface:` but enumerates only Rust crates, BFF, and UAR/PEM; task 5.2 likewise says `Import Rust, BFF, UAR and PEM`. Task 5.4 is the sole `500-line inventory` task. C06 later `merge[s] the duplicated React baselines` and c07 `move[s] the mobile app into apps/mobile`, with no corresponding inventory/split step before c13.",
+      "suggested_fix": "Explicitly include React and Flutter outputs in c05's import manifest and task 5.4, or add equivalent line-count inventory and clean-architecture split tasks to c06 and c07 before their downstream work."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 126,
+      "claim": "C13's dependency graph omits c14 even though c13 depends on the commands created by c14.",
+      "evidence": "C13 declares `Depends on: c03 and c06 to c12`, while c14 states `These are the commands c13 runs.` The round order happens to schedule c14 earlier, but the declared change dependencies are therefore inconsistent with the actual data dependency.",
+      "suggested_fix": "Add c14 as an explicit prerequisite of c13 and state in c14 that completion is required before the boundary packet starts."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 31,
+      "claim": "Task 5.0 does not actually assign the owner for the UAR output that the plan identifies as ownerless.",
+      "evidence": "The ownership-gap paragraph names `crates/**`, `services/bff/**`, and `the generator's uar folders` as ownerless and says the delivery lead must assign them before c05. However, task 5.0's requirement is only `Assign owners for crates/** and services/bff/**`, and the proposed owners likewise omit UAR.",
+      "suggested_fix": "Expand task 5.0, its prerequisite, and the proposed ownership map to include every UAR directory and any separately generated PEM path, with an explicit owner before any c05 import work."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 50,
+      "claim": "The visual comparison oracle omits the screen states that c02 is required to inventory.",
+      "evidence": "C02 requires an inventory of `routes, screens and states`, but c03 defines the oracle only as `a route \u00d7 viewport \u00d7 theme matrix` and says baselines are captured for every route. There is no state dimension or rule mapping an inventoried state to a baseline, so multiple states on one route can share only one visual comparison.",
+      "suggested_fix": "Make the oracle `route/state \u00d7 viewport \u00d7 theme`, or define and test a deterministic mapping from every inventoried state ID to its own baseline and expected visual state."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 53,
+      "claim": "The fidelity boundary has no deterministic rule for what constitutes an unresolved difference under the permissive default threshold.",
+      "evidence": "C03 allows `maxDiffPixelRatio 0.01` and says the design lead may tighten it, while c13 says `any unresolved difference blocks the boundary` without defining who classifies a difference, how below-threshold differences are treated, or when the threshold becomes immutable.",
+      "suggested_fix": "Freeze per-route thresholds and the exception rubric before c05, assign an explicit adjudicator, and define the boundary result for both above-threshold and below-threshold differences."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 122,
+      "claim": "The Flutter UI work has no accessibility acceptance coverage.",
+      "evidence": "C12 requires golden tests but does not require accessible names, semantics, focus traversal, or reduced-motion behavior. C13's accessibility gate uses axe, reduced-motion, and contrast checks for the web matrix, none of which inspects the Flutter widget tree. The accessibility constraint applies to all new UI, not only HTML.",
+      "suggested_fix": "Add Flutter semantics/accessibility-name assertions, focus-order checks, reduced-motion tests, and a non-visual accessibility gate to c12/c13."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "line": 131,
+      "claim": "The specified Rust lint command does not guarantee that Clippy warnings fail the lint gate.",
+      "evidence": "C14 specifies `cargo check/clippy/test --workspace` without `--all-targets -- -D warnings` or an equivalent warning-denial mechanism, even though the constraint preamble requires `no-lint-warnings` to be checked against the command introduced by this phase.",
+      "suggested_fix": "Specify an exact lint command such as `cargo clippy --workspace --all-targets -- -D warnings` and ensure all configured Biome and Flutter analyzer findings also produce a nonzero lint result."
+    }
+  ],
+  "checked_classes": []
+}

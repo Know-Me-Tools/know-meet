@@ -1,0 +1,132 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "card-with-action",
+  "title": "Agent card with image, text and an action",
+  "description": "Card > Column with an Image from the allowed origin, title, description, Divider and a primary Button.",
+  "surfaceId": "km-agent-card",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-agent-card",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+        "dataModel": {
+          "agent": {
+            "id": "scribe",
+            "name": "Scribe",
+            "blurb": "Takes notes and writes the summary."
+          }
+        }
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-agent-card",
+        "components": [
+          {
+            "id": "root",
+            "component": "Card",
+            "child": "col"
+          },
+          {
+            "id": "col",
+            "component": "Column",
+            "children": [
+              "avatar",
+              "name",
+              "blurb",
+              "rule",
+              "add_btn"
+            ]
+          },
+          {
+            "id": "avatar",
+            "component": "Image",
+            "url": "{{ALLOWED_ORIGIN}}/media/avatar.png",
+            "description": "Scribe avatar",
+            "variant": "avatar"
+          },
+          {
+            "id": "name",
+            "component": "Text",
+            "text": {
+              "@path": "/agent/name"
+            }
+          },
+          {
+            "id": "blurb",
+            "component": "Text",
+            "text": {
+              "@path": "/agent/blurb"
+            }
+          },
+          {
+            "id": "rule",
+            "component": "Divider"
+          },
+          {
+            "id": "add_btn",
+            "component": "Button",
+            "child": "add_label",
+            "variant": "primary",
+            "action": {
+              "event": {
+                "name": "add_agent",
+                "context": {
+                  "agentId": {
+                    "@path": "/agent/id"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "add_label",
+            "component": "Text",
+            "text": "Add to meeting"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "description": "Add the agent",
+      "click": "add_btn",
+      "expectAction": {
+        "name": "add_agent",
+        "sourceComponentId": "add_btn",
+        "context": {
+          "agentId": "scribe"
+        }
+      }
+    }
+  ],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "col",
+      "avatar",
+      "name",
+      "blurb",
+      "rule",
+      "add_btn",
+      "add_label"
+    ],
+    "fallbackComponentIds": [],
+    "visibleText": [
+      "Scribe",
+      "Takes notes and writes the summary.",
+      "Add to meeting"
+    ],
+    "blockedMediaUrls": []
+  },
+  "flutterNotes": "Image loads over HTTP from the harness media origin; on device use the host LAN address in place of 127.0.0.1."
+}

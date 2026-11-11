@@ -1,0 +1,20 @@
+# c15 task 15.5: minimal Tauri 2 shell that loads one prototype's Vite dist.
+# Standalone (own [workspace]); not a member of the root Cargo workspace.
+# Pins match apps/desktop/src-tauri (tauri 2.11.3, tauri-build 2.6.3) and the
+# pinned CLI (tauri-cli 2.11.4, tooling/versions.toml).
+[package]
+name = "km-agentic-ui-tauri-shell"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+tauri = { version = "=2.11.3", features = [] }
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]

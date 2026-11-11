@@ -1,0 +1,279 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "state-snapshot-delta",
+  "title": "Shared state: snapshot then RFC 6902 deltas (all six ops)",
+  "description": "STATE_SNAPSHOT followed by STATE_DELTA patches using add, remove, replace, move, copy and test. Final state must deep-equal `expected.state`.",
+  "tags": [
+    "@state"
+  ],
+  "userPrompt": "Track the agenda while we talk.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_SNAPSHOT",
+            "snapshot": {
+              "agenda": [
+                {
+                  "id": "a1",
+                  "title": "Pricing",
+                  "done": false
+                },
+                {
+                  "id": "a2",
+                  "title": "Roadmap",
+                  "done": false
+                }
+              ],
+              "phase": "discussion",
+              "counters": {
+                "decisions": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "replace",
+                "path": "/agenda/0/done",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "add",
+                "path": "/agenda/-",
+                "value": {
+                  "id": "a3",
+                  "title": "Hiring",
+                  "done": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "test",
+                "path": "/phase",
+                "value": "discussion"
+              },
+              {
+                "op": "replace",
+                "path": "/phase",
+                "value": "wrap-up"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "move",
+                "from": "/agenda/2",
+                "path": "/agenda/1"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "copy",
+                "from": "/phase",
+                "path": "/lastPhase"
+              },
+              {
+                "op": "replace",
+                "path": "/counters/decisions",
+                "value": 2
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STATE_DELTA",
+            "delta": [
+              {
+                "op": "remove",
+                "path": "/lastPhase"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-state-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": "Agenda"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " updated:"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " pricing"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " is"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " done,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " hiring"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " moved"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-state-1",
+            "delta": " up."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-state-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Track the agenda while we talk."
+      },
+      {
+        "id": "msg-state-1",
+        "role": "assistant",
+        "textEquals": "Agenda updated: pricing is done, hiring moved up.",
+        "status": "complete"
+      }
+    ],
+    "state": {
+      "agenda": [
+        {
+          "id": "a1",
+          "title": "Pricing",
+          "done": true
+        },
+        {
+          "id": "a3",
+          "title": "Hiring",
+          "done": false
+        },
+        {
+          "id": "a2",
+          "title": "Roadmap",
+          "done": false
+        }
+      ],
+      "phase": "wrap-up",
+      "counters": {
+        "decisions": 2
+      }
+    }
+  }
+}

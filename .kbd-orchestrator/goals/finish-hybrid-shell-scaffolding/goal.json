@@ -1,0 +1,21 @@
+{
+  "slug": "finish-hybrid-shell-scaffolding",
+  "description": "Finish the hybrid-shell-foundation scaffolding: complete c03 and c04, then c05 scaffold generation/import, c06 web+desktop single bundle and c07 Flutter shell import, ending with runnable React 19 web, Tauri desktop and Flutter mobile shells.",
+  "phases": [
+    {
+      "name": "creation",
+      "status": "complete",
+      "human_gate_result": {
+        "decision": "approved-plan",
+        "provenance": "operator: 'finish the scaffolding, work in goal mode until it is done' (2026-11-09)",
+        "elicitation_id": null
+      }
+    }
+  ],
+  "tool": "claude-code",
+  "kbdPhase": "hybrid-shell-foundation",
+  "method": "VLBV",
+  "stop": "c03, c04, c05, c06 and c07 tasks complete in canonical KBD state; apps/web builds and serves, apps/desktop (Tauri) builds from the same web bundle, apps/mobile (Flutter) builds; no committed secrets",
+  "status": "creation-complete-boundary-pending",
+  "loop_controller": "this-session-foreground-team-agents"
+}

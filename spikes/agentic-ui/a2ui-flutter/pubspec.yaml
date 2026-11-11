@@ -1,0 +1,47 @@
+name: a2ui_parity
+description: "c15 spike 15.4: A2UI 1.0 golden surfaces through the official Flutter renderer."
+publish_to: 'none'
+version: 0.0.1
+
+environment:
+  sdk: ^3.13.4
+  flutter: 3.47.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Exact pins (pub.dev, publisher labs.flutter.dev, published 2026-11-09).
+  a2ui_flutter: 0.2.0
+  a2ui_core: 0.6.0
+  # Schema type for the Know Meet fallback component (transitive via a2ui_core).
+  json_schema_builder: 0.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  # Fake video platform so Video/AudioPlayer initialise headlessly.
+  video_player_platform_interface: 6.9.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/surfaces/
+  # Pinned brand fonts (copied from apps/mobile/assets/fonts, OFL) so goldens are deterministic.
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter-regular.ttf
+        - asset: assets/fonts/inter-medium.ttf
+          weight: 500
+        - asset: assets/fonts/inter-semibold.ttf
+          weight: 600
+    - family: Space Grotesk
+      fonts:
+        - asset: assets/fonts/space-grotesk-variable.ttf
+    - family: JetBrains Mono
+      fonts:
+        - asset: assets/fonts/jetbrains-mono-medium.ttf
+          weight: 500
+        - asset: assets/fonts/jetbrains-mono-semibold.ttf
+          weight: 600

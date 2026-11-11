@@ -1,0 +1,14 @@
+{
+  "runId": "own-raf-control-occluded-conformance-mwba1c36",
+  "state": "occluded",
+  "repeats": 6,
+  "binary": "/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/tauri-shell/bin/km-spike-own",
+  "startedAt": "2026-11-10T22:43:51.149Z",
+  "endedAt": "2026-11-10T22:45:31.645Z",
+  "driverExit": 0,
+  "env": {
+    "KM_BACKGROUND_THROTTLING": "default"
+  },
+  "driverCommand": "node src/webview-driver/tauri-run.ts --binary /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/tauri-shell/bin/km-spike-own --prototype own-raf-control-occluded --mode conformance --repeats 6 --scenarios long-markdown,a2ui-over-agui,cancel-mid-stream,custom-chunks,disconnect-reconnect-replay,hitl-approve,hitl-expire,hitl-reject,malformed-out-of-order,parallel-tool-calls,reasoning-subagents-snapshot,run-cancelled-by-agent,run-error,state-snapshot-delta --no-axe --timeout-min 60",
+  "stagerCommand": "gates/bin/window-stage --mode occluded --owner km-spike-own (started 1000 ms after the driver)"
+}

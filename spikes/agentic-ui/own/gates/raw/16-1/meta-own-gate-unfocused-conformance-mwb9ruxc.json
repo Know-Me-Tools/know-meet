@@ -1,0 +1,14 @@
+{
+  "runId": "own-gate-unfocused-conformance-mwb9ruxc",
+  "state": "unfocused",
+  "repeats": 6,
+  "binary": "/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/own/gates/bin/km-spike-own-gate",
+  "startedAt": "2026-11-10T22:36:29.010Z",
+  "endedAt": "2026-11-10T22:38:09.668Z",
+  "driverExit": 0,
+  "env": {
+    "KM_BACKGROUND_THROTTLING": "default"
+  },
+  "driverCommand": "node src/webview-driver/tauri-run.ts --binary /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/own/gates/bin/km-spike-own-gate --prototype own-gate-unfocused --mode conformance --repeats 6 --scenarios long-markdown,a2ui-over-agui,cancel-mid-stream,custom-chunks,disconnect-reconnect-replay,hitl-approve,hitl-expire,hitl-reject,malformed-out-of-order,parallel-tool-calls,reasoning-subagents-snapshot,run-cancelled-by-agent,run-error,state-snapshot-delta --no-axe --timeout-min 60",
+  "stagerCommand": "gates/bin/window-stage --mode unfocused --owner km-spike-own-gate (started 1000 ms after the driver)"
+}

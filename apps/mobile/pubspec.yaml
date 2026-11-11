@@ -1,0 +1,57 @@
+name: sovereign_hybrid_mobile
+publish_to: none
+version: 0.1.0+1
+environment:
+  sdk: ">=3.13.0-0 <4.0.0"
+# Exact pins. Versions, check dates and licences: deps-note.md.
+dependencies:
+  flutter:
+    sdk: flutter
+  gen_ui_ffi:
+    path: rust-builder
+  flutter_rust_bridge: 2.12.0
+  flutter_riverpod: 3.3.1
+  riverpod_annotation: 4.0.2
+  path_provider: 2.1.6
+  go_router: 18.1.3
+  shared_preferences: 2.5.6
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+  build_runner: 2.15.1
+  riverpod_generator: 4.0.3
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/capabilities/
+  # Self-hosted Know Meet families: TTFs from the same upstream releases c02
+  # used for the web WOFF2 files (assets/fonts/README.md). Family names match
+  # KmTokens.fontDisplay / fontBody / fontMono. Only the weights the prototype
+  # loads are shipped; do not add faces (packages/design-tokens/fonts/README.md).
+  fonts:
+    - family: Space Grotesk
+      fonts:
+        # One variable file (wght 300-700) serves 500, 600 and 700.
+        - asset: assets/fonts/space-grotesk-variable.ttf
+          weight: 500
+        - asset: assets/fonts/space-grotesk-variable.ttf
+          weight: 600
+        - asset: assets/fonts/space-grotesk-variable.ttf
+          weight: 700
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter-regular.ttf
+          weight: 400
+        - asset: assets/fonts/inter-medium.ttf
+          weight: 500
+        - asset: assets/fonts/inter-semibold.ttf
+          weight: 600
+    - family: JetBrains Mono
+      fonts:
+        - asset: assets/fonts/jetbrains-mono-medium.ttf
+          weight: 500
+        - asset: assets/fonts/jetbrains-mono-semibold.ttf
+          weight: 600

@@ -1,0 +1,13 @@
+{
+  "name": "@know-meet/desktop",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Know Meet desktop: the Tauri 2 host (src-tauri) serving the apps/web build. No frontend of its own.",
+  "type": "module",
+  "scripts": {
+    "tauri": "node scripts/tauri-cli.ts"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4"
+  }
+}

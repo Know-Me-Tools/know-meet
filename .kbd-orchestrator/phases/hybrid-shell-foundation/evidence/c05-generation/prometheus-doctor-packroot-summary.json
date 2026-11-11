@@ -1,0 +1,10 @@
+{
+ "cwd": "/Users/gqadonis/Projects/prometheus/prometheus-skill-pack",
+ "summary": {
+  "failed": 0,
+  "warned": 4,
+  "passed": 18,
+  "skipped": 2,
+  "exit_code": 0
+ }
+}

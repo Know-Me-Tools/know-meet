@@ -1,0 +1,469 @@
+{
+ "schema": "know-meet-fidelity-oracle/v1",
+ "change": "c03-value-scenarios-and-baselines",
+ "status": "frozen",
+ "frozenAt": "2026-11-09",
+ "frozenBy": "bdd-quality (know-meet-team), c03 task 3.2",
+ "freezeRule": "Frozen before c05 starts (plan c03). Any change to a threshold, the default, the rubric or the matrix after freeze needs a design-lead adjudication record in `adjudications` AND an operator-adopted contract amendment if it loosens acceptance. Never loosen a threshold to turn a failing value scenario green.",
+ "contract": {
+  "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json",
+  "contractDigest": "768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855",
+  "scenarios": [
+   "VS-1",
+   "VS-3"
+  ]
+ },
+ "inventory": {
+  "path": "docs/design/screen-inventory/route-inventory.json",
+  "sha256": "eef76bda67aad2d1036a3cc54d5edbbe1dd8f35452767667963406b532b01b1b",
+  "inScopeStates": 70,
+  "scopeDecisions": {
+   "D-1": "Whole auth.html flow in scope (5 states), per inventory default; resolution relayed by delivery-lead 2026-11-09, not yet entered in decision-log.md",
+   "D-2": "Room side panels, meet.start and meet.ended OUT of scope, per inventory default; same provenance"
+  }
+ },
+ "matrix": {
+  "themes": [
+   "dark",
+   "light"
+  ],
+  "viewports": [
+   375,
+   768,
+   1024,
+   1440
+  ],
+  "browsers": {
+   "gating": "chromium",
+   "informational": [
+    "webkit",
+    "firefox"
+   ]
+  },
+  "expectedCells": 560,
+  "notApplicableCells": "frame.nav-collapsed and frame.nav-open at 1024 and 1440 in both themes (8 cells): the prototype collapses nav only at <= 899px. They are not baselines and are not compared."
+ },
+ "comparison": {
+  "engine": "Playwright expect(...).toHaveScreenshot against tests/fidelity/baselines/<theme>/<viewport>/<state-id with dots as hyphens>.png",
+  "captureEnvironment": "tests/fidelity/src/support/capture-environment.ts (frozen clock 2026-11-10T15:00:00Z, UTC, en-US, DPR 1, animations disabled, caret hidden, self-hosted fonts); recorded in baselines/manifest.json",
+  "updateSnapshots": "none (the boundary run must never write or refresh a baseline)",
+  "sizeMismatch": "A different image size is a failure (Playwright default), never auto-cropped.",
+  "default": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2
+  }
+ },
+ "verdictRule": {
+  "aboveThreshold": "FAIL",
+  "atOrBelowThreshold": "PASS, unless design-lead logged a fidelity defect for that cell in `adjudications` before the boundary run started, in which case FAIL",
+  "missingBaseline": "BLOCKED (a missing baseline is never captured on the fly)",
+  "missingAppRoute": "BLOCKED (no entry in oracle/app-state-map.json for the state)",
+  "unresolvedDifference": "Any FAIL or BLOCKED cell blocks the c13 boundary (plan c13)."
+ },
+ "perState": {
+  "index.default": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "auth.sign-in": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "auth.sign-up": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "auth.check-email": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "auth.sign-in-error": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "auth.magic-link-sent": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "join.invite": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "join.waiting": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "join.expired": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "join.wrong-code": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "meet.room": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "meet.room-guest": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.upcoming": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.schedule": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.meeting.partner-onboarding": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.meeting.cohort-kickoff": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.meeting.product-sync": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.meeting.pricing-review": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.invites": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.empty": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.registry": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.register.1": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.register.2": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.register.3": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.register.4": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.register-error": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.detail.scribe": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.detail.researcher": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.detail.facilitator": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.detail.translator": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.concierge": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.dots": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.dot.iris": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.library": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.partner-onboarding-1014": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.partner-onboarding-1014.transcript": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.partner-onboarding-1014.summary": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.partner-onboarding-1014.delivery": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.partner-onboarding-1014.storage": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.design-crit-1009": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.detail.vendor-call-1002": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.processing.partner-onboarding-1014": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.empty": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.account": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.livekit": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.telnyx-sms": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.telnyx-voice": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.calendars": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.calendar-connect.google": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.calendar-connect.outlook": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.calendar-connect.caldav": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.storage": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.storage-s3": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.storage-ipfs": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.storage-test-failed": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.recording": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.delivery": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.templates": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.notifications": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "dashboard.gate-signed-out": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "agents.gate-signed-out": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "recordings.gate-signed-out": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "settings.gate-signed-out": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.appbar-signed-out": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.appbar-signed-in": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.account-menu-open": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.nav-collapsed": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.nav-open": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.skip-link-focused": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  },
+  "frame.theme-toggle": {
+   "maxDiffPixelRatio": 0.01,
+   "threshold": 0.2,
+   "basis": "default"
+  }
+ },
+ "reference": {
+  "gating": false,
+  "adjudicator": "design-lead",
+  "items": [
+   "brand-guide.logo",
+   "brand-guide.construction",
+   "brand-guide.clear-space",
+   "brand-guide.colour",
+   "brand-guide.type",
+   "live-room.in-call-layout"
+  ],
+  "rule": "Reference captures (brand guide logo, clear space, type; live room layout skeleton) are reviewed side by side with the app's rendering of the same element; they never pass or fail by pixel ratio."
+ },
+ "exceptionRubric": {
+  "adjudicator": "design-lead",
+  "whoMayRequest": [
+   "ui-engineer",
+   "client-shell",
+   "mobile-engineer",
+   "bdd-quality"
+  ],
+  "when": "Before the c13 boundary run starts. Requests raised during or after the run apply only to a later, separately authorised run.",
+  "allowedGrounds": [
+   {
+    "id": "R1-font-rasterisation",
+    "description": "Sub-pixel anti-aliasing differences from font rendering only, with identical glyph positions and metrics.",
+    "maxRaise": "maxDiffPixelRatio up to 0.02 for that cell"
+   },
+   {
+    "id": "R2-prototype-defect",
+    "description": "The prototype itself is wrong against tokens.json or the brand guide (source hierarchy: tokens.json > brand guide > prototype > live prototype) and design-lead records the correct reference.",
+    "maxRaise": "cell compared against a design-lead approved replacement baseline, recorded with its digest"
+   },
+   {
+    "id": "R3-dynamic-content",
+    "description": "Content the frozen clock cannot fix (for example a random seed) and that is not a design property.",
+    "maxRaise": "mask the dynamic region only, region recorded as CSS selector and box"
+   },
+   {
+    "id": "R4-platform-chrome",
+    "description": "Native or browser chrome outside the page (scrollbars, focus ring default) that the design does not specify.",
+    "maxRaise": "mask or threshold up to 0.02"
+   }
+  ],
+  "neverAllowed": [
+   "Colour, spacing, radius, type scale or weight differences",
+   "Missing or extra UI elements",
+   "Layout reflow or different page height",
+   "Theme-specific differences (a cell may not be excepted in one theme to hide a token bug)",
+   "Raising the global default"
+  ],
+  "record": "Append to `adjudications`: {cell: state/theme/viewport, ground, change, rationale, decidedBy: design-lead, decidedAt, baselineSha256}. Each record is evidence for the boundary run."
+ },
+ "adjudications": []
+}

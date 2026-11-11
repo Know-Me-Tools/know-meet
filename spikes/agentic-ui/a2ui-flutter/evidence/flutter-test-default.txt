@@ -1,0 +1,120 @@
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+4 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart
+00:00 +0: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/live_harness_test.dart: (suite)
+  Skip: needs the harness mock server; run with KM_HARNESS_URL and --run-skipped
+00:02 +0 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/unit_test.dart: rewriteUnknownComponents rewrites only unknown types, keeps ids and order
+00:02 +1 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/unit_test.dart: rewriteUnknownComponents returns the same message when nothing is unknown
+00:02 +2 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: (setUpAll)
+00:02 +3 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: (setUpAll)
+00:02 +4 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: (setUpAll)
+00:02 +5 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: (setUpAll)
+00:02 +5 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:03 +6 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:03 +6 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/native_renderer_test.dart: unknown type: siblings render, unknown renders nothing, error reported, message not rejected
+native unknown-component errors: [UNKNOWN_COMPONENT_TYPE: Component 'hologram' has type 'KmHologram', which is not in catalog 'https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json'.]
+00:03 +7 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:03 +8 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +9 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +10 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +10 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/native_renderer_test.dart: media: without a policy the disallowed image IS requested
+native image requests: [http://127.0.0.1:4317/media/whiteboard.png, http://127.0.0.1:4317/media/poster.png, http://127.0.0.1:4318/beacon/a2ui-image.png]
+native media opened: [http://127.0.0.1:4317/media/clip.mp4, http://127.0.0.1:4317/media/note.wav]
+00:04 +11 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +12 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +13 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +14 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/app_shell_test.dart: phone: list, then a pushed surface page
+00:04 +15 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/incremental_frames_test.dart: incremental-update-delete intermediate frames
+00:04 +15 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/native_renderer_test.dart: media with Know Meet policy: allowed media is requested (recorder positive control), evil URL is not, placeholder shown
+km media requests: [http://127.0.0.1:4317/media/whiteboard.png, http://127.0.0.1:4317/media/poster.png, http://127.0.0.1:4317/media/clip.mp4, http://127.0.0.1:4317/media/note.wav]
+00:04 +16 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/incremental_frames_test.dart: incremental-update-delete intermediate frames
+00:04 +17 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/incremental_frames_test.dart: incremental-update-delete intermediate frames
+00:04 +18 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/incremental_frames_test.dart: incremental-update-delete intermediate frames
+00:05 +19 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/form-validation golden interactions
+00:05 +20 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/form-validation golden interactions
+00:05 +21 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/form-validation golden interactions
+00:05 +22 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/form-validation golden interactions
+00:05 +23 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/form-validation golden interactions
+00:05 +24 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden form-validation_phone_dark
+00:05 +25 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/incremental-update-delete golden interactions
+00:05 +26 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden form-validation_phone_light
+00:06 +27 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden form-validation_phone_light
+00:06 +28 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/media-image-video-audio golden interactions
+00:06 +29 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden form-validation_tablet_dark
+00:06 +30 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: a2ui/nested-layout golden interactions
+00:06 +31 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +32 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +33 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +34 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +35 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +36 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +36 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: form-validation: field errors show before any input
+form errors visible on first render: [Name is required, Enter a valid email]
+00:06 +37 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +38 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:06 +39 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:07 +39 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/interactions_test.dart: nested-layout: Tabs switch and Modal opens
+modal trigger actions: ({name: noop_open, surfaceId: km-agenda-board, sourceComponentId: modal_trigger, context: {}})
+00:07 +40 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:07 +41 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:07 +42 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip renders without error
+00:07 +43 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden media-image-video-audio_tablet_dark
+00:07 +44 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip every expected component id is rendered
+00:07 +45 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden media-image-video-audio_tablet_light
+00:07 +46 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip fallback ids use the neutral fallback
+00:07 +47 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden nested-layout_phone_dark
+00:07 +48 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip visible text
+00:07 +49 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden nested-layout_phone_light
+00:08 +50 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/button-actions-roundtrip blocked media is never requested
+00:08 +51 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden nested-layout_tablet_dark
+00:08 +52 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/card-with-action renders without error
+00:08 +53 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden nested-layout_tablet_light
+00:08 +54 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/card-with-action every expected component id is rendered
+00:08 +55 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden unknown-component-fallback_phone_dark
+00:08 +56 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/card-with-action fallback ids use the neutral fallback
+00:08 +57 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden unknown-component-fallback_phone_light
+00:08 +58 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/card-with-action visible text
+00:08 +59 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden unknown-component-fallback_tablet_dark
+00:08 +60 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/golden_test.dart: golden unknown-component-fallback_tablet_dark
+00:08 +61 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation renders without error
+00:08 +62 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation renders without error
+00:08 +63 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation every expected component id is rendered
+00:08 +64 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation fallback ids use the neutral fallback
+00:08 +65 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation visible text
+00:08 +66 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/form-validation blocked media is never requested
+00:09 +67 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete renders without error
+00:09 +68 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete every expected component id is rendered
+00:09 +69 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete fallback ids use the neutral fallback
+00:09 +70 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete visible text
+00:09 +71 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete final data model and deletion
+00:09 +72 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/incremental-update-delete blocked media is never requested
+00:09 +73 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template renders without error
+00:09 +74 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template every expected component id is rendered
+00:09 +75 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template fallback ids use the neutral fallback
+00:09 +76 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template visible text
+00:09 +77 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template final data model and deletion
+00:09 +78 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/list-template blocked media is never requested
+00:09 +79 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/media-image-video-audio renders without error
+00:09 +80 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/media-image-video-audio every expected component id is rendered
+00:09 +81 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/media-image-video-audio fallback ids use the neutral fallback
+00:09 +82 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/media-image-video-audio visible text
+00:09 +83 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/media-image-video-audio blocked media is never requested
+00:09 +84 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/nested-layout renders without error
+00:09 +85 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/nested-layout every expected component id is rendered
+00:09 +86 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/nested-layout fallback ids use the neutral fallback
+00:09 +87 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/nested-layout visible text
+00:09 +88 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/nested-layout blocked media is never requested
+00:10 +89 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/unknown-component-fallback renders without error
+00:10 +90 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/unknown-component-fallback every expected component id is rendered
+00:10 +91 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/unknown-component-fallback fallback ids use the neutral fallback
+00:10 +92 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/unknown-component-fallback visible text
+00:10 +93 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: a2ui/unknown-component-fallback blocked media is never requested
+00:10 +94 ~1: /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/surfaces_render_test.dart: (tearDownAll)
+00:10 +94 ~1: All tests passed!
