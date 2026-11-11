@@ -10,6 +10,12 @@
    Then load:  <link rel="stylesheet" href="assets/km.css">
                <script src="assets/km.js"></script>   (end of <body>, or with defer)
 
+   Reference revision v2 (2026-11-11): adaptive primary navigation. km.js sets
+   <html data-nav-class="bar|rail|inline"> from the window tokens in km.css
+   (--window-medium 600, --window-expanded 1024) and morphs once per crossing
+   with a View Transition (instant under prefers-reduced-motion). The hamburger
+   is retired. [data-tooltip] gets the toast-style tooltip (KM.tooltip).
+
    Safety: every user/data string reaches the DOM through textContent (KM.h).
    innerHTML is never used with data. No secrets are stored anywhere; the
    LiveKit/Telnyx config below names environment variables only.
@@ -535,6 +541,120 @@
     return h('span', { class: 'lock-badge' }, icon('lock'), h('span', { text: label || 'Sign in required' }));
   }
 
+  /* ---------------------------------------------------------------- adaptive navigation */
+  /* DESIGN.md "Adaptive layout": bar < window-medium, rail < window-expanded,
+     inline links otherwise. The class is a data attribute so one DOM commit
+     can run inside document.startViewTransition(); the nav DOM never changes,
+     so a focused destination keeps focus through the morph. */
+  var WINDOW = { medium: 600, expanded: 1024 };
+  var navMorph = null;
+  function readWindowTokens() {
+    try {
+      var cs = window.getComputedStyle(document.documentElement);
+      var m = parseFloat(cs.getPropertyValue('--window-medium'));
+      var e = parseFloat(cs.getPropertyValue('--window-expanded'));
+      if (m > 0) WINDOW.medium = m;
+      if (e > 0) WINDOW.expanded = e;
+    } catch (_) { /* keep the token defaults */ }
+  }
+  function navClassFor(width) { return width < WINDOW.medium ? 'bar' : (width < WINDOW.expanded ? 'rail' : 'inline'); }
+  function reducedMotion() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  /* DESIGN.md "Resize motion": transform and opacity only. The UA group
+     animation also tweens width/height (and backdrop-filter); keep its
+     transform path (the indicator still travels) and drop the rest, so each
+     group snaps to its new box while its snapshots crossfade. Durations and
+     easing stay on the ::view-transition-* rules in km.css. */
+  var COMPOSITOR = { transform: 1, opacity: 1, offset: 1, computedOffset: 1, easing: 1, composite: 1 };
+  function compositorOnlyGroups() {
+    document.getAnimations().forEach(function (a) {
+      var fx = a.effect;
+      if (!fx || !fx.pseudoElement || fx.pseudoElement.indexOf('::view-transition-group') !== 0) return;
+      fx.setKeyframes(fx.getKeyframes().map(function (frame) {
+        var kept = {};
+        Object.keys(frame).forEach(function (k) { if (COMPOSITOR[k] && k !== 'computedOffset') kept[k] = frame[k]; });
+        return kept;
+      }));
+    });
+  }
+  function applyNavClass(animate) {
+    var root = document.documentElement;
+    var next = navClassFor(window.innerWidth);
+    if (root.dataset.navClass === next) return;
+    /* The class swap itself never transitions (no 150ms colour fades on the
+       links): transitions are off while the new class is committed and the
+       style flushed, so turning them back on starts nothing. */
+    function commit() {
+      root.setAttribute('data-nav-committing', '');
+      root.dataset.navClass = next;
+      void window.getComputedStyle(root).color;
+      var probe = $('.appnav a'); if (probe) void window.getComputedStyle(probe).color;
+      root.removeAttribute('data-nav-committing');
+    }
+    if (navMorph) { navMorph.skipTransition(); navMorph = null; commit(); return; }
+    if (!animate || reducedMotion()) { commit(); return; }
+    if (document.startViewTransition) {
+      navMorph = document.startViewTransition(commit);
+      navMorph.ready.then(compositorOnlyGroups, function () {});
+      navMorph.finished.then(function () { navMorph = null; }, function () { navMorph = null; });
+      return;
+    }
+    commit();
+    var nav = $('.appnav');
+    if (nav) { nav.classList.remove('is-swapping'); void nav.offsetWidth; nav.classList.add('is-swapping'); }
+  }
+  readWindowTokens();
+  applyNavClass(false);
+  window.addEventListener('resize', function () { applyNavClass(true); });
+
+  /* ---------------------------------------------------------------- tooltip */
+  /* Toast style (operator 2026-11-11): after 500ms hover or on focus; Escape
+     dismisses. It never holds interactive content or the only copy of
+     information (SC 1.4.13). The trigger keeps its own accessible name. */
+  var TIP_DELAY = 500;
+  var tip = { el: null, timer: 0, owner: null };
+  function hideTooltip() {
+    clearTimeout(tip.timer);
+    if (tip.el && tip.el.parentNode) tip.el.parentNode.removeChild(tip.el);
+    if (tip.owner) tip.owner.removeAttribute('aria-describedby');
+    tip.el = null; tip.owner = null;
+  }
+  function showTooltip(owner) {
+    hideTooltip();
+    var text = owner.getAttribute('data-tooltip');
+    if (!text) return;
+    var el = h('div', { class: 'tooltip', role: 'tooltip', id: 'km-tooltip', text: text });
+    document.body.appendChild(el);
+    var r = owner.getBoundingClientRect();
+    var top = r.bottom + 8;
+    if (top + el.offsetHeight > window.innerHeight - 8) top = r.top - 8 - el.offsetHeight;
+    var left = Math.min(Math.max(8, r.left + r.width / 2 - el.offsetWidth / 2), window.innerWidth - 8 - el.offsetWidth);
+    el.style.top = top + 'px';
+    el.style.left = left + 'px';
+    owner.setAttribute('aria-describedby', 'km-tooltip');
+    tip.el = el; tip.owner = owner;
+  }
+  function tooltipOwner(e) { return e.target && e.target.closest ? e.target.closest('[data-tooltip]') : null; }
+  document.addEventListener('mouseover', function (e) {
+    var o = tooltipOwner(e);
+    if (!o || o === tip.owner) return;
+    clearTimeout(tip.timer);
+    tip.timer = setTimeout(function () { showTooltip(o); }, TIP_DELAY);
+  });
+  document.addEventListener('mouseout', function (e) { var o = tooltipOwner(e); if (o && !o.contains(e.relatedTarget)) hideTooltip(); });
+  document.addEventListener('focusin', function (e) { var o = tooltipOwner(e); if (o) showTooltip(o); });
+  document.addEventListener('focusout', function (e) { if (tooltipOwner(e)) hideTooltip(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && tip.el) hideTooltip(); });
+
+  /* ---------------------------------------------------------------- slider fill */
+  /* input[type=range] paints its `selected` range from --pct (km.css). */
+  function syncRange(input) {
+    var min = parseFloat(input.min) || 0, max = parseFloat(input.max), val = parseFloat(input.value);
+    if (!(max > min)) max = 100;
+    input.style.setProperty('--pct', ((Math.min(Math.max(val, min), max) - min) / (max - min) * 100) + '%');
+  }
+  document.addEventListener('input', function (e) { if (e.target && e.target.type === 'range') syncRange(e.target); });
+  function syncAllRanges() { $$('input[type="range"]').forEach(syncRange); }
+
   /* ---------------------------------------------------------------- app bar */
   var NAV = [
     { key: 'home', label: 'Home', href: 'index.html', icon: 'home' },
@@ -547,19 +667,9 @@
     if (!el) return null;
     opts = opts || {};
     el.classList.add('appbar');
-    var state = { navOpen: false, menuOpen: false };
+    var state = { menuOpen: false };
 
     function q(sel) { return el.querySelector(sel); }
-    function setNav(open, returnFocus) {
-      var nav = q('.appnav'), btn = q('.appnav-toggle');
-      if (!nav || !btn) return;
-      state.navOpen = open;
-      nav.setAttribute('data-open', open ? 'true' : 'false');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-      setIcon(btn, open ? 'x' : 'menu');
-      if (!open && returnFocus) btn.focus();
-    }
     function setMenu(open, returnFocus) {
       var menu = q('.acct-menu'), btn = q('.acct-btn');
       if (!menu || !btn) return;
@@ -578,7 +688,7 @@
       return h('div', { class: 'menu-wrap' },
         h('button', { class: 'acct-btn', type: 'button', 'aria-expanded': 'false', 'aria-controls': menuId,
             'aria-label': 'Account: ' + user.name,
-            onclick: function (e) { e.stopPropagation(); setNav(false); setMenu(!state.menuOpen); } },
+            onclick: function (e) { e.stopPropagation(); setMenu(!state.menuOpen); } },
           h('span', { class: 'avatar', 'aria-hidden': 'true', text: user.initials })),
         h('div', { class: 'menu acct-menu', id: menuId, hidden: true },
           h('div', { class: 'menu-id' },
@@ -591,7 +701,7 @@
     }
 
     function render() {
-      state.navOpen = false; state.menuOpen = false;
+      state.menuOpen = false;
       var user = auth.get();
       clear(el);
       var navId = 'km-appnav';
@@ -599,37 +709,34 @@
         h('a', { class: 'brand', href: 'index.html', 'aria-label': 'Know Meet home' },
           brandMark(),
           h('span', { class: 'brand-word', 'aria-hidden': 'true' }, 'Know ', h('b', { text: 'Meet' }))),
-        h('nav', { class: 'appnav', id: navId, 'aria-label': 'Primary', 'data-open': 'false' },
+        h('nav', { class: 'appnav', id: navId, 'aria-label': 'Primary' },
           h('ul', null, NAV.map(function (n) {
             return h('li', null,
-              h('a', { href: n.href, 'aria-current': n.key === opts.active ? 'page' : null }, icon(n.icon), h('span', { text: n.label })));
+              h('a', { href: n.href, 'aria-current': n.key === opts.active ? 'page' : null },
+                h('span', { class: 'nav-ind', 'aria-hidden': 'true' }, icon(n.icon)),
+                h('span', { class: 'nav-label', text: n.label })));
           }))),
         h('div', { class: 'appbar-right' },
           h('a', { class: 'btn btn-primary btn-sm btn-start', href: 'room.html#start' }, icon('cam'), h('span', { class: 'btn-label', text: 'Start meeting' })),
           h('button', { class: 'icon-btn theme-toggle', type: 'button', 'aria-label': 'Switch theme' }, icon('sun')),
-          accountCluster(user),
-          h('button', { class: 'icon-btn appnav-toggle', type: 'button', 'aria-controls': navId, 'aria-expanded': 'false',
-              'aria-label': 'Open navigation menu',
-              onclick: function (e) { e.stopPropagation(); setMenu(false); setNav(!state.navOpen); } },
-            icon('menu')))));
+          accountCluster(user))));
       theme.sync();
+      applyNavClass(false);
     }
 
     if (!el._kmAppBar) {
       el._kmAppBar = true;
       document.addEventListener('click', function (e) {
         if (state.menuOpen) { var m = q('.menu-wrap'); if (m && !m.contains(e.target)) setMenu(false); }
-        if (state.navOpen) { var n = q('.appnav'); if (n && !n.contains(e.target)) setNav(false); }
       });
       document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
         if (state.menuOpen) setMenu(false, true);
-        if (state.navOpen) setNav(false, true);
       });
       auth.onChange(render);
     }
     render();
-    return { render: render, closeMenus: function () { setMenu(false); setNav(false); } };
+    return { render: render, closeMenus: function () { setMenu(false); } };
   }
 
   /* ---------------------------------------------------------------- sample data (fictional) */
@@ -763,6 +870,8 @@
   KM.gate = gate;
   KM.lockBadge = lockBadge;
   KM.toast = toast;
+  KM.tooltip = { show: showTooltip, hide: hideTooltip };
+  KM.navClass = function () { return document.documentElement.dataset.navClass; };
   KM.route = route;
   KM.parseHash = parseHash;
   KM.dialog = dialog;
@@ -773,6 +882,34 @@
   KM.data = buildData();
   KM.iconNames = Object.keys(ICONS);
 
+  /* wide tables scroll inside their own .table-wrap; while one overflows it becomes a
+     named, keyboard-scrollable region (WCAG 2.1.1, axe scrollable-region-focusable) */
+  function markScrollRegions() {
+    $$('.table-wrap').forEach(function (w) {
+      var over = w.scrollWidth > w.clientWidth + 1;
+      if (over && !w.hasAttribute('tabindex')) {
+        var cap = w.querySelector('caption');
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'region');
+        w.setAttribute('aria-label', (cap && cap.textContent ? cap.textContent : 'Table') + ', scrollable');
+        w.setAttribute('data-km-scroll', '1');
+      } else if (!over && w.getAttribute('data-km-scroll') === '1') {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label'); w.removeAttribute('data-km-scroll');
+      }
+    });
+  }
+  var scrollRegionQueued = false;
+  function queueScrollRegions() {
+    if (scrollRegionQueued) return;
+    scrollRegionQueued = true;
+    requestAnimationFrame(function () { scrollRegionQueued = false; markScrollRegions(); });
+  }
+  ready(function () {
+    window.addEventListener('resize', queueScrollRegions);
+    if (window.MutationObserver) new MutationObserver(queueScrollRegions).observe(document.body, { childList: true, subtree: true });
+    queueScrollRegions();
+  });
+
   window.KM = KM;
 
   /* ---------------------------------------------------------------- boot */
@@ -781,5 +918,6 @@
     injectSprite();
     toastRegion();
     theme.sync();
+    syncAllRanges();
   });
 })(window, document);

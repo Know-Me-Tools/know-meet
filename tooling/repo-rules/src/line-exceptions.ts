@@ -37,6 +37,7 @@ export const LINE_EXCEPTIONS: Readonly<Record<string, readonly string[]>> = {
     "spikes/**/corpus/**",
     "spikes/**/evidence/**",
     "spikes/**/raw/**",
+    "docs/design/prototype-v1-archive/**",
     "**/goldens/**",
     "**/__snapshots__/**",
     "**/*.snap",

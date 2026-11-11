@@ -1,6 +1,8 @@
 # Contract VS-1 (adopted-contract.json, digest 768c585b...). Owner tasks: c03/3.2, c10, c11, c13/13.1.
 # Oracle: per-route/state screenshots at 375/768/1024/1440 in dark and light are within the frozen
-# threshold (tests/fidelity/oracle/thresholds.json) of the c03 prototype baselines.
+# threshold (tests/fidelity/oracle/thresholds.json) of the prototype baselines (reference revision v2:
+# route-inventory.json v2.0.0, 71 states; hamburger states frame.nav-collapsed/frame.nav-open retired,
+# adaptive nav states frame.nav-bar/rail/inline exist only in their width class, other cells not applicable).
 # Negative control: the same comparison against a build with pre-reconciliation tokens must FAIL.
 # Runs once, at the c13 boundary only (VLBV). Status until then: NOT_EXERCISED.
 @VS-1 @value-critical @ui @web @boundary-only
@@ -92,8 +94,9 @@ Feature: VS-1 Web shell matches the prototype on every in-scope route and state 
       | frame.appbar-signed-out                              |
       | frame.appbar-signed-in                               |
       | frame.account-menu-open                              |
-      | frame.nav-collapsed                                  |
-      | frame.nav-open                                       |
+      | frame.nav-bar                                        |
+      | frame.nav-rail                                       |
+      | frame.nav-inline                                     |
       | frame.skip-link-focused                              |
       | frame.theme-toggle                                   |
 

@@ -2,8 +2,14 @@ import type { Locator, Page } from "@playwright/test";
 import { CAPTURE_ENVIRONMENT, settle } from "./capture-environment.ts";
 import type { InventoryEntry } from "./inventory.ts";
 
-/** Shell parts that frame states interact with or crop to. */
-export type UiRole = "appbar" | "account-button" | "nav-toggle" | "theme-toggle";
+/** Shell parts that frame states interact with, wait for or crop to. */
+export type UiRole =
+  | "appbar"
+  | "account-button"
+  | "theme-toggle"
+  | "nav-bar"
+  | "nav-rail"
+  | "nav-inline";
 
 /** Where a state is rendered: the frozen prototype or the built app. */
 export interface RenderTarget {
@@ -14,7 +20,9 @@ export interface RenderTarget {
 
 export type Interaction =
   | { readonly kind: "click"; readonly role: UiRole }
-  | { readonly kind: "press"; readonly key: string };
+  | { readonly kind: "press"; readonly key: string }
+  /** Fails the cell unless the role is visible (for example the expected nav class). */
+  | { readonly kind: "expect-visible"; readonly role: UiRole };
 
 export type CaptureRegion =
   | { readonly kind: "full-page" }
@@ -31,19 +39,64 @@ export interface StatePlan {
   readonly method: string;
 }
 
-/** Selectors of the prototype's own controls (km.js mountAppBar). */
+/**
+ * Selectors of the prototype's own controls (km.js mountAppBar). km.js sets
+ * html[data-nav-class] = bar | rail | inline from the window tokens.
+ */
 export const PROTOTYPE_SELECTORS: Readonly<Record<UiRole, string>> = {
   appbar: "#appbar",
   "account-button": ".acct-btn",
-  "nav-toggle": ".appnav-toggle",
   "theme-toggle": ".theme-toggle",
+  "nav-bar": 'html[data-nav-class="bar"] .appnav',
+  "nav-rail": 'html[data-nav-class="rail"] .appnav',
+  "nav-inline": 'html[data-nav-class="inline"] .appnav',
 };
 
-const NAV_ONLY_BELOW = `The prototype collapses navigation only at <= ${CAPTURE_ENVIRONMENT.navCollapseMaxWidth}px (km.css bp-899); at wider viewports the state does not exist.`;
+type NavClass = "bar" | "rail" | "inline";
+
+/** Adaptive navigation classes (DESIGN.md D-8), keyed by inventory state ID. */
+const NAV_STATES: Readonly<Record<string, { navClass: NavClass; range: string }>> = {
+  "frame.nav-bar": { navClass: "bar", range: `width < ${CAPTURE_ENVIRONMENT.windowMedium}` },
+  "frame.nav-rail": {
+    navClass: "rail",
+    range: `${CAPTURE_ENVIRONMENT.windowMedium} <= width < ${CAPTURE_ENVIRONMENT.windowExpanded}`,
+  },
+  "frame.nav-inline": {
+    navClass: "inline",
+    range: `width >= ${CAPTURE_ENVIRONMENT.windowExpanded}`,
+  },
+};
+
+export function navClassFor(viewport: number): NavClass {
+  if (viewport < CAPTURE_ENVIRONMENT.windowMedium) return "bar";
+  return viewport < CAPTURE_ENVIRONMENT.windowExpanded ? "rail" : "inline";
+}
+
+/**
+ * Nav states exist only inside their width class. The frame uses the same
+ * fixed bar/rail geometry in prototype and app, and both are captured
+ * full-page (Chromium paints the fixed nav at its first-viewport position).
+ */
+function navPlan(entry: InventoryEntry, viewport: number): StatePlan {
+  const nav = NAV_STATES[entry.id];
+  if (nav === undefined) throw new Error(`Not a nav state: ${entry.id}`);
+  const listed = entry.viewports === undefined || entry.viewports.includes(viewport);
+  if (navClassFor(viewport) !== nav.navClass || !listed) {
+    return notApplicable(
+      `nav class ${nav.navClass} exists only at ${nav.range} (DESIGN.md D-8); viewport ${viewport} renders ${navClassFor(viewport)}`,
+    );
+  }
+  return {
+    applicable: true,
+    interactions: [{ kind: "expect-visible", role: `nav-${nav.navClass}` }],
+    region: { kind: "full-page" },
+    method: `load, require the ${nav.navClass} navigation (data-nav-class=${nav.navClass}), fixed-nav full-page capture`,
+  };
+}
 
 /** How each inventory state is reached and what is captured. */
 export function planState(entry: InventoryEntry, viewport: number): StatePlan {
-  const narrow = viewport <= CAPTURE_ENVIRONMENT.navCollapseMaxWidth;
+  if (entry.id in NAV_STATES) return navPlan(entry, viewport);
   switch (entry.id) {
     case "frame.appbar-signed-out":
     case "frame.appbar-signed-in":
@@ -55,20 +108,6 @@ export function planState(entry: InventoryEntry, viewport: number): StatePlan {
         region: { kind: "viewport" },
         method: "load signed in, click the account button (prototype .acct-btn), capture viewport",
       };
-    case "frame.nav-collapsed":
-      return narrow
-        ? element("appbar", "load at a narrow viewport, crop to the app bar")
-        : notApplicable();
-    case "frame.nav-open":
-      return narrow
-        ? {
-            applicable: true,
-            interactions: [{ kind: "click", role: "nav-toggle" }],
-            region: { kind: "viewport" },
-            method:
-              "load at a narrow viewport, click the menu button (prototype .appnav-toggle), capture viewport",
-          }
-        : notApplicable();
     case "frame.skip-link-focused":
       return {
         applicable: true,
@@ -95,10 +134,10 @@ function element(role: UiRole, method: string): StatePlan {
   return { applicable: true, interactions: [], region: { kind: "element", role }, method };
 }
 
-function notApplicable(): StatePlan {
+function notApplicable(reason: string): StatePlan {
   return {
     applicable: false,
-    notApplicableReason: NAV_ONLY_BELOW,
+    notApplicableReason: reason,
     interactions: [],
     region: { kind: "viewport" },
     method: "not applicable",
@@ -116,6 +155,8 @@ export async function driveState(
   await settle(page);
   for (const step of plan.interactions) {
     if (step.kind === "click") await page.locator(target.selector(step.role)).first().click();
+    else if (step.kind === "expect-visible")
+      await page.locator(target.selector(step.role)).first().waitFor({ state: "visible" });
     else await page.keyboard.press(step.key);
     await settle(page);
   }

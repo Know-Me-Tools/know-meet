@@ -108,7 +108,8 @@ Tailwind consumers; CSS custom properties cannot be used inside `@media`.
 D-5 accepted the fixes proposed in the v1.1.0 contrast record. These are the only
 values in `tokens.json` that intentionally differ from what the frozen prototype
 renders. The prototype itself is not edited, so the c03 fidelity rubric must treat
-these states as logged design-lead exceptions. Ratios are in
+these states as logged design-lead exceptions. **Superseded by section F: prototype
+v2 renders these values.** Ratios are in
 [contrast-record.md](contrast-record.md).
 
 | ID | Theme | Token | Prototype renders | v1.2.0 | Why |
@@ -140,7 +141,8 @@ fill-only WCAG (supersedes the D-5 input-ring exception, section D, TD-45/TD-46)
 D-7 = size tokens; D-8 = adaptive layout and its motion. Rules in `DESIGN.md`;
 ratios in [contrast-record.md](contrast-record.md). The frozen prototype is not
 edited, so each prototype-visible change below is logged as a fidelity adjudication
-in `tests/fidelity/oracle/thresholds.json`.
+in `tests/fidelity/oracle/thresholds.json`. **Superseded by section F: prototype v2
+renders every change below, so ADJ-1 to ADJ-3 are no longer exceptions.**
 
 ### E1. Removed tokens
 
@@ -196,3 +198,181 @@ Room side-panel rings (`.recips`, `.pipe-step`, `.opt`) are out of this phase's 
 (D-2) and follow the same rules when they come in.
 
 Result: dark 224 keys, light 49 keys.
+
+## F. Reference revision v2: the prototype renders the current design (2026-11-11)
+
+Operator approval (2026-11-11, "Yes, go ahead"): update the design reference so the
+fidelity oracle compares against the current design; then bdd-quality recaptures the
+baselines and delivery-lead records the contract amendment. Rule for this revision:
+**change only what tokens v1.3.0 and DESIGN.md (D-6, D-7, D-8, tooltip) require;
+layout, copy and structure stay as v1.** No new CHANGELOG: this section is the
+change summary.
+
+### F1. History
+
+v1 is copied byte-for-byte to `docs/design/prototype-v1-archive/` (frozen, history
+only) with `sha256-manifest.txt` (16 files: the nine prototype pages and four assets,
+plus `live/assets/km.css`, `km.js` and `room.css`). Every digest matches the c02 read
+in `screen-inventory/source-digests.json`; the c03 baselines (set digest `a3380e5f…b552`)
+were captured from it.
+
+### F2. What changed
+
+| ID | Where | v1 | v2 |
+|---|---|---|---|
+| RV-01 | km.css section 1 | 52 hand-written tokens, D-5 values absent, `ring-input` | Verbatim copy of `packages/design-tokens/generated/web/tokens.css` (v1.3.0, 224 dark / 49 light keys). Refresh by re-copying, never by editing |
+| RV-02 | Focus, everywhere | 2px ember outline (`:focus-visible`), ember inset ring on inputs, switch outline, choice-card outline | Fill: the whole control takes `focus` + `on-focus` (inner fills drop out). Tab panels: `card-hov` fill. Error summary (programmatic focus): none |
+| RV-03 | `.input`, select, textarea, `.recips` | `card` + 1px `ring-input` | `control` / `control-hov` / `control-invalid` / `focus`, placeholders `control-placeholder` / `focus-placeholder`; size tokens; readonly keeps the control fill (v1 `surface` would vanish on a surface card without the ring) |
+| RV-04 | Checkbox, radio | Native, `accent-color` | Fill-only (`appearance: none`): `control` box, `selected` + `on-selected` tick or 8px dot, `focus` box |
+| RV-05 | Slider (`.scrub`) | Native, `accent-color` | Track `control`, range `selected` (km.js sets `--pct`), thumb `slider-thumb`; focus track `focus`, thumb `on-focus` |
+| RV-06 | Switch | `muted` track (light `#D5DAE1` literal), outline on focus | `switch-track`, `switch-thumb(-on)`, hover `control-hov`, focus track `focus` + thumb `on-focus`, size tokens |
+| RV-07 | Segmented | `muted` track, `card` pressed segment + shadow | `control` track, `on-control` text, pressed `selected` + leading check icon |
+| RV-08 | Tabs, side nav, app-bar links | 2px ember underline; `ember-soft` / `ember-text` pills | `selected` / `on-selected` pill; hover `card-hov` |
+| RV-09 | Lines | App bar rule, tab-list rule, table rules, sheet-foot and menu rules, `.divider`, home section and footer rules, compare-table, wizard-foot, auth-foot, dashboard (calendar, switch, mail, delivery, agent rows), settings (switch, capability, permission rows), recordings to-do rows, screens tools bar, room options rule, transcript mark underline | Removed; separation by the existing spacing. Table: header row `bg-2`, even body rows `surface`, wrap transparent |
+| RV-10 | Rings | Code-block ring, avatar-stack cut-out, account-button ring, paused/offline glyph ring, input ring, file-drop ring, danger-panel ring, pipeline running/skipped rings, knowledge-row flash ring, join "waiting" rings | Removed or filled: avatars 4px apart; account avatar `selected` when open; paused/offline = filled 8px `fg-sub` square; running step `amber-soft`; flash `cyan-soft`; waiting pulse = filled `ember-soft` disc |
+| RV-11 | Speaking | 3px inset ember/cyan/green ring on room tiles; 2px rings on the home mini room, recording posters and player tiles | 24px `size-speak-badge` with three `on-speak` voice bars at the end of the tile head (`speak-person`, `speak-agent` for dots/agents, `speak-phone`); top-right on mini tiles, posters and player tiles |
+| RV-12 | Drop zone | `surface` + 2px dashed outline (light literal `#CBD2DB`) | `control` + `on-control`, drag-over `selected` + `on-selected`, keyboard focus `focus` |
+| RV-13 | Choice cards (`.option`) | 2px ember ring when checked | Indicator carries state; checked card `ember-soft`; hover `card-hov`; focus whole card `focus` with the indicator inverted |
+| RV-14 | Status pips | `green` / `amber` / `red` | `pip-green` / `pip-amber` / `pip-red`, `size-pip` |
+| RV-15 | Navigation | Inline links >= 900; hamburger + dropdown <= 899 | Adaptive (D-8): km.js sets `html[data-nav-class]` from `--window-medium` / `--window-expanded`. Bar < 600 (fixed bottom, `bg-2`, 64 + safe area, five 56x32 indicators with 12px labels), rail 600-1023 (fixed leading, 80 wide, items 80x64), inline pills >= 1024. Content clears the bar (body padding) and starts after the rail (`#main` margin); toasts sit `s4` above the bar. Hamburger and `.appnav-toggle` removed |
+| RV-16 | Resize motion | None | One View Transition per class crossing (`km-nav`, `km-nav-current`, `km-main`; `dur-nav-morph` 280, `dur-nav-label` 150, `dur-reflow` 200, `ease-layout`); fallback nav crossfade; a crossing during a transition skips it; instant under reduced motion; focus is kept (same DOM) |
+| RV-17 | Tooltip | None | `.tooltip` = toast style (`fg` fill, `bg` text, 14px medium, radius 12, `size-tooltip-*`); km.js shows it for `[data-tooltip]` after 500ms hover or on focus, Escape dismisses. No page uses it yet, so no capture changes |
+| RV-18 | Literals | `#FFFFFF` on danger buttons and video tile footers, `rgba(0,0,0,.55)` scrim | `on-danger`, `on-media`, `media-foot-scrim` |
+
+Pages touched: `km.css`, `km.js`, and the `<style>` blocks of index, auth, join,
+dashboard, agents, recordings, settings, screens and meet (room). `live/assets/km.css`
+is a copy of the prototype's, `live/assets/km.js` the prototype's with its two
+`room.html#start` links, `live/assets/room.css` stays identical to meet.html's style
+block. The other `docs/design/live/*.html` page style blocks were not revised (out of
+scope; prototype is canonical for static screens, S-04).
+
+### F3. Verification (design-lead, ad hoc, not baselines)
+
+- Rendered with the c03 capture environment (frozen clock, self-hosted fonts):
+  index, dashboard, schedule, register step 3, room, recording detail, settings,
+  join waiting, account menu, skip link and keyboard focus, both themes, 375 to 1440.
+  No page errors. Computed-style sweep of every link, button, field, tab, card, tile,
+  list row, chip, table cell, app bar and nav: **0 non-zero borders, outlines or
+  ring/rule box-shadows.**
+- Resize 1200 -> 1100 -> 1000 -> 900 -> 700 -> 500 -> 400 -> 1300: classes inline,
+  inline, rail, rail, rail, bar, bar, inline; 4 view transitions with motion, 0 under
+  `prefers-reduced-motion: reduce`; the focused nav link keeps focus across a crossing.
+- v1 vs v2 at `agents.register.3` 1024 dark: identical layout; only fills and lines differ.
+
+### F4. Consequences for the oracle
+
+- `screen-inventory/route-inventory.json` v2.0.0: `frame.nav-collapsed` and
+  `frame.nav-open` retired (`inScope: false`, IDs kept); `frame.nav-bar` (375),
+  `frame.nav-rail` (768), `frame.nav-inline` (1024, 1440) added as bdd-quality
+  proposed. In scope **71 states** (frame 8), matrix **568 cells**, 16 not applicable,
+  **552 captures** (v1: 70, 560, 8, 552). `routeSource.sha256` refreshed (screens.html
+  lost its tools-bar rule).
+- `tests/fidelity/oracle/thresholds.json`: ADJ-1 to ADJ-3 `superseded` by this
+  revision (not exceptions); ADJ-4 `resolved by contract amendment (pending)`. No
+  threshold, default, rubric or matrix value was edited.
+- Driver changes needed (bdd-quality): listed in
+  `tests/fidelity/oracle/proposed-nav-states.json` `driverChangesNeeded`.
+- Request to the repo-rules owner: add `docs/design/prototype-v1-archive/**` to line
+  exception E-L6 (frozen design prototypes) in `tooling/repo-rules/src/line-exceptions.ts`;
+  the archived pages exceed 500 lines exactly as `docs/design/prototype/**` does.
+- Open (owner decision, not blocking): tab-panel focus uses a `card-hov` fill, which is
+  below 3:1 for a large region; the danger panel lost its only distinguishing ring and
+  now relies on its copy and danger button; readonly fields take the control fill.
+
+### F5. Reference revision v2.1: two prototype defects found at recapture (2026-11-11)
+
+bdd-quality's v2 recapture found the reference itself breaking DESIGN.md, so the
+reference was corrected before the contract amendment. No token, copy or layout
+value changed; `km.css` and `km.js` in `prototype/assets/` and `live/assets/` (kept
+identical in the touched blocks).
+
+| ID | Defect (v2) | Cause | Fix (v2.1) |
+|---|---|---|---|
+| RV-19 | Each class crossing animated `width`/`height`; snapshots animated `mix-blend-mode`; nav links/indicators ran their 150ms `color`/`background-color` fades. DESIGN.md allows transform and opacity only | Browser defaults: the UA `::view-transition-group` keyframes tween size; the UA old/new pair adds a blend-mode animation; the class commit restyled links that carry state transitions | km.js `compositorOnlyGroups()` rewrites every group animation to `transform` only on `transition.ready`; km.css names own `km-vt-out` / `km-vt-in` opacity keyframes for `::view-transition-old/new(*)` with static `mix-blend-mode: plus-lighter`; `commit()` sets `html[data-nav-committing]` (km.css: `transition: none !important` on the nav), flushes style, then removes it. Durations, easing and reduced-motion rules unchanged |
+| RV-20 | Horizontal overflow in the rail class: 104 full-page captures at 768 were 848 wide | `#main.page` is `width: 100%` and the rail rule added `margin-left: 80px` | Rail rule now `margin-inline-start: var(--km-rail-w); width: auto; min-width: 0` on `#main`, so the column is `viewport - rail` |
+| RV-21 | Three states still overflowed at 600, 768 and 1023 once their state was driven: `dashboard.invites` (`#main` 80 to 1222px, document 1222), `dashboard.meeting.*` (pricing-review 779px at 768, 763px at 600; also partner-onboarding, cohort-kickoff, product-sync at 600) and `recordings.detail.partner-onboarding-1014.delivery` (793px). Page-load checks (RV-20) never reached them | Four stacked causes. `.app` (and the `.card`/`.panel`/`.section` grids) have an implicit `auto` column, so the column took the table's min-content. `.page` carries `margin: 0 auto` and the rail rule only reset the start margin; an auto end margin disables grid stretch, so `#main` fit its widest table (1142px). The absolutely placed `.sr-only` header span had no positioned ancestor inside the scroller, so it escaped the `.table-wrap` clip and widened the document | `.app`, `.card`, `.panel` and `.section` get `grid-template-columns: minmax(0, 1fr)` (cards held the meeting-detail invitee table in an implicit `auto` column: 779px at 768, 763px at 600); the rail rule adds `margin-inline-end: 0`; `.table-wrap` gets `position: relative`; km.js `markScrollRegions()` makes an overflowing `.table-wrap` a named, focusable region (`role="region"`, `aria-label` from the caption, `tabindex=0`) with a `card-hov` fill focus. No token, copy or visible layout value changed |
+
+DESIGN.md "Rail (medium)" and "Resize motion" carry the same correction for web and
+Flutter.
+
+DESIGN.md carries the rule as "No horizontal page overflow, with wide tables in their own scroller (rule RV-21)". Verification: every in-scope state (71 inventory entries) driven with `planState`/`driveState` from `tests/fidelity/src/support/state-drivers.ts`, at 600, 768 and 1023, dark and light, asserting `documentElement.scrollWidth == clientWidth` and that each overflowing `.table-wrap` has `tabindex=0`, `role=region` and a name. Recapture needed: the three states at 768 (their columns were wider than the viewport).
+
+Verification (design-lead, prototype only, `python3 -m http.server` on
+`docs/design/prototype`, Playwright Chromium 1.65 via `tests/fidelity` node_modules,
+probe functions from `tests/fidelity/src/motion/nav-morph-probe.ts` with the nav
+selector `html`, because the prototype carries `data-nav-class` on `<html>`):
+
+- `checkMorphTokens` (`dur-nav-morph`, `ease-layout`) on index and dashboard:
+  1440->1000 rail, 1024->1023 rail, 1000->500 bar, 600->599 bar, 500->800 rail,
+  800->1200 inline: **12/12 pass**. Observed per crossing: 4 groups (`km-nav`,
+  `km-nav-current` 280ms; `km-main`, `root` 200ms) animating `transform` only, 8
+  snapshots animating `opacity` only (`km-nav` 150ms), all `cubic-bezier(0.2, 0, 0, 1)`;
+  no link or indicator transitions.
+- `checkInstant`: 1440->1100 (inside inline) and 1440->500 under reduced motion, both
+  pages: **4/4 pass**.
+- `scrollWidth == clientWidth` for index, dashboard, agents, recordings, settings,
+  screens, auth, join and meet at 320, 599, 600, 768, 1023 and 1024: **54/54, no
+  overflow**.
+
+Recapture needed: every rail-class capture (768 column, all in-scope states with the
+app bar, both themes), since the content column moved 80px narrower inside the
+viewport. Bar (375) and inline (1024, 1440) captures are unaffected by RV-20; RV-19
+changes no static pixel.
+
+Implementation notes (reported to the owners, not edited here):
+- apps/web `nav-morph.ts` strips only `width`/`height` from the group keyframes
+  (`backdrop-filter` stays if the UA adds it); `styles/frame.css` keeps the UA old/new
+  keyframes (`mix-blend-mode` animates) and the 150ms `.km-nav-item` /
+  `.km-nav-indicator` colour transitions run on the class commit. The rail uses
+  `padding-left` on a flex `1 1 auto`, `min-width: 0` main, which matches RV-20.
+- apps/mobile `km_app_frame.dart`: rail and page share a `Row` with the page in
+  `Expanded`, which matches RV-20. The only implicit tween in the frame is the
+  indicator `AnimatedContainer` in `km_nav_bars.dart` (fixed 56x32, `durFast` colour
+  for state changes); its fill does not change across a class crossing, so RV-19
+  holds, but mobile-engineer should confirm no size/colour tween fires on the switch.
+
+#### F5 continued: focus fills below 3:1 (2026-11-11)
+
+bdd-quality's focus-fill probe (`tests/fidelity/src/a11y/flat-controls-probe.ts`, run
+over the v2 prototype by `tests/fidelity/src/cli/prototype-probes.ts flat`) reported
+351 focus stops whose fill changed by < 3:1 (552 cells, 21,182 stops). Operator rule
+(AGENTS.md "Flat 2.0 and WCAG"): every focusable element shows focus by a fill change
+>= 3:1 against its unfocused state and the surface, with its content >= 4.5:1 on the
+focus fill. Fixed in `prototype/assets/km.css` (copied byte-identical to
+`live/assets/km.css`), `prototype/dashboard.html`, `prototype/agents.html`; no token,
+copy or rest-state layout value changed (tokens.json stays v1.3.0). DESIGN.md "State
+order" carries the rules.
+
+| ID | Finding (probe, v2.1) | Cause | Fix (v2.2) |
+|---|---|---|---|
+| RV-22 | `input[Seek]` (recordings player scrubber, 40 stops) and every `input[type=range]`: 1.00:1 to rest and surface | The focus fill was drawn on the `::-webkit-slider-runnable-track` / `::-moz-range-track` pseudo-elements; the control box itself stayed transparent | The control box (44px target) takes a `focus` plate (`radius-pill`, `dur-fast` fill transition); on the plate range and thumb are `on-focus` and the rest of the track keeps `control`. Contrast record: track on plate 4.91 (dark) / 5.87 (light); thumb and range against track 3.90 / 3.27; thumb on plate 19.21 |
+| RV-23 | `div#agent-panel` (agent detail tab panel, 64 stops): 1.36:1 (dark) and 1.03:1 (light); overflowing `.table-wrap` scrollers used the same `card-hov` focus | Focusable regions were excluded from the 7b focus rule and took `card-hov`, a hover tint, not a 3:1 change | `[role="tabpanel"]` and `.table-wrap[tabindex]` join the 7b rule: the whole region takes `focus`, all content `on-focus` (19.21), inner fills drop out while focused. `agents.html` `.tab-panel:focus-visible` card-hov override removed |
+| RV-24 | "Fix in step N" (agents register step 4, 24 stops) and "connect Telnyx SMS" (settings delivery, 4 stops) text links: 2.15:1 (dark only) | Not a design defect: the probe takes the luminance of the translucent `amber-soft` note fill as if opaque (`#F59E0B`). Composited over the panel it is `#352F25`, and the focus fill is 13.23:1 against it (contrast record `focus-fill-vs-amber-soft-over-surface`) | Text links in running copy (no class, outside `nav`) now show focus as a highlight: `focus` fill behind the text run, 3px past the glyphs, radius 4, `box-decoration-break: clone`, padding offset by an equal negative margin (28 links measured: 0 px of text movement). Probe correction requested (below) |
+| RV-25 | `input#d-files` (meeting detail "Add" pre-reads, 32 stops): 1.00:1; same pattern unreached on `#f-files` (schedule form, past the 40-stop probe limit) | The visually hidden file input had no fill of its own; a page-local rule filled the label | `km.css` rule for every file input: the input takes `focus` + `on-focus` itself and hands the same fill to its stand-in `input + label` (and `.drop:has(input:focus-visible)` in the room); a native file input takes `focus` and inverts its `::file-selector-button`. Page-local rule in `dashboard.html` removed |
+| RV-26 | `button#kb-chip` (room "Sources" chip, 15 stops): 2.21:1 to rest (dark only) | Not a design defect: same opaque reading of translucent `cyan-soft`; composited over `bg` the chip is `#092830` and the focus change is 15.45:1 | None needed in the prototype. Contrast record adds `focus-fill-vs-unfocused-cyan-soft-over-bg` and focus against `amber`/`red`/`green`/`cyan-soft` over `surface` (all >= 13.1:1) |
+| RV-27 | `a[Skip to content]` (`frame.skip-link-focused`, 8 stops): 1.00:1 to rest | Not a design defect: that state is rendered by pressing Tab, so the probe's rest pass reads the skip link while it is already focused (rest fill = focus fill). Its real rest fill is `ember-btn`; focused it slides in with `focus` (19.21:1 against the page) | None needed. Probe correction requested (below) |
+| RV-28 | `live/*.html` still carried four v1 outline rules (sign-in error summary, choice cards, agent tab panel, pre-read file label) | The live copy's pages predate D-6 | Replaced with the prototype's fill rules. Not in the fidelity scope; `live/meet.html` `.drop` keeps a v1 dashed outline (live room is a contract exclusion, VS-6) |
+
+Probe corrections requested from bdd-quality (owner of `tests/fidelity/**`; not edited
+here): (1) `fillOf` should alpha-composite every translucent layer down to the first
+opaque ancestor, as `contrast-record.mjs` does, instead of returning the first
+non-transparent colour; (2) `auditFlatControls` should blur before `readRest`, so a
+state that is rendered with focus (`frame.skip-link-focused`) has a true rest fill.
+With both corrections applied to a scratch copy, RV-24, RV-26 and RV-27 measure as
+passes; the remaining official findings are only those three probe artefacts.
+
+Verification (design-lead, 2026-11-11; prototype served by `tests/fidelity`'s static
+server, Playwright Chromium 1.65, every in-scope state x dark/light x 375/768/1024/1440
+= 552 cells, 21,182 focus stops; scratch runner and logs in `/tmp/kmdiag`, not tracked):
+
+- Official `auditFlatControls`: **351 -> 79** findings, all RV-24/RV-26/RV-27 probe
+  artefacts (48 "Fix in step", 8 "connect Telnyx SMS", 15 "Sources", 8 "Skip to
+  content"). No-stroke (rest and focus): 0. Page overflow (`scrollWidth` >
+  `clientWidth`): 0. `auditScrollRegions`: 0.
+- Same audit with the two probe corrections above: **0 findings**.
+- 28 text links across 8 states at 375 and 1440: the RV-24 highlight moves no glyph.
+- Contrast record: 254 pairs (was 240), 0 failing.
+
+Recapture needed only for captures that show a focused slider, file label, tab panel,
+scroll region or text link (`frame.skip-link-focused` is unchanged); rest states are
+pixel-identical.

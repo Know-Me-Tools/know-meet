@@ -141,3 +141,60 @@ Then(
 		).toBe(true);
 	},
 );
+
+When(
+	"every focused control takes a white fill at 6% opacity",
+	async ({ scenario }) => {
+		const page = negativePages.get(scenario);
+		if (page === undefined) throw new Error("home route not rendered");
+		// The id argument in :is() outranks the product's own !important focus rules.
+		await page.addStyleTag({
+			content:
+				":is(#km-nc, *):focus-visible{background:rgba(255,255,255,0.06) !important}",
+		});
+		negativeReports.set(scenario, await auditFlatControls(page));
+	},
+);
+
+Then(
+	"the flat-control audit reports every focus stop below 3:1",
+	async ({ scenario }) => {
+		const report = negativeReports.get(scenario);
+		expect(report?.focusStops ?? 0, "focus stops observed").toBeGreaterThan(0);
+		const unreported = (report?.stops ?? []).filter(
+			(s) => s.contrastToRest >= 3 && s.contrastToSurface >= 3,
+		);
+		expect(unreported.map((s) => s.label)).toEqual([]);
+	},
+);
+
+When(
+	"the skip link is focused and its focus fill is pinned to its rest fill",
+	async ({ scenario }) => {
+		const page = negativePages.get(scenario);
+		if (page === undefined) throw new Error("home route not rendered");
+		const skip = page.getByRole("link", { name: "Skip to content" });
+		const rest = await skip.evaluate((el) => {
+			const style = getComputedStyle(el);
+			return { bg: style.backgroundColor, fg: style.color };
+		});
+		await page.addStyleTag({
+			content: `a[href="#main"]:is(#km-nc, :focus, :focus-visible){background-color:${rest.bg} !important;color:${rest.fg} !important}`,
+		});
+		await page.keyboard.press("Tab");
+		await expect(skip).toBeFocused();
+		negativeReports.set(scenario, await auditFlatControls(page));
+	},
+);
+
+Then(
+	"the flat-control audit reports the skip link fill as unchanged",
+	async ({ scenario }) => {
+		const problems = negativeReports.get(scenario)?.problems ?? [];
+		expect(
+			problems.some(
+				(p) => p.includes("Skip to content") && p.includes("fill changes by only"),
+			),
+		).toBe(true);
+	},
+);

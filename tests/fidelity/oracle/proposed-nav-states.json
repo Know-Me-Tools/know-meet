@@ -1,6 +1,13 @@
 {
  "schema": "know-meet-proposed-nav-states/v1",
- "status": "proposed",
+ "status": "adopted",
+ "adoption": {
+  "by": "design-lead",
+  "at": "2026-11-11",
+  "into": "docs/design/screen-inventory/route-inventory.json v2.0.0 (reference revision v2)",
+  "result": "frame.nav-collapsed and frame.nav-open retired (inScope false, IDs kept); frame.nav-bar, frame.nav-rail, frame.nav-inline added as proposed. In scope: 71 states, 568 matrix cells, 16 not applicable, 552 captures.",
+  "reference": "docs/design/prototype/** now renders the adaptive nav (km.js sets html[data-nav-class] = bar | rail | inline; nav items are .appnav a > .nav-ind + .nav-label). v1 frozen in docs/design/prototype-v1-archive/."
+ },
  "owner": "bdd-quality (proposal); docs/design/screen-inventory/route-inventory.json belongs to design-lead",
  "request": "design-lead: add these entries to route-inventory.json (inScope true) and retire the two hamburger entries, per ADJ-1 and ADJ-2 in tests/fidelity/oracle/thresholds.json. The frozen perState thresholds, matrix and baselines are not changed here; new cells need design-lead replacement baselines before c13 (ADJ-1 'pending').",
  "authority": "DESIGN.md Adaptive layout (D-8); operator design answers 2026-11-11 item 4; ADJ-1, ADJ-2",
@@ -90,5 +97,17 @@
  "knownConflicts": [
   "features/vs-1-web-fidelity.feature still lists frame.nav-collapsed and frame.nav-open in its state table; it is bound to the frozen thresholds and is left unchanged until delivery-lead records the operator-adopted contract amendment ADJ-4 asks for.",
   "features/accessibility.feature 'Keyboard focus is visible' accepts outline or box-shadow as the focus indicator, which contradicts D-6; left unchanged pending the same approval. features/flat-controls.feature is the replacement oracle."
- ]
+ ],
+ "driverChangesNeeded": {
+  "owner": "bdd-quality (tests/fidelity/src/support/state-drivers.ts, capture-environment.ts, oracle/app-state-map.json)",
+  "why": "The nav change breaks how the nav states are reached: without a case in planState the three new IDs fall to the default (full-page index capture at all four viewports), and the two retired cases reference .appnav-toggle, which no longer exists.",
+  "changes": [
+   "planState: add frame.nav-bar (applicable only when viewport < 600), frame.nav-rail (600 <= viewport < 1024) and frame.nav-inline (viewport >= 1024); otherwise not-applicable with reason 'nav class <bar|rail|inline> exists only at <range> (DESIGN.md D-8)'. Suggested region: element crop of the nav (new UiRole 'appnav': prototype '.appnav', app '[data-testid=km-appnav]'), so the cell isolates the nav from page content.",
+   "planState: delete the frame.nav-collapsed and frame.nav-open cases and the 'nav-toggle' UiRole / PROTOTYPE_SELECTORS entry; NAV_ONLY_BELOW and CAPTURE_ENVIRONMENT.navCollapseMaxWidth (899) are obsolete. Replace with the window tokens (windowMedium 600, windowExpanded 1024) if a constant is still wanted; changing CAPTURE_ENVIRONMENT is fine because every baseline is recaptured anyway.",
+   "Full-page captures: Chromium renders the position:fixed bar (375) and rail (768) at their first-viewport position, so in long full-page captures the bar sits over content at y = viewport height - 64 and the rail stops at the first viewport height. The app frame uses the same fixed geometry, so reference and app match; no change required, but either keep full-page for both or switch frame-bearing pages at 375/768 to viewport captures for both, never one of each.",
+   "Unchanged and still valid: frame.appbar-signed-out/in crop to #appbar (the fixed bar/rail is outside its box), frame.account-menu-open (.acct-btn), frame.theme-toggle (.theme-toggle), frame.skip-link-focused (Tab). Frozen clock, theme/auth storage keys, font routing and SHARED_SOURCES paths are unchanged.",
+   "app-state-map.json: map the three new IDs to the app testids above and drop the two retired IDs.",
+   "Recapture all baselines from the v2 prototype (every page changed: tokens v1.3.0 and Flat 2.0 fills), record the new baselineSetSha256, then delivery-lead records the contract amendment (ADJ-4)."
+  ]
+ }
 }

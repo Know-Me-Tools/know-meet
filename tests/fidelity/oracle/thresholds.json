@@ -15,8 +15,9 @@
  },
  "inventory": {
   "path": "docs/design/screen-inventory/route-inventory.json",
-  "sha256": "eef76bda67aad2d1036a3cc54d5edbbe1dd8f35452767667963406b532b01b1b",
-  "inScopeStates": 70,
+  "sha256": "b0bba5c2768514e0b3fd28f76fd4f6d8aa527e17da3d80573845475109a92790",
+  "version": "2.0.0",
+  "inScopeStates": 71,
   "scopeDecisions": {
    "D-1": "Whole auth.html flow in scope (5 states), per inventory default; resolution relayed by delivery-lead 2026-11-09, not yet entered in decision-log.md",
    "D-2": "Room side panels, meet.start and meet.ended OUT of scope, per inventory default; same provenance"
@@ -40,8 +41,56 @@
     "firefox"
    ]
   },
-  "expectedCells": 560,
-  "notApplicableCells": "frame.nav-collapsed and frame.nav-open at 1024 and 1440 in both themes (8 cells): the prototype collapses nav only at <= 899px. They are not baselines and are not compared."
+  "expectedCells": 568,
+  "notApplicableCells": "16 cells: frame.nav-bar at 768/1024/1440, frame.nav-rail at 375/1024/1440 and frame.nav-inline at 375/768, in both themes. Each adaptive nav class exists only inside its width class (DESIGN.md D-8: bar < 600, rail 600-1023, inline >= 1024). They are not baselines and are not compared.",
+  "applicableCaptures": 552
+ },
+ "referenceRevision": {
+  "revision": "v2",
+  "decidedAt": "2026-11-11",
+  "authority": "operator approval 2026-11-11 (\"Yes, go ahead\"): the fidelity oracle compares against the current design (tokens v1.3.0, Flat 2.0 fills, adaptive navigation); change log docs/design/token-reconciliation/discrepancy-log.md section F",
+  "baselineManifest": "tests/fidelity/baselines/manifest.json",
+  "baselineSetSha256": "f50d28f690a44c2cfb770279fdb5c0164ab2eabadb3c71d6083adbbb46f35481",
+  "revisionDetail": "v2.2: prototype corrected after recapture (discrepancy-log.md F5, RV-19 to RV-28; focus fills RV-22 to RV-28). Full fresh recapture of all 552 baselines and 48 references; supersedes the v2 set a23f2c2e007331eae5be8eedef966da79ad78c7d68442c8395c5d25515125b88 (captured 2026-11-11T18:25:18.705Z), which ADJ-1 to ADJ-3 cite as recorded at their decision",
+  "capturedAt": "2026-11-11T21:55:35.072Z",
+  "counts": {
+   "inScopeStates": 71,
+   "matrixCells": 568,
+   "expectedCaptures": 552,
+   "captured": 552,
+   "notApplicable": 16,
+   "failed": 0,
+   "reference": 48
+  },
+  "prototypeTreeSha256": "085e3e3e6c8afac8dc0e2286750567104c30695f853cbb0c8572873264229a8c",
+  "liveTreeSha256": "d19c3c901c8f665d35841cca3f0e31543568230ba7316195c08fbfe5804c9da3",
+  "prototypeSources": [
+   {"path": "docs/design/prototype/agents.html", "sha256": "76b8b7e16cb27b682c5b8a2d552912d6d971758dc5f730866379aa4cf80a8165"},
+   {"path": "docs/design/prototype/auth.html", "sha256": "a917602275ca1d9628dd5cd569fc032acc024073d8e3fa1234fc6286246c01d8"},
+   {"path": "docs/design/prototype/dashboard.html", "sha256": "8d8b168a1a571f45d8c767c237983e3b3ce07edcd32e3d7b82b2c6a8ccd0bdc7"},
+   {"path": "docs/design/prototype/index.html", "sha256": "1d2212a52e1408956c4ec9b148699d84cc6e89d3b79d79bc98a859035aec0442"},
+   {"path": "docs/design/prototype/join.html", "sha256": "8695045964bd317c52076687341272f7eb5e65f7ba48a0055fc338dfa2a82808"},
+   {"path": "docs/design/prototype/meet.html", "sha256": "b674333e5e3d042aaea1380f93800564a736f05b836640e19a042b0f1a4157ea"},
+   {"path": "docs/design/prototype/recordings.html", "sha256": "f5c46c19411ab28a741f89b0ff023850db75b3e7db5a2cdaa8d2c6d9a04bf8cd"},
+   {"path": "docs/design/prototype/screens.html", "sha256": "597851a25181461960fe461b6f3a02e4adbff2e895f5d03f9f3b72c218e9bcb3"},
+   {"path": "docs/design/prototype/settings.html", "sha256": "e085811047a26b5f8c567cb632453fa9f521ae0e62eb8b976cdb45c216b501c3"},
+   {"path": "docs/design/prototype/assets/km.css", "sha256": "3d33485bafc7b8d0928391f634154f94936c2408ef019fe26ea2d6038463fbbb"},
+   {"path": "docs/design/prototype/assets/km.js", "sha256": "fba696d98c9371db9823152c24472a3435e32eec3317b668e11f7036b634ddf4"},
+   {"path": "docs/design/prototype/assets/favicon.svg", "sha256": "116a4178ca6c8dc026f0b1ee6fee2a4042d82e164c54c2bd466028a7c982e694"},
+   {"path": "docs/design/brand.css", "sha256": "ce229ee07822e5f5de583c32e72a8d87c0fc30e12b881d420a44328d7f9b218a"},
+   {"path": "docs/design/live/assets/km.css", "sha256": "3d33485bafc7b8d0928391f634154f94936c2408ef019fe26ea2d6038463fbbb"},
+   {"path": "docs/design/live/assets/room.css", "sha256": "69a972c84fb7267f0049d2da23ac375e05095c70f4c84ff6b74badb1d08bf0a1"},
+   {"path": "docs/design/live/assets/live-room.js", "sha256": "f7f53fa86da544908ea3e059548d0619d44d737da0594035f1e06bac7f738a5d"}
+  ],
+  "previous": {
+   "revision": "v1",
+   "baselineManifest": "tests/fidelity/baselines-v1-archive/manifest.json",
+   "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552",
+   "prototypeArchive": "docs/design/prototype-v1-archive",
+   "prototypeArchiveTreeSha256": "a569317de860dfe7977f0094f93339472c7dfab6d869ffb711fcd59c56305f81"
+  },
+  "thresholdChange": "none: every one of the 71 states uses the unchanged default (maxDiffPixelRatio 0.01, threshold 0.2); default, rubric and verdict rule unchanged",
+  "contractAmendment": "pending (ADJ-4): delivery-lead records the operator-adopted amendment covering this revision, baselineSetSha256 and the matrix change"
  },
  "comparison": {
   "engine": "Playwright expect(...).toHaveScreenshot against tests/fidelity/baselines/<theme>/<viewport>/<state-id with dots as hyphens>.png",
@@ -61,356 +110,77 @@
   "unresolvedDifference": "Any FAIL or BLOCKED cell blocks the c13 boundary (plan c13)."
  },
  "perState": {
-  "index.default": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "auth.sign-in": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "auth.sign-up": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "auth.check-email": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "auth.sign-in-error": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "auth.magic-link-sent": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "join.invite": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "join.waiting": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "join.expired": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "join.wrong-code": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "meet.room": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "meet.room-guest": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.upcoming": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.schedule": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.meeting.partner-onboarding": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.meeting.cohort-kickoff": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.meeting.product-sync": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.meeting.pricing-review": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.invites": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.empty": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.registry": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.register.1": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.register.2": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.register.3": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.register.4": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.register-error": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.detail.scribe": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.detail.researcher": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.detail.facilitator": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.detail.translator": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.concierge": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.dots": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.dot.iris": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.library": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.partner-onboarding-1014": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.partner-onboarding-1014.transcript": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.partner-onboarding-1014.summary": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.partner-onboarding-1014.delivery": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.partner-onboarding-1014.storage": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.design-crit-1009": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.detail.vendor-call-1002": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.processing.partner-onboarding-1014": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.empty": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.account": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.livekit": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.telnyx-sms": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.telnyx-voice": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.calendars": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.calendar-connect.google": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.calendar-connect.outlook": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.calendar-connect.caldav": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.storage": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.storage-s3": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.storage-ipfs": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.storage-test-failed": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.recording": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.delivery": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.templates": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.notifications": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "dashboard.gate-signed-out": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "agents.gate-signed-out": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "recordings.gate-signed-out": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "settings.gate-signed-out": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.appbar-signed-out": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.appbar-signed-in": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.account-menu-open": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.nav-collapsed": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.nav-open": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.skip-link-focused": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  },
-  "frame.theme-toggle": {
-   "maxDiffPixelRatio": 0.01,
-   "threshold": 0.2,
-   "basis": "default"
-  }
+  "index.default": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "auth.sign-in": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "auth.sign-up": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "auth.check-email": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "auth.sign-in-error": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "auth.magic-link-sent": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "join.invite": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "join.waiting": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "join.expired": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "join.wrong-code": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "meet.room": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "meet.room-guest": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.upcoming": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.schedule": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.meeting.partner-onboarding": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.meeting.cohort-kickoff": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.meeting.product-sync": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.meeting.pricing-review": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.invites": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.empty": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.registry": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.register.1": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.register.2": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.register.3": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.register.4": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.register-error": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.detail.scribe": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.detail.researcher": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.detail.facilitator": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.detail.translator": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.concierge": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.dots": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.dot.iris": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.library": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.partner-onboarding-1014": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.partner-onboarding-1014.transcript": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.partner-onboarding-1014.summary": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.partner-onboarding-1014.delivery": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.partner-onboarding-1014.storage": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.design-crit-1009": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.detail.vendor-call-1002": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.processing.partner-onboarding-1014": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.empty": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.account": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.livekit": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.telnyx-sms": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.telnyx-voice": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.calendars": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.calendar-connect.google": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.calendar-connect.outlook": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.calendar-connect.caldav": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.storage": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.storage-s3": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.storage-ipfs": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.storage-test-failed": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.recording": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.delivery": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.templates": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.notifications": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "dashboard.gate-signed-out": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "agents.gate-signed-out": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "recordings.gate-signed-out": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "settings.gate-signed-out": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.appbar-signed-out": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.appbar-signed-in": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.account-menu-open": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.nav-bar": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.nav-rail": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.nav-inline": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.skip-link-focused": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"},
+  "frame.theme-toggle": {"maxDiffPixelRatio": 0.01, "threshold": 0.2, "basis": "default"}
  },
  "reference": {
   "gating": false,
@@ -466,9 +236,9 @@
   "record": "Append to `adjudications`: {cell: state/theme/viewport, ground, change, rationale, decidedBy: design-lead, decidedAt, baselineSha256}. Each record is evidence for the boundary run."
  },
  "adjudications": [
-  {"id": "ADJ-1", "cells": ["index.default/{dark,light}/{375,768}", "dashboard.upcoming/{dark,light}/{375,768}", "dashboard.schedule/{dark,light}/{375,768}", "dashboard.meeting.partner-onboarding/{dark,light}/{375,768}", "dashboard.meeting.cohort-kickoff/{dark,light}/{375,768}", "dashboard.meeting.product-sync/{dark,light}/{375,768}", "dashboard.meeting.pricing-review/{dark,light}/{375,768}", "dashboard.invites/{dark,light}/{375,768}", "dashboard.empty/{dark,light}/{375,768}", "agents.registry/{dark,light}/{375,768}", "agents.register.1/{dark,light}/{375,768}", "agents.register.2/{dark,light}/{375,768}", "agents.register.3/{dark,light}/{375,768}", "agents.register.4/{dark,light}/{375,768}", "agents.register-error/{dark,light}/{375,768}", "agents.detail.scribe/{dark,light}/{375,768}", "agents.detail.researcher/{dark,light}/{375,768}", "agents.detail.facilitator/{dark,light}/{375,768}", "agents.detail.translator/{dark,light}/{375,768}", "agents.concierge/{dark,light}/{375,768}", "agents.dots/{dark,light}/{375,768}", "agents.dot.iris/{dark,light}/{375,768}", "recordings.library/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.transcript/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.summary/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.delivery/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.storage/{dark,light}/{375,768}", "recordings.detail.design-crit-1009/{dark,light}/{375,768}", "recordings.detail.vendor-call-1002/{dark,light}/{375,768}", "recordings.processing.partner-onboarding-1014/{dark,light}/{375,768}", "recordings.empty/{dark,light}/{375,768}", "settings.account/{dark,light}/{375,768}", "settings.livekit/{dark,light}/{375,768}", "settings.telnyx-sms/{dark,light}/{375,768}", "settings.telnyx-voice/{dark,light}/{375,768}", "settings.calendars/{dark,light}/{375,768}", "settings.calendar-connect.google/{dark,light}/{375,768}", "settings.calendar-connect.outlook/{dark,light}/{375,768}", "settings.calendar-connect.caldav/{dark,light}/{375,768}", "settings.storage/{dark,light}/{375,768}", "settings.storage-s3/{dark,light}/{375,768}", "settings.storage-ipfs/{dark,light}/{375,768}", "settings.storage-test-failed/{dark,light}/{375,768}", "settings.recording/{dark,light}/{375,768}", "settings.delivery/{dark,light}/{375,768}", "settings.templates/{dark,light}/{375,768}", "settings.notifications/{dark,light}/{375,768}", "dashboard.gate-signed-out/{dark,light}/{375,768}", "agents.gate-signed-out/{dark,light}/{375,768}", "recordings.gate-signed-out/{dark,light}/{375,768}", "settings.gate-signed-out/{dark,light}/{375,768}", "frame.appbar-signed-out/{dark,light}/{375,768}", "frame.appbar-signed-in/{dark,light}/{375,768}", "frame.account-menu-open/{dark,light}/{375,768}", "frame.skip-link-focused/{dark,light}/{375,768}", "frame.theme-toggle/{dark,light}/{375,768}"], "ground": "R2-prototype-defect", "change": "Primary navigation follows the adaptive spec (DESIGN.md, Adaptive layout): bottom bar at 375, navigation rail at 768. The frozen baselines show the prototype's hamburger app bar. Compare these cells against design-lead replacement baselines (prototype rendered with the adaptive nav), recorded with their digests before the c13 run; until then the cells are BLOCKED, never compared against the hamburger baseline.", "rationale": "Operator decision 4 makes the adaptive layout a product requirement that the prototype lacks; source hierarchy places tokens.json and DESIGN.md above the prototype.", "replacementBaseline": "pending", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
-  {"id": "ADJ-2", "cells": ["frame.nav-collapsed/{dark,light}/{375,768}", "frame.nav-open/{dark,light}/{375,768}"], "ground": "R2-prototype-defect", "change": "State retired: the hamburger nav no longer exists at any width. Request to bdd-quality (inventory/state-map owner): replace with frame.nav-bar (375) and frame.nav-rail (768) states and add frame.nav-resize-reduced-motion as an a11y/motion check, not a pixel cell.", "rationale": "Operator decision 4; the retired states have no app route to map (would be BLOCKED as missingAppRoute).", "replacementBaseline": "not applicable (state retired)", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
-  {"id": "ADJ-3", "cells": ["*/{dark,light}/{375,768,1024,1440} (every compared cell that renders a changed component)"], "ground": "R2-prototype-defect", "change": "D-6 Flat 2.0 fills replace the prototype's lines and D-5 ring: control fill on inputs, selects, textareas, checkboxes, radios, switches, segmented controls and the drop zone; current nav item and selected tab are a selected pill (was ember-soft pill / 2px ember underline); app bar, tab-list, table, sheet-footer and menu rules removed; code-block, avatar-stack, account-button and state-glyph rings removed; status pips use pip-* roles; room tiles show a speaking badge instead of the 3px ring; dark primary buttons use ember-btn #FA5F30 (TD-47). Each cell is compared against a replacement baseline captured from the prototype restyled to tokens v1.3.0 (design-lead), digests recorded before c13.", "rationale": "Operator decisions 2 and 5 (no strokes; WCAG 2.2 AA by fill) supersede D-5; contrast-record.md v1.3.0: 240/240 pairs pass. Values and IDs in discrepancy-log.md section E (TD-47 to TD-65).", "replacementBaseline": "pending", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
-  {"id": "ADJ-4", "cells": ["policy"], "ground": "note", "change": "Policy conflict surfaced, not resolved here: ADJ-1 to ADJ-3 are colour, element and layout differences, which exceptionRubric.neverAllowed lists, and they are not threshold loosening. They rest on R2 (reference replaced, thresholds unchanged) plus the operator's 2026-11-11 decisions. delivery-lead should record whether an operator-adopted contract amendment is required under freezeRule. No threshold, default, matrix entry or baseline image was changed.", "rationale": "Surface policy conflicts without rewriting operator-owned rules.", "replacementBaseline": "not applicable", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"}
+  {"id": "ADJ-1", "status": "superseded", "supersededBy": "reference revision v2 (prototype updated): docs/design/prototype/** renders tokens v1.3.0, Flat 2.0 fills and the adaptive navigation (operator approval 2026-11-11, \"Yes, go ahead\"); v1 frozen in docs/design/prototype-v1-archive/; change log discrepancy-log.md section F", "cells": ["index.default/{dark,light}/{375,768}", "dashboard.upcoming/{dark,light}/{375,768}", "dashboard.schedule/{dark,light}/{375,768}", "dashboard.meeting.partner-onboarding/{dark,light}/{375,768}", "dashboard.meeting.cohort-kickoff/{dark,light}/{375,768}", "dashboard.meeting.product-sync/{dark,light}/{375,768}", "dashboard.meeting.pricing-review/{dark,light}/{375,768}", "dashboard.invites/{dark,light}/{375,768}", "dashboard.empty/{dark,light}/{375,768}", "agents.registry/{dark,light}/{375,768}", "agents.register.1/{dark,light}/{375,768}", "agents.register.2/{dark,light}/{375,768}", "agents.register.3/{dark,light}/{375,768}", "agents.register.4/{dark,light}/{375,768}", "agents.register-error/{dark,light}/{375,768}", "agents.detail.scribe/{dark,light}/{375,768}", "agents.detail.researcher/{dark,light}/{375,768}", "agents.detail.facilitator/{dark,light}/{375,768}", "agents.detail.translator/{dark,light}/{375,768}", "agents.concierge/{dark,light}/{375,768}", "agents.dots/{dark,light}/{375,768}", "agents.dot.iris/{dark,light}/{375,768}", "recordings.library/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.transcript/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.summary/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.delivery/{dark,light}/{375,768}", "recordings.detail.partner-onboarding-1014.storage/{dark,light}/{375,768}", "recordings.detail.design-crit-1009/{dark,light}/{375,768}", "recordings.detail.vendor-call-1002/{dark,light}/{375,768}", "recordings.processing.partner-onboarding-1014/{dark,light}/{375,768}", "recordings.empty/{dark,light}/{375,768}", "settings.account/{dark,light}/{375,768}", "settings.livekit/{dark,light}/{375,768}", "settings.telnyx-sms/{dark,light}/{375,768}", "settings.telnyx-voice/{dark,light}/{375,768}", "settings.calendars/{dark,light}/{375,768}", "settings.calendar-connect.google/{dark,light}/{375,768}", "settings.calendar-connect.outlook/{dark,light}/{375,768}", "settings.calendar-connect.caldav/{dark,light}/{375,768}", "settings.storage/{dark,light}/{375,768}", "settings.storage-s3/{dark,light}/{375,768}", "settings.storage-ipfs/{dark,light}/{375,768}", "settings.storage-test-failed/{dark,light}/{375,768}", "settings.recording/{dark,light}/{375,768}", "settings.delivery/{dark,light}/{375,768}", "settings.templates/{dark,light}/{375,768}", "settings.notifications/{dark,light}/{375,768}", "dashboard.gate-signed-out/{dark,light}/{375,768}", "agents.gate-signed-out/{dark,light}/{375,768}", "recordings.gate-signed-out/{dark,light}/{375,768}", "settings.gate-signed-out/{dark,light}/{375,768}", "frame.appbar-signed-out/{dark,light}/{375,768}", "frame.appbar-signed-in/{dark,light}/{375,768}", "frame.account-menu-open/{dark,light}/{375,768}", "frame.skip-link-focused/{dark,light}/{375,768}", "frame.theme-toggle/{dark,light}/{375,768}"], "ground": "R2-prototype-defect", "change": "Primary navigation follows the adaptive spec (DESIGN.md, Adaptive layout): bottom bar at 375, navigation rail at 768. The frozen baselines show the prototype's hamburger app bar. Compare these cells against design-lead replacement baselines (prototype rendered with the adaptive nav), recorded with their digests before the c13 run; until then the cells are BLOCKED, never compared against the hamburger baseline.", "rationale": "Operator decision 4 makes the adaptive layout a product requirement that the prototype lacks; source hierarchy places tokens.json and DESIGN.md above the prototype.", "replacementBaseline": "not an exception: compared against the baselines recaptured from the v2 prototype, baselineSetSha256 a23f2c2e007331eae5be8eedef966da79ad78c7d68442c8395c5d25515125b88 (referenceRevision)", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
+  {"id": "ADJ-2", "status": "superseded", "supersededBy": "reference revision v2 (prototype updated): docs/design/prototype/** renders tokens v1.3.0, Flat 2.0 fills and the adaptive navigation (operator approval 2026-11-11, \"Yes, go ahead\"); v1 frozen in docs/design/prototype-v1-archive/; change log discrepancy-log.md section F; route-inventory.json v2.0.0 retires frame.nav-collapsed and frame.nav-open (inScope false) and adds frame.nav-bar, frame.nav-rail, frame.nav-inline", "cells": ["frame.nav-collapsed/{dark,light}/{375,768}", "frame.nav-open/{dark,light}/{375,768}"], "ground": "R2-prototype-defect", "change": "State retired: the hamburger nav no longer exists at any width. Request to bdd-quality (inventory/state-map owner): replace with frame.nav-bar (375) and frame.nav-rail (768) states and add frame.nav-resize-reduced-motion as an a11y/motion check, not a pixel cell.", "rationale": "Operator decision 4; the retired states have no app route to map (would be BLOCKED as missingAppRoute).", "replacementBaseline": "not applicable (state retired)", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
+  {"id": "ADJ-3", "status": "superseded", "supersededBy": "reference revision v2 (prototype updated): docs/design/prototype/** renders tokens v1.3.0, Flat 2.0 fills and the adaptive navigation (operator approval 2026-11-11, \"Yes, go ahead\"); v1 frozen in docs/design/prototype-v1-archive/; change log discrepancy-log.md section F", "cells": ["*/{dark,light}/{375,768,1024,1440} (every compared cell that renders a changed component)"], "ground": "R2-prototype-defect", "change": "D-6 Flat 2.0 fills replace the prototype's lines and D-5 ring: control fill on inputs, selects, textareas, checkboxes, radios, switches, segmented controls and the drop zone; current nav item and selected tab are a selected pill (was ember-soft pill / 2px ember underline); app bar, tab-list, table, sheet-footer and menu rules removed; code-block, avatar-stack, account-button and state-glyph rings removed; status pips use pip-* roles; room tiles show a speaking badge instead of the 3px ring; dark primary buttons use ember-btn #FA5F30 (TD-47). Each cell is compared against a replacement baseline captured from the prototype restyled to tokens v1.3.0 (design-lead), digests recorded before c13.", "rationale": "Operator decisions 2 and 5 (no strokes; WCAG 2.2 AA by fill) supersede D-5; contrast-record.md v1.3.0: 240/240 pairs pass. Values and IDs in discrepancy-log.md section E (TD-47 to TD-65).", "replacementBaseline": "not an exception: compared against the baselines recaptured from the v2 prototype, baselineSetSha256 a23f2c2e007331eae5be8eedef966da79ad78c7d68442c8395c5d25515125b88 (referenceRevision)", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"},
+  {"id": "ADJ-4", "status": "resolved by contract amendment (pending)", "resolution": "With the reference updated, ADJ-1 to ADJ-3 are no longer exceptions to neverAllowed: the oracle compares against the current design. Remaining step for delivery-lead: record the operator-adopted contract amendment under freezeRule covering the reference revision, the recaptured baselineSetSha256 and the matrix change (expectedCells 560 -> 568, notApplicableCells 8 -> 16: frame.nav-bar only at 375, frame.nav-rail only at 768, frame.nav-inline only at 1024/1440; applicable captures stay 552). No threshold, default or rubric value changes.", "cells": ["policy"], "ground": "note", "change": "Policy conflict surfaced, not resolved here: ADJ-1 to ADJ-3 are colour, element and layout differences, which exceptionRubric.neverAllowed lists, and they are not threshold loosening. They rest on R2 (reference replaced, thresholds unchanged) plus the operator's 2026-11-11 decisions. delivery-lead should record whether an operator-adopted contract amendment is required under freezeRule. No threshold, default, matrix entry or baseline image was changed.", "rationale": "Surface policy conflicts without rewriting operator-owned rules.", "replacementBaseline": "not applicable", "decidedBy": "design-lead", "decidedAt": "2026-11-11", "baselineSetSha256": "a3380e5ffb0ab5c575ac3fcceb4e9f49d27f1bbb09586da699850a055306b552", "authority": "operator design answers 2026-11-11 (decision-log.md, round-5 questions) items 2, 4, 5; tokens.json v1.3.0"}
  ]
 }

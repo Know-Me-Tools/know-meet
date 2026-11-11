@@ -14,10 +14,13 @@ export interface InventoryEntry {
   readonly scopeBasis: string;
   readonly source: string;
   readonly how?: string;
+  /** Viewports at which the state exists (adaptive nav states); absent means all four. */
+  readonly viewports?: readonly number[];
 }
 
 export interface Inventory {
   readonly version: string;
+  readonly referenceRevision?: { readonly revision: string; readonly decidedAt: string };
   readonly routeSource: { readonly path: string; readonly sha256: string };
   readonly captureMatrix: {
     readonly themes: readonly Theme[];

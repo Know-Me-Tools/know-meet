@@ -10,7 +10,6 @@
  "roles": {
   "appbar": "[data-testid=\"km-appbar\"]",
   "account-button": "[data-testid=\"km-account-button\"]",
-  "nav-toggle": "[data-testid=\"km-nav-toggle\"]",
   "theme-toggle": "[data-testid=\"km-theme-toggle\"]",
   "titlebar": "[data-testid=\"km-titlebar\"]",
   "appnav": "[data-testid=\"km-appnav\"]",
@@ -286,20 +285,6 @@
    "path": "/dashboard#upcoming",
    "access": "sign-in"
   },
-  "frame.nav-collapsed": {
-   "path": "/",
-   "access": "guest",
-   "retired": true,
-   "retiredBy": "ADJ-2",
-   "note": "Retired by operator decision 4 (hamburger collapsed state); no app route exists; superseded by frame.nav-bar and frame.nav-rail"
-  },
-  "frame.nav-open": {
-   "path": "/",
-   "access": "guest",
-   "retired": true,
-   "retiredBy": "ADJ-2",
-   "note": "Retired by operator decision 4 (hamburger menu open state); no app route exists; superseded by frame.nav-bar and frame.nav-rail"
-  },
   "frame.skip-link-focused": {
    "path": "/",
    "access": "guest"
@@ -311,22 +296,34 @@
   "frame.nav-bar": {
    "path": "/",
    "access": "guest",
-   "viewport": 375,
    "navClass": "bar",
-   "replaces": "frame.nav-collapsed",
-   "adjudication": "ADJ-1"
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)",
+   "viewports": [
+    375
+   ]
   },
   "frame.nav-rail": {
    "path": "/",
    "access": "guest",
-   "viewport": 768,
    "navClass": "rail",
-   "replaces": "frame.nav-open",
-   "adjudication": "ADJ-1"
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)",
+   "viewports": [
+    768
+   ]
+  },
+  "frame.nav-inline": {
+   "path": "/",
+   "access": "guest",
+   "viewports": [
+    1024,
+    1440
+   ],
+   "navClass": "inline",
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)"
   }
  },
  "navigation": {
-  "source": "DESIGN.md Adaptive layout (D-8, operator 2026-11-11); ADJ-1 and ADJ-2 in thresholds.json",
+  "source": "DESIGN.md Adaptive layout (D-8, operator 2026-11-11); reference revision v2 (route-inventory.json v2.0.0, discrepancy-log.md section F). frame.nav-collapsed and frame.nav-open are retired (inScope false) and have no app route.",
   "rule": "One <nav aria-label=\"Primary\" data-testid=\"km-appnav\"> in every width class; the class is exposed as data-nav-class = bar (<600) | rail (600-1023) | inline (>=1024). Never separate DOM nodes, so focus survives the morph. km-nav-toggle is retired and must not render at any width.",
   "status": "proposed: client-shell must confirm the data-nav-class and km-nav-item/km-nav-indicator testids before c09 merges; until then these cells are BLOCKED, never skipped",
   "classBounds": {

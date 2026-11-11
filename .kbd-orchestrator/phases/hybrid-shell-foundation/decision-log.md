@@ -180,3 +180,10 @@ Provenance: user (explicit form answers, Travis James).
 - Oracle: ADJ-1..ADJ-4 logged; ADJ-4 surfaces that these are neverAllowed differences vs the frozen prototype → needs an updated prototype, recaptured baselines and a contract amendment (operator decision pending).
 - Carried: vs-1 feature still lists retired hamburger states; accessibility.feature focus scenario still accepts outline/box-shadow (must become fill-based); 29 legacy web components need hand-curation; focused dark code block contrast; titlebar height token; Flutter build_runner hangs; human speaking flag in room model.
 - 16.1 macOS minimised re-run never completed (runs die with sessions); needs a dedicated foreground run with the screen unlocked.
+
+## 2026-11-11 — operator: "Yes, go ahead" — fidelity reference v2 and contract amendment
+
+- Prototype updated in place to the operator's design (Flat 2.0 no strokes, fill-based WCAG focus, adaptive nav); v1 archived in docs/design/prototype-v1-archive and tests/fidelity/baselines-v1-archive. Defects found and fixed on the way: view-transition width/height + link colour fades (now transform/opacity only), rail overflow at 768, three wide-content overflows (tables now named focusable scroll regions), 351 focus fills <3:1 (fixed; two probe flaws corrected with negative controls).
+- Final reference: 552/552 baselines + 48 references; baseline-set sha256 f50d28f690a44c2cfb770279fdb5c0164ab2eabadb3c71d6083adbbb46f35481; probes on the prototype: focus-fill 0 (21,177 stops), no-stroke 0, overflow 0, scroll regions 32/0, nav-morph 6/6. Contrast record 254 pairs, 0 failures.
+- Contract amended (VS-1 oracle + fixtures → reference revision v2), signed with the operator key (travis@tribehealthsolutions.com, ED25519 SHA256:oE4PH+kE…), adopted as contract-adoption-hybrid-shell-foundation-138ce337 (supersedes …-768c585b, bound revision 3). KBD-METHOD VLBV re-bound to 138ce337; KBD-POLICY-ACK recorded for AGENTS.md/CLAUDE.md at the new digest. Readiness READY; method context RESOLVED_REFERENCES.
+- Web nav-morph/frame.css updated to the corrected spec.

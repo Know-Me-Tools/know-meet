@@ -237,8 +237,12 @@
     view-transition-name: km-main;
   }
 
+  /* The rail reserves its space as a start margin (width auto, min-width 0),
+     never padding or a fixed width. */
   .km-framed[data-nav-class="rail"] .km-main {
-    padding-left: var(--km-rail-w);
+    margin-inline-start: var(--km-rail-w);
+    width: auto;
+    min-width: 0;
   }
 
   .km-framed[data-nav-class="bar"] .km-main {
@@ -291,6 +295,36 @@
   ::view-transition-new(root) {
     animation-duration: var(--dur-reflow);
     animation-timing-function: var(--ease-layout);
+  }
+
+  /* Snapshots crossfade on opacity alone: the UA pair also animates
+     mix-blend-mode, so name our own keyframes and hold plus-lighter statically. */
+  ::view-transition-old(*) {
+    animation-name: km-vt-out;
+    mix-blend-mode: plus-lighter;
+  }
+
+  ::view-transition-new(*) {
+    animation-name: km-vt-in;
+    mix-blend-mode: plus-lighter;
+  }
+
+  @keyframes km-vt-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes km-vt-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* No link colour/background fades while nav-morph.ts commits a class change. */
+  html[data-nav-committing] .km-nav,
+  html[data-nav-committing] .km-nav * {
+    transition: none !important;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page } from "@playwright/test";
+import { auditFlatControls } from "../src/a11y/flat-controls-probe.ts";
+import { auditScrollRegions, type ScrollRegionReport } from "../src/a11y/scroll-regions-probe.ts";
 import { contextOptions, prepareContext } from "../src/support/capture-environment.ts";
 import type { Theme } from "../src/support/inventory.ts";
 import { renderCell } from "../src/support/render-cell.ts";
@@ -18,6 +20,8 @@ interface CellViolations {
 const results = new WeakMap<object, CellViolations[]>();
 const injected = new WeakMap<object, string[]>();
 const injectedPages = new WeakMap<object, Page>();
+/** Focus problems from the Flat 2.0 probe (strokes or < 3:1 fill change), per scenario. */
+const focusFillProblems = new WeakMap<object, string[]>();
 
 async function analyse(page: Page): Promise<CellViolations["violations"]> {
   const report = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
@@ -69,6 +73,7 @@ When(
   "the home route is tabbed through from the top in each theme",
   async ({ browser, baseURL, appStateMap, scenario, $testInfo }) => {
     const stops: string[] = [];
+    const fillProblems: string[] = [];
     for (const theme of THEMES) {
       const context = await browser.newContext(contextOptions(1440));
       const origin = baseURL ?? "";
@@ -95,9 +100,19 @@ When(
               (el.textContent ?? "").trim() ||
               (el.getAttribute("title") ?? "");
             const style = getComputedStyle(el);
+            // D-6: focus is never a stroke: no outline, and no ring (zero-blur box-shadow with
+            // spread, as flat-controls-probe.ts defines it; soft elevation is not a ring).
+            const ringShadow = style.boxShadow.split(/,(?![^(]*\))/).some((shadow) => {
+              const px = shadow.match(/-?\d+(\.\d+)?px/g) ?? [];
+              return (
+                px.length >= 4 &&
+                Number.parseFloat(px[2] ?? "0") === 0 &&
+                Number.parseFloat(px[3] ?? "0") !== 0
+              );
+            });
             const ring =
               (style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) > 0) ||
-              style.boxShadow !== "none";
+              ringShadow;
             return {
               tag: el.tagName.toLowerCase(),
               href: el.getAttribute("href") ?? "",
@@ -108,14 +123,23 @@ When(
           if (stop === null) break;
           stops.push(JSON.stringify({ theme, ...stop }));
         }
+        // Fill rule: reload, then the Flat 2.0 probe compares each focus fill with its rest fill.
+        await page.goto(`${origin}/`);
+        await page.waitForLoadState("networkidle");
+        const flat = await auditFlatControls(page);
+        expect(flat.focusStops, `focus stops audited in ${theme}`).toBeGreaterThan(1);
+        fillProblems.push(
+          ...flat.problems.filter((p) => p.startsWith("focus ")).map((p) => `${theme}: ${p}`),
+        );
       } finally {
         await context.close();
       }
     }
     scenario.focusStops = stops;
+    focusFillProblems.set(scenario, fillProblems);
     expect(appStateMap.roles.main).not.toBe("");
     await $testInfo.attach("focus-stops.json", {
-      body: `[${stops.join(",")}]`,
+      body: JSON.stringify({ stops: stops.map((s) => JSON.parse(s)), fillProblems }, null, 2),
       contentType: "application/json",
     });
   },
@@ -132,14 +156,25 @@ Then("the skip link is the first focus stop", async ({ scenario }) => {
   }
 });
 
+Then("every focused control has an accessible name", async ({ scenario }) => {
+  const stops = (scenario.focusStops ?? []).map(
+    (s) => JSON.parse(s) as { name: string; tag: string },
+  );
+  expect(stops.length).toBeGreaterThan(1);
+  expect(stops.filter((s) => s.name.length === 0)).toEqual([]);
+});
+
 Then(
-  "every focused control has an accessible name and a visible focus indicator",
+  "focus is shown by a fill change of at least 3:1 with no outline or box-shadow ring",
   async ({ scenario }) => {
     const stops = (scenario.focusStops ?? []).map(
       (s) => JSON.parse(s) as { name: string; ring: boolean; tag: string },
     );
     expect(stops.length).toBeGreaterThan(1);
-    expect(stops.filter((s) => s.name.length === 0 || !s.ring)).toEqual([]);
+    expect(stops.filter((s) => s.ring), "focus stops drawn with an outline or box-shadow").toEqual(
+      [],
+    );
+    expect(focusFillProblems.get(scenario) ?? ["not audited"]).toEqual([]);
   },
 );
 
@@ -190,3 +225,66 @@ Then(
     expect(injected.get(scenario) ?? []).toEqual(expect.arrayContaining([first, second]));
   },
 );
+
+// ---- Scrollable table regions (RV-21): named, focusable, focus is a fill change.
+const regionReports = new WeakMap<object, Array<{ cell: string; report: ScrollRegionReport }>>();
+
+When(
+  "the scrollable table regions of page {string} are audited in each theme at each viewport",
+  async ({ browser, inventory, appTarget, scenario }, pageName: string) => {
+    const collected: Array<{ cell: string; report: ScrollRegionReport }> = [];
+    for (const entry of inScopeIdsOf(inventory, pageName)) {
+      for (const theme of THEMES) {
+        for (const viewport of VIEWPORTS) {
+          const cell = await renderCell(browser, appTarget, entry, theme, viewport);
+          if (cell === null) continue;
+          try {
+            collected.push({
+              cell: `${entry.id}/${theme}/${viewport}`,
+              report: await auditScrollRegions(cell.page),
+            });
+          } finally {
+            await cell.context.close();
+          }
+        }
+      }
+    }
+    expect(collected.length, `states audited for page ${pageName}`).toBeGreaterThan(0);
+    regionReports.set(scenario, collected);
+  },
+);
+
+Then("every overflowing table region is a named, focusable region reachable by Tab", async ({ scenario }) => {
+  const cells = regionReports.get(scenario) ?? [];
+  expect(
+    cells.reduce((sum, c) => sum + c.report.overflowing, 0),
+    "overflowing table regions observed",
+  ).toBeGreaterThan(0);
+  const offenders = cells.flatMap(({ cell, report }) =>
+    report.problems
+      .filter((p) => /overflows|fits|not reachable|not :focus-visible/.test(p))
+      .map((p) => `${cell}: ${p}`),
+  );
+  expect(offenders).toEqual([]);
+});
+
+Then("table region focus is a fill change with no outline or box-shadow ring", async ({ scenario }) => {
+  const cells = regionReports.get(scenario) ?? [];
+  expect(
+    cells.reduce((sum, c) => sum + c.report.focused, 0),
+    "table regions focused by keyboard",
+  ).toBeGreaterThan(0);
+  const offenders = cells.flatMap(({ cell, report }) =>
+    report.problems
+      .filter((p) => /focus draws|focus fill/.test(p))
+      .map((p) => `${cell}: ${p}`),
+  );
+  expect(offenders).toEqual([]);
+});
+
+Then("the scroll-region results are recorded as evidence", async ({ scenario, $testInfo }) => {
+  await $testInfo.attach("scroll-regions.json", {
+    body: JSON.stringify(regionReports.get(scenario) ?? [], null, 2),
+    contentType: "application/json",
+  });
+});

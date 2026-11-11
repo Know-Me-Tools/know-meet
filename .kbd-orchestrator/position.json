@@ -2,13 +2,13 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 202,
-  "derivedRevision": 202,
+  "sourceRevision": 207,
+  "derivedRevision": 207,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 202
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 207
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-11T16:18:21.097586Z",
+  "updatedAt": "2026-11-11T23:39:48.979383Z",
   "cursor": [
     "hybrid-shell-foundation",
     "execute",

@@ -24,9 +24,15 @@ node packages/design-tokens/scripts/contrast-record.mjs
 
 | Theme | Text pairs pass / fail | UI and graphic pairs pass / fail |
 |---|---|---|
-| Dark | 60 / 0 | 60 / 0 |
-| Light | 60 / 0 | 60 / 0 |
-| **Total (240 pairs)** | **120 / 0** | **120 / 0** |
+| Dark | 60 / 0 | 67 / 0 |
+| Light | 60 / 0 | 67 / 0 |
+| **Total (254 pairs)** | **120 / 0** | **134 / 0** |
+
+RV-22..RV-26 (discrepancy-log F5, 2026-11-11) added 14 UI pairs: the focused slider
+plate (track on the plate, thumb and range against the track) and the focus fill against
+translucent "-soft" fills composited over the surface they render on (Sources chip in
+the room bar; text links inside amber, red, green and cyan notes on a panel). Tokens
+unchanged (v1.3.0).
 
 **Every pair passes. There are no accepted exceptions.** The pair list changed: the
 ring pairs (focus ring, input ring, invalid ring, tile rings, drop-zone outline, tab

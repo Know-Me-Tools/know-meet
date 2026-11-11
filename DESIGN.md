@@ -11,13 +11,15 @@ same look on every surface.** Product context is in [PRODUCT.md](PRODUCT.md).
    (Tailwind 4), `shadcn.css`, Flutter `tokens.g.dart` (`KmPalette`, `KmTokens`) and
    `km_theme.g.dart` (`buildKmTheme`). Never hand-edit a generated file.
 2. This file: rules that tokens alone cannot carry (control states, layout, motion).
-3. `docs/design/brand-guide.html`, then `docs/design/prototype/` (frozen visual
-   reference), then `docs/design/live/` (room layout reference). The root `live/`
-   folder is not a source.
+3. `docs/design/brand-guide.html`, then `docs/design/prototype/` (visual reference,
+   revision v2: renders tokens v1.3.0, the Flat 2.0 rules and the adaptive navigation
+   below), then `docs/design/live/` (room layout reference). The root `live/` folder
+   is not a source. `docs/design/prototype-v1-archive/` is the frozen pre-v2 copy
+   (history only, never a source).
 
-Every value that intentionally differs from the frozen prototype is logged in
-`docs/design/token-reconciliation/discrepancy-log.md` (sections D and E), and its
-contrast is in `contrast-record.md` next to it.
+Every token change is logged in `docs/design/token-reconciliation/discrepancy-log.md`
+(sections D and E; reference revision v2 in section F), and its contrast is in
+`contrast-record.md` next to it.
 
 ## Identity in one paragraph
 
@@ -79,7 +81,7 @@ and never takes focus fill.
 | Radio (20px round) | `control` disc | `control-hov` | `selected` disc + 8px `on-selected` dot | `focus` disc (+ `on-focus` dot) | n/a |
 | Switch (48x28, thumb 22) | track `switch-track`, thumb `switch-thumb` | track `control-hov` | track `ember-btn`, thumb `switch-thumb-on`, thumb at +20px | track `focus`, thumb `on-focus` (position still shows state) | n/a |
 | Segmented control | track `control`, segments transparent with `on-control` text | segment `control-hov` | segment `selected` + `on-selected` text **and a leading check icon** | segment `focus` + `on-focus` | n/a |
-| Slider (track 6, thumb 20) | track `control`, range `selected`, thumb `slider-thumb` | n/a | n/a | track `focus`, range kept, thumb `on-focus` | n/a |
+| Slider (track 6, thumb 20, 44px control box) | track `control`, range `selected`, thumb `slider-thumb` | n/a | n/a | control box takes a `focus` plate (radius-pill); range and thumb `on-focus`, rest of track `control` (RV-22) | n/a |
 | Toggle chip | `control` + `on-control` | `control-hov` | `selected` + `on-selected` + check icon | `focus` + `on-focus` | n/a |
 | Tabs | transparent, `fg-sub` text (text identifies) | `card-hov` | pill `selected` + `on-selected` (replaces the 2px ember underline) | `focus` + `on-focus` | n/a |
 | Nav item (bar, rail, app bar) | transparent, `fg-sub` | `card-hov` | indicator `selected` + `on-selected` (replaces `ember-soft`) | `focus` + `on-focus` | n/a |
@@ -88,6 +90,10 @@ and never takes focus fill.
 | Ghost / icon button | transparent, icon `fg` | `card-hov` | pressed: `selected` | `focus` + `on-focus` | n/a |
 | Danger button | `danger-btn` + `on-danger` | `danger-btn-hov` | n/a | `focus` + `on-focus` | n/a |
 | Interactive card, list row, link | surface ladder (text identifies) | `card-hov` | n/a | whole card `focus`, all text `on-focus` | n/a |
+| Text link in running copy (no class, outside nav) | `ember-text` on the surrounding fill | n/a | n/a | highlight: `focus` fill behind the text run (3px past the glyphs, radius 4, per line fragment, no layout shift) + `on-focus` text (RV-24) | n/a |
+| Focusable region (tab panel, overflowing table scroller) | its surface | n/a | n/a | whole region `focus`, all content `on-focus`, inner fills drop out (RV-23) | n/a |
+| File input | hidden input + label button (`input + label.btn`) | as the button | n/a | input and its label button `focus` + `on-focus`; a native file input takes `focus` and inverts its button (RV-25) | n/a |
+| Skip link | off-screen, `ember-btn` + `on-ember` | n/a | n/a | slides in at `s2` with the `focus` fill + `on-focus` (>= 3:1 against the page; its rest state is never seen) | n/a |
 | Choice card | `surface` with a radio or checkbox indicator inside (the indicator carries state) | `card-hov` | indicator `selected`; card fill `ember-soft` (supplementary) | card `focus` | n/a |
 | Drop zone | `control` + `on-control` ("Drop files or browse") | `control-hov` | drag-over: `selected` + `on-selected` ("Release to upload") | `focus` + `on-focus` | n/a |
 
@@ -107,6 +113,15 @@ Rules that follow from the table:
   the field.
 - **Focus transitions** use `--dur-fast` on `background-color` and `color`; under
   reduced motion they are instant.
+- **The focused element carries the fill itself** (RV-22..RV-25). Focus is measured on
+  the element that holds keyboard focus: its own fill must differ from its unfocused
+  fill and from the surface by >= 3:1, and every piece of content on it must keep
+  >= 4.5:1 (text) or >= 3:1 (glyphs, thumbs, tracks) against the focus fill. A native
+  control whose visible parts are pseudo-elements (range, file) takes the `focus`
+  fill on its own box; a visually hidden input (file, switch, choice card) takes the
+  fill itself and hands the same fill to the element that stands in for it. A
+  translucent "-soft" fill under a focused control is measured composited over the
+  surface it renders on (contrast record, RV-26).
 - **Tooltip = toast style** (operator, 2026-11-11): `fg` fill, `bg` text, 14px medium,
   radius 12, padding `size-tooltip-pad-y` x `size-tooltip-pad-x`, max width
   `size-tooltip-max-w` (320), float shadow, appears after 500ms hover or on focus,
@@ -205,7 +220,30 @@ icon centred in an indicator `size-nav-indicator-w` x `size-nav-indicator-h`
 height. Items stacked from the top with `s4` top padding and `s1` gaps; each item is
 80 x 64 with the same 56 x 32 indicator, icon and 12px label as the bar and the same
 states. The page column starts after the rail; `page-max` and page padding are
-unchanged.
+unchanged. The rail *reserves* its width inside the viewport, it never adds to it:
+the content column is `viewport - rail` (web: `margin-inline-start` or
+`padding-inline-start` of `--km-rail-w` on a column that is `width: auto` /
+flex `1 1 auto` with `min-width: 0`; never `width: 100%` or `100vw` plus an offset).
+Nothing scrolls horizontally at any width from 600 to 1023 (checked at 600, 768
+and 1023: `scrollWidth == clientWidth`). Flutter: rail and page share one `Row`,
+the page in `Expanded`.
+
+**No horizontal page overflow, with wide tables in their own scroller (rule RV-21).**
+`scrollWidth == clientWidth` holds at 600, 768 and 1023 in both themes for every
+in-scope *state*, not only page loads (invites, meeting detail and recording delivery
+carry wide tables). Rules: (1) the page shell and every single-column grid container (`.app`, `.card`, `.panel`,
+`.section`) is one shrinkable column (`grid-template-columns: minmax(0, 1fr)`), never an
+implicit `auto` track, which grows to the min-content of a wide table;
+(2) a grid or flex child that holds wide content has `min-width: 0` and no auto margin
+on its stretch axis (the rail's `#main` zeroes `margin-inline-end`, because an auto
+margin turns off stretch); (3) no fixed pixel widths on containers; (4) a wide table sits
+in a `.table-wrap` with `overflow-x: auto` and `position: relative` (so absolutely placed
+`.sr-only` header labels scroll with it); (5) while it overflows the wrapper is a
+named region: `role="region"`, `aria-label` from the table caption, `tabindex="0"`
+(arrow keys scroll it); its focus is the whole-region `focus` fill with `on-focus`
+content (RV-23; `card-hov` was 1.03-1.36:1), never an outline or ring.
+Flutter: a wide table is a horizontal `SingleChildScrollView` inside a `Semantics`
+container with a label, focusable, with the same fill focus.
 
 **Inline links (expanded).** The prototype's pill links (44px tall, 14px semibold,
 radius-pill). States as the table above: current is `selected` / `on-selected`
@@ -238,7 +276,21 @@ layout animates once per crossing; continuous resizing inside a class never anim
 | `dur-reflow` | 200ms | Content column crossfade/slide when the rail appears or leaves |
 | `ease-layout` | `cubic-bezier(0.2, 0, 0, 1)` | All three |
 
-- Animate `transform` and `opacity` only; never width, height, padding or margins.
+- Animate `transform` and `opacity` only; never width, height, padding, margins,
+  colours or blend modes. This includes what the browser adds by default (correction
+  2026-11-11, prototype v2.1):
+  - The UA `::view-transition-group(*)` animation tweens `width`/`height` (and
+    `backdrop-filter`) as well as `transform`. On `transition.ready`, rewrite each
+    group animation's keyframes to `transform` only (`effect.setKeyframes`); the
+    group snaps to its new box while the indicator still travels.
+  - The UA `::view-transition-old/new(*)` pair also animates `mix-blend-mode`. Use
+    own opacity-only keyframes (`km-vt-out` / `km-vt-in`) and hold
+    `mix-blend-mode: plus-lighter` statically.
+  - The class commit must not start state transitions (the 150ms link/indicator
+    colour fades): disable transitions on the nav while the new class is applied
+    and the style flushed (prototype: `html[data-nav-committing]`), so re-enabling
+    them starts nothing. This also keeps reduced motion and in-class resizes at zero
+    animations.
 - Web: wrap the class change in `document.startViewTransition()` with
   `view-transition-name: km-nav` on the nav and `km-nav-current` on the current
   indicator, so the indicator travels to its new position; labels fade with
@@ -255,9 +307,10 @@ layout animates once per crossing; continuous resizing inside a class never anim
 
 ## Verification hooks
 
-- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (240 pairs).
-- Fidelity: `tests/fidelity/oracle/thresholds.json` `adjudications` lists the cells
-  this file changes against the frozen prototype baselines.
+- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (254 pairs).
+- Fidelity: the oracle compares against baselines captured from prototype v2, so
+  this file's rules are the reference, not exceptions (`thresholds.json` ADJ-1 to
+  ADJ-3 superseded; ADJ-4 contract amendment pending).
 - Checklist for reviews (also the Kimi Code fallback when Impeccable is unavailable):
   no stroke utilities; every control on an allowed surface; every state from the
   table; nav identical across web and Flutter at 375, 768 and 1024 in both themes;

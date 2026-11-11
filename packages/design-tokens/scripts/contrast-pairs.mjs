@@ -142,7 +142,17 @@ export const PAIRS = [
     ui(`focus-fill-vs-unfocused-${fill}`, "focus", [fill], `Focus change: focus fill against the unfocused ${what} (>= 3:1, operator D-6)`),
   ),
   ui("check-glyph-on-selected", "on-selected", ["selected"], "Checkbox tick and radio dot on the checked fill"),
-  ui("check-glyph-on-focus", "on-focus", ["focus"], "Tick, radio dot, switch thumb and slider thumb while focused (the track takes the focus fill)"),
+  ui("check-glyph-on-focus", "on-focus", ["focus"], "Tick, radio dot, switch thumb, slider thumb and slider range while focused (the switch track and the slider plate take the focus fill)"),
+  // RV-22: a focused slider sits on a `focus` plate (the whole 44px control box);
+  // the unfilled track keeps `control`, range and thumb take `on-focus`.
+  ui("slider-track-on-focus-plate", "control", ["focus"], "Focused slider: unfilled track against the focus plate"),
+  ui("slider-thumb-focused-vs-track", "on-focus", ["control"], "Focused slider: thumb and range (on-focus) against the unfilled track"),
+  // RV-26: focus on a control or link that sits on a translucent "-soft" fill, measured
+  // composited over the surface it renders on (chip-cyan in the room bar, notes in panels).
+  ui("focus-fill-vs-unfocused-cyan-soft-over-bg", "focus", ["bg", "cyan-soft"], "Focus change: Sources chip (chip-cyan) in the room bar"),
+  ...["amber", "red", "green", "cyan"].map((c) =>
+    ui(`focus-fill-vs-${c}-soft-over-surface`, "focus", ["surface", `${c}-soft`], `Focus fill of a text link inside a ${c} note on a panel (surface)`),
+  ),
   ui("switch-thumb-vs-track-off", "switch-thumb", ["switch-track"], "Switch off: thumb against track"),
   ...CONTROL_SURFACES.map((s) =>
     ui(`switch-track-on-vs-${s}`, "ember-btn", [s], `Switch on: ember track against ${s}`),

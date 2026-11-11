@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 202,
-  "derivedRevision": 202,
+  "sourceRevision": 203,
+  "derivedRevision": 203,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 202
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 203
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-11T16:18:21.097586Z",
+  "last_updated": "2026-11-11T23:39:19.255668Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
   "changes_completed": 11,
