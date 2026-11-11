@@ -18,6 +18,7 @@ export const LINE_EXCEPTIONS: Readonly<Record<string, readonly string[]>> = {
     ".kbd-orchestrator/**/*.jsonl",
     ".kbd-orchestrator/**/*.sig",
     ".kbd-orchestrator/**/review/**/raw-*.txt",
+    ".kbd-orchestrator/**/evidence/**/*.txt",
     ".agent-team/**/state.json",
     ".agent-team/**/team.json",
   ],

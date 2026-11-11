@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/know_meet_app.dart';
 import 'bridge/generated/frb_generated.dart';
-import 'features/theme_mode/theme_mode.dart';
+import 'shared/theme_mode/theme_mode.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

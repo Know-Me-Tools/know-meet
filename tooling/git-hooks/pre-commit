@@ -1,7 +1,39 @@
 #!/bin/sh
-# Know Meet pre-commit hook (c01). Installed by `pnpm install` via
+# Know Meet pre-commit hook (c01, c14). Installed by `pnpm install` via
 # `git config core.hooksPath tooling/git-hooks`. Runs every repo rule except the
 # slow native lints (clippy, flutter analyze), which run in `pnpm run lint` and CI.
+#
+# The repo pins Node exactly (package.json engines.node); a newer shell Node makes
+# every rule fail on the engine check, so select the pinned one or stop loudly.
 set -eu
 cd "$(git rev-parse --show-toplevel)"
-exec node tooling/repo-rules/src/lint-all.ts --skip lint:native
+
+PINNED="$(sed -n 's/.*"node": *"\([0-9][0-9.]*\)".*/\1/p' package.json | head -n 1)"
+if [ -z "$PINNED" ]; then
+  echo "pre-commit: cannot read engines.node from package.json" >&2
+  exit 1
+fi
+
+run_rules() {
+  exec node tooling/repo-rules/src/lint-all.ts --skip lint:native
+}
+
+CURRENT="$(node -p 'process.versions.node' 2>/dev/null || echo none)"
+if [ "$CURRENT" = "$PINNED" ]; then
+  run_rules
+fi
+
+# Wrong Node on PATH: re-exec under the pinned one via the first version manager found.
+if command -v fnm >/dev/null 2>&1 && fnm list 2>/dev/null | grep -q "v$PINNED"; then
+  exec fnm exec --using="$PINNED" -- node tooling/repo-rules/src/lint-all.ts --skip lint:native
+fi
+if command -v mise >/dev/null 2>&1 && mise ls --installed node 2>/dev/null | grep -q "$PINNED"; then
+  exec mise exec "node@$PINNED" -- node tooling/repo-rules/src/lint-all.ts --skip lint:native
+fi
+if command -v volta >/dev/null 2>&1; then
+  exec volta run --node "$PINNED" node tooling/repo-rules/src/lint-all.ts --skip lint:native
+fi
+
+echo "pre-commit: Node $PINNED is required but the shell has $CURRENT, and no fnm/mise/volta install of it was found." >&2
+echo "pre-commit: install it (for example 'fnm install $PINNED') and retry; the hook will not run the rules on the wrong Node." >&2
+exit 1

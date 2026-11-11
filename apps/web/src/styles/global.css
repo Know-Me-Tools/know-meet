@@ -1,18 +1,8 @@
 /* TJ-ARCH-MOB-001 compliant */
-/* Global stylesheet: Tailwind 4 plus the generated Know Meet tokens (c04).
-   Order matters: fonts, then tokens (both themes), then the Tailwind @theme,
-   then the shadcn variable mapping. Never add colour or font values here. */
-@import "tailwindcss";
-@import "@know-meet/design-tokens/fonts.css";
-@import "@know-meet/design-tokens/tokens.css";
-@import "@know-meet/design-tokens/theme.css";
-@import "@know-meet/design-tokens/shadcn.css";
+/* Global stylesheet. The shared kit (@know-meet/ui, c08) owns Tailwind 4, the
+   generated Know Meet tokens (c04), the data-theme dark variant and the base
+   layer; this app adds nothing on top yet. Never add colour or font values here. */
+@import "@know-meet/ui/globals.css";
 
-@layer base {
-  body {
-    margin: 0;
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-body);
-  }
-}
+/* This app's own sources (relative to this file); the kit registers its own. */
+@source "..";

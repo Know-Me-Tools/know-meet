@@ -2,12 +2,11 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@know-meet/ui/components/tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import * as React from "react";
-
 import { Skeleton } from "@/presentation/components/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/presentation/components/ui/tooltip";
 import { useSidebar } from "./sidebar-context";
 
 function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {

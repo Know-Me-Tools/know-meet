@@ -2,11 +2,10 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { Input } from "@know-meet/ui/components/input";
+import { Separator } from "@know-meet/ui/components/separator";
 import { cn } from "cn";
 import type * as React from "react";
-
-import { Input } from "@/presentation/components/ui/input";
-import { Separator } from "@/presentation/components/ui/separator";
 
 function SidebarInput({ className, ...props }: React.ComponentProps<typeof Input>) {
   return (

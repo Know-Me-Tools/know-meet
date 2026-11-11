@@ -1,0 +1,85 @@
+/* TJ-ARCH-MOB-001 compliant */
+/* @know-meet/ui stylesheet: the single entry an app imports (c08).
+   Order matters: Tailwind, motion utilities, fonts, tokens (both themes), the
+   Tailwind @theme, then the shadcn variable mapping. Never add colour, font or
+   spacing literals here; every value is a generated token (packages/design-tokens). */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@know-meet/design-tokens/fonts.css";
+@import "@know-meet/design-tokens/tokens.css";
+@import "@know-meet/design-tokens/theme.css";
+@import "@know-meet/design-tokens/shadcn.css";
+
+/* Kit sources (relative to this file). Apps add their own @source if needed. */
+@source "../components";
+
+/* Theme switch: tokens are dark on :root and light on [data-theme="light"]
+   (apps/web theme-adapters, storage key km-meet-theme). `dark:` therefore means
+   "not inside a light subtree" so it can never disagree with the tokens. Kit
+   components don't use `dark:`; the tokens switch by themselves. This variant
+   only keeps the uncurated components left in apps/web consistent. */
+@custom-variant dark (&:not(:where([data-theme="light"], [data-theme="light"] *)));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
+  }
+
+  a {
+    color: var(--ember-text);
+    text-underline-offset: 3px;
+  }
+
+  /* km.css base: one focus treatment everywhere (ember, 2px, offset 2px). */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--ember-soft);
+    color: var(--fg);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--ember);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /* km.css: all motion stops under reduced motion (PRODUCT.md, constraints.md). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: var(--dur-reduced-motion) !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: var(--dur-reduced-motion) !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

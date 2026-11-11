@@ -15,6 +15,7 @@
     "@know-meet/application": "workspace:*",
     "@know-meet/design-tokens": "workspace:*",
     "@know-meet/domain": "workspace:*",
+    "@know-meet/ui": "workspace:*",
     "@prometheus-ags/entity-graph-core": "4.3.0",
     "@prometheus-ags/entity-graph-react": "4.3.0",
     "@shadcn/react": "0.3.1",

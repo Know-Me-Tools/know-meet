@@ -1,16 +1,16 @@
 // shadcn base-nova registry primitive (c06 split of sidebar.tsx, unmodified logic; c08 restyles).
 
-import { cn } from "cn";
-import { PanelLeftIcon } from "lucide-react";
-import type * as React from "react";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@know-meet/ui/components/button";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/presentation/components/ui/sheet";
+} from "@know-meet/ui/components/sheet";
+import { cn } from "cn";
+import { PanelLeftIcon } from "lucide-react";
+import type * as React from "react";
 import { SIDEBAR_WIDTH_MOBILE } from "./sidebar-constants";
 import { useSidebar } from "./sidebar-context";
 

@@ -1,12 +1,11 @@
 "use client";
 
+import { Button } from "@know-meet/ui/components/button";
+import { Input } from "@know-meet/ui/components/input";
+import { Textarea } from "@know-meet/ui/components/textarea";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type * as React from "react";
-
-import { Button } from "@/presentation/components/ui/button";
-import { Input } from "@/presentation/components/ui/input";
-import { Textarea } from "@/presentation/components/ui/textarea";
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

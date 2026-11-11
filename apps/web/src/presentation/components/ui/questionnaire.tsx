@@ -1,10 +1,10 @@
 "use client";
 
+import { type Button, buttonVariants } from "@know-meet/ui/components/button";
 import { Questionnaire as QuestionnairePrimitive } from "@shadcn/react/questionnaire";
 import { cn } from "cn";
 import { CheckIcon } from "lucide-react";
 import type * as React from "react";
-import { type Button, buttonVariants } from "@/presentation/components/ui/button";
 
 function Questionnaire({
   className,

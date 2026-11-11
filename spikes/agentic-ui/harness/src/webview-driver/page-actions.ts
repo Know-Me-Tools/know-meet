@@ -50,6 +50,38 @@ export function kmWaitAssistantText(chars: number, timeoutMs = 30_000): Promise<
   return kmPoll(`assistant text >= ${chars}`, () => (kmSnapshot().messages.some((m) => m.role === "assistant" && m.text.length >= chars) ? true : null), timeoutMs, 50);
 }
 
+/**
+ * Resolves inside the MutationObserver callback in which `probe` first returns non-null, so the
+ * continuation runs as a microtask of the task that changed the DOM (no clamped timer in a hidden
+ * page). The timeout is a setTimeout and may itself be clamped; it only bounds failures.
+ */
+export function kmWaitDom<T>(label: string, probe: () => T | null, timeoutMs: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const first = probe();
+    if (first !== null) {
+      resolve(first);
+      return;
+    }
+    const observer = new MutationObserver(() => {
+      const value = probe();
+      if (value === null) return;
+      observer.disconnect();
+      clearTimeout(timer);
+      resolve(value);
+    });
+    const timer = setTimeout(() => {
+      observer.disconnect();
+      reject(new Error(`timed out after ${timeoutMs} ms: ${label}`));
+    }, timeoutMs);
+    observer.observe(document.documentElement, { subtree: true, childList: true, characterData: true, attributes: true });
+  });
+}
+
+/** kmWaitAssistantText driven by DOM mutations instead of a 50 ms poll (the cancel trigger). */
+export function kmWaitAssistantTextOnMutation(chars: number, timeoutMs = 30_000): Promise<true> {
+  return kmWaitDom(`assistant text >= ${chars}`, () => (kmSnapshot().messages.some((m) => m.role === "assistant" && m.text.length >= chars) ? true : null), timeoutMs);
+}
+
 interface SessionView {
   readonly log: { readonly requests: readonly { readonly outcome: string }[] };
   readonly summary: { readonly requestCount: number };
@@ -145,7 +177,7 @@ export async function kmPerformInteraction(harnessUrl: string, sessionId: string
       await kmPoll(`approval ${interaction.interruptId} expired`, () => (kmApprovalCard(interaction.interruptId)?.getAttribute("data-status") === "expired" ? true : null), 20_000);
       return;
     case "cancel-run":
-      await kmWaitAssistantText(interaction.afterTextChars);
+      await kmWaitAssistantTextOnMutation(interaction.afterTextChars);
       kmByTestId("km-cancel-run").click();
       await kmWaitSettled(["interrupted"]);
       return;

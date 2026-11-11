@@ -29,7 +29,7 @@
   "test_command": "pnpm run test",
   "lint_command": "pnpm run lint && pnpm run typecheck",
   "dev_command": "./docs/design/live/start.sh",
-  "__commands_note": "No application build tooling exists yet (static HTML design kit + dependency-free Node token server). The hybrid shell phase must set build/test/lint commands here once its workspace exists.",
+  "__commands_note": "Set by c14 (hybrid-shell-foundation). build: turbo (web, tokens) then cargo build -p bff, tauri build --debug, bundle-identity, build_runner, flutter build apk --debug and ios --simulator --no-codesign. test: turbo, repo-rule fixtures, cargo test --workspace (incl. src-tauri), build_runner, flutter test. lint: repo rules + clippy -D warnings + flutter analyze --fatal-infos, then typecheck. Fidelity (pnpm run test:fidelity) and bundle identity (pnpm run verify:bundle-identity) are c13 commands, not per-change.",
   "stack": {
     "current": [
       "static HTML/CSS/JS design system (docs/design)",

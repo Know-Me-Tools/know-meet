@@ -1,3 +1,4 @@
+import { Button } from "@know-meet/ui/components/button";
 import {
   MessageScroller as MessageScrollerPrimitive,
   useMessageScroller,
@@ -7,7 +8,6 @@ import {
 import { cn } from "cn";
 import { ArrowDownIcon } from "lucide-react";
 import type * as React from "react";
-import { Button } from "@/presentation/components/ui/button";
 
 function MessageScrollerProvider(
   props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>,

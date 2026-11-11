@@ -1,7 +1,8 @@
 // TJ-ARCH-MOB-001 compliant
+
+import { TooltipProvider } from "@know-meet/ui/components/tooltip";
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
-import { TooltipProvider } from "../presentation/components/ui/tooltip";
 import { NotesServicesContext } from "../presentation/notes/notes-services";
 import { type AppServices, AppServicesContext } from "./app-services";
 import type { createAppRouter } from "./router";
