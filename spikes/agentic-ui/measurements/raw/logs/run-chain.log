@@ -1,0 +1,446 @@
+== tauri conformance own
+run own-conformance-mwawviik: 58 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/own-conformance-mwawviik.app.log
+(node:7108) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  step 1/58
+  step 3/58
+  step 5/58
+  step 7/58
+  step 11/58
+  step 20/58
+  step 31/58
+  step 40/58
+  step 45/58
+  step 49/58
+  step 51/58
+  step 52/58
+  step 54/58
+  step 58/58
+run own-conformance-mwawviik: done; records in reports/spike-report/own-conformance-mwawviik.jsonl
+  -> /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/tauri-own-conformance-mwawviik.jsonl
+== tauri conformance hybrid
+run hybrid-conformance-mwawwmuo: 58 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/hybrid-conformance-mwawwmuo.app.log
+(node:8966) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  step 0/58
+  step 2/58
+  step 4/58
+  step 5/58
+  step 6/58
+  step 7/58
+  step 9/58
+  step 13/58
+  step 24/58
+  step 34/58
+  step 44/58
+  step 49/58
+  step 51/58
+  step 54/58
+  step 58/58
+run hybrid-conformance-mwawwmuo: done; records in reports/spike-report/hybrid-conformance-mwawwmuo.jsonl
+  -> /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/tauri-hybrid-conformance-mwawwmuo.jsonl
+done
+== dry run hybrid webkit
+(node:11649) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+dry run hybrid-dryrun-webkit-mwawxrcn done: reports/spike-report/hybrid-dryrun-webkit-mwawxrcn.jsonl
+== tauri measure hybrid
+run hybrid-measure-mwawyiuv: 75 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/hybrid-measure-mwawyiuv.app.log
+(node:13483) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  step 2/75
+  step 5/75
+  step 6/75
+  step 7/75
+  step 8/75
+  step 9/75
+  step 13/75
+  step 15/75
+  step 17/75
+  step 19/75
+  step 22/75
+  step 27/75
+  step 32/75
+  step 35/75
+  step 36/75
+  step 37/75
+  step 38/75
+  step 39/75
+  step 41/75
+  step 45/75
+  step 48/75
+  step 50/75
+  step 53/75
+  step 59/75
+  step 66/75
+  step 70/75
+  step 72/75
+  step 73/75
+  step 75/75
+run hybrid-measure-mwawyiuv: done; records in reports/spike-report/hybrid-measure-mwawyiuv.jsonl
+  -> /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/tauri-hybrid-measure-mwawyiuv.jsonl
+== tauri measure own
+run own-measure-mwax9aw9: 75 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/own-measure-mwax9aw9.app.log
+(node:19295) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  step 4/75
+  step 5/75
+  step 6/75
+  step 7/75
+  step 8/75
+  step 9/75
+  step 11/75
+  step 13/75
+  step 15/75
+  step 16/75
+  step 17/75
+  step 18/75
+  step 19/75
+  step 20/75
+  step 22/75
+  step 24/75
+  step 26/75
+  step 28/75
+  step 30/75
+  step 32/75
+  step 34/75
+  step 35/75
+  step 36/75
+  step 37/75
+  step 38/75
+  step 39/75
+  step 41/75
+  step 43/75
+  step 45/75
+  step 47/75
+  step 49/75
+  step 50/75
+  step 52/75
+  step 54/75
+  step 64/75
+  step 66/75
+  step 68/75
+  step 70/75
+  step 71/75
+  step 72/75
+  step 73/75
+  step 74/75
+  step 75/75
+run own-measure-mwax9aw9: done; records in reports/spike-report/own-measure-mwax9aw9.jsonl
+  -> /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/tauri-own-measure-mwax9aw9.jsonl
+done
+== browser
+== hybrid-chromium
+a2ui-over-agui #1: ttft 63 ms, total 203 ms, commits 27
+a2ui-over-agui #2: ttft 63 ms, total 193 ms, commits 27
+a2ui-over-agui #3: ttft 71 ms, total 192 ms, commits 26
+a2ui-over-agui #4: ttft 72 ms, total 192 ms, commits 26
+a2ui-over-agui #5: ttft 90 ms, total 192 ms, commits 22
+cancel-mid-stream #1: ttft 75 ms, total 86676 ms, commits 6922
+cancel-mid-stream #2: ttft 92 ms, total 86674 ms, commits 6922
+cancel-mid-stream #3: ttft 75 ms, total 86679 ms, commits 6922
+cancel-mid-stream #4: ttft 75 ms, total 86692 ms, commits 6919
+cancel-mid-stream #5: ttft 65 ms, total 86984 ms, commits 6893
+custom-chunks #1: ttft 128 ms, total 414 ms, commits 50
+custom-chunks #2: ttft 68 ms, total 422 ms, commits 58
+custom-chunks #3: ttft 187 ms, total 420 ms, commits 43
+custom-chunks #4: ttft 91 ms, total 398 ms, commits 55
+custom-chunks #5: ttft 210 ms, total 402 ms, commits 39
+disconnect-reconnect-replay #1: ttft 187 ms, total 1015 ms, commits 87
+disconnect-reconnect-replay #2: ttft 226 ms, total 1012 ms, commits 84
+disconnect-reconnect-replay #3: ttft 161 ms, total 1011 ms, commits 88
+disconnect-reconnect-replay #4: ttft 165 ms, total 1014 ms, commits 88
+disconnect-reconnect-replay #5: ttft 147 ms, total 1014 ms, commits 89
+hitl-approve #1: ttft 234 ms, total 284 ms, commits 28
+hitl-approve #2: ttft 153 ms, total 276 ms, commits 28
+hitl-approve #3: ttft 128 ms, total 284 ms, commits 28
+hitl-approve #4: ttft 142 ms, total 274 ms, commits 28
+hitl-approve #5: ttft 224 ms, total 275 ms, commits 28
+hitl-expire #1: ttft 128 ms, total 275 ms, commits 28
+hitl-expire #2: ttft 188 ms, total 275 ms, commits 28
+hitl-expire #3: ttft 68 ms, total 276 ms, commits 35
+hitl-expire #4: ttft 153 ms, total 277 ms, commits 28
+hitl-expire #5: ttft 71 ms, total 276 ms, commits 35
+hitl-reject #1: ttft 189 ms, total 274 ms, commits 28
+hitl-reject #2: ttft 122 ms, total 275 ms, commits 28
+hitl-reject #3: ttft 130 ms, total 276 ms, commits 28
+hitl-reject #4: ttft 142 ms, total 275 ms, commits 28
+hitl-reject #5: ttft 88 ms, total 276 ms, commits 32
+long-markdown #1: ttft 265 ms, total 5855 ms, commits 4574
+long-markdown #2: ttft 373 ms, total 5859 ms, commits 4547
+long-markdown #3: ttft 157 ms, total 5855 ms, commits 4602
+long-markdown #4: ttft 275 ms, total 5856 ms, commits 4562
+long-markdown #5: ttft 127 ms, total 5854 ms, commits 4608
+malformed-out-of-order #1: ttft 192 ms, total 276 ms, commits 18
+malformed-out-of-order #2: ttft 147 ms, total 275 ms, commits 24
+malformed-out-of-order #3: ttft 145 ms, total 274 ms, commits 24
+malformed-out-of-order #4: ttft 175 ms, total 274 ms, commits 20
+malformed-out-of-order #5: ttft 163 ms, total 275 ms, commits 21
+parallel-tool-calls #1: ttft 146 ms, total 694 ms, commits 97
+parallel-tool-calls #2: ttft 219 ms, total 693 ms, commits 96
+parallel-tool-calls #3: ttft 76 ms, total 692 ms, commits 104
+parallel-tool-calls #4: ttft 213 ms, total 693 ms, commits 96
+parallel-tool-calls #5: ttft 144 ms, total 693 ms, commits 97
+reasoning-subagents-snapshot #1: ttft 348 ms, total 493 ms, commits 61
+reasoning-subagents-snapshot #2: ttft 348 ms, total 492 ms, commits 61
+reasoning-subagents-snapshot #3: ttft 351 ms, total 497 ms, commits 61
+reasoning-subagents-snapshot #4: ttft 347 ms, total 493 ms, commits 61
+reasoning-subagents-snapshot #5: ttft 348 ms, total 493 ms, commits 61
+run-cancelled-by-agent #1: ttft 72 ms, total 117 ms, commits 15
+run-cancelled-by-agent #2: ttft 88 ms, total 114 ms, commits 12
+run-cancelled-by-agent #3: ttft 190 ms, total 202 ms, commits 10
+run-cancelled-by-agent #4: ttft 170 ms, total 201 ms, commits 10
+run-cancelled-by-agent #5: ttft 193 ms, total 204 ms, commits 10
+run-error #1: ttft 106 ms, total 120 ms, commits 11
+run-error #2: ttft 170 ms, total 201 ms, commits 10
+run-error #3: ttft 140 ms, total 152 ms, commits 10
+run-error #4: ttft 97 ms, total 110 ms, commits 11
+run-error #5: ttft 217 ms, total 229 ms, commits 10
+state-snapshot-delta #1: ttft 167 ms, total 252 ms, commits 20
+state-snapshot-delta #2: ttft 166 ms, total 253 ms, commits 20
+state-snapshot-delta #3: ttft 170 ms, total 254 ms, commits 20
+state-snapshot-delta #4: ttft 168 ms, total 253 ms, commits 20
+state-snapshot-delta #5: ttft 247 ms, total 262 ms, commits 14
+hostile/huge-table #1: ttft 154 ms, total 1154 ms, commits 411
+hostile/huge-table #2: ttft 172 ms, total 1116 ms, commits 411
+hostile/huge-table #3: ttft 209 ms, total 1050 ms, commits 411
+hostile/huge-table #4: ttft 151 ms, total 1154 ms, commits 411
+hostile/huge-table #5: ttft 152 ms, total 1141 ms, commits 411
+bundle: 465 files, raw 16814672 B, gzip 4795327 B, brotli 4241452 B
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/measure-hybrid-chromium.json
+== own-chromium
+a2ui-over-agui #1: ttft 42 ms, total 189 ms, commits 13
+a2ui-over-agui #2: ttft 159 ms, total 189 ms, commits 6
+a2ui-over-agui #3: ttft 36 ms, total 188 ms, commits 13
+a2ui-over-agui #4: ttft 237 ms, total 240 ms, commits 3
+a2ui-over-agui #5: ttft 213 ms, total 215 ms, commits 3
+cancel-mid-stream #1: ttft 94 ms, total 86667 ms, commits 2237
+cancel-mid-stream #2: ttft 197 ms, total 86749 ms, commits 2228
+cancel-mid-stream #3: ttft 144 ms, total 86709 ms, commits 2243
+cancel-mid-stream #4: ttft 127 ms, total 86688 ms, commits 2248
+cancel-mid-stream #5: ttft 100 ms, total 86714 ms, commits 2253
+custom-chunks #1: ttft 163 ms, total 411 ms, commits 16
+custom-chunks #2: ttft 181 ms, total 404 ms, commits 15
+custom-chunks #3: ttft 102 ms, total 404 ms, commits 19
+custom-chunks #4: ttft 248 ms, total 396 ms, commits 12
+custom-chunks #5: ttft 108 ms, total 399 ms, commits 20
+disconnect-reconnect-replay #1: ttft 100 ms, total 1007 ms, commits 43
+disconnect-reconnect-replay #2: ttft 110 ms, total 1007 ms, commits 45
+disconnect-reconnect-replay #3: ttft 34 ms, total 1008 ms, commits 46
+disconnect-reconnect-replay #4: ttft 35 ms, total 1008 ms, commits 43
+disconnect-reconnect-replay #5: ttft 93 ms, total 1007 ms, commits 44
+hitl-approve #1: ttft 184 ms, total 269 ms, commits 4
+hitl-approve #2: ttft 114 ms, total 268 ms, commits 7
+hitl-approve #3: ttft 36 ms, total 268 ms, commits 12
+hitl-approve #4: ttft 37 ms, total 268 ms, commits 11
+hitl-approve #5: ttft 178 ms, total 267 ms, commits 4
+hitl-expire #1: ttft 224 ms, total 268 ms, commits 4
+hitl-expire #2: ttft 161 ms, total 267 ms, commits 5
+hitl-expire #3: ttft 101 ms, total 267 ms, commits 8
+hitl-expire #4: ttft 37 ms, total 289 ms, commits 12
+hitl-expire #5: ttft 127 ms, total 268 ms, commits 7
+hitl-reject #1: ttft 124 ms, total 267 ms, commits 7
+hitl-reject #2: ttft 100 ms, total 268 ms, commits 8
+hitl-reject #3: ttft 110 ms, total 268 ms, commits 8
+hitl-reject #4: ttft 213 ms, total 268 ms, commits 4
+hitl-reject #5: ttft 130 ms, total 269 ms, commits 7
+long-markdown #1: ttft 106 ms, total 5895 ms, commits 162
+long-markdown #2: ttft 132 ms, total 5873 ms, commits 164
+long-markdown #3: ttft 113 ms, total 5854 ms, commits 162
+long-markdown #4: ttft 41 ms, total 5871 ms, commits 165
+long-markdown #5: ttft 36 ms, total 5868 ms, commits 167
+malformed-out-of-order #1: ttft 122 ms, total 268 ms, commits 13
+malformed-out-of-order #2: ttft 123 ms, total 267 ms, commits 12
+malformed-out-of-order #3: ttft 121 ms, total 268 ms, commits 11
+malformed-out-of-order #4: ttft 123 ms, total 270 ms, commits 12
+malformed-out-of-order #5: ttft 123 ms, total 271 ms, commits 17
+parallel-tool-calls #1: ttft 138 ms, total 689 ms, commits 31
+parallel-tool-calls #2: ttft 169 ms, total 688 ms, commits 26
+parallel-tool-calls #3: ttft 107 ms, total 690 ms, commits 33
+parallel-tool-calls #4: ttft 176 ms, total 705 ms, commits 29
+parallel-tool-calls #5: ttft 103 ms, total 689 ms, commits 32
+reasoning-subagents-snapshot #1: ttft 323 ms, total 490 ms, commits 25
+reasoning-subagents-snapshot #2: ttft 325 ms, total 490 ms, commits 24
+reasoning-subagents-snapshot #3: ttft 323 ms, total 489 ms, commits 22
+reasoning-subagents-snapshot #4: ttft 324 ms, total 488 ms, commits 26
+reasoning-subagents-snapshot #5: ttft 325 ms, total 488 ms, commits 20
+run-cancelled-by-agent #1: ttft 112 ms, total 116 ms, commits 3
+run-cancelled-by-agent #2: ttft 88 ms, total 109 ms, commits 4
+run-cancelled-by-agent #3: ttft 100 ms, total 108 ms, commits 4
+run-cancelled-by-agent #4: ttft 81 ms, total 108 ms, commits 4
+run-cancelled-by-agent #5: ttft 160 ms, total 161 ms, commits 2
+run-error #1: ttft 103 ms, total 108 ms, commits 4
+run-error #2: ttft 114 ms, total 117 ms, commits 2
+run-error #3: ttft 108 ms, total 110 ms, commits 2
+run-error #4: ttft 98 ms, total 101 ms, commits 4
+run-error #5: ttft 189 ms, total 191 ms, commits 2
+state-snapshot-delta #1: ttft 175 ms, total 250 ms, commits 8
+state-snapshot-delta #2: ttft 146 ms, total 251 ms, commits 8
+state-snapshot-delta #3: ttft 188 ms, total 253 ms, commits 6
+state-snapshot-delta #4: ttft 143 ms, total 248 ms, commits 7
+state-snapshot-delta #5: ttft 143 ms, total 250 ms, commits 8
+hostile/huge-table #1: ttft 210 ms, total 1127 ms, commits 15
+hostile/huge-table #2: ttft 324 ms, total 1134 ms, commits 13
+hostile/huge-table #3: ttft 134 ms, total 1137 ms, commits 17
+hostile/huge-table #4: ttft 126 ms, total 1168 ms, commits 18
+hostile/huge-table #5: ttft 133 ms, total 1119 ms, commits 17
+bundle: 465 files, raw 16140763 B, gzip 4608328 B, brotli 4090550 B
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/measure-own-chromium.json
+== hybrid-webkit
+a2ui-over-agui #1: ttft 81 ms, total 209 ms, commits 26
+a2ui-over-agui #2: ttft 73 ms, total 203 ms, commits 26
+a2ui-over-agui #3: ttft 74 ms, total 210 ms, commits 25
+a2ui-over-agui #4: ttft 84 ms, total 220 ms, commits 26
+a2ui-over-agui #5: ttft 89 ms, total 227 ms, commits 24
+cancel-mid-stream #1: ttft 75 ms, total 86833 ms, commits 6917
+cancel-mid-stream #2: ttft 73 ms, total 86769 ms, commits 6909
+cancel-mid-stream #3: ttft 70 ms, total 86721 ms, commits 6919
+cancel-mid-stream #4: ttft 75 ms, total 86718 ms, commits 6920
+cancel-mid-stream #5: ttft 73 ms, total 86760 ms, commits 6915
+custom-chunks #1: ttft 76 ms, total 537 ms, commits 58
+custom-chunks #2: ttft 71 ms, total 434 ms, commits 58
+custom-chunks #3: ttft 69 ms, total 416 ms, commits 58
+custom-chunks #4: ttft 72 ms, total 440 ms, commits 58
+custom-chunks #5: ttft 73 ms, total 430 ms, commits 58
+disconnect-reconnect-replay #1: ttft 82 ms, total 1031 ms, commits 94
+disconnect-reconnect-replay #2: ttft 70 ms, total 1042 ms, commits 94
+disconnect-reconnect-replay #3: ttft 69 ms, total 1039 ms, commits 94
+disconnect-reconnect-replay #4: ttft 68 ms, total 1038 ms, commits 94
+disconnect-reconnect-replay #5: ttft 257 ms, total 1031 ms, commits 81
+hitl-approve #1: ttft 79 ms, total 302 ms, commits 36
+hitl-approve #2: ttft 72 ms, total 295 ms, commits 36
+hitl-approve #3: ttft 72 ms, total 295 ms, commits 35
+hitl-approve #4: ttft 74 ms, total 297 ms, commits 35
+hitl-approve #5: ttft 74 ms, total 299 ms, commits 35
+hitl-expire #1: ttft 71 ms, total 295 ms, commits 35
+hitl-expire #2: ttft 70 ms, total 295 ms, commits 35
+hitl-expire #3: ttft 71 ms, total 295 ms, commits 35
+hitl-expire #4: ttft 69 ms, total 295 ms, commits 35
+hitl-expire #5: ttft 79 ms, total 286 ms, commits 34
+hitl-reject #1: ttft 80 ms, total 289 ms, commits 35
+hitl-reject #2: ttft 70 ms, total 296 ms, commits 35
+hitl-reject #3: ttft 70 ms, total 296 ms, commits 36
+hitl-reject #4: ttft 73 ms, total 299 ms, commits 36
+hitl-reject #5: ttft 76 ms, total 301 ms, commits 35
+long-markdown #1: ttft 57 ms, total 5918 ms, commits 4530
+long-markdown #2: ttft 99 ms, total 5901 ms, commits 4540
+long-markdown #3: ttft 108 ms, total 5924 ms, commits 4483
+long-markdown #4: ttft 99 ms, total 5936 ms, commits 4443
+long-markdown #5: ttft 86 ms, total 5952 ms, commits 4405
+malformed-out-of-order #1: ttft 154 ms, total 298 ms, commits 24
+malformed-out-of-order #2: ttft 160 ms, total 302 ms, commits 23
+malformed-out-of-order #3: ttft 173 ms, total 318 ms, commits 23
+malformed-out-of-order #4: ttft 158 ms, total 286 ms, commits 23
+malformed-out-of-order #5: ttft 159 ms, total 295 ms, commits 23
+parallel-tool-calls #1: ttft 95 ms, total 711 ms, commits 105
+parallel-tool-calls #2: ttft 87 ms, total 704 ms, commits 105
+parallel-tool-calls #3: ttft 88 ms, total 705 ms, commits 105
+parallel-tool-calls #4: ttft 84 ms, total 696 ms, commits 106
+parallel-tool-calls #5: ttft 85 ms, total 701 ms, commits 105
+reasoning-subagents-snapshot #1: ttft 366 ms, total 510 ms, commits 61
+reasoning-subagents-snapshot #2: ttft 353 ms, total 507 ms, commits 61
+reasoning-subagents-snapshot #3: ttft 359 ms, total 510 ms, commits 60
+reasoning-subagents-snapshot #4: ttft 362 ms, total 511 ms, commits 61
+reasoning-subagents-snapshot #5: ttft 354 ms, total 506 ms, commits 61
+run-cancelled-by-agent #1: ttft 70 ms, total 132 ms, commits 15
+run-cancelled-by-agent #2: ttft 70 ms, total 133 ms, commits 15
+run-cancelled-by-agent #3: ttft 68 ms, total 131 ms, commits 16
+run-cancelled-by-agent #4: ttft 65 ms, total 128 ms, commits 15
+run-cancelled-by-agent #5: ttft 67 ms, total 130 ms, commits 16
+run-error #1: ttft 66 ms, total 111 ms, commits 14
+run-error #2: ttft 65 ms, total 109 ms, commits 13
+run-error #3: ttft 71 ms, total 113 ms, commits 13
+run-error #4: ttft 69 ms, total 112 ms, commits 13
+run-error #5: ttft 67 ms, total 111 ms, commits 14
+state-snapshot-delta #1: ttft 171 ms, total 268 ms, commits 19
+state-snapshot-delta #2: ttft 171 ms, total 266 ms, commits 20
+state-snapshot-delta #3: ttft 172 ms, total 266 ms, commits 20
+state-snapshot-delta #4: ttft 173 ms, total 270 ms, commits 20
+state-snapshot-delta #5: ttft 174 ms, total 269 ms, commits 19
+hostile/huge-table #1: ttft 44 ms, total 1132 ms, commits 413
+hostile/huge-table #2: ttft 50 ms, total 1112 ms, commits 411
+hostile/huge-table #3: ttft 45 ms, total 1095 ms, commits 412
+hostile/huge-table #4: ttft 45 ms, total 1117 ms, commits 411
+hostile/huge-table #5: ttft 44 ms, total 1118 ms, commits 412
+bundle: 465 files, raw 16814672 B, gzip 4795327 B, brotli 4241452 B
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/measure-hybrid-webkit.json
+== own-webkit
+a2ui-over-agui #1: ttft 44 ms, total 193 ms, commits 12
+a2ui-over-agui #2: ttft 39 ms, total 192 ms, commits 13
+a2ui-over-agui #3: ttft 39 ms, total 188 ms, commits 13
+a2ui-over-agui #4: ttft 40 ms, total 190 ms, commits 12
+a2ui-over-agui #5: ttft 39 ms, total 190 ms, commits 13
+cancel-mid-stream #1: ttft 13 ms, total 86712 ms, commits 2168
+cancel-mid-stream #2: ttft 13 ms, total 86739 ms, commits 2165
+cancel-mid-stream #3: ttft 11 ms, total 86681 ms, commits 2173
+cancel-mid-stream #4: ttft 12 ms, total 86668 ms, commits 2163
+cancel-mid-stream #5: ttft 11 ms, total 86740 ms, commits 2163
+custom-chunks #1: ttft 40 ms, total 440 ms, commits 23
+custom-chunks #2: ttft 39 ms, total 402 ms, commits 24
+custom-chunks #3: ttft 41 ms, total 398 ms, commits 23
+custom-chunks #4: ttft 39 ms, total 429 ms, commits 24
+custom-chunks #5: ttft 38 ms, total 413 ms, commits 24
+disconnect-reconnect-replay #1: ttft 30 ms, total 1024 ms, commits 48
+disconnect-reconnect-replay #2: ttft 30 ms, total 1022 ms, commits 49
+disconnect-reconnect-replay #3: ttft 29 ms, total 1020 ms, commits 48
+disconnect-reconnect-replay #4: ttft 29 ms, total 1024 ms, commits 48
+disconnect-reconnect-replay #5: ttft 33 ms, total 1027 ms, commits 46
+hitl-approve #1: ttft 39 ms, total 280 ms, commits 12
+hitl-approve #2: ttft 47 ms, total 293 ms, commits 12
+hitl-approve #3: ttft 41 ms, total 277 ms, commits 12
+hitl-approve #4: ttft 39 ms, total 271 ms, commits 11
+hitl-approve #5: ttft 40 ms, total 273 ms, commits 12
+hitl-expire #1: ttft 39 ms, total 271 ms, commits 11
+hitl-expire #2: ttft 40 ms, total 273 ms, commits 12
+hitl-expire #3: ttft 40 ms, total 273 ms, commits 12
+hitl-expire #4: ttft 40 ms, total 279 ms, commits 11
+hitl-expire #5: ttft 39 ms, total 272 ms, commits 12
+hitl-reject #1: ttft 39 ms, total 274 ms, commits 11
+hitl-reject #2: ttft 38 ms, total 278 ms, commits 11
+hitl-reject #3: ttft 39 ms, total 272 ms, commits 11
+hitl-reject #4: ttft 39 ms, total 281 ms, commits 12
+hitl-reject #5: ttft 40 ms, total 284 ms, commits 12
+long-markdown #1: ttft 20 ms, total 5849 ms, commits 131
+long-markdown #2: ttft 19 ms, total 5852 ms, commits 129
+long-markdown #3: ttft 20 ms, total 5852 ms, commits 130
+long-markdown #4: ttft 21 ms, total 5845 ms, commits 125
+long-markdown #5: ttft 22 ms, total 6022 ms, commits 131
+malformed-out-of-order #1: ttft 125 ms, total 269 ms, commits 18
+malformed-out-of-order #2: ttft 127 ms, total 278 ms, commits 19
+malformed-out-of-order #3: ttft 131 ms, total 277 ms, commits 17
+malformed-out-of-order #4: ttft 126 ms, total 277 ms, commits 19
+malformed-out-of-order #5: ttft 125 ms, total 274 ms, commits 17
+parallel-tool-calls #1: ttft 58 ms, total 712 ms, commits 37
+parallel-tool-calls #2: ttft 61 ms, total 689 ms, commits 36
+parallel-tool-calls #3: ttft 57 ms, total 684 ms, commits 34
+parallel-tool-calls #4: ttft 57 ms, total 706 ms, commits 35
+parallel-tool-calls #5: ttft 63 ms, total 689 ms, commits 29
+reasoning-subagents-snapshot #1: ttft 327 ms, total 500 ms, commits 27
+reasoning-subagents-snapshot #2: ttft 327 ms, total 497 ms, commits 29
+reasoning-subagents-snapshot #3: ttft 326 ms, total 491 ms, commits 28
+reasoning-subagents-snapshot #4: ttft 326 ms, total 496 ms, commits 29
+reasoning-subagents-snapshot #5: ttft 327 ms, total 488 ms, commits 29
+run-cancelled-by-agent #1: ttft 43 ms, total 112 ms, commits 7
+run-cancelled-by-agent #2: ttft 40 ms, total 113 ms, commits 6
+run-cancelled-by-agent #3: ttft 39 ms, total 108 ms, commits 7
+run-cancelled-by-agent #4: ttft 39 ms, total 113 ms, commits 6
+run-cancelled-by-agent #5: ttft 38 ms, total 112 ms, commits 6
+run-error #1: ttft 38 ms, total 109 ms, commits 6
+run-error #2: ttft 39 ms, total 103 ms, commits 6
+run-error #3: ttft 39 ms, total 111 ms, commits 6
+run-error #4: ttft 39 ms, total 108 ms, commits 6
+run-error #5: ttft 39 ms, total 110 ms, commits 5
+state-snapshot-delta #1: ttft 145 ms, total 251 ms, commits 8
+state-snapshot-delta #2: ttft 144 ms, total 259 ms, commits 8
+state-snapshot-delta #3: ttft 145 ms, total 249 ms, commits 9
+state-snapshot-delta #4: ttft 144 ms, total 247 ms, commits 8
+state-snapshot-delta #5: ttft 145 ms, total 245 ms, commits 8
+hostile/huge-table #1: ttft 22 ms, total 1143 ms, commits 22
+hostile/huge-table #2: ttft 24 ms, total 1157 ms, commits 23
+hostile/huge-table #3: ttft 25 ms, total 1140 ms, commits 23
+hostile/huge-table #4: ttft 22 ms, total 1152 ms, commits 23
+hostile/huge-table #5: ttft 21 ms, total 1110 ms, commits 22
+bundle: 465 files, raw 16140763 B, gzip 4608328 B, brotli 4090550 B
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/measure-own-webkit.json
+done
+CHAIN-DONE

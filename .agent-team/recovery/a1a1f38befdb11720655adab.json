@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "file": ".claude/agents/delivery-lead.md",
+      "before": null,
+      "afterSha256": "2cb15450d5c368c1b2771275b0dca2f8e3a044b6b27ce4ff7d73ae87d248823b"
+    },
+    {
+      "file": ".claude/agents/architect.md",
+      "before": null,
+      "afterSha256": "e8181b33a91a8ad388d97c027622fc3928de38986becc5bab1d96fbde3fc36ef"
+    },
+    {
+      "file": ".claude/agents/build-platform.md",
+      "before": null,
+      "afterSha256": "837bf43200b45dfc45cb297b6d56a416971bad4ed256db3b7bdce61ccfc84ad0"
+    },
+    {
+      "file": ".claude/agents/bdd-quality.md",
+      "before": null,
+      "afterSha256": "6cf0aa9b1979217a61709597b1f03481e7c0e1942703db1973f4013acfc43932"
+    },
+    {
+      "file": ".claude/agents/design-lead.md",
+      "before": null,
+      "afterSha256": "ed619fafab6349da1d91833b390fa3f0d07babb4d7b3312f330e891ad5f6abcb"
+    },
+    {
+      "file": ".claude/agents/ui-engineer.md",
+      "before": null,
+      "afterSha256": "e735f53bb2c4defd47c6fac4bbc022451c81cf8045ee95b170f6ad59d437a092"
+    },
+    {
+      "file": ".claude/agents/client-shell.md",
+      "before": null,
+      "afterSha256": "8183206cdd4e6597d0fa1cdc334c7367a297be183d234b65cb2d767a9ca36f57"
+    },
+    {
+      "file": ".claude/agents/mobile-engineer.md",
+      "before": null,
+      "afterSha256": "21ffd9cb3e300bbf577845b94074ef37eb42dab0ad11bc643eb508a4e084c2fc"
+    },
+    {
+      "file": ".claude/agents/webrtc-engineer.md",
+      "before": null,
+      "afterSha256": "469e8f2f7b646de8ca3bafccde88a81fece9f1a5c6f8642bba393475afae0343"
+    },
+    {
+      "file": ".claude/agents/livekit-platform.md",
+      "before": null,
+      "afterSha256": "3f2464ecd1b169054c53f904f4b43ca86a20b8fc9754b09c3324ab96afa21207"
+    },
+    {
+      "file": ".claude/agents/livekit-agents.md",
+      "before": null,
+      "afterSha256": "770874699d63f828953aba8cfd0469b3f3cd3bbc7b1181f5ed1b6ba00c2faf5a"
+    },
+    {
+      "file": ".claude/agents/crdt-engineer.md",
+      "before": null,
+      "afterSha256": "45a020aafbf1428d5808053a25a5934a9fb6636610bfa5fa2b31649614430462"
+    },
+    {
+      "file": ".claude/agents/integrations-engineer.md",
+      "before": null,
+      "afterSha256": "0223e7d654328b702e20573e32698f9b5b0490564fa60f92f0dda93ff15584e2"
+    },
+    {
+      "file": ".claude/agents/security-reviewer.md",
+      "before": null,
+      "afterSha256": "6f7b3f48cb233d2a77907bef69cb37edfea00fd36e33232fbd8bb71d519a4739"
+    },
+    {
+      "file": ".claude/agents/independent-reviewer.md",
+      "before": null,
+      "afterSha256": "0c000aaa5ef7dccd48558badeb9118bc3c477678910e30c3b65a0923928bd282"
+    },
+    {
+      "file": ".agent-team/know-meet-team/team.json",
+      "before": null,
+      "afterSha256": "35015e62fc052bdb5aa31cdaefffa66f8dba1eb81494ebca5e618415f0dc424e"
+    },
+    {
+      "file": "AGENTS.md",
+      "before": "# Know Meet — agent rules\n\nKnow Meet is the KnowMe meeting room: agentic video meetings on LiveKit. This\nrepository holds the brand system and design prototypes (`docs/design/`) and, from\nthe `hybrid-shell-foundation` phase on, the application shells:\n\n- **Web:** React 19\n- **Desktop:** Tauri, running the *same* React web build\n- **Mobile:** Flutter\n\nThese rules apply to every agent and harness: Claude Code, Codex, OpenCode, Kimi\nCode, MiniMax Code, Qwen Code, Zed and any other. `CLAUDE.md` imports this file.\n\n## Process\n\n- Work goes through KBD (`.kbd-orchestrator/`) and OpenSpec (`openspec/`): assess →\n  analyze → plan → execute → reflect. Don't shortcut stages or edit generated KBD\n  JSON by hand.\n- `.kbd-orchestrator/constraints.md` holds the machine-checkable constraints.\n  `.kbd-orchestrator/project.json` holds the build, test and lint commands.\n\n## File naming: kebab-case\n\n- File and directory names are **kebab-case**: lowercase words joined by hyphens,\n  for example `meeting-tile.tsx`, `use-room-state.ts`, `design-tokens/`.\n- The *name of the code symbol* still follows its language: `meeting-tile.tsx`\n  exports `MeetingTile`, and `use-room-state.ts` exports `useRoomState`.\n- **Exceptions**, only where the toolchain requires another form:\n  - **Dart/Flutter source:** `lower_snake_case.dart`, required by the Dart\n    `file_names` lint and import conventions.\n  - **Rust source modules:** `snake_case.rs`, because hyphens aren't valid module\n    identifiers. Crate package names may stay kebab-case.\n  - **Tool-mandated names:**\n    - Project docs: `README.md`, `LICENSE`, `CHANGELOG.md`, `AGENTS.md`, `CLAUDE.md`\n    - Rust: `Cargo.toml`, `Cargo.lock`, `build.rs`, `main.rs`, `lib.rs`, `mod.rs`\n    - Dart: `pubspec.yaml`, `analysis_options.yaml`\n    - JS tooling: `package.json`, `tsconfig*.json`, `vite.config.ts`,\n      `components.json`, `tauri.conf.json`\n    - Containers: `Dockerfile`\n    - Dotfiles\n  - **Native platform scaffolding** created by `flutter create`, Xcode or Gradle\n    (`AppDelegate.swift`, `MainActivity.kt`, `Info.plist`, `AndroidManifest.xml`,\n    Gradle files).\n  - **Files whose names a generator owns**, for example `routeTree.gen.ts`,\n    `*.g.dart`, `*.freezed.dart`.\n  - **AI-harness integration files** that OpenSpec or another tool generates inside\n    `.agents/`, `.claude/`, `.codex/`, `.dsh/`, `.kimi-code/`, `.opencode/`,\n    `.qwen/` or `.zed/` (`SKILL.md`, command files, `.openspec-target`).\n\n## File size: 500 lines maximum\n\n- **No file may exceed 500 lines, in any language.** That covers TypeScript, TSX, CSS,\n  Rust, Dart, shell, config and Markdown.\n- When a file would pass 500 lines, **don't grow it and don't split it arbitrarily.**\n  Replace it with a **directory named after the function or feature**, and divide\n  the code by clean-architecture responsibility, so each file has one reason to\n  change:\n\n  ```text\n  room-controls/              # was room-controls.tsx (over 500 lines)\n    index.ts                  # public surface: re-exports only\n    domain/                   # entities, value objects, rules (no framework imports)\n    application/              # use cases, state orchestration, ports (interfaces)\n    infrastructure/           # adapters: LiveKit, Tauri IPC, HTTP, storage\n    presentation/             # components, hooks, view models, styles\n  ```\n\n  Use only the layers the feature needs. A small feature may only need\n  `presentation/` and `application/`. Use the same shape in Rust (`mod.rs` / `lib.rs`\n  re-exports) and Dart (a barrel `<feature>.dart` exporting the public files).\n- **Dependencies point inward:** presentation → application → domain, and\n  infrastructure → application/domain. Domain and application code never imports UI\n  frameworks, Tauri, Flutter or the LiveKit SDK.\n- Splitting should make the code *easier to read and reason about*. Name files after\n  what they do (`join-room.ts`, `token-request.ts`), not `utils-2.ts` or `part-b.ts`.\n- **Exceptions** (these can't be meaningfully split):\n  - Lockfiles: `pnpm-lock.yaml`, `Cargo.lock`, `pubspec.lock`.\n  - Generated code: flutter_rust_bridge output, `*.g.dart`, `*.freezed.dart`,\n    `routeTree.gen.ts`, Tauri `gen/` schemas. Regenerate them instead of editing.\n  - Vendored third-party code, for example `assets/vendor/*`.\n  - Native platform project files, for example `project.pbxproj`.\n  - Test fixtures, golden images and recorded snapshot data.\n  - AI-harness skill and command files generated by OpenSpec or other tools (the\n    same harness folders as above). `openspec update` rewrites them, so don't edit\n    or split them.\n  - **Pending operator decision:** the frozen design prototypes in\n    `docs/design/**`, and long-form docs other than `CHANGELOG.md`. Until decided,\n    leave `docs/design/` as it is and don't add new files over 500 lines anywhere.\n- An automated checker (line count plus naming, honouring the exceptions above) will\n  be wired into the lint command, a pre-commit hook and CI during the\n  `hybrid-shell-foundation` phase.\n\n## Design fidelity\n\n- `docs/design/` is the visual source of truth: `tokens.json` / `tokens.css`, the\n  brand guide and the prototypes. Every shell must match it in both dark and light\n  themes.\n- Colours, type, spacing, radii and motion come from the design tokens. Don't add\n  ad-hoc hex values or font stacks in app code.\n- UI primitives come from the shared shadcn/ui component set themed with the\n  tokens. Don't copy components per app.\n- Fidelity is proven with screenshots against the prototypes at 375, 768, 1024 and\n  1440 in both themes. Passing architecture checks alone is not proof.\n\n## Never do\n\n- Never commit LiveKit or other secrets. `LIVEKIT_*` values come only from the shell\n  environment and stay server-side. Clients receive short-lived tokens.\n- Never write to `/Users/gqadonis/Projects/hybrid-mobile-architecture-src`. It is a\n  read-only reference.\n- Never call Tauri APIs unguarded in shared web code. Wrap them in an `isTauri()`\n  check, so the plain web build keeps working.\n- Never use `any` in TypeScript.\n- Don't use the root `live/` folder. It's a stale duplicate of\n  `docs/design/live/`, pending removal.\n",
+      "afterSha256": "a47dcc17b918ce470b66e238c0df5e74e84a6cc1320927f113218e349bab9e0d"
+    },
+    {
+      "file": "CLAUDE.md",
+      "before": "@AGENTS.md\n\n# Claude Code notes\n\n`AGENTS.md` above is the single source of project rules. In particular:\n\n- **Kebab-case file names**, with the listed toolchain exceptions (Dart\n  `snake_case`, Rust module `snake_case`, tool-mandated names).\n- **No file over 500 lines.** A file that would grow past that becomes a feature\n  directory, split by clean-architecture layer.\n\nWhen the two files disagree, `AGENTS.md` wins. Edit the rule there, not here.\n\nBefore creating or extending a file, check its line count. If the change would take\nit past 500 lines, restructure it into a directory first, as part of the same\nchange.\n",
+      "afterSha256": "2bf0591806f7208e5b680fa3651b370ecf5e816c60e6497ee9cbf55165d73066"
+    },
+    {
+      "file": ".agent-team/project-routing.json",
+      "before": null,
+      "afterSha256": "47285d0a9dc0c4cc51ab02e66c706a703ef66519d41752fbb4d86513260ca03f"
+    }
+  ]
+}

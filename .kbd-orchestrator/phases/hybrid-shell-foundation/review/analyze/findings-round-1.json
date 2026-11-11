@@ -1,0 +1,86 @@
+{
+  "mode": "artifact",
+  "verdict": "BLOCK",
+  "judge_model": "claude-opus-5-5",
+  "isolation_mode": "harness-native",
+  "producer_model": "claude-opus-5-5",
+  "cross_model_check": "same-model-collision",
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "analysis.md",
+      "line": 111,
+      "claim": "The Flutter UI kit recommendation (forui, shadcn_flutter reference-only) contradicts the package's explicit direction and Goal 1, and Q-A4 frames the operator decision without disclosing that direction.",
+      "evidence": "Goal 1: 'no hand-rolled substitute for what the skill provides'. The package prescribes shadcn_flutter: skills/hybrid-mobile-architecture/SKILL.md:194 '**shadcn-equivalent (Flutter):** Use `shadcn_flutter` package'; AGENTS.md:218 'prefer shadcn_flutter equivalents in Flutter'; skills/flutter-golden-ui/SKILL.md:38 'Wrap with the real theme (shadcn_flutter ThemeData from [[hybrid-design-tokens]])'. analysis.md Q-A4 instead says 'Recommended: forui (0.27 line, more releases)... shadcn_flutter (0.0.x) stays reference-only', and cand-008 calls forui a 'More mature release line'. That maturity claim is unsupported: shadcn_flutter is at 0.0.55 (55 patch releases, published 2026-10-01 per pub.dev) and both packages need the same floor (Flutter >=3.47, Dart >=3.13). Version-number shape is not evidence of maturity. The cited 'stale/invented pin' lesson is about a pin value, not about the library.",
+      "suggested_fix": "Make shadcn_flutter the default because it is the skill-provided choice. Move forui to the alternative, and require evidence before deviating: API coverage of the components on the Q-A3 routes, theming hook for token-generated ThemeData, issue and commit activity. If forui is still preferred, record it as an explicit Goal-1 deviation for the operator in Q-A4, citing SKILL.md:194 and AGENTS.md:218."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "analysis.md",
+      "line": 39,
+      "claim": "Replacing the skill-provided token pipeline (hybrid-design-tokens / gen-design-tokens) with Style Dictionary plus three hand-written custom formats is a Goal-1 deviation, but the analysis decides it unilaterally. Q-A1 gates the comparable Rust-core strip on the operator; this has no such gate.",
+      "evidence": "Goal 1 forbids 'hand-rolled substitute for what the skill provides'. skills/hybrid-design-tokens/SKILL.md is the package's mandated token compiler ('One token source feeds both the React/Tailwind theme AND the Flutter theme... Generation makes the drift impossible'). analysis.md: 'Keep the package's pipeline as reference... so it isn't adopted', and build_required adds three custom Style Dictionary formats (shadcn vars, Tailwind @theme, ThemeData). That is new authored code that substitutes for the skill. Q-A2 only asks which file is canonical (km.css vs tokens.json); it never asks whether to depart from the skill's pipeline. The option of copying gen-design-tokens into the project and extending it (rgba and clamp support, configurable fonts) was never evaluated; the reference repo is read-only, so a local copy is allowed.",
+      "suggested_fix": "Add an operator question (e.g. Q-A8) with the three options and their costs: (1) adopt Style Dictionary as a recorded Goal-1 deviation, (2) vendor and extend the package's gen-design-tokens in tools/, (3) contribute upstream in a separate phase. Until it is answered, do not mark the token pipeline as 'adopt'."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "analysis.md",
+      "line": 112,
+      "claim": "No lint, typecheck or unit-test toolchain was evaluated for Goal 8, and the recommended pin set (Q-A5: follow versions.toml, which pins TypeScript 7.0.2) cannot install the default React lint stack.",
+      "evidence": "Goal 8 requires 'real build, test and lint commands'. The only 'lint' items in analysis.md are ls-lint and a line-count script; ESLint/Biome/oxlint, Vitest and flutter_lints are never considered. versions.toml pins typescript = \"7.0.2\" (Go-native compiler), and the baseline package.json uses typescript 7.0.2. Verified on npm: typescript-eslint latest 8.72.1 (and canary 8.72.2-alpha.11) declares peer 'typescript: >=4.8.4 <6.1.0'. The usual shadcn/Vite lint setup therefore cannot be installed under the recommended pins. Constraints 'no-any-type', 'no-console-log-in-commits' and 'build-passes' all depend on this missing toolchain.",
+      "suggested_fix": "Add a lint/typecheck/test category with candidates and verdicts: Biome 2.6.6 or oxlint 1.92.0 (no tsc JS-API dependency) vs ESLint with TypeScript pinned to 6.0.x; Vitest for web unit tests; flutter_lints/very_good_analysis and flutter test for mobile. Q-A5 must state the TypeScript decision explicitly."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "line": 59,
+      "claim": "The keep/strip table treats the Tauri and Flutter shells as separable from the stripped Rust crates, but both baselines are wired to them. 'Keep' therefore leaves little beyond what `tauri init` / `flutter create` produce, so Goal 1's coverage (0.45) is overstated.",
+      "evidence": "assets/templates/baselines/tauri/desktop/src-tauri/Cargo.toml:9 'gen_ui_notes = { path = \"../../rust/gen_ui_notes\" }'. src-tauri/src/main.rs: every #[tauri::command] calls gen_ui_notes::*. tauri.conf.json uses 'npm run dev/build' and frontendDist '../dist' (not pnpm or apps/web/dist). The Flutter baseline lib/ contains only bridge/, features/notes/ and main.dart, and pubspec pins flutter_rust_bridge 2.12.0 plus a rust_builder/ dir. analysis.md says 'Tauri src-tauri | Keep' and '`rust/gen_ui_*` crates and flutter_rust_bridge | Strip' with no surgery noted.",
+      "suggested_fix": "List the edits needed after stripping (main.rs commands, Cargo deps, tauri.conf build commands and frontendDist, Flutter bridge/rust_builder/pubspec). Re-estimate cand-001 coverage. Put the residual generator contribution into Q-A1 so the operator knows what 'Goal 1 satisfied' actually means."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "line": 90,
+      "claim": "The layer mapping assigns the generator's `entities` folder to the domain layer, but that folder holds a React hook importing the PEM library, which violates the clean-architecture-boundaries constraint and depends on PEM, which is being stripped. The real domain file (types.ts with the repository port) is missing from the mapping.",
+      "evidence": "baselines/web/web/src/features/notes/entities/useNoteEntities.ts: \"import { useEntityQuery, useEntityMutation } from '@prometheus-ags/prometheus-entity-management'; ... export function useNoteEntities()\". types.ts defines 'interface Note' and 'interface NoteRepository'. analysis.md: '| `entities` | domain |'. Constraint clean-architecture-boundaries: 'Domain and application layers do not import UI ... code'.",
+      "suggested_fix": "Map types.ts (entities and ports) to domain. Map entities/ hooks to application, or drop them along with PEM. Map api/ to infrastructure adapters implementing NoteRepository."
+    },
+    {
+      "severity": "WARNING",
+      "file": "library-candidates.json",
+      "claim": "cand-005's evidence misstates the package token generator: it does write web output (a Tailwind 4 @theme file).",
+      "evidence": "cand-005 claim: 'no web/shadcn/ThemeData output'; analysis.md line 20: 'writes neither web, shadcn nor `ThemeData` output'. runtime/src/native-helpers/gen-design-tokens.mts line 15 builds \"'@theme {'\" plus a ':root[data-theme=\"light\"]' override and writes 'desktop/src/theme.css' (line 32). hybrid-design-tokens/SKILL.md: '├── desktop/src/theme.css  Tailwind 4 @theme (+ light override)'. It also emits a Dart token class using GoogleFonts (line 21).",
+      "suggested_fix": "Correct the claim: the generator outputs Tailwind 4 @theme CSS and Dart constants, but no shadcn variable names or ThemeData. Re-run the build-vs-adopt comparison on that corrected basis (it feeds the Goal-1 deviation question above)."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "claim": "Fonts are not analysed at all, including the bundled-fonts/CSP warning carried over from assess. The current sources would load fonts remotely in a way the Tauri CSP blocks.",
+      "evidence": "prior_handoffs: 'WARNINGs carried: ... bundled fonts/CSP'. docs/design/prototype/index.html and brand-guide.html load Google Fonts. The baseline tauri.conf.json CSP is \"default-src 'self'; ... style-src 'self' 'unsafe-inline'; img-src 'self' data:\", with no font-src and no fonts.gstatic.com. The package's Dart output uses GoogleFonts (runtime fetch). analysis.md never mentions fonts, @fontsource, font bundling or CSP.",
+      "suggested_fix": "Add a font-delivery category: self-hosted fonts (e.g. @fontsource packages for web/Tauri, bundled assets in pubspec for Flutter) vs runtime google_fonts with CSP changes. Record the decision so the token pipeline emits matching font-family stacks."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "claim": "There is no build-vs-adopt coverage for motion or theme switching, both of which the Goal-6 fidelity priority requires, or for app routing on either platform.",
+      "evidence": "Goal 6 lists 'light and dark themes, motion'. docs/design/live/assets/km.css contains 38 animation/transition/@keyframes occurrences. analysis.md has no candidate for motion (e.g. tw-animate-css used by shadcn, Flutter motion mapping of duration and easing tokens), the theme-toggle mechanism, a React router (the constraints already anticipate 'routeTree.gen.ts', i.e. TanStack Router) or Flutter navigation (the package ships a mobile-navigation skill). Yet Q-A3 commits to eight routes plus a theme toggle.",
+      "suggested_fix": "Add candidate entries with verdicts for: motion tokens and the animation utility on web, motion token mapping in Flutter, the theme provider (class dark mode per the package), the React router, and Flutter navigation following the mobile-navigation skill."
+    },
+    {
+      "severity": "WARNING",
+      "file": "analysis.md",
+      "line": 97,
+      "claim": "Making a new DTCG source in packages/design-tokens canonical, with docs/design/tokens.json and tokens.css as outputs, conflicts with the blocking constraint wording and the path-ownership rule, and the analysis does not flag the needed constraint change.",
+      "evidence": "Constraint design-tokens-single-source: 'come from the Know Meet design tokens (docs/design/tokens.css / tokens.json)'. Path ownership: 'docs/design/... changes there are design changes, not shell changes.' Q-A2 recommends that 'tokens.json and tokens.css become outputs', i.e. the shell pipeline writes into docs/design.",
+      "suggested_fix": "Add the required constraint amendment (or keep the generated outputs outside docs/design) to Q-A2, so Spec does not propose work that violates a blocking constraint."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "library-candidates.json",
+      "claim": "Adopting alchemist adds a golden-test dependency the package's flutter-golden-ui skill does not use. The toolchain landscape also omits the pnpm major-version drift.",
+      "evidence": "skills/flutter-golden-ui/SKILL.md:34 uses the built-in 'matchesGoldenFile(...)'. cand-012 adopts alchemist 0.14.1 with no comparison against it. cand-003 notes the pin is 11.15.0 and 11.25.0 is installed, but npm shows pnpm latest 12.18.0 (2026-11-06), a major version, which Q-A5 never mentions.",
+      "suggested_fix": "Justify alchemist over built-in goldens (e.g. CI/platform font determinism) or default to the skill's approach. Add the pnpm 12 drift to Q-A5."
+    }
+  ]
+}

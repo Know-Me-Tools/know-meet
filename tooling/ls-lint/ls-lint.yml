@@ -1,0 +1,88 @@
+# Kebab-case naming (AGENTS.md "File naming"). Exception IDs follow the
+# hybrid-shell-foundation assessment: E-N1 Dart, E-N2 Rust, E-N3 tool-mandated
+# names, E-N4 native scaffolding, E-N5 generator-owned names, E-N6 AI-harness
+# files. Paths are relative to the repo root (run from the root).
+ls:
+  .dir: kebab-case | regex:\.[a-z][a-z0-9-]* | regex:(integration_test|test_driver)
+  .*: kebab-case
+  # E-N3 tool-mandated names (README.md, AGENTS.md, CLAUDE.md, CHANGELOG.md,
+  # Cargo.toml/Cargo.lock). E-N5: PRODUCT.md (Impeccable) and SKILLS.md
+  # (agent-team generator) own their names; pending operator confirmation.
+  .md: kebab-case | regex:(README|AGENTS|CLAUDE|CHANGELOG|LICENSE|PRODUCT|SKILLS)
+  .toml: kebab-case | regex:Cargo
+  .lock: kebab-case | regex:Cargo
+  # E-N1 Dart: lower_snake_case files (analysis_options.yaml is Dart-mandated).
+  .dart: snake_case
+  # E-N3: flutter_rust_bridge.yaml is the FRB codegen's mandated config name.
+  .yaml: kebab-case | regex:(analysis_options|flutter_rust_bridge)
+  # E-N2 Rust: snake_case module files.
+  .rs: snake_case
+
+  # E-N1 / E-N2: module directories are identifiers in Dart and Rust. A
+  # directory block replaces the root rules, so it repeats the file rules.
+  apps/mobile/lib: &dart-tree
+    .dir: snake_case
+    .*: kebab-case
+    .dart: snake_case
+  apps/mobile/test: *dart-tree
+  # E-N3: Flutter mandates the integration_test/ and test_driver/ directory names.
+  apps/mobile/integration_test: *dart-tree
+  apps/mobile/test_driver: *dart-tree
+  crates/*/src: &rust-tree
+    .dir: snake_case
+    .*: kebab-case
+    .rs: snake_case
+  apps/desktop/src-tauri/src: *rust-tree
+
+ignore:
+  - .git
+  - node_modules
+  - apps/web/node_modules
+  - apps/desktop/node_modules
+  - packages/application/node_modules
+  - packages/domain/node_modules
+  - packages/design-tokens/node_modules
+  - tests/fidelity/node_modules
+  # Spikes are dated evidence, not product code (c15/c16); they keep their own tool layouts.
+  - spikes
+  # E-N3: tool-mandated README inside the Dart test tree.
+  - apps/mobile/test/goldens/README.md
+  - .turbo
+  - .prometheus
+  - .impeccable
+  # E-N6 AI-harness integration files (OpenSpec and other tools).
+  - .agents
+  - .claude
+  - .codex
+  - .dsh
+  - .kimi-code
+  - .opencode
+  - .qwen
+  - .zed
+  # E-N5 KBD orchestrator state: generator-owned names (timestamps, signatures).
+  - .kbd-orchestrator
+  # E-N3 / E-N4 / E-N5: extensionless tool-mandated files, native scaffolding
+  # and generator output.
+  - docs/design/live/assets/vendor/LICENSE
+  - live
+  - apps/mobile/android
+  - apps/mobile/ios
+  - apps/mobile/macos
+  - apps/mobile/linux
+  - apps/mobile/windows
+  - apps/mobile/web
+  - apps/mobile/build
+  - apps/mobile/.dart_tool
+  # E-N4 / E-N5 (c05): the flutter_rust_bridge plugin package. Its platform
+  # folders are native scaffolding and cargokit is vendored generator output
+  # (provenance in apps/mobile/rust-builder/upstream.md).
+  - apps/mobile/rust-builder/android
+  - apps/mobile/rust-builder/ios
+  - apps/mobile/rust-builder/macos
+  - apps/mobile/rust-builder/linux
+  - apps/mobile/rust-builder/windows
+  - apps/mobile/rust-builder/cargokit
+  - apps/desktop/src-tauri/icons
+  - apps/desktop/src-tauri/gen
+  - apps/desktop/src-tauri/target
+  - target

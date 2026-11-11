@@ -1,0 +1,41 @@
+---
+paths: ['**/*.ts', '**/*.tsx', '**/package.json', '**/tsconfig.json']
+---
+
+# TypeScript
+
+Loaded when a TypeScript file is read. Not resident.
+
+Load `vercel-react-best-practices` before any React change and
+`vercel-composition-patterns` for component APIs. Any change to how a screen
+looks or behaves also loads `impeccable` (see `AGENTS.md`, Required skills).
+
+Batch implementation until a production path is complete. Use a narrow type check
+earlier only when it is needed to unblock work. At a completed change boundary, run
+the smallest browser, API, process, or build integration that exercises the real
+entry point and collaborators. Unit, component-only, snapshot, and per-edit tests are
+not completion evidence. Reserve broad end-to-end, visual, and bundle gates for the
+final applicable phase or release boundary.
+
+## Hard rules
+
+- Bun and esbuild strip types without checking them. `tsc --noEmit` is the real
+  type gate — a green Bun run proves nothing about types.
+- Cache `.tsbuildinfo`. Incremental typecheck drops substantially with it.
+- Watch mode and per-edit test loops are not completion gates.
+- Keep e2e to the flows where failure costs money, not to everything reachable.
+
+## Structure
+
+Organize by capability under `features/<domain>/`, not by technical layer.
+Layer order is UI, then hooks, then stores, then services, then external. A
+component does not call a service or mutate a store directly.
+
+Components render and submit intent. No business rule exists only in a
+component. No browser storage in artifacts.
+
+<!-- Replace example boundaries with this project's real production-path gates. -->
+
+## Selected phase method
+
+Before this stack work, recover the active phase method-context.md and adopted contract from signed canonical KBD status/decisions. For selected VLBV, complete the agreed whole value phase before generated-code builds, tests, imports, lint/typecheck or verification probes; a stack-specific compiler/check example is not permission. Surface host-policy conflicts before dependent action. Retain supersession, evidence/candidate freshness, consumed budgets and unresolved effects; reconcile uncertain effects before retry. This path rule is instruction-only, not universal interception.

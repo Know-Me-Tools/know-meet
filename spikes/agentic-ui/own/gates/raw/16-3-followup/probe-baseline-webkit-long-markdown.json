@@ -1,0 +1,195 @@
+{
+  "label": "baseline",
+  "url": "http://127.0.0.1:4296/",
+  "scenario": "long-markdown",
+  "browser": "webkit",
+  "at": "2026-11-11T08:34:29.735Z",
+  "results": [
+    {
+      "run": 1,
+      "topFrameGaps": [
+        {
+          "startRel": 303,
+          "ms": 1113,
+          "textLenAtStart": 774
+        },
+        {
+          "startRel": 1428,
+          "ms": 32,
+          "textLenAtStart": 927
+        },
+        {
+          "startRel": 5869,
+          "ms": 30,
+          "textLenAtStart": 17035
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 309,
+          "ms": 1098
+        },
+        {
+          "startRel": -103,
+          "ms": 86
+        },
+        {
+          "startRel": -234,
+          "ms": 76
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-1-mwbv4lit",
+          "start": 2,
+          "end": 5885,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 73,
+          "end": 77,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 108,
+          "end": 112,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 274,
+          "end": 278,
+          "size": 974
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 307,
+          "end": 312,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 307,
+          "end": 312,
+          "size": 2910
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 307,
+          "end": 314,
+          "size": 16523
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1413,
+          "end": 1416,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1418,
+          "end": 1422,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 2,
+      "topFrameGaps": [
+        {
+          "startRel": 295,
+          "ms": 1111,
+          "textLenAtStart": 736
+        },
+        {
+          "startRel": 1406,
+          "ms": 35,
+          "textLenAtStart": 942
+        },
+        {
+          "startRel": 6377,
+          "ms": 25,
+          "textLenAtStart": 17335
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 300,
+          "ms": 1092
+        },
+        {
+          "startRel": -155,
+          "ms": 73
+        },
+        {
+          "startRel": 1409,
+          "ms": 26
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-2-mwbv4r6q",
+          "start": 2,
+          "end": 5882,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 67,
+          "end": 70,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 101,
+          "end": 103,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 266,
+          "end": 268,
+          "size": 974
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 299,
+          "end": 304,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 299,
+          "end": 304,
+          "size": 2910
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 299,
+          "end": 306,
+          "size": 16523
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1399,
+          "end": 1401,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1404,
+          "end": 1406,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    }
+  ]
+}

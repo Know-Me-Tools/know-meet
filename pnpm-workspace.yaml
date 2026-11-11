@@ -1,0 +1,13 @@
+# Workspace layout for the hybrid shell (plan c01). Package-level manifests
+# belong to their owning roles; build-platform owns this file and the root.
+packages:
+  - apps/*
+  - packages/*
+  # c03 (bdd-quality): tests/fidelity joins the workspace lockfile.
+  - tests/*
+
+# Pins come from tooling/versions.toml; refuse installs on the wrong engine.
+engineStrict: true
+packageManagerStrict: true
+packageManagerStrictVersion: true
+saveExact: true

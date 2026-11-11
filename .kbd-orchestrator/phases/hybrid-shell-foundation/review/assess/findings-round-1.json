@@ -1,0 +1,98 @@
+{
+  "mode": "artifact",
+  "verdict": "BLOCK",
+  "judge_model": "claude-opus-5-5",
+  "producer_model": "claude-opus-5-5",
+  "isolation_mode": "harness-native",
+  "cross_model_check": "same-model-collision",
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "assessment.md",
+      "line": 35,
+      "claim": "The assessment calls tokens.json 'complete for colour, type, space, radius and motion', but the prototype's own stylesheet (the fidelity reference) uses 17 tokens that tokens.json lacks, and one of its values conflicts with tokens.json.",
+      "evidence": "docs/design/prototype/assets/km.css lines 62-161 define --tile, --tile-2, --ember-btn-hov, --green-text, --green-soft, --amber-text, --amber-soft, --red-text, --red-soft, --danger-btn-hov, --scrim, --shadow-float, --shadow-card, --ring-input, --header-h, --page-max and --orb. None of them is in docs/design/tokens.json (a set-diff of the variable names confirms this). --text-display is clamp(36px, 3.6vw + 18px, 64px) in km.css but clamp(40px, 4vw + 16px, 72px) in tokens.json and tokens.css. tokens.json has no font weights or line heights, while km.css uses weights 500/600/700 and a 1.5 body line-height. Under the blocking constraint design-tokens-single-source, any shell generated from tokens.json cannot reproduce the prototype, which conflicts with Goal 6 (priority #1).",
+      "suggested_fix": "Add a 'token source reconciliation' gap: km.css vs tokens.json/tokens.css, listing the missing tokens and the conflicting value. Add an open question on which file is canonical (km.css is what the prototype actually renders), and make the reconciliation a prerequisite for any token pipeline work."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "assessment.md",
+      "line": 51,
+      "claim": "The generator-fit analysis never checks what the profiles generate besides UI shells. Every profile carries Rust core, UAR, FRB, Axum BFF or PEM payloads that the proposed exclusions reject, so Analyze cannot judge options (a)/(b)/(c) or the 'post-generation restructuring' budget.",
+      "evidence": "builder.manifest.json: sovereign-hybrid = flutter-mobile + tauri-desktop + rust-core with uarMode 'hybrid'; governed-web-shell = react-web + axum-bff with 'service UAR, AG-UI/A2UI, PEM/PGlite, governed identity'. The baselines ship rust/gen_ui_db, gen_ui_notes and gen_ui_ffi, mobile/flutter_rust_bridge.yaml and rust_builder, and web/server. The web and desktop package.json files depend on @prometheus-ags/prometheus-entity-management, entity-graph-core and zustand. SKILL.md Step 3 rule 1: 'All networking, LLM interaction, inference, MCP, and agent logic lives in Rust. Never re-implement these in Dart or TypeScript.' The assessment's exclusions (line 225 onward) exclude 'Authentication' and 'Real data and persistence', and its option (c) at line 55 would add an Axum BFF and UAR. The artifact mentions none of this.",
+      "suggested_fix": "List, for each candidate profile, the surfaces and runtime dependencies it emits (rust-core, UAR mode, FRB, axum-bff, PEM, gen_ui_db, auth). Classify each as keep, strip or stub against the exclusions, and state whether the Step 3 Rust-core invariant applies to a shell-only phase. Feed this into Open Question 1 and the risk-acceptance item."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 60,
+      "claim": "The token pipeline gap analysis misses concrete incompatibilities: the generator would reject or mistranslate Know Meet's token values.",
+      "evidence": "runtime/src/native-helpers/gen-design-tokens.mts, bundled as scripts/gen-design-tokens.mjs lines 790-836, asserts each colour matches /^#[0-9a-fA-F]{6}$/. tokens.json has cyan-soft 'rgba(0, 194, 220, 0.14)', and km.css has more rgba tokens. The script hardcodes the font mapping {display: spaceGrotesk, sans: inter, prose: roboto, mono: jetBrainsMono} and expects TOML type entries with size, weight and role, but tokens.json has CSS font stacks and clamp() sizes, which have no Flutter equivalent. The script also skips any output whose directory doesn't exist (existsSync(dirname(path))), so a combined-workspace layout gets no output and no error.",
+      "suggested_fix": "Add these gaps to Generator fit item 4: alpha colours, clamp() sizes for Flutter, the font-family mapping, and silent skips for missing directories. Each one changes whether the decision is 'write a mapper' or 'migrate to TOML'."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 111,
+      "claim": "The assessment says every file over 500 lines is a design reference. That is false: 7 tracked harness files exceed 500 lines.",
+      "evidence": "`git ls-files | xargs wc -l` returns 575 lines for .opencode/skills/openspec-onboard/SKILL.md, .kimi-code/skills/openspec-onboard/SKILL.md, .dsh/skills/openspec-onboard/SKILL.md, .claude/skills/openspec-onboard/SKILL.md and .agents/skills/openspec-onboard/SKILL.md, 571 for .claude/commands/opsx/onboard.md and 567 for .opencode/commands/opsx-onboard.md. None of them falls under E-L1 to E-L7. The packet file_tree also leaves out all five harness directories.",
+      "suggested_fix": "Add an exception for tool-generated harness skill and command files (OpenSpec-owned, regenerated by `openspec init/update`), or list them as violations. The checker's exception globs must cover them, or lint fails on day one."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 126,
+      "claim": "The assessment says all authored file names comply with kebab-case 'apart from README.md, LICENSE, .gitignore, .gitkeep'. That leaves out 60 tracked SKILL.md files, and no proposed exception covers them.",
+      "evidence": "`git ls-files` lists 60 files named SKILL.md (plus .openspec-target) under .agents/, .claude/, .dsh/, .kimi-code/ and .opencode/. E-N3 lists README.md, LICENSE, CHANGELOG.md, AGENTS.md and CLAUDE.md, but not SKILL.md. The 'Dotfiles' exception is ambiguous about files inside dot-directories.",
+      "suggested_fix": "Add SKILL.md and harness command files to E-N3 or E-N5, and state explicitly whether dot-directory contents are exempt."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 239,
+      "claim": "Open Question 3 offers only the SKILL.md layering or the baseline layering. Goal 4 and AGENTS.md already mandate domain/application/infrastructure/presentation, and the question ignores that.",
+      "evidence": "goals.md: 'React 19 app shell, built with clean architecture (domain / application / infrastructure / presentation boundaries)'. AGENTS.md shows the same four-layer layout. SKILL.md lines 197-206 use {data, domain, presentation} with app/ as the application layer. The baseline uses {api, components, entities, hooks, stores}. Neither option matches the stated goal.",
+      "suggested_fix": "Frame the question as how to map the generator's layering onto the mandated four layers (for example data→infrastructure, app/→application). Don't present it as a choice between two options that both violate Goal 4."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 206,
+      "claim": "The fidelity scope is undefined. The adopted outcome shrinks Goal 6 ('perfectly replicate') to 'home and the app frame', and VS-1 checks only index.html, yet the assessment calls screens.html the fidelity oracle. That repeats the '2 routes instead of 6' failure the assessment cites in lesson 3.",
+      "evidence": "docs/design/prototype/screens.html inventories 68 routes across 9 pages (index, screens, auth, join, meet, dashboard, agents, recordings, settings). Assessment line 206 limits the outcome to 'home and the app frame with navigation', and VS-1 (line 195) compares only prototype/index.html. No open question asks which of the 68 routes this phase must replicate.",
+      "suggested_fix": "Add an open question and a value scenario that fix the in-scope route and state subset from screens.html, for example all chrome, navigation and static screens with function stubbed. Give every in-scope route a screenshot oracle."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 100,
+      "claim": "The assessment reports the Flutter SDK version as UNKNOWN and carries it forward as an unknown, but it is observable, and it drifts materially from the pin.",
+      "evidence": "Running `flutter --version` returns 'Flutter 3.48.0-0.5.pre • channel beta'. versions.toml pins flutter = \"3.47.5\" (stable, Dart 3.13.4). Installed Dart is 3.14.0-95.2.beta. The channel mismatch (beta vs stable) matters for the generator's preflight and for golden-test reproducibility.",
+      "suggested_fix": "Record Flutter 3.48.0-0.5.pre (beta) in the drift table and remove the UNKNOWN from the adopted-outcome baseline. Add 'switch to the pinned stable Flutter' to Open Question 6."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 110,
+      "claim": "The assessment doesn't say that the live prototype, AGENTS.md, CLAUDE.md and .kbd-orchestrator are untracked, so part of the fidelity reference isn't versioned. The no-livekit-secrets check is also a `git grep`, which cannot see those files.",
+      "evidence": "`git status --short` shows '?? docs/design/live/', '?? live/', '?? AGENTS.md', '?? CLAUDE.md' and '?? .kbd-orchestrator/'. `git ls-files docs/design/live` returns nothing. The constraint no-livekit-secrets-in-repo checks with `git grep`, which skips untracked files, so the 'PASS' at line 110 was not produced by the defined check. Goal 6 names the live prototype as a source.",
+      "suggested_fix": "State the tracking status. Decide whether docs/design/live is committed before it serves as an oracle, and re-run the secrets check once it is tracked or with --untracked."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "assessment.md",
+      "line": 78,
+      "claim": "Item 9 presents Tauri pitfalls as open risks, but the source document marks them as fixed in the generator, and the baseline already contains the fixes.",
+      "evidence": "knowme-poc-architecture-and-implementation-plan.md section 5.2 is titled 'Tauri desktop shell defects (fixed at source)'. assets/templates/baselines/tauri/desktop/src-tauri contains both build.rs and capabilities/default.json, and the baseline also has src/vite-env.d.ts.",
+      "suggested_fix": "Reframe item 9 as verification checks on generated output, not as work to plan, so Plan doesn't schedule fixes that already exist."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "assessment.md",
+      "line": 51,
+      "claim": "Item 2 notes that the generator has no shared-workspace tooling, but no open question asks which package manager or workspace tool to choose, and Goal 8 (real build, test and lint commands) depends on that choice.",
+      "evidence": "versions.toml pins pnpm = \"11.15.0\", but the web and tauri baselines ship npm package-lock.json files. The Flutter side would need its own workspace story (melos or pub workspaces). Open Questions 1 to 7 don't cover this.",
+      "suggested_fix": "Add an open question on workspace tooling: pnpm workspace layout, lockfile strategy and Flutter workspace. Draft the candidate build, test and lint commands for project.json from it."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+[judge] WARN: canonical judge/producer identity is incomplete; independence is degraded
+[MODEL_ROUTING] phase=adv-review-judge class=frontier model=MiniMax-M3 producer=claude-opus-5-5
+[judge] retry 2/3: HTTP 000 looks like a timeout
+[judge]        at 300s; escalating timeout to 600s and retrying.
+[judge] ERROR: judge output is not shape-valid findings JSON
+[judge] ERROR: unusable judge output
+exit=2

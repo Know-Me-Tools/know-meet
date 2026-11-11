@@ -1,0 +1,68 @@
+{
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "assessment.md",
+      "claim": "The token-source decision presented by the assessment permits a canonical source that violates the blocking design-token constraint.",
+      "evidence": "The assessment says, \u201cDecide which file is canonical (`km.css` is what actually renders),\u201d lists \u201cToken canonical source: `km.css` ... or `tokens.json`?\u201d, and also offers migration to TOML. The blocking constraint instead requires colors, type and spacing to come from \u201cdocs/design/tokens.css / tokens.json\u201d and requires Flutter to generate from or mirror `tokens.json`.",
+      "suggested_fix": "Constrain the decision to `tokens.json` and `tokens.css`: designate `tokens.json` as the editable source and `tokens.css` as generated, then reconcile the prototype values into them. If `km.css` or TOML must become canonical, identify the required blocking-constraint amendment as an explicit operator decision before analysis proceeds."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "assessment.md",
+      "claim": "The proposed fidelity oracle does not cover all design sources mandated by Goal 6, so it can pass while omitting required brand-guide or live-prototype fidelity.",
+      "evidence": "Goal 6 requires replication \u201cfrom docs/design (tokens, brand guide, prototype and live prototype),\u201d but VS-1 requires identity only \u201cto the prototype,\u201d VS-7 defines scope solely from \u201cthe 68 routes in `screens.html`,\u201d and the adopted scenario compares Flutter only with \u201cthe prototype.\u201d The assessment itself later says `docs/design/live/` \u201cshould be committed before it serves as an oracle,\u201d yet no scenario uses it.",
+      "suggested_fix": "Define an explicit source hierarchy and acceptance matrix covering token values, brand-guide rules, the prototype, and the live prototype for every in-scope route and state; require discrepancies between those sources to be resolved before declaring fidelity achieved."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "assessment.md",
+      "claim": "The `no-livekit-secrets-in-repo` PASS overstates what the cited checks can detect.",
+      "evidence": "The assessment claims that the untracked-file scan found \u201cno matches for the secret or key patterns.\u201d The supplied LiveKit check matches only `LIVEKIT_API_SECRET`, while the fallback check matches lowercase `api_key`; neither regex detects a conventional assignment such as `LIVEKIT_API_KEY=\"...\"`.",
+      "suggested_fix": "Replace the PASS with the actual scope of the checks, expand the blocking check to cover both `LIVEKIT_API_SECRET` and `LIVEKIT_API_KEY` with the supported assignment syntaxes, and add a negative test fixture proving each prohibited assignment is detected."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The proposed acceptance scenarios cannot verify motion, even though motion is an explicit Goal 6 component.",
+      "evidence": "Goal 6 explicitly includes \u201cmotion.\u201d VS-1 is verified through \u201cScreenshots,\u201d VS-3 through Flutter \u201cgoldens,\u201d and the required safety checks mention only \u201cWCAG 2.2 AA contrast\u201d; none observes transition timing, easing, keyframes, or animation behavior. The `accessibility-basics` constraint also requires reduced-motion support, which is not covered by any scenario.",
+      "suggested_fix": "Add runtime observations for representative transitions and interactions in both themes, including expected duration, easing and reduced-motion behavior, rather than treating static screenshots and goldens as the complete fidelity oracle."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The assessment's coordination status for the parallel agent-team work is factually stale.",
+      "evidence": "It states, \u201cNo such artifact exists in the repo. Analyze must confirm whether that work is still running.\u201d The packet's file tree contains `.agent-team/know-meet-team` and `.agent-team/project-routing.json`, and the analyze handoff says the parallel session \u201ccreated .agent-team/know-meet-team (16 roles) and routing blocks\u201d and that \u201cPlan must bind to it.\u201d",
+      "suggested_fix": "Replace the existence question with the current state: verify the existing manifest and routing blocks, identify any missing roles or stale routing, and carry the requirement that Plan bind to that team into the next-stage handoff."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The assessment contradicts itself on whether a screen and state inventory exists, leaving the route oracle ambiguously defined.",
+      "evidence": "The Spec gap summary says, \u201cNo screen and state inventory exists to define \u2018perfect replication\u2019,\u201d and the next sentence says, \u201cThe prototypes contain one: `docs/design/prototype/screens.html` lists every screen and state.\u201d Elsewhere the assessment treats the entries as \u201c68 routes,\u201d although the cited source is described as screens and states rather than an enumerated route manifest.",
+      "suggested_fix": "State that `screens.html` is a raw design reference rather than a formal inventory, then require a machine-readable inventory that distinguishes routes, screens and states and provides the canonical count and identifiers used for acceptance."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The clean-architecture assessment proposes folder relabeling without assessing the dependency direction required by the project constraint.",
+      "evidence": "Goal 4 requires \u201cdomain / application / infrastructure / presentation boundaries,\u201d and `clean-architecture-boundaries` says domain and application layers must not import UI, Tauri, Flutter or LiveKit SDK code. The assessment only says Plan must define a mapping such as \u201c`data`/`api` \u2192 infrastructure\u201d and \u201c`entities` \u2192 domain\u201d; it defines no permitted dependency graph, port boundary, or enforcement mechanism.",
+      "suggested_fix": "Specify layer responsibilities and allowed imports, require infrastructure and native adapters to implement application-owned ports, and require architecture tests or lint rules that reject outward imports from domain and application code."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The generator-fit analysis does not verify the explicit React version and mobile-platform requirements of the goals.",
+      "evidence": "The goals require a \u201cReact 19 web app\u201d and a Flutter shell \u201cfor iOS and Android.\u201d The assessment names `react-web` and `flutter-mobile` profiles and labels the target \u201cReact 19 web shell,\u201d but never reports the generated baselines' React package version or whether their Flutter output contains both iOS and Android scaffolds.",
+      "suggested_fix": "Inspect the generator's actual web and mobile package manifests and platform directories, record the current React version and mobile targets, and add explicit compatibility or pinning work for React 19 and both Flutter platforms."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The four failing generator doctor checks are recorded too vaguely to drive a remediation plan.",
+      "evidence": "Build health reports that `knowme-builder doctor --json` returned `ok: false` with \u201c4 failing Prometheus health checks,\u201d while the adopted contract says the cause is \u201cUNKNOWN.\u201d No failing check names, diagnostics, ownership, or remediation are provided.",
+      "suggested_fix": "Capture the doctor output with each failing check identifier and diagnostic, map each failure to its cause and remediation, and distinguish stale-installation failures from independent generator or environment failures before defining execution steps."
+    }
+  ],
+  "checked_classes": []
+}

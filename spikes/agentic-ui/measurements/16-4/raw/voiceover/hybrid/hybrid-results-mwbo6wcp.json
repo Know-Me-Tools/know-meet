@@ -1,0 +1,312 @@
+{
+  "prototype": "hybrid",
+  "binary": "/Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/tauri-shell/bin/km-spike-hybrid-a11y-4327",
+  "results": [
+    {
+      "id": "a11y-1 axe idle / mid-stream / settled",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "axe runs: F18 idle, auto mid-stream, F18 finished"
+      ],
+      "runId": "a11y-hybrid-stream-long-markdown-mwbo4xr8",
+      "traces": {},
+      "axe": [
+        {
+          "t": 1358,
+          "label": "F18 idle",
+          "runStatus": "idle",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        },
+        {
+          "t": 4566,
+          "label": "auto mid-stream",
+          "runStatus": "running",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        },
+        {
+          "t": 11991,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a11y-2 transcript aria-busy while streaming and not after",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 194ms=null(idle), 3970ms=true(running), 9827ms=null(finished)"
+      ],
+      "runId": "a11y-hybrid-stream-long-markdown-mwbo4xr8",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-3 streaming text not inside a live region",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-hybrid-stream-long-markdown-mwbo4xr8",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-4 live-region announcements throttled and finalized",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "6 announcements during 5.9 s (budget 9); final (219 chars): \"Assistant replied: Meeting summary: agentic UI spike review This is a long, deliberately varied answer used to measure s\""
+      ],
+      "runId": "a11y-hybrid-stream-long-markdown-mwbo4xr8",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "conformance long-markdown (collector compare.ts)",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-hybrid-stream-long-markdown-mwbo4xr8",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-5 streaming and approval never steal focus (+ axe with pending approval)",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "focus right after submit: textarea#km-composer-input \"Message\"",
+        "focus placed at 5547 ms; first settle at 5317 ms",
+        "active after settle: textarea#km-composer-input \"Message\"",
+        "aria-busy transitions: 191ms=null(idle), 5072ms=true(running), 5312ms=null(interrupted)",
+        "live-region (1 region, aria-live=polite role=null) changes: 191ms:\"\" | 5092ms:\"Assistant is responding, 1 words so far.\" | 5312ms:\"The assistant needs your approval to continue.\""
+      ],
+      "runId": "a11y-hybrid-focus-hitl-approve-mwbo59x5",
+      "traces": {},
+      "axe": [
+        {
+          "t": 6311,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a11y-6 approval can be approved from the keyboard",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 255ms=null(idle), 4738ms=true(running), 4975ms=null(interrupted), 6973ms=true(running), 7084ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=null) changes: 255ms:\"\" | 4756ms:\"Assistant is responding, 1 words so far.\" | 4975ms:\"The assistant needs your approval to continue.\" | 7010ms:\"Assistant is responding, 1 words so far.\" | 7084ms:\"Assistant replied: Sent the summary to 4 attendees.\"",
+        "decision key: \"Enter\" trusted=true on button[type=button]#km-approval-approve \"Approve and send\"",
+        "focus after decision: button[type=button]#km-approval-approve \"Approve and send\"",
+        "reference DOM order (tabindex>=0): button[type=button]#km-approval-approve \"Approve and send\" | button[type=button]#km-approval-reject \"Reject\" | textarea#km-composer-input \"Message\" | button[type=submit]#km-composer-submit \"Send\""
+      ],
+      "runId": "a11y-hybrid-approve-hitl-approve-mwbo5h3f",
+      "traces": {
+        "Tab from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Meeting assistant Prototype H: assistant\"",
+          "3. Tab -> button[type=button]#km-approval-approve \"Approve and send\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5128,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "conformance hitl-approve (collector compare.ts)",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-hybrid-approve-hitl-approve-mwbo5h3f",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-7 approval can be rejectd from the keyboard",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "aria-busy transitions: 198ms=null(idle), 4286ms=true(running), 4526ms=null(interrupted), 8299ms=true(running), 8422ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=null) changes: 198ms:\"\" | 4305ms:\"Assistant is responding, 1 words so far.\" | 4526ms:\"The assistant needs your approval to continue.\" | 8338ms:\"Assistant is responding, 1 words so far.\" | 8422ms:\"Assistant replied: OK, I did not send the email.\"",
+        "decision key: \" \" trusted=true on button[type=button]#km-approval-reject \"Reject\"",
+        "focus after decision: button[type=button]#km-approval-reject \"Reject\"",
+        "reference DOM order (tabindex>=0): button[type=button]#km-approval-approve \"Approve and send\" | button[type=button]#km-approval-reject \"Reject\" | textarea#km-composer-input \"Message\" | button[type=submit]#km-composer-submit \"Send\""
+      ],
+      "runId": "a11y-hybrid-reject-hitl-reject-mwbo5pvz",
+      "traces": {
+        "Tab from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Meeting assistant Prototype H: assistant\"",
+          "3. Tab -> button[type=button]#km-approval-approve \"Approve and send\"",
+          "4. Tab -> button[type=button]#km-approval-reject \"Reject\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 4691,
+          "label": "F18 interrupted approval-pending",
+          "runStatus": "interrupted",
+          "pendingApprovals": 1,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "conformance hitl-reject (collector compare.ts)",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [],
+      "runId": "a11y-hybrid-reject-hitl-reject-mwbo5pvz",
+      "traces": {},
+      "axe": [],
+      "warnings": []
+    },
+    {
+      "id": "a11y-8 run errors use role=alert",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "alert: {\"count\":1,\"visible\":true,\"text\":\"The assistant stopped with an error (RECORDING_UNAVAILABLE). The recording store is unavailable.\"}",
+        "aria-busy transitions: 211ms=null(idle), 3360ms=true(running), 3429ms=null(error)",
+        "live-region (1 region, aria-live=polite role=null) changes: 211ms:\"\" | 3378ms:\"Assistant is responding, 1 words so far.\" | 3429ms:\"The run failed (RECORDING_UNAVAILABLE).\""
+      ],
+      "runId": "a11y-hybrid-alert-run-error-mwbo5zbw",
+      "traces": {},
+      "axe": [
+        {
+          "t": 3853,
+          "label": "F18 error",
+          "runStatus": "error",
+          "pendingApprovals": 0,
+          "violations": [],
+          "nodes": []
+        }
+      ],
+      "warnings": [
+        "composer received \"Fetch last week’s recording.\" for typed \"Fetch last week's recording.\""
+      ]
+    },
+    {
+      "id": "conformance run-error (collector compare.ts)",
+      "prototype": "hybrid",
+      "pass": false,
+      "details": [
+        "FAIL messages[0].text: expected \"Fetch last week's recording.\", got \"Fetch last week’s recording.\"",
+        "typed prompt arrived as \"Fetch last week’s recording.\" (expected \"Fetch last week's recording.\")"
+      ],
+      "runId": "a11y-hybrid-alert-run-error-mwbo5zbw",
+      "traces": {},
+      "axe": [],
+      "warnings": [
+        "composer received \"Fetch last week’s recording.\" for typed \"Fetch last week's recording.\""
+      ]
+    },
+    {
+      "id": "a2ui/form-validation",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "browser expectation (DOM tab order, tabindex>=0): name_field, email_field, phone_field, role_picker, agree_box, submit_btn",
+        "plain Tab reached: name_field, email_field, phone_field, role_picker, agree_box, submit_btn; Option+Tab reached: name_field, email_field, phone_field, role_picker, agree_box, submit_btn",
+        "\"Valid form: the action fires with bound context.\" -> invite_guest {\"email\":\"ana@know-me.tools\",\"name\":\"Ana\",\"role\":[\"guest\"]}",
+        "aria-busy transitions: 192ms=null(idle), 4311ms=true(running), 4433ms=null(finished), 20096ms=true(running), 20181ms=null(finished)",
+        "live-region (1 region, aria-live=polite role=null) changes: 192ms:\"\" | 4328ms:\"Assistant is responding, 1 words so far.\" | 4433ms:\"Assistant replied: Here is the form validation surface.\" | 20134ms:\"Assistant is responding, 1 words so far.\" | 20181ms:\"Assistant replied: Received action invite guest.\""
+      ],
+      "runId": "a11y-hybrid-a2ui-a2ui-form-validation-mwbo64vd",
+      "traces": {
+        "Tab cycle from composer": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Meeting assistant Prototype H: assistant\"",
+          "3. Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "4. Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "5. Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "6. Tab -> input[type=radio]#a2ui:role_picker \"Guest\"",
+          "7. Tab -> input[type=checkbox]#a2ui:agree_box \"Guest may be recorded\"",
+          "8. Tab -> button[type=button]#a2ui:submit_btn \"Send invite\"",
+          "9. Tab -> textarea#km-composer-input \"Message\""
+        ],
+        "Option+Tab cycle from composer (diagnostic)": [
+          "1. opt+Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. opt+Tab -> body \"Meeting assistant Prototype H: assistant\"",
+          "3. opt+Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "4. opt+Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "5. opt+Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "6. opt+Tab -> input[type=radio]#a2ui:role_picker \"Guest\"",
+          "7. opt+Tab -> input[type=checkbox]#a2ui:agree_box \"Guest may be recorded\"",
+          "8. opt+Tab -> button[type=button]#a2ui:submit_btn \"Send invite\"",
+          "9. opt+Tab -> textarea#km-composer-input \"Message\""
+        ]
+      },
+      "axe": [
+        {
+          "t": 5304,
+          "label": "F18 finished",
+          "runStatus": "finished",
+          "pendingApprovals": 0,
+          "violations": [
+            "color-contrast (serious): 1 node(s) - Elements must meet minimum color contrast ratio thresholds"
+          ],
+          "nodes": [
+            "color-contrast: [\"span[data-a2ui-id=\\\"submit_label\\\"]\"]"
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "a2ui/form-validation keyboard-only submit",
+      "prototype": "hybrid",
+      "pass": true,
+      "details": [
+        "keys: 17 trusted=true",
+        "sent invite_guest {\"email\":\"ana@know-me.tools\",\"name\":\"Ana\",\"role\":[\"guest\"]}"
+      ],
+      "runId": "a11y-hybrid-a2ui-keyboard-a2ui-form-validation-mwbo6mol",
+      "traces": {
+        "keyboard-only form": [
+          "1. Tab -> button[type=submit]#km-composer-submit \"Send\"",
+          "2. Tab -> body \"Meeting assistant Prototype H: assistant\"",
+          "3. Tab -> input[type=text]#a2ui:name_field \"Name\"",
+          "4. Tab -> input[type=text]#a2ui:email_field \"Email\"",
+          "5. Tab -> input[type=text]#a2ui:phone_field \"Phone (optional)\"",
+          "6. Tab -> input[type=radio]#a2ui:role_picker \"Guest\"",
+          "7. Tab -> input[type=checkbox]#a2ui:agree_box \"Guest may be recorded\"",
+          "8. Tab -> button[type=button]#a2ui:submit_btn \"Send invite\""
+        ]
+      },
+      "axe": [],
+      "warnings": []
+    }
+  ],
+  "failures": []
+}

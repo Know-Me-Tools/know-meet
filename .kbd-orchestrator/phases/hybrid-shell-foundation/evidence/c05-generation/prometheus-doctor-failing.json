@@ -1,0 +1,128 @@
+{
+ "summary": {
+  "failed": 4,
+  "warned": 4,
+  "passed": 12,
+  "skipped": 4,
+  "exit_code": 1
+ },
+ "failing": [
+  {
+   "id": "skills.directory",
+   "group": "skills",
+   "label": "Skills directory",
+   "severity": "red",
+   "status": "fail",
+   "summary": "skills/ is missing",
+   "details": [
+    "Required runtime skill catalog is absent."
+   ],
+   "optional": false,
+   "actions": [
+    {
+     "id": "manual.restore-checkout",
+     "description": "Restore the checked-out skills catalog before any automated repair run.",
+     "safe": false,
+     "reversible": false,
+     "dry_run_only": false,
+     "command_hint": null,
+     "reason_blocked": "Doctor must not recreate or overwrite an unknown checkout tree automatically."
+    }
+   ]
+  },
+  {
+   "id": "execution.runtime",
+   "group": "execution",
+   "label": "Prometheus Exec runtime",
+   "severity": "red",
+   "status": "fail",
+   "summary": "1 execution runtime defect(s)",
+   "details": [
+    "prometheus-exec doctor reported unhealthy"
+   ],
+   "optional": false,
+   "actions": []
+  },
+  {
+   "id": "hooks.lifecycle",
+   "group": "hooks",
+   "label": "Lifecycle hooks",
+   "severity": "red",
+   "status": "fail",
+   "summary": "active plugin generation verification failed",
+   "details": [
+    "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/Users/gqadonis/Projects/know-me/know-meet/scripts/install-plugin-generation.js'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.5.0\n"
+   ],
+   "optional": false,
+   "actions": [
+    {
+     "id": "manual.review-hooks",
+     "description": "Review hook ownership and payload integrity before any automatic replacement.",
+     "safe": false,
+     "reversible": false,
+     "dry_run_only": false,
+     "command_hint": null,
+     "reason_blocked": "Doctor must not overwrite unknown hook customizations or local user workflow hooks."
+    }
+   ]
+  },
+  {
+   "id": "hooks.harness-adapters",
+   "group": "hooks",
+   "label": "Installed Codex hook graph",
+   "severity": "red",
+   "status": "fail",
+   "summary": "46 installed hook graph defect(s)",
+   "details": [
+    "release manifest is unreadable at ./shared/harnesses/generated/release-manifest.json: No such file or directory (os error 2)",
+    "hook contract is unreadable at ./shared/harnesses/hook-contract.json: No such file or directory (os error 2)",
+    "release manifest has no valid bundle id",
+    "release manifest does not select hook-runtime-v1",
+    "hook contract contains no hooks",
+    "./hooks/codex-hooks.json is unreadable",
+    "source plugin manifest is unreadable at ./dist/plugins/codex/prometheus-skill-pack/.codex-plugin/plugin.json: No such file or directory (os error 2)",
+    "active immutable generation selected hooks differ from the generated source manifest",
+    "active immutable generation exposes 33 hook commands; expected 0",
+    "active immutable generation hook command 1 is not pinned to bundle ",
+    "active immutable generation hook command 2 is not pinned to bundle ",
+    "active immutable generation hook command 3 is not pinned to bundle ",
+    "active immutable generation hook command 4 is not pinned to bundle ",
+    "active immutable generation hook command 5 is not pinned to bundle ",
+    "active immutable generation hook command 6 is not pinned to bundle ",
+    "active immutable generation hook command 7 is not pinned to bundle ",
+    "active immutable generation hook command 8 is not pinned to bundle ",
+    "active immutable generation hook command 9 is not pinned to bundle ",
+    "active immutable generation hook command 10 is not pinned to bundle ",
+    "active immutable generation hook command 11 is not pinned to bundle ",
+    "active immutable generation hook command 12 is not pinned to bundle ",
+    "active immutable generation hook command 13 is not pinned to bundle ",
+    "active immutable generation hook command 14 is not pinned to bundle ",
+    "active immutable generation hook command 15 is not pinned to bundle ",
+    "active immutable generation hook command 16 is not pinned to bundle ",
+    "active immutable generation hook command 17 is not pinned to bundle ",
+    "active immutable generation hook command 18 is not pinned to bundle ",
+    "active immutable generation hook command 19 is not pinned to bundle ",
+    "active immutable generation hook command 20 is not pinned to bundle ",
+    "active immutable generation hook command 21 is not pinned to bundle ",
+    "active immutable generation hook command 22 is not pinned to bundle ",
+    "active immutable generation hook command 23 is not pinned to bundle ",
+    "active immutable generation hook command 24 is not pinned to bundle ",
+    "active immutable generation hook command 25 is not pinned to bundle ",
+    "active immutable generation hook command 26 is not pinned to bundle ",
+    "active immutable generation hook command 27 is not pinned to bundle ",
+    "active immutable generation hook command 28 is not pinned to bundle ",
+    "active immutable generation hook command 29 is not pinned to bundle ",
+    "active immutable generation hook command 30 is not pinned to bundle ",
+    "active immutable generation hook command 31 is not pinned to bundle ",
+    "active immutable generation hook command 32 is not pinned to bundle ",
+    "active immutable generation hook command 33 is not pinned to bundle ",
+    "active immutable generation hook identities differ from the generated hook contract",
+    "active immutable generation is bundle 240931d1a089829caceeac3e9c1d08bd3b6f15ccf44404f46d70914a801cd6d6, not ",
+    "bundle index resolves to /Users/gqadonis/.prometheus/plugins/prometheus-skill-pack/bundles, not the active generation",
+    "source plugin version is missing"
+   ],
+   "optional": false,
+   "actions": []
+  }
+ ]
+}

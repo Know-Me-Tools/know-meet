@@ -1,0 +1,21 @@
+{
+  "slug": "agentic-ui-spike",
+  "description": "Execute c15: shared harness (15.1), prototypes H and O (15.2/15.3), A2UI web/Flutter parity (15.4), measure both in Vite prod builds inside Tauri (15.5), comparison report + cross-model adversarial review (15.6), then present the recommendation for the operator decision.",
+  "phases": [
+    {
+      "name": "creation",
+      "status": "in_progress",
+      "human_gate_result": {
+        "decision": "approved",
+        "provenance": "operator 2026-11-10: 'Proceed in goal mode to execute your test kit plan'",
+        "elicitation_id": null
+      }
+    }
+  ],
+  "tool": "claude-code",
+  "kbdPhase": "hybrid-shell-foundation",
+  "change": "c15-agentic-ui-spike",
+  "stop": "c15 tasks 15.1-15.6 complete; comparison report with measured numbers and both reviewer verdicts presented to the operator",
+  "status": "complete",
+  "loop_controller": "this-session-foreground-team-agents"
+}

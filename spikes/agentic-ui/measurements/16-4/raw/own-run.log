@@ -1,0 +1,26 @@
+stream: a11y-own-stream-long-markdown-mwbbh0i7
+(node:57856) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  PASS a11y-1 axe idle / mid-stream / settled
+  PASS a11y-2 transcript aria-busy while streaming and not after
+  PASS a11y-3 streaming text not inside a live region
+  PASS a11y-4 live-region announcements throttled and finalized
+  PASS conformance long-markdown (collector compare.ts)
+focus: a11y-own-focus-hitl-approve-mwbbhdet
+  PASS a11y-5 streaming and approval never steal focus (+ axe with pending approval)
+approve: a11y-own-approve-hitl-approve-mwbbhlbl
+  ERROR timed out after 10000 ms waiting for a11y-state
+reject: a11y-own-reject-hitl-reject-mwbbhye9
+  PASS a11y-7 approval can be rejectd from the keyboard
+  PASS conformance hitl-reject (collector compare.ts)
+alert: a11y-own-alert-run-error-mwbbi8rc
+  PASS a11y-8 run errors use role=alert
+  FAIL conformance run-error (collector compare.ts): FAIL messages[0].text: expected "Fetch last week's recording.", got "Fetch last week’s recording."
+a2ui/button-actions-roundtrip: a11y-own-a2ui-a2ui-button-actions-roundtrip-mwbbig7u
+  PASS a2ui/button-actions-roundtrip
+a2ui/card-with-action: a11y-own-a2ui-a2ui-card-with-action-mwbbir9x
+  PASS a2ui/card-with-action
+a2ui/form-validation: a11y-own-a2ui-a2ui-form-validation-mwbbj1w5
+  FAIL a2ui/form-validation: FAIL A2UI controls not reached by Tab: name_field, email_field, phone_field, role_picker, agree_box, submit_btn
+a2ui-keyboard: a11y-own-a2ui-keyboard-a2ui-form-validation-mwbbjtt6
+  ERROR fetch failed

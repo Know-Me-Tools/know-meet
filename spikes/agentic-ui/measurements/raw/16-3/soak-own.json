@@ -1,0 +1,1894 @@
+{
+ "schemaVersion": 1,
+ "gate": "16.3",
+ "prototype": "own",
+ "url": "http://127.0.0.1:4286/",
+ "startedAt": "2026-11-11T05:37:40.740Z",
+ "finishedAt": "2026-11-11T06:07:46.844Z",
+ "minutes": 30,
+ "thinkMs": 5000,
+ "cycle": [
+  "long-markdown",
+  "parallel-tool-calls",
+  "custom-chunks",
+  "state-snapshot-delta",
+  "reasoning-subagents-snapshot",
+  "hostile/huge-table"
+ ],
+ "method": "single page and session; POSTs rerouted to the next cycle scenario with a fresh server session id; forced GC before every heap sample",
+ "slopeMbPerMinute": {
+  "n": 31,
+  "slope": 0.1486103142520208,
+  "ciLow": -0.08572709437113923,
+  "ciHigh": 0.3829477228751808,
+  "intercept": 29.045707912695047
+ },
+ "slopeMbPerRun": {
+  "n": 31,
+  "slope": 0.016894179793470396,
+  "ciLow": -0.00992768895746015,
+  "ciHigh": 0.04371604854440094,
+  "intercept": 29.0627261077938
+ },
+ "samples": [
+  {
+   "minute": 0,
+   "elapsedMs": 16,
+   "heapAfterGcBytes": 8253624,
+   "domNodes": 22,
+   "messages": 0,
+   "runsCompleted": 0,
+   "loadavg1": 39.21142578125
+  },
+  {
+   "minute": 1,
+   "elapsedMs": 64206,
+   "heapAfterGcBytes": 31942096,
+   "domNodes": 6938,
+   "messages": 12,
+   "runsCompleted": 9,
+   "loadavg1": 38.52099609375
+  },
+  {
+   "minute": 2,
+   "elapsedMs": 123297,
+   "heapAfterGcBytes": 30463812,
+   "domNodes": 4812,
+   "messages": 5,
+   "runsCompleted": 18,
+   "loadavg1": 31.08642578125
+  },
+  {
+   "minute": 3,
+   "elapsedMs": 181596,
+   "heapAfterGcBytes": 33057032,
+   "domNodes": 7156,
+   "messages": 10,
+   "runsCompleted": 26,
+   "loadavg1": 24.24951171875
+  },
+  {
+   "minute": 4,
+   "elapsedMs": 246449,
+   "heapAfterGcBytes": 30539456,
+   "domNodes": 5145,
+   "messages": 5,
+   "runsCompleted": 36,
+   "loadavg1": 14.1826171875
+  },
+  {
+   "minute": 5,
+   "elapsedMs": 304850,
+   "heapAfterGcBytes": 33110740,
+   "domNodes": 7489,
+   "messages": 10,
+   "runsCompleted": 44,
+   "loadavg1": 9.9921875
+  },
+  {
+   "minute": 6,
+   "elapsedMs": 363217,
+   "heapAfterGcBytes": 22550216,
+   "domNodes": 1058,
+   "messages": 3,
+   "runsCompleted": 53,
+   "loadavg1": 10.68994140625
+  },
+  {
+   "minute": 7,
+   "elapsedMs": 422197,
+   "heapAfterGcBytes": 33489624,
+   "domNodes": 7774,
+   "messages": 7,
+   "runsCompleted": 61,
+   "loadavg1": 7.28955078125
+  },
+  {
+   "minute": 8,
+   "elapsedMs": 480732,
+   "heapAfterGcBytes": 33784508,
+   "domNodes": 8053,
+   "messages": 14,
+   "runsCompleted": 70,
+   "loadavg1": 6.712890625
+  },
+  {
+   "minute": 9,
+   "elapsedMs": 545456,
+   "heapAfterGcBytes": 33539096,
+   "domNodes": 8107,
+   "messages": 7,
+   "runsCompleted": 79,
+   "loadavg1": 5.41796875
+  },
+  {
+   "minute": 10,
+   "elapsedMs": 604123,
+   "heapAfterGcBytes": 34288060,
+   "domNodes": 8386,
+   "messages": 14,
+   "runsCompleted": 88,
+   "loadavg1": 25.01611328125
+  },
+  {
+   "minute": 11,
+   "elapsedMs": 668983,
+   "heapAfterGcBytes": 34101616,
+   "domNodes": 8440,
+   "messages": 7,
+   "runsCompleted": 97,
+   "loadavg1": 49.44384765625
+  },
+  {
+   "minute": 12,
+   "elapsedMs": 722065,
+   "heapAfterGcBytes": 34250188,
+   "domNodes": 8714,
+   "messages": 12,
+   "runsCompleted": 105,
+   "loadavg1": 49.46484375
+  },
+  {
+   "minute": 13,
+   "elapsedMs": 781267,
+   "heapAfterGcBytes": 31713408,
+   "domNodes": 6588,
+   "messages": 5,
+   "runsCompleted": 114,
+   "loadavg1": 59.3486328125
+  },
+  {
+   "minute": 14,
+   "elapsedMs": 845487,
+   "heapAfterGcBytes": 34176356,
+   "domNodes": 9047,
+   "messages": 12,
+   "runsCompleted": 123,
+   "loadavg1": 64.48583984375
+  },
+  {
+   "minute": 15,
+   "elapsedMs": 904698,
+   "heapAfterGcBytes": 32133708,
+   "domNodes": 6921,
+   "messages": 5,
+   "runsCompleted": 132,
+   "loadavg1": 39.64306640625
+  },
+  {
+   "minute": 16,
+   "elapsedMs": 963145,
+   "heapAfterGcBytes": 34563324,
+   "domNodes": 9265,
+   "messages": 10,
+   "runsCompleted": 140,
+   "loadavg1": 42.20947265625
+  },
+  {
+   "minute": 17,
+   "elapsedMs": 1021644,
+   "heapAfterGcBytes": 23873528,
+   "domNodes": 2834,
+   "messages": 3,
+   "runsCompleted": 149,
+   "loadavg1": 52.13623046875
+  },
+  {
+   "minute": 18,
+   "elapsedMs": 1080654,
+   "heapAfterGcBytes": 34757084,
+   "domNodes": 9550,
+   "messages": 7,
+   "runsCompleted": 157,
+   "loadavg1": 61.10498046875
+  },
+  {
+   "minute": 19,
+   "elapsedMs": 1145382,
+   "heapAfterGcBytes": 24005684,
+   "domNodes": 3167,
+   "messages": 3,
+   "runsCompleted": 167,
+   "loadavg1": 56.0478515625
+  },
+  {
+   "minute": 20,
+   "elapsedMs": 1204422,
+   "heapAfterGcBytes": 34877300,
+   "domNodes": 9883,
+   "messages": 7,
+   "runsCompleted": 175,
+   "loadavg1": 43.00732421875
+  },
+  {
+   "minute": 21,
+   "elapsedMs": 1263196,
+   "heapAfterGcBytes": 35078596,
+   "domNodes": 10162,
+   "messages": 14,
+   "runsCompleted": 184,
+   "loadavg1": 54.29345703125
+  },
+  {
+   "minute": 22,
+   "elapsedMs": 1328157,
+   "heapAfterGcBytes": 35147048,
+   "domNodes": 10216,
+   "messages": 7,
+   "runsCompleted": 193,
+   "loadavg1": 61.61376953125
+  },
+  {
+   "minute": 23,
+   "elapsedMs": 1381296,
+   "heapAfterGcBytes": 34955420,
+   "domNodes": 10490,
+   "messages": 12,
+   "runsCompleted": 201,
+   "loadavg1": 74.4990234375
+  },
+  {
+   "minute": 24,
+   "elapsedMs": 1440628,
+   "heapAfterGcBytes": 32740936,
+   "domNodes": 8364,
+   "messages": 5,
+   "runsCompleted": 210,
+   "loadavg1": 90.21142578125
+  },
+  {
+   "minute": 25,
+   "elapsedMs": 1505002,
+   "heapAfterGcBytes": 35061000,
+   "domNodes": 10823,
+   "messages": 12,
+   "runsCompleted": 219,
+   "loadavg1": 67.41650390625
+  },
+  {
+   "minute": 26,
+   "elapsedMs": 1564387,
+   "heapAfterGcBytes": 33038100,
+   "domNodes": 8697,
+   "messages": 5,
+   "runsCompleted": 228,
+   "loadavg1": 74.84716796875
+  },
+  {
+   "minute": 27,
+   "elapsedMs": 1623083,
+   "heapAfterGcBytes": 35680488,
+   "domNodes": 11041,
+   "messages": 10,
+   "runsCompleted": 236,
+   "loadavg1": 89.90185546875
+  },
+  {
+   "minute": 28,
+   "elapsedMs": 1681786,
+   "heapAfterGcBytes": 24497992,
+   "domNodes": 4610,
+   "messages": 3,
+   "runsCompleted": 245,
+   "loadavg1": 57.158203125
+  },
+  {
+   "minute": 29,
+   "elapsedMs": 1740916,
+   "heapAfterGcBytes": 35486760,
+   "domNodes": 11326,
+   "messages": 7,
+   "runsCompleted": 253,
+   "loadavg1": 52.67138671875
+  },
+  {
+   "minute": 30,
+   "elapsedMs": 1805684,
+   "heapAfterGcBytes": 24631492,
+   "domNodes": 4943,
+   "messages": 3,
+   "runsCompleted": 263,
+   "loadavg1": 54.65966796875
+  }
+ ],
+ "runs": [
+  {
+   "index": 0,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6270
+  },
+  {
+   "index": 1,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1080
+  },
+  {
+   "index": 2,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 747
+  },
+  {
+   "index": 3,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 609
+  },
+  {
+   "index": 4,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 864
+  },
+  {
+   "index": 5,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1490
+  },
+  {
+   "index": 6,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6250
+  },
+  {
+   "index": 7,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1050
+  },
+  {
+   "index": 8,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 767
+  },
+  {
+   "index": 9,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 604
+  },
+  {
+   "index": 10,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 848
+  },
+  {
+   "index": 11,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1506
+  },
+  {
+   "index": 12,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6225
+  },
+  {
+   "index": 13,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1058
+  },
+  {
+   "index": 14,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 765
+  },
+  {
+   "index": 15,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 633
+  },
+  {
+   "index": 16,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 857
+  },
+  {
+   "index": 17,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1518
+  },
+  {
+   "index": 18,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6201
+  },
+  {
+   "index": 19,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1053
+  },
+  {
+   "index": 20,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 763
+  },
+  {
+   "index": 21,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 598
+  },
+  {
+   "index": 22,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 844
+  },
+  {
+   "index": 23,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1499
+  },
+  {
+   "index": 24,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6228
+  },
+  {
+   "index": 25,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1039
+  },
+  {
+   "index": 26,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 747
+  },
+  {
+   "index": 27,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 621
+  },
+  {
+   "index": 28,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 850
+  },
+  {
+   "index": 29,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1499
+  },
+  {
+   "index": 30,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6227
+  },
+  {
+   "index": 31,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1051
+  },
+  {
+   "index": 32,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 767
+  },
+  {
+   "index": 33,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 612
+  },
+  {
+   "index": 34,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 851
+  },
+  {
+   "index": 35,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1540
+  },
+  {
+   "index": 36,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6217
+  },
+  {
+   "index": 37,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1040
+  },
+  {
+   "index": 38,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 771
+  },
+  {
+   "index": 39,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 624
+  },
+  {
+   "index": 40,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 867
+  },
+  {
+   "index": 41,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1471
+  },
+  {
+   "index": 42,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6279
+  },
+  {
+   "index": 43,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1049
+  },
+  {
+   "index": 44,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 757
+  },
+  {
+   "index": 45,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 624
+  },
+  {
+   "index": 46,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 856
+  },
+  {
+   "index": 47,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1501
+  },
+  {
+   "index": 48,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6254
+  },
+  {
+   "index": 49,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1054
+  },
+  {
+   "index": 50,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 768
+  },
+  {
+   "index": 51,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 621
+  },
+  {
+   "index": 52,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 865
+  },
+  {
+   "index": 53,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1499
+  },
+  {
+   "index": 54,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6246
+  },
+  {
+   "index": 55,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1067
+  },
+  {
+   "index": 56,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 775
+  },
+  {
+   "index": 57,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 639
+  },
+  {
+   "index": 58,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 855
+  },
+  {
+   "index": 59,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1520
+  },
+  {
+   "index": 60,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6263
+  },
+  {
+   "index": 61,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1028
+  },
+  {
+   "index": 62,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 777
+  },
+  {
+   "index": 63,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 636
+  },
+  {
+   "index": 64,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 852
+  },
+  {
+   "index": 65,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1502
+  },
+  {
+   "index": 66,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6251
+  },
+  {
+   "index": 67,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1051
+  },
+  {
+   "index": 68,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 758
+  },
+  {
+   "index": 69,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 607
+  },
+  {
+   "index": 70,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 834
+  },
+  {
+   "index": 71,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1517
+  },
+  {
+   "index": 72,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6237
+  },
+  {
+   "index": 73,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1052
+  },
+  {
+   "index": 74,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 780
+  },
+  {
+   "index": 75,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 624
+  },
+  {
+   "index": 76,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 863
+  },
+  {
+   "index": 77,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1483
+  },
+  {
+   "index": 78,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6237
+  },
+  {
+   "index": 79,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1041
+  },
+  {
+   "index": 80,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 758
+  },
+  {
+   "index": 81,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 639
+  },
+  {
+   "index": 82,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 881
+  },
+  {
+   "index": 83,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1536
+  },
+  {
+   "index": 84,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6252
+  },
+  {
+   "index": 85,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1066
+  },
+  {
+   "index": 86,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 778
+  },
+  {
+   "index": 87,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 634
+  },
+  {
+   "index": 88,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 846
+  },
+  {
+   "index": 89,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1521
+  },
+  {
+   "index": 90,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6314
+  },
+  {
+   "index": 91,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1063
+  },
+  {
+   "index": 92,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 785
+  },
+  {
+   "index": 93,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 618
+  },
+  {
+   "index": 94,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 851
+  },
+  {
+   "index": 95,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1532
+  },
+  {
+   "index": 96,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6242
+  },
+  {
+   "index": 97,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1043
+  },
+  {
+   "index": 98,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 791
+  },
+  {
+   "index": 99,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 629
+  },
+  {
+   "index": 100,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 867
+  },
+  {
+   "index": 101,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1534
+  },
+  {
+   "index": 102,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6240
+  },
+  {
+   "index": 103,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1057
+  },
+  {
+   "index": 104,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 807
+  },
+  {
+   "index": 105,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 607
+  },
+  {
+   "index": 106,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 860
+  },
+  {
+   "index": 107,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1552
+  },
+  {
+   "index": 108,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6249
+  },
+  {
+   "index": 109,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1062
+  },
+  {
+   "index": 110,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 776
+  },
+  {
+   "index": 111,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 635
+  },
+  {
+   "index": 112,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 876
+  },
+  {
+   "index": 113,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1492
+  },
+  {
+   "index": 114,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6224
+  },
+  {
+   "index": 115,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1069
+  },
+  {
+   "index": 116,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 781
+  },
+  {
+   "index": 117,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 625
+  },
+  {
+   "index": 118,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 884
+  },
+  {
+   "index": 119,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1474
+  },
+  {
+   "index": 120,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6229
+  },
+  {
+   "index": 121,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1052
+  },
+  {
+   "index": 122,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 786
+  },
+  {
+   "index": 123,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 593
+  },
+  {
+   "index": 124,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 891
+  },
+  {
+   "index": 125,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1497
+  },
+  {
+   "index": 126,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6273
+  },
+  {
+   "index": 127,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1067
+  },
+  {
+   "index": 128,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 780
+  },
+  {
+   "index": 129,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 636
+  },
+  {
+   "index": 130,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 877
+  },
+  {
+   "index": 131,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1500
+  },
+  {
+   "index": 132,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6229
+  },
+  {
+   "index": 133,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1059
+  },
+  {
+   "index": 134,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 774
+  },
+  {
+   "index": 135,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 634
+  },
+  {
+   "index": 136,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 864
+  },
+  {
+   "index": 137,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1472
+  },
+  {
+   "index": 138,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6254
+  },
+  {
+   "index": 139,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1053
+  },
+  {
+   "index": 140,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 766
+  },
+  {
+   "index": 141,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 636
+  },
+  {
+   "index": 142,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 885
+  },
+  {
+   "index": 143,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1507
+  },
+  {
+   "index": 144,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6244
+  },
+  {
+   "index": 145,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1072
+  },
+  {
+   "index": 146,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 779
+  },
+  {
+   "index": 147,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 645
+  },
+  {
+   "index": 148,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 900
+  },
+  {
+   "index": 149,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1481
+  },
+  {
+   "index": 150,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6250
+  },
+  {
+   "index": 151,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1052
+  },
+  {
+   "index": 152,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 789
+  },
+  {
+   "index": 153,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 650
+  },
+  {
+   "index": 154,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 906
+  },
+  {
+   "index": 155,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1526
+  },
+  {
+   "index": 156,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6254
+  },
+  {
+   "index": 157,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1050
+  },
+  {
+   "index": 158,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 835
+  },
+  {
+   "index": 159,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 633
+  },
+  {
+   "index": 160,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 895
+  },
+  {
+   "index": 161,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1559
+  },
+  {
+   "index": 162,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6264
+  },
+  {
+   "index": 163,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1077
+  },
+  {
+   "index": 164,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 774
+  },
+  {
+   "index": 165,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 640
+  },
+  {
+   "index": 166,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 919
+  },
+  {
+   "index": 167,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1528
+  },
+  {
+   "index": 168,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6243
+  },
+  {
+   "index": 169,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1071
+  },
+  {
+   "index": 170,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 791
+  },
+  {
+   "index": 171,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 631
+  },
+  {
+   "index": 172,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 898
+  },
+  {
+   "index": 173,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1517
+  },
+  {
+   "index": 174,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6259
+  },
+  {
+   "index": 175,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1044
+  },
+  {
+   "index": 176,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 800
+  },
+  {
+   "index": 177,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 636
+  },
+  {
+   "index": 178,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 899
+  },
+  {
+   "index": 179,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1537
+  },
+  {
+   "index": 180,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6261
+  },
+  {
+   "index": 181,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1088
+  },
+  {
+   "index": 182,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 806
+  },
+  {
+   "index": 183,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 634
+  },
+  {
+   "index": 184,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 889
+  },
+  {
+   "index": 185,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1532
+  },
+  {
+   "index": 186,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6250
+  },
+  {
+   "index": 187,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1070
+  },
+  {
+   "index": 188,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 793
+  },
+  {
+   "index": 189,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 632
+  },
+  {
+   "index": 190,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 875
+  },
+  {
+   "index": 191,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1533
+  },
+  {
+   "index": 192,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6284
+  },
+  {
+   "index": 193,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1067
+  },
+  {
+   "index": 194,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 758
+  },
+  {
+   "index": 195,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 657
+  },
+  {
+   "index": 196,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 902
+  },
+  {
+   "index": 197,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1497
+  },
+  {
+   "index": 198,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6260
+  },
+  {
+   "index": 199,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1088
+  },
+  {
+   "index": 200,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 793
+  },
+  {
+   "index": 201,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 623
+  },
+  {
+   "index": 202,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 912
+  },
+  {
+   "index": 203,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1527
+  },
+  {
+   "index": 204,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6261
+  },
+  {
+   "index": 205,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1067
+  },
+  {
+   "index": 206,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 803
+  },
+  {
+   "index": 207,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 633
+  },
+  {
+   "index": 208,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 922
+  },
+  {
+   "index": 209,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1483
+  },
+  {
+   "index": 210,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6252
+  },
+  {
+   "index": 211,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1072
+  },
+  {
+   "index": 212,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 765
+  },
+  {
+   "index": 213,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 657
+  },
+  {
+   "index": 214,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 896
+  },
+  {
+   "index": 215,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1500
+  },
+  {
+   "index": 216,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6274
+  },
+  {
+   "index": 217,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1073
+  },
+  {
+   "index": 218,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 781
+  },
+  {
+   "index": 219,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 628
+  },
+  {
+   "index": 220,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 918
+  },
+  {
+   "index": 221,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1509
+  },
+  {
+   "index": 222,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6248
+  },
+  {
+   "index": 223,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1092
+  },
+  {
+   "index": 224,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 809
+  },
+  {
+   "index": 225,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 638
+  },
+  {
+   "index": 226,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 891
+  },
+  {
+   "index": 227,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1551
+  },
+  {
+   "index": 228,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6268
+  },
+  {
+   "index": 229,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1089
+  },
+  {
+   "index": 230,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 797
+  },
+  {
+   "index": 231,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 643
+  },
+  {
+   "index": 232,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 900
+  },
+  {
+   "index": 233,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1535
+  },
+  {
+   "index": 234,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6251
+  },
+  {
+   "index": 235,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1086
+  },
+  {
+   "index": 236,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 778
+  },
+  {
+   "index": 237,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 657
+  },
+  {
+   "index": 238,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 920
+  },
+  {
+   "index": 239,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1572
+  },
+  {
+   "index": 240,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6246
+  },
+  {
+   "index": 241,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1077
+  },
+  {
+   "index": 242,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 813
+  },
+  {
+   "index": 243,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 644
+  },
+  {
+   "index": 244,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 907
+  },
+  {
+   "index": 245,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1519
+  },
+  {
+   "index": 246,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6268
+  },
+  {
+   "index": 247,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1097
+  },
+  {
+   "index": 248,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 795
+  },
+  {
+   "index": 249,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 654
+  },
+  {
+   "index": 250,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 912
+  },
+  {
+   "index": 251,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1524
+  },
+  {
+   "index": 252,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6248
+  },
+  {
+   "index": 253,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1060
+  },
+  {
+   "index": 254,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 789
+  },
+  {
+   "index": 255,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 653
+  },
+  {
+   "index": 256,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 900
+  },
+  {
+   "index": 257,
+   "scenarioId": "hostile/huge-table",
+   "status": "finished",
+   "durationMs": 1545
+  },
+  {
+   "index": 258,
+   "scenarioId": "long-markdown",
+   "status": "finished",
+   "durationMs": 6285
+  },
+  {
+   "index": 259,
+   "scenarioId": "parallel-tool-calls",
+   "status": "finished",
+   "durationMs": 1082
+  },
+  {
+   "index": 260,
+   "scenarioId": "custom-chunks",
+   "status": "finished",
+   "durationMs": 806
+  },
+  {
+   "index": 261,
+   "scenarioId": "state-snapshot-delta",
+   "status": "finished",
+   "durationMs": 650
+  },
+  {
+   "index": 262,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "status": "finished",
+   "durationMs": 909
+  }
+ ]
+}

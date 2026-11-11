@@ -1,0 +1,20 @@
+00:00 +0: loading /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/a2ui-flutter/test/live_harness_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: live round-trip a2ui/button-actions-roundtrip
+LIVE a2ui/button-actions-roundtrip statuses=[200, 200, 200] summary={"requestCount":3,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[{"name":"consent_accept","surfaceId":"km-recording-consent","sourceComponentId":"accept_btn","context":{"meetingId":"m-981","scope":"audio+video"}},{"name":"consent_decline","surfaceId":"km-recording-consent","sourceComponentId":"decline_btn","context":{"meetingId":"m-981"}}],"unmatchedRequests":0,"invalidInputs":0}
+00:00 +1: live round-trip a2ui/card-with-action
+LIVE a2ui/card-with-action statuses=[200, 200] summary={"requestCount":2,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[{"name":"add_agent","surfaceId":"km-agent-card","sourceComponentId":"add_btn","context":{"agentId":"scribe"}}],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +2: live round-trip a2ui/form-validation
+LIVE a2ui/form-validation statuses=[200, 200] summary={"requestCount":2,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[{"name":"invite_guest","surfaceId":"km-form-validation","sourceComponentId":"submit_btn","context":{"name":"Ana","email":"ana@know-me.tools","role":["guest"]}}],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +3: live round-trip a2ui/incremental-update-delete
+LIVE a2ui/incremental-update-delete statuses=[200] summary={"requestCount":1,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +4: live round-trip a2ui/list-template
+LIVE a2ui/list-template statuses=[200] summary={"requestCount":1,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +5: live round-trip a2ui/media-image-video-audio
+LIVE a2ui/media-image-video-audio statuses=[200] summary={"requestCount":1,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +6: live round-trip a2ui/nested-layout
+LIVE a2ui/nested-layout statuses=[200] summary={"requestCount":1,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +7: live round-trip a2ui/unknown-component-fallback
+LIVE a2ui/unknown-component-fallback statuses=[200] summary={"requestCount":1,"resumeEntries":[],"noResolvedResumeAfterExpiry":true,"resumedWithLastEventId":false,"clientAborted":false,"a2uiActions":[],"unmatchedRequests":0,"invalidInputs":0}
+00:01 +8: (tearDownAll)
+00:01 +8: All tests passed!

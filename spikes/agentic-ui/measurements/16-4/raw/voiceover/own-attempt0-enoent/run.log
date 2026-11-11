@@ -1,0 +1,23 @@
+1794374169268 stream: a11y-own-stream-long-markdown-mwbo1u44
+1794374169288 (node:9342) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+1794374169288 (Use `node --trace-warnings ...` to show where the warning was created)
+1794374169289 node:events:505
+1794374169289     throw er; // Unhandled 'error' event
+1794374169289     ^
+1794374169289 
+1794374169289 Error: spawn ../../tauri-shell/bin/km-spike-own-a11y-4327 ENOENT
+1794374169289     at ChildProcess._handle.onexit (node:internal/child_process:286:19)
+1794374169289     at onErrorNT (node:internal/child_process:524:16)
+1794374169289     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+1794374169289 Emitted 'error' event on ChildProcess instance at:
+1794374169289     at ChildProcess._handle.onexit (node:internal/child_process:292:12)
+1794374169289     at onErrorNT (node:internal/child_process:524:16)
+1794374169289     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+1794374169289   errno: -2,
+1794374169289   code: 'ENOENT',
+1794374169289   syscall: 'spawn ../../tauri-shell/bin/km-spike-own-a11y-4327',
+1794374169289   path: '../../tauri-shell/bin/km-spike-own-a11y-4327',
+1794374169289   spawnargs: []
+1794374169289 }
+1794374169289 
+1794374169289 Node.js v26.8.2

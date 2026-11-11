@@ -1,0 +1,277 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "form-validation",
+  "title": "Invite form with renderer-side checks",
+  "description": "TextField checks (required, email, regex), a CheckBox, a ChoicePicker and a submit Button whose checks gate the action.",
+  "surfaceId": "km-form-validation",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-form-validation",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+        "dataModel": {
+          "form": {
+            "name": "",
+            "email": "",
+            "phone": "",
+            "agree": false,
+            "role": [
+              "guest"
+            ]
+          }
+        },
+        "sendDataModel": true
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-form-validation",
+        "components": [
+          {
+            "id": "root",
+            "component": "Card",
+            "child": "col"
+          },
+          {
+            "id": "col",
+            "component": "Column",
+            "children": [
+              "title",
+              "name_field",
+              "email_field",
+              "phone_field",
+              "role_picker",
+              "agree_box",
+              "submit_btn"
+            ],
+            "align": "stretch"
+          },
+          {
+            "id": "title",
+            "component": "Text",
+            "text": "Invite a guest"
+          },
+          {
+            "id": "name_field",
+            "component": "TextField",
+            "label": "Name",
+            "value": {
+              "@path": "/form/name"
+            },
+            "checks": [
+              {
+                "condition": {
+                  "@call": "required",
+                  "args": {
+                    "value": {
+                      "@path": "/form/name"
+                    }
+                  }
+                },
+                "message": "Name is required"
+              }
+            ]
+          },
+          {
+            "id": "email_field",
+            "component": "TextField",
+            "label": "Email",
+            "value": {
+              "@path": "/form/email"
+            },
+            "checks": [
+              {
+                "condition": {
+                  "@call": "email",
+                  "args": {
+                    "value": {
+                      "@path": "/form/email"
+                    }
+                  }
+                },
+                "message": "Enter a valid email"
+              }
+            ]
+          },
+          {
+            "id": "phone_field",
+            "component": "TextField",
+            "label": "Phone (optional)",
+            "value": {
+              "@path": "/form/phone"
+            },
+            "checks": [
+              {
+                "condition": {
+                  "@call": "regex",
+                  "args": {
+                    "value": {
+                      "@path": "/form/phone"
+                    },
+                    "pattern": "^(\\+?[0-9]{10,15})?$"
+                  }
+                },
+                "message": "Use 10-15 digits"
+              }
+            ]
+          },
+          {
+            "id": "role_picker",
+            "component": "ChoicePicker",
+            "label": "Role",
+            "options": [
+              {
+                "label": "Guest",
+                "value": "guest"
+              },
+              {
+                "label": "Co-host",
+                "value": "cohost"
+              }
+            ],
+            "value": {
+              "@path": "/form/role"
+            }
+          },
+          {
+            "id": "agree_box",
+            "component": "CheckBox",
+            "label": "Guest may be recorded",
+            "value": {
+              "@path": "/form/agree"
+            }
+          },
+          {
+            "id": "submit_btn",
+            "component": "Button",
+            "child": "submit_label",
+            "variant": "primary",
+            "checks": [
+              {
+                "condition": {
+                  "@call": "and",
+                  "args": {
+                    "values": [
+                      {
+                        "@call": "required",
+                        "args": {
+                          "value": {
+                            "@path": "/form/name"
+                          }
+                        }
+                      },
+                      {
+                        "@call": "email",
+                        "args": {
+                          "value": {
+                            "@path": "/form/email"
+                          }
+                        }
+                      },
+                      {
+                        "@call": "required",
+                        "args": {
+                          "value": {
+                            "@path": "/form/agree"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "message": "Complete the form first"
+              }
+            ],
+            "action": {
+              "event": {
+                "name": "invite_guest",
+                "context": {
+                  "name": {
+                    "@path": "/form/name"
+                  },
+                  "email": {
+                    "@path": "/form/email"
+                  },
+                  "role": {
+                    "@path": "/form/role"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "submit_label",
+            "component": "Text",
+            "text": "Send invite"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "description": "Invalid email: the action must not fire and the check message must show.",
+      "fill": {
+        "name_field": "Ana",
+        "email_field": "not-an-email"
+      },
+      "click": "submit_btn",
+      "expectVisibleText": [
+        "Enter a valid email"
+      ]
+    },
+    {
+      "description": "Valid form: the action fires with bound context.",
+      "fill": {
+        "name_field": "Ana",
+        "email_field": "ana@know-me.tools"
+      },
+      "toggle": [
+        "agree_box"
+      ],
+      "click": "submit_btn",
+      "expectAction": {
+        "name": "invite_guest",
+        "sourceComponentId": "submit_btn",
+        "context": {
+          "name": "Ana",
+          "email": "ana@know-me.tools",
+          "role": [
+            "guest"
+          ]
+        }
+      }
+    }
+  ],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "col",
+      "title",
+      "name_field",
+      "email_field",
+      "phone_field",
+      "role_picker",
+      "agree_box",
+      "submit_btn",
+      "submit_label"
+    ],
+    "fallbackComponentIds": [],
+    "visibleText": [
+      "Invite a guest",
+      "Name",
+      "Email",
+      "Send invite"
+    ],
+    "blockedMediaUrls": []
+  },
+  "flutterNotes": "a2ui_flutter must evaluate the same checks client-side; compare the visible error text and that no action is emitted on the invalid click."
+}

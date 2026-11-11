@@ -1,0 +1,1592 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<title>Settings · Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="LiveKit, Telnyx SMS and dial-in, calendars, S3 and IPFS storage, recording and summary delivery." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/settings.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Settings — Know Meet" />
+<meta property="og:description" content="LiveKit, Telnyx SMS and dial-in, calendars, S3 and IPFS storage, recording and summary delivery." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/settings.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Settings — Know Meet" />
+<meta name="twitter:description" content="LiveKit, Telnyx SMS and dial-in, calendars, S3 and IPFS storage, recording and summary delivery." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/km.css" />
+<style>
+  /* ---- page-local: settings ---- */
+  .content { display: grid; gap: var(--s5); align-content: start; min-width: 0; }
+  .content .page-head { margin-bottom: 0; }
+  .sidenav > .eyebrow { padding: 0 var(--s3) var(--s2); }
+  .req { color: var(--ember-text); }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { padding: 0; margin-bottom: 6px; font-weight: 600; font-size: var(--text-sm); }
+  fieldset[disabled] { opacity: 0.55; }
+  .panel > h2, .panel .panel-h { font-size: var(--text-lg); }
+  .panel-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--s3); }
+  .panel-head > div { display: grid; gap: 4px; min-width: 0; max-width: 64ch; }
+  .panel-head p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .form-foot { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; padding-top: var(--s2); }
+  .req-note { color: var(--fg-sub); font-size: var(--text-xs); }
+  .switches > .switch-row + .switch-row { box-shadow: inset 0 1px 0 var(--muted); }
+  .switch-row b { font-weight: 600; }
+  .switch-row .small { color: var(--fg-sub); }
+  .switch-row { cursor: pointer; }
+
+  .note { display: flex; align-items: flex-start; gap: var(--s3); padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--muted); color: var(--fg); font-size: var(--text-sm); }
+  .note > .ic { margin-top: 1px; }
+  .note > div { display: grid; gap: var(--s2); min-width: 0; }
+  .note-info { background: var(--cyan-soft); } .note-info > .ic { color: var(--cyan-text); }
+  .note-warn { background: var(--amber-soft); } .note-warn > .ic { color: var(--amber-text); }
+  .note-ok { background: var(--green-soft); } .note-ok > .ic { color: var(--green-text); }
+  .note-err { background: var(--red-soft); } .note-err > .ic { color: var(--red-text); }
+
+  .cred { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--bg-2); }
+  .cred code { justify-self: start; }
+  .cap { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s3) 0; }
+  .cap + .cap { box-shadow: inset 0 1px 0 var(--muted); }
+  .cap .ttl { display: block; font-weight: 600; font-size: var(--text-sm); }
+  .cap .d { display: block; color: var(--fg-sub); font-size: var(--text-sm); }
+
+  .checks { display: grid; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+  .check { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--bg-2); }
+  .check .st { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--muted); color: var(--fg-sub); }
+  .check .lbl { display: grid; gap: 2px; min-width: 0; }
+  .check .lbl > * { display: block; }
+  .check .lbl small { color: var(--fg-sub); font-size: var(--text-sm); overflow-wrap: anywhere; }
+  .check .state { font-size: var(--text-sm); font-weight: 600; color: var(--fg-sub); white-space: nowrap; }
+  .check[data-s="run"] .st { background: var(--amber-soft); color: var(--amber-text); }
+  .check[data-s="ok"] .st { background: var(--green-soft); color: var(--green-text); }
+  .check[data-s="ok"] .state { color: var(--green-text); }
+  .check[data-s="fail"] .st { background: var(--red-soft); color: var(--red-text); }
+  .check[data-s="fail"] .state { color: var(--red-text); }
+  .check[data-s="fail"] .lbl small { color: var(--fg); }
+  .spin { animation: km-spin 0.9s linear infinite; }
+  @keyframes km-spin { to { transform: rotate(360deg); } }
+
+  .prov { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s4); align-items: start; }
+  .prov-mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--muted); color: var(--fg); font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+  .prov-body { display: grid; gap: var(--s3); min-width: 0; }
+  .prov-body h2 { font-size: var(--text-lg); }
+  .cal-list { display: grid; gap: 0; }
+  .link-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: center; }
+  .link-card .lead { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--muted); }
+  .link-card .t { display: block; font-weight: 600; }
+  .link-card .d { display: block; color: var(--fg-sub); font-size: var(--text-sm); }
+
+  .consent { width: min(100%, 520px); }
+  .perm { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); padding: var(--s3) 0; }
+  .perm + .perm { box-shadow: inset 0 1px 0 var(--muted); }
+  .perm .ic { color: var(--ember-text); margin-top: 2px; }
+  .perm b { display: block; }
+  .perm span.d { display: block; color: var(--fg-sub); font-size: var(--text-sm); }
+
+  /* previews */
+  .tpl-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  .email-card { display: grid; border-radius: var(--radius-tile); background: var(--card); box-shadow: var(--shadow-card), inset 0 0 0 1px var(--muted); overflow: hidden; }
+  .email-meta { display: grid; gap: 4px; padding: var(--s3) var(--s4); background: var(--bg-2); font-size: var(--text-sm); }
+  .email-meta > div { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--s2); }
+  .email-meta dt { color: var(--fg-sub); }
+  .email-meta dd { margin: 0; overflow-wrap: anywhere; }
+  .email-body { display: grid; gap: var(--s3); padding: var(--s5) var(--s4); font-size: var(--text-sm); }
+  .email-body h3 { font-size: var(--text-lg); overflow-wrap: anywhere; }
+  .email-body h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-sub); }
+  .email-body ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+  .email-body .btn { justify-self: start; }
+  .email-body .foot { color: var(--fg-sub); font-size: var(--text-xs); }
+  .phone-frame { width: min(100%, 340px); padding: var(--s4); border-radius: 28px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--muted); display: grid; gap: var(--s2); }
+  .phone-frame .from { text-align: center; color: var(--fg-sub); font-size: var(--text-xs); }
+  .bubble { justify-self: start; max-width: 88%; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: var(--muted); color: var(--fg); font-size: var(--text-sm); line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; }
+  .counter { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; font-size: var(--text-sm); color: var(--fg-sub); }
+  .tokens { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .result-list { display: grid; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+  .result-list li label { display: flex; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s3); border-radius: var(--radius); background: var(--bg-2); cursor: pointer; }
+  .result-list input { width: 20px; height: 20px; accent-color: var(--ember-btn); margin: 0; }
+
+  @media (max-width: 1023px) {
+    .tpl-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .cred { grid-template-columns: minmax(0, 1fr) auto; }
+    .cred .masked { grid-column: 1 / -1; grid-row: 2; }
+    .prov { grid-template-columns: auto minmax(0, 1fr); }
+    .prov > .chip { grid-column: 2; grid-row: 1; justify-self: start; }
+    .prov-body { grid-column: 1 / -1; }
+    .check { grid-template-columns: 36px minmax(0, 1fr); }
+    .check .state { grid-column: 2; }
+    .cap { grid-template-columns: auto minmax(0, 1fr); }
+    .cap > .chip { grid-column: 2; justify-self: start; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <header id="appbar"></header>
+  <main id="main" class="page" tabindex="-1"></main>
+</div>
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var h = KM.h, icon = KM.icon, fmt = KM.fmt, D = KM.data;
+  var main = document.getElementById('main');
+  KM.mountAppBar(document.getElementById('appbar'), { active: 'settings' });
+  document.querySelector('.skip-link').addEventListener('click', function (e) { e.preventDefault(); main.focus(); });
+
+  /* ------------------------------------------------------------ state (no secrets are ever persisted) */
+  var KEY = 'km-meet-settings';
+  var detectedTz = 'America/Los_Angeles';
+  try { detectedTz = Intl.DateTimeFormat().resolvedOptions().timeZone || detectedTz; } catch (_) { /* keep default */ }
+  var DEF = {
+    tz: detectedTz,
+    defaults: { waiting: true, scribe: true, dialin: true, dot: true },
+    notif: { recReady: true, summary: true, responses: true, digest: false, smsStart: false, smsSummary: true, phone: '' },
+    lk: { mode: 'managed', url: '', keyId: '', region: 'auto', testedAt: null },
+    sms: { connected: false, keyLast4: '', profile: '', number: '', receipts: true, lastTest: null },
+    voice: {
+      numbers: D.telnyx.dialIn.map(function (n) { return { number: n.number, region: n.region, status: 'Active' }; }),
+      sipName: D.telnyx.sipTrunk, pinLen: '8',
+      greeting: 'Welcome to Know Meet. Please enter your meeting PIN, followed by the pound key.'
+    },
+    cal: {
+      google: { connected: true, calendars: { work: true, team: true, personal: false }, addLink: true, window: '30', lastSync: null },
+      outlook: { connected: true, calendars: { calendar: true, partners: true, birthdays: false }, addLink: true, window: '30', lastSync: null },
+      caldav: { connected: false, server: '', user: '', calendars: { home: true }, addLink: false, window: '30', lastSync: null }
+    },
+    storage: { mode: 'managed', format: 'mp4', layout: 'speaker', res: '1080p', audioOnly: false, retention: '365', ipfs: true },
+    s3: { saved: false, provider: 'r2', endpoint: '', region: 'auto', bucket: '', prefix: 'meet/', keyId: '', pathStyle: true, testedAt: null },
+    ipfs: { mode: 'knowme', endpoint: '', rpc: 'http://127.0.0.1:5001', gateway: 'https://ipfs.io', pinAfter: true, testedAt: null },
+    rec: { auto: true, live: true, lang: 'auto', speakers: true, kb: true, profanity: false },
+    delivery: { on: true, transcript: true, summary: true, actions: true, recording: true, recipients: 'all', email: true, sms: true, timing: 'immediate', expiry: '30' },
+    tpl: {
+      subject: 'Summary: {meeting}',
+      intro: 'Thanks for joining. Here is what we covered, the decisions we made, and who owns each next step.',
+      sms: 'Your summary for {meeting} is ready:',
+      inviteSubject: 'Invitation: {meeting} · {date}',
+      inviteSms: '{host} invited you to {meeting}, {date}.'
+    }
+  };
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function merge(a, b) {
+    Object.keys(b || {}).forEach(function (k) {
+      var bv = b[k], av = a[k];
+      if (bv && typeof bv === 'object' && !Array.isArray(bv) && av && typeof av === 'object' && !Array.isArray(av)) a[k] = merge(av, bv);
+      else if (bv !== undefined) a[k] = bv;
+    });
+    return a;
+  }
+  function load() {
+    try { return merge(clone(DEF), JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (_) { return clone(DEF); }
+  }
+  var ST = load();
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (_) { /* storage unavailable */ } }
+
+  /* ------------------------------------------------------------ ui helpers */
+  var uid = 0;
+  var RUN = 0; /* cancels timers when the route changes */
+  function req() { return h('span', { class: 'req', 'aria-hidden': 'true', text: ' *' }); }
+  function chip(text, cls, ic) { return h('span', { class: 'chip ' + (cls || '') }, ic ? icon(ic) : null, h('span', { text: text })); }
+  function stateChip(text, kind) { return h('span', { class: 'chip chip-' + kind }, h('span', { class: 'pip', 'aria-hidden': 'true' }), h('span', { text: text })); }
+  function note(kind, ic, children) { return h('div', { class: 'note note-' + kind, role: kind === 'err' ? 'alert' : null }, icon(ic), h('div', null, children)); }
+  function busy(btn, label) {
+    var kids = Array.prototype.slice.call(btn.childNodes);
+    btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+    KM.clear(btn); btn.appendChild(icon('refresh', 'spin')); btn.appendChild(h('span', { text: label }));
+    return function () { btn.disabled = false; btn.removeAttribute('aria-busy'); KM.clear(btn); kids.forEach(function (k) { btn.appendChild(k); }); };
+  }
+  function later(ms, fn) { var token = RUN; setTimeout(function () { if (token === RUN) fn(); }, ms); }
+  function saved(msg) { save(); KM.toast(msg || 'Saved', 'check'); }
+  function nowLabel() { return fmt.relDay(new Date()) + ' at ' + fmt.time(new Date()); }
+
+  function field(o) {
+    var id = o.id || ('f' + (++uid));
+    var hintId = id + '-hint', errId = id + '-err';
+    var described = (o.hint ? hintId + ' ' : '') + errId;
+    var input;
+    if (o.type === 'textarea') {
+      input = h('textarea', { class: 'input', id: id, rows: String(o.rows || 3), placeholder: o.placeholder || null, maxlength: o.max ? String(o.max) : null,
+        'aria-describedby': described, 'aria-required': o.required ? 'true' : null });
+      input.value = o.value || '';
+    } else {
+      input = h('input', { class: 'input' + (o.mono ? ' mono' : ''), id: id, type: o.type || 'text', value: o.value || '', placeholder: o.placeholder || null,
+        autocomplete: o.autocomplete || (o.type === 'password' ? 'new-password' : 'off'), spellcheck: o.mono || o.type === 'password' ? 'false' : null,
+        readonly: o.readonly ? true : null, inputmode: o.inputmode || null, maxlength: o.max ? String(o.max) : null,
+        'aria-describedby': described, 'aria-required': o.required ? 'true' : null });
+    }
+    var errText = h('span');
+    var err = h('p', { class: 'field-error', id: errId }, icon('alert', 'ic-sm'), errText);
+    var control = input;
+    if (o.type === 'password') {
+      var eye = h('button', { class: 'icon-btn', type: 'button', 'aria-pressed': 'false', 'aria-label': 'Show ' + o.label, onclick: function () {
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        eye.setAttribute('aria-pressed', show ? 'true' : 'false');
+        eye.setAttribute('aria-label', (show ? 'Hide ' : 'Show ') + o.label);
+        KM.setIcon(eye, show ? 'eye-off' : 'eye');
+      } }, icon('eye'));
+      control = h('div', { class: 'input-group' }, input, eye);
+    } else if (o.copy) {
+      control = h('div', { class: 'input-group' }, input,
+        h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy ' + o.label, onclick: function () { KM.copy(input.value); } }, icon('copy')));
+    }
+    var hintEl = o.hint ? h('p', { class: 'hint', id: hintId, text: o.hint }) : null;
+    var el = h('div', { class: 'field' },
+      h('label', { for: id }, o.label, o.required ? req() : null, o.optional ? h('span', { class: 'sub', style: 'font-weight:400', text: ' (optional)' }) : null),
+      hintEl, control, err);
+    function setError(msg) {
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      errText.textContent = msg || '';
+      err.classList.toggle('show', !!msg);
+    }
+    function check() {
+      var v = input.value.trim();
+      var msg = null;
+      if (o.required && !v) msg = o.requiredMsg || ('Enter ' + o.label.toLowerCase() + ' — this field is required.');
+      else if (v && o.validate) msg = o.validate(v);
+      setError(msg);
+      return !msg;
+    }
+    input.addEventListener('blur', check);
+    input.addEventListener('input', function () { if (input.getAttribute('aria-invalid') === 'true') check(); if (o.oninput) o.oninput(input.value); });
+    return { el: el, input: input, check: check, setError: setError, hintEl: hintEl, value: function () { return input.value.trim(); } };
+  }
+  function selectField(o) {
+    var id = o.id || ('f' + (++uid));
+    var sel = h('select', { class: 'input', id: id, disabled: o.disabled ? true : null, 'aria-describedby': o.hint ? id + '-hint' : null,
+      onchange: function () { if (o.onchange) o.onchange(sel.value); } },
+      o.options.map(function (op) { return h('option', { value: op[0], selected: op[0] === o.value ? true : null, text: op[1] }); }));
+    var hintEl = o.hint ? h('p', { class: 'hint', id: id + '-hint', text: o.hint }) : null;
+    return { el: h('div', { class: 'field' }, h('label', { for: id }, o.label, o.required ? req() : null), hintEl, sel), input: sel, hintEl: hintEl };
+  }
+  function switchRow(o) {
+    var id = o.id || ('sw' + (++uid));
+    var input = h('input', { type: 'checkbox', id: id, role: 'switch', checked: o.checked ? true : null, disabled: o.disabled ? true : null,
+      'aria-describedby': o.desc ? id + '-d' : null,
+      onchange: function () { if (o.onchange) o.onchange(input.checked); } });
+    var el = h('label', { class: 'switch-row', for: id },
+      h('span', { class: 'copy' }, h('b', { text: o.label }), o.desc ? h('span', { class: 'small', id: id + '-d', text: o.desc }) : null),
+      h('span', { class: 'switch' }, input, h('span', { class: 'track' }), h('span', { class: 'thumb' })));
+    return { el: el, input: input };
+  }
+  function segField(label, options, value, onChange, disabled) {
+    var id = 'seg' + (++uid);
+    var wrap = h('div', { class: 'seg', role: 'group', 'aria-labelledby': id });
+    options.forEach(function (o) {
+      wrap.appendChild(h('button', { type: 'button', disabled: disabled ? true : null, 'aria-pressed': o[0] === value ? 'true' : 'false', onclick: function () {
+        KM.$$('button', wrap).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        this.setAttribute('aria-pressed', 'true');
+        onChange(o[0]);
+      } }, o[2] ? icon(o[2], 'ic-sm') : null, h('span', { text: o[1] })));
+    });
+    return h('div', { class: 'field' }, h('span', { class: 'label', id: id, text: label }), h('div', null, wrap));
+  }
+  function radioGroup(legend, name, options, value, onChange) {
+    return h('fieldset', null, h('legend', { text: legend }), options.map(function (o) {
+      var id = name + '-' + o[0];
+      return h('label', { class: 'check-row', for: id },
+        h('input', { type: 'radio', name: name, id: id, value: o[0], checked: o[0] === value ? true : null, onchange: function () { onChange(o[0]); } }),
+        h('span', null, h('span', { style: 'display:block;font-weight:600', text: o[1] }), o[2] ? h('span', { class: 'small sub', style: 'display:block', text: o[2] }) : null));
+    }));
+  }
+  function checkRow(id, label, desc, checked, onChange) {
+    return h('label', { class: 'check-row', for: id },
+      h('input', { type: 'checkbox', id: id, checked: checked ? true : null, onchange: function () { onChange.call(this, this.checked); } }),
+      h('span', null, h('span', { style: 'display:block;font-weight:600', text: label }), desc ? h('span', { class: 'small sub', style: 'display:block', text: desc }) : null));
+  }
+  function panel(title, desc, children, actions) {
+    var hid = 'p' + (++uid);
+    return h('section', { class: 'panel', 'aria-labelledby': hid },
+      h('div', { class: 'panel-head' },
+        h('div', null, h('h2', { id: hid, class: 'panel-h', text: title }), desc ? h('p', { text: desc }) : null),
+        actions || null),
+      children);
+  }
+  function maskTail(last4) { return '••••••••••••' + (last4 || ''); }
+
+  /* staged checks */
+  function checksList(steps) {
+    var ol = h('ol', { class: 'checks' });
+    var rows = steps.map(function (s, i) {
+      var st = h('span', { class: 'st', 'aria-hidden': 'true' }, h('span', { class: 'mono', text: String(i + 1) }));
+      var small = h('small', { text: s.detail || '' });
+      var state = h('span', { class: 'state', text: s.initial || 'Waiting' });
+      var li = h('li', { class: 'check', 'data-s': 'wait' }, st, h('span', { class: 'lbl' }, h('b', { text: s.label }), small), state);
+      ol.appendChild(li);
+      return { li: li, st: st, small: small, state: state };
+    });
+    return { el: ol, rows: rows };
+  }
+  function setRow(row, s, text, detail) {
+    row.li.setAttribute('data-s', s);
+    KM.clear(row.st);
+    row.st.appendChild(s === 'run' ? icon('refresh', 'spin') : s === 'ok' ? icon('check') : s === 'fail' ? icon('alert') : icon('remove'));
+    row.state.textContent = text;
+    if (detail != null) row.small.textContent = detail;
+  }
+  function runChecks(cl, steps) {
+    var token = RUN;
+    return new Promise(function (resolve) {
+      var i = 0;
+      function next() {
+        if (token !== RUN) return;
+        if (i >= steps.length) { resolve({ ok: true }); return; }
+        var row = cl.rows[i], s = steps[i];
+        setRow(row, 'run', 'Checking…');
+        setTimeout(function () {
+          if (token !== RUN) return;
+          var err = s.fail ? s.fail() : null;
+          if (err) {
+            setRow(row, 'fail', 'Failed', err);
+            for (var j = i + 1; j < steps.length; j++) setRow(cl.rows[j], 'skip', 'Skipped');
+            resolve({ ok: false, at: i, error: err });
+            return;
+          }
+          setRow(row, 'ok', s.okText || 'Passed', s.okDetail || null);
+          i++; next();
+        }, s.ms || 850);
+      }
+      next();
+    });
+  }
+
+  /* ------------------------------------------------------------ shell */
+  var NAV = [
+    ['Account', [['account', 'Account', 'user'], ['notifications', 'Notifications', 'mail']]],
+    ['Connections', [['livekit', 'LiveKit', 'server'], ['telnyx-sms', 'Telnyx SMS', 'sms'], ['telnyx-voice', 'Telnyx voice dial-in', 'phone-in'], ['calendars', 'Calendars', 'calendar']]],
+    ['Recording', [['storage', 'Storage', 'database'], ['recording', 'Recording & transcription', 'record'], ['delivery', 'Summary delivery', 'send'], ['templates', 'Message templates', 'edit']]]
+  ];
+  var ACTIVE_ALIAS = { 'calendar-connect': 'calendars', 'storage-s3': 'storage', 'storage-ipfs': 'storage', 'storage-test-failed': 'storage' };
+  function groupOf(key) {
+    var k = ACTIVE_ALIAS[key] || key, g = 'Settings';
+    NAV.forEach(function (grp) { grp[1].forEach(function (it) { if (it[0] === k) g = grp[0]; }); });
+    return g;
+  }
+  function shell(key) {
+    var active = ACTIVE_ALIAS[key] || key;
+    KM.clear(main);
+    var nav = h('nav', { class: 'sidenav', 'aria-label': 'Settings sections' },
+      h('span', { class: 'eyebrow', text: 'Settings' }),
+      NAV.map(function (grp) {
+        return [h('span', { class: 'eyebrow eyebrow-sub group-label', text: grp[0] }),
+          h('ul', null, grp[1].map(function (it) {
+            return h('li', null, h('a', { href: '#' + it[0], 'aria-current': it[0] === active ? 'page' : null }, icon(it[2]), h('span', { text: it[1] })));
+          }))];
+      }));
+    var content = h('div', { class: 'content' });
+    main.appendChild(h('div', { class: 'layout-side' }, nav, content));
+    return content;
+  }
+  function head(c, key, title, desc, actions, extraCrumb) {
+    document.title = title + ' · Settings · Know Meet';
+    var cr = h('nav', { class: 'crumbs', 'aria-label': 'Breadcrumb' },
+      h('a', { href: '#account', text: 'Settings' }), icon('chevron-right'), h('span', { text: groupOf(key) }));
+    if (extraCrumb) { cr.appendChild(icon('chevron-right')); cr.appendChild(h('a', { href: extraCrumb[1], text: extraCrumb[0] })); }
+    c.appendChild(h('div', { class: 'page-head' },
+      h('div', null, cr, h('h1', { text: title }), desc ? h('p', { class: 'sub', text: desc }) : null),
+      actions ? h('div', { class: 'actions' }, actions) : null));
+  }
+
+  /* ------------------------------------------------------------ #account */
+  var TZS = ['America/Los_Angeles', 'America/Denver', 'America/Chicago', 'America/New_York', 'America/Sao_Paulo', 'Europe/London', 'Europe/Berlin', 'Africa/Lagos', 'Asia/Kolkata', 'Asia/Singapore', 'Asia/Tokyo', 'Australia/Sydney', 'UTC'];
+  function vAccount(c) {
+    var u = KM.auth.get();
+    head(c, 'account', 'Account', 'Your profile, time zone, and the defaults new meetings start with.');
+
+    var name = field({ label: 'Display name', required: true, value: u.name, max: 80, autocomplete: 'name',
+      hint: 'Shown to participants and in invites you send.',
+      validate: function (v) { return v.length < 2 ? 'Use at least 2 characters so people recognise you.' : null; } });
+    var email = field({ label: 'Email', value: u.email, readonly: true, hint: 'Your sign-in identity. To use a different email, sign out and sign in with it.' });
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check'), h('span', { text: 'Save profile' }));
+    var form = h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+      e.preventDefault();
+      if (!name.check()) { name.input.focus(); return; }
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () { restore(); KM.auth.signIn({ email: u.email, name: name.value() }); KM.toast('Profile saved', 'check'); });
+    } },
+      h('div', { class: 'od-row', style: '--od-gap: var(--s4)' },
+        h('span', { class: 'avatar avatar-lg avatar-ember', 'aria-hidden': 'true', text: u.initials }),
+        h('div', { class: 'stack-sm', style: 'min-width:0' }, h('b', { class: 'od-truncate', title: u.name, text: u.name }), h('span', { class: 'small sub od-truncate', title: u.email, text: u.email }))),
+      h('div', { class: 'field-row' }, name.el, email.el),
+      h('div', { class: 'form-foot' }, saveBtn, h('span', { class: 'req-note', text: '* Required' })));
+    c.appendChild(panel('Profile', null, form));
+
+    var tzOpts = TZS.indexOf(ST.tz) < 0 ? [ST.tz].concat(TZS) : TZS;
+    var tz = selectField({ label: 'Time zone', value: ST.tz, hint: 'Used for scheduling, invites and the dates in summaries.',
+      options: tzOpts.map(function (z) { return [z, z.replace(/_/g, ' ')]; }),
+      onchange: function (v) { ST.tz = v; saved('Time zone set to ' + v.replace(/_/g, ' ')); } });
+    var d = ST.defaults;
+    c.appendChild(panel('Meeting defaults', 'Applied when you start or schedule a meeting. You can change them per meeting.', h('div', { class: 'stack' },
+      tz.el,
+      h('div', { class: 'switches' },
+        switchRow({ label: 'Waiting room', desc: 'Invitees wait until you admit them.', checked: d.waiting, onchange: function (v) { d.waiting = v; saved(); } }).el,
+        switchRow({ label: 'Add Scribe to meetings I host', desc: 'Scribe keeps notes, decisions and action items.', checked: d.scribe, onchange: function (v) { d.scribe = v; saved(); } }).el,
+        switchRow({ label: 'Bring Iris, your dot', desc: 'Your always-on agent joins with your private memory.', checked: d.dot, onchange: function (v) { d.dot = v; saved(); } }).el,
+        switchRow({ label: 'Include phone dial-in in invites', desc: 'Adds the dial-in number and meeting PIN to email and SMS invites.', checked: d.dialin, onchange: function (v) { d.dialin = v; saved(); } }).el))));
+
+    var outBtn = h('button', { class: 'btn', type: 'button', onclick: function () { KM.auth.signOut(); KM.toast('Signed out', 'log-out'); } }, icon('log-out'), h('span', { text: 'Sign out' }));
+    c.appendChild(panel('Session', 'Signing out keeps your recordings and settings in your account.', h('div', null, outBtn)));
+
+    var delBtn = h('button', { class: 'btn btn-danger', type: 'button', onclick: function () {
+      KM.confirm({
+        title: 'Delete your account?',
+        body: h('div', { class: 'stack-sm' },
+          h('p', { text: 'This permanently deletes your profile, settings, saved transcripts and summaries, and recordings in KnowMe-managed storage. Your dots’ private memory is erased.' }),
+          h('p', { text: 'Files in your own bucket are not touched. Recordings are unpinned from IPFS, but copies other nodes already fetched may persist.' })),
+        confirmLabel: 'Delete account', danger: true
+      }).then(function (ok) {
+        if (!ok) return;
+        var restore = busy(delBtn, 'Deleting…');
+        later(1200, function () {
+          restore();
+          try { localStorage.removeItem(KEY); } catch (_) { /* ignore */ }
+          ST = load();
+          KM.auth.signOut();
+          KM.toast('Account deleted', 'trash');
+        });
+      });
+    } }, icon('trash'), h('span', { text: 'Delete account' }));
+    c.appendChild(panel('Delete account', 'Removes your account and everything KnowMe stores for it. This can’t be undone.', h('div', null, delBtn)));
+  }
+
+  /* ------------------------------------------------------------ #notifications */
+  function vNotifications(c) {
+    var n = ST.notif;
+    head(c, 'notifications', 'Notifications', 'Choose what KnowMe tells you about, and where.');
+    c.appendChild(panel('Email', null, h('div', { class: 'switches' },
+      switchRow({ label: 'Recording ready', desc: 'When a recording finishes processing and is pinned.', checked: n.recReady, onchange: function (v) { n.recReady = v; saved(); } }).el,
+      switchRow({ label: 'Summary and transcript', desc: 'Your own copy after each meeting you join.', checked: n.summary, onchange: function (v) { n.summary = v; saved(); } }).el,
+      switchRow({ label: 'Invite responses', desc: 'When invitees accept or decline.', checked: n.responses, onchange: function (v) { n.responses = v; saved(); } }).el,
+      switchRow({ label: 'Weekly digest', desc: 'Open action items assigned to you across meetings.', checked: n.digest, onchange: function (v) { n.digest = v; saved(); } }).el)));
+
+    var phone = field({ label: 'Mobile number for SMS', value: n.phone, type: 'tel', autocomplete: 'tel', inputmode: 'tel', placeholder: '+1 415 555 0142',
+      hint: 'Include the country code. Reply STOP to any message to opt out.', validate: validatePhone });
+    var smsOn = !!n.phone;
+    var smsBox = h('fieldset', { disabled: smsOn ? null : true },
+      h('legend', { class: 'sr-only', text: 'SMS notifications' }),
+      h('div', { class: 'switches' },
+        switchRow({ label: 'Meeting starting', desc: 'A text 5 minutes before meetings you host or were invited to.', checked: n.smsStart, onchange: function (v) { n.smsStart = v; saved(); } }).el,
+        switchRow({ label: 'Summary link', desc: 'A short link to the summary when a meeting closes.', checked: n.smsSummary, onchange: function (v) { n.smsSummary = v; saved(); } }).el));
+    var saveBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!phone.check()) { phone.input.focus(); return; }
+      n.phone = phone.value();
+      smsBox.disabled = !n.phone;
+      saved(n.phone ? 'Mobile number saved' : 'Mobile number removed');
+    } }, h('span', { text: 'Save number' }));
+    c.appendChild(panel('SMS', 'Sent through Telnyx. Standard message rates may apply.', h('div', { class: 'stack' },
+      h('div', { class: 'input-group', style: 'align-items:end' }, phone.el, h('div', { style: 'padding-bottom: 0' }, saveBtn)),
+      smsOn ? null : note('info', 'info', 'Add a mobile number to turn on SMS notifications.'),
+      smsBox)));
+  }
+  function validatePhone(v) {
+    var digits = v.replace(/\D/g, '');
+    if (!/^\+?[\d\s().-]+$/.test(v) || digits.length < 10 || digits.length > 15) return 'Enter a mobile number with its country code, like +1 415 555 0142.';
+    return null;
+  }
+
+  /* ------------------------------------------------------------ #livekit */
+  var LK = { draft: null };
+  function vLivekit(c) {
+    if (!LK.draft) LK.draft = ST.lk.mode;
+    head(c, 'livekit', 'LiveKit', 'All meeting audio, video, agents, recording (Egress) and phone dial-in (SIP) run on LiveKit.');
+
+    // Live build: real status of the local token service (live/server.mjs). Keys never reach the browser.
+    var liveSlot = h('div', { class: 'stack' }, h('p', { class: 'small sub', text: 'Checking the local token service…' }));
+    c.appendChild(panel('This live build', 'Meetings started from this prototype use the LiveKit project in your shell environment.', liveSlot));
+    fetch('api/status', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok) throw new Error('bad reply');
+        KM.clear(liveSlot);
+        liveSlot.appendChild(h('div', { class: 'od-cluster' }, stateChip('Token service running', 'green')));
+        liveSlot.appendChild(field({ label: 'Server URL (LIVEKIT_URL)', value: j.data.url, readonly: true, mono: true, copy: true }).el);
+        liveSlot.appendChild(h('p', { class: 'hint' }, icon('lock', 'ic-sm'),
+          ' API key ' + j.data.keyHint + ' and its secret stay in the server process. The browser only receives signed tokens, valid for ' + Math.round(j.data.tokenTtl / 3600) + ' hours.'));
+      })
+      .catch(function () {
+        KM.clear(liveSlot);
+        liveSlot.appendChild(h('div', { class: 'od-cluster' }, stateChip('Token service not reachable', 'amber')));
+        liveSlot.appendChild(h('p', { class: 'small sub', text: 'Run ./live/start.sh in the know-meet repo and open this page from http://localhost:5173. The panels below are the simulated account settings.' }));
+      });
+
+    var body = h('div', { class: 'stack' });
+    c.appendChild(h('div', { class: 'od-cluster', style: 'justify-content: space-between' },
+      segField('Connection mode', [['managed', 'KnowMe-managed', 'cloud'], ['own', 'My own LiveKit project', 'server']], LK.draft, function (v) { LK.draft = v; draw(); }),
+      h('p', { class: 'small sub' }, 'Active now: ', h('b', { text: ST.lk.mode === 'own' ? 'Your project' : 'KnowMe-managed' }))));
+    c.appendChild(body);
+
+    function capabilities(egress, sip) {
+      return panel('Capabilities', 'What this connection supports for Know Meet.', h('div', null,
+        h('div', { class: 'cap' }, h('span', { class: 'lead' }, icon('record')),
+          h('span', null, h('span', { class: 'ttl', text: 'Egress' }), h('span', { class: 'd', text: 'Room Composite recording to MP4 or HLS on S3-compatible storage' })),
+          egress === 'ok' ? stateChip('Available', 'green') : stateChip('Not checked yet', 'amber')),
+        h('div', { class: 'cap' }, h('span', { class: 'lead' }, icon('phone-in')),
+          h('span', null, h('span', { class: 'ttl', text: 'SIP' }), h('span', { class: 'd', text: 'Inbound trunk for Telnyx voice dial-in (no outbound calling)' })),
+          sip === 'ok' ? stateChip('Available', 'green') : stateChip('Not checked yet', 'amber'))));
+    }
+
+    function draw() {
+      KM.clear(body);
+      if (LK.draft === 'managed') {
+        var credRow = function (name) {
+          return h('div', { class: 'cred' }, h('code', { text: name }), h('span', { class: 'masked', 'aria-label': 'Hidden value', text: '••••••••••••••••' }), chip('Server-side', '', 'lock'));
+        };
+        body.appendChild(panel('KnowMe-managed project', 'KnowMe runs and scales the LiveKit project for you.', h('div', { class: 'stack' },
+          field({ label: 'Server URL', value: D.livekit.url, readonly: true, mono: true, copy: true }).el,
+          h('div', { class: 'field' }, h('span', { class: 'label', text: 'Credentials' }),
+            h('div', { class: 'stack-sm' }, credRow(D.livekit.keyVar), credRow(D.livekit.secretVar)),
+            h('p', { class: 'hint' }, icon('lock', 'ic-sm'), ' Managed by KnowMe — stored server-side. Values are never shown in the browser.')),
+          ST.lk.mode === 'own' ? h('div', { class: 'form-foot' },
+            h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+              KM.confirm({ title: 'Switch back to KnowMe-managed?', body: 'New meetings will use KnowMe’s LiveKit project. Meetings in progress stay on your project until they end. Your project credentials are removed from KnowMe.', confirmLabel: 'Switch' }).then(function (ok) {
+                if (!ok) return;
+                ST.lk = clone(DEF.lk); saved('Using KnowMe-managed LiveKit'); vRoute();
+              });
+            } }, h('span', { text: 'Use KnowMe-managed' }))) : null)));
+        body.appendChild(capabilities('ok', 'ok'));
+        return;
+      }
+      var lk = ST.lk;
+      var url = field({ label: 'Server URL', required: true, mono: true, value: lk.url, placeholder: 'wss://your-project.livekit.cloud',
+        hint: 'The WebSocket URL from your LiveKit project settings.',
+        validate: function (v) { return /^wss:\/\/[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/\S*)?$/i.test(v) ? null : 'Use the WebSocket URL, starting with wss:// — for example wss://your-project.livekit.cloud.'; } });
+      var key = field({ label: 'API key', required: !lk.keyId, mono: true, value: '', placeholder: lk.keyId ? 'Saved key ' + lk.keyId + ' — enter a new one to replace' : 'APIxxxxxxxxxxxx',
+        validate: function (v) { return /^[A-Za-z0-9_-]{8,}$/.test(v) ? null : 'API keys are at least 8 letters or numbers, with no spaces. Copy it from your LiveKit project’s Keys page.'; } });
+      var secret = field({ label: 'API secret', type: 'password', required: !lk.keyId, mono: true, placeholder: lk.keyId ? 'Saved — leave blank to keep' : '',
+        hint: 'Stored encrypted on KnowMe servers and never shown again.' });
+      var region = selectField({ label: 'Region', value: lk.region, hint: 'Leave on Auto unless your project is pinned to a region.',
+        options: [['auto', 'Auto (nearest)'], ['us-west', 'US West'], ['us-east', 'US East'], ['eu-central', 'EU Central'], ['ap-south', 'Asia Pacific (Mumbai)'], ['ap-southeast', 'Asia Pacific (Singapore)']] });
+      var steps = [
+        { label: 'Resolve URL', detail: 'DNS and TLS for the server URL' },
+        { label: 'Authenticate', detail: 'Sign a server token with the API key and secret',
+          fail: function () { var s = secret.value(); return s && s.length < 16 ? 'Authentication failed: the API secret was rejected. Copy it again from your LiveKit project — secrets are long random strings.' : null; } },
+        { label: 'Create test room', detail: 'Create and delete a temporary room' },
+        { label: 'Egress available', detail: 'Room Composite egress can be started' },
+        { label: 'SIP available', detail: 'Inbound SIP trunks can be created' }
+      ];
+      var testArea = h('div', { class: 'stack' });
+      var tested = !!lk.testedAt;
+      var capSlot = h('div');
+      function drawCaps(state) { KM.clear(capSlot); capSlot.appendChild(capabilities(state, state)); }
+      var testBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+        if (!validate()) return;
+        KM.clear(testArea);
+        var cl = checksList(steps);
+        var status = h('div', { 'aria-live': 'polite' });
+        testArea.appendChild(cl.el); testArea.appendChild(status);
+        var restore = busy(testBtn, 'Testing…');
+        runChecks(cl, steps).then(function (res) {
+          restore();
+          tested = res.ok;
+          drawCaps(res.ok ? 'ok' : 'pending');
+          status.appendChild(res.ok
+            ? note('ok', 'check', 'Connection works. Egress and SIP are available on this project. Save to use it for new meetings.')
+            : note('err', 'alert', [h('b', { text: 'Test failed at “' + steps[res.at].label + '”. ' }), res.error]));
+        });
+      } }, icon('bolt'), h('span', { text: 'Test connection' }));
+      function validate() {
+        var ok = [url.check(), key.check(), secret.check()];
+        var bad = [url, key, secret][ok.indexOf(false)];
+        if (bad) { bad.input.focus(); return false; }
+        return true;
+      }
+      var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check'), h('span', { text: 'Save' }));
+      var form = h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+        e.preventDefault();
+        if (!validate()) return;
+        var go = tested ? Promise.resolve(true) : KM.confirm({ title: 'Save without a successful test?', body: 'New meetings may fail to start if the URL or credentials are wrong. We recommend running Test connection first.', confirmLabel: 'Save anyway' });
+        go.then(function (ok) {
+          if (!ok) return;
+          var restore = busy(saveBtn, 'Saving…');
+          later(800, function () {
+            restore();
+            var k = key.value();
+            ST.lk = { mode: 'own', url: url.value(), keyId: k ? k.slice(0, 3) + '…' + k.slice(-4) : lk.keyId, region: region.input.value, testedAt: tested ? new Date().toISOString() : null };
+            secret.input.value = '';
+            saved('Saved. New meetings use your LiveKit project');
+            vRoute();
+          });
+        });
+      } },
+        h('div', { class: 'stack' }, url.el, h('div', { class: 'field-row' }, key.el, secret.el), region.el),
+        h('div', { class: 'form-foot' }, testBtn, saveBtn, h('span', { class: 'req-note', text: '* Required' })),
+        testArea);
+      body.appendChild(panel('Your LiveKit project', lk.mode === 'own' ? 'Connected to ' + lk.url : 'Use a LiveKit Cloud or self-hosted project you control.', form));
+      body.appendChild(capSlot);
+      drawCaps(lk.mode === 'own' && lk.testedAt ? 'ok' : 'pending');
+    }
+    draw();
+  }
+
+  /* ------------------------------------------------------------ #telnyx-sms */
+  var SMSF = { open: false };
+  var PROFILES = { 'Know Meet invites': ['+1 (415) 555-0123', '+1 (415) 555-0124'], 'Support notifications': ['+1 (628) 555-0177'] };
+  var WEBHOOK = 'https://meet.know-me.tools/hooks/telnyx/messaging';
+  function scopeNote() {
+    return note('info', 'info', 'Telnyx is used only for SMS (invites and summary links) and inbound voice dial-in. Meeting audio and video always run on LiveKit.');
+  }
+  function smsTester(onResult) {
+    var phone = field({ label: 'Send a test to', required: true, type: 'tel', inputmode: 'tel', autocomplete: 'tel', placeholder: '+1 415 555 0142', validate: validatePhone });
+    var out = h('div', { 'aria-live': 'polite' });
+    var btn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!phone.check()) { phone.input.focus(); return; }
+      var to = phone.value();
+      KM.clear(out);
+      out.appendChild(h('p', { class: 'small sub' }, 'Sending to ', h('span', { class: 'mono', text: to }), '…'));
+      var restore = busy(btn, 'Sending…');
+      later(1600, function () {
+        restore();
+        KM.clear(out);
+        var failed = /0000$/.test(to.replace(/\D/g, ''));
+        if (failed) {
+          out.appendChild(note('err', 'alert', [h('b', { text: 'Failed. ' }), 'Telnyx error 40300: the destination carrier rejected the message — the number may be a landline or unreachable by SMS. Try a mobile number that can receive texts.']));
+          if (onResult) onResult({ ok: false, to: to, at: nowLabel() });
+        } else {
+          out.appendChild(note('ok', 'check', [h('b', { text: 'Delivered. ' }), 'Telnyx confirmed delivery to ' + to + ' at ' + fmt.time(new Date()) + '.']));
+          if (onResult) onResult({ ok: true, to: to, at: nowLabel() });
+        }
+      });
+    } }, icon('send'), h('span', { text: 'Send test SMS' }));
+    return h('div', { class: 'stack' }, h('div', { class: 'input-group', style: 'align-items:end' }, phone.el, btn), out);
+  }
+  function vTelnyxSms(c) {
+    var s = ST.sms;
+    head(c, 'telnyx-sms', 'Telnyx SMS', 'Telnyx Messaging sends SMS invites and summary links to participants with a phone number.');
+    c.appendChild(scopeNote());
+
+    if (s.connected) {
+      var last = s.lastTest ? (s.lastTest.ok ? 'Delivered to ' : 'Failed to ') + s.lastTest.to + ' · ' + s.lastTest.at : 'No test sent yet';
+      var discBtn = h('button', { class: 'btn btn-danger', type: 'button', onclick: function () {
+        KM.confirm({ title: 'Disconnect Telnyx SMS?', body: 'KnowMe will stop sending SMS invites and summary links. Email delivery keeps working. Your API key is deleted from KnowMe.', confirmLabel: 'Disconnect', danger: true }).then(function (ok) {
+          if (!ok) return;
+          ST.sms = clone(DEF.sms); SMSF.open = false; saved('Telnyx SMS disconnected'); vRoute();
+        });
+      } }, h('span', { text: 'Disconnect' }));
+      c.appendChild(panel('Connected', null, h('div', { class: 'stack' },
+        h('dl', { class: 'kv' },
+          h('dt', { text: 'Status' }), h('dd', { class: 'plain' }, stateChip('Connected', 'green')),
+          h('dt', { text: 'API key' }), h('dd', null, h('span', { class: 'masked', 'aria-label': 'API key ending in ' + s.keyLast4, text: 'KEY' + maskTail(s.keyLast4) })),
+          h('dt', { text: 'Messaging profile' }), h('dd', { class: 'plain', text: s.profile }),
+          h('dt', { text: 'Sender number' }), h('dd', { text: s.number }),
+          h('dt', { text: 'Delivery receipts' }), h('dd', { class: 'plain', text: s.receipts ? 'Sent to KnowMe' : 'Off' }),
+          h('dt', { text: 'Webhook URL' }), h('dd', { text: WEBHOOK }),
+          h('dt', { text: 'Last test' }), h('dd', { class: 'plain', text: last })),
+        h('div', { class: 'btn-row' }, discBtn)),
+        stateChip('Active', 'green')));
+      c.appendChild(panel('Send a test SMS', 'Uses your sender number and messaging profile.', smsTester(function (r) { s.lastTest = r; save(); })));
+      c.appendChild(optOutNote());
+      return;
+    }
+
+    if (!SMSF.open) {
+      c.appendChild(h('section', { class: 'empty', 'aria-labelledby': 'sms-empty-h' },
+        h('div', { class: 'empty-icon' }, icon('sms')),
+        h('h2', { id: 'sms-empty-h', style: 'font-size: var(--text-lg)', text: 'Not connected' }),
+        h('p', { text: 'Connect a Telnyx account to text meeting invites and summary links. Without it, KnowMe sends everything by email only.' }),
+        h('button', { class: 'btn btn-primary', type: 'button', onclick: function () { SMSF.open = true; vRoute(); } }, icon('plus'), h('span', { text: 'Connect Telnyx' }))));
+      return;
+    }
+
+    var F = { keyValid: false, profile: '', number: '', last4: '' };
+    var key = field({ label: 'Telnyx API key', type: 'password', required: true, mono: true, hint: 'From Mission Control → Account settings → API Keys. Use a v2 key that starts with KEY.',
+      validate: function (v) { return /^KEY[A-Za-z0-9_]{16,}$/.test(v) ? null : 'Telnyx v2 API keys start with KEY followed by at least 16 letters or numbers. Paste the full key.'; },
+      oninput: function () { if (F.keyValid) { F.keyValid = false; drawProfile(); } } });
+    var keyBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!key.check()) { key.input.focus(); return; }
+      var restore = busy(keyBtn, 'Validating…');
+      later(1100, function () {
+        restore();
+        F.keyValid = true; F.last4 = key.value().slice(-4);
+        KM.toast('API key is valid', 'check');
+        drawProfile(true);
+      });
+    } }, icon('key'), h('span', { text: 'Validate key' }));
+    var profileSlot = h('div', { class: 'stack' });
+    var receipts = switchRow({ label: 'Send delivery receipts to KnowMe', desc: 'Telnyx posts delivery status to this webhook so you can see Delivered or Failed per participant.', checked: true });
+    var testSlot = h('div');
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check'), h('span', { text: 'Save and connect' }));
+    var formErr = h('div', { 'aria-live': 'polite' });
+
+    function drawProfile(loading) {
+      KM.clear(profileSlot);
+      KM.clear(testSlot);
+      if (!F.keyValid) {
+        profileSlot.appendChild(selectField({ label: 'Messaging profile', required: true, disabled: true, options: [['', 'Validate your API key first']], hint: 'Available after the key is validated.' }).el);
+        profileSlot.appendChild(selectField({ label: 'Sender number', required: true, disabled: true, options: [['', 'Choose a profile first']] }).el);
+        return;
+      }
+      if (loading) {
+        profileSlot.appendChild(h('div', { class: 'field' }, h('span', { class: 'label', text: 'Messaging profile' }),
+          h('p', { class: 'small sub od-row', role: 'status' }, icon('refresh', 'spin'), h('span', { text: 'Loading messaging profiles from Telnyx…' }))));
+        later(900, function () { drawProfile(false); });
+        return;
+      }
+      var prof = selectField({ label: 'Messaging profile', required: true, value: F.profile,
+        options: [['', 'Select a profile']].concat(Object.keys(PROFILES).map(function (p) { return [p, p]; })),
+        onchange: function (v) { F.profile = v; F.number = ''; drawProfile(false); } });
+      var nums = F.profile ? PROFILES[F.profile] : [];
+      var num = selectField({ label: 'Sender number', required: true, value: F.number, disabled: !F.profile,
+        hint: F.profile ? nums.length + (nums.length === 1 ? ' number' : ' numbers') + ' on this profile.' : 'Choose a profile first.',
+        options: [['', F.profile ? 'Select a number' : 'Choose a profile first']].concat(nums.map(function (n) { return [n, n]; })),
+        onchange: function (v) { F.number = v; drawProfile(false); } });
+      profileSlot.appendChild(h('div', { class: 'field-row' }, prof.el, num.el));
+      if (F.profile && F.number) {
+        testSlot.appendChild(h('div', { class: 'stack-sm' }, h('h3', { style: 'font-size: var(--text-base)', text: 'Test SMS' }),
+          smsTester(function (r) { F.lastTest = r; })));
+      }
+    }
+    drawProfile(false);
+
+    var form = h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+      e.preventDefault();
+      KM.clear(formErr);
+      if (!key.check()) { key.input.focus(); return; }
+      if (!F.keyValid) { formErr.appendChild(note('err', 'alert', 'Validate your API key before connecting.')); keyBtn.focus(); return; }
+      if (!F.profile || !F.number) { formErr.appendChild(note('err', 'alert', 'Choose a messaging profile and a sender number to send from.')); return; }
+      var restore = busy(saveBtn, 'Connecting…');
+      later(900, function () {
+        restore();
+        ST.sms = { connected: true, keyLast4: F.last4, profile: F.profile, number: F.number, receipts: receipts.input.checked, lastTest: F.lastTest || null };
+        SMSF.open = false;
+        saved('Telnyx SMS connected');
+        vRoute();
+      });
+    } },
+      h('div', { class: 'input-group', style: 'align-items:end' }, key.el, keyBtn),
+      profileSlot,
+      h('div', { class: 'stack-sm' }, receipts.el, field({ label: 'Webhook URL', value: WEBHOOK, readonly: true, mono: true, copy: true, hint: 'Set this as the webhook URL on the messaging profile in Telnyx.' }).el),
+      testSlot,
+      formErr,
+      h('div', { class: 'form-foot' }, saveBtn,
+        h('button', { class: 'btn btn-ghost', type: 'button', onclick: function () { SMSF.open = false; vRoute(); } }, h('span', { text: 'Cancel' })),
+        h('span', { class: 'req-note', text: '* Required' })));
+    c.appendChild(panel('Connect Telnyx Messaging', 'Your key is stored encrypted on KnowMe servers and only used to send messages.', form));
+    c.appendChild(optOutNote());
+  }
+  function optOutNote() {
+    return panel('Opt-outs', null, h('div', { class: 'stack-sm small' },
+      h('p', null, 'Recipients can reply ', h('code', { text: 'STOP' }), ', ', h('code', { text: 'UNSUBSCRIBE' }), ', ', h('code', { text: 'CANCEL' }), ', ', h('code', { text: 'END' }), ' or ', h('code', { text: 'QUIT' }),
+        ' to opt out. Telnyx blocks further messages to that number from your profile, and KnowMe stops texting them and falls back to email.'),
+      h('p', { class: 'sub', text: 'Every message KnowMe sends ends with “Reply STOP to opt out.” HELP replies return your organisation name and a support contact.' })));
+  }
+
+  /* ------------------------------------------------------------ #telnyx-voice */
+  var TRUNK_ID = 'ST_k9Vb2xTn7pQe';
+  function vTelnyxVoice(c) {
+    var v = ST.voice;
+    head(c, 'telnyx-voice', 'Telnyx voice dial-in', 'Let people join from any phone. Telnyx numbers route inbound calls over SIP into LiveKit, where the caller enters a meeting PIN.');
+    c.appendChild(note('info', 'phone-in', [h('b', { text: 'Inbound only. ' }), 'KnowMe never places outbound calls — there is no dial-out or “call a phone” feature. Callers dial in to your numbers.']));
+
+    var tbody = h('tbody');
+    function drawNumbers() {
+      KM.clear(tbody);
+      v.numbers.forEach(function (n, i) {
+        tbody.appendChild(h('tr', null,
+          h('td', null, h('span', { class: 'mono od-nowrap', text: n.number })),
+          h('td', { text: n.region }),
+          h('td', null, n.status === 'Active' ? stateChip('Active', 'green') : h('span', { class: 'chip chip-amber' }, icon('refresh', 'spin'), h('span', { text: 'Provisioning' }))),
+          h('td', { class: 'small sub', text: 'LiveKit SIP · PIN dispatch' }),
+          h('td', { class: 'num' }, h('button', { class: 'btn btn-sm btn-ghost', type: 'button', 'aria-label': 'Release ' + n.number, disabled: n.status !== 'Active' ? true : null, onclick: function () {
+            KM.confirm({ title: 'Release ' + n.number + '?', body: 'Callers to this number will no longer reach your meetings, and the number returns to Telnyx. Invites already sent still show it.', confirmLabel: 'Release number', danger: true }).then(function (ok) {
+              if (!ok) return;
+              v.numbers = v.numbers.filter(function (_, j) { return j !== i; });
+              saved('Number released'); drawNumbers();
+            });
+          } }, h('span', { text: 'Release' })))));
+      });
+      if (!v.numbers.length) tbody.appendChild(h('tr', null, h('td', { colspan: '5', class: 'sub', text: 'No dial-in numbers. Add one so invites include a phone option.' })));
+    }
+    drawNumbers();
+    v.numbers.forEach(function (n) {
+      if (n.status === 'Active') return;
+      later(2600, function () { n.status = 'Active'; saved(n.number + ' is active'); drawNumbers(); });
+    });
+    c.appendChild(panel('Dial-in numbers', 'Shown in invites alongside the meeting PIN.', h('div', { class: 'table-wrap', style: 'background: var(--bg-2)' },
+      h('table', { class: 'table' },
+        h('caption', { class: 'sr-only', text: 'Dial-in numbers' }),
+        h('thead', null, h('tr', null, ['Number', 'Region', 'Status', 'Routes to'].map(function (t) { return h('th', { scope: 'col', text: t }); }), h('th', { scope: 'col', class: 'num' }, h('span', { class: 'sr-only', text: 'Actions' })))),
+        tbody)),
+      h('button', { class: 'btn btn-primary btn-sm', type: 'button', onclick: function () { addNumberDialog(function (num) {
+        var entry = { number: num, region: 'US', status: 'Provisioning' };
+        v.numbers = v.numbers.concat([entry]);
+        save(); drawNumbers();
+        KM.toast('Provisioning ' + num + '…', 'phone-in');
+        later(2600, function () { entry.status = 'Active'; saved(num + ' is active'); drawNumbers(); });
+      }); } }, icon('plus', 'ic-sm'), h('span', { text: 'Add number' }))));
+
+    /* SIP trunk */
+    var sipName = field({ label: 'Telnyx SIP connection name', required: true, mono: true, value: v.sipName, hint: 'The SIP connection in Telnyx that your numbers are assigned to.',
+      validate: function (x) { return /^[a-z0-9-]{3,48}$/i.test(x) ? null : 'Use 3–48 letters, numbers or hyphens, matching the name in Telnyx.'; } });
+    var pinLen = selectField({ label: 'Meeting PIN length', value: v.pinLen, options: [['6', '6 digits'], ['8', '8 digits'], ['10', '10 digits']], hint: 'Longer PINs are harder to guess. Applies to meetings scheduled from now on.' });
+    var counter = h('span', { class: 'xsmall sub' });
+    var greeting = field({ label: 'Greeting', type: 'textarea', required: true, value: v.greeting, max: 200, rows: 3, hint: 'Read to callers before they enter the PIN.',
+      oninput: function (x) { counter.textContent = x.length + ' / 200'; } });
+    counter.textContent = v.greeting.length + ' / 200';
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check'), h('span', { text: 'Save dial-in settings' }));
+    c.appendChild(panel('SIP trunk to LiveKit', 'Calls arrive on a Telnyx SIP connection and are handed to a LiveKit inbound trunk.', h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+      e.preventDefault();
+      var ok1 = sipName.check(), ok2 = greeting.check();
+      if (!ok1) { sipName.input.focus(); return; }
+      if (!ok2) { greeting.input.focus(); return; }
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () { restore(); v.sipName = sipName.value(); v.pinLen = pinLen.input.value; v.greeting = greeting.value(); saved('Dial-in settings saved'); });
+    } },
+      h('div', { class: 'field-row' }, sipName.el,
+        h('div', { class: 'field' }, h('span', { class: 'label', text: 'LiveKit inbound trunk ID' }),
+          h('p', { class: 'hint', text: 'Created by KnowMe on your LiveKit project (sample ID).' }),
+          h('div', { class: 'input-group' }, h('input', { class: 'input mono', readonly: true, value: TRUNK_ID, 'aria-label': 'LiveKit inbound trunk ID' }),
+            h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Copy trunk ID', onclick: function () { KM.copy(TRUNK_ID); } }, icon('copy'))))),
+      h('dl', { class: 'kv' },
+        h('dt', { text: 'Dispatch rule' }), h('dd', { class: 'plain' }, h('b', { text: 'PIN-based. ' }), 'The caller enters the meeting PIN and is routed to that meeting’s LiveKit room as a phone participant.'),
+        h('dt', { text: 'Wrong PIN' }), h('dd', { class: 'plain', text: 'Callers get three tries, then the call ends.' })),
+      pinLen.el,
+      h('div', { class: 'stack-sm' }, greeting.el, counter),
+      h('div', { class: 'form-foot' }, saveBtn, h('span', { class: 'req-note', text: '* Required' })))));
+
+    /* status */
+    var statusSteps = [
+      { label: 'Telnyx number', detail: v.numbers.filter(function (n) { return n.status === 'Active'; }).length + ' active dial-in numbers', initial: 'Active', okText: 'Active' },
+      { label: 'SIP connection', detail: v.sipName, initial: 'Active', okText: 'Active' },
+      { label: 'LiveKit inbound trunk', detail: TRUNK_ID + ' (sample)', initial: 'Active', okText: 'Active' },
+      { label: 'Dispatch rule', detail: 'PIN → meeting room', initial: 'Active', okText: 'Active' }
+    ];
+    var cl = checksList(statusSteps);
+    cl.rows.forEach(function (r) { setRow(r, 'ok', 'Active'); });
+    var recheck = h('button', { class: 'btn btn-sm', type: 'button', onclick: function () {
+      var restore = busy(recheck, 'Checking…');
+      cl.rows.forEach(function (r) { r.li.setAttribute('data-s', 'wait'); r.state.textContent = 'Waiting'; });
+      runChecks(cl, statusSteps).then(function () { restore(); KM.toast('Dial-in path is active end to end', 'check'); });
+    } }, icon('refresh', 'ic-sm'), h('span', { text: 'Re-check' }));
+    c.appendChild(panel('Status', 'Every hop from the phone network to the meeting room.', cl.el, recheck));
+
+    c.appendChild(panel('Test call', null, h('ol', { class: 'stack-sm', style: 'margin:0;padding-left:20px' },
+      h('li', null, 'Start a meeting, then call ', h('span', { class: 'mono od-nowrap', text: v.numbers[0] ? v.numbers[0].number : D.telnyx.dialIn[0].number }), ' from any phone.'),
+      h('li', { text: 'Listen for your greeting.' }),
+      h('li', null, 'Enter the meeting PIN shown in the room’s invite panel, followed by ', h('code', { text: '#' }), ' — for example ', h('span', { class: 'mono od-nowrap', text: '482 913 07#' }), '.'),
+      h('li', { text: 'You join as a phone participant. Your speech is transcribed like everyone else’s.' }))));
+  }
+  function addNumberDialog(onAdd) {
+    var area = field({ label: 'Area code', required: true, inputmode: 'numeric', max: 3, placeholder: '415', hint: 'Search US and Canada local numbers.',
+      validate: function (x) { return /^[2-9]\d{2}$/.test(x) ? null : 'Enter a 3-digit area code that doesn’t start with 0 or 1, like 415.'; } });
+    var results = h('div', { 'aria-live': 'polite' });
+    var picked = '';
+    var addBtn = h('button', { class: 'btn btn-primary', type: 'button', disabled: true, onclick: function () {
+      if (!picked) return;
+      dlg.close(); onAdd(picked);
+    } }, icon('plus'), h('span', { text: 'Add number' }));
+    var searchBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!area.check()) { area.input.focus(); return; }
+      var ac = area.value();
+      picked = ''; addBtn.disabled = true;
+      KM.clear(results);
+      var restore = busy(searchBtn, 'Searching…');
+      setTimeout(function () {
+        restore();
+        KM.clear(results);
+        if (ac === '999' || ac === '555') {
+          results.appendChild(note('warn', 'alert', 'No numbers are available in area code ' + ac + ' right now. Try a nearby area code.'));
+          return;
+        }
+        var nums = ['0131', '0148', '0186'].map(function (s) { return '+1 (' + ac + ') 555-' + s; });
+        results.appendChild(h('fieldset', null, h('legend', { text: nums.length + ' numbers available' }),
+          h('ul', { class: 'result-list' }, nums.map(function (n, i) {
+            return h('li', null, h('label', { for: 'num-' + i },
+              h('input', { type: 'radio', name: 'pick-num', id: 'num-' + i, value: n, onchange: function () { picked = n; addBtn.disabled = false; } }),
+              h('span', { class: 'mono', text: n }), h('span', { class: 'small sub', text: 'Local · voice' })));
+          }))));
+      }, 1000);
+    } }, icon('search'), h('span', { text: 'Search' }));
+    var dlg = h('dialog', { 'aria-labelledby': 'add-num-h' },
+      h('div', { class: 'dlg' },
+        h('div', { class: 'dlg-head' }, h('div', null, h('h2', { id: 'add-num-h', text: 'Add a dial-in number' }), h('p', { text: 'Numbers are bought on your Telnyx account and routed to LiveKit SIP.' })),
+          h('button', { class: 'icon-btn', type: 'button', 'data-close': true, 'aria-label': 'Close' }, icon('x'))),
+        h('div', { class: 'dlg-body stack' }, h('div', { class: 'input-group', style: 'align-items:end' }, area.el, searchBtn), results),
+        h('div', { class: 'dlg-foot' }, h('button', { class: 'btn', type: 'button', 'data-close': true, text: 'Cancel' }), addBtn)));
+    document.body.appendChild(dlg);
+    KM.dialog(dlg).open();
+    area.input.focus();
+    area.input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); searchBtn.click(); } });
+    dlg.addEventListener('close', function () { setTimeout(function () { if (dlg.parentNode) dlg.parentNode.removeChild(dlg); }, 0); });
+  }
+
+  /* ------------------------------------------------------------ #calendars */
+  var PROVIDERS = {
+    google: { name: 'Google Calendar', mark: 'G', cals: [['work', 'Work'], ['team', 'Team rituals'], ['personal', 'Personal'], ['holidays', 'Holidays in United States']] },
+    outlook: { name: 'Microsoft 365 / Outlook', mark: 'M', cals: [['calendar', 'Calendar'], ['partners', 'Shared — Partnerships'], ['birthdays', 'Birthdays']] },
+    caldav: { name: 'iCloud / CalDAV', mark: 'iC', cals: [['home', 'Home'], ['work', 'Work']] }
+  };
+  function vCalendars(c) {
+    var u = KM.auth.get();
+    head(c, 'calendars', 'Calendars', 'Connected calendars show your upcoming meetings and get a KnowMe link added to events you create.');
+    ['google', 'outlook', 'caldav'].forEach(function (key) {
+      var p = PROVIDERS[key], s = ST.cal[key];
+      var hid = 'cal-' + key;
+      var body = h('div', { class: 'prov-body' });
+      var sec = h('section', { class: 'panel', 'aria-labelledby': hid },
+        h('div', { class: 'prov' },
+          h('span', { class: 'prov-mark', 'aria-hidden': 'true', text: p.mark }),
+          h('div', { class: 'stack-sm', style: 'min-width:0' }, h('h2', { id: hid, class: 'panel-h', text: p.name }),
+            s.connected ? h('span', { class: 'small sub od-truncate', title: key === 'caldav' ? s.user : u.email, text: key === 'caldav' ? s.user + ' · ' + s.server : u.email }) : h('span', { class: 'small sub', text: 'Not connected' })),
+          s.connected ? stateChip('Connected', 'green') : chip('Not connected', '', null)),
+        body);
+      if (!s.connected) {
+        body.appendChild(h('p', { class: 'small sub', text: key === 'caldav' ? 'Connect iCloud or any CalDAV server with an app-specific password.' : 'Sign in with ' + p.name.split(' /')[0] + ' to sync events and add KnowMe links.' }));
+        body.appendChild(h('div', null, h('a', { class: 'btn btn-primary btn-sm', href: '#calendar-connect:' + key }, icon('link', 'ic-sm'), h('span', { text: 'Connect' }))));
+      } else {
+        var lastEl = h('span', { class: 'small sub', text: s.lastSync ? 'Last synced ' + s.lastSync : 'Synced automatically every 5 minutes' });
+        var syncBtn = h('button', { class: 'btn btn-sm', type: 'button', onclick: function () {
+          var restore = busy(syncBtn, 'Syncing…');
+          later(1400, function () { restore(); s.lastSync = nowLabel(); lastEl.textContent = 'Last synced ' + s.lastSync; saved(p.name + ' synced'); });
+        } }, icon('refresh', 'ic-sm'), h('span', { text: 'Sync now' }));
+        var disc = h('button', { class: 'btn btn-sm btn-ghost', type: 'button', onclick: function () {
+          KM.confirm({ title: 'Disconnect ' + p.name + '?', body: 'Upcoming events from this calendar disappear from KnowMe, and new events you create there won’t get a KnowMe link. Meetings already scheduled keep their links.', confirmLabel: 'Disconnect', danger: true }).then(function (ok) {
+            if (!ok) return;
+            ST.cal[key] = clone(DEF.cal[key]); ST.cal[key].connected = false; saved(p.name + ' disconnected'); vRoute();
+          });
+        } }, h('span', { text: 'Disconnect' }));
+        body.appendChild(h('fieldset', null, h('legend', { text: 'Calendars to sync' }),
+          h('div', { class: 'cal-list' }, p.cals.map(function (cal) {
+            return checkRow('c-' + key + '-' + cal[0], cal[1], null, !!s.calendars[cal[0]], function (v) {
+              var next = {}; Object.keys(s.calendars).forEach(function (k) { next[k] = s.calendars[k]; }); next[cal[0]] = v;
+              if (!Object.keys(next).some(function (k) { return next[k]; })) { KM.toast('Keep at least one calendar selected, or disconnect instead', 'alert'); this.checked = true; return; }
+              s.calendars = next; saved();
+            });
+          }))));
+        body.appendChild(switchRow({ label: 'Add KnowMe link to events I create', desc: 'Adds the join link, dial-in number and PIN to the event description.', checked: s.addLink, onchange: function (v) { s.addLink = v; saved(); } }).el);
+        body.appendChild(selectField({ label: 'Sync window', value: s.window, options: [['14', 'Next 2 weeks'], ['30', 'Next 30 days'], ['90', 'Next 90 days']], onchange: function (v) { s.window = v; saved(); } }).el);
+        body.appendChild(h('div', { class: 'od-cluster', style: 'justify-content: space-between' }, lastEl, h('div', { class: 'btn-row' }, syncBtn, disc)));
+      }
+      c.appendChild(sec);
+    });
+  }
+
+  /* ------------------------------------------------------------ #calendar-connect:<provider> */
+  var CONNECT = { provider: null, phase: 'consent' };
+  function vCalendarConnect(c, arg) {
+    var key = arg;
+    var p = PROVIDERS[key];
+    if (!p) {
+      head(c, 'calendar-connect', 'Calendar provider not found', null, null, ['Calendars', '#calendars']);
+      c.appendChild(h('div', { class: 'empty' }, h('div', { class: 'empty-icon' }, icon('alert')),
+        h('p', null, 'There is no calendar provider called ', h('code', { text: arg || '(none)' }), '. Choose Google, Microsoft 365 or CalDAV.'),
+        h('a', { class: 'btn btn-primary btn-sm', href: '#calendars', text: 'Back to calendars' })));
+      return;
+    }
+    if (key === 'caldav') { vCaldav(c); return; }
+    if (CONNECT.provider !== key) { CONNECT.provider = key; CONNECT.phase = 'consent'; }
+    var u = KM.auth.get();
+    head(c, 'calendar-connect', 'Connect ' + p.name, null, null, ['Calendars', '#calendars']);
+    var idx = { consent: 0, connecting: 1, pick: 2, cancelled: 0 }[CONNECT.phase];
+    c.appendChild(h('ol', { class: 'steps', 'aria-label': 'Connection steps' }, ['Permissions', 'Connect', 'Choose calendars'].map(function (l, i) {
+      return h('li', { 'aria-current': i === idx ? 'step' : null, class: i < idx ? 'is-done' : null },
+        h('span', { class: 'step-n' }, i < idx ? icon('check', 'ic-sm') : String(i + 1)), h('span', { class: 'step-label', text: l }));
+    })));
+    var card = h('section', { class: 'panel consent', 'aria-labelledby': 'cc-h' });
+    c.appendChild(card);
+    function go(phase) { CONNECT.phase = phase; vRoute(); }
+
+    if (CONNECT.phase === 'cancelled') {
+      card.appendChild(h('h2', { id: 'cc-h', class: 'panel-h', text: 'Connection cancelled' }));
+      card.appendChild(note('err', 'x', 'You cancelled on the ' + p.name.split(' /')[0] + ' consent screen, so KnowMe has no access to your calendar. Nothing was changed.'));
+      card.appendChild(h('div', { class: 'btn-row' },
+        h('button', { class: 'btn btn-primary', type: 'button', onclick: function () { go('consent'); } }, icon('refresh'), h('span', { text: 'Try again' })),
+        h('a', { class: 'btn', href: '#calendars', text: 'Back to calendars' })));
+      return;
+    }
+    if (CONNECT.phase === 'connecting') {
+      card.appendChild(h('h2', { id: 'cc-h', class: 'panel-h', text: 'Connecting…' }));
+      card.appendChild(h('p', { class: 'od-row sub', role: 'status' }, icon('refresh', 'spin'), h('span', { text: 'Finishing sign-in with ' + p.name + ' and reading your calendar list.' })));
+      later(1700, function () { go('pick'); });
+      return;
+    }
+    if (CONNECT.phase === 'pick') {
+      var sel = {};
+      p.cals.forEach(function (cal, i) { sel[cal[0]] = i < 2; });
+      var err = h('p', { class: 'field-error', id: 'pick-err' }, icon('alert', 'ic-sm'), h('span', { text: 'Choose at least one calendar to sync.' }));
+      card.appendChild(h('h2', { id: 'cc-h', class: 'panel-h', text: 'Connected — choose calendars' }));
+      card.appendChild(note('ok', 'check', 'Signed in as ' + u.email + '.'));
+      card.appendChild(h('fieldset', { 'aria-describedby': 'pick-err' }, h('legend', { text: 'Calendars to sync' }),
+        p.cals.map(function (cal) { return checkRow('pick-' + cal[0], cal[1], null, sel[cal[0]], function (v) { sel[cal[0]] = v; err.classList.remove('show'); }); }), err));
+      var doneBtn = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+        if (!Object.keys(sel).some(function (k) { return sel[k]; })) { err.classList.add('show'); return; }
+        ST.cal[key] = merge(clone(DEF.cal[key]), { connected: true, calendars: sel, lastSync: nowLabel() });
+        CONNECT.provider = null;
+        saved(p.name + ' connected');
+        location.hash = '#calendars';
+      } }, icon('check'), h('span', { text: 'Done' }));
+      card.appendChild(h('div', { class: 'btn-row' }, doneBtn));
+      return;
+    }
+    card.appendChild(h('div', { class: 'od-row' }, h('span', { class: 'prov-mark', 'aria-hidden': 'true', text: p.mark }),
+      h('div', { class: 'stack-sm', style: 'min-width:0' }, h('h2', { id: 'cc-h', class: 'panel-h', text: 'Know Meet wants to access your ' + p.name.split(' /')[0] + ' account' }),
+        h('span', { class: 'small sub od-truncate', title: u.email, text: u.email }))));
+    card.appendChild(h('div', null,
+      h('div', { class: 'perm' }, icon('eye'), h('div', null, h('b', { text: 'See your events' }), h('span', { class: 'd', text: 'Read events in the calendars you choose, to show upcoming meetings and avoid conflicts.' }))),
+      h('div', { class: 'perm' }, icon('calendar'), h('div', null, h('b', { text: 'Create events with a KnowMe link' }), h('span', { class: 'd', text: 'Add meetings you schedule in KnowMe, with the join link, dial-in number and PIN.' })))));
+    card.appendChild(h('p', { class: 'small sub', text: 'KnowMe never deletes events, and never reads your email or contacts. You can disconnect at any time.' }));
+    card.appendChild(h('div', { class: 'btn-row' },
+      h('button', { class: 'btn btn-primary', type: 'button', onclick: function () { go('connecting'); } }, h('span', { text: 'Continue' })),
+      h('button', { class: 'btn', type: 'button', onclick: function () { go('cancelled'); } }, h('span', { text: 'Cancel' }))));
+  }
+  function vCaldav(c) {
+    head(c, 'calendar-connect', 'Connect iCloud / CalDAV', 'Works with iCloud, Fastmail, Nextcloud and other CalDAV servers.', null, ['Calendars', '#calendars']);
+    var server = field({ label: 'Server URL', required: true, mono: true, value: 'https://caldav.icloud.com', hint: 'For iCloud use https://caldav.icloud.com.',
+      validate: function (v) { return /^https:\/\/[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/\S*)?$/i.test(v) ? null : 'Use the full https:// address of your CalDAV server.'; } });
+    var user = field({ label: 'Username', required: true, autocomplete: 'username', placeholder: 'you@icloud.com', hint: 'For iCloud, your Apple Account email.' });
+    var pass = field({ label: 'App-specific password', type: 'password', required: true, mono: true, placeholder: 'xxxx-xxxx-xxxx-xxxx',
+      hint: 'Create one at appleid.apple.com → Sign-In and Security → App-Specific Passwords. Your regular password won’t work.' });
+    var out = h('div', { 'aria-live': 'polite' });
+    var btn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('link'), h('span', { text: 'Test & connect' }));
+    c.appendChild(panel('Account details', null, h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+      e.preventDefault();
+      KM.clear(out);
+      var list = [server, user, pass], oks = list.map(function (f) { return f.check(); });
+      var bad = list[oks.indexOf(false)];
+      if (bad) { bad.input.focus(); return; }
+      var restore = busy(btn, 'Testing…');
+      later(1500, function () {
+        restore();
+        if (pass.value() === 'wrong') {
+          pass.setError('This password was rejected. Generate a new app-specific password and paste it here.');
+          out.appendChild(note('err', 'alert', [h('b', { text: 'Authentication failed (HTTP 401). ' }), 'The server didn’t accept this username and password. Check the username, then create a new app-specific password — they stop working if you change your account password.']));
+          pass.input.focus();
+          return;
+        }
+        ST.cal.caldav = merge(clone(DEF.cal.caldav), { connected: true, server: server.value(), user: user.value(), lastSync: nowLabel() });
+        saved('iCloud / CalDAV connected');
+        location.hash = '#calendars';
+      });
+    } }, server.el, h('div', { class: 'field-row' }, user.el, pass.el), out,
+      h('div', { class: 'form-foot' }, btn, h('a', { class: 'btn btn-ghost', href: '#calendars', text: 'Cancel' }), h('span', { class: 'req-note', text: '* Required' })))));
+  }
+
+  /* ------------------------------------------------------------ #storage */
+  function vStorage(c) {
+    var d = clone(ST.storage);
+    head(c, 'storage', 'Storage', 'Where recordings go after LiveKit Egress writes them, and how they are pinned to IPFS.');
+    var dest = h('div');
+    var outSlot = h('div', { class: 'stack' });
+    var modeErr = h('div', { 'aria-live': 'polite' });
+    c.appendChild(h('div', { class: 'stack' },
+      segField('Storage mode', [['managed', 'KnowMe-managed', 'cloud'], ['byo', 'Bring your own', 'database']], d.mode, function (v) { d.mode = v; drawDest(); KM.clear(modeErr); }),
+      dest, modeErr));
+    function drawDest() {
+      KM.clear(dest);
+      var byo = d.mode === 'byo';
+      var bucketTxt = ST.s3.saved ? ST.s3.bucket + (ST.s3.prefix ? '/' + ST.s3.prefix.replace(/\/$/, '') : '') : 'Not configured';
+      var pinTxt = { knowme: 'KnowMe pinning', psa: 'Your Pinning Service API', kubo: 'Your Kubo node' }[ST.ipfs.mode];
+      dest.appendChild(panel('Where new recordings go', byo ? 'Your bucket and pinning service. KnowMe never keeps a copy.' : 'KnowMe provides S3-compatible storage and IPFS pinning.', h('dl', { class: 'kv' },
+        h('dt', { text: 'Storage' }), h('dd', { class: byo ? null : 'plain', text: byo ? bucketTxt : 'KnowMe-managed S3-compatible bucket' }),
+        h('dt', { text: 'IPFS pinning' }), h('dd', { class: 'plain', text: d.ipfs ? (byo ? pinTxt : 'KnowMe pinning') : 'Off' }),
+        h('dt', { text: 'Existing recordings' }), h('dd', { class: 'plain', text: 'Stay where they are. Only new recordings use this setting.' }))));
+      if (byo && !ST.s3.saved) dest.appendChild(note('warn', 'alert', ['Bring your own needs an S3-compatible bucket. ', h('a', { href: '#storage-s3', text: 'Configure S3-compatible storage' }), ' before saving.']));
+      dest.appendChild(h('div', { class: 'grid-2' },
+        linkCard('#storage-s3', 'database', 'S3-compatible storage', ST.s3.saved ? ST.s3.bucket + ' · ' + providerName(ST.s3.provider) : 'Amazon S3, R2, B2, Wasabi, MinIO…', ST.s3.saved ? stateChip('Configured', 'green') : chip('Not configured')),
+        linkCard('#storage-ipfs', 'globe', 'IPFS pinning', pinTxt, ST.ipfs.mode === 'knowme' ? chip('Default') : stateChip('Configured', 'green'))));
+    }
+    function drawOutput() {
+      KM.clear(outSlot);
+      var dis = d.audioOnly;
+      outSlot.appendChild(h('div', { class: 'od-cluster', style: '--od-gap: var(--s5); align-items: flex-start' },
+        segField('Format', [['mp4', 'MP4 file'], ['hls', 'HLS segments']], d.format, function (v) { d.format = v; }),
+        segField('Layout', [['speaker', 'Speaker'], ['grid', 'Grid']], d.layout, function (v) { d.layout = v; }, dis),
+        segField('Resolution', [['720p', '720p'], ['1080p', '1080p']], d.res, function (v) { d.res = v; }, dis)));
+      outSlot.appendChild(switchRow({ label: 'Audio only', desc: 'Record a Room Composite audio mix without video. Smaller files; layout and resolution don’t apply.', checked: d.audioOnly, onchange: function (v) { d.audioOnly = v; drawOutput(); } }).el);
+    }
+    drawDest(); drawOutput();
+    c.appendChild(panel('Egress output', 'LiveKit Egress records every participant in one Room Composite.', outSlot));
+    var ret = selectField({ label: 'Keep recordings for', value: d.retention, options: [['30', '30 days'], ['90', '90 days'], ['365', '1 year'], ['forever', 'Forever']],
+      hint: 'After this, the file is deleted from storage and unpinned. Transcripts and summaries follow the same schedule.', onchange: function (v) { d.retention = v; } });
+    c.appendChild(panel('Retention and privacy', null, h('div', { class: 'stack' },
+      ret.el,
+      note('info', 'lock', 'Recordings are encrypted at rest in S3-compatible storage. For bring-your-own buckets, your bucket’s encryption settings apply.'),
+      switchRow({ label: 'Pin recordings to IPFS', desc: 'Keeps a content-addressed copy and stores its CID with the recording.', checked: d.ipfs, onchange: function (v) { d.ipfs = v; drawDest(); } }).el,
+      note('warn', 'globe', 'IPFS is a public network: anyone who has a recording’s CID can fetch it through a gateway. Turn pinning off for meetings that must stay private.'))));
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+      KM.clear(modeErr);
+      if (d.mode === 'byo' && !ST.s3.saved) {
+        modeErr.appendChild(note('err', 'alert', ['Can’t switch to bring your own yet — no bucket is configured. ', h('a', { href: '#storage-s3', text: 'Set up S3-compatible storage' }), '.']));
+        modeErr.scrollIntoView({ block: 'center' });
+        return;
+      }
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () { restore(); ST.storage = d; saved(d.mode === 'byo' ? 'Saved. New recordings go to ' + ST.s3.bucket : 'Saved. New recordings use KnowMe-managed storage'); d = clone(ST.storage); });
+    } }, icon('check'), h('span', { text: 'Save storage settings' }));
+    c.appendChild(h('div', { class: 'form-foot' }, saveBtn));
+  }
+  function linkCard(href, ic, title, desc, trail) {
+    return h('a', { class: 'card card-raised link-card', href: href },
+      h('span', { class: 'lead', 'aria-hidden': 'true' }, icon(ic)),
+      h('span', { style: 'min-width:0' }, h('span', { class: 't', text: title }), h('span', { class: 'd od-truncate', title: desc, text: desc })),
+      h('span', { class: 'od-row' }, trail, icon('chevron-right', 'ic-sm')));
+  }
+
+  /* ------------------------------------------------------------ #storage-s3 */
+  var S3P = {
+    aws: { name: 'Amazon S3', hint: 'https://s3.<region>.amazonaws.com', region: 'us-east-1' },
+    r2: { name: 'Cloudflare R2', hint: 'https://<account-id>.r2.cloudflarestorage.com', region: 'auto' },
+    b2: { name: 'Backblaze B2', hint: 'https://s3.<region>.backblazeb2.com', region: 'us-west-004' },
+    wasabi: { name: 'Wasabi', hint: 'https://s3.<region>.wasabisys.com', region: 'us-east-1' },
+    minio: { name: 'MinIO', hint: 'https://minio.your-domain.com', region: 'us-east-1' },
+    other: { name: 'Other S3-compatible', hint: 'https://your-endpoint.example.com', region: '' }
+  };
+  function providerName(k) { return (S3P[k] || S3P.other).name; }
+  var FAIL_KEY = 'km-s3-test-failure';
+  function vStorageS3(c) {
+    var s = ST.s3;
+    head(c, 'storage-s3', 'S3-compatible storage', 'Bring your own bucket. LiveKit Egress writes recordings here, then KnowMe pins them to IPFS.', null, ['Storage', '#storage']);
+    var provider = selectField({ label: 'Provider', required: true, value: s.provider, options: Object.keys(S3P).map(function (k) { return [k, S3P[k].name]; }), onchange: onProvider });
+    var endpoint = field({ label: 'Endpoint URL', required: true, mono: true, value: s.endpoint, placeholder: S3P[s.provider].hint, hint: 'e.g. ' + S3P[s.provider].hint,
+      validate: function (v) {
+        if (!/^https:\/\//i.test(v)) return 'The endpoint must start with https:// — LiveKit Egress only writes over TLS.';
+        if (/[<>]/.test(v)) return 'Replace the placeholder in angle brackets with your own value.';
+        return /^https:\/\/[a-z0-9.-]+(:\d+)?(\/\S*)?$/i.test(v) ? null : 'That doesn’t look like a valid URL. Check for spaces or typos.';
+      } });
+    var region = field({ label: 'Region', required: true, mono: true, value: s.region, hint: 'R2 uses auto.' });
+    var bucket = field({ label: 'Bucket', required: true, mono: true, value: s.bucket, placeholder: 'acme-meet-archive',
+      validate: function (v) { return /^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/.test(v) ? null : 'Bucket names are 3–63 lowercase letters, numbers, dots or hyphens, and start and end with a letter or number.'; } });
+    var prefix = field({ label: 'Path prefix', optional: true, mono: true, value: s.prefix, placeholder: 'meet/', hint: 'Recordings are written under this folder, e.g. meet/2026/10/14/…',
+      validate: function (v) { return /^\//.test(v) ? 'Remove the leading slash — prefixes are relative to the bucket.' : null; } });
+    var keyId = field({ label: 'Access key ID', required: true, mono: true, value: s.keyId, autocomplete: 'off' });
+    var secret = field({ label: 'Secret access key', type: 'password', required: !s.saved, mono: true, placeholder: s.saved ? 'Saved — leave blank to keep' : '',
+      hint: 'Needs PutObject, GetObject and DeleteObject on this bucket. Stored encrypted; never shown again.' });
+    var pathStyle = switchRow({ label: 'Force path style', checked: s.pathStyle,
+      desc: 'Uses endpoint/bucket/key URLs instead of bucket.endpoint/key. LiveKit Egress needs this (force_path_style) for most non-AWS endpoints, so it turns on automatically for them.' });
+    function onProvider(k) {
+      var p = S3P[k];
+      endpoint.input.placeholder = p.hint;
+      endpoint.hintEl.textContent = 'e.g. ' + p.hint;
+      if (!region.value() || region.value() === 'auto' || k === 'r2') region.input.value = p.region;
+      if (k === 'aws' && !endpoint.value()) endpoint.input.value = 'https://s3.' + (region.value() || 'us-east-1') + '.amazonaws.com';
+      pathStyle.input.checked = k !== 'aws';
+      if (endpoint.input.getAttribute('aria-invalid') === 'true') endpoint.check();
+    }
+    var fields = [endpoint, region, bucket, prefix, keyId, secret];
+    function validate() {
+      var oks = fields.map(function (f) { return f.check(); });
+      var bad = fields[oks.indexOf(false)];
+      if (bad) { bad.input.focus(); return false; }
+      return true;
+    }
+    var testArea = h('div', { class: 'stack' });
+    var tested = false;
+    var testBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!validate()) return;
+      var b = bucket.value(), pre = prefix.value();
+      var obj = (pre ? pre.replace(/\/?$/, '/') : '') + '.knowme-test-' + Date.now().toString(36) + '.txt';
+      var steps = [
+        { label: 'Connect to endpoint', detail: endpoint.value() },
+        { label: 'Write test object', detail: 'PUT ' + b + '/' + obj, fail: function () { return b === 'missing-bucket' ? 'Bucket not found: ' + b : null; } },
+        { label: 'Read it back', detail: 'GET and compare checksum' },
+        { label: 'Delete test object', detail: 'DELETE ' + b + '/' + obj }
+      ];
+      KM.clear(testArea);
+      var cl = checksList(steps);
+      var status = h('div', { 'aria-live': 'polite' });
+      testArea.appendChild(cl.el); testArea.appendChild(status);
+      var restore = busy(testBtn, 'Testing…');
+      runChecks(cl, steps).then(function (res) {
+        restore();
+        if (!res.ok) {
+          try { sessionStorage.setItem(FAIL_KEY, JSON.stringify({ bucket: b, provider: provider.input.value, endpoint: endpoint.value(), object: obj, pathStyle: pathStyle.input.checked })); } catch (_) { /* ignore */ }
+          status.appendChild(note('err', 'alert', 'Test failed. Opening the details…'));
+          later(900, function () { location.hash = '#storage-test-failed'; });
+          return;
+        }
+        tested = true;
+        status.appendChild(note('ok', 'check', 'Write, read and delete all worked. Save to use this bucket for new recordings.'));
+      });
+    } }, icon('bolt'), h('span', { text: 'Test connection' }));
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'submit' }, icon('check'), h('span', { text: 'Save' }));
+    c.appendChild(panel('Bucket', null, h('form', { class: 'stack', novalidate: true, onsubmit: function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+      var go = tested ? Promise.resolve(true) : KM.confirm({ title: 'Save without a successful test?', body: 'If the bucket or keys are wrong, new recordings will fail to upload and stay in the processing queue until fixed.', confirmLabel: 'Save anyway' });
+      go.then(function (ok) {
+        if (!ok) return;
+        var restore = busy(saveBtn, 'Saving…');
+        later(700, function () {
+          restore();
+          ST.s3 = { saved: true, provider: provider.input.value, endpoint: endpoint.value(), region: region.value(), bucket: bucket.value(), prefix: prefix.value(), keyId: keyId.value(), pathStyle: pathStyle.input.checked, testedAt: tested ? new Date().toISOString() : null };
+          secret.input.value = '';
+          saved('Bucket saved');
+          vRoute();
+        });
+      });
+    } },
+      h('div', { class: 'field-row' }, provider.el, region.el),
+      endpoint.el,
+      h('div', { class: 'field-row' }, bucket.el, prefix.el),
+      h('div', { class: 'field-row' }, keyId.el, secret.el),
+      pathStyle.el,
+      h('div', { class: 'form-foot' }, testBtn, saveBtn, h('a', { class: 'btn btn-ghost', href: '#storage', text: 'Back to storage' }), h('span', { class: 'req-note', text: '* Required' })),
+      testArea)));
+    if (s.saved) c.appendChild(note('ok', 'check', 'Saved bucket: ' + s.bucket + ' on ' + providerName(s.provider) + (s.testedAt ? ' · tested' : ' · not tested yet') + '. Select Storage → Bring your own to send new recordings here.'));
+  }
+
+  /* ------------------------------------------------------------ #storage-ipfs */
+  function vStorageIpfs(c) {
+    var s = ST.ipfs;
+    var mode = s.mode;
+    head(c, 'storage-ipfs', 'IPFS pinning', 'After each upload, a KnowMe job pins the recording to IPFS and stores its CID.', null, ['Storage', '#storage']);
+    var modeSlot = h('div', { class: 'stack' });
+    var F = {};
+    c.appendChild(panel('Pinning', null, h('div', { class: 'stack' },
+      segField('Pin with', [['knowme', 'KnowMe pinning'], ['psa', 'Pinning Service API'], ['kubo', 'Your Kubo node']], mode, function (v) { mode = v; drawMode(); }),
+      modeSlot)));
+    function drawMode() {
+      KM.clear(modeSlot);
+      F = {};
+      if (mode === 'knowme') {
+        modeSlot.appendChild(note('info', 'info', 'KnowMe pins recordings on its own IPFS nodes. Nothing to configure.'));
+        return;
+      }
+      if (mode === 'psa') {
+        F.endpoint = field({ label: 'Pinning service endpoint', required: true, mono: true, value: s.endpoint, placeholder: 'https://pinning.example.com/psa',
+          hint: 'Any service that implements the IPFS Pinning Service API.', validate: httpsUrl });
+        F.token = field({ label: 'Access token', type: 'password', required: true, mono: true, hint: 'Sent as a bearer token. Stored encrypted; never shown again.' });
+        modeSlot.appendChild(F.endpoint.el); modeSlot.appendChild(F.token.el);
+      } else {
+        F.rpc = field({ label: 'Kubo RPC API URL', required: true, mono: true, value: s.rpc, placeholder: 'http://127.0.0.1:5001',
+          hint: 'Your node’s RPC API (port 5001 by default). It must be reachable from KnowMe; 127.0.0.1 only works if the pinning job runs on the same host.',
+          validate: function (v) { return /^https?:\/\/[a-z0-9.-]+(:\d+)?(\/\S*)?$/i.test(v) ? null : 'Use the full RPC URL starting with http:// or https://, e.g. http://127.0.0.1:5001.'; } });
+        F.auth = field({ label: 'Authorization', type: 'password', optional: true, mono: true, hint: 'Basic auth or bearer token, if your RPC API sits behind a proxy.' });
+        modeSlot.appendChild(F.rpc.el); modeSlot.appendChild(F.auth.el);
+      }
+    }
+    drawMode();
+    function httpsUrl(v) { return /^https:\/\/[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/\S*)?$/i.test(v) ? null : 'Use a full https:// URL.'; }
+    var gateway = field({ label: 'Public gateway URL', required: true, mono: true, value: s.gateway, hint: 'Used to build links like https://ipfs.io/ipfs/<cid>.', validate: httpsUrl });
+    var pinAfter = switchRow({ label: 'Pin after upload', desc: 'Pin each recording as soon as it lands in storage.', checked: s.pinAfter });
+    var testArea = h('div', { class: 'stack' });
+    var testBtn = h('button', { class: 'btn', type: 'button', onclick: function () {
+      if (!validate()) return;
+      var steps = [
+        { label: 'Reach pinning endpoint', detail: mode === 'knowme' ? 'KnowMe pinning' : mode === 'psa' ? F.endpoint.value() : F.rpc.value() },
+        { label: 'Authenticate', detail: mode === 'kubo' && !F.auth.value() ? 'No authorization set' : 'Using your credentials',
+          fail: function () { var t = mode === 'psa' ? F.token.value() : mode === 'kubo' ? F.auth.value() : ''; return t === 'wrong' ? '401 Unauthorized: the token was rejected. Create a new token with pin permissions and paste it again.' : null; } },
+        { label: 'Pin a small test CID', detail: 'bafkreidgvpkjawlxz6sffxzwgooowe5yt7i6wsyg236mfoks77nywkptdq' },
+        { label: 'Fetch via gateway', detail: gateway.value() + '/ipfs/…' }
+      ];
+      KM.clear(testArea);
+      var cl = checksList(steps);
+      var status = h('div', { 'aria-live': 'polite' });
+      testArea.appendChild(cl.el); testArea.appendChild(status);
+      var restore = busy(testBtn, 'Testing…');
+      runChecks(cl, steps).then(function (res) {
+        restore();
+        status.appendChild(res.ok
+          ? note('ok', 'check', 'Pinned and fetched the test CID. It was unpinned again after the test.')
+          : note('err', 'alert', [h('b', { text: 'Test failed at “' + steps[res.at].label + '”. ' }), res.error]));
+      });
+    } }, icon('bolt'), h('span', { text: 'Test pinning' }));
+    function validate() {
+      var list = [gateway].concat(Object.keys(F).map(function (k) { return F[k]; }));
+      var oks = list.map(function (f) { return f.check(); });
+      var bad = list[oks.indexOf(false)];
+      if (bad) { bad.input.focus(); return false; }
+      return true;
+    }
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+      if (!validate()) return;
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () {
+        restore();
+        ST.ipfs = { mode: mode, endpoint: F.endpoint ? F.endpoint.value() : s.endpoint, rpc: F.rpc ? F.rpc.value() : s.rpc, gateway: gateway.value(), pinAfter: pinAfter.input.checked, testedAt: s.testedAt };
+        saved('IPFS pinning saved');
+        s = ST.ipfs;
+      });
+    } }, icon('check'), h('span', { text: 'Save' }));
+    c.appendChild(panel('Gateway and timing', null, h('div', { class: 'stack' }, gateway.el, pinAfter.el,
+      h('div', { class: 'form-foot' }, testBtn, saveBtn, h('span', { class: 'req-note', text: '* Required' })), testArea)));
+    c.appendChild(note('warn', 'globe', 'Pinned content is public to anyone who has the CID. Unpinning removes your copy, but other IPFS nodes that fetched the file may keep it.'));
+  }
+
+  /* ------------------------------------------------------------ #storage-test-failed */
+  function vStorageFailed(c) {
+    var f = { bucket: 'missing-bucket', provider: 'r2', endpoint: 'https://acme-account.r2.cloudflarestorage.com', object: 'meet/.knowme-test-mk2q8z.txt', pathStyle: true };
+    try { f = merge(f, JSON.parse(sessionStorage.getItem(FAIL_KEY) || '{}')); } catch (_) { /* use default */ }
+    head(c, 'storage-test-failed', 'Storage test failed', 'KnowMe couldn’t write to your bucket, so new recordings won’t upload until this is fixed.', null, ['S3-compatible storage', '#storage-s3']);
+    var steps = [
+      { label: 'Connect to endpoint', detail: f.endpoint },
+      { label: 'Write test object', detail: 'PUT ' + f.bucket + '/' + f.object, fail: function () { return f.bucket === 'missing-bucket' ? 'Bucket not found: ' + f.bucket : null; } },
+      { label: 'Read it back', detail: 'GET and compare checksum' },
+      { label: 'Delete test object', detail: 'DELETE ' + f.bucket + '/' + f.object }
+    ];
+    var cl = checksList(steps);
+    setRow(cl.rows[0], 'ok', 'Passed');
+    setRow(cl.rows[1], 'fail', 'Failed', 'Bucket not found: ' + f.bucket);
+    setRow(cl.rows[2], 'skip', 'Skipped');
+    setRow(cl.rows[3], 'skip', 'Skipped');
+    var status = h('div', { 'aria-live': 'polite' });
+    var retry = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+      KM.clear(status);
+      cl.rows.forEach(function (r) { r.li.setAttribute('data-s', 'wait'); r.state.textContent = 'Waiting'; });
+      var restore = busy(retry, 'Retrying…');
+      runChecks(cl, steps).then(function (res) {
+        restore();
+        status.appendChild(res.ok
+          ? note('ok', 'check', ['The test passed this time. ', h('a', { href: '#storage-s3', text: 'Go back and save your bucket' }), '.'])
+          : note('err', 'alert', 'Still failing: bucket ' + f.bucket + ' was not found. Fix the bucket name or create the bucket, then edit your settings.'));
+      });
+    } }, icon('refresh'), h('span', { text: 'Retry test' }));
+    c.appendChild(panel('What failed', providerName(f.provider) + ' · ' + f.endpoint, h('div', { class: 'stack' }, note('err', 'alert', [h('b', { text: 'Step 2 of 4 — Write test object. ' }), 'Bucket not found: ' + f.bucket]), cl.el, status)));
+    var raw = 'PUT /' + f.bucket + '/' + f.object + (f.pathStyle ? '  (path style)' : '') + '\n' +
+      'HTTP/1.1 404 Not Found\n\n' +
+      '<?xml version="1.0" encoding="UTF-8"?>\n<Error>\n  <Code>NoSuchBucket</Code>\n  <Message>The specified bucket does not exist.</Message>\n  <BucketName>' + f.bucket + '</BucketName>\n</Error>';
+    c.appendChild(panel('Raw provider error', null, h('pre', { class: 'code', tabindex: '0', 'aria-label': 'Raw provider error', text: raw }),
+      h('button', { class: 'btn btn-sm', type: 'button', onclick: function () { KM.copy(raw); } }, icon('copy', 'ic-sm'), h('span', { text: 'Copy' }))));
+    var fixes = [
+      'Check the bucket name for typos. Names are lowercase and must match exactly.',
+      'Create the bucket in your ' + providerName(f.provider) + ' console if it doesn’t exist yet.',
+      'Confirm the endpoint points at the right account and region.',
+      'Make sure the access key can PutObject, GetObject and DeleteObject on this bucket.',
+      'For non-AWS providers, keep Force path style on.'
+    ];
+    c.appendChild(panel('How to fix it', 'Tick items off as you go.', h('div', null, fixes.map(function (t, i) { return checkRow('fix-' + i, t, null, false, function () {}); }))));
+    c.appendChild(h('div', { class: 'form-foot' }, retry,
+      h('a', { class: 'btn', href: '#storage-s3' }, icon('edit'), h('span', { text: 'Edit storage settings' })),
+      h('a', { class: 'btn btn-ghost', href: '#storage', text: 'Back to storage' })));
+  }
+
+  /* ------------------------------------------------------------ #recording */
+  function vRecording(c) {
+    var r = ST.rec;
+    head(c, 'recording', 'Recording & transcription', 'Defaults for meetings you host. Hosts can still start or stop recording in the room.');
+    c.appendChild(panel('Recording', null, h('div', { class: 'switches' },
+      switchRow({ label: 'Auto-record meetings I host', desc: 'Starts a Room Composite recording once everyone present has consented.', checked: r.auto, onchange: function (v) { r.auto = v; saved(); } }).el,
+      switchRow({ label: 'Ask participants for consent', desc: 'Always on. Everyone sees a recording notice and must agree before recording starts; people who join later see it before they enter.', checked: true, disabled: true }).el)));
+    var lang = selectField({ label: 'Transcription language', value: r.lang, onchange: function (v) { r.lang = v; saved('Language saved'); },
+      options: [['auto', 'Detect automatically'], ['en-US', 'English (US)'], ['en-GB', 'English (UK)'], ['es', 'Spanish'], ['fr', 'French'], ['de', 'German'], ['pt-BR', 'Portuguese (Brazil)'], ['hi', 'Hindi'], ['ja', 'Japanese']] });
+    c.appendChild(panel('Transcription', null, h('div', { class: 'stack' },
+      h('div', { class: 'switches' },
+        switchRow({ label: 'Live transcription', desc: 'Transcribe as people speak and show captions in the room.', checked: r.live, onchange: function (v) { r.live = v; saved(); } }).el,
+        switchRow({ label: 'Speaker labels', desc: 'Attribute each line to a participant or agent.', checked: r.speakers, onchange: function (v) { r.speakers = v; saved(); } }).el,
+        switchRow({ label: 'Add transcript to meeting knowledge in real time', desc: 'Every agent in the room, including Concierge, can answer from what has been said so far.', checked: r.kb, onchange: function (v) { r.kb = v; saved(); } }).el,
+        switchRow({ label: 'Profanity filter', desc: 'Masks profanity in captions, transcripts and summaries.', checked: r.profanity, onchange: function (v) { r.profanity = v; saved(); } }).el),
+      lang.el)));
+    c.appendChild(h('section', { class: 'panel', 'aria-labelledby': 'guest-h' },
+      h('div', { class: 'od-cluster', style: 'justify-content: space-between' }, h('h2', { id: 'guest-h', class: 'panel-h', text: 'Guest meetings' }), KM.lockBadge('Not editable')),
+      h('p', { class: 'small sub', text: 'Meetings started by someone who isn’t signed in are never recorded. They get live transcription and the Concierge only, and the transcript is deleted when the meeting ends — it isn’t saved or sent to anyone.' })));
+  }
+
+  /* ------------------------------------------------------------ #delivery */
+  function vDelivery(c) {
+    var d = clone(ST.delivery);
+    head(c, 'delivery', 'Summary delivery', 'When a meeting closes, KnowMe generates a summary and action items and sends them with the transcript.',
+      h('a', { class: 'btn', href: '#templates' }, icon('eye'), h('span', { text: 'Preview messages' })));
+    var body = h('fieldset', { disabled: d.on ? null : true, class: 'stack' }, h('legend', { class: 'sr-only', text: 'Delivery options' }));
+    c.appendChild(h('section', { class: 'panel', 'aria-label': 'Automatic delivery' },
+      switchRow({ label: 'Send automatically at meeting close', desc: 'Turn off to send summaries yourself from each recording.', checked: d.on, onchange: function (v) { d.on = v; body.disabled = !v; } }).el));
+    var whatErr = h('p', { class: 'field-error', id: 'what-err' }, icon('alert', 'ic-sm'), h('span', { text: 'Choose at least one thing to send, or turn automatic delivery off.' }));
+    var chErr = h('p', { class: 'field-error', id: 'ch-err' }, icon('alert', 'ic-sm'), h('span', { text: 'Choose at least one channel.' }));
+    function cb(k) { return function (v) { d[k] = v; whatErr.classList.remove('show'); chErr.classList.remove('show'); }; }
+    var reviewNote = h('div');
+    function drawReview() {
+      KM.clear(reviewNote);
+      if (d.timing === 'review') reviewNote.appendChild(note('info', 'clock', 'Summaries wait in a review queue on each recording’s Delivery tab. Nothing is sent until you approve it.'));
+    }
+    body.appendChild(panel('What to send', null, h('fieldset', { 'aria-describedby': 'what-err' }, h('legend', { class: 'sr-only', text: 'What to send' }),
+      checkRow('w-summary', 'Summary', 'A short narrative of the meeting and its decisions.', d.summary, cb('summary')),
+      checkRow('w-actions', 'Action items', 'Each item with its owner and due date.', d.actions, cb('actions')),
+      checkRow('w-transcript', 'Full transcript', 'Speaker-attributed, with timestamps.', d.transcript, cb('transcript')),
+      checkRow('w-recording', 'Recording link', 'Only for recorded meetings.', d.recording, cb('recording')), whatErr)));
+    body.appendChild(panel('Recipients', null, radioGroup('Who receives it', 'recip', [
+      ['all', 'All participants', 'Including invitees without a KnowMe account — they open the link without signing in.'],
+      ['signed', 'Only signed-in participants', null],
+      ['me', 'Only me', null]], d.recipients, function (v) { d.recipients = v; })));
+    var smsDesc = ST.sms.connected ? 'Sent from ' + ST.sms.number + ' to participants with a phone number.' : 'Needs Telnyx SMS — not connected yet.';
+    body.appendChild(panel('Channels', null, h('div', { class: 'stack-sm' },
+      h('fieldset', { 'aria-describedby': 'ch-err' }, h('legend', { class: 'sr-only', text: 'Channels' }),
+        checkRow('ch-email', 'Email', 'Full summary in the message body.', d.email, cb('email')),
+        checkRow('ch-sms', 'SMS link via Telnyx', smsDesc, d.sms, cb('sms')), chErr),
+      ST.sms.connected ? null : note('warn', 'sms', ['SMS links won’t send until you ', h('a', { href: '#telnyx-sms', text: 'connect Telnyx SMS' }), '.']))));
+    body.appendChild(panel('Timing', null, h('div', { class: 'stack' },
+      radioGroup('When to send', 'timing', [['immediate', 'Immediately when processing completes', null], ['review', 'After I review', 'Hold summaries until you approve them.']], d.timing, function (v) { d.timing = v; drawReview(); }),
+      reviewNote,
+      selectField({ label: 'Links expire after', value: d.expiry, hint: 'Applies to transcript and recording links for people without an account.', options: [['7', '7 days'], ['30', '30 days'], ['90', '90 days'], ['never', 'Never']], onchange: function (v) { d.expiry = v; } }).el)));
+    drawReview();
+    c.appendChild(body);
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+      if (d.on && !(d.summary || d.actions || d.transcript || d.recording)) { whatErr.classList.add('show'); whatErr.scrollIntoView({ block: 'center' }); return; }
+      if (d.on && !(d.email || d.sms)) { chErr.classList.add('show'); chErr.scrollIntoView({ block: 'center' }); return; }
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () { restore(); ST.delivery = clone(d); saved('Delivery settings saved'); });
+    } }, icon('check'), h('span', { text: 'Save delivery settings' }));
+    c.appendChild(h('div', { class: 'form-foot' }, saveBtn, h('a', { class: 'btn', href: '#templates' }, icon('eye'), h('span', { text: 'Preview' }))));
+  }
+
+  /* ------------------------------------------------------------ #templates */
+  var SHORT = 'meet.know-me.tools/s/7Qx2';
+  function smsStats(text) {
+    var gsm = /^[\x20-\x7E\n]*$/.test(text);
+    var single = gsm ? 160 : 70, multi = gsm ? 153 : 67;
+    var segs = text.length <= single ? 1 : Math.ceil(text.length / multi);
+    return { len: text.length, segs: segs, limit: segs === 1 ? single : multi * segs, gsm: gsm };
+  }
+  function vTemplates(c) {
+    var t = clone(ST.tpl);
+    var u = KM.auth.get();
+    var m = D.meeting('partner-onboarding');
+    var nextM = D.meeting('cohort-kickoff');
+    var sum = { paras: 'Jordan, Avery and Marcus agreed on a two-phase rollout: sandbox access first, then production once the security review closes.',
+      actions: [['Issue sandbox credentials', 'Jordan Reyes', 'Oct 19'], ['Confirm required API scopes', 'Marcus Oyelaran', 'Oct 20'], ['Schedule the security review', 'Avery Chen', 'Oct 23']] };
+    function fill(s, mt) {
+      mt = mt || m;
+      return String(s).replace(/\{meeting\}/g, mt.title).replace(/\{host\}/g, mt.host).replace(/\{date\}/g, fmt.day(mt.start) + ' ' + fmt.time(mt.start));
+    }
+    head(c, 'templates', 'Message templates', 'What participants receive. Edit the subject and intro; previews update as you type.',
+      h('a', { class: 'btn', href: '#delivery' }, icon('settings'), h('span', { text: 'Delivery settings' })));
+    c.appendChild(h('div', { class: 'tokens', 'aria-label': 'Available placeholders' },
+      h('span', { class: 'small sub', text: 'Placeholders:' }), ['{meeting}', '{host}', '{date}'].map(function (x) { return h('code', { text: x }); })));
+
+    /* summary email */
+    var subj = field({ label: 'Email subject', required: true, value: t.subject, max: 120, oninput: function (v) { t.subject = v; drawEmail(); } });
+    var intro = field({ label: 'Email intro', type: 'textarea', required: true, value: t.intro, max: 400, rows: 4, oninput: function (v) { t.intro = v; drawEmail(); } });
+    var emailPrev = h('div', { 'aria-live': 'off' });
+    function drawEmail() {
+      KM.clear(emailPrev);
+      emailPrev.appendChild(h('article', { class: 'email-card', 'aria-label': 'Summary email preview' },
+        h('dl', { class: 'email-meta' },
+          h('div', null, h('dt', { text: 'From' }), h('dd', { text: 'Know Meet <summaries@know-me.tools>' })),
+          h('div', null, h('dt', { text: 'To' }), h('dd', { text: 'avery.chen@northwind.io' })),
+          h('div', null, h('dt', { text: 'Subject' }), h('dd', null, h('b', { text: fill(t.subject) || '(no subject)' })))),
+        h('div', { class: 'email-body' },
+          h('h3', { text: m.title }),
+          h('p', { class: 'sub', text: fmt.day(m.start) + ' · ' + fmt.mins(m.durationMin) + ' · Hosted by ' + m.host }),
+          h('p', { text: fill(t.intro) }),
+          h('h4', { text: 'Summary' }), h('p', { text: sum.paras }),
+          h('h4', { text: 'Action items' }),
+          h('ul', null, sum.actions.map(function (a) { return h('li', null, h('b', { text: a[0] }), ' — ' + a[1] + ', due ' + a[2]); })),
+          h('div', { class: 'btn-row' },
+            h('span', { class: 'btn btn-primary btn-sm', 'aria-hidden': 'true', text: 'Read the transcript' }),
+            h('span', { class: 'btn btn-sm', 'aria-hidden': 'true', text: 'Watch the recording' })),
+          h('p', { class: 'foot', text: (ST.delivery.expiry === 'never' ? 'Links don’t expire.' : 'Links expire in ' + ST.delivery.expiry + ' days.') + ' You received this because you joined this meeting.' }))));
+    }
+    drawEmail();
+
+    /* summary sms */
+    var smsIn = field({ label: 'SMS intro', required: true, value: t.sms, max: 200, oninput: function (v) { t.sms = v; drawSms(); } });
+    var smsPrev = h('div');
+    var smsCount = h('div', { class: 'counter', 'aria-live': 'polite' });
+    var smsErr = h('div');
+    function smsText() { return fill(t.sms) + ' ' + SHORT + ' Reply STOP to opt out.'; }
+    function drawSms() {
+      var txt = smsText(), st = smsStats(txt);
+      KM.clear(smsPrev); KM.clear(smsCount); KM.clear(smsErr);
+      smsPrev.appendChild(phone(ST.sms.number || D.telnyx.smsFrom, txt));
+      smsCount.appendChild(h('span', { class: 'mono', text: st.len + ' / ' + st.limit }));
+      smsCount.appendChild(h('span', { text: 'characters' }));
+      smsCount.appendChild(st.segs > 2 ? stateChip(st.segs + ' segments', 'red') : stateChip(st.segs + (st.segs === 1 ? ' segment' : ' segments'), 'green'));
+      if (!st.gsm) smsCount.appendChild(h('span', { class: 'xsmall', text: 'Special characters use 70-character segments.' }));
+      if (st.segs > 2) smsErr.appendChild(note('err', 'alert', 'This SMS needs ' + st.segs + ' segments. Shorten the intro to fit in 2 or fewer.'));
+    }
+    drawSms();
+
+    /* invites */
+    var invSubj = field({ label: 'Invite email subject', required: true, value: t.inviteSubject, max: 120, oninput: function (v) { t.inviteSubject = v; drawInvites(); } });
+    var invSms = field({ label: 'Invite SMS intro', required: true, value: t.inviteSms, max: 160, oninput: function (v) { t.inviteSms = v; drawInvites(); } });
+    var invPrev = h('div', { class: 'stack' });
+    var invCount = h('div', { class: 'counter', 'aria-live': 'polite' });
+    function inviteSmsText() {
+      return fill(t.inviteSms, nextM) + ' Join: meet.know-me.tools/j/' + nextM.joinCode + ' Dial-in: ' + nextM.dialIn.number + ' PIN ' + nextM.dialIn.pin + '# Reply STOP to opt out.';
+    }
+    function drawInvites() {
+      KM.clear(invPrev); KM.clear(invCount);
+      invPrev.appendChild(h('article', { class: 'email-card', 'aria-label': 'Invite email preview' },
+        h('dl', { class: 'email-meta' },
+          h('div', null, h('dt', { text: 'From' }), h('dd', { text: u.name + ' via Know Meet' })),
+          h('div', null, h('dt', { text: 'To' }), h('dd', { text: 'dana@lumenlabs.co' })),
+          h('div', null, h('dt', { text: 'Subject' }), h('dd', null, h('b', { text: fill(t.inviteSubject, nextM) || '(no subject)' })))),
+        h('div', { class: 'email-body' },
+          h('h3', { text: nextM.title }),
+          h('p', { text: fmt.date(nextM.start) + ' · ' + fmt.mins(nextM.durationMin) }),
+          h('span', { class: 'btn btn-primary btn-sm', 'aria-hidden': 'true', text: 'Join in browser' }),
+          h('p', null, 'Or dial ', h('b', { text: nextM.dialIn.number }), ' and enter PIN ', h('b', { text: nextM.dialIn.pin + '#' })),
+          h('p', { class: 'foot', text: 'No account needed. This meeting may be recorded and is transcribed live; you’ll be asked for consent before recording starts.' }))));
+      var txt = inviteSmsText(), st = smsStats(txt);
+      invPrev.appendChild(phone(ST.sms.number || D.telnyx.smsFrom, txt));
+      invCount.appendChild(h('span', { class: 'mono', text: st.len + ' / ' + st.limit }));
+      invCount.appendChild(h('span', { text: 'characters' }));
+      invCount.appendChild(st.segs > 2 ? stateChip(st.segs + ' segments', 'red') : stateChip(st.segs + (st.segs === 1 ? ' segment' : ' segments'), 'green'));
+    }
+    drawInvites();
+
+    c.appendChild(panel('Summary email', 'Sent at meeting close to recipients chosen in delivery settings.', h('div', { class: 'tpl-grid' },
+      h('div', { class: 'stack' }, subj.el, intro.el), emailPrev)));
+    c.appendChild(panel('Summary SMS', 'Sent via Telnyx to participants with a phone number. Keep it to 2 segments.', h('div', { class: 'tpl-grid' },
+      h('div', { class: 'stack' }, smsIn.el, smsCount, smsErr), smsPrev)));
+    c.appendChild(panel('Invites', 'What invitees receive by email and SMS. Invitees never need an account.', h('div', { class: 'tpl-grid' },
+      h('div', { class: 'stack' }, invSubj.el, invSms.el, invCount), invPrev)));
+
+    var saveBtn = h('button', { class: 'btn btn-primary', type: 'button', onclick: function () {
+      var list = [subj, intro, smsIn, invSubj, invSms], oks = list.map(function (f) { return f.check(); });
+      var bad = list[oks.indexOf(false)];
+      if (bad) { bad.input.focus(); return; }
+      if (smsStats(smsText()).segs > 2 || smsStats(inviteSmsText()).segs > 2) { smsIn.setError('Shorten this so the SMS fits in 2 segments.'); smsIn.input.focus(); return; }
+      var restore = busy(saveBtn, 'Saving…');
+      later(700, function () { restore(); ST.tpl = clone(t); saved('Templates saved'); });
+    } }, icon('check'), h('span', { text: 'Save templates' }));
+    var resetBtn = h('button', { class: 'btn btn-ghost', type: 'button', onclick: function () {
+      KM.confirm({ title: 'Reset templates?', body: 'Your subject and intro text go back to the KnowMe defaults.', confirmLabel: 'Reset' }).then(function (ok) {
+        if (!ok) return;
+        ST.tpl = clone(DEF.tpl); saved('Templates reset'); vRoute();
+      });
+    } }, h('span', { text: 'Reset to defaults' }));
+    c.appendChild(h('div', { class: 'form-foot' }, saveBtn, resetBtn, h('span', { class: 'req-note', text: '* Required' })));
+  }
+  function phone(from, text) {
+    return h('div', { class: 'phone-frame', role: 'img', 'aria-label': 'SMS preview: ' + text },
+      h('span', { class: 'from', text: 'Text message · from ' + from }),
+      h('div', { class: 'bubble', text: text }));
+  }
+
+  /* ------------------------------------------------------------ routing */
+  var VIEWS = {
+    'account': vAccount, 'notifications': vNotifications, 'livekit': vLivekit, 'telnyx-sms': vTelnyxSms, 'telnyx-voice': vTelnyxVoice,
+    'calendars': vCalendars, 'calendar-connect': vCalendarConnect, 'storage': vStorage, 'storage-s3': vStorageS3, 'storage-ipfs': vStorageIpfs,
+    'storage-test-failed': vStorageFailed, 'recording': vRecording, 'delivery': vDelivery, 'templates': vTemplates
+  };
+  var lastKey = null;
+  function render(key, arg) {
+    RUN++;
+    if (key !== lastKey) { if (key !== 'livekit') LK.draft = null; if (key !== 'telnyx-sms') SMSF.open = false; }
+    lastKey = key;
+    if (!KM.auth.isSignedIn()) {
+      document.title = 'Settings · Know Meet';
+      KM.clear(main);
+      main.appendChild(h('div', { class: 'page-head' }, h('div', null, h('span', { class: 'eyebrow', text: 'Settings' }), h('h1', { text: 'Settings' }))));
+      var slot = h('div');
+      main.appendChild(slot);
+      KM.gate(slot, { title: 'Sign in to manage settings',
+        reason: 'LiveKit, Telnyx, calendars, storage and delivery settings belong to your account. Guests can still start a meeting with the Concierge.',
+        next: 'settings.html' + location.hash });
+      return;
+    }
+    var c = shell(key);
+    VIEWS[key](c, arg);
+  }
+  var handlers = {};
+  Object.keys(VIEWS).forEach(function (k) { handlers[k] = function (arg) { render(k, arg); }; });
+  var router = KM.route(handlers, 'account');
+  function vRoute() { router.refresh(); }
+  KM.auth.onChange(function () { router.refresh(); });
+})();
+</script>
+</body>
+</html>

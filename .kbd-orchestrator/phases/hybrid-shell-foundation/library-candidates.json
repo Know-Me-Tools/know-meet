@@ -1,0 +1,498 @@
+{
+  "phase": "hybrid-shell-foundation",
+  "generated_at": "2026-11-09T09:06:34Z",
+  "research_budget": {
+    "max_queries_per_tier": 8,
+    "max_minutes": 20,
+    "queries_used": {
+      "1": 5,
+      "2": 6,
+      "3": 3,
+      "4": 0
+    }
+  },
+  "gaps_addressed": [
+    "generator-fit",
+    "shared-web-tauri",
+    "workspace-tooling",
+    "token-pipeline",
+    "web-ui-kit",
+    "flutter-ui-kit",
+    "naming-rule",
+    "line-limit-rule",
+    "web-fidelity",
+    "flutter-fidelity",
+    "lint-test-tooling",
+    "routing",
+    "fonts"
+  ],
+  "candidates": [
+    {
+      "id": "cand-001",
+      "name": "knowme-builder (hybrid-mobile-architecture)",
+      "kind": "skeleton",
+      "repo_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/tools/knowme-builder",
+      "registry": "none",
+      "fit_for_gap": "generator-fit: Tauri src-tauri and Flutter shell baselines",
+      "verdict": "adapt",
+      "coverage_estimate": 0.35,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/builder.manifest.json",
+          "claim": "Profiles: sovereign-hybrid, governed-web-shell, axum-web, tauri-desktop, flutter-mobile; none combines React web + Tauri sharing it + Flutter"
+        },
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/assets/templates/baselines/tauri/desktop/src-tauri",
+          "claim": "Baseline ships build.rs and capabilities/default.json (defects fixed at source)"
+        }
+      ],
+      "risks": [
+        "Installed alpha.1 vs source alpha.5",
+        "Profiles carry rust-core/UAR/Axum/PEM payloads to strip",
+        "Baseline file names violate kebab-case",
+        "Kept src-tauri commands call gen_ui_notes and Flutter shell depends on flutter_rust_bridge; both need shell-only stubs"
+      ],
+      "decision_rationale": "Generate into scratch dir, keep Tauri and Flutter shells, strip server/Rust-core/PEM, restructure into a shared web package (assessment option a)"
+    },
+    {
+      "id": "cand-002",
+      "name": "Tauri v2 frontendDist/beforeBuildCommand",
+      "kind": "pattern",
+      "repo_url": "https://github.com/tauri-apps/tauri",
+      "registry": "npm",
+      "fit_for_gap": "shared-web-tauri: desktop builds the same web bundle",
+      "verdict": "adopt",
+      "coverage_estimate": 0.9,
+      "license": "Apache-2.0 OR MIT",
+      "maintenance": {
+        "last_release": "2026-11-06 (@tauri-apps/cli 2.12.4)"
+      },
+      "evidence": [
+        {
+          "tier": 2,
+          "source_url": "https://github.com/tauri-apps/tauri-docs/blob/v2/src/content/docs/start/frontend/vite.mdx",
+          "claim": "build.devUrl, frontendDist, beforeDevCommand, beforeBuildCommand configure any frontend path/command"
+        },
+        {
+          "tier": 3,
+          "claim": "@tauri-apps/cli 2.12.4 latest; versions.toml pins 2.11.4; installed 2.10.0"
+        }
+      ],
+      "risks": [
+        "Unguarded Tauri calls blank plain web build (package lesson)"
+      ],
+      "decision_rationale": "Native support; no third-party template needed"
+    },
+    {
+      "id": "cand-003",
+      "name": "pnpm workspaces",
+      "kind": "framework",
+      "repo_url": "https://github.com/pnpm/pnpm",
+      "registry": "npm",
+      "fit_for_gap": "workspace-tooling: apps/* and packages/* with one lockfile",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/versions.toml",
+          "claim": "pnpm pinned 11.15.0 although baselines ship npm lockfiles"
+        }
+      ],
+      "risks": [
+        "Installed pnpm 11.25.0 differs from pin"
+      ],
+      "decision_rationale": "Already pinned by the package; supports shared packages for web and Tauri"
+    },
+    {
+      "id": "cand-004",
+      "name": "Style Dictionary",
+      "kind": "library",
+      "repo_url": "https://github.com/style-dictionary/style-dictionary",
+      "registry": "npm",
+      "fit_for_gap": "token-pipeline: one source to CSS vars, Tailwind theme, Dart",
+      "verdict": "adapt",
+      "coverage_estimate": 0.75,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "5.8.0 (2026-11-03)"
+      },
+      "evidence": [
+        {
+          "tier": 2,
+          "source_url": "https://github.com/style-dictionary/style-dictionary/blob/main/docs/src/content/docs/reference/Hooks/Formats/predefined.md",
+          "claim": "Built-in css/variables and flutter/class.dart formats; custom formats and transform groups supported"
+        },
+        {
+          "tier": 3,
+          "claim": "npm 5.8.0 modified 2026-11-03, Apache-2.0"
+        }
+      ],
+      "risks": [
+        "Needs custom formats for shadcn var names, Tailwind @theme and ThemeData",
+        "clamp() sizes have no Dart equivalent"
+      ],
+      "decision_rationale": "Option 2 under operator gate Q-A8: substitute pipeline; accepts rgba/clamp/font stacks; needs custom formats"
+    },
+    {
+      "id": "cand-005",
+      "name": "gen-design-tokens.mjs (hybrid-design-tokens skill)",
+      "kind": "library",
+      "repo_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/scripts/gen-design-tokens.mjs",
+      "registry": "none",
+      "fit_for_gap": "token-pipeline",
+      "verdict": "adapt",
+      "coverage_estimate": 0.4,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/scripts/gen-design-tokens.mjs",
+          "claim": "Emits Tailwind 4 @theme to desktop/src/theme.css (line 798) and tokens.dart; existsSync guard skips missing dirs (line 830)"
+        },
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/runtime/src/native-helpers/gen-design-tokens.mts",
+          "claim": "Hex-only colour assertion, TOML input, hardcoded font map; no shadcn vars, no apps/web target, no ThemeData"
+        }
+      ],
+      "decision_rationale": "Option 1 under operator gate Q-A8 (recommended for Goal 1): vendor into tools/design-tokens and extend for rgba, clamp, fonts, shadcn/web targets, ThemeData, loud failures"
+    },
+    {
+      "id": "cand-006",
+      "name": "shadcn (CLI + components)",
+      "kind": "library",
+      "repo_url": "https://github.com/shadcn-ui/ui",
+      "registry": "npm",
+      "fit_for_gap": "web-ui-kit",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT",
+      "maintenance": {
+        "last_release": "4.23.0 (2026-10-27)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "npm shadcn 4.23.0 modified 2026-10-27, MIT"
+        },
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/skills/hybrid-mobile-architecture/SKILL.md",
+          "claim": "Package directs npx shadcn init with Tailwind 4, CSS variables, class dark mode; no components pre-generated"
+        }
+      ],
+      "risks": [
+        "Default theme must be fully replaced by token-driven variables (lesson: conflicting token blocks)"
+      ],
+      "decision_rationale": "Source-owned components can be renamed kebab-case and themed by tokens"
+    },
+    {
+      "id": "cand-007",
+      "name": "Tailwind CSS 4",
+      "kind": "framework",
+      "repo_url": "https://github.com/tailwindlabs/tailwindcss",
+      "registry": "npm",
+      "fit_for_gap": "web-ui-kit styling",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT",
+      "maintenance": {
+        "last_release": "4.3.5 (2026-11-06)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "npm tailwindcss 4.3.5 modified 2026-11-06"
+        }
+      ],
+      "risks": [
+        "Not pinned in versions.toml"
+      ],
+      "decision_rationale": "Required by shadcn; pin exactly per dependency-pin-discipline"
+    },
+    {
+      "id": "cand-008",
+      "name": "forui",
+      "kind": "library",
+      "repo_url": "https://pub.dev/packages/forui",
+      "registry": "none",
+      "fit_for_gap": "flutter-ui-kit",
+      "verdict": "reference",
+      "coverage_estimate": 0.6,
+      "maintenance": {
+        "last_release": "0.27.7 (2026-10-26)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://pub.dev/api/packages/forui",
+          "claim": "0.27.7, Flutter >=3.47.0-0, Dart >=3.13.0-0"
+        }
+      ],
+      "risks": [
+        "Pre-1.0 API churn",
+        "Theme must be driven by generated tokens"
+      ],
+      "decision_rationale": "Fallback only if shadcn_flutter cannot express the Know Meet theme"
+    },
+    {
+      "id": "cand-009",
+      "name": "shadcn_flutter",
+      "kind": "library",
+      "repo_url": "https://pub.dev/packages/shadcn_flutter",
+      "registry": "none",
+      "fit_for_gap": "flutter-ui-kit",
+      "verdict": "adopt",
+      "coverage_estimate": 0.5,
+      "maintenance": {
+        "last_release": "0.0.55 (2026-10-01)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://pub.dev/api/packages/shadcn_flutter",
+          "claim": "0.0.55, Flutter >=3.47.0"
+        },
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/docs/reference-app/knowme-poc-architecture-and-implementation-plan.md",
+          "claim": "Package lessons record a stale/invented shadcn_flutter pin"
+        },
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/skills/hybrid-mobile-architecture/SKILL.md",
+          "claim": "Line 194: Use shadcn_flutter package; AGENTS.md line 218 prefers shadcn_flutter equivalents"
+        }
+      ],
+      "decision_rationale": "Package-directed (Goal 1); 55 releases; pin exactly per dependency-pin-discipline",
+      "risks": [
+        "0.0.x API churn; pin exactly"
+      ]
+    },
+    {
+      "id": "cand-010",
+      "name": "ls-lint",
+      "kind": "library",
+      "repo_url": "https://github.com/loeffel-io/ls-lint",
+      "registry": "npm",
+      "fit_for_gap": "naming-rule",
+      "verdict": "adopt",
+      "coverage_estimate": 0.95,
+      "license": "MIT",
+      "maintenance": {
+        "last_release": "2.3.2 (2026-10-17)"
+      },
+      "evidence": [
+        {
+          "tier": 2,
+          "source_url": "https://github.com/ls-lint/docs/blob/master/2.3/configuration/the-basics.md",
+          "claim": "Per-directory and per-extension rules, .dir rules, glob patterns and ignore list"
+        },
+        {
+          "tier": 3,
+          "claim": "@ls-lint/ls-lint 2.3.2 MIT"
+        }
+      ],
+      "decision_rationale": "Directly expresses kebab-case with snake_case for .dart/.rs and the E-N exceptions"
+    },
+    {
+      "id": "cand-011",
+      "name": "Playwright Test",
+      "kind": "framework",
+      "repo_url": "https://github.com/microsoft/playwright",
+      "registry": "npm",
+      "fit_for_gap": "web-fidelity",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "1.65.0 (2026-11-09)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "@playwright/test 1.65.0 modified 2026-11-09"
+        }
+      ],
+      "risks": [
+        "Does not drive the Tauri webview; VS-2 relies on bundle identity"
+      ],
+      "decision_rationale": "Captures prototype baseline and shell screenshots per route/theme/viewport"
+    },
+    {
+      "id": "cand-012",
+      "name": "alchemist",
+      "kind": "library",
+      "repo_url": "https://pub.dev/packages/alchemist",
+      "registry": "none",
+      "fit_for_gap": "flutter-fidelity",
+      "verdict": "reference",
+      "coverage_estimate": 0.7,
+      "maintenance": {
+        "last_release": "0.14.1 (2026-10-08)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://pub.dev/api/packages/alchemist",
+          "claim": "0.14.1, Flutter >=3.32.0"
+        }
+      ],
+      "decision_rationale": "Built-in matchesGoldenFile via flutter-golden-ui skill is the default; alchemist only for multi-theme grids"
+    },
+    {
+      "id": "cand-013",
+      "name": "hybrid-mobile-architecture process skills",
+      "kind": "pattern",
+      "repo_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/skills",
+      "registry": "none",
+      "fit_for_gap": "process: fidelity, a11y, pins, runtime verification",
+      "verdict": "adopt",
+      "coverage_estimate": 0.6,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/skills",
+          "claim": "reference-ui-fidelity, tauri-ui-review, flutter-golden-ui, a11y-gate, dependency-pin-discipline, hybrid-runtime-verification, tauri-custom-titlebar, mobile-navigation"
+        }
+      ],
+      "decision_rationale": "Bind into Plan roles per recalled lesson"
+    },
+    {
+      "id": "cand-014",
+      "name": "Small Tauri monorepo templates",
+      "kind": "skeleton",
+      "repo_url": "https://github.com/Stormix/vite-tauri-monorepo",
+      "registry": "none",
+      "fit_for_gap": "shared-web-tauri",
+      "verdict": "reject",
+      "coverage_estimate": 0.2,
+      "maintenance": {
+        "stars": 5
+      },
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Stormix/vite-tauri-monorepo",
+          "claim": "5 stars, last updated 2024-09; peers are Vue/Nuxt templates with <5 stars"
+        }
+      ],
+      "decision_rationale": "Not credible bases; Tauri native config suffices"
+    },
+    {
+      "id": "cand-015",
+      "name": "Biome",
+      "kind": "library",
+      "repo_url": "https://github.com/biomejs/biome",
+      "registry": "npm",
+      "fit_for_gap": "lint-test-tooling: TS/TSX/CSS lint + format without a TypeScript peer dependency",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT OR Apache-2.0",
+      "maintenance": {
+        "last_release": "2.6.6 (2026-11-06)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "typescript-eslint (all releases incl. canary) peer typescript >=4.8.4 <6.1.0, incompatible with pinned TS 7.0.2; Biome 2.6.6 has no TS peer dependency"
+        }
+      ],
+      "risks": [
+        "Rule set differs from ESLint ecosystem"
+      ],
+      "decision_rationale": "Only viable mainstream linter under the TS 7 pin (oxlint 1.92.0 is the alternative)"
+    },
+    {
+      "id": "cand-016",
+      "name": "Vitest",
+      "kind": "framework",
+      "repo_url": "https://github.com/vitest-dev/vitest",
+      "registry": "npm",
+      "fit_for_gap": "lint-test-tooling: unit tests for packages/app-shell, ui, design-tokens",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT",
+      "maintenance": {
+        "last_release": "5.1.0 (2026-11-02)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "vitest 5.1.0 modified 2026-11-02"
+        }
+      ],
+      "decision_rationale": "Vite-native test runner matching Vite 8 pin"
+    },
+    {
+      "id": "cand-017",
+      "name": "flutter_lints + dart analyze",
+      "kind": "library",
+      "repo_url": "https://pub.dev/packages/flutter_lints",
+      "registry": "none",
+      "fit_for_gap": "lint-test-tooling: Dart lint incl. file_names",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "maintenance": {
+        "last_release": "6.0.0 (2025-05-27)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://pub.dev/api/packages/flutter_lints",
+          "claim": "6.0.0 published 2025-05-27"
+        }
+      ],
+      "decision_rationale": "Standard Flutter lint set; enforces lower_snake_case file names (E-N1)"
+    },
+    {
+      "id": "cand-018",
+      "name": "TanStack Router",
+      "kind": "library",
+      "repo_url": "https://github.com/TanStack/router",
+      "registry": "npm",
+      "fit_for_gap": "routing: web/Tauri shell navigation",
+      "verdict": "adopt",
+      "coverage_estimate": 0.8,
+      "license": "MIT",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "file:///Users/gqadonis/Projects/hybrid-mobile-architecture-src/references/tauri/patterns.md",
+          "claim": "Package stack lists TanStack Router/Table with React 19 and Tauri"
+        }
+      ],
+      "decision_rationale": "Package-prescribed router"
+    }
+  ],
+  "build_required": [
+    {
+      "need": "Cross-language 500-line checker honouring E-L exception globs",
+      "why_no_candidate": "eslint max-lines is JS/TS only; no maintained multi-language tool found within budget",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Token generator work: Option 1 extensions to vendored package generator, or Option 2 Style Dictionary custom formats (shadcn vars, Tailwind @theme, ThemeData)",
+      "why_no_candidate": "Built-in formats emit plain variables/constants only",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Prototype-vs-shell screenshot fidelity harness (routes x themes x viewports)",
+      "why_no_candidate": "Playwright supplies the mechanism; the route inventory and comparison spec are project-specific",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Shell-only stubs replacing gen_ui_notes Tauri commands and flutter_rust_bridge bindings",
+      "why_no_candidate": "Generator baselines are wired to the Rust core this phase strips",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Self-hosted OFL fonts with Tauri CSP font-src and Flutter asset fonts",
+      "why_no_candidate": "Prototype relies on Google Fonts CDN",
+      "capability_gap_id": null
+    }
+  ]
+}

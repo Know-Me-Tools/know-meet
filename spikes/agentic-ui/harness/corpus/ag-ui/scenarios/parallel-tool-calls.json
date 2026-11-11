@@ -1,0 +1,652 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "parallel-tool-calls",
+  "title": "Parallel tool calls with interleaved argument deltas",
+  "description": "Three TOOL_CALL_START before any ARGS; ARGS deltas interleave round-robin; ENDs and RESULTs arrive out of start order. A fourth call uses TOOL_CALL_CHUNK; the final answer uses TEXT_MESSAGE_CHUNK; STEP_STARTED/FINISHED wrap the work.",
+  "tags": [
+    "@tools",
+    "@ordering"
+  ],
+  "userPrompt": "When is Ana free on Thursday, what did we decide on pricing, and what are the spec risks?",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STEP_STARTED",
+            "stepName": "gather"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-tools-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": "Let"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " me"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " check"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " calendar,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " meeting"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " memory"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " and"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " spec"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " in"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-tools-1",
+            "delta": " parallel."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-tools-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_START",
+            "toolCallId": "tc-cal-1",
+            "toolCallName": "calendar_lookup",
+            "parentMessageId": "msg-tools-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_START",
+            "toolCallId": "tc-mem-1",
+            "toolCallName": "memory_search",
+            "parentMessageId": "msg-tools-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_START",
+            "toolCallId": "tc-doc-1",
+            "toolCallName": "doc_fetch",
+            "parentMessageId": "msg-tools-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-cal-1",
+            "delta": "{\"attendee\":"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-mem-1",
+            "delta": "{\"query\":\"pr"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-doc-1",
+            "delta": "{\"docId\":\"sp"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-cal-1",
+            "delta": "\"ana@know-me"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-mem-1",
+            "delta": "icing decisi"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-doc-1",
+            "delta": "ec-42\",\"sect"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-cal-1",
+            "delta": ".tools\",\"day"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-mem-1",
+            "delta": "on\",\"limit\":"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-doc-1",
+            "delta": "ion\":\"risks\""
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-cal-1",
+            "delta": "\":\"2026-11-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-mem-1",
+            "delta": "3}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-doc-1",
+            "delta": "}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-cal-1",
+            "delta": "2\"}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_END",
+            "toolCallId": "tc-mem-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_END",
+            "toolCallId": "tc-cal-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_END",
+            "toolCallId": "tc-doc-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_CHUNK",
+            "toolCallId": "tc-wx-1",
+            "toolCallName": "weather_lookup",
+            "parentMessageId": "msg-tools-1",
+            "delta": "{\"city\":\"Lisbon\""
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_CHUNK",
+            "toolCallId": "tc-wx-1",
+            "delta": "}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-mem-1",
+            "toolCallId": "tc-mem-1",
+            "content": "{\"hits\":[{\"id\":\"n-7\",\"text\":\"usage-based tiers\"}]}",
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-doc-1",
+            "toolCallId": "tc-doc-1",
+            "content": [
+              {
+                "type": "text",
+                "text": "Risks: WebView2 unmeasured; a2ui_flutter alpha."
+              }
+            ],
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-cal-1",
+            "toolCallId": "tc-cal-1",
+            "content": "{\"free\":[{\"from\":\"14:00\",\"to\":\"15:30\"}]}",
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-wx-1",
+            "toolCallId": "tc-wx-1",
+            "content": "{\"tempC\":19}",
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "STEP_FINISHED",
+            "stepName": "gather"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "role": "assistant",
+            "delta": "Ana"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " is"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " free"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " 14:00-15:30"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " on"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " Thursday."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " Pricing:"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " team"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " chose"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " usage-based"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " tiers."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " Spec"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " risks:"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " WebView2"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " is"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " unmeasured"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " and"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " A2UI"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " Flutter"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " renderer"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " is"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CHUNK",
+            "messageId": "msg-tools-2",
+            "delta": " alpha."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "When is Ana free on Thursday, what did we decide on pricing, and what are the spec risks?"
+      },
+      {
+        "id": "msg-tools-1",
+        "role": "assistant",
+        "textEquals": "Let me check the calendar, meeting memory and the spec in parallel.",
+        "status": "complete"
+      },
+      {
+        "id": "msg-tools-2",
+        "role": "assistant",
+        "textEquals": "Ana is free 14:00-15:30 on Thursday. Pricing: the team chose usage-based tiers. Spec risks: WebView2 is unmeasured and the A2UI Flutter renderer is alpha.",
+        "status": "complete"
+      }
+    ],
+    "toolCalls": [
+      {
+        "id": "tc-cal-1",
+        "name": "calendar_lookup",
+        "args": {
+          "attendee": "ana@know-me.tools",
+          "day": "2026-11-12"
+        },
+        "status": "complete"
+      },
+      {
+        "id": "tc-mem-1",
+        "name": "memory_search",
+        "args": {
+          "query": "pricing decision",
+          "limit": 3
+        },
+        "status": "complete"
+      },
+      {
+        "id": "tc-doc-1",
+        "name": "doc_fetch",
+        "args": {
+          "docId": "spec-42",
+          "section": "risks"
+        },
+        "status": "complete"
+      },
+      {
+        "id": "tc-wx-1",
+        "name": "weather_lookup",
+        "args": {
+          "city": "Lisbon"
+        },
+        "status": "complete",
+        "resultIncludes": "19"
+      }
+    ],
+    "steps": [
+      {
+        "name": "gather",
+        "status": "finished"
+      }
+    ],
+    "dom": [
+      {
+        "selector": "[data-testid='km-tool-call']",
+        "count": 4
+      }
+    ]
+  }
+}

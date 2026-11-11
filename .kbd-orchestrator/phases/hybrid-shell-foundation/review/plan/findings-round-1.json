@@ -1,0 +1,85 @@
+{
+  "mode": "artifact",
+  "verdict": "BLOCK",
+  "judge_model": "MiniMax-M3",
+  "producer_model": "claude-opus-5-5",
+  "isolation_mode": "rest-gateway:http://localhost:4000/v1",
+  "cross_model_check": "unverified-producer-unknown",
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "The execution order starts generator import in parallel with acceptance-definition work, contradicting the plan's requirement that value scenarios and baselines exist before any screen is generated.",
+      "evidence": "The plan states, \"Value scenarios and prototype baselines are therefore defined in c03, before any screen is generated,\" and c05 is described as \"generate and import everything.\" However, \"Round 2 (parallel): c03, c04, c05\" allows c05 task 5.1, \"Scratch generation,\" to run before c03 finishes its Gherkin features and baseline capture.",
+      "suggested_fix": "Make c05 depend on c03, thereby transitively on c02, and move generator execution into a later round after c03 completes."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "VS-6 and VS-7 are left without implementation coverage, task mapping, or boundary evidence.",
+      "evidence": "c03 limits its features to \"VS-1 to VS-5, VS-8 and VS-9,\" and c13 similarly promises evidence only for \"VS-1 to VS-5, VS-8 and VS-9.\" The \"Scenario \u2192 task coverage\" table has no VS-6 or VS-7 row. This is unexplained even though c02 task 2.3 explicitly says it \"Defines the VS-7 scope.\"",
+      "suggested_fix": "Add VS-6 and VS-7 to the scenario coverage table, implementation or verification tasks, and c13 evidence set; if either is intentionally deferred, record an explicit contract-approved deferral and rationale."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "The foundational toolchain task does not provision the Tauri CLI version required by c06 and relies on an unavailable versions manifest.",
+      "evidence": "The trade-offs section says \"tauri-cli 2.10.0 ... [is] realigned in c01,\" but c01's declared pin list contains only Rust, Node, pnpm, and Flutter, while c06 task 6.2 requires \"tauri-cli 2.11.4.\" Task 1.2 says \"Pins come straight from versions.toml,\" yet the cited-path inventory states \"MISSING versions.toml,\" and no change creates or identifies an alternative source for that file.",
+      "suggested_fix": "Create a checked-in versions manifest as part of c01, include tauri-cli 2.11.4 and all required tool versions, and add an install or version-verification task before c05 and c06 run."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "No task installs and verifies the real aggregate build, test, and lint commands after the Rust, BFF, and Flutter workspaces have been introduced.",
+      "evidence": "The goal requires setting \"real build, test and lint commands in .kbd-orchestrator/project.json once the workspace exists.\" Task 1.4 updates project.json during c01, but c01 runs before c05 imports Cargo/BFF surfaces and c07 imports Flutter; no later change mentions project.json. Moreover, c01's explicit script list is \"lint, typecheck and test\" and omits a build script.",
+      "suggested_fix": "Add a task after c05 through c07 to define the aggregate commands for web, Rust/BFF, and Flutter, update project.json, and run those commands as a required c13 gate."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The fidelity tasks do not bind source files to the authorized design directories and can resolve them to the prohibited stale root live duplicate.",
+      "evidence": "The constraint says \"live/ at the repo root is a stale duplicate of docs/design/live/. It is pending removal and must not be used as a source.\" Nevertheless, c10 and c11 name bare files such as \"index.html,\" \"dashboard.html,\" and \"settings.html,\" while c02 and c08 likewise name bare \"km.css\" and \"room.css.\" The file tree shows exactly those stale files under ./live, and none of those tasks specifies docs/design/prototype or docs/design/live as the authoritative path.",
+      "suggested_fix": "Use explicit source paths in every design task, prohibit root live/, and record the resolved source path and digest with each screenshot baseline."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The imported generator surfaces have no explicit 500-line compliance and remediation step.",
+      "evidence": "The operator decisions allow restructuring for \"kebab-case and 500-line compliance,\" and c05 imports \"every surface,\" including Rust crates and the BFF. However, c05's concrete import instruction only says \"Apply kebab-case renames,\" while c01 merely creates a checker and c11's folder-splitting instruction applies only to the new screen features. No task requires splitting oversized imported files before the blocking line-count check runs.",
+      "suggested_fix": "Add a c05 acceptance step that inventories every imported authored file, splits all files over 500 lines into feature directories, and runs the c01 line-count checker before downstream work begins."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The boundary work has no explicit visual-comparison oracle or pass threshold for the highest-priority fidelity goal.",
+      "evidence": "c03 captures baselines at the required viewports and themes, but c10 and c11 use the ambiguous criterion \"matching,\" and c13 only says \"Record evidence for VS-1\" without requiring comparison to those baselines. The constraint specifically calls for \"Visual comparison at 375 / 768 / 1024 / 1440 in light and dark,\" while the goal requires \"perfectly replicate\" the prototype.",
+      "suggested_fix": "Specify a route-by-viewport-by-theme comparison matrix in c13, define automated pixel-diff thresholds and any manual-review rubric, and block the boundary on an unresolved difference."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The blocking secret constraints have no concrete pass/fail checks in either the implementation tooling or the security boundary task.",
+      "evidence": "c01 task 1.3 names only \"Biome, ls-lint, line checker,\" and c13 task 13.8 says only \"Security review.\" Neither task invokes the required checks for no-livekit-secrets-in-repo or no-hardcoded-secrets, nor defines the required manual token-secret-stays-server-side review for imported BFF, PEM, or Tauri-related code.",
+      "suggested_fix": "Add the two secret scans to lint, pre-commit, and CI, and add an explicit c05/c13 review that traces every token and LiveKit secret path and proves browser, Tauri webview, and Flutter clients receive only server-minted tokens."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The plan omits accessibility and reduced-motion acceptance work despite including motion in the primary fidelity goal.",
+      "evidence": "The goal requires fidelity of \"light and dark themes, motion,\" and the accessibility constraint requires \"semantic HTML or accessible names, visible focus, and reduced-motion support.\" The change list includes token contrast work and prototype matching, but no task defines semantic-name, keyboard-focus, reduced-motion, or accessibility-gate checks, and c13's independent UI review has no stated accessibility oracle.",
+      "suggested_fix": "Add accessibility and reduced-motion behavior to the frame and screen tasks, then make the package accessibility gate an explicit c13 pass/fail check at each required viewport and theme."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The plan contains no task covering the required KBD reflect stage.",
+      "evidence": "The goal explicitly requires the full sequence \"assess \u2192 analyze \u2192 plan \u2192 execute \u2192 reflect\" with \"no shortcuts.\" The 13 changes end at c13, which covers fidelity, security, and independent review; no change or task captures lessons, updates OpenSpec status or specifications, or performs reflection after execution.",
+      "suggested_fix": "Add a final reflection task after c13 to record lessons, reconcile findings, update or archive OpenSpec changes as appropriate, and feed the results into the next waypoint."
+    }
+  ],
+  "judge_identity": {
+    "providerConnectionId": "kimi-coding-plan",
+    "providerId": "moonshot",
+    "modelId": "k3.1-pro"
+  }
+}

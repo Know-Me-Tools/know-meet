@@ -1,0 +1,97 @@
+# Gate 16.1 (c16-agentic-core-gates), Windows WebView2 leg. NOT wired into the repository's
+# .github/workflows: copy it there (or into a scratch repo with the same tree) to run it.
+# Runbook and pass criteria: spikes/agentic-ui/own/webview2-runbook.md.
+# Pin the third-party actions below to commit SHAs before running in a shared repository.
+name: spike-webview2-gate-16-1
+
+on:
+  workflow_dispatch:
+    inputs:
+      repeats:
+        description: Repeats per scenario (>= 6; the first steps of a run are excluded until the state is staged)
+        default: "6"
+
+permissions:
+  contents: read
+
+jobs:
+  webview2-window-states:
+    runs-on: windows-latest
+    timeout-minutes: 150
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      SPIKE: spikes/agentic-ui
+      RUSTC_WRAPPER: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.1
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.15.0
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.97.1
+
+      - name: Record environment
+        run: |
+          node --version; pnpm --version; rustc --version
+          Get-ItemProperty 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}' -ErrorAction SilentlyContinue | Select-Object pv
+          Get-CimInstance Win32_VideoController | Select-Object CurrentHorizontalResolution, CurrentVerticalResolution
+          [System.Environment]::OSVersion.VersionString
+
+      - name: Install Tauri CLI (pinned)
+        run: cargo install tauri-cli --version 2.11.4 --locked
+
+      - name: Install spike packages (standalone, not the root workspace)
+        run: |
+          pnpm --dir "$env:SPIKE/harness" install --ignore-workspace --frozen-lockfile
+          pnpm --dir "$env:SPIKE/own" install --ignore-workspace --frozen-lockfile
+
+      - name: Unit tests and build of prototype O
+        run: |
+          pnpm --dir "$env:SPIKE/own" test
+          pnpm --dir "$env:SPIKE/own" build
+
+      - name: Build the Tauri gate shell (WebView2)
+        working-directory: ${{ env.SPIKE }}/own
+        run: node gates/scripts/build-gate-shell.ts
+
+      - name: Start the harness mock server and collector on 127.0.0.1:4317
+        working-directory: ${{ env.SPIKE }}/harness
+        run: |
+          Start-Process -FilePath node -ArgumentList 'src/server/main.ts' -RedirectStandardOutput harness.log -RedirectStandardError harness.err -WindowStyle Hidden
+          for ($i = 0; $i -lt 60; $i++) {
+            try { Invoke-RestMethod http://127.0.0.1:4317/healthz | Out-Null; Write-Output 'harness up'; exit 0 } catch { Start-Sleep -Seconds 1 }
+          }
+          throw 'harness did not start'
+
+      - name: Window states (focused, unfocused, occluded, minimised)
+        working-directory: ${{ env.SPIKE }}/own
+        run: |
+          foreach ($state in 'focused', 'unfocused', 'occluded', 'minimised') {
+            node gates/scripts/window-state-run-windows.ts --state $state --repeats ${{ inputs.repeats }}
+            if ($LASTEXITCODE -ne 0) { Write-Warning "state $state exited $LASTEXITCODE" }
+          }
+
+      - name: Summarise against the focused baseline
+        working-directory: ${{ env.SPIKE }}/own
+        run: |
+          $ids = Get-ChildItem gates/raw/16-1-webview2/meta-*.json | ForEach-Object { $_.BaseName -replace '^meta-', '' }
+          node gates/scripts/summarize-window-states.ts --dir 16-1-webview2 @ids | Tee-Object gates/raw/16-1-webview2/summary.md
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: webview2-gate-16-1
+          path: |
+            ${{ env.SPIKE }}/own/gates/raw/16-1-webview2/
+            ${{ env.SPIKE }}/harness/reports/webview-driver/
+            ${{ env.SPIKE }}/harness/harness.log
+            ${{ env.SPIKE }}/harness/harness.err

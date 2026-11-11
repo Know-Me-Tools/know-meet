@@ -1,0 +1,41 @@
+run own-gate-focused-conformance-mwb9pno5: 84 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/own-gate-focused-conformance-mwb9pno5.app.log
+(node:71992) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  frontmost request: exit 0 
+  step 0/84
+  step 1/84
+  step 2/84
+  step 3/84
+  step 4/84
+  step 5/84
+  step 7/84
+  step 12/84
+  step 13/84
+  step 15/84
+  step 16/84
+  step 18/84
+  step 21/84
+  step 24/84
+  step 26/84
+  step 28/84
+  step 30/84
+  step 33/84
+  step 36/84
+  step 37/84
+  step 38/84
+  step 39/84
+  step 40/84
+  step 41/84
+  step 42/84
+  step 45/84
+  step 49/84
+  step 54/84
+  step 56/84
+  step 59/84
+  step 62/84
+  step 65/84
+  step 74/84
+  step 81/84
+  step 84/84
+run own-gate-focused-conformance-mwb9pno5: done; records in reports/spike-report/own-gate-focused-conformance-mwb9pno5.jsonl
+state focused: run own-gate-focused-conformance-mwb9pno5, driver exit 0; raw in /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/own/gates/raw/16-1

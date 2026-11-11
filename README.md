@@ -107,6 +107,7 @@ remember you. Invitees never need an account, whichever column the host is in.
 |---|---|
 | [`docs/design/`](docs/design/README.md) | Brand guide, templates, mood board, tokens, logos and the full prototype |
 | `docs/design/prototype/` | Every product screen; start at `index.html` or `screens.html` |
+| [`docs/design/live/`](docs/design/live/README.md) | The same prototype with a real LiveKit meeting room; run `./docs/design/live/start.sh` |
 | `scripts/build-site.sh` | Stages the published site layout into a folder; used by both publish scripts |
 | `scripts/publish-ipfs.sh` | Publishes the site to IPFS (pinned) and points the `know-meet` IPNS name at it |
 | `scripts/publish-pages.sh` | Rebuilds the GitHub Pages mirror on the `gh-pages` branch |

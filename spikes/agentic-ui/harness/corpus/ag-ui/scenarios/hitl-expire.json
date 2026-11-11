@@ -1,0 +1,557 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [
+    {
+      "do": "wait-for-expiry",
+      "interruptId": "int-email-expire"
+    }
+  ],
+  "validity": "valid",
+  "id": "hitl-expire",
+  "title": "HITL approval: request expires unanswered",
+  "description": "The interrupt's expiresAt is rewritten to now + 3 s at serve time. The UI must show the request as expired, disable approve/reject, and must not send a resolved resume after expiry. The scenario still defines the server's answer to a late resume (RUN_ERROR INTERRUPT_EXPIRED) so a late send is observable, not silent.",
+  "tags": [
+    "@hitl",
+    "@expiry"
+  ],
+  "userPrompt": "Email the meeting summary to everyone who attended.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-hitl-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": "I"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " drafted"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " summary"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " email."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " Sending"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " email"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " needs"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " your"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-1",
+            "delta": " approval."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-hitl-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_START",
+            "toolCallId": "tc-email-1",
+            "toolCallName": "send_summary_email",
+            "parentMessageId": "msg-hitl-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "{\"to\":[\"ana@"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "know-me.tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "s\",\"ben@know"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "-me.tools\",\""
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "chi@know-me."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "tools\",\"dee@"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "know-me.tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "s\"],\"subject"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "\":\"Meeting s"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-email-1",
+            "delta": "ummary\"}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_END",
+            "toolCallId": "tc-email-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "interrupt",
+              "interrupts": [
+                {
+                  "id": "int-email-expire",
+                  "reason": "tool_call",
+                  "toolCallId": "tc-email-1",
+                  "message": "Send the meeting summary to 4 attendees?",
+                  "responseSchema": {
+                    "type": "object",
+                    "properties": {
+                      "approved": {
+                        "type": "boolean"
+                      },
+                      "reason": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "approved"
+                    ]
+                  },
+                  "expiresAt": "2099-01-01T00:00:00.000Z"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "rewrites": {
+        "interruptExpiresInMs": 3000
+      }
+    },
+    {
+      "trigger": {
+        "kind": "resume-after-expiry",
+        "interruptId": "int-email-expire"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_ERROR",
+            "message": "Interrupt int-email-expire expired before it was answered.",
+            "code": "INTERRUPT_EXPIRED"
+          }
+        }
+      ]
+    },
+    {
+      "trigger": {
+        "kind": "resume",
+        "interruptId": "int-email-expire",
+        "status": "resolved",
+        "approved": true
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-email-1",
+            "toolCallId": "tc-email-1",
+            "content": "{\"sent\":true,\"recipients\":4}",
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-hitl-2",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": "Sent"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " summary"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " to"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " 4"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " attendees."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-hitl-2"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "trigger": {
+        "kind": "resume",
+        "interruptId": "int-email-expire",
+        "status": "resolved",
+        "approved": false
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_RESULT",
+            "messageId": "res-email-1",
+            "toolCallId": "tc-email-1",
+            "content": "{\"sent\":false,\"reason\":\"rejected by user\"}",
+            "role": "tool"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-hitl-2",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": "OK,"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " I"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " did"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " not"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " send"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-hitl-2",
+            "delta": " email."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-hitl-2"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "interrupted",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Email the meeting summary to everyone who attended."
+      },
+      {
+        "id": "msg-hitl-1",
+        "role": "assistant",
+        "textEquals": "I drafted the summary email. Sending email needs your approval.",
+        "status": "complete"
+      }
+    ],
+    "toolCalls": [
+      {
+        "id": "tc-email-1",
+        "name": "send_summary_email",
+        "args": {
+          "to": [
+            "ana@know-me.tools",
+            "ben@know-me.tools",
+            "chi@know-me.tools",
+            "dee@know-me.tools"
+          ],
+          "subject": "Meeting summary"
+        },
+        "status": "expired"
+      }
+    ],
+    "interrupts": [
+      {
+        "id": "int-email-expire",
+        "status": "expired"
+      }
+    ],
+    "server": {
+      "requestCount": 1,
+      "noResolvedResumeAfterExpiry": true
+    },
+    "dom": [
+      {
+        "selector": "[data-testid='km-approval'][data-status='expired']",
+        "count": 1
+      },
+      {
+        "selector": "[data-testid='km-approval-approve']:not([disabled]):not([aria-disabled='true'])",
+        "count": 0
+      }
+    ]
+  }
+}

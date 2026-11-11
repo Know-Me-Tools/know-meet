@@ -1,0 +1,73 @@
+/*
+   GENERATED FROM docs/design/tokens.json by @know-meet/design-tokens. DO NOT EDIT.
+   Edit the token source and run: pnpm --filter @know-meet/design-tokens generate
+   Import after tokens.css and theme.css. --card, --muted and --radius are
+   Know Meet tokens and keep their prototype meaning (see README).
+*/
+/* Declared on every themed root so var() re-resolves inside a [data-theme] subtree. */
+:root,
+[data-theme] {
+  --background: var(--bg); /* page ground (body) */
+  --foreground: var(--fg); /* body text */
+  --card-foreground: var(--fg); /* text on cards */
+  --popover: var(--bg-2); /* .menu and .sheet background */
+  --popover-foreground: var(--fg);
+  --primary: var(--ember-btn); /* .btn-primary fill */
+  --primary-foreground: var(--on-ember); /* .btn-primary label */
+  --secondary: var(--card); /* .btn default fill */
+  --secondary-foreground: var(--fg); /* .btn default label */
+  --muted-foreground: var(--fg-sub); /* secondary text */
+  --accent: var(--card-hov); /* hover fill (.btn:hover, a.card:hover) */
+  --accent-foreground: var(--fg);
+  --destructive: var(--danger-btn); /* .btn-danger fill */
+  --destructive-foreground: var(--on-danger); /* .btn-danger label */
+  --border: transparent; /* Flat 2.0: no visible borders; regions separate by fill */
+  --input: var(--ring-input); /* input-only 1px ring (D-5 exception to Flat 2.0) */
+  --ring: var(--ember); /* :focus-visible ring */
+  --chart-1: var(--ember);
+  --chart-2: var(--cyan);
+  --chart-3: var(--green);
+  --chart-4: var(--amber);
+  --chart-5: var(--red);
+  --sidebar: var(--bg-2); /* app chrome */
+  --sidebar-foreground: var(--fg);
+  --sidebar-primary: var(--ember-btn);
+  --sidebar-primary-foreground: var(--on-ember);
+  --sidebar-accent: var(--card-hov);
+  --sidebar-accent-foreground: var(--fg);
+  --sidebar-border: transparent; /* Flat 2.0 */
+  --sidebar-ring: var(--ember);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}

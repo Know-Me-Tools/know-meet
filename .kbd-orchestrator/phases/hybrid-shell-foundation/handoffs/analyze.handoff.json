@@ -1,0 +1,12 @@
+{
+  "stage": "analyze",
+  "completedAt": "2026-11-09T09:09:41Z",
+  "outputs": [
+    "analysis.md",
+    "library-candidates.json"
+  ],
+  "nextStage": "spec",
+  "summaryForNext": "18 candidates; key verdicts: adapt knowme-builder (scratch generate, keep Tauri + Flutter hosts with shell-only stubs, strip rust-core/Axum/UAR/PEM); adopt Tauri frontendDist pattern for one web bundle, pnpm workspace, shadcn 4.23 + Tailwind 4.3.5, shadcn_flutter (package-directed), Biome (typescript-eslint cannot support TS 7.0.2), Vitest, flutter_lints, ls-lint, Playwright, TanStack Router. Token generator is an operator gate (Q-A8): extend the vendored package generator (recommended) or Style Dictionary; either needs a converter from the custom tokens.json schema. BLOCKED pending Q-A1 restructuring budget, Q-A2 token source, Q-A3 route scope, Q-A8 generator. Q-A7: a parallel session created .agent-team/know-meet-team (16 roles) and routing blocks in AGENTS.md/CLAUDE.md; Plan must bind to it. Adversarial review PASS round 2 (same-model harness-native); remaining WARNINGs fixed in text.",
+  "skipped": false,
+  "skipReason": null
+}

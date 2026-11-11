@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "activeTeam": "know-meet-team",
+  "manifest": ".agent-team/know-meet-team/team.json",
+  "target": "deepseek",
+  "nativeDefinitions": [
+    ".dsh/profiles/know-meet-team-delivery-lead/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-architect/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-build-platform/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-bdd-quality/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-design-lead/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-ui-engineer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-client-shell/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-mobile-engineer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-webrtc-engineer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-livekit-platform/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-livekit-agents/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-crdt-engineer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-integrations-engineer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-security-reviewer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-independent-reviewer/cordis.patch.yml",
+    ".dsh/profiles/know-meet-team-team/cordis.patch.yml"
+  ],
+  "instructionFiles": [
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "delegation": "native-definitions",
+  "limitations": [
+    "Native definition presence is not live invocation evidence. The active harness owns permissions, models, concurrency and delegation.",
+    "When delegation is unavailable, use selected role instructions sequentially and report it; builder-context review is not independent.",
+    "Zed external ACP agents use their native configuration; Zed parallel threads are not an automatic delegation API."
+  ]
+}

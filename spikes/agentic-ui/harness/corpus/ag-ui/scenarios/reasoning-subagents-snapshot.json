@@ -1,0 +1,441 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "reasoning-subagents-snapshot",
+  "title": "Reasoning, encrypted reasoning, subagents and MESSAGES_SNAPSHOT",
+  "description": "REASONING_* (including CHUNK and ENCRYPTED_VALUE, which must not be shown as text), SUBAGENT_STARTED/FINISHED/ERROR, and a trailing MESSAGES_SNAPSHOT. AG-UI semantics: MESSAGES_SNAPSHOT replaces the message list, so the final transcript is exactly the three snapshot messages (history + the answer); the live user turn and reasoning are replaced.",
+  "tags": [
+    "@reasoning",
+    "@subagents",
+    "@snapshot"
+  ],
+  "userPrompt": "Ask the Scribe and the Researcher what changed since last week.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_START",
+            "messageId": "rsn-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_START",
+            "messageId": "rsn-1",
+            "role": "reasoning"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": "The"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " user"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " wants"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " a"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " diff."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " I"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " will"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " ask"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " Scribe"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " for"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " notes"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " and"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " Researcher"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " for"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CONTENT",
+            "messageId": "rsn-1",
+            "delta": " sources."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_END",
+            "messageId": "rsn-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_END",
+            "messageId": "rsn-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_MESSAGE_CHUNK",
+            "messageId": "rsn-2",
+            "delta": "Checking both subagents finished."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "REASONING_ENCRYPTED_VALUE",
+            "subtype": "message",
+            "entityId": "rsn-2",
+            "encryptedValue": "ZW5jcnlwdGVkLXJlYXNvbmluZy1ibG9i"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "SUBAGENT_STARTED",
+            "subagentRunId": "sub-scribe-1",
+            "name": "scribe"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "SUBAGENT_FINISHED",
+            "subagentRunId": "sub-scribe-1",
+            "outcome": {
+              "type": "success"
+            },
+            "result": {
+              "decisions": 2
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "SUBAGENT_STARTED",
+            "subagentRunId": "sub-research-1",
+            "name": "researcher"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "SUBAGENT_ERROR",
+            "subagentRunId": "sub-research-1",
+            "message": "Archive unreachable.",
+            "code": "ARCHIVE_DOWN"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-rsn-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": "The"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " Scribe"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " reports"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " two"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " new"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " decisions."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " The"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " Researcher"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " could"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " not"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " reach"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-rsn-1",
+            "delta": " archive."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-rsn-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "MESSAGES_SNAPSHOT",
+            "messages": [
+              {
+                "id": "msg-user-hist",
+                "role": "user",
+                "content": "Earlier question from last week."
+              },
+              {
+                "id": "msg-asst-hist",
+                "role": "assistant",
+                "content": "Earlier answer from last week."
+              },
+              {
+                "id": "msg-rsn-1",
+                "role": "assistant",
+                "content": "The Scribe reports two new decisions. The Researcher could not reach the archive."
+              }
+            ]
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "id": "msg-user-hist",
+        "role": "user",
+        "textEquals": "Earlier question from last week."
+      },
+      {
+        "id": "msg-asst-hist",
+        "role": "assistant",
+        "textEquals": "Earlier answer from last week."
+      },
+      {
+        "id": "msg-rsn-1",
+        "role": "assistant",
+        "textEquals": "The Scribe reports two new decisions. The Researcher could not reach the archive."
+      }
+    ],
+    "subagents": [
+      {
+        "subagentRunId": "sub-scribe-1",
+        "status": "finished"
+      },
+      {
+        "subagentRunId": "sub-research-1",
+        "status": "error"
+      }
+    ]
+  }
+}

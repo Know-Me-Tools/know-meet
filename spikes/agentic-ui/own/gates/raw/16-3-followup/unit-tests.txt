@@ -1,0 +1,42 @@
+✔ rAF paused: the first token is published within the deadline (2.334291ms)
+✔ rAF paused: a steady stream keeps publishing (bounded lag, no stall) (0.618458ms)
+✔ hidden page: deltas publish on the next task (0.321ms)
+✔ boundary commits are unchanged: deltas never commit, boundaries commit once per microtask (0.752333ms)
+✔ text deltas accumulate and RUN_FINISHED completes the message (1.762084ms)
+✔ ordering violations are protocol errors and never change text (1.45975ms)
+✔ chunked tool calls assemble and close when another event arrives (0.73475ms)
+✔ an interrupt gates its tool call; approval is idempotent and yields one resume (0.268125ms)
+✔ a decision after expiresAt expires instead of resolving (0.073292ms)
+✔ JSON patch supports test, move, copy and remove without mutating input (0.461792ms)
+✔ Streamdown 2.7.1 default rehype chain is raw -> sanitize -> harden(allow-all) (0.790958ms)
+✔ O's harden options are origin-scoped, with no wildcard, no data images, no extra protocols (0.2345ms)
+✔ an empty policy allows no http(s) link or image at all (0.58575ms)
+✔ enumerated link and image matrix: default vs O (1.459042ms)
+✔ focused: flushes on the next frame and cancels the deadline timer (3.164625ms)
+✔ rAF paused: the deadline flushes within deadlineMs (0.298166ms)
+✔ rAF paused for a whole stream: every publish stays within the bound (0.951958ms)
+✔ requests while a flush is pending coalesce into one flush (0.360334ms)
+✔ hidden page: flushes on the next task, never waits for a frame (0.263ms)
+✔ becoming hidden while waiting for a frame flushes on the next task (0.211166ms)
+✔ timers throttled too: a request after the due time flushes on the next task (0.143834ms)
+✔ delayed request: not before the delay, then frame-or-deadline (0.164958ms)
+✔ delayed request with rAF paused flushes by delay + deadline (0.118584ms)
+✔ cancel drops a pending flush; dispose stops visibility handling (0.154458ms)
+✔ rejects a non-positive deadline (0.25225ms)
+✔ frames survive arbitrary chunk boundaries and CRLF (2.773084ms)
+✔ invalid JSON is still delivered as a frame for the decoder to reject (0.172458ms)
+✔ highlight posts to the worker, returns null, and calls back with the worker result (0.997292ms)
+✔ complete blocks are cached and returned synchronously; streaming blocks are not cached (0.159958ms)
+✔ identical in-flight requests are posted once and all callbacks fire (0.102583ms)
+✔ the worker is created lazily, on the first highlight (0.096417ms)
+✔ without a worker every call falls back to the main-thread plugin (0.096875ms)
+✔ a worker error hands waiting requests to the main-thread plugin and stops using the worker (0.157542ms)
+✔ LiveTextBuffer on the entity-graph live layer publishes, notifies and clears (0.361333ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 284.871709

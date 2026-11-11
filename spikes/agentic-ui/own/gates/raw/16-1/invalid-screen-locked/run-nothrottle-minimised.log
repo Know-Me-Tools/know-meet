@@ -1,0 +1,40 @@
+run own-gate-nothrottle-minimised-conformance-mwbuxifn: 84 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/own-gate-nothrottle-minimised-conformance-mwbuxifn.app.log
+(node:32009) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  frontmost request: exit 0 
+  step 0/84
+  step 1/84
+  step 2/84
+  step 3/84
+  step 4/84
+  step 5/84
+  step 9/84
+  step 12/84
+  step 14/84
+  step 15/84
+  step 17/84
+  step 19/84
+  step 23/84
+  step 25/84
+  step 27/84
+  step 29/84
+  step 31/84
+  step 34/84
+  step 36/84
+  step 37/84
+  step 38/84
+  step 39/84
+  step 40/84
+  step 41/84
+  step 43/84
+  step 46/84
+  step 51/84
+  step 55/84
+  step 57/84
+  step 60/84
+  step 63/84
+  step 69/84
+  step 79/84
+  step 84/84
+run own-gate-nothrottle-minimised-conformance-mwbuxifn: done; records in reports/spike-report/own-gate-nothrottle-minimised-conformance-mwbuxifn.jsonl
+state minimised: run own-gate-nothrottle-minimised-conformance-mwbuxifn, driver exit 0; raw in /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/own/gates/raw/16-1

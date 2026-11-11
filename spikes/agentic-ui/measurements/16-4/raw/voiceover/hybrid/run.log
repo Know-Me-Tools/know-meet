@@ -1,0 +1,24 @@
+1794374313956 stream: a11y-hybrid-stream-long-markdown-mwbo4xr8
+1794374313970 (node:14622) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+1794374313970 (Use `node --trace-warnings ...` to show where the warning was created)
+1794374328217   PASS a11y-1 axe idle / mid-stream / settled
+1794374328217   PASS a11y-2 transcript aria-busy while streaming and not after
+1794374328217   PASS a11y-3 streaming text not inside a live region
+1794374328217   PASS a11y-4 live-region announcements throttled and finalized
+1794374328217   PASS conformance long-markdown (collector compare.ts)
+1794374329721 focus: a11y-hybrid-focus-hitl-approve-mwbo59x5
+1794374337516   PASS a11y-5 streaming and approval never steal focus (+ axe with pending approval)
+1794374339019 approve: a11y-hybrid-approve-hitl-approve-mwbo5h3f
+1794374348914   PASS a11y-6 approval can be approved from the keyboard
+1794374348914   PASS conformance hitl-approve (collector compare.ts)
+1794374350415 reject: a11y-hybrid-reject-hitl-reject-mwbo5pvz
+1794374361151   PASS a11y-7 approval can be rejectd from the keyboard
+1794374361151   PASS conformance hitl-reject (collector compare.ts)
+1794374362652 alert: a11y-hybrid-alert-run-error-mwbo5zbw
+1794374368330   PASS a11y-8 run errors use role=alert
+1794374368330   FAIL conformance run-error (collector compare.ts): FAIL messages[0].text: expected "Fetch last week's recording.", got "Fetch last week’s recording."
+1794374369833 a2ui/form-validation: a11y-hybrid-a2ui-a2ui-form-validation-mwbo64vd
+1794374391415   PASS a2ui/form-validation
+1794374392917 a2ui-keyboard: a11y-hybrid-a2ui-keyboard-a2ui-form-validation-mwbo6mol
+1794374403947   PASS a2ui/form-validation keyboard-only submit
+1794374405449 13/14 pass, 0 errors -> /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/16-4/raw/voiceover/hybrid/hybrid-results-mwbo6wcp.json

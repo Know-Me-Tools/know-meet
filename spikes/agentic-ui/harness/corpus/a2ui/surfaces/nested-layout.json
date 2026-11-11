@@ -1,0 +1,153 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "nested-layout",
+  "title": "Deeply nested layout: Tabs > Row > Column > Card, plus a Modal",
+  "description": "Exercises child resolution across Tabs, Row, Column, Card and Modal (trigger/content) at depth 6.",
+  "surfaceId": "km-agenda-board",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-agenda-board",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-agenda-board",
+        "components": [
+          {
+            "id": "root",
+            "component": "Tabs",
+            "tabs": [
+              {
+                "title": "Agenda",
+                "child": "agenda_row"
+              },
+              {
+                "title": "Notes",
+                "child": "notes_col"
+              }
+            ]
+          },
+          {
+            "id": "agenda_row",
+            "component": "Row",
+            "children": [
+              "left_col",
+              "right_col"
+            ],
+            "align": "start"
+          },
+          {
+            "id": "left_col",
+            "component": "Column",
+            "children": [
+              "item_card_1",
+              "item_card_2"
+            ]
+          },
+          {
+            "id": "item_card_1",
+            "component": "Card",
+            "child": "item_1"
+          },
+          {
+            "id": "item_1",
+            "component": "Text",
+            "text": "1. Pricing"
+          },
+          {
+            "id": "item_card_2",
+            "component": "Card",
+            "child": "item_2"
+          },
+          {
+            "id": "item_2",
+            "component": "Text",
+            "text": "2. Roadmap"
+          },
+          {
+            "id": "right_col",
+            "component": "Column",
+            "children": [
+              "details_modal"
+            ]
+          },
+          {
+            "id": "details_modal",
+            "component": "Modal",
+            "trigger": "modal_trigger",
+            "content": "modal_body"
+          },
+          {
+            "id": "modal_trigger",
+            "component": "Button",
+            "child": "modal_trigger_label",
+            "action": {
+              "event": {
+                "name": "noop_open",
+                "context": {}
+              }
+            }
+          },
+          {
+            "id": "modal_trigger_label",
+            "component": "Text",
+            "text": "Details"
+          },
+          {
+            "id": "modal_body",
+            "component": "Text",
+            "text": "Decided: usage-based tiers."
+          },
+          {
+            "id": "notes_col",
+            "component": "Column",
+            "children": [
+              "note_1"
+            ]
+          },
+          {
+            "id": "note_1",
+            "component": "Text",
+            "text": "Notes tab content"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "agenda_row",
+      "left_col",
+      "item_card_1",
+      "item_1",
+      "item_card_2",
+      "item_2",
+      "right_col",
+      "details_modal",
+      "modal_trigger",
+      "modal_trigger_label"
+    ],
+    "fallbackComponentIds": [],
+    "visibleText": [
+      "Agenda",
+      "Notes",
+      "1. Pricing",
+      "2. Roadmap",
+      "Details"
+    ],
+    "blockedMediaUrls": []
+  },
+  "flutterNotes": "Inactive tab content (notes_col) and the closed modal body are not required to be in the tree; compare only the listed ids."
+}

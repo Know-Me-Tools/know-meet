@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "file": ".dsh/profiles/know-meet-team-delivery-lead/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "298b781b9fc3544ded5031d7052c62d5d35ff8d52d4812570917b73752c7abae"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-architect/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "5d5386685670dd07b15ef6c2e1e6f503a300227c5e5c2fd5607c4c34e9c090a0"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-build-platform/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "93b2bf8ee35bb0c75d11db36d77e1555807dcd2276996e1f1d730b0fb7624c27"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-bdd-quality/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "83c32fe0689a33ffbab7850ae98caa0b319a71ee42722c10e9e8d7fae54c4a49"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-design-lead/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "5ba10ba236908c41d9d266976367592813c54b72e7fa39ee437e3bbf0b33087d"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-ui-engineer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "23aec3aa2aa80523eda8dabfb608b0406ec01d995617b8154ee344ef801f6876"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-client-shell/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "3ed8c8ef5f67153b2d8f1413c936946dc904ceba449ef4064b10c87f6aeffb0d"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-mobile-engineer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "6befb77ed8c97c3e763ed1f6e46d5bccbcfbef0893d378ce48045119419732b1"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-webrtc-engineer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "aa9ffff85114eb314258880725a4bd007eaf1fc0bfe0cad89dbe83cd0c51364b"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-livekit-platform/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "6f8f91f9d8b9074a89d999e77d174d56ee77f9ec610d51149708cea641f368a5"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-livekit-agents/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "2e460318621af350b24e949d1860659a9cf776a78eccc95a232c86962e0b0bd2"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-crdt-engineer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "297e45ec1cd53bf32a1a4f258e0e0ee450c6dec02ae3fef807e74a8bebc909ae"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-integrations-engineer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "d6b79f9d91a374d759ad5808907298dfbd185f325814d4a93c75f5a1ec5fd077"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-security-reviewer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "55b41e37833df703c758eee3d4157ac04ef04cd87e7ece99143c40e8db2834e2"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-independent-reviewer/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "b79da9737031f320b5151961136e201423a82d4b2afb4fc87a6bbf364c24dada"
+    },
+    {
+      "file": ".dsh/profiles/know-meet-team-team/cordis.patch.yml",
+      "before": null,
+      "afterSha256": "79a2b31cf177b460dbfa8adf99d8b0dc0698752fe3798dae93887350d9a72535"
+    },
+    {
+      "file": ".agent-team/project-routing.json",
+      "before": "{\n  \"schemaVersion\": 1,\n  \"activeTeam\": \"know-meet-team\",\n  \"manifest\": \".agent-team/know-meet-team/team.json\",\n  \"target\": \"kimi\",\n  \"nativeDefinitions\": [\n    \".kimi-code/agents/delivery-lead.md\",\n    \".kimi-code/agents/architect.md\",\n    \".kimi-code/agents/build-platform.md\",\n    \".kimi-code/agents/bdd-quality.md\",\n    \".kimi-code/agents/design-lead.md\",\n    \".kimi-code/agents/ui-engineer.md\",\n    \".kimi-code/agents/client-shell.md\",\n    \".kimi-code/agents/mobile-engineer.md\",\n    \".kimi-code/agents/webrtc-engineer.md\",\n    \".kimi-code/agents/livekit-platform.md\",\n    \".kimi-code/agents/livekit-agents.md\",\n    \".kimi-code/agents/crdt-engineer.md\",\n    \".kimi-code/agents/integrations-engineer.md\",\n    \".kimi-code/agents/security-reviewer.md\",\n    \".kimi-code/agents/independent-reviewer.md\"\n  ],\n  \"instructionFiles\": [\n    \"AGENTS.md\",\n    \"CLAUDE.md\"\n  ],\n  \"delegation\": \"native-definitions\",\n  \"limitations\": [\n    \"Native definition presence is not live invocation evidence. The active harness owns permissions, models, concurrency and delegation.\",\n    \"When delegation is unavailable, use selected role instructions sequentially and report it; builder-context review is not independent.\",\n    \"Zed external ACP agents use their native configuration; Zed parallel threads are not an automatic delegation API.\"\n  ]\n}\n",
+      "afterSha256": "c2ec05b35d5202e204f2ce377ebde8ff6acaeac689a4237306bcc3af065db516"
+    }
+  ]
+}

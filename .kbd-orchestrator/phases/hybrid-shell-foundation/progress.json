@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "2",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 183,
+  "derivedRevision": 183,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 183
+  },
+  "conflictCount": 0,
+  "phase": "hybrid-shell-foundation",
+  "phaseId": "hybrid-shell-foundation",
+  "parentPhase": null,
+  "last_updated": "2026-11-11T08:32:21.264101Z",
+  "last_updated_by": "kbd-runtime",
+  "changes_total": 16,
+  "changes_completed": 8,
+  "implementation_total": 16,
+  "implementation_completed": 8,
+  "completion": {
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 8,
+      "total": 16,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "completionScopes": {
+    "completion": "phase",
+    "runCompletion": "run"
+  },
+  "runCompletion": {
+    "scope": "run",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 8,
+      "total": 16,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "changes": [
+    {
+      "id": "c01-workspace-and-repo-rules",
+      "title": "pnpm workspace, toolchain pins and enforced repo rules (kebab-case, 500 lines, no any, no ad-hoc colours, secrets, depen",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 6,
+      "tasks_done": 6,
+      "last_task_completed": "Delete the stale root live/ folder or record the operator-approved temporary exception (operator decision required)",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c02-design-token-reconciliation",
+      "title": "Reconcile prototype-rendered values into docs/design/tokens.json, self-host fonts, route/state inventory and source hier",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Write the machine-readable in-scope route/screen/state inventory, theme behaviour notes and the source hierarchy with resolved discrepancies",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c03-value-scenarios-and-baselines",
+      "title": "Gherkin value scenarios, prototype screenshot baselines, fidelity oracle, accessibility and motion checks",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Define the bundle-identity check, the no-Tauri web smoke, axe accessibility and motion/reduced-motion checks",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c04-token-generator",
+      "title": "Vendor and extend the hybrid-mobile-architecture token generator for web CSS, shadcn, Tailwind and Flutter ThemeData",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Emit Dart tokens and a light/dark ThemeData builder",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c05-scaffold-generation-import",
+      "title": "Generate sovereign-hybrid and governed-web-shell with knowme-builder and import every surface",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 7,
+      "tasks_done": 7,
+      "last_task_completed": "Trace every token and LiveKit-secret path in BFF, PEM, UAR and Tauri code (initial trace)",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c06-web-desktop-single-bundle",
+      "title": "One React 19 bundle shared by web and Tauri, mapped onto four clean-architecture layers",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Load generated token CSS and self-hosted fonts and set the CSP font-src to self",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c07-flutter-shell-import",
+      "title": "Flutter app in apps/mobile with generated ThemeData and theme persistence",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 2,
+      "tasks_done": 2,
+      "last_task_completed": "Wire generated light/dark ThemeData and persist the theme mode",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c08-shared-ui-kit",
+      "title": "Shared shadcn/ui kit in packages/ui themed by generated tokens",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 3,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Initialize shadcn in packages/ui with Tailwind 4, generated CSS variables and class-based dark mode, kebab-case files",
+      "blockers": []
+    },
+    {
+      "id": "c09-app-frame-and-navigation",
+      "title": "App frame, TanStack Router navigation, theme toggle and Tauri titlebar",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 2,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Build the TanStack Router route tree, app bar, navigation and theme toggle with accessible names, focus and reduced motion",
+      "blockers": []
+    },
+    {
+      "id": "c10-public-screens",
+      "title": "Static home, sign-in and join screens matching the prototype",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 3,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Build the home screen",
+      "blockers": []
+    },
+    {
+      "id": "c11-app-screens",
+      "title": "Static dashboard, agents, recordings, settings and meeting-room layout with media stubbed",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 5,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Build the dashboard screen",
+      "blockers": []
+    },
+    {
+      "id": "c12-flutter-frame-and-screens",
+      "title": "Flutter frame and in-scope screens with goldens and accessibility",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 3,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Build the shadcn_flutter app frame with mobile navigation",
+      "blockers": []
+    },
+    {
+      "id": "c13-fidelity-verification-and-evidence",
+      "title": "Single boundary run, fidelity, security and accessibility evidence",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 10,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Run the web fidelity matrix (VS-1)",
+      "blockers": []
+    },
+    {
+      "id": "c14-aggregate-commands",
+      "title": "Real build, test and lint commands across web, desktop, Rust/BFF and Flutter",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 2,
+      "tasks_done": 0,
+      "last_task_completed": null,
+      "next_task_pending": "Extend root build, test and lint scripts to cover web, desktop, Rust/BFF and Flutter with zero-warning flags",
+      "blockers": []
+    },
+    {
+      "id": "c15-agentic-ui-spike",
+      "title": "Agentic-UI spike: hybrid vs own on entity-graph",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 6,
+      "tasks_done": 6,
+      "last_task_completed": "Write the comparison report, run the cross-model adversarial review and record the operator decision",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "c16-agentic-core-gates",
+      "title": "Agentic-core gates for adopting O",
+      "status": "BLOCKED",
+      "implementation_status": "BLOCKED",
+      "tasks_total": 7,
+      "tasks_done": 6,
+      "last_task_completed": "Write the end-to-end Flutter agentic-UI plan (AG-UI transport incl. evaluating community ag_ui, HITL, reconnec",
+      "next_task_pending": "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised",
+      "blockers": [
+        "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised"
+      ]
+    }
+  ],
+  "children": {},
+  "migrationStatus": null
+}

@@ -1,0 +1,195 @@
+# Release lane (c01, extended 2026-11-11): full repo verification plus native Tauri desktop
+# installers for six targets, uploaded to a DRAFT GitHub Release. A human publishes the draft.
+# Runbook: docs/release/desktop-releases.md. Toolchains come from tooling/versions.toml via
+# package.json (packageManager, engines.node) and rust-toolchain.toml; nothing is restated here.
+# Signing is optional: each signing step is skipped when its secrets are absent.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch: # on a tag ref: publishes to that tag's draft release; on a branch: workflow artifacts only
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  full:
+    name: repo rules, typecheck, test, build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node tooling/repo-rules/src/lint-all.ts --skip lint:native # native lints run in ci.yml rust/flutter jobs
+      - run: pnpm run typecheck
+      - run: pnpm run test
+      - run: pnpm run build
+
+  prepare:
+    name: draft release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      publish: ${{ steps.release.outputs.publish }}
+      release-id: ${{ steps.release.outputs.release-id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Tag must equal v<tauri.conf.json version>
+        if: github.ref_type == 'tag'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(node -p 'require("./apps/desktop/src-tauri/tauri.conf.json").version')
+          if [ "$TAG" != "v$version" ]; then
+            echo "::error::tag $TAG does not match tauri.conf.json version $version (expected v$version)"
+            exit 1
+          fi
+      - name: Create or reuse the draft release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+        run: |
+          if [ "$REF_TYPE" != "tag" ]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "Branch run: installers go to workflow artifacts only."
+            exit 0
+          fi
+          id=$(gh api "repos/$GITHUB_REPOSITORY/releases" --paginate \
+            --jq ".[] | select(.tag_name == \"$TAG\") | .id" | head -n1)
+          if [ -z "$id" ]; then
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --draft --verify-tag \
+              --title "Know Meet $TAG" --generate-notes
+            id=$(gh api "repos/$GITHUB_REPOSITORY/releases" --paginate \
+              --jq ".[] | select(.tag_name == \"$TAG\") | .id" | head -n1)
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          echo "release-id=$id" >> "$GITHUB_OUTPUT"
+
+  desktop:
+    name: desktop ${{ matrix.os }}-${{ matrix.arch }}
+    needs: [full, prepare]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Native runners for every target (labels: actions/runner-images README, 2026-11).
+          - { os: windows, arch: x64, runner: windows-2025, bundles: "msi,nsis" }
+          # WiX is not on the Arm64 image; the NSIS installer is x86 (emulated) wrapping a native arm64 app.
+          - { os: windows, arch: arm64, runner: windows-11-arm, bundles: "nsis" }
+          - { os: macos, arch: arm64, runner: macos-26, bundles: "app,dmg" }
+          - { os: macos, arch: x64, runner: macos-26-intel, bundles: "app,dmg" }
+          # 22.04 keeps the AppImage/deb glibc floor at 2.35; WebKitGTK 4.1 is available there.
+          - { os: linux, arch: x64, runner: ubuntu-22.04, bundles: "deb,rpm,appimage" }
+          - { os: linux, arch: arm64, runner: ubuntu-22.04-arm, bundles: "deb,rpm,appimage" }
+    env:
+      KM_LIVEKIT_URL: ${{ vars.KM_LIVEKIT_URL }}
+      KM_MEDIA_ORIGINS: ${{ vars.KM_MEDIA_ORIGINS }}
+      HAS_APPLE_CERT: ${{ secrets.APPLE_CERTIFICATE != '' }}
+      HAS_WINDOWS_CERT: ${{ secrets.WINDOWS_CERTIFICATE != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Linux system dependencies (WebKitGTK 4.1)
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
+
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+          cache: pnpm
+
+      - name: Install pinned Rust from rust-toolchain.toml
+        shell: bash
+        run: rustup show active-toolchain || rustup toolchain install
+
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: ". -> target"
+          key: desktop-${{ matrix.os }}-${{ matrix.arch }}
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build apps/web's workspace dependencies (turbo cache); web itself builds in beforeBuildCommand
+        run: pnpm exec turbo run build --filter=@know-meet/web^...
+
+      - name: macOS signing and notarisation secrets (skipped when absent)
+        if: matrix.os == 'macos' && env.HAS_APPLE_CERT == 'true'
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_PRIVATE_KEY: ${{ secrets.APPLE_API_PRIVATE_KEY }}
+        run: |
+          # Export only non-empty values: Tauri treats a set-but-empty variable as present.
+          for name in APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD APPLE_SIGNING_IDENTITY APPLE_API_ISSUER APPLE_API_KEY; do
+            value="${!name}"
+            if [ -n "$value" ]; then echo "$name=$value" >> "$GITHUB_ENV"; fi
+          done
+          if [ -n "$APPLE_API_PRIVATE_KEY" ]; then
+            key_path="$RUNNER_TEMP/AuthKey_${APPLE_API_KEY}.p8"
+            printf '%s\n' "$APPLE_API_PRIVATE_KEY" > "$key_path"
+            echo "APPLE_API_KEY_PATH=$key_path" >> "$GITHUB_ENV"
+          fi
+
+      - name: Windows code-signing certificate (skipped when absent)
+        if: matrix.os == 'windows' && env.HAS_WINDOWS_CERT == 'true'
+        shell: pwsh
+        env:
+          WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+          WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+          WINDOWS_TIMESTAMP_URL: ${{ vars.WINDOWS_TIMESTAMP_URL || 'http://timestamp.digicert.com' }}
+        run: |
+          $pfx = Join-Path $env:RUNNER_TEMP 'signing.pfx'
+          [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:WINDOWS_CERTIFICATE))
+          $password = ConvertTo-SecureString -String $env:WINDOWS_CERTIFICATE_PASSWORD -Force -AsPlainText
+          $cert = Import-PfxCertificate -FilePath $pfx -CertStoreLocation Cert:\CurrentUser\My -Password $password
+          Remove-Item $pfx
+          $config = @{ bundle = @{ windows = @{ certificateThumbprint = $cert.Thumbprint; digestAlgorithm = 'sha256'; timestampUrl = $env:WINDOWS_TIMESTAMP_URL } } }
+          $path = Join-Path $env:RUNNER_TEMP 'tauri-windows-signing.json'
+          $config | ConvertTo-Json -Depth 5 | Set-Content -Path $path -Encoding utf8NoBOM
+          "KM_SIGNING_ARGS=--config $path" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Build installers (tauri-action) and upload
+        uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # action-v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          projectPath: apps/desktop
+          # The wrapper merges the env-driven CSP (KM_LIVEKIT_URL, KM_MEDIA_ORIGINS) into --config.
+          tauriScript: pnpm tauri
+          args: --bundles ${{ matrix.bundles }} ${{ env.KM_SIGNING_ARGS }}
+          releaseId: ${{ needs.prepare.outputs.publish == 'true' && needs.prepare.outputs.release-id || '' }}
+          tagName: ${{ needs.prepare.outputs.publish == 'true' && github.ref_name || '' }}
+          releaseDraft: true
+          uploadUpdaterJson: false # no updater plugin yet
+          releaseAssetNamePattern: know-meet_[version]_${{ matrix.os }}_${{ matrix.arch }}[setup][ext]
+          uploadWorkflowArtifacts: true
+          workflowArtifactNamePattern: know-meet-${{ matrix.os }}-${{ matrix.arch }}-[bundle]
+          retryAttempts: 1

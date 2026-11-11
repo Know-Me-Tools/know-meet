@@ -1,0 +1,38 @@
+{
+  "generatedBy": "@know-meet/design-tokens generator",
+  "source": {
+    "path": "docs/design/tokens.json",
+    "version": "1.2.0",
+    "sha256": "c872cf1d89266453afaf16fc7513476ec4f06f4bf8993dc0e0db2428a530af32"
+  },
+  "outputs": [
+    {
+      "path": "packages/design-tokens/generated/web/tokens.css",
+      "sha256": "21c6c1b94a4b74fdbb4ae1aef365cc4a5be56512fcf5bdb3769dbef2d05762cd"
+    },
+    {
+      "path": "packages/design-tokens/generated/web/fonts.css",
+      "sha256": "8d34787c9cfedd8fefd29883fd6ef8f1dd1a25107a3a53520b017f7b48e007a1"
+    },
+    {
+      "path": "packages/design-tokens/generated/web/theme.css",
+      "sha256": "22232d96ae0a6f49d66c29f51b382c10d21323a0a87d71e9159edf7efa9e37d9"
+    },
+    {
+      "path": "packages/design-tokens/generated/web/shadcn.css",
+      "sha256": "0563f206b576c790ff6cc0b7a37a4e25c6ff95e9fadf37f4509a8d8db9ea8545"
+    },
+    {
+      "path": "packages/design-tokens/generated/flutter/tokens.g.dart",
+      "sha256": "1029dd823565b50e20c900574031862d4eebe6ce47109196fc445e24517237dc"
+    },
+    {
+      "path": "packages/design-tokens/generated/flutter/km_theme.g.dart",
+      "sha256": "0e13fe598163cf0a8fe30f77b5c492570cb6ab99b68f8dd0027d9a7cde91df1a"
+    },
+    {
+      "path": "docs/design/tokens.css",
+      "sha256": "58f251c0e42798cfdc28a07f62f9d4671bb15114fb995f912d1a8d1386c4980a"
+    }
+  ]
+}

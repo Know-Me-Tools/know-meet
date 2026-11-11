@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "file": ".codex/agents/delivery_lead.toml",
+      "before": null,
+      "afterSha256": "dce5eaf348dbf739984adcf73c40f067a981d5744e97a6059540f0feab8a4483"
+    },
+    {
+      "file": ".codex/agents/architect.toml",
+      "before": null,
+      "afterSha256": "8145fefcc69fcafeb049ada709286524b442702d35a3cbed38a6cbf0add83b32"
+    },
+    {
+      "file": ".codex/agents/build_platform.toml",
+      "before": null,
+      "afterSha256": "3ff3690d27bbc1e362304a9d28684dd04e30d43ef26d40f61b7bd810d5eeae00"
+    },
+    {
+      "file": ".codex/agents/bdd_quality.toml",
+      "before": null,
+      "afterSha256": "e9209b06f6a6710227d71f3e241d73276cab401cf6bbd7a39d80717609e7daf4"
+    },
+    {
+      "file": ".codex/agents/design_lead.toml",
+      "before": null,
+      "afterSha256": "252acc252f0578a9a5176cdc3c80eb9547a6f8963b6ec808e183d527da165ef7"
+    },
+    {
+      "file": ".codex/agents/ui_engineer.toml",
+      "before": null,
+      "afterSha256": "3dec415ed05e2f6faad7ed55edb47d45e26d251aa4a92c5462239d8bbe78f86d"
+    },
+    {
+      "file": ".codex/agents/client_shell.toml",
+      "before": null,
+      "afterSha256": "14396099ef7b58096ac2132a76bbe68c59ac0f4f2e95fe5fb1804a9190483717"
+    },
+    {
+      "file": ".codex/agents/mobile_engineer.toml",
+      "before": null,
+      "afterSha256": "02efe85bad4e47c65e8963065ae17554b07987b1d0af8b57b00583e7c8e48e2d"
+    },
+    {
+      "file": ".codex/agents/webrtc_engineer.toml",
+      "before": null,
+      "afterSha256": "f9d7232ede23f7122e3e1db4313ad3d9153ad3ee85d87de628464da1ab25eb39"
+    },
+    {
+      "file": ".codex/agents/livekit_platform.toml",
+      "before": null,
+      "afterSha256": "4211d02e88dd17cc765cda3a958689df9cba5c68de6def9260b774a6fe2a508e"
+    },
+    {
+      "file": ".codex/agents/livekit_agents.toml",
+      "before": null,
+      "afterSha256": "3b41de5482195c19a51d105a96dbe3ff9c4bcc487eb545d290eb8d8e32091871"
+    },
+    {
+      "file": ".codex/agents/crdt_engineer.toml",
+      "before": null,
+      "afterSha256": "cc4574cf5fd3533bf6549c8a448c85b67a5069bd3bb6753bad33cb00e5c73e2d"
+    },
+    {
+      "file": ".codex/agents/integrations_engineer.toml",
+      "before": null,
+      "afterSha256": "f5e67a10414267b1da9b8d1378b2292010cf3f83f8f280f1a0207933af00bda9"
+    },
+    {
+      "file": ".codex/agents/security_reviewer.toml",
+      "before": null,
+      "afterSha256": "359ee006e0fb3bf7257034da17ecf54e1fd669a48a266f9ebb506b9c2770bc9e"
+    },
+    {
+      "file": ".codex/agents/independent_reviewer.toml",
+      "before": null,
+      "afterSha256": "5e94366e9f47a55a12caf7fb495ada4afb36fe693de787c9f5e060e460eb196e"
+    },
+    {
+      "file": ".agent-team/project-routing.json",
+      "before": "{\n  \"schemaVersion\": 1,\n  \"activeTeam\": \"know-meet-team\",\n  \"manifest\": \".agent-team/know-meet-team/team.json\",\n  \"target\": \"claude\",\n  \"nativeDefinitions\": [\n    \".claude/agents/delivery-lead.md\",\n    \".claude/agents/architect.md\",\n    \".claude/agents/build-platform.md\",\n    \".claude/agents/bdd-quality.md\",\n    \".claude/agents/design-lead.md\",\n    \".claude/agents/ui-engineer.md\",\n    \".claude/agents/client-shell.md\",\n    \".claude/agents/mobile-engineer.md\",\n    \".claude/agents/webrtc-engineer.md\",\n    \".claude/agents/livekit-platform.md\",\n    \".claude/agents/livekit-agents.md\",\n    \".claude/agents/crdt-engineer.md\",\n    \".claude/agents/integrations-engineer.md\",\n    \".claude/agents/security-reviewer.md\",\n    \".claude/agents/independent-reviewer.md\"\n  ],\n  \"instructionFiles\": [\n    \"AGENTS.md\",\n    \"CLAUDE.md\"\n  ],\n  \"delegation\": \"native-definitions\",\n  \"limitations\": [\n    \"Native definition presence is not live invocation evidence. The active harness owns permissions, models, concurrency and delegation.\",\n    \"When delegation is unavailable, use selected role instructions sequentially and report it; builder-context review is not independent.\",\n    \"Zed external ACP agents use their native configuration; Zed parallel threads are not an automatic delegation API.\"\n  ]\n}\n",
+      "afterSha256": "bb0514428590f1ed954d047f57d56a979d232bef57cef72cc9f8b8b2a39cf6ff"
+    }
+  ]
+}

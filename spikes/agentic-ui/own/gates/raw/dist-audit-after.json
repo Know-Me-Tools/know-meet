@@ -1,0 +1,14 @@
+{
+  "label": "after-16-5",
+  "at": "2026-11-10T22:21:08.343Z",
+  "dataFontsInCss": [],
+  "emittedFontFiles": 66,
+  "rawHtmlParserMarkers": [],
+  "entryChunks": [
+    {
+      "file": "index-72uicBvS.js",
+      "bytes": 1634657,
+      "brotli": 400169
+    }
+  ]
+}

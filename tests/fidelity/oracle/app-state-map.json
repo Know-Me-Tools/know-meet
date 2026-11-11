@@ -1,0 +1,301 @@
+{
+ "schema": "know-meet-app-state-map/v1",
+ "status": "proposed",
+ "owner": "bdd-quality (file); route values must be confirmed by client-shell before c09 merges (request recorded in the c03 report)",
+ "rule": "Every in-scope state ID maps to the URL path the built web app renders it at. A missing or unconfirmed entry makes that cell BLOCKED at c13, never skipped.",
+ "storage": {
+  "theme": "localStorage km-meet-theme = dark|light (theme-behaviour.md)",
+  "auth": "localStorage km-auth = {\"name\",\"email\"} renders the signed-in static screens (no real auth: contract exclusion)"
+ },
+ "roles": {
+  "appbar": "[data-testid=\"km-appbar\"]",
+  "account-button": "[data-testid=\"km-account-button\"]",
+  "nav-toggle": "[data-testid=\"km-nav-toggle\"]",
+  "theme-toggle": "[data-testid=\"km-theme-toggle\"]",
+  "titlebar": "[data-testid=\"km-titlebar\"]",
+  "appnav": "[data-testid=\"km-appnav\"]",
+  "main": "main#main"
+ },
+ "states": {
+  "index.default": {
+   "path": "/",
+   "access": "guest"
+  },
+  "auth.sign-in": {
+   "path": "/auth#sign-in",
+   "access": "guest"
+  },
+  "auth.sign-up": {
+   "path": "/auth#sign-up",
+   "access": "guest"
+  },
+  "auth.check-email": {
+   "path": "/auth#check-email",
+   "access": "guest"
+  },
+  "auth.sign-in-error": {
+   "path": "/auth#sign-in-error",
+   "access": "guest"
+  },
+  "auth.magic-link-sent": {
+   "path": "/auth#magic-link-sent",
+   "access": "guest"
+  },
+  "join.invite": {
+   "path": "/join#invite",
+   "access": "invitee"
+  },
+  "join.waiting": {
+   "path": "/join#waiting",
+   "access": "invitee"
+  },
+  "join.expired": {
+   "path": "/join#expired",
+   "access": "invitee"
+  },
+  "join.wrong-code": {
+   "path": "/join#wrong-code",
+   "access": "invitee"
+  },
+  "meet.room": {
+   "path": "/meet#room",
+   "access": "sign-in"
+  },
+  "meet.room-guest": {
+   "path": "/meet#room-guest",
+   "access": "guest"
+  },
+  "dashboard.upcoming": {
+   "path": "/dashboard#upcoming",
+   "access": "sign-in"
+  },
+  "dashboard.schedule": {
+   "path": "/dashboard#schedule",
+   "access": "sign-in"
+  },
+  "dashboard.meeting.partner-onboarding": {
+   "path": "/dashboard#meeting:partner-onboarding",
+   "access": "sign-in"
+  },
+  "dashboard.meeting.cohort-kickoff": {
+   "path": "/dashboard#meeting:cohort-kickoff",
+   "access": "sign-in"
+  },
+  "dashboard.meeting.product-sync": {
+   "path": "/dashboard#meeting:product-sync",
+   "access": "sign-in"
+  },
+  "dashboard.meeting.pricing-review": {
+   "path": "/dashboard#meeting:pricing-review",
+   "access": "sign-in"
+  },
+  "dashboard.invites": {
+   "path": "/dashboard#invites",
+   "access": "sign-in"
+  },
+  "dashboard.empty": {
+   "path": "/dashboard#empty",
+   "access": "sign-in"
+  },
+  "agents.registry": {
+   "path": "/agents#registry",
+   "access": "sign-in"
+  },
+  "agents.register.1": {
+   "path": "/agents#register:1",
+   "access": "sign-in"
+  },
+  "agents.register.2": {
+   "path": "/agents#register:2",
+   "access": "sign-in"
+  },
+  "agents.register.3": {
+   "path": "/agents#register:3",
+   "access": "sign-in"
+  },
+  "agents.register.4": {
+   "path": "/agents#register:4",
+   "access": "sign-in"
+  },
+  "agents.register-error": {
+   "path": "/agents#register-error",
+   "access": "sign-in"
+  },
+  "agents.detail.scribe": {
+   "path": "/agents#detail:scribe",
+   "access": "sign-in"
+  },
+  "agents.detail.researcher": {
+   "path": "/agents#detail:researcher",
+   "access": "sign-in"
+  },
+  "agents.detail.facilitator": {
+   "path": "/agents#detail:facilitator",
+   "access": "sign-in"
+  },
+  "agents.detail.translator": {
+   "path": "/agents#detail:translator",
+   "access": "sign-in"
+  },
+  "agents.concierge": {
+   "path": "/agents#concierge",
+   "access": "guest"
+  },
+  "agents.dots": {
+   "path": "/agents#dots",
+   "access": "sign-in"
+  },
+  "agents.dot.iris": {
+   "path": "/agents#dot:iris",
+   "access": "sign-in"
+  },
+  "recordings.library": {
+   "path": "/recordings#library",
+   "access": "sign-in"
+  },
+  "recordings.detail.partner-onboarding-1014": {
+   "path": "/recordings#detail:partner-onboarding-1014",
+   "access": "sign-in"
+  },
+  "recordings.detail.partner-onboarding-1014.transcript": {
+   "path": "/recordings#detail:partner-onboarding-1014:transcript",
+   "access": "sign-in"
+  },
+  "recordings.detail.partner-onboarding-1014.summary": {
+   "path": "/recordings#detail:partner-onboarding-1014:summary",
+   "access": "sign-in"
+  },
+  "recordings.detail.partner-onboarding-1014.delivery": {
+   "path": "/recordings#detail:partner-onboarding-1014:delivery",
+   "access": "sign-in"
+  },
+  "recordings.detail.partner-onboarding-1014.storage": {
+   "path": "/recordings#detail:partner-onboarding-1014:storage",
+   "access": "sign-in"
+  },
+  "recordings.detail.design-crit-1009": {
+   "path": "/recordings#detail:design-crit-1009",
+   "access": "sign-in"
+  },
+  "recordings.detail.vendor-call-1002": {
+   "path": "/recordings#detail:vendor-call-1002",
+   "access": "sign-in"
+  },
+  "recordings.processing.partner-onboarding-1014": {
+   "path": "/recordings#processing:partner-onboarding-1014",
+   "access": "sign-in"
+  },
+  "recordings.empty": {
+   "path": "/recordings#empty",
+   "access": "sign-in"
+  },
+  "settings.account": {
+   "path": "/settings#account",
+   "access": "sign-in"
+  },
+  "settings.livekit": {
+   "path": "/settings#livekit",
+   "access": "sign-in"
+  },
+  "settings.telnyx-sms": {
+   "path": "/settings#telnyx-sms",
+   "access": "sign-in"
+  },
+  "settings.telnyx-voice": {
+   "path": "/settings#telnyx-voice",
+   "access": "sign-in"
+  },
+  "settings.calendars": {
+   "path": "/settings#calendars",
+   "access": "sign-in"
+  },
+  "settings.calendar-connect.google": {
+   "path": "/settings#calendar-connect:google",
+   "access": "sign-in"
+  },
+  "settings.calendar-connect.outlook": {
+   "path": "/settings#calendar-connect:outlook",
+   "access": "sign-in"
+  },
+  "settings.calendar-connect.caldav": {
+   "path": "/settings#calendar-connect:caldav",
+   "access": "sign-in"
+  },
+  "settings.storage": {
+   "path": "/settings#storage",
+   "access": "sign-in"
+  },
+  "settings.storage-s3": {
+   "path": "/settings#storage-s3",
+   "access": "sign-in"
+  },
+  "settings.storage-ipfs": {
+   "path": "/settings#storage-ipfs",
+   "access": "sign-in"
+  },
+  "settings.storage-test-failed": {
+   "path": "/settings#storage-test-failed",
+   "access": "sign-in"
+  },
+  "settings.recording": {
+   "path": "/settings#recording",
+   "access": "sign-in"
+  },
+  "settings.delivery": {
+   "path": "/settings#delivery",
+   "access": "sign-in"
+  },
+  "settings.templates": {
+   "path": "/settings#templates",
+   "access": "sign-in"
+  },
+  "settings.notifications": {
+   "path": "/settings#notifications",
+   "access": "sign-in"
+  },
+  "dashboard.gate-signed-out": {
+   "path": "/dashboard",
+   "access": "guest"
+  },
+  "agents.gate-signed-out": {
+   "path": "/agents",
+   "access": "guest"
+  },
+  "recordings.gate-signed-out": {
+   "path": "/recordings",
+   "access": "guest"
+  },
+  "settings.gate-signed-out": {
+   "path": "/settings",
+   "access": "guest"
+  },
+  "frame.appbar-signed-out": {
+   "path": "/",
+   "access": "guest"
+  },
+  "frame.appbar-signed-in": {
+   "path": "/dashboard#upcoming",
+   "access": "sign-in"
+  },
+  "frame.account-menu-open": {
+   "path": "/dashboard#upcoming",
+   "access": "sign-in"
+  },
+  "frame.nav-collapsed": {
+   "path": "/",
+   "access": "guest"
+  },
+  "frame.nav-open": {
+   "path": "/",
+   "access": "guest"
+  },
+  "frame.skip-link-focused": {
+   "path": "/",
+   "access": "guest"
+  },
+  "frame.theme-toggle": {
+   "path": "/",
+   "access": "guest"
+  }
+ }
+}

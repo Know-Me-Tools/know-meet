@@ -1,0 +1,120 @@
+{
+  "generatedBy": "src/corpus-authoring/build-corpus.ts",
+  "files": [
+    {
+      "path": "corpus/ag-ui/scenarios/long-markdown.json",
+      "sha256": "1695c9b40f5f4394778a60e4dcfbb2db1f7693fac7c03a46f001306c716ff1b4",
+      "bytes": 694241
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/parallel-tool-calls.json",
+      "sha256": "27fed7d296967fcdcaec444c77724ee0ab4f1e6c202357a5f334b9068bbfc138",
+      "bytes": 16187
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/hitl-approve.json",
+      "sha256": "c94bea90dde5bf45a5744710a17979d701ebc7d8d9f01b4a3864bdad43fa5e2d",
+      "bytes": 13229
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/hitl-reject.json",
+      "sha256": "3091f746df19c38b8426bf7de68a480da072a3dee676f5e8a5747bb8a9f66cea",
+      "bytes": 15865
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/hitl-expire.json",
+      "sha256": "49dc24a767565f1326fda8f5ce2d327bd8c95db131cf093154de830397d8e1da",
+      "bytes": 13919
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/cancel-mid-stream.json",
+      "sha256": "8cf1117b4c01fa88eb9ab5bbcf32050deefc4f77dbf4358985148c232eda2b01",
+      "bytes": 701191
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/run-cancelled-by-agent.json",
+      "sha256": "f3b317feb5db3ccaee50b9e9eaa5a3f00a364312f1c3569625f54f9f05e7f252",
+      "bytes": 2870
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/run-error.json",
+      "sha256": "4052c77a71e168645cf86ace448518e5459a655a0870e68ecba6f7e24d89bb78",
+      "bytes": 2718
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/disconnect-reconnect-replay.json",
+      "sha256": "b79e68c935b93edf5e089f4e87f03946b7d39679dfcff140482b7690868f4db4",
+      "bytes": 11425
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/state-snapshot-delta.json",
+      "sha256": "51152982d3c5cce0ad33b6c20b97b05083715692f645d054630b03bb5ae30e4d",
+      "bytes": 6522
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/custom-chunks.json",
+      "sha256": "4ee88c380647290b7b384070dc699dc337246171ceb3144d9756b0e2b35c8132",
+      "bytes": 11571
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/a2ui-over-agui.json",
+      "sha256": "3ca4b31e16ca048964eb32f35d5c1700bbfdd9289370f7b0cc052ce7fb41c739",
+      "bytes": 10927
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/reasoning-subagents-snapshot.json",
+      "sha256": "6d17bfc8ce22d3698e52f32d0b00a23ac2c76574f621387032bb48f1147287fd",
+      "bytes": 11127
+    },
+    {
+      "path": "corpus/ag-ui/scenarios/malformed-out-of-order.json",
+      "sha256": "c552ac27a838c288f83587a7307d59b63c48d649463baa9634b31d040047578e",
+      "bytes": 6136
+    },
+    {
+      "path": "corpus/a2ui/surfaces/form-validation.json",
+      "sha256": "5cb8c3e5f9fc3843975dd32bf4c11ccd9ea907e98d01cd41221e62860d645a02",
+      "bytes": 7318
+    },
+    {
+      "path": "corpus/a2ui/surfaces/list-template.json",
+      "sha256": "2b1f453d42c4fe56f43a4a8697e0d76268e8df1fb42b707bb78c43c83299d11e",
+      "bytes": 3260
+    },
+    {
+      "path": "corpus/a2ui/surfaces/card-with-action.json",
+      "sha256": "2f4fca05540040e13729252f5d7c497371e87c58c01c280683a561fdccacab8e",
+      "bytes": 3278
+    },
+    {
+      "path": "corpus/a2ui/surfaces/button-actions-roundtrip.json",
+      "sha256": "94224f5769e1085cfe5ca4c5593c2a9441433f7e079b7a41736baff72a97e570",
+      "bytes": 4158
+    },
+    {
+      "path": "corpus/a2ui/surfaces/media-image-video-audio.json",
+      "sha256": "eed03af0313d9af67be6711488ce514734657fe2b242c03ee1f648ed52ce3463",
+      "bytes": 2337
+    },
+    {
+      "path": "corpus/a2ui/surfaces/nested-layout.json",
+      "sha256": "879931b2bf122764a4896997d790167f58d4b316884d92f75b9f2082cc0bfd69",
+      "bytes": 3846
+    },
+    {
+      "path": "corpus/a2ui/surfaces/unknown-component-fallback.json",
+      "sha256": "b620a0cd539fd13dc01afec388b32a40237e36e88668146591c823ec4409731b",
+      "bytes": 1996
+    },
+    {
+      "path": "corpus/a2ui/surfaces/incremental-update-delete.json",
+      "sha256": "9ea5e93febb0455fdc9c28b5ae0bbd0cff00b69935099b519062b91db4a6724b",
+      "bytes": 3104
+    },
+    {
+      "path": "corpus/hostile/hostile-corpus.json",
+      "sha256": "d0dfe8f14ae5f6900a9eb3a5de0d4ae56256081e6d66a4f9b7c014e0eb543132",
+      "bytes": 60105
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+== hybrid-chromium
+a2ui-over-agui #1: ttft 75 ms, total 204 ms, commits 26
+a2ui-over-agui #2: ttft 73 ms, total 193 ms, commits 25
+a2ui-over-agui #3: ttft 75 ms, total 192 ms, commits 25
+a2ui-over-agui #4: ttft 62 ms, total 190 ms, commits 27
+a2ui-over-agui #5: ttft 75 ms, total 191 ms, commits 25
+cancel-mid-stream #1: ttft 92 ms, total 86658 ms, commits 6920
+cancel-mid-stream #2: ttft 76 ms, total 86675 ms, commits 6917
+cancel-mid-stream #3: ttft 97 ms, total 86666 ms, commits 6921
+cancel-mid-stream #4: ttft 73 ms, total 86692 ms, commits 6920
+cancel-mid-stream #5: ttft 65 ms, total 86737 ms, commits 6918
+custom-chunks #1: ttft 87 ms, total 407 ms, commits 56
+custom-chunks #2: ttft 88 ms, total 419 ms, commits 55
+custom-chunks #3: ttft 90 ms, total 416 ms, commits 54
+custom-chunks #4: ttft 86 ms, total 416 ms, commits 56
+custom-chunks #5: ttft 73 ms, total 399 ms, commits 57
+disconnect-reconnect-replay #1: ttft 74 ms, total 1012 ms, commits 94
+disconnect-reconnect-replay #2: ttft 81 ms, total 1012 ms, commits 93
+disconnect-reconnect-replay #3: ttft 74 ms, total 1013 ms, commits 94
+disconnect-reconnect-replay #4: ttft 85 ms, total 1013 ms, commits 93
+disconnect-reconnect-replay #5: ttft 72 ms, total 1013 ms, commits 94
+hitl-approve #1: ttft 62 ms, total 276 ms, commits 36
+hitl-approve #2: ttft 72 ms, total 276 ms, commits 35
+hitl-approve #3: ttft 76 ms, total 275 ms, commits 34
+hitl-approve #4: ttft 96 ms, total 275 ms, commits 31
+hitl-approve #5: ttft 75 ms, total 275 ms, commits 34
+hitl-expire #1: ttft 75 ms, total 274 ms, commits 34
+hitl-expire #2: ttft 63 ms, total 275 ms, commits 35
+hitl-expire #3: ttft 75 ms, total 274 ms, commits 34
+hitl-expire #4: ttft 136 ms, total 276 ms, commits 28
+hitl-expire #5: ttft 65 ms, total 275 ms, commits 35
+hitl-reject #1: ttft 74 ms, total 274 ms, commits 34
+hitl-reject #2: ttft 76 ms, total 292 ms, commits 34
+hitl-reject #3: ttft 78 ms, total 302 ms, commits 35
+hitl-reject #4: ttft 72 ms, total 275 ms, commits 35
+hitl-reject #5: ttft 91 ms, total 275 ms, commits 31
+long-markdown #1: ttft 142 ms, total 5843 ms, commits 4614
+long-markdown #2: ttft 142 ms, total 5846 ms, commits 4598
+long-markdown #3: ttft 114 ms, total 5854 ms, commits 4608
+long-markdown #4: ttft 179 ms, total 5846 ms, commits 4598
+long-markdown #5: ttft 122 ms, total 5841 ms, commits 4612
+malformed-out-of-order #1: ttft 145 ms, total 274 ms, commits 24
+malformed-out-of-order #2: ttft 147 ms, total 274 ms, commits 24
+malformed-out-of-order #3: ttft 146 ms, total 274 ms, commits 24
+malformed-out-of-order #4: ttft 146 ms, total 274 ms, commits 24
+malformed-out-of-order #5: ttft 148 ms, total 275 ms, commits 24
+parallel-tool-calls #1: ttft 88 ms, total 693 ms, commits 104
+parallel-tool-calls #2: ttft 85 ms, total 691 ms, commits 105
+parallel-tool-calls #3: ttft 89 ms, total 693 ms, commits 104
+parallel-tool-calls #4: ttft 76 ms, total 693 ms, commits 106
+parallel-tool-calls #5: ttft 82 ms, total 692 ms, commits 105
+reasoning-subagents-snapshot #1: ttft 346 ms, total 492 ms, commits 61
+reasoning-subagents-snapshot #2: ttft 346 ms, total 492 ms, commits 61
+reasoning-subagents-snapshot #3: ttft 348 ms, total 492 ms, commits 61
+reasoning-subagents-snapshot #4: ttft 346 ms, total 491 ms, commits 61
+reasoning-subagents-snapshot #5: ttft 347 ms, total 492 ms, commits 61
+run-cancelled-by-agent #1: ttft 77 ms, total 114 ms, commits 13
+run-cancelled-by-agent #2: ttft 90 ms, total 112 ms, commits 12
+run-cancelled-by-agent #3: ttft 61 ms, total 112 ms, commits 16
+run-cancelled-by-agent #4: ttft 91 ms, total 113 ms, commits 12
+run-cancelled-by-agent #5: ttft 89 ms, total 112 ms, commits 12
+run-error #1: ttft 61 ms, total 112 ms, commits 14
+run-error #2: ttft 75 ms, total 112 ms, commits 12
+run-error #3: ttft 63 ms, total 112 ms, commits 14
+run-error #4: ttft 112 ms, total 127 ms, commits 11
+run-error #5: ttft 64 ms, total 114 ms, commits 14
+state-snapshot-delta #1: ttft 169 ms, total 253 ms, commits 20
+state-snapshot-delta #2: ttft 167 ms, total 252 ms, commits 20
+state-snapshot-delta #3: ttft 169 ms, total 251 ms, commits 20
+state-snapshot-delta #4: ttft 167 ms, total 251 ms, commits 20
+state-snapshot-delta #5: ttft 167 ms, total 251 ms, commits 20
+hostile/huge-table #1: ttft 76 ms, total 1134 ms, commits 411
+hostile/huge-table #2: ttft 75 ms, total 1106 ms, commits 411
+hostile/huge-table #3: ttft 91 ms, total 1118 ms, commits 411
+hostile/huge-table #4: ttft 89 ms, total 1143 ms, commits 411
+hostile/huge-table #5: ttft 93 ms, total 1116 ms, commits 411
+bundle: 465 files, raw 16814672 B, gzip 4795327 B, brotli 4241452 B
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/measure-hybrid-chromium.json
+== own-chromium
+a2ui-over-agui #1: ttft 69 ms, total 194 ms, commits 11
+a2ui-over-agui #2: ttft 59 ms, total 188 ms, commits 12
+a2ui-over-agui #3: ttft 59 ms, total 188 ms, commits 12
+a2ui-over-agui #4: ttft 60 ms, total 188 ms, commits 12
+a2ui-over-agui #5: ttft 60 ms, total 186 ms, commits 12
+cancel-mid-stream #1: ttft 65 ms, total 86647 ms, commits 2239
+cancel-mid-stream #2: ttft 65 ms, total 86647 ms, commits 2252
+cancel-mid-stream #3: ttft 66 ms, total 86751 ms, commits 2244
+cancel-mid-stream #4: ttft 65 ms, total 86669 ms, commits 2248
+browserContext.close: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/gqadonis/Library/Caches/ms-playwright/chromium_headless_shell-1254/chrome-headless-shell-mac-arm64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/ln/0wnpd96j26z2qhvx9m6hwt2r0000gn/T/playwright_chromiumdev_profile-s1cSNI --remote-debugging-pipe --no-startup-window
+<launched> pid=63521
+[pid=63521][err] [1110/101330.942746:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101331.069291:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101331.635175:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101331.703121:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101332.102932:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101332.168921:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101332.566727:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101332.635564:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101333.035615:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101333.101855:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101333.503368:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101333.570282:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101500.436647:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101500.519135:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101627.390283:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101627.470248:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101754.452313:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101754.521759:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101921.450176:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521][err] [1110/101921.520658:ERROR:ui/display/mac/cv_display_link_mac.mm:191] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+[pid=63521] <gracefully close start>
+[pid=63521][err] [1110/101954.729263:ERROR:content/browser/gpu/gpu_process_host.cc:1042] GPU process exited unexpectedly: exit_code=15
+[pid=63521][err] [1110/101954.729297:WARNING:content/browser/gpu/gpu_process_host.cc:1501] The GPU process has crashed 1 time(s)
+[pid=63521][err] [1110/101954.732929:ERROR:content/browser/network_service_instance_impl.cc:655] Network service crashed or was terminated, restarting service.

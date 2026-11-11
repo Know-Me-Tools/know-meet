@@ -1,0 +1,11 @@
+{
+  "stage": "assess",
+  "completedAt": "2026-11-09T08:52:32Z",
+  "outputs": [
+    "assessment.md"
+  ],
+  "nextStage": "analyze",
+  "summaryForNext": "Greenfield: no shell code. Key gaps: (1) no knowme-builder profile combines React web + Tauri sharing that web + Flutter, and every profile carries Rust-core/UAR/Axum/PEM payloads to keep, strip or stub; (2) tokens.json does not match what the prototype renders (17 tokens missing from km.css, --text-display conflict, weights, line heights, fonts) and must be reconciled before any token pipeline; (3) the generator token script rejects rgba, has no clamp() equivalent, hardcodes fonts and skips missing dirs silently; (4) stale toolchain (builder alpha.1 vs alpha.5, Flutter 3.48 beta vs 3.47.5 stable). Open for analyze/plan: generator strategy, token canonical source, four-layer mapping, workspace tooling (pnpm, Flutter), in-scope subset of 68 prototype routes, operator decisions E-L6/E-L7, parallel agent-team session. Adversarial review PASS on round 2 (same-model harness-native); WARNINGs carried: reconciliation scope beyond the token block, bundled fonts/CSP, exception status provisional.",
+  "skipped": false,
+  "skipReason": null
+}

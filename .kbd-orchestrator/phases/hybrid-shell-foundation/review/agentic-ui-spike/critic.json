@@ -1,0 +1,100 @@
+{
+  "verdict": "REVISE",
+  "recommended": "inconclusive",
+  "agrees_with_report": false,
+  "findings": [
+    {
+      "severity": "major",
+      "claim": "The long-task results show H is cheap at 0 ms on 12 scenarios while O costs 66\u2013135 ms, with O also higher on long-markdown, parallel-tool-calls, and huge-table.",
+      "problem": "These are not render-complete totals. The comparison explicitly measures H at runStatus settle, while H defers Streamdown work until after settle. The supplementary render-lag data exists only for long-markdown and huge-table. For huge-table, H recorded 327 ms at settle and another 214 ms of long tasks after settle, so its render-complete total may be about 541 ms versus O's 494 ms. There is no equivalent post-settle measurement for the other 12 scenarios. The report therefore compares H's incomplete work with O's complete work and may reverse the huge-table conclusion.",
+      "fix": "Measure task intervals continuously from submit through final paint or render-complete for every scenario in both prototypes, include post-settle work, and report medians and worst observed runs. Do not use settle snapshots as total long-task cost."
+    },
+    {
+      "severity": "major",
+      "claim": "Time to first token and total stream time were equivalent within 21 ms or 1.5%.",
+      "problem": "That tolerance applies to total stream time, not TTFT. The attached TTFT tables contain differences far above 21 ms: Chromium cancel-mid-stream was 75 versus 127 ms, run-cancelled-by-agent 170 versus 100 ms, and long-markdown 265 versus 106 ms. WebKit differences also commonly exceed 21 ms, although O is often faster there. This is a direct misread of the comparison and should not be presented as equivalence.",
+      "fix": "Split TTFT and total stream time into separate claims, publish paired distributions and confidence intervals, and avoid declaring equivalence where only total pacing is equivalent."
+    },
+    {
+      "severity": "major",
+      "claim": "Both paths pass everything.",
+      "problem": "That is true of the 148 browser checks, but not of the full target matrix. The Tauri run covered 58 conformance/hostile scenarios and did not run the eight A2UI golden surfaces or the eight-check accessibility suite. Trusted Tauri keyboard activation was simulated with focus() plus click(), and element.click() substituted for pointer input. Axe found one WCAG violation for H and two for O in Tauri, and both initially failed the two media-hostile checks under the apps/web CSP. The recommendation overstates the acceptance evidence.",
+      "fix": "State exactly which suites passed in each environment. Require the full A2UI and accessibility suites, real keyboard and pointer input, zero relevant axe violations, and CSP-corrected media runs in Tauri before making an adoption decision."
+    },
+    {
+      "severity": "major",
+      "claim": "The accepted measurements form a fair head-to-head, and the discarded O requestAnimationFrame run is not decision-relevant.",
+      "problem": "Browser and Tauri runs always placed H before O rather than interleaving paired trials, machine load was uncontrolled, there were only five repeats, p95 was merely the maximum, and Tauri conformance ran only once. The excluded O run demonstrated roughly 900 ms versus 281 ms latency in a plausible desktop window state, while background throttling being configured as disabled did not establish that the behavior was impossible. Discarding that run removes a relevant tail-risk result rather than merely an uncontrolled performance sample.",
+      "fix": "Use randomized or alternating paired runs, more repetitions, and report confidence intervals and all adverse runs. Treat background, unfocused, minimized, and occluded states as acceptance scenarios, and remove rAF as a correctness-critical publication dependency before comparing medians."
+    },
+    {
+      "severity": "major",
+      "claim": "O's approximately 25\u201328\u00d7 fewer React commits are evidence that O is the better production architecture.",
+      "problem": "Commit count is only a proxy for work. H's many commits were largely memoized, whereas O acknowledges that each batched commit does more work and had longer main-thread tasks. The measured WebKit long-markdown ratio is actually about 34.5\u00d7, so the stated range is also incomplete. More importantly, the prototypes are not equally tuned: H currently commits per delta and uses deferred rendering, while O coalesces with rAF; H's production plan adds delta coalescing, and O could also adopt deferred rendering. The measured difference may therefore describe the prototypes rather than the intended production designs.",
+      "fix": "Benchmark the intended final implementations with identical streaming, rendering, and batching policies. Add main-thread CPU time, scripting time, frame drops, paint completion, input latency, and end-to-end time to first visible text. Treat commit count as diagnostic evidence, not a decision criterion."
+    },
+    {
+      "severity": "major",
+      "claim": "O needs about nine fewer engineer-days to productionize.",
+      "problem": "The 31-versus-22 figures are self-authored estimates, not measured results, and there is no common work breakdown, uncertainty range, or independent estimate. The categories are asymmetric, and O's 22 days do not explicitly include the report's required entity-graph upstream work, AG-UI event maintenance, or the Dart transport and Flutter alpha churn. O also has 597 more authored lines than H, although LOC alone is not quality because H has no unit tests. The report presents an estimate as if it were a measured architectural benefit.",
+      "fix": "Create a common, independently reviewed work breakdown with comparable transport, persistence, testing, accessibility, security, mobile, and dependency tasks. Publish assumptions and ranges, and include entity-graph remediation and ongoing ownership costs in both totals."
+    },
+    {
+      "severity": "major",
+      "claim": "O has no ongoing upstream tracking, whereas assistant-ui tracks the specification across 69 releases.",
+      "problem": "No ongoing tracking is not credible. O would own AG-UI event semantics, entity-graph fixes, Streamdown, A2UI, and the alpha Flutter packages. The attached Flutter report explicitly identifies upstream re-pinning work and mentions the community ag_ui package. Conversely, the attached material provides no release inventory supporting the specific claim of 69 releases or showing that assistant-ui would absorb the event work H still performs in its transport, guard, projector, and HITL integration.",
+      "fix": "Produce a dependency-by-dependency total-cost-of-ownership table with release cadence, affected code, test work, and fallback plans. Verify the release count and distinguish assistant-ui release tracking from AG-UI specification tracking."
+    },
+    {
+      "severity": "major",
+      "claim": "O keeps one model of run state, which is a decisive architectural advantage over H.",
+      "problem": "O has a reducer, a partially projected entity-graph representation, and a LiveTextBuffer overlay. Its own results call the graph projection lossy and restart recovery unproven. While O can have one logical authority, that has not been demonstrated through hydration, expiry, or restart. H has two run-status views, but its known expiry divergence is also a correctness defect that should be weighed rather than merely described as duplicate state.",
+      "fix": "Define the canonical authority and synchronization invariants for run, tool, and HITL state. Add tests for expiry races, restart hydration, pending-interrupt rearming, and disagreement between any projection and the authority. Until those tests pass, describe O as simpler rather than proven to have one model."
+    },
+    {
+      "severity": "major",
+      "claim": "H's library ended up bypassed for the store, transport, and A2UI, the three places it was supposed to save work.",
+      "problem": "The attached material does not establish that assistant-ui was intended to provide a durable store, reconnecting SSE transport, or a complete A2UI renderer. H still uses assistant-ui for live run aggregation, thread and message primitives, parts, an approval seam, and A2UI action forwarding. O's additional 597 lines include runtime and presentation functionality that H receives from the library. Treating those areas as pre-agreed assistant-ui responsibilities biases the effort comparison.",
+      "fix": "Replace the bypass narrative with a retained-value and feature-by-feature comparison. Count only capabilities that actually replace H's own code, and give both options the same entity-graph, A2UI, security, persistence, and accessibility requirements."
+    },
+    {
+      "severity": "minor",
+      "claim": "O is 151 KB smaller on initial Brotli load, supporting the architecture recommendation.",
+      "problem": "The measured difference is real for the spike artifacts, but both bundles use react-dom/profiling and include known removable material. H contains an unused AG-UI protobuf path, duplicate Zod versions, and assistant-ui code, while its own production estimate includes bundle diet. O also contains an unused HTML-parser path. No optimized, non-profiling, cold-start comparison was performed, so the final production difference and latency effect are unknown.",
+      "fix": "Compare release builds without profiling or development-only code, with tree shaking, lazy loading, and the intended catalogs and grammars. Report final compressed bytes together with cold navigation and first-content latency."
+    },
+    {
+      "severity": "minor",
+      "claim": "No Dart AG-UI transport exists.",
+      "problem": "The narrower statement supported by the attached result is that a2ui_flutter itself has no AG-UI transport and that the community ag_ui 0.3.0 package was not evaluated. The absolute claim is false as written. The recommendation also does not explain whether choosing the own-core web architecture materially reduces the Dart implementation or test burden.",
+      "fix": "Rewrite this as an evaluated-stack limitation and evaluate the community transport or specify and estimate a native Dart implementation. Include mobile transport effort and conformance in the architecture decision."
+    },
+    {
+      "severity": "minor",
+      "claim": "Streamdown allows every link and image origin by default.",
+      "problem": "The attached results support that both prototypes needed Know Meet origin and scheme policies, but they do not directly document the full default allow matrix for links and images or show that every origin is accepted by default. The recommendation treats the broader statement as established evidence.",
+      "fix": "Cite the exact Streamdown configuration behavior or add a test enumerating default link and image policies, then show the explicit production allowlist and denial cases."
+    }
+  ],
+  "unmeasured_but_decisive": [
+    "Render-complete main-thread CPU, scripting time, frame drops, final-paint latency, and input responsiveness under identical production rendering policies",
+    "End-to-end streaming and approval latency when the Tauri window is unfocused, backgrounded, minimized, occluded, or restored, including a scheduler that does not depend on requestAnimationFrame",
+    "Entity-graph behavior with production-sized transcripts, concurrent sessions, atomic batched writes, ordered collections, lossless state projection, persistence, restart hydration, and pending-interrupt rearming",
+    "The full 74-check web-equivalent suite in Tauri, real trusted keyboard and pointer input, full accessibility checks, real screen readers, packaged macOS .app behavior, and Windows WebView2",
+    "Compatibility and maintenance cost for future AG-UI event types, malformed and duplicate delivery, reconnect semantics, and cross-version contract tests",
+    "Cold-start and runtime performance of optimized non-profiling production builds on supported desktop hardware",
+    "Flutter AG-UI transport behavior, reconnect and replay, HITL, A2UI parity, accessibility, and total alpha-package ownership cost"
+  ],
+  "strongest_case_for_H": "The strongest case for H is that O's advertised wins do not yet establish a user-visible or lifecycle-correct win. H has 597 fewer authored lines, does not publish through requestAnimationFrame, and has not exhibited O's observed roughly threefold WKWebView latency under an uncontrolled window state. After accounting for deferred work, H's expensive huge-table result may be comparable to or better than O's 494 ms. assistant-ui still supplies live run aggregation, thread and message primitives, and approval/action seams, so describing H as wholly bypassed understates its retained value and the cost of O's reimplementation. H would be the stronger option if store-backed state is made authoritative, dual-state expiry and hydration are repaired, and assistant-ui's AG-UI behavior is contract-tested. As built, however, H is not adoptable unchanged either, so this evidence supports a gated bake-off rather than an O decision.",
+  "conditions_before_adoption": [
+    "Replace or harden O's rAF publishing path and demonstrate bounded p95 latency in focused, unfocused, backgrounded, minimized, occluded, and restored Tauri states",
+    "Define and test one canonical run, tool, and HITL state authority, including expiry races, idempotent resume, restart hydration, and pending-interrupt rearming; apply the same gate to any H adapter",
+    "Complete entity-graph atomic batch, ordered transcript, lossless shared-state projection, production-build devtools removal, large-graph load, persistence, and restart-recovery work, or explicitly prove the existing workarounds meet production needs",
+    "Run the complete conformance, A2UI, hostile, and accessibility suites in Chromium, Playwright WebKit, system WKWebView, and Windows WebView2, using real trusted keyboard and pointer input plus manual VoiceOver and NVDA testing",
+    "Fix and retest the media and KaTeX CSP configuration, including explicit Streamdown link and image allowlists and safe handling of data fonts",
+    "Repeat performance tests on final non-profiling builds with render-complete long-task, CPU, frame, paint, input-latency, heap, cold-start, and paired statistical reporting",
+    "Obtain an independent common work breakdown and first-year total-cost estimate covering AG-UI evolution, entity-graph, A2UI, security, accessibility, WebView2, Flutter transport, testing, and dependency churn",
+    "Specify and validate the Flutter AG-UI transport, A2UI catalog, accessibility parity, alpha pinning policy, and release-upgrade process before treating the multi-platform requirement as satisfied"
+  ],
+  "confidence": 0.94
+}

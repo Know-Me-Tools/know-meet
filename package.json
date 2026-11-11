@@ -1,0 +1,35 @@
+{
+  "name": "know-meet",
+  "private": true,
+  "description": "Know Meet workspace root: React 19 web, Tauri desktop and Flutter mobile shells.",
+  "type": "module",
+  "packageManager": "pnpm@11.15.0",
+  "engines": {
+    "node": "26.5.0",
+    "pnpm": "11.15.0"
+  },
+  "scripts": {
+    "prepare": "git config core.hooksPath tooling/git-hooks",
+    "lint": "node tooling/repo-rules/src/lint-all.ts",
+    "lint:pins": "node tooling/repo-rules/src/check-pins.ts",
+    "lint:names": "ls-lint --config tooling/ls-lint/ls-lint.yml",
+    "lint:lines": "node tooling/repo-rules/src/check-lines.ts",
+    "lint:colours": "node tooling/repo-rules/src/check-colours.ts",
+    "lint:secrets": "node tooling/repo-rules/src/check-secrets.ts",
+    "lint:boundaries": "node tooling/repo-rules/src/check-boundaries.ts",
+    "lint:biome": "biome ci --config-path=tooling/biome --error-on-warnings --no-errors-on-unmatched",
+    "lint:native": "node tooling/repo-rules/src/run-native-lints.ts",
+    "typecheck": "turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json",
+    "test": "turbo run test && node --test \"tooling/repo-rules/test/**/*.test.ts\"",
+    "test:external": "turbo run test:external",
+    "build": "turbo run build",
+    "verify:toolchain": "node tooling/repo-rules/src/check-toolchain.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.6",
+    "@ls-lint/ls-lint": "2.3.2",
+    "@types/node": "26.5.1",
+    "turbo": "2.11.10",
+    "typescript": "7.0.2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "file": "tooling/versions.toml",
+  "source": "/Users/gqadonis/Projects/hybrid-mobile-architecture-src/versions.toml",
+  "sourceRepoCommit": "f34584a",
+  "sourceFileLastCommit": "e62ad61bb0997d8eeca24364af5c087d55eea90a",
+  "sourceFileLastCommitDate": "2026-10-19",
+  "sourcePackageVersion": "knowme-builder 2.0.0-alpha.5",
+  "sha256": "0c2f7f60a768c121fcbf8264b42969f68b3dce301d3b176c55ea31a3e7b53a3c",
+  "copiedAt": "2026-11-09",
+  "copiedBy": "know-meet-team/build-platform (c01 task 1.2)",
+  "policy": "Byte-identical copy. Never edit it here; re-copy from the reference and update sha256. tooling/repo-rules/src/check-pins.ts fails lint when the digest or any derived pin drifts.",
+  "derived": {
+    "rust-toolchain.toml": "toolchain.rust",
+    "package.json#packageManager": "toolchain.pnpm",
+    "package.json#engines.node": "toolchain.node",
+    "package.json#engines.pnpm": "toolchain.pnpm",
+    "package.json#devDependencies.typescript": "toolchain.typescript",
+    ".github/workflows/ci.yml (node-version-file, flutter-version)": "toolchain.node, toolchain.flutter"
+  }
+}

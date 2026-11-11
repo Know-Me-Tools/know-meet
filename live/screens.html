@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>All screens — Know Meet</title>
+<!-- og:start -->
+<meta name="description" content="Every screen and state of the Know Meet prototype, from guest meetings to recording storage settings." />
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/screens.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="All screens — Know Meet" />
+<meta property="og:description" content="Every screen and state of the Know Meet prototype, from guest meetings to recording storage settings." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/screens.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="All screens — Know Meet" />
+<meta name="twitter:description" content="Every screen and state of the Know Meet prototype, from guest meetings to recording storage settings." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css">
+<style>
+  .tools { position: sticky; top: var(--header-h); z-index: 5; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s3) var(--s4); align-items: end; padding: var(--s4) 0; margin-bottom: var(--s5); background: var(--bg); box-shadow: 0 1px 0 var(--muted); }
+  .tools .field { max-width: 520px; }
+  .search-wrap { position: relative; }
+  .search-wrap .ic { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--fg-sub); pointer-events: none; }
+  .search-wrap .input { padding-left: 44px; padding-right: 48px; }
+  .search-wrap .clear { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); }
+  .tools-right { display: grid; gap: 6px; justify-items: end; }
+  .count { font-family: var(--font-mono); font-size: 12px; color: var(--fg-sub); }
+  .groups { display: grid; gap: var(--s6); }
+  .group { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  .group-head { position: sticky; top: calc(var(--header-h) + 120px); display: grid; gap: var(--s2); }
+  .group-head h2 { font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 600; letter-spacing: 0; overflow-wrap: anywhere; }
+  .group-head h2 a { color: var(--fg); text-decoration: none; }
+  .group-head h2 a:hover { color: var(--ember-text); text-decoration: underline; }
+  .group-head p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .route-list { display: grid; gap: var(--s2); }
+  .route { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2) var(--s4); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-card); color: inherit; text-decoration: none; transition: background-color var(--dur-fast) ease; }
+  @media (hover: hover) { .route:hover { background: var(--card-hov); } .route:hover .r-title { color: var(--ember-text); } }
+  .route .r-body { display: grid; gap: 2px; min-width: 0; }
+  .route .r-body > * { display: block; min-width: 0; }
+  .route .r-title { font-weight: 600; }
+  .route .r-href { font-family: var(--font-mono); font-size: 12px; color: var(--ember-text); overflow-wrap: anywhere; }
+  .route .r-desc { color: var(--fg-sub); font-size: var(--text-sm); }
+  .route mark { background: var(--amber-soft); color: inherit; border-radius: 3px; padding: 0 1px; }
+  @media (max-width: 899px) {
+    .group { grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+    .group-head { position: static; }
+  }
+  @media (max-width: 767px) {
+    .tools { grid-template-columns: minmax(0, 1fr); position: static; }
+    .tools-right { justify-items: start; }
+    .route { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="appbar"></header>
+<main id="main" class="page">
+  <div class="page-head">
+    <div>
+      <span class="eyebrow">Screen map</span>
+      <h1>All screens</h1>
+      <p class="sub">Every screen and state in the Know Meet prototype, grouped by page. The chip shows who can reach it: anyone as a guest, only after sign-in, or an invitee from a link.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="index.html"><span data-ic="home"></span><span>Home</span></a>
+    </div>
+  </div>
+
+  <div class="tools">
+    <div class="field">
+      <label for="q">Filter screens</label>
+      <div class="search-wrap">
+        <span data-ic="search"></span>
+        <input class="input" id="q" type="search" autocomplete="off" placeholder="Try “recording”, “settings” or “#room”" aria-describedby="count">
+        <button class="icon-btn clear" type="button" id="q-clear" aria-label="Clear filter" hidden><span data-ic="x"></span></button>
+      </div>
+    </div>
+    <div class="tools-right">
+      <div class="seg" role="group" aria-label="Access">
+        <button type="button" data-access="all" aria-pressed="true">All</button>
+        <button type="button" data-access="Guest" aria-pressed="false">Guest</button>
+        <button type="button" data-access="Sign-in" aria-pressed="false">Sign-in</button>
+        <button type="button" data-access="Invitee" aria-pressed="false">Invitee</button>
+      </div>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="groups" id="groups"></div>
+  <div id="empty" hidden></div>
+</main>
+
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var KM = window.KM, h = KM.h;
+  KM.$$('[data-ic]').forEach(function (s) { s.parentNode.replaceChild(KM.icon(s.getAttribute('data-ic'), s.getAttribute('data-ic-class') || ''), s); });
+  KM.mountAppBar(KM.$('#appbar'), {});
+
+  var G = 'Guest', S = 'Sign-in', I = 'Invitee';
+  var FILES = [
+    { file: 'index.html', label: 'Home', desc: 'Canonical entry point.', routes: [
+      ['', 'Home', 'What a KnowMe meeting does, guest vs signed-in comparison, start or join with a code.', G]
+    ]},
+    { file: 'screens.html', label: 'Screen map', desc: 'This page.', routes: [
+      ['', 'All screens', 'Searchable map of every route in the prototype.', G]
+    ]},
+    { file: 'auth.html', label: 'Auth', desc: 'Sign in, sign up and verification. Sign-in honours ?next=.', routes: [
+      ['#sign-in', 'Sign in', 'Email and password, Google or Microsoft, or a one-time email link; continue as guest.', G],
+      ['#sign-up', 'Create account', 'Name, work email, password with requirements, and terms.', G],
+      ['#check-email', 'Check your email', 'Verification sent, resend with cooldown, change address, confirm.', G],
+      ['#sign-in-error', 'Sign-in error', 'Error summary for a wrong email/password pair with a reset path.', G],
+      ['#magic-link-sent', 'Sign-in link sent', 'Confirmation of the one-time link with resend.', G]
+    ]},
+    { file: 'join.html', label: 'Invitee landing', desc: 'What people see from an email, SMS or calendar invite. No account.', routes: [
+      ['#invite', 'Invitation', 'Host, title, time, join in browser, dial-in number and PIN, recording notice, add to calendar.', I],
+      ['#waiting', 'Waiting for host', 'Waiting room until the host admits you.', I],
+      ['#expired', 'Link expired', 'The meeting has ended or the link is no longer valid, with next steps.', I],
+      ['#wrong-code', 'Code not found', 'The join code didn’t match a meeting; re-enter it.', I]
+    ]},
+    { file: 'room.html', label: 'Live meeting (LiveKit)', desc: 'A real LiveKit room: video, audio, screen share and chat. Needs ./live/start.sh running.', routes: [
+      ['#start', 'Start a live meeting', 'Name the meeting and get a real join code.', G],
+      ['#lobby?code=km-dem-o01&title=Demo%20room', 'Live lobby', 'Real camera preview, mic level, device choice, share code and link.', G],
+      ['#ended', 'After the meeting', 'Real attendees, duration and chat, plus the simulated summary and delivery.', G]
+    ]},
+    { file: 'meet.html', label: 'Meeting (simulated)', desc: 'The original fully simulated room, kept for reference.', routes: [
+      ['#start', 'Start a meeting', 'Instant meeting setup; works as a guest.', G],
+      ['#lobby', 'Lobby', 'Camera, mic and speaker check before joining.', G],
+      ['#room', 'Room (signed in)', 'Full room: dots, registered agents, recording, private agent panel.', S],
+      ['#room-guest', 'Room (guest)', 'Guest room with the Concierge only and sign-in gates.', G],
+      ['#room:invite', 'Invite panel', 'Share link, email and SMS invites, dial-in details.', S],
+      ['#room:transcript', 'Live transcript', 'Transcript panel building as people talk.', S],
+      ['#room:chat', 'Group chat', 'Chat with everyone in the room, share files, mention agents.', G],
+      ['#room:chat?with=marcus', 'Private chat', 'Person-to-person messages and files only the two of you see.', G],
+      ['#room:record-consent', 'Recording consent', 'Consent dialog and banner before Room Composite recording starts.', S],
+      ['#room:agents', 'Add an agent', 'Dispatch a registered agent into the room.', S],
+      ['#ended', 'Meeting ended', 'Leave / end screen with what happens next.', G],
+      ['#processing', 'Processing', 'Finalizing to S3, pinning to IPFS, writing the summary, sending to participants.', S]
+    ]},
+    { file: 'dashboard.html', label: 'Meetings', desc: 'Your schedule, invites and delivery.', routes: [
+      ['#upcoming', 'Upcoming meetings', 'Live and upcoming meetings across connected calendars.', S],
+      ['#schedule', 'Schedule a meeting', 'Schedule form with invitees, agents and recording defaults.', S],
+      ['#meeting:partner-onboarding', 'Meeting detail · Partner onboarding review', 'Live meeting with invite and delivery status.', S],
+      ['#meeting:cohort-kickoff', 'Meeting detail · Cohort 2 kickoff', 'Later today, from Outlook.', S],
+      ['#meeting:product-sync', 'Meeting detail · Weekly product sync', 'Tomorrow, hosted by Avery Chen.', S],
+      ['#meeting:pricing-review', 'Meeting detail · Pricing review', 'Later this week, with Translator.', S],
+      ['#invites', 'Sent invites', 'Every invite with SMS, email and calendar delivery status; resend.', S],
+      ['#empty', 'No meetings yet', 'Empty state with no meetings and no calendars connected.', S]
+    ]},
+    { file: 'agents.html', label: 'Agents', desc: 'Registry, registration wizard, Concierge and dots.', routes: [
+      ['#registry', 'Agent registry', 'Registered LiveKit agents with status and owners.', S],
+      ['#register:1', 'Register · 1 Identity', 'Name, role and description of the agent.', S],
+      ['#register:2', 'Register · 2 Worker & dispatch', 'LiveKit worker name and dispatch rules.', S],
+      ['#register:3', 'Register · 3 Permissions', 'Permissions and meeting knowledge access.', S],
+      ['#register:4', 'Register · 4 Test & finish', 'Test the connection and finish.', S],
+      ['#register-error', 'Connection test failed', 'What failed in the worker test and how to fix it.', S],
+      ['#detail:scribe', 'Agent · Scribe', 'Note-taker detail.', S],
+      ['#detail:researcher', 'Agent · Researcher', 'Research agent detail.', S],
+      ['#detail:facilitator', 'Agent · Facilitator', 'Facilitation agent detail.', S],
+      ['#detail:translator', 'Agent · Translator', 'Live translation agent detail (offline).', S],
+      ['#concierge', 'Concierge', 'The system agent and exactly what guests get.', G],
+      ['#dots', 'Your dots', 'Iris settings and memory scope.', S],
+      ['#dot:iris', 'Dot · Iris', 'Your dot’s detail and private memory.', S]
+    ]},
+    { file: 'recordings.html', label: 'Recordings', desc: 'Library of recorded sessions, transcripts and storage.', routes: [
+      ['#library', 'Recordings library', 'All recorded meetings.', S],
+      ['#detail:partner-onboarding-1014', 'Recording · Partner onboarding review', 'Playback and overview.', S],
+      ['#detail:partner-onboarding-1014:transcript', 'Recording · Transcript', 'Full transcript with speakers.', S],
+      ['#detail:partner-onboarding-1014:summary', 'Recording · Summary', 'Summary and action items.', S],
+      ['#detail:partner-onboarding-1014:delivery', 'Recording · Delivery', 'Who received the transcript and summary, by email and SMS.', S],
+      ['#detail:partner-onboarding-1014:storage', 'Recording · Storage', 'S3 path and IPFS CID.', S],
+      ['#detail:design-crit-1009', 'Recording · Design critique', 'Grid-layout recording.', S],
+      ['#detail:vendor-call-1002', 'Recording · Vendor security call', 'Stored in your own bucket; summary not yet sent.', S],
+      ['#processing:partner-onboarding-1014', 'Recording still finalizing', 'Processing state while egress and pinning finish.', S],
+      ['#empty', 'No recordings yet', 'Empty library.', S]
+    ]},
+    { file: 'settings.html', label: 'Settings', desc: 'Account, connections, storage and delivery.', routes: [
+      ['#account', 'Account', 'Profile and sign-in details.', S],
+      ['#livekit', 'LiveKit', 'Project URL and API key variables (masked).', S],
+      ['#telnyx-sms', 'Telnyx SMS', 'Messaging profile and sender for invites and summary links.', S],
+      ['#telnyx-voice', 'Telnyx voice dial-in', 'Inbound numbers and SIP trunk into LiveKit SIP.', S],
+      ['#calendars', 'Calendars', 'Connected calendars.', S],
+      ['#calendar-connect:google', 'Connect Google Calendar', 'Connection flow for Google.', S],
+      ['#calendar-connect:outlook', 'Connect Microsoft 365 / Outlook', 'Connection flow for Microsoft.', S],
+      ['#calendar-connect:caldav', 'Connect iCloud / CalDAV', 'Server URL and app password.', S],
+      ['#storage', 'Storage', 'KnowMe-managed or bring your own.', S],
+      ['#storage-s3', 'S3-compatible storage', 'Endpoint, bucket, path-style and credentials.', S],
+      ['#storage-ipfs', 'IPFS pinning', 'Pinning service endpoint.', S],
+      ['#storage-test-failed', 'Storage test failed', 'What failed and how to fix it.', S],
+      ['#recording', 'Recording & transcription', 'Defaults for recording, layout, format and transcription.', S],
+      ['#delivery', 'Delivery', 'Automatic transcript and summary delivery.', S],
+      ['#templates', 'Message templates', 'Email and SMS previews.', S],
+      ['#notifications', 'Notifications', 'What you’re notified about and how.', S]
+    ]}
+  ];
+
+  var CHIP = { Guest: 'chip chip-green', 'Sign-in': 'chip', Invitee: 'chip chip-cyan' };
+  var ICON = { Guest: 'globe', 'Sign-in': 'lock', Invitee: 'mail' };
+  var total = FILES.reduce(function (n, f) { return n + f.routes.length; }, 0);
+  var state = { q: '', access: 'all' };
+
+  /* restore from URL (?q=&access=) */
+  try {
+    var sp = new URLSearchParams(location.search);
+    state.q = (sp.get('q') || '').slice(0, 80);
+    var a = sp.get('access');
+    if (a === G || a === S || a === I) state.access = a;
+  } catch (_) { /* old browser: defaults */ }
+
+  var input = KM.$('#q'), clearBtn = KM.$('#q-clear'), groupsEl = KM.$('#groups'), emptyEl = KM.$('#empty'), countEl = KM.$('#count');
+  input.value = state.q;
+
+  function highlight(text, q) {
+    if (!q) return text;
+    var i = text.toLowerCase().indexOf(q);
+    if (i < 0) return text;
+    return [text.slice(0, i), h('mark', { text: text.slice(i, i + q.length) }), text.slice(i + q.length)];
+  }
+  function syncUrl() {
+    var parts = [];
+    if (state.q) parts.push('q=' + encodeURIComponent(state.q));
+    if (state.access !== 'all') parts.push('access=' + encodeURIComponent(state.access));
+    try { history.replaceState(null, '', location.pathname + (parts.length ? '?' + parts.join('&') : '')); } catch (_) { /* file:// */ }
+  }
+  function render() {
+    var q = state.q.trim().toLowerCase();
+    var shown = 0;
+    KM.clear(groupsEl);
+    FILES.forEach(function (f) {
+      var rows = f.routes.filter(function (r) {
+        if (state.access !== 'all' && r[3] !== state.access) return false;
+        if (!q) return true;
+        return (f.file + r[0] + ' ' + r[1] + ' ' + r[2] + ' ' + r[3] + ' ' + f.label).toLowerCase().indexOf(q) > -1;
+      });
+      if (!rows.length) return;
+      shown += rows.length;
+      var gid = 'g-' + f.file.replace(/\W/g, '-');
+      groupsEl.appendChild(h('section', { class: 'group', 'aria-labelledby': gid },
+        h('div', { class: 'group-head' },
+          h('span', { class: 'eyebrow eyebrow-sub', text: f.label + ' · ' + rows.length + (rows.length === 1 ? ' screen' : ' screens') }),
+          h('h2', { id: gid }, h('a', { href: f.file, text: f.file })),
+          h('p', { text: f.desc })),
+        h('ul', { class: 'route-list' }, rows.map(function (r) {
+          var href = f.file + r[0];
+          return h('li', null, h('a', { class: 'route', href: href },
+            h('span', { class: 'r-body' },
+              h('span', { class: 'r-title' }, highlight(r[1], q)),
+              h('span', { class: 'r-href' }, highlight(href, q)),
+              h('span', { class: 'r-desc' }, highlight(r[2], q))),
+            h('span', { class: CHIP[r[3]] }, KM.icon(ICON[r[3]]), r[3])));
+        }))));
+    });
+    countEl.textContent = shown === total ? 'Showing all ' + total + ' screens' : 'Showing ' + shown + ' of ' + total + ' screens';
+    clearBtn.hidden = !state.q;
+    KM.clear(emptyEl);
+    emptyEl.hidden = shown > 0;
+    if (!shown) {
+      emptyEl.appendChild(h('div', { class: 'empty empty-center' },
+        h('div', { class: 'empty-icon' }, KM.icon('search')),
+        h('h3', { text: 'No screens match' }),
+        h('p', { text: 'Nothing matches “' + state.q + '”' + (state.access !== 'all' ? ' with ' + state.access + ' access' : '') + '. Try a page name like “settings”, a route like “#room”, or clear the filters.' }),
+        h('button', { class: 'btn', type: 'button', onclick: function () { state.q = ''; state.access = 'all'; input.value = ''; syncSeg(); syncUrl(); render(); input.focus(); } }, KM.icon('x'), h('span', { text: 'Clear filters' }))));
+    }
+  }
+  function syncSeg() {
+    KM.$$('.seg [data-access]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-access') === state.access ? 'true' : 'false'); });
+  }
+  input.addEventListener('input', function () { state.q = input.value.slice(0, 80); syncUrl(); render(); });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; state.q = ''; syncUrl(); render(); } });
+  clearBtn.addEventListener('click', function () { input.value = ''; state.q = ''; syncUrl(); render(); input.focus(); });
+  KM.$$('.seg [data-access]').forEach(function (b) {
+    b.addEventListener('click', function () { state.access = b.getAttribute('data-access'); syncSeg(); syncUrl(); render(); });
+  });
+  syncSeg();
+  render();
+})();
+</script>
+</body>
+</html>

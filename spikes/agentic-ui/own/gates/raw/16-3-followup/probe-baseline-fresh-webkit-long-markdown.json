@@ -1,0 +1,474 @@
+{
+  "label": "baseline-fresh",
+  "url": "http://127.0.0.1:4296/",
+  "scenario": "long-markdown",
+  "browser": "webkit",
+  "at": "2026-11-11T08:46:39.354Z",
+  "results": [
+    {
+      "run": 1,
+      "topFrameGaps": [
+        {
+          "startRel": 276,
+          "ms": 1082,
+          "textLenAtStart": 657
+        },
+        {
+          "startRel": 1358,
+          "ms": 40,
+          "textLenAtStart": 828
+        },
+        {
+          "startRel": 5877,
+          "ms": 28,
+          "textLenAtStart": 17159
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 282,
+          "ms": 1075
+        },
+        {
+          "startRel": -160,
+          "ms": 73
+        },
+        {
+          "startRel": -192,
+          "ms": 32
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-fresh-1-mwbvjr24",
+          "start": 2,
+          "end": 5893,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 84,
+          "end": 87,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 100,
+          "end": 102,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 249,
+          "end": 252,
+          "size": 974
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 280,
+          "end": 285,
+          "size": 2910
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 280,
+          "end": 285,
+          "size": 2872
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 280,
+          "end": 287,
+          "size": 16523
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1392,
+          "end": 1396,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1402,
+          "end": 1405,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 2,
+      "topFrameGaps": [
+        {
+          "startRel": 295,
+          "ms": 1096,
+          "textLenAtStart": 745
+        },
+        {
+          "startRel": 1391,
+          "ms": 33,
+          "textLenAtStart": 913
+        },
+        {
+          "startRel": 1493,
+          "ms": 19,
+          "textLenAtStart": 4331
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 306,
+          "ms": 1077
+        },
+        {
+          "startRel": -152,
+          "ms": 73
+        },
+        {
+          "startRel": 1383,
+          "ms": 36
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-fresh-2-mwbvjwtw",
+          "start": 2,
+          "end": 5881,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 67,
+          "end": 69,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 118,
+          "end": 120,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 266,
+          "end": 269,
+          "size": 974
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 299,
+          "end": 306,
+          "size": 16523
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 300,
+          "end": 304,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 300,
+          "end": 304,
+          "size": 2910
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1388,
+          "end": 1390,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1392,
+          "end": 1394,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 3,
+      "topFrameGaps": [
+        {
+          "startRel": 288,
+          "ms": 1109,
+          "textLenAtStart": 732
+        },
+        {
+          "startRel": 1397,
+          "ms": 34,
+          "textLenAtStart": 886
+        },
+        {
+          "startRel": 5888,
+          "ms": 24,
+          "textLenAtStart": 17230
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 294,
+          "ms": 1094
+        },
+        {
+          "startRel": -150,
+          "ms": 72
+        },
+        {
+          "startRel": 1388,
+          "ms": 38
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-fresh-3-mwbvk2m0",
+          "start": 1,
+          "end": 5898,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 75,
+          "end": 78,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 109,
+          "end": 112,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 259,
+          "end": 261,
+          "size": 974
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 292,
+          "end": 297,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 292,
+          "end": 297,
+          "size": 2910
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 292,
+          "end": 298,
+          "size": 16523
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1394,
+          "end": 1396,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1398,
+          "end": 1400,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 4,
+      "topFrameGaps": [
+        {
+          "startRel": 296,
+          "ms": 1100,
+          "textLenAtStart": 732
+        },
+        {
+          "startRel": 1396,
+          "ms": 36,
+          "textLenAtStart": 886
+        },
+        {
+          "startRel": 5879,
+          "ms": 23,
+          "textLenAtStart": 17174
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 302,
+          "ms": 1085
+        },
+        {
+          "startRel": -154,
+          "ms": 72
+        },
+        {
+          "startRel": 1387,
+          "ms": 39
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-fresh-4-mwbvk8ck",
+          "start": 2,
+          "end": 5888,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 85,
+          "end": 88,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 101,
+          "end": 104,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 268,
+          "end": 270,
+          "size": 974
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 300,
+          "end": 307,
+          "size": 16523
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 301,
+          "end": 305,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 301,
+          "end": 305,
+          "size": 2910
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1393,
+          "end": 1395,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1397,
+          "end": 1400,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 5,
+      "topFrameGaps": [
+        {
+          "startRel": 277,
+          "ms": 1097,
+          "textLenAtStart": 677
+        },
+        {
+          "startRel": 1374,
+          "ms": 42,
+          "textLenAtStart": 860
+        },
+        {
+          "startRel": 5877,
+          "ms": 20,
+          "textLenAtStart": 17195
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 283,
+          "ms": 1090
+        },
+        {
+          "startRel": -167,
+          "ms": 75
+        },
+        {
+          "startRel": 1373,
+          "ms": 32
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-baseline-fresh-5-mwbvke42",
+          "start": 1,
+          "end": 5884,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 65,
+          "end": 68,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 98,
+          "end": 101,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-Dz2EL9rU.js",
+          "start": 248,
+          "end": 251,
+          "size": 974
+        },
+        {
+          "name": "/assets/github-light-EUqPIrTm.js",
+          "start": 282,
+          "end": 286,
+          "size": 2872
+        },
+        {
+          "name": "/assets/github-dark-C-LZuMrd.js",
+          "start": 282,
+          "end": 286,
+          "size": 2910
+        },
+        {
+          "name": "/assets/typescript-DVfyLS1i.js",
+          "start": 282,
+          "end": 288,
+          "size": 16523
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 1410,
+          "end": 1413,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 1419,
+          "end": 1421,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    }
+  ]
+}

@@ -1,0 +1,6667 @@
+{
+ "chromium": {
+  "browser": "chromium 158.0.8127.18",
+  "replacedRuns": [
+   {
+    "prototype": "own",
+    "scenarioId": "cancel-mid-stream",
+    "repeat": 4,
+    "runStatus": "finished",
+    "error": null,
+    "startedAt": "2026-11-11T04:31:20.977Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "cancel-mid-stream",
+    "repeat": 4,
+    "runStatus": null,
+    "error": "page.evaluate: Target crashed ",
+    "startedAt": "2026-11-11T04:32:48.208Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "a2ui-over-agui",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:14.585Z"
+   },
+   {
+    "prototype": "own",
+    "scenarioId": "a2ui-over-agui",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:16.963Z"
+   },
+   {
+    "prototype": "own",
+    "scenarioId": "state-snapshot-delta",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:19.056Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "state-snapshot-delta",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:21.432Z"
+   },
+   {
+    "prototype": "own",
+    "scenarioId": "custom-chunks",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:23.673Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "custom-chunks",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:25.479Z"
+   },
+   {
+    "prototype": "own",
+    "scenarioId": "parallel-tool-calls",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:27.198Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "parallel-tool-calls",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:28.882Z"
+   },
+   {
+    "prototype": "own",
+    "scenarioId": "run-error",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:30.952Z"
+   },
+   {
+    "prototype": "hybrid",
+    "scenarioId": "run-error",
+    "repeat": 4,
+    "runStatus": "error",
+    "error": null,
+    "startedAt": "2026-11-11T04:34:32.732Z"
+   }
+  ],
+  "runs": 300,
+  "errors": 0,
+  "timedOut": 0,
+  "loadavg1": {
+   "min": 5.33,
+   "median": 9.01,
+   "max": 57.93
+  }
+ },
+ "chromiumMetrics": {
+  "renderComplete": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 191.35,
+     "p90": 192.78,
+     "p95": 193.59
+    },
+    "o": {
+     "n": 10,
+     "median": 186,
+     "p90": 186.52,
+     "p95": 187.06
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.25,
+     "ciLow": -6.049999999999997,
+     "ciHigh": -5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 86690.6,
+     "p90": 86754.25,
+     "p95": 86818.825
+    },
+    "o": {
+     "n": 10,
+     "median": 86686.35,
+     "p90": 86732.34,
+     "p95": 86819.81999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -12.950000000004366,
+     "ciLow": -24.19999999999709,
+     "ciHigh": -2.900000000001455,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 456.95,
+     "p90": 465.71999999999997,
+     "p95": 467.16
+    },
+    "o": {
+     "n": 10,
+     "median": 438.04999999999995,
+     "p90": 450.98,
+     "p95": 455.39
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -16.30000000000001,
+     "ciLow": -22.19999999999999,
+     "ciHigh": -11.5,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 1011.7,
+     "p90": 1014.61,
+     "p95": 1014.6550000000001
+    },
+    "o": {
+     "n": 10,
+     "median": 1006.2,
+     "p90": 1026.3,
+     "p95": 1026.3
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.699999999999989,
+     "ciLow": -6.649999999999977,
+     "ciHigh": 3.3999999999999773,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 272.7,
+     "p90": 274.69,
+     "p95": 276.445
+    },
+    "o": {
+     "n": 10,
+     "median": 265.5,
+     "p90": 266.44,
+     "p95": 267.07
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -7.150000000000006,
+     "ciLow": -8.099999999999994,
+     "ciHigh": -6.700000000000017,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 273.3,
+     "p90": 277.15999999999997,
+     "p95": 281.48
+    },
+    "o": {
+     "n": 10,
+     "median": 265.85,
+     "p90": 266.44,
+     "p95": 267.07
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -7.650000000000006,
+     "ciLow": -8.349999999999994,
+     "ciHigh": -6.300000000000011,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 272.95,
+     "p90": 274.16,
+     "p95": 274.43
+    },
+    "o": {
+     "n": 10,
+     "median": 265.65,
+     "p90": 269.43,
+     "p95": 271.365
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -7.25,
+     "ciLow": -8.199999999999989,
+     "ciHigh": -4.600000000000023,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 1149.05,
+     "p90": 1171.5,
+     "p95": 1178.25
+    },
+    "o": {
+     "n": 10,
+     "median": 1131.3,
+     "p90": 1148.48,
+     "p95": 1156.49
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -18.200000000000045,
+     "ciLow": -39.35000000000002,
+     "ciHigh": -1.099999999999909,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 5824.5,
+     "p90": 5836.64,
+     "p95": 5837.2699999999995
+    },
+    "o": {
+     "n": 10,
+     "median": 5825.549999999999,
+     "p90": 5835.25,
+     "p95": 5852.125
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -8.549999999999727,
+     "ciLow": -13.399999999999636,
+     "ciHigh": 1.5,
+     "positive": 3,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 272.5,
+     "p90": 274,
+     "p95": 278.5
+    },
+    "o": {
+     "n": 10,
+     "median": 272.65,
+     "p90": 273.2,
+     "p95": 273.2
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0.15000000000000568,
+     "ciLow": -0.5,
+     "ciHigh": 0.6999999999999886,
+     "positive": 6,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 691.75,
+     "p90": 708.19,
+     "p95": 710.395
+    },
+    "o": {
+     "n": 10,
+     "median": 686.3,
+     "p90": 687,
+     "p95": 687
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.699999999999989,
+     "ciLow": -13.200000000000045,
+     "ciHigh": -5.25,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 491.65,
+     "p90": 492.90999999999997,
+     "p95": 492.955
+    },
+    "o": {
+     "n": 10,
+     "median": 486.1,
+     "p90": 488.48999999999995,
+     "p95": 488.895
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.44999999999996,
+     "ciLow": -6.300000000000011,
+     "ciHigh": -4.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 111.25,
+     "p90": 111.74,
+     "p95": 112.36999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 106.19999999999999,
+     "p90": 107.21,
+     "p95": 108.155
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.050000000000004,
+     "ciLow": -5.850000000000001,
+     "ciHigh": -4.3500000000000085,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 112.05,
+     "p90": 112.61,
+     "p95": 113.555
+    },
+    "o": {
+     "n": 10,
+     "median": 106.35,
+     "p90": 106.96000000000001,
+     "p95": 107.23
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.499999999999993,
+     "ciLow": -6.5,
+     "ciHigh": -4.949999999999996,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 251.14999999999998,
+     "p90": 251.83999999999997,
+     "p95": 252.47
+    },
+    "o": {
+     "n": 10,
+     "median": 246.25,
+     "p90": 247.10999999999999,
+     "p95": 247.155
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -4.450000000000003,
+     "ciLow": -5.349999999999994,
+     "ciHigh": -4.150000000000006,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "renderLag": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.23999999999999913,
+     "p95": 1.3199999999999974
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 1,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 55.25,
+     "p90": 57.41,
+     "p95": 57.455
+    },
+    "o": {
+     "n": 10,
+     "median": 41.5,
+     "p90": 62.129999999999995,
+     "p95": 64.96499999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -8.25,
+     "ciLow": -20.349999999999998,
+     "ciHigh": 4.700000000000003,
+     "positive": 3,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 11.2,
+     "p90": 18.99999999999998,
+     "p95": 43.29999999999994
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -11.2,
+     "ciLow": -13,
+     "ciHigh": -10.8,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.51,
+     "p95": 0.5549999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 7,
+     "p90": 7.63,
+     "p95": 7.765
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 6.9,
+     "ciLow": 6.6000000000000005,
+     "ciHigh": 7.3,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   }
+  ],
+  "ttft": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 60.05,
+     "p90": 62.54,
+     "p95": 64.07
+    },
+    "o": {
+     "n": 10,
+     "median": 35.150000000000006,
+     "p90": 36.06,
+     "p95": 36.33
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -25.400000000000002,
+     "ciLow": -26.900000000000002,
+     "ciHigh": -24.799999999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 63.95,
+     "p90": 68.91000000000001,
+     "p95": 68.955
+    },
+    "o": {
+     "n": 10,
+     "median": 23,
+     "p90": 27.95,
+     "p95": 28.174999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -40.7,
+     "ciLow": -44.45,
+     "ciHigh": -37.35,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 60.099999999999994,
+     "p90": 62.62,
+     "p95": 63.160000000000004
+    },
+    "o": {
+     "n": 10,
+     "median": 34.95,
+     "p90": 35.98,
+     "p95": 36.34
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -25.25,
+     "ciLow": -26.85,
+     "ciHigh": -23.95,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 58.6,
+     "p90": 59.07,
+     "p95": 59.385
+    },
+    "o": {
+     "n": 10,
+     "median": 26.35,
+     "p90": 27.630000000000003,
+     "p95": 27.765
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -32.5,
+     "ciLow": -33.800000000000004,
+     "ciHigh": -31,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 60.05,
+     "p90": 61.62,
+     "p95": 62.61
+    },
+    "o": {
+     "n": 10,
+     "median": 34.95,
+     "p90": 35.34,
+     "p95": 35.97
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -25,
+     "ciLow": -26,
+     "ciHigh": -24.500000000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 60.5,
+     "p90": 61.23,
+     "p95": 62.26499999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 34.849999999999994,
+     "p90": 36.730000000000004,
+     "p95": 37.315
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -25.6,
+     "ciLow": -26.150000000000002,
+     "ciHigh": -24.299999999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 59.95,
+     "p90": 60.879999999999995,
+     "p95": 61.24
+    },
+    "o": {
+     "n": 10,
+     "median": 35.25,
+     "p90": 36.42,
+     "p95": 38.309999999999995
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.849999999999998,
+     "ciLow": -25.6,
+     "ciHigh": -23.1,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 45.4,
+     "p90": 47.27,
+     "p95": 47.585
+    },
+    "o": {
+     "n": 10,
+     "median": 38.7,
+     "p90": 43.529999999999994,
+     "p95": 44.565
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -6.449999999999999,
+     "ciLow": -8.100000000000001,
+     "ciHigh": -3.6499999999999986,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 67.2,
+     "p90": 70.19999999999999,
+     "p95": 70.64999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 35.75,
+     "p90": 39.339999999999996,
+     "p95": 39.52
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -30.75,
+     "ciLow": -34.25,
+     "ciHigh": -27.85000000000001,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 145.45,
+     "p90": 146.77,
+     "p95": 148.885
+    },
+    "o": {
+     "n": 10,
+     "median": 120.05,
+     "p90": 121.35,
+     "p95": 121.575
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -25.450000000000003,
+     "ciLow": -25.950000000000003,
+     "ciHigh": -24.550000000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 74.45,
+     "p90": 82.56,
+     "p95": 86.42999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 50.05,
+     "p90": 53.13,
+     "p95": 53.714999999999996
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.799999999999997,
+     "ciLow": -27,
+     "ciHigh": -23.799999999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 346.15,
+     "p90": 348.20000000000005,
+     "p95": 348.65000000000003
+    },
+    "o": {
+     "n": 10,
+     "median": 321.25,
+     "p90": 323.37,
+     "p95": 323.685
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.950000000000017,
+     "ciLow": -25.55000000000001,
+     "ciHigh": -24.099999999999994,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 59.9,
+     "p90": 62.57,
+     "p95": 62.885
+    },
+    "o": {
+     "n": 10,
+     "median": 35.6,
+     "p90": 36.43,
+     "p95": 36.565
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.799999999999997,
+     "ciLow": -25.850000000000005,
+     "ciHigh": -24.299999999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 59.6,
+     "p90": 61.959999999999994,
+     "p95": 62.68
+    },
+    "o": {
+     "n": 10,
+     "median": 34.8,
+     "p90": 36.29,
+     "p95": 38.495
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.9,
+     "ciLow": -25.800000000000004,
+     "ciHigh": -23.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 165.25,
+     "p90": 166.69,
+     "p95": 167.545
+    },
+    "o": {
+     "n": 10,
+     "median": 140.7,
+     "p90": 142.12,
+     "p95": 142.21
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.249999999999986,
+     "ciLow": -25.10000000000001,
+     "ciHigh": -23.39999999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "longTasks": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 4.999999999999982,
+     "p95": 27.499999999999947
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 1,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 212,
+     "p90": 225.4,
+     "p95": 227.2
+    },
+    "o": {
+     "n": 10,
+     "median": 263.5,
+     "p90": 275.9,
+     "p95": 293.44999999999993
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 66.5,
+     "ciLow": 31,
+     "ciHigh": 95,
+     "positive": 9,
+     "negative": 1,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 76.5,
+     "p90": 78.8,
+     "p95": 82.39999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 76.5,
+     "ciLow": 75,
+     "ciHigh": 78,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   }
+  ],
+  "taskTime": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 95.4,
+     "p90": 98.18,
+     "p95": 99.44
+    },
+    "o": {
+     "n": 10,
+     "median": 60.55,
+     "p90": 68,
+     "p95": 68
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -30.45,
+     "ciLow": -37.400000000000006,
+     "ciHigh": -28.650000000000002,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 11644.7,
+     "p90": 12156.91,
+     "p95": 12178.555
+    },
+    "o": {
+     "n": 10,
+     "median": 7358.5,
+     "p90": 8328.32,
+     "p95": 8408.51
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3654.8999999999996,
+     "ciLow": -4475.35,
+     "ciHigh": -3518.0999999999995,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 226.75,
+     "p90": 232.02,
+     "p95": 234.35999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 175.75,
+     "p90": 186.04,
+     "p95": 192.51999999999998
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -51,
+     "ciLow": -59.5,
+     "ciHigh": -41.900000000000006,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 163.3,
+     "p90": 175.67999999999998,
+     "p95": 186.83999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 115.45,
+     "p90": 125.19,
+     "p95": 126.495
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -51.949999999999996,
+     "ciLow": -65.9,
+     "ciHigh": -35.9,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 108.05,
+     "p90": 116.34,
+     "p95": 120.11999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 59.8,
+     "p90": 61.31999999999999,
+     "p95": 63.66
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -48.599999999999994,
+     "ciLow": -53.05,
+     "ciHigh": -45.199999999999996,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 110.2,
+     "p90": 115.07,
+     "p95": 117.18499999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 62.8,
+     "p90": 66.44,
+     "p95": 69.77
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -48.5,
+     "ciLow": -49.300000000000004,
+     "ciHigh": -46.50000000000001,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 107.45,
+     "p90": 111.7,
+     "p95": 112.6
+    },
+    "o": {
+     "n": 10,
+     "median": 59.9,
+     "p90": 64.59,
+     "p95": 66.345
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -48.35,
+     "ciLow": -49.50000000000001,
+     "ciHigh": -45.14999999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 1191.1,
+     "p90": 1210.69,
+     "p95": 1219.195
+    },
+    "o": {
+     "n": 10,
+     "median": 722.6,
+     "p90": 742.39,
+     "p95": 746.8449999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -469.45,
+     "ciLow": -503.00000000000006,
+     "ciHigh": -456.45000000000005,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 2392.7,
+     "p90": 2506.06,
+     "p95": 2537.3799999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 806.8,
+     "p90": 829.04,
+     "p95": 843.62
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1594.6,
+     "ciLow": -1655.1999999999998,
+     "ciHigh": -1538.3,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 83.75,
+     "p90": 86.69999999999999,
+     "p95": 89.39999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 56.45,
+     "p90": 59.13999999999999,
+     "p95": 62.91999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -26.5,
+     "ciLow": -29.200000000000003,
+     "ciHigh": -24.45,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 191.8,
+     "p90": 204.42,
+     "p95": 205.41
+    },
+    "o": {
+     "n": 10,
+     "median": 107.65,
+     "p90": 116.21000000000001,
+     "p95": 119.85499999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -85.89999999999999,
+     "ciLow": -93.54999999999998,
+     "ciHigh": -80.79999999999998,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 127.19999999999999,
+     "p90": 140.03,
+     "p95": 143.315
+    },
+    "o": {
+     "n": 10,
+     "median": 80,
+     "p90": 85.67999999999999,
+     "p95": 87.38999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -47.449999999999996,
+     "ciLow": -55.1,
+     "ciHigh": -43.2,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 66,
+     "p90": 74.43,
+     "p95": 74.565
+    },
+    "o": {
+     "n": 10,
+     "median": 43.349999999999994,
+     "p90": 48,
+     "p95": 48
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.049999999999997,
+     "ciLow": -26.400000000000006,
+     "ciHigh": -22.55,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 67.05000000000001,
+     "p90": 71.16999999999999,
+     "p95": 75.085
+    },
+    "o": {
+     "n": 10,
+     "median": 43.25,
+     "p90": 48.94,
+     "p95": 50.919999999999995
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -24.1,
+     "ciLow": -26.1,
+     "ciHigh": -22.60000000000001,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 87.85,
+     "p90": 95.2,
+     "p95": 95.2
+    },
+    "o": {
+     "n": 10,
+     "median": 52.7,
+     "p90": 60.51,
+     "p95": 66.40499999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -34.9,
+     "ciLow": -37.2,
+     "ciHigh": -31.7,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "scriptTime": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 48.45,
+     "p90": 49.58,
+     "p95": 49.94
+    },
+    "o": {
+     "n": 10,
+     "median": 31.299999999999997,
+     "p90": 33.91,
+     "p95": 33.955
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -16.9,
+     "ciLow": -18.200000000000003,
+     "ciHigh": -15.600000000000001,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 5745.45,
+     "p90": 6199.8,
+     "p95": 6223.65
+    },
+    "o": {
+     "n": 10,
+     "median": 3745.5,
+     "p90": 4560.36,
+     "p95": 4633.9800000000005
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1759.5,
+     "ciLow": -2118.3,
+     "ciHigh": -1636.0499999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 86.15,
+     "p90": 89.80999999999999,
+     "p95": 90.755
+    },
+    "o": {
+     "n": 10,
+     "median": 52.4,
+     "p90": 55.11,
+     "p95": 56.055
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -34.650000000000006,
+     "ciLow": -37.25,
+     "ciHigh": -30.000000000000007,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 88.45,
+     "p90": 99.01,
+     "p95": 102.65499999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 53.5,
+     "p90": 57.15,
+     "p95": 57.375
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -36.650000000000006,
+     "ciLow": -48.699999999999996,
+     "ciHigh": -31.300000000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 54.75,
+     "p90": 57.86,
+     "p95": 59.48
+    },
+    "o": {
+     "n": 10,
+     "median": 24.45,
+     "p90": 25.42,
+     "p95": 25.96
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -30.7,
+     "ciLow": -32.6,
+     "ciHigh": -29.000000000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 55.7,
+     "p90": 59.54,
+     "p95": 60.62
+    },
+    "o": {
+     "n": 10,
+     "median": 25,
+     "p90": 26.03,
+     "p95": 26.165
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -31.200000000000003,
+     "ciLow": -32.45,
+     "ciHigh": -29.700000000000003,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 54.95,
+     "p90": 57.32,
+     "p95": 57.41
+    },
+    "o": {
+     "n": 10,
+     "median": 24.799999999999997,
+     "p90": 25.330000000000002,
+     "p95": 25.465
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -30.5,
+     "ciLow": -31.599999999999994,
+     "ciHigh": -29.699999999999996,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 1085.6999999999998,
+     "p90": 1098.4499999999998,
+     "p95": 1109.0249999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 575.6,
+     "p90": 589.94,
+     "p95": 595.97
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -508.65,
+     "ciLow": -542.3499999999999,
+     "ciHigh": -494.3,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 1624.1,
+     "p90": 1701.83,
+     "p95": 1719.0649999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 333.9,
+     "p90": 360.24,
+     "p95": 363.12
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1302.65,
+     "ciLow": -1342.5,
+     "ciHigh": -1253.6,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 43.95,
+     "p90": 44.67,
+     "p95": 44.985
+    },
+    "o": {
+     "n": 10,
+     "median": 24.75,
+     "p90": 26.09,
+     "p95": 27.394999999999996
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -18.55,
+     "ciLow": -19.75,
+     "ciHigh": -17.450000000000003,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 98.55000000000001,
+     "p90": 105.3,
+     "p95": 105.75
+    },
+    "o": {
+     "n": 10,
+     "median": 43.75,
+     "p90": 45.81,
+     "p95": 47.205
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -54.55,
+     "ciLow": -58.95,
+     "ciHigh": -53.85,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 68.7,
+     "p90": 74.65,
+     "p95": 75.325
+    },
+    "o": {
+     "n": 10,
+     "median": 36.75,
+     "p90": 38.46,
+     "p95": 38.73
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -32.3,
+     "ciLow": -35.7,
+     "ciHigh": -30.200000000000003,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 36.65,
+     "p90": 39.43,
+     "p95": 40.015
+    },
+    "o": {
+     "n": 10,
+     "median": 19.799999999999997,
+     "p90": 20.74,
+     "p95": 20.92
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -16.949999999999996,
+     "ciLow": -19.599999999999998,
+     "ciHigh": -15.899999999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 35.95,
+     "p90": 38,
+     "p95": 38.449999999999996
+    },
+    "o": {
+     "n": 10,
+     "median": 18.7,
+     "p90": 19.79,
+     "p95": 20.195
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -16.95,
+     "ciLow": -18.25,
+     "ciHigh": -16.400000000000002,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 44.7,
+     "p90": 48.91,
+     "p95": 48.955
+    },
+    "o": {
+     "n": 10,
+     "median": 21.4,
+     "p90": 24.6,
+     "p95": 25.049999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -23.4,
+     "ciLow": -24.949999999999996,
+     "ciHigh": -22.549999999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "dropped": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 2,
+     "p90": 2,
+     "p95": 2
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 2,
+     "ciLow": 1,
+     "ciHigh": 2,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 23,
+     "p90": 24.1,
+     "p95": 24.549999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 15.5,
+     "p90": 16.1,
+     "p95": 16.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -7.5,
+     "ciLow": -10,
+     "ciHigh": -6.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 3,
+     "p90": 3,
+     "p95": 3
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 3,
+     "ciLow": 2,
+     "ciHigh": 3,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   }
+  ],
+  "inputP50": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 7.8999999999999995,
+     "p90": 18.01,
+     "p95": 18.055
+    },
+    "o": {
+     "n": 10,
+     "median": 11.649999999999999,
+     "p90": 15.56,
+     "p95": 15.83
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0.9499999999999993,
+     "ciLow": -7.050000000000001,
+     "ciHigh": 10,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 9.5,
+     "p90": 10.129999999999999,
+     "p95": 10.265
+    },
+    "o": {
+     "n": 10,
+     "median": 9.275,
+     "p90": 9.83,
+     "p95": 9.965
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.47500000000000053,
+     "ciLow": -0.7000000000000002,
+     "ciHigh": 0.10000000000000053,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 12.175,
+     "p90": 17.215000000000003,
+     "p95": 17.282500000000002
+    },
+    "o": {
+     "n": 10,
+     "median": 13.625,
+     "p90": 16.76,
+     "p95": 17.479999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0.7249999999999996,
+     "ciLow": -4.400000000000002,
+     "ciHigh": 3.375,
+     "positive": 7,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 9.45,
+     "p90": 13.57,
+     "p95": 13.885
+    },
+    "o": {
+     "n": 10,
+     "median": 8.7,
+     "p90": 12.305,
+     "p95": 12.5525
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.7500000000000004,
+     "ciLow": -4.4,
+     "ciHigh": 3.4250000000000003,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 3.6,
+     "p90": 18.2,
+     "p95": 18.2
+    },
+    "o": {
+     "n": 10,
+     "median": 13.35,
+     "p90": 14.7,
+     "p95": 15.149999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 3.9,
+     "ciLow": -4,
+     "ciHigh": 11.25,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 12.899999999999999,
+     "p90": 17.959999999999997,
+     "p95": 19.129999999999995
+    },
+    "o": {
+     "n": 10,
+     "median": 13.55,
+     "p90": 15.49,
+     "p95": 16.345
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.4999999999999991,
+     "ciLow": -6.3500000000000005,
+     "ciHigh": 10.7,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 10.8,
+     "p90": 17.99,
+     "p95": 18.395
+    },
+    "o": {
+     "n": 10,
+     "median": 13,
+     "p90": 16,
+     "p95": 16
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1.3000000000000003,
+     "ciLow": -5.399999999999999,
+     "ciHigh": 10.5,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 34.275,
+     "p90": 42.815000000000005,
+     "p95": 44.457499999999996
+    },
+    "o": {
+     "n": 10,
+     "median": 25.35,
+     "p90": 37.97,
+     "p95": 39.184999999999995
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.625000000000002,
+     "ciLow": -21.150000000000002,
+     "ciHigh": -2.0500000000000007,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 12.1,
+     "p90": 13.12,
+     "p95": 13.21
+    },
+    "o": {
+     "n": 10,
+     "median": 9.55,
+     "p90": 10.12,
+     "p95": 10.21
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -2.575,
+     "ciLow": -3,
+     "ciHigh": -1.6499999999999995,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 16.95,
+     "p90": 18.54,
+     "p95": 19.169999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 11.45,
+     "p90": 17.509999999999998,
+     "p95": 18.005
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.8000000000000007,
+     "ciLow": -8.9,
+     "ciHigh": 1.1999999999999993,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 7.95,
+     "p90": 16.22,
+     "p95": 16.31
+    },
+    "o": {
+     "n": 10,
+     "median": 5.95,
+     "p90": 15.3,
+     "p95": 15.3
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.0999999999999996,
+     "ciLow": -5.500000000000001,
+     "ciHigh": 3.25,
+     "positive": 3,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 17,
+     "p90": 18.05,
+     "p95": 18.275
+    },
+    "o": {
+     "n": 10,
+     "median": 7.550000000000001,
+     "p90": 17.12,
+     "p95": 17.21
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.6499999999999995,
+     "ciLow": -11.95,
+     "ciHigh": 1.5499999999999998,
+     "positive": 3,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 16,
+     "p90": 18.53,
+     "p95": 18.665
+    },
+    "o": {
+     "n": 10,
+     "median": 14.25,
+     "p90": 16.01,
+     "p95": 16.055
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.9500000000000002,
+     "ciLow": -6.85,
+     "ciHigh": 5.3,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 3.15,
+     "p90": 17.82,
+     "p95": 17.91
+    },
+    "o": {
+     "n": 10,
+     "median": 12.600000000000001,
+     "p90": 15.33,
+     "p95": 15.465
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 10.350000000000001,
+     "ciLow": -3.999999999999999,
+     "ciHigh": 11.200000000000001,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 14.4,
+     "p90": 18.1,
+     "p95": 18.1
+    },
+    "o": {
+     "n": 10,
+     "median": 5.65,
+     "p90": 7.2399999999999975,
+     "p95": 11.019999999999992
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -9.3,
+     "ciLow": -11.5,
+     "ciHigh": -8.350000000000001,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   }
+  ],
+  "inputMax": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 7.8999999999999995,
+     "p90": 18.01,
+     "p95": 18.055
+    },
+    "o": {
+     "n": 10,
+     "median": 11.649999999999999,
+     "p90": 15.56,
+     "p95": 15.83
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0.9499999999999993,
+     "ciLow": -7.050000000000001,
+     "ciHigh": 10,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 20.9,
+     "p90": 23.189999999999998,
+     "p95": 24.944999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 19.8,
+     "p90": 21.45,
+     "p95": 22.574999999999996
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.6999999999999993,
+     "ciLow": -3,
+     "ciHigh": 0,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 17,
+     "p90": 18.75,
+     "p95": 18.974999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 17.3,
+     "p90": 18.82,
+     "p95": 19.36
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.9499999999999993,
+     "ciLow": -5.250000000000001,
+     "ciHigh": 0.8999999999999986,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 15.6,
+     "p90": 17.41,
+     "p95": 17.455
+    },
+    "o": {
+     "n": 10,
+     "median": 14.600000000000001,
+     "p90": 16.79,
+     "p95": 17.195
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.9500000000000002,
+     "ciLow": -3.299999999999999,
+     "ciHigh": 3.3000000000000007,
+     "positive": 3,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 3.6,
+     "p90": 18.2,
+     "p95": 18.2
+    },
+    "o": {
+     "n": 10,
+     "median": 13.35,
+     "p90": 14.7,
+     "p95": 15.149999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 3.9,
+     "ciLow": -4,
+     "ciHigh": 10.899999999999999,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 12.899999999999999,
+     "p90": 17.959999999999997,
+     "p95": 19.129999999999995
+    },
+    "o": {
+     "n": 10,
+     "median": 13.55,
+     "p90": 15.49,
+     "p95": 16.345
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.4999999999999991,
+     "ciLow": -6.3500000000000005,
+     "ciHigh": 10.7,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 10.8,
+     "p90": 17.99,
+     "p95": 18.395
+    },
+    "o": {
+     "n": 10,
+     "median": 13,
+     "p90": 16,
+     "p95": 16
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1.3000000000000003,
+     "ciLow": -5.399999999999999,
+     "ciHigh": 10.5,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 73.1,
+     "p90": 99.7,
+     "p95": 100.6
+    },
+    "o": {
+     "n": 10,
+     "median": 54.349999999999994,
+     "p90": 56.489999999999995,
+     "p95": 56.894999999999996
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -27.150000000000002,
+     "ciLow": -43.1,
+     "ciHigh": -1,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 18.25,
+     "p90": 19.2,
+     "p95": 19.2
+    },
+    "o": {
+     "n": 10,
+     "median": 19.5,
+     "p90": 64.36999999999999,
+     "p95": 70.98499999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1.1499999999999986,
+     "ciLow": -1.5,
+     "ciHigh": 45.2,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 16.95,
+     "p90": 18.54,
+     "p95": 19.169999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 11.45,
+     "p90": 17.509999999999998,
+     "p95": 18.005
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.8000000000000007,
+     "ciLow": -8.9,
+     "ciHigh": 1.1999999999999993,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 17.5,
+     "p90": 18.459999999999997,
+     "p95": 18.73
+    },
+    "o": {
+     "n": 10,
+     "median": 13.7,
+     "p90": 17.5,
+     "p95": 17.5
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.5,
+     "ciLow": -8.4,
+     "ciHigh": 1.549999999999999,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 17,
+     "p90": 18.05,
+     "p95": 18.275
+    },
+    "o": {
+     "n": 10,
+     "median": 7.550000000000001,
+     "p90": 17.12,
+     "p95": 17.21
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.6499999999999995,
+     "ciLow": -11.95,
+     "ciHigh": 1.5499999999999998,
+     "positive": 3,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 16,
+     "p90": 18.53,
+     "p95": 18.665
+    },
+    "o": {
+     "n": 10,
+     "median": 14.25,
+     "p90": 16.01,
+     "p95": 16.055
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.9500000000000002,
+     "ciLow": -6.85,
+     "ciHigh": 5.3,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 3.15,
+     "p90": 17.82,
+     "p95": 17.91
+    },
+    "o": {
+     "n": 10,
+     "median": 12.600000000000001,
+     "p90": 15.33,
+     "p95": 15.465
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 10.350000000000001,
+     "ciLow": -3.999999999999999,
+     "ciHigh": 11.25,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 14.4,
+     "p90": 18.1,
+     "p95": 18.1
+    },
+    "o": {
+     "n": 10,
+     "median": 5.65,
+     "p90": 7.2399999999999975,
+     "p95": 11.019999999999992
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -9.3,
+     "ciLow": -11.5,
+     "ciHigh": -8.350000000000001,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   }
+  ],
+  "heap": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 14.48009,
+     "p90": 14.490266,
+     "p95": 14.490527
+    },
+    "o": {
+     "n": 10,
+     "median": 11.125958,
+     "p90": 11.134085599999999,
+     "p95": 11.1347948
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.3533620000000006,
+     "ciLow": -3.367196,
+     "ciHigh": -3.3456720000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 21.458592,
+     "p90": 21.4625444,
+     "p95": 21.463752200000002
+    },
+    "o": {
+     "n": 10,
+     "median": 20.570695999999998,
+     "p90": 20.6234392,
+     "p95": 20.6484916
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.8873620000000013,
+     "ciLow": -0.9374966500000002,
+     "ciHigh": -0.8431320000000007,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 16.973495999999997,
+     "p90": 16.9764848,
+     "p95": 16.9765604
+    },
+    "o": {
+     "n": 10,
+     "median": 13.70232,
+     "p90": 13.7063212,
+     "p95": 13.7086486
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.2706799999999987,
+     "ciLow": -3.2747800000000016,
+     "ciHigh": -3.267383999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 14.163608,
+     "p90": 14.1658264,
+     "p95": 14.1671692
+    },
+    "o": {
+     "n": 10,
+     "median": 10.95188,
+     "p90": 10.956419599999998,
+     "p95": 10.9565438
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.212249999999999,
+     "ciLow": -3.2161659999999994,
+     "ciHigh": -3.207616,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 14.23655,
+     "p90": 14.2372236,
+     "p95": 14.2377078
+    },
+    "o": {
+     "n": 10,
+     "median": 10.642752,
+     "p90": 10.6463444,
+     "p95": 10.647498200000001
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.590623999999999,
+     "ciLow": -3.5973940000000004,
+     "ciHigh": -3.5804600000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 14.228662,
+     "p90": 14.2392316,
+     "p95": 14.2404358
+    },
+    "o": {
+     "n": 10,
+     "median": 10.644542000000001,
+     "p90": 10.6492192,
+     "p95": 10.650583600000001
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.585916,
+     "ciLow": -3.5934479999999986,
+     "ciHigh": -3.5759679999999996,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 14.230146,
+     "p90": 14.239930399999999,
+     "p95": 14.2410752
+    },
+    "o": {
+     "n": 10,
+     "median": 10.644164,
+     "p90": 10.6498136,
+     "p95": 10.6498928
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.5865460000000002,
+     "ciLow": -3.6001319999999986,
+     "ciHigh": -3.5757399999999997,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 20.027839999999998,
+     "p90": 20.037066,
+     "p95": 20.037561
+    },
+    "o": {
+     "n": 10,
+     "median": 19.935894,
+     "p90": 20.0094772,
+     "p95": 20.0194186
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.09576200000000057,
+     "ciLow": -0.19276400000000038,
+     "ciHigh": -0.04403399999999991,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 20.912298,
+     "p90": 21.021264000000002,
+     "p95": 21.028968
+    },
+    "o": {
+     "n": 10,
+     "median": 19.084924,
+     "p90": 19.1791816,
+     "p95": 19.1897548
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.8422019999999986,
+     "ciLow": -1.8910279999999986,
+     "ciHigh": -1.8120879999999993,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 13.894826,
+     "p90": 13.904766799999999,
+     "p95": 13.9068134
+    },
+    "o": {
+     "n": 10,
+     "median": 10.604721999999999,
+     "p90": 10.609318,
+     "p95": 10.614169
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.2909700000000006,
+     "ciLow": -3.29943,
+     "ciHigh": -3.286611999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 14.820272,
+     "p90": 14.821496,
+     "p95": 14.823476000000001
+    },
+    "o": {
+     "n": 10,
+     "median": 11.21996,
+     "p90": 11.2274776,
+     "p95": 11.2330288
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.5993499999999994,
+     "ciLow": -3.6010039999999996,
+     "ciHigh": -3.5951440000000003,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 14.398828,
+     "p90": 14.4011148,
+     "p95": 14.4035034
+    },
+    "o": {
+     "n": 10,
+     "median": 11.070516000000001,
+     "p90": 11.07465,
+     "p95": 11.075163
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.3296780000000012,
+     "ciLow": -3.331993999999999,
+     "ciHigh": -3.3246920000000006,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 13.37345,
+     "p90": 13.409562,
+     "p95": 13.410507
+    },
+    "o": {
+     "n": 10,
+     "median": 10.407236000000001,
+     "p90": 10.4246804,
+     "p95": 10.4247002
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -2.9681119999999996,
+     "ciLow": -2.988956,
+     "ciHigh": -2.9549900000000004,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 13.127266,
+     "p90": 13.133928,
+     "p95": 13.136826
+    },
+    "o": {
+     "n": 10,
+     "median": 10.386358000000001,
+     "p90": 10.3903192,
+     "p95": 10.3925656
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -2.7455939999999996,
+     "ciLow": -2.8160159999999994,
+     "ciHigh": -2.735771999999999,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 13.762281999999999,
+     "p90": 13.767989199999999,
+     "p95": 13.7708926
+    },
+    "o": {
+     "n": 10,
+     "median": 10.56968,
+     "p90": 10.589655200000001,
+     "p95": 10.5904796
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.190859999999999,
+     "ciLow": -3.1958339999999996,
+     "ciHigh": -3.1748920000000016,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ]
+ },
+ "webkit": {
+  "browser": "webkit 27.2",
+  "replacedRuns": [],
+  "runs": 300,
+  "errors": 0,
+  "timedOut": 0,
+  "loadavg1": {
+   "min": 6.78,
+   "median": 26.99,
+   "max": 96.07
+  }
+ },
+ "webkitMetrics": {
+  "renderComplete": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 198,
+     "p90": 200,
+     "p95": 200
+    },
+    "o": {
+     "n": 10,
+     "median": 187.5,
+     "p90": 199,
+     "p95": 199
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -10,
+     "ciLow": -12,
+     "ciHigh": -1,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 86833.5,
+     "p90": 86872.9,
+     "p95": 86881.45
+    },
+    "o": {
+     "n": 10,
+     "median": 86847.5,
+     "p90": 86941.6,
+     "p95": 86953.3
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -5.5,
+     "ciLow": -15,
+     "ciHigh": 49,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 532.5,
+     "p90": 594.3,
+     "p95": 640.6499999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 502,
+     "p90": 538.4,
+     "p95": 558.1999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28.5,
+     "ciLow": -58.5,
+     "ciHigh": -11.5,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 1033.5,
+     "p90": 1038.1,
+     "p95": 1038.55
+    },
+    "o": {
+     "n": 10,
+     "median": 1025.5,
+     "p90": 1046.1,
+     "p95": 1046.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -7.5,
+     "ciLow": -10,
+     "ciHigh": 1,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 292,
+     "p90": 296.3,
+     "p95": 297.65
+    },
+    "o": {
+     "n": 10,
+     "median": 275,
+     "p90": 278,
+     "p95": 278
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -15.5,
+     "ciLow": -21,
+     "ciHigh": -14.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 291.5,
+     "p90": 295.1,
+     "p95": 295.55
+    },
+    "o": {
+     "n": 10,
+     "median": 274.5,
+     "p90": 277.3,
+     "p95": 278.65
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -16.5,
+     "ciLow": -19,
+     "ciHigh": -15,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 291.5,
+     "p90": 295.3,
+     "p95": 296.65
+    },
+    "o": {
+     "n": 10,
+     "median": 276,
+     "p90": 277.1,
+     "p95": 277.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -15,
+     "ciLow": -19,
+     "ciHigh": -10,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 1144,
+     "p90": 1156.1,
+     "p95": 1161.05
+    },
+    "o": {
+     "n": 10,
+     "median": 1162,
+     "p90": 1165.9,
+     "p95": 1169.95
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 12.5,
+     "ciLow": 0.9875000000000114,
+     "ciHigh": 25.5,
+     "positive": 8,
+     "negative": 2,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 5865.5,
+     "p90": 5884.8,
+     "p95": 5915.4
+    },
+    "o": {
+     "n": 10,
+     "median": 5865.5,
+     "p90": 5873.2,
+     "p95": 5874.1
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3.5,
+     "ciLow": -41,
+     "ciHigh": 5.5,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 291.5,
+     "p90": 295.2,
+     "p95": 296.1
+    },
+    "o": {
+     "n": 10,
+     "median": 276,
+     "p90": 281.8,
+     "p95": 289.9
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -12,
+     "ciLow": -15.5,
+     "ciHigh": -9,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 696,
+     "p90": 699.2,
+     "p95": 700.1
+    },
+    "o": {
+     "n": 10,
+     "median": 686,
+     "p90": 689.6,
+     "p95": 692.3
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -9.5,
+     "ciLow": -14,
+     "ciHigh": -6,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 502.5,
+     "p90": 507.1,
+     "p95": 507.55
+    },
+    "o": {
+     "n": 10,
+     "median": 493.5,
+     "p90": 495.2,
+     "p95": 496.1
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -10.5,
+     "ciLow": -14,
+     "ciHigh": -8,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 128,
+     "p90": 133.1,
+     "p95": 133.55
+    },
+    "o": {
+     "n": 10,
+     "median": 113,
+     "p90": 118,
+     "p95": 118
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -15.5,
+     "ciLow": -21,
+     "ciHigh": -13,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 110.5,
+     "p90": 113.1,
+     "p95": 113.55
+    },
+    "o": {
+     "n": 10,
+     "median": 113,
+     "p90": 114,
+     "p95": 114
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 2,
+     "ciLow": -2,
+     "ciHigh": 4,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 266,
+     "p90": 267.6,
+     "p95": 270.3
+    },
+    "o": {
+     "n": 10,
+     "median": 246.5,
+     "p90": 250.2,
+     "p95": 251.1
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -19,
+     "ciLow": -21.5,
+     "ciHigh": -15,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "renderLag": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 3,
+     "p90": 3.299999999999999,
+     "p95": 4.649999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -3,
+     "ciLow": -3,
+     "ciHigh": -2.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 103.5,
+     "p90": 128.59999999999997,
+     "p95": 158.29999999999993
+    },
+    "o": {
+     "n": 10,
+     "median": 96.5,
+     "p90": 109.39999999999999,
+     "p95": 115.69999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -14.5,
+     "ciLow": -26,
+     "ciHigh": -1,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.29999999999999893,
+     "p95": 1.6499999999999968
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 1,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 61,
+     "p90": 68.1,
+     "p95": 68.55
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -61,
+     "ciLow": -66,
+     "ciHigh": -58.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 2,
+     "p90": 3.3999999999999986,
+     "p95": 5.199999999999996
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -2,
+     "ciLow": -3,
+     "ciHigh": -1,
+     "positive": 0,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 2.5,
+     "p90": 5.999999999999993,
+     "p95": 14.999999999999979
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 2.5,
+     "ciLow": 1,
+     "ciHigh": 3.5,
+     "positive": 8,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.29999999999999893,
+     "p95": 1.6499999999999968
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 1,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 0,
+     "meaningful": false
+    }
+   }
+  ],
+  "ttft": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 67,
+     "p90": 68.1,
+     "p95": 68.55
+    },
+    "o": {
+     "n": 10,
+     "median": 39,
+     "p90": 40,
+     "p95": 40
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28,
+     "ciLow": -28.5,
+     "ciHigh": -27,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 70,
+     "p90": 71.2,
+     "p95": 72.1
+    },
+    "o": {
+     "n": 10,
+     "median": 11,
+     "p90": 11.1,
+     "p95": 11.549999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -59,
+     "ciLow": -60,
+     "ciHigh": -59,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 67,
+     "p90": 69.6,
+     "p95": 72.3
+    },
+    "o": {
+     "n": 10,
+     "median": 39,
+     "p90": 42,
+     "p95": 42
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -27.5,
+     "ciLow": -29.5,
+     "ciHigh": -26,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 65.5,
+     "p90": 67.1,
+     "p95": 67.55
+    },
+    "o": {
+     "n": 10,
+     "median": 29,
+     "p90": 30,
+     "p95": 30
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -36.5,
+     "ciLow": -37.5,
+     "ciHigh": -35.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 67,
+     "p90": 71.1,
+     "p95": 71.55
+    },
+    "o": {
+     "n": 10,
+     "median": 39,
+     "p90": 41.3,
+     "p95": 42.65
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28.5,
+     "ciLow": -30,
+     "ciHigh": -27.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 67.5,
+     "p90": 69.3,
+     "p95": 70.64999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 38,
+     "p90": 39.1,
+     "p95": 39.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -29.5,
+     "ciLow": -31,
+     "ciHigh": -28,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 67.5,
+     "p90": 69.1,
+     "p95": 69.55
+    },
+    "o": {
+     "n": 10,
+     "median": 38,
+     "p90": 39.1,
+     "p95": 39.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28.5,
+     "ciLow": -31,
+     "ciHigh": -26,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 43.5,
+     "p90": 48.2,
+     "p95": 49.099999999999994
+    },
+    "o": {
+     "n": 10,
+     "median": 21.5,
+     "p90": 23.1,
+     "p95": 23.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -22,
+     "ciLow": -24.5,
+     "ciHigh": -21,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 86.5,
+     "p90": 92.3,
+     "p95": 98.14999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 20,
+     "p90": 22,
+     "p95": 22
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -65.5,
+     "ciLow": -70,
+     "ciHigh": -60,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 151.5,
+     "p90": 154.3,
+     "p95": 155.65
+    },
+    "o": {
+     "n": 10,
+     "median": 124,
+     "p90": 125.3,
+     "p95": 126.64999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28.5,
+     "ciLow": -29.5,
+     "ciHigh": -25.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 82,
+     "p90": 84.4,
+     "p95": 86.19999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 53,
+     "p90": 56.2,
+     "p95": 57.099999999999994
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28,
+     "ciLow": -30,
+     "ciHigh": -27,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 351,
+     "p90": 358,
+     "p95": 358
+    },
+    "o": {
+     "n": 10,
+     "median": 324.5,
+     "p90": 326.4,
+     "p95": 328.2
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -26,
+     "ciLow": -32,
+     "ciHigh": -25.5,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 67.5,
+     "p90": 72.1,
+     "p95": 72.55
+    },
+    "o": {
+     "n": 10,
+     "median": 38.5,
+     "p90": 41.2,
+     "p95": 42.099999999999994
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -28.5,
+     "ciLow": -31.5,
+     "ciHigh": -26,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 67.5,
+     "p90": 69,
+     "p95": 69
+    },
+    "o": {
+     "n": 10,
+     "median": 39,
+     "p90": 39.1,
+     "p95": 39.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -29,
+     "ciLow": -30,
+     "ciHigh": -26,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 172,
+     "p90": 174.3,
+     "p95": 175.65
+    },
+    "o": {
+     "n": 10,
+     "median": 144,
+     "p90": 145.3,
+     "p95": 146.65
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -27,
+     "ciLow": -28,
+     "ciHigh": -26,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   }
+  ],
+  "dropped": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 1,
+     "p90": 1.0999999999999996,
+     "p95": 1.549999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.09999999999999964,
+     "p95": 0.5499999999999989
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1,
+     "ciLow": -1,
+     "ciHigh": -0.5,
+     "positive": 0,
+     "negative": 8,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 26.5,
+     "p90": 42.99999999999999,
+     "p95": 51.99999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 84,
+     "p90": 92.89999999999999,
+     "p95": 96.94999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 59,
+     "ciLow": 52,
+     "ciHigh": 64,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 6.5,
+     "p90": 11.299999999999999,
+     "p95": 12.649999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 5,
+     "p90": 8.299999999999999,
+     "p95": 9.649999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -2,
+     "ciLow": -4,
+     "ciHigh": 0.5,
+     "positive": 2,
+     "negative": 8,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.09999999999999964,
+     "p95": 0.5499999999999989
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.09999999999999964,
+     "p95": 0.5499999999999989
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": 0,
+     "ciHigh": 0,
+     "positive": 1,
+     "negative": 1,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 1,
+     "p90": 2,
+     "p95": 2
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1,
+     "ciLow": -1.5,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 7,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 0.5,
+     "p90": 1.0999999999999996,
+     "p95": 1.549999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 25,
+     "p90": 27,
+     "p95": 27
+    },
+    "o": {
+     "n": 10,
+     "median": 14.5,
+     "p90": 18.1,
+     "p95": 18.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -9,
+     "ciLow": -10,
+     "ciHigh": -8,
+     "positive": 0,
+     "negative": 10,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 3,
+     "p90": 6.299999999999999,
+     "p95": 7.649999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 69,
+     "p90": 71.1,
+     "p95": 71.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 65,
+     "ciLow": 64,
+     "ciHigh": 67,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 0.5,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.09999999999999964,
+     "p95": 0.5499999999999989
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 1,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0.09999999999999964,
+     "p95": 0.5499999999999989
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -0.5,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 2,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 0.5,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 0.5,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -1,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 0,
+     "p90": 1,
+     "p95": 1
+    },
+    "o": {
+     "n": 10,
+     "median": 0,
+     "p90": 0,
+     "p95": 0
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -0.5,
+     "ciHigh": 0,
+     "positive": 0,
+     "negative": 2,
+     "meaningful": false
+    }
+   }
+  ],
+  "inputP50": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 12.2,
+     "p95": 13.099999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 18.5,
+     "p90": 26,
+     "p95": 26
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 8.5,
+     "ciLow": -4,
+     "ciHigh": 18,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 9,
+     "p90": 10,
+     "p95": 10
+    },
+    "o": {
+     "n": 10,
+     "median": 10,
+     "p90": 11.05,
+     "p95": 11.274999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1,
+     "ciLow": 1,
+     "ciHigh": 2,
+     "positive": 9,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 52.25,
+     "p90": 74.35,
+     "p95": 89.42499999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 14,
+     "p90": 51.699999999999996,
+     "p95": 57.09999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -46,
+     "ciLow": -57.5,
+     "ciHigh": -19.5,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 10,
+     "p90": 11.6,
+     "p95": 12.049999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 13.25,
+     "p90": 15.75,
+     "p95": 16.874999999999996
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 4,
+     "ciLow": 2,
+     "ciHigh": 5.25,
+     "positive": 9,
+     "negative": 1,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 9.5,
+     "p90": 15.299999999999999,
+     "p95": 16.65
+    },
+    "o": {
+     "n": 10,
+     "median": 8,
+     "p90": 20.5,
+     "p95": 22.749999999999993
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -4,
+     "ciHigh": 5,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 13,
+     "p95": 13
+    },
+    "o": {
+     "n": 10,
+     "median": 6.5,
+     "p90": 21.299999999999997,
+     "p95": 22.65
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.5,
+     "ciLow": -4,
+     "ciHigh": 6,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 13.299999999999999,
+     "p95": 14.649999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 6.5,
+     "p90": 24.2,
+     "p95": 25.099999999999998
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -2,
+     "ciHigh": 11,
+     "positive": 3,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 46.5,
+     "p90": 53.35,
+     "p95": 54.925
+    },
+    "o": {
+     "n": 10,
+     "median": 34.5,
+     "p90": 40.1,
+     "p95": 40.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -12,
+     "ciLow": -21.75,
+     "ciHigh": -6.75,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 11.5,
+     "p90": 13,
+     "p95": 13
+    },
+    "o": {
+     "n": 10,
+     "median": 11.5,
+     "p90": 13.6,
+     "p95": 14.049999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -3,
+     "ciHigh": 2,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 9,
+     "p90": 10,
+     "p95": 10
+    },
+    "o": {
+     "n": 10,
+     "median": 19.5,
+     "p90": 22.1,
+     "p95": 22.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 11,
+     "ciLow": -6,
+     "ciHigh": 12.5,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 9,
+     "p90": 13.2,
+     "p95": 14.099999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 12.5,
+     "p90": 15.1,
+     "p95": 15.549999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1,
+     "ciLow": -1,
+     "ciHigh": 5,
+     "positive": 7,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 16.299999999999997,
+     "p95": 17.65
+    },
+    "o": {
+     "n": 10,
+     "median": 16.5,
+     "p90": 19.1,
+     "p95": 19.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 8.5,
+     "ciLow": 0,
+     "ciHigh": 13,
+     "positive": 7,
+     "negative": 2,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 10.5,
+     "p90": 13,
+     "p95": 13
+    },
+    "o": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 22.599999999999998,
+     "p95": 25.299999999999994
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1,
+     "ciLow": -5.5,
+     "ciHigh": 13,
+     "positive": 4,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 14.1,
+     "p95": 14.549999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 13,
+     "p90": 25.1,
+     "p95": 25.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1.5,
+     "ciLow": -3,
+     "ciHigh": 14,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 6,
+     "p90": 7,
+     "p95": 7
+    },
+    "o": {
+     "n": 10,
+     "median": 23,
+     "p90": 24.2,
+     "p95": 25.099999999999998
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 17.5,
+     "ciLow": 16,
+     "ciHigh": 18.5,
+     "positive": 9,
+     "negative": 1,
+     "meaningful": true
+    }
+   }
+  ],
+  "inputMax": [
+   {
+    "scenarioId": "a2ui-over-agui",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 12.2,
+     "p95": 13.099999999999998
+    },
+    "o": {
+     "n": 10,
+     "median": 18.5,
+     "p90": 26,
+     "p95": 26
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 8.5,
+     "ciLow": -4,
+     "ciHigh": 18,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "cancel-mid-stream",
+    "h": {
+     "n": 10,
+     "median": 24.5,
+     "p90": 27,
+     "p95": 27
+    },
+    "o": {
+     "n": 10,
+     "median": 964.5,
+     "p90": 999,
+     "p95": 1017
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 939,
+     "ciLow": 925,
+     "ciHigh": 966,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "custom-chunks",
+    "h": {
+     "n": 10,
+     "median": 92,
+     "p90": 139.89999999999998,
+     "p95": 166.44999999999993
+    },
+    "o": {
+     "n": 10,
+     "median": 19,
+     "p90": 79.49999999999999,
+     "p95": 99.74999999999994
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -84,
+     "ciLow": -109,
+     "ciHigh": -48,
+     "positive": 1,
+     "negative": 9,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "disconnect-reconnect-replay",
+    "h": {
+     "n": 10,
+     "median": 15,
+     "p90": 18.1,
+     "p95": 18.549999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 19,
+     "p90": 25.1,
+     "p95": 25.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 6.5,
+     "ciLow": -1,
+     "ciHigh": 8,
+     "positive": 7,
+     "negative": 3,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-approve",
+    "h": {
+     "n": 10,
+     "median": 9.5,
+     "p90": 15.299999999999999,
+     "p95": 16.65
+    },
+    "o": {
+     "n": 10,
+     "median": 8,
+     "p90": 20.5,
+     "p95": 22.749999999999993
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 0,
+     "ciLow": -4,
+     "ciHigh": 4.5,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-expire",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 13,
+     "p95": 13
+    },
+    "o": {
+     "n": 10,
+     "median": 6.5,
+     "p90": 21.299999999999997,
+     "p95": 22.65
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1.5,
+     "ciLow": -4,
+     "ciHigh": 6,
+     "positive": 4,
+     "negative": 6,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hitl-reject",
+    "h": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 13.299999999999999,
+     "p95": 14.649999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 6.5,
+     "p90": 24.2,
+     "p95": 25.099999999999998
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -0.5,
+     "ciLow": -2,
+     "ciHigh": 11,
+     "positive": 3,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "hostile/huge-table",
+    "h": {
+     "n": 10,
+     "median": 66,
+     "p90": 86.6,
+     "p95": 89.3
+    },
+    "o": {
+     "n": 10,
+     "median": 83,
+     "p90": 122.3,
+     "p95": 123.64999999999999
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 12.5,
+     "ciLow": -13.5,
+     "ciHigh": 52,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "long-markdown",
+    "h": {
+     "n": 10,
+     "median": 23,
+     "p90": 29.999999999999996,
+     "p95": 34.499999999999986
+    },
+    "o": {
+     "n": 10,
+     "median": 932.5,
+     "p90": 1158.1,
+     "p95": 1158.55
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 907.5,
+     "ciLow": 885,
+     "ciHigh": 1112,
+     "positive": 10,
+     "negative": 0,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "malformed-out-of-order",
+    "h": {
+     "n": 10,
+     "median": 9,
+     "p90": 10,
+     "p95": 10
+    },
+    "o": {
+     "n": 10,
+     "median": 19.5,
+     "p90": 22.1,
+     "p95": 22.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 11,
+     "ciLow": -6,
+     "ciHigh": 12,
+     "positive": 6,
+     "negative": 4,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "parallel-tool-calls",
+    "h": {
+     "n": 10,
+     "median": 14,
+     "p90": 16.1,
+     "p95": 16.549999999999997
+    },
+    "o": {
+     "n": 10,
+     "median": 18,
+     "p90": 28,
+     "p95": 28
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 5,
+     "ciLow": 1,
+     "ciHigh": 13.5,
+     "positive": 9,
+     "negative": 1,
+     "meaningful": true
+    }
+   },
+   {
+    "scenarioId": "reasoning-subagents-snapshot",
+    "h": {
+     "n": 10,
+     "median": 8,
+     "p90": 16.299999999999997,
+     "p95": 17.65
+    },
+    "o": {
+     "n": 10,
+     "median": 16.5,
+     "p90": 19.1,
+     "p95": 19.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 8.5,
+     "ciLow": 0,
+     "ciHigh": 13,
+     "positive": 7,
+     "negative": 2,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-cancelled-by-agent",
+    "h": {
+     "n": 10,
+     "median": 10.5,
+     "p90": 13,
+     "p95": 13
+    },
+    "o": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 22.599999999999998,
+     "p95": 25.299999999999994
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": -1,
+     "ciLow": -4.5,
+     "ciHigh": 13,
+     "positive": 4,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "run-error",
+    "h": {
+     "n": 10,
+     "median": 8.5,
+     "p90": 14.1,
+     "p95": 14.549999999999999
+    },
+    "o": {
+     "n": 10,
+     "median": 13,
+     "p90": 25.1,
+     "p95": 25.549999999999997
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 1.5,
+     "ciLow": -3,
+     "ciHigh": 14,
+     "positive": 5,
+     "negative": 5,
+     "meaningful": false
+    }
+   },
+   {
+    "scenarioId": "state-snapshot-delta",
+    "h": {
+     "n": 10,
+     "median": 6,
+     "p90": 7,
+     "p95": 7
+    },
+    "o": {
+     "n": 10,
+     "median": 23,
+     "p90": 24.2,
+     "p95": 25.099999999999998
+    },
+    "diff": {
+     "n": 10,
+     "medianDiff": 17.5,
+     "ciLow": 16,
+     "ciHigh": 18.5,
+     "positive": 9,
+     "negative": 1,
+     "meaningful": true
+    }
+   }
+  ]
+ },
+ "chromiumProfilingCommits": [
+  {
+   "scenarioId": "a2ui-over-agui",
+   "h": {
+    "n": 3,
+    "median": 26,
+    "p90": 26,
+    "p95": 26
+   },
+   "o": {
+    "n": 3,
+    "median": 12,
+    "p90": 12.8,
+    "p95": 12.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -14,
+    "ciLow": -14,
+    "ciHigh": -12,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "custom-chunks",
+   "h": {
+    "n": 3,
+    "median": 59,
+    "p90": 59,
+    "p95": 59
+   },
+   "o": {
+    "n": 3,
+    "median": 24,
+    "p90": 24,
+    "p95": 24
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -35,
+    "ciLow": -37,
+    "ciHigh": -35,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "disconnect-reconnect-replay",
+   "h": {
+    "n": 3,
+    "median": 94,
+    "p90": 94,
+    "p95": 94
+   },
+   "o": {
+    "n": 3,
+    "median": 46,
+    "p90": 47.6,
+    "p95": 47.8
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -48,
+    "ciLow": -48,
+    "ciHigh": -46,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-approve",
+   "h": {
+    "n": 3,
+    "median": 35,
+    "p90": 35.8,
+    "p95": 35.9
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11.8,
+    "p95": 11.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -24,
+    "ciLow": -25,
+    "ciHigh": -23,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-expire",
+   "h": {
+    "n": 3,
+    "median": 35,
+    "p90": 35,
+    "p95": 35
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11.8,
+    "p95": 11.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -24,
+    "ciLow": -24,
+    "ciHigh": -22,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-reject",
+   "h": {
+    "n": 3,
+    "median": 35,
+    "p90": 35,
+    "p95": 35
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11.8,
+    "p95": 11.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -24,
+    "ciLow": -24,
+    "ciHigh": -23,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hostile/huge-table",
+   "h": {
+    "n": 3,
+    "median": 412,
+    "p90": 412,
+    "p95": 412
+   },
+   "o": {
+    "n": 3,
+    "median": 20,
+    "p90": 20.8,
+    "p95": 20.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -392,
+    "ciLow": -392,
+    "ciHigh": -391,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "long-markdown",
+   "h": {
+    "n": 3,
+    "median": 4488,
+    "p90": 4495.2,
+    "p95": 4496.1
+   },
+   "o": {
+    "n": 3,
+    "median": 161,
+    "p90": 166.6,
+    "p95": 167.3
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -4330,
+    "ciLow": -4336,
+    "ciHigh": -4313,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "malformed-out-of-order",
+   "h": {
+    "n": 3,
+    "median": 23,
+    "p90": 23,
+    "p95": 23
+   },
+   "o": {
+    "n": 3,
+    "median": 18,
+    "p90": 18,
+    "p95": 18
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -5,
+    "ciLow": -5,
+    "ciHigh": -4,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "parallel-tool-calls",
+   "h": {
+    "n": 3,
+    "median": 103,
+    "p90": 104.6,
+    "p95": 104.8
+   },
+   "o": {
+    "n": 3,
+    "median": 34,
+    "p90": 34,
+    "p95": 34
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -69,
+    "ciLow": -71,
+    "ciHigh": -69,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "reasoning-subagents-snapshot",
+   "h": {
+    "n": 3,
+    "median": 59,
+    "p90": 59.8,
+    "p95": 59.9
+   },
+   "o": {
+    "n": 3,
+    "median": 28,
+    "p90": 28,
+    "p95": 28
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -32,
+    "ciLow": -33,
+    "ciHigh": -30,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "run-cancelled-by-agent",
+   "h": {
+    "n": 3,
+    "median": 15,
+    "p90": 15,
+    "p95": 15
+   },
+   "o": {
+    "n": 3,
+    "median": 6,
+    "p90": 6,
+    "p95": 6
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -9,
+    "ciLow": -9,
+    "ciHigh": -8,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "run-error",
+   "h": {
+    "n": 3,
+    "median": 13,
+    "p90": 13,
+    "p95": 13
+   },
+   "o": {
+    "n": 3,
+    "median": 5,
+    "p90": 5,
+    "p95": 5
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -8,
+    "ciLow": -8,
+    "ciHigh": -8,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "state-snapshot-delta",
+   "h": {
+    "n": 3,
+    "median": 19,
+    "p90": 19,
+    "p95": 19
+   },
+   "o": {
+    "n": 3,
+    "median": 8,
+    "p90": 8,
+    "p95": 8
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -11,
+    "ciLow": -12,
+    "ciHigh": -11,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  }
+ ],
+ "webkitProfilingCommits": [
+  {
+   "scenarioId": "a2ui-over-agui",
+   "h": {
+    "n": 3,
+    "median": 27,
+    "p90": 27,
+    "p95": 27
+   },
+   "o": {
+    "n": 3,
+    "median": 12,
+    "p90": 12,
+    "p95": 12
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -15,
+    "ciLow": -16,
+    "ciHigh": -14,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "custom-chunks",
+   "h": {
+    "n": 3,
+    "median": 59,
+    "p90": 59.8,
+    "p95": 59.9
+   },
+   "o": {
+    "n": 3,
+    "median": 23,
+    "p90": 23.8,
+    "p95": 23.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -36,
+    "ciLow": -36,
+    "ciHigh": -36,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "disconnect-reconnect-replay",
+   "h": {
+    "n": 3,
+    "median": 94,
+    "p90": 94,
+    "p95": 94
+   },
+   "o": {
+    "n": 3,
+    "median": 38,
+    "p90": 42,
+    "p95": 42.5
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -56,
+    "ciLow": -57,
+    "ciHigh": -51,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-approve",
+   "h": {
+    "n": 3,
+    "median": 35,
+    "p90": 35.8,
+    "p95": 35.9
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11,
+    "p95": 11
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -25,
+    "ciLow": -25,
+    "ciHigh": -24,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-expire",
+   "h": {
+    "n": 3,
+    "median": 36,
+    "p90": 36,
+    "p95": 36
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11.8,
+    "p95": 11.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -25,
+    "ciLow": -26,
+    "ciHigh": -23,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hitl-reject",
+   "h": {
+    "n": 3,
+    "median": 36,
+    "p90": 36,
+    "p95": 36
+   },
+   "o": {
+    "n": 3,
+    "median": 11,
+    "p90": 11.8,
+    "p95": 11.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -25,
+    "ciLow": -25,
+    "ciHigh": -24,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "hostile/huge-table",
+   "h": {
+    "n": 3,
+    "median": 412,
+    "p90": 412,
+    "p95": 412
+   },
+   "o": {
+    "n": 3,
+    "median": 23,
+    "p90": 23,
+    "p95": 23
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -389,
+    "ciLow": -390,
+    "ciHigh": -389,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "long-markdown",
+   "h": {
+    "n": 3,
+    "median": 4506,
+    "p90": 4517.2,
+    "p95": 4518.6
+   },
+   "o": {
+    "n": 3,
+    "median": 132,
+    "p90": 132.8,
+    "p95": 132.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -4374,
+    "ciLow": -4387,
+    "ciHigh": -3772,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "malformed-out-of-order",
+   "h": {
+    "n": 3,
+    "median": 24,
+    "p90": 24,
+    "p95": 24
+   },
+   "o": {
+    "n": 3,
+    "median": 18,
+    "p90": 18,
+    "p95": 18
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -6,
+    "ciLow": -7,
+    "ciHigh": -6,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "parallel-tool-calls",
+   "h": {
+    "n": 3,
+    "median": 106,
+    "p90": 106,
+    "p95": 106
+   },
+   "o": {
+    "n": 3,
+    "median": 32,
+    "p90": 32.8,
+    "p95": 32.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -74,
+    "ciLow": -74,
+    "ciHigh": -73,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "reasoning-subagents-snapshot",
+   "h": {
+    "n": 3,
+    "median": 60,
+    "p90": 60.8,
+    "p95": 60.9
+   },
+   "o": {
+    "n": 3,
+    "median": 27,
+    "p90": 27,
+    "p95": 27
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -34,
+    "ciLow": -34,
+    "ciHigh": -33,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "run-cancelled-by-agent",
+   "h": {
+    "n": 3,
+    "median": 16,
+    "p90": 16,
+    "p95": 16
+   },
+   "o": {
+    "n": 3,
+    "median": 6,
+    "p90": 6,
+    "p95": 6
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -10,
+    "ciLow": -11,
+    "ciHigh": -9,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "run-error",
+   "h": {
+    "n": 3,
+    "median": 14,
+    "p90": 14,
+    "p95": 14
+   },
+   "o": {
+    "n": 3,
+    "median": 5,
+    "p90": 5.8,
+    "p95": 5.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -9,
+    "ciLow": -9,
+    "ciHigh": -7,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  },
+  {
+   "scenarioId": "state-snapshot-delta",
+   "h": {
+    "n": 3,
+    "median": 20,
+    "p90": 20,
+    "p95": 20
+   },
+   "o": {
+    "n": 3,
+    "median": 7,
+    "p90": 7.8,
+    "p95": 7.9
+   },
+   "diff": {
+    "n": 3,
+    "medianDiff": -13,
+    "ciLow": -13,
+    "ciHigh": -12,
+    "positive": 0,
+    "negative": 3,
+    "meaningful": true
+   }
+  }
+ ],
+ "soak-hybrid": {
+  "slopeMbPerMinute": {
+   "n": 31,
+   "slope": 0.8905730278305931,
+   "ciLow": 0.6997711590965066,
+   "ciHigh": 1.0813748965646797,
+   "intercept": 27.579118290543818
+  },
+  "slopeMbPerRun": {
+   "n": 31,
+   "slope": 0.11009620469897788,
+   "ciLow": 0.08683379475396469,
+   "ciHigh": 0.13335861464399107,
+   "intercept": 27.15490317718651
+  },
+  "first": {
+   "minute": 0,
+   "elapsedMs": 16,
+   "heapAfterGcBytes": 9516284,
+   "domNodes": 20,
+   "messages": 0,
+   "runsCompleted": 0,
+   "loadavg1": 54.65966796875
+  },
+  "last": {
+   "minute": 30,
+   "elapsedMs": 1807182,
+   "heapAfterGcBytes": 53768268,
+   "domNodes": 6420,
+   "messages": 14,
+   "runsCompleted": 244,
+   "loadavg1": 12.96630859375
+  },
+  "runs": 244,
+  "nonFinished": 0
+ },
+ "soak-own": {
+  "slopeMbPerMinute": {
+   "n": 31,
+   "slope": 0.1486103142520208,
+   "ciLow": -0.08572709437113923,
+   "ciHigh": 0.3829477228751808,
+   "intercept": 29.045707912695047
+  },
+  "slopeMbPerRun": {
+   "n": 31,
+   "slope": 0.016894179793470396,
+   "ciLow": -0.00992768895746015,
+   "ciHigh": 0.04371604854440094,
+   "intercept": 29.0627261077938
+  },
+  "first": {
+   "minute": 0,
+   "elapsedMs": 16,
+   "heapAfterGcBytes": 8253624,
+   "domNodes": 22,
+   "messages": 0,
+   "runsCompleted": 0,
+   "loadavg1": 39.21142578125
+  },
+  "last": {
+   "minute": 30,
+   "elapsedMs": 1805684,
+   "heapAfterGcBytes": 24631492,
+   "domNodes": 4943,
+   "messages": 3,
+   "runsCompleted": 263,
+   "loadavg1": 54.65966796875
+  },
+  "runs": 263,
+  "nonFinished": 0
+ }
+}

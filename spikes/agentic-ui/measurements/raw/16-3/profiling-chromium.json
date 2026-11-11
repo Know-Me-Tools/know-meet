@@ -1,0 +1,4687 @@
+{
+ "schemaVersion": 1,
+ "gate": "16.3",
+ "label": "profiling",
+ "browser": "chromium 158.0.8127.18",
+ "startedAt": "2026-11-11T05:33:10.326Z",
+ "finishedAt": "2026-11-11T05:35:11.544Z",
+ "environment": {
+  "node": "v26.8.2",
+  "os": "darwin 25.6.0 arm64",
+  "cpu": "Apple M1 Max",
+  "cpuCount": 10,
+  "memoryBytes": 68719476736,
+  "loadavgAtStart": [
+   18.353515625,
+   17.4013671875,
+   25.48583984375
+  ],
+  "loadavgAtEnd": [
+   12.4814453125,
+   16.23095703125,
+   24.01025390625
+  ]
+ },
+ "settings": {
+  "repeats": 3,
+  "seed": 1631,
+  "scenarios": [
+   "a2ui-over-agui",
+   "custom-chunks",
+   "disconnect-reconnect-replay",
+   "hitl-approve",
+   "hitl-expire",
+   "hitl-reject",
+   "long-markdown",
+   "malformed-out-of-order",
+   "parallel-tool-calls",
+   "reasoning-subagents-snapshot",
+   "run-cancelled-by-agent",
+   "run-error",
+   "state-snapshot-delta",
+   "hostile/huge-table"
+  ],
+  "hybridUrl": "http://127.0.0.1:4287/",
+  "ownUrl": "http://127.0.0.1:4288/",
+  "harnessUrl": "http://127.0.0.1:4317",
+  "quietMs": 300,
+  "pacing": "corpus defaults (no rate/gap overrides)",
+  "viewport": "1280x720"
+ },
+ "order": [
+  {
+   "repeat": 1,
+   "scenarioId": "long-markdown",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "run-cancelled-by-agent",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "hitl-reject",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "run-error",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "state-snapshot-delta",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "hitl-approve",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "malformed-out-of-order",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "disconnect-reconnect-replay",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "parallel-tool-calls",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "hostile/huge-table",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "custom-chunks",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "hitl-expire",
+   "first": "own"
+  },
+  {
+   "repeat": 1,
+   "scenarioId": "a2ui-over-agui",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "run-error",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "hostile/huge-table",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "disconnect-reconnect-replay",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "hitl-expire",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "hitl-approve",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "state-snapshot-delta",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "run-cancelled-by-agent",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "a2ui-over-agui",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "long-markdown",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "custom-chunks",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "parallel-tool-calls",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "malformed-out-of-order",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "first": "own"
+  },
+  {
+   "repeat": 2,
+   "scenarioId": "hitl-reject",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "a2ui-over-agui",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "reasoning-subagents-snapshot",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "parallel-tool-calls",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "hitl-expire",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "run-cancelled-by-agent",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "malformed-out-of-order",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "hostile/huge-table",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "state-snapshot-delta",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "long-markdown",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "hitl-reject",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "hitl-approve",
+   "first": "own"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "disconnect-reconnect-replay",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "custom-chunks",
+   "first": "hybrid"
+  },
+  {
+   "repeat": 3,
+   "scenarioId": "run-error",
+   "first": "own"
+  }
+ ],
+ "runs": [
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-long-markdown-1-mwbonpyv",
+   "startedAt": "2026-11-11T05:33:10.327Z",
+   "loadavg1": 18.35,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 39.9,
+   "totalStreamMs": 5889.9,
+   "renderCompleteMs": 5889.9,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 81,
+   "longTaskCount": 1,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 1425.3,
+    "scriptMs": 718.4,
+    "layoutMs": 74.8,
+    "styleMs": 25.6
+   },
+   "frameStats": {
+    "frames": 349,
+    "droppedFrames": 4,
+    "jankFrames": 1,
+    "maxFrameMs": 66.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18.5,
+    79.9,
+    16.4,
+    14.4,
+    11.8,
+    8.7,
+    6.2,
+    3.9,
+    18.7,
+    0.8,
+    17.1,
+    14.6,
+    10.1,
+    8.1,
+    13.5,
+    17.6,
+    7.1,
+    3.1,
+    14.7,
+    3.1,
+    14.8,
+    13.5,
+    10.3
+   ],
+   "inputLatencyInStreamMs": [
+    18.5,
+    79.9,
+    16.4,
+    14.4,
+    11.8,
+    8.7,
+    6.2,
+    3.9,
+    18.7,
+    0.8,
+    17.1,
+    14.6,
+    10.1,
+    8.1,
+    13.5,
+    17.6,
+    7.1,
+    3.1,
+    14.7,
+    3.1,
+    14.8,
+    13.5,
+    10.3
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    80,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 158,
+   "componentRenders": 132,
+   "storeCommits": 8,
+   "mutationCount": 916,
+   "jsHeapUsedBytes": 25270436,
+   "jsHeapUsedAfterGcBytes": 19291436,
+   "domNodes": 2208,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-long-markdown-1-mwbonv1j",
+   "startedAt": "2026-11-11T05:33:16.903Z",
+   "loadavg1": 20.65,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 113.1,
+   "totalStreamMs": 5831.9,
+   "renderCompleteMs": 5831.9,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 3258.6,
+    "scriptMs": 2434.2,
+    "layoutMs": 86.1,
+    "styleMs": 29.7
+   },
+   "frameStats": {
+    "frames": 350,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    24.5,
+    13.1,
+    7.3,
+    4.2,
+    20.7,
+    17.7,
+    16.8,
+    12.5,
+    10.2,
+    6.6,
+    23.1,
+    16.7,
+    17.2,
+    13.8,
+    12.8,
+    8.6,
+    5.4,
+    2.9,
+    19.6,
+    15.5,
+    15,
+    16.1,
+    10.5
+   ],
+   "inputLatencyInStreamMs": [
+    24.5,
+    13.1,
+    7.3,
+    4.2,
+    20.7,
+    17.7,
+    16.8,
+    12.5,
+    10.2,
+    6.6,
+    23.1,
+    16.7,
+    17.2,
+    13.8,
+    12.8,
+    8.6,
+    5.4,
+    2.9,
+    19.6,
+    15.5,
+    15,
+    16.1,
+    10.5
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 4488,
+   "componentRenders": 2,
+   "storeCommits": 9,
+   "mutationCount": 1758,
+   "jsHeapUsedBytes": 35742760,
+   "jsHeapUsedAfterGcBytes": 21519588,
+   "domNodes": 1790,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-run-cancelled-by-agent-1-mwboo03g",
+   "startedAt": "2026-11-11T05:33:23.452Z",
+   "loadavg1": 20.03,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 61.8,
+   "totalStreamMs": 112.2,
+   "renderCompleteMs": 112.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 84.3,
+    "scriptMs": 43.7,
+    "layoutMs": 0.8,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.3
+   ],
+   "inputLatencyInStreamMs": [
+    19.3
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 15,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 22,
+   "jsHeapUsedBytes": 14818256,
+   "jsHeapUsedAfterGcBytes": 13514784,
+   "domNodes": 29,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-run-cancelled-by-agent-1-mwboo0oc",
+   "startedAt": "2026-11-11T05:33:24.204Z",
+   "loadavg1": 19.55,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 36.8,
+   "totalStreamMs": 106.8,
+   "renderCompleteMs": 106.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 55.8,
+    "scriptMs": 21.3,
+    "layoutMs": 0.9,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.9
+   ],
+   "inputLatencyInStreamMs": [
+    7.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 6,
+   "componentRenders": 8,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10885968,
+   "jsHeapUsedAfterGcBytes": 10505176,
+   "domNodes": 27,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-hitl-reject-1-mwboo184",
+   "startedAt": "2026-11-11T05:33:24.916Z",
+   "loadavg1": 19.55,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 36.6,
+   "totalStreamMs": 268.2,
+   "renderCompleteMs": 268.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 78.7,
+    "scriptMs": 29.1,
+    "layoutMs": 5.2,
+    "styleMs": 2.4
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.4
+   ],
+   "inputLatencyInStreamMs": [
+    7.4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11837220,
+   "jsHeapUsedAfterGcBytes": 10740988,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-hitl-reject-1-mwboo1w1",
+   "startedAt": "2026-11-11T05:33:25.777Z",
+   "loadavg1": 19.55,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 61.3,
+   "totalStreamMs": 275.2,
+   "renderCompleteMs": 275.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 124,
+    "scriptMs": 69.7,
+    "layoutMs": 5.7,
+    "styleMs": 1.4
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.1
+   ],
+   "inputLatencyInStreamMs": [
+    19.1
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15829632,
+   "jsHeapUsedAfterGcBytes": 14366260,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-run-error-1-mwboo2lt",
+   "startedAt": "2026-11-11T05:33:26.705Z",
+   "loadavg1": 19.55,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 36.1,
+   "totalStreamMs": 106.6,
+   "renderCompleteMs": 106.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 52.5,
+    "scriptMs": 19.8,
+    "layoutMs": 0.9,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.9
+   ],
+   "inputLatencyInStreamMs": [
+    7.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 5,
+   "componentRenders": 7,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10683092,
+   "jsHeapUsedAfterGcBytes": 10387024,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-run-error-1-mwboo351",
+   "startedAt": "2026-11-11T05:33:27.397Z",
+   "loadavg1": 19.55,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 63.4,
+   "totalStreamMs": 114.7,
+   "renderCompleteMs": 114.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 82.6,
+    "scriptMs": 41.9,
+    "layoutMs": 1.1,
+    "styleMs": 1
+   },
+   "frameStats": {
+    "frames": 7,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.3
+   ],
+   "inputLatencyInStreamMs": [
+    17.3
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 13,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 22,
+   "jsHeapUsedBytes": 14200092,
+   "jsHeapUsedAfterGcBytes": 13257812,
+   "domNodes": 31,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-state-snapshot-delta-1-mwboo3qo",
+   "startedAt": "2026-11-11T05:33:28.176Z",
+   "loadavg1": 19.55,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 142.1,
+   "totalStreamMs": 246.9,
+   "renderCompleteMs": 246.9,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 72.5,
+    "scriptMs": 24.5,
+    "layoutMs": 1.1,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 15,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    4
+   ],
+   "inputLatencyInStreamMs": [
+    4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 7,
+   "componentRenders": 9,
+   "storeCommits": 11,
+   "mutationCount": 26,
+   "jsHeapUsedBytes": 11421140,
+   "jsHeapUsedAfterGcBytes": 10657700,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-state-snapshot-delta-1-mwboo4ew",
+   "startedAt": "2026-11-11T05:33:29.048Z",
+   "loadavg1": 19.99,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 166.3,
+   "totalStreamMs": 252.3,
+   "renderCompleteMs": 252.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 99.4,
+    "scriptMs": 55.1,
+    "layoutMs": 1.1,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 15,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    10.7
+   ],
+   "inputLatencyInStreamMs": [
+    10.7
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 19,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 23,
+   "jsHeapUsedBytes": 14989912,
+   "jsHeapUsedAfterGcBytes": 13911064,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-hitl-approve-1-mwboo53x",
+   "startedAt": "2026-11-11T05:33:29.949Z",
+   "loadavg1": 19.99,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 62.4,
+   "totalStreamMs": 274.7,
+   "renderCompleteMs": 274.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 133.9,
+    "scriptMs": 70.2,
+    "layoutMs": 5.8,
+    "styleMs": 1.7
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.6
+   },
+   "inputLatencyMs": [
+    18.5
+   ],
+   "inputLatencyInStreamMs": [
+    18.5
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15827316,
+   "jsHeapUsedAfterGcBytes": 14368356,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-hitl-approve-1-mwboo5tj",
+   "startedAt": "2026-11-11T05:33:30.871Z",
+   "loadavg1": 19.99,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 36.7,
+   "totalStreamMs": 266.3,
+   "renderCompleteMs": 266.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 74.9,
+    "scriptMs": 27.7,
+    "layoutMs": 4.3,
+    "styleMs": 1.7
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.6
+   ],
+   "inputLatencyInStreamMs": [
+    6.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11833700,
+   "jsHeapUsedAfterGcBytes": 10742884,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-malformed-out-of-order-1-mwboo6he",
+   "startedAt": "2026-11-11T05:33:31.730Z",
+   "loadavg1": 19.99,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 146.4,
+   "totalStreamMs": 273.7,
+   "renderCompleteMs": 274.5,
+   "renderLagAfterSettleMs": 0.8,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 102.6,
+    "scriptMs": 51.4,
+    "layoutMs": 1,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.3
+   ],
+   "inputLatencyInStreamMs": [
+    17.3
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 22,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 24,
+   "jsHeapUsedBytes": 15335860,
+   "jsHeapUsedAfterGcBytes": 13792532,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-malformed-out-of-order-1-mwboo76w",
+   "startedAt": "2026-11-11T05:33:32.648Z",
+   "loadavg1": 19.99,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 122.3,
+   "totalStreamMs": 268.4,
+   "renderCompleteMs": 273.1,
+   "renderLagAfterSettleMs": 4.7,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 73.6,
+    "scriptMs": 30.9,
+    "layoutMs": 1.1,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17
+   ],
+   "inputLatencyInStreamMs": [
+    17
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 18,
+   "componentRenders": 22,
+   "storeCommits": 13,
+   "mutationCount": 55,
+   "jsHeapUsedBytes": 11836008,
+   "jsHeapUsedAfterGcBytes": 10712316,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-disconnect-reconnect-replay-1-mwboo7uz",
+   "startedAt": "2026-11-11T05:33:33.515Z",
+   "loadavg1": 19.99,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 31.8,
+   "totalStreamMs": 1025.6,
+   "renderCompleteMs": 1025.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 181.4,
+    "scriptMs": 89.6,
+    "layoutMs": 10.7,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 61,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.9,
+    6.7,
+    16.3,
+    12.4
+   ],
+   "inputLatencyInStreamMs": [
+    17.9,
+    6.7,
+    16.3,
+    12.4
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 48,
+   "componentRenders": 50,
+   "storeCommits": 4,
+   "mutationCount": 67,
+   "jsHeapUsedBytes": 11662560,
+   "jsHeapUsedAfterGcBytes": 11095604,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-disconnect-reconnect-replay-1-mwboo940",
+   "startedAt": "2026-11-11T05:33:35.136Z",
+   "loadavg1": 20.47,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 59.7,
+   "totalStreamMs": 1032,
+   "renderCompleteMs": 1032,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 250.4,
+    "scriptMs": 146.4,
+    "layoutMs": 9.9,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 61,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.4,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    3.1,
+    17.7,
+    13.6,
+    12
+   ],
+   "inputLatencyInStreamMs": [
+    3.1,
+    17.7,
+    13.6,
+    12
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 94,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 61,
+   "jsHeapUsedBytes": 16639056,
+   "jsHeapUsedAfterGcBytes": 14310848,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-reasoning-subagents-snapshot-1-mwbooaf0",
+   "startedAt": "2026-11-11T05:33:36.828Z",
+   "loadavg1": 20.47,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 323.5,
+   "totalStreamMs": 487,
+   "renderCompleteMs": 487,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 121,
+    "scriptMs": 52.7,
+    "layoutMs": 3.5,
+    "styleMs": 2.1
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    2.8
+   ],
+   "inputLatencyInStreamMs": [
+    2.8
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 26,
+   "componentRenders": 44,
+   "storeCommits": 13,
+   "mutationCount": 73,
+   "jsHeapUsedBytes": 12857356,
+   "jsHeapUsedAfterGcBytes": 11201316,
+   "domNodes": 30,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-reasoning-subagents-snapshot-1-mwboob95",
+   "startedAt": "2026-11-11T05:33:37.913Z",
+   "loadavg1": 20.47,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 348.1,
+   "totalStreamMs": 492.3,
+   "renderCompleteMs": 492.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 175.4,
+    "scriptMs": 96.8,
+    "layoutMs": 1.8,
+    "styleMs": 1.1
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    14.4
+   ],
+   "inputLatencyInStreamMs": [
+    14.4
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 59,
+   "componentRenders": 2,
+   "storeCommits": 10,
+   "mutationCount": 30,
+   "jsHeapUsedBytes": 16088976,
+   "jsHeapUsedAfterGcBytes": 14559696,
+   "domNodes": 33,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-parallel-tool-calls-1-mwbooc4r",
+   "startedAt": "2026-11-11T05:33:39.051Z",
+   "loadavg1": 19.55,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 51.3,
+   "totalStreamMs": 687.6,
+   "renderCompleteMs": 687.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 163.6,
+    "scriptMs": 72.8,
+    "layoutMs": 9,
+    "styleMs": 3.9
+   },
+   "frameStats": {
+    "frames": 41,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    12.4,
+    10.1,
+    14.2
+   ],
+   "inputLatencyInStreamMs": [
+    12.4,
+    10.1,
+    14.2
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 34,
+   "componentRenders": 51,
+   "storeCommits": 18,
+   "mutationCount": 96,
+   "jsHeapUsedBytes": 12215688,
+   "jsHeapUsedAfterGcBytes": 11340728,
+   "domNodes": 70,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-parallel-tool-calls-1-mwbood4a",
+   "startedAt": "2026-11-11T05:33:40.330Z",
+   "loadavg1": 19.55,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 77.8,
+   "totalStreamMs": 692.5,
+   "renderCompleteMs": 692.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 262.2,
+    "scriptMs": 146.2,
+    "layoutMs": 9.6,
+    "styleMs": 2.4
+   },
+   "frameStats": {
+    "frames": 41,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    20.5,
+    11.9,
+    2.9
+   ],
+   "inputLatencyInStreamMs": [
+    20.5,
+    11.9,
+    2.9
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 103,
+   "componentRenders": 59,
+   "storeCommits": 13,
+   "mutationCount": 90,
+   "jsHeapUsedBytes": 18783580,
+   "jsHeapUsedAfterGcBytes": 14997656,
+   "domNodes": 57,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-hostile-huge-table-1-mwbooe5a",
+   "startedAt": "2026-11-11T05:33:41.662Z",
+   "loadavg1": 19.55,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 59.5,
+   "totalStreamMs": 1126.2,
+   "renderCompleteMs": 1141.4,
+   "renderLagAfterSettleMs": 15.2,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 172,
+   "longTaskCount": 3,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 1126.2,
+    "scriptMs": 1009.1,
+    "layoutMs": 24.6,
+    "styleMs": 7.3
+   },
+   "frameStats": {
+    "frames": 51,
+    "droppedFrames": 17,
+    "jankFrames": 2,
+    "maxFrameMs": 66.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    43.7,
+    20.9,
+    47.4,
+    26.7
+   ],
+   "inputLatencyInStreamMs": [
+    43.7,
+    20.9,
+    47.4,
+    26.7
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 412,
+   "componentRenders": 2,
+   "storeCommits": 5,
+   "mutationCount": 19,
+   "jsHeapUsedBytes": 44921308,
+   "jsHeapUsedAfterGcBytes": 21111376,
+   "domNodes": 4443,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-hostile-huge-table-1-mwboofjr",
+   "startedAt": "2026-11-11T05:33:43.479Z",
+   "loadavg1": 19.55,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 49.7,
+   "totalStreamMs": 1109.1,
+   "renderCompleteMs": 1109.1,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 259,
+   "longTaskCount": 4,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 726,
+    "scriptMs": 565.7,
+    "layoutMs": 46.4,
+    "styleMs": 7
+   },
+   "frameStats": {
+    "frames": 52,
+    "droppedFrames": 14,
+    "jankFrames": 2,
+    "maxFrameMs": 66.6,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.6,
+    29.3,
+    25.2,
+    4.2,
+    13
+   ],
+   "inputLatencyInStreamMs": [
+    7.6,
+    29.3,
+    25.2,
+    4.2,
+    13
+   ],
+   "eventTimingDurationsMs": [
+    32,
+    24,
+    16
+   ],
+   "reactCommits": 20,
+   "componentRenders": 22,
+   "storeCommits": 3,
+   "mutationCount": 418,
+   "jsHeapUsedBytes": 21691360,
+   "jsHeapUsedAfterGcBytes": 21375636,
+   "domNodes": 4441,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-custom-chunks-1-mwboogvv",
+   "startedAt": "2026-11-11T05:33:45.211Z",
+   "loadavg1": 19.43,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 36.4,
+   "totalStreamMs": 392.6,
+   "renderCompleteMs": 449.8,
+   "renderLagAfterSettleMs": 57.2,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 200.2,
+    "scriptMs": 60.2,
+    "layoutMs": 12.7,
+    "styleMs": 12.9
+   },
+   "frameStats": {
+    "frames": 27,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.1,
+    4.2
+   ],
+   "inputLatencyInStreamMs": [
+    7.1,
+    4.2
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 24,
+   "componentRenders": 32,
+   "storeCommits": 11,
+   "mutationCount": 665,
+   "jsHeapUsedBytes": 15505148,
+   "jsHeapUsedAfterGcBytes": 13828224,
+   "domNodes": 163,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-custom-chunks-1-mwboohox",
+   "startedAt": "2026-11-11T05:33:46.257Z",
+   "loadavg1": 19.43,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 62.4,
+   "totalStreamMs": 407.9,
+   "renderCompleteMs": 467,
+   "renderLagAfterSettleMs": 59.1,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 258.3,
+    "scriptMs": 104,
+    "layoutMs": 11.6,
+    "styleMs": 12.8
+   },
+   "frameStats": {
+    "frames": 28,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.1,
+    13.6
+   ],
+   "inputLatencyInStreamMs": [
+    17.1,
+    13.6
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 59,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 669,
+   "jsHeapUsedBytes": 20361804,
+   "jsHeapUsedAfterGcBytes": 17131524,
+   "domNodes": 169,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-hitl-expire-1-mwbooik4",
+   "startedAt": "2026-11-11T05:33:47.380Z",
+   "loadavg1": 19.43,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 37,
+   "totalStreamMs": 286.5,
+   "renderCompleteMs": 286.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 80.5,
+    "scriptMs": 29.2,
+    "layoutMs": 4.9,
+    "styleMs": 2.2
+   },
+   "frameStats": {
+    "frames": 17,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.6
+   ],
+   "inputLatencyInStreamMs": [
+    6.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11845528,
+   "jsHeapUsedAfterGcBytes": 10747816,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-hitl-expire-1-mwbooj8z",
+   "startedAt": "2026-11-11T05:33:48.275Z",
+   "loadavg1": 19.43,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 62.7,
+   "totalStreamMs": 275,
+   "renderCompleteMs": 275,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 134.3,
+    "scriptMs": 70.1,
+    "layoutMs": 6,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.6
+   },
+   "inputLatencyMs": [
+    18.2
+   ],
+   "inputLatencyInStreamMs": [
+    18.2
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15838996,
+   "jsHeapUsedAfterGcBytes": 14366244,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 1,
+   "sessionId": "m163-own-chromium-a2ui-over-agui-1-mwboojyt",
+   "startedAt": "2026-11-11T05:33:49.205Z",
+   "loadavg1": 18.59,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 36.3,
+   "totalStreamMs": 187.7,
+   "renderCompleteMs": 187.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 77.3,
+    "scriptMs": 35.7,
+    "layoutMs": 1.3,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 11,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    15.2
+   ],
+   "inputLatencyInStreamMs": [
+    15.2
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 13,
+   "componentRenders": 16,
+   "storeCommits": 6,
+   "mutationCount": 40,
+   "jsHeapUsedBytes": 11604272,
+   "jsHeapUsedAfterGcBytes": 11243276,
+   "domNodes": 40,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 1,
+   "sessionId": "m163-hybrid-chromium-a2ui-over-agui-1-mwbookko",
+   "startedAt": "2026-11-11T05:33:49.992Z",
+   "loadavg1": 18.59,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 62.1,
+   "totalStreamMs": 191.9,
+   "renderCompleteMs": 191.9,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 109.4,
+    "scriptMs": 55.6,
+    "layoutMs": 1.3,
+    "styleMs": 1
+   },
+   "frameStats": {
+    "frames": 11,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.2
+   ],
+   "inputLatencyInStreamMs": [
+    19.2
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 25,
+   "componentRenders": 4,
+   "storeCommits": 6,
+   "mutationCount": 32,
+   "jsHeapUsedBytes": 15002056,
+   "jsHeapUsedAfterGcBytes": 14376684,
+   "domNodes": 42,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-run-error-2-mwbool86",
+   "startedAt": "2026-11-11T05:33:50.838Z",
+   "loadavg1": 18.59,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 36.5,
+   "totalStreamMs": 107.7,
+   "renderCompleteMs": 107.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 54,
+    "scriptMs": 20.7,
+    "layoutMs": 1,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 5,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.3,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.1
+   ],
+   "inputLatencyInStreamMs": [
+    7.1
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 5,
+   "componentRenders": 7,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10655336,
+   "jsHeapUsedAfterGcBytes": 10381992,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-run-error-2-mwboolrg",
+   "startedAt": "2026-11-11T05:33:51.532Z",
+   "loadavg1": 18.59,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 62.4,
+   "totalStreamMs": 112.8,
+   "renderCompleteMs": 112.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 81.4,
+    "scriptMs": 41.5,
+    "layoutMs": 1.1,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 7,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19
+   ],
+   "inputLatencyInStreamMs": [
+    19
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 13,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 22,
+   "jsHeapUsedBytes": 14209568,
+   "jsHeapUsedAfterGcBytes": 13262756,
+   "domNodes": 31,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-hostile-huge-table-2-mwboomcf",
+   "startedAt": "2026-11-11T05:33:52.287Z",
+   "loadavg1": 18.59,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 56.7,
+   "totalStreamMs": 1124.7,
+   "renderCompleteMs": 1139.1,
+   "renderLagAfterSettleMs": 14.4,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 169,
+   "longTaskCount": 3,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 1124.2,
+    "scriptMs": 1008.4,
+    "layoutMs": 24.3,
+    "styleMs": 7.3
+   },
+   "frameStats": {
+    "frames": 48,
+    "droppedFrames": 20,
+    "jankFrames": 2,
+    "maxFrameMs": 66.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    39.2,
+    43.4,
+    49.7,
+    24.9
+   ],
+   "inputLatencyInStreamMs": [
+    39.2,
+    43.4,
+    49.7,
+    24.9
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 412,
+   "componentRenders": 2,
+   "storeCommits": 5,
+   "mutationCount": 19,
+   "jsHeapUsedBytes": 69141968,
+   "jsHeapUsedAfterGcBytes": 21093836,
+   "domNodes": 4443,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-hostile-huge-table-2-mwboonqi",
+   "startedAt": "2026-11-11T05:33:54.090Z",
+   "loadavg1": 18.54,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 48.6,
+   "totalStreamMs": 1171.8,
+   "renderCompleteMs": 1171.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 281,
+   "longTaskCount": 4,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 784.2,
+    "scriptMs": 623.5,
+    "layoutMs": 46.1,
+    "styleMs": 7.1
+   },
+   "frameStats": {
+    "frames": 52,
+    "droppedFrames": 18,
+    "jankFrames": 3,
+    "maxFrameMs": 83.3,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    8.6,
+    11.3,
+    50.8,
+    47.7,
+    42.5
+   ],
+   "inputLatencyInStreamMs": [
+    8.6,
+    11.3,
+    50.8,
+    47.7,
+    42.5
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    56,
+    48,
+    48
+   ],
+   "reactCommits": 21,
+   "componentRenders": 23,
+   "storeCommits": 3,
+   "mutationCount": 418,
+   "jsHeapUsedBytes": 48570664,
+   "jsHeapUsedAfterGcBytes": 21648996,
+   "domNodes": 4441,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-disconnect-reconnect-replay-2-mwboop4k",
+   "startedAt": "2026-11-11T05:33:55.892Z",
+   "loadavg1": 18.54,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 60.6,
+   "totalStreamMs": 1032.1,
+   "renderCompleteMs": 1032.1,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 251.1,
+    "scriptMs": 149.6,
+    "layoutMs": 9.8,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 62,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    1.8,
+    17.6,
+    12.4,
+    7.8
+   ],
+   "inputLatencyInStreamMs": [
+    1.8,
+    17.6,
+    12.4,
+    7.8
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 94,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 61,
+   "jsHeapUsedBytes": 16684896,
+   "jsHeapUsedAfterGcBytes": 14312972,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-disconnect-reconnect-replay-2-mwbooqfo",
+   "startedAt": "2026-11-11T05:33:57.588Z",
+   "loadavg1": 18.54,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 30.9,
+   "totalStreamMs": 1028.5,
+   "renderCompleteMs": 1028.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 170.2,
+    "scriptMs": 81.2,
+    "layoutMs": 9.2,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 62,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.6,
+    4,
+    9.6,
+    9.4
+   ],
+   "inputLatencyInStreamMs": [
+    17.6,
+    4,
+    9.6,
+    9.4
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 46,
+   "componentRenders": 48,
+   "storeCommits": 4,
+   "mutationCount": 65,
+   "jsHeapUsedBytes": 12978256,
+   "jsHeapUsedAfterGcBytes": 11097264,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-hitl-expire-2-mwboorol",
+   "startedAt": "2026-11-11T05:33:59.205Z",
+   "loadavg1": 17.78,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 61.6,
+   "totalStreamMs": 275.5,
+   "renderCompleteMs": 275.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 137.1,
+    "scriptMs": 70.4,
+    "layoutMs": 6.3,
+    "styleMs": 1.4
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.1
+   ],
+   "inputLatencyInStreamMs": [
+    19.1
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 34,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 42,
+   "jsHeapUsedBytes": 14848488,
+   "jsHeapUsedAfterGcBytes": 14135468,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-hitl-expire-2-mwbooseh",
+   "startedAt": "2026-11-11T05:34:00.137Z",
+   "loadavg1": 17.78,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 44.6,
+   "totalStreamMs": 270.9,
+   "renderCompleteMs": 270.9,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 96.1,
+    "scriptMs": 31.7,
+    "layoutMs": 4.5,
+    "styleMs": 1.8
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    5.7
+   ],
+   "inputLatencyInStreamMs": [
+    5.7
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 12,
+   "componentRenders": 16,
+   "storeCommits": 6,
+   "mutationCount": 40,
+   "jsHeapUsedBytes": 11990580,
+   "jsHeapUsedAfterGcBytes": 10762860,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-hitl-approve-2-mwboot2v",
+   "startedAt": "2026-11-11T05:34:01.015Z",
+   "loadavg1": 17.78,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 34.6,
+   "totalStreamMs": 287.4,
+   "renderCompleteMs": 287.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 84.8,
+    "scriptMs": 30.1,
+    "layoutMs": 6.3,
+    "styleMs": 2.9
+   },
+   "frameStats": {
+    "frames": 17,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    16.9
+   ],
+   "inputLatencyInStreamMs": [
+    16.9
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 12,
+   "componentRenders": 16,
+   "storeCommits": 6,
+   "mutationCount": 40,
+   "jsHeapUsedBytes": 11981756,
+   "jsHeapUsedAfterGcBytes": 10750296,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-hitl-approve-2-mwbootru",
+   "startedAt": "2026-11-11T05:34:01.914Z",
+   "loadavg1": 17.78,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 61.1,
+   "totalStreamMs": 275.2,
+   "renderCompleteMs": 275.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 133.9,
+    "scriptMs": 70.3,
+    "layoutMs": 5.9,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    16.5
+   ],
+   "inputLatencyInStreamMs": [
+    16.5
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15817740,
+   "jsHeapUsedAfterGcBytes": 14368248,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-state-snapshot-delta-2-mwboouhk",
+   "startedAt": "2026-11-11T05:34:02.840Z",
+   "loadavg1": 17.78,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 140.8,
+   "totalStreamMs": 248.4,
+   "renderCompleteMs": 248.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 70.2,
+    "scriptMs": 24.7,
+    "layoutMs": 1.5,
+    "styleMs": 1.4
+   },
+   "frameStats": {
+    "frames": 15,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    3.9
+   ],
+   "inputLatencyInStreamMs": [
+    3.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 8,
+   "componentRenders": 10,
+   "storeCommits": 11,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 11576436,
+   "jsHeapUsedAfterGcBytes": 10669888,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-state-snapshot-delta-2-mwboov4w",
+   "startedAt": "2026-11-11T05:34:03.680Z",
+   "loadavg1": 17.78,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 166.1,
+   "totalStreamMs": 252.2,
+   "renderCompleteMs": 252.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 109.1,
+    "scriptMs": 54.4,
+    "layoutMs": 1.1,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 15,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    12.1
+   ],
+   "inputLatencyInStreamMs": [
+    12.1
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 19,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 23,
+   "jsHeapUsedBytes": 14955336,
+   "jsHeapUsedAfterGcBytes": 13893812,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-run-cancelled-by-agent-2-mwboovu1",
+   "startedAt": "2026-11-11T05:34:04.585Z",
+   "loadavg1": 18.36,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 36.7,
+   "totalStreamMs": 106.8,
+   "renderCompleteMs": 106.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 54.6,
+    "scriptMs": 21,
+    "layoutMs": 0.9,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.6
+   },
+   "inputLatencyMs": [
+    6.9
+   ],
+   "inputLatencyInStreamMs": [
+    6.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 6,
+   "componentRenders": 8,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10880444,
+   "jsHeapUsedAfterGcBytes": 10497000,
+   "domNodes": 27,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-run-cancelled-by-agent-2-mwboowd9",
+   "startedAt": "2026-11-11T05:34:05.277Z",
+   "loadavg1": 18.36,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 61.5,
+   "totalStreamMs": 112.4,
+   "renderCompleteMs": 112.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 84.2,
+    "scriptMs": 43.1,
+    "layoutMs": 0.7,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    20.1
+   ],
+   "inputLatencyInStreamMs": [
+    20.1
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 15,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 22,
+   "jsHeapUsedBytes": 14804712,
+   "jsHeapUsedAfterGcBytes": 13515660,
+   "domNodes": 29,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-a2ui-over-agui-2-mwboowyf",
+   "startedAt": "2026-11-11T05:34:06.039Z",
+   "loadavg1": 18.36,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 36.5,
+   "totalStreamMs": 186.7,
+   "renderCompleteMs": 186.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 72.7,
+    "scriptMs": 34.4,
+    "layoutMs": 1.2,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 10,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.3,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    8.6
+   ],
+   "inputLatencyInStreamMs": [
+    8.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 12,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 12771804,
+   "jsHeapUsedAfterGcBytes": 11232448,
+   "domNodes": 40,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-a2ui-over-agui-2-mwbooxjy",
+   "startedAt": "2026-11-11T05:34:06.814Z",
+   "loadavg1": 18.36,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 62.7,
+   "totalStreamMs": 191.6,
+   "renderCompleteMs": 191.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 112.2,
+    "scriptMs": 58.6,
+    "layoutMs": 1.4,
+    "styleMs": 1.1
+   },
+   "frameStats": {
+    "frames": 11,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    16.5
+   ],
+   "inputLatencyInStreamMs": [
+    16.5
+   ],
+   "eventTimingDurationsMs": [
+    32
+   ],
+   "reactCommits": 26,
+   "componentRenders": 4,
+   "storeCommits": 6,
+   "mutationCount": 33,
+   "jsHeapUsedBytes": 15235796,
+   "jsHeapUsedAfterGcBytes": 14613880,
+   "domNodes": 42,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-long-markdown-2-mwbooy7a",
+   "startedAt": "2026-11-11T05:34:07.654Z",
+   "loadavg1": 18.36,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 43.7,
+   "totalStreamMs": 5889.6,
+   "renderCompleteMs": 5889.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 78,
+   "longTaskCount": 1,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 1450,
+    "scriptMs": 734.3,
+    "layoutMs": 78.5,
+    "styleMs": 28.6
+   },
+   "frameStats": {
+    "frames": 348,
+    "droppedFrames": 5,
+    "jankFrames": 1,
+    "maxFrameMs": 66.6,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.1,
+    36.4,
+    14,
+    8,
+    19.9,
+    5.3,
+    6.8,
+    5.2,
+    31.1,
+    17.4,
+    17.6,
+    11.3,
+    10.3,
+    4.9,
+    2.5,
+    17,
+    12.1,
+    19.3,
+    11.7,
+    4.5,
+    1.6,
+    15,
+    11.6
+   ],
+   "inputLatencyInStreamMs": [
+    6.1,
+    36.4,
+    14,
+    8,
+    19.9,
+    5.3,
+    6.8,
+    5.2,
+    31.1,
+    17.4,
+    17.6,
+    11.3,
+    10.3,
+    4.9,
+    2.5,
+    17,
+    12.1,
+    19.3,
+    11.7,
+    4.5,
+    1.6,
+    15,
+    11.6
+   ],
+   "eventTimingDurationsMs": [
+    24,
+    16,
+    40,
+    24,
+    16,
+    16,
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 161,
+   "componentRenders": 135,
+   "storeCommits": 8,
+   "mutationCount": 957,
+   "jsHeapUsedBytes": 24628748,
+   "jsHeapUsedAfterGcBytes": 19942016,
+   "domNodes": 2208,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-long-markdown-2-mwbop37r",
+   "startedAt": "2026-11-11T05:34:14.151Z",
+   "loadavg1": 19.2,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 109,
+   "totalStreamMs": 5834.7,
+   "renderCompleteMs": 5834.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 3395.5,
+    "scriptMs": 2535.9,
+    "layoutMs": 88.2,
+    "styleMs": 30.6
+   },
+   "frameStats": {
+    "frames": 350,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    32,
+    17.3,
+    14.1,
+    12.9,
+    8,
+    4.3,
+    17.7,
+    17.1,
+    12.5,
+    5.8,
+    18.3,
+    15.1,
+    13.7,
+    12.6,
+    8.7,
+    6.3,
+    2.8,
+    18.1,
+    14.9,
+    11.5,
+    6.5,
+    3.7,
+    20.9
+   ],
+   "inputLatencyInStreamMs": [
+    32,
+    17.3,
+    14.1,
+    12.9,
+    8,
+    4.3,
+    17.7,
+    17.1,
+    12.5,
+    5.8,
+    18.3,
+    15.1,
+    13.7,
+    12.6,
+    8.7,
+    6.3,
+    2.8,
+    18.1,
+    14.9,
+    11.5,
+    6.5,
+    3.7,
+    20.9
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 4497,
+   "componentRenders": 2,
+   "storeCommits": 9,
+   "mutationCount": 1764,
+   "jsHeapUsedBytes": 30016096,
+   "jsHeapUsedAfterGcBytes": 21523692,
+   "domNodes": 1790,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-custom-chunks-2-mwbop88b",
+   "startedAt": "2026-11-11T05:34:20.651Z",
+   "loadavg1": 18.22,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 62,
+   "totalStreamMs": 403.6,
+   "renderCompleteMs": 459.3,
+   "renderLagAfterSettleMs": 55.7,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 264.3,
+    "scriptMs": 106.1,
+    "layoutMs": 13.8,
+    "styleMs": 13.9
+   },
+   "frameStats": {
+    "frames": 27,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18.4,
+    14.1
+   ],
+   "inputLatencyInStreamMs": [
+    18.4,
+    14.1
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 59,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 669,
+   "jsHeapUsedBytes": 19870548,
+   "jsHeapUsedAfterGcBytes": 17129832,
+   "domNodes": 169,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-custom-chunks-2-mwbop92z",
+   "startedAt": "2026-11-11T05:34:21.755Z",
+   "loadavg1": 18.22,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 34.5,
+   "totalStreamMs": 390.1,
+   "renderCompleteMs": 444.1,
+   "renderLagAfterSettleMs": 54,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 190.9,
+    "scriptMs": 58.9,
+    "layoutMs": 8.9,
+    "styleMs": 11.6
+   },
+   "frameStats": {
+    "frames": 26,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.1,
+    3.5
+   ],
+   "inputLatencyInStreamMs": [
+    6.1,
+    3.5
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 24,
+   "componentRenders": 32,
+   "storeCommits": 11,
+   "mutationCount": 665,
+   "jsHeapUsedBytes": 15460828,
+   "jsHeapUsedAfterGcBytes": 13828416,
+   "domNodes": 163,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-parallel-tool-calls-2-mwbop9vh",
+   "startedAt": "2026-11-11T05:34:22.781Z",
+   "loadavg1": 18.22,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 76.4,
+   "totalStreamMs": 693,
+   "renderCompleteMs": 693,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 252.5,
+    "scriptMs": 142.2,
+    "layoutMs": 8.3,
+    "styleMs": 1.8
+   },
+   "frameStats": {
+    "frames": 40,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.4,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18.1,
+    16.3,
+    15.4
+   ],
+   "inputLatencyInStreamMs": [
+    18.1,
+    16.3,
+    15.4
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 103,
+   "componentRenders": 59,
+   "storeCommits": 13,
+   "mutationCount": 90,
+   "jsHeapUsedBytes": 16649848,
+   "jsHeapUsedAfterGcBytes": 14992364,
+   "domNodes": 57,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-parallel-tool-calls-2-mwbopawp",
+   "startedAt": "2026-11-11T05:34:24.121Z",
+   "loadavg1": 17.25,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 50.8,
+   "totalStreamMs": 686.1,
+   "renderCompleteMs": 686.1,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 163.5,
+    "scriptMs": 72,
+    "layoutMs": 8.6,
+    "styleMs": 3.8
+   },
+   "frameStats": {
+    "frames": 41,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    11.4,
+    9,
+    3
+   ],
+   "inputLatencyInStreamMs": [
+    11.4,
+    9,
+    3
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 34,
+   "componentRenders": 51,
+   "storeCommits": 18,
+   "mutationCount": 97,
+   "jsHeapUsedBytes": 12359248,
+   "jsHeapUsedAfterGcBytes": 11347200,
+   "domNodes": 70,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-malformed-out-of-order-2-mwbopbw3",
+   "startedAt": "2026-11-11T05:34:25.395Z",
+   "loadavg1": 17.25,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 146.3,
+   "totalStreamMs": 273.3,
+   "renderCompleteMs": 274.1,
+   "renderLagAfterSettleMs": 0.8,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 95.3,
+    "scriptMs": 54.4,
+    "layoutMs": 1.2,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18.3
+   ],
+   "inputLatencyInStreamMs": [
+    18.3
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 23,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 25,
+   "jsHeapUsedBytes": 15912012,
+   "jsHeapUsedAfterGcBytes": 14032584,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-malformed-out-of-order-2-mwbopclh",
+   "startedAt": "2026-11-11T05:34:26.309Z",
+   "loadavg1": 17.25,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 122,
+   "totalStreamMs": 267.4,
+   "renderCompleteMs": 275.5,
+   "renderLagAfterSettleMs": 8.1,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 64.5,
+    "scriptMs": 29.6,
+    "layoutMs": 1.1,
+    "styleMs": 1.1
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    8.4
+   ],
+   "inputLatencyInStreamMs": [
+    8.4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 18,
+   "componentRenders": 22,
+   "storeCommits": 13,
+   "mutationCount": 55,
+   "jsHeapUsedBytes": 11829880,
+   "jsHeapUsedAfterGcBytes": 10706980,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-reasoning-subagents-snapshot-2-mwbopd9p",
+   "startedAt": "2026-11-11T05:34:27.181Z",
+   "loadavg1": 17.25,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 322.2,
+   "totalStreamMs": 487.1,
+   "renderCompleteMs": 487.1,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 112.1,
+    "scriptMs": 50.4,
+    "layoutMs": 3,
+    "styleMs": 1.9
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.4
+   ],
+   "inputLatencyInStreamMs": [
+    6.4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 28,
+   "componentRenders": 46,
+   "storeCommits": 13,
+   "mutationCount": 75,
+   "jsHeapUsedBytes": 11614796,
+   "jsHeapUsedAfterGcBytes": 11197032,
+   "domNodes": 30,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-reasoning-subagents-snapshot-2-mwbope4m",
+   "startedAt": "2026-11-11T05:34:28.294Z",
+   "loadavg1": 17.25,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 347.4,
+   "totalStreamMs": 492.8,
+   "renderCompleteMs": 492.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 190,
+    "scriptMs": 109.7,
+    "layoutMs": 1.5,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    15.2
+   ],
+   "inputLatencyInStreamMs": [
+    15.2
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 58,
+   "componentRenders": 2,
+   "storeCommits": 10,
+   "mutationCount": 29,
+   "jsHeapUsedBytes": 15970960,
+   "jsHeapUsedAfterGcBytes": 14552144,
+   "domNodes": 33,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 2,
+   "sessionId": "m163-hybrid-chromium-hitl-reject-2-mwbopf1x",
+   "startedAt": "2026-11-11T05:34:29.493Z",
+   "loadavg1": 17.06,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 62.5,
+   "totalStreamMs": 274.7,
+   "renderCompleteMs": 274.7,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 125.1,
+    "scriptMs": 70.3,
+    "layoutMs": 6.3,
+    "styleMs": 1.4
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18
+   ],
+   "inputLatencyInStreamMs": [
+    18
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15819792,
+   "jsHeapUsedAfterGcBytes": 14365940,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 2,
+   "sessionId": "m163-own-chromium-hitl-reject-2-mwbopfrm",
+   "startedAt": "2026-11-11T05:34:30.418Z",
+   "loadavg1": 17.06,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 36.6,
+   "totalStreamMs": 267.2,
+   "renderCompleteMs": 267.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 74.5,
+    "scriptMs": 27.8,
+    "layoutMs": 4.4,
+    "styleMs": 1.9
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.6
+   ],
+   "inputLatencyInStreamMs": [
+    6.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11839576,
+   "jsHeapUsedAfterGcBytes": 10744188,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-a2ui-over-agui-3-mwbopgfs",
+   "startedAt": "2026-11-11T05:34:31.288Z",
+   "loadavg1": 17.06,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 35.8,
+   "totalStreamMs": 187.4,
+   "renderCompleteMs": 187.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 76.8,
+    "scriptMs": 36.5,
+    "layoutMs": 1.5,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 11,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.4
+   ],
+   "inputLatencyInStreamMs": [
+    7.4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 12,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 12786660,
+   "jsHeapUsedAfterGcBytes": 11251128,
+   "domNodes": 40,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "a2ui-over-agui",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-a2ui-over-agui-3-mwboph1f",
+   "startedAt": "2026-11-11T05:34:32.067Z",
+   "loadavg1": 17.06,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 62.1,
+   "totalStreamMs": 192.3,
+   "renderCompleteMs": 192.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 112.5,
+    "scriptMs": 58.4,
+    "layoutMs": 1.4,
+    "styleMs": 1
+   },
+   "frameStats": {
+    "frames": 11,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.3
+   ],
+   "inputLatencyInStreamMs": [
+    19.3
+   ],
+   "eventTimingDurationsMs": [
+    32
+   ],
+   "reactCommits": 26,
+   "componentRenders": 4,
+   "storeCommits": 6,
+   "mutationCount": 33,
+   "jsHeapUsedBytes": 15232948,
+   "jsHeapUsedAfterGcBytes": 14614672,
+   "domNodes": 42,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-reasoning-subagents-snapshot-3-mwbophov",
+   "startedAt": "2026-11-11T05:34:32.911Z",
+   "loadavg1": 17.06,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 348.6,
+   "totalStreamMs": 493,
+   "renderCompleteMs": 493,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 174.9,
+    "scriptMs": 96.3,
+    "layoutMs": 2.2,
+    "styleMs": 1
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    12.9
+   ],
+   "inputLatencyInStreamMs": [
+    12.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 60,
+   "componentRenders": 2,
+   "storeCommits": 10,
+   "mutationCount": 31,
+   "jsHeapUsedBytes": 16111584,
+   "jsHeapUsedAfterGcBytes": 14546928,
+   "domNodes": 33,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "reasoning-subagents-snapshot",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-reasoning-subagents-snapshot-3-mwbopikh",
+   "startedAt": "2026-11-11T05:34:34.049Z",
+   "loadavg1": 15.94,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 322.4,
+   "totalStreamMs": 487.5,
+   "renderCompleteMs": 487.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 116.1,
+    "scriptMs": 51.6,
+    "layoutMs": 3.4,
+    "styleMs": 2
+   },
+   "frameStats": {
+    "frames": 29,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    14.9
+   ],
+   "inputLatencyInStreamMs": [
+    14.9
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 28,
+   "componentRenders": 46,
+   "storeCommits": 13,
+   "mutationCount": 75,
+   "jsHeapUsedBytes": 11586280,
+   "jsHeapUsedAfterGcBytes": 11195832,
+   "domNodes": 30,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-parallel-tool-calls-3-mwbopjes",
+   "startedAt": "2026-11-11T05:34:35.140Z",
+   "loadavg1": 15.94,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 77.5,
+   "totalStreamMs": 694.6,
+   "renderCompleteMs": 694.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 261,
+    "scriptMs": 144.5,
+    "layoutMs": 8.7,
+    "styleMs": 2
+   },
+   "frameStats": {
+    "frames": 41,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    19.1,
+    13.7,
+    9.9
+   ],
+   "inputLatencyInStreamMs": [
+    19.1,
+    13.7,
+    9.9
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 105,
+   "componentRenders": 59,
+   "storeCommits": 13,
+   "mutationCount": 92,
+   "jsHeapUsedBytes": 18339272,
+   "jsHeapUsedAfterGcBytes": 15002712,
+   "domNodes": 57,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "parallel-tool-calls",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-parallel-tool-calls-3-mwbopkfn",
+   "startedAt": "2026-11-11T05:34:36.467Z",
+   "loadavg1": 15.94,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 51.4,
+   "totalStreamMs": 687.4,
+   "renderCompleteMs": 687.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 147.7,
+    "scriptMs": 64.7,
+    "layoutMs": 8.1,
+    "styleMs": 3.2
+   },
+   "frameStats": {
+    "frames": 41,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    11.9,
+    8.1,
+    13.2
+   ],
+   "inputLatencyInStreamMs": [
+    11.9,
+    8.1,
+    13.2
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 34,
+   "componentRenders": 51,
+   "storeCommits": 18,
+   "mutationCount": 96,
+   "jsHeapUsedBytes": 12212424,
+   "jsHeapUsedAfterGcBytes": 11350672,
+   "domNodes": 70,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-hitl-expire-3-mwboplf8",
+   "startedAt": "2026-11-11T05:34:37.748Z",
+   "loadavg1": 15.94,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 45.9,
+   "totalStreamMs": 291.4,
+   "renderCompleteMs": 291.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 77.5,
+    "scriptMs": 28.4,
+    "layoutMs": 4.3,
+    "styleMs": 1.9
+   },
+   "frameStats": {
+    "frames": 17,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    21.9
+   ],
+   "inputLatencyInStreamMs": [
+    21.9
+   ],
+   "eventTimingDurationsMs": [
+    24
+   ],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11836840,
+   "jsHeapUsedAfterGcBytes": 10739980,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-expire",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-hitl-expire-3-mwbopm3s",
+   "startedAt": "2026-11-11T05:34:38.632Z",
+   "loadavg1": 15.94,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 62.9,
+   "totalStreamMs": 273.8,
+   "renderCompleteMs": 273.8,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 132,
+    "scriptMs": 68.6,
+    "layoutMs": 5.7,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.4
+   ],
+   "inputLatencyInStreamMs": [
+    17.4
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15829704,
+   "jsHeapUsedAfterGcBytes": 14366112,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-run-cancelled-by-agent-3-mwbopmu3",
+   "startedAt": "2026-11-11T05:34:39.579Z",
+   "loadavg1": 16.18,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 36.1,
+   "totalStreamMs": 107.3,
+   "renderCompleteMs": 107.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 55.6,
+    "scriptMs": 21,
+    "layoutMs": 1.1,
+    "styleMs": 1.3
+   },
+   "frameStats": {
+    "frames": 6,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6
+   ],
+   "inputLatencyInStreamMs": [
+    6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 6,
+   "componentRenders": 8,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10879764,
+   "jsHeapUsedAfterGcBytes": 10500116,
+   "domNodes": 27,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-cancelled-by-agent",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-run-cancelled-by-agent-3-mwbopndl",
+   "startedAt": "2026-11-11T05:34:40.281Z",
+   "loadavg1": 16.18,
+   "runStatus": "cancelled",
+   "timeToFirstTokenMs": 64.2,
+   "totalStreamMs": 112.6,
+   "renderCompleteMs": 112.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 84.7,
+    "scriptMs": 43.2,
+    "layoutMs": 0.7,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 7,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    14.2
+   ],
+   "inputLatencyInStreamMs": [
+    14.2
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 14,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 21,
+   "jsHeapUsedBytes": 14703816,
+   "jsHeapUsedAfterGcBytes": 13501912,
+   "domNodes": 29,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-malformed-out-of-order-3-mwbopnyg",
+   "startedAt": "2026-11-11T05:34:41.032Z",
+   "loadavg1": 16.18,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 147.9,
+   "totalStreamMs": 274.5,
+   "renderCompleteMs": 274.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 109.9,
+    "scriptMs": 55.4,
+    "layoutMs": 1.1,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    16.5
+   ],
+   "inputLatencyInStreamMs": [
+    16.5
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 23,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 25,
+   "jsHeapUsedBytes": 15907400,
+   "jsHeapUsedAfterGcBytes": 14033080,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "malformed-out-of-order",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-malformed-out-of-order-3-mwbopons",
+   "startedAt": "2026-11-11T05:34:41.944Z",
+   "loadavg1": 16.18,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 121.9,
+   "totalStreamMs": 268.4,
+   "renderCompleteMs": 274,
+   "renderLagAfterSettleMs": 5.6,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 73.1,
+    "scriptMs": 29.9,
+    "layoutMs": 1.1,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    13.1
+   ],
+   "inputLatencyInStreamMs": [
+    13.1
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 18,
+   "componentRenders": 22,
+   "storeCommits": 13,
+   "mutationCount": 55,
+   "jsHeapUsedBytes": 11821200,
+   "jsHeapUsedAfterGcBytes": 10707924,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-hostile-huge-table-3-mwboppbz",
+   "startedAt": "2026-11-11T05:34:42.815Z",
+   "loadavg1": 16.18,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 48.5,
+   "totalStreamMs": 1112.3,
+   "renderCompleteMs": 1112.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 256,
+   "longTaskCount": 4,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 719.9,
+    "scriptMs": 561.1,
+    "layoutMs": 45.4,
+    "styleMs": 7
+   },
+   "frameStats": {
+    "frames": 52,
+    "droppedFrames": 15,
+    "jankFrames": 2,
+    "maxFrameMs": 66.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    8.5,
+    31.4,
+    36.5,
+    4.1,
+    15.6
+   ],
+   "inputLatencyInStreamMs": [
+    8.5,
+    31.4,
+    36.5,
+    4.1,
+    15.6
+   ],
+   "eventTimingDurationsMs": [
+    32,
+    32,
+    16
+   ],
+   "reactCommits": 20,
+   "componentRenders": 22,
+   "storeCommits": 3,
+   "mutationCount": 419,
+   "jsHeapUsedBytes": 21682644,
+   "jsHeapUsedAfterGcBytes": 21371648,
+   "domNodes": 4441,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hostile/huge-table",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-hostile-huge-table-3-mwbopqo5",
+   "startedAt": "2026-11-11T05:34:44.549Z",
+   "loadavg1": 15.21,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 57.7,
+   "totalStreamMs": 1072.5,
+   "renderCompleteMs": 1147.3,
+   "renderLagAfterSettleMs": 74.8,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 173,
+   "longTaskCount": 3,
+   "longTaskAfterSettleMs": 58,
+   "cpu": {
+    "taskMs": 1141.3,
+    "scriptMs": 1025.4,
+    "layoutMs": 24.4,
+    "styleMs": 7.1
+   },
+   "frameStats": {
+    "frames": 48,
+    "droppedFrames": 21,
+    "jankFrames": 4,
+    "maxFrameMs": 66.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    14.1,
+    7.1,
+    51,
+    97.3
+   ],
+   "inputLatencyInStreamMs": [
+    14.1,
+    7.1,
+    51,
+    97.3
+   ],
+   "eventTimingDurationsMs": [
+    24
+   ],
+   "reactCommits": 412,
+   "componentRenders": 2,
+   "storeCommits": 5,
+   "mutationCount": 19,
+   "jsHeapUsedBytes": 63291732,
+   "jsHeapUsedAfterGcBytes": 21106600,
+   "domNodes": 4443,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-state-snapshot-delta-3-mwbops2s",
+   "startedAt": "2026-11-11T05:34:46.372Z",
+   "loadavg1": 15.21,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 164.6,
+   "totalStreamMs": 251.2,
+   "renderCompleteMs": 251.2,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 107.4,
+    "scriptMs": 54.2,
+    "layoutMs": 1,
+    "styleMs": 0.7
+   },
+   "frameStats": {
+    "frames": 14,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.3,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    14.4
+   ],
+   "inputLatencyInStreamMs": [
+    14.4
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 19,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 23,
+   "jsHeapUsedBytes": 14950016,
+   "jsHeapUsedAfterGcBytes": 13902168,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "state-snapshot-delta",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-state-snapshot-delta-3-mwbopsrp",
+   "startedAt": "2026-11-11T05:34:47.269Z",
+   "loadavg1": 15.21,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 140.6,
+   "totalStreamMs": 247,
+   "renderCompleteMs": 247,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 69.3,
+    "scriptMs": 24.6,
+    "layoutMs": 1,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 15,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    5.4
+   ],
+   "inputLatencyInStreamMs": [
+    5.4
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 8,
+   "componentRenders": 10,
+   "storeCommits": 11,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 11574296,
+   "jsHeapUsedAfterGcBytes": 10669820,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-long-markdown-3-mwboptfd",
+   "startedAt": "2026-11-11T05:34:48.121Z",
+   "loadavg1": 15.21,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 117.2,
+   "totalStreamMs": 5832.6,
+   "renderCompleteMs": 5832.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 3284.4,
+    "scriptMs": 2456.6,
+    "layoutMs": 88.2,
+    "styleMs": 29.7
+   },
+   "frameStats": {
+    "frames": 350,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    23.1,
+    15.4,
+    9.8,
+    7.9,
+    1.7,
+    19,
+    18,
+    15.6,
+    12.4,
+    11.4,
+    7.3,
+    2.3,
+    16.7,
+    16.2,
+    10.9,
+    5.9,
+    17.6,
+    18.5,
+    16.5,
+    13.5,
+    12.1,
+    11.1,
+    6.8
+   ],
+   "inputLatencyInStreamMs": [
+    23.1,
+    15.4,
+    9.8,
+    7.9,
+    1.7,
+    19,
+    18,
+    15.6,
+    12.4,
+    11.4,
+    7.3,
+    2.3,
+    16.7,
+    16.2,
+    10.9,
+    5.9,
+    17.6,
+    18.5,
+    16.5,
+    13.5,
+    12.1,
+    11.1,
+    6.8
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+   ],
+   "reactCommits": 4481,
+   "componentRenders": 2,
+   "storeCommits": 9,
+   "mutationCount": 1716,
+   "jsHeapUsedBytes": 47271464,
+   "jsHeapUsedAfterGcBytes": 21537432,
+   "domNodes": 1790,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "long-markdown",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-long-markdown-3-mwbopyfv",
+   "startedAt": "2026-11-11T05:34:54.619Z",
+   "loadavg1": 13.56,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 42.1,
+   "totalStreamMs": 5850,
+   "renderCompleteMs": 5850,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 80,
+   "longTaskCount": 1,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 1457.8,
+    "scriptMs": 750.7,
+    "layoutMs": 80.6,
+    "styleMs": 24.4
+   },
+   "frameStats": {
+    "frames": 345,
+    "droppedFrames": 6,
+    "jankFrames": 1,
+    "maxFrameMs": 66.6,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    7.2,
+    79,
+    4.7,
+    17.6,
+    15.6,
+    16.3,
+    15.2,
+    13.2,
+    21.1,
+    6.6,
+    17.3,
+    16.4,
+    14.2,
+    12.9,
+    7.1,
+    18.1,
+    2.1,
+    16.4,
+    6.8,
+    22.6,
+    13.7,
+    10.9,
+    7
+   ],
+   "inputLatencyInStreamMs": [
+    7.2,
+    79,
+    4.7,
+    17.6,
+    15.6,
+    16.3,
+    15.2,
+    13.2,
+    21.1,
+    6.6,
+    17.3,
+    16.4,
+    14.2,
+    12.9,
+    7.1,
+    18.1,
+    2.1,
+    16.4,
+    6.8,
+    22.6,
+    13.7,
+    10.9,
+    7
+   ],
+   "eventTimingDurationsMs": [
+    80,
+    16,
+    16,
+    16,
+    16,
+    24,
+    16,
+    16,
+    16,
+    16,
+    16,
+    24,
+    24,
+    16
+   ],
+   "reactCommits": 168,
+   "componentRenders": 133,
+   "storeCommits": 8,
+   "mutationCount": 967,
+   "jsHeapUsedBytes": 29950736,
+   "jsHeapUsedAfterGcBytes": 19751344,
+   "domNodes": 2208,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-hitl-reject-3-mwboq3fe",
+   "startedAt": "2026-11-11T05:35:01.082Z",
+   "loadavg1": 13.35,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 36.1,
+   "totalStreamMs": 266.3,
+   "renderCompleteMs": 266.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 74.4,
+    "scriptMs": 28.2,
+    "layoutMs": 4,
+    "styleMs": 1.8
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    15.6
+   ],
+   "inputLatencyInStreamMs": [
+    15.6
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 12,
+   "componentRenders": 16,
+   "storeCommits": 6,
+   "mutationCount": 40,
+   "jsHeapUsedBytes": 11993676,
+   "jsHeapUsedAfterGcBytes": 10747216,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-reject",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-hitl-reject-3-mwboq436",
+   "startedAt": "2026-11-11T05:35:01.938Z",
+   "loadavg1": 13.35,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 63.2,
+   "totalStreamMs": 275.4,
+   "renderCompleteMs": 275.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 132.7,
+    "scriptMs": 69.1,
+    "layoutMs": 6.2,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    18.1
+   ],
+   "inputLatencyInStreamMs": [
+    18.1
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 35,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 43,
+   "jsHeapUsedBytes": 15843944,
+   "jsHeapUsedAfterGcBytes": 14366312,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-hitl-approve-3-mwboq4u2",
+   "startedAt": "2026-11-11T05:35:02.906Z",
+   "loadavg1": 13.35,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 35.9,
+   "totalStreamMs": 272.3,
+   "renderCompleteMs": 272.3,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 79.2,
+    "scriptMs": 29.4,
+    "layoutMs": 4.8,
+    "styleMs": 2.3
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6.3
+   ],
+   "inputLatencyInStreamMs": [
+    6.3
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 11,
+   "componentRenders": 15,
+   "storeCommits": 6,
+   "mutationCount": 39,
+   "jsHeapUsedBytes": 11842272,
+   "jsHeapUsedAfterGcBytes": 10741176,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "hitl-approve",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-hitl-approve-3-mwboq5hw",
+   "startedAt": "2026-11-11T05:35:03.764Z",
+   "loadavg1": 13.35,
+   "runStatus": "interrupted",
+   "timeToFirstTokenMs": 61.4,
+   "totalStreamMs": 275.5,
+   "renderCompleteMs": 275.5,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 125.5,
+    "scriptMs": 69.8,
+    "layoutMs": 6,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 16,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    3.6
+   ],
+   "inputLatencyInStreamMs": [
+    3.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 36,
+   "componentRenders": 17,
+   "storeCommits": 5,
+   "mutationCount": 44,
+   "jsHeapUsedBytes": 16072500,
+   "jsHeapUsedAfterGcBytes": 14383808,
+   "domNodes": 41,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-disconnect-reconnect-replay-3-mwboq67g",
+   "startedAt": "2026-11-11T05:35:04.684Z",
+   "loadavg1": 12.52,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 60.7,
+   "totalStreamMs": 1013.6,
+   "renderCompleteMs": 1013.6,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 244.8,
+    "scriptMs": 147.7,
+    "layoutMs": 9,
+    "styleMs": 0.9
+   },
+   "frameStats": {
+    "frames": 61,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    3.3,
+    18.1,
+    7.1,
+    18.3
+   ],
+   "inputLatencyInStreamMs": [
+    3.3,
+    18.1,
+    7.1,
+    18.3
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    32,
+    16
+   ],
+   "reactCommits": 94,
+   "componentRenders": 2,
+   "storeCommits": 4,
+   "mutationCount": 61,
+   "jsHeapUsedBytes": 16649356,
+   "jsHeapUsedAfterGcBytes": 14318068,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "disconnect-reconnect-replay",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-disconnect-reconnect-replay-3-mwboq7h9",
+   "startedAt": "2026-11-11T05:35:06.333Z",
+   "loadavg1": 12.52,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 30.1,
+   "totalStreamMs": 1029.1,
+   "renderCompleteMs": 1031.6,
+   "renderLagAfterSettleMs": 2.5,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 179.5,
+    "scriptMs": 87.5,
+    "layoutMs": 10.1,
+    "styleMs": 1.5
+   },
+   "frameStats": {
+    "frames": 61,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.2,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    15.9,
+    4,
+    5.9,
+    15.3
+   ],
+   "inputLatencyInStreamMs": [
+    15.9,
+    4,
+    5.9,
+    15.3
+   ],
+   "eventTimingDurationsMs": [
+    16,
+    16
+   ],
+   "reactCommits": 46,
+   "componentRenders": 48,
+   "storeCommits": 4,
+   "mutationCount": 66,
+   "jsHeapUsedBytes": 11554288,
+   "jsHeapUsedAfterGcBytes": 11070328,
+   "domNodes": 26,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-custom-chunks-3-mwboq8qv",
+   "startedAt": "2026-11-11T05:35:07.975Z",
+   "loadavg1": 12.52,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 63.2,
+   "totalStreamMs": 399.5,
+   "renderCompleteMs": 456.8,
+   "renderLagAfterSettleMs": 57.3,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 265.4,
+    "scriptMs": 107.5,
+    "layoutMs": 13.5,
+    "styleMs": 12.5
+   },
+   "frameStats": {
+    "frames": 27,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.8,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    17.1,
+    10
+   ],
+   "inputLatencyInStreamMs": [
+    17.1,
+    10
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 59,
+   "componentRenders": 2,
+   "storeCommits": 11,
+   "mutationCount": 669,
+   "jsHeapUsedBytes": 20314324,
+   "jsHeapUsedAfterGcBytes": 17124880,
+   "domNodes": 169,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "custom-chunks",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-custom-chunks-3-mwboq9le",
+   "startedAt": "2026-11-11T05:35:09.074Z",
+   "loadavg1": 12.48,
+   "runStatus": "finished",
+   "timeToFirstTokenMs": 35.6,
+   "totalStreamMs": 406.5,
+   "renderCompleteMs": 439.8,
+   "renderLagAfterSettleMs": 33.3,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 189.4,
+    "scriptMs": 58.5,
+    "layoutMs": 8.4,
+    "styleMs": 15.2
+   },
+   "frameStats": {
+    "frames": 25,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.4,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    6,
+    18.5
+   ],
+   "inputLatencyInStreamMs": [
+    6,
+    18.5
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 22,
+   "componentRenders": 29,
+   "storeCommits": 10,
+   "mutationCount": 661,
+   "jsHeapUsedBytes": 15751352,
+   "jsHeapUsedAfterGcBytes": 13821668,
+   "domNodes": 163,
+   "error": null
+  },
+  {
+   "prototype": "own",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 3,
+   "sessionId": "m163-own-chromium-run-error-3-mwboqads",
+   "startedAt": "2026-11-11T05:35:10.096Z",
+   "loadavg1": 12.48,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 36.5,
+   "totalStreamMs": 108.4,
+   "renderCompleteMs": 108.4,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 52.9,
+    "scriptMs": 19.8,
+    "layoutMs": 0.8,
+    "styleMs": 1.2
+   },
+   "frameStats": {
+    "frames": 5,
+    "droppedFrames": 1,
+    "jankFrames": 0,
+    "maxFrameMs": 33.3,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    8.6
+   ],
+   "inputLatencyInStreamMs": [
+    8.6
+   ],
+   "eventTimingDurationsMs": [],
+   "reactCommits": 5,
+   "componentRenders": 7,
+   "storeCommits": 3,
+   "mutationCount": 27,
+   "jsHeapUsedBytes": 10661684,
+   "jsHeapUsedAfterGcBytes": 10383048,
+   "domNodes": 28,
+   "error": null
+  },
+  {
+   "prototype": "hybrid",
+   "browser": "chromium",
+   "scenarioId": "run-error",
+   "repeat": 3,
+   "sessionId": "m163-hybrid-chromium-run-error-3-mwboqax7",
+   "startedAt": "2026-11-11T05:35:10.795Z",
+   "loadavg1": 12.48,
+   "runStatus": "error",
+   "timeToFirstTokenMs": 61.9,
+   "totalStreamMs": 113.1,
+   "renderCompleteMs": 113.1,
+   "renderLagAfterSettleMs": 0,
+   "renderCompleteTimedOut": false,
+   "longTaskTotalMs": 0,
+   "longTaskCount": 0,
+   "longTaskAfterSettleMs": 0,
+   "cpu": {
+    "taskMs": 81.4,
+    "scriptMs": 41.1,
+    "layoutMs": 0.9,
+    "styleMs": 0.8
+   },
+   "frameStats": {
+    "frames": 7,
+    "droppedFrames": 0,
+    "jankFrames": 0,
+    "maxFrameMs": 16.7,
+    "medianFrameMs": 16.7
+   },
+   "inputLatencyMs": [
+    20.3
+   ],
+   "inputLatencyInStreamMs": [
+    20.3
+   ],
+   "eventTimingDurationsMs": [
+    16
+   ],
+   "reactCommits": 13,
+   "componentRenders": 2,
+   "storeCommits": 3,
+   "mutationCount": 22,
+   "jsHeapUsedBytes": 14227440,
+   "jsHeapUsedAfterGcBytes": 13256300,
+   "domNodes": 31,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+  "target": "minimax",
+  "verification": {
+    "level": "source-verified",
+    "source": "https://github.com/MiniMax-AI/minimax-code/blob/main/packages/local-runtime-v2/src/service/agent/storage/canonical-agent-config.ts",
+    "version": "@minimax-ai/code 0.4.12; source inspected 2026-09-24",
+    "live": "unverified"
+  },
+  "capabilities": {
+    "agent-definition": "emitted",
+    "role-model": "emitted",
+    "team-options": "preserved-only",
+    "agent-plugin": "not-emitted",
+    "agent-marketplace": "not-emitted",
+    "static-team-roster": "not-emitted",
+    "model-policy-resolution": "not-emitted"
+  },
+  "diagnostics": [
+    "Source-verified serialization only; installed native validation and live execution are unverified.",
+    "Only explicit model IDs are translated. Resolve tier, skill, capability and price policies with agent-team-models before native invocation.",
+    "mcode exec has no verified custom-agent selector. The MiniMax plugin manifest supports skills/MCP/hooks/apps, not an agents field; no agent plugin is invented.",
+    "Role overrides are preserved without native schema certification. Skill IDs refer to separately installed skills; prompt mentions do not install or authorize them."
+  ],
+  "instructions": [
+    "Review staged artifacts before installation. Export grants no execution or registration authority.",
+    "Install agents/<name>/agent.md under the active MiniMax user-data directory: MINIMAX_DATA_DIR, MAVIS_DATA_DIR, or default ~/.minimax. Export does not install there."
+  ],
+  "files": [
+    {
+      "file": "agents/delivery-lead/agent.md",
+      "sha256": "18be79584039e612a62cb9cdc8ff388c39d089b2ebaf0130878a65de75147302"
+    },
+    {
+      "file": "agents/architect/agent.md",
+      "sha256": "ace604ce3249d2a29ba5a49ef2d86fac0df1fcc3ef28a0eb7dbbd7a37aa29f33"
+    },
+    {
+      "file": "agents/build-platform/agent.md",
+      "sha256": "3720cf02b50dd04188b77a5a876d5eaaab3227623fbcb5abf38e61c9ad6b271a"
+    },
+    {
+      "file": "agents/bdd-quality/agent.md",
+      "sha256": "a69db81c4a6111e6bab66c38d4d021cd4c7439c148f5a08ef948a62196754298"
+    },
+    {
+      "file": "agents/design-lead/agent.md",
+      "sha256": "099435d9104e705723055cfa4a3a26760ae408f0c9822b130d4993b5043a6814"
+    },
+    {
+      "file": "agents/ui-engineer/agent.md",
+      "sha256": "5c6f839136e6601eb9579ee958981648d47889ea6b9aeaf0810f6df1798240dd"
+    },
+    {
+      "file": "agents/client-shell/agent.md",
+      "sha256": "dbabae5dc88ea64072507d7f53fc257733d0073afcd0578876b4699eeedf7d68"
+    },
+    {
+      "file": "agents/mobile-engineer/agent.md",
+      "sha256": "8471817eda3666556feedc4e96dab7e98068a914e7fc155dbf80bf2a03d70265"
+    },
+    {
+      "file": "agents/webrtc-engineer/agent.md",
+      "sha256": "221ffd7a56be1e20046f05b41d33a5d73724fee27d5d3e81e3735e2174ae4245"
+    },
+    {
+      "file": "agents/livekit-platform/agent.md",
+      "sha256": "24eaf4eedbb9713168c614d33966bf33be10da0cae3322f208227a70bb56daa2"
+    },
+    {
+      "file": "agents/livekit-agents/agent.md",
+      "sha256": "04589f22db0b3148b97c2c9a9a02f3eb1f9b0259408042819accbe5799fa6dee"
+    },
+    {
+      "file": "agents/crdt-engineer/agent.md",
+      "sha256": "fbaaee189e65a35411e0f721d49c4d3bc2389f9e95c9e56487dec55b16db0e6e"
+    },
+    {
+      "file": "agents/integrations-engineer/agent.md",
+      "sha256": "11d63c8e07239eeffe1b8ae299ab3bbe7f9b7dd6efcc70746b5c0e02e7c27701"
+    },
+    {
+      "file": "agents/security-reviewer/agent.md",
+      "sha256": "dfe47206b9b64a7544f8cae03cdbc8d408cf1d585c76bf4b403b63ce01587ffe"
+    },
+    {
+      "file": "agents/independent-reviewer/agent.md",
+      "sha256": "0000bba96c8245232dae9f52dd4bb31d480b258b439184ecba5d278e6f7e161f"
+    },
+    {
+      "file": "export-receipt.json",
+      "sha256": "b21457a9a904f598f1bfc2a62c78f12b8d3f73d0df3f87f5373668830b087bf7"
+    }
+  ]
+}

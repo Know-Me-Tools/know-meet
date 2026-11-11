@@ -1,0 +1,26 @@
+{
+  "$comment": "Configuration for packages/design-tokens/generator. Paths are relative to this file. Output directories must already exist: a missing one is a hard error, never a silent skip.",
+  "source": "../../docs/design/tokens.json",
+  "fluidViewports": [375, 768, 1024, 1440],
+  "fonts": {
+    "dir": "fonts",
+    "faces": [
+      { "family": "Space Grotesk", "file": "space-grotesk-variable.woff2", "weight": "300 700" },
+      { "family": "Inter", "file": "inter-regular.woff2", "weight": "400" },
+      { "family": "Inter", "file": "inter-medium.woff2", "weight": "500" },
+      { "family": "Inter", "file": "inter-semibold.woff2", "weight": "600" },
+      { "family": "JetBrains Mono", "file": "jetbrains-mono-medium.woff2", "weight": "500" },
+      { "family": "JetBrains Mono", "file": "jetbrains-mono-semibold.woff2", "weight": "600" }
+    ]
+  },
+  "outputs": {
+    "web": { "dir": "generated/web" },
+    "flutter": { "dir": "generated/flutter", "paletteClass": "KmPalette", "tokensClass": "KmTokens" },
+    "brandDocs": {
+      "file": "../../docs/design/tokens.css",
+      "prefix": "km-",
+      "valueAliases": { "text-display": "text-display-brand" }
+    },
+    "manifest": "generated/manifest.json"
+  }
+}

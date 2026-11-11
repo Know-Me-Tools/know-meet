@@ -1,0 +1,8 @@
+# Goldens and the live harness round-trip are tagged off the default path:
+#   flutter test                      -> everything except live-harness
+#   flutter test --tags golden        -> goldens only
+#   KM_HARNESS_URL=... flutter test --tags live-harness
+tags:
+  golden: {}
+  live-harness:
+    skip: "needs the harness mock server; run with KM_HARNESS_URL and --run-skipped"

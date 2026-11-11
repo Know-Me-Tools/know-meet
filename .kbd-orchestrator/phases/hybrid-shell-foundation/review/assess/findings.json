@@ -1,0 +1,50 @@
+{
+  "mode": "artifact",
+  "verdict": "PASS",
+  "judge_model": "claude-opus-5-5",
+  "isolation_mode": "harness-native",
+  "producer_model": "claude-opus-5-5",
+  "cross_model_check": "same-model-collision",
+  "findings": [
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 42,
+      "claim": "The token reconciliation only compares the :root custom properties. It doesn't list the literal values in km.css component rules or the motion keyframes, which also have to become tokens before Goal 6 can be met under design-tokens-single-source.",
+      "evidence": "The 'Token source reconciliation' section covers only 'km.css (lines 62–161)'. After line 175, km.css still contains literal colours: #D5DAE1 for the light switch track at line 312, #FFFFFF three times, #fff, #000, rgba(11, 15, 20, 0.2) and rgba(0, 0, 0, 0.2). It also has literal type sizes: 11px at lines 380 and 388, 13px at lines 211, 496, 507 and 513, 15px at line 422, and clamp(24px, 2vw + 12px, 32px) at line 437. Weights and line-heights are set per rule (h1–h4 600/1.2; .display 700/1.04/-0.025em). Animation durations are literal too: 0.9s, 1.2s and 1.6s at lines 683–692, which tokens.json names dot-think and dot-ripple. Eight keyframes (toast-in, dlg-in, pop-in, orb-breathe, orb-speak, orb-ripple, orb-spin and toast-out) plus a prefers-reduced-motion block at line 775 define the 'motion' named in Goal 6. The reconciliation is also one-way. tokens.json has radius-pill, dot-breathe, dot-think and dot-ripple, which km.css never declares as variables. And --orb, counted among the 17 'missing tokens', is a component-scoped alias ('.orb { --orb: var(--ember); }' at line 671), not a design token.",
+      "suggested_fix": "Extend the reconciliation into a full inventory of km.css: component-level literal colours, sizes, weights, line-heights and letter-spacing, plus durations and keyframes. Classify each item as a new token, a mapping onto an existing token, or a component-local constant. Take --orb out of the missing-token count. Add the reverse direction: tokens in tokens.json that km.css never uses. Without this, Flutter ThemeData and the shadcn variable mapping will each re-derive these values by hand."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 52,
+      "claim": "The assessment never asks how the three brand fonts reach the shells. The prototype loads them from the Google Fonts CDN, and that does not carry over to Flutter or to an offline Tauri webview.",
+      "evidence": "km.css line 58: 'Fonts are loaded by each page via <link>; this file never @imports fonts.' Every prototype page links https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600 (for example dashboard.html line 28 and screens.html). The assessment mentions fonts only at line 87, about the generator's hardcoded mapping. It doesn't cover bundling font files for Flutter (pubspec assets or google_fonts), self-hosting for Tauri (offline use, and a CSP that would block fonts.googleapis.com), or OFL licensing. It also gives the weights as '500/600/700', but body text uses 400 ('font: 400 var(--text-base)/1.5') and the load includes Inter 400. VS-3 names the false positive 'matching colours but default Material type', but no gap or open question covers the cause.",
+      "suggested_fix": "Add a font-delivery gap: self-host or bundle Space Grotesk 500/600/700, Inter 400/500/600 and JetBrains Mono 500/600 for web/Tauri, either as assets or through a pinned package, and register them in Flutter. Check the Tauri CSP. Add an open question on self-hosting versus the CDN for the web build."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 145,
+      "claim": "The revised secrets-check item is stale. It tells Plan to add `--untracked` to the constraint check, but constraints.md already has it, so Plan would schedule work that is already done and misreport the state of the constraint.",
+      "evidence": "Assessment line 145: 'The constraint's check must add `--untracked`, or these paths must be committed.' Open Question 10 repeats 'add `--untracked` to the secrets constraint'. .kbd-orchestrator/constraints.md line 21 already reads: check: \"git grep --untracked -nE 'LIVEKIT_API_SECRET…'\", and line 26 (no-hardcoded-secrets) also uses --untracked. The packet's constraints field shows the same text.",
+      "suggested_fix": "Say that the constraint checks already use `--untracked`, and record that as done this stage. Limit Open Question 10 to committing docs/design/live/, AGENTS.md and CLAUDE.md."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "line": 172,
+      "claim": "The assessment gives the naming and size exceptions as 'proposed, pending operator confirmation', and Open Question 4 asks to confirm only E-N1–E-N5 and E-L1–E-L7. But AGENTS.md and the blocking constraints already enforce every exception, including E-N6 and E-L8, so their adoption status contradicts itself.",
+      "evidence": "Line 172: 'The exceptions below are **proposed, pending operator confirmation**'. Line 279: 'Confirm exceptions E-N1 to E-N5 and E-L1 to E-L7', which leaves out E-N6 and E-L8, the two added in this revision. The constraints.md blocking rules max-500-lines-per-file and kebab-case-file-names already list the 'tool-generated AI-harness skill/command files' exceptions. AGENTS.md states them as rules under '## File size' and '## File naming', and keeps only docs/design/** and long-form docs as 'Pending operator decision'. The checker that Plan builds won't know which exception globs are authoritative.",
+      "suggested_fix": "State which exceptions are adopted (written into AGENTS.md and constraints.md) and which are still open (E-L6, E-L7). Add E-N6 and E-L8 to Open Question 4, or mark them adopted. Name AGENTS.md and constraints.md as the source of truth for the checker's exception globs."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "assessment.md",
+      "line": 233,
+      "claim": "The theme mechanism the shells must reproduce isn't recorded. That covers the default theme, system-preference fallback, persistence and the pre-paint script that prevents a flash of the wrong theme.",
+      "evidence": "km.js lines 5–8 require an inline pre-paint script that reads localStorage 'km-meet-theme' and falls back to matchMedia('(prefers-color-scheme: light)'), then sets document.documentElement.dataset.theme. km.css line 57 makes dark the default, with [data-theme=\"light\"] overriding. VS-1 to VS-3 require both themes, but the assessment never says how the theme is chosen or persisted. That decision matters for the React/Tauri shell (no flash of unstyled theme) and for Flutter (ThemeMode.system versus a persisted choice).",
+      "suggested_fix": "Add the theme-selection contract (default, system fallback, persistence key, no-flash requirement) to the look-and-feel reference row or to VS-1/VS-3, so that each shell implements the same behaviour."
+    }
+  ]
+}

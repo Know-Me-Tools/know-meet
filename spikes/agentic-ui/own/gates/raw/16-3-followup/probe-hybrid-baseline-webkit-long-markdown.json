@@ -1,0 +1,78 @@
+{
+  "label": "hybrid-baseline",
+  "url": "http://127.0.0.1:4295/",
+  "scenario": "long-markdown",
+  "browser": "webkit",
+  "at": "2026-11-11T08:35:13.716Z",
+  "results": [
+    {
+      "run": 1,
+      "topFrameGaps": [
+        {
+          "startRel": 312,
+          "ms": 36,
+          "textLenAtStart": 0
+        },
+        {
+          "startRel": 5895,
+          "ms": 25,
+          "textLenAtStart": 0
+        },
+        {
+          "startRel": 6312,
+          "ms": 23,
+          "textLenAtStart": 0
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": -192,
+          "ms": 84
+        },
+        {
+          "startRel": -236,
+          "ms": 44
+        },
+        {
+          "startRel": 20,
+          "ms": 33
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-hybrid-baseline-1-mwbv5p11",
+          "start": 10,
+          "end": 5897,
+          "size": 0
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 107,
+          "end": 111,
+          "size": 94124
+        },
+        {
+          "name": "/assets/inter-medium-CDhBSFyE.woff2",
+          "start": 217,
+          "end": 220,
+          "size": 114648
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 336,
+          "end": 339,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 344,
+          "end": 347,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 0
+    }
+  ]
+}

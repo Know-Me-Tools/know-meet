@@ -1,0 +1,127 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "incremental-update-delete",
+  "title": "Incremental data-model updates, component replacement, then deleteSurface",
+  "description": "Data model set at root, patched by path, a component replaced by a second updateComponents, then the surface deleted.",
+  "surfaceId": "km-live-poll",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-live-poll",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-live-poll",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": [
+              "q",
+              "votes_yes",
+              "votes_no"
+            ]
+          },
+          {
+            "id": "q",
+            "component": "Text",
+            "text": "Ship the hybrid runtime?"
+          },
+          {
+            "id": "votes_yes",
+            "component": "Text",
+            "text": {
+              "@call": "formatString",
+              "args": {
+                "value": "Yes: ${/votes/yes}"
+              }
+            }
+          },
+          {
+            "id": "votes_no",
+            "component": "Text",
+            "text": {
+              "@call": "formatString",
+              "args": {
+                "value": "No: ${/votes/no}"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "km-live-poll",
+        "path": "/",
+        "value": {
+          "votes": {
+            "yes": 0,
+            "no": 0
+          }
+        }
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "km-live-poll",
+        "path": "/votes/yes",
+        "value": 3
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "km-live-poll",
+        "path": "/votes/no",
+        "value": 1
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-live-poll",
+        "components": [
+          {
+            "id": "q",
+            "component": "Text",
+            "text": "Ship the hybrid runtime? (closed)"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0",
+      "deleteSurface": {
+        "surfaceId": "km-live-poll"
+      }
+    }
+  ],
+  "interactions": [],
+  "expected": {
+    "renderedComponentIds": [],
+    "fallbackComponentIds": [],
+    "visibleText": [],
+    "blockedMediaUrls": [],
+    "dataModel": {
+      "votes": {
+        "yes": 3,
+        "no": 1
+      }
+    },
+    "deleted": true
+  },
+  "flutterNotes": "Assert intermediate frames too: after message 5 the texts read 'Yes: 3' and 'No: 1'; after message 6 the question ends with '(closed)'; after message 7 the surface is gone."
+}

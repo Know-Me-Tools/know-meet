@@ -1,0 +1,59 @@
+/* Know Meet tokens (generated; imported by relative path, not modified) + Tailwind 4. */
+@import "tailwindcss";
+@import "../../../../packages/design-tokens/generated/web/fonts.css";
+@import "../../../../packages/design-tokens/generated/web/tokens.css";
+@import "../../../../packages/design-tokens/generated/web/theme.css";
+@import "../../../../packages/design-tokens/generated/web/shadcn.css";
+@import "katex/dist/katex.min.css";
+
+@source "../node_modules/streamdown/dist/*.js";
+@source "../node_modules/@streamdown/code/dist/*.js";
+@source "../node_modules/@streamdown/math/dist/*.js";
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Markdown body (shadcn AI Elements "Response" pattern, Know Meet type scale). */
+.km-prose h1,
+.km-prose h2,
+.km-prose h3 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
+  margin: var(--spacing-s5) 0 var(--spacing-s2);
+}
+.km-prose h1 { font-size: var(--text-xl); }
+.km-prose h2 { font-size: var(--text-lg); }
+.km-prose h3 { font-size: var(--text-base); }
+.km-prose p { margin: var(--spacing-s2) 0; }
+.km-prose ul,
+.km-prose ol { margin: var(--spacing-s2) 0; padding-left: var(--spacing-s5); }
+.km-prose ul { list-style: disc; }
+.km-prose ol { list-style: decimal; }
+.km-prose code { font-family: var(--font-mono); font-size: var(--text-code-inline); }
+.km-prose :not(pre) > code { background: var(--card); border-radius: var(--radius-4); padding: 1px var(--spacing-s1); }
+.km-prose pre { background: var(--bg-2); border-radius: var(--radius-base); padding: var(--spacing-s3); margin: var(--spacing-s3) 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* Wrap instead of scroll: a scrollable region without focusable content fails WCAG (axe scrollable-region-focusable). */
+.km-prose [class*="overflow-x-auto"],
+.km-prose [class*="overflow-auto"] { overflow: visible !important; }
+.km-prose table { border-collapse: collapse; margin: var(--spacing-s3) 0; font-size: var(--text-13); }
+.km-prose th,
+.km-prose td { padding: var(--spacing-s1) var(--spacing-s3); text-align: left; background: var(--surface); }
+.km-prose th { color: var(--fg-sub); font-weight: var(--font-weight-medium); }
+.km-prose tr:nth-child(even) td { background: var(--bg-2); }
+.km-prose blockquote { border-left: 3px solid var(--muted); padding-left: var(--spacing-s3); color: var(--fg-sub); }
+.km-prose a { color: var(--cyan-text); }

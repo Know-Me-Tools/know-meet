@@ -1,49 +1,244 @@
-/* Know Meet design tokens — v1 (knowmeet-brand-1)
+/*
+   GENERATED FROM docs/design/tokens.json by @know-meet/design-tokens. DO NOT EDIT.
+   Edit the token source and run: pnpm --filter @know-meet/design-tokens generate
+   Brand documents' stylesheet (operator decision D-4): every token as --km-<key>.
    Dark is the default theme. Apply [data-theme="light"] on <html> for light.
-   Source of truth for the prototype (prototype/assets/km.css) and brand docs. */
+   --km-text-display carries the value of text-display-brand.
+*/
 :root {
   color-scheme: dark;
-  /* surfaces */
-  --km-bg: #0B0F14;        /* ink: page ground */
-  --km-bg-2: #111620;      /* app chrome, sheets */
-  --km-surface: #161D29;   /* tiles, quiet panels */
-  --km-card: #1C2535;      /* cards, inputs */
+  /* colour */
+  --km-bg: #0B0F14;
+  --km-bg-2: #111620;
+  --km-surface: #161D29;
+  --km-card: #1C2535;
   --km-card-hov: #202B40;
-  --km-muted: #253044;     /* tracks, dividers by fill */
-  /* text */
+  --km-muted: #253044;
+  --km-tile: #161D29;
+  --km-tile-2: #1C2535;
   --km-fg: #E8EDF3;
   --km-fg-sub: #A7B0BC;
-  /* brand */
-  --km-ember: #FF6A3D;     /* the core dot; primary action */
+  --km-ember: #FF6A3D;
   --km-ember-btn: #FF6A3D;
+  --km-ember-btn-hov: #FF8159;
   --km-on-ember: #0B0F14;
   --km-ember-text: #FF6A3D;
   --km-ember-soft: #2B1A18;
-  --km-cyan: #00C2DC;      /* agents and dots activity */
+  --km-cyan: #00C2DC;
   --km-cyan-text: #00C2DC;
+  --km-cyan-text-on-tile: #00C2DC;
   --km-cyan-soft: rgba(0, 194, 220, 0.14);
-  /* status */
-  --km-green: #22C55E; --km-amber: #F59E0B; --km-red: #EF4444; --km-danger-btn: #DC2626;
-  /* type */
+  --km-green: #22C55E;
+  --km-green-text: #4ADE80;
+  --km-green-soft: rgba(34, 197, 94, 0.14);
+  --km-amber: #F59E0B;
+  --km-amber-text: #FBBF24;
+  --km-amber-soft: rgba(245, 158, 11, 0.14);
+  --km-red: #EF4444;
+  --km-red-text: #F87171;
+  --km-red-soft: rgba(239, 68, 68, 0.16);
+  --km-danger-btn: #DC2626;
+  --km-danger-btn-hov: #B91C1C;
+  --km-on-danger: #FFFFFF;
+  --km-scrim: rgba(5, 8, 12, 0.64);
+  /* shadow */
+  --km-shadow-float: 0 24px 64px rgba(0, 0, 0, 0.48);
+  --km-shadow-card: none;
+  /* colour */
+  --km-ring-input: #64718A;
+  --km-switch-track: #253044;
+  --km-switch-thumb: #E8EDF3;
+  --km-switch-thumb-on: #0B0F14;
+  /* shadow */
+  --km-switch-thumb-shadow: none;
+  --km-seg-pressed-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* colour */
+  --km-drop-outline: #253044;
+  --km-media-bg: #000000;
+  --km-on-media: #FFFFFF;
+  --km-media-foot-scrim: rgba(0, 0, 0, 0.55);
+  --km-media-tag-bg: rgba(11, 15, 20, 0.74);
+  --km-media-tag-host: #FFB59E;
+  --km-media-quality-poor: #FCA5A5;
+  /* orb gradient geometry */
+  --km-orb-center: 34% 30%;
+  --km-orb-highlight-mix: 45%;
+  --km-orb-mid-stop: 56%;
+  --km-orb-shade-mix: 68%;
+  --km-orb-mini-mid-stop: 58%;
+  --km-orb-mini-shade-mix: 70%;
+  /* font family */
   --km-font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --km-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --km-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --km-text-xs: 12px; --km-text-sm: 14px; --km-text-base: 16px; --km-text-lg: 18px;
-  --km-text-xl: 24px; --km-text-2xl: clamp(28px, 2.2vw + 16px, 40px); --km-text-display: clamp(40px, 4vw + 16px, 72px);
+  /* font weight */
+  --km-font-weight-regular: 400;
+  --km-font-weight-medium: 500;
+  --km-font-weight-semibold: 600;
+  --km-font-weight-bold: 700;
+  /* font size (px, em or fluid clamp) */
+  --km-text-10: 10px;
+  --km-text-11: 11px;
+  --km-text-xs: 12px;
+  --km-text-13: 13px;
+  --km-text-sm: 14px;
+  --km-text-15: 15px;
+  --km-text-base: 16px;
+  --km-text-lg: 18px;
+  --km-text-22: 22px;
+  --km-text-xl: 24px;
+  --km-text-34: 34px;
+  --km-text-2xl: clamp(28px, 2.2vw + 16px, 40px);
+  --km-text-display: clamp(40px, 4vw + 16px, 72px);
+  --km-text-display-brand: clamp(40px, 4vw + 16px, 72px);
+  --km-text-stat: clamp(24px, 2vw + 12px, 32px);
+  --km-text-glyph: clamp(16px, 1.2vw + 8px, 22px);
+  --km-text-tile-avatar: clamp(22px, 2vw + 8px, 36px);
+  --km-text-code-inline: 0.88em;
+  /* line height */
+  --km-leading-none: 1;
+  --km-leading-display: 1.04;
+  --km-leading-105: 1.05;
+  --km-leading-stat: 1.15;
+  --km-leading-heading: 1.2;
+  --km-leading-140: 1.4;
+  --km-leading-145: 1.45;
+  --km-leading-body: 1.5;
+  --km-leading-bubble: 1.55;
+  --km-leading-code: 1.6;
+  --km-leading-18px: 18px;
+  --km-leading-20px: 20px;
+  /* letter spacing */
+  --km-tracking-display: -0.025em;
+  --km-tracking-heading: -0.01em;
+  --km-tracking-none: 0;
+  --km-tracking-code: 0.04em;
+  --km-tracking-label: 0.08em;
+  --km-tracking-table: 0.1em;
+  --km-tracking-eyebrow: 0.12em;
+  --km-tracking-masked: 0.18em;
   /* space (8px rhythm) */
-  --km-s1: 4px; --km-s2: 8px; --km-s3: 12px; --km-s4: 16px; --km-s5: 24px; --km-s6: 32px; --km-s7: 48px; --km-s8: 64px;
-  /* shape */
-  --km-radius: 12px; --km-radius-tile: 16px; --km-radius-lg: 20px; --km-radius-pill: 999px;
-  /* motion */
-  --km-dur-fast: 150ms; --km-dur: 240ms; --km-dur-panel: 280ms; --km-dur-exit: 190ms;
-  --km-ease-out: cubic-bezier(0.16, 1, 0.3, 1); --km-ease-in: cubic-bezier(0.55, 0, 0.75, 0.25);
-  --km-dot-breathe: 3.2s; --km-dot-think: 0.9s; --km-dot-ripple: 1.6s;
+  --km-s1: 4px;
+  --km-s2: 8px;
+  --km-s3: 12px;
+  --km-s4: 16px;
+  --km-s5: 24px;
+  --km-s6: 32px;
+  --km-s7: 48px;
+  --km-s8: 64px;
+  /* radius */
+  --km-radius-1: 1px;
+  --km-radius-2: 2px;
+  --km-radius-3: 3px;
+  --km-radius-4: 4px;
+  --km-radius-5: 5px;
+  --km-radius-6: 6px;
+  --km-radius-8: 8px;
+  --km-radius-9: 9px;
+  --km-radius-10: 10px;
+  --km-radius: 12px;
+  --km-radius-14: 14px;
+  --km-radius-tile: 16px;
+  --km-radius-18: 18px;
+  --km-radius-lg: 20px;
+  --km-radius-22: 22px;
+  --km-radius-28: 28px;
+  --km-radius-pill: 999px;
+  --km-radius-round: 50%;
+  /* layout */
+  --km-header-h: 64px;
+  --km-page-max: 1200px;
+  --km-rs-w: 400px;
+  /* breakpoints (max-width; reference only, var() cannot be used in @media) */
+  --km-bp-380: 380px;
+  --km-bp-420: 420px;
+  --km-bp-480: 480px;
+  --km-bp-599: 599px;
+  --km-bp-767: 767px;
+  --km-bp-899: 899px;
+  --km-bp-1023: 1023px;
+  --km-bp-1199: 1199px;
+  /* z-index */
+  --km-z-raised: 1;
+  --km-z-sticky-tools: 5;
+  --km-z-room-scrim: 15;
+  --km-z-room-sheet: 20;
+  --km-z-appbar: 50;
+  --km-z-menu: 60;
+  --km-z-scrim: 69;
+  --km-z-sheet: 70;
+  --km-z-toast: 80;
+  --km-z-skip-link: 100;
+  /* motion durations */
+  --km-dur-meter: 80ms;
+  --km-dur-fast: 150ms;
+  --km-dur-progress: 180ms;
+  --km-dur-bar: 200ms;
+  --km-dur: 240ms;
+  --km-dur-panel: 280ms;
+  --km-dur-exit: 190ms;
+  /* easing */
+  --km-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --km-ease-in: cubic-bezier(0.55, 0, 0.75, 0.25);
+  --km-ease-standard: ease;
+  --km-ease-in-out: ease-in-out;
+  --km-ease-linear: linear;
+  /* motion durations */
+  --km-dot-breathe: 3.2s;
+  --km-dot-think: 0.9s;
+  --km-dot-think-breathe: 1.2s;
+  --km-dot-speak: 0.9s;
+  --km-dot-ripple: 1.6s;
+  --km-dot-ripple-offset: 0.8s;
+  --km-anim-spin: 0.9s;
+  --km-anim-spin-fast: 0.8s;
+  --km-anim-spin-slow: 1s;
+  --km-anim-voice-bar: 0.7s;
+  --km-anim-typing: 1s;
+  --km-anim-rec-blink: 1.6s;
+  --km-anim-live-ring: 1.8s;
+  --km-anim-wait-ring: 2.4s;
+  --km-dur-reduced-motion: 0.001ms;
 }
+
 [data-theme="light"] {
   color-scheme: light;
-  --km-bg: #F7F7F8; --km-bg-2: #FFFFFF; --km-surface: #FAFBFC; --km-card: #FFFFFF; --km-card-hov: #F2F4F7; --km-muted: #EEF0F3;
-  --km-fg: #0B0F14; --km-fg-sub: #4B5563;
-  --km-ember: #E04E28; --km-ember-btn: #C13E1E; --km-on-ember: #FFFFFF; --km-ember-text: #C13E1E; --km-ember-soft: #FBE8E1;
-  --km-cyan: #0891B2; --km-cyan-text: #0E7490; --km-cyan-soft: rgba(8, 145, 178, 0.12);
-  --km-green: #16A34A; --km-amber: #D97706; --km-red: #DC2626;
+  --km-bg: #F7F7F8;
+  --km-bg-2: #FFFFFF;
+  --km-surface: #FAFBFC;
+  --km-card: #FFFFFF;
+  --km-card-hov: #F2F4F7;
+  --km-muted: #EEF0F3;
+  --km-tile: #E9ECF1;
+  --km-tile-2: #DDE2E9;
+  --km-fg: #0B0F14;
+  --km-fg-sub: #4B5563;
+  --km-ember: #E04E28;
+  --km-ember-btn: #C13E1E;
+  --km-ember-btn-hov: #A93518;
+  --km-on-ember: #FFFFFF;
+  --km-ember-text: #C13E1E;
+  --km-ember-soft: #FCECE7;
+  --km-cyan: #0891B2;
+  --km-cyan-text: #0E7490;
+  --km-cyan-text-on-tile: #0B6680;
+  --km-cyan-soft: rgba(8, 145, 178, 0.1);
+  --km-green: #16A34A;
+  --km-green-text: #166534;
+  --km-green-soft: rgba(22, 163, 74, 0.12);
+  --km-amber: #D97706;
+  --km-amber-text: #B45309;
+  --km-amber-soft: rgba(217, 119, 6, 0.12);
+  --km-red: #DC2626;
+  --km-red-text: #B91C1C;
+  --km-red-soft: rgba(220, 38, 38, 0.1);
+  --km-scrim: rgba(11, 15, 20, 0.4);
+  --km-shadow-float: 0 24px 64px rgba(11, 15, 20, 0.16);
+  --km-shadow-card: 0 1px 2px rgba(11, 15, 20, 0.06), 0 1px 1px rgba(11, 15, 20, 0.03);
+  --km-ring-input: #858F9E;
+  --km-switch-track: #858F9E;
+  --km-switch-thumb: #FFFFFF;
+  --km-switch-thumb-on: #FFFFFF;
+  --km-switch-thumb-shadow: 0 1px 2px rgba(11, 15, 20, 0.2);
+  --km-drop-outline: #CBD2DB;
 }

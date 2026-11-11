@@ -1,0 +1,114 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "valid",
+  "id": "run-error",
+  "title": "Run fails with RUN_ERROR mid-message",
+  "description": "An open message is interrupted by RUN_ERROR (code RECORDING_UNAVAILABLE). The partial text stays visible, marked as errored; an error is announced.",
+  "tags": [
+    "@error"
+  ],
+  "userPrompt": "Fetch last week's recording.",
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-err-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-err-1",
+            "delta": "Looking"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-err-1",
+            "delta": " up"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-err-1",
+            "delta": " last"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-err-1",
+            "delta": " week's"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-err-1",
+            "delta": " recording"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_ERROR",
+            "message": "The recording store is unavailable.",
+            "code": "RECORDING_UNAVAILABLE"
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "error",
+    "runErrorCode": "RECORDING_UNAVAILABLE",
+    "noProtocolErrors": true,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Fetch last week's recording."
+      },
+      {
+        "id": "msg-err-1",
+        "role": "assistant",
+        "textEquals": "Looking up last week's recording",
+        "status": "error"
+      }
+    ],
+    "dom": [
+      {
+        "selector": "[role='alert']",
+        "minCount": 1
+      }
+    ]
+  }
+}

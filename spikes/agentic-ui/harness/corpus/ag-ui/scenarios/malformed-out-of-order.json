@@ -1,0 +1,249 @@
+{
+  "corpusFormatVersion": 1,
+  "agUiCorePackage": "@ag-ui/core@1.0.4",
+  "agUiProtocolVersion": "1.0",
+  "pacing": {
+    "tokensPerSecond": 120,
+    "eventGapMs": 15
+  },
+  "interactions": [],
+  "validity": "intentionally-invalid",
+  "id": "malformed-out-of-order",
+  "title": "Malformed and out-of-order events",
+  "description": "Invalid JSON, unknown event type, missing/wrong-typed fields, CONTENT before START, ARGS/END for unknown tool calls, a duplicate START for a closed message and an event after RUN_FINISHED. Strings marked MUST-NOT-RENDER must never appear.",
+  "tags": [
+    "@robustness",
+    "@ordering"
+  ],
+  "userPrompt": "Stress test the stream.",
+  "expectedInvalidItems": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    20,
+    23
+  ],
+  "runs": [
+    {
+      "trigger": {
+        "kind": "initial"
+      },
+      "items": [
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_STARTED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-ghost",
+            "delta": "GHOST-TEXT-MUST-NOT-RENDER"
+          }
+        },
+        {
+          "kind": "raw-sse",
+          "rawSse": "data: {this is not json\n\n",
+          "note": "invalid JSON payload"
+        },
+        {
+          "kind": "invalid-event",
+          "event": {
+            "type": "TEXT_MESSAGE_SHOUT",
+            "messageId": "msg-x",
+            "delta": "UNKNOWN-TYPE-MUST-NOT-RENDER"
+          },
+          "note": "unknown event type"
+        },
+        {
+          "kind": "invalid-event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-bad-1"
+          },
+          "note": "TEXT_MESSAGE_CONTENT without delta"
+        },
+        {
+          "kind": "invalid-event",
+          "event": {
+            "type": "TOOL_CALL_START",
+            "toolCallId": 42,
+            "toolCallName": "x"
+          },
+          "note": "toolCallId is a number"
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_ARGS",
+            "toolCallId": "tc-ghost",
+            "delta": "{\"a\":1}"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TOOL_CALL_END",
+            "toolCallId": "tc-ghost"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-good-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": "This"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " valid"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " message"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " must"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " still"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " render"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " after"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " the"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " bad"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " frames."
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_END",
+            "messageId": "msg-good-1"
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_START",
+            "messageId": "msg-good-1",
+            "role": "assistant"
+          }
+        },
+        {
+          "kind": "raw-sse",
+          "rawSse": ": keep-alive comment\n\n",
+          "note": "SSE comment (valid, ignore)"
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "RUN_FINISHED",
+            "threadId": "thread-from-request",
+            "runId": "run-from-request",
+            "outcome": {
+              "type": "success"
+            }
+          }
+        },
+        {
+          "kind": "event",
+          "event": {
+            "type": "TEXT_MESSAGE_CONTENT",
+            "messageId": "msg-good-1",
+            "delta": " AFTER-FINISH-MUST-NOT-RENDER"
+          }
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "runStatus": "finished",
+    "minProtocolErrors": 5,
+    "messages": [
+      {
+        "role": "user",
+        "textEquals": "Stress test the stream."
+      },
+      {
+        "id": "msg-good-1",
+        "role": "assistant",
+        "textEquals": "This valid message must still render after the bad frames.",
+        "status": "complete"
+      }
+    ],
+    "forbiddenText": [
+      "GHOST-TEXT-MUST-NOT-RENDER",
+      "UNKNOWN-TYPE-MUST-NOT-RENDER",
+      "AFTER-FINISH-MUST-NOT-RENDER"
+    ]
+  }
+}

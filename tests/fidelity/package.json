@@ -1,0 +1,20 @@
+{
+  "name": "@know-meet/fidelity-tests",
+  "private": true,
+  "description": "Know Meet value scenarios (playwright-bdd), prototype baselines and the c13 fidelity oracle. Boundary-only: no `test` script, so per-change `turbo run test` never runs it.",
+  "type": "module",
+  "scripts": {
+    "capture:baselines": "node src/capture/capture-baselines.ts",
+    "bddgen": "bddgen -c playwright.config.ts",
+    "test:boundary": "bddgen -c playwright.config.ts && playwright test -c playwright.config.ts",
+    "check:bundle-identity": "node src/bundle-identity/check-bundle-identity.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.0",
+    "@types/node": "26.5.1",
+    "playwright-bdd": "9.2.1",
+    "typescript": "7.0.2"
+  }
+}

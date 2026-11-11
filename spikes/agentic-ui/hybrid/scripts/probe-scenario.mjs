@@ -1,0 +1,17 @@
+import { chromium, webkit } from "../../harness/node_modules/@playwright/test/index.mjs";
+const [scenario, prompt, browserName = "chromium", waitMs = "4000"] = process.argv.slice(2);
+const browser = await (browserName === "webkit" ? webkit : chromium).launch();
+const page = await browser.newPage();
+page.on("console", (m) => console.log("console:", m.type(), m.text().slice(0, 300)));
+page.on("pageerror", (e) => console.log("pageerror:", e.message));
+const session = "dbg-" + Date.now();
+await page.goto(`http://localhost:4175/?scenario=${encodeURIComponent(scenario)}&agui=http://127.0.0.1:4317&session=${session}&allowMediaOrigin=http://127.0.0.1:4317`);
+await page.waitForFunction(() => window.__spike?.ready === true);
+await page.getByTestId("km-composer-input").fill(prompt);
+await page.getByTestId("km-composer-submit").click();
+await page.waitForTimeout(Number(waitMs));
+const snap = await page.evaluate(() => window.__spike.snapshot());
+console.log(JSON.stringify(snap, null, 1).slice(0, 4000));
+console.log(JSON.stringify(await page.evaluate(() => window.__spike.renderCounts())));
+if (process.env.HTML) console.log((await page.getByTestId("km-transcript").innerHTML()).slice(0, Number(process.env.HTML)));
+await browser.close();

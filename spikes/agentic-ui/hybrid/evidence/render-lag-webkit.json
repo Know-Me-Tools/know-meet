@@ -1,0 +1,62 @@
+{
+  "browser": "webkit",
+  "measuredAt": "2026-11-10T15:56:35.846Z",
+  "cases": {
+    "long-markdown": {
+      "runs": [
+        {
+          "settleMs": 5890,
+          "renderCompleteMs": 5892,
+          "lagAfterSettleMs": 2,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 5901,
+          "renderCompleteMs": 5904,
+          "lagAfterSettleMs": 3,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 5893,
+          "renderCompleteMs": 5899,
+          "lagAfterSettleMs": 6,
+          "longTaskMsToRender": 0
+        }
+      ],
+      "median": {
+        "settleMs": 5893,
+        "renderCompleteMs": 5899,
+        "lagAfterSettleMs": 3,
+        "longTaskMsToRender": 0
+      }
+    },
+    "hostile/huge-table": {
+      "runs": [
+        {
+          "settleMs": 1174,
+          "renderCompleteMs": 1255,
+          "lagAfterSettleMs": 81,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 1168,
+          "renderCompleteMs": 1244,
+          "lagAfterSettleMs": 76,
+          "longTaskMsToRender": 0
+        },
+        {
+          "settleMs": 1150,
+          "renderCompleteMs": 1191,
+          "lagAfterSettleMs": 41,
+          "longTaskMsToRender": 0
+        }
+      ],
+      "median": {
+        "settleMs": 1168,
+        "renderCompleteMs": 1244,
+        "lagAfterSettleMs": 76,
+        "longTaskMsToRender": 0
+      }
+    }
+  }
+}

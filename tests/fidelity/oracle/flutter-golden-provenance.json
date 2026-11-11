@@ -1,0 +1,40 @@
+{
+ "schema": "know-meet-flutter-golden-provenance/v1",
+ "change": "c03-value-scenarios-and-baselines",
+ "scenario": "VS-3",
+ "status": "frozen-rule",
+ "goldensDir": "apps/mobile/test/goldens",
+ "goldensOwner": "mobile-engineer (generates and commits the goldens in c12)",
+ "approver": "design-lead",
+ "rule": "A Flutter golden becomes part of the VS-3 oracle only after design-lead approves it side by side with the prototype baseline of the same state, theme and phone viewport (375). Unapproved goldens make VS-3 BLOCKED, not PASS. `flutter test --update-goldens` output is never self-approving.",
+ "comparisonSource": {
+  "baselineManifest": "tests/fidelity/baselines/manifest.json",
+  "viewport": 375,
+  "themes": [
+   "dark",
+   "light"
+  ],
+  "states": "Every in-scope state of docs/design/screen-inventory/route-inventory.json that c12 renders in a phone layout; c12 lists any state it does not render and why."
+ },
+ "approvalRecord": {
+  "path": "apps/mobile/test/goldens/approvals.json",
+  "requestedFrom": "mobile-engineer (owned path); bdd-quality reads it at c13",
+  "entryShape": {
+   "golden": "repo-relative path of the golden PNG",
+   "goldenSha256": "sha256 of the approved golden bytes",
+   "stateId": "inventory state ID",
+   "theme": "dark | light",
+   "prototypeBaseline": "tests/fidelity/baselines/<theme>/375/<stem>.png",
+   "prototypeBaselineSha256": "sha256 from baselines/manifest.json",
+   "tokensSha256": "sha256 of docs/design/tokens.json at approval time",
+   "decision": "approved | rejected",
+   "decidedBy": "design-lead",
+   "decidedAt": "ISO-8601 timestamp",
+   "notes": "differences accepted and why (Flutter vs web rendering only; never token, spacing or layout differences)"
+  },
+  "fileShape": "{\"approvals\": [entry, ...]}"
+ },
+ "invalidation": "An approval is void when the golden digest, the prototype baseline digest or docs/design/tokens.json digest changes; the golden must be re-approved.",
+ "negativeControl": "Contract VS-3: running the golden suite with stock ThemeData.dark() must FAIL; additionally a golden whose sha256 is absent from approvals.json must make the provenance check fail.",
+ "goldenHarnessRequest": "mobile-engineer: the golden suite honours --dart-define=KM_GOLDEN_THEME_OVERRIDE=stock-dark by building the app with ThemeData.dark() instead of the generated themes (VS-3 negative control). If the define is ignored the control passes the goldens and therefore FAILS, so it cannot pass silently."
+}

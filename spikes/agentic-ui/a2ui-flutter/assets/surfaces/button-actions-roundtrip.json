@@ -1,0 +1,161 @@
+{
+  "corpusFormatVersion": 1,
+  "a2uiSpecVersion": "1.0",
+  "a2uiWebCorePackage": "@a2ui/web_core@0.15.0",
+  "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+  "validation": {
+    "mode": "strict-pass"
+  },
+  "id": "button-actions-roundtrip",
+  "title": "Two buttons, distinct actions, context from data binding",
+  "description": "Accept and decline actions carry static and bound context. Over AG-UI the agent answers with updateDataModel, which must re-render the status text.",
+  "surfaceId": "km-recording-consent",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "km-recording-consent",
+        "catalogId": "https://a2ui.org/specification/v1_0/catalogs/basic/catalog.json",
+        "dataModel": {
+          "meeting": {
+            "id": "m-981",
+            "title": "Pricing sync"
+          },
+          "consent": "pending"
+        }
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "km-recording-consent",
+        "components": [
+          {
+            "id": "root",
+            "component": "Column",
+            "children": [
+              "question",
+              "status",
+              "buttons"
+            ]
+          },
+          {
+            "id": "question",
+            "component": "Text",
+            "text": {
+              "@call": "formatString",
+              "args": {
+                "value": "Record ${/meeting/title}?"
+              }
+            }
+          },
+          {
+            "id": "status",
+            "component": "Text",
+            "text": {
+              "@path": "/consent"
+            }
+          },
+          {
+            "id": "buttons",
+            "component": "Row",
+            "children": [
+              "accept_btn",
+              "decline_btn"
+            ],
+            "justify": "start"
+          },
+          {
+            "id": "accept_btn",
+            "component": "Button",
+            "child": "accept_label",
+            "variant": "primary",
+            "action": {
+              "event": {
+                "name": "consent_accept",
+                "context": {
+                  "meetingId": {
+                    "@path": "/meeting/id"
+                  },
+                  "scope": "audio+video"
+                }
+              }
+            }
+          },
+          {
+            "id": "accept_label",
+            "component": "Text",
+            "text": "Allow recording"
+          },
+          {
+            "id": "decline_btn",
+            "component": "Button",
+            "child": "decline_label",
+            "variant": "borderless",
+            "action": {
+              "event": {
+                "name": "consent_decline",
+                "context": {
+                  "meetingId": {
+                    "@path": "/meeting/id"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "decline_label",
+            "component": "Text",
+            "text": "Don't record"
+          }
+        ]
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "description": "Accept",
+      "click": "accept_btn",
+      "expectAction": {
+        "name": "consent_accept",
+        "sourceComponentId": "accept_btn",
+        "context": {
+          "meetingId": "m-981",
+          "scope": "audio+video"
+        }
+      }
+    },
+    {
+      "description": "Decline",
+      "click": "decline_btn",
+      "expectAction": {
+        "name": "consent_decline",
+        "sourceComponentId": "decline_btn",
+        "context": {
+          "meetingId": "m-981"
+        }
+      }
+    }
+  ],
+  "expected": {
+    "renderedComponentIds": [
+      "root",
+      "question",
+      "status",
+      "buttons",
+      "accept_btn",
+      "accept_label",
+      "decline_btn",
+      "decline_label"
+    ],
+    "fallbackComponentIds": [],
+    "visibleText": [
+      "Record Pricing sync?",
+      "pending",
+      "Allow recording",
+      "Don't record"
+    ],
+    "blockedMediaUrls": []
+  },
+  "flutterNotes": "Compare the emitted action JSON (name, sourceComponentId, context) byte-for-byte after key sorting; timestamp is excluded."
+}

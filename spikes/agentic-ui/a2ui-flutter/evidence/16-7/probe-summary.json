@@ -1,0 +1,193 @@
+{
+ "date": "2026-11-10",
+ "harness": "http://127.0.0.1:4317 (contract v1)",
+ "dart": "3.13.4",
+ "packages": {
+  "ag_ui": "0.3.0",
+  "http": "1.6.0"
+ },
+ "rows": [
+  {
+   "mode": "stock",
+   "scenario": "long-markdown",
+   "ms": 5832,
+   "clientStatus": "finished",
+   "outcomeSeen": null,
+   "events": 3463,
+   "clientErrors": 0,
+   "firstErrors": [],
+   "textEquals": null,
+   "attempts": null,
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "stock",
+   "scenario": "hitl-approve",
+   "ms": 260,
+   "clientStatus": "finished",
+   "outcomeSeen": null,
+   "events": 26,
+   "clientErrors": 0,
+   "firstErrors": [],
+   "textEquals": null,
+   "attempts": null,
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "stock",
+   "scenario": "disconnect-reconnect-replay",
+   "ms": 462,
+   "clientStatus": "running",
+   "outcomeSeen": null,
+   "events": 25,
+   "clientErrors": 1,
+   "firstErrors": [
+    "ClientException: ClientException: Connection closed while receiving data, uri=http://127.0.0.1:4317/agui/disconnect-reconnect-replay?session=probe-stock-disconnect-reconnect-replay-1794348964138224"
+   ],
+   "textEquals": null,
+   "attempts": null,
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "stock",
+   "scenario": "malformed-out-of-order",
+   "ms": 269,
+   "clientStatus": "finished",
+   "outcomeSeen": null,
+   "events": 19,
+   "clientErrors": 4,
+   "firstErrors": [
+    "DecodingError: DecodingError: Failed to decode SSE message (field: message.data) (expected: BaseEvent) (actual: String)",
+    "DecodingError: DecodingError: Failed to create event from JSON (field: type) (expected: BaseEvent) (actual: _Map<String, dynamic>)"
+   ],
+   "textEquals": null,
+   "attempts": null,
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "stock",
+   "scenario": "reasoning-subagents-snapshot",
+   "ms": 474,
+   "clientStatus": "finished",
+   "outcomeSeen": null,
+   "events": 41,
+   "clientErrors": 4,
+   "firstErrors": [
+    "DecodingError: DecodingError: Failed to create event from JSON (field: type) (expected: BaseEvent) (actual: _Map<String, dynamic>)",
+    "DecodingError: DecodingError: Failed to create event from JSON (field: type) (expected: BaseEvent) (actual: _Map<String, dynamic>)"
+   ],
+   "textEquals": null,
+   "attempts": null,
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "adapter",
+   "scenario": "long-markdown",
+   "ms": 5838,
+   "clientStatus": "finished",
+   "outcomeSeen": "success",
+   "events": 3463,
+   "clientErrors": 0,
+   "firstErrors": [],
+   "textEquals": {
+    "msg-long-1": true
+   },
+   "attempts": [
+    "attempt 1: lastId=3463 settled=true error=null"
+   ],
+   "server": {
+    "requestCount": 1,
+    "resumeEntries": [],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "adapter",
+   "scenario": "hitl-approve",
+   "ms": 388,
+   "clientStatus": "finished",
+   "outcomeSeen": "success",
+   "events": 37,
+   "clientErrors": 0,
+   "firstErrors": [],
+   "textEquals": {
+    "msg-hitl-1": true,
+    "msg-hitl-2": true
+   },
+   "attempts": [
+    "attempt 1: lastId=26 settled=true error=null",
+    "resume: [{\"interruptId\":\"int-email-approve\",\"status\":\"resolved\",\"payload\":{\"approved\":true}}]",
+    "attempt 1: lastId=11 settled=true error=null"
+   ],
+   "server": {
+    "requestCount": 2,
+    "resumeEntries": [
+     {
+      "interruptId": "int-email-approve",
+      "status": "resolved",
+      "approved": true
+     }
+    ],
+    "resumedWithLastEventId": false,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  },
+  {
+   "mode": "adapter",
+   "scenario": "disconnect-reconnect-replay",
+   "ms": 847,
+   "clientStatus": "finished",
+   "outcomeSeen": "success",
+   "events": 49,
+   "clientErrors": 0,
+   "firstErrors": [],
+   "textEquals": {
+    "msg-replay-1": true
+   },
+   "attempts": [
+    "attempt 1: lastId=25 settled=false error=ClientException",
+    "attempt 2: lastId=49 settled=true error=null"
+   ],
+   "server": {
+    "requestCount": 2,
+    "resumeEntries": [],
+    "resumedWithLastEventId": true,
+    "unmatchedRequests": 0,
+    "invalidInputs": 0
+   }
+  }
+ ]
+}

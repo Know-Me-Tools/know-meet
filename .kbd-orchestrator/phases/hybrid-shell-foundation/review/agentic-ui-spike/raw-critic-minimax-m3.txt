@@ -1,0 +1,1023 @@
+<think>We need produce ONLY JSON exact schema. Need deeply analyze claims, evidence. Need adversarial review report Recommendation and What builds revealed. Need strongest H case, determine differences decision. Need flag unsupported/misreads, cherry picking, unfair conditions, missing decisive measurements. Need perhaps recommend inconclusive or H/O. Need judge.
+
+We have attached all docs. Need independently scrutinize numbers and claims.
+
+Let's inventory report claims and verify.
+
+Report summary:
+
+H assistant-ui runtime etc owning live state behind ChatSession; O own reducer. Both same harness (14 AG-UI, 8 A2UI, 44 hostile, 8 a11y) as prod builds Chromium, WebKit, Tauri. Correct mostly; Tauri only conformance/hostile and axe not full a11y/A2UI, but wording "both ran same harness ... as ... Chromium, WebKit and Tauri" overbroad because Tauri not A2UI surfaces/full a11y checks. Comparison admits. Could finding major/minor.
+
+Measured:
+Harness checks Chromium + WebKit 148/148 both. Yes.
+Tauri conformance 14/14 yes.
+Tauri hostile apps/web CSP 42/44 both yes.
+Same CSP media origin 9/9 yes.
+long-markdown commits values from comparison yes.
+huge table commits yes.
+Long-task total Chromium 12 short scenarios: H 0, O 66–135. Need count: "other 12 scenarios" excluding long markdown, parallel, huge = 12. But a2ui 133, cancel 122, custom 135, disconnect 66, hitl approve 87, expire98,reject97, malformed78, reasoning94,cancel agent74,error80,state86. range yes.
+Long task three yes.
+Heap after GC ranges: H min 12.5 max21.1 yes. O 10.1 max20.7? table has huge 20.5, long 19.1; max 20.7 p95 but range statement "12.5–21.1" likely medians? Headline says ranges across measured scenarios; likely median ranges, yes O 10.1–20.7 maybe p95 max 20.7, H p95 max 21.1. Fine.
+Initial load 600261 vs449383 yes difference150878 (not 151 exactly). Report says -151 KB, rounded.
+Whole dist 4241452 vs4090550 difference150902 ~147.4 KiB or 151k decimal. "−151 KB" technically decimal 150.9 KB yes.
+TTFT/stream equivalent "within 21ms or 1.5%; exceptions" Need inspect. TTFT differences can be huge: Chromium cancel 75 vs127 =52ms, run canceled170 vs100=70; WebKit O often 12 vs H73 =61; reasoning 359 vs327 32; state172 vs145 27; hostile45 vs22 23. Total stream only likely equivalent. Phrase "Time to first token / total stream time | equivalent (within 21 ms or 1.5%; exceptions...)" is false for TTFT. Comparison says total stream set... differences ≤21ms on sub-second and ≤1.5 longer exceptions; TTFT separately ranges and tables many >21 ms. So major misread. Could affect responsiveness; O often faster WebKit, slower Chromium certain. Need flag.
+
+Code 2554 vs3151 yes. But apples? H code excludes 76 diagnostics vs O total own code 3151 and tests etc? H table says src total 2554 (38 files) includes scripts 76? Let's parse H LOC: Domain651 + application321 + infra 205+72+111+169 + presentation348+153+166+131+50 + root122 + styles55 + scripts76 = sum? 651+321=972; +205=1177;+72=1249;+111=1360;+169=1529;+348=1877;+153=2030;+166=2196;+131=2327;+50=2377;+122=2499;+55=2554;+76=2630. They state src 2554 in 38 files; scripts separately 76 "not shipped". Table totals likely 2554 excluding scripts? Sum above excluding scripts =2554 indeed. O own code 3151 excluding tests/scripts and copied shadcn 77? Need sum O layers:836+517+621+1177=3151. presentation says excluding ui + main/styles. 77 copied shadcn patterns separate. Report says code written 3151, so okay own code only. H says copied 0. O copied 77 maybe not included. H includes assistant adapter and projector. But production estimates subjective and perhaps unfair: H work includes A2UI 4 same; O has same. H 31 vs O 22 estimates not independently measured, and different scopes? H includes "bundle diet 3" vs O 2, tests 4 vs3, a11y3 vs2, Tauri2 same, etc. H adds dual model4, transport3. O persistence3 etc. But report recommendation says O needs ~9 fewer eng-days and "no ongoing upstream tracking". H has assistant-ui tracking 0.5 day/week. O also depends on entity-graph upstream, AG-UI spec, Streamdown, A2UI, Flutter alpha; saying no ongoing upstream tracking is plainly false. O tracks AG-UI every new event type, entity-graph upstream fixes, A2UI, Streamdown, own Flutter packages. H's assistant-ui tracking 0.5 day/week but O perhaps AG-UI churn itself and dependencies. "assistant-ui tracks spec across 69 releases" report uncomfortable says tracks across 69 releases — likely source? No attached evidence for 69 release count perhaps package? Unsupported. Also assistant-ui support only AG-UI runtime not A2UI converter used, but can still absorb AG-UI event support. H replaced transport because HttpAgent gaps; custom transport means upstream spec churn burden remains. Need flag.
+
+What builds revealed H:
+- runtime folds run one assistant message and keeps ids/steps/errors/approval state internal; couldn't store record; H rebuilt normalized model from event journal (384 projector); two views status. Results support. However report table says projector 384? H LOC table says projector 352+ support32; text says 384. Fine. "two views side by side" supports architecture.
+- HttpAgent cannot reconnect Last Event ID or skip malformed frames; H subclassed base own transport. Support.
+- assistant-ui A2UI converter drops Video, Modal, component ids, fallback validation; H rendered direct same O. Support from results. It says "drops Video, Modal" but precise missing Video, AudioPlayer, Modal. Fine.
+- rerenders every delta (~28x O commits on long answers). Long markdown ratio 4574/164 =27.89. But H results narrative says 4596 vs164; comparison medians 4574. Fine. Does rerender every delta exactly? 3459 deltas and >3459 commits plus other renders; yes. "Long-task totals stay low because Streamdown memoises blocks and H enabled deferred rendering; 400-row table cost 13.3s long tasks before change." H results initial 13264ms and after about200; comparison accepted long tasks includes deferred lag 214 etc. Supports. But long-task comparison itself unfair/timing mismatch: H measured at runStatus settle while deferred markdown rendering continues; supplementary only huge table and long markdown, not all 12 scenarios. Report uses H=0 vs O 66-135 and says H low. Comparison explicitly caveat H long-task/DOM at settle, deferred work after settle excluded; H's supplement only long markdown/huge table. O does not defer, so its work counted at settle. Need flag major. They did supplement long markdown H: +2ms lag, 0 long tasks Chromium; huge table +46 lag,214ms. So for long markdown accepted H 57ms and supplement no extra; huge table H 327 +214? H own result render-lag table says huge +46, 214 long tasks, so total maybe 541ms, close O494. Report table says H huge 327 and O494; if render-complete H = 541, then O is actually less long task by ~47ms! Need scrutinize counting overlap. H long-task 327 at settle plus +214 after settle likely disjoint (if no overlap; PerformanceObserver long tasks timing), total ~541. Supplement says huge table +46ms lag, 214ms long tasks. So head-to-head long-task total for huge table should be 541 for H if accounting all deferred work, unless initial long task overlaps settle? "settle-to-render" and "part of render work lands after settle"; likely disjoint. This materially reverses claimed long-task advantage in that key scenario. Report's "What builds revealed" says H low due deferred and 13.3 sec before. Recommendation "both paths pass everything; O ... renders fewer" doesn't explicitly claim long-task win, but report measured results and uncomfortable case says O long-task higher and H per-delta cheap. That is misleading. Need major finding. Also report says "Neither crossed 2,000ms budget." Huge table initial H before defer 13.3 sec crossed; final totals likely both under 2 sec. O 494 or p95 751. Fine.
+
+- O reducer easy dependencies hardening:
+Boundary commits: 3459 deltas -> 8 store commits and 164 React commits. Yes comparison median Chromium long markdown 8/164. Note O results says 3 store for huge.
+- entity graph gaps list support.
+"AG-UI bridge drops plain fields, array order and removals" Results wording: apply snapshots/deltas "scalars (`phase`), array order (`move`), and removals are not represented" Ambiguous: drops plain fields? Original own results: "write only mapped object slices: scalars (`phase`), array order (`move`), and removals are not represented". Report says drops plain fields, array order and removals. Fine.
+- rAF throttle one uncontrolled run ~900 vs281, reported disable background throttling cause unknown. Support comparison: first O run subsec ~900 hitl 907 vs281; Tauri config background_throttling Disabled in table, though diagnostic weird. Yes.
+Shared:
+- Streamdown allows every link/image origin by default and pulls unused HTML parser; need allowlist config. Evidence from own results and bundle parse5 pulled by Streamdown's rehype-raw. Does "allows every link and image origin by default" support? own first run links dropped by rehype-harden due prefixes? Hmm Streamdown perhaps by default permits every origin. Need inspect attached statements. O architecture says image allowlist `allowMediaOrigin`; H URL policy. The report claim says explicit allowlist config. Both prototypes use own allowlist; perhaps not actual upstream configurable allowlist? "needs explicit allowlist config" might be unsupported because Streamdown's API maybe allowMediaOrigin? own results first run says harden `allowedLinkPrefixes:["*"]` plus our own scheme check. H has url-policy. Could be okay.
+- KaTeX data font blocked CSP fallback same origin. Support comparison.
+- CSP media entries failures. yes.
+- @a2ui/react no fallback and disables failing-check Buttons; prototypes replaced. Support own. But "disables failing-check Buttons" web default perhaps yes. Flutter results says web contract differs; own says default Button disabled while checks fail. Support.
+- Flutter 58/58 only catalog; stock fails2 surfaces; 2.5–3.5 eng-weeks; no Dart AGUI. Support a2ui results. Note "no Dart AG-UI transport exists" too absolute: community ag_ui 0.3.0 exists but not evaluated; a2ui_flutter has none. Attached says "There is no AG-UI transport exists" in report shared findings, and Flutter result explicitly says community `ag_ui` 0.3.0 was not evaluated. So report's "no Dart AG-UI transport exists" false/misleading. Should say no transport in a2ui_flutter/evaluated stack. Could matter recommendation cross-platform. Major/minor.
+
+Recommendation:
+Adopt O, own core etc.
+Why:
+- both pass everything. Not true Tauri: only 14 conformance, hostile; not full a11y/A2UI surfaces, and both had Tauri axe violations. Browser full pass yes. Tauri media CSP fails. "both paths pass everything" misleading. Both browser harness yes. Tauri same. But H/O Tauri axe H 1 violation, O2; neither passes axe all scenarios. Also browser harness a11y 8/8. This is a major claim.
+- O smaller -151 KB initial. Yes but bundle includes unused @ag-ui/proto in H and assistant deps; H had room to drop unused proto etc. Productionization bundle diet H3 O2. Initial size comparison with profiling build and unused deps; not product final. Difference may vanish after bundle diet. Still measured.
+- renders 25-28x fewer long answers. Long markdown 27.9x Chromium, 34.5x WebKit (4483/130), 26.4x Tauri (4481/170). "25–28x" underreports WebKit but across maybe yes. Huge table 24x Chromium,18x WebKit,19x Tauri. Long answers ratio okay. But commit count does not directly equal user-perceived performance or cost; H long tasks low and heap etc. Could still be material CPU overhead though not measured. Need flag missing energy/CPU maybe. React commit counts scope differs? Both transcript subtree, comparable but H includes assistant primitives; that's architecture. O includes own. Fine.
+- needs 9 fewer eng-days. Estimates not measured, no common rubric, H code itself is 597 fewer LOC despite report says library bypassed, weird. H production estimate has ongoing 0.5d/wk. O no ongoing upstream tracking false.
+- no ongoing upstream tracking false.
+- keeps one model run state. O yes; H actually two views but agreement enforced? O also canonical reducer and store plus LiveTextBuffer overlay (two state layers) and partial AGUI bridge projection. Claim "one model run state" perhaps O has reducer + entity graph + live buffer; canonical reducer, store projection, buffer. H has runtime + projector/store, agreement not structurally enforced. O stronger but not literally one model: O store partial projection and buffer. Could say canonical one. Also O restart recovery unproven, likely important.
+- H library bypassed for store, transport, A2UI three places supposed save. It still provides runtime/message primitives, approval seam (but host not fully), transcript view. "bypassed" overstates because assistant-ui runtime is used, plus adapter. But indeed core useful pieces bypassed.
+
+Task wants strongest case H instead of O. Need construct.
+
+We need decide recommended O/H/inconclusive. Adversarial. The question likely expects critique. Need assess whether measured differences large enough decide. O render commits substantially lower, initial size 25% lower, long task possibly comparable, code LOC is higher O (contradicts production estimate savings). H upstream helps AG-UI spec churn perhaps but they own transport/reducer anyway, so little advantage. H dual state and incomplete hydration are serious. O has entity-graph gaps and rAF vulnerability; H uses runtime live state and avoids rAF? Yet O uses entity-graph same store; H entity-graph issues too but doesn't use graph for live text. O canonical state and explicit HITL likely better. H's advantages: mature assistant UI runtime perhaps upstream protocol tracking, no rAF throttle, lower long-task work at settle, 597 fewer LOC, built-in component primitives potentially reduce production effort; but H production estimate says 31 vs22. Can strongest case H: H already uses upstream assistant-ui AG-UI runtime and may absorb spec updates, has no unexplained rAF dependency, much less code, low long-task per commit and heap on short scenarios, and avoids O's entity graph live overlay / graph projection inconsistencies. It has durable store record? H's projector canonical perhaps journal. H still dual status issue can be resolved by driving store; hydration needs mapping. O's production readiness depends on unbuilt entity graph primitives, rAF issue, restart recovery, no upstream? H also persistence restart missing and entity graph. H runtime likely handles live state/hydration? H says hydration not built, subagent reload doesn't survive. Maybe not stronger.
+
+Could recommend H despite issues? Need judge evidence. The user explicitly asks "Make strongest case for H instead of O" and verdict. We need likely say report recommendation unsupported/inconclusive because decisive missing measures. Or perhaps H due unfair comparison? Let's inspect all evidence carefully to identify major flaws.
+
+Potential misreads:
+- Report's "Initial load -151 KB brotli" calculated from comparison. Correct.
+- Whole dist difference also ~151KB because lazy files same count. H contains assistant package 482+233+168 unused proto =883 source indicative; but initial H +658 raw vs O; only149 brotli. It is relevant.
+- Code written O 3151 vs H2554: O is 597 lines more, undermines "production estimate 9 fewer days." But production estimate may account H dual-model and ongoing. The report omits O more LOC and 8 unit tests vs H no unit tests. Yet it presents 31 vs22. Need challenge estimate fairness: The estimates are authored by each prototype's own architect (H UI engineer, O architect), not independent; likely incentive/optimism. No task-level common rubric, no uncertainty, and O estimate excludes upstream tracking/entity graph changes? O conditions say upstream work; are upstream entity graph fixes included in 22? Let's examine own estimate: store of record gaps. Work list:
+move 3
+persistence/recovery3
+threads2
+A2UI4
+bundle2
+a11y2
+Tauri2
+tests3
+security1 =22.
+No explicit entity-graph upstream fixes! Conditions before c08 require upstream: batched transactions, render-only layer, AGUI bridge fixes, no devtools. Yet own results says LiveTextBuffer built, upsert workaround; those upstream fixes maybe not required to adopt, but report condition says upstream. Those efforts are not costed in 22 days. Also no AG-UI transport implementation effort! Own built own SSE parser, but productionize likely test/reconnect etc maybe tests. H transport work 3 and own transport fault injection in tests 3, but no explicit production hardening line. O's new AG-UI event types work not costed; Flutter AGUI channel 3-5 days not included in web O estimate (separate mobile estimate). H 31 includes work not in O: A2UI same 4, bundle 3 vs2, a11y3 vs2, tests4 vs3, perhaps conservatively adds one to many tasks beyond dual model + transport. Let's compare line-by-line:
+H:
+move 3 vs O3
+dual model4 vs (read-model maybe included move?) O no explicit
+persistence 4 vs3
+transport3 vs likely no explicit (transport fault tests 3 only)
+A2UI4 vs4
+bundle3 vs2
+a11y3 vs2
+Tauri2 vs2
+tests4 vs3
+security1 vs1
+subtotal 27? 3+4+4+3+4+3+3+2+4+1=31. O 3+3+2+4+2+2+2+3+1=22. Difference due H adds dual model 4 + transport3 =7, and +1 on persistence,bundle,a11y,tests =4, O has thread/history2 that H maybe in persistence4? Let's sum H 31 yes. O22. A fair common rubric would include equivalent transport/test effort both, perhaps H transport 3 is already built though production hardening. O own transport also needs. H's extra +1s unexplained. The 9 days estimate not supported by measurements, just estimates. Should be finding major.
+- H ongoing assistant tracking 0.5 day/week =26 days/year, actually dwarfs nominal 9 day difference over first year, but O also upstream tracking absent from estimate. If AGUI churn, 0.5/wk might absorb events; yet H bypasses transport? assistant-ui updates maybe runtime but own transport emits events to pipeline; event types runtime understands. H's projector still must understand every event? It handles model; likely yes. O owns entire surface. H perhaps less.
+- "assistant-ui tracks spec across 69 releases" no evidence attached. Could count package versions? Not given raw. Unsupported.
+
+Fairness:
+- Run order H always before O in browsers and Tauri, potential warm cache bias (H first gets cold, O benefits warmed server/browser/build) or order drift; but fresh contexts and separate server. Tauri order H then O. Could affect TTFT. Yet total stream pacing dominates. More concerning discarded runs: H Tauri two runs discarded, O one; reordering to same activation. Accepted H and O runs perhaps not interleaved, susceptible to machine state. Sample 5, p95 max. The 900ms rAF discarded for O (correctly disclosed). For decision, unexplained run proves fragility.
+- H and O built with `react-dom/profiling`; performance and bundle size includes overhead equally-ish. H uses assistant package; O has no assistant. Production bundle would remove profiling from both; H's initial size perhaps relative shift. "smaller O" not final because H productionization includes diet.
+- commit count measured subtree includes H assistant runtime, O own. That's appropriate.
+- H long-task at settle issue.
+- Tauri a11y not full, driver uses synthetic focus+click for keyboard, pointer element.click. So key accessibility requirement not actually measured in Tauri. Browser WebKit real keyboard tests yes, but Tauri WKWebView differs and O specifically rAF window behavior. Thus adoption not ready.
+- Windows WebView2 absent entirely despite context desktop Tauri and condition says run before builds. This alone means recommendation can be direction/inconclusive.
+- Flutter parity is separate: report says no Dart AGUI transport exists, false. More importantly recommendation O composes web only; mobile likely requires own Dart transport regardless, adding cost not in 22. H would also require it because assistant-ui web doesn't help Flutter, so neutral. But choosing own core may align mobile shared protocol/reducer semantics? Dart transport not measured. Could favor O if shared design, but not measured.
+- Full streaming markdown requirements: math, Mermaid, safe SVG, media. Harness passes; but H custom Mermaid vs O lazy wrapper; both. Need measure malformed partial fragments? tests. Both pass hostile. Need actual visual/a11y.
+- Custom chunks both pass.
+- HITL: O explicit machine robust, H dual models and expiry bug (runtime still gate open). This isn't in recommendation comparison much, although report says O keeps one model. This could be decisive. Harness H hitl expire passes because durable card blocks but runtime gate remains open. If downstream logic sees runtime approval, risk. Strong O advantage. H's runtime approval model may have security/workflow inconsistency. Strongest H case must address: choose H only after eliminating runtime as authority and making store sole authority, or use library's supported status update/hydration APIs; otherwise dual state violates correctness.
+- H projector 384 lines from journal means still own reducer; assistant-ui runtime only presentation. O's own domain reducer is likely cleaner. O LOC 597 more because A2UI catalog maybe H same. Why H fewer LOC despite dual state? H leverages assistant primitives but runtime semantics unused. O production cost lower due no dual model.
+- H's assistant-ui upstream tracking 0.5d/wk perhaps unjustified because most experimental APIs used? It uses ThreadPrimitive/MessagePrimitive, runtime, approval seam, A2UI action. Those likely churn.
+- H's initial bundle includes assistant-cloud hard dependency even unused? Bundle perhaps tree shaking. It says no import.
+- H's "assistant-ui tracks spec across 69 releases" package version history? Not attached. Could be rhetorical.
+
+What exactly output expected: JSON no markdown. We need include findings array with claim/problem/fix. Need ensure valid JSON escaped etc. Could have maybe 10 findings. Desired oververbosity 5. We need be thorough but not huge. Need verdict. Could set REVISE, recommended inconclusive. Agree report false. Strongest case H string. Conditions.
+
+Let's determine severity/verdict. If report has major unsupported decision and key missing conditions, REVISE likely. BLOCK if recommendation unsafe and evidence fundamentally flawed? They ask independent adversarial reviewer, likely report has serious flaws. "BLOCK" could mean cannot proceed at all. Conditions before adoption already acknowledge some gaps. Recommendation O direction plausible but decision not adequately measured. Could verdict REVISE, recommended inconclusive. Need decide. "Measured differences large enough to decide, or spike inconclusive." We can say inconclusive due render count and bundle differences real but not enough against unmeasured workload/recovery/a11y; recommendation premature. A REVISE fits. If key claim false (TTFT equivalence, no upstream tracking) and long task unfair, must revise report, not necessarily block architecture. So REVISE.
+
+Could recommend H instead? Let's assess if H has enough strongest case to be selected. H's measured advantages:
+- lower LOC by 597 (19% less) but no unit tests.
+- avoids O rAF window throttling; accepted runs frontmost, O can triple latency in uncontrolled state.
+- H uses mature assistant runtime maybe handles live state, status etc. But store mismatch.
+- H initial bundle 151KB larger, not advantage.
+- H renders 25-34x more; O better CPU maybe.
+- H long tasks no worse once full render (H huge maybe ~541 vs O494); short H 0 vs O 66-135 but unfair settle measurement. It could be genuinely lower short tasks due memoization; O commits fewer but each does more. H's long tasks perhaps 0 at settle and defer could generate after-settle long tasks untested across 12. Supplement only long markdown and huge. O's 66-135 within budget. Neither bad.
+- H store commits similar and heap H slightly higher after GC.
+- H architecture has two state sources and known expired gate inconsistency, hydration absent. O one canonical model but store record not restart proven and entity graph gaps.
+- H code lower LOC but production estimate higher, subjective.
+- H upstream churn possibly lower protocol burden, but H custom transport and projector likely still must adapt event schemas. assistant runtime might reduce UI primitives and HITL.
+- H no rAF publishing means better background behavior; significant desktop app window may be background/minimized. O's latency can triple, likely decisive for Tauri UX. But could fix scheduler using setTimeout or buffer. Not architecture-level.
+- H's upstream assistant runtime might absorb AGUI event semantics, but H still validates via core schemas and own EventGuard. Its projector reconstructs normalized model. So little.
+- H is tested by assistant-ui runtime maybe battle-tested; but pinned 0.x experimental.
+- H includes support for thread history perhaps hydration adapter available, though not built. O history entirely own.
+- H can use assistant-ui primitives for mature streaming markdown? It uses Streamdown same.
+
+Could strongest case for H conclude O's measured gains don't justify owning protocol because H's code is less and upstream maintains AGUI; H's render count is cheap (0 long tasks) and actual total render time comparable; O's rAF issue is production-critical; H avoids needing own SSE? Actually H did own SSE, so cannot claim avoids transport. It did own transport. Thus H case not enough. "inconclusive" likely.
+
+Need identify every claim in "Recommendation" and "What builds revealed" support. We need findings specific. Let's list:
+
+Finding 1 major: "Time to first token / total stream time equivalent within 21 ms/1.5%" false for TTFT. The report's table combines. Evidence: TTFT H vs O e.g Chromium cancel-mid-stream 75 vs127 (+52), run-canceled 170 vs100 (-70); WebKit custom72 vs39 (-33), reasoning359 vs327; hostile45 vs22 (-23). The 21ms applies total stream, not TTFT. Fix split rows and use distributions/uncertainty; don't call equivalent. Note direction mixed, perhaps O generally faster WebKit but H some Chromium. The exceptions listed in comparison only total. This is explicit misread.
+
+Finding 2 major: long-task comparison is unfair due H deferred rendering at settle and supplementary only key scenarios. Report's "H 0 vs O 66-135" and "O long-task totals higher" excludes deferred H work. Huge table H 327 at settle + 214 after settle = ~541 vs O494, reversing key scenario. The 12 short scenarios lack settle-to-render supplemental, so cannot conclude H zero. Fix instrument both to render-complete, same measurement boundary, all scenarios; report total and p95. This affects performance claim.
+
+Potential nuance: H supplement `hostile/huge-table +46ms lag, 214ms long tasks`; report table says H long tasks 327. Yes sum if disjoint. Need phrase likely ~541 not exact due overlap/timing. Fix not assert exact if uncertainty, but says deferred work excluded; key conclusion invalid. This is perhaps critical? Major.
+
+Finding 3 major: "both paths pass everything" ignores Tauri gaps and axe violations. Tauri did not run 8 A2UI surfaces or 8 a11y checks; keyboard approvals synthetic focus+click; pending approval not axe scanned; both had axe violations (H1, O2), media CSP failures 42/44. Browser passed full harness, but context includes Tauri. Fix scope claim accurately and require Tauri full parity, CSP fixed, a11y.
+
+Finding 4 major: Effort estimate 9 days unsupported/unfair. Self-authored, no common WBS, O's estimate excludes entity-graph upstream fixes/AGUI event maintenance/Dart transport, H vs O asymmetry, assumptions. LOC contradicts. Fix independent estimate/task decomposition/range, include upstream and mobile; report uncertainty.
+Also "no ongoing upstream tracking" false. Could combine or separate. Maybe separate major because direct factual false.
+- O depends on AG-UI spec (every new event), entity-graph upstream, Streamdown, A2UI, alpha Flutter packages. H depends assistant. No ongoing tracking can't be claimed. Fix total cost of ownership and track release cadence.
+- H tracks 69 releases unsupported attached evidence. Minor or major. Could mention in same finding.
+
+Finding 5 major: "keeps one model of run state" overstated. O has reducer, entity graph projection, LiveTextBuffer overlay; partial graph state is lossy and restart recovery unproven. H dual model known. The architectural delta is real but O also overlays. Fix define canonical authority and invariants, test hydration and expiry. Could be major because recommendation premise.
+H expiry bug: runtime gate remains open while durable card blocks; known correctness issue. Report mentions "H keeps two views" but recommendation doesn't weigh divergence beyond structural enforcement. Harness passes, but test didn't assert runtime state. This supports O.
+
+Finding 6 major/minor: Initial bundle comparison not production-final; both profiling builds, H has unused paths and explicit diet task; report uses raw spike sizes to support architecture. 151 KB difference measured, but not causal/adoption decisive. Also total dist difference same; lazy chunks. Fix compare optimized production builds and cold-load latency, not bytes only. Since O still smaller likely, severity minor/major depending report. I'd say minor if supporting factor not sole basis.
+
+Finding 7 major/minor: render commits lower doesn't establish production advantage because no CPU time/energy/input latency and H memoizes cheaply; H had actual lower long tasks (if corrected) and O's fewer commits each more work. Report notes uncomfortable but still uses "renders fewer" as evidence. Missing decisive measurement CPU/main-thread duration and frame drops. Could combine with long-task finding. We should specifically say 25-28x commit count is not 25-28x less work. React commit count can be cheap; no rendering CPU benchmark. Fix instrument renderer CPU, scripting time, dropped frames, latency to final paint. This could change decision.
+
+Finding 8 major: rAF issue in O is a production reliability concern and accepted runs controlled frontmost; H doesn't depend rAF for publishing. This undermines "O no ongoing" and should be weighted; one discarded run demonstrated 3x latency. Report acknowledges but condition says investigate. Adoption shouldn't be recommended until fixed. Add decisive measurement under minimized/occluded/background states. Is this "finding" (claim issue)? Report already acknowledges. We can flag missing condition, but tasks ask claims. Perhaps include in unmeasured decisive and conditions. Maybe finding that report treats this as future investigation while recommending adoption despite it contradicting robustness advantage; O's issue is decisive, H doesn't have it. Could be major.
+
+Finding 9 minor: "no Dart AG-UI transport exists" false/overbroad; a2ui_flutter lacks one; community ag_ui exists not evaluated. Fix wording. This shared finding is explicitly task scope. Mark major? Probably minor, because doesn't decide web choice.
+
+Finding 10 major: measurement fairness/order/sample:
+- Browser order always H then O, Tauri H then O; possible warm-up/system drift. 5 repeats and p95=max; no randomized/interleaved paired runs; one machine no load controls; Tauri conformance once; discarded runs (H 2, O1). O rAF discarded. TTFT sensitive. For decision of 20ms-level differences, condition inadequate. Could be major. Fix paired randomized/interleaved runs and more repeats; report confidence intervals. But commit ratios huge and bundle sizes robust. Yet O rAF behavior changes workload conditions and fairness. This is worth major.
+- The comparison itself says sample sizes. Report says equivalent. Include.
+
+Finding 11 minor/major: A2UI web catalog same for both, so report statement assistant converter lossy is true but irrelevant to H vs O because both pay same catalog cost. Effort estimate gives each A2UI 4 days. That's properly considered perhaps.
+
+Finding 12 major: H's upstream benefit mischaracterized: assistant-ui doesn't own store/transport/A2UI used, and H still uses @ag-ui/core schemas, own parser/guard/projector. Thus H doesn't materially "track spec across 69 releases" unless runtime's support reduces own projector work. The report says every event type is our work for O, but H also must update projector for IDs/steps/errors/approval; at least some event work. The 69 releases no evidence. Could be finding major due recommendation rationale. Fix inventory event maintenance burden for each with compatibility tests; pin versions and track roadmap.
+
+Finding 13: Tauri a11y violation means O not necessarily better; H 1 vs O2. Report recommendation doesn't mention these measured violations beyond shared maybe. Need emphasize O has target-size violation and H has one contrast. This directly weakens "both pass everything." Include in finding 3.
+
+Finding 14: O's entity-graph conditions not implemented and are not costed; report says O depends on fixes not made, store design unproven at production load. Conditions before c08 maybe means build blockers. Yet recommendation to adopt before fixes. It should be conditional rather than full adopt. Could recommend inconclusive until conditions. Include with effort or canonical state.
+
+Finding 15: Full "streaming markdown" and media requirement perhaps harness doesn't verify all features? It has 44 hostile plus surfaces. Both pass. But H uses raw HTML dropped, O too likely. Requirements include media. CSP. No need.
+
+Finding 16: "both paths pass everything" Tauri conformance includes only AG-UI; Tauri hostile; A2UI surfaces not run. Good.
+
+Finding 17: Claim H "two views of run status exist side by side" yes, but O also store and buffer. Architectural simplification claim needs invariant test.
+
+Finding 18: "assistant-ui A2UI converter drops validation checks" evidence H says does not run checks. But both bypass it. This means H's upstream assistance less than report says, supporting O, not adversarial issue.
+
+Finding 19: "O publishes through rAF; WKWebView throttled it in one uncontrolled run (~900 vs 281). Reported runs disable background throttling" The config says background_throttling: Disabled, yet accepted run issue still? O rAF sensitive. They report frontmost. Background throttling disabled config perhaps webview config should prevent, but observed suggests not sufficient. Cause unknown. H does not depend. This is strongest H case.
+
+Finding 20: report says "assistant-ui tracks spec across 69 releases" perhaps attached H says "ship near-daily and many experimental APIs" but no 69 count. Flag unsupported.
+
+Finding 21: Bundle initial loads both include same React profiling build. H includes assistant packages and @ag-ui/proto unused. The 151KB is plausible. But report claims O "smaller" not "faster"; no cold navigation timings. Initial bytes on desktop not decisive.
+
+Finding 22: "O needs ~9 fewer eng-days and no ongoing upstream tracking": direct contradiction with uncomfortable case "Every new AG-UI event type is our work." Fix recommendation wording.
+
+Potential verdict could perhaps "BLOCK" because report claims adoption despite blockers and evidence not enough. But schema asks recommended O/H/inconclusive. I lean REVISE/inconclusive. Let's carefully reason decision criterion: Task 3 asks whether measured differences large enough to decide. O has 25-28x fewer React commits, 151KB smaller, estimated 9 days lower. H code LOC lower and upstream tracking. But measurement differences:
+- render count is large but actual long tasks don't favor O (H per-delta cheap; after full render huge H ~541 vs O494); no CPU metric. So commit count's significance uncertain.
+- bundle difference 151KB likely real but small and optimizable.
+- effort estimate unvalidated.
+- architecture H dual model severe; O canonical design plausible but entity graph incomplete.
+- O rAF severe.
+Thus no decisive architecture evidence. Recommendation should be inconclusive/conditional. Could still pick O on architectural grounds (one state model, explicit HITL) but H has dual state known. Strong H case maybe enough to recommend H? Let's assess state correctness:
+H's approval expiry bug is serious. Runtime still considers gate open; only store card blocks. If no downstream action because card blocks, user cannot act, but runtime state could be used by other components. They agree every harness scenario but not structural. Could drive all status store, costing 4 days. O explicit machine. H assistant runtime is redundant. This leans O.
+O's entity graph store is partial/lossy and restart unproven. H same store but live state in runtime and projector. H's normalized projector can produce canonical state; H could make projector source and runtime display-only. Still two. Could disable runtime state features and use primitives.
+H upstream doesn't save transport. O explicit control may be better for custom chunks, HITL, accessibility.
+If forced, O may be preferable direction despite evidence gaps. But task asks judge measured differences enough. We can say inconclusive measurement, but report's architecture argument could conditionally favor O. recommended field perhaps "inconclusive." Verdict REVISE. Agree false.
+
+Need phrase strongest_case_for_H as a coherent argument, not just list:
+"Adopt H as baseline: it has 597 fewer authored LOC, no rAF publish dependency and no observed 3x WKWebView latency under uncontrolled window state, similar store commits/heap and no proven user-facing advantage from O's fewer React commits; assistant-ui can absorb AG-UI event churn and provides mature message primitives/HITL. H's 428? H code 2554 vs O3151. This case fails if runtime remains a second authority and hydration/HITL expiry cannot be made store-only."
+Should we mention assistant-ui upstream absorb AGUI though H transport still own? Phrase conditional: retain assistant-ui's runtime/primitives and AGUI handling, use custom transport/store. Upstream can reduce renderer-level spec churn, although not transport. H's 2554 LOC includes assistant UI; no unit tests. O more LOC. H's low short scenario long tasks and O rAF issue. H's initial bundle bigger. Strongest possible case must acknowledge but argue.
+
+Could H be strongest because report's recommendation says no ongoing tracking, but H actually less code and upstream? O owns protocol and entity graph. Hmm.
+
+Conditions before adoption:
+- Full Tauri WebView2, WKWebView full a11y/A2UI and real keyboard input, screen reader; macOS .app and Windows.
+- Fix CSP media/font and rerun.
+- Resolve O rAF with scheduler independent or setTimeout, test minimized/occluded; measure end-to-end latency.
+- entity graph atomic batch, projection fidelity/ordered transcript/live layer/devtools, implement production read model; durable restart/hydration/resume, graph-size load.
+- Fair performance benchmark render-complete, CPU/frame/input latency, heap, cold load optimized non-profiling, randomized paired.
+- Independent effort/TCO estimate including AGUI event support, entity graph, A2UI/Flutter, upstream releases.
+- Define canonical state authority/HITL state and test expiration/restart; if H, eliminate dual state or define adapter.
+- Streamdown allowlist security.
+- Flutter AGUI transport parity/a11y and alpha pin strategy.
+- Perhaps optimize H/O bundle.
+
+Unmeasured_but_decisive array:
+1 production-scale graph/transcript performance and restart/recovery; O store-of-record.
+2 rAF/minimized/occluded Tauri end-to-end latency.
+3 full Tauri trusted keyboard/screenreader/a11y/A2UI; Windows WebView2.
+4 CPU/main thread/frame/paint/input latency render-complete; commit counts alone.
+5 AGUI event lifecycle/version compatibility and cost.
+6 cold startup optimized production build.
+7 real multi-session/concurrent run/hydration maybe.
+8 Flutter transport/visual/accessibility parity.
+Need avoid too many.
+
+Findings severity:
+Let's plan ~10 findings.
+
+1 critical or major long-task invalid. Severity major likely.
+Claim exact report language.
+Problem details.
+Fix.
+
+2 major "TTFT equivalent".
+3 major "both paths pass everything".
+4 major production estimate/TCO.
+5 major "no ongoing upstream tracking / 69 releases".
+Could combine 4 and5 but separate.
+6 major "one model run state" overstatement and H expiry correctness not weighed.
+7 major bundle raw.
+8 major commit count interpretation.
+9 major fairness/samples/run order.
+10 minor Dart transport.
+11 major conditions not met / O dependencies.
+Some overlap. Need ensure all claims checked but output doesn't have to list every true claim; findings only issues.
+
+Could add minor claim "Both ran same harness in Tauri" inaccurate. Covered in pass everything.
+Could add minor "H's library ended up bypassed for three places" overstatement: it still supplies runtime/message primitives/approval seam. Maybe finding. This is central rationale and could be challenged. The report says "the three places it was supposed to save work" but there wasn't necessarily requirement it own store/transport/A2UI. assistant-ui as AGUI runtime not necessarily intended to be store/transport/A2UI renderer. `@assistant-ui/react-ag-ui` uses AGUI client HttpAgent. H built around it. Claim "supposed to save work" unsupported by attached brief/contract (not provided). Also H still uses assistant UI for live run, Thread/Message primitives, approval resume seam. It isn't bypassed wholesale. Could mark minor/major. Fix quantify retained functionality and compare replacement cost, don't assert intended scope. This supports H strongest case. Let's include major perhaps because recommendation rationale.
+
+Need inspect task wording "Know Meet's agentic-UI architecture. A spike built two prototypes..." The report says H's library ended up bypassed for store, transport and A2UI—the three places it was supposed to save work. Attached results don't establish intended responsibilities; assistant-ui likely is runtime, not durable store or A2UI full renderer. This is editorial. We can flag major as unsupported framing. H did keep runtime and primitives. It may mean adoption of assistant-ui offers less value, but not bypassed.
+
+Also report "assistant-ui tracks spec across 69 releases" no source. We need mention unsupported claim in finding. Maybe one finding "Upstream claims are one-sided/unsupported: no evidence for 69 releases; O has more upstream." Good.
+
+Potential concern output JSON only; valid JSON no comments. Strings can have Unicode × etc valid. Need no newline restrictions; okay.
+
+Let's deeply verify calculations and nuances to ensure findings accurate.
+
+TTFT:
+Report table: "Time to first token / total stream time | equivalent (within 21 ms or 1.5%; exceptions in comparison.md)". Comparison explicitly:
+"Total stream time is set mostly by mock server's pacing... differ by at most 21ms ... exceptions". It doesn't make equivalent claim for TTFT. TTFT table differences:
+- Chromium a2ui 71 vs159 88
+- cancel75 vs12752
+- custom128 vs16335
+- disconnect165 vs93 -72
+- hitl approve153 vs114 -39
+- expire128 vs127 ~1
+- reject130 vs1246
+- long265 vs106 -159
+- malformed163 vs123 -40
+- parallel146 vs1388
+- reasoning348 vs32424
+- canceled170 vs10070
+- error140 vs10832
+- state168 vs14622
+- hostile154 vs13420.
+H vs O direction. WebKit:
+O mostly dramatically lower (12-59 vs 68-359), except malformed126 vs159, reasoning327 vs359 slight, state145 vs172. So O faster WebKit, H some Chromium. "Equivalent within21" clearly false. Could impact platform choice: desktop WebKit O good. But TTFT MutationObserver maybe artificial. Need report distributions, no threshold.
+
+Long tasks:
+The 12 short scenarios in report table H 0 all; O range. H uses defer only transcript? Could after settle produce work for all. H results own initial a11y etc says deferred Streamdown. The supplement only long markdown/huge table. For short scenarios, perhaps no deferred render lag or no content? But not measured. Report cannot claim H 0 total, only at settle. Exactly.
+For huge table, H result table long tasks264 in hybrid own evidence vs comparison median327. Supplement 214. Accepted browser compare H327. If add, total541. O494. It flips. But maybe H's long task at settle includes some of render before settle and supplement counts same long task if it straddles settle? PerformanceObserver task started before settle and ends after; if counted at settle? Harness likely long task collector observes entries asynchronously; "at instant" maybe could include task if completed? Supplement measures settle-to-render and might double-count straddler. We shouldn't definitively sum without raw. Say deferred work excluded and supplement adds 214ms after settle, so 327 is not render-complete; depending overlap true total could be ~541, not known. This could reverse ordering. Correct.
+
+"Long-task total H 0 on short scenarios" maybe in report says "12 short scenarios" but one cancel-mid-stream long 86sec (not short in duration), 12 "other scenarios" not short. The report says "12 short scenarios" mischaracterization. Could note minor: 12 other scenarios includes 86.7s cancel-mid-stream. But "other 12" in comparison. Report wording "12 short scenarios" could be misleading. We could include in long task finding. It's not all short. Severity minor perhaps. The range 66-135 includes. But "short scenarios" likely excludes three heavy, yet cancel is 86 seconds. Not decisive.
+
+Bundle:
+Comparison initial load includes index + JS + runtime + CSS. H's individual results bundle says Entry JS 585680 + CSS13952 etc; report uses aggregate 600261. O aggregate449383. Difference 150878 bytes = 147.34 KiB. Report says "−151 KB" if SI kB; many interpret KB=1024 so ~147KB. Minor rounding. Whole diff same. Not issue.
+Both use profiling, adds React overhead. H unused @ag-ui/proto 168 source in entry perhaps tree-shakable? Source map indicative and says protobuf path unused, but still source bytes in map means bundled likely. H effort includes drop proto. Production H could reduce more than O. O parse5 unused and H also parse5 same. A2UI same. H zod versions 3 and4, bundle diet. So final size uncertain.
+
+Effort:
+H estimates own authored. O estimate not include AGUI transport event support explicitly. H also transport. H "ongoing tracking assistant 0.5 day/week"; O report says no ongoing but O tracks AGUI manually. Flutter tracking separate ~0.5 day/release. If O chosen, mobile still alpha churn. This is a severe false economics. Fix calculate total ownership over e.g. 12 months:
+H first-year =31 +26=57 days.
+O first-year at least 22 + AGUI event work + entity graph + Flutter tracking. If only Flutter 0.5 day/release maybe unknown release frequency. 69 releases assistant? Hmm.
+Could estimate H's upstream 0.5d/week is perhaps to track experimental APIs, but if H's use could be isolated adapter and pinned, less. O has AGUI each new event type but spec events finite and versioned. Need measure.
+
+H code LOC:
+H 2554, O3151. This means own O more code by 23.4%. Report includes but doesn't reconcile. Why production O 9 days less despite more code? H dual model/transport. Since H already built transport but estimate includes production hardening; O likely similarly. Need fair scope.
+
+"assistant-ui tracks spec across 69 releases": The attached H dependencies says @assistant-ui/react 0.15.33, transitive core etc; "ship near-daily" and "same-day release" but no 69 number. Maybe report author got from npm. Not attached. Flag.
+
+Entity graph:
+Both use entity graph 4.3.0, so H is equally exposed to atomic writes, lossy bridge, devtools. O conditions specifically upstream fixes may apply both. Report uncomfortable says "O depends on entity-graph fixes we haven't made; store design unproven", but H also depends entity graph and same unproven production load. Difference: H doesn't use graph for live text, O does. Atomic commit still. Report recommendation "no ongoing upstream tracking" ignores both. Need say H's store writes boundary too; H doesn't need render-only live layer? It uses runtime live text and projector, so it avoids graph live overlay, but projector own. O conditions batched transactions etc. Since O's 8 boundary commits work, upstream batching not needed for token rate, but production graph large copy perhaps. Both. Report recommendation "no ongoing upstream tracking" ignores both. Need say H's store writes boundary too; H doesn't need render-only live layer? It uses runtime live text and projector, so it avoids graph live overlay, but projector own. O conditions batched transactions etc. Since O's 8 boundary commits work, upstream batching not needed for token rate, but production graph large copy perhaps. Both. Report uncomfortable says "O depends on entity-graph fixes we haven't made; store design unproven", but H also depends entity graph and same unproven production load. Difference: H doesn't use graph for live text, O does. Atomic commit still. Report recommendation "no ongoing upstream tracking" ignores both. Need say H's store writes boundary too; H doesn't need render-only live layer? It uses runtime live text and projector, so it avoids graph live overlay, but projector own. O conditions batched transactions etc. Since O's 8 boundary commits work, upstream batching not needed for token rate, but production graph large copy perhaps. Both.
+- H doesn't need entity graph render-only layer because runtime live buffer, but it does need hydration/projection.
+- O's AGUI bridge lossy, H's projector possibly own; canonical state still.
+- Both have restart recovery unproven.
+Thus architecture selection must compare durability.
+
+One model:
+O canonical reducer in memory, graph partial projection, LiveTextBuffer. The report's phrase "keeps one model of run state" could mean one canonical model vs H two. Need not call outright false; qualify. But report says H "two views of run status exist side by side" and O one. O has two layers but synchronized by design. Could say "one logical authority" not one model. This is a major semantic overclaim.
+
+H dual state expiration:
+H results says approval card runtime still gate open, only store-backed card blocks. If user action requires card, okay, but known divergence. The recommendation says O keeps one model and H doesn't; should test not just visible DOM. This supports O architecture. Missing test would decide.
+
+Tauri:
+Comparison says conformance mode ran all 14 AGUI and 44 hostile once and axe at settled state every scenario. It says conformance all 44 hostile, yes. It doesn't run checks/a11y 8 or A2UI 8. "Driver parity 58 scenarios" includes conformance14+hostile44, not A2UI8. Browser suite includes A2UI8 + a11y8 plus conformance14+hostile44 =74 per browser. Tauri 58 scenarios excludes A2UI8/a11y8. Good.
+Axe at settled all 58 found H1 and O2 violations, despite report "both paths pass everything." Also H pending approval not scanned. Tauri keyboard synthetic. Media fails due CSP. This is major.
+Report says "Tauri conformance (14 scenarios) 14/14", "hostile 42/44" correctly table, but Recommendation prose overstates.
+
+Tauri `background_throttling: Disabled`: H and O both. Yet O rAF issue. Maybe config in `tauri.conf.json`; accepted runs brought front. The one discarded run 900ms perhaps before window activation. O's rAF is sensitive; fix scheduler to use setTimeout or direct dispatch. H stronger here.
+
+Fairness:
+Both same mock server pacing, same builds. Good.
+Browser order H then O. Could result O benefits warm OS caches but each Vite server separate; modules/browser context fresh. Server warm likely O's server already warmed from H; mock server common already warmed by H. TTFT includes network mock, perhaps O benefit. This could explain some TTFT. Need flag.
+Tauri H then O. Machine no CPU pinning, other apps. Five runs p95 max. For large commit counts robust.
+Discarded H two, O one. H discarded overlap, superseded; O rAF. Correct transparency. Could not accuse cherry picking because reasons disclosed. But decision based on acceptable runs still leaves sensitivity.
+Tauri conformance once only; CSP media variant once. No statistical reliability.
+
+"both ran ... Chromium 158, Playwright WebKit 27.2 and Tauri ..." Browser heads are headless not actual Chrome/Safari. Report says Chromium and WebKit, okay. Tauri uses WKWebView.
+
+Flutter:
+"58 / 58 parity checks only with KM catalog; stock fails 2 surfaces." Exact.
+"~2.5–3.5 eng-weeks to parity" estimate includes one Flutter engineer and assumes web settles; not measured.
+"No Dart AG-UI transport exists." a2ui result says no AGUI transport in `a2ui_flutter`; community `ag_ui` exists but not evaluated. Should phrase.
+This is shared path, no H/O effect unless own core facilitates Dart implementation. Report recommendation perhaps implies own AGUI core but only TypeScript; Flutter has separate Dart implementation no reuse. Could flag "own AGUI core" might create cross-platform schema/code duplication; not measured. The recommendation includes mobile context. O's own core in TS doesn't solve Flutter transport. H likewise. Mobile parity estimate separate and unmeasured. Add condition.
+
+What does "recommended":"inconclusive" mean with verdict REVISE. Good.
+
+Potential finding on report's "H enabled deferred rendering; long-task totals stay low because Streamdown memoises blocks" causality unsupported by comparative implementation: both use Streamdown, O doesn't defer? O perhaps no defer. They attribute H low tasks to memoization and defer. But H's initial without defer 13.3s, after 200ms. O uses no defer and huge table 494ms. Why not enable defer in O? Maybe O streaming mode inherently. The report doesn't test O with deferred rendering or H without per-delta commit to isolate architecture. This is an unfair implementation tuning issue: prototypes were not feature-equivalent? H uses assistant UI + defer; O own and no defer. Both need full streaming. Performance comparison combines architecture with tuning choices. H needed defer due assistant; O apparently Streamdown handles. To compare architecture, coalesce H deltas or apply same defer to O, and measure. Report's H production estimate includes delta coalescing, meaning final H would have O-like commits. Conversely O could defer. This is decisive missing benchmark. Add finding: implementations not tuned equivalently; H currently commits per delta plus defer; O uses rAF coalescing. H production plan adds coalescing. The measured difference may vanish after planned work, while O could adopt defer. This undermines recommendation. Fix benchmark final intended implementations, not prototypes.
+
+This may be strongest methodological critique. Include major.
+
+Similarly H uses `useDeferredValue`; O perhaps streaming mode but no defer. Both Streamdown. If H per-delta cheap, no need coalesce for performance but estimate adds. O rAF coalescing each commit does more. Could compare:
+- H current: 4574 commits, 57ms long tasks long markdown, 327 settle huge +214 after.
+- O current:164 commits,163ms long,494 huge.
+So O fewer commits but more long work. H may actually perform better. If H coalesced, perhaps both fewer and low work. Thus claimed advantage invalid.
+
+Could report's "O renders ~25-28x fewer times" factually true but using it as benefit assumes commit=bad. The uncomfortable section acknowledges O long tasks higher. Need explicitly flag cherry-picking: Recommendation cites fewer commits as benefit while omitting/understating opposite long-task data. It does mention uncomfortable but still rationale. Strong adversarial.
+
+H strongest case can point this out.
+
+Could there be a bug in report statement "Long-task total, Chromium, 12 short scenarios | 0 ms | 66–135 ms" H 0 due measurement boundary, not actual. This is likely key expected critique.
+
+"Time to first token / total stream time equivalent" also likely key.
+
+"both paths pass everything" likely key.
+
+"needs 9 fewer eng-days" estimates perhaps user expects check. Need flag unmeasured estimates.
+
+"no ongoing upstream tracking" obvious false.
+
+"assistant-ui tracks spec across 69 releases" unsupported.
+
+"both paths pass everything; O smaller..." initial size H includes assistant unused proto; H effort bundle diet3. Cherry picking.
+
+"no ongoing upstream tracking" obvious false.
+
+"assistant-ui tracks spec across 69 releases" unsupported.
+
+"both paths pass everything; O smaller..." initial size H includes assistant unused proto; H effort bundle diet3. Cherry picking.
+
+Could recommend H based on strongest case? Let's entertain. The task likely from a benchmark evaluating reviewer should not blindly agree. Maybe expected verdict "REVISE", recommended H perhaps because H advantages. Let's infer wording: Decision says recommendation O. They want strongest case H. Attached details intentionally expose flaws: H has dual model, H bypass. O has rAF issue and entity graph dependencies. Is evidence enough? Maybe report has intentionally comprehensive tradeoffs and should PASS? But role explicitly adversarial, attack. We need independently judge.
+
+Let's assess architectural merits:
+H:
+- assistant-ui runtime provides live run state, but own ChatSession port and durable normalized model. Two state models; no structural enforcement; known approval expiry discrepancy.
+- transport custom; A2UI bypass; projector 384.
+- more render commits but low long tasks.
+- bundle +151KB.
+- LOC -597.
+- production estimate +9d.
+- restart recovery missing, hydration missing, subagent reload.
+- no unit tests.
+- upstream churn high, experimental APIs.
+O:
+- own AGUI core types and transport/reducer.
+- canonical reducer, explicit HITL robust.
+- entity graph store with live overlay, boundary commits.
+- O more LOC.
+- bundle smaller.
+- render fewer.
+- production estimate lower.
+- restart recovery missing, graph projection lossy, no upstream entity features.
+- rAF fragility.
+- own protocol maintenance.
+- Flutter separate.
+O appears architecturally cleaner for custom requirements, despite production gap. H's library mostly redundant, so O likely. But measurement does not prove because effort estimate. Could choose O conditionally. Task 3 asks measured differences enough; likely answer: no, inconclusive due missing decisive conditions. The recommended field can be inconclusive even if architecture lean O. Yes.
+
+Should verdict be BLOCK because condition 1 says upstream entity-graph fixes before c08, and no restart load measurement; recommendation says adopt O now. If adopting architecture can be conditional. "REVISE" report to make conditional, remove unsupported claims. BLOCK might be warranted if decision irreversible. But schema likely expected PASS if report robust, REVISE if fixes, BLOCK if fundamental. Since architecture direction can be revised based on missing measurements, REVISE.
+
+Confidence maybe 0.93. Need make findings precise and not overclaim.
+
+Let's formulate JSON fields:
+verdict: "REVISE"
+recommended: "inconclusive"
+agrees_with_report: false
+
+findings array perhaps 11.
+
+Finding A:
+severity major
+claim: "H long-task totals are 0 and O is 66–135/163/111/494; O's long-task totals are higher."
+problem: "The 21ms/1.5% comparison is not a true render-complete comparison. H's deferred Streamdown work can land after settle; the report only compares at settle and separately notes deferred work. This creates an apples-to-oranges comparison." Fix: "Use one boundary (settle + post-settle render-complete), report pre/post totals, and define a budget for each scenario."
+
+Finding B:
+severity major
+claim: "O uses fewer React commits and has lower memory."
+problem: "Commit count is not work; H's commits may be cheap. The report compares commit counts while evidence says O long tasks are longer and memory results are mixed. It also changes presentation implementation (defer/memoization vs O streaming)."
+Fix: "Benchmark CPU/main-thread time, frames, long tasks, input latency, and peak/resident memory under identical fixtures; use regression/perf gates."
+
+Finding C:
+severity major
+claim: "O is smaller/faster in bundle."
+problem: "Bundle comparison includes build mode, profiling/react-dom, sourcemaps, dev-only flags, and different chunking/tree-shaking; H's `assistant-ui` is used only in specific features and may be split/lazy. Initial transfer may not reflect runtime memory."
+Fix: "Build release production bundles with identical source-map/chunk/minification settings, report compressed/uncompressed total and initial transfer, then measure startup and interaction."
+
+Finding D:
+severity major
+claim: "O's measured render/long-task results establish superior performance."
+problem: "The report acknowledges that O's long-task totals are worse on short scenarios and that O has no raw/committed rendering baseline under equivalent conditions; the conclusion treats O as proven better despite mixed results."
+Fix: "Change conclusion to 'mixed/inconclusive' and publish per-scenario medians, variance, and identical workload definitions."
+
+Finding E:
+severity major
+claim: "O has a smaller operational surface and less custom code than H."
+problem: "The LOC count includes generated/vendor code and differing boundaries; O still adds custom AG-UI, state, and streaming code. The claim of less custom code is not established by the stated counting method."
+Fix: "Count handwritten production code, generated code, dependencies, and custom maintenance separately; show a dependency/complexity comparison."
+
+Finding F:
+severity minor
+claim: "H's assistant-ui implementation is not production-ready."
+problem: "The report's evidence supports that it is incomplete, but the recommendation does not distinguish missing features from architectural rejection; H may be viable with targeted work, while O also has known gaps."
+Fix: "List H blockers, owner, and estimate; compare against O blockers and don't reject H solely for incompleteness."
+
+Finding G:
+severity major
+claim: "The report's recommendation is sufficiently decisive to proceed with O."
+problem: "The stated conditions depend on unresolved upstream gaps and unmeasured production workloads; the evidence cannot support an unconditional adoption decision."
+Fix: "Make recommendation conditional, define a pilot, acceptance criteria, and rollback/exit criteria."
+
+Maybe include "The report's conclusion is directionally plausible" to avoid overclaiming.
+
+Need no markdown perhaps JSON only. Ensure valid JSON no trailing commas. The final must be only JSON, but developer asks clone analysis, so answer should be analysis content enclosed tags, as done. O's long tasks are higher, so H is cheaper per commit."
+problem: "H values are at runStatus settle; deferred Streamdown work occurs afterward. Only long markdown and huge table supplement. For huge table H reports 327ms at settle plus 214ms after-settle, so render-complete could be ~541 vs O494; for 12 other scenarios no complete count. Thus 0 vs66-135 isn't comparable and may reverse."
+fix: "Instrument both from submit through final paint/render-complete, include post-settle tasks, report overlap-aware totals for all scenarios, same browser and Tauri if possible."
+
+Finding B:
+major
+claim "TTFT / total stream equivalent within 21ms or1.5."
+problem 21ms only total stream, TTFT differences large. Examples.
+fix separate.
+
+Finding C:
+major
+claim "both paths pass everything."
+problem Tauri subset, axe violations, media failures, trusted input not real.
+fix qualify and run.
+
+Finding D:
+major
+claim "O needs ~9 fewer eng-days."
+problem self estimates, no common WBS; O more LOC; upstream fixes/event support/mobile missing; asymmetric.
+fix independent estimate ranges and include.
+
+Finding E:
+major
+claim "O ... no ongoing upstream tracking" and H tracks spec across69.
+problem O owns AGUI, entitygraph, Streamdown,A2UI, Flutter alpha; attached says community ag_ui etc; no69 evidence.
+fix total ownership/release matrix.
+
+Finding F:
+major
+claim "O ... keeps one model of run state."
+problem reducer+graph projection+live buffer, graph lossy; restart unproven. H has dual but O known approval? Could mention O must define. Maybe also state H expiry divergence. Fix authority/invariant tests.
+Could perhaps phrase claim "The recommendation's architectural advantage that O 'keeps one model' is decisive." problem.
+
+Finding G:
+major
+claim "O renders 25-28x fewer times ... as evidence favoring O."
+problem commit count proxy; no CPU/paint/input latency; unfair implementation (H per delta + defer vs O coalesced); final H plan coalesces; could vanish.
+fix benchmark intended production designs.
+This overlaps A but distinct architecture metric.
+
+Finding H:
+major
+claim "O is 151KB smaller ... supports adoption."
+problem profiling builds, H unused paths and diet; no cold start; final optimized difference unknown. Fix production nonprofiling lazy build. Severity minor maybe. Use minor.
+
+Finding I:
+major
+claim "H library ended up bypassed for store, transport,A2UI—the three places supposed to save work."
+problem no attached brief establishes those duties; H still provides runtime, thread/message primitives, approval seam and reduces LOC; A2UI converter never viable in either. Fix articulate retained value, common baseline.
+Maybe minor/major. Mark minor perhaps. But core rationale. Major.
+
+Finding J:
+major
+claim "The measured head-to-head is fair/sufficient."
+problem fixed ordering, no interleaving, machine load, n=5 p95 max, Tauri once, discarded runs, O rAF. But comparison openly caveats. We can state report failed to account. Fix randomized paired, more repeats, stats. Major.
+Would this be redundant with report's own caveats? It's still unmeasured decisive. Fine.
+
+Finding K:
+minor
+claim "no Dart AG-UI transport exists."
+problem a2ui_flutter lacks transport; community ag_ui exists but unevaluated; wording false.
+fix.
+
+Finding L:
+major
+claim "O's entity-graph dependencies/unknown rAF are conditions but not blockers to architectural recommendation."
+problem accepted O behavior depends frontmost, observed triple latency; entity graph production load/restart untested. These could reverse. Fix resolve before selection. This overlaps effort. Maybe conditions enough; task asks unmeasured decisive. We can avoid extra finding and list in conditions.
+
+Potential finding on "assistant-ui tracks spec across 69 releases" likely unsupported. Include E.
+
+Need perhaps distinguish severity critical. No critical because no dangerous security claim? Could set one critical for long-task cherry-picking? "critical" usually recommendation invalid. But we can reserve major. Output verdict revise.
+
+Strongest_case_for_H string must be robust and mention caveats:
+"Choose H if desktop robustness and protocol maintenance dominate: H has 597 fewer authored lines (2,554 vs3,151), does not publish via rAF and has shown none of O's observed 3x WKWebView latency under uncontrolled window state, and its per-delta work appears cheap (after complete deferred rendering, huge-table is roughly comparable/better). assistant-ui may absorb renderer-side AG-UI event churn and provides mature message/approval primitives, while O still has an unexplained scheduling defect, a partial entity-graph projection, and unproven restart/load behavior. This case is only credible if assistant-ui is made display-only and store-backed status/HITL is authoritative, hydration is implemented, and event compatibility is tested."
+Wait H's huge table complete maybe H ~541 vs O494, not better, comparable. H short 0 vs O 66-135 but unfair; after supplement unknown. Say "reported low long-task cost" cautiously. H initial bigger. Also assistant-ui may absorb but H custom transport still. Strongest possible acknowledges.
+
+Could H have better upstream AGUI handling? The assistant runtime is fed events after own parser; runtime could interpret new types. O reducer must. H's projector also must but perhaps runtime can provide parts. Fine.
+
+Conditions_before_adoption array:
+- Full production acceptance harness in optimized builds across Chromium, Playwright WebKit, WKWebView, WebView2; Tauri A2UI 8 and a11y 8 with real trusted keyboard/pointer, screenreader.
+- CSP allow media and KaTeX data or self-host fonts; rerun hostile/media.
+- rAF replacement / background throttling test minimized/occluded/unfocused, plus p95 latency.
+- production entity graph implementation: atomic batch, ordered transcript, lossless state, devtools off, large graph load, storage persistence, restart/hydrate/interrupt rearm; benchmark.
+- define canonical authority and HITL expiry, test race/idempotency, no divergence; if H, store-only.
+- fair perf: render-complete longtask/CPU/frame/input, heap, optimized bundle cold start, paired randomized repeats.
+- independent TCO and effort including AGUI event types, upstream, Flutter transport/a11y.
+- Flutter: implement/evaluate Dart AGUI channel, parity/a11y, pin alpha releases.
+
+Unmeasured decisive:
+- actual CPU/render duration etc.
+- background rAF.
+- durable state production.
+- Windows.
+- full Tauri accessibility.
+- event churn and TCO.
+- mobile.
+
+Could include exact count of LOC difference: O-H=597, 23.4% relative H (597/2554=23.4) or 18.9% relative O. Say 597 fewer lines.
+Could mention H has no unit tests, so LOC isn't quality. Strongest case caveat.
+Could mention H's upstream 0.5d/week over year =26d, making O TCO potentially better. But strongest case for H could say if assistant-ui stability proven. Hmm.
+
+Let's ensure JSON strings don't have unescaped quotes. We can use standard quotes around values and escape internal quotes like \"one model\". Avoid newline? JSON can have arrays. We can output pretty JSON, still only JSON. Need no code fences.
+
+Before settle, let's consider if recommended should perhaps be H, based on "strongest case". The user asks "Make strongest case for H instead of O" regardless recommended. If we choose inconclusive, okay. But maybe report's flaws not enough to make inconclusive because architectural quality clearly O. Task 3 asks measured differences large enough to decide. Render commits 25x is large, bundle 151KB, effort 9d. Yet actual performance not better; architecture O better. Could measured differences still decide O based on fewer commits? No. Effort not measured. Missing Tauri/full a11y. The recommendation's own conditions mean not ready. Inconclusive defensible.
+
+Could recommended field be O while verdict REVISE because direction credible but evidence claims overstate? User asks judge measured differences enough; if we say not enough, recommended should inconclusive. Consistency.
+
+Maybe "BLOCK" because report's conclusion "both pass everything" false and adoption conditions unmet. But revise likely.
+
+Let's dive into potential stronger criticisms for completeness.
+
+- Report's initial load says −151KB but H entry chunk composition includes @ag-ui/proto unused and duplicate zod. H production plan removes; fair to note O immediate smaller but final can be adjusted.
+- H whole dist has 398 files same O despite more packages because dependencies? Difference only 151KB compressed. Not huge.
+- H's LOC lower partly because assistant-ui provides UI primitives, but report says library bypassed in three hard areas; these hard areas were always custom requirements, not assistant responsibilities. O has 597 more lines partly because it reimplements runtime primitives that H gets from assistant-ui. Thus "library bypassed" doesn't imply no savings. This is important strongest H / finding I. H uses assistant UI for Thread/Message, parts, approval seam, A2UI action forwarding. The report claims three places "supposed to save work", but assistant-ui was never a durable store or A2UI renderer likely. Attached context only says "assistant-ui AG-UI runtime + entity-graph durable store"; no requirement assistant-ui own store/A2UI. The report unfairly judges library against tasks it wasn't intended to solve. This could materially change effort estimate: O's extra 597 LOC reflects runtime functionality assistant-ui provides. Therefore effort comparison invalid. Include.
+- O own core needs every AGUI event; H also uses @ag-ui/core but assistant runtime handles parts. Yet H projector must support normalized fields. Fine.
+- "no ongoing upstream tracking" as false. O tracks spec. H's upstream 0.5d/wk perhaps includes tracking assistant packages. Could compare.
+- "assistant-ui tracks spec across69 releases" perhaps version count is not meaningful. Unsupported.
+- H uses release 0.15 experimental APIs; pinned due policy. O uses stable-ish @ag-ui/core1.0.4 and A2UI0.15; entity graph4.3. O also alpha Flutter.
+- Entity graph "devtools events ship in production builds" same both. Report puts under O reveal but shared library. Since both use, not differentiator. It may influence O adoption but H too. Conditions upstream perhaps both. Could finding: report attributes shared dependency defects to O only although H uses same entity graph; O's unique issue is live overlay. Is this a misattribution? In "What builds revealed — O", list includes entity-graph 4.3 gaps. H also uses entity graph and reports whole graph copy, transactions per change, deep freeze. H used one transaction checkpoint with multiple entities; O had to use upsert per type due no atomic multi-entity. H results says one graph transaction per checkpoint upserting changed entities; perhaps same issue. Both. The report's recommendation treats O dependency hardening as O downside. But H equally subject. However O's conditions require upstream fixes. Could flag minor/major that comparative burden isn't isolated. Strongest H: H avoids need for render-only layer, but O built one.
+- Report says O's dependencies needed hardening; H's assistant UI bypass. H also entity graph hardening, assistant UI tracking. Fair effort includes.
+- "both paths pass everything" browser full but Tauri no.
+- "H long task low because memoization and defer; 13.3s before change" This shows H performance fragile under implementation changes and extra tuning; O's 494 final without huge defer maybe. H production plan coalesce. Could argue H currently better user latency, and its poor initial implementation doesn't reflect production plan. Either way unfair.
+
+- rAF: O's first run "sub-second scenarios about 900ms"; H likely unaffected because doesn't use rAF. Accepted runs bring frontmost. In actual desktop app users can background/minimize; when foreground, rAF resumes? Text might buffer. This is decisive UX. Report condition "investigate" should instead require fix. Good.
+
+- No Windows WebView2; context specifically React/Tauri desktop maybe operator expects. Report already acknowledges as condition. Adoption can't be final. Same for real screen readers. The report calls condition before builds, so perhaps recommendation is conditional. But says adopt O now. We can say decision can be directionally O but not evidence-final.
+
+- Flutter parity results state web side wasn't run at time 15.4 but later 15.5 did. Report uses 58/58. Fine.
+- Flutter "no Dart AGUI transport exists" community package. Include.
+- O uses @ag-ui/core types only and custom decoder; @ag-ui/core EventSchemas. "every new AGUI event type is our work" somewhat: schemas know events, but reducer semantics custom. Yes.
+- H assistant-ui tracks spec but H custom EventGuard may also reject new events. So both maintenance.
+
+- O's reducer pure and explicit HITL could be more testable. H no unit tests. Supports O, but effort estimates fail to count O's tests? O 8 unit vs H0, H tests estimate4 vs O3 (odd: O already8 but only3 prod days, H no tests4). Not unfair necessarily.
+- O 3151 lines vs H2554, so own implementation not "reducer easy"? It had more code. Report calls reducer easy part, supported subjective.
+- H assistant runtime holds state but H rebuilt normalized model, so 384 lines. O entire domain/application 1353 vs H972? H domain/application 972, O 1353, difference381; H infrastructure assistant etc. O more.
+
+Could quantify report's claim "O is smaller initial -151KB": H results says entry chunk +149KB brotli, CSS +2.3KB, runtime etc, total150.9. Fine.
+- Whole dist O smaller only150.9KB compressed though raw674KB. Same file count. Fine.
+
+- "Time to first token / total stream time equivalent" perhaps report intended within21ms exceptions includes TTFT? It says exceptions in comparison.md. We should quote exact. Strong misread.
+- "both paths pass everything" perhaps means harness checks all in browser; but report lists Tauri separately. Still prose inaccurate. Major due requirement.
+- "long answers 25-28x" ratio measured, but O and H code architecture differ. Fine.
+- "needs 9 fewer eng-days" estimates in attached. Numerically yes but unsupported as empirical. Task asks support by measurements/results; results contain estimates, so claim supported as estimate but report presents as fact. Flag.
+- "no ongoing upstream tracking" not supported anywhere. Direct false.
+- "assistant-ui tracks spec across69 releases" attached doesn't support count. Flag.
+- "one model" attached says H two; O architecture maybe canonical. Qualify.
+
+Potential final confidence 0.95. We can say 0.94.
+
+Need decide exact number findings. Maybe 12 is okay. Output JSON could be ~7-10k chars. Desired oververbosity5. User asks comprehensive. Let's aim 11 findings.
+
+Let's draft each carefully.
+
+Finding 1 long-task:
+{
+severity:"major",
+claim:"Report: H has 0 ms long tasks on 12 scenarios and O has 66–135 ms; O's long-task totals are higher.",
+problem:"These are not render-complete totals. ... H huge 327 at settle plus 214 post settle ... The 12 scenario supplements absent. ...",
+fix:"..."
+}
+Mention "12 short" inaccurate? Could add: one is 86.7s cancel. But not necessary. Could mention "other 12, not all short." Maybe include in problem.
+
+Finding 2 TTFT:
+Examples exact. Note total stream statement applies only total. Fix.
+
+Finding 3 pass:
+Include Tauri scope and axe.
+
+Finding 4 effort:
+Claim numeric.
+Problem self-authored estimates not measurements; asymmetric categories; O upstream fixes/mobile/AGUI omitted; O LOC more. Fix.
+
+Finding 5 no upstream:
+Separate.
+
+Finding 6 one model:
+Maybe also H expiry divergence. Problem says O's logical authority may be reducer but graph partial/live buffer; no restart. Report treats architectural simplification as proven. H dual issue known and deserves remediation. Fix.
+
+Finding 7 commit metric/final intended implementation:
+Maybe overlap finding1, but distinct. Include.
+
+Finding 8 bundle:
+Minor.
+
+Finding 9 H library bypass:
+Major/minor. Let's mark major because recommendation's rationale. Problem attached doesn't establish expected duties, H retains runtime etc. The extra O LOC likely from features H gets. Fix retained-value inventory and equal feature baseline.
+
+Finding 10 measurement fairness:
+Major. Fixed order, sample. Fix.
+
+Finding 11 Dart transport:
+Minor.
+
+Finding 12 conditions not enough / O unique risks:
+Could fold into effort/performance. Maybe finding:
+Claim "O is the safer production choice now."
+Problem report itself says O depends on unbuilt entity graph primitives, restart unproven, rAF unexplained, while H avoids rAF and live overlay; blockers are architecture-affecting and unresolved. Thus no adoption now.
+Fix resolve as gates and remeasure. This is essentially verdict. Include major.
+
+Could label severity "critical" for no adoption? Maybe no.
+
+Would output only JSON. Ensure no invalid characters. We need perhaps avoid quote characters inside strings or escape. We can write no internal double quotes except escaped. Use single quotes? JSON strings can contain apostrophes. We can avoid quoting.
+
+Let's articulate strongest H:
+"The strongest H case is not that H wins every metric; it is that O's advertised wins do not establish a user-visible win. H has 597 fewer authored lines (2,554 vs 3,151), no rAF-dependent publisher, and low reported main-thread cost despite many commits; its deferred-render-complete huge-table total may be comparable or better than O's 494 ms, and it has no observed uncontrolled-window 3x latency. assistant-ui still supplies live run aggregation, thread/message primitives, and an approval seam, so treating H as merely a bypassed library understates its retained value and the real cost of O's reimplementation. H would be the stronger choice if store-backed state is made authoritative, dual-state expiry/hydration are fixed, and upstream AG-UI behavior is contract-tested. As built, H is not adoptable unchanged either, so the evidence supports a gated bake-off rather than O."
+This is strong but fair. Note "low reported main-thread cost despite many commits" H's short 0 at settle incomplete. Could say "reported low" and caveat. The huge complete total may comparable. Good.
+
+Conditions as above.
+
+Unmeasured list maybe 7 strings.
+
+Potential issue: JSON schema verdict allowed PASS/REVISE/BLOCK. recommended values O/H/inconclusive. We set.
+
+Confidence 0.95? Since we are confident report needs revise but architecture O plausible. 0.93.
+
+Let's make sure all claims in report are supported:
+- H runtime internals: supported.
+- HttpAgent limitations: supported.
+- A2UI converter gaps: supported.
+- render count: supported.
+- long-task low: flawed.
+- O reducer easy: subjective, but measurements.
+- boundary commits: supported.
+- entity graph gaps: supported.
+- rAF: supported.
+- shared: mostly supported except no Dart transport.
+- Recommendation:
+  both pass everything flawed.
+  smaller supported.
+  render fewer fact supported, inference weak.
+  9 days only estimates.
+  no upstream false.
+  one model partially.
+  library bypassed overstated.
+Good.
+
+Could include finding that "assistant-ui tracks spec across 69 releases" unsupported; in upstream finding.
+
+Let's examine O production estimate missing entity graph upstream fixes. Report conditions say upstream batched transactions, render-only layer, AGUI bridge fixes, no devtools. But own prototype already works around:
+- no atomic multi-entity: used one upsert per entity type.
+- live layer built own.
+- bridge canonical reducer.
+- devtools events still emitted.
+If upstream changes not required, why condition? Perhaps they want upstream. Either way cost not in estimate. State "the 22-day estimate does not show whether..." rather than assert omitted. It explicitly lists no entity graph upstream work, so fair.
+O own AGUI transport production work: estimate tests transport fault injection but no explicit hardening. H transport 3 includes delta coalescing, fault, cancel/resume idempotency; O already owns but still needs same. Comparing H includes 3 for transport while O doesn't have explicit; maybe O's tests line includes fault but not cancel/resume. Asymmetric.
+A2UI both 4 equal.
+Mobile both separate not included. Fine.
+
+Fairness finding:
+Comparison says order H then O for each browser and Tauri. O may benefit server warm. But H first each browser, then O; O always after H, likely cache advantage. TTFT O in WebKit much faster could be due warm? Fresh context but browser binary/cache? Each context fresh, disk cache maybe context separate; server warm. Since total stream dictated server and equal, TTFT perhaps client render. Still fixed order matters.
+No CPU pinning, normal desktop.
+Tauri conformance one run. Good.
+
+Could mention "medians of 5; p95=max; no confidence intervals." Yes.
+
+One model finding:
+O store of record isn't full transcript? Own results says entity graph store of record with ordered transcript array on KmThread. AGUI shared state partial. Live text buffer overlay. Canonical reducer in memory. On restart rehydrate unproven. Report's claim "one model of run state" likely means run state not transcript? O has reducer state and store; but synchronization is deliberate. H runtime and projector can agree but no structural enforcement. We should not overstate false; phrase "overstated and not proven at lifecycle boundaries." Severity major because architectural reason.
+H expiry divergence is a known bug-like condition. It supports O. The report's H findings explicitly says only store card blocks, runtime gate remains open. Recommendation should weigh security/workflow. Add.
+
+Bundle finding:
+Claim "O smaller (-151KB initial)" is fact. Problem only treating as architectural/adoption and final production. Severity minor. H's unused paths could be dropped. H still assistant core likely &gt; O. Need final build.
+
+No Dart transport finding:
+Attached says community ag_ui 0.3.0 exists but not evaluated. Report says "no Dart AG-UI transport exists." False. Could be major if mobile viability, but minor wording.
+
+"O carries protocol surface ourselves. Every new AG-UI event type is our work; assistant-ui tracks spec across 69 releases." No evidence of 69. Also assistant-ui's AGUI adapter only 0.1.2 maybe not every release. Phrase "tracks spec across 69 releases" potentially false because assistant-ui releases not AGUI spec releases. We can explicitly say no release inventory or compatibility data attached, so unsupported. Fix count assistant-ui releases vs AGUI spec versions and event coverage.
+
+Potential finding "H's upstream tracking cost 0.5 day/week" also self estimate, not measured. Include effort/upstream.
+
+Do we need mention Flutter parity only browser contract expected at time? Later web results confirm. Fine.
+
+Should we include exact report recommendation in finding claim. Yes.
+
+Let's ensure JSON validity with line breaks. We can output pretty.
+
+Let's think if "verdict":"BLOCK" maybe more appropriate because conditions before adoption unmet and report says recommendation. But user asked output "REVISE" likely if report needs corrections. "BLOCK" if recommendation should not be used at all. We recommend inconclusive, so perhaps BLOCK? Semantics: A review verdict could PASS/REVISE/BLOCK; a report recommending architecture without decisive evidence could be BLOCK. They might expect BLOCK if critical flaws. Need infer from no rubric. Usually "REVISE" means can fix report; "BLOCK" means fundamental. We can choose REVISE because conditions/gate and rewrite. The report can be revised to conditional inconclusive. "agrees false." Good.
+
+Confidence 0.95 maybe. We need be confident in finding H huge addition. Could use 0.93 due possible overlap in long task. Fine.
+
+Let's perhaps not include all long report text in claim due length. JSON output can be sizeable. We can include 12 findings.
+
+Let's draft final JSON carefully.
+
+Potential final:
+
+{
+ "verdict":"REVISE",
+ "recommended":"inconclusive",
+ "agrees_with_report":false,
+ "findings":[
+ {severity major, claim:"H's ...", problem:"...", fix:"..."},
+ ...
+ ],
+ "unmeasured_but_decisive":[...],
+ "strongest_case_for_H":"...",
+ "conditions_before_adoption":[...],
+ "confidence":0.94
+}
+
+Let's ensure no trailing commas.
+
+Need phrase "O renders ~25–28× fewer times" is measured but report says 25-28 while WebKit ratio 34.5. Could flag numeric misread: report gives range 25-28 but actual across browsers: long markdown:
+Chromium 4574/164=27.89
+WebKit4483/130=34.48
+Tauri4481/170=26.36.
+So "25–28x" across the three is wrong for WebKit; it is ~26–35x, not 25–28. If they perhaps refer Chromium/Tauri only? Report says long answers general. It cites table all. This is a minor numerical misread. We should include in commit finding: actual WebKit ratio ~34.5×, so stated range understates. More importantly proxy. Add.
+
+Huge table ratio:
+411/17=24.18, 412/23=17.91,414/22=18.82.
+Not "25-28x" if includes all long answers only. "on long answers" likely long-markdown. WebKit 34.5. Flag minor. Could add finding severity minor:
+claim "O renders ~25-28x fewer times on long answers."
+problem WebKit ratio 34.5, and commit count isn't work. But combine with major to avoid too many.
+
+"Code written 2554 vs3151" yes. Maybe report fails to mention O is 597 more in recommendation; it says needs 9 fewer days, tension. Include.
+
+"Productionise estimate ~31 + .5day/week vs22" both estimates. No confidence.
+
+"Initial load -151KB" H results individual entry says +149KB but aggregate difference150878; okay.
+
+"Whole dist" difference 150902; okay.
+
+"Both same harness" yes.
+
+"Flutter 58/58 parity only catalog" yes.
+
+"KaTeX data font blocked falls back same-origin" yes.
+
+"Streamdown allows every link/image origin default" maybe not exactly. Should we flag? Let's investigate wording from attached:
+Own first run: "`strong` rendered ... links dropped by rehype-harden (prefixes like `https://` are not accepted, only full origins or `*`)" This suggests default harden behavior allows? "links dropped ... prefixes like https:// not accepted, only full origins or *" weird: full origins accepted, https prefix not. The report says every link/image origin by default, security. H has url policy. There is no explicit test showing Streamdown allows every origin by default; perhaps code inspection implied. Could flag unsupported. But enough findings. Maybe include as minor:
+Claim "Streamdown allows every link and image origin by default."
+Problem attached results show a misconfiguration dropped prefixes and both prototypes added own policies; they do not document a default-origin allow matrix or show exploit. The need for allowlist is supported, but universal default claim not directly. Fix cite API/docs or test default. Severity minor.
+Could include, since task says every claim. But too many findings okay.
+
+"@a2ui/react disables failing-check Buttons" own result says yes. Flutter result web expected says web contract clicks and blocks, but web observation later? O replaces catalog and harness. The claim default disables might be source knowledge. supported enough.
+
+"devtools events ship in production builds" source inspection. results says yes.
+
+"entity graph bridge drops plain fields..." supported.
+
+"rAF reported runs disable background throttling" Tauri config says background_throttling Disabled. yes.
+
+"two Tauri hostile failures" yes.
+
+"no Dart AGUI" false.
+
+Maybe report says "assistant-ui tracks spec across 69 releases." We flag.
+
+Let's include Streamdown finding as minor perhaps.
+
+Let's reason whether H's `a2ui` converter dropping Video, Modal etc is supported only H results, yes. Both use direct catalog. No issue.
+
+Potential claim "H library ended up bypassed for store, transport,A2UI — three places it was supposed to save work." It might be interpreted assistant-ui react-ag-ui expected to provide these? The attached brief doesn't say. Flag.
+
+Let's formulate precise fixes:
+- Long task: collect PerformanceObserver timestamps continuously, mark final paint after deferred work and media, count tasks whose active interval overlaps interval, same for all.
+- TTFT: compare with distributions, separate total stream and TTFT, use paired stats.
+- Tauri: run full 74 checks? Note browser each has74, total148 across two. Tauri should run 14+8+44+8 =74 (though a11y harness may involve interactions). Include.
+- Axe violations fix contrast/target size.
+- Trusted input: manual keyboard Enter/Space/Tab in Tauri, screenreaders.
+- Entity graph production: load test perhaps 100k entities etc not specify.
+- AGUI version: matrix.
+
+Could conditions include "Tauri .app bundled, code signing/App Sandbox" because comparison says not run. Context Tauri 2.11.3 release. Add.
+
+Could unmeasured decisive include "Windows WebView2 and packaged macOS .app" rather than conditions.
+
+Let's ensure "recommended":"inconclusive" is exactly allowed lower case. Yes.
+
+Let's now consider whether findings should flag the initial line "both ran same harness... Tauri" as major separately. Finding3 covers.
+
+Potential issue: report's "H's long tasks stay low because memoisation and H enabled deferred" and O's long tasks measured at settle. Does O perhaps render final before settle, so its work all included. yes. Strong.
+
+Potential issue: H's deferred render after settle might mean harness settled early before content fully rendered; conformance driver repolls. This could make total stream times not actual final completion. Total stream time same due mock pacing; render completion lag not included. Thus both total stream and TTFT don't capture final visual readiness. Need mention under performance. The measurement boundary is different. Add to long task finding: total stream/TTFT don't establish final painted output; H can settle before table rendered. Need compare final paint.
+
+Potential issue: O's rAF throttled and discarded means accepted median hides severe tail. p95=max in accepted runs doesn't include discarded because discard whole run due scenario? They discarded one entire O run where all subsec scenarios ~900. They did not include it as p95. Since p95 is maximum of 5 accepted, excluding a valid adverse run because not frontmost is condition-based. But background throttling explicitly disabled yet still. Treat as known adverse condition; a robustness result, not discard. This is a cherry-picking issue. Important! The report says one uncontrolled run ~900 vs281, cause not established; accepted runs disable background throttling. In fact Tauri config already says background_throttling Disabled for all. The first run perhaps before frontmost. They discarded it because condition not controlled, but adverse window state is real. For a desktop app, minimized/background is a valid state. Thus excluding it from p95 understates tail. We should include in fairness finding and conditions. This strengthens H case.
+- The comparison says accepted runs visibilityState visible, document.hasFocus mostly false. First run nobody controlled frontmost, likely visibility maybe? unknown. If O published via rAF and window not frontmost, 900ms. It may be visible but not frontmost; actual user can have app visible behind another? rAF should still run if visible. Still.
+- Tauri config background_throttling disabled yet rAF throttles, so disabling doesn't guarantee. Report's condition "reported runs disable background throttling" perhaps tries defense. Need fix scheduler to avoid rAF.
+
+Could add finding:
+Claim "The discarded O run is not evidence against O and accepted runs represent production."
+Problem it's a valid desktop state and config's background_throttling Disabled did not prevent it; discarding an entire adverse run removes tail risk.
+Fix include worst observed, fix/test.
+Severity major.
+We can fold in fairness finding or separate. Separate perhaps 12 findings.
+
+Let's outline final findings exact:
+1 long task unfair (major)
+2 TTFT misread (major)
+3 Tauri "pass everything" false (major)
+4 adverse rAF run excluded (major)
+5 render commit proxy/final configs + ratio (major)
+6 effort estimate invalid (major)
+7 no upstream tracking false/69 unsupported (major)
+8 one model overstated/restart/live projection (major)
+9 H bypass framing unsupported (major)
+10 bundle evidence nonfinal (minor)
+11 measurement order/statistics (major) perhaps overlap rAF.
+12 Flutter AGUI wording false (minor)
+13 Streamdown default claim unsupported (minor)
+
+Would 13 be too many? Fine but output long. We can combine 4+11.
+
+Let's make 11:
+1 long task
+2 TTFT
+3 Tauri
+4 measurement fairness/rAF
+5 commits/proxy
+6 effort
+7 upstream
+8 one model
+9 H bypass
+10 bundle
+11 Flutter + maybe Streamdown separate? We can make 12 for Streamdown.
+
+We need avoid repetitive major findings. That's okay.
+
+Let's consider severity of bundle minor and Streamdown minor. Good.
+
+Let's formulate finding4:
+claim: "The head-to-head accepted runs are a fair basis and the discarded O rAF run is not decision-relevant."
+problem: "Browser and Tauri order always H then O, no interleaving; five repeats, p95=max; machine uncontrolled; Tauri conformance once; H2/O1 discarded. The excluded O run is a valid desktop state and background_throttling disabled did not eliminate it. O's tail is hidden."
+fix randomized paired/interleaved, include worst-case, stats, background states. This is major.
+
+Finding5:
+claim commit advantage.
+problem actual WebKit ratio 34.5; proxies; intended final architectures differ; H production plan coalesces; no CPU. fix.
+
+Finding6 effort.
+Finding7 upstream.
+Finding8 state.
+Finding9 bypass.
+Finding10 bundle.
+Finding11 Dart.
+Finding12 Streamdown.
+
+Do we need flag "both paths pass everything" as critical because security/media? Major.
+
+Could report's Recommendation conditions explicitly include Windows and manual screenreaders. It does. Yet recommendation says adopt. We can say report contradicts itself: it treats conditions as future while making adoption decision; no architecture can be adopted until. This might be finding 13:
+Claim "Adopt O now."
+Problem conditions 1-4 acknowledge blockers. Entity graph fix not made, rAF unknown, Windows missing, screen reader missing. An adoption recommendation can be conditional, but language unconditional.
+Fix "make recommendation conditional: O preferred candidate pending gates, no production adoption yet." Severity major.
+This directly captures. Add perhaps instead of Streamdown. But task checks report; yes.
+
+Could combine into verdict and conditions; no need finding.
+
+Let's ensure strongest H not overstate assistant upstream. We can say "potentially absorbs renderer-side AG-UI additions" conditional.
+
+Let's maybe include a finding that H assistant runtime's upstream tracking cost 0.5 day/week isn't measured and no release count; effort. Fine.
+
+Let's ponder if initial size H includes profiling build and package's unused proto. H effort explicitly bundle diet. If report's decision can use current prototypes, 151KB is real. But architecture selection not necessarily. Minor.
+
+Now, should "unmeasured_but_decisive" include actual AGUI conformance future event matrix? Yes.
+
+Let's create concise but detailed strings.
+
+Potential final finding object wording:
+
+{
+"severity":"major",
+"claim":"The report's long-task results show H is cheap (0 ms on 12 scenarios) and O is more expensive (66-135 ms; 163/111/494 ms).",
+"problem":"The comparison explicitly measures H at runStatus settle, while H defers Streamdown. Deferred work is omitted. The supplement exists only for long-markdown and huge-table; huge-table adds 214 ms after settle in Chromium, on top of 327 ms observed at settle, so a render-complete total may be about 541 ms versus O's 494 ms. No complete total exists for the other 12 scenarios. Calling the 0 values total long tasks and using O's larger totals as adverse is not apples-to-apples.",
+"fix":"Measure continuous task intervals from submit through final paint/render-complete for every scenario in both prototypes, include post-settle tasks, and report medians and worst runs. Do not compare settle snapshots."
+}
+
+That's strong.
+
+TTFT:
+Examples. Fine.
+
+Tauri:
+"The Tauri corpus has 58 scenarios, not full 74; A2UI8 and a11y8 omitted. Keyboard synthetic. axe violations. media." Good.
+
+Fairness:
+Potential "H first always" only, but not proof bias. Say susceptible not definitive. "p95=max". Discarded O valid. Fix.
+
+Effort:
+"31 vs22 appears in self-authored estimates, so report can cite as estimates but not evidence." Also O's estimate omits explicit upstream fixes. LOC contradiction. Good.
+
+Upstream:
+"No ongoing upstream tracking" false. O must track AGUI, entity graph, A2UI, Streamdown, Flutter. 69 releases unsupported. Fix.
+
+State:
+"one model" O has reducer, graph projection, buffer. H has dual. O graph partial/lossy and restart unproven. Need canonical authority. H expiry divergence. Good.
+
+H bypass:
+"The three places supposed to save work" no attached contract says assistant-ui owns durable store/transport/A2UI; it still supplies live aggregation/thread/message/approval. O's extra LOC may reflect own reimplementation. Fix feature matrix.
+
+Bundle:
+"current spike profiling build, H unused proto/duplicate zod and diet, O parse5; final sizes unknown." Fix.
+
+Flutter:
+No Dart AGUI transport exists false; community exists but unevaluated. Also recommendation web doesn't solve mobile. Fix wording and test.
+
+Streamdown:
+Maybe claim says default allows every origin. The attached evidence: O first run links dropped due harden config, not direct. H URL policy. Could be source code knowledge but no explicit. We can mark minor. Fix cite or test. Is it worth potentially speculative? We need avoid false accusations. The result says "Streamdown allows every link and image origin by default" maybe likely from code audit. The report author could know. But task says attached support; no explicit evidence. We can phrase "not directly established by attached results" rather than false. Fine.
+
+What about "KaTeX inlined data font blocked" fully supported, no finding.
+
+Could include finding "H does not need rAF; O's first run 900ms" in fairness.
+
+Let's decide confidence 0.95 or .94. Use 0.94.
+
+Need output ONLY JSON, no markdown. We can include Unicode em dash etc valid. But perhaps parsers fine. Use simple punctuation.
+
+Let's now simulate final output and validate JSON syntax mentally. We need escape any internal double quote:
+- claim strings can avoid quotes or use single quotes. We might mention "pass everything" requiring escaped double or single quotes. Use single quotes around phrase inside JSON string (apostrophe okay), e.g. "The claim that both paths pass everything..." no internal double.
+- "one model" use single quotes.
+- "no ongoing upstream tracking" single.
+- line counts.
+No raw newlines within strings; each string one line in pretty output.
+
+Let's perhaps use `×` okay. Use `2,554` etc.
+
+Let's draft all 12 findings.
+
+Finding list detailed:
+
+1 major long task.
+2 major TTFT.
+3 major Tauri.
+4 major fairness/rAF.
+5 major commits.
+6 major effort.
+7 major upstream.
+8 major state.
+9 major H bypass.
+10 minor bundle.
+11 minor Flutter.
+12 minor Streamdown.
+
+Would "unmeasured_but_decisive" repeat. Fine.
+
+Could finding 4 combine sample and rAF, making fix broad.
+Could finding 5 say React commit ratios measured but conclusion isn't. Good.
+Could finding 6 say O has 597 more authored LOC; H no unit tests so LOC alone not quality. This is fair.
+Could finding 9 say "H's no unit tests" perhaps undermine LOC, but strongest H case should acknowledge. In finding6 mention LOC isn't quality because H no unit tests.
+Could finding8 cite H expiry known divergence. Great.
+
+Unmeasured list:
+1 render-complete CPU/frame/final paint and real user latency.
+2 O rAF minimized/occluded.
+3 entity graph production load/persistence/restart/hydration.
+4 full Tauri WebView2/package/accessibility/screenreader.
+5 AGUI event/version churn/TCO.
+6 cold startup optimized build.
+7 Flutter AGUI transport and parity/accessibility.
+Maybe concurrent sessions HITL race.
+
+Conditions before adoption 7 strings.
+
+Strongest H as above.
+
+Let's make conditions:
+- "Resolve O rAF and demonstrate p95 ... no focus dependency" and benchmark H.
+- "Implement canonical state/store, restart etc."
+- "Run full acceptance matrix..."
+- "Fix CSP and Streamdown..."
+- "Benchmark final code..."
+- "Independent effort..."
+- "Flutter..."
+- "If retaining H, make store authoritative..."
+Could make 8.
+
+One subtle issue: The user asks "Conditions before adoption" perhaps should align report conditions but add missing. Good.
+
+Let's assess whether report conditions already mention entity graph upstream, Streamdown/CSP, rAF/WebView2, manual screen readers. We should add missing fair benchmark, canonical state, Tauri A2UI/keyboard, TCO. Good.
+
+Potential output length ~12k chars, desired 5 maybe okay due task comprehensive. We can be concise within strings.
+
+Let's write final now after ensuring no accidentalMarkdown.</think>
+
+{"verdict":"REVISE","recommended":"inconclusive","agrees_with_report":false,"findings":[{"severity":"major","claim":"The long-task results show H is cheap at 0 ms on 12 scenarios while O costs 66–135 ms, with O also higher on long-markdown, parallel-tool-calls, and huge-table.","problem":"These are not render-complete totals. The comparison explicitly measures H at runStatus settle, while H defers Streamdown work until after settle. The supplementary render-lag data exists only for long-markdown and huge-table. For huge-table, H recorded 327 ms at settle and another 214 ms of long tasks after settle, so its render-complete total may be about 541 ms versus O's 494 ms. There is no equivalent post-settle measurement for the other 12 scenarios. The report therefore compares H's incomplete work with O's complete work and may reverse the huge-table conclusion.","fix":"Measure task intervals continuously from submit through final paint or render-complete for every scenario in both prototypes, include post-settle work, and report medians and worst observed runs. Do not use settle snapshots as total long-task cost."},{"severity":"major","claim":"Time to first token and total stream time were equivalent within 21 ms or 1.5%.","problem":"That tolerance applies to total stream time, not TTFT. The attached TTFT tables contain differences far above 21 ms: Chromium cancel-mid-stream was 75 versus 127 ms, run-cancelled-by-agent 170 versus 100 ms, and long-markdown 265 versus 106 ms. WebKit differences also commonly exceed 21 ms, although O is often faster there. This is a direct misread of the comparison and should not be presented as equivalence.","fix":"Split TTFT and total stream time into separate claims, publish paired distributions and confidence intervals, and avoid declaring equivalence where only total pacing is equivalent."},{"severity":"major","claim":"Both paths pass everything.","problem":"That is true of the 148 browser checks, but not of the full target matrix. The Tauri run covered 58 conformance/hostile scenarios and did not run the eight A2UI golden surfaces or the eight-check accessibility suite. Trusted Tauri keyboard activation was simulated with focus() plus click(), and element.click() substituted for pointer input. Axe found one WCAG violation for H and two for O in Tauri, and both initially failed the two media-hostile checks under the apps/web CSP. The recommendation overstates the acceptance evidence.","fix":"State exactly which suites passed in each environment. Require the full A2UI and accessibility suites, real keyboard and pointer input, zero relevant axe violations, and CSP-corrected media runs in Tauri before making an adoption decision."},{"severity":"major","claim":"The accepted measurements form a fair head-to-head, and the discarded O requestAnimationFrame run is not decision-relevant.","problem":"Browser and Tauri runs always placed H before O rather than interleaving paired trials, machine load was uncontrolled, there were only five repeats, p95 was merely the maximum, and Tauri conformance ran only once. The excluded O run demonstrated roughly 900 ms versus 281 ms latency in a plausible desktop window state, while background throttling being configured as disabled did not establish that the behavior was impossible. Discarding that run removes a relevant tail-risk result rather than merely an uncontrolled performance sample.","fix":"Use randomized or alternating paired runs, more repetitions, and report confidence intervals and all adverse runs. Treat background, unfocused, minimized, and occluded states as acceptance scenarios, and remove rAF as a correctness-critical publication dependency before comparing medians."},{"severity":"major","claim":"O's approximately 25–28× fewer React commits are evidence that O is the better production architecture.","problem":"Commit count is only a proxy for work. H's many commits were largely memoized, whereas O acknowledges that each batched commit does more work and had longer main-thread tasks. The measured WebKit long-markdown ratio is actually about 34.5×, so the stated range is also incomplete. More importantly, the prototypes are not equally tuned: H currently commits per delta and uses deferred rendering, while O coalesces with rAF; H's production plan adds delta coalescing, and O could also adopt deferred rendering. The measured difference may therefore describe the prototypes rather than the intended production designs.","fix":"Benchmark the intended final implementations with identical streaming, rendering, and batching policies. Add main-thread CPU time, scripting time, frame drops, paint completion, input latency, and end-to-end time to first visible text. Treat commit count as diagnostic evidence, not a decision criterion."},{"severity":"major","claim":"O needs about nine fewer engineer-days to productionize.","problem":"The 31-versus-22 figures are self-authored estimates, not measured results, and there is no common work breakdown, uncertainty range, or independent estimate. The categories are asymmetric, and O's 22 days do not explicitly include the report's required entity-graph upstream work, AG-UI event maintenance, or the Dart transport and Flutter alpha churn. O also has 597 more authored lines than H, although LOC alone is not quality because H has no unit tests. The report presents an estimate as if it were a measured architectural benefit.","fix":"Create a common, independently reviewed work breakdown with comparable transport, persistence, testing, accessibility, security, mobile, and dependency tasks. Publish assumptions and ranges, and include entity-graph remediation and ongoing ownership costs in both totals."},{"severity":"major","claim":"O has no ongoing upstream tracking, whereas assistant-ui tracks the specification across 69 releases.","problem":"No ongoing tracking is not credible. O would own AG-UI event semantics, entity-graph fixes, Streamdown, A2UI, and the alpha Flutter packages. The attached Flutter report explicitly identifies upstream re-pinning work and mentions the community ag_ui package. Conversely, the attached material provides no release inventory supporting the specific claim of 69 releases or showing that assistant-ui would absorb the event work H still performs in its transport, guard, projector, and HITL integration.","fix":"Produce a dependency-by-dependency total-cost-of-ownership table with release cadence, affected code, test work, and fallback plans. Verify the release count and distinguish assistant-ui release tracking from AG-UI specification tracking."},{"severity":"major","claim":"O keeps one model of run state, which is a decisive architectural advantage over H.","problem":"O has a reducer, a partially projected entity-graph representation, and a LiveTextBuffer overlay. Its own results call the graph projection lossy and restart recovery unproven. While O can have one logical authority, that has not been demonstrated through hydration, expiry, or restart. H has two run-status views, but its known expiry divergence is also a correctness defect that should be weighed rather than merely described as duplicate state.","fix":"Define the canonical authority and synchronization invariants for run, tool, and HITL state. Add tests for expiry races, restart hydration, pending-interrupt rearming, and disagreement between any projection and the authority. Until those tests pass, describe O as simpler rather than proven to have one model."},{"severity":"major","claim":"H's library ended up bypassed for the store, transport, and A2UI, the three places it was supposed to save work.","problem":"The attached material does not establish that assistant-ui was intended to provide a durable store, reconnecting SSE transport, or a complete A2UI renderer. H still uses assistant-ui for live run aggregation, thread and message primitives, parts, an approval seam, and A2UI action forwarding. O's additional 597 lines include runtime and presentation functionality that H receives from the library. Treating those areas as pre-agreed assistant-ui responsibilities biases the effort comparison.","fix":"Replace the bypass narrative with a retained-value and feature-by-feature comparison. Count only capabilities that actually replace H's own code, and give both options the same entity-graph, A2UI, security, persistence, and accessibility requirements."},{"severity":"minor","claim":"O is 151 KB smaller on initial Brotli load, supporting the architecture recommendation.","problem":"The measured difference is real for the spike artifacts, but both bundles use react-dom/profiling and include known removable material. H contains an unused AG-UI protobuf path, duplicate Zod versions, and assistant-ui code, while its own production estimate includes bundle diet. O also contains an unused HTML-parser path. No optimized, non-profiling, cold-start comparison was performed, so the final production difference and latency effect are unknown.","fix":"Compare release builds without profiling or development-only code, with tree shaking, lazy loading, and the intended catalogs and grammars. Report final compressed bytes together with cold navigation and first-content latency."},{"severity":"minor","claim":"No Dart AG-UI transport exists.","problem":"The narrower statement supported by the attached result is that a2ui_flutter itself has no AG-UI transport and that the community ag_ui 0.3.0 package was not evaluated. The absolute claim is false as written. The recommendation also does not explain whether choosing the own-core web architecture materially reduces the Dart implementation or test burden.","fix":"Rewrite this as an evaluated-stack limitation and evaluate the community transport or specify and estimate a native Dart implementation. Include mobile transport effort and conformance in the architecture decision."},{"severity":"minor","claim":"Streamdown allows every link and image origin by default.","problem":"The attached results support that both prototypes needed Know Meet origin and scheme policies, but they do not directly document the full default allow matrix for links and images or show that every origin is accepted by default. The recommendation treats the broader statement as established evidence.","fix":"Cite the exact Streamdown configuration behavior or add a test enumerating default link and image policies, then show the explicit production allowlist and denial cases."}],"unmeasured_but_decisive":["Render-complete main-thread CPU, scripting time, frame drops, final-paint latency, and input responsiveness under identical production rendering policies","End-to-end streaming and approval latency when the Tauri window is unfocused, backgrounded, minimized, occluded, or restored, including a scheduler that does not depend on requestAnimationFrame","Entity-graph behavior with production-sized transcripts, concurrent sessions, atomic batched writes, ordered collections, lossless state projection, persistence, restart hydration, and pending-interrupt rearming","The full 74-check web-equivalent suite in Tauri, real trusted keyboard and pointer input, full accessibility checks, real screen readers, packaged macOS .app behavior, and Windows WebView2","Compatibility and maintenance cost for future AG-UI event types, malformed and duplicate delivery, reconnect semantics, and cross-version contract tests","Cold-start and runtime performance of optimized non-profiling production builds on supported desktop hardware","Flutter AG-UI transport behavior, reconnect and replay, HITL, A2UI parity, accessibility, and total alpha-package ownership cost"],"strongest_case_for_H":"The strongest case for H is that O's advertised wins do not yet establish a user-visible or lifecycle-correct win. H has 597 fewer authored lines, does not publish through requestAnimationFrame, and has not exhibited O's observed roughly threefold WKWebView latency under an uncontrolled window state. After accounting for deferred work, H's expensive huge-table result may be comparable to or better than O's 494 ms. assistant-ui still supplies live run aggregation, thread and message primitives, and approval/action seams, so describing H as wholly bypassed understates its retained value and the cost of O's reimplementation. H would be the stronger option if store-backed state is made authoritative, dual-state expiry and hydration are repaired, and assistant-ui's AG-UI behavior is contract-tested. As built, however, H is not adoptable unchanged either, so this evidence supports a gated bake-off rather than an O decision.","conditions_before_adoption":["Replace or harden O's rAF publishing path and demonstrate bounded p95 latency in focused, unfocused, backgrounded, minimized, occluded, and restored Tauri states","Define and test one canonical run, tool, and HITL state authority, including expiry races, idempotent resume, restart hydration, and pending-interrupt rearming; apply the same gate to any H adapter","Complete entity-graph atomic batch, ordered transcript, lossless shared-state projection, production-build devtools removal, large-graph load, persistence, and restart-recovery work, or explicitly prove the existing workarounds meet production needs","Run the complete conformance, A2UI, hostile, and accessibility suites in Chromium, Playwright WebKit, system WKWebView, and Windows WebView2, using real trusted keyboard and pointer input plus manual VoiceOver and NVDA testing","Fix and retest the media and KaTeX CSP configuration, including explicit Streamdown link and image allowlists and safe handling of data fonts","Repeat performance tests on final non-profiling builds with render-complete long-task, CPU, frame, paint, input-latency, heap, cold-start, and paired statistical reporting","Obtain an independent common work breakdown and first-year total-cost estimate covering AG-UI evolution, entity-graph, A2UI, security, accessibility, WebView2, Flutter transport, testing, and dependency churn","Specify and validate the Flutter AG-UI transport, A2UI catalog, accessibility parity, alpha pinning policy, and release-upgrade process before treating the multi-platform requirement as satisfied"],"confidence":0.94}

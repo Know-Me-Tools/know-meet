@@ -1,0 +1,154 @@
+{
+  "verdict": "REVISE",
+  "recommended_primary": "assistant-ui's full AG-UI runtime behind a Know Meet presentation port, with entity-graph as the durable canonical store rather than the per-token UI store",
+  "recommended_stack": "Use @assistant-ui/react plus the release-verified scoped AG-UI adapter and A2UI integration, copied shadcn/Base-UI AI Elements, and Streamdown with math/mermaid/code plugins; checkpoint canonical run/message/tool state into entity-graph, and maintain @a2ui/react/a2ui_flutter conformance fixtures and renderer exit paths.",
+  "agrees_with_research": false,
+  "findings": [
+    {
+      "severity": "critical",
+      "claim": "Own+pieces is ranked first because it is 'the only option where state lives in our own store', while assistant-ui full's duplicate-state problem is structural.",
+      "problem": "The evidence does not support that decisive claim. It is contradicted within the same document by assistant-ui headless fed from entity-graph and by shadcn patterns whose state can be application-owned. More importantly, clean architecture does not require entity-graph to own transient per-token UI state. assistant-ui can own ephemeral run state while entity-graph remains the durable system of record through idempotent checkpoints. The research neither prototypes the alleged state conflict nor demonstrates that forking is unavoidable.",
+      "fix": "Define canonical ownership explicitly: one runtime writer during a run, entity-graph projections at message/tool/run checkpoints, deterministic backend IDs, and no independent dual writers. Score 'assistant-ui full plus entity-graph checkpoint persistence' as a separate candidate and run a short bake-off before overriding its higher matrix score."
+    },
+    {
+      "severity": "critical",
+      "claim": "The requirements matrix supports the ranking, with Own+pieces scoring 25 and receiving 3 for custom parts, markdown, and React/Vite/Tauri fit.",
+      "problem": "The scoring is asymmetric and repeatedly violates the stated scale. Own+pieces receives R3=3 for a renderer registry that is merely a design, although purely self-built functionality should score 1. R4=3 includes SVG/media renderers that do not exist, despite the scale reserving 2 for official extension points. R7=3 is awarded while Tauri compatibility is explicitly Unknown. R8=2 includes an unwritten reducer and an unbuilt A2UI catalog. Conversely, AUI headless is penalized for needing an A2UI piece even though Own+pieces is credited for adding that same piece. 'shadcn AIE on its own' also receives markdown credit for a separate recommended library.",
+      "fix": "Normalize every candidate to the same supplied pieces, distinguish shipped/tested functionality from designs, use '?' rather than implicit pass scores, and regenerate the ranking only after release-artifact and integration tests."
+    },
+    {
+      "severity": "major",
+      "claim": "entity-graph 4.3.0's applyAgUiSnapshot/applyAgUiDelta, persistence, merge strategies, and time travel make it the best chat core.",
+      "problem": "The installed dist and README support the existence of those APIs and the STATE_SNAPSHOT/STATE_DELTA scope. They do not establish message/run/tool lifecycle handling, event ordering, replay correctness, idempotency, interruption recovery, token-rate performance, or Tauri suitability. The document itself confirms zero lifecycle-event matches and no benchmark, yet does not make those gaps a gate on standardization. Buffering ephemeral text outside the graph is not inherently a second source of truth; it is a valid design if commit boundaries are explicit.",
+      "fix": "Require a spike covering long/high-frequency streams, concurrent tools, cancellation, reconnect, replay, reload mid-run, WebKit and WebView2, memory/GC, and persistence recovery. Benchmark assistant-ui with the same canonical checkpoint model before selecting the own-core path."
+    },
+    {
+      "severity": "major",
+      "claim": "All versions, dates, dependencies, and code features were verified on 2026-11-09.",
+      "problem": "The supplied files contain URLs and descriptions of commands, not captured registry outputs, lockfiles, tarball hashes, or commit SHAs. Most code evidence comes from unpinned default-branch shallow clones, so it cannot establish what the cited npm releases contain. The 2026 package/version/date assertions are therefore not independently reproducible from this bundle; they should be treated as unverified rather than automatically false.",
+      "fix": "Attach timestamped npm/pub.dev outputs, exact repository commits and tags, npm tarball integrity hashes, peer-dependency trees, and generated SBOMs. Inspect the actual packed release artifacts, not only default-branch source."
+    },
+    {
+      "severity": "major",
+      "claim": "assistant-ui's cited releases provide complete AG-UI handling, including CUSTOM, and A2UI v0.9-v1.0 with action round-trip and history rehydration.",
+      "problem": "Event strings, version strings, test filenames, and changelog entries on a default branch support the presence of implementation work, not semantic conformance in the cited releases. They do not prove ordering, partial JSON handling, reconnects, CUSTOM delivery, or every A2UI version's behavior. Package identity is also inconsistent: the recommendation uses unscoped react-ag-ui and react-streamdown, S1 uses @assistant-ui/react-ag-ui and @assistant-ui/react-streamdown, and the A2UI import is variously described as @assistant-ui/generative-ui/a2ui and react-generative-ui.",
+      "fix": "Verify exact package names, exported subpaths, and versions from npm pack. Run the released artifacts against Know Meet's real backend and golden AG-UI/A2UI fixtures, including CUSTOM, unknown events, snapshots/deltas, malformed/truncated input, action responses, and history reload."
+    },
+    {
+      "severity": "major",
+      "claim": "69 react-ag-ui releases demonstrate hardening, assistant-ui provides a working chat in days, and the own implementation will take about 7-10 engineer-weeks.",
+      "problem": "Release count is equally compatible with churn and does not measure defect rates or coverage, especially for a 0.1.x adapter. Neither duration estimate is based on a recorded prototype. The listed own-build items sum to roughly 36-55 engineer-days, or about 7.2-11 five-day weeks, before integration, security review, conformance testing, accessibility remediation, documentation, and contingency. Ongoing protocol maintenance is not costed.",
+      "fix": "Replace these assertions with time-boxed spikes and measured defect/effort data. Compare initial integration cost and three-year ownership cost, including upgrades, accessibility, protocol drift, security fixes, and exit cost."
+    },
+    {
+      "severity": "major",
+      "claim": "Streamdown coverage justifies R4=3 for Own+pieces, assistant-ui, and shadcn AI Elements.",
+      "problem": "The cited documentation supports GFM and optional KaTeX, Mermaid, Shiki, sanitization, origin hardening, and incomplete-markdown repair. It does not support the complete hard requirement: safe SVG and video/audio are expressly absent from the default allow-list. Suggesting DOMPurify for an SVG fence is not a completed security design, and optional plugin dependencies do not prove correct streaming integration or safe Mermaid interaction.",
+      "fix": "Score full R4 as unmet until malicious-fixture tests pass. Use typed media components with protocol/origin allow-lists and CSP; tightly restrict or sandbox SVG, including external references and foreignObject; configure Mermaid's strict security mode and sanitize its output; lazy-load heavy plugins; and test truncated fences, math, links, images, and raw HTML."
+    },
+    {
+      "severity": "major",
+      "claim": "Tool, Confirmation, and Questionnaire patterns plus a needsApproval mock establish adequate R5 support for the own-core option.",
+      "problem": "Visual patterns and mocks do not implement resumable human-in-the-loop behavior. Tool-call correlation, approval denial, duplicate submission, cancellation, timeout, restart recovery, backend resume semantics, and authorization remain unspecified. onResumeToolCall/onAddToolResult API existence likewise does not prove end-to-end compatibility with Know Meet's backend.",
+      "fix": "Define and test an explicit Interrupt/approval state machine with idempotency and restart recovery, or reuse assistant-ui's released flow if it passes the same backend contract tests. Keep authorization and approval verification server-side."
+    },
+    {
+      "severity": "major",
+      "claim": "React peer ranges and a lack of documented Tauri issues justify R7=3, while the 272 KB Bundlephobia figure helps demote assistant-ui headless.",
+      "problem": "React peer compatibility is not evidence of Vite production behavior, SSE cancellation/streaming, Tauri CSP, WebKit/WebView2 interoperability, or bundle cost. No documented issues is weak evidence. A non-tree-shaken full-package Bundlephobia result cannot be assigned to a headless Vite import graph, and installed transitive dependencies are not necessarily shipped or executed.",
+      "fix": "Measure production Vite bundles with a visualizer and profile real chat workloads in both Tauri webviews. Test lit, React 19, zod 3/zod 4 resolution, Shiki/Mermaid loading, SSE cancellation, offline behavior, and CSP before awarding R7 points."
+    },
+    {
+      "severity": "major",
+      "claim": "assistant-ui earns R9=2 because aria-live='polite' occurs twice, while Own+pieces earns R9=1 from other isolated ARIA features.",
+      "problem": "ARIA string occurrences, aria-pressed feedback buttons, and keyboard support on Trace do not establish accessible streaming. They say nothing about announcement frequency, repeated token verbosity, focus theft, scroll anchoring, keyboard-accessible approvals, or screen-reader behavior during history rehydration. No candidate has evidence sufficient for a numerical accessibility score.",
+      "fix": "Mark R9 unverified until a manual audit is complete. Test NVDA, VoiceOver, keyboard-only operation, reduced motion, zoom/contrast, and interrupted streams. Announce throttled milestones or user-requested summaries rather than every token, and manage focus explicitly for stop, approval, errors, and new messages."
+    },
+    {
+      "severity": "major",
+      "claim": "assistant-cloud and runtime-owned state demonstrate backend/runtime lock-in, while npm maintainers show that CopilotKit controls AG-UI in practice.",
+      "problem": "An installed dependency is not evidence of mandatory network calls or a required backend, and state ownership is architectural coupling rather than proof of backend lock-in. Conversely, npm maintainer entries prove CopilotKit publishing involvement, not exclusive protocol governance or steering. Own+pieces retains the same AG-UI governance exposure, so its R10=3 versus assistant-ui's R10=2 is not established by these arguments.",
+      "fix": "Trace imports and network activity, test offline/direct AG-UI operation, disable cloud features, and pin versions. Review AG-UI governance documents and release ACLs before asserting control. For either option, enforce internal ports, wire-format fixtures, canonical persistence, and a tested replacement path."
+    },
+    {
+      "severity": "major",
+      "claim": "The same A2UI JSON renders on Flutter through a2ui_flutter, supporting the cross-platform advantage of Own+pieces.",
+      "problem": "The cited roadmap labels Flutter alpha, and no catalog, version-conformance, action round-trip, accessibility, or visual-parity evidence is supplied. A custom web shadcn catalog has no automatic Flutter counterpart. The official web renderer's self-described 'Stable' roadmap status also does not prove Know Meet's integration is stable.",
+      "fix": "Create shared versioned catalogs and golden A2UI fixtures, and gate mobile adoption on web/Flutter parity tests for supported components, validation failures, actions, history, theming, and accessibility. Keep an explicit unsupported-component fallback."
+    },
+    {
+      "severity": "minor",
+      "claim": "Using Vercel AI SDK would necessarily mean replacing AG-UI as Know Meet's wire format.",
+      "problem": "That is true only if its UIMessage protocol is exposed at the backend boundary. AI SDK React could theoretically be evaluated as an internal runtime/presentation adapter behind AG-UI, although that would still require a converter and would not obviously beat assistant-ui.",
+      "fix": "Reject it, if desired, for conversion cost, duplicate runtime state, or lack of required protocol support\u2014not for an unavoidable backend wire-format change."
+    },
+    {
+      "severity": "minor",
+      "claim": "The summary totals provide a reliable quantitative comparison, including CopilotKit (21), OpenUI (17+?), Tambo (\u226412), and json-render (\u226415).",
+      "problem": "Several displayed totals do not reconcile with their cells. CopilotKit's numeric cells sum to 19 with R9 unknown, OpenUI's known cells sum to 14 rather than 17, Tambo's known cells sum to 9 with five unknowns and therefore do not imply \u226412, and json-render's known cells sum to 14 with two unknowns and therefore do not imply \u226415. The top-three arithmetic is correct, but the treatment of unknowns is not.",
+      "fix": "Generate totals programmatically, omit totals containing unknowns or publish correct min-max ranges, and add consistency tests to the decision document."
+    }
+  ],
+  "missed_candidates": [
+    "assistant-ui full plus entity-graph checkpoint/settled-state persistence\u2014the README's own fallback, which is a distinct architecture and was never scored",
+    "A reducer-reuse option using @ag-ui/client or release-verified/vendored MIT assistant-ui reducer code under an external entity-graph store; export and licensing feasibility need checking, but the three-option dichotomy was not proven",
+    "flutter_ai_toolkit, which is listed in S15 but never evaluated for Flutter chat, markdown, accessibility, or protocol adaptation",
+    "@a2ui/lit as an alternative official web renderer, particularly if React-wrapper, bundle, or Tauri interoperability tests change the renderer choice",
+    "A react-markdown/remark/rehype-based fallback pipeline instead of treating Streamdown as the only markdown piece",
+    "@ai-sdk/react used only internally behind an AG-UI adapter, as a candidate to reject on measured integration cost rather than on an unavoidable wire-format claim"
+  ],
+  "requirement_gaps": [
+    {
+      "req": "R1",
+      "gap": "The own reducer and transport do not exist, and neither option has demonstrated backend conformance for CUSTOM, replay, cancellation, resume, thread switching, ordering, or reconnect.",
+      "fill": "Prefer the release-verified assistant-ui AG-UI adapter initially; add golden-event and real-backend contract tests, version pinning, unknown-event fallbacks, and idempotent checkpoint/recovery semantics."
+    },
+    {
+      "req": "R2",
+      "gap": "The shadcn A2UI catalog, version negotiation, action round-trip, history restoration, failure fallback, and Flutter parity remain unbuilt or unverified.",
+      "fill": "Use a release-tested assistant-ui or official @a2ui/react renderer behind a port, with a versioned catalog and shared web/Flutter conformance fixtures before approving a2ui_flutter."
+    },
+    {
+      "req": "R3",
+      "gap": "The proposed MessagePart registry is only a design, and parsing CUSTOM does not by itself support arbitrary custom stream chunks or safe renderer fallback.",
+      "fill": "Implement schema-versioned chunk/part adapters and a typed renderer registry with unknown-part rendering, validation, error boundaries, ordering tests, and no arbitrary code execution."
+    },
+    {
+      "req": "R4",
+      "gap": "Safe SVG, video/audio, hardened Mermaid output, media origin policy, CSP, and malicious incomplete-markdown behavior are not delivered.",
+      "fill": "Add a documented threat model, typed media renderers, restricted/sandboxed SVG handling, strict Mermaid configuration, URL allow-lists, lazy-loaded plugins, and security/streaming fixture tests."
+    },
+    {
+      "req": "R5",
+      "gap": "End-to-end HITL persistence, idempotent approval/denial, restart resume, tool correlation, generative-UI actions, and backend authorization are unspecified.",
+      "fill": "Reuse a tested runtime flow where possible and otherwise implement an explicit Interrupt state machine with backend contract tests and server-side authorization."
+    },
+    {
+      "req": "R6",
+      "gap": "The custom A2UI token mapping is unbuilt, while stock assistant-ui markup may introduce Radix styling alongside Know Meet's Base UI base-nova system.",
+      "fill": "Keep assistant-ui primarily as runtime, render through copied Base UI/shadcn patterns and explicit part renderers, and add token, dark-mode, Tailwind @source, and visual-regression tests."
+    },
+    {
+      "req": "R7",
+      "gap": "There are no Vite bundle measurements or Tauri WebKit/WebView2 results for streaming, lit, zod resolution, CSP, or heavy markdown plugins.",
+      "fill": "Run production-build and runtime spikes in both webviews, measure tree-shaken bundles and memory, code-split Mermaid/Shiki/KaTeX, and test cancellation and offline behavior."
+    },
+    {
+      "req": "R8",
+      "gap": "Roadmap labels, stars, release counts, and recency do not establish release quality; the own reducer is unbuilt, the web catalog is proposed, Flutter is alpha, and assistant-ui remains 0.x.",
+      "fill": "Pin exact artifacts, audit changelogs and tests, define support/upgrade/exit policies, and require conformance plus soak tests before calling any option mature."
+    },
+    {
+      "req": "R9",
+      "gap": "No candidate has a meaningful streaming-accessibility audit.",
+      "fill": "Perform manual screen-reader and keyboard testing, add throttled/user-configurable announcements, preserve focus and scroll position, and test approvals, errors, history, reduced motion, and mobile accessibility."
+    },
+    {
+      "req": "R10",
+      "gap": "The recommendation reduces library coupling but not AG-UI/A2UI governance risk; assistant-ui's actual cloud/network coupling is also unmeasured, and simple post-run mirroring can lose interrupted runs.",
+      "fill": "Use internal protocol/runtime ports, no-cloud network tests, open-wire fixtures, deterministic IDs, idempotent run/message/tool checkpoints with recovery offsets, and a periodic renderer/runtime replacement drill."
+    }
+  ],
+  "strongest_counter_case": "The research's own evidence makes assistant-ui the better baseline: it awards AUI full the highest score and identifies an existing implementation for precisely the difficult work Know Meet would otherwise assume\u2014AG-UI lifecycle handling, replay/disconnect behavior, history rehydration, tool deferral/approval, CUSTOM parts, and A2UI actions. The only decisive argument against it is the assertion that entity-graph must own all transient state, which is neither an operator hard requirement nor a consequence of clean architecture. Treat assistant-ui state as ephemeral presentation/run state and entity-graph as the durable canonical projection, with deterministic IDs and idempotent checkpoints rather than uncoordinated dual writes. This preserves the backend's AG-UI/A2UI contract and an exit path while substantially reducing initial protocol and edge-case work. The approach still needs version pinning, no-cloud verification, bundle/Tauri measurements, accessibility remediation, and release-artifact conformance tests; assistant-ui's 0.x churn is a real cost. But the burden of proof should be on the unbuilt own-core implementation to demonstrate better performance, consistency, accessibility, and total ownership cost in a bake-off, not on the existing framework to disprove an untested architectural premise.",
+  "confidence": 0.84
+}

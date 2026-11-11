@@ -1,0 +1,38 @@
+stream: a11y-own-stream-long-markdown-mwbmbz9g
+(node:71410) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  PASS a11y-1 axe idle / mid-stream / settled
+  PASS a11y-2 transcript aria-busy while streaming and not after
+  PASS a11y-3 streaming text not inside a live region
+  PASS a11y-4 live-region announcements throttled and finalized
+  PASS conformance long-markdown (collector compare.ts)
+focus: a11y-own-focus-hitl-approve-mwbmca1r
+  PASS a11y-5 streaming and approval never steal focus (+ axe with pending approval)
+approve: a11y-own-approve-hitl-approve-mwbmcfcx
+  PASS a11y-6 approval can be approved from the keyboard
+  PASS conformance hitl-approve (collector compare.ts)
+reject: a11y-own-reject-hitl-reject-mwbmcm50
+  PASS a11y-7 approval can be rejectd from the keyboard
+  PASS conformance hitl-reject (collector compare.ts)
+alert: a11y-own-alert-run-error-mwbmct97
+  PASS a11y-8 run errors use role=alert
+  FAIL conformance run-error (collector compare.ts): FAIL messages[0].text: expected "Fetch last week's recording.", got "Fetch last week’s recording."
+a2ui/button-actions-roundtrip: a11y-own-a2ui-a2ui-button-actions-roundtrip-mwbmcxo2
+  PASS a2ui/button-actions-roundtrip
+a2ui/card-with-action: a11y-own-a2ui-a2ui-card-with-action-mwbmd6k5
+  PASS a2ui/card-with-action
+a2ui/form-validation: a11y-own-a2ui-a2ui-form-validation-mwbmdeax
+  PASS a2ui/form-validation
+a2ui-keyboard: a11y-own-a2ui-keyboard-a2ui-form-validation-mwbmdt63
+  PASS a2ui/form-validation keyboard-only submit
+a2ui/incremental-update-delete: a11y-own-a2ui-a2ui-incremental-update-delete-mwbme1bj
+  PASS a2ui/incremental-update-delete
+a2ui/list-template: a11y-own-a2ui-a2ui-list-template-mwbme9ay
+  PASS a2ui/list-template
+a2ui/media-image-video-audio: a11y-own-a2ui-a2ui-media-image-video-audio-mwbmegkx
+  PASS a2ui/media-image-video-audio
+a2ui/nested-layout: a11y-own-a2ui-a2ui-nested-layout-mwbmeqle
+  PASS a2ui/nested-layout
+a2ui/unknown-component-fallback: a11y-own-a2ui-a2ui-unknown-component-fallback-mwbmeyzj
+  PASS a2ui/unknown-component-fallback
+20/21 pass, 0 errors -> ../measurements/16-4/raw/run-3-own/own-results-mwbmf6cm.json

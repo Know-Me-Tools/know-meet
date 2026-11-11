@@ -1,0 +1,13 @@
+import { chromium } from "../../harness/node_modules/@playwright/test/index.mjs";
+const [scenario, entityType] = process.argv.slice(2);
+const browser = await chromium.launch();
+const page = await browser.newPage();
+page.on("pageerror", (e) => console.log("pageerror:", e.message));
+await page.goto(`http://localhost:4175/?scenario=${encodeURIComponent(scenario)}&agui=http://127.0.0.1:4317&session=dump-${Date.now()}&allowMediaOrigin=http://127.0.0.1:4317`);
+await page.waitForFunction(() => window.__spike?.ready === true);
+await page.getByTestId("km-composer-input").fill("go");
+await page.getByTestId("km-composer-submit").click();
+await page.waitForTimeout(3000);
+const dump = await page.evaluate(() => window.__spike.storeSnapshot());
+console.log(JSON.stringify(entityType ? dump.entities[entityType] : dump.counts, null, 1).slice(0, 3000));
+await browser.close();

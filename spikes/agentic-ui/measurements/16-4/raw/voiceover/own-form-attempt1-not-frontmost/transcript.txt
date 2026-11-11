@@ -1,0 +1,14 @@
+   0.00s  POLL start  errors=
+   0.00s  RUN  vo-form: a11y-own-a2ui-keyboard-a2ui-form-validation-mwbo877t (harness http://127.0.0.1:4327)
+   0.07s  VO   "system has new window"
+   0.47s  VO   "km-spike-own-a11y-4327 is not responding"
+   1.25s  VO   "Messages Natalia iMessage window Message edit text, is editing has keyboard focus"
+   1.50s  VO   "application Know Meet agentic-UI spike window Know Meet agentic-UI spike window"
+   2.20s  VO   "km-spike-own-a11y-4327 is launched in the background"
+   2.54s  VO   "In Know Meet · Concierge (prototype O) web content banner"
+   5.57s  VO   "edit text Insertion at beginning of text. Thanks, I didn't know most of this. "
+  11.32s  VO   "Thanks,"
+  12.56s  VO   "You are currently on a banner, inside of web content."
+  13.46s  VO   "Conversation region Message the Concierge form main"
+  22.45s  RUN  ERROR timed out after 10000 ms waiting for a11y-state
+  22.49s  POLL stop 259 errors=0

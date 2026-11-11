@@ -1,0 +1,11 @@
+22:33:22 macOS 26.7.3; km-input {"trusted":true}
+22:33:22 SCREnableAppleScript default: The domain/default pair of (com.apple.VoiceOver4/default, SCREnableAppleScript) does not exist
+22:33:22 /private/var/db/Accessibility: .VoiceOverAppleScriptEnabled-Migrated 
+22:33:22 voiceover running before: no
+22:33:26 app pid 79425 front: {"pid":79425}
+22:33:37 voiceover running after Cmd+F5: no
+22:33:38 voiceover running after VoiceOverStarter: yes
+22:33:45 step 0 (app focused) last phrase: 39:46: execution error: VoiceOver got an error: Can’t get content of last phrase. (-1728)
+22:33:45 BLOCKED: VoiceOver AppleScript control refused; stopping the probe
+22:33:49 voiceover running after cleanup: no
+22:33:49 app stopped

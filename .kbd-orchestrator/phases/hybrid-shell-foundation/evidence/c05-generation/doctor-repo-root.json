@@ -1,0 +1,20 @@
+{
+  "ok": false,
+  "operation": "doctor",
+  "changed": false,
+  "path": "/Users/gqadonis/Projects/know-me/know-meet/.",
+  "profile": null,
+  "actions": [
+    "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.6",
+    "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "Builder hybrid-mobile-architecture manifest 2.0.0-alpha.5 is internally consistent across 6 harnesses",
+    "Prometheus package 1.14.0 is compatible (required 1.7.0)",
+    "Prometheus control-plane contract 2.0.0 is compatible",
+    "Prometheus typed KBD and durable learning commands are available"
+  ],
+  "conflicts": [],
+  "warnings": [
+    "no cross-target requested; native library and application build readiness are unverified",
+    "Prometheus doctor reported 4 failing health check(s)"
+  ]
+}
