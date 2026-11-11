@@ -134,3 +134,20 @@ Provenance: user (explicit form answers, Travis James).
 
 - Pre-commit hook findings fixed before committing: Node pinned to 26.5.0 for the hook (shell had 26.8.2); ls-lint now skips nested node_modules and spikes/; chart.tsx exempted from the colour scan (selectors for recharts defaults); Biome safe auto-fixes applied to code; frozen artifacts (fidelity oracle, baselines manifest, Tauri capabilities, token-generator config) excluded from Biome and restored byte-for-byte; impeccable prebuilt binaries git-ignored.
 - 38 Biome findings remain (evidence/c13-biome-backlog.txt). Under VLBV lint is a c13 boundary item, so this one commit bypassed the hook with --no-verify; c13/c14 must clear the backlog. No secrets found (constraint greps + check-secrets ok).
+
+## 2026-11-11 — operator: commit+push; keep PEM bridge deletion behaviour, bump and publish; fix security findings in a PR
+
+- know-meet: committed 89c47db on feat/hybrid-shell-foundation, pushed over SSH (HTTPS token lacks `workflow` scope); PR https://github.com/Know-Me-Tools/know-meet/pull/3.
+- PEM security PR https://github.com/Prometheus-AGS/prometheus-entity-management/pull/77 fixes 20 of 21 critical/high advisories (incl. next 16.4.6 RCE fixes). Blocked on zod advisory 1243066: only fix is zod ≥4.6.6; upstream @a2ui packages require zod ^3.25.76. Operator decision pending (accept with expiry vs wait).
+- PEM PR #76 bumped to 4.4.0 (all 13 packages, minor; bridge deletion behaviour leads the changelog); merges after #77, then publish via the repo's pnpm publish script.
+
+## 2026-11-11 — operator: latest zod, pin latest DOMPurify; PEM 4.4.0 published
+
+- Verified on npm + web search: zod 4.6.7, dompurify 3.4.17 (both npm latest, 2026-10-12).
+- PEM #77 (security, 0 critical/high, no accepted advisories), #76 (4.4.0 streaming-store hardening) and #78 (published-version docs) merged; all 13 @prometheus-ags packages published at 4.4.0 (tag v4.4.0 + GitHub release). @a2ui/web_core 0.12.0 runs on zod 4 via a committed pnpm patch to zod/v3, bundled into a2ui-react's dist; a2ui-react now ships its own markdown renderer on dompurify 3.4.17. Consumer installs still contain an unused zod 3.25.76 type dependency (audit noise) — README documents the override.
+- Gate 16.2 complete. Follow-up: bump know-meet to @prometheus-ags/entity-graph-* 4.4.0 (apps/web pins 4.3.0) when c08/8.3 adopts the own core.
+
+## 2026-11-11 — gate 16.3 complete; 16.1 minimised re-run blocked
+
+- 16.3 (600 interleaved paired runs, non-profiling, render-complete, bootstrap CIs): O meaningfully lower on TTFT (15/15 scenarios, both engines), Chromium main-thread task time (long-markdown −1.6 s), scripting and heap; H heap grows +0.89 MB/min in a 30-min soak vs O +0.15 (n.s.). Against O: Chromium long tasks +77 ms (long-markdown) / +67 ms (huge-table); WebKit one ~1 s frame gap per 20 KB stream (worst input latency +908 ms, cause unknown) — must be fixed before c08/8.3 ships O.
+- 16.1 minimised re-run with background throttling disabled could not run: macOS screen locked (loginwindow frontmost); runs quarantined. Measurement fix chosen: correct the harness's clamped 20 ms settle poll rather than switching the pass rule.

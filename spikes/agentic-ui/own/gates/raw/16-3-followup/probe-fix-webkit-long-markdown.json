@@ -1,0 +1,252 @@
+{
+  "label": "fix",
+  "url": "http://127.0.0.1:4298/",
+  "scenario": "long-markdown",
+  "browser": "webkit",
+  "at": "2026-11-11T08:44:59.013Z",
+  "results": [
+    {
+      "run": 1,
+      "topFrameGaps": [
+        {
+          "startRel": 1293,
+          "ms": 264,
+          "textLenAtStart": 3680
+        },
+        {
+          "startRel": 644,
+          "ms": 64,
+          "textLenAtStart": 624
+        },
+        {
+          "startRel": 1942,
+          "ms": 62,
+          "textLenAtStart": 5418
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": 1296,
+          "ms": 257
+        },
+        {
+          "startRel": -197,
+          "ms": 89
+        },
+        {
+          "startRel": 632,
+          "ms": 68
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-fix-1-mwbvhx2x",
+          "start": 1,
+          "end": 5897,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 66,
+          "end": 69,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 98,
+          "end": 101,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-CdfOCrQv.js",
+          "start": 654,
+          "end": 658,
+          "size": 974
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 687,
+          "end": 690,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 694,
+          "end": 697,
+          "size": 16740
+        },
+        {
+          "name": "/assets/shiki-highlight.worker-BZM0aE-H.js",
+          "start": 714,
+          "end": 723,
+          "size": 65592
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 2,
+      "topFrameGaps": [
+        {
+          "startRel": 5594,
+          "ms": 25,
+          "textLenAtStart": 16357
+        },
+        {
+          "startRel": 6476,
+          "ms": 24,
+          "textLenAtStart": 17335
+        },
+        {
+          "startRel": 6128,
+          "ms": 23,
+          "textLenAtStart": 17335
+        }
+      ],
+      "heartbeatsInsideLargestGap": 1,
+      "topHeartbeatGaps": [
+        {
+          "startRel": -155,
+          "ms": 72
+        },
+        {
+          "startRel": -178,
+          "ms": 23
+        },
+        {
+          "startRel": -3,
+          "ms": 22
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-fix-2-mwbvi2q8",
+          "start": 1,
+          "end": 5897,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 83,
+          "end": 86,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 115,
+          "end": 118,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-CdfOCrQv.js",
+          "start": 266,
+          "end": 269,
+          "size": 974
+        },
+        {
+          "name": "/assets/shiki-highlight.worker-BZM0aE-H.js",
+          "start": 298,
+          "end": 307,
+          "size": 65592
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 338,
+          "end": 341,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 342,
+          "end": 345,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    },
+    {
+      "run": 3,
+      "topFrameGaps": [
+        {
+          "startRel": 5878,
+          "ms": 26,
+          "textLenAtStart": 17134
+        },
+        {
+          "startRel": 6643,
+          "ms": 25,
+          "textLenAtStart": 17335
+        },
+        {
+          "startRel": 311,
+          "ms": 24,
+          "textLenAtStart": 782
+        }
+      ],
+      "heartbeatsInsideLargestGap": 2,
+      "topHeartbeatGaps": [
+        {
+          "startRel": -165,
+          "ms": 74
+        },
+        {
+          "startRel": -199,
+          "ms": 34
+        },
+        {
+          "startRel": 301,
+          "ms": 27
+        }
+      ],
+      "resourcesAfterSubmit": [
+        {
+          "name": "/agui/long-markdown?session=probe-fix-3-mwbvi8qi",
+          "start": 3,
+          "end": 5887,
+          "size": 0
+        },
+        {
+          "name": "/assets/inter-semibold-BAEEcJ4E.woff2",
+          "start": 66,
+          "end": 68,
+          "size": 115112
+        },
+        {
+          "name": "/assets/jetbrains-mono-medium-3S3k2nMz.woff2",
+          "start": 100,
+          "end": 103,
+          "size": 94124
+        },
+        {
+          "name": "/assets/highlighted-body-JLMTFACH-CdfOCrQv.js",
+          "start": 250,
+          "end": 252,
+          "size": 974
+        },
+        {
+          "name": "/assets/shiki-highlight.worker-BZM0aE-H.js",
+          "start": 281,
+          "end": 289,
+          "size": 65592
+        },
+        {
+          "name": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+          "start": 325,
+          "end": 327,
+          "size": 26572
+        },
+        {
+          "name": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+          "start": 329,
+          "end": 333,
+          "size": 16740
+        }
+      ],
+      "marksNearGap": [],
+      "finalTextLen": 17335
+    }
+  ]
+}

@@ -16,6 +16,8 @@ export default defineConfig({
       { find: /^rehype-raw$/, replacement: fileURLToPath(new URL("./src/infrastructure/rehype-raw-disabled.ts", import.meta.url)) },
     ],
   },
+  // The Shiki worker code-splits (lazy grammars/themes), which needs ES-module workers.
+  worker: { format: "es" },
   build: {
     target: "es2022",
     sourcemap: true,

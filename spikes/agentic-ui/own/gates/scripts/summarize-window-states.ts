@@ -61,6 +61,7 @@ interface Meta {
 export interface StepRow {
   readonly scenarioId: string;
   readonly repeat: number;
+  readonly startedAtEpochMs: number;
   readonly conformant: boolean;
   readonly problems: readonly string[];
   readonly compliant: boolean;
@@ -104,6 +105,7 @@ function stepRows(meta: Meta): StepRow[] {
     return {
       scenarioId: r.scenarioId,
       repeat: r.repeat,
+      startedAtEpochMs: r.startedAtEpochMs,
       conformant: problems.length === 0,
       problems,
       compliant: window.length > 0 && window.every((s) => matches(meta.state, s)),

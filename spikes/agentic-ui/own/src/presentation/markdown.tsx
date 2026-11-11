@@ -8,11 +8,12 @@
  *   Streamdown's allow-all default;
  * - a second check in the `a` and `img` renderers, because rehype-harden passes
  *   some schemes regardless of prefixes (mailto, irc, xmpp, blob);
- * - KaTeX via @streamdown/math (trust stays false), Shiki via @streamdown/code,
- *   Mermaid through the sanitising lazy wrapper;
+ * - KaTeX via @streamdown/math (trust stays false), Mermaid through the sanitising lazy
+ *   wrapper; Shiki through the injected `highlighter` (gate 16.3 follow-up: the composition root
+ *   passes a Worker-backed @streamdown/code, so grammar compilation never blocks the main thread);
  * - no link-safety modal and no copy/download controls (extra focus stops).
  */
-import { code } from "@streamdown/code";
+import type { CodeHighlighterPlugin } from "@streamdown/code";
 import { createMathPlugin } from "@streamdown/math";
 import { memo, useMemo } from "react";
 import { defaultRehypePlugins, Streamdown, type Components, type PluginConfig } from "streamdown";
@@ -22,7 +23,9 @@ import { safeMermaidPlugin } from "./parts/mermaid-safe.ts";
 
 const math = createMathPlugin({ singleDollarTextMath: true });
 
-const PLUGINS = { math, code, mermaid: safeMermaidPlugin } as unknown as PluginConfig;
+function plugins(highlighter: CodeHighlighterPlugin): PluginConfig {
+  return { math, code: highlighter, mermaid: safeMermaidPlugin } as unknown as PluginConfig;
+}
 
 type Pluggable = NonNullable<Parameters<typeof Streamdown>[0]["rehypePlugins"]>[number];
 
@@ -64,9 +67,11 @@ export interface MarkdownProps {
   readonly text: string;
   readonly streaming: boolean;
   readonly policy: MarkdownPolicy;
+  readonly highlighter: CodeHighlighterPlugin;
 }
 
-export const Markdown = memo(function Markdown({ text, streaming, policy }: MarkdownProps) {
+export const Markdown = memo(function Markdown({ text, streaming, policy, highlighter }: MarkdownProps) {
+  const pluginConfig = useMemo(() => plugins(highlighter), [highlighter]);
   const rehypePlugins = useMemo(() => hardened(policy), [policy]);
   const renderers = useMemo(() => components(policy), [policy]);
   return (
@@ -75,7 +80,7 @@ export const Markdown = memo(function Markdown({ text, streaming, policy }: Mark
       mode="streaming"
       parseIncompleteMarkdown
       isAnimating={streaming}
-      plugins={PLUGINS}
+      plugins={pluginConfig}
       components={renderers}
       rehypePlugins={rehypePlugins}
       skipHtml

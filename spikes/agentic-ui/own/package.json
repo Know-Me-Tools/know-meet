@@ -18,8 +18,8 @@
     "@a2ui/react": "0.15.0",
     "@a2ui/web_core": "0.15.0",
     "@ag-ui/core": "1.0.4",
-    "@prometheus-ags/entity-graph-core": "4.3.0",
-    "@prometheus-ags/entity-graph-react": "4.3.0",
+    "@prometheus-ags/entity-graph-core": "4.4.0",
+    "@prometheus-ags/entity-graph-react": "4.4.0",
     "@streamdown/code": "2.0.0",
     "@streamdown/math": "1.0.3",
     "@streamdown/mermaid": "1.0.3",
@@ -33,6 +33,10 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@shikijs/core": "4.6.0",
+    "@shikijs/engine-javascript": "4.6.0",
+    "@shikijs/langs-precompiled": "4.6.0",
+    "@shikijs/themes": "4.6.0",
     "@tailwindcss/vite": "4.3.5",
     "@types/node": "26.6.6",
     "@types/react": "19.2.7",

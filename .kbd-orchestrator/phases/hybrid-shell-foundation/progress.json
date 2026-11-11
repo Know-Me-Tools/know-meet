@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 181,
-  "derivedRevision": 181,
+  "sourceRevision": 183,
+  "derivedRevision": 183,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 181
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 183
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-11T05:43:18.340409Z",
+  "last_updated": "2026-11-11T08:32:21.264101Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
   "changes_completed": 8,
@@ -241,7 +241,7 @@
       "status": "BLOCKED",
       "implementation_status": "BLOCKED",
       "tasks_total": 7,
-      "tasks_done": 4,
+      "tasks_done": 6,
       "last_task_completed": "Write the end-to-end Flutter agentic-UI plan (AG-UI transport incl. evaluating community ag_ui, HITL, reconnec",
       "next_task_pending": "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised",
       "blockers": [

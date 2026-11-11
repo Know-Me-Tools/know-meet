@@ -1,0 +1,238 @@
+{
+ "suite": "conformance",
+ "build": "own/gates/builds/own-fix-no-profiling",
+ "stats": {
+  "startTime": "2026-11-11T08:48:46.841Z",
+  "duration": 48578.385,
+  "expected": 28,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0
+ },
+ "tests": [
+  {
+   "title": "a2ui-over-agui @a2ui @activity",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "a2ui-over-agui @a2ui @activity",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "cancel-mid-stream @cancel @streaming",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "cancel-mid-stream @cancel @streaming",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "custom-chunks @custom @media",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "custom-chunks @custom @media",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "disconnect-reconnect-replay @reconnect @replay",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "disconnect-reconnect-replay @reconnect @replay",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-approve @hitl @a11y @keyboard",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-approve @hitl @a11y @keyboard",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-expire @hitl @expiry",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-expire @hitl @expiry",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-reject @hitl @a11y @keyboard",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hitl-reject @hitl @a11y @keyboard",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "long-markdown @streaming @performance @a11y",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "long-markdown @streaming @performance @a11y",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "malformed-out-of-order @robustness @ordering",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "malformed-out-of-order @robustness @ordering",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "parallel-tool-calls @tools @ordering",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "parallel-tool-calls @tools @ordering",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "reasoning-subagents-snapshot @reasoning @subagents @snapshot",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "reasoning-subagents-snapshot @reasoning @subagents @snapshot",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "run-cancelled-by-agent @cancel",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "run-cancelled-by-agent @cancel",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "run-error @error",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "run-error @error",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "state-snapshot-delta @state",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "state-snapshot-delta @state",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  }
+ ]
+}

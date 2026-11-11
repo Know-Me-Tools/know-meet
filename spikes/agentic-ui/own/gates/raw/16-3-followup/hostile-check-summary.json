@@ -1,0 +1,718 @@
+{
+ "suite": "hostile",
+ "build": "own/gates/builds/own-fix-no-profiling",
+ "stats": {
+  "startTime": "2026-11-11T08:46:55.159Z",
+  "duration": 110835.812,
+  "expected": 88,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0
+ },
+ "tests": [
+  {
+   "title": "hostile/xss-script-tag @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-script-tag @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-mixed-case-script @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-mixed-case-script @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-img-onerror @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-img-onerror @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-svg-onload-inline @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-svg-onload-inline @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-iframe-srcdoc @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-iframe-srcdoc @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-details-ontoggle @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-details-ontoggle @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-style-exfil @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-style-exfil @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-md-image-attr-breakout @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-md-image-attr-breakout @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-form-action @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-form-action @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-meta-refresh-base @hostile @xss-html",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-meta-refresh-base @hostile @xss-html",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-split-script-stream @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/xss-split-script-stream @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-javascript-inline @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-javascript-inline @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-javascript-entity @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-javascript-entity @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-data-html @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-data-html @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-reference-style-js @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-reference-style-js @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-autolink-js @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-autolink-js @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-https-allowed @hostile @link-scheme",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/link-https-allowed @hostile @link-scheme",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-fence-script @hostile @raw-svg",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-fence-script @hostile @raw-svg",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-foreign-object @hostile @raw-svg",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-foreign-object @hostile @raw-svg",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-external-refs @hostile @raw-svg",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-external-refs @hostile @raw-svg",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-anchor-and-animate @hostile @raw-svg",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/svg-anchor-and-animate @hostile @raw-svg",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-html-label @hostile @mermaid",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-html-label @hostile @mermaid",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-click-javascript @hostile @mermaid",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-click-javascript @hostile @mermaid",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-init-loose @hostile @mermaid",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-init-loose @hostile @mermaid",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-syntax-error @hostile @mermaid",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-syntax-error @hostile @mermaid",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-custom-chunk @hostile @mermaid",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/mermaid-custom-chunk @hostile @mermaid",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-valid @hostile @katex",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-valid @hostile @katex",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-href-javascript @hostile @katex",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-href-javascript @hostile @katex",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-html-extensions @hostile @katex",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-html-extensions @hostile @katex",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-macro-bomb @hostile @katex",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/katex-macro-bomb @hostile @katex",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-unclosed-fence @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-unclosed-fence @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-partial-table @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-partial-table @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-unclosed-math @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-unclosed-math @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-split-link-emphasis @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-split-link-emphasis @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-dangling-html @hostile @streaming-fragment",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/stream-dangling-html @hostile @streaming-fragment",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/huge-table @hostile @huge-table",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/huge-table @hostile @huge-table",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-md-image-allowed @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-md-image-allowed @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-md-image-disallowed @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-md-image-disallowed @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-raw-video-audio @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-raw-video-audio @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-image-allowed @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-image-allowed @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-video-allowed @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-video-allowed @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-audio-disallowed @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-audio-disallowed @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-javascript-url @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-javascript-url @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-svg-image @hostile @media-origin",
+   "project": "chromium",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  },
+  {
+   "title": "hostile/media-custom-svg-image @hostile @media-origin",
+   "project": "webkit",
+   "status": "expected",
+   "results": [
+    "passed"
+   ]
+  }
+ ]
+}

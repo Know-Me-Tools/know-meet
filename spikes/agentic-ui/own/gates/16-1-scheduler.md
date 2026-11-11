@@ -7,6 +7,12 @@ Change: `c16-agentic-core-gates`, task 16.1. Date: 2026-11-10. Author: architect
 **16.1, excluding WebView2: FAIL.** Three of the four window states pass. Minimised does not pass
 with Tauri's default background throttling.
 
+> **Update 2026-11-11 (section 11).** The operator chose `"backgroundThrottling": "disabled"`. O's
+> gate shell now declares it, and the rebuilt binary applies it (verified). The minimised re-run
+> under that setting is **not yet measured**: the macOS session was locked during the attempt, so
+> no window state could be produced and those runs are quarantined. **macOS minimised: pending
+> (blocked on an unlocked session), not pass and not fail.** WebView2: still pending.
+
 | State (Tauri default `background_throttling`) | Steps used / run | Conformant | Worst p95 TTFT vs focused | Worst p95 total vs focused | Pass |
 |---|---|---|---|---|---|
 | Focused (baseline, 2 runs pooled) | 157 / 168 | 168 / 168 | 1× | 1× | baseline |
@@ -321,3 +327,104 @@ times, and exit codes. All runs exited 0.
 | `run-*.log` | Runner output |
 | `superseded/` | First focused run (`mwb9me1o`): 84/84 conformant, superseded when the stager start moved from 2.5 s to 1 s and `long-markdown` moved first |
 | `../unit-tests.txt` | Unit test output (27/27) |
+
+## 11. Background throttling disabled (2026-11-11)
+
+**Operator decision 2026-11-11:** the product desktop app sets `"backgroundThrottling": "disabled"`
+(`apps/desktop/src-tauri/tauri.conf.json`; valid values `disabled | throttle | suspend`; the policy
+takes effect on macOS 14+ / iOS 17+ only). This section re-tests minimised under that setting.
+
+### 11.1 Shell change (done, verified)
+
+- `tauri-shell/src-tauri/src/main.rs`: if the build config declares a window labelled `main`
+  (`create: false`), the shell builds it with `WebviewWindowBuilder::from_config`, the same way
+  apps/desktop does. That window's `backgroundThrottling` then sets the policy, and
+  `KM_BACKGROUND_THROTTLING` is ignored. With no such window, which covers the H and c15 builds, the
+  previous code path is unchanged.
+- `gates/scripts/build-gate-shell.ts`: O's generated config declares that window, with
+  `backgroundThrottling: "disabled"`, 1280×720, `focus: true`. The value is exported as the
+  constant `BACKGROUND_THROTTLING`.
+- Rebuilt `gates/bin/km-spike-own-gate` (2026-11-11 02:26) from the unchanged `own/dist` (no source
+  file is newer than the dist). Log: `raw/build-gate-shell-nothrottle.log`.
+- **Verified:** on launch the binary reports
+  `spike shell: window from config, background_throttling=Some(Disabled)`
+  (`raw/16-1/shell-config-check-nothrottle.txt`).
+- `gates/scripts/window-state-run.ts`:
+  - new `--throttling config`: the binary's own config decides, recorded as
+    `KM_BACKGROUND_THROTTLING=config` in the meta;
+  - **new guard:** it refuses to start while the macOS session is locked (see 11.2).
+- `gates/scripts/summarize-window-states.ts`: step rows also carry `startedAtEpochMs` (an additive
+  field).
+- `gates/scripts/soak-minimised.ts` (new): groups a long minimised run's steps by minutes since the
+  window was first seen minimised. It judges each step against the focused p95 for its scenario.
+
+### 11.2 Measurement attempt: invalid, the session was locked
+
+Same method as sections 3 and 4: harness on :4317 (healthy), 14 scenarios × 6, a focused baseline
+first, then minimised. A 14-repeat minimised soak (about 10 min) was started after them and stopped
+early.
+
+- The runs completed with driver exit 0, and all steps were conformant (84/84 in each run). But the
+  stager reported `frontmost: "loginwindow"` in **every** sample, 99/99 in each run.
+  `targetOnScreen` stayed true even while `AXMinimized` was being applied.
+- `ioreg` confirms `CGSSessionScreenIsLocked = true`, with a lock time of 02:08:33. The runs went
+  from 02:27 to 02:31.
+- The summarizer therefore marks **0/84 steps state-compliant** in both runs. A locked screen is
+  neither focused nor minimised, so these runs say nothing about the gate.
+- They are quarantined in `raw/16-1/invalid-screen-locked/` (runs `mwbuvcww` focused, `mwbuxifn`
+  minimised, partial soak `mwbuzwff`) and are not used.
+- The runner's new guard refuses to start in this condition. Tested: it exits 1 with "screen is
+  locked".
+
+**Result: macOS minimised with throttling disabled is still pending. It is not a pass and not a
+fail.** Re-running needs an unlocked, awake session that nobody is using.
+
+### 11.3 What to expect, and a criterion decision needed before the re-run
+
+The closest valid evidence is the diagnostic run of 2026-11-10, `mwbafy69`
+(`raw/16-1/summary-diagnostics.json`, section 5). It used the same O dist, with the policy disabled
+through the environment variable instead of the config:
+
+- 84/84 compliant, 84/84 conformant. The reconnect race from section 6 did not occur, which fits a
+  process that is not deprioritised.
+- **TTFT p95 was within 1.5× in all 14 scenarios.** The worst was `a2ui-over-agui` at 1.39×.
+- **Total p95 failed in 9 of 14 scenarios.** The worst was `state-snapshot-delta` at 3.56×, and
+  `custom-chunks`, `hitl-*` and `malformed-out-of-order` were 2.95–3.28×.
+  - This is the harness driver's 20 ms settle poll. It is a `setTimeout`, and WebKit clamps it to
+    about 1 s in a hidden page whatever the Tauri policy, so many scenarios "settle" at a flat
+    905–930 ms.
+  - O's own run duration (`runTiming`, independent of that poll) was within about 1.1× of focused
+    in the same run (section 5 table). `cancel-mid-stream` is the exception: the driver also
+    clicks cancel from a 50 ms poll.
+
+So under the literal criterion (p95 total within 1.5×, measured by the driver), **minimised is
+expected to fail on total even with throttling disabled. The cause is the harness, not O.** Before
+the re-run, one of these must be decided:
+
+1. **Harness owner:** move the driver's settle detection, and the cancel trigger, off clamped
+   timers, using a MutationObserver or MessageChannel. This was already requested in section 7.
+2. **Operator:** for hidden pages, judge "total" by O's in-page `runTiming` instead of the driver
+   poll.
+
+Without either, the re-run can only confirm TTFT and conformance.
+
+### 11.4 Soak (> 5 min minimised): not done
+
+The soak started, but it ran under the same lock, so it is invalid. Tauri documents unloading a
+hidden view after about 5 minutes under `suspend`; with `disabled`, that should not apply, but this
+is unverified. Command for the re-run, from `spikes/agentic-ui/own/`:
+
+```bash
+node gates/scripts/window-state-run.ts --state focused   --throttling config --label own-gate-nothrottle
+node gates/scripts/window-state-run.ts --state minimised --throttling config --label own-gate-nothrottle
+node gates/scripts/window-state-run.ts --state minimised --throttling config --label own-gate-nothrottle-soak --repeats 14
+node gates/scripts/summarize-window-states.ts --out summary-nothrottle.json <focused id> <minimised id> <soak id>
+node gates/scripts/soak-minimised.ts --soak <soak id> --focused <focused id> --after-min 5
+```
+
+### 11.5 Still pending
+
+- **Windows WebView2:** the workflow `.github/workflows/webview2-gate.yml` exists. Run it with
+  `gh workflow run webview2-gate.yml` once PR #3 lands; it was not triggered here.
+- **The reconnect-race conformance check** (section 6) is still open with the harness owner. It did
+  not occur with throttling disabled on 2026-11-10.

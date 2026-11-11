@@ -12,6 +12,7 @@ import type { LiveTextBuffer } from "../application/live-text-buffer.ts";
 import type { CustomPart, Interrupt, Step, Subagent, ToolCall, TranscriptMessage, RunStatus } from "../domain/transcript-model.ts";
 import type { A2uiHost } from "../infrastructure/a2ui-host.ts";
 import type { MarkdownPolicy } from "./markdown-policy.ts";
+import type { CodeHighlighterPlugin } from "@streamdown/code";
 import { ENTITY, THREAD_ID } from "../infrastructure/entity-graph-store.ts";
 import type { ReactCatalogComponent } from "@a2ui/react";
 
@@ -22,6 +23,8 @@ export interface SessionServices {
   readonly a2ui: A2uiHost<ReactCatalogComponent>;
   readonly allowMediaOrigins: readonly string[];
   readonly markdownPolicy: MarkdownPolicy;
+  /** Streamdown code highlighter (the composition root supplies a Worker-backed one). */
+  readonly codeHighlighter: CodeHighlighterPlugin;
 }
 
 const SessionContext = createContext<SessionServices | null>(null);

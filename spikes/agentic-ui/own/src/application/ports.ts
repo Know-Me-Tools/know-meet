@@ -48,6 +48,20 @@ export interface AgUiTransport {
 export type CommitReason = "boundary" | "checkpoint";
 
 /** Durable store of record (entity-graph). One `commit` is one checkpoint transaction. */
+/**
+ * Render-only overlay for published streaming text, keyed by message id. Values are
+ * ephemeral: never durable writes, never persisted (entity-graph live layer in the app).
+ */
+export interface LiveTextOverlay {
+  set(id: string, text: string): void;
+  /** Drops the id's text; true when one was held. */
+  clear(id: string): boolean;
+  get(id: string): string | undefined;
+  /** Ids that currently hold text. */
+  ids(): string[];
+  subscribe(id: string, listener: () => void): () => void;
+}
+
 export interface TranscriptStore {
   commit(state: TranscriptState, reason: CommitReason): void;
   /** STATE_SNAPSHOT / STATE_DELTA are projected into the store as they arrive. */

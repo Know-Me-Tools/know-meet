@@ -51,18 +51,18 @@ export function PartList({ keys }: { readonly keys: readonly string[] }) {
 }
 
 function Body({ message, text }: { readonly message: TranscriptMessage; readonly text: string }) {
-  const { markdownPolicy } = useServices();
+  const { markdownPolicy, codeHighlighter } = useServices();
   const streaming = message.status === "streaming";
   if (message.role === "user") return <p className="whitespace-pre-wrap text-sm text-fg">{text}</p>;
   if (message.role === "reasoning") {
     return (
       <details className="text-13 text-fg-sub">
         <summary className="cursor-pointer">Reasoning</summary>
-        {message.encrypted ? <p>The reasoning for this step is encrypted and not shown.</p> : <Markdown text={text} streaming={streaming} policy={markdownPolicy} />}
+        {message.encrypted ? <p>The reasoning for this step is encrypted and not shown.</p> : <Markdown text={text} streaming={streaming} policy={markdownPolicy} highlighter={codeHighlighter} />}
       </details>
     );
   }
-  return <Markdown text={text} streaming={streaming} policy={markdownPolicy} />;
+  return <Markdown text={text} streaming={streaming} policy={markdownPolicy} highlighter={codeHighlighter} />;
 }
 
 export const MessageView = memo(function MessageView({ id }: { readonly id: string }) {

@@ -1,11 +1,13 @@
 /**
- * TranscriptStore on @prometheus-ags/entity-graph-core 4.3.0 (the store of
+ * TranscriptStore on @prometheus-ags/entity-graph-core 4.4.0 (the store of
  * record). Each commit diffs the immutable transcript against the last
- * committed one by reference and writes only changed entities, one
- * `upsertEntities` per entity type. Shared agent state goes through the
- * package's AG-UI bridge (applyAgUiSnapshot / applyAgUiDelta).
+ * committed one by reference and writes only changed entities, all of them in
+ * one `batchGraphWrites` (one atomic graph publication per commit; 4.3.0 needed
+ * one `upsertEntities` publication per entity type). Shared agent state goes
+ * through the package's AG-UI bridge (applyAgUiSnapshot / applyAgUiDelta), which
+ * in 4.4.0 publishes once per event and removes entities the agent removed.
  */
-import { applyAgUiDelta, applyAgUiSnapshot, graphStore, type AgUiStateMapping } from "@prometheus-ags/entity-graph-core";
+import { applyAgUiDelta, applyAgUiSnapshot, batchGraphWrites, graphStore, type AgUiStateMapping } from "@prometheus-ags/entity-graph-core";
 import type { CommitReason, TranscriptStore } from "../application/ports.ts";
 import type { AgUiDomainEvent } from "../domain/agui-event.ts";
 import type { TranscriptState } from "../domain/transcript-model.ts";
@@ -100,9 +102,10 @@ export class EntityGraphTranscriptStore implements TranscriptStore {
     const deletions = removed(prev?.messageOrder, state.messages);
     this.last = state;
     if (deletions.length === 0 && writes.every(([, rows]) => rows.length === 0)) return;
-    const api = graphStore.getState();
-    for (const id of deletions) api.removeEntity(ENTITY.message, id);
-    for (const [type, rows] of writes) if (rows.length > 0) api.upsertEntities(type, rows);
+    batchGraphWrites((batch) => {
+      for (const id of deletions) batch.removeEntity(ENTITY.message, id);
+      for (const [type, rows] of writes) if (rows.length > 0) batch.upsertEntities(type, rows);
+    });
     this.commits += 1;
     this.reasons[reason] += 1;
   }

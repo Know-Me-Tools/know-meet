@@ -780,3 +780,57 @@ own min 10: heap 34.3 MB, dom 8386, runs 88
 own min 11: heap 34.1 MB, dom 8440, runs 97
 own min 12: heap 34.3 MB, dom 8714, runs 105
 own min 13: heap 31.7 MB, dom 6588, runs 114
+own min 14: heap 34.2 MB, dom 9047, runs 123
+own min 15: heap 32.1 MB, dom 6921, runs 132
+own min 16: heap 34.6 MB, dom 9265, runs 140
+own min 17: heap 23.9 MB, dom 2834, runs 149
+own min 18: heap 34.8 MB, dom 9550, runs 157
+own min 19: heap 24.0 MB, dom 3167, runs 167
+own min 20: heap 34.9 MB, dom 9883, runs 175
+own min 21: heap 35.1 MB, dom 10162, runs 184
+own min 22: heap 35.1 MB, dom 10216, runs 193
+own min 23: heap 35.0 MB, dom 10490, runs 201
+own min 24: heap 32.7 MB, dom 8364, runs 210
+own min 25: heap 35.1 MB, dom 10823, runs 219
+own min 26: heap 33.0 MB, dom 8697, runs 228
+own min 27: heap 35.7 MB, dom 11041, runs 236
+own min 28: heap 24.5 MB, dom 4610, runs 245
+own min 29: heap 35.5 MB, dom 11326, runs 253
+own min 30: heap 24.6 MB, dom 4943, runs 263
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/16-3/soak-own.json
+hybrid min 0: heap 9.5 MB, dom 20, runs 0
+hybrid min 1: heap 32.5 MB, dom 6412, runs 9
+hybrid min 2: heap 30.3 MB, dom 4481, runs 18
+hybrid min 3: heap 35.0 MB, dom 6288, runs 26
+hybrid min 4: heap 27.2 MB, dom 58, runs 35
+hybrid min 5: heap 36.5 MB, dom 6288, runs 44
+hybrid min 6: heap 29.4 MB, dom 58, runs 53
+hybrid min 7: heap 38.2 MB, dom 6251, runs 61
+hybrid min 8: heap 39.8 MB, dom 6420, runs 70
+hybrid min 9: heap 35.9 MB, dom 4481, runs 78
+hybrid min 10: heap 40.2 MB, dom 6288, runs 86
+hybrid min 11: heap 32.8 MB, dom 58, runs 95
+hybrid min 12: heap 42.2 MB, dom 6251, runs 103
+hybrid min 13: heap 42.6 MB, dom 6412, runs 111
+hybrid min 14: heap 39.5 MB, dom 4481, runs 120
+hybrid min 15: heap 43.6 MB, dom 6288, runs 128
+hybrid min 16: heap 44.7 MB, dom 6420, runs 136
+hybrid min 17: heap 41.4 MB, dom 4481, runs 144
+hybrid min 18: heap 45.4 MB, dom 6288, runs 152
+hybrid min 19: heap 46.3 MB, dom 6420, runs 160
+hybrid min 20: heap 43.2 MB, dom 4481, runs 168
+hybrid min 21: heap 47.2 MB, dom 6251, runs 175
+hybrid min 22: heap 48.0 MB, dom 6412, runs 183
+hybrid min 23: heap 40.0 MB, dom 58, runs 191
+hybrid min 24: heap 50.2 MB, dom 6251, runs 199
+hybrid min 25: heap 50.6 MB, dom 6288, runs 206
+hybrid min 26: heap 51.6 MB, dom 6420, runs 214
+hybrid min 27: heap 48.4 MB, dom 4481, runs 222
+hybrid min 28: heap 52.1 MB, dom 6251, runs 229
+hybrid min 29: heap 52.8 MB, dom 6288, runs 236
+hybrid min 30: heap 53.8 MB, dom 6420, runs 244
+wrote /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/measurements/raw/16-3/soak-hybrid.json
+done
+./scripts/run-16-3.sh: line 22: 51999 Terminated: 15          ( cd "$SPIKE_DIR/$1" && exec pnpm exec vite preview --outDir "$BUILDS/$2" --port "$3" --strictPort --host 127.0.0.1 > /dev/null 2>&1 )  (wd: ~/Projects/know-me/know-meet/spikes/agentic-ui/measurements)
+./scripts/run-16-3.sh: line 22: 52022 Terminated: 15          ( cd "$SPIKE_DIR/$1" && exec pnpm exec vite preview --outDir "$BUILDS/$2" --port "$3" --strictPort --host 127.0.0.1 > /dev/null 2>&1 )  (wd: ~/Projects/know-me/know-meet/spikes/agentic-ui/measurements)
+./scripts/run-16-3.sh: line 22: 52059 Terminated: 15          ( cd "$SPIKE_DIR/$1" && exec pnpm exec vite preview --outDir "$BUILDS/$2" --port "$3" --strictPort --host 127.0.0.1 > /dev/null 2>&1 )  (wd: ~/Projects/know-me/know-meet/spikes/agentic-ui/measurements)

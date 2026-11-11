@@ -18,11 +18,11 @@ importers:
         specifier: 1.0.4
         version: 1.0.4(zod@3.25.76)
       '@prometheus-ags/entity-graph-core':
-        specifier: 4.3.0
-        version: 4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 4.4.0
+        version: 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@prometheus-ags/entity-graph-react':
-        specifier: 4.3.0
-        version: 4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 4.4.0
+        version: 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@streamdown/code':
         specifier: 2.0.0
         version: 2.0.0(react@19.2.7)
@@ -57,6 +57,18 @@ importers:
         specifier: 3.25.76
         version: 3.25.76
     devDependencies:
+      '@shikijs/core':
+        specifier: 4.6.0
+        version: 4.6.0
+      '@shikijs/engine-javascript':
+        specifier: 4.6.0
+        version: 4.6.0
+      '@shikijs/langs-precompiled':
+        specifier: 4.6.0
+        version: 4.6.0
+      '@shikijs/themes':
+        specifier: 4.6.0
+        version: 4.6.0
       '@tailwindcss/vite':
         specifier: 4.3.5
         version: 4.3.5(vite@8.3.7(@types/node@26.6.6)(jiti@2.7.0))
@@ -157,8 +169,8 @@ packages:
   '@preact/signals-core@1.14.5':
     resolution: {integrity: sha512-vcRv7Ityz5JVmeiVqIluLFzT/PDS/AlhHUpw3/aUWqcVUs6bDGIPXE/6RSC4evBNWYvnniozg5Syfj33al3gkg==}
 
-  '@prometheus-ags/entity-graph-core@4.3.0':
-    resolution: {integrity: sha512-SW7JdzqmoqbXK9ekLpFEs+AXi8x/qmiyodJCSTkgyIEZ8dP8qt6CAPgozKlJjOvuJyRw8HTe5AhG9ehSR7wEqQ==}
+  '@prometheus-ags/entity-graph-core@4.4.0':
+    resolution: {integrity: sha512-mjQuwA78wKdKijWZ1LrYeqqaP8U5h82d3To2Cmi1rWsOBeBd67oixdTupWY7uckRzOSD0ctkxbPVKc65XR91dw==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
       '@ag-ui/core': '>=0.0.30'
@@ -172,12 +184,12 @@ packages:
       loro-crdt:
         optional: true
 
-  '@prometheus-ags/entity-graph-react@4.3.0':
-    resolution: {integrity: sha512-1T+pvy3wkKtjV2GKqGEe1KC6fIKOoyxc2Prp7E1l8i5vIOhizEIWx5LsrUDouWUpWfAEuBt048MNZkOFVX36jA==}
+  '@prometheus-ags/entity-graph-react@4.4.0':
+    resolution: {integrity: sha512-osS+QyPMODhiNcDvFmVcxlSBXyeOlQ2jq7t4V7M0oeC+QjxrT62qq7aQh56W21/YgN0NXlHVK6KUAPi5GSEOKQ==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
       '@ag-ui/core': '>=0.0.30'
-      '@prometheus-ags/entity-graph-core': ^4.3.0
+      '@prometheus-ags/entity-graph-core': ^4.4.0
       '@tauri-apps/plugin-sql': '>=2.0.0'
       loro-crdt: '>=1.0.0'
       react: '>=19.0.0 <20.0.0'
@@ -299,6 +311,10 @@ packages:
 
   '@shikijs/engine-oniguruma@4.6.0':
     resolution: {integrity: sha512-aggd6Q7SuJOXNnsUbfG2XesxBJKBMAw/PDTUo9PyRjMaaJJ2dNrI+q0C+25ARXAK9yLHAlwxc9oRT2u68YKZ7w==}
+    engines: {node: '>=20'}
+
+  '@shikijs/langs-precompiled@4.6.0':
+    resolution: {integrity: sha512-LO4zGfclIlPH/4ec89Ys5+PAPtIAvOEadxKpFbiI87ALvOIMdzCRAaMxnQ2b2GieaElVtOVYOiGdBLaU4dvQLA==}
     engines: {node: '>=20'}
 
   '@shikijs/langs@4.6.0':
@@ -1786,7 +1802,7 @@ snapshots:
 
   '@preact/signals-core@1.14.5': {}
 
-  '@prometheus-ags/entity-graph-core@4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
       immer: 11.2.9
       zustand: 5.1.0(@types/react@19.2.7)(immer@11.2.9)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
@@ -1797,9 +1813,9 @@ snapshots:
       - react
       - use-sync-external-store
 
-  '@prometheus-ags/entity-graph-react@4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-react@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
-      '@prometheus-ags/entity-graph-core': 4.3.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+      '@prometheus-ags/entity-graph-core': 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@tanstack/react-table': 9.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/react-virtual': 3.14.26(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/table-core': 9.3.1
@@ -1881,6 +1897,11 @@ snapshots:
     dependencies:
       '@shikijs/types': 4.6.0
       '@shikijs/vscode-textmate': 10.1.0
+
+  '@shikijs/langs-precompiled@4.6.0':
+    dependencies:
+      '@shikijs/types': 4.6.0
+      oniguruma-to-es: 4.3.6
 
   '@shikijs/langs@4.6.0':
     dependencies:

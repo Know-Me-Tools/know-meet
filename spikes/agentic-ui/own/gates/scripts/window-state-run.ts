@@ -3,11 +3,11 @@
  * controlled window state, with background throttling at Tauri's default (policy unset).
  *
  *   node gates/scripts/window-state-run.ts --state focused|unfocused|occluded|minimised [--repeats 6]
- *        [--binary gates/bin/km-spike-own-gate] [--label own-gate] [--throttling default|disabled]
+ *        [--binary gates/bin/km-spike-own-gate] [--label own-gate] [--throttling default|disabled|config]
  *        [--stager-style titled|borderless]
  *
  * 1. Starts the harness driver run (../harness/src/webview-driver/tauri-run.ts, unchanged) with
- *    KM_BACKGROUND_THROTTLING=default, conformance mode, no axe. tauri-run brings the app to the
+ *    KM_BACKGROUND_THROTTLING=default (or as --throttling says), conformance mode, no axe. tauri-run brings the app to the
  *    front at about 1.5 s.
  * 2. At 1 s starts gates/bin/window-stage in the requested mode; it re-asserts the state every
  *    second and logs one JSON sample per second.
@@ -16,7 +16,7 @@
  * Needs the harness collector on 127.0.0.1:4317 and gates/bin/window-stage
  * (swiftc -O gates/scripts/window-stage.swift -o gates/bin/window-stage).
  */
-import { spawn, type ChildProcess } from "node:child_process";
+import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { copyFileSync, createWriteStream, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { CONFORMANCE_SCENARIOS } from "./conformance-scenarios.ts";
@@ -35,8 +35,12 @@ interface Args {
   readonly repeats: number;
   readonly binary: string;
   readonly label: string;
-  /** "default" leaves Tauri's background_throttling unset (the gate condition); "disabled" is diagnostic only. */
-  readonly throttling: "default" | "disabled";
+  /**
+   * "default" leaves Tauri's background_throttling unset; "disabled" forces it off via the env var
+   * (c15-style binaries only); "config" means the binary's own window config decides (gate builds
+   * since 2026-11-11 declare backgroundThrottling "disabled"), recorded as KM_BACKGROUND_THROTTLING=config.
+   */
+  readonly throttling: "default" | "disabled" | "config";
   /** Passed to window-stage --style (occluded: titled | borderless). */
   readonly stagerStyle: string;
 }
@@ -53,10 +57,17 @@ function parseArgs(argv: readonly string[]): Args {
   const label = v.get("--label") ?? "own-gate";
   if (!/^[a-z0-9-]+$/.test(label)) throw new Error("--label must be kebab-case");
   const throttling = v.get("--throttling") ?? "default";
-  if (throttling !== "default" && throttling !== "disabled") throw new Error("--throttling default|disabled");
+  if (throttling !== "default" && throttling !== "disabled" && throttling !== "config") throw new Error("--throttling default|disabled|config");
   const stagerStyle = v.get("--stager-style") ?? "titled";
   if (stagerStyle !== "titled" && stagerStyle !== "borderless") throw new Error("--stager-style titled|borderless");
   return { state, repeats: Number(v.get("--repeats") ?? "6"), binary: resolve(v.get("--binary") ?? join(OWN, "gates", "bin", "km-spike-own-gate")), label, throttling, stagerStyle };
+}
+
+/** A locked macOS session makes loginwindow frontmost, so no window state can be produced (2026-11-11 runs). */
+function screenIsLocked(): boolean {
+  if (process.platform !== "darwin") return false;
+  const out = spawnSync("ioreg", ["-n", "Root", "-d1", "-a"], { encoding: "utf8" }).stdout ?? "";
+  return /<key>CGSSessionScreenIsLocked<\/key>\s*<true\/>/.test(out);
 }
 
 function waitExit(child: ChildProcess): Promise<number | null> {
@@ -66,6 +77,7 @@ function waitExit(child: ChildProcess): Promise<number | null> {
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   if (!existsSync(args.binary)) throw new Error(`${args.binary} missing: node gates/scripts/build-gate-shell.ts`);
+  if (screenIsLocked()) throw new Error("screen is locked (CGSSessionScreenIsLocked): window states cannot be produced; unlock and re-run");
   mkdirSync(RAW, { recursive: true });
   const prototype = `${args.label}-${args.state}`;
   const driverArgs = [
@@ -73,7 +85,7 @@ async function main(): Promise<void> {
     "--repeats", String(args.repeats), "--scenarios", CONFORMANCE_SCENARIOS.join(","), "--no-axe", "--timeout-min", "60",
   ];
   // The shell keeps WebKit's policy only for KM_BACKGROUND_THROTTLING=default; any other value disables throttling.
-  const env = { ...process.env, KM_BACKGROUND_THROTTLING: args.throttling === "default" ? "default" : "disabled" };
+  const env = { ...process.env, KM_BACKGROUND_THROTTLING: args.throttling };
   const startedAt = new Date().toISOString();
   const driver = spawn("node", driverArgs, { cwd: HARNESS, env, stdio: ["ignore", "pipe", "inherit"] });
   let runId: string | null = null;

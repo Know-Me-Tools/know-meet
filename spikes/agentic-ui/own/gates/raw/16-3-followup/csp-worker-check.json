@@ -1,0 +1,30 @@
+[
+ {
+  "browser": "webkit",
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:4317",
+  "delivery": "header",
+  "workers": [
+   "/assets/shiki-highlight.worker-BZM0aE-H.js"
+  ],
+  "status": "finished",
+  "error": null,
+  "violations": [
+   "script-src eval"
+  ],
+  "pre": 22,
+  "highlightedSpans": 308
+ },
+ {
+  "browser": "chromium",
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:4317",
+  "delivery": "meta",
+  "workers": [
+   "/assets/shiki-highlight.worker-BZM0aE-H.js"
+  ],
+  "status": "finished",
+  "error": null,
+  "violations": [],
+  "pre": 22,
+  "highlightedSpans": 308
+ }
+]
