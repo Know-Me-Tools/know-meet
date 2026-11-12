@@ -2,8 +2,9 @@
 // Pathless layouts (DESIGN.md "Destinations"): navigation appears wherever the app
 // bar appears on product pages (home, dashboard, agents, recordings, settings,
 // including signed-out gates); never in the meeting room, sign-in or join flows.
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useLocation } from "@tanstack/react-router";
 import { AppBar } from "./app-bar";
+import { type FocusedFlow, FocusedFooter, FocusedTopBar } from "./focused-top-bar";
 import { useWidthClass } from "./use-width-class";
 
 function Main() {
@@ -25,13 +26,14 @@ export function FramedLayout() {
   );
 }
 
-/** Sign-in and join: the app bar without navigation. */
+/** Sign-in and join: their own slim header (no navigation), as in auth.html / join.html. */
 export function FocusedLayout() {
-  const widthClass = useWidthClass();
+  const flow: FocusedFlow = useLocation({ select: (location) => location.pathname }).startsWith("/join") ? "join" : "auth";
   return (
     <div className="km-framed flex flex-1 flex-col">
-      <AppBar widthClass={widthClass} withNav={false} />
+      <FocusedTopBar flow={flow} />
       <Main />
+      {flow === "join" ? <FocusedFooter /> : null}
     </div>
   );
 }

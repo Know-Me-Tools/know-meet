@@ -187,3 +187,8 @@ Provenance: user (explicit form answers, Travis James).
 - Final reference: 552/552 baselines + 48 references; baseline-set sha256 f50d28f690a44c2cfb770279fdb5c0164ab2eabadb3c71d6083adbbb46f35481; probes on the prototype: focus-fill 0 (21,177 stops), no-stroke 0, overflow 0, scroll regions 32/0, nav-morph 6/6. Contrast record 254 pairs, 0 failures.
 - Contract amended (VS-1 oracle + fixtures → reference revision v2), signed with the operator key (travis@tribehealthsolutions.com, ED25519 SHA256:oE4PH+kE…), adopted as contract-adoption-hybrid-shell-foundation-138ce337 (supersedes …-768c585b, bound revision 3). KBD-METHOD VLBV re-bound to 138ce337; KBD-POLICY-ACK recorded for AGENTS.md/CLAUDE.md at the new digest. Readiness READY; method context RESOLVED_REFERENCES.
 - Web nav-morph/frame.css updated to the corrected spec.
+
+## 2026-11-12 — c10 and c11 complete (static)
+
+- c10: home (guest/signed-in), full sign-in flow (5 states), join (4 states); focused top bar for auth/join; kit +orb, glyph, speak-badge, brand-mark. c11: dashboard, agents (static, no agentic runtime), recordings, settings (16 sections), meeting room (#room, #room-guest) with stubbed media; kit +km-icon, table-region, page-head, stepper, range-input, code-panel. F6/F9 VoiceOver findings addressed in the new screens.
+- Prototype v2 still carries decorative strokes the implementation dropped under Flat 2.0 (error-summary red stripe, "or with email" divider lines, amber ring on transcript search hits) → design-lead to remove from the prototype and recapture affected states before c13. Recordings "processing" state uses real-time timing → capture driver must pin it.

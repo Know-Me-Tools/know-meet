@@ -9,6 +9,7 @@
 @import "@know-meet/design-tokens/tokens.css";
 @import "@know-meet/design-tokens/theme.css";
 @import "@know-meet/design-tokens/shadcn.css";
+@import "./presence.css";
 
 /* Kit sources (relative to this file). Apps add their own @source if needed. */
 @source "../components";

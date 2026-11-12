@@ -1,0 +1,42 @@
+/* TJ-ARCH-MOB-001 compliant */
+/* Presence motion and fills shared by the dot orb and the join waiting room (c10).
+   km.css `.orb` (radial ember/cyan sphere, `orb-breathe`) and join.html `.wait .ring`
+   (`wait-ring`, a filled pulse with no stroke, D-6). Every value is a token; the
+   `white`/`black` keywords are the shading endpoints of the prototype's color-mix.
+   Reduced motion: the kit base layer stops every animation; components also add
+   `motion-reduce:animate-none`. */
+@theme {
+  --animate-orb-breathe: km-orb-breathe var(--dot-breathe) ease-in-out infinite;
+  --animate-wait-ring: km-wait-ring var(--anim-wait-ring) var(--ease-out) infinite;
+
+  @keyframes km-orb-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
+  @keyframes km-wait-ring {
+    from {
+      transform: scale(0.55);
+      opacity: 0.7;
+    }
+    to {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+}
+
+/* km.css `.orb` fill; `--orb` picks the hue (ember by default, cyan for a colleague's dot). */
+@utility bg-orb {
+  background: radial-gradient(
+    circle at var(--orb-center),
+    color-mix(in srgb, var(--orb, var(--ember)) var(--orb-highlight-mix), white) 0%,
+    var(--orb, var(--ember)) var(--orb-mid-stop),
+    color-mix(in srgb, var(--orb, var(--ember)) var(--orb-shade-mix), black) 100%
+  );
+}

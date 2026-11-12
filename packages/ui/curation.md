@@ -240,3 +240,48 @@ Findings (polish applied where marked):
 - Polished in place: standalone toggle chip rests on `control`; caret follows the
   control text colour; body theme transition uses `dur` + `ease-standard`; drawer
   scrim uses `bg-scrim`; table/sheet/avatar/menu rules removed.
+
+## c10 public screens additions (2026-11-11)
+
+New kit components (presence parts the home, join and room screens share):
+
+| Component | Prototype source | Notes |
+|---|---|---|
+| orb | km.css `.orb`, `.orb--cyan` | `tone` ember/cyan; radial fill from `--orb-*` tokens (`bg-orb` utility) and `animate-orb-breathe` at `--dot-breathe`; stops under reduced motion. Decorative. |
+| glyph (`AgentGlyph`, `PhoneGlyph`) | `.agent-glyph`, `.is-system`, `.phone-glyph`, `-sm` | `size` default/sm, agent `tone` agent/system. Decorative. |
+| speak-badge | D-6 speaking badge (`--speak-bars`) | 24px `speak-person/agent/phone` badge with three `on-speak` bars as elements (no gradient trick). |
+| brand-mark | km.js `KM_MARK` | Same drawing as the frame's `KmMark`, exposed so screens don't import the app shell. The frame could switch to it (c09 owner). |
+
+`src/styles/presence.css` (imported by `globals.css`) holds the `orb-breathe` and
+`wait-ring` animations and the `bg-orb` utility; the only literals are the
+`white`/`black` shading endpoints of the prototype's `color-mix`.
+
+Screens reuse c11's `km-icon` and `table-region`. Two prototype v2 details were
+not ported because DESIGN.md D-6 outranks the prototype: the 3px inset red stripe
+on the sign-in error summary and the 1px rules beside "or with email". Both need a
+design-lead decision or a fidelity adjudication at c13.
+
+## c11 app screens additions (2026-11-11)
+
+New kit components (each a new file; nothing existing was rewritten except the
+`PageHead` narrow-width rule):
+
+| Component | Prototype source | Notes |
+|---|---|---|
+| km-icon (`KmIcon`, `KM_ICON_NAMES`) | km.js `ICONS` (60 glyphs) | Generated verbatim from km.js; 24 viewBox, 1.75 stroke. Decorative (`aria-hidden`); size with `size-*` (`.ic` 20, `.ic-sm` 16, `.ic-lg` 28). |
+| table-region (`TableRegion`) | `.table-wrap` + `.table`, km.js `markScrollRegions` | RV-21/RV-23: becomes `role="region"`, "<caption>, scrollable", `tabIndex=0` only while it overflows (ResizeObserver); whole-region focus fill, inner fills drop out. Caption required (sr-only by default). |
+| page-head (`PageHead`, `PageHeadText`, `PageEyebrow`, `PageTitle`, `PageSub`, `PageActions`) | `.page-head`, `.eyebrow`, `h1`, `.sub` | `PageTitle` is focusable with `tabIndex=-1` for hash-change focus. Under 768px: `mb-s5`, items start. |
+| stepper (`Stepper`, `StepperItem`) | `.steps` | Ordered list, `aria-current="step"`, done steps show a check plus sr-only status text. |
+| range-input (`RangeInput`) | native `input[type=range]` (DESIGN.md slider, RV-22) | Controlled; `--pct` fill; focus plate with `on-focus` range and thumb. |
+| code-panel (`CodePanel`) | `.code` | Plain-text `pre`, named focusable scroll region with fill focus; `tone` surface/inset. |
+
+Candidates resolved: `alert`, `aspect-ratio`, `popover` and `code-block` were not
+needed (screens use Badge/inline copy, CSS aspect ratios, and `CodePanel`); they stay
+uncurated in `apps/web`.
+
+Static audit (VLBV: source scan only, nothing built or rendered): `impeccable detect`
+returned `[]` on the c11 folders; 0 hex, 0 `any`, 0 stroke utilities; every file
+<= 500 lines. Open for design-lead: the dashboard schedule error summary drops the
+prototype's 4px inset red stripe (same D-6 call as c10's sign-in summary), and
+recordings drops the 1px amber ring on transcript search hits; both need a c13
+fidelity adjudication.

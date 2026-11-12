@@ -7,7 +7,8 @@ import { NotesScreen } from "../presentation/notes/notes-screen";
 import { AppFrame } from "./frame/app-frame";
 import { FocusedLayout, FramedLayout, RoomLayout } from "./frame/layouts";
 import { RouteError, RouteNotFound } from "./route-fallbacks";
-import { ScreenPlaceholder } from "./routes/screen-placeholder";
+import { AgentsRoute, DashboardRoute, MeetRoute, RecordingsRoute, SettingsRoute } from "./routes/app-routes";
+import { AuthRoute, HomeRoute, JoinRoute } from "./routes/public-routes";
 
 const rootRoute = createRootRoute({ component: AppFrame });
 
@@ -15,36 +16,30 @@ const framed = createRoute({ getParentRoute: () => rootRoute, id: "framed", comp
 const focused = createRoute({ getParentRoute: () => rootRoute, id: "focused", component: FocusedLayout });
 const room = createRoute({ getParentRoute: () => rootRoute, id: "room", component: RoomLayout });
 
-const placeholder = (title: string) => () => <ScreenPlaceholder title={title} />;
-
-const homeRoute = createRoute({ getParentRoute: () => framed, path: "/", component: placeholder("Know Meet") });
+const homeRoute = createRoute({ getParentRoute: () => framed, path: "/", component: HomeRoute });
 const dashboardRoute = createRoute({
   getParentRoute: () => framed,
   path: "dashboard",
-  component: placeholder("Meetings"),
+  component: DashboardRoute,
 });
-const agentsRoute = createRoute({ getParentRoute: () => framed, path: "agents", component: placeholder("Agents") });
+const agentsRoute = createRoute({ getParentRoute: () => framed, path: "agents", component: AgentsRoute });
 const recordingsRoute = createRoute({
   getParentRoute: () => framed,
   path: "recordings",
-  component: placeholder("Recordings"),
+  component: RecordingsRoute,
 });
 const settingsRoute = createRoute({
   getParentRoute: () => framed,
   path: "settings",
-  component: placeholder("Settings"),
+  component: SettingsRoute,
 });
 /** Generator baseline notes demo (PEM + BFF/Tauri adapters), kept off the nav. */
 const notesRoute = createRoute({ getParentRoute: () => framed, path: "notes", component: NotesScreen });
 
-const authRoute = createRoute({ getParentRoute: () => focused, path: "auth", component: placeholder("Sign in") });
-const joinRoute = createRoute({
-  getParentRoute: () => focused,
-  path: "join",
-  component: placeholder("Join a meeting"),
-});
+const authRoute = createRoute({ getParentRoute: () => focused, path: "auth", component: AuthRoute });
+const joinRoute = createRoute({ getParentRoute: () => focused, path: "join", component: JoinRoute });
 
-const meetRoute = createRoute({ getParentRoute: () => room, path: "meet", component: placeholder("Meeting room") });
+const meetRoute = createRoute({ getParentRoute: () => room, path: "meet", component: MeetRoute });
 
 const routeTree = rootRoute.addChildren([
   framed.addChildren([homeRoute, dashboardRoute, agentsRoute, recordingsRoute, settingsRoute, notesRoute]),

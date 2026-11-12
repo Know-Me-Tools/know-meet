@@ -2,13 +2,13 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 207,
-  "derivedRevision": 207,
+  "sourceRevision": 223,
+  "derivedRevision": 223,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 207
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 223
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-11T23:39:48.979383Z",
+  "updatedAt": "2026-11-12T00:22:38.186501Z",
   "cursor": [
     "hybrid-shell-foundation",
     "execute",
@@ -20,7 +20,7 @@
     "id": "80abee42-ead8-4e6f-b617-e458847775d3",
     "status": "ready",
     "progress": {
-      "done": 11,
+      "done": 13,
       "total": 16
     },
     "children": [
@@ -30,7 +30,7 @@
         "canonicalId": "hybrid-shell-foundation",
         "status": "PENDING",
         "progress": {
-          "done": 11,
+          "done": 13,
           "total": 16
         },
         "children": [
@@ -118,18 +118,18 @@
           {
             "type": "change",
             "id": "c10-public-screens",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 3,
               "total": 3
             }
           },
           {
             "type": "change",
             "id": "c11-app-screens",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 5,
               "total": 5
             }
           },
