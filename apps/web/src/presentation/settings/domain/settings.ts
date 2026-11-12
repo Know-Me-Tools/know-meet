@@ -20,7 +20,10 @@ export type SettingsSection =
   | "templates";
 
 /** Sections with a side-navigation entry (sub-pages highlight their parent). */
-export type SettingsNavKey = Exclude<SettingsSection, "calendar-connect" | "storage-s3" | "storage-ipfs" | "storage-test-failed">;
+export type SettingsNavKey = Exclude<
+  SettingsSection,
+  "calendar-connect" | "storage-s3" | "storage-ipfs" | "storage-test-failed"
+>;
 
 export type CalendarProviderKey = "google" | "outlook" | "caldav";
 export type S3ProviderKey = "aws" | "r2" | "b2" | "wasabi" | "minio" | "other";

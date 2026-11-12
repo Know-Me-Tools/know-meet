@@ -117,7 +117,10 @@ export function meetingEnd(meeting: Meeting): Date {
   return new Date(new Date(meeting.start).getTime() + meeting.durationMin * MINUTE_MS);
 }
 
-export function findById<T extends { readonly id: string }>(list: readonly T[], id: string): T | null {
+export function findById<T extends { readonly id: string }>(
+  list: readonly T[],
+  id: string,
+): T | null {
   return list.find((item) => item.id === id) ?? null;
 }
 

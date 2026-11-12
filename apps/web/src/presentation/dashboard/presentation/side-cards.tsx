@@ -17,7 +17,15 @@ import { busySpinClass, ConnectedChip, smallLinkClass } from "./dashboard-parts"
 const MINUTE_MS = 60_000;
 const SYNC_MS = 1400;
 
-function CalendarRow({ name, account, connected }: { readonly name: string; readonly account: string; readonly connected: boolean }) {
+function CalendarRow({
+  name,
+  account,
+  connected,
+}: {
+  readonly name: string;
+  readonly account: string;
+  readonly connected: boolean;
+}) {
   return (
     <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 py-s2 not-first:pt-s3">
       <span className="grid size-9 place-items-center rounded-10 bg-muted">
@@ -32,7 +40,11 @@ function CalendarRow({ name, account, connected }: { readonly name: string; read
       {connected ? (
         <ConnectedChip />
       ) : (
-        <Link to="/settings" hash="calendars" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}>
+        <Link
+          to="/settings"
+          hash="calendars"
+          className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+        >
           Connect
         </Link>
       )}
@@ -40,7 +52,10 @@ function CalendarRow({ name, account, connected }: { readonly name: string; read
   );
 }
 
-type SyncState = { readonly kind: "idle" } | { readonly kind: "syncing" } | { readonly kind: "done" };
+type SyncState =
+  | { readonly kind: "idle" }
+  | { readonly kind: "syncing" }
+  | { readonly kind: "done" };
 
 export function CalendarsCard() {
   const { now } = useDashboard();
@@ -58,7 +73,9 @@ export function CalendarsCard() {
         <h2 id="cal-title" className="text-lg">
           Connected calendars
         </h2>
-        <span className="text-sm text-muted-foreground">KnowMe adds a join link and dial-in to each event.</span>
+        <span className="text-sm text-muted-foreground">
+          KnowMe adds a join link and dial-in to each event.
+        </span>
       </CardHeader>
       <ul className="m-0 grid list-none p-0">
         <CalendarRow name="Google Calendar" account={CALENDAR_ACCOUNTS.google.account} connected />
@@ -66,7 +83,10 @@ export function CalendarsCard() {
         <CalendarRow name="CalDAV" account="Not connected" connected={false} />
       </ul>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span role="status" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+        <span
+          role="status"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground"
+        >
           {sync.kind === "idle" ? (
             <>
               <KmIcon name="clock" className="size-4" />
@@ -81,8 +101,17 @@ export function CalendarsCard() {
             </>
           ) : null}
         </span>
-        <Button variant="secondary" size="sm" disabled={sync.kind === "syncing"} aria-busy={sync.kind === "syncing" || undefined} onClick={startSync}>
-          <KmIcon name="refresh" className={cn("size-4", sync.kind === "syncing" && busySpinClass)} />
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={sync.kind === "syncing"}
+          aria-busy={sync.kind === "syncing" || undefined}
+          onClick={startSync}
+        >
+          <KmIcon
+            name="refresh"
+            className={cn("size-4", sync.kind === "syncing" && busySpinClass)}
+          />
           <span>{sync.kind === "syncing" ? "Syncing…" : "Sync now"}</span>
         </Button>
       </div>
@@ -95,7 +124,8 @@ export function CalendarsCard() {
 
 export function DeliveryCard() {
   const { deliveries } = useDashboard();
-  const count = (status: DeliveryStatus) => deliveries.filter((d) => d.status === status && d.resolvedByEmail !== true).length;
+  const count = (status: DeliveryStatus) =>
+    deliveries.filter((d) => d.status === status && d.resolvedByEmail !== true).length;
   const failed = deliveries.filter(isOpenFailure).length;
   const tally = [
     { label: "Delivered", value: count("delivered") + count("opened") },
@@ -108,7 +138,9 @@ export function DeliveryCard() {
         <h2 id="del-title" className="text-lg">
           Invite delivery
         </h2>
-        <span className="text-sm text-muted-foreground">Email, SMS and calendar invites across upcoming meetings.</span>
+        <span className="text-sm text-muted-foreground">
+          Email, SMS and calendar invites across upcoming meetings.
+        </span>
       </CardHeader>
       <div className="grid grid-cols-3 gap-s2">
         {tally.map((t) => (
@@ -121,10 +153,22 @@ export function DeliveryCard() {
       {failed ? (
         <p className="flex items-start gap-1.5 text-sm">
           <KmIcon name="alert" className="mt-0.5 size-4" />
-          <span>{failed === 1 ? "1 SMS invite couldn’t be delivered." : `${failed} invites couldn’t be delivered.`}</span>
+          <span>
+            {failed === 1
+              ? "1 SMS invite couldn’t be delivered."
+              : `${failed} invites couldn’t be delivered.`}
+          </span>
         </p>
       ) : null}
-      <Link to="/dashboard" hash="invites" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "justify-self-start", focusFillClass)}>
+      <Link
+        to="/dashboard"
+        hash="invites"
+        className={cn(
+          buttonVariants({ variant: "secondary", size: "sm" }),
+          "justify-self-start",
+          focusFillClass,
+        )}
+      >
         <span>Review invites</span>
         <KmIcon name="chevron-right" className="size-4" />
       </Link>

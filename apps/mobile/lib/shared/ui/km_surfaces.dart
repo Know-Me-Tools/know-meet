@@ -65,8 +65,16 @@ class KmChip extends StatelessWidget {
     final KmPalette p = context.km;
     final (Color bg, Color fg, Color dot) = switch (tone) {
       KmChipTone.neutral => (p.muted, p.fg, p.fg),
-      KmChipTone.ember => (p.emberSoft, p.emberText, p.emberText),
-      KmChipTone.cyan => (p.cyanSoft, p.cyanText, p.cyanText),
+      KmChipTone.ember => (
+        p.emberSoft,
+        p.readable(p.emberText, <Color>[p.emberSoft]),
+        p.emberText,
+      ),
+      KmChipTone.cyan => (
+        p.cyanSoft,
+        p.readable(p.cyanText, <Color>[p.cyanSoft]),
+        p.cyanText,
+      ),
       // Status pips use the pip-* roles (light: darker text hues, so they
       // pass on their soft chip).
       KmChipTone.green => (p.greenSoft, p.fg, p.pipGreen),

@@ -63,11 +63,16 @@ export function ScheduledView({ meeting, wasEdit, onScheduleAnother }: Scheduled
               <h2 id="ok-title" className="text-xl">
                 {wasEdit ? "Invitees are being notified" : "Invites are on their way"}
               </h2>
-              <p className="text-sm text-muted-foreground">Delivery status updates here and on the meeting page.</p>
+              <p className="text-sm text-muted-foreground">
+                Delivery status updates here and on the meeting page.
+              </p>
             </div>
           </div>
           <div className="flex items-start gap-s2 rounded-base bg-card p-s3 text-sm text-muted-foreground">
-            <KmIcon name={calendar ? "calendar" : "info"} className="mt-px size-[18px] text-cyan-text" />
+            <KmIcon
+              name={calendar ? "calendar" : "info"}
+              className="mt-px size-[18px] text-cyan-text"
+            />
             <span>
               {calendar
                 ? `Calendar event ${wasEdit ? "updated" : "created"} in ${calendar.label} — ${calendar.account}, with the KnowMe link and dial-in details.`
@@ -77,7 +82,10 @@ export function ScheduledView({ meeting, wasEdit, onScheduleAnother }: Scheduled
           <h3>Per-invitee delivery</h3>
           <ul className="m-0 grid list-none p-0">
             {contacts.map((inv) => (
-              <li key={inv.key} className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s3 py-s3">
+              <li
+                key={inv.key}
+                className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s3 py-s3"
+              >
                 <Avatar size="sm" aria-hidden="true">
                   <AvatarFallback>{initialsOf(inv.name)}</AvatarFallback>
                 </Avatar>
@@ -97,14 +105,18 @@ export function ScheduledView({ meeting, wasEdit, onScheduleAnother }: Scheduled
                       <span className="flex flex-wrap items-center gap-1.5">
                         <ChannelChip channel="sms" />
                         <StatusChip status={smsDelivered ? "delivered" : "queued"} />
-                        <span className="text-xs whitespace-nowrap text-muted-foreground">{inv.phone}</span>
+                        <span className="text-xs whitespace-nowrap text-muted-foreground">
+                          {inv.phone}
+                        </span>
                       </span>
                     ) : null}
                     {calendar && inv.email ? (
                       <span className="flex flex-wrap items-center gap-1.5">
                         <ChannelChip channel="calendar" />
                         <StatusChip status="delivered" />
-                        <span className="text-xs text-muted-foreground">On the calendar invite</span>
+                        <span className="text-xs text-muted-foreground">
+                          On the calendar invite
+                        </span>
                       </span>
                     ) : null}
                   </div>
@@ -116,17 +128,29 @@ export function ScheduledView({ meeting, wasEdit, onScheduleAnother }: Scheduled
             {smsDelivered ? "SMS invites delivered." : ""}
           </p>
           <div className="flex flex-wrap items-center gap-s2">
-            <Link to="/dashboard" hash={`meeting:${meeting.id}`} className={cn(buttonVariants(), focusFillClass)}>
+            <Link
+              to="/dashboard"
+              hash={`meeting:${meeting.id}`}
+              className={cn(buttonVariants(), focusFillClass)}
+            >
               <span>Open meeting details</span>
               <KmIcon name="chevron-right" className="size-4" />
             </Link>
             {wasEdit ? null : (
-              <button type="button" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)} onClick={onScheduleAnother}>
+              <button
+                type="button"
+                className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+                onClick={onScheduleAnother}
+              >
                 <KmIcon name="plus" className="size-4" />
                 <span>Schedule another</span>
               </button>
             )}
-            <Link to="/dashboard" hash="upcoming" className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}>
+            <Link
+              to="/dashboard"
+              hash="upcoming"
+              className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}
+            >
               Back to meetings
             </Link>
           </div>
@@ -136,7 +160,15 @@ export function ScheduledView({ meeting, wasEdit, onScheduleAnother }: Scheduled
             <h2 id="ok-join" className="text-lg">
               Join info
             </h2>
-            <JoinList rows={[["Link", url], ["Code", meeting.joinCode], ...(meeting.dialIn ? [["Dial in", `${meeting.dialIn.number} · PIN ${meeting.dialIn.pin}`] as const] : [])]} />
+            <JoinList
+              rows={[
+                ["Link", url],
+                ["Code", meeting.joinCode],
+                ...(meeting.dialIn
+                  ? [["Dial in", `${meeting.dialIn.number} · PIN ${meeting.dialIn.pin}`] as const]
+                  : []),
+              ]}
+            />
             <CopyLinkButton url={url} title={meeting.title} />
           </Card>
         </aside>

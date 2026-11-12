@@ -51,7 +51,10 @@ function MacLight({
 
 export function MacWindowControls({ controls, maximized }: ControlsProps) {
   return (
-    <div role="group" aria-label="Window" className="flex flex-none items-center gap-s1 px-s2">
+    <fieldset
+      aria-label="Window"
+      className="m-0 min-w-0 p-0 flex flex-none items-center gap-s1 px-s2"
+    >
       <MacLight label="Close" tone="bg-pip-red" onClick={run(controls.close)}>
         <XIcon strokeWidth={3} />
       </MacLight>
@@ -65,7 +68,7 @@ export function MacWindowControls({ controls, maximized }: ControlsProps) {
       >
         <PlusIcon strokeWidth={3} />
       </MacLight>
-    </div>
+    </fieldset>
   );
 }
 
@@ -74,8 +77,13 @@ const desktopButtonClass =
 
 export function DesktopWindowControls({ controls, maximized }: ControlsProps) {
   return (
-    <div role="group" aria-label="Window" className="flex h-full flex-none items-stretch">
-      <button type="button" aria-label="Minimize" onClick={run(controls.minimize)} className={desktopButtonClass}>
+    <fieldset aria-label="Window" className="m-0 min-w-0 p-0 flex h-full flex-none items-stretch">
+      <button
+        type="button"
+        aria-label="Minimize"
+        onClick={run(controls.minimize)}
+        className={desktopButtonClass}
+      >
         <MinusIcon aria-hidden="true" />
       </button>
       <button
@@ -94,6 +102,6 @@ export function DesktopWindowControls({ controls, maximized }: ControlsProps) {
       >
         <XIcon aria-hidden="true" />
       </button>
-    </div>
+    </fieldset>
   );
 }

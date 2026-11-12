@@ -27,7 +27,9 @@ interface RegionFacts {
 
 export async function auditScrollRegions(page: Page): Promise<ScrollRegionReport> {
   // markScrollRegions runs on the next animation frame after load/resize/mutation.
-  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  await page.evaluate(
+    () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+  );
   const facts: RegionFacts[] = await page.evaluate((selector) => {
     return Array.from(document.querySelectorAll<HTMLElement>(selector)).map((el, index) => {
       el.setAttribute("data-km-region-probe", String(index));
@@ -46,9 +48,11 @@ export async function auditScrollRegions(page: Page): Promise<ScrollRegionReport
   const problems: string[] = [];
   const overflowing = facts.filter((f) => f.overflows);
   for (const f of overflowing) {
-    if (f.tabindex !== "0") problems.push(`scroll ${f.label}: overflows but is not keyboard focusable`);
+    if (f.tabindex !== "0")
+      problems.push(`scroll ${f.label}: overflows but is not keyboard focusable`);
     if (f.role !== "region") problems.push(`scroll ${f.label}: overflows but has no region role`);
-    if (f.name.length === 0) problems.push(`scroll ${f.label}: overflows but has no accessible name`);
+    if (f.name.length === 0)
+      problems.push(`scroll ${f.label}: overflows but has no accessible name`);
   }
   for (const f of facts.filter((x) => !x.overflows && x.tabindex !== null))
     problems.push(`scroll ${f.label}: fits its container but is still a tab stop`);
@@ -86,13 +90,21 @@ export async function auditScrollRegions(page: Page): Promise<ScrollRegionReport
       if (el === null || raw === null || raw === undefined) return null;
       const style = getComputedStyle(el);
       const strokes: string[] = [];
-      if (Number.parseFloat(style.outlineWidth) > 0 && style.outlineStyle !== "none") strokes.push("outline");
+      if (Number.parseFloat(style.outlineWidth) > 0 && style.outlineStyle !== "none")
+        strokes.push("outline");
       for (const side of ["Top", "Right", "Bottom", "Left"] as const)
-        if (Number.parseFloat(style[`border${side}Width`]) > 0 && style[`border${side}Style`] !== "none")
+        if (
+          Number.parseFloat(style[`border${side}Width`]) > 0 &&
+          style[`border${side}Style`] !== "none"
+        )
           strokes.push(`border-${side.toLowerCase()}`);
       for (const shadow of style.boxShadow.split(/,(?![^(]*\))/)) {
         const px = shadow.match(/-?\d+(\.\d+)?px/g) ?? [];
-        if (px.length >= 4 && Number.parseFloat(px[2] ?? "0") === 0 && Number.parseFloat(px[3] ?? "0") !== 0)
+        if (
+          px.length >= 4 &&
+          Number.parseFloat(px[2] ?? "0") === 0 &&
+          Number.parseFloat(px[3] ?? "0") !== 0
+        )
           strokes.push("ring");
       }
       const own = style.backgroundColor;
@@ -111,7 +123,8 @@ export async function auditScrollRegions(page: Page): Promise<ScrollRegionReport
     const f = facts.find((x) => x.index === stop.index);
     const label = f?.label ?? String(stop.index);
     if (!stop.visible) problems.push(`scroll ${label}: focused by keyboard but not :focus-visible`);
-    if (stop.strokes.length > 0) problems.push(`scroll ${label}: focus draws ${stop.strokes.join(", ")}`);
+    if (stop.strokes.length > 0)
+      problems.push(`scroll ${label}: focus draws ${stop.strokes.join(", ")}`);
     const ratios = await page.evaluate(
       ({ a, b, c }) => {
         const toRgba = (value: string): number[] => {
@@ -139,10 +152,13 @@ export async function auditScrollRegions(page: Page): Promise<ScrollRegionReport
       { a: stop.own, b: rest[String(stop.index)] ?? stop.surface, c: stop.surface },
     );
     const [toRest, toSurface] = ratios;
-    if (toRest < MIN_FILL_CONTRAST) problems.push(`scroll ${label}: focus fill changes by only ${toRest.toFixed(2)}:1`);
-    if (toSurface < MIN_FILL_CONTRAST) problems.push(`scroll ${label}: focus fill ${toSurface.toFixed(2)}:1 against surface`);
+    if (toRest < MIN_FILL_CONTRAST)
+      problems.push(`scroll ${label}: focus fill changes by only ${toRest.toFixed(2)}:1`);
+    if (toSurface < MIN_FILL_CONTRAST)
+      problems.push(`scroll ${label}: focus fill ${toSurface.toFixed(2)}:1 against surface`);
   }
   for (const index of wanted)
-    if (!seen.has(index)) problems.push(`scroll ${facts.find((f) => f.index === index)?.label}: not reachable by Tab`);
+    if (!seen.has(index))
+      problems.push(`scroll ${facts.find((f) => f.index === index)?.label}: not reachable by Tab`);
   return { overflowing: overflowing.length, focused, problems };
 }

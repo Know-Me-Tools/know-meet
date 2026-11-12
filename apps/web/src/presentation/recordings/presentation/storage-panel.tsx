@@ -15,8 +15,8 @@ import { type ReactNode, useState } from "react";
 import { copyText } from "../../shared/copy-text";
 import { formatBytes } from "../../workspace/application/format";
 import type { Recording } from "../../workspace/domain/workspace";
-import type { RecordingMeta } from "../domain/recording-details";
 import { gatewayUrl, objectKey } from "../application/recordings-model";
+import type { RecordingMeta } from "../domain/recording-details";
 import { BusyLabel } from "./busy-label";
 import { ConfirmDialog } from "./confirm-dialog";
 import { Note } from "./recording-parts";
@@ -64,8 +64,19 @@ function entriesFor(recording: Recording, meta: RecordingMeta): readonly Entry[]
         </span>
       ),
     },
-    { term: "Object key", value: <span>{key}<CopyButton label="object key" value={key} /></span> },
-    { term: "Size", value: <span className="whitespace-nowrap">{formatBytes(recording.sizeBytes)}</span> },
+    {
+      term: "Object key",
+      value: (
+        <span>
+          {key}
+          <CopyButton label="object key" value={key} />
+        </span>
+      ),
+    },
+    {
+      term: "Size",
+      value: <span className="whitespace-nowrap">{formatBytes(recording.sizeBytes)}</span>,
+    },
     {
       term: "Checksum",
       value: (
@@ -74,8 +85,24 @@ function entriesFor(recording: Recording, meta: RecordingMeta): readonly Entry[]
         </span>
       ),
     },
-    { term: "IPFS CID", value: <span>{recording.cid}<CopyButton label="CID" value={recording.cid} /></span> },
-    { term: "Gateway URL", value: <span>{gateway}<CopyButton label="gateway URL" value={gateway} /></span> },
+    {
+      term: "IPFS CID",
+      value: (
+        <span>
+          {recording.cid}
+          <CopyButton label="CID" value={recording.cid} />
+        </span>
+      ),
+    },
+    {
+      term: "Gateway URL",
+      value: (
+        <span>
+          {gateway}
+          <CopyButton label="gateway URL" value={gateway} />
+        </span>
+      ),
+    },
     {
       term: "Pin status",
       value: (
@@ -150,17 +177,22 @@ export function StoragePanel({
         </dl>
       </div>
       <Note kind="info" icon="info">
-        IPFS content is addressed by its CID. Anyone who has the CID can fetch the file from a public gateway, so share the
-        CID only with people who should see the recording.
+        IPFS content is addressed by its CID. Anyone who has the CID can fetch the file from a
+        public gateway, so share the CID only with people who should see the recording.
       </Note>
       <section aria-labelledby="dz-h" className={cardVariants({ variant: "panel" })}>
         <h3 id="dz-h">Delete recording</h3>
         <p className="text-sm text-muted-foreground">
-          Removes the file from storage, the transcript and summary from KnowMe, and unpins it from IPFS. This can’t be
-          undone.
+          Removes the file from storage, the transcript and summary from KnowMe, and unpins it from
+          IPFS. This can’t be undone.
         </p>
         <div>
-          <Button variant="destructive" disabled={deleting} aria-busy={deleting} onClick={() => setConfirming(true)}>
+          <Button
+            variant="destructive"
+            disabled={deleting}
+            aria-busy={deleting}
+            onClick={() => setConfirming(true)}
+          >
             {deleting ? (
               <BusyLabel label="Deleting…" />
             ) : (
@@ -182,12 +214,13 @@ export function StoragePanel({
       >
         <div className="grid gap-s2">
           <p>
-            This deletes “{recording.title}” from {place}, removes the transcript and summary from KnowMe, and unpins the
-            CID.
+            This deletes “{recording.title}” from {place}, removes the transcript and summary from
+            KnowMe, and unpins the CID.
           </p>
           <p>
-            Unpinning stops {host} from hosting the file, but copies other IPFS nodes already fetched may persist and stay
-            reachable by CID. Links already sent to participants will stop working.
+            Unpinning stops {host} from hosting the file, but copies other IPFS nodes already
+            fetched may persist and stay reachable by CID. Links already sent to participants will
+            stop working.
           </p>
         </div>
       </ConfirmDialog>

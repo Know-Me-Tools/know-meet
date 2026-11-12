@@ -51,12 +51,10 @@ function focusPageHeading(): void {
 export function useHashRoute(): HashRoute {
   const hash = useLocation({ select: (location) => location.hash });
   const route = useMemo(() => parseHashRoute(hash), [hash]);
-  const first = useRef(true);
+  const previous = useRef(hash);
   useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
+    if (previous.current === hash) return; // first render, or no change
+    previous.current = hash;
     window.scrollTo(0, 0);
     focusPageHeading();
   }, [hash]);
@@ -64,7 +62,11 @@ export function useHashRoute(): HashRoute {
 }
 
 /** Builds a hash for `<Link hash>`: `view`, `view:arg`, `view:arg?k=v`. */
-export function toHash(view: string, arg?: string, params?: Readonly<Record<string, string>>): string {
+export function toHash(
+  view: string,
+  arg?: string,
+  params?: Readonly<Record<string, string>>,
+): string {
   const path = arg === undefined ? view : `${view}:${arg}`;
   const query = params === undefined ? "" : new URLSearchParams(params).toString();
   return query === "" ? path : `${path}?${query}`;

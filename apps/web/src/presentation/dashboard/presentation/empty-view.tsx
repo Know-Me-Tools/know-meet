@@ -12,7 +12,10 @@ import { useDocumentTitle } from "../../shared/use-document-title";
 const STEPS: readonly { readonly lead: string; readonly rest: string }[] = [
   { lead: "Connect a calendar", rest: " — read your events and add KnowMe links to new ones." },
   { lead: "Schedule and invite", rest: " — by email, by SMS, or both." },
-  { lead: "Meet with your agents", rest: " — the transcript and summary go out when the meeting ends." },
+  {
+    lead: "Meet with your agents",
+    rest: " — the transcript and summary go out when the meeting ends.",
+  },
 ];
 
 export function EmptyView() {
@@ -36,12 +39,16 @@ export function EmptyView() {
           Connect a calendar to see your meetings here
         </h2>
         <p className="max-w-measure-empty text-sm text-muted-foreground">
-          Link Google Calendar, Outlook or any CalDAV calendar and your meetings show up in this list. Each event gets a KnowMe join
-          link and phone dial-in details, so invitees can join from the browser or a phone — no account needed.
+          Link Google Calendar, Outlook or any CalDAV calendar and your meetings show up in this
+          list. Each event gets a KnowMe join link and phone dial-in details, so invitees can join
+          from the browser or a phone — no account needed.
         </p>
         <ol className="my-s3 grid list-none gap-s3 p-0 text-left">
           {STEPS.map((step, index) => (
-            <li key={step.lead} className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s3 text-sm text-muted-foreground">
+            <li
+              key={step.lead}
+              className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s3 text-sm text-muted-foreground"
+            >
               <span
                 aria-hidden="true"
                 className="grid size-7 place-items-center rounded-round bg-muted font-mono text-xs font-semibold text-foreground"
@@ -60,7 +67,11 @@ export function EmptyView() {
             <KmIcon name="calendar" />
             <span>Connect a calendar</span>
           </Link>
-          <Link to="/dashboard" hash="schedule" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/dashboard"
+            hash="schedule"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="plus" />
             <span>Schedule a meeting</span>
           </Link>

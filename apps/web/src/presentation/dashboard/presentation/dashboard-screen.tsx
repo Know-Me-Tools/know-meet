@@ -11,7 +11,12 @@ import { useSessionUser } from "../../shared/session";
 import { SignInGate } from "../../shared/sign-in-gate";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { type HashRoute, useHashRoute } from "../../shared/use-hash-route";
-import { type DashboardViewKey, GATE_REASON, GATE_TITLES, resolveDashboardView } from "../domain/dashboard";
+import {
+  type DashboardViewKey,
+  GATE_REASON,
+  GATE_TITLES,
+  resolveDashboardView,
+} from "../domain/dashboard";
 import { DashboardProvider } from "./dashboard-context";
 import { EmptyView } from "./empty-view";
 import { InvitesView } from "./invites-view";
@@ -30,12 +35,22 @@ function DashboardGate({ view }: { readonly view: DashboardViewKey }) {
           <PageSub>Scheduling, calendars and invites belong to your KnowMe account.</PageSub>
         </PageHeadText>
       </PageHead>
-      <SignInGate title={GATE_TITLES[view]} reason={GATE_REASON} next={`dashboard${hash ? `#${hash}` : ""}`} />
+      <SignInGate
+        title={GATE_TITLES[view]}
+        reason={GATE_REASON}
+        next={`dashboard${hash ? `#${hash}` : ""}`}
+      />
     </>
   );
 }
 
-function DashboardView({ view, route }: { readonly view: DashboardViewKey; readonly route: HashRoute }) {
+function DashboardView({
+  view,
+  route,
+}: {
+  readonly view: DashboardViewKey;
+  readonly route: HashRoute;
+}) {
   switch (view) {
     case "schedule":
       return <ScheduleView editId={route.params.edit} />;

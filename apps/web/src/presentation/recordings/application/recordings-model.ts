@@ -76,7 +76,10 @@ export interface LibraryQuery {
   readonly sort: LibrarySort;
 }
 
-export function queryLibrary(recordings: readonly Recording[], query: LibraryQuery): readonly Recording[] {
+export function queryLibrary(
+  recordings: readonly Recording[],
+  query: LibraryQuery,
+): readonly Recording[] {
   const q = query.q.trim().toLowerCase();
   const matches = recordings.filter((recording) => {
     const owner = RECORDING_META[recording.id]?.owner;
@@ -121,26 +124,67 @@ export function deliveryRows(
     const status = receipts[name] ?? {};
     const rows: DeliveryRow[] = [];
     if (email !== null) {
-      rows.push({ name, channel: "email", label: "Email", destination: email, status: status.email ?? "Delivered" });
+      rows.push({
+        name,
+        channel: "email",
+        label: "Email",
+        destination: email,
+        status: status.email ?? "Delivered",
+      });
     }
     if (person !== null && status.sms !== undefined) {
-      rows.push({ name, channel: "sms", label: "SMS link via Telnyx", destination: person.phone, status: status.sms });
+      rows.push({
+        name,
+        channel: "sms",
+        label: "SMS link via Telnyx",
+        destination: person.phone,
+        status: status.sms,
+      });
     }
     return rows;
   });
 }
 
 export function isHeldForReview(recording: Recording, receipts: DeliveryReceipts): boolean {
-  return !recording.summarySent && Object.values(receipts).some((r) => r.email === "Held for review");
+  return (
+    !recording.summarySent && Object.values(receipts).some((r) => r.email === "Held for review")
+  );
 }
 
 export function processingSteps(recording: Recording): readonly ProcessingStep[] {
   const byo = recording.storage === "byo";
   return [
-    { title: "Finalize composite", detail: `LiveKit Egress closes the Room Composite ${recording.format.toUpperCase()}`, durationMs: 1600, doneLabel: "Done" },
-    { title: "Upload to S3", detail: byo ? `Writing to your bucket ${recording.bucket}` : "Writing to KnowMe-managed S3-compatible storage", durationMs: 2000, doneLabel: "Done" },
-    { title: "Pin to IPFS", detail: byo ? "Pinning through your pinning service" : "Pinning through KnowMe pinning", durationMs: 1600, doneLabel: "Pinned" },
-    { title: "Summary", detail: "Generating the summary and action items from the transcript", durationMs: 1800, doneLabel: "Done" },
-    { title: "Delivery", detail: "Sending transcript and summary per your delivery settings", durationMs: 1300, doneLabel: recording.summarySent ? "Done" : "Held for review" },
+    {
+      title: "Finalize composite",
+      detail: `LiveKit Egress closes the Room Composite ${recording.format.toUpperCase()}`,
+      durationMs: 1600,
+      doneLabel: "Done",
+    },
+    {
+      title: "Upload to S3",
+      detail: byo
+        ? `Writing to your bucket ${recording.bucket}`
+        : "Writing to KnowMe-managed S3-compatible storage",
+      durationMs: 2000,
+      doneLabel: "Done",
+    },
+    {
+      title: "Pin to IPFS",
+      detail: byo ? "Pinning through your pinning service" : "Pinning through KnowMe pinning",
+      durationMs: 1600,
+      doneLabel: "Pinned",
+    },
+    {
+      title: "Summary",
+      detail: "Generating the summary and action items from the transcript",
+      durationMs: 1800,
+      doneLabel: "Done",
+    },
+    {
+      title: "Delivery",
+      detail: "Sending transcript and summary per your delivery settings",
+      durationMs: 1300,
+      doneLabel: recording.summarySent ? "Done" : "Held for review",
+    },
   ];
 }

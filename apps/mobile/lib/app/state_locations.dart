@@ -3,8 +3,8 @@
 /// Maps an inventory state ID (docs/design/screen-inventory/
 /// route-inventory.json, `idRule`) to the app location that renders it.
 ///
-/// Rule: `<page>.<hash with ':' as '.'>` becomes `/<page>/<hash with '.'
-/// as '/'>`; `index.default` is `/`; `<page>.default` and
+/// Rule: `<page>.<hash>` (hash with ':' as '.') becomes `/<page>/<path>`
+/// (path is the hash with '.' as '/'); `index.default` is `/`; `<page>.default` and
 /// `<page>.gate-signed-out` are `/<page>` (the gate is the signed-out
 /// render of the page). `frame.*` states render on the page the inventory
 /// names (`how` field) and are listed explicitly.
@@ -33,7 +33,8 @@ const Map<String, String> _frameStates = <String, String>{
   // rail at 768, inline links at 1024, on an app page with a current item.
   'frame.nav-bar': '/dashboard/upcoming',
   'frame.nav-rail': '/dashboard/upcoming',
-  'frame.nav-links': '/dashboard/upcoming',
+  'frame.nav-inline': '/dashboard/upcoming',
+  'frame.nav-bar-focused': '/dashboard/upcoming',
   'frame.skip-link-focused': '/',
   'frame.theme-toggle': '/',
 };

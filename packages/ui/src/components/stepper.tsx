@@ -56,6 +56,7 @@ function StepperItem({ n, state, className, children, ...props }: StepperItemPro
             strokeWidth={2.25}
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
             focusable="false"
             className="size-[15px]"
           >
@@ -73,5 +74,5 @@ function StepperItem({ n, state, className, children, ...props }: StepperItemPro
   );
 }
 
-export { Stepper, StepperItem };
 export type { StepState };
+export { Stepper, StepperItem };

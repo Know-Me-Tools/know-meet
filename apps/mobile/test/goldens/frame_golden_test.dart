@@ -25,7 +25,12 @@ void main() {
   // page with a current destination (DESIGN.md "Adaptive layout"):
   kmGolden('frame.nav-bar', signedIn: true, fullPage: false, widths: const <double>[375]);
   kmGolden('frame.nav-rail', signedIn: true, fullPage: false, widths: const <double>[768]);
-  kmGolden('frame.nav-links', signedIn: true, fullPage: false, widths: const <double>[1024]);
+  kmGolden(
+    'frame.nav-inline',
+    signedIn: true,
+    fullPage: false,
+    widths: const <double>[1024, 1440],
+  );
   // Keyboard focus on the current bar item: the D-6 focus fill.
   kmGolden(
     'frame.nav-bar-focused',

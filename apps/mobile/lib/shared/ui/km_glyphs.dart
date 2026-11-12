@@ -59,7 +59,8 @@ class KmGlyphIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color c = color ?? IconTheme.of(context).color ?? const Color(0xFF000000);
+    final Color? c = color ?? IconTheme.of(context).color ?? DefaultTextStyle.of(context).style.color;
+    if (c == null) return SizedBox.square(dimension: size);
     return ExcludeSemantics(
       child: SizedBox.square(
         dimension: size,

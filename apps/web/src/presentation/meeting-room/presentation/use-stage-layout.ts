@@ -14,7 +14,10 @@ export interface StageLayout {
 const FOCUSABLE = "a[href], button, input, select, textarea, [tabindex]:not([tabindex='-1'])";
 
 export function useStageLayout(ref: RefObject<HTMLElement | null>, tileCount: number): StageLayout {
-  const [layout, setLayout] = useState<StageLayout>({ columns: columnsFor(tileCount, 1024), scrollable: false });
+  const [layout, setLayout] = useState<StageLayout>({
+    columns: columnsFor(tileCount, 1024),
+    scrollable: false,
+  });
   useLayoutEffect(() => {
     const stage = ref.current;
     if (stage === null) return undefined;
@@ -23,7 +26,9 @@ export function useStageLayout(ref: RefObject<HTMLElement | null>, tileCount: nu
       const overflows = stage.scrollHeight > stage.clientHeight + 1;
       const hasControl = stage.querySelector(FOCUSABLE) !== null;
       const next = { columns: columnsFor(tileCount, width), scrollable: overflows && !hasControl };
-      setLayout((prev) => (prev.columns === next.columns && prev.scrollable === next.scrollable ? prev : next));
+      setLayout((prev) =>
+        prev.columns === next.columns && prev.scrollable === next.scrollable ? prev : next,
+      );
     };
     measure();
     const observer = new ResizeObserver(measure);

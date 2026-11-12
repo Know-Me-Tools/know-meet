@@ -36,9 +36,9 @@ ThemeData withKmInteraction(ThemeData theme, {double viewportWidth = 375}) {
   return theme.copyWith(
     snackBarTheme: theme.snackBarTheme.copyWith(width: toastW),
     splashFactory: NoSplash.splashFactory,
-    splashColor: const Color(0x00000000),
-    highlightColor: const Color(0x00000000),
-    hoverColor: const Color(0x00000000),
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     tooltipTheme: TooltipThemeData(
       waitDuration: const Duration(milliseconds: 500),
       constraints: const BoxConstraints(maxWidth: KmTokens.sizeTooltipMaxW),

@@ -23,7 +23,11 @@ export interface FieldState {
   };
 }
 
-export function useField(validate: (value: string) => string, initialValue = "", initialError = ""): FieldState {
+export function useField(
+  validate: (value: string) => string,
+  initialValue = "",
+  initialError = "",
+): FieldState {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState(initialError);
   const check = () => {
@@ -52,7 +56,10 @@ export function useField(validate: (value: string) => string, initialValue = "",
  * Runs every check synchronously so the error state is in the DOM, then focuses
  * the first `aria-invalid` control. Returns true when the form is valid.
  */
-export function submitForm(form: HTMLFormElement | null, checks: readonly (() => boolean)[]): boolean {
+export function submitForm(
+  form: HTMLFormElement | null,
+  checks: readonly (() => boolean)[],
+): boolean {
   let valid = true;
   flushSync(() => {
     for (const check of checks) valid = check() && valid;

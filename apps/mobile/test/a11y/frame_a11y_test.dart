@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sovereign_hybrid_mobile/app/frame/km_app_bar.dart';
 import 'package:sovereign_hybrid_mobile/app/frame/km_app_frame.dart';
-import 'package:sovereign_hybrid_mobile/app/frame/km_nav_bars.dart';
 import 'package:sovereign_hybrid_mobile/shared/ui/ui.dart';
 
 import '../support/km_a11y.dart';
@@ -37,7 +36,7 @@ void main() {
     );
     kmA11yGate('frame.nav-bar', signedIn: true);
     kmA11yGate('frame.nav-rail', signedIn: true, width: 768);
-    kmA11yGate('frame.nav-links', signedIn: true, width: 1024);
+    kmA11yGate('frame.nav-inline', signedIn: true, width: 1024);
     kmA11yGate('frame.appbar-signed-out', width: 768);
   });
 
@@ -135,7 +134,7 @@ void main() {
       await tester.tap(find.byKey(_account));
       await tester.pump();
       expect(find.byType(KmAccountMenu), findsOneWidget);
-      expect(tester.hasRunningAnimations, isFalse);
+      expect(kmHasRunningAnimations(tester), isFalse);
     });
 
     testWidgets('the account menu pops in when animations are allowed', (
@@ -147,7 +146,7 @@ void main() {
       await pumpKmApp(tester, stateId: 'settings.account', signedIn: true);
       await tester.tap(find.byKey(_account));
       await tester.pump();
-      expect(tester.hasRunningAnimations, isTrue);
+      expect(kmHasRunningAnimations(tester), isTrue);
       await tester.pumpAndSettle();
     });
   });

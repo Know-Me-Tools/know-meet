@@ -19,6 +19,7 @@ export const LINE_EXCEPTIONS: Readonly<Record<string, readonly string[]>> = {
     ".kbd-orchestrator/**/*.sig",
     ".kbd-orchestrator/**/review/**/raw-*.txt",
     ".kbd-orchestrator/**/evidence/**/*.txt",
+    ".kbd-orchestrator/**/evidence/**/*.log",
     ".agent-team/**/state.json",
     ".agent-team/**/team.json",
   ],
@@ -42,6 +43,7 @@ export const LINE_EXCEPTIONS: Readonly<Record<string, readonly string[]>> = {
     "**/__snapshots__/**",
     "**/*.snap",
     "tests/fidelity/baselines/**",
+    "tests/fidelity/baselines-v1-archive/**",
   ],
   "E-L6 frozen design prototypes": [
     "docs/design/prototype/**",

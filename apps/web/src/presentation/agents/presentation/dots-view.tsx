@@ -17,7 +17,8 @@ import { SwitchRow } from "./agent-form-fields";
 import { useAgentsState } from "./agents-state";
 import { AgentsPageHead, DotStatusChip } from "./agents-ui";
 
-const grid3Class = "grid grid-cols-3 gap-s4 max-bp1024:grid-cols-2 max-bp768:grid-cols-[minmax(0,1fr)]";
+const grid3Class =
+  "grid grid-cols-3 gap-s4 max-bp1024:grid-cols-2 max-bp768:grid-cols-[minmax(0,1fr)]";
 const dotCardClass = "grid-cols-[auto_minmax(0,1fr)] items-start gap-s4";
 
 function IrisCard() {
@@ -72,7 +73,9 @@ function SolCard() {
             <h2 id="dot-sol" className="text-lg">
               {name}
             </h2>
-            <span className="text-sm text-muted-foreground">Avery’s dot — visible in shared meetings</span>
+            <span className="text-sm text-muted-foreground">
+              Avery’s dot — visible in shared meetings
+            </span>
           </div>
           <Badge variant="locked">
             <KmIcon name="lock" />
@@ -116,7 +119,9 @@ export function DotsView() {
             onCheckedChange={(on) => {
               updateIris({ byDefault: on });
               toast.add({
-                title: on ? `${iris.name} will join your meetings by default` : `${iris.name} joins only when you bring it`,
+                title: on
+                  ? `${iris.name} will join your meetings by default`
+                  : `${iris.name} joins only when you bring it`,
                 type: "success",
               });
             }}
@@ -131,13 +136,15 @@ export function DotsView() {
           <article className={cardVariants()}>
             <h3 className="text-lg">Dots</h3>
             <p className="text-sm text-muted-foreground">
-              One per person, always on. Remembers across meetings in a private memory you control and can clear.
+              One per person, always on. Remembers across meetings in a private memory you control
+              and can clear.
             </p>
           </article>
           <article className={cardVariants()}>
             <h3 className="text-lg">Registered agents</h3>
             <p className="text-sm text-muted-foreground">
-              LiveKit workers you run. Dispatched into a meeting by agent_name, with the permissions you set.
+              LiveKit workers you run. Dispatched into a meeting by agent_name, with the permissions
+              you set.
             </p>
             <Link to="/agents" hash="registry" className="text-sm">
               Your agents
@@ -146,7 +153,8 @@ export function DotsView() {
           <article className={cardVariants()}>
             <h3 className="text-lg">Concierge</h3>
             <p className="text-sm text-muted-foreground">
-              Provided by KnowMe in every meeting, and the only agent guests get. Remembers nothing afterwards.
+              Provided by KnowMe in every meeting, and the only agent guests get. Remembers nothing
+              afterwards.
             </p>
             <Link to="/agents" hash="concierge" className="text-sm">
               About the Concierge

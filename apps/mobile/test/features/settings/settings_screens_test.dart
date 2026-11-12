@@ -68,7 +68,7 @@ void main() {
     // A sub-page highlights its parent section (prototype ACTIVE_ALIAS).
     expect(
       tester.getSemantics(find.bySemanticsLabel('Storage').first),
-      containsSemantics(isButton: true, isSelected: true, hasTapAction: true),
+      isSemantics(isButton: true, isSelected: true, hasTapAction: true),
     );
     await tester.tap(find.bySemanticsLabel('Notifications').first);
     await tester.pumpAndSettle();

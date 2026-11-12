@@ -14,9 +14,27 @@ import type {
 import type { RegistrationDraft } from "../domain/registration";
 
 const CONFIG: Readonly<Record<AgentId, AgentConfig>> = {
-  concierge: { project: "managed", media: "speak", knowledge: "shared", dispatch: "system", autoJoin: "always" },
-  scribe: { project: "managed", media: "listen", knowledge: "shared", dispatch: "anyone", autoJoin: "mine" },
-  researcher: { project: "managed", media: "speak", knowledge: "files", dispatch: "me", autoJoin: "never" },
+  concierge: {
+    project: "managed",
+    media: "speak",
+    knowledge: "shared",
+    dispatch: "system",
+    autoJoin: "always",
+  },
+  scribe: {
+    project: "managed",
+    media: "listen",
+    knowledge: "shared",
+    dispatch: "anyone",
+    autoJoin: "mine",
+  },
+  researcher: {
+    project: "managed",
+    media: "speak",
+    knowledge: "files",
+    dispatch: "me",
+    autoJoin: "never",
+  },
   facilitator: {
     project: "managed",
     media: "speak",
@@ -36,14 +54,30 @@ const CONFIG: Readonly<Record<AgentId, AgentConfig>> = {
 };
 
 export const MEMORIES: readonly DotMemory[] = [
-  { id: "m-1014", meeting: "Partner onboarding review", date: "2026-10-14T16:46:00",
-    text: "Marcus owns the partner API checklist; you offered to review it before Friday." },
-  { id: "m-1012", meeting: "Weekly product sync", date: "2026-10-12T10:30:00",
-    text: "Pricing review moved to later this week; Avery will bring two options." },
-  { id: "m-1009", meeting: "Design critique", date: "2026-10-09T11:31:00",
-    text: "You preferred the grid layout for recordings; Dana is sharing revised mocks." },
-  { id: "m-1002", meeting: "Vendor security call", date: "2026-10-02T16:22:00",
-    text: "You asked to revisit data-retention terms before signing anything." },
+  {
+    id: "m-1014",
+    meeting: "Partner onboarding review",
+    date: "2026-10-14T16:46:00",
+    text: "Marcus owns the partner API checklist; you offered to review it before Friday.",
+  },
+  {
+    id: "m-1012",
+    meeting: "Weekly product sync",
+    date: "2026-10-12T10:30:00",
+    text: "Pricing review moved to later this week; Avery will bring two options.",
+  },
+  {
+    id: "m-1009",
+    meeting: "Design critique",
+    date: "2026-10-09T11:31:00",
+    text: "You preferred the grid layout for recordings; Dana is sharing revised mocks.",
+  },
+  {
+    id: "m-1002",
+    meeting: "Vendor security call",
+    date: "2026-10-02T16:22:00",
+    text: "You asked to revisit data-retention terms before signing anything.",
+  },
 ];
 
 export const VOICES: readonly { readonly value: IrisVoice; readonly label: string }[] = [
@@ -69,29 +103,51 @@ export function buildRegistry(
   added: readonly RegistryAgent[],
   removed: ReadonlySet<string>,
 ): readonly RegistryAgent[] {
-  const base = workspace.agents.map((agent): RegistryAgent => ({ ...agent, ...CONFIG[agent.id], paused: false }));
+  const base = workspace.agents.map(
+    (agent): RegistryAgent => ({ ...agent, ...CONFIG[agent.id], paused: false }),
+  );
   return [...base, ...added].filter((agent) => !removed.has(agent.id));
 }
 
 /** Recent dispatches per agent; the live meeting comes from the workspace. */
 export function activityFor(agentId: string, workspace: Workspace): readonly DispatchRecord[] {
   const liveStart = workspace.meetings.find((m) => m.id === "partner-onboarding")?.start ?? "";
-  const live: DispatchRecord = { meeting: "Partner onboarding review", date: liveStart, min: null, outcome: "live" };
+  const live: DispatchRecord = {
+    meeting: "Partner onboarding review",
+    date: liveStart,
+    min: null,
+    outcome: "live",
+  };
   const table: Readonly<Record<string, readonly DispatchRecord[]>> = {
     concierge: [
       live,
-      { meeting: "Partner onboarding review", date: "2026-10-14T16:00:00", min: 46, outcome: "done" },
+      {
+        meeting: "Partner onboarding review",
+        date: "2026-10-14T16:00:00",
+        min: 46,
+        outcome: "done",
+      },
       { meeting: "Design critique", date: "2026-10-09T11:00:00", min: 31, outcome: "done" },
       { meeting: "Vendor security call", date: "2026-10-02T15:30:00", min: 52, outcome: "done" },
     ],
     scribe: [
       live,
-      { meeting: "Partner onboarding review", date: "2026-10-14T16:00:00", min: 46, outcome: "done" },
+      {
+        meeting: "Partner onboarding review",
+        date: "2026-10-14T16:00:00",
+        min: 46,
+        outcome: "done",
+      },
       { meeting: "Design critique", date: "2026-10-09T11:00:00", min: 31, outcome: "done" },
     ],
     researcher: [
       live,
-      { meeting: "Partner onboarding review", date: "2026-10-14T16:00:00", min: 38, outcome: "done" },
+      {
+        meeting: "Partner onboarding review",
+        date: "2026-10-14T16:00:00",
+        min: 38,
+        outcome: "done",
+      },
       { meeting: "Vendor security call", date: "2026-10-02T15:30:00", min: 52, outcome: "done" },
     ],
     facilitator: [
@@ -140,7 +196,8 @@ export function agentFromDraft(draft: RegistrationDraft, owner: string): Registr
 /** The minimal Python worker shown on step 2 (env var names only, never values). */
 export function workerSnippet(draft: RegistrationDraft, managedUrl: string): string {
   const name = draft.agentName.trim() || "your-agent-name";
-  const url = draft.project === "own" ? draft.url.trim() || "wss://<your-project>.livekit.cloud" : managedUrl;
+  const url =
+    draft.project === "own" ? draft.url.trim() || "wss://<your-project>.livekit.cloud" : managedUrl;
   const display = (draft.name.trim() || "a helpful meeting agent").replace(/["\\]/g, "");
   return [
     "# worker.py — minimal LiveKit Agents worker for KnowMe",

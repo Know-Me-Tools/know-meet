@@ -4,11 +4,16 @@ import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
 import { Link } from "@tanstack/react-router";
 import { buttonLinkClass, eyebrowClass, h2Class } from "../public-shared/ui-classes";
 
-const REASONS: readonly { readonly icon: KmIconName; readonly title: string; readonly detail: string }[] = [
+const REASONS: readonly {
+  readonly icon: KmIconName;
+  readonly title: string;
+  readonly detail: string;
+}[] = [
   {
     icon: "agent-add",
     title: "Agents in your meetings",
-    detail: "Bring your dot Iris and dispatch registered agents like Scribe and Researcher. Guests only get the Concierge.",
+    detail:
+      "Bring your dot Iris and dispatch registered agents like Scribe and Researcher. Guests only get the Concierge.",
   },
   {
     icon: "record",
@@ -34,7 +39,10 @@ export function WhyAside() {
       <ul className="m-0 grid list-none gap-s4 p-0">
         {REASONS.map((reason) => (
           <li key={reason.title} className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s3">
-            <span aria-hidden="true" className="grid size-10 place-items-center rounded-[12px] bg-surface text-ember-text">
+            <span
+              aria-hidden="true"
+              className="grid size-10 place-items-center rounded-[12px] bg-surface text-ember-text"
+            >
               <KmIcon name={reason.icon} />
             </span>
             <div>
@@ -46,10 +54,14 @@ export function WhyAside() {
       </ul>
       <div className="grid gap-s3 rounded-tile bg-surface p-s4">
         <p className="text-sm text-muted-foreground">
-          In a hurry? Guests can start or join a meeting right now with the Concierge and live transcription. The
-          transcript is deleted when the meeting ends.
+          In a hurry? Guests can start or join a meeting right now with the Concierge and live
+          transcription. The transcript is deleted when the meeting ends.
         </p>
-        <Link to="/meet" hash="start" className={buttonLinkClass("secondary", "default", "justify-self-start")}>
+        <Link
+          to="/meet"
+          hash="start"
+          className={buttonLinkClass("secondary", "default", "justify-self-start")}
+        >
           <KmIcon name="cam" />
           <span>Continue as guest</span>
         </Link>

@@ -64,19 +64,19 @@ final class KmInitialLocationProvider
 String _$kmInitialLocationHash() => r'6c21f3ea79b75c5ce5f38bc0b7aa117907be12b2';
 
 /// The frame popover open at start. Always closed in production; the golden
-/// suite opens it for `frame.nav-open` and `frame.account-menu-open`.
+/// suite opens it for `frame.account-menu-open`.
 
 @ProviderFor(kmInitialFrameOverlay)
 final kmInitialFrameOverlayProvider = KmInitialFrameOverlayProvider._();
 
 /// The frame popover open at start. Always closed in production; the golden
-/// suite opens it for `frame.nav-open` and `frame.account-menu-open`.
+/// suite opens it for `frame.account-menu-open`.
 
 final class KmInitialFrameOverlayProvider
     extends $FunctionalProvider<KmFrameOverlay, KmFrameOverlay, KmFrameOverlay>
     with $Provider<KmFrameOverlay> {
   /// The frame popover open at start. Always closed in production; the golden
-  /// suite opens it for `frame.nav-open` and `frame.account-menu-open`.
+  /// suite opens it for `frame.account-menu-open`.
   KmInitialFrameOverlayProvider._()
     : super(
         from: null,

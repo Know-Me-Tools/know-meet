@@ -13,6 +13,7 @@ export function SkipLink() {
     main.scrollIntoView({ block: "start" });
   };
   return (
+    // biome-ignore lint/a11y/useValidAnchor: a skip link is in-page navigation, so it stays an anchor with a real #main href; onClick only stops the hash router from treating the fragment as a route.
     <a
       href="#main"
       onClick={onClick}

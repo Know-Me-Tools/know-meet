@@ -60,7 +60,7 @@ export async function observeResize(
         const nav = document.querySelector(selector);
         const startedAt = performance.now();
         let idle = 0;
-        const describe = (animation: Animation): MorphAnimation | null => {
+        const describeAnimation = (animation: Animation): MorphAnimation | null => {
           const effect = animation.effect as KeyframeEffect | null;
           if (effect === null || effect.target === null) return null;
           const timing = effect.getComputedTiming();
@@ -68,7 +68,7 @@ export async function observeResize(
           const pseudo = effect.pseudoElement ?? "";
           const inScope =
             pseudo.startsWith("::view-transition") ||
-            (nav !== null && nav.contains(effect.target)) ||
+            nav?.contains(effect.target) ||
             effect.target.closest("main") !== null;
           if (!inScope) return null;
           const properties = new Set<string>();
@@ -94,7 +94,7 @@ export async function observeResize(
             if (preexisting.has(animation)) continue;
             running = true;
             if (!seen.has(animation)) {
-              const entry = describe(animation);
+              const entry = describeAnimation(animation);
               if (entry !== null) seen.set(animation, entry);
             }
           }

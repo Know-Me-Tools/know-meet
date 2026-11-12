@@ -17,7 +17,9 @@ export function emailError(value: string): string {
 
 /** Magic link without an email: say why the email is needed. */
 export function magicLinkEmailError(value: string): string {
-  return value === "" ? "Enter your email first so we know where to send the sign-in link." : emailError(value);
+  return value === ""
+    ? "Enter your email first so we know where to send the sign-in link."
+    : emailError(value);
 }
 
 export function signInPasswordError(value: string): string {
@@ -39,7 +41,8 @@ export function passwordRules(value: string): PasswordRules {
 }
 
 export function newPasswordError(value: string): string {
-  if (value === "") return `Create a password with at least ${PASSWORD_MIN} characters, including a number.`;
+  if (value === "")
+    return `Create a password with at least ${PASSWORD_MIN} characters, including a number.`;
   const rules = passwordRules(value);
   if (!rules.length) {
     const missing = PASSWORD_MIN - value.length;

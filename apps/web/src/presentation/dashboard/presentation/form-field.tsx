@@ -20,7 +20,11 @@ interface FormFieldProps {
 }
 
 /** The ids a control should list in `aria-describedby`. */
-export function describedBy(id: string, error: string | undefined, hintId?: string): string | undefined {
+export function describedBy(
+  id: string,
+  error: string | undefined,
+  hintId?: string,
+): string | undefined {
   const ids = [hintId, error ? `${id}-err` : undefined].filter((x): x is string => x !== undefined);
   return ids.length ? ids.join(" ") : undefined;
 }
@@ -33,7 +37,16 @@ export function RequiredMark() {
   );
 }
 
-export function FormField({ id, label, required, hint, hintId, error, className, children }: FormFieldProps) {
+export function FormField({
+  id,
+  label,
+  required,
+  hint,
+  hintId,
+  error,
+  className,
+  children,
+}: FormFieldProps) {
   return (
     <div className={cn("grid min-w-0 gap-1.5", className)}>
       <Label htmlFor={id} className="block">
@@ -47,7 +60,7 @@ export function FormField({ id, label, required, hint, hintId, error, className,
         </span>
       ) : null}
       {error ? (
-        <FieldError id={`${id}-err`} role={undefined}>
+        <FieldError id={`${id}-err`} announce={false}>
           {error}
         </FieldError>
       ) : null}

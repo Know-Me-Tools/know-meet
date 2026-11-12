@@ -30,7 +30,10 @@ export function Feat({ id, className, children }: FeatProps) {
 
 export function FeatIcon({ name }: { readonly name: KmIconName }) {
   return (
-    <span aria-hidden="true" className="grid size-10 place-items-center rounded-[12px] bg-muted text-foreground">
+    <span
+      aria-hidden="true"
+      className="grid size-10 place-items-center rounded-[12px] bg-muted text-foreground"
+    >
       <KmIcon name={name} />
     </span>
   );
@@ -59,8 +62,9 @@ export function RecallFeature() {
         Recall the whole session
       </h3>
       <p>
-        The combined video lands in S3-compatible storage, then KnowMe pins it to IPFS and keeps the CID with the
-        transcript. Use KnowMe-managed storage or bring your own bucket and pinning service.
+        The combined video lands in S3-compatible storage, then KnowMe pins it to IPFS and keeps the
+        CID with the transcript. Use KnowMe-managed storage or bring your own bucket and pinning
+        service.
       </p>
       <div className="grid gap-1 rounded-base bg-background p-s3 light:bg-muted">
         <span className="text-xs text-muted-foreground">IPFS CID · Partner onboarding review</span>
@@ -70,7 +74,11 @@ export function RecallFeature() {
       </div>
       <FeatureFoot>
         <LockChip />
-        <Link to="/recordings" hash="detail:partner-onboarding-1014:storage" className={smallLinkClass}>
+        <Link
+          to="/recordings"
+          hash="detail:partner-onboarding-1014:storage"
+          className={smallLinkClass}
+        >
           Open a stored recording
         </Link>
       </FeatureFoot>
@@ -97,8 +105,8 @@ export function InviteFeature() {
           Invite anyone — no account required
         </h3>
         <p>
-          Invitees open a link and join in the browser, or call in. Phone callers come in through a Telnyx SIP trunk and
-          join audio-only with a PIN.
+          Invitees open a link and join in the browser, or call in. Phone callers come in through a
+          Telnyx SIP trunk and join audio-only with a PIN.
         </p>
         <FeatureFoot>
           <Badge variant="green">
@@ -112,7 +120,10 @@ export function InviteFeature() {
       </div>
       <ul className="m-0 grid list-none grid-cols-2 gap-s2 p-0 max-bp421:grid-cols-[minmax(0,1fr)]">
         {CHANNELS.map((channel) => (
-          <li key={channel.label} className="flex items-center gap-s2 rounded-base bg-card p-s3 text-sm font-semibold">
+          <li
+            key={channel.label}
+            className="flex items-center gap-s2 rounded-base bg-card p-s3 text-sm font-semibold"
+          >
             <KmIcon name={channel.icon} className="text-ember-text" />
             {channel.label}
           </li>

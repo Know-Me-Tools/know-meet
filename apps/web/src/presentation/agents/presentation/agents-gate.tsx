@@ -14,7 +14,11 @@ export function AgentsGate({ title, next }: { readonly title: string; readonly n
   useDocumentTitle(`${title} — Know Meet`);
   return (
     <>
-      <AgentsPageHead eyebrow="Agents" title={title} crumbs={[{ label: "Agents", to: "registry" }, { label: title }]} />
+      <AgentsPageHead
+        eyebrow="Agents"
+        title={title}
+        crumbs={[{ label: "Agents", to: "registry" }, { label: title }]}
+      />
       <SignInGate title="Sign in to bring agents into meetings" reason={REASON} next={next}>
         <p className="text-sm">
           Joining as a guest?{" "}

@@ -1,0 +1,227 @@
+$ turbo run build && node tooling/repo-rules/src/run-aggregate.ts build
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running build in 7 packages
+   • Remote caching disabled
+
+@know-meet/design-tokens:generate: cache bypass, force executing f18c83c31a6d85cd
+@know-meet/design-tokens:generate: $ node generator/src/cli.ts
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:generate: unchanged docs/design/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:generate: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/design-tokens:build: cache hit, replaying logs dcd10a9b77be3171
+@know-meet/design-tokens:build: $ node generator/src/cli.ts --check
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:build: unchanged docs/design/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:build: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/web:build: cache hit, replaying logs 0fbdcbef3fce125e
+@know-meet/web:build: $ node scripts/build.mjs
+@know-meet/web:build: vite v8.1.5 building client environment for production...
+@know-meet/web:build: [2K@know-meet/web:build: transforming...✓ 2973 modules transformed.
+@know-meet/web:build: rendering chunks...
+@know-meet/web:build: computing gzip size...
+@know-meet/web:build: dist/index.html                                         0.96 kB │ gzip:   0.50 kB
+@know-meet/web:build: dist/assets/space-grotesk-variable-CzOCAti0.woff2      49.25 kB
+@know-meet/web:build: dist/assets/jetbrains-mono-medium-3S3k2nMz.woff2       93.82 kB
+@know-meet/web:build: dist/assets/jetbrains-mono-semibold-BM8Dc2t-.woff2     94.47 kB
+@know-meet/web:build: dist/assets/inter-regular-COLGFB3M.woff2              111.26 kB
+@know-meet/web:build: dist/assets/inter-medium-CDhBSFyE.woff2               114.34 kB
+@know-meet/web:build: dist/assets/inter-semibold-BAEEcJ4E.woff2             114.81 kB
+@know-meet/web:build: dist/assets/index-D-3KUqHu.css                        211.26 kB │ gzip:  36.93 kB
+@know-meet/web:build: dist/assets/tauri-adapters-CXjmmqla.js                  0.38 kB │ gzip:   0.24 kB
+@know-meet/web:build: dist/assets/window-BVM36iHt.js                         14.13 kB │ gzip:   3.45 kB
+@know-meet/web:build: dist/assets/index-_XGS5OKB.js                       1,102.72 kB │ gzip: 325.92 kB
+@know-meet/web:build: 
+@know-meet/web:build: ✓ built in 505ms
+@know-meet/web:build: [plugin builtin:vite-reporter] 
+@know-meet/web:build: (!) Some chunks are larger than 500 kB after minification. Consider:
+@know-meet/web:build: - Using dynamic import() to code-split the application
+@know-meet/web:build: - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+@know-meet/web:build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+ Tasks:    3 successful, 3 total
+Cached:    2 cached, 3 total
+  Time:    571ms 
+
+
+-- cargo build -p bff: cargo build -p bff --locked
+   Compiling libsqlite3-sys v0.38.2
+   Compiling rusqlite v0.40.2
+   Compiling gen_ui_db v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/crates/gen-ui-db)
+   Compiling gen_ui_notes v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/crates/gen-ui-notes)
+   Compiling bff v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/services/bff)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.70s
+
+-- tauri build --debug: pnpm --filter @know-meet/desktop run tauri build --debug --ci
+$ node scripts/tauri-cli.ts build --debug --ci
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `pnpm --filter @know-meet/web run build`
+$ node scripts/build.mjs
+vite v8.1.5 building client environment for production...
+[2Ktransforming...✓ 2973 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         0.96 kB │ gzip:   0.50 kB
+dist/assets/space-grotesk-variable-CzOCAti0.woff2      49.25 kB
+dist/assets/jetbrains-mono-medium-3S3k2nMz.woff2       93.82 kB
+dist/assets/jetbrains-mono-semibold-BM8Dc2t-.woff2     94.47 kB
+dist/assets/inter-regular-COLGFB3M.woff2              111.26 kB
+dist/assets/inter-medium-CDhBSFyE.woff2               114.34 kB
+dist/assets/inter-semibold-BAEEcJ4E.woff2             114.81 kB
+dist/assets/index-D-3KUqHu.css                        211.26 kB │ gzip:  36.93 kB
+dist/assets/tauri-adapters-CXjmmqla.js                  0.38 kB │ gzip:   0.24 kB
+dist/assets/window-BVM36iHt.js                         14.13 kB │ gzip:   3.45 kB
+dist/assets/index-_XGS5OKB.js                       1,102.72 kB │ gzip: 325.92 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 537ms
+   Compiling libsqlite3-sys v0.38.2
+   Compiling rusqlite v0.40.2
+   Compiling gen_ui_db v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/crates/gen-ui-db)
+   Compiling gen_ui_notes v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/crates/gen-ui-notes)
+   Compiling sovereign_hybrid_desktop v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.90s
+       Built application at: /Users/gqadonis/Projects/know-me/know-meet/target/debug/sovereign_hybrid_desktop
+    Bundling Know Meet.app (/Users/gqadonis/Projects/know-me/know-meet/target/debug/bundle/macos/Know Meet.app)
+    Finished 1 bundle at:
+        /Users/gqadonis/Projects/know-me/know-meet/target/debug/bundle/macos/Know Meet.app
+
+
+-- bundle identity: pnpm --filter @know-meet/fidelity-tests run check:bundle-identity
+$ node src/bundle-identity/check-bundle-identity.ts
+{
+  "check": "bundle-identity",
+  "left": {
+    "label": "frontendDist",
+    "path": "/Users/gqadonis/Projects/know-me/know-meet/apps/web/dist",
+    "digest": "edf48ad1aa0e57ef03a0843aeb0d6f3f5a27adf1ed957fab717e3678aa3ced41",
+    "files": 13
+  },
+  "right": {
+    "label": "web dist",
+    "path": "/Users/gqadonis/Projects/know-me/know-meet/apps/web/dist",
+    "digest": "edf48ad1aa0e57ef03a0843aeb0d6f3f5a27adf1ed957fab717e3678aa3ced41",
+    "files": 13
+  },
+  "identical": true,
+  "differences": []
+}
+
+-- flutter pub get: flutter pub get --enforce-lockfile
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 92.0.0 (111.0.0 available)
+  analyzer 9.0.0 (14.7.0 available)
+  analyzer_buffer 0.3.0 (0.3.4 available)
+  build 4.0.7 (5.0.0 available)
+  build_config 1.3.3 (1.4.0 available)
+  build_daemon 4.1.6 (4.1.7 available)
+  build_runner 2.15.1 (2.17.1 available)
+  built_collection 5.1.1 (6.0.0 available)
+  code_assets 2.1.0 (2.2.0 available)
+  code_builder 4.12.0 (4.13.0 available)
+  coverage 1.15.1 (1.16.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dart_style 3.1.3 (3.1.14 available)
+  flutter_riverpod 3.3.1 (3.5.0 available)
+  flutter_rust_bridge 2.12.0 (2.13.0 available)
+  frontend_server_client 4.0.0 (4.2.0 available)
+  go_router 18.1.3 (18.1.4 available)
+  http_multi_server 3.2.2 (3.2.3 available)
+  jni 1.0.3 (1.1.2 available)
+  jni_flutter 1.0.3 (1.0.4+1 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  material_ui 1.10.0 (1.11.0 available)
+  mockito 5.6.4 (5.8.1 available)
+  objective_c 9.6.0 (9.6.4 available)
+  package_config 2.2.0 (3.0.0 available)
+  pubspec_parse 1.6.0 (1.7.0 available)
+  riverpod 3.2.1 (3.5.0 available)
+  riverpod_analyzer_utils 1.0.0-dev.9 (1.0.0 available)
+  riverpod_annotation 4.0.2 (4.0.8 available)
+  riverpod_generator 4.0.3 (4.0.10 available)
+  shared_preferences_android 2.4.28 (2.5.5 available)
+  shared_preferences_foundation 2.5.7 (2.6.2 available)
+  shelf 1.4.2 (1.4.3 available)
+  shelf_static 1.1.3 (1.2.0 available)
+  source_gen 4.2.4 (4.3.1 available)
+  test 1.31.1 (1.33.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  test_core 0.6.18 (0.6.21 available)
+  vector_math 2.4.3 (2.4.4 available)
+  vm_service 15.3.0 (15.4.0 available)
+  web 1.1.1 (1.1.2 available)
+Got dependencies!
+41 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+
+-- build_runner: dart run build_runner build
+  0s riverpod_generator on 227 inputs; integration_test/notes_test.dart
+  0s riverpod_generator on 227 inputs: 1 skipped; lib/app/app_router.dart
+  0s riverpod_generator on 227 inputs: 227 skipped
+  0s source_gen:combining_builder on 227 inputs; integration_test/notes_test.dart
+  0s source_gen:combining_builder on 227 inputs: 227 skipped
+  Built with build_runner/aot in 1s; wrote 0 outputs.
+
+-- flutter build apk --debug: flutter build apk --debug
+Running Gradle task 'assembleDebug'...                          
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/Users/gqadonis/.gradle/wrapper/dists/gradle-9.3.1-all/9ot9r568e8zfvvd4mn8rbu1j0/gradle-9.3.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+Resolving dependencies...
+Downloading packages...
+  args 2.4.2 (2.7.0 available)
+  collection 1.18.0 (1.19.1 available)
+  convert 3.1.1 (3.1.2 available)
+  crypto 3.0.3 (3.0.8 available)
+  ed25519_edwards 0.3.1 (0.3.2 available)
+  github 9.17.0 (9.26.0 available)
+  http 1.1.0 (1.6.0 available)
+  http_parser 4.0.2 (4.1.2 available)
+  logging 1.2.0 (1.3.0 available)
+  path 1.8.0 (1.9.1 available)
+  petitparser 5.4.0 (7.1.0 available)
+  source_span 1.10.0 (1.10.2 available)
+  toml 0.14.0 (0.18.0 available)
+  version 3.0.0 (3.0.2 available)
+  yaml 3.1.2 (3.1.4 available)
+Got dependencies!
+15 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Compiling bin/build_tool_runner.dart to kernel file bin/build_tool_runner.dill.
+INFO: Precompiled binaries are disabled
+INFO: Building gen_ui_ffi for armv7-linux-androideabi
+INFO: Building gen_ui_ffi for aarch64-linux-android
+INFO: Building gen_ui_ffi for x86_64-linux-android
+Running Gradle task 'assembleDebug'...                             12.5s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+
+-- flutter build ios --simulator: flutter build ios --simulator --no-codesign
+Building org.example.sovereign-hybrid for simulator (ios)...
+The following plugins do not support Swift Package Manager for ios:
+  - gen_ui_ffi
+This will become an error in a future version of Flutter. Please contact the plugin maintainers to request Swift Package Manager adoption.
+Running Xcode build...                                          
+Xcode build done.                                           17.5s
+✓ Built build/ios/iphonesimulator/Runner.app
+
+build: native surfaces pass

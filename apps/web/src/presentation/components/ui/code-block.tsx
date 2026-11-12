@@ -144,6 +144,7 @@ function CodeBlockContent({
       data-wrap={wrap || undefined}
       data-numbered={lineNumbers || undefined}
       dir="ltr"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrolling code block must be keyboard-focusable so keyboard users can scroll it (WCAG 2.1.1).
       tabIndex={0}
       style={{ counterReset: `line ${startLine - 1}`, ...style }}
       className={cn(
@@ -160,7 +161,8 @@ function CodeBlockContent({
           ? children
               .replace(/\n$/, "")
               .split("\n")
-              .map((line, index) => <CodeBlockLine key={index}>{line}</CodeBlockLine>)
+              .map((text, offset) => ({ lineNumber: startLine + offset, text }))
+              .map((line) => <CodeBlockLine key={line.lineNumber}>{line.text}</CodeBlockLine>)
           : children}
       </code>
     </pre>

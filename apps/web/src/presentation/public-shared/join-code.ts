@@ -14,7 +14,8 @@ export function normalizeCode(value: string): string {
 
 /** Format check. `required` adds the empty-field message (submit only). */
 export function codeFormatError(code: string, required: boolean): string {
-  if (code === "") return required ? `Enter the code from your invite, for example ${CODE_EXAMPLE}.` : "";
+  if (code === "")
+    return required ? `Enter the code from your invite, for example ${CODE_EXAMPLE}.` : "";
   if (!CODE_PATTERN.test(code)) {
     return `Codes look like ${CODE_EXAMPLE}: “km”, then two groups of three letters or numbers, joined by hyphens.`;
   }

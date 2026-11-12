@@ -66,22 +66,22 @@
   }
 
   :where(
-      a[href],
-      button,
-      input,
-      select,
-      textarea,
-      summary,
-      [role="button"],
-      [role="link"],
-      [role="tab"],
-      [role="menuitem"],
-      [role="option"],
-      [role="checkbox"],
-      [role="radio"],
-      [role="switch"],
-      [tabindex]:not([tabindex="-1"])
-    ):focus-visible {
+    a[href],
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [role="button"],
+    [role="link"],
+    [role="tab"],
+    [role="menuitem"],
+    [role="option"],
+    [role="checkbox"],
+    [role="radio"],
+    [role="switch"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
     background-color: var(--focus);
     color: var(--on-focus);
   }
@@ -89,15 +89,19 @@
   /* Choice card (DESIGN.md): the focused card takes the focus fill, and the
      radio/checkbox inside keeps its state fill so state stays visible. Layer
      order makes this !important beat the indicator's own focus utility. */
-  [data-slot="field-label"] :is([data-slot="checkbox"], [data-slot="radio-group-item"]):focus-visible {
+  /* biome-ignore-start lint/complexity/noImportantStyles: the choice-card indicator must keep its state fill over its own Tailwind focus utility, which sits in a later cascade layer */
+  [data-slot="field-label"]
+    :is([data-slot="checkbox"], [data-slot="radio-group-item"]):focus-visible {
     background-color: var(--control) !important;
     color: var(--on-control) !important;
   }
 
-  [data-slot="field-label"] :is([data-slot="checkbox"], [data-slot="radio-group-item"])[data-checked]:focus-visible {
+  [data-slot="field-label"]
+    :is([data-slot="checkbox"], [data-slot="radio-group-item"])[data-checked]:focus-visible {
     background-color: var(--selected) !important;
     color: var(--on-selected) !important;
   }
+  /* biome-ignore-end lint/complexity/noImportantStyles: the choice-card indicator must keep its state fill over its own Tailwind focus utility, which sits in a later cascade layer */
 
   /* Forced colours drop every fill, so the system draws a focus outline there
      only. This is the one outline in the product and never renders otherwise. */
@@ -118,11 +122,14 @@
     caret-color: currentColor; /* on-control / on-focus: legible on every control fill */
   }
 
+  /* biome-ignore-start lint/complexity/noImportantStyles: the hidden attribute must win over display utilities in the utilities layer */
   [hidden] {
     display: none !important;
   }
+  /* biome-ignore-end lint/complexity/noImportantStyles: the hidden attribute must win over display utilities in the utilities layer */
 
   /* km.css: all motion stops under reduced motion (PRODUCT.md, constraints.md). */
+  /* biome-ignore-start lint/complexity/noImportantStyles: reduced motion must override every component and utility duration (WCAG 2.3.3) */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -133,4 +140,5 @@
       scroll-behavior: auto !important;
     }
   }
+  /* biome-ignore-end lint/complexity/noImportantStyles: reduced motion must override every component and utility duration (WCAG 2.3.3) */
 }

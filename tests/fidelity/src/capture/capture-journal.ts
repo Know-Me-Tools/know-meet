@@ -41,9 +41,16 @@ export function captureKey(paths: readonly string[], environment: unknown): stri
 export const cellKey = (id: string, theme: string, viewport: number): string =>
   `${id}|${theme}|${viewport}`;
 
-function imageStillValid(rel: string, expected: string, source: string, sourceSha: string): boolean {
+function imageStillValid(
+  rel: string,
+  expected: string,
+  source: string,
+  sourceSha: string,
+): boolean {
   const file = join(BASELINES_DIR, rel);
-  return existsSync(file) && sha256File(file) === expected && sha256File(repoPath(source)) === sourceSha;
+  return (
+    existsSync(file) && sha256File(file) === expected && sha256File(repoPath(source)) === sourceSha
+  );
 }
 
 function parseLines(text: string): JournalLine[] {

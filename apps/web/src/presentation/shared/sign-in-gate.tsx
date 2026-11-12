@@ -34,11 +34,19 @@ export function SignInGate({ title, reason, next, children }: SignInGateProps) {
       </h2>
       <p className="max-w-[42ch] text-muted-foreground">{reason}</p>
       <div className="mt-s3 flex flex-wrap items-center justify-center gap-s2">
-        <Link to="/auth" hash={`sign-in?next=${encodeURIComponent(next)}`} className={cn(buttonVariants(), focusFillClass)}>
+        <Link
+          to="/auth"
+          hash={`sign-in?next=${encodeURIComponent(next)}`}
+          className={cn(buttonVariants(), focusFillClass)}
+        >
           <KmIcon name="user" />
           <span>Sign in</span>
         </Link>
-        <Link to="/meet" hash="start" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+        <Link
+          to="/meet"
+          hash="start"
+          className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+        >
           <KmIcon name="cam" />
           <span>Start a guest meeting</span>
         </Link>

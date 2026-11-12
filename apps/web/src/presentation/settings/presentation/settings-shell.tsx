@@ -5,7 +5,14 @@
 // current section is `aria-current="page"` with the `selected` fill (DESIGN.md
 // nav item); focus is the `focus` fill. Every page head carries a breadcrumb.
 import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
-import { PageActions, PageEyebrow, PageHead, PageHeadText, PageSub, PageTitle } from "@know-meet/ui/components/page-head";
+import {
+  PageActions,
+  PageEyebrow,
+  PageHead,
+  PageHeadText,
+  PageSub,
+  PageTitle,
+} from "@know-meet/ui/components/page-head";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import type * as React from "react";
@@ -69,7 +76,13 @@ function SettingsNav({ section }: { readonly section: SettingsSection }) {
 }
 
 /** km.css `.layout-side` with the settings nav and the `.content` column. */
-export function SettingsLayout({ section, children }: { readonly section: SettingsSection; readonly children: React.ReactNode }) {
+export function SettingsLayout({
+  section,
+  children,
+}: {
+  readonly section: SettingsSection;
+  readonly children: React.ReactNode;
+}) {
   return (
     <div className="grid grid-cols-[240px_minmax(0,1fr)] items-start gap-s6 max-bp900:grid-cols-[minmax(0,1fr)] max-bp900:gap-s5">
       <SettingsNav section={section} />
@@ -78,7 +91,10 @@ export function SettingsLayout({ section, children }: { readonly section: Settin
   );
 }
 
-const crumbLinkClass = cn("text-muted-foreground no-underline hover:text-foreground hover:underline", focusFillClass);
+const crumbLinkClass = cn(
+  "text-muted-foreground no-underline hover:text-foreground hover:underline",
+  focusFillClass,
+);
 
 interface SettingsHeadProps {
   readonly section: SettingsSection;
@@ -95,7 +111,10 @@ export function SettingsHead({ section, title, description, actions, parent }: S
   return (
     <PageHead className="mb-0 max-bp768:mb-0 max-bp768:items-start">
       <PageHeadText>
-        <nav aria-label="Breadcrumb" className="mb-s2 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-s2 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground"
+        >
           <SettingsLink hash="account" className={crumbLinkClass}>
             Settings
           </SettingsLink>

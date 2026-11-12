@@ -29,3 +29,14 @@ local.properties
 
 # Prebuilt third-party skill binaries (reinstalled by the skill; ~18 MB each)
 **/skills/impeccable/scripts/bin/
+
+# Key and certificate material must never be committed (secrets come from the environment)
+*.pem
+*.p8
+*.p12
+*.pfx
+*.key
+*.jks
+*.keystore
+android/key.properties
+**/android/key.properties

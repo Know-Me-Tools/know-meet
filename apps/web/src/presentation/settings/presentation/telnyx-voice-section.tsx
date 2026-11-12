@@ -10,20 +10,39 @@ import { toast } from "@know-meet/ui/components/toast";
 import { useMemo, useState } from "react";
 import { copyText } from "../../shared/copy-text";
 import type { Workspace } from "../../workspace/domain/workspace";
-import { DEFAULT_GREETING, dialInNumbersFrom, LIVEKIT_TRUNK_ID } from "../application/settings-fixtures";
+import {
+  DEFAULT_GREETING,
+  dialInNumbersFrom,
+  LIVEKIT_TRUNK_ID,
+} from "../application/settings-fixtures";
 import { type FieldRule, validateSipName } from "../application/validators";
 import type { CheckRowState, CheckStep, DialInNumber } from "../domain/settings";
 import { AddNumberDialog } from "./add-number-dialog";
 import { ChecksList } from "./checks-list";
 import { ConfirmDialog, type ConfirmRequest } from "./confirm-dialog";
 import { InputGroup, SelectField, TextField } from "./settings-fields";
-import { BusyContent, FieldRow, FormFoot, KeyValue, KeyValueList, Note, Panel, RequiredNote, Stack, StatusChip } from "./settings-parts";
+import {
+  BusyContent,
+  FieldRow,
+  FormFoot,
+  KeyValue,
+  KeyValueList,
+  Note,
+  Panel,
+  RequiredNote,
+  Stack,
+  StatusChip,
+} from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useFormErrors } from "./use-form-errors";
 import { useStagedChecks } from "./use-staged-checks";
 import { useBusyAction, useLater } from "./use-static-delay";
 
-function NumbersPanel({ numbers, onAdd, onRelease }: {
+function NumbersPanel({
+  numbers,
+  onAdd,
+  onRelease,
+}: {
   readonly numbers: readonly DialInNumber[];
   readonly onAdd: () => void;
   readonly onRelease: (number: string) => void;
@@ -65,7 +84,13 @@ function NumbersPanel({ numbers, onAdd, onRelease }: {
                 </td>
                 <td className="text-sm text-muted-foreground">LiveKit SIP · PIN dispatch</td>
                 <td className="text-right! tabular-nums">
-                  <Button variant="ghost" size="sm" aria-label={`Release ${n.number}`} disabled={n.status !== "Active"} onClick={() => onRelease(n.number)}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    aria-label={`Release ${n.number}`}
+                    disabled={n.status !== "Active"}
+                    onClick={() => onRelease(n.number)}
+                  >
                     Release
                   </Button>
                 </td>
@@ -92,7 +117,10 @@ const SIP_RULES: Readonly<Record<SipKey, FieldRule>> = {
 };
 
 function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) {
-  const [values, setValues] = useState<Readonly<Record<SipKey, string>>>({ sipName: initialSipName, greeting: DEFAULT_GREETING });
+  const [values, setValues] = useState<Readonly<Record<SipKey, string>>>({
+    sipName: initialSipName,
+    greeting: DEFAULT_GREETING,
+  });
   const [pinLength, setPinLength] = useState("8");
   const { formRef, errors, validate, revalidate } = useFormErrors(SIP_RULES);
   const saving = useBusyAction();
@@ -101,7 +129,10 @@ function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) 
     revalidate(key, value);
   };
   return (
-    <Panel title="SIP trunk to LiveKit" description="Calls arrive on a Telnyx SIP connection and are handed to a LiveKit inbound trunk.">
+    <Panel
+      title="SIP trunk to LiveKit"
+      description="Calls arrive on a Telnyx SIP connection and are handed to a LiveKit inbound trunk."
+    >
       <form
         ref={formRef}
         noValidate
@@ -113,13 +144,34 @@ function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) 
         }}
       >
         <FieldRow>
-          <TextField id="voice-sip" label="Telnyx SIP connection name" required mono hint="The SIP connection in Telnyx that your numbers are assigned to." value={values.sipName} error={errors.sipName} onValueChange={set("sipName")} />
+          <TextField
+            id="voice-sip"
+            label="Telnyx SIP connection name"
+            required
+            mono
+            hint="The SIP connection in Telnyx that your numbers are assigned to."
+            value={values.sipName}
+            error={errors.sipName}
+            onValueChange={set("sipName")}
+          />
           <div className="grid min-w-0 gap-1.5">
             <span className="text-sm font-semibold">LiveKit inbound trunk ID</span>
-            <p className="text-sm text-muted-foreground">Created by KnowMe on your LiveKit project (sample ID).</p>
+            <p className="text-sm text-muted-foreground">
+              Created by KnowMe on your LiveKit project (sample ID).
+            </p>
             <InputGroup>
-              <Input readOnly aria-label="LiveKit inbound trunk ID" value={LIVEKIT_TRUNK_ID} className="font-mono text-13" />
-              <Button variant="ghost" size="icon" aria-label="Copy trunk ID" onClick={() => void copyText(LIVEKIT_TRUNK_ID)}>
+              <Input
+                readOnly
+                aria-label="LiveKit inbound trunk ID"
+                value={LIVEKIT_TRUNK_ID}
+                className="font-mono text-13"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Copy trunk ID"
+                onClick={() => void copyText(LIVEKIT_TRUNK_ID)}
+              >
                 <KmIcon name="copy" />
               </Button>
             </InputGroup>
@@ -127,7 +179,8 @@ function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) 
         </FieldRow>
         <KeyValueList>
           <KeyValue label="Dispatch rule" plain="plain">
-            <b>PIN-based. </b>The caller enters the meeting PIN and is routed to that meeting’s LiveKit room as a phone participant.
+            <b>PIN-based. </b>The caller enters the meeting PIN and is routed to that meeting’s
+            LiveKit room as a phone participant.
           </KeyValue>
           <KeyValue label="Wrong PIN" plain="plain">
             Callers get three tries, then the call ends.
@@ -136,12 +189,27 @@ function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) 
         <SelectField
           label="Meeting PIN length"
           value={pinLength}
-          options={[["6", "6 digits"], ["8", "8 digits"], ["10", "10 digits"]]}
+          options={[
+            ["6", "6 digits"],
+            ["8", "8 digits"],
+            ["10", "10 digits"],
+          ]}
           hint="Longer PINs are harder to guess. Applies to meetings scheduled from now on."
           onValueChange={setPinLength}
         />
         <Stack gap="sm">
-          <TextField id="voice-greeting" label="Greeting" kind="textarea" required maxLength={200} rows={3} hint="Read to callers before they enter the PIN." value={values.greeting} error={errors.greeting} onValueChange={set("greeting")} />
+          <TextField
+            id="voice-greeting"
+            label="Greeting"
+            kind="textarea"
+            required
+            maxLength={200}
+            rows={3}
+            hint="Read to callers before they enter the PIN."
+            value={values.greeting}
+            error={errors.greeting}
+            onValueChange={set("greeting")}
+          />
           <span className="text-xs text-muted-foreground">{values.greeting.length} / 200</span>
         </Stack>
         <FormFoot>
@@ -157,17 +225,36 @@ function SipTrunkPanel({ initialSipName }: { readonly initialSipName: string }) 
   );
 }
 
-function StatusPanel({ activeCount, sipName }: { readonly activeCount: number; readonly sipName: string }) {
+function StatusPanel({
+  activeCount,
+  sipName,
+}: {
+  readonly activeCount: number;
+  readonly sipName: string;
+}) {
   const steps = useMemo<readonly CheckStep[]>(
     () => [
-      { label: "Telnyx number", detail: `${activeCount} active dial-in numbers`, initial: "Active", okText: "Active" },
+      {
+        label: "Telnyx number",
+        detail: `${activeCount} active dial-in numbers`,
+        initial: "Active",
+        okText: "Active",
+      },
       { label: "SIP connection", detail: sipName, initial: "Active", okText: "Active" },
-      { label: "LiveKit inbound trunk", detail: `${LIVEKIT_TRUNK_ID} (sample)`, initial: "Active", okText: "Active" },
+      {
+        label: "LiveKit inbound trunk",
+        detail: `${LIVEKIT_TRUNK_ID} (sample)`,
+        initial: "Active",
+        okText: "Active",
+      },
       { label: "Dispatch rule", detail: "PIN → meeting room", initial: "Active", okText: "Active" },
     ],
     [activeCount, sipName],
   );
-  const preset = useMemo<readonly CheckRowState[]>(() => steps.map((s) => ({ state: "ok", text: "Active", detail: s.detail })), [steps]);
+  const preset = useMemo<readonly CheckRowState[]>(
+    () => steps.map((s) => ({ state: "ok", text: "Active", detail: s.detail })),
+    [steps],
+  );
   const checks = useStagedChecks(steps, preset);
   const [running, setRunning] = useState(false);
   return (
@@ -200,7 +287,9 @@ function StatusPanel({ activeCount, sipName }: { readonly activeCount: number; r
 }
 
 export function TelnyxVoiceSection({ workspace }: { readonly workspace: Workspace }) {
-  const [numbers, setNumbers] = useState<readonly DialInNumber[]>(() => dialInNumbersFrom(workspace.telnyx.dialIn));
+  const [numbers, setNumbers] = useState<readonly DialInNumber[]>(() =>
+    dialInNumbersFrom(workspace.telnyx.dialIn),
+  );
   const [adding, setAdding] = useState(false);
   const [confirm, setConfirm] = useState<ConfirmRequest | null>(null);
   const later = useLater();
@@ -214,7 +303,8 @@ export function TelnyxVoiceSection({ workspace }: { readonly workspace: Workspac
       />
       <Note kind="info" icon="phone-in">
         <p>
-          <b>Inbound only. </b>KnowMe never places outbound calls — there is no dial-out or “call a phone” feature. Callers dial in to your numbers.
+          <b>Inbound only. </b>KnowMe never places outbound calls — there is no dial-out or “call a
+          phone” feature. Callers dial in to your numbers.
         </p>
       </Note>
       <NumbersPanel
@@ -234,16 +324,20 @@ export function TelnyxVoiceSection({ workspace }: { readonly workspace: Workspac
         }
       />
       <SipTrunkPanel initialSipName={workspace.telnyx.sipTrunk} />
-      <StatusPanel activeCount={numbers.filter((n) => n.status === "Active").length} sipName={workspace.telnyx.sipTrunk} />
+      <StatusPanel
+        activeCount={numbers.filter((n) => n.status === "Active").length}
+        sipName={workspace.telnyx.sipTrunk}
+      />
       <Panel title="Test call">
         <ol className="m-0 grid list-decimal gap-s2 pl-5">
           <li>
-            Start a meeting, then call <span className="font-mono text-13 whitespace-nowrap">{first}</span> from any phone.
+            Start a meeting, then call{" "}
+            <span className="font-mono text-13 whitespace-nowrap">{first}</span> from any phone.
           </li>
           <li>Listen for your greeting.</li>
           <li>
-            Enter the meeting PIN shown in the room’s invite panel, followed by <code>#</code> — for example{" "}
-            <span className="font-mono text-13 whitespace-nowrap">482 913 07#</span>.
+            Enter the meeting PIN shown in the room’s invite panel, followed by <code>#</code> — for
+            example <span className="font-mono text-13 whitespace-nowrap">482 913 07#</span>.
           </li>
           <li>You join as a phone participant. Your speech is transcribed like everyone else’s.</li>
         </ol>
@@ -255,7 +349,9 @@ export function TelnyxVoiceSection({ workspace }: { readonly workspace: Workspac
           setNumbers((current) => [...current, { number, region: "US", status: "Provisioning" }]);
           toast.add({ title: `Provisioning ${number}…`, type: "info" });
           later(2600, () => {
-            setNumbers((current) => current.map((n) => (n.number === number ? { ...n, status: "Active" } : n)));
+            setNumbers((current) =>
+              current.map((n) => (n.number === number ? { ...n, status: "Active" } : n)),
+            );
             toast.add({ title: `${number} is active`, type: "success" });
           });
         }}

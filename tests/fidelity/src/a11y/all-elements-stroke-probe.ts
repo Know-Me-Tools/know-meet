@@ -33,13 +33,23 @@ export async function scanAllStrokes(page: Page): Promise<StrokeScan> {
     let pseudos = 0;
     const sig = (el: Element, pseudo: string): string => {
       const parts: string[] = [];
-      for (let n: Element | null = el, depth = 0; n !== null && depth < 3; n = n.parentElement, depth += 1) {
-        const cls = n.classList.length > 0 ? `.${Array.from(n.classList).slice(0, 2).join(".")}` : "";
+      for (
+        let n: Element | null = el, depth = 0;
+        n !== null && depth < 3;
+        n = n.parentElement, depth += 1
+      ) {
+        const cls =
+          n.classList.length > 0 ? `.${Array.from(n.classList).slice(0, 2).join(".")}` : "";
         parts.unshift(`${n.tagName.toLowerCase()}${n.id ? `#${n.id}` : ""}${cls}`);
       }
       return parts.join(" > ") + pseudo;
     };
-    const add = (kind: StrokeFinding["kind"], el: Element, pseudo: string, detail: string): void => {
+    const add = (
+      kind: StrokeFinding["kind"],
+      el: Element,
+      pseudo: string,
+      detail: string,
+    ): void => {
       const where = sig(el, pseudo);
       const key = `${kind}|${where}|${detail}`;
       if (seen.has(key)) return;
@@ -49,15 +59,31 @@ export async function scanAllStrokes(page: Page): Promise<StrokeScan> {
     const strokes = (el: Element, pseudo: string, style: CSSStyleDeclaration): void => {
       for (const side of ["Top", "Right", "Bottom", "Left"] as const) {
         const width = Number.parseFloat(style[`border${side}Width`]);
-        if (width > 0 && style[`border${side}Style`] !== "none" && style[`border${side}Style`] !== "hidden")
-          add("border", el, pseudo, `border-${side.toLowerCase()} ${width}px ${style[`border${side}Style`]} ${style[`border${side}Color`]}`);
+        if (
+          width > 0 &&
+          style[`border${side}Style`] !== "none" &&
+          style[`border${side}Style`] !== "hidden"
+        )
+          add(
+            "border",
+            el,
+            pseudo,
+            `border-${side.toLowerCase()} ${width}px ${style[`border${side}Style`]} ${style[`border${side}Color`]}`,
+          );
       }
       if (style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) > 0)
-        add("outline", el, pseudo, `outline ${style.outlineWidth} ${style.outlineStyle} ${style.outlineColor}`);
+        add(
+          "outline",
+          el,
+          pseudo,
+          `outline ${style.outlineWidth} ${style.outlineStyle} ${style.outlineColor}`,
+        );
       if (style.boxShadow !== "none") add("shadow", el, pseudo, `box-shadow ${style.boxShadow}`);
     };
     const visible = (style: CSSStyleDeclaration): boolean =>
-      style.display !== "none" && style.visibility !== "hidden" && Number.parseFloat(style.opacity) > 0;
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      Number.parseFloat(style.opacity) > 0;
 
     for (const el of Array.from(document.querySelectorAll("body, body *"))) {
       if (el.closest("svg") !== null && el.tagName.toLowerCase() !== "svg") continue;
@@ -70,7 +96,9 @@ export async function scanAllStrokes(page: Page): Promise<StrokeScan> {
         if (el.tagName === "HR") add("rule", el, "", "<hr>");
         if (style.textDecorationLine !== "none") {
           // Only text-bearing elements: a decoration on a container is inherited by its text.
-          const hasOwnText = Array.from(el.childNodes).some((n) => n.nodeType === 3 && (n.textContent ?? "").trim() !== "");
+          const hasOwnText = Array.from(el.childNodes).some(
+            (n) => n.nodeType === 3 && (n.textContent ?? "").trim() !== "",
+          );
           if (hasOwnText) add("deco-text", el, "", style.textDecorationLine);
         }
       }
@@ -80,11 +108,17 @@ export async function scanAllStrokes(page: Page): Promise<StrokeScan> {
         const w = Number.parseFloat(ps.width);
         const h = Number.parseFloat(ps.height);
         const hasFill = ps.backgroundColor !== "rgba(0, 0, 0, 0)" || ps.backgroundImage !== "none";
-        const thin = (Number.isFinite(w) && w > 0 && w <= 4) || (Number.isFinite(h) && h > 0 && h <= 4);
+        const thin =
+          (Number.isFinite(w) && w > 0 && w <= 4) || (Number.isFinite(h) && h > 0 && h <= 4);
         pseudos += 1;
         strokes(el, pseudo, ps);
         if (hasFill && thin && ps.display !== "inline")
-          add("rule", el, pseudo, `${pseudo} ${ps.width} x ${ps.height} filled ${ps.backgroundColor}`);
+          add(
+            "rule",
+            el,
+            pseudo,
+            `${pseudo} ${ps.width} x ${ps.height} filled ${ps.backgroundColor}`,
+          );
       }
     }
     return { elements, pseudos, findings };

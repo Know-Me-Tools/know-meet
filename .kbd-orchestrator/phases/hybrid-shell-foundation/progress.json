@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 224,
-  "derivedRevision": 224,
+  "sourceRevision": 230,
+  "derivedRevision": 230,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 224
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-12T14:23:54.696327Z",
+  "last_updated": "2026-11-12T14:40:26.886778Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
   "changes_completed": 13,
@@ -205,8 +205,8 @@
     {
       "id": "c13-fidelity-verification-and-evidence",
       "title": "Single boundary run, fidelity, security and accessibility evidence",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "IN_PROGRESS",
+      "implementation_status": "IN_PROGRESS",
       "tasks_total": 10,
       "tasks_done": 0,
       "last_task_completed": null,

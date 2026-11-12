@@ -56,7 +56,10 @@ export function MeetingRoomScreen({ themeControl }: { readonly themeControl: Rea
   const user = useSessionUser();
   const { workspace } = useSampleWorkspace();
   const mode = roomModeFor(view, user !== null);
-  const room = useMemo(() => buildRoomModel(workspace, mode, user?.name ?? null), [workspace, mode, user]);
+  const room = useMemo(
+    () => buildRoomModel(workspace, mode, user?.name ?? null),
+    [workspace, mode, user],
+  );
   useDocumentTitle(`Know Meet — ${room.title}`);
 
   const [startedAt] = useState(() => Date.now());
@@ -89,7 +92,12 @@ export function MeetingRoomScreen({ themeControl }: { readonly themeControl: Rea
   return (
     <Toaster>
       <div className="grid h-[calc(100dvh-var(--km-titlebar-h,0px))] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden">
-        <RoomHead room={room} participantCount={tiles.length} onUnavailable={onUnavailable} themeControl={themeControl} />
+        <RoomHead
+          room={room}
+          participantCount={tiles.length}
+          onUnavailable={onUnavailable}
+          themeControl={themeControl}
+        />
         <div className="relative grid min-h-0 grid-rows-[minmax(0,1fr)_auto]">
           <section
             ref={stageRef}
@@ -97,7 +105,11 @@ export function MeetingRoomScreen({ themeControl }: { readonly themeControl: Rea
             tabIndex={stage.scrollable ? 0 : undefined}
             className={cn(
               "min-h-0 overflow-y-auto px-s5 pt-s2 pb-s4 max-bp768:px-s3 max-bp768:pb-s3",
-              stage.scrollable && cn(focusFillClass, "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!"),
+              stage.scrollable &&
+                cn(
+                  focusFillClass,
+                  "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!",
+                ),
             )}
           >
             <ul

@@ -24,7 +24,15 @@ interface ConfirmDialogProps {
   readonly onConfirm: () => void;
 }
 
-export function ConfirmDialog({ open, onOpenChange, title, children, confirmLabel, tone = "primary", onConfirm }: ConfirmDialogProps) {
+export function ConfirmDialog({
+  open,
+  onOpenChange,
+  title,
+  children,
+  confirmLabel,
+  tone = "primary",
+  onConfirm,
+}: ConfirmDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>

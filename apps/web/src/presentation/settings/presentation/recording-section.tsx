@@ -11,8 +11,15 @@ import { Panel, PanelSurface, Stack } from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 
 const LANGUAGES: readonly (readonly [string, string])[] = [
-  ["auto", "Detect automatically"], ["en-US", "English (US)"], ["en-GB", "English (UK)"], ["es", "Spanish"], ["fr", "French"],
-  ["de", "German"], ["pt-BR", "Portuguese (Brazil)"], ["hi", "Hindi"], ["ja", "Japanese"],
+  ["auto", "Detect automatically"],
+  ["en-US", "English (US)"],
+  ["en-GB", "English (UK)"],
+  ["es", "Spanish"],
+  ["fr", "French"],
+  ["de", "German"],
+  ["pt-BR", "Portuguese (Brazil)"],
+  ["hi", "Hindi"],
+  ["ja", "Japanese"],
 ];
 
 const DEFAULTS = { auto: true, live: true, speakers: true, kb: true, profanity: false } as const;
@@ -28,10 +35,19 @@ export function RecordingSection() {
   };
   return (
     <>
-      <SettingsHead section="recording" title="Recording & transcription" description="Defaults for meetings you host. Hosts can still start or stop recording in the room." />
+      <SettingsHead
+        section="recording"
+        title="Recording & transcription"
+        description="Defaults for meetings you host. Hosts can still start or stop recording in the room."
+      />
       <Panel title="Recording">
         <div>
-          <SwitchRow label="Auto-record meetings I host" description="Starts a Room Composite recording once everyone present has consented." checked={prefs.auto} onCheckedChange={toggle("auto")} />
+          <SwitchRow
+            label="Auto-record meetings I host"
+            description="Starts a Room Composite recording once everyone present has consented."
+            checked={prefs.auto}
+            onCheckedChange={toggle("auto")}
+          />
           <SwitchRow
             label="Ask participants for consent"
             description="Always on. Everyone sees a recording notice and must agree before recording starts; people who join later see it before they enter."
@@ -43,10 +59,30 @@ export function RecordingSection() {
       <Panel title="Transcription">
         <Stack>
           <div>
-            <SwitchRow label="Live transcription" description="Transcribe as people speak and show captions in the room." checked={prefs.live} onCheckedChange={toggle("live")} />
-            <SwitchRow label="Speaker labels" description="Attribute each line to a participant or agent." checked={prefs.speakers} onCheckedChange={toggle("speakers")} />
-            <SwitchRow label="Add transcript to meeting knowledge in real time" description="Every agent in the room, including Concierge, can answer from what has been said so far." checked={prefs.kb} onCheckedChange={toggle("kb")} />
-            <SwitchRow label="Profanity filter" description="Masks profanity in captions, transcripts and summaries." checked={prefs.profanity} onCheckedChange={toggle("profanity")} />
+            <SwitchRow
+              label="Live transcription"
+              description="Transcribe as people speak and show captions in the room."
+              checked={prefs.live}
+              onCheckedChange={toggle("live")}
+            />
+            <SwitchRow
+              label="Speaker labels"
+              description="Attribute each line to a participant or agent."
+              checked={prefs.speakers}
+              onCheckedChange={toggle("speakers")}
+            />
+            <SwitchRow
+              label="Add transcript to meeting knowledge in real time"
+              description="Every agent in the room, including Concierge, can answer from what has been said so far."
+              checked={prefs.kb}
+              onCheckedChange={toggle("kb")}
+            />
+            <SwitchRow
+              label="Profanity filter"
+              description="Masks profanity in captions, transcripts and summaries."
+              checked={prefs.profanity}
+              onCheckedChange={toggle("profanity")}
+            />
           </div>
           <SelectField
             label="Transcription language"
@@ -70,7 +106,9 @@ export function RecordingSection() {
           </Badge>
         </div>
         <p className="text-sm text-muted-foreground">
-          Meetings started by someone who isn’t signed in are never recorded. They get live transcription and the Concierge only, and the transcript is deleted when the meeting ends — it isn’t saved or sent to anyone.
+          Meetings started by someone who isn’t signed in are never recorded. They get live
+          transcription and the Concierge only, and the transcript is deleted when the meeting ends
+          — it isn’t saved or sent to anyone.
         </p>
       </PanelSurface>
     </>

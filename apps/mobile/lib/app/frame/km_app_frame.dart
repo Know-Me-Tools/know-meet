@@ -55,6 +55,29 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> with TickerProviderStat
   late KmFrameOverlay _overlay = widget.initialOverlay;
 
   @override
+  void initState() {
+    super.initState();
+    // Twice: the route takes focus in its own post-frame callback.
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _startFocusAtFrame(),
+      ),
+    );
+  }
+
+  /// The page route sits in a nested Navigator whose focus scope holds focus
+  /// on arrival, so the first Tab would skip the frame. Like a browser's
+  /// document start, hand focus to the frame's own scope unless a control
+  /// (an autofocused field) already has it, so Tab starts at the skip link.
+  void _startFocusAtFrame() {
+    if (!mounted) return;
+    final FocusNode? focus = FocusManager.instance.primaryFocus;
+    if (focus is FocusScopeNode) {
+      focus.unfocus(disposition: UnfocusDisposition.scope);
+    }
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _morph.update(
@@ -212,10 +235,16 @@ class _KmAppFrameState extends ConsumerState<KmAppFrame> with TickerProviderStat
               if (_overlay != KmFrameOverlay.none)
                 Positioned.fill(
                   top: safe.top + KmTokens.headerH,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+                  child: Semantics(
+                    button: true,
+                    label: 'Close menu',
+                    excludeSemantics: true,
                     onTap: () => _set(KmFrameOverlay.none),
-                    child: const SizedBox.expand(),
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => _set(KmFrameOverlay.none),
+                      child: const SizedBox.expand(),
+                    ),
                   ),
                 ),
               if (_overlay == KmFrameOverlay.accountMenu && user != null)

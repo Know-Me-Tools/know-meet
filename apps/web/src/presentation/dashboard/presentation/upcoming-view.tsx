@@ -2,9 +2,21 @@
 // dashboard.html `#upcoming`: page head, section tabs, the live banner, the
 // filterable day-grouped meeting list and the side cards (calendars, delivery).
 import { buttonVariants } from "@know-meet/ui/components/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@know-meet/ui/components/empty";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@know-meet/ui/components/empty";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
-import { PageActions, PageHead, PageHeadText, PageSub, PageTitle } from "@know-meet/ui/components/page-head";
+import {
+  PageActions,
+  PageHead,
+  PageHeadText,
+  PageSub,
+  PageTitle,
+} from "@know-meet/ui/components/page-head";
 import { ToggleGroup, ToggleGroupItem } from "@know-meet/ui/components/toggle-group";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
@@ -21,9 +33,18 @@ import { LiveBanner, MeetingRow } from "./meeting-row";
 import { CalendarsCard, DeliveryCard } from "./side-cards";
 
 const FILTER_EMPTY: Readonly<Record<MeetingFilter, { title: string; body: string }>> = {
-  all: { title: "Nothing else on the calendar", body: "Schedule a meeting and invite people by email or phone number." },
-  hosting: { title: "No upcoming meetings you’re hosting", body: "Try a different filter, or schedule a new meeting." },
-  invited: { title: "No upcoming meetings you’re invited to", body: "Try a different filter, or schedule a new meeting." },
+  all: {
+    title: "Nothing else on the calendar",
+    body: "Schedule a meeting and invite people by email or phone number.",
+  },
+  hosting: {
+    title: "No upcoming meetings you’re hosting",
+    body: "Try a different filter, or schedule a new meeting.",
+  },
+  invited: {
+    title: "No upcoming meetings you’re invited to",
+    body: "Try a different filter, or schedule a new meeting.",
+  },
 };
 
 function isFilter(value: unknown): value is MeetingFilter {
@@ -46,7 +67,15 @@ function groupByDay(rows: readonly DashboardMeeting[], now: Date): readonly DayG
   return groups;
 }
 
-function MeetingList({ rows, filter, onShowAll }: { readonly rows: readonly DashboardMeeting[]; readonly filter: MeetingFilter; readonly onShowAll: () => void }) {
+function MeetingList({
+  rows,
+  filter,
+  onShowAll,
+}: {
+  readonly rows: readonly DashboardMeeting[];
+  readonly filter: MeetingFilter;
+  readonly onShowAll: () => void;
+}) {
   const { now } = useDashboard();
   if (rows.length === 0) {
     const copy = FILTER_EMPTY[filter];
@@ -60,12 +89,20 @@ function MeetingList({ rows, filter, onShowAll }: { readonly rows: readonly Dash
           <EmptyDescription>{copy.body}</EmptyDescription>
         </EmptyHeader>
         <div className="flex flex-wrap items-center gap-s2">
-          <Link to="/dashboard" hash="schedule" className={cn(buttonVariants({ size: "sm" }), focusFillClass)}>
+          <Link
+            to="/dashboard"
+            hash="schedule"
+            className={cn(buttonVariants({ size: "sm" }), focusFillClass)}
+          >
             <KmIcon name="plus" className="size-4" />
             <span>Schedule meeting</span>
           </Link>
           {filter === "all" ? null : (
-            <button type="button" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)} onClick={onShowAll}>
+            <button
+              type="button"
+              className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+              onClick={onShowAll}
+            >
               Show all
             </button>
           )}
@@ -77,11 +114,20 @@ function MeetingList({ rows, filter, onShowAll }: { readonly rows: readonly Dash
     const first = group.items[0];
     const headingId = `day-${index}`;
     return (
-      <section key={group.label} aria-labelledby={headingId} className="grid gap-s2 not-first:mt-s5">
-        <h2 id={headingId} className="font-mono text-xs font-semibold tracking-table text-muted-foreground uppercase">
+      <section
+        key={group.label}
+        aria-labelledby={headingId}
+        className="grid gap-s2 not-first:mt-s5"
+      >
+        <h2
+          id={headingId}
+          className="font-mono text-xs font-semibold tracking-table text-muted-foreground uppercase"
+        >
           {group.label}
           {(group.label === "Today" || group.label === "Tomorrow") && first ? (
-            <span className="ml-s2 font-body text-sm tracking-none whitespace-nowrap normal-case">{formatDay(first.start)}</span>
+            <span className="ml-s2 font-body text-sm tracking-none whitespace-nowrap normal-case">
+              {formatDay(first.start)}
+            </span>
           ) : null}
         </h2>
         <ul className="m-0 grid list-none gap-s2 p-0">
@@ -99,7 +145,9 @@ function MeetingList({ rows, filter, onShowAll }: { readonly rows: readonly Dash
 export function UpcomingView({ initialFilter }: { readonly initialFilter: string | undefined }) {
   useDocumentTitle("Meetings · Know Meet");
   const { meetings, now, workspace, localTz } = useDashboard();
-  const [filter, setFilter] = useState<MeetingFilter>(isFilter(initialFilter) ? initialFilter : "all");
+  const [filter, setFilter] = useState<MeetingFilter>(
+    isFilter(initialFilter) ? initialFilter : "all",
+  );
   const active = meetings.filter((m) => {
     const status = statusOf(m, now);
     return status === "live" || status === "upcoming";
@@ -112,7 +160,11 @@ export function UpcomingView({ initialFilter }: { readonly initialFilter: string
 
   const choose = (next: MeetingFilter) => {
     setFilter(next);
-    window.history.replaceState(window.history.state, "", `#upcoming${next === "all" ? "" : `?filter=${next}`}`);
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `#upcoming${next === "all" ? "" : `?filter=${next}`}`,
+    );
   };
 
   return (
@@ -120,10 +172,16 @@ export function UpcomingView({ initialFilter }: { readonly initialFilter: string
       <PageHead>
         <PageHeadText>
           <PageTitle>Meetings</PageTitle>
-          <PageSub>Everything on your connected calendars, plus meetings scheduled in KnowMe.</PageSub>
+          <PageSub>
+            Everything on your connected calendars, plus meetings scheduled in KnowMe.
+          </PageSub>
         </PageHeadText>
         <PageActions>
-          <Link to="/meet" hash="start" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/meet"
+            hash="start"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="cam" />
             <span>Start now</span>
           </Link>
@@ -153,7 +211,9 @@ export function UpcomingView({ initialFilter }: { readonly initialFilter: string
                 </ToggleGroupItem>
               ))}
             </ToggleGroup>
-            <span className="text-sm text-muted-foreground">Times shown in {timeZoneLabel(localTz, localTz)}</span>
+            <span className="text-sm text-muted-foreground">
+              Times shown in {timeZoneLabel(localTz, localTz)}
+            </span>
           </div>
           <div aria-live="polite">
             <MeetingList rows={rows} filter={filter} onShowAll={() => choose("all")} />

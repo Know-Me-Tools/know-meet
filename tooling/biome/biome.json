@@ -32,10 +32,16 @@
       "!**/tooling/biome",
       "!**/tests/fidelity/oracle",
       "!**/tests/fidelity/baselines",
+      "!**/tests/fidelity/baselines-*",
       "!**/src-tauri/capabilities",
       "!**/src-tauri/command-manifest.json",
       "!**/packages/design-tokens/token-generator.config.json"
     ]
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
   },
   "formatter": {
     "enabled": true,
@@ -67,6 +73,21 @@
       "correctness": {
         "noUnusedImports": "error",
         "noUnusedVariables": "error"
+      },
+      "complexity": {
+        "useLiteralKeys": "off"
+      },
+      "a11y": {
+        "noLabelWithoutControl": {
+          "level": "error",
+          "options": {
+            "inputComponents": [
+              "Checkbox",
+              "RadioGroupItem",
+              "Switch"
+            ]
+          }
+        }
       }
     }
   },

@@ -10,13 +10,13 @@ import { toast } from "@know-meet/ui/components/toast";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Fragment, useEffect, useEffectEvent, useRef, useState } from "react";
 import type * as React from "react";
+import { Fragment, useEffect, useEffectEvent, useRef, useState } from "react";
 import { agentFromDraft } from "../application/agents-fixtures";
 import { AUTOJOIN, DISPATCH, KNOWLEDGE, MEDIA, type RegistryAgent } from "../domain/agent-config";
 import { draftErrors, FAIL_WORKER, FIELD_LABEL } from "../domain/registration";
 import { useAgentsState } from "./agents-state";
-import { Masked, NotSet, Notice } from "./agents-ui";
+import { Masked, Notice, NotSet } from "./agents-ui";
 import { type CheckSpec, type CheckState, TestChecks } from "./test-checks";
 import { WizardFrame } from "./wizard-frame";
 
@@ -24,7 +24,15 @@ const STEP_MS = 900;
 
 type Row = readonly [string, React.ReactNode, "mono" | "plain"];
 
-function SummaryCard({ title, step, rows }: { readonly title: string; readonly step: 1 | 2 | 3; readonly rows: readonly Row[] }) {
+function SummaryCard({
+  title,
+  step,
+  rows,
+}: {
+  readonly title: string;
+  readonly step: 1 | 2 | 3;
+  readonly rows: readonly Row[];
+}) {
   return (
     <section aria-labelledby={`sum-${step}`} className={cn(cardVariants(), "gap-s2")}>
       <div className="flex flex-wrap items-start justify-between gap-s3">
@@ -44,8 +52,15 @@ function SummaryCard({ title, step, rows }: { readonly title: string; readonly s
       <dl className="m-0 grid grid-cols-[minmax(0,1fr)] gap-0.5">
         {rows.map(([term, value, face], index) => (
           <Fragment key={term}>
-            <dt className={cn("pt-0.5 text-sm text-muted-foreground", index > 0 && "mt-s2")}>{term}</dt>
-            <dd className={cn("m-0 min-w-0 [overflow-wrap:anywhere]", face === "mono" ? "font-mono text-13" : "text-sm")}>
+            <dt className={cn("pt-0.5 text-sm text-muted-foreground", index > 0 && "mt-s2")}>
+              {term}
+            </dt>
+            <dd
+              className={cn(
+                "m-0 min-w-0 [overflow-wrap:anywhere]",
+                face === "mono" ? "font-mono text-13" : "text-sm",
+              )}
+            >
               {value === "" ? <NotSet /> : value}
             </dd>
           </Fragment>
@@ -55,7 +70,13 @@ function SummaryCard({ title, step, rows }: { readonly title: string; readonly s
   );
 }
 
-function SuccessPanel({ agent, onAnother }: { readonly agent: RegistryAgent; readonly onAnother: () => void }) {
+function SuccessPanel({
+  agent,
+  onAnother,
+}: {
+  readonly agent: RegistryAgent;
+  readonly onAnother: () => void;
+}) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => headingRef.current?.focus(), []);
   return (
@@ -87,22 +108,42 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
   const state = useAgentsState();
   const { draft, secrets, registry, workspace, userName } = state;
   const navigate = useNavigate();
-  const errors = draftErrors(draft, secrets, registry.map((agent) => agent.worker));
+  const errors = draftErrors(
+    draft,
+    secrets,
+    registry.map((agent) => agent.worker),
+  );
   const url = draft.project === "own" ? draft.url : workspace.livekit.url;
   const checks: readonly CheckSpec[] = [
     { title: "Reach LiveKit project", detail: url },
-    { title: "Worker registered with agent_name", detail: `Looking for “${draft.agentName || "—"}”` },
-    { title: "Test dispatch into sandbox room", detail: "Private room, no participants other than the agent" },
-    { title: "Agent joined & responded", detail: "Waits for the agent to join and answer a test message" },
+    {
+      title: "Worker registered with agent_name",
+      detail: `Looking for “${draft.agentName || "—"}”`,
+    },
+    {
+      title: "Test dispatch into sandbox room",
+      detail: "Private room, no participants other than the agent",
+    },
+    {
+      title: "Agent joined & responded",
+      detail: "Waits for the agent to join and answer a test message",
+    },
   ];
   const [states, setStates] = useState<readonly CheckState[]>(() => checks.map(() => "waiting"));
   const [running, setRunning] = useState(false);
   const [registered, setRegistered] = useState<RegistryAgent | null>(null);
   const [live, setLive] = useState(
-    errors.length > 0 ? "Fix the items above to run the test." : "Runs four checks against your worker. Takes a few seconds.",
+    errors.length > 0
+      ? "Fix the items above to run the test."
+      : "Runs four checks against your worker. Takes a few seconds.",
   );
   const timers = useRef<number[]>([]);
-  useEffect(() => () => timers.current.forEach((id) => window.clearTimeout(id)), []);
+  useEffect(
+    () => () => {
+      for (const id of timers.current) window.clearTimeout(id);
+    },
+    [],
+  );
 
   const later = (fn: () => void) => {
     timers.current.push(window.setTimeout(fn, STEP_MS));
@@ -134,8 +175,12 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
           step(index + 1);
           return;
         }
-        setStates((current) => current.map((s, i) => (i === index ? "failed" : i > index ? "skipped" : s)));
-        setLive(`Failed: no worker registered with agent_name “${draft.agentName}”. Opening details…`);
+        setStates((current) =>
+          current.map((s, i) => (i === index ? "failed" : i > index ? "skipped" : s)),
+        );
+        setLive(
+          `Failed: no worker registered with agent_name “${draft.agentName}”. Opening details…`,
+        );
         state.setLastFailure({ agentName: draft.agentName, url });
         later(() => void navigate({ to: "/agents", hash: "register-error" }));
       });
@@ -151,7 +196,7 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
     if (!autorun || !canRun) return undefined;
     startRun();
     return () => {
-      timers.current.forEach((id) => window.clearTimeout(id));
+      for (const id of timers.current) window.clearTimeout(id);
       timers.current = [];
     };
   }, [autorun, canRun]);
@@ -165,11 +210,17 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
             <strong>Finish these before testing</strong>
             <ul className="m-0 grid list-none gap-s2 p-0">
               {errors.map((error) => (
-                <li key={error.field} className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s2 text-sm">
+                <li
+                  key={error.field}
+                  className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s2 text-sm"
+                >
                   <KmIcon name="alert" className="mt-px size-[18px] text-red-text" />
                   <span>
                     {`${FIELD_LABEL[error.field]}: ${error.message} `}
-                    <Link to="/agents" hash={`register:${error.step}`}>{`Fix in step ${error.step}`}</Link>
+                    <Link
+                      to="/agents"
+                      hash={`register:${error.step}`}
+                    >{`Fix in step ${error.step}`}</Link>
                   </span>
                 </li>
               ))}
@@ -180,7 +231,11 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
           <SummaryCard
             title="Identity"
             step={1}
-            rows={[["Name", draft.name, "plain"], ["Role", draft.role, "plain"], ["Glyph", draft.glyph, "mono"]]}
+            rows={[
+              ["Name", draft.name, "plain"],
+              ["Role", draft.role, "plain"],
+              ["Glyph", draft.glyph, "mono"],
+            ]}
           />
           <SummaryCard
             title="Worker & dispatch"
@@ -191,8 +246,12 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
               ["agent_name", draft.agentName, "mono"],
               ...(own
                 ? ([
-                    ["API key", secrets.apiKey === "" ? "" : <Masked />, "plain"],
-                    ["API secret", secrets.apiSecret === "" ? "" : <Masked />, "plain"],
+                    ["API key", secrets.apiKey === "" ? "" : <Masked key="api-key" />, "plain"],
+                    [
+                      "API secret",
+                      secrets.apiSecret === "" ? "" : <Masked key="api-secret" />,
+                      "plain",
+                    ],
                   ] as const)
                 : []),
             ]}
@@ -206,7 +265,9 @@ export function WizardTest({ autorun }: { readonly autorun: boolean }) {
               ["Dispatch", DISPATCH[draft.dispatch].label, "plain"],
               [
                 "Auto-join",
-                draft.autoJoin === "tagged" ? `Meetings tagged “${draft.tag || "—"}”` : AUTOJOIN[draft.autoJoin].label,
+                draft.autoJoin === "tagged"
+                  ? `Meetings tagged “${draft.tag || "—"}”`
+                  : AUTOJOIN[draft.autoJoin].label,
                 "plain",
               ],
             ]}

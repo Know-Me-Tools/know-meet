@@ -49,5 +49,17 @@ export function usePlayback(totalSeconds: number): Playback {
     setPlaying(!playing);
   }, [playing, t, totalSeconds]);
 
-  return { t, total: totalSeconds, playing, speed, captions, follow, seek, toggle, setSpeed, setCaptions, setFollow };
+  return {
+    t,
+    total: totalSeconds,
+    playing,
+    speed,
+    captions,
+    follow,
+    seek,
+    toggle,
+    setSpeed,
+    setCaptions,
+    setFollow,
+  };
 }

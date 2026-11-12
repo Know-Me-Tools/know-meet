@@ -2,6 +2,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart' show OverflowDecoratedBox;
 
 /// WCAG 2.2 relative luminance of an opaque colour.
 double kmLuminance(Color c) {
@@ -23,6 +24,8 @@ Color? kmDecorationFill(Widget w) {
     DecoratedBox(:final Decoration decoration) => decoration,
     Container(:final Decoration? decoration) => decoration,
     AnimatedContainer(:final Decoration? decoration) => decoration,
+    // shadcn_flutter paints its button fill through this widget.
+    OverflowDecoratedBox(:final Decoration decoration) => decoration,
     _ => null,
   };
   return d is BoxDecoration ? d.color : null;
@@ -36,6 +39,8 @@ String? kmStrokeOf(Widget w) {
     DecoratedBox(:final Decoration decoration) => decoration,
     Container(:final Decoration? decoration) => decoration,
     AnimatedContainer(:final Decoration? decoration) => decoration,
+    // shadcn_flutter paints its button fill through this widget.
+    OverflowDecoratedBox(:final Decoration decoration) => decoration,
     _ => null,
   };
   if (d is BoxDecoration && d.border != null) {

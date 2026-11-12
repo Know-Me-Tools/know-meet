@@ -7,7 +7,7 @@ import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { toast } from "@know-meet/ui/components/toast";
 import { cn } from "@know-meet/ui/lib/utils";
 import { useState } from "react";
-import { type Delivery } from "../domain/dashboard";
+import type { Delivery } from "../domain/dashboard";
 import { useDashboard } from "./dashboard-context";
 import { busySpinClass } from "./dashboard-parts";
 
@@ -55,7 +55,11 @@ export function SendEmailInsteadButton({ delivery }: { readonly delivery: Delive
           const email = await sendEmailInstead(delivery);
           toast.add({ title: `Email invite sent to ${email}`, type: "success" });
         } catch (error) {
-          toast.add({ title: error instanceof Error ? error.message : "Couldn’t send the email invite. Try again.", type: "error" });
+          toast.add({
+            title:
+              error instanceof Error ? error.message : "Couldn’t send the email invite. Try again.",
+            type: "error",
+          });
         }
       }}
     />
@@ -63,7 +67,15 @@ export function SendEmailInsteadButton({ delivery }: { readonly delivery: Delive
 }
 
 /** Resends one or more deliveries; `name` is used for the toast and the accessible name. */
-export function ResendButton({ deliveries, ariaLabel, name }: { readonly deliveries: readonly Delivery[]; readonly ariaLabel: string; readonly name: string }) {
+export function ResendButton({
+  deliveries,
+  ariaLabel,
+  name,
+}: {
+  readonly deliveries: readonly Delivery[];
+  readonly ariaLabel: string;
+  readonly name: string;
+}) {
   const { resend } = useDashboard();
   return (
     <ActionButton
@@ -91,7 +103,13 @@ export function ResendButton({ deliveries, ariaLabel, name }: { readonly deliver
 }
 
 /** Bulk resend (invites view): "Resend failed (n)" / "Resend selected (n)". */
-export function BulkResendButton({ deliveries, label, primary, icon, onDone }: {
+export function BulkResendButton({
+  deliveries,
+  label,
+  primary,
+  icon,
+  onDone,
+}: {
   readonly deliveries: readonly Delivery[];
   readonly label: string;
   readonly primary?: boolean;

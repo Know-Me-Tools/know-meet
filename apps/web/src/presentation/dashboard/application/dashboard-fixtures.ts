@@ -3,7 +3,12 @@
 // extras (BASE_EXTRA), the base invite deliveries, the calendar accounts and the
 // time-zone list. Everything derives from the shared sample workspace.
 import { findPerson, type Workspace } from "../../workspace/domain/workspace";
-import type { DashboardMeeting, Delivery, DeliveryChannel, DeliveryStatus } from "../domain/dashboard";
+import type {
+  DashboardMeeting,
+  Delivery,
+  DeliveryChannel,
+  DeliveryStatus,
+} from "../domain/dashboard";
 import { LANDLINE_REASON } from "../domain/dashboard";
 
 const MINUTE_MS = 60_000;
@@ -37,7 +42,9 @@ export function localTimeZone(): string {
 
 /** The picker list: the local zone first when it is not already listed. */
 export function timeZoneOptions(local: string): readonly (readonly [string, string])[] {
-  return TIME_ZONES.some(([id]) => id === local) ? TIME_ZONES : [[local, local.replace(/_/g, " ")], ...TIME_ZONES];
+  return TIME_ZONES.some(([id]) => id === local)
+    ? TIME_ZONES
+    : [[local, local.replace(/_/g, " ")], ...TIME_ZONES];
 }
 
 export function timeZoneLabel(id: string, local: string): string {
@@ -54,7 +61,8 @@ interface MeetingExtra {
 const BASE_EXTRA: Readonly<Record<string, MeetingExtra>> = {
   "partner-onboarding": {
     dots: ["iris"],
-    description: "Walk Northwind and Lumen Labs through the partner program and agree on onboarding owners.",
+    description:
+      "Walk Northwind and Lumen Labs through the partner program and agree on onboarding owners.",
     preReads: [
       { name: "Partner program overview.pdf", size: 1258291 },
       { name: "Onboarding checklist v3.docx", size: 84210 },
@@ -66,7 +74,11 @@ const BASE_EXTRA: Readonly<Record<string, MeetingExtra>> = {
     description: "Kick off Cohort 2: introductions, schedule and first deliverables.",
     preReads: [{ name: "Cohort 2 roster.xlsx", size: 40960 }],
   },
-  "product-sync": { dots: ["sol", "iris"], description: "Weekly status across roadmap items.", preReads: [] },
+  "product-sync": {
+    dots: ["sol", "iris"],
+    description: "Weekly status across roadmap items.",
+    preReads: [],
+  },
   "pricing-review": {
     dots: ["iris"],
     description: "Review the pricing model draft before it goes to partners.",
@@ -78,7 +90,10 @@ const BASE_EXTRA: Readonly<Record<string, MeetingExtra>> = {
 };
 
 /** The workspace meetings with their dashboard defaults and extras. */
-export function baseDashboardMeetings(workspace: Workspace, tz: string): readonly DashboardMeeting[] {
+export function baseDashboardMeetings(
+  workspace: Workspace,
+  tz: string,
+): readonly DashboardMeeting[] {
   return workspace.meetings.map((meeting) => {
     const extra = BASE_EXTRA[meeting.id];
     return {
@@ -95,7 +110,13 @@ export function baseDashboardMeetings(workspace: Workspace, tz: string): readonl
   });
 }
 
-function channelsForBase(source: string, index: number, email: string, phone: string | null, phoneOnly: boolean) {
+function channelsForBase(
+  source: string,
+  index: number,
+  email: string,
+  phone: string | null,
+  phoneOnly: boolean,
+) {
   const channels: DeliveryChannel[] = [];
   if (!phoneOnly && email !== "") channels.push("email");
   if (phone !== null && (index % 2 === 0 || phoneOnly)) channels.push("sms");
@@ -107,7 +128,9 @@ function channelsForBase(source: string, index: number, email: string, phone: st
 export function baseDeliveries(workspace: Workspace): readonly Delivery[] {
   const list: Delivery[] = [];
   for (const meeting of workspace.meetings) {
-    const sentAt = new Date(new Date(meeting.start).getTime() - 2 * 24 * 60 * MINUTE_MS).toISOString();
+    const sentAt = new Date(
+      new Date(meeting.start).getTime() - 2 * 24 * 60 * MINUTE_MS,
+    ).toISOString();
     meeting.invitees.forEach((name, index) => {
       const person = findPerson(workspace, name);
       const id = person?.id ?? "self";
@@ -153,6 +176,8 @@ const CODE_ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
 /** A fresh join code, `km-xxx-xxx`. */
 export function newJoinCode(random: () => number = Math.random): string {
   const part = (n: number) =>
-    Array.from({ length: n }, () => CODE_ALPHABET.charAt(Math.floor(random() * CODE_ALPHABET.length))).join("");
+    Array.from({ length: n }, () =>
+      CODE_ALPHABET.charAt(Math.floor(random() * CODE_ALPHABET.length)),
+    ).join("");
   return `km-${part(3)}-${part(3)}`;
 }

@@ -23,7 +23,12 @@ function describedBy(...ids: readonly (string | false | undefined)[]): string | 
   return list.length === 0 ? undefined : list.join(" ");
 }
 
-function FieldLabelText({ htmlFor, label, required, optional }: {
+function FieldLabelText({
+  htmlFor,
+  label,
+  required,
+  optional,
+}: {
   readonly htmlFor: string;
   readonly label: string;
   readonly required?: boolean;
@@ -32,8 +37,14 @@ function FieldLabelText({ htmlFor, label, required, optional }: {
   return (
     <label htmlFor={htmlFor} className="text-sm font-semibold">
       {label}
-      {required === true ? <span aria-hidden="true" className="text-ember-text">{" *"}</span> : null}
-      {optional === true ? <span className="font-regular text-muted-foreground"> (optional)</span> : null}
+      {required === true ? (
+        <span aria-hidden="true" className="text-ember-text">
+          {" *"}
+        </span>
+      ) : null}
+      {optional === true ? (
+        <span className="font-regular text-muted-foreground"> (optional)</span>
+      ) : null}
     </label>
   );
 }
@@ -71,7 +82,20 @@ export interface TextFieldProps {
 
 /** settings.html `field(o)`. */
 export function TextField(props: TextFieldProps) {
-  const { id, label, value, onValueChange, error, hint, required, optional, kind = "text", mono, copyable, readOnly } = props;
+  const {
+    id,
+    label,
+    value,
+    onValueChange,
+    error,
+    hint,
+    required,
+    optional,
+    kind = "text",
+    mono,
+    copyable,
+    readOnly,
+  } = props;
   const [revealed, setRevealed] = useState(false);
   const hintId = `${id}-hint`;
   const errorId = `${id}-err`;
@@ -90,7 +114,11 @@ export function TextField(props: TextFieldProps) {
   } as const;
   const control =
     kind === "textarea" ? (
-      <Textarea {...shared} rows={props.rows ?? 3} onChange={(event) => onValueChange?.(event.target.value)} />
+      <Textarea
+        {...shared}
+        rows={props.rows ?? 3}
+        onChange={(event) => onValueChange?.(event.target.value)}
+      />
     ) : (
       <Input
         {...shared}
@@ -120,7 +148,12 @@ export function TextField(props: TextFieldProps) {
       ) : copyable === true ? (
         <InputGroup>
           {control}
-          <Button variant="ghost" size="icon" aria-label={`Copy ${label}`} onClick={() => void copyText(value)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={`Copy ${label}`}
+            onClick={() => void copyText(value)}
+          >
             <KmIcon name="copy" />
           </Button>
         </InputGroup>
@@ -134,7 +167,12 @@ export function TextField(props: TextFieldProps) {
 
 /** km.css `.input-group`: a control plus a trailing button. */
 export function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s2", className)} {...props} />;
+  return (
+    <div
+      className={cn("grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s2", className)}
+      {...props}
+    />
+  );
 }
 
 export interface SelectFieldProps {
@@ -149,7 +187,16 @@ export interface SelectFieldProps {
 }
 
 /** settings.html `selectField(o)` on the kit native select. */
-export function SelectField({ id, label, value, options, onValueChange, hint, required, disabled }: SelectFieldProps) {
+export function SelectField({
+  id,
+  label,
+  value,
+  options,
+  onValueChange,
+  hint,
+  required,
+  disabled,
+}: SelectFieldProps) {
   const autoId = useId();
   const selectId = id ?? autoId;
   const hintId = `${selectId}-hint`;
@@ -175,7 +222,13 @@ export function SelectField({ id, label, value, options, onValueChange, hint, re
 }
 
 /** settings.html `switchRow(o)`: label and description, the switch at the end. */
-export function SwitchRow({ label, description, checked, onCheckedChange, disabled }: {
+export function SwitchRow({
+  label,
+  description,
+  checked,
+  onCheckedChange,
+  disabled,
+}: {
   readonly label: string;
   readonly description?: string;
   readonly checked: boolean;
@@ -205,7 +258,13 @@ export function SwitchRow({ label, description, checked, onCheckedChange, disabl
 }
 
 /** km.css `.check-row` with a kit checkbox. */
-export function CheckRow({ id, label, description, checked, onCheckedChange }: {
+export function CheckRow({
+  id,
+  label,
+  description,
+  checked,
+  onCheckedChange,
+}: {
   readonly id: string;
   readonly label: string;
   readonly description?: string;
@@ -214,10 +273,17 @@ export function CheckRow({ id, label, description, checked, onCheckedChange }: {
 }) {
   return (
     <div className="flex min-h-size-target items-start gap-s3 py-s2">
-      <Checkbox id={id} checked={checked} onCheckedChange={(next) => onCheckedChange(next)} className="mt-0.5" />
+      <Checkbox
+        id={id}
+        checked={checked}
+        onCheckedChange={(next) => onCheckedChange(next)}
+        className="mt-0.5"
+      />
       <label htmlFor={id} className="grid cursor-pointer gap-0.5">
         <span className="font-semibold">{label}</span>
-        {description === undefined ? null : <span className="text-sm text-muted-foreground">{description}</span>}
+        {description === undefined ? null : (
+          <span className="text-sm text-muted-foreground">{description}</span>
+        )}
       </label>
     </div>
   );
@@ -230,7 +296,13 @@ export interface ChoiceOption {
 }
 
 /** settings.html `radioGroup(legend, …)`: a fieldset of radio rows. */
-export function RadioChoices({ name, legend, options, value, onValueChange }: {
+export function RadioChoices({
+  name,
+  legend,
+  options,
+  value,
+  onValueChange,
+}: {
   readonly name: string;
   readonly legend: string;
   readonly options: readonly ChoiceOption[];
@@ -243,7 +315,12 @@ export function RadioChoices({ name, legend, options, value, onValueChange }: {
       <span id={legendId} className="mb-1.5 text-sm font-semibold">
         {legend}
       </span>
-      <RadioGroup aria-labelledby={legendId} value={value} onValueChange={(next) => onValueChange(String(next))} className="gap-0">
+      <RadioGroup
+        aria-labelledby={legendId}
+        value={value}
+        onValueChange={(next) => onValueChange(String(next))}
+        className="gap-0"
+      >
         {options.map((option) => {
           const id = `${name}-${option.value}`;
           return (
@@ -270,7 +347,13 @@ export interface SegmentOption {
 }
 
 /** settings.html `segField(label, …)`: a labelled segmented control (single choice). */
-export function SegmentField({ label, options, value, onValueChange, disabled }: {
+export function SegmentField({
+  label,
+  options,
+  value,
+  onValueChange,
+  disabled,
+}: {
   readonly label: string;
   readonly options: readonly SegmentOption[];
   readonly value: string;

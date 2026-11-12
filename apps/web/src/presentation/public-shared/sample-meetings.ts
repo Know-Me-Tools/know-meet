@@ -33,7 +33,10 @@ export interface DialInNumber {
   readonly number: string;
 }
 
-export const SIGNED_IN_SAMPLE_USER = { name: "Jordan Reyes", email: "jordan.reyes@know-me.tools" } as const;
+export const SIGNED_IN_SAMPLE_USER = {
+  name: "Jordan Reyes",
+  email: "jordan.reyes@know-me.tools",
+} as const;
 
 export const SAMPLE_PEOPLE: readonly SamplePerson[] = [
   { name: "Avery Chen", email: "avery.chen@northwind.io", org: "Northwind", initials: "AC" },
@@ -53,7 +56,15 @@ const PIN = "482 913 07";
 export const DEFAULT_INVITE_MEETING_ID = "product-sync";
 
 function atDay(now: Date, dayOffset: number, hours: number, minutes: number): Date {
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate() + dayOffset, hours, minutes, 0, 0);
+  return new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + dayOffset,
+    hours,
+    minutes,
+    0,
+    0,
+  );
 }
 
 export function buildSampleMeetings(now: Date): readonly SampleMeeting[] {
@@ -134,9 +145,19 @@ export function hostOf(meeting: SampleMeeting): SamplePerson {
   const person = SAMPLE_PEOPLE.find((candidate) => candidate.name === meeting.host);
   if (person !== undefined) return person;
   if (meeting.host === SIGNED_IN_SAMPLE_USER.name) {
-    return { name: meeting.host, email: SIGNED_IN_SAMPLE_USER.email, org: "Northwind", initials: "JR" };
+    return {
+      name: meeting.host,
+      email: SIGNED_IN_SAMPLE_USER.email,
+      org: "Northwind",
+      initials: "JR",
+    };
   }
-  return { name: meeting.host, email: "", org: "", initials: meeting.host.slice(0, 2).toUpperCase() };
+  return {
+    name: meeting.host,
+    email: "",
+    org: "",
+    initials: meeting.host.slice(0, 2).toUpperCase(),
+  };
 }
 
 /** Home "Your next meeting": the live one first, then the soonest upcoming. */

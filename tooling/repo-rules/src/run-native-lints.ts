@@ -1,5 +1,5 @@
-import { cwdFromArgs } from "./lib/report.ts";
 import { FLUTTER_PREP, flutterStep, rootStep, runSteps } from "./lib/native-steps.ts";
+import { cwdFromArgs } from "./lib/report.ts";
 
 /**
  * Zero-warning native lints. `--workspace` covers crates/**, services/bff and

@@ -62,7 +62,7 @@ void main() {
           }
           continue;
         }
-        final String target = norm(File(f.parent.path + '/' + i).absolute.path);
+        final String target = norm(File('${f.parent.path}/$i').absolute.path);
         final RegExpMatch? other = RegExp(r'/lib/features/([a-z_]+)/').firstMatch(target);
         if (other != null && other.group(1) != own.group(1)) {
           violations.add('${norm(f.path)} -> $i');

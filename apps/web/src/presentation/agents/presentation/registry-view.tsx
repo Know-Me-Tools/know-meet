@@ -2,9 +2,16 @@
 // #registry (agents.html `renderRegistry`): search + status filter, "Your agents",
 // "System agents" and "Your dots". Filters start from the hash params (?q=,
 // ?status=) and then live in component state, so typing never moves focus.
-import { AgentGlyph } from "@know-meet/ui/components/glyph";
+
 import { Button, buttonVariants } from "@know-meet/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyMedia, EmptyTitle } from "@know-meet/ui/components/empty";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyMedia,
+  EmptyTitle,
+} from "@know-meet/ui/components/empty";
+import { AgentGlyph } from "@know-meet/ui/components/glyph";
 import { Input } from "@know-meet/ui/components/input";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { Orb } from "@know-meet/ui/components/orb";
@@ -42,7 +49,10 @@ function toStatus(value: string | undefined): StatusFilter {
 function matches(agent: RegistryAgent, status: StatusFilter, needle: string): boolean {
   if (status !== "all" && agent.status !== status) return false;
   if (needle === "") return true;
-  return [agent.name, agent.role, agent.worker, agent.owner, agent.desc].join(" ").toLowerCase().includes(needle);
+  return [agent.name, agent.role, agent.worker, agent.owner, agent.desc]
+    .join(" ")
+    .toLowerCase()
+    .includes(needle);
 }
 
 function AgentRow({ agent }: { readonly agent: RegistryAgent }) {
@@ -98,7 +108,8 @@ function YourAgents({
         </EmptyMedia>
         <EmptyTitle>No registered agents yet</EmptyTitle>
         <EmptyDescription>
-          Register a LiveKit Agents worker by its agent_name and you can dispatch it into any meeting you host.
+          Register a LiveKit Agents worker by its agent_name and you can dispatch it into any
+          meeting you host.
         </EmptyDescription>
         <RegisterLink />
       </Empty>
@@ -111,7 +122,9 @@ function YourAgents({
           <KmIcon name="filter" />
         </EmptyMedia>
         <EmptyTitle>No agents match these filters</EmptyTitle>
-        <EmptyDescription>Try a different name, role or worker name, or show agents in every status.</EmptyDescription>
+        <EmptyDescription>
+          Try a different name, role or worker name, or show agents in every status.
+        </EmptyDescription>
         <EmptyContent>
           <Button type="button" variant="secondary" onClick={onClear}>
             <KmIcon name="x" className="size-4" />
@@ -139,14 +152,23 @@ function DotsSection() {
         title="Your dots"
         sub="Persistent personal agents with private memory."
         action={
-          <Link to="/agents" hash="dots" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}>
+          <Link
+            to="/agents"
+            hash="dots"
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}
+          >
             <span>Manage dots</span>
             <KmIcon name="chevron-right" className="size-4" />
           </Link>
         }
       />
       <div className="grid gap-s2">
-        <Link to="/agents" hash="dot:iris" className={listRowClass} data-state={iris.paused ? "paused" : "listening"}>
+        <Link
+          to="/agents"
+          hash="dot:iris"
+          className={listRowClass}
+          data-state={iris.paused ? "paused" : "listening"}
+        >
           <Orb className={cn("w-10", iris.paused && "animate-none opacity-45 grayscale")} />
           <span className="grid min-w-0 gap-0.5">
             <span className="block truncate font-semibold">{iris.name}</span>
@@ -225,7 +247,9 @@ export function RegistryView({ params }: { readonly params: Readonly<Record<stri
             aria-labelledby="status-label"
             value={[status]}
             onValueChange={(values) => {
-              const next = values.find((value): value is StatusFilter => STATUS_FILTERS.some(([key]) => key === value));
+              const next = values.find((value): value is StatusFilter =>
+                STATUS_FILTERS.some(([key]) => key === value),
+              );
               if (next !== undefined) setStatus(next);
             }}
           >
@@ -268,7 +292,9 @@ export function RegistryView({ params }: { readonly params: Readonly<Record<stri
           {systemShown.length > 0 ? (
             systemShown.map((agent) => <AgentRow key={agent.id} agent={agent} />)
           ) : (
-            <p className="text-sm text-muted-foreground">The Concierge doesn’t match these filters.</p>
+            <p className="text-sm text-muted-foreground">
+              The Concierge doesn’t match these filters.
+            </p>
           )}
         </div>
       </section>

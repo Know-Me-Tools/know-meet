@@ -51,7 +51,11 @@ function PhoneGlyph({ className, size = "default", ...props }: GlyphProps) {
       data-slot="phone-glyph"
       data-size={size}
       aria-hidden="true"
-      className={cn(glyphVariants({ size }), "bg-green-soft text-green-text [&>svg]:size-[45%]", className)}
+      className={cn(
+        glyphVariants({ size }),
+        "bg-green-soft text-green-text [&>svg]:size-[45%]",
+        className,
+      )}
       {...props}
     />
   );

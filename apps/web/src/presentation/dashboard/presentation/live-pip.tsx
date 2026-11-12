@@ -12,7 +12,8 @@ export function LivePip() {
   const ring = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const element = ring.current;
-    if (element === null || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (element === null || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return undefined;
     const easing = getComputedStyle(element).getPropertyValue("--ease-out").trim() || "ease-out";
     const animation = element.animate(
       [

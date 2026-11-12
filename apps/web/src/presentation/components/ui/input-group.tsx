@@ -7,13 +7,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type * as React from "react";
 
-function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
+function InputGroup({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
-    <div
+    <fieldset
       data-slot="input-group"
-      role="group"
       className={cn(
-        "group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg transition-colors outline-none has-disabled:bg-input/50 has-disabled:opacity-50 has-[[data-slot=input-group-control]:focus-visible]:bg-focus! has-[[data-slot=input-group-control]:focus-visible]:text-on-focus! has-[[data-slot][aria-invalid=true]]:bg-control-invalid has-[[data-slot][aria-invalid=true]]:text-on-control-invalid has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto dark:has-disabled:bg-input/80 has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5 bg-input text-on-control",
+        "group/input-group relative m-0 p-0 flex h-8 w-full min-w-0 items-center rounded-lg transition-colors outline-none has-disabled:bg-input/50 has-disabled:opacity-50 has-[[data-slot=input-group-control]:focus-visible]:bg-focus! has-[[data-slot=input-group-control]:focus-visible]:text-on-focus! has-[[data-slot][aria-invalid=true]]:bg-control-invalid has-[[data-slot][aria-invalid=true]]:text-on-control-invalid has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto dark:has-disabled:bg-input/80 has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5 bg-input text-on-control",
         className,
       )}
       {...props}
@@ -44,13 +43,13 @@ function InputGroupAddon({
   className,
   align = "inline-start",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
+}: React.ComponentProps<"fieldset"> & VariantProps<typeof inputGroupAddonVariants>) {
   return (
-    <div
-      role="group"
+    // biome-ignore lint/a11y/useKeyWithClickEvents: clicking the addon is a pointer shortcut that focuses the input; keyboard users already reach the input by Tab.
+    <fieldset
       data-slot="input-group-addon"
       data-align={align}
-      className={cn(inputGroupAddonVariants({ align }), className)}
+      className={cn("m-0 min-w-0 p-0", inputGroupAddonVariants({ align }), className)}
       onClick={(e) => {
         if ((e.target as HTMLElement).closest("button")) {
           return;

@@ -20,7 +20,7 @@ export function WizardPermissions() {
   const focusTag = useRef(false);
 
   useEffect(() => {
-    if (!focusTag.current) return;
+    if (!tagged || !focusTag.current) return;
     focusTag.current = false;
     document.getElementById("p-tag")?.focus();
   }, [tagged]);
@@ -97,9 +97,9 @@ export function WizardPermissions() {
         <Notice icon="info">
           <strong>Data retention</strong>
           <span>
-            While it’s in a meeting, the agent can read only the knowledge you grant here. Anything your worker stores
-            lives on your infrastructure under your own retention policy. In guest meetings the live transcript is
-            deleted when the meeting ends.
+            While it’s in a meeting, the agent can read only the knowledge you grant here. Anything
+            your worker stores lives on your infrastructure under your own retention policy. In
+            guest meetings the live transcript is deleted when the meeting ends.
           </span>
         </Notice>
       </form>

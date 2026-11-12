@@ -148,6 +148,11 @@
     height: var(--spacing-s8);
   }
 
+  /* Inline nav has no indicator (ordered before the higher-specificity rules below). */
+  .km-nav[data-nav-class="inline"] .km-nav-indicator {
+    display: none;
+  }
+
   /* Current: indicator `selected`, icon `on-selected`, label `fg`. */
   .km-nav:not([data-nav-class="inline"]) .km-nav-item[aria-current="page"] {
     color: var(--fg);
@@ -160,7 +165,9 @@
   }
 
   @media (hover: hover) {
-    .km-nav:not([data-nav-class="inline"]) .km-nav-item:not([aria-current="page"]):hover .km-nav-indicator {
+    .km-nav:not([data-nav-class="inline"])
+      .km-nav-item:not([aria-current="page"]):hover
+      .km-nav-indicator {
       background: var(--card-hov);
     }
   }
@@ -194,10 +201,6 @@
     border-radius: var(--radius-pill);
   }
 
-  .km-nav[data-nav-class="inline"] .km-nav-indicator {
-    display: none;
-  }
-
   .km-nav[data-nav-class="inline"] .km-nav-label {
     font-size: var(--text-sm);
   }
@@ -223,7 +226,14 @@
   /* The bar hides while the on-screen keyboard is open (a focused text control
      on a touch device). */
   @media (pointer: coarse) {
-    html:has(:is(input:not([type="checkbox"], [type="radio"], [type="range"]), textarea, select, [contenteditable="true"]):focus)
+    html:has(
+        :is(
+            input:not([type="checkbox"], [type="radio"], [type="range"]),
+            textarea,
+            select,
+            [contenteditable="true"]
+          ):focus
+      )
       .km-nav[data-nav-class="bar"] {
       display: none;
     }
@@ -322,11 +332,14 @@
   }
 
   /* No link colour/background fades while nav-morph.ts commits a class change. */
+  /* biome-ignore-start lint/complexity/noImportantStyles: nav-morph.ts must cut every nav transition during a class commit, including utility transitions */
   html[data-nav-committing] .km-nav,
   html[data-nav-committing] .km-nav * {
     transition: none !important;
   }
+  /* biome-ignore-end lint/complexity/noImportantStyles: nav-morph.ts must cut every nav transition during a class commit, including utility transitions */
 
+  /* biome-ignore-start lint/complexity/noImportantStyles: reduced motion must override the view-transition animations (WCAG 2.3.3) */
   @media (prefers-reduced-motion: reduce) {
     ::view-transition-group(*),
     ::view-transition-old(*),
@@ -334,4 +347,5 @@
       animation: none !important;
     }
   }
+  /* biome-ignore-end lint/complexity/noImportantStyles: reduced motion must override the view-transition animations (WCAG 2.3.3) */
 }

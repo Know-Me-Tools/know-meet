@@ -18,10 +18,27 @@ interface HowStep {
 }
 
 const HOW: readonly HowStep[] = [
-  { icon: "record", title: "Recorded as one composite", detail: "LiveKit Egress records every participant in a single Room Composite layout, after everyone in the room consents." },
-  { icon: "database", title: "Saved to S3-compatible storage", detail: "KnowMe-managed by default, or your own bucket." },
-  { icon: "globe", title: "Pinned to IPFS", detail: "A post-recording job pins the file and keeps its content ID (CID)." },
-  { icon: "send", title: "Summary and transcript sent", detail: "Participants get them by email, or an SMS link, when the meeting closes." },
+  {
+    icon: "record",
+    title: "Recorded as one composite",
+    detail:
+      "LiveKit Egress records every participant in a single Room Composite layout, after everyone in the room consents.",
+  },
+  {
+    icon: "database",
+    title: "Saved to S3-compatible storage",
+    detail: "KnowMe-managed by default, or your own bucket.",
+  },
+  {
+    icon: "globe",
+    title: "Pinned to IPFS",
+    detail: "A post-recording job pins the file and keeps its content ID (CID).",
+  },
+  {
+    icon: "send",
+    title: "Summary and transcript sent",
+    detail: "Participants get them by email, or an SMS link, when the meeting closes.",
+  },
 ];
 
 export function EmptyRecordingsView() {
@@ -41,13 +58,16 @@ export function EmptyRecordingsView() {
           No recordings yet
         </h2>
         <p className="max-w-measure-empty text-sm text-muted-foreground">
-          When you record a meeting you host, it shows up here with its transcript and summary. Here is what happens to
-          each recording:
+          When you record a meeting you host, it shows up here with its transcript and summary. Here
+          is what happens to each recording:
         </p>
         <ol className="m-0 grid list-none gap-s3 p-0">
           {HOW.map((step) => (
             <li key={step.title} className="grid grid-cols-[40px_minmax(0,1fr)] items-start gap-s3">
-              <span aria-hidden="true" className="grid size-10 place-items-center rounded-base bg-muted text-foreground">
+              <span
+                aria-hidden="true"
+                className="grid size-10 place-items-center rounded-base bg-muted text-foreground"
+              >
                 <KmIcon name={step.icon} />
               </span>
               <div>
@@ -62,11 +82,19 @@ export function EmptyRecordingsView() {
             <KmIcon name="cam" />
             <span>Start a meeting</span>
           </Link>
-          <Link to="/settings" hash="recording" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/settings"
+            hash="recording"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="settings" />
             <span>Recording settings</span>
           </Link>
-          <Link to="/settings" hash="storage" className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}>
+          <Link
+            to="/settings"
+            hash="storage"
+            className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}
+          >
             <KmIcon name="database" />
             <span>Choose storage</span>
           </Link>
@@ -79,7 +107,9 @@ export function EmptyRecordingsView() {
 export function RecordingNotFoundView({ id }: { readonly id: string }) {
   return (
     <>
-      <RecordingsCrumbs items={[{ label: "Recordings", hash: "library" }, { label: "Not found" }]} />
+      <RecordingsCrumbs
+        items={[{ label: "Recordings", hash: "library" }, { label: "Not found" }]}
+      />
       <PageHead>
         <PageHeadText>
           <PageTitle>Recording not found</PageTitle>
@@ -93,8 +123,11 @@ export function RecordingNotFoundView({ id }: { readonly id: string }) {
           Details
         </h2>
         <p className="max-w-measure-empty text-sm text-muted-foreground">
-          We couldn’t find a recording with the id <code className="rounded-6 bg-muted px-1.5 py-px font-mono text-[0.88em] [overflow-wrap:anywhere]">{id === "" ? "(none)" : id}</code>. It may have been deleted, or
-          the link may be incomplete.
+          We couldn’t find a recording with the id{" "}
+          <code className="rounded-6 bg-muted px-1.5 py-px font-mono text-[0.88em] [overflow-wrap:anywhere]">
+            {id === "" ? "(none)" : id}
+          </code>
+          . It may have been deleted, or the link may be incomplete.
         </p>
         <div className="flex flex-wrap items-center gap-s2">
           <Link to="/recordings" hash="library" className={cn(buttonVariants(), focusFillClass)}>

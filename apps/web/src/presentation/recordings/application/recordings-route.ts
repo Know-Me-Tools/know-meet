@@ -2,7 +2,7 @@
 // recordings.html router: `#library` (default), `#empty`, `#detail:<id>[:<tab>]`,
 // `#processing:<id>`. Unknown views fall back to the library; an unknown tab
 // falls back to the transcript (prototype behaviour).
-import type { RecordingTab, RecordingsView } from "../domain/recording-details";
+import type { RecordingsView, RecordingTab } from "../domain/recording-details";
 
 export interface TabSpec {
   readonly id: RecordingTab;

@@ -4,6 +4,7 @@ library;
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sovereign_hybrid_mobile/app/app_router.dart';
 import 'package:sovereign_hybrid_mobile/app/know_meet_app.dart';
@@ -95,7 +96,7 @@ void main() {
     ) async {
       setKmViewport(tester, width: 375, disableAnimations: true);
       await pumpKmApp(tester, stateId: 'meet.room', signedIn: true);
-      expect(tester.hasRunningAnimations, isFalse);
+      expect(kmHasRunningAnimations(tester), isFalse);
     });
 
     testWidgets('the dots breathe when animations are allowed', (
@@ -121,7 +122,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.byType(KmOrb), findsWidgets);
-      expect(tester.hasRunningAnimations, isTrue);
+      expect(kmHasRunningAnimations(tester), isTrue);
       await tester.pumpWidget(const SizedBox());
     });
   });

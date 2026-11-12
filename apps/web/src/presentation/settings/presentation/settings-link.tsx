@@ -8,6 +8,11 @@ import type * as React from "react";
 
 const ACTIVE_OPTIONS = { exact: true, includeHash: true } as const;
 
-export function SettingsLink({ hash, ...props }: Omit<React.ComponentProps<"a">, "href"> & { readonly hash: string }) {
-  return <Link to="/settings" hash={hash} activeOptions={ACTIVE_OPTIONS} activeProps={{}} {...props} />;
+export function SettingsLink({
+  hash,
+  ...props
+}: Omit<React.ComponentProps<"a">, "href"> & { readonly hash: string }) {
+  return (
+    <Link to="/settings" hash={hash} activeOptions={ACTIVE_OPTIONS} activeProps={{}} {...props} />
+  );
 }

@@ -9,7 +9,13 @@ import { useNavigate } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useRef } from "react";
 import { describedBy, FormField } from "../public-shared/form-field";
-import { CODE_EXAMPLE, CODE_MAX_LENGTH, codeFormatError, normalizeCode, unknownCodeError } from "../public-shared/join-code";
+import {
+  CODE_EXAMPLE,
+  CODE_MAX_LENGTH,
+  codeFormatError,
+  normalizeCode,
+  unknownCodeError,
+} from "../public-shared/join-code";
 import { findByCode, type SampleMeeting } from "../public-shared/sample-meetings";
 import { submitForm, useField } from "../public-shared/use-field";
 import { toHash } from "../shared/use-hash-route";
@@ -22,7 +28,12 @@ interface CodeFormProps {
   readonly focusOnMount?: boolean;
 }
 
-export function CodeForm({ idSuffix, meetings, initialCode = "", focusOnMount = false }: CodeFormProps) {
+export function CodeForm({
+  idSuffix,
+  meetings,
+  initialCode = "",
+  focusOnMount = false,
+}: CodeFormProps) {
   const id = `code-${idSuffix}`;
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
@@ -42,7 +53,9 @@ export function CodeForm({ idSuffix, meetings, initialCode = "", focusOnMount = 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const value = normalizeCode(code.value);
-    const problem = codeFormatError(value, true) || (findByCode(meetings, value) === null ? unknownCodeError(value) : "");
+    const problem =
+      codeFormatError(value, true) ||
+      (findByCode(meetings, value) === null ? unknownCodeError(value) : "");
     const ok = submitForm(formRef.current, [
       () => {
         code.setValue(value);

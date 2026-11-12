@@ -10,7 +10,10 @@ import { cn } from "#lib/utils";
 /** DESIGN.md: tooltips appear after 500ms of hover. */
 const TOOLTIP_HOVER_DELAY_MS = 500;
 
-function TooltipProvider({ delay = TOOLTIP_HOVER_DELAY_MS, ...props }: TooltipPrimitive.Provider.Props) {
+function TooltipProvider({
+  delay = TOOLTIP_HOVER_DELAY_MS,
+  ...props
+}: TooltipPrimitive.Provider.Props) {
   return <TooltipPrimitive.Provider data-slot="tooltip-provider" delay={delay} {...props} />;
 }
 

@@ -2,6 +2,8 @@
 // One Content-Security-Policy for the web build (meta tag) and the Tauri host
 // (app.security.csp, merged by apps/desktop/scripts/tauri-cli.ts). Node runs this
 // file directly (type stripping), so it uses erasable TypeScript only.
+// Hosted HTTP serving also sends buildContentSecurityPolicyHeader() as a response
+// header, which adds the header-only frame-ancestors directive.
 
 /** Public LiveKit server URL (wss://…). Not a secret; API key/secret never reach clients. */
 export const LIVEKIT_URL_ENV = "KM_LIVEKIT_URL";
@@ -31,7 +33,18 @@ const BASE_DIRECTIVES: Directives = [
   ["media-src", ["'self'"]],
   ["font-src", ["'self'"]],
   ["connect-src", ["'self'", "ipc:", "http://ipc.localhost"]],
+  // Hardening (c13 security review L3): no <base> rewriting, forms post only to
+  // this origin, no plugins. All three are valid in a <meta> CSP and in Tauri's.
+  ["base-uri", ["'none'"]],
+  ["form-action", ["'self'"]],
+  ["object-src", ["'none'"]],
 ];
+
+/**
+ * Header-only directives. Browsers ignore `frame-ancestors` in a <meta> CSP, and
+ * the Tauri webview is never framed, so it is not part of the shared policy.
+ */
+const HEADER_ONLY_DIRECTIVES: Directives = [["frame-ancestors", ["'none'"]]];
 
 /**
  * Origins the LiveKit client needs: the wss signalling origin and the https origin
@@ -114,4 +127,20 @@ export function buildContentSecurityPolicy(input: ContentSecurityPolicyInput): s
           : sources;
     return `${name} ${all.join(" ")}`;
   }).join("; ");
+}
+
+/**
+ * The policy for a `Content-Security-Policy` HTTP response header: the shared
+ * policy plus header-only directives (`frame-ancestors 'none'`, anti-clickjacking).
+ *
+ * Where it must be applied: any server that hosts the built web app (`apps/web/dist`)
+ * over HTTP must send this header on every HTML response — the hosted Axum static
+ * server, a CDN or a reverse proxy. The <meta> tag the build embeds cannot carry
+ * `frame-ancestors`. The Tauri host does not need it (it uses `app.security.csp`).
+ */
+export function buildContentSecurityPolicyHeader(input: ContentSecurityPolicyInput): string {
+  const headerOnly = HEADER_ONLY_DIRECTIVES.map(
+    ([name, sources]) => `${name} ${sources.join(" ")}`,
+  ).join("; ");
+  return `${buildContentSecurityPolicy(input)}; ${headerOnly}`;
 }

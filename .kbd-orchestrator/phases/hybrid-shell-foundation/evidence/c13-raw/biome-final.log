@@ -1,0 +1,235 @@
+$ pnpm exec biome ci --config-path=tooling/biome --error-on-warnings --no-errors-on-unmatched --reporter=summary  (2026-11-12T14:57:04Z)
+reporter/format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i The following files need to be formatted:
+  
+  - apps/mobile/deps-note.md
+  - apps/mobile/test/a11y/README.md
+  - apps/mobile/test/goldens/README.md
+  - tooling/repo-rules/src/secret-rules.ts
+  
+reporter/violations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Some lint rules or assist actions reported some violations.
+  
+  i The following files have violations:
+  
+  - tooling/repo-rules/src/run-aggregate.ts (1 error)
+  - tooling/repo-rules/src/run-native-lints.ts (1 error)
+  
+  i The following lint rules have violations:
+  
+  Rule Name                                   Diagnostics
+  
+  assist/source/organizeImports               2 (2 errors)
+
+Checked 435 files in 259ms. No fixes applied.
+Found 6 errors.
+ci ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+
+exit=1
+
+$ biome ci (full diagnostics)
+apps/mobile/deps-note.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × File content differs from formatting output
+  
+     6  6 │   3.47.5 (Dart 3.13.4), the `tooling/versions.toml` toolchain pin.
+     7  7 │   
+     8    │ - |·Package····················|·Pin····|·Source·of·the·pin··································································|·Latest·on·pub.dev·(2026-11-09)·|·Licence·····························|
+     9    │ - |·--------------------------·|·------·|·----------------------------------------------------------------------------------·|·------------------------------·|·-----------------------------------·|
+    10    │ - |·`flutter_riverpod`·········|·3.3.1··|·`tooling/versions.toml`·`riverpod`·(3.3.2+·conflicts·with·Freezed's·analyzer·line)·|·3.5.0·(2026-11-06)·············|·MIT·(generator·baseline,·unchanged)·|
+    11    │ - |·`riverpod_annotation`······|·4.0.2··|·`tooling/versions.toml`·coherent·set···············································|·4.0.8··························|·MIT·(unchanged)·····················|
+    12    │ - |·`riverpod_generator`·(dev)·|·4.0.3··|·`tooling/versions.toml`·coherent·set···············································|·4.0.10·························|·MIT·(unchanged)·····················|
+    13    │ - |·`go_router`················|·18.1.3·|·latest,·checked·in·c07·(published·2026-11-04;·needs·Dart·^3.12,·Flutter·>=3.44)····|·18.1.3·························|·BSD-3-Clause························|
+    14    │ - |·`shared_preferences`·······|·2.5.6··|·latest,·checked·in·c07·(published·2026-10-05;·needs·Dart·^3.11,·Flutter·>=3.41)····|·2.5.6··························|·BSD-3-Clause························|
+    15    │ - |·`flutter_lints`·(dev)······|·6.0.0··|·latest,·checked·in·c07·(published·2025-05-27)······································|·6.0.0··························|·BSD-3-Clause························|
+    16    │ - |·`shadcn_flutter`···········|·0.0.55·|·cand-009;·latest,·checked·in·c12·on·2026-11-11·(published·2026-10-01;·needs·Dart·>=3.13,·Flutter·>=3.47)·|·0.0.55·····················|·BSD-3-Clause························|
+    17    │ - |·`flutter_rust_bridge`······|·2.12.0·|·`tooling/versions.toml`·(runtime,·Dart·package·and·codegen·move·together)··········|·not·changed····················|·MIT·(unchanged)·····················|
+        8 │ + |·Package····················|·Pin····|·Source·of·the·pin························································································|·Latest·on·pub.dev·(2026-11-09)·|·Licence·····························|
+        9 │ + |·--------------------------·|·------·|·--------------------------------------------------------------------------------------------------------·|·------------------------------·|·-----------------------------------·|
+       10 │ + |·`flutter_riverpod`·········|·3.3.1··|·`tooling/versions.toml`·`riverpod`·(3.3.2+·conflicts·with·Freezed's·analyzer·line)·······················|·3.5.0·(2026-11-06)·············|·MIT·(generator·baseline,·unchanged)·|
+       11 │ + |·`riverpod_annotation`······|·4.0.2··|·`tooling/versions.toml`·coherent·set·····································································|·4.0.8··························|·MIT·(unchanged)·····················|
+       12 │ + |·`riverpod_generator`·(dev)·|·4.0.3··|·`tooling/versions.toml`·coherent·set·····································································|·4.0.10·························|·MIT·(unchanged)·····················|
+       13 │ + |·`go_router`················|·18.1.3·|·latest,·checked·in·c07·(published·2026-11-04;·needs·Dart·^3.12,·Flutter·>=3.44)··························|·18.1.3·························|·BSD-3-Clause························|
+       14 │ + |·`shared_preferences`·······|·2.5.6··|·latest,·checked·in·c07·(published·2026-10-05;·needs·Dart·^3.11,·Flutter·>=3.41)··························|·2.5.6··························|·BSD-3-Clause························|
+       15 │ + |·`flutter_lints`·(dev)······|·6.0.0··|·latest,·checked·in·c07·(published·2025-05-27)····························································|·6.0.0··························|·BSD-3-Clause························|
+       16 │ + |·`shadcn_flutter`···········|·0.0.55·|·cand-009;·latest,·checked·in·c12·on·2026-11-11·(published·2026-10-01;·needs·Dart·>=3.13,·Flutter·>=3.47)·|·0.0.55·························|·BSD-3-Clause························|
+       17 │ + |·`flutter_rust_bridge`······|·2.12.0·|·`tooling/versions.toml`·(runtime,·Dart·package·and·codegen·move·together)································|·not·changed····················|·MIT·(unchanged)·····················|
+    18 18 │   
+    19 19 │   Riverpod is deliberately behind latest: the newer set is not validated with
+  
+
+apps/mobile/test/a11y/README.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × File content differs from formatting output
+  
+     8  8 │   recorded there.
+     9  9 │   
+    10    │ - |·Checklist·item·|·How·it·is·covered·|·Where·|
+    11    │ - |·---·|·---·|·---·|
+    12    │ - |·Text·contrast·≥·4.5:1·(1.4.3)·in·both·themes·|·`textContrastGuideline`·on·every·in-scope·state,·dark·and·light,·at·375;·token·pairs·for·`on-control`,·placeholders,·`on-focus`,·`on-selected`,·`on-control-invalid`,·`on-ember`·|·`kmA11yGate`·(`test/support/km_a11y.dart`);·`focus_fill_test.dart`·"fill·contrast"·|
+    13    │ - |·Control·boundaries·≥·3:1·by·fill·(1.4.11)·|·`control`·against·`bg`,·`bg-2`,·`surface`,·`card`·(the·only·surfaces·a·control·may·sit·on)·|·`focus_fill_test.dart`·"fill·contrast"·|
+    14    │ - |·No·borders,·outlines,·rings·or·divider·lines·(D-6)·|·Every·in-scope·state·is·scanned·for·`BoxDecoration.border`,·shape·sides·and·`Divider`s·|·`focus_fill_test.dart`·"Flat·2.0:·no·strokes"·|
+    15    │ - |·Focus·visible·by·fill,·≥·3:1·(2.4.7,·2.4.11)·|·`focus`·against·every·allowed·surface·and·against·e...
+    16    │ - |·Focus·only·for·keyboard·(`:focus-visible`)·|·`KmInteractive`·uses·the·focus·*highlight*·(traditional·mode),·so·a·tap·never·leaves·a·focus·fill;·shadcn·buttons·run·with·`disableFocusOutline`·and·the·fill·from·`KmStateColors`·|·`km_states.dart`,·`km_button.dart`·|
+    17    │ - |·Every·actionable·element·has·an·accessible·name·|·`labeledTapTargetGuideline`·on·every·state;·kit·controls·require·a·label·(`KmButton.label`,·`KmIconButton.label`,·`KmCheckbox.label`,·`KmRadio.label`,·`KmSwitch.label`,·`KmSelect.label`)·|·kit;·`kmA11yGate`·|
+    18    │ - |·Target·size·≥·24·(2.5.8);·44·preferred·|·`MinimumTapTargetGuideline(24×24)`·on·every·state;·nav·items·≥·48×44·(bar),·80×64·(rail),·44·tall·(links);·`sm`·buttons·are·36·only·with·a·fine·pointer·(desktop),·otherwise·44·|·`km_a11y.dart`,·`adaptive_nav_test.dart`,·`kmFinePointer`·in·`km_button.dart`·|
+    19    │ - |·Keyboard·reachable,·logical·order,·no·trap·|·Tab·order·skip·link·→·brand·→·start·→·theme·→·sign·in/account·→·(rail·at·medium)·→·page·→·(bar·at·compact);·skip·link·moves·focus·to·main;·Escape·closes·the·account·menu·and·returns·focus·|·`frame_a11y_test.dart`;·`OrderedTraversalPolicy`·in·`lib/app/frame/km_app_frame.dart`·|
+    20    │ - |·Focus·survives·the·nav·morph·|·Focus·on·a·destination·stays·on·the·same·destination·after·crossing·600/1024·|·`adaptive_nav_test.dart`·|
+    21    │ - |·State·not·by·colour·alone·|·Selected·segments·and·toggle·chips·add·a·check·icon;·invalid·fields·add·the·error·line·(icon·+·text);·switches·move·the·thumb;·status·pips·sit·beside·text;·speaking·is·a·badge·next·to·the·state·text;·current·tab/nav·item·announced·as·selected·|·`km_controls.dart`,·`km_selection.dart`,·`km_fields.dart`,·`km_feedback.dart`,·`km_nav_bars.dart`·|
+    22    │ - |·Images/media·labelled;·decorative·excluded·|·Brand·mark,·nav·glyphs,·avatars,·orbs·and·speaking·badges·are·`ExcludeSemantics`;·adjacent·text·names·them·|·`km_brand.dart`,·`km_glyphs.dart`,·`km_avatar.dart`,·`km_orb.dart`,·`km_feedback.dart`·|
+    23    │ - |·Reduced·motion·honoured·|·Every·in-scope·state·settles·with·no·running·animation·under·`disableAnimations`;·focus/hover·fill·transitions·and·the·nav·morph·are·instant;·the·account·menu·appears·without·animation·|·`reduced_motion_test.dart`,·`adaptive_nav_test.dart`,·`frame_a11y_test.dart`;·`KmMotion`,·`KmNavMorph`·|
+    24    │ - |·Live·regions·announce·status·|·Field·errors·and·the·room's·"You·joined"·notice·are·`liveRegion`·|·`km_fields.dart`·(`KmFieldError`),·meeting_room·feature·|
+    25    │ - |·Tooltips·(1.4.13)·|·Toast·style,·500·ms·hover·delay,·never·the·only·copy·of·information·(`excludeFromSemantics`,·the·control·keeps·its·name).·**Open:**·Escape-to-dismiss·is·Flutter's·default·tooltip·behaviour·and·is·not·asserted·by·a·test·|·`km_feedback.dart`·(`KmTooltip`),·`app_theme.dart`·|
+    26    │ - |·Large·text·does·not·overflow·|·**Not·covered·yet.**·No·test·pumps·a·text·scale·above·1.0;·open·item·for·c13·|·—·|
+       10 │ + |·Checklist·item·····································|·How·it·is·covered····························...
+       11 │ + |·--------------------------------------------------·|·---------------------------------------------...
+       12 │ + ...:1·(1.4.3)·in·both·themes·······|·`textContrastGuideline`·on·every·in-scope·state,·dark·and·light,·a...
+       13 │ + ...es·≥·3:1·by·fill·(1.4.11)··········|·`control`·against·`bg`,·`bg-2`,·`surface`,·`card`·(the·only·sur...
+       14 │ + ...hape·sides·and·`Divider`s···········································································...
+       15 │ + |·Focus·visible·by·fill,·≥·3:1·(2.4.7,·2.4.11)·······|·`focus`·against·every·allowed·surface·and·aga...
+       16 │ + ...yboard·(`:focus-visible`)·········|·`KmInteractive`·uses·the·focus·_highlight_·(traditional·mode),·s...
+       17 │ + ...nt·has·an·accessible·name····|·`labeledTapTargetGuideline`·on·every·state;·kit·controls·require·a·la...
+       18 │ + ...·24·(2.5.8);·44·preferred·············|·`MinimumTapTargetGuideline(24×24)`·on·every·state;·nav·items...
+       19 │ + ...e,·logical·order,·no·trap·········|·Tab·order·skip·link·→·brand·→·start·→·theme·→·sign·in/account·→·...
+       20 │ + ...us·survives·the·nav·morph·······················|·Focus·on·a·destination·stays·on·the·same·destinati...
+       21 │ + ...State·not·by·colour·alone··························|·Selected·segments·and·toggle·chips·add·a·check·...
+       22 │ + ...lled;·decorative·excluded·········|·Brand·mark,·nav·glyphs,·avatars,·orbs·and·speaking·badges·are·`E...
+       23 │ + |·Reduced·motion·honoured····························|·Every·in-scope·state·settles·with·no·running·...
+       24 │ + ...e·regions·announce·status·······················|·Field·errors·and·the·room's·"You·joined"·notice·ar...
+       25 │ + |·Tooltips·(1.4.13)··································|·Toast·style,·500·ms·hover·delay,·never·the·on...
+       26 │ + ...ge·text·does·not·overflow·······················|·**Not·covered·yet.**·No·test·pumps·a·text·scale·ab...
+    27 27 │   
+  
+
+apps/mobile/test/goldens/README.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × File content differs from formatting output
+  
+    40 40 │   recorded in `kmStatesNotRendered`:
+    41 41 │   
+    42    │ - |·File·|·States·|
+    43    │ - |·---·|·---·|
+    44    │ - |·`frame_golden_test.dart`·|·5·inventory·`frame.*`·plus·4·adaptive-nav·states·(ADJ-2)·|
+    45    │ - |·`public_golden_test.dart`·|·`index.default`,·5·`auth.*`,·4·`join.*`·|
+    46    │ - |·`dashboard_golden_test.dart`·|·9·`dashboard.*`·(incl.·the·signed-out·gate)·|
+    47    │ - |·`agents_golden_test.dart`·|·14·`agents.*`·|
+    48    │ - |·`recordings_golden_test.dart`·|·11·`recordings.*`·|
+    49    │ - |·`settings_golden_test.dart`·|·17·`settings.*`·|
+    50    │ - |·`meeting_room_golden_test.dart`·|·`meet.room`,·`meet.room-guest`·|
+       42 │ + |·File····························|·States···················································|
+       43 │ + |·-------------------------------·|·--------------------------------------------------------·|
+       44 │ + |·`frame_golden_test.dart`········|·5·inventory·`frame.*`·plus·4·adaptive-nav·states·(ADJ-2)·|
+       45 │ + |·`public_golden_test.dart`·······|·`index.default`,·5·`auth.*`,·4·`join.*`··················|
+       46 │ + |·`dashboard_golden_test.dart`····|·9·`dashboard.*`·(incl.·the·signed-out·gate)··············|
+       47 │ + |·`agents_golden_test.dart`·······|·14·`agents.*`············································|
+       48 │ + |·`recordings_golden_test.dart`···|·11·`recordings.*`········································|
+       49 │ + |·`settings_golden_test.dart`·····|·17·`settings.*`··········································|
+       50 │ + |·`meeting_room_golden_test.dart`·|·`meet.room`,·`meet.room-guest`···························|
+    51 51 │   
+    52 52 │   `coverage_test.dart` (untagged, fast path) fails if an in-scope state has no
+  
+
+tooling/repo-rules/src/run-aggregate.ts:1:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  × Sort these imports.
+  
+   > 1 │ import { cwdFromArgs } from "./lib/report.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 2 │ import {
+   > 3 │   FLUTTER_PREP,
+   > 4 │   flutterStep,
+   > 5 │   type NativeStep,
+   > 6 │   rootStep,
+   > 7 │   runSteps,
+   > 8 │ } from "./lib/native-steps.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ 
+    10 │ /**
+  
+  i Safe fix: Organize imports and exports (Biome)
+  
+     1    │ - import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     2    │ - import·{
+     3    │ - ··FLUTTER_PREP,
+     4    │ - ··flutterStep,
+     5    │ - ··type·NativeStep,
+     6    │ - ··rootStep,
+     7    │ - ··runSteps,
+     8    │ - }·from·"./lib/native-steps.ts";
+        1 │ + import·{
+        2 │ + ··FLUTTER_PREP,
+        3 │ + ··flutterStep,
+        4 │ + ··type·NativeStep,
+        5 │ + ··rootStep,
+        6 │ + ··runSteps,
+        7 │ + }·from·"./lib/native-steps.ts";
+        8 │ + import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     9  9 │   
+    10 10 │   /**
+  
+
+tooling/repo-rules/src/run-native-lints.ts:1:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━
+
+  × Sort these imports.
+  
+  > 1 │ import { cwdFromArgs } from "./lib/report.ts";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 2 │ import { FLUTTER_PREP, flutterStep, rootStep, runSteps } from "./lib/native-steps.ts";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    3 │ 
+    4 │ /**
+  
+  i Safe fix: Organize imports and exports (Biome)
+  
+     1    │ - import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     2    │ - import·{·FLUTTER_PREP,·flutterStep,·rootStep,·runSteps·}·from·"./lib/native-steps.ts";
+        1 │ + import·{·FLUTTER_PREP,·flutterStep,·rootStep,·runSteps·}·from·"./lib/native-steps.ts";
+        2 │ + import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     3  3 │   
+     4  4 │   /**
+  
+
+tooling/repo-rules/src/secret-rules.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × File content differs from formatting output
+  
+    58 58 │       pattern: `(secret|token|passw(or)?d|private[_-]?key)${QUOTE}${SPACE}[:=]${SPACE}["'][A-Za-z0-9+/_=-]{24,}["']`,
+    59 59 │       ignoreCase: true,
+    60    │ - ····pathspec:·["apps",·"packages",·"services",·"crates",·".github",·"tooling",·":!tooling/repo-rules",·":!*.md",·":!**/test/**",·":!**/tests/**",·":!**/fixtures/**",·":!pnpm-lock.yaml"],
+       60 │ + ····pathspec:·[
+       61 │ + ······"apps",
+       62 │ + ······"packages",
+       63 │ + ······"services",
+       64 │ + ······"crates",
+       65 │ + ······".github",
+       66 │ + ······"tooling",
+       67 │ + ······":!tooling/repo-rules",
+       68 │ + ······":!*.md",
+       69 │ + ······":!**/test/**",
+       70 │ + ······":!**/tests/**",
+       71 │ + ······":!**/fixtures/**",
+       72 │ + ······":!pnpm-lock.yaml",
+       73 │ + ····],
+    61 74 │     },
+    62 75 │   ];
+  
+
+Checked 435 files in 159ms. No fixes applied.
+Found 6 errors.
+ci ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+
+
+Scoped biome (owned paths: apps/web packages tests/fidelity apps/desktop/scripts):
+Checked 390 files in 124ms. No fixes applied.
+
+== c13 13.8 follow-up (L3/L4/L5) 2026-11-12T15:00:58Z ==
+$ biome ci (owned paths)
+Checked 394 files in 112ms. No fixes applied.

@@ -7,8 +7,8 @@
 // Every view except #concierge needs a signed-in session (km-auth); without one it
 // renders its page head and the sign-in gate (agents.gate-signed-out).
 import { Toaster } from "@know-meet/ui/components/toast";
-import { useSessionUser } from "../../shared/session";
 import { ScreenPage } from "../../shared/screen-page";
+import { useSessionUser } from "../../shared/session";
 import { type HashRoute, useHashRoute } from "../../shared/use-hash-route";
 import { AgentDetailView } from "./agent-detail-view";
 import { AgentsGate } from "./agents-gate";
@@ -42,7 +42,13 @@ function gateTitleFor(route: HashRoute): string {
   }
 }
 
-function WizardStepView({ arg, params }: { readonly arg: string | null; readonly params: HashRoute["params"] }) {
+function WizardStepView({
+  arg,
+  params,
+}: {
+  readonly arg: string | null;
+  readonly params: HashRoute["params"];
+}) {
   const step = Number.parseInt(arg ?? "", 10);
   if (step === 2) return <WizardWorker />;
   if (step === 3) return <WizardPermissions />;
@@ -60,7 +66,12 @@ function DotRoute({ id }: { readonly id: string | null }) {
       />
     );
   }
-  return <AgentsNotFound title="Dot not found" message={`You have one dot, Iris. There’s no dot called “${id ?? ""}”.`} />;
+  return (
+    <AgentsNotFound
+      title="Dot not found"
+      message={`You have one dot, Iris. There’s no dot called “${id ?? ""}”.`}
+    />
+  );
 }
 
 function SignedInView({ route }: { readonly route: HashRoute }) {
@@ -87,7 +98,13 @@ function AgentsRoutes() {
   const key = `${route.view}:${route.arg ?? ""}`;
   if (route.view === "concierge") return <ConciergeView key={key} />;
   if (!signedIn) {
-    return <AgentsGate key={key} title={gateTitleFor(route)} next={`agents#${route.view || "registry"}${route.arg === null ? "" : `:${route.arg}`}`} />;
+    return (
+      <AgentsGate
+        key={key}
+        title={gateTitleFor(route)}
+        next={`agents#${route.view || "registry"}${route.arg === null ? "" : `:${route.arg}`}`}
+      />
+    );
   }
   return <SignedInView key={key} route={route} />;
 }

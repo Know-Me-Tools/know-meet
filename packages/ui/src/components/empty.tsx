@@ -77,7 +77,7 @@ function EmptyMedia({
   );
 }
 
-/** An h3 by default (km.css `.empty h3`); pass `render={<h2 />}` to fit the outline. */
+/** An h3 by default (km.css `.empty h3`); pass `render={(headingProps) => <h2 {...headingProps} />}` to fit the outline. */
 function EmptyTitle({ className, render, ...props }: useRender.ComponentProps<"h3">) {
   return useRender({
     defaultTagName: "h3",

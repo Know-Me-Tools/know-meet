@@ -10,7 +10,15 @@ import { cn } from "@know-meet/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { eyebrowClass, h3Class } from "../public-shared/ui-classes";
-import { Feat, FeatIcon, FeatureFoot, InviteFeature, LockChip, RecallFeature, smallLinkClass } from "./feature-bento-parts";
+import {
+  Feat,
+  FeatIcon,
+  FeatureFoot,
+  InviteFeature,
+  LockChip,
+  RecallFeature,
+  smallLinkClass,
+} from "./feature-bento-parts";
 import { SectionHead } from "./section-head";
 
 const AGENTS = [
@@ -32,8 +40,9 @@ function DotsFeature() {
           A dot that remembers you across every meeting
         </h3>
         <p>
-          A dot is your always-on personal agent with its own private memory. Iris joins your calls, recalls what was
-          decided last time, and keeps notes only you can read. Your colleagues bring theirs — Avery’s is Sol.
+          A dot is your always-on personal agent with its own private memory. Iris joins your calls,
+          recalls what was decided last time, and keeps notes only you can read. Your colleagues
+          bring theirs — Avery’s is Sol.
         </p>
         <FeatureFoot>
           <LockChip />
@@ -47,7 +56,10 @@ function DotsFeature() {
           { name: "Iris", owner: "Your dot", tone: "ember" as const },
           { name: "Sol", owner: "Avery’s dot", tone: "cyan" as const },
         ].map((dot) => (
-          <div key={dot.name} className="grid justify-items-center gap-s2 rounded-base bg-surface px-s2 py-s4 text-center">
+          <div
+            key={dot.name}
+            className="grid justify-items-center gap-s2 rounded-base bg-surface px-s2 py-s4 text-center"
+          >
             <Orb tone={dot.tone} className="w-[64%]" />
             <strong className="font-display">{dot.name}</strong>
             <span className="text-xs text-muted-foreground">{dot.owner}</span>
@@ -68,7 +80,10 @@ function AgentsFeature() {
       <p>Register your own LiveKit agent workers once, then add them to any meeting mid-call.</p>
       <ul className="m-0 grid list-none gap-s2 p-0">
         {AGENTS.map((agent) => (
-          <li key={agent.name} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-s3 text-sm">
+          <li
+            key={agent.name}
+            className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-s3 text-sm"
+          >
             <AgentGlyph size="sm">{agent.mono}</AgentGlyph>
             <div className="grid">
               <strong className="block">{agent.name}</strong>
@@ -108,15 +123,28 @@ function SimpleFeature(props: {
 export function FeatureBento() {
   return (
     <section aria-labelledby="feat-title">
-      <SectionHead id="feat-title" eyebrow="01 — Inside the room" title="What happens in a KnowMe meeting">
-        Every room is a LiveKit room with agents as real participants. They hear the same audio, read the same
-        transcript, and work from the same shared knowledge — so the work after the meeting is already done when it ends.
+      <SectionHead
+        id="feat-title"
+        eyebrow="01 — Inside the room"
+        title="What happens in a KnowMe meeting"
+      >
+        Every room is a LiveKit room with agents as real participants. They hear the same audio,
+        read the same transcript, and work from the same shared knowledge — so the work after the
+        meeting is already done when it ends.
       </SectionHead>
       <div className="grid grid-cols-6 gap-s3 max-bp1024:grid-cols-2 max-bp768:grid-cols-[minmax(0,1fr)]">
         <DotsFeature />
         <AgentsFeature />
-        <SimpleFeature id="f-private" icon="eye-off" title="A private agent panel only you see" className="col-span-2">
-          <p>Ask your dot or an agent a question mid-meeting without interrupting. Nobody else sees the thread.</p>
+        <SimpleFeature
+          id="f-private"
+          icon="eye-off"
+          title="A private agent panel only you see"
+          className="col-span-2"
+        >
+          <p>
+            Ask your dot or an agent a question mid-meeting without interrupting. Nobody else sees
+            the thread.
+          </p>
           <div aria-hidden="true" className="grid gap-1.5 rounded-base bg-card p-s3 text-sm">
             <span className={cn(eyebrowClass, "text-10")}>Only you · Iris</span>
             <span>What did Marcus commit to on Oct 14?</span>
@@ -125,10 +153,15 @@ export function FeatureBento() {
             <LockChip />
           </FeatureFoot>
         </SimpleFeature>
-        <SimpleFeature id="f-knowledge" icon="book" title="Shared meeting knowledge" className="col-span-2">
+        <SimpleFeature
+          id="f-knowledge"
+          icon="book"
+          title="Shared meeting knowledge"
+          className="col-span-2"
+        >
           <p>
-            Files you upload and every transcript segment feed one knowledge base that all agents in the room can read —
-            including the Concierge.
+            Files you upload and every transcript segment feed one knowledge base that all agents in
+            the room can read — including the Concierge.
           </p>
           <FeatureFoot>
             <LockChip label="Uploads: sign-in" />
@@ -138,10 +171,15 @@ export function FeatureBento() {
             </Badge>
           </FeatureFoot>
         </SimpleFeature>
-        <SimpleFeature id="f-record" icon="record" title="Record and transcribe on the fly" className="col-span-2">
+        <SimpleFeature
+          id="f-record"
+          icon="record"
+          title="Record and transcribe on the fly"
+          className="col-span-2"
+        >
           <p>
-            Start recording any time. LiveKit Room Composite egress captures everyone in one layout as MP4 or HLS, with
-            consent asked in the room.
+            Start recording any time. LiveKit Room Composite egress captures everyone in one layout
+            as MP4 or HLS, with consent asked in the room.
           </p>
           <FeatureFoot>
             <LockChip />
@@ -150,10 +188,15 @@ export function FeatureBento() {
             </Link>
           </FeatureFoot>
         </SimpleFeature>
-        <SimpleFeature id="f-close" icon="send" title="Transcript, summary and action items, sent at close" className="col-span-3 bg-card">
+        <SimpleFeature
+          id="f-close"
+          icon="send"
+          title="Transcript, summary and action items, sent at close"
+          className="col-span-3 bg-card"
+        >
           <p>
-            When the host ends the meeting, KnowMe writes the summary and action items and delivers them to every
-            participant automatically, per your delivery settings.
+            When the host ends the meeting, KnowMe writes the summary and action items and delivers
+            them to every participant automatically, per your delivery settings.
           </p>
           <ul className="m-0 grid list-none gap-s2 p-0">
             <li className="flex items-center gap-s2 text-sm">
@@ -173,8 +216,16 @@ export function FeatureBento() {
           </FeatureFoot>
         </SimpleFeature>
         <RecallFeature />
-        <SimpleFeature id="f-cal" icon="calendar" title="Your calendars, connected" className="col-span-2">
-          <p>Meetings you schedule land on the calendar you already use, with the join link and dial-in attached.</p>
+        <SimpleFeature
+          id="f-cal"
+          icon="calendar"
+          title="Your calendars, connected"
+          className="col-span-2"
+        >
+          <p>
+            Meetings you schedule land on the calendar you already use, with the join link and
+            dial-in attached.
+          </p>
           <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
             {["Google Calendar", "Microsoft 365 / Outlook", "iCloud / CalDAV"].map((name) => (
               <Badge key={name} render={<li />}>

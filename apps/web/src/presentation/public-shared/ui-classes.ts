@@ -10,8 +10,7 @@ export const eyebrowClass =
   "block font-mono text-11 font-semibold tracking-eyebrow uppercase text-ember-text";
 
 /** km.css `.display`: the hero heading. */
-export const displayClass =
-  "font-display text-display leading-display font-bold tracking-display";
+export const displayClass = "font-display text-display leading-display font-bold tracking-display";
 
 /** km.css `.lede`. */
 export const ledeClass = "text-lg text-muted-foreground max-w-[62ch]";
@@ -31,7 +30,11 @@ type ButtonVariant = "default" | "secondary" | "ghost";
 type ButtonSize = "default" | "sm" | "lg";
 
 /** A router link that looks like a kit Button (km.css `.btn` on an `<a>`). */
-export function buttonLinkClass(variant: ButtonVariant = "secondary", size: ButtonSize = "default", extra?: string) {
+export function buttonLinkClass(
+  variant: ButtonVariant = "secondary",
+  size: ButtonSize = "default",
+  extra?: string,
+) {
   return cn(buttonVariants({ variant, size }), focusFillClass, extra);
 }
 

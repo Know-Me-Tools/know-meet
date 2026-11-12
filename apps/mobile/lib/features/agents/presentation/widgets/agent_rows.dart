@@ -135,7 +135,8 @@ class AgentRegistryRow extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text('Worker ', style: meta),
+                Text('Worker', style: meta),
+                const SizedBox(width: 4),
                 AgentCode(agent.worker),
               ],
             ),

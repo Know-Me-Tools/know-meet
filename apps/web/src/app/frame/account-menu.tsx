@@ -32,7 +32,10 @@ export function AccountMenu() {
         to="/auth"
         hash="sign-in"
         data-testid="km-account-button"
-        className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "focus-visible:bg-focus! focus-visible:text-on-focus!")}
+        className={cn(
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "focus-visible:bg-focus! focus-visible:text-on-focus!",
+        )}
       >
         <UserIcon aria-hidden="true" className="max-bp600:hidden" />
         <span>Sign in</span>
@@ -62,8 +65,12 @@ export function AccountMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-72">
         <div className="grid gap-0.5 px-s3 pt-s2 pb-s3">
-          <strong className="font-display font-semibold [overflow-wrap:anywhere]">{user.name}</strong>
-          <span className="text-sm text-muted-foreground [overflow-wrap:anywhere]">{user.email}</span>
+          <strong className="font-display font-semibold [overflow-wrap:anywhere]">
+            {user.name}
+          </strong>
+          <span className="text-sm text-muted-foreground [overflow-wrap:anywhere]">
+            {user.email}
+          </span>
         </div>
         <DropdownMenuItem onClick={() => void navigate({ to: "/settings" })}>
           <SettingsIcon aria-hidden="true" />

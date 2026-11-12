@@ -1,4 +1,3 @@
-import { cwdFromArgs } from "./lib/report.ts";
 import {
   FLUTTER_PREP,
   flutterStep,
@@ -6,6 +5,7 @@ import {
   rootStep,
   runSteps,
 } from "./lib/native-steps.ts";
+import { cwdFromArgs } from "./lib/report.ts";
 
 /**
  * Native halves of the aggregate commands (c14). `pnpm run build` and
@@ -63,7 +63,10 @@ const TEST: readonly NativeStep[] = [
   flutterStep("flutter test", "flutter", "test"),
 ];
 
-const MODES: Readonly<Record<string, readonly NativeStep[]>> = { build: BUILD, test: TEST };
+const MODES: Readonly<Record<string, readonly NativeStep[]>> = {
+  build: BUILD,
+  test: TEST,
+};
 const mode = process.argv[2] ?? "";
 const steps = MODES[mode];
 if (steps === undefined) {

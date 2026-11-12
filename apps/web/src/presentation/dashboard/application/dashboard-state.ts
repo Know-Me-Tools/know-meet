@@ -2,7 +2,12 @@
 // The dashboard's session state (dashboard.html `state`): meetings created or
 // edited here, cancellations and delivery patches. A pure reducer; nothing is
 // sent anywhere (static phase, contract exclusion).
-import type { DashboardMeeting, DashboardMeetingStatus, Delivery, PreRead } from "../domain/dashboard";
+import type {
+  DashboardMeeting,
+  DashboardMeetingStatus,
+  Delivery,
+  PreRead,
+} from "../domain/dashboard";
 
 export interface DashboardState {
   readonly created: readonly DashboardMeeting[];
@@ -23,7 +28,12 @@ export const EMPTY_DASHBOARD_STATE: DashboardState = {
 };
 
 export type DashboardAction =
-  | { readonly type: "create"; readonly meeting: DashboardMeeting; readonly deliveries: readonly Delivery[]; readonly preReads: readonly PreRead[] }
+  | {
+      readonly type: "create";
+      readonly meeting: DashboardMeeting;
+      readonly deliveries: readonly Delivery[];
+      readonly preReads: readonly PreRead[];
+    }
   | { readonly type: "override"; readonly id: string; readonly changes: Partial<DashboardMeeting> }
   | { readonly type: "cancel"; readonly id: string }
   | { readonly type: "patch-delivery"; readonly id: string; readonly changes: Partial<Delivery> }
@@ -37,14 +47,25 @@ export function dashboardReducer(state: DashboardState, action: DashboardAction)
         ...state,
         created: [...state.created, action.meeting],
         createdDeliveries: [...state.createdDeliveries, ...action.deliveries],
-        preReads: action.preReads.length ? { ...state.preReads, [action.meeting.id]: action.preReads } : state.preReads,
+        preReads: action.preReads.length
+          ? { ...state.preReads, [action.meeting.id]: action.preReads }
+          : state.preReads,
       };
     case "override":
-      return { ...state, overrides: { ...state.overrides, [action.id]: { ...state.overrides[action.id], ...action.changes } } };
+      return {
+        ...state,
+        overrides: {
+          ...state.overrides,
+          [action.id]: { ...state.overrides[action.id], ...action.changes },
+        },
+      };
     case "cancel":
       return { ...state, cancelled: [...state.cancelled, action.id] };
     case "patch-delivery":
-      return { ...state, patch: { ...state.patch, [action.id]: { ...state.patch[action.id], ...action.changes } } };
+      return {
+        ...state,
+        patch: { ...state.patch, [action.id]: { ...state.patch[action.id], ...action.changes } },
+      };
     case "add-delivery":
       return { ...state, createdDeliveries: [...state.createdDeliveries, action.delivery] };
     case "set-pre-reads":
@@ -53,7 +74,11 @@ export function dashboardReducer(state: DashboardState, action: DashboardAction)
 }
 
 /** A meeting with this session's overrides, cancellation and pre-reads applied. */
-export function selectMeeting(state: DashboardState, base: readonly DashboardMeeting[], id: string): DashboardMeeting | null {
+export function selectMeeting(
+  state: DashboardState,
+  base: readonly DashboardMeeting[],
+  id: string,
+): DashboardMeeting | null {
   const found = base.find((m) => m.id === id) ?? state.created.find((m) => m.id === id);
   if (found === undefined) return null;
   return {
@@ -64,7 +89,10 @@ export function selectMeeting(state: DashboardState, base: readonly DashboardMee
   };
 }
 
-export function selectAllMeetings(state: DashboardState, base: readonly DashboardMeeting[]): readonly DashboardMeeting[] {
+export function selectAllMeetings(
+  state: DashboardState,
+  base: readonly DashboardMeeting[],
+): readonly DashboardMeeting[] {
   return [...base, ...state.created]
     .map((m) => selectMeeting(state, base, m.id))
     .filter((m): m is DashboardMeeting => m !== null)

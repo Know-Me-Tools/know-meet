@@ -171,9 +171,10 @@ Then(
       (s) => JSON.parse(s) as { name: string; ring: boolean; tag: string },
     );
     expect(stops.length).toBeGreaterThan(1);
-    expect(stops.filter((s) => s.ring), "focus stops drawn with an outline or box-shadow").toEqual(
-      [],
-    );
+    expect(
+      stops.filter((s) => s.ring),
+      "focus stops drawn with an outline or box-shadow",
+    ).toEqual([]);
     expect(focusFillProblems.get(scenario) ?? ["not audited"]).toEqual([]);
   },
 );
@@ -254,33 +255,37 @@ When(
   },
 );
 
-Then("every overflowing table region is a named, focusable region reachable by Tab", async ({ scenario }) => {
-  const cells = regionReports.get(scenario) ?? [];
-  expect(
-    cells.reduce((sum, c) => sum + c.report.overflowing, 0),
-    "overflowing table regions observed",
-  ).toBeGreaterThan(0);
-  const offenders = cells.flatMap(({ cell, report }) =>
-    report.problems
-      .filter((p) => /overflows|fits|not reachable|not :focus-visible/.test(p))
-      .map((p) => `${cell}: ${p}`),
-  );
-  expect(offenders).toEqual([]);
-});
+Then(
+  "every overflowing table region is a named, focusable region reachable by Tab",
+  async ({ scenario }) => {
+    const cells = regionReports.get(scenario) ?? [];
+    expect(
+      cells.reduce((sum, c) => sum + c.report.overflowing, 0),
+      "overflowing table regions observed",
+    ).toBeGreaterThan(0);
+    const offenders = cells.flatMap(({ cell, report }) =>
+      report.problems
+        .filter((p) => /overflows|fits|not reachable|not :focus-visible/.test(p))
+        .map((p) => `${cell}: ${p}`),
+    );
+    expect(offenders).toEqual([]);
+  },
+);
 
-Then("table region focus is a fill change with no outline or box-shadow ring", async ({ scenario }) => {
-  const cells = regionReports.get(scenario) ?? [];
-  expect(
-    cells.reduce((sum, c) => sum + c.report.focused, 0),
-    "table regions focused by keyboard",
-  ).toBeGreaterThan(0);
-  const offenders = cells.flatMap(({ cell, report }) =>
-    report.problems
-      .filter((p) => /focus draws|focus fill/.test(p))
-      .map((p) => `${cell}: ${p}`),
-  );
-  expect(offenders).toEqual([]);
-});
+Then(
+  "table region focus is a fill change with no outline or box-shadow ring",
+  async ({ scenario }) => {
+    const cells = regionReports.get(scenario) ?? [];
+    expect(
+      cells.reduce((sum, c) => sum + c.report.focused, 0),
+      "table regions focused by keyboard",
+    ).toBeGreaterThan(0);
+    const offenders = cells.flatMap(({ cell, report }) =>
+      report.problems.filter((p) => /focus draws|focus fill/.test(p)).map((p) => `${cell}: ${p}`),
+    );
+    expect(offenders).toEqual([]);
+  },
+);
 
 Then("the scroll-region results are recorded as evidence", async ({ scenario, $testInfo }) => {
   await $testInfo.attach("scroll-regions.json", {

@@ -75,7 +75,7 @@ enum CalendarProvider {
   /// Two-letter provider mark (prototype `.prov-mark`).
   final String mark;
 
-  /// "your <accountNoun>" in the consent heading.
+  /// `your <accountNoun>` in the consent heading.
   final String accountNoun;
 
   static CalendarProvider? fromKey(String key) {

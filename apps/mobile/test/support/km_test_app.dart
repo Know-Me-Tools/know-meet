@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sovereign_hybrid_mobile/app/app_router.dart';
 import 'package:sovereign_hybrid_mobile/app/frame/km_app_frame.dart';
@@ -19,11 +20,20 @@ import 'golden_theme_override.dart';
 /// (tests/fidelity/src/support/capture-environment.ts `frozenClockIso`).
 final DateTime kmFrozenNow = DateTime.utc(2026, 11, 10, 15);
 
+/// Riverpod 3's `ProviderScope` keeps exactly one transient frame callback
+/// registered after every build, so `WidgetTester.hasRunningAnimations` is
+/// always true under it. Any real animation (a ticker) adds a second callback.
+const int kmScopeTransientCallbacks = 1;
+
+/// True when an animation, not just the provider scope, is still running.
+bool kmHasRunningAnimations(WidgetTester tester) =>
+    tester.binding.transientCallbackCount > kmScopeTransientCallbacks;
+
 /// Themes in the capture matrix.
 enum KmTestTheme { dark, light }
 
 /// Viewport heights paired with the adopted widths (capture environment).
-const Map<double, double> kmViewportHeights = <double, double>{
+final Map<double, double> kmViewportHeights = <double, double>{
   375: 812,
   768: 1024,
   1024: 768,

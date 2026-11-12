@@ -19,19 +19,33 @@ import type { CalendarProvider } from "../domain/settings";
 import { CalDavSection } from "./caldav-form";
 import { ProviderMark } from "./calendars-section";
 import { CheckRow } from "./settings-fields";
+import { SettingsLink } from "./settings-link";
 import { Note, PanelSurface } from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useLater } from "./use-static-delay";
-import { SettingsLink } from "./settings-link";
 
 type Phase = "consent" | "connecting" | "pick" | "cancelled";
 
 const STEP_LABELS = ["Permissions", "Connect", "Choose calendars"] as const;
-const PHASE_STEP: Readonly<Record<Phase, number>> = { consent: 0, connecting: 1, pick: 2, cancelled: 0 };
+const PHASE_STEP: Readonly<Record<Phase, number>> = {
+  consent: 0,
+  connecting: 1,
+  pick: 2,
+  cancelled: 0,
+};
 
-const linkButton = (variant: "default" | "secondary") => cn(buttonVariants({ variant }), focusFillClass);
+const linkButton = (variant: "default" | "secondary") =>
+  cn(buttonVariants({ variant }), focusFillClass);
 
-function Permission({ icon, title, children }: { readonly icon: KmIconName; readonly title: string; readonly children: string }) {
+function Permission({
+  icon,
+  title,
+  children,
+}: {
+  readonly icon: KmIconName;
+  readonly title: string;
+  readonly children: string;
+}) {
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-s3 py-s3">
       <KmIcon name={icon} className="mt-0.5 text-ember-text" />
@@ -43,7 +57,13 @@ function Permission({ icon, title, children }: { readonly icon: KmIconName; read
   );
 }
 
-function PickCalendars({ provider, email }: { readonly provider: CalendarProvider; readonly email: string }) {
+function PickCalendars({
+  provider,
+  email,
+}: {
+  readonly provider: CalendarProvider;
+  readonly email: string;
+}) {
   const [selected, setSelected] = useState<Readonly<Record<string, boolean>>>(() =>
     Object.fromEntries(provider.calendars.map((cal, i) => [cal.id, i < 2])),
   );
@@ -55,7 +75,11 @@ function PickCalendars({ provider, email }: { readonly provider: CalendarProvide
       <Note kind="ok" icon="check">
         Signed in as {email}.
       </Note>
-      <div role="group" aria-labelledby={legendId} aria-describedby={showError ? "pick-err" : undefined}>
+      <fieldset
+        className="m-0 min-w-0 p-0"
+        aria-labelledby={legendId}
+        aria-describedby={showError ? "pick-err" : undefined}
+      >
         <span id={legendId} className="mb-1.5 block text-sm font-semibold">
           Calendars to sync
         </span>
@@ -71,8 +95,10 @@ function PickCalendars({ provider, email }: { readonly provider: CalendarProvide
             }}
           />
         ))}
-        {showError ? <FieldError id="pick-err">Choose at least one calendar to sync.</FieldError> : null}
-      </div>
+        {showError ? (
+          <FieldError id="pick-err">Choose at least one calendar to sync.</FieldError>
+        ) : null}
+      </fieldset>
       <div className="flex flex-wrap items-center gap-s2">
         <Button
           onClick={() => {
@@ -93,7 +119,13 @@ function PickCalendars({ provider, email }: { readonly provider: CalendarProvide
   );
 }
 
-function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; readonly email: string }) {
+function OAuthFlow({
+  provider,
+  email,
+}: {
+  readonly provider: CalendarProvider;
+  readonly email: string;
+}) {
   const [phase, setPhase] = useState<Phase>("consent");
   const later = useLater();
   const headingId = useId();
@@ -111,10 +143,18 @@ function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; r
           : `Know Meet wants to access your ${provider.shortName} account`;
   return (
     <>
-      <SettingsHead section="calendar-connect" title={`Connect ${provider.name}`} parent={["Calendars", "calendars"]} />
+      <SettingsHead
+        section="calendar-connect"
+        title={`Connect ${provider.name}`}
+        parent={["Calendars", "calendars"]}
+      />
       <Stepper aria-label="Connection steps">
         {STEP_LABELS.map((label, i) => (
-          <StepperItem key={label} n={i + 1} state={i < current ? "done" : i === current ? "current" : "upcoming"}>
+          <StepperItem
+            key={label}
+            n={i + 1}
+            state={i < current ? "done" : i === current ? "current" : "upcoming"}
+          >
             {label}
           </StepperItem>
         ))}
@@ -135,13 +175,17 @@ function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; r
             </div>
             <div>
               <Permission icon="eye" title="See your events">
-                Read events in the calendars you choose, to show upcoming meetings and avoid conflicts.
+                Read events in the calendars you choose, to show upcoming meetings and avoid
+                conflicts.
               </Permission>
               <Permission icon="calendar" title="Create events with a KnowMe link">
                 Add meetings you schedule in KnowMe, with the join link, dial-in number and PIN.
               </Permission>
             </div>
-            <p className="text-sm text-muted-foreground">KnowMe never deletes events, and never reads your email or contacts. You can disconnect at any time.</p>
+            <p className="text-sm text-muted-foreground">
+              KnowMe never deletes events, and never reads your email or contacts. You can
+              disconnect at any time.
+            </p>
             <div className="flex flex-wrap items-center gap-s2">
               <Button onClick={() => setPhase("connecting")}>Continue</Button>
               <Button variant="secondary" onClick={() => setPhase("cancelled")}>
@@ -156,7 +200,10 @@ function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; r
         )}
         {phase === "connecting" ? (
           <p role="status" className="flex items-center gap-s2 text-muted-foreground">
-            <KmIcon name="refresh" className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none" />
+            <KmIcon
+              name="refresh"
+              className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none"
+            />
             <span>Finishing sign-in with {provider.name} and reading your calendar list.</span>
           </p>
         ) : null}
@@ -164,7 +211,8 @@ function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; r
         {phase === "cancelled" ? (
           <>
             <Note kind="err" icon="x">
-              You cancelled on the {provider.shortName} consent screen, so KnowMe has no access to your calendar. Nothing was changed.
+              You cancelled on the {provider.shortName} consent screen, so KnowMe has no access to
+              your calendar. Nothing was changed.
             </Note>
             <div className="flex flex-wrap items-center gap-s2">
               <Button onClick={() => setPhase("consent")}>
@@ -185,15 +233,23 @@ function OAuthFlow({ provider, email }: { readonly provider: CalendarProvider; r
 function UnknownProvider({ arg }: { readonly arg: string | null }) {
   return (
     <>
-      <SettingsHead section="calendar-connect" title="Calendar provider not found" parent={["Calendars", "calendars"]} />
+      <SettingsHead
+        section="calendar-connect"
+        title="Calendar provider not found"
+        parent={["Calendars", "calendars"]}
+      />
       <Empty>
         <EmptyMedia variant="icon">
           <KmIcon name="alert" />
         </EmptyMedia>
         <p>
-          There is no calendar provider called <code>{arg ?? "(none)"}</code>. Choose Google, Microsoft 365 or CalDAV.
+          There is no calendar provider called <code>{arg ?? "(none)"}</code>. Choose Google,
+          Microsoft 365 or CalDAV.
         </p>
-        <SettingsLink hash="calendars" className={cn(buttonVariants({ size: "sm" }), focusFillClass)}>
+        <SettingsLink
+          hash="calendars"
+          className={cn(buttonVariants({ size: "sm" }), focusFillClass)}
+        >
           Back to calendars
         </SettingsLink>
       </Empty>
@@ -201,7 +257,13 @@ function UnknownProvider({ arg }: { readonly arg: string | null }) {
   );
 }
 
-export function CalendarConnectSection({ arg, user }: { readonly arg: string | null; readonly user: SessionUserView }) {
+export function CalendarConnectSection({
+  arg,
+  user,
+}: {
+  readonly arg: string | null;
+  readonly user: SessionUserView;
+}) {
   if (!isCalendarProvider(arg)) return <UnknownProvider arg={arg} />;
   if (arg === "caldav") return <CalDavSection />;
   return <OAuthFlow key={arg} provider={CALENDAR_PROVIDERS[arg]} email={user.email} />;

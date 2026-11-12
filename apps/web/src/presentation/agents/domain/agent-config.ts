@@ -16,8 +16,14 @@ export interface OptionCopy {
 }
 
 export const MEDIA: Readonly<Record<MediaMode, OptionCopy>> = {
-  speak: { label: "Speak and listen", desc: "Hears the room and can talk. Can also post to meeting chat." },
-  listen: { label: "Listen only", desc: "Hears the room and reads granted knowledge. Never speaks or posts." },
+  speak: {
+    label: "Speak and listen",
+    desc: "Hears the room and can talk. Can also post to meeting chat.",
+  },
+  listen: {
+    label: "Listen only",
+    desc: "Hears the room and reads granted knowledge. Never speaks or posts.",
+  },
   chat: { label: "Chat only", desc: "Hears the room and replies in meeting chat, never out loud." },
 };
 
@@ -30,18 +36,27 @@ export const KNOWLEDGE: Readonly<Record<KnowledgeAccess, OptionCopy>> = {
     label: "Shared knowledge plus host-only files",
     desc: "Also reads files the host has kept private to their own agents.",
   },
-  none: { label: "None", desc: "Gets no transcript or files from KnowMe. Works only from what it hears." },
+  none: {
+    label: "None",
+    desc: "Gets no transcript or files from KnowMe. Works only from what it hears.",
+  },
 };
 
 export const DISPATCH: Readonly<Record<Exclude<DispatchScope, "system">, OptionCopy>> = {
   me: { label: "Only me", desc: "Only you can bring it into meetings you host." },
-  anyone: { label: "Anyone in meetings I host", desc: "Any participant in a meeting you host can dispatch it." },
+  anyone: {
+    label: "Anyone in meetings I host",
+    desc: "Any participant in a meeting you host can dispatch it.",
+  },
 };
 
 export const AUTOJOIN: Readonly<Record<Exclude<AutoJoin, "always">, OptionCopy>> = {
   never: { label: "Never — on request", desc: "Joins only when someone dispatches it." },
   mine: { label: "My meetings", desc: "Joins every meeting you host as soon as it starts." },
-  tagged: { label: "Meetings tagged…", desc: "Joins meetings you host that carry a tag you choose." },
+  tagged: {
+    label: "Meetings tagged…",
+    desc: "Joins meetings you host that carry a tag you choose.",
+  },
 };
 
 export const PROJECTS: Readonly<Record<ProjectKind, OptionCopy>> = {
@@ -80,7 +95,9 @@ export interface DispatchRecord {
   readonly outcome: DispatchOutcome;
 }
 
-export const OUTCOME: Readonly<Record<DispatchOutcome, { readonly label: string; readonly tone: "cyan" | "green" | "red" }>> = {
+export const OUTCOME: Readonly<
+  Record<DispatchOutcome, { readonly label: string; readonly tone: "cyan" | "green" | "red" }>
+> = {
   live: { label: "In meeting now", tone: "cyan" },
   done: { label: "Completed", tone: "green" },
   failed: { label: "Worker offline — not joined", tone: "red" },
@@ -100,7 +117,11 @@ export interface IrisSettings {
   readonly voice: IrisVoice;
   readonly join: "always" | "ask";
   readonly speak: "asked" | "never";
-  readonly scope: { readonly summaries: boolean; readonly conversations: boolean; readonly files: boolean };
+  readonly scope: {
+    readonly summaries: boolean;
+    readonly conversations: boolean;
+    readonly files: boolean;
+  };
   readonly paused: boolean;
   readonly byDefault: boolean;
 }
@@ -116,5 +137,7 @@ export function autoJoinText(agent: AgentConfig): string {
 }
 
 export function dispatchText(agent: AgentConfig): string {
-  return agent.dispatch === "system" ? "Automatic — present in every meeting" : DISPATCH[agent.dispatch].label;
+  return agent.dispatch === "system"
+    ? "Automatic — present in every meeting"
+    : DISPATCH[agent.dispatch].label;
 }

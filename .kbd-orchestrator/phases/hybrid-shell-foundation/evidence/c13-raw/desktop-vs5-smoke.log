@@ -1,0 +1,50 @@
+[WebServer] $ vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4173 --strictPort
+
+Running 2 tests using 1 worker
+
+  ✓  1 [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:6:3 › VS-5 Plain web build works without the Tauri runtime › The home route renders cleanly in a plain browser @VS-5 @value-critical @ui @web @smoke @boundary-only (1.4s)
+  ✘  2 [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:15:3 › VS-5 Plain web build works without the Tauri runtime › An unguarded Tauri call is detected @VS-5 @value-critical @ui @web @smoke @boundary-only @negative-control (19.6s)
+
+
+  1) [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:15:3 › VS-5 Plain web build works without the Tauri runtime › An unguarded Tauri call is detected @VS-5 @value-critical @ui @web @smoke @boundary-only @negative-control › Given a scratch branch whose web entry calls the Tauri invoke API at startup without an isTauri() guard 
+
+    Error: $ node scripts/build.mjs
+
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+       at steps/web-smoke.steps.ts:40
+
+      38 |     installScratch(tree.dir);
+      39 |     const build = runCommand("pnpm --filter @know-meet/web build", tree.dir);
+    > 40 |     expect(build.exitCode, build.stderr.slice(-3000)).toBe(0);
+         |                                                       ^
+      41 |     scenario.scratchDir = tree.dir;
+      42 |   },
+      43 | );
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/web-smoke.steps.ts:40:55)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/vs-5-web-without-tauri.feature.spec.js:16:5
+
+    Error Context: reports/test-results/vs-5-web-without-tauri.fea-055a3-rded-Tauri-call-is-detected-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    reports/test-results/vs-5-web-without-tauri.fea-055a3-rded-Tauri-call-is-detected-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace reports/test-results/vs-5-web-without-tauri.fea-055a3-rded-Tauri-call-is-detected-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:15:3 › VS-5 Plain web build works without the Tauri runtime › An unguarded Tauri call is detected @VS-5 @value-critical @ui @web @smoke @boundary-only @negative-control 
+  1 passed (24.4s)
+undefined
+/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: playwright test -c playwright.config.ts --grep '@VS-5'

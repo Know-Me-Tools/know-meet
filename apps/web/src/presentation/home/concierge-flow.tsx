@@ -9,16 +9,28 @@ import { Orb } from "@know-meet/ui/components/orb";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
-import { buttonLinkClass, eyebrowClass, focusContentClass, h3Class } from "../public-shared/ui-classes";
+import {
+  buttonLinkClass,
+  eyebrowClass,
+  focusContentClass,
+  h3Class,
+} from "../public-shared/ui-classes";
 import { SectionHead } from "./section-head";
 
-const CONCIERGE_DOES = ["Greets and orients", "Answers from the live transcript", "Routes questions to the right agent"] as const;
+const CONCIERGE_DOES = [
+  "Greets and orients",
+  "Answers from the live transcript",
+  "Routes questions to the right agent",
+] as const;
 
 export function ConciergeSection() {
   return (
     <section aria-labelledby="cg-title">
       <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s6 rounded-lg bg-ember-soft p-s6 max-bp1024:grid-cols-[auto_minmax(0,1fr)] max-bp768:grid-cols-[minmax(0,1fr)] max-bp768:gap-s4 max-bp768:p-s5">
-        <div aria-hidden="true" className="relative grid aspect-square w-[132px] place-items-center rounded-28 bg-bg-2 max-bp768:w-24 light:bg-card">
+        <div
+          aria-hidden="true"
+          className="relative grid aspect-square w-[132px] place-items-center rounded-28 bg-bg-2 max-bp768:w-24 light:bg-card"
+        >
           <AgentGlyph tone="system" className="w-[60%] rounded-18">
             CG
           </AgentGlyph>
@@ -30,11 +42,14 @@ export function ConciergeSection() {
             Meet the Concierge
           </h2>
           <p className="max-w-[60ch] text-foreground">
-            The Concierge is in every room, including guest rooms. It greets people as they arrive, explains what’s
-            happening, answers questions from the live transcript, and tells guests what signing in would add. It’s the
-            only agent guests get.
+            The Concierge is in every room, including guest rooms. It greets people as they arrive,
+            explains what’s happening, answers questions from the live transcript, and tells guests
+            what signing in would add. It’s the only agent guests get.
           </p>
-          <ul aria-label="What the Concierge does" className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+          <ul
+            aria-label="What the Concierge does"
+            className="m-0 flex list-none flex-wrap gap-1.5 p-0"
+          >
             {CONCIERGE_DOES.map((item) => (
               <Badge key={item} render={<li />} className="bg-bg-2 light:bg-card">
                 {item}
@@ -106,7 +121,9 @@ export function FlowSection() {
                 focusContentClass,
               )}
             >
-              <span className="font-mono text-13 font-semibold text-ember-text">{String(index + 1).padStart(2, "0")}</span>
+              <span className="font-mono text-13 font-semibold text-ember-text">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <h3 className={h3Class}>{step.title}</h3>
               <p className="text-sm text-muted-foreground">{step.text}</p>
               <span className="mt-auto inline-flex items-center gap-1 pt-s2 text-sm font-semibold text-ember-text transition-transform duration-(--dur-fast) ease-out group-hover/step:translate-x-[3px]">

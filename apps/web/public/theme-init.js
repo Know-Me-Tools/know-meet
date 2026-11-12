@@ -3,7 +3,7 @@
    same-origin script so CSP `script-src 'self'` allows it without a hash. Stored
    km-meet-theme first, then prefers-color-scheme (light), else dark. Mirrors
    infrastructure/theme/theme-adapters.ts, which takes over once the app boots. */
-(function () {
+(() => {
   var root = document.documentElement;
   var theme = null;
   try {

@@ -5,7 +5,13 @@ import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
 import { cn } from "@know-meet/ui/lib/utils";
 import type * as React from "react";
 
-export function CenterCard({ labelledBy, children }: { readonly labelledBy: string; readonly children: React.ReactNode }) {
+export function CenterCard({
+  labelledBy,
+  children,
+}: {
+  readonly labelledBy: string;
+  readonly children: React.ReactNode;
+}) {
   return (
     <section
       aria-labelledby={labelledBy}
@@ -16,7 +22,13 @@ export function CenterCard({ labelledBy, children }: { readonly labelledBy: stri
   );
 }
 
-export function StateBadge({ icon, tone }: { readonly icon: KmIconName; readonly tone: "warn" | "error" }) {
+export function StateBadge({
+  icon,
+  tone,
+}: {
+  readonly icon: KmIconName;
+  readonly tone: "warn" | "error";
+}) {
   return (
     <div
       aria-hidden="true"
@@ -47,7 +59,9 @@ export function OptionItem({ icon, title, detail, action }: OptionItemProps) {
       <KmIcon name={icon} className="mt-0.5 text-ember-text" />
       <div>
         <strong className="block">{title}</strong>
-        {detail === undefined ? null : <span className="mt-0.5 block text-sm text-muted-foreground">{detail}</span>}
+        {detail === undefined ? null : (
+          <span className="mt-0.5 block text-sm text-muted-foreground">{detail}</span>
+        )}
         {action === undefined ? null : <span className="text-sm font-semibold">{action}</span>}
       </div>
     </li>

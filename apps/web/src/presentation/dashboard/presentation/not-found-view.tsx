@@ -31,14 +31,19 @@ export function NotFoundView({ id }: { readonly id: string | null }) {
             We couldn’t find that meeting
           </h2>
           <p className="max-w-measure-empty text-sm text-muted-foreground">
-            There is no meeting with the id <code>{shown}</code>. It may have been cancelled, or the link was copied incompletely.
+            There is no meeting with the id <code>{shown}</code>. It may have been cancelled, or the
+            link was copied incompletely.
           </p>
         </EmptyHeader>
         <div className="flex flex-wrap items-center gap-s2">
           <Link to="/dashboard" hash="upcoming" className={cn(buttonVariants(), focusFillClass)}>
             Back to meetings
           </Link>
-          <Link to="/dashboard" hash="schedule" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/dashboard"
+            hash="schedule"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             Schedule a meeting
           </Link>
         </div>

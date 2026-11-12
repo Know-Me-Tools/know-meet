@@ -5,7 +5,13 @@ import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { PageEyebrow } from "@know-meet/ui/components/page-head";
 import type { InvitePreview } from "../application/schedule-form";
 
-export function SchedulePreviewPanel({ preview, from }: { readonly preview: InvitePreview; readonly from: string }) {
+export function SchedulePreviewPanel({
+  preview,
+  from,
+}: {
+  readonly preview: InvitePreview;
+  readonly from: string;
+}) {
   return (
     <aside
       aria-labelledby="pv-title"
@@ -16,7 +22,9 @@ export function SchedulePreviewPanel({ preview, from }: { readonly preview: Invi
           <h2 id="pv-title" className="text-lg">
             Invite preview
           </h2>
-          <span className="text-sm text-muted-foreground">What recipients will see. Updates as you type.</span>
+          <span className="text-sm text-muted-foreground">
+            What recipients will see. Updates as you type.
+          </span>
         </div>
         <div className="grid content-start gap-s2">
           <PageEyebrow className="text-muted-foreground">Email</PageEyebrow>
@@ -24,7 +32,9 @@ export function SchedulePreviewPanel({ preview, from }: { readonly preview: Invi
             <div className="grid gap-0.5 pb-s3 *:block *:[overflow-wrap:anywhere]">
               <span className="text-xs text-muted-foreground">From: {from} via Know Meet</span>
               <span className="text-xs text-muted-foreground">{preview.to}</span>
-              <span className="font-display text-base font-semibold text-foreground">{preview.subject}</span>
+              <span className="font-display text-base font-semibold text-foreground">
+                {preview.subject}
+              </span>
             </div>
             <div className="grid gap-s3">
               <p className="[overflow-wrap:anywhere]">{preview.intro}</p>
@@ -50,7 +60,9 @@ export function SchedulePreviewPanel({ preview, from }: { readonly preview: Invi
                   </>
                 ) : null}
               </dl>
-              {preview.description ? <p className="line-clamp-3 [overflow-wrap:anywhere]">{preview.description}</p> : null}
+              {preview.description ? (
+                <p className="line-clamp-3 [overflow-wrap:anywhere]">{preview.description}</p>
+              ) : null}
               <p className="text-muted-foreground">{preview.notices}</p>
             </div>
           </div>

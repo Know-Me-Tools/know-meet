@@ -43,6 +43,7 @@ function Slider({
         {Array.from({ length: _values.length }, (_, index) => (
           <SliderPrimitive.Thumb
             data-slot="slider-thumb"
+            // biome-ignore lint/suspicious/noArrayIndexKey: thumb N is bound to value N by position, so the index is the thumb's identity; values reorder but thumbs do not.
             key={index}
             className="relative block size-size-slider-thumb shrink-0 rounded-round bg-slider-thumb shadow-(--switch-thumb-shadow) transition-colors duration-(--dur-fast) select-none after:absolute after:-inset-3 has-[:focus-visible]:bg-on-focus! disabled:pointer-events-none disabled:opacity-50"
           />

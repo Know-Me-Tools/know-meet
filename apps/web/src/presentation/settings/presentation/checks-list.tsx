@@ -17,7 +17,12 @@ const GLYPH_FILL: Readonly<Record<CheckRowState["state"], string>> = {
 function Glyph({ row, index }: { readonly row: CheckRowState; readonly index: number }) {
   switch (row.state) {
     case "run":
-      return <KmIcon name="refresh" className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none" />;
+      return (
+        <KmIcon
+          name="refresh"
+          className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none"
+        />
+      );
     case "ok":
       return <KmIcon name="check" />;
     case "fail":
@@ -29,7 +34,11 @@ function Glyph({ row, index }: { readonly row: CheckRowState; readonly index: nu
   }
 }
 
-export function ChecksList({ steps, rows, label }: {
+export function ChecksList({
+  steps,
+  rows,
+  label,
+}: {
   readonly steps: readonly CheckStep[];
   readonly rows: readonly CheckRowState[];
   readonly label?: string;
@@ -44,19 +53,31 @@ export function ChecksList({ steps, rows, label }: {
             data-s={row.state}
             className="grid grid-cols-[36px_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-bg-2 px-s4 py-s3 max-bp768:grid-cols-[36px_minmax(0,1fr)]"
           >
-            <span aria-hidden="true" className={cn("grid size-9 place-items-center rounded-round", GLYPH_FILL[row.state])}>
+            <span
+              aria-hidden="true"
+              className={cn("grid size-9 place-items-center rounded-round", GLYPH_FILL[row.state])}
+            >
               <Glyph row={row} index={index} />
             </span>
             <span className="grid min-w-0 gap-0.5">
               <b>{step.label}</b>
-              <small className={cn("text-sm [overflow-wrap:anywhere]", row.state === "fail" ? "text-foreground" : "text-muted-foreground")}>
+              <small
+                className={cn(
+                  "text-sm [overflow-wrap:anywhere]",
+                  row.state === "fail" ? "text-foreground" : "text-muted-foreground",
+                )}
+              >
                 {row.detail}
               </small>
             </span>
             <span
               className={cn(
                 "text-sm font-semibold whitespace-nowrap max-bp768:col-start-2",
-                row.state === "ok" ? "text-green-text" : row.state === "fail" ? "text-red-text" : "text-muted-foreground",
+                row.state === "ok"
+                  ? "text-green-text"
+                  : row.state === "fail"
+                    ? "text-red-text"
+                    : "text-muted-foreground",
               )}
             >
               {row.text}

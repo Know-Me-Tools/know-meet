@@ -6,7 +6,13 @@ import { buttonVariants } from "@know-meet/ui/components/button";
 import { cardVariants } from "@know-meet/ui/components/card";
 import { AgentGlyph } from "@know-meet/ui/components/glyph";
 import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
-import { PageEyebrow, PageHead, PageHeadText, PageSub, PageTitle } from "@know-meet/ui/components/page-head";
+import {
+  PageEyebrow,
+  PageHead,
+  PageHeadText,
+  PageSub,
+  PageTitle,
+} from "@know-meet/ui/components/page-head";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
@@ -17,9 +23,15 @@ import { useAgentsState } from "./agents-state";
 import { Crumbs } from "./agents-ui";
 
 const sectionClass = "grid grid-cols-[minmax(0,1fr)] gap-s4";
-const grid3Class = "grid grid-cols-3 gap-s4 max-bp1024:grid-cols-2 max-bp768:grid-cols-[minmax(0,1fr)]";
+const grid3Class =
+  "grid grid-cols-3 gap-s4 max-bp1024:grid-cols-2 max-bp768:grid-cols-[minmax(0,1fr)]";
 
-function Feature({ icon, title, tone, children }: {
+function Feature({
+  icon,
+  title,
+  tone,
+  children,
+}: {
   readonly icon: KmIconName;
   readonly title: string;
   readonly tone: "ember" | "cyan";
@@ -42,14 +54,23 @@ function Feature({ icon, title, tone, children }: {
   );
 }
 
-function PlainList({ kind, items }: { readonly kind: "yes" | "no"; readonly items: readonly string[] }) {
+function PlainList({
+  kind,
+  items,
+}: {
+  readonly kind: "yes" | "no";
+  readonly items: readonly string[];
+}) {
   return (
     <ul className="m-0 grid list-none gap-s2 p-0">
       {items.map((item) => (
         <li key={item} className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-s2 text-sm">
           <KmIcon
             name={kind === "yes" ? "check" : "x"}
-            className={cn("mt-px size-[18px]", kind === "yes" ? "text-green-text" : "text-red-text")}
+            className={cn(
+              "mt-px size-[18px]",
+              kind === "yes" ? "text-green-text" : "text-red-text",
+            )}
           />
           <span>{item}</span>
         </li>
@@ -93,7 +114,11 @@ function CallToAction({ signedIn }: { readonly signedIn: boolean }) {
             </>
           ) : (
             <>
-              <Link to="/auth" hash={`sign-in?next=${encodeURIComponent("agents#registry")}`} className={primary}>
+              <Link
+                to="/auth"
+                hash={`sign-in?next=${encodeURIComponent("agents#registry")}`}
+                className={primary}
+              >
                 <KmIcon name="user" className="size-4" />
                 <span>Sign in to register agents</span>
               </Link>
@@ -113,14 +138,18 @@ export function ConciergeView() {
   useDocumentTitle("Concierge — Know Meet");
   const signedIn = useSessionUser() !== null;
   const { registry, workspace } = useAgentsState();
-  const mono = registry.find((agent) => agent.id === "concierge")?.mono ??
-    workspace.agents.find((agent) => agent.id === "concierge")?.mono ?? "CG";
+  const mono =
+    registry.find((agent) => agent.id === "concierge")?.mono ??
+    workspace.agents.find((agent) => agent.id === "concierge")?.mono ??
+    "CG";
 
   return (
     <>
       <PageHead className="max-bp768:mb-s5 max-bp768:items-start">
         <PageHeadText>
-          <Crumbs items={[{ label: "Agents", to: signedIn ? "registry" : "/" }, { label: "Concierge" }]} />
+          <Crumbs
+            items={[{ label: "Agents", to: signedIn ? "registry" : "/" }, { label: "Concierge" }]}
+          />
           <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-s5 max-bp768:grid-cols-[minmax(0,1fr)]">
             <AgentGlyph tone="system" className="w-[84px]">
               {mono}
@@ -129,8 +158,8 @@ export function ConciergeView() {
               <PageEyebrow>System agent · provided by KnowMe</PageEyebrow>
               <PageTitle>Concierge</PageTitle>
               <PageSub className="max-w-[62ch] text-lg">
-                The one agent that’s in every meeting, including meetings where nobody has an account. It helps guests
-                follow along and shows what agents can do.
+                The one agent that’s in every meeting, including meetings where nobody has an
+                account. It helps guests follow along and shows what agents can do.
               </PageSub>
             </div>
           </div>
@@ -142,13 +171,16 @@ export function ConciergeView() {
         </h2>
         <div className={grid3Class}>
           <Feature icon="chat" title="Answers questions about the meeting" tone="ember">
-            Ask what was decided, who said what, or what you missed. It answers from the live transcript of this meeting.
+            Ask what was decided, who said what, or what you missed. It answers from the live
+            transcript of this meeting.
           </Feature>
           <Feature icon="agent-add" title="Explains the other agents" tone="cyan">
-            Describes what registered agents and dots in the room can do, and demonstrates them when the host allows it.
+            Describes what registered agents and dots in the room can do, and demonstrates them when
+            the host allows it.
           </Feature>
           <Feature icon="cc" title="Works with live transcription" tone="ember">
-            Everyone gets live captions. The Concierge reads the same transcript, so its answers match what was said.
+            Everyone gets live captions. The Concierge reads the same transcript, so its answers
+            match what was said.
           </Feature>
         </div>
       </section>

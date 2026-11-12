@@ -3,9 +3,9 @@ name = "sovereign_hybrid_desktop"
 version = "0.1.0"
 edition = "2024"
 [build-dependencies]
-tauri-build = "=2.6.3"
+tauri-build = { version = "=2.6.3", features = [] }
 [dependencies]
-tauri = "=2.11.3"
+tauri = { version = "=2.11.3", features = [] }
 gen_ui_notes = { path = "../../../crates/gen-ui-notes" }
 
 [features]

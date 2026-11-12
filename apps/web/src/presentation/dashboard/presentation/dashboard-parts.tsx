@@ -28,7 +28,11 @@ import type { DashboardMeetingStatus, DeliveryChannel, DeliveryStatus } from "..
 
 type ViewTab = "upcoming" | "invites" | "schedule";
 
-const TABS: readonly { readonly key: ViewTab; readonly label: string; readonly icon: KmIconName }[] = [
+const TABS: readonly {
+  readonly key: ViewTab;
+  readonly label: string;
+  readonly icon: KmIconName;
+}[] = [
   { key: "upcoming", label: "Upcoming", icon: "calendar" },
   { key: "invites", label: "Invites", icon: "send" },
   { key: "schedule", label: "Schedule", icon: "plus" },
@@ -37,7 +41,10 @@ const TABS: readonly { readonly key: ViewTab; readonly label: string; readonly i
 /** km.css `.tabs` of links (aria-current), dashboard.html `dashTabs`. */
 export function DashTabs({ active }: { readonly active: ViewTab }) {
   return (
-    <nav aria-label="Meetings sections" className="-mt-s2 mb-s5 flex gap-s1 overflow-x-auto [scrollbar-width:none]">
+    <nav
+      aria-label="Meetings sections"
+      className="-mt-s2 mb-s5 flex gap-s1 overflow-x-auto [scrollbar-width:none]"
+    >
       {TABS.map((tab) => (
         <Link
           key={tab.key}
@@ -64,13 +71,18 @@ export function MeetingsCrumbs({ label }: { readonly label: string }) {
     <Breadcrumb className="mb-s2">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink render={<Link to="/dashboard" hash="upcoming" />}>Meetings</BreadcrumbLink>
+          <BreadcrumbLink render={<Link to="/dashboard" hash="upcoming" />}>
+            Meetings
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <KmIcon name="chevron-right" className="size-3.5" />
         </BreadcrumbSeparator>
         <BreadcrumbItem className="min-w-0">
-          <BreadcrumbPage title={label} className="block max-w-[40ch] truncate text-muted-foreground">
+          <BreadcrumbPage
+            title={label}
+            className="block max-w-[40ch] truncate text-muted-foreground"
+          >
             {label}
           </BreadcrumbPage>
         </BreadcrumbItem>
@@ -110,7 +122,12 @@ export function ChannelChip({ channel }: { readonly channel: DeliveryChannel }) 
   );
 }
 
-const STATUS: Readonly<Record<DeliveryStatus, { variant: "green" | "amber" | "red" | "default"; icon: KmIconName; label: string }>> = {
+const STATUS: Readonly<
+  Record<
+    DeliveryStatus,
+    { variant: "green" | "amber" | "red" | "default"; icon: KmIconName; label: string }
+  >
+> = {
   delivered: { variant: "green", icon: "check", label: "Delivered" },
   opened: { variant: "green", icon: "eye", label: "Opened" },
   queued: { variant: "amber", icon: "clock", label: "Queued" },
@@ -172,9 +189,20 @@ export function ConnectedChip() {
 }
 
 /** km.css `.meta-item`: 16px icon + 14px sub text, no wrap. */
-export function MetaItem({ icon, children, title }: { readonly icon?: KmIconName; readonly children: React.ReactNode; readonly title?: string }) {
+export function MetaItem({
+  icon,
+  children,
+  title,
+}: {
+  readonly icon?: KmIconName;
+  readonly children: React.ReactNode;
+  readonly title?: string;
+}) {
   return (
-    <span className="inline-flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground" title={title}>
+    <span
+      className="inline-flex items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground"
+      title={title}
+    >
       {icon ? <KmIcon name={icon} className="size-4" /> : null}
       {children}
     </span>
@@ -210,9 +238,22 @@ export function AgentChips({ agents }: { readonly agents: readonly Agent[] }) {
     ));
 }
 
-export function CopyLinkButton({ url, title, size = "sm" }: { readonly url: string; readonly title: string; readonly size?: "sm" | "default" }) {
+export function CopyLinkButton({
+  url,
+  title,
+  size = "sm",
+}: {
+  readonly url: string;
+  readonly title: string;
+  readonly size?: "sm" | "default";
+}) {
   return (
-    <Button variant="secondary" size={size} aria-label={`Copy join link for ${title}`} onClick={() => void copyText(url)}>
+    <Button
+      variant="secondary"
+      size={size}
+      aria-label={`Copy join link for ${title}`}
+      onClick={() => void copyText(url)}
+    >
       <KmIcon name="link" className="size-4" />
       <span>Copy link</span>
     </Button>
@@ -230,7 +271,15 @@ interface SwitchRowProps {
 }
 
 /** km.css `.switch-row`: label and hint on the left, the switch on the right. */
-export function SwitchRow({ id, label, hint, checked, disabled, onCheckedChange, children }: SwitchRowProps) {
+export function SwitchRow({
+  id,
+  label,
+  hint,
+  checked,
+  disabled,
+  onCheckedChange,
+  children,
+}: SwitchRowProps) {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s4 py-s3">
       <div className="grid gap-0.5 *:block">
@@ -246,12 +295,26 @@ export function SwitchRow({ id, label, hint, checked, disabled, onCheckedChange,
 }
 
 /** km.css `.state-line` + `.state-glyph`: round green pip = online, filled square = offline. */
-export function StateLine({ status, label, className }: { readonly status: "online" | "offline"; readonly label: string; readonly className?: string }) {
+export function StateLine({
+  status,
+  label,
+  className,
+}: {
+  readonly status: "online" | "offline";
+  readonly label: string;
+  readonly className?: string;
+}) {
   return (
-    <span className={cn("inline-flex items-center gap-2 text-xs font-semibold", className)} data-state={status}>
+    <span
+      className={cn("inline-flex items-center gap-2 text-xs font-semibold", className)}
+      data-state={status}
+    >
       <span
         aria-hidden="true"
-        className={cn("flex-none", status === "online" ? "size-2.5 rounded-round bg-pip-green" : "size-size-pip bg-fg-sub")}
+        className={cn(
+          "flex-none",
+          status === "online" ? "size-2.5 rounded-round bg-pip-green" : "size-size-pip bg-fg-sub",
+        )}
       />
       <span>{label}</span>
     </span>
@@ -262,4 +325,5 @@ export function StateLine({ status, label, className }: { readonly status: "onli
 export const smallLinkClass = "text-sm";
 
 /** dashboard.html `busy()`: the refresh icon spins while an action runs; still under reduced motion. */
-export const busySpinClass = "animate-spin [animation-duration:var(--anim-spin-fast)] motion-reduce:animate-none";
+export const busySpinClass =
+  "animate-spin [animation-duration:var(--anim-spin-fast)] motion-reduce:animate-none";

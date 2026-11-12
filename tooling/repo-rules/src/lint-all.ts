@@ -22,7 +22,9 @@ const skipped = new Set(skipIndex >= 0 ? (process.argv[skipIndex + 1] ?? "").spl
 const failed: string[] = [];
 for (const step of STEPS.filter((name) => !skipped.has(name))) {
   process.stdout.write(`\n== ${step}\n`);
-  const run = spawnSync("pnpm", ["run", "--silent", step], { stdio: "inherit" });
+  const run = spawnSync("pnpm", ["run", "--silent", step], {
+    stdio: "inherit",
+  });
   if (run.status !== 0) failed.push(step);
 }
 process.stdout.write(

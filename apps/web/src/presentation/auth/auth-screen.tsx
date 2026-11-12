@@ -3,9 +3,10 @@
 // route-inventory.json / app-state-map.json: #sign-in (default), #sign-in-error,
 // #sign-up, #check-email and #magic-link-sent. Each view is keyed by its state so
 // field state resets on every transition, and each sets the document title.
+
+import type { SessionUserView } from "../shared/session";
 import { useDocumentTitle } from "../shared/use-document-title";
 import { useHashRoute } from "../shared/use-hash-route";
-import type { SessionUserView } from "../shared/session";
 import { type AuthView, authParams } from "./auth-params";
 import { CheckEmailView, MagicLinkView } from "./inbox-views";
 import { SignInView } from "./sign-in-view";
@@ -43,7 +44,13 @@ export function AuthScreen({ user, onSignOut }: AuthScreenProps) {
       return <MagicLinkView key={view} params={params} />;
     default:
       return (
-        <SignInView key={view} params={params} isError={view === "sign-in-error"} user={user} onSignOut={onSignOut} />
+        <SignInView
+          key={view}
+          params={params}
+          isError={view === "sign-in-error"}
+          user={user}
+          onSignOut={onSignOut}
+        />
       );
   }
 }

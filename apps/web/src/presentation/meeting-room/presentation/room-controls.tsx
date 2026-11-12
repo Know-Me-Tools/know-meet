@@ -62,7 +62,10 @@ function Ctl({ icon, label, tone = "rest", locked = false, className, ...props }
 
 function CtlGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-wrap items-center gap-s2 max-bp768:flex-nowrap", className)} {...props} />
+    <div
+      className={cn("flex flex-wrap items-center gap-s2 max-bp768:flex-nowrap", className)}
+      {...props}
+    />
   );
 }
 
@@ -74,7 +77,11 @@ function RoomClock({ startedAt }: { readonly startedAt: number }) {
     return () => window.clearInterval(timer);
   }, []);
   return (
-    <span role="timer" aria-label="Time in meeting" className="font-mono text-13 text-muted-foreground">
+    <span
+      role="timer"
+      aria-label="Time in meeting"
+      className="font-mono text-13 text-muted-foreground"
+    >
       {formatDuration(now - startedAt)}
     </span>
   );
@@ -149,10 +156,30 @@ export function RoomControls(props: RoomControlsProps) {
         />
       </CtlGroup>
       <CtlGroup>
-        <Ctl icon="chat" label="Chat" aria-describedby={LATER_NOTE_ID} onClick={later("Meeting chat")} />
-        <Ctl icon="wave" label="Transcript" aria-describedby={LATER_NOTE_ID} onClick={later("The live transcript")} />
-        <Ctl icon="book" label="Knowledge" aria-describedby={LATER_NOTE_ID} onClick={later("Meeting knowledge")} />
-        <Ctl icon="users" label="Invite" aria-describedby={LATER_NOTE_ID} onClick={later("Inviting people")} />
+        <Ctl
+          icon="chat"
+          label="Chat"
+          aria-describedby={LATER_NOTE_ID}
+          onClick={later("Meeting chat")}
+        />
+        <Ctl
+          icon="wave"
+          label="Transcript"
+          aria-describedby={LATER_NOTE_ID}
+          onClick={later("The live transcript")}
+        />
+        <Ctl
+          icon="book"
+          label="Knowledge"
+          aria-describedby={LATER_NOTE_ID}
+          onClick={later("Meeting knowledge")}
+        />
+        <Ctl
+          icon="users"
+          label="Invite"
+          aria-describedby={LATER_NOTE_ID}
+          onClick={later("Inviting people")}
+        />
         <Ctl
           icon="agent-add"
           label="Add agent"

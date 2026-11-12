@@ -54,6 +54,7 @@ function TableRegion({
   const ref = React.useRef<HTMLDivElement>(null);
   const overflows = useOverflowsInline(ref);
   return (
+    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: aria-label is set under the same condition as role="region"; without overflow the wrapper has neither.
     <div
       ref={ref}
       data-slot="table-region"
@@ -68,7 +69,9 @@ function TableRegion({
       )}
     >
       <table data-slot="table" className={cn(tableClass, className)} {...props}>
-        <caption className={cn("px-s4 py-s3 text-left text-sm text-muted-foreground", captionClassName)}>
+        <caption
+          className={cn("px-s4 py-s3 text-left text-sm text-muted-foreground", captionClassName)}
+        >
           {caption}
         </caption>
         {children}

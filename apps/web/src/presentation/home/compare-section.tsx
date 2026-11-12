@@ -6,8 +6,8 @@
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { TableRegion } from "@know-meet/ui/components/table-region";
 import { Link } from "@tanstack/react-router";
-import type { SessionUserView } from "../shared/session";
 import { buttonLinkClass } from "../public-shared/ui-classes";
+import type { SessionUserView } from "../shared/session";
 import { SectionHead } from "./section-head";
 
 interface Cell {
@@ -34,12 +34,37 @@ const ROWS: readonly Row[] = [
     signedIn: { included: true, note: "Saved with the meeting" },
   },
   { name: "Phone dial-in for invitees", detail: "Audio-only, via PIN", guest: YES, signedIn: YES },
-  { name: "Registered agents", detail: "Scribe, Researcher, Facilitator, Translator, your own", guest: NO, signedIn: YES },
-  { name: "Your dot and private agent panel", detail: "Iris, with private memory", guest: NO, signedIn: YES },
+  {
+    name: "Registered agents",
+    detail: "Scribe, Researcher, Facilitator, Translator, your own",
+    guest: NO,
+    signedIn: YES,
+  },
+  {
+    name: "Your dot and private agent panel",
+    detail: "Iris, with private memory",
+    guest: NO,
+    signedIn: YES,
+  },
   { name: "Uploads to meeting knowledge", guest: NO, signedIn: YES },
-  { name: "Recording", detail: "LiveKit Room Composite egress, MP4 or HLS", guest: NO, signedIn: YES },
-  { name: "Transcript, summary and action items sent at close", detail: "Email and SMS", guest: NO, signedIn: YES },
-  { name: "Recordings library", detail: "S3-compatible storage, pinned to IPFS", guest: NO, signedIn: YES },
+  {
+    name: "Recording",
+    detail: "LiveKit Room Composite egress, MP4 or HLS",
+    guest: NO,
+    signedIn: YES,
+  },
+  {
+    name: "Transcript, summary and action items sent at close",
+    detail: "Email and SMS",
+    guest: NO,
+    signedIn: YES,
+  },
+  {
+    name: "Recordings library",
+    detail: "S3-compatible storage, pinned to IPFS",
+    guest: NO,
+    signedIn: YES,
+  },
   {
     name: "Scheduling and calendar connections",
     detail: "Google, Microsoft 365, iCloud / CalDAV",
@@ -66,7 +91,9 @@ function CapabilityCell({ cell }: { readonly cell: Cell }) {
         <KmIcon name="check" className="mt-px size-[18px] text-green-text" />
         <span>
           Included
-          {cell.note === undefined ? null : <small className="block text-xs text-muted-foreground">{cell.note}</small>}
+          {cell.note === undefined ? null : (
+            <small className="block text-xs text-muted-foreground">{cell.note}</small>
+          )}
         </span>
       </span>
     </td>
@@ -77,8 +104,8 @@ export function CompareSection({ user }: { readonly user: SessionUserView | null
   return (
     <section aria-labelledby="cmp-title">
       <SectionHead id="cmp-title" eyebrow="02 — Access" title="Guest or signed in">
-        Anyone can start or join a meeting. Signing in turns on everything that needs to remember you: agents, recording,
-        delivery, storage and calendars.
+        Anyone can start or join a meeting. Signing in turns on everything that needs to remember
+        you: agents, recording, delivery, storage and calendars.
       </SectionHead>
       <TableRegion caption="Capabilities available to guests compared with signed-in users">
         <thead>
@@ -95,10 +122,15 @@ export function CompareSection({ user }: { readonly user: SessionUserView | null
         <tbody>
           {ROWS.map((row) => (
             <tr key={row.name}>
-              <th scope="row" className="align-top! font-body text-sm font-semibold text-foreground">
+              <th
+                scope="row"
+                className="align-top! font-body text-sm font-semibold text-foreground"
+              >
                 {row.name}
                 {row.detail === undefined ? null : (
-                  <span className="mt-0.5 block text-xs font-normal text-muted-foreground">{row.detail}</span>
+                  <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+                    {row.detail}
+                  </span>
                 )}
               </th>
               <CapabilityCell cell={row.guest} />

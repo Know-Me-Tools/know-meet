@@ -7,7 +7,8 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { focusFirstError } from "../../shared/focus-first-error";
 import { checkField, type FieldRule } from "../application/validators";
 
-export type FieldErrors<K extends string> = Readonly<Partial<Record<K, string | null>>>;
+// A mapped type: TS 7 rejects `{}` for Readonly<Partial<Record<K, …>>> over a generic K.
+export type FieldErrors<K extends string> = { readonly [P in K]?: string | null };
 
 export function useFormErrors<K extends string>(rules: Readonly<Record<K, FieldRule>>) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -20,7 +21,10 @@ export function useFormErrors<K extends string>(rules: Readonly<Record<K, FieldR
 
   /** Validates every listed field; returns true when all pass. */
   const validate = useCallback(
-    (values: Readonly<Record<K, string>>, keys: readonly K[] = Object.keys(rules) as K[]): boolean => {
+    (
+      values: Readonly<Record<K, string>>,
+      keys: readonly K[] = Object.keys(rules) as K[],
+    ): boolean => {
       const next: Partial<Record<K, string | null>> = {};
       for (const key of keys) next[key] = checkField(rules[key], values[key]);
       setErrors(next);

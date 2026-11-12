@@ -8,20 +8,27 @@
  * failing translucent focus fill and a skip link whose focus fill equals its rest fill.
  */
 import { chromium } from "@playwright/test";
-import { auditFlatControls, contrastRatio, type Rgb } from "../a11y/flat-controls-probe.ts";
 import { scanAllStrokes } from "../a11y/all-elements-stroke-probe.ts";
+import { auditFlatControls, contrastRatio, type Rgb } from "../a11y/flat-controls-probe.ts";
 import { auditScrollRegions } from "../a11y/scroll-regions-probe.ts";
 import { startStaticServer } from "../capture/static-server.ts";
 import { checkInstant, checkMorphTokens, observeResize } from "../motion/nav-morph-probe.ts";
 import { contextOptions, prepareContext } from "../support/capture-environment.ts";
 import { findEntry, inScopeEntries, loadInventory, type Theme } from "../support/inventory.ts";
-import { DESIGN_DIR, FONTS_DIR } from "../support/repo-paths.ts";
 import { renderCell } from "../support/render-cell.ts";
-import { PROTOTYPE_SELECTORS, prototypeStatePath, type RenderTarget } from "../support/state-drivers.ts";
+import { DESIGN_DIR, FONTS_DIR } from "../support/repo-paths.ts";
+import {
+  PROTOTYPE_SELECTORS,
+  prototypeStatePath,
+  type RenderTarget,
+} from "../support/state-drivers.ts";
 
+/** CLI report line: this tool's output is its stdout report. */
+const print = (line: string): void => {
+  process.stdout.write(`${line}\n`);
+};
 const which = new Set(process.argv.slice(2));
-const run = (name: string): boolean =>
-  which.size === 0 ? name !== "controls" : which.has(name);
+const run = (name: string): boolean => (which.size === 0 ? name !== "controls" : which.has(name));
 const THEMES: readonly Theme[] = ["dark", "light"];
 const VIEWPORTS = [375, 768, 1024, 1440] as const;
 // The prototype keeps data-nav-class on <html>; the probe scope is then the whole page (stricter).
@@ -68,7 +75,9 @@ try {
         "instant" in c && c.instant
           ? checkInstant(obs, c.cls)
           : checkMorphTokens(obs, c.cls, "dur-nav-morph", "ease-layout");
-      console.log(`morph ${c.from}->${c.to} ${c.cls}${c.reduce ? " reduced" : ""}: ${result.ok ? "PASS" : "FAIL"} ${result.detail}`);
+      print(
+        `morph ${c.from}->${c.to} ${c.cls}${c.reduce ? " reduced" : ""}: ${result.ok ? "PASS" : "FAIL"} ${result.detail}`,
+      );
       if (!result.ok) failures.push(`morph ${c.from}->${c.to}`);
       await context.close();
     }
@@ -90,7 +99,7 @@ try {
         const reported = r.stops.filter((s) => s.contrastToRest < 3 || s.contrastToSurface < 3);
         const opaquePass = r.stops.filter((s) => s.contrastToSurface < 3).length;
         const ok = r.focusStops > 0 && reported.length === r.focusStops;
-        console.log(
+        print(
           `controls NC-1 translucent focus fill ${id}/dark/1440: ${ok ? "PASS" : "FAIL"} ` +
             `${reported.length}/${r.focusStops} stops reported (${opaquePass} below 3:1 against surface); ` +
             `opaque reading of the same fill against black would be ${contrastRatio(opaqueWhite, [0, 0, 0]).toFixed(2)}:1`,
@@ -103,7 +112,13 @@ try {
     // NC-2: frame.skip-link-focused is rendered with the skip link focused. Unchanged, it must pass;
     // with its focus fill pinned to its rest fill (ember-btn) it must be reported.
     for (const pinned of [false, true]) {
-      const cell = await renderCell(browser, target, findEntry(inventory, "frame.skip-link-focused"), "dark", 1440);
+      const cell = await renderCell(
+        browser,
+        target,
+        findEntry(inventory, "frame.skip-link-focused"),
+        "dark",
+        1440,
+      );
       if (cell === null) throw new Error("NC-2: frame.skip-link-focused not applicable");
       try {
         const focusedAtRender = await cell.page.evaluate(
@@ -116,9 +131,14 @@ try {
           });
         const r = await auditFlatControls(cell.page);
         const skip = r.stops.filter((s) => s.label.includes("Skip to content"));
-        const skipProblems = r.problems.filter((p) => p.includes("Skip to content") && p.includes("fill changes"));
-        const ok = focusedAtRender && skip.length > 0 && (pinned ? skipProblems.length > 0 : skipProblems.length === 0);
-        console.log(
+        const skipProblems = r.problems.filter(
+          (p) => p.includes("Skip to content") && p.includes("fill changes"),
+        );
+        const ok =
+          focusedAtRender &&
+          skip.length > 0 &&
+          (pinned ? skipProblems.length > 0 : skipProblems.length === 0);
+        print(
           `controls NC-2 skip link ${pinned ? "focus fill pinned to rest fill" : "unchanged"}: ${ok ? "PASS" : "FAIL"} ` +
             `focused at render ${focusedAtRender}, ${skip.length} skip-link stops, contrast to rest ` +
             `${skip.map((s) => `${s.contrastToRestPass.toFixed(2)}/${s.contrastAfterBlur.toFixed(2)}`).join(" ")}, ` +
@@ -154,7 +174,9 @@ try {
               }));
               overflowCells += 1;
               if (w.scroll !== viewport || w.client !== viewport)
-                failures.push(`overflow ${id}: document ${w.scroll}px, client ${w.client}px, viewport ${viewport}px`);
+                failures.push(
+                  `overflow ${id}: document ${w.scroll}px, client ${w.client}px, viewport ${viewport}px`,
+                );
             }
             if (run("flat")) {
               const r = await auditFlatControls(cell.page);
@@ -168,7 +190,11 @@ try {
               strokeCells += 1;
               strokeElements += scan.elements + scan.pseudos;
               for (const f of scan.findings) {
-                if (f.kind === "deco-text") decoText.set(`${f.where} ${f.detail}`, (decoText.get(`${f.where} ${f.detail}`) ?? 0) + 1);
+                if (f.kind === "deco-text")
+                  decoText.set(
+                    `${f.where} ${f.detail}`,
+                    (decoText.get(`${f.where} ${f.detail}`) ?? 0) + 1,
+                  );
                 else failures.push(`strokes ${id}: ${f.kind} ${f.where} ${f.detail}`);
               }
             }
@@ -184,18 +210,23 @@ try {
         }
       }
     }
-    console.log(`flat: ${cells} cells, ${stops} focus stops; scroll: ${regions} overflowing regions, ${focusedRegions} focused; overflow: ${overflowCells} cells; strokes: ${strokeCells} cells, ${strokeElements} elements+pseudos scanned`);
-    if (decoText.size > 0) console.log(`text-decoration (informational, not counted): ${[...decoText.keys()].length} distinct, e.g. ${[...decoText.keys()].slice(0, 6).join(" | ")}`);
+    print(
+      `flat: ${cells} cells, ${stops} focus stops; scroll: ${regions} overflowing regions, ${focusedRegions} focused; overflow: ${overflowCells} cells; strokes: ${strokeCells} cells, ${strokeElements} elements+pseudos scanned`,
+    );
+    if (decoText.size > 0)
+      print(
+        `text-decoration (informational, not counted): ${[...decoText.keys()].length} distinct, e.g. ${[...decoText.keys()].slice(0, 6).join(" | ")}`,
+      );
   }
 } finally {
   await browser.close();
   await server.close();
 }
-console.log(`FAILURES ${failures.length}`);
+print(`FAILURES ${failures.length}`);
 const grouped = new Map<string, number>();
 for (const f of failures) {
   const key = f.replace(/^(\w+) [^:]+\/(dark|light)\/\d+: /, "$1 ");
   grouped.set(key, (grouped.get(key) ?? 0) + 1);
 }
-for (const [k, n] of [...grouped].sort((a, b) => b[1] - a[1])) console.log(`${n}x ${k}`);
+for (const [k, n] of [...grouped].sort((a, b) => b[1] - a[1])) print(`${n}x ${k}`);
 process.exitCode = failures.length === 0 ? 0 : 1;

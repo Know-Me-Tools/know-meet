@@ -32,7 +32,9 @@ export function Panel({ title, description, trail, className, children, ...props
           <h2 id={headingId} className="text-lg">
             {title}
           </h2>
-          {description === undefined ? null : <p className="text-sm text-muted-foreground">{description}</p>}
+          {description === undefined ? null : (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          )}
         </div>
         {trail}
       </PanelHead>
@@ -42,7 +44,12 @@ export function Panel({ title, description, trail, className, children, ...props
 }
 
 export function PanelHead({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("flex flex-wrap items-start justify-between gap-s3", className)} {...props} />;
+  return (
+    <div
+      className={cn("flex flex-wrap items-start justify-between gap-s3", className)}
+      {...props}
+    />
+  );
 }
 
 /** A bare `.panel` surface for custom heads (calendars, consent). */
@@ -95,7 +102,13 @@ export function Note({
 }
 
 /** settings.html `stateChip(text, kind)`: soft fill, status pip and the words. */
-export function StatusChip({ tone, children }: { readonly tone: "green" | "amber" | "red"; readonly children: React.ReactNode }) {
+export function StatusChip({
+  tone,
+  children,
+}: {
+  readonly tone: "green" | "amber" | "red";
+  readonly children: React.ReactNode;
+}) {
   return (
     <Badge variant={tone}>
       <BadgePip />
@@ -105,7 +118,13 @@ export function StatusChip({ tone, children }: { readonly tone: "green" | "amber
 }
 
 /** settings.html `chip(text, '', icon)`: the neutral muted chip. */
-export function NeutralChip({ icon, children }: { readonly icon?: KmIconName; readonly children: React.ReactNode }) {
+export function NeutralChip({
+  icon,
+  children,
+}: {
+  readonly icon?: KmIconName;
+  readonly children: React.ReactNode;
+}) {
   return (
     <Badge>
       {icon === undefined ? null : <KmIcon name={icon} />}
@@ -127,19 +146,44 @@ export function KeyValueList({ className, ...props }: React.ComponentProps<"dl">
   );
 }
 
-export function KeyValue({ label, plain, children }: { readonly label: string; readonly plain?: "plain"; readonly children: React.ReactNode }) {
+export function KeyValue({
+  label,
+  plain,
+  children,
+}: {
+  readonly label: string;
+  readonly plain?: "plain";
+  readonly children: React.ReactNode;
+}) {
   return (
     <>
       <dt className="pt-0.5 text-sm text-muted-foreground">{label}</dt>
-      <dd className={cn("m-0 min-w-0 [overflow-wrap:anywhere]", plain === "plain" ? "text-sm" : "font-mono text-13")}>{children}</dd>
+      <dd
+        className={cn(
+          "m-0 min-w-0 [overflow-wrap:anywhere]",
+          plain === "plain" ? "text-sm" : "font-mono text-13",
+        )}
+      >
+        {children}
+      </dd>
     </>
   );
 }
 
 /** km.css `.masked`: a hidden value, announced by its label instead of the dots. */
-export function Masked({ label, children }: { readonly label: string; readonly children: React.ReactNode }) {
+export function Masked({
+  label,
+  children,
+}: {
+  readonly label: string;
+  readonly children: React.ReactNode;
+}) {
   return (
-    <span role="img" aria-label={label} className="font-mono text-13 tracking-[0.18em] whitespace-nowrap text-muted-foreground select-none">
+    <span
+      role="img"
+      aria-label={label}
+      className="font-mono text-13 tracking-[0.18em] whitespace-nowrap text-muted-foreground select-none"
+    >
       {children}
     </span>
   );
@@ -168,10 +212,18 @@ export function RequiredNote() {
 }
 
 /** km.css `.stack` (s4) / `.stack-sm` (s2). */
-export function Stack({ gap = "md", className, ...props }: React.ComponentProps<"div"> & { readonly gap?: "md" | "sm" }) {
+export function Stack({
+  gap = "md",
+  className,
+  ...props
+}: React.ComponentProps<"div"> & { readonly gap?: "md" | "sm" }) {
   return (
     <div
-      className={cn("grid min-w-0 grid-cols-[minmax(0,1fr)] content-start", gap === "md" ? "gap-s4" : "gap-s2", className)}
+      className={cn(
+        "grid min-w-0 grid-cols-[minmax(0,1fr)] content-start",
+        gap === "md" ? "gap-s4" : "gap-s2",
+        className,
+      )}
       {...props}
     />
   );
@@ -179,11 +231,24 @@ export function Stack({ gap = "md", className, ...props }: React.ComponentProps<
 
 /** km.css `.field-row`: two equal columns, one under 768px. */
 export function FieldRow({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("grid grid-cols-2 gap-s4 max-bp768:grid-cols-[minmax(0,1fr)] *:min-w-0", className)} {...props} />;
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-2 gap-s4 max-bp768:grid-cols-[minmax(0,1fr)] *:min-w-0",
+        className,
+      )}
+      {...props}
+    />
+  );
 }
 
 /** settings.html `busy(btn, label)`: while busy the button shows a spinning refresh and the busy label. */
-export function BusyContent({ busy, busyLabel, icon, children }: {
+export function BusyContent({
+  busy,
+  busyLabel,
+  icon,
+  children,
+}: {
   readonly busy: boolean;
   readonly busyLabel: string;
   readonly icon?: KmIconName;
@@ -192,7 +257,10 @@ export function BusyContent({ busy, busyLabel, icon, children }: {
   if (busy) {
     return (
       <>
-        <KmIcon name="refresh" className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none" />
+        <KmIcon
+          name="refresh"
+          className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none"
+        />
         <span>{busyLabel}</span>
       </>
     );

@@ -26,6 +26,7 @@ export function Titlebar() {
   const isMac = (controls?.platform ?? detectWindowPlatform(window)) === "mac";
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: pointer-only window dragging on the title bar (Tauri drag region); keyboard users move and resize the window with the window controls and OS shortcuts.
     <div
       data-testid="km-titlebar"
       data-tauri-drag-region
@@ -34,7 +35,9 @@ export function Titlebar() {
     >
       {isMac ? (
         <div className="w-[96px] flex-none">
-          {controls === null ? null : <MacWindowControls controls={controls} maximized={maximized} />}
+          {controls === null ? null : (
+            <MacWindowControls controls={controls} maximized={maximized} />
+          )}
         </div>
       ) : null}
       <div

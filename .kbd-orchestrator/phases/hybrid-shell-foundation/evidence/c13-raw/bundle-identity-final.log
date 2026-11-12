@@ -1,0 +1,19 @@
+$ pnpm --filter @know-meet/fidelity-tests run check:bundle-identity
+$ node src/bundle-identity/check-bundle-identity.ts
+{
+  "check": "bundle-identity",
+  "left": {
+    "label": "frontendDist",
+    "path": "/Users/gqadonis/Projects/know-me/know-meet/apps/web/dist",
+    "digest": "edf48ad1aa0e57ef03a0843aeb0d6f3f5a27adf1ed957fab717e3678aa3ced41",
+    "files": 13
+  },
+  "right": {
+    "label": "web dist",
+    "path": "/Users/gqadonis/Projects/know-me/know-meet/apps/web/dist",
+    "digest": "edf48ad1aa0e57ef03a0843aeb0d6f3f5a27adf1ed957fab717e3678aa3ced41",
+    "files": 13
+  },
+  "identical": true,
+  "differences": []
+}

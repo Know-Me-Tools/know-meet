@@ -11,7 +11,12 @@ import type { WidthClass } from "./width-class";
 
 export function PrimaryNav({ widthClass }: { readonly widthClass: WidthClass }) {
   return (
-    <nav aria-label="Primary" data-testid="km-appnav" data-nav-class={widthClass} className="km-nav">
+    <nav
+      aria-label="Primary"
+      data-testid="km-appnav"
+      data-nav-class={widthClass}
+      className="km-nav"
+    >
       <ul className="km-nav-list">
         {DESTINATIONS.map((destination) => (
           <li key={destination.to}>

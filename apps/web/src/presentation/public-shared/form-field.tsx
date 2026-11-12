@@ -35,7 +35,16 @@ interface FormFieldProps {
   readonly children: React.ReactNode;
 }
 
-export function FormField({ id, label, error, required = false, hint, labelExtra, announceError = false, children }: FormFieldProps) {
+export function FormField({
+  id,
+  label,
+  error,
+  required = false,
+  hint,
+  labelExtra,
+  announceError = false,
+  children,
+}: FormFieldProps) {
   const labelNode = (
     <Label htmlFor={id} className="gap-0">
       {label}
@@ -57,9 +66,7 @@ export function FormField({ id, label, error, required = false, hint, labelExtra
         </div>
       )}
       {children}
-      {hint === undefined ? null : (
-        <FieldDescription id={hintId(id)}>{hint}</FieldDescription>
-      )}
+      {hint === undefined ? null : <FieldDescription id={hintId(id)}>{hint}</FieldDescription>}
       <FieldError id={errorId(id)} role={announceError ? "alert" : undefined}>
         {error === "" ? null : error}
       </FieldError>

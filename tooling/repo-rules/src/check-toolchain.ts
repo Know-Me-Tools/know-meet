@@ -29,15 +29,30 @@ const flutterField =
     (JSON.parse(output) as Record<string, string>)[field];
 
 const PROBES: readonly Probe[] = [
-  { tool: "node", command: ["node", "--version"], wanted: pin("node"), parse: firstSemver },
-  { tool: "pnpm", command: ["pnpm", "--version"], wanted: pin("pnpm"), parse: firstSemver },
+  {
+    tool: "node",
+    command: ["node", "--version"],
+    wanted: pin("node"),
+    parse: firstSemver,
+  },
+  {
+    tool: "pnpm",
+    command: ["pnpm", "--version"],
+    wanted: pin("pnpm"),
+    parse: firstSemver,
+  },
   {
     tool: "typescript",
     command: ["pnpm", "exec", "tsc", "--version"],
     wanted: pin("typescript"),
     parse: firstSemver,
   },
-  { tool: "rust", command: ["rustc", "--version"], wanted: pin("rust"), parse: firstSemver },
+  {
+    tool: "rust",
+    command: ["rustc", "--version"],
+    wanted: pin("rust"),
+    parse: firstSemver,
+  },
   {
     tool: "tauri-cli",
     command: ["cargo", "tauri", "--version"],

@@ -200,3 +200,8 @@ Provenance: user (explicit form answers, Travis James).
 - Light theme bg / surface / card get fill-only steps of ~1.15–1.25:1 (no strokes or shadows) for hierarchy; dark theme unchanged unless also under-separated. Then full recapture and VS-1 contract amendment (operator authorised signing the reference update, 2026-11-11).
 
 - 2026-11-12: reference v2.3 (tokens v1.5.0, strokes removed, processing pinned): 600 images recaptured, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d; nav-morph probes pass. VS-1 amendment signed with the operator key and adopted as contract-adoption-hybrid-shell-foundation-261ec2fd (supersedes 138ce337, bound revision 4); VLBV re-bound.
+
+## 2026-11-12 — operator: start c13 ("do as you recommend")
+
+- c13 boundary run starts. The adopted contract (261ec2fd) references no c08/8.3, c15 or c16 task, so the agentic-UI layer (8.3) and the open gate 16.1 (macOS minimised window, Windows WebView2) are carried as follow-up outside this boundary; 8.3 stays blocked on c16.
+- Stage A (build + fix boundary failures): web/desktop, Rust/BFF/FRB, Flutter in parallel. Stage B: VS-1 fidelity matrix, VS-4, VS-8, a11y gate, security trace, independent review.

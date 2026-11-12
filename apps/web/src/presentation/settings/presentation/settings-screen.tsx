@@ -48,7 +48,13 @@ function SettingsGate({ hash }: { readonly hash: string }) {
   );
 }
 
-function SectionView({ route, user }: { readonly route: HashRoute; readonly user: SessionUserView }) {
+function SectionView({
+  route,
+  user,
+}: {
+  readonly route: HashRoute;
+  readonly user: SessionUserView;
+}) {
   const { workspace } = useSampleWorkspace();
   const section = resolveSection(route.view);
   switch (section) {

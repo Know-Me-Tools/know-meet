@@ -1,0 +1,7 @@
+  0s riverpod_generator on 227 inputs; integration_test/notes_test.dart
+W SDK language version 3.13.0 is newer than `analyzer` language version 3.11.0. Run `flutter packages upgrade`.
+  10s riverpod_generator on 227 inputs: 1 output, 1 no-op; spent 8s analyzing, 2s resolving; lib/app/app_theme.dart
+  11s riverpod_generator on 227 inputs: 1 skipped, 15 output, 211 no-op; spent 9s analyzing, 2s resolving
+  0s source_gen:combining_builder on 227 inputs; integration_test/notes_test.dart
+  0s source_gen:combining_builder on 227 inputs: 1 skipped, 15 output, 211 no-op
+  Built with build_runner/aot in 11s; wrote 30 outputs.

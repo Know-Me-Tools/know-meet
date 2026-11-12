@@ -33,7 +33,11 @@ const KEYS_FOR: Readonly<Record<PinningMode, readonly IpfsKey[]>> = {
   kubo: ["gateway", "rpc", "auth"],
 };
 
-const MODE_LABEL: Readonly<Record<PinningMode, string>> = { knowme: "KnowMe pinning", psa: "Pinning Service API", kubo: "Your Kubo node" };
+const MODE_LABEL: Readonly<Record<PinningMode, string>> = {
+  knowme: "KnowMe pinning",
+  psa: "Pinning Service API",
+  kubo: "Your Kubo node",
+};
 
 function isPinningMode(value: string): value is PinningMode {
   return value === "knowme" || value === "psa" || value === "kubo";
@@ -42,24 +46,44 @@ function isPinningMode(value: string): value is PinningMode {
 export function StorageIpfsSection() {
   const [mode, setMode] = useState<PinningMode>("knowme");
   const [values, setValues] = useState<Readonly<Record<IpfsKey, string>>>({
-    gateway: "https://ipfs.io", endpoint: "", token: "", rpc: "http://127.0.0.1:5001", auth: "",
+    gateway: "https://ipfs.io",
+    endpoint: "",
+    token: "",
+    rpc: "http://127.0.0.1:5001",
+    auth: "",
   });
   const [pinAfter, setPinAfter] = useState(true);
   const [testState, setTestState] = useState<"idle" | "running" | "done">("idle");
-  const [outcome, setOutcome] = useState<{ readonly ok: boolean; readonly step?: string; readonly error?: string } | null>(null);
+  const [outcome, setOutcome] = useState<{
+    readonly ok: boolean;
+    readonly step?: string;
+    readonly error?: string;
+  } | null>(null);
   const { formRef, errors, validate, revalidate } = useFormErrors(RULES);
   const saving = useBusyAction();
   const set = (key: IpfsKey) => (value: string) => {
     setValues((current) => ({ ...current, [key]: value }));
     revalidate(key, value);
   };
-  const credential = mode === "psa" ? values.token.trim() : mode === "kubo" ? values.auth.trim() : "";
+  const credential =
+    mode === "psa" ? values.token.trim() : mode === "kubo" ? values.auth.trim() : "";
   const steps = useMemo<readonly CheckStep[]>(
     () => [
-      { label: "Reach pinning endpoint", detail: mode === "knowme" ? "KnowMe pinning" : mode === "psa" ? values.endpoint.trim() : values.rpc.trim() },
+      {
+        label: "Reach pinning endpoint",
+        detail:
+          mode === "knowme"
+            ? "KnowMe pinning"
+            : mode === "psa"
+              ? values.endpoint.trim()
+              : values.rpc.trim(),
+      },
       {
         label: "Authenticate",
-        detail: mode === "kubo" && values.auth.trim() === "" ? "No authorization set" : "Using your credentials",
+        detail:
+          mode === "kubo" && values.auth.trim() === ""
+            ? "No authorization set"
+            : "Using your credentials",
         fail: () =>
           credential === "wrong"
             ? "The token was rejected (401 Unauthorized). Create a new token with pin permissions and paste it again."
@@ -81,13 +105,21 @@ export function StorageIpfsSection() {
         description="After each upload, a KnowMe job pins the recording to IPFS and stores its CID."
         parent={["Storage", "storage"]}
       />
-      <form ref={formRef} noValidate className="grid gap-s5" onSubmit={(event) => event.preventDefault()}>
+      <form
+        ref={formRef}
+        noValidate
+        className="grid gap-s5"
+        onSubmit={(event) => event.preventDefault()}
+      >
         <Panel title="Pinning">
           <Stack>
             <SegmentField
               label="Pin with"
               value={mode}
-              options={(["knowme", "psa", "kubo"] as const).map((m) => ({ value: m, label: MODE_LABEL[m] }))}
+              options={(["knowme", "psa", "kubo"] as const).map((m) => ({
+                value: m,
+                label: MODE_LABEL[m],
+              }))}
               onValueChange={(next) => {
                 if (isPinningMode(next)) setMode(next);
               }}
@@ -98,8 +130,28 @@ export function StorageIpfsSection() {
               </Note>
             ) : mode === "psa" ? (
               <>
-                <TextField id="ipfs-endpoint" label="Pinning service endpoint" required mono placeholder="https://pinning.example.com/psa" hint="Any service that implements the IPFS Pinning Service API." value={values.endpoint} error={errors.endpoint} onValueChange={set("endpoint")} />
-                <TextField id="ipfs-token" label="Access token" kind="password" required mono hint="Sent as a bearer token. Stored encrypted; never shown again." value={values.token} error={errors.token} onValueChange={set("token")} />
+                <TextField
+                  id="ipfs-endpoint"
+                  label="Pinning service endpoint"
+                  required
+                  mono
+                  placeholder="https://pinning.example.com/psa"
+                  hint="Any service that implements the IPFS Pinning Service API."
+                  value={values.endpoint}
+                  error={errors.endpoint}
+                  onValueChange={set("endpoint")}
+                />
+                <TextField
+                  id="ipfs-token"
+                  label="Access token"
+                  kind="password"
+                  required
+                  mono
+                  hint="Sent as a bearer token. Stored encrypted; never shown again."
+                  value={values.token}
+                  error={errors.token}
+                  onValueChange={set("token")}
+                />
               </>
             ) : (
               <>
@@ -114,15 +166,39 @@ export function StorageIpfsSection() {
                   error={errors.rpc}
                   onValueChange={set("rpc")}
                 />
-                <TextField id="ipfs-auth" label="Authorization" kind="password" optional mono hint="Basic auth or bearer token, if your RPC API sits behind a proxy." value={values.auth} error={errors.auth} onValueChange={set("auth")} />
+                <TextField
+                  id="ipfs-auth"
+                  label="Authorization"
+                  kind="password"
+                  optional
+                  mono
+                  hint="Basic auth or bearer token, if your RPC API sits behind a proxy."
+                  value={values.auth}
+                  error={errors.auth}
+                  onValueChange={set("auth")}
+                />
               </>
             )}
           </Stack>
         </Panel>
         <Panel title="Gateway and timing">
           <Stack>
-            <TextField id="ipfs-gateway" label="Public gateway URL" required mono hint="Used to build links like https://ipfs.io/ipfs/<cid>." value={values.gateway} error={errors.gateway} onValueChange={set("gateway")} />
-            <SwitchRow label="Pin after upload" description="Pin each recording as soon as it lands in storage." checked={pinAfter} onCheckedChange={setPinAfter} />
+            <TextField
+              id="ipfs-gateway"
+              label="Public gateway URL"
+              required
+              mono
+              hint="Used to build links like https://ipfs.io/ipfs/<cid>."
+              value={values.gateway}
+              error={errors.gateway}
+              onValueChange={set("gateway")}
+            />
+            <SwitchRow
+              label="Pin after upload"
+              description="Pin each recording as soon as it lands in storage."
+              checked={pinAfter}
+              onCheckedChange={setPinAfter}
+            />
             <FormFoot>
               <Button
                 variant="secondary"
@@ -134,7 +210,11 @@ export function StorageIpfsSection() {
                   setTestState("running");
                   checks.run((result) => {
                     setTestState("done");
-                    setOutcome(result.ok ? { ok: true } : { ok: false, step: steps[result.at ?? 0]?.label, error: result.error });
+                    setOutcome(
+                      result.ok
+                        ? { ok: true }
+                        : { ok: false, step: steps[result.at ?? 0]?.label, error: result.error },
+                    );
                   });
                 }}
               >
@@ -147,7 +227,9 @@ export function StorageIpfsSection() {
                 aria-busy={saving.busy || undefined}
                 onClick={() => {
                   if (!valid()) return;
-                  saving.start(700, () => toast.add({ title: "IPFS pinning saved", type: "success" }));
+                  saving.start(700, () =>
+                    toast.add({ title: "IPFS pinning saved", type: "success" }),
+                  );
                 }}
               >
                 <BusyContent busy={saving.busy} busyLabel="Saving…" icon="check">
@@ -179,7 +261,8 @@ export function StorageIpfsSection() {
         </Panel>
       </form>
       <Note kind="warn" icon="globe">
-        Pinned content is public to anyone who has the CID. Unpinning removes your copy, but other IPFS nodes that fetched the file may keep it.
+        Pinned content is public to anyone who has the CID. Unpinning removes your copy, but other
+        IPFS nodes that fetched the file may keep it.
       </Note>
     </>
   );

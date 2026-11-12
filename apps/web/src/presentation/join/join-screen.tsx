@@ -25,7 +25,10 @@ function toView(view: string): JoinView {
   return view === "waiting" || view === "expired" || view === "wrong-code" ? view : "invite";
 }
 
-function resolveMeeting(meetings: readonly SampleMeeting[], params: Readonly<Record<string, string>>): SampleMeeting {
+function resolveMeeting(
+  meetings: readonly SampleMeeting[],
+  params: Readonly<Record<string, string>>,
+): SampleMeeting {
   const code = params["code"];
   const id = params["meeting"];
   const byCode = code === undefined ? null : findByCode(meetings, code.toLowerCase());
@@ -52,12 +55,19 @@ export function JoinScreen() {
   const params = route.params;
   const meeting = resolveMeeting(meetings, params);
   const codeParam = params["code"];
-  const unknownCode = view === "invite" && codeParam !== undefined && findByCode(meetings, codeParam.toLowerCase()) === null;
+  const unknownCode =
+    view === "invite" &&
+    codeParam !== undefined &&
+    findByCode(meetings, codeParam.toLowerCase()) === null;
   const ended = view === "invite" && meetingStatus(meeting, now) === "ended";
 
   useEffect(() => {
     if (!unknownCode) return;
-    void navigate({ to: "/join", hash: toHash("wrong-code", undefined, { code: codeParam ?? "" }), replace: true });
+    void navigate({
+      to: "/join",
+      hash: toHash("wrong-code", undefined, { code: codeParam ?? "" }),
+      replace: true,
+    });
   }, [unknownCode, navigate, codeParam]);
 
   useDocumentTitle(title(view, meeting, ended));
@@ -82,17 +92,27 @@ export function JoinScreen() {
         return <ExpiredView meeting={explicit} meetings={meetings} />;
       }
       case "wrong-code":
-        return <WrongCodeView tried={(params["code"] ?? "").toLowerCase().slice(0, 20)} meetings={meetings} />;
+        return (
+          <WrongCodeView
+            tried={(params["code"] ?? "").toLowerCase().slice(0, 20)}
+            meetings={meetings}
+          />
+        );
       default:
         if (unknownCode) return null;
         if (ended) return <ExpiredView meeting={meeting} meetings={meetings} />;
-        return <InviteView meeting={meeting} status={meetingStatus(meeting, now)} now={now} via={params["via"]} />;
+        return (
+          <InviteView
+            meeting={meeting}
+            status={meetingStatus(meeting, now)}
+            now={now}
+            via={params["via"]}
+          />
+        );
     }
   })();
 
   return (
-    <div className="mx-auto w-full max-w-[1120px] px-s5 pt-s5 pb-s8 max-bp768:px-s4">
-      {content}
-    </div>
+    <div className="mx-auto w-full max-w-[1120px] px-s5 pt-s5 pb-s8 max-bp768:px-s4">{content}</div>
   );
 }

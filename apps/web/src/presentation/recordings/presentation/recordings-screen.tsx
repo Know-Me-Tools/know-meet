@@ -14,18 +14,19 @@ import { useSessionUser } from "../../shared/session";
 import { SignInGate } from "../../shared/sign-in-gate";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { useHashRoute } from "../../shared/use-hash-route";
-import { useSampleWorkspace } from "../../workspace/use-workspace";
 import type { Recording, Workspace } from "../../workspace/domain/workspace";
-import type { RecordingsView } from "../domain/recording-details";
+import { useSampleWorkspace } from "../../workspace/use-workspace";
 import { RECORDING_META } from "../application/recording-fixtures";
 import { resolveRecordingsView, tabLabel } from "../application/recordings-route";
+import type { RecordingsView } from "../domain/recording-details";
 import { DetailView } from "./detail-view";
 import { EmptyRecordingsView, RecordingNotFoundView } from "./empty-views";
 import { LibraryView } from "./library-view";
 import { ProcessingView } from "./processing-view";
 
 function titleFor(view: RecordingsView, recording: Recording | null): string {
-  if (view.kind === "detail" && recording !== null) return `${recording.title} — ${tabLabel(view.tab)}`;
+  if (view.kind === "detail" && recording !== null)
+    return `${recording.title} — ${tabLabel(view.tab)}`;
   if (view.kind === "processing" && recording !== null) return `Processing — ${recording.title}`;
   if (view.kind === "detail" || view.kind === "processing") return "Recording not found";
   return "Recordings";
@@ -67,8 +68,18 @@ function SignedInRecordings({
   const recording = workspace.recordings.find((r) => r.id === view.id) ?? null;
   const meta = recording === null ? undefined : RECORDING_META[recording.id];
   if (recording === null || meta === undefined) return <RecordingNotFoundView id={view.id} />;
-  if (view.kind === "processing") return <ProcessingView key={recording.id} recording={recording} email={email} />;
-  return <DetailView key={recording.id} workspace={workspace} recording={recording} meta={meta} tab={view.tab} onDeleted={onDeleted} />;
+  if (view.kind === "processing")
+    return <ProcessingView key={recording.id} recording={recording} email={email} />;
+  return (
+    <DetailView
+      key={recording.id}
+      workspace={workspace}
+      recording={recording}
+      meta={meta}
+      tab={view.tab}
+      onDeleted={onDeleted}
+    />
+  );
 }
 
 export function RecordingsScreen() {
@@ -79,11 +90,14 @@ export function RecordingsScreen() {
   const { workspace: sample } = useSampleWorkspace();
   const [deleted, setDeleted] = useState<ReadonlySet<string>>(() => new Set());
   const workspace: Workspace =
-    deleted.size === 0 ? sample : { ...sample, recordings: sample.recordings.filter((r) => !deleted.has(r.id)) };
+    deleted.size === 0
+      ? sample
+      : { ...sample, recordings: sample.recordings.filter((r) => !deleted.has(r.id)) };
   const view = resolveRecordingsView(route.view, route.arg);
-  const recording = view.kind === "detail" || view.kind === "processing"
-    ? (workspace.recordings.find((r) => r.id === view.id) ?? null)
-    : null;
+  const recording =
+    view.kind === "detail" || view.kind === "processing"
+      ? (workspace.recordings.find((r) => r.id === view.id) ?? null)
+      : null;
   const signedIn = user !== null;
   useDocumentTitle(`${signedIn ? titleFor(view, recording) : "Recordings"} · Know Meet`);
 
@@ -96,7 +110,12 @@ export function RecordingsScreen() {
     <Toaster>
       <ScreenPage>
         {signedIn ? (
-          <SignedInRecordings view={view} workspace={workspace} email={user.email} onDeleted={onDeleted} />
+          <SignedInRecordings
+            view={view}
+            workspace={workspace}
+            email={user.email}
+            onDeleted={onDeleted}
+          />
         ) : (
           <SignedOutRecordings next={hash === "" ? "recordings" : `recordings#${hash}`} />
         )}

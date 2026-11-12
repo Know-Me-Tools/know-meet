@@ -24,14 +24,22 @@ interface ConfirmDialogProps {
   readonly onConfirm: () => void;
 }
 
-export function ConfirmDialog({ trigger, title, children, confirmLabel, onConfirm }: ConfirmDialogProps) {
+export function ConfirmDialog({
+  trigger,
+  title,
+  children,
+  confirmLabel,
+  onConfirm,
+}: ConfirmDialogProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger render={trigger} />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription render={<div className="grid gap-s2" />}>{children}</AlertDialogDescription>
+          <AlertDialogDescription render={<div className="grid gap-s2" />}>
+            {children}
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

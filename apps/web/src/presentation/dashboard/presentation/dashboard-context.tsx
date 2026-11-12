@@ -4,8 +4,8 @@
 // (resend, send email instead). Static phase: actions settle locally after the
 // prototype's delay; nothing leaves the page.
 import { createContext, type ReactNode, use, useCallback, useMemo, useReducer } from "react";
-import { useSampleWorkspace } from "../../workspace/use-workspace";
 import type { Workspace } from "../../workspace/domain/workspace";
+import { useSampleWorkspace } from "../../workspace/use-workspace";
 import {
   baseDashboardMeetings,
   baseDeliveries,
@@ -62,7 +62,10 @@ export function DashboardProvider({ children }: { readonly children: ReactNode }
   const [state, dispatch] = useReducer(dashboardReducer, EMPTY_DASHBOARD_STATE);
 
   const meetings = useMemo(() => selectAllMeetings(state, base), [state, base]);
-  const deliveries = useMemo(() => selectDeliveries(state, base, baseDeliveryList), [state, base, baseDeliveryList]);
+  const deliveries = useMemo(
+    () => selectDeliveries(state, base, baseDeliveryList),
+    [state, base, baseDeliveryList],
+  );
   const getMeeting = useCallback((id: string) => selectMeeting(state, base, id), [state, base]);
   const joinUrlFor = useCallback((code: string) => joinUrl(code, window.location.origin), []);
 
@@ -79,14 +82,22 @@ export function DashboardProvider({ children }: { readonly children: ReactNode }
   const sendEmailInstead = useCallback(
     async (delivery: Delivery) => {
       const person = workspace.people.find((p) => p.name === delivery.name);
-      if (!person) throw new Error(`No email address on file for ${delivery.name}. Add one from Schedule → Edit.`);
+      if (!person)
+        throw new Error(
+          `No email address on file for ${delivery.name}. Add one from Schedule → Edit.`,
+        );
       await wait(RESEND_MS);
       const existing = deliveries.find(
-        (d) => d.meetingId === delivery.meetingId && d.name === delivery.name && d.channel === "email",
+        (d) =>
+          d.meetingId === delivery.meetingId && d.name === delivery.name && d.channel === "email",
       );
       const sentAt = new Date().toISOString();
       if (existing) {
-        dispatch({ type: "patch-delivery", id: existing.id, changes: { status: "delivered", reason: null, resentAt: sentAt } });
+        dispatch({
+          type: "patch-delivery",
+          id: existing.id,
+          changes: { status: "delivered", reason: null, resentAt: sentAt },
+        });
       } else {
         dispatch({
           type: "add-delivery",
@@ -111,8 +122,31 @@ export function DashboardProvider({ children }: { readonly children: ReactNode }
   );
 
   const model = useMemo<DashboardModel>(
-    () => ({ workspace, now, localTz, state, dispatch, meetings, deliveries, getMeeting, joinUrlFor, resend, sendEmailInstead }),
-    [workspace, now, localTz, state, meetings, deliveries, getMeeting, joinUrlFor, resend, sendEmailInstead],
+    () => ({
+      workspace,
+      now,
+      localTz,
+      state,
+      dispatch,
+      meetings,
+      deliveries,
+      getMeeting,
+      joinUrlFor,
+      resend,
+      sendEmailInstead,
+    }),
+    [
+      workspace,
+      now,
+      localTz,
+      state,
+      meetings,
+      deliveries,
+      getMeeting,
+      joinUrlFor,
+      resend,
+      sendEmailInstead,
+    ],
   );
   return <DashboardContext value={model}>{children}</DashboardContext>;
 }

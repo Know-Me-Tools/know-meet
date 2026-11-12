@@ -39,14 +39,25 @@ const STATUS_FILL: Readonly<Record<CheckState, string>> = {
 
 function CheckIcon({ state, n }: { readonly state: CheckState; readonly n: number }) {
   if (state === "running") {
-    return <KmIcon name="refresh" className="size-4 animate-spin stroke-[2.25] motion-reduce:animate-none" />;
+    return (
+      <KmIcon
+        name="refresh"
+        className="size-4 animate-spin stroke-[2.25] motion-reduce:animate-none"
+      />
+    );
   }
   if (state === "passed") return <KmIcon name="check" className="size-4 stroke-[2.25]" />;
   if (state === "failed") return <KmIcon name="x" className="size-4 stroke-[2.25]" />;
   return <>{n}</>;
 }
 
-export function TestChecks({ checks, states }: { readonly checks: readonly CheckSpec[]; readonly states: readonly CheckState[] }) {
+export function TestChecks({
+  checks,
+  states,
+}: {
+  readonly checks: readonly CheckSpec[];
+  readonly states: readonly CheckState[];
+}) {
   return (
     <ol aria-label="Test checks" className="m-0 grid list-none gap-s2 p-0">
       {checks.map((check, index) => {
@@ -68,9 +79,16 @@ export function TestChecks({ checks, states }: { readonly checks: readonly Check
             </span>
             <span className="grid min-w-0 gap-0.5">
               <span className="block text-sm font-semibold">{check.title}</span>
-              <span className="block text-sm text-muted-foreground [overflow-wrap:anywhere]">{check.detail}</span>
+              <span className="block text-sm text-muted-foreground [overflow-wrap:anywhere]">
+                {check.detail}
+              </span>
             </span>
-            <span className={cn("text-sm font-semibold whitespace-nowrap max-bp768:col-start-2", STATUS_FILL[state])}>
+            <span
+              className={cn(
+                "text-sm font-semibold whitespace-nowrap max-bp768:col-start-2",
+                STATUS_FILL[state],
+              )}
+            >
               {STATUS_TEXT[state]}
             </span>
           </li>

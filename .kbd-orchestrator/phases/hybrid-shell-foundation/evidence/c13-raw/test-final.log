@@ -1,0 +1,976 @@
+$ turbo run test && node --test "tooling/repo-rules/test/**/*.test.ts" && node tooling/repo-rules/src/run-aggregate.ts test
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running test in 7 packages
+   • Remote caching disabled
+
+@know-meet/design-tokens:generate: cache bypass, force executing f18c83c31a6d85cd
+@know-meet/design-tokens:test: cache miss, executing c95c09542d980bb6
+@know-meet/design-tokens:generate: $ node generator/src/cli.ts
+@know-meet/design-tokens:test: $ node --test "generator/test/**/*.test.ts"
+@know-meet/design-tokens:test: ℹ tests 0
+@know-meet/design-tokens:test: ℹ suites 0
+@know-meet/design-tokens:test: ℹ pass 0
+@know-meet/design-tokens:test: ℹ fail 0
+@know-meet/design-tokens:test: ℹ cancelled 0
+@know-meet/design-tokens:test: ℹ skipped 0
+@know-meet/design-tokens:test: ℹ todo 0
+@know-meet/design-tokens:test: ℹ duration_ms 6.666167
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:generate: unchanged docs/design/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:generate: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/design-tokens:build: cache hit, replaying logs dcd10a9b77be3171
+@know-meet/design-tokens:build: $ node generator/src/cli.ts --check
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:build: unchanged docs/design/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:build: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/web:test: cache hit, replaying logs 2b2058cad0d361bb
+@know-meet/web:test: $ node --test "tests/unit/**/*.test.ts"
+@know-meet/web:test: ✔ keeps internal route names and their hash sub-states (0.519416ms)
+@know-meet/web:test: ✔ falls back to the default for anything that is not an internal route (0.103292ms)
+@know-meet/web:test: ✔ escapeText escapes TEXT specials and every kind of line break (0.607ms)
+@know-meet/web:test: ✔ quoteParam DQUOTE-quotes and drops characters a parameter cannot carry (0.087125ms)
+@know-meet/web:test: ✔ httpsUrl accepts https only (0.118333ms)
+@know-meet/web:test: ✔ a hostile title, name and description cannot inject a property (1.324ms)
+@know-meet/web:test: ✔ a non-https URL is left out; an https URL is written (0.704042ms)
+@know-meet/web:test: ✔ an organizer email that is not a plain address is left out (0.364875ms)
+@know-meet/web:test: ✔ lines fold at 75 octets without splitting a character (0.423375ms)
+@know-meet/web:test: ✔ the meta/Tauri policy carries base-uri, form-action and object-src (0.555083ms)
+@know-meet/web:test: ✔ the header policy adds frame-ancestors 'none' to the shared policy (0.242ms)
+@know-meet/web:test: ℹ tests 11
+@know-meet/web:test: ℹ suites 0
+@know-meet/web:test: ℹ pass 11
+@know-meet/web:test: ℹ fail 0
+@know-meet/web:test: ℹ cancelled 0
+@know-meet/web:test: ℹ skipped 0
+@know-meet/web:test: ℹ todo 0
+@know-meet/web:test: ℹ duration_ms 90.800542
+
+ Tasks:    4 successful, 4 total
+Cached:    2 cached, 4 total
+  Time:    708ms 
+
+ WARNING  no output files found for task @know-meet/design-tokens#test. Please check your `outputs` key in `turbo.json`
+▶ 500-line limit
+  ✔ lines-501-ts (187.641916ms)
+  ✔ lines-501-doc (178.039833ms)
+  ✔ lines-501-dart (161.057417ms)
+  ✔ lines-500-ok (167.520291ms)
+  ✔ lines-exempt-root-live-temporary (153.849041ms)
+  ✔ lines-exempt-prototype (168.743333ms)
+  ✔ lines-exempt-design-live (156.833375ms)
+  ✔ lines-exempt-changelog (176.605958ms)
+  ✔ lines-exempt-harness (187.1525ms)
+  ✔ lines-exempt-lockfile (170.077709ms)
+  ✔ lines-exempt-generated-dart (167.738334ms)
+  ✔ lines-exempt-vendor (149.116209ms)
+  ✔ lines-exempt-pbxproj (143.871542ms)
+  ✔ lines-exempt-golden-fixture (171.81325ms)
+✔ 500-line limit (2341.6465ms)
+▶ kebab-case names
+  ✔ names-pascal-tsx (140.978416ms)
+  ✔ names-pascal-dir (105.822583ms)
+  ✔ names-camel-dart (105.805958ms)
+  ✔ names-kebab-dart (97.853917ms)
+  ✔ names-camel-rust (101.5765ms)
+  ✔ names-snake-ts (105.321208ms)
+  ✔ names-allowed (104.048875ms)
+✔ kebab-case names (761.719959ms)
+▶ secret scans
+  ✔ secrets-env (286.237583ms)
+  ✔ secrets-env-export-key (302.277459ms)
+  ✔ secrets-yaml (290.858875ms)
+  ✔ secrets-json (304.944667ms)
+  ✔ secrets-go-walrus (304.608667ms)
+  ✔ secrets-camel-ts (300.570125ms)
+  ✔ secrets-ruby-arrow (316.024166ms)
+  ✔ secrets-api-key (325.008042ms)
+  ✔ secrets-sk-token (298.224459ms)
+  ✔ secrets-env-reference-ok (299.725584ms)
+✔ secret scans (3028.915667ms)
+▶ hex-colour scan
+  ✔ colours-tsx (136.668ms)
+  ✔ colours-css (139.007708ms)
+  ✔ colours-dart (136.818875ms)
+  ✔ colours-allowed (144.414375ms)
+✔ hex-colour scan (557.115542ms)
+▶ dependency direction (Dart)
+  ✔ boundaries-dart-flutter-in-domain (133.503708ms)
+  ✔ boundaries-dart-presentation-in-application (136.944375ms)
+  ✔ boundaries-dart-presentation-ok (131.719042ms)
+✔ dependency direction (Dart) (402.3305ms)
+▶ Biome (no any, dependency direction)
+  ✔ biome-any (139.59875ms)
+  ✔ biome-react-in-domain (115.982417ms)
+  ✔ biome-livekit-in-application (113.117542ms)
+  ✔ biome-tauri-in-domain (114.188458ms)
+  ✔ biome-infrastructure-in-application (109.657708ms)
+  ✔ biome-presentation-react-ok (112.787417ms)
+✔ Biome (no any, dependency direction) (705.686875ms)
+▶ toolchain pins
+  ✔ pins-current-ok (112.631875ms)
+  ✔ pins-rust-drift (117.05525ms)
+  ✔ pins-versions-edited (125.685125ms)
+  ✔ pins-pnpm-drift (113.680042ms)
+✔ toolchain pins (469.220917ms)
+ℹ tests 48
+ℹ suites 7
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8394.00025
+
+-- cargo test: cargo test --workspace --locked
+   Compiling sovereign_hybrid_desktop v0.1.0 (/Users/gqadonis/Projects/know-me/know-meet/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.51s
+     Running unittests src/main.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/bff-93abc9236a151402)
+
+running 1 test
+test tests::accepts_only_own_loopback_origin ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/gen_ui_db-f1a0ed0b9593838d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/gen_ui_notes-f419cb388f89fb4a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/it.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/it-26151865fa77ad87)
+
+running 3 tests
+test rejects_invalid_input_without_persisting_it ... ok
+test unicode_and_sql_text_remain_data_after_reopen ... ok
+test persists_across_independent_connections_and_preserves_order ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/lib.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/gen_ui_types-32cbf73048e4be37)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/Volumes/T7/rust/cargo-build/65/467db39721e66b/debug/deps/sovereign_hybrid_desktop-1bfb854cdf2a43f8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests gen_ui_db
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests gen_ui_notes
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests gen_ui_types
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+-- flutter pub get: flutter pub get --enforce-lockfile
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 92.0.0 (111.0.0 available)
+  analyzer 9.0.0 (14.7.0 available)
+  analyzer_buffer 0.3.0 (0.3.4 available)
+  build 4.0.7 (5.0.0 available)
+  build_config 1.3.3 (1.4.0 available)
+  build_daemon 4.1.6 (4.1.7 available)
+  build_runner 2.15.1 (2.17.1 available)
+  built_collection 5.1.1 (6.0.0 available)
+  code_assets 2.1.0 (2.2.0 available)
+  code_builder 4.12.0 (4.13.0 available)
+  coverage 1.15.1 (1.16.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dart_style 3.1.3 (3.1.14 available)
+  flutter_riverpod 3.3.1 (3.5.0 available)
+  flutter_rust_bridge 2.12.0 (2.13.0 available)
+  frontend_server_client 4.0.0 (4.2.0 available)
+  go_router 18.1.3 (18.1.4 available)
+  http_multi_server 3.2.2 (3.2.3 available)
+  jni 1.0.3 (1.1.2 available)
+  jni_flutter 1.0.3 (1.0.4+1 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  material_ui 1.10.0 (1.11.0 available)
+  mockito 5.6.4 (5.8.1 available)
+  objective_c 9.6.0 (9.6.4 available)
+  package_config 2.2.0 (3.0.0 available)
+  pubspec_parse 1.6.0 (1.7.0 available)
+  riverpod 3.2.1 (3.5.0 available)
+  riverpod_analyzer_utils 1.0.0-dev.9 (1.0.0 available)
+  riverpod_annotation 4.0.2 (4.0.8 available)
+  riverpod_generator 4.0.3 (4.0.10 available)
+  shared_preferences_android 2.4.28 (2.5.5 available)
+  shared_preferences_foundation 2.5.7 (2.6.2 available)
+  shelf 1.4.2 (1.4.3 available)
+  shelf_static 1.1.3 (1.2.0 available)
+  source_gen 4.2.4 (4.3.1 available)
+  test 1.31.1 (1.33.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  test_core 0.6.18 (0.6.21 available)
+  vector_math 2.4.3 (2.4.4 available)
+  vm_service 15.3.0 (15.4.0 available)
+  web 1.1.1 (1.1.2 available)
+Got dependencies!
+41 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+
+-- build_runner: dart run build_runner build
+  0s riverpod_generator on 227 inputs; integration_test/notes_test.dart
+  0s riverpod_generator on 227 inputs: 227 skipped
+  0s source_gen:combining_builder on 227 inputs; integration_test/notes_test.dart
+  0s source_gen:combining_builder on 227 inputs: 227 skipped
+  Built with build_runner/aot in 1s; wrote 0 outputs.
+
+-- flutter test: flutter test
+00:00 +0: loading /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/meeting_room/meeting_room_screens_test.dart
+00:00 +0: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/meeting_room/meeting_room_screens_test.dart: meet.room (signed in) renders the title, roster and every named control
+00:01 +1: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +3: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +4: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +5: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +6: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +7: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +8: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +9: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +10: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +11: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +12: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +13: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +14: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:01 +15: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:01 +16: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:02 +17: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:02 +18: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (light, 375)
+00:02 +19: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library meets the a11y gate (light, 375)
+00:02 +20: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents screens render agents.register.4 renders at phone width
+00:02 +21: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.meeting.partner-onboarding shows "Partner onboarding review"
+00:02 +22: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit renders its heading signed in
+00:02 +23: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit renders its heading signed in
+00:02 +24: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +25: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +26: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +27: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +28: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (dark, 375)
+00:02 +29: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.meeting.product-sync shows "Weekly product sync"
+00:02 +30: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.meeting.product-sync shows "Weekly product sync"
+00:02 +31: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +32: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +33: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +34: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +35: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.meeting.pricing-review shows "Pricing review"
+00:02 +36: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:02 +37: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +38: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +39: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +40: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +41: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +42: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +43: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +44: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +45: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +46: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +47: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +48: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +49: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +50: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +51: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +52: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +53: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +54: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +55: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +56: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +57: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +58: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +59: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +60: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +61: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.transcript meets the a11y gate (light, 375)
+00:04 +62: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.transcript meets the a11y gate (light, 375)
+00:04 +63: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.upcoming meets the a11y gate (dark, 375)
+00:04 +64: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars renders its heading signed in
+00:05 +65: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars renders its heading signed in
+00:05 +66: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +67: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +68: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +69: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +70: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +71: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:05 +72: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (dark, 375)
+00:05 +73: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (dark, 375)
+00:05 +74: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (dark, 375)
+00:05 +75: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars meets the a11y gate (light, 375)
+00:05 +76: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars meets the a11y gate (light, 375)
+00:05 +77: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (light, 375)
+00:05 +78: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (light, 375)
+00:05 +79: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (light, 375)
+00:05 +80: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (light, 375)
+00:05 +81: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (light, 375)
+00:05 +82: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (light, 375)
+00:05 +83: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (dark, 375)
+00:05 +84: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (dark, 375)
+00:06 +85: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (dark, 375)
+00:06 +86: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (dark, 375)
+00:06 +87: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (dark, 375)
+00:06 +88: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:06 +89: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:06 +90: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:06 +91: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:06 +92: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (light, 375)
+00:06 +93: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (light, 375)
+00:06 +94: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (light, 375)
+00:06 +95: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (light, 375)
+00:06 +96: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:06 +97: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:06 +98: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:06 +99: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:06 +100: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.cohort-kickoff meets the a11y gate (light, 375)
+00:06 +101: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.cohort-kickoff meets the a11y gate (light, 375)
+00:06 +102: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.cohort-kickoff meets the a11y gate (light, 375)
+00:06 +103: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.detail.facilitator meets the a11y gate (light, 375)
+00:06 +104: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.detail.facilitator meets the a11y gate (light, 375)
+00:06 +105: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:07 +106: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:07 +107: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:07 +108: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:07 +109: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.product-sync meets the a11y gate (dark, 375)
+00:07 +110: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: auth.check-email meets the a11y gate (light, 375)
+00:07 +111: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.detail.translator meets the a11y gate (light, 375)
+00:07 +112: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.outlook meets the a11y gate (light, 375)
+00:07 +113: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage renders "Egress type"
+00:07 +114: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage renders "Egress type"
+00:07 +115: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage renders "Egress type"
+00:07 +116: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage renders "Egress type"
+00:07 +117: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav renders its heading signed in
+00:07 +118: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav renders its heading signed in
+00:07 +119: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav renders its heading signed in
+00:07 +120: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.pricing-review meets the a11y gate (dark, 375)
+00:07 +121: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.pricing-review meets the a11y gate (dark, 375)
+00:07 +122: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:07 +123: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:07 +124: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:07 +125: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (dark, 375)
+00:07 +126: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (dark, 375)
+00:07 +127: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (dark, 375)
+00:07 +128: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.pricing-review meets the a11y gate (light, 375)
+00:07 +129: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.dot.iris meets the a11y gate (dark, 375)
+00:07 +130: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:07 +131: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:08 +132: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:08 +133: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:08 +134: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:08 +135: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:08 +136: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:08 +137: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:08 +138: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:08 +139: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: join.invite meets the a11y gate (dark, 375)
+00:08 +140: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage renders its heading signed in
+00:08 +141: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.design-crit-1009 meets the a11y gate (dark, 375)
+00:08 +142: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.design-crit-1009 meets the a11y gate (dark, 375)
+00:08 +143: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:08 +144: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:08 +145: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:08 +146: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:08 +147: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:08 +148: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.design-crit-1009 meets the a11y gate (light, 375)
+00:08 +149: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.design-crit-1009 meets the a11y gate (light, 375)
+00:08 +150: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:08 +151: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:08 +152: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:08 +153: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 renders "7,720 words · speaker-attributed"
+00:08 +154: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 renders "7,720 words · speaker-attributed"
+00:08 +155: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 renders "7,720 words · speaker-attributed"
+00:08 +156: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 renders its heading signed in
+00:08 +157: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 renders its heading signed in
+00:08 +158: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 renders its heading signed in
+00:08 +159: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:09 +160: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:09 +161: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:09 +162: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:09 +163: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:09 +164: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:09 +165: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: the home hero headline renders as a heading
+00:09 +166: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (light, 375)
+00:09 +167: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (light, 375)
+00:09 +168: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (light, 375)
+00:09 +169: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (light, 375)
+00:09 +170: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (light, 375)
+00:09 +171: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.processing.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:09 +172: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs renders its heading signed in
+00:09 +173: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.processing.partner-onboarding-1014 meets the a11y gate (light, 375)
+00:09 +174: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (dark, 375)
+00:09 +175: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (dark, 375)
+00:09 +176: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty meets the a11y gate (dark, 375)
+00:09 +177: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty meets the a11y gate (dark, 375)
+00:09 +178: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:09 +179: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:09 +180: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:09 +181: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty meets the a11y gate (light, 375)
+00:09 +182: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed renders its heading signed in
+00:09 +183: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed renders its heading signed in
+00:09 +184: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.gate-signed-out meets the a11y gate (dark, 375)
+00:09 +185: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed meets the a11y gate (dark, 375)
+00:10 +186: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed meets the a11y gate (dark, 375)
+00:10 +187: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +188: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +189: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +190: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +191: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +192: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +193: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +194: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +195: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +196: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +197: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +198: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +199: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +200: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +201: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +202: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +203: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +204: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +205: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +206: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +207: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +208: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +209: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +210: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +211: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +212: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +213: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +214: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +215: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +216: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +217: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +218: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +219: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +220: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +221: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +222: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +223: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +224: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +225: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +226: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +227: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +228: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +229: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:10 +230: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +231: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +232: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +233: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +234: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +235: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +236: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +237: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +238: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +239: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +240: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +241: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +242: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmBottomBar at 375.0
+00:11 +243: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmBottomBar at 375.0
+00:11 +244: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmBottomBar at 375.0
+00:11 +245: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +246: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +247: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +248: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +249: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +250: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +251: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +252: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +253: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +254: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +255: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +256: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +257: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +258: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +259: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +260: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +261: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +262: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +263: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +264: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +265: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +266: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +267: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +268: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +269: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +270: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +271: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +272: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +273: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +274: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +275: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +276: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +277: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +278: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +279: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmInlineNav at 1440.0
+00:13 +280: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.schedule is still under reduced motion
+00:13 +281: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.schedule is still under reduced motion
+00:13 +282: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.schedule is still under reduced motion
+00:13 +283: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.schedule is still under reduced motion
+00:13 +284: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:13 +285: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state dashboard.upcoming draws no border, outline, ring or divider
+00:13 +286: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state dashboard.upcoming draws no border, outline, ring or divider
+00:13 +287: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.meeting.partner-onboarding is still under reduced motion
+00:13 +288: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-in meets the a11y gate (dark, 375)
+00:13 +289: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-in meets the a11y gate (dark, 375)
+00:13 +290: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-in meets the a11y gate (dark, 375)
+00:13 +291: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-in meets the a11y gate (dark, 375)
+00:13 +292: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:13 +293: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:13 +294: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:13 +295: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:14 +296: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:14 +297: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:14 +298: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +299: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +300: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +301: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +302: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +303: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +304: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +305: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +306: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +307: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +308: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +309: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +310: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +311: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +312: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +313: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +314: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:14 +315: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +316: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +317: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +318: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +319: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +320: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +321: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 375)
+00:15 +322: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:15 +323: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:15 +324: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:15 +325: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:15 +326: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:15 +327: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:15 +328: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:15 +329: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +330: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +331: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +332: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +333: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +334: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +335: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +336: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +337: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (dark, 768)
+00:15 +338: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state agents.detail.facilitator draws no border, outline, ring or divider
+00:15 +339: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-inline meets the a11y gate (light, 1024)
+00:15 +340: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-inline meets the a11y gate (light, 1024)
+00:15 +341: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-inline meets the a11y gate (light, 1024)
+00:15 +342: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-inline meets the a11y gate (light, 1024)
+00:15 +343: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (light, 375)
+00:15 +344: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (light, 375)
+00:15 +345: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (light, 375)
+00:15 +346: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014 is still under reduced motion
+00:15 +347: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014 is still under reduced motion
+00:16 +348: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.library draws no border, outline, ring or divider
+00:16 +349: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (light, 768)
+00:16 +350: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.account (light, 768)
+00:16 +351: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.transcript is still under reduced motion
+00:16 +352: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014 draws no border, outline, ring or divider
+00:16 +353: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: focus traversal order guest: skip link, brand, start, theme, sign in
+00:16 +354: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.livekit (dark, 375)
+00:16 +355: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.livekit (dark, 375)
+00:16 +356: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.transcript draws no border, outline, ring or divider
+00:16 +357: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.transcript draws no border, outline, ring or divider
+00:16 +358: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +359: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +360: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +361: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +362: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +363: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:16 +364: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +365: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +366: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +367: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +368: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +369: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +370: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +371: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +372: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +373: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +374: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +375: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +376: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +377: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +378: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +379: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +380: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +381: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +382: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:17 +383: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 375)
+00:18 +384: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.telnyx-sms is still under reduced motion
+00:18 +385: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-sms (light, 375)
+00:18 +386: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-sms (light, 375)
+00:18 +387: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:18 +388: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:18 +389: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:18 +390: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:18 +391: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (dark, 768)
+00:18 +392: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendars is still under reduced motion
+00:18 +393: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendars is still under reduced motion
+00:18 +394: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +395: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +396: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +397: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +398: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +399: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 375)
+00:18 +400: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (light, 768)
+00:19 +401: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (light, 768)
+00:19 +402: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-out (light, 768)
+00:19 +403: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 768)
+00:19 +404: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 768)
+00:19 +405: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (dark, 768)
+00:19 +406: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.appbar-signed-in (dark, 375)
+00:19 +407: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.storage-s3 is still under reduced motion
+00:19 +408: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.calendar-connect.outlook draws no border, outline, ring or divider
+00:19 +409: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (light, 375)
+00:19 +410: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (light, 375)
+00:19 +411: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (light, 375)
+00:19 +412: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.telnyx-voice (light, 375)
+00:19 +413: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +414: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +415: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +416: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +417: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +418: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +419: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +420: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +421: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:19 +422: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +423: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +424: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +425: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +426: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +427: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +428: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +429: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +430: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +431: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +432: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +433: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +434: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +435: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +436: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +437: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +438: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +439: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +440: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +441: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +442: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +443: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +444: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +445: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +446: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 375)
+00:20 +447: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:20 +448: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:20 +449: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:20 +450: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:21 +451: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:21 +452: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendars (light, 768)
+00:21 +453: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +454: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +455: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +456: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +457: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +458: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (dark, 768)
+00:21 +459: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-rail (dark, 768)
+00:21 +460: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.theme-toggle is still under reduced motion
+00:21 +461: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.account-menu-open draws no border, outline, ring or divider
+00:21 +462: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendar-connect.google (dark, 768)
+00:21 +463: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendar-connect.google (dark, 768)
+00:21 +464: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 375)
+00:21 +465: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 375)
+00:21 +466: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 375)
+00:21 +467: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 375)
+00:21 +468: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendar-connect.google (light, 375)
+00:21 +469: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-inline (dark, 1024)
+00:21 +470: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.skip-link-focused draws no border, outline, ring or divider
+00:21 +471: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 768)
+00:21 +472: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 768)
+00:21 +473: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 768)
+00:21 +474: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.library (light, 768)
+00:21 +475: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.calendar-connect.outlook (dark, 375)
+00:21 +476: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-inline (light, 1024)
+00:21 +477: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +478: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +479: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +480: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +481: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +482: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +483: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 375)
+00:22 +484: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-bar-focused (dark, 375)
+00:22 +485: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-bar-focused (dark, 375)
+00:22 +486: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 768)
+00:22 +487: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014 (dark, 768)
+00:22 +488: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-bar-focused (light, 375)
+00:22 +489: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/frame_golden_test.dart: frame.nav-bar-focused (light, 375)
+00:22 +490: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +491: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +492: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +493: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +494: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +495: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +496: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +497: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +498: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +499: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +500: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +501: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +502: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +503: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:23 +504: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:24 +505: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.registry (dark, 375)
+00:24 +506: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +507: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +508: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +509: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +510: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +511: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 375)
+00:24 +512: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.transcript (light, 375)
+00:24 +513: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.transcript (light, 375)
+00:24 +514: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.transcript (light, 375)
+00:24 +515: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 768)
+00:24 +516: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 768)
+00:24 +517: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (dark, 768)
+00:24 +518: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.transcript (light, 768)
+00:24 +519: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.transcript (light, 768)
+00:24 +520: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.1 (dark, 375)
+00:24 +521: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.upcoming (light, 375)
+00:25 +522: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.storage-ipfs (dark, 375)
+00:25 +523: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.summary (dark, 375)
+00:25 +524: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.summary (dark, 375)
+00:25 +525: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +526: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +527: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +528: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +529: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +530: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +531: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +532: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +533: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +534: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +535: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +536: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +537: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +538: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (dark, 375)
+00:25 +539: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.summary (light, 768)
+00:26 +540: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.2 (light, 375)
+00:26 +541: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.2 (light, 375)
+00:26 +542: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +543: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +544: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +545: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +546: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +547: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (dark, 768)
+00:26 +548: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/meeting_room_golden_test.dart: meet.room (light, 768)
+00:26 +549: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.recording (dark, 375)
+00:26 +550: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.3 (dark, 375)
+00:26 +551: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.3 (dark, 375)
+00:26 +552: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.delivery (dark, 768)
+00:26 +553: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 375)
+00:26 +554: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 375)
+00:26 +555: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 375)
+00:26 +556: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 375)
+00:26 +557: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 375)
+00:26 +558: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.delivery (light, 375)
+00:26 +559: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.delivery (light, 375)
+00:26 +560: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.delivery (light, 375)
+00:26 +561: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.3 (light, 375)
+00:26 +562: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 768)
+00:26 +563: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 768)
+00:26 +564: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 768)
+00:27 +565: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.schedule (light, 768)
+00:27 +566: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.delivery (dark, 375)
+00:27 +567: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.4 (dark, 375)
+00:27 +568: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.storage (dark, 375)
+00:27 +569: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +570: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +571: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +572: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +573: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +574: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 375)
+00:27 +575: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.storage (dark, 768)
+00:27 +576: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.storage (dark, 768)
+00:27 +577: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.storage (dark, 768)
+00:27 +578: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (dark, 768)
+00:27 +579: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.register.4 (light, 768)
+00:27 +580: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.delivery (light, 768)
+00:27 +581: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.partner-onboarding-1014.storage (light, 375)
+00:27 +582: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (light, 375)
+00:27 +583: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (light, 375)
+00:27 +584: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.templates (dark, 375)
+00:27 +585: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.templates (dark, 375)
+00:27 +586: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.templates (dark, 375)
+00:27 +587: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (light, 768)
+00:28 +588: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.partner-onboarding (light, 768)
+00:28 +589: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.design-crit-1009 (dark, 375)
+00:28 +590: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.templates (dark, 768)
+00:28 +591: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/settings_golden_test.dart: settings.templates (dark, 768)
+00:28 +592: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.cohort-kickoff (dark, 375)
+00:28 +593: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.design-crit-1009 (dark, 768)
+00:28 +594: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.detail.design-crit-1009 (dark, 768)
+00:28 +595: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +596: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +597: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +598: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +599: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +600: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +601: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +602: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +603: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +604: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +605: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +606: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +607: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +608: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +609: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:28 +610: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +611: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +612: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +613: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +614: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +615: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +616: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +617: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +618: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +619: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +620: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +621: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +622: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +623: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +624: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +625: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +626: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +627: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +628: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +629: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +630: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +631: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +632: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +633: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +634: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +635: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +636: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 375)
+00:29 +637: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/recordings_golden_test.dart: recordings.processing.partner-onboarding-1014 (light, 375)
+00:29 +638: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.pricing-review (dark, 768)
+00:29 +639: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.pricing-review (dark, 768)
+00:29 +640: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:29 +641: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:29 +642: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +643: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +644: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +645: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +646: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +647: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (dark, 768)
+00:30 +648: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.pricing-review (light, 768)
+00:30 +649: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.pricing-review (light, 768)
+00:30 +650: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.meeting.pricing-review (light, 768)
+00:30 +651: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +652: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +653: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +654: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +655: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +656: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +657: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +658: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +659: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +660: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 375)
+00:30 +661: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.dot.iris (dark, 375)
+00:30 +662: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (dark, 768)
+00:30 +663: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (dark, 768)
+00:31 +664: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (dark, 768)
+00:31 +665: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: home index.default (light, 768)
+00:31 +666: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.dot.iris (light, 768)
+00:31 +667: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.dot.iris (light, 768)
+00:31 +668: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 375)
+00:31 +669: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 375)
+00:31 +670: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 375)
+00:31 +671: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 375)
+00:31 +672: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-in (light, 375)
+00:31 +673: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/agents_golden_test.dart: agents agents.gate-signed-out (light, 375)
+00:31 +674: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 768)
+00:31 +675: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 768)
+00:31 +676: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 768)
+00:31 +677: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.invites (light, 768)
+00:31 +678: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-up (dark, 768)
+00:31 +679: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.empty (dark, 375)
+00:31 +680: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-up (light, 375)
+00:31 +681: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-up (light, 375)
+00:31 +682: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.empty (light, 375)
+00:32 +683: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-up (light, 768)
+00:32 +684: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.empty (light, 768)
+00:32 +685: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.check-email (dark, 375)
+00:32 +686: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.gate-signed-out (dark, 375)
+00:32 +687: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.check-email (dark, 768)
+00:32 +688: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.gate-signed-out (dark, 768)
+00:32 +689: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.check-email (light, 375)
+00:32 +690: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.gate-signed-out (light, 375)
+00:32 +691: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.check-email (light, 768)
+00:32 +692: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/dashboard_golden_test.dart: dashboard.gate-signed-out (light, 768)
+00:32 +693: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-in-error (dark, 375)
+00:32 +694: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-in-error (dark, 768)
+00:32 +695: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-in-error (light, 375)
+00:32 +696: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.sign-in-error (light, 768)
+00:32 +697: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.magic-link-sent (dark, 375)
+00:32 +698: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.magic-link-sent (dark, 768)
+00:32 +699: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.magic-link-sent (light, 375)
+00:32 +700: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: auth auth.magic-link-sent (light, 768)
+00:32 +701: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.invite (dark, 375)
+00:33 +702: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.invite (dark, 768)
+00:33 +703: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.invite (light, 375)
+00:33 +704: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.invite (light, 768)
+00:33 +705: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.waiting (dark, 375)
+00:33 +706: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.waiting (dark, 768)
+00:33 +707: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.waiting (light, 375)
+00:33 +708: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.waiting (light, 768)
+00:33 +709: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.expired (dark, 375)
+00:33 +710: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.expired (dark, 768)
+00:33 +711: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.expired (light, 375)
+00:33 +712: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.expired (light, 768)
+00:33 +713: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.wrong-code (dark, 375)
+00:33 +714: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.wrong-code (dark, 768)
+00:34 +715: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.wrong-code (light, 375)
+00:34 +716: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/public_golden_test.dart: join join.wrong-code (light, 768)
+00:34 +717: All tests passed!
+
+test: native surfaces pass

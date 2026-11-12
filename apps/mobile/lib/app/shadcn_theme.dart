@@ -3,7 +3,6 @@ import 'package:flutter/material.dart' as m;
 import 'package:shadcn_flutter/shadcn_flutter.dart' as shad;
 
 import '../shared/ui/km_palette_of.dart';
-import '../theme/generated/tokens.g.dart';
 
 /// Derives the shadcn_flutter theme from the Material ThemeData that is in
 /// force (the generated Know Meet theme, or the VS-3 stock override). Nothing
@@ -32,7 +31,7 @@ shad.ThemeData kmShadcnTheme(m.ThemeData material) {
     destructiveForeground: p.onDanger,
     // D-6: no strokes. shadcn's `border` has no Flat 2.0 role; `input` and
     // `ring` are fills (control and focus), as on the web (DESIGN.md).
-    border: const m.Color(0x00000000),
+    border: m.Colors.transparent,
     input: p.control,
     ring: p.focus,
     chart1: p.ember,

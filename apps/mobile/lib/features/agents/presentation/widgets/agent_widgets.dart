@@ -258,7 +258,7 @@ class AgentLink extends StatelessWidget {
       child: KmInteractive(
         onTap: onTap,
         builder: (BuildContext context, Set<WidgetState> s) {
-          final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.emberText);
+          final KmStateColors c = KmStateColors.quiet(p, s, restOn: p.readable(p.emberText, <Color>[p.amberSoft, p.redSoft, p.emberSoft]));
           return KmFillBox(
             colors: c,
             radius: KmTokens.radius4,

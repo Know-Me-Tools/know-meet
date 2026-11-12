@@ -13,10 +13,10 @@ import { FAILED_STORAGE_TEST, S3_PROVIDERS } from "../application/settings-fixtu
 import type { CheckRowState, CheckStep } from "../domain/settings";
 import { ChecksList } from "./checks-list";
 import { CheckRow } from "./settings-fields";
+import { SettingsLink } from "./settings-link";
 import { BusyContent, FormFoot, Note, Panel, Stack } from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useStagedChecks } from "./use-staged-checks";
-import { SettingsLink } from "./settings-link";
 
 const F = FAILED_STORAGE_TEST;
 const NOT_FOUND = `Bucket not found: ${F.bucket}`;
@@ -42,7 +42,8 @@ const FIXES: readonly string[] = [
   "For non-AWS providers, keep Force path style on.",
 ];
 
-const linkButton = (variant: "secondary" | "ghost") => cn(buttonVariants({ variant }), focusFillClass);
+const linkButton = (variant: "secondary" | "ghost") =>
+  cn(buttonVariants({ variant }), focusFillClass);
 
 export function StorageTestFailedSection() {
   const steps = useMemo<readonly CheckStep[]>(
@@ -88,7 +89,8 @@ export function StorageTestFailedSection() {
           <div aria-live="polite">
             {stillFailing ? (
               <Note kind="err" icon="alert">
-                Still failing: bucket {F.bucket} was not found. Fix the bucket name or create the bucket, then edit your settings.
+                Still failing: bucket {F.bucket} was not found. Fix the bucket name or create the
+                bucket, then edit your settings.
               </Note>
             ) : null}
           </div>
@@ -115,7 +117,9 @@ export function StorageTestFailedSection() {
               id={`fix-${i}`}
               label={text}
               checked={fixed[i] === true}
-              onCheckedChange={(checked) => setFixed((current) => current.map((v, j) => (j === i ? checked : v)))}
+              onCheckedChange={(checked) =>
+                setFixed((current) => current.map((v, j) => (j === i ? checked : v)))
+              }
             />
           ))}
         </div>

@@ -73,6 +73,7 @@ When(
       consoleErrors,
       mainVisible: await page.locator(appStateMap.roles.main).first().isVisible(),
       appbarVisible: await page.locator(appStateMap.roles.appbar).first().isVisible(),
+      // biome-ignore lint/performance/useDomNodeTextContent: this is Playwright's Locator API, not a DOM node; the smoke check wants rendered (visible) text.
       bodyText: (await page.locator("body").innerText()).trim().length,
     };
     observations.set(scenario, observation);

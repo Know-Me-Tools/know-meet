@@ -30,7 +30,10 @@ import { RecordingPoster } from "./recording-poster";
 const INITIAL_CONTROLS: LibraryControls = { q: "", filter: "all", sort: "new", layout: "grid" };
 
 /** Linked cards and rows drop their inner fills while focused (DESIGN.md interactive card). */
-const linkFocusClass = cn(focusFillClass, "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!");
+const linkFocusClass = cn(
+  focusFillClass,
+  "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!",
+);
 
 function MetaLine({ recording }: { readonly recording: Recording }) {
   return (
@@ -73,12 +76,18 @@ function StorageStrip({ recordings }: { readonly recordings: readonly Recording[
         </div>
         <p className="text-sm text-muted-foreground">
           <span className="whitespace-nowrap">{formatBytes(usage.usedBytes)} used</span> of{" "}
-          <span className="whitespace-nowrap">{formatBytes(usage.quotaBytes)}</span> · illustrative sample, not a real plan
-          limit.
-          {own > 0 ? ` ${own}${own === 1 ? " recording is" : " recordings are"} in your own bucket and not counted here.` : ""}
+          <span className="whitespace-nowrap">{formatBytes(usage.quotaBytes)}</span> · illustrative
+          sample, not a real plan limit.
+          {own > 0
+            ? ` ${own}${own === 1 ? " recording is" : " recordings are"} in your own bucket and not counted here.`
+            : ""}
         </p>
       </div>
-      <Link to="/settings" hash="storage" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}>
+      <Link
+        to="/settings"
+        hash="storage"
+        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+      >
         <span>Manage storage</span>
         <KmIcon name="chevron-right" className="size-4" />
       </Link>
@@ -86,7 +95,13 @@ function StorageStrip({ recordings }: { readonly recordings: readonly Recording[
   );
 }
 
-function RecordingCard({ workspace, recording }: { readonly workspace: Workspace; readonly recording: Recording }) {
+function RecordingCard({
+  workspace,
+  recording,
+}: {
+  readonly workspace: Workspace;
+  readonly recording: Recording;
+}) {
   const meta = RECORDING_META[recording.id];
   return (
     <li>
@@ -113,7 +128,13 @@ function RecordingCard({ workspace, recording }: { readonly workspace: Workspace
   );
 }
 
-function RecordingRow({ workspace, recording }: { readonly workspace: Workspace; readonly recording: Recording }) {
+function RecordingRow({
+  workspace,
+  recording,
+}: {
+  readonly workspace: Workspace;
+  readonly recording: Recording;
+}) {
   const meta = RECORDING_META[recording.id];
   return (
     <li>
@@ -153,7 +174,11 @@ function NoMatch({ onClear }: { readonly onClear: () => void }) {
       <p className="max-w-measure-empty text-sm text-muted-foreground">
         Try a different title or participant name, or switch the filter back to All.
       </p>
-      <button type="button" onClick={onClear} className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}>
+      <button
+        type="button"
+        onClick={onClear}
+        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+      >
         <KmIcon name="x" className="size-4" />
         <span>Clear search and filter</span>
       </button>
@@ -174,12 +199,16 @@ export function LibraryView({ workspace }: { readonly workspace: Workspace }) {
           <PageEyebrow>Library</PageEyebrow>
           <PageTitle>Recordings</PageTitle>
           <PageSub>
-            Room Composite recordings of meetings you hosted or joined, with transcripts, summaries and where each file is
-            stored.
+            Room Composite recordings of meetings you hosted or joined, with transcripts, summaries
+            and where each file is stored.
           </PageSub>
         </PageHeadText>
         <PageActions>
-          <Link to="/settings" hash="storage" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/settings"
+            hash="storage"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="database" />
             <span>Storage settings</span>
           </Link>

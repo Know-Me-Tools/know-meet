@@ -43,8 +43,8 @@ import {
   driveState,
   PROTOTYPE_SELECTORS,
   planState,
-  type RenderTarget,
   prototypeStatePath,
+  type RenderTarget,
 } from "../support/state-drivers.ts";
 import type {
   BaselineManifest,
@@ -53,13 +53,13 @@ import type {
   SkippedRecord,
 } from "./baseline-manifest.ts";
 import {
-  type JournalLine,
-  type Resumed,
   captureKey,
   cellKey,
   closeJournal,
+  type JournalLine,
   loadJournal,
   openJournal,
+  type Resumed,
 } from "./capture-journal.ts";
 import { REFERENCE_TARGETS } from "./reference-captures.ts";
 import { startStaticServer } from "./static-server.ts";

@@ -2,18 +2,18 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 226,
-  "derivedRevision": 226,
+  "sourceRevision": 230,
+  "derivedRevision": 230,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 226
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-12T14:24:07.062681Z",
+  "updatedAt": "2026-11-12T14:40:26.886778Z",
   "cursor": [
     "hybrid-shell-foundation",
     "execute",
-    "c16-agentic-core-gates",
-    "16.1"
+    "c13-fidelity-verification-and-evidence",
+    "13.2"
   ],
   "root": {
     "type": "phase",
@@ -145,7 +145,7 @@
           {
             "type": "change",
             "id": "c13-fidelity-verification-and-evidence",
-            "status": "PENDING",
+            "status": "IN_PROGRESS",
             "progress": {
               "done": 0,
               "total": 10

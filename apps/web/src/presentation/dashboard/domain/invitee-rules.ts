@@ -36,7 +36,14 @@ export function parseInvitee(raw: string, people: readonly Person[]): InviteePar
   if (EMAIL_RE.test(value)) {
     return {
       ok: true,
-      invitee: { key: value.toLowerCase(), value, kind: "email", name: known ? known.name : value, email: value, phone: known ? known.phone : null },
+      invitee: {
+        key: value.toLowerCase(),
+        value,
+        kind: "email",
+        name: known ? known.name : value,
+        email: value,
+        phone: known ? known.phone : null,
+      },
     };
   }
   let digits = phoneDigits(value);
@@ -45,15 +52,28 @@ export function parseInvitee(raw: string, people: readonly Person[]): InviteePar
     if (bare.length === 10 && !digits.startsWith("+")) digits = `+1${bare}`;
     else if (!digits.startsWith("+")) digits = `+${bare}`;
     if (bare.length < 10 || bare.length > 15) {
-      return { ok: false, error: `“${value}” doesn’t look like a full phone number. Include the country code, like +1 415 555 0142.` };
+      return {
+        ok: false,
+        error: `“${value}” doesn’t look like a full phone number. Include the country code, like +1 415 555 0142.`,
+      };
     }
     return {
       ok: true,
-      invitee: { key: digits, value, kind: "phone", name: known ? known.name : value, email: known ? known.email : null, phone: digits },
+      invitee: {
+        key: digits,
+        value,
+        kind: "phone",
+        name: known ? known.name : value,
+        email: known ? known.email : null,
+        phone: digits,
+      },
     };
   }
   if (value.includes("@")) {
-    return { ok: false, error: `“${value}” isn’t a complete email address. Use the form name@company.com.` };
+    return {
+      ok: false,
+      error: `“${value}” isn’t a complete email address. Use the form name@company.com.`,
+    };
   }
   return {
     ok: false,
@@ -94,7 +114,11 @@ export function commitInvitees(
     }
     const next = parsed.invitee;
     const duplicate = invitees.some(
-      (x) => x.key === next.key || (next.email !== null && x.email !== null && x.email.toLowerCase() === next.email.toLowerCase()),
+      (x) =>
+        x.key === next.key ||
+        (next.email !== null &&
+          x.email !== null &&
+          x.email.toLowerCase() === next.email.toLowerCase()),
     );
     if (duplicate) {
       rejected.push({ value: part, error: `“${part}” is already on the invite list.` });
@@ -102,5 +126,9 @@ export function commitInvitees(
     }
     invitees = [...invitees, next];
   }
-  return { invitees, rest: rejected.map((r) => r.value).join(", "), error: rejected[0]?.error ?? "" };
+  return {
+    invitees,
+    rest: rejected.map((r) => r.value).join(", "),
+    error: rejected[0]?.error ?? "",
+  };
 }

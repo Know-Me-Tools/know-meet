@@ -12,13 +12,28 @@ import type * as React from "react";
 import { useState } from "react";
 import type { StorageMode } from "../domain/settings";
 import { SegmentField, SelectField, SwitchRow } from "./settings-fields";
-import { BusyContent, FormFoot, KeyValue, KeyValueList, NeutralChip, Note, Panel, Stack } from "./settings-parts";
+import { SettingsLink } from "./settings-link";
+import {
+  BusyContent,
+  FormFoot,
+  KeyValue,
+  KeyValueList,
+  NeutralChip,
+  Note,
+  Panel,
+  Stack,
+} from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useBusyAction } from "./use-static-delay";
-import { SettingsLink } from "./settings-link";
 
 /** settings.html `linkCard()`: a raised card link with a lead tile, text and a trailing chip. */
-function LinkCard({ hash, icon, title, description, trail }: {
+function LinkCard({
+  hash,
+  icon,
+  title,
+  description,
+  trail,
+}: {
   readonly hash: "storage-s3" | "storage-ipfs";
   readonly icon: KmIconName;
   readonly title: string;
@@ -59,10 +74,20 @@ function Destination({ mode, ipfs }: { readonly mode: StorageMode; readonly ipfs
     <>
       <Panel
         title="Where new recordings go"
-        description={byo ? "Your bucket and pinning service. KnowMe never keeps a copy." : "KnowMe provides S3-compatible storage and IPFS pinning."}
+        description={
+          byo
+            ? "Your bucket and pinning service. KnowMe never keeps a copy."
+            : "KnowMe provides S3-compatible storage and IPFS pinning."
+        }
       >
         <KeyValueList>
-          {byo ? <KeyValue label="Storage">Not configured</KeyValue> : <KeyValue label="Storage" plain="plain">KnowMe-managed S3-compatible bucket</KeyValue>}
+          {byo ? (
+            <KeyValue label="Storage">Not configured</KeyValue>
+          ) : (
+            <KeyValue label="Storage" plain="plain">
+              KnowMe-managed S3-compatible bucket
+            </KeyValue>
+          )}
           <KeyValue label="IPFS pinning" plain="plain">
             {ipfs ? "KnowMe pinning" : "Off"}
           </KeyValue>
@@ -83,8 +108,20 @@ function Destination({ mode, ipfs }: { readonly mode: StorageMode; readonly ipfs
         </Note>
       ) : null}
       <div className="grid grid-cols-2 gap-s4 max-bp768:grid-cols-[minmax(0,1fr)]">
-        <LinkCard hash="storage-s3" icon="database" title="S3-compatible storage" description="Amazon S3, R2, B2, Wasabi, MinIO…" trail={<NeutralChip>Not configured</NeutralChip>} />
-        <LinkCard hash="storage-ipfs" icon="globe" title="IPFS pinning" description="KnowMe pinning" trail={<NeutralChip>Default</NeutralChip>} />
+        <LinkCard
+          hash="storage-s3"
+          icon="database"
+          title="S3-compatible storage"
+          description="Amazon S3, R2, B2, Wasabi, MinIO…"
+          trail={<NeutralChip>Not configured</NeutralChip>}
+        />
+        <LinkCard
+          hash="storage-ipfs"
+          icon="globe"
+          title="IPFS pinning"
+          description="KnowMe pinning"
+          trail={<NeutralChip>Default</NeutralChip>}
+        />
       </div>
     </>
   );
@@ -96,12 +133,41 @@ function EgressOutput() {
   const [resolution, setResolution] = useState("1080p");
   const [audioOnly, setAudioOnly] = useState(false);
   return (
-    <Panel title="Egress output" description="LiveKit Egress records every participant in one Room Composite.">
+    <Panel
+      title="Egress output"
+      description="LiveKit Egress records every participant in one Room Composite."
+    >
       <Stack>
         <div className="flex flex-wrap items-start gap-s5">
-          <SegmentField label="Format" value={format} onValueChange={setFormat} options={[{ value: "mp4", label: "MP4 file" }, { value: "hls", label: "HLS segments" }]} />
-          <SegmentField label="Layout" value={layout} onValueChange={setLayout} disabled={audioOnly} options={[{ value: "speaker", label: "Speaker" }, { value: "grid", label: "Grid" }]} />
-          <SegmentField label="Resolution" value={resolution} onValueChange={setResolution} disabled={audioOnly} options={[{ value: "720p", label: "720p" }, { value: "1080p", label: "1080p" }]} />
+          <SegmentField
+            label="Format"
+            value={format}
+            onValueChange={setFormat}
+            options={[
+              { value: "mp4", label: "MP4 file" },
+              { value: "hls", label: "HLS segments" },
+            ]}
+          />
+          <SegmentField
+            label="Layout"
+            value={layout}
+            onValueChange={setLayout}
+            disabled={audioOnly}
+            options={[
+              { value: "speaker", label: "Speaker" },
+              { value: "grid", label: "Grid" },
+            ]}
+          />
+          <SegmentField
+            label="Resolution"
+            value={resolution}
+            onValueChange={setResolution}
+            disabled={audioOnly}
+            options={[
+              { value: "720p", label: "720p" },
+              { value: "1080p", label: "1080p" },
+            ]}
+          />
         </div>
         <SwitchRow
           label="Audio only"
@@ -122,7 +188,11 @@ export function StorageSection() {
   const saving = useBusyAction();
   return (
     <>
-      <SettingsHead section="storage" title="Storage" description="Where recordings go after LiveKit Egress writes them, and how they are pinned to IPFS." />
+      <SettingsHead
+        section="storage"
+        title="Storage"
+        description="Where recordings go after LiveKit Egress writes them, and how they are pinned to IPFS."
+      />
       <Stack>
         <SegmentField
           label="Storage mode"
@@ -157,16 +227,28 @@ export function StorageSection() {
           <SelectField
             label="Keep recordings for"
             value={retention}
-            options={[["30", "30 days"], ["90", "90 days"], ["365", "1 year"], ["forever", "Forever"]]}
+            options={[
+              ["30", "30 days"],
+              ["90", "90 days"],
+              ["365", "1 year"],
+              ["forever", "Forever"],
+            ]}
             hint="After this, the file is deleted from storage and unpinned. Transcripts and summaries follow the same schedule."
             onValueChange={setRetention}
           />
           <Note kind="info" icon="lock">
-            Recordings are encrypted at rest in S3-compatible storage. For bring-your-own buckets, your bucket’s encryption settings apply.
+            Recordings are encrypted at rest in S3-compatible storage. For bring-your-own buckets,
+            your bucket’s encryption settings apply.
           </Note>
-          <SwitchRow label="Pin recordings to IPFS" description="Keeps a content-addressed copy and stores its CID with the recording." checked={ipfs} onCheckedChange={setIpfs} />
+          <SwitchRow
+            label="Pin recordings to IPFS"
+            description="Keeps a content-addressed copy and stores its CID with the recording."
+            checked={ipfs}
+            onCheckedChange={setIpfs}
+          />
           <Note kind="warn" icon="globe">
-            IPFS is a public network: anyone who has a recording’s CID can fetch it through a gateway. Turn pinning off for meetings that must stay private.
+            IPFS is a public network: anyone who has a recording’s CID can fetch it through a
+            gateway. Turn pinning off for meetings that must stay private.
           </Note>
         </Stack>
       </Panel>
@@ -179,7 +261,12 @@ export function StorageSection() {
               setModeError(true);
               return;
             }
-            saving.start(700, () => toast.add({ title: "Saved. New recordings use KnowMe-managed storage", type: "success" }));
+            saving.start(700, () =>
+              toast.add({
+                title: "Saved. New recordings use KnowMe-managed storage",
+                type: "success",
+              }),
+            );
           }}
         >
           <BusyContent busy={saving.busy} busyLabel="Saving…" icon="check">

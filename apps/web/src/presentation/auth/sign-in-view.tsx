@@ -17,13 +17,22 @@ import { describedBy, FormField } from "../public-shared/form-field";
 import { buttonLinkClass } from "../public-shared/ui-classes";
 import { submitForm, useField } from "../public-shared/use-field";
 import type { SessionUserView } from "../shared/session";
+import {
+  AuthFoot,
+  AuthHead,
+  AuthPanel,
+  AuthShell,
+  FootLine,
+  GuestLink,
+  SignedInNotice,
+} from "./auth-layout";
 import { type AuthParams, authHash } from "./auth-params";
-import { AuthFoot, AuthHead, AuthPanel, AuthShell, FootLine, GuestLink, SignedInNotice } from "./auth-layout";
 import { PasswordInput } from "./password-input";
 import { emailError, magicLinkEmailError, signInPasswordError } from "./validators";
 import { WhyAside } from "./why-aside";
 
-const NOT_WIRED = "Signing in isn’t connected in this preview yet. Continue as a guest to try a meeting.";
+const NOT_WIRED =
+  "Signing in isn’t connected in this preview yet. Continue as a guest to try a meeting.";
 
 interface SignInViewProps {
   readonly params: AuthParams;
@@ -32,7 +41,13 @@ interface SignInViewProps {
   readonly onSignOut: () => void;
 }
 
-function ErrorSummary({ onMagicLink, signUpHash }: { readonly onMagicLink: () => void; readonly signUpHash: string }) {
+function ErrorSummary({
+  onMagicLink,
+  signUpHash,
+}: {
+  readonly onMagicLink: () => void;
+  readonly signUpHash: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // After the page-heading focus that follows a hash change (km.js `later(…, 0)`).
@@ -53,8 +68,9 @@ function ErrorSummary({ onMagicLink, signUpHash }: { readonly onMagicLink: () =>
           That email and password don’t match
         </h2>
         <p className="mt-1 text-sm">
-          Check the email for typos and re-enter your password — it’s case-sensitive. If you can’t remember it, we can
-          email you a one-time sign-in link instead, then you can set a new password in Settings.
+          Check the email for typos and re-enter your password — it’s case-sensitive. If you can’t
+          remember it, we can email you a one-time sign-in link instead, then you can set a new
+          password in Settings.
         </p>
       </div>
       <div className="col-start-2 mt-s2 flex flex-wrap items-center gap-s2">
@@ -74,7 +90,11 @@ export function SignInView({ params, isError, user, onSignOut }: SignInViewProps
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const email = useField(emailError, params.email ?? "");
-  const password = useField(signInPasswordError, "", isError ? "Re-enter your password for this email." : "");
+  const password = useField(
+    signInPasswordError,
+    "",
+    isError ? "Re-enter your password for this email." : "",
+  );
   const [status, setStatus] = useState("");
   const next = params.next === undefined ? {} : { next: params.next };
 
@@ -98,12 +118,16 @@ export function SignInView({ params, isError, user, onSignOut }: SignInViewProps
     if (submitForm(formRef.current, [email.check, password.check])) setStatus(NOT_WIRED);
   };
 
-  const sso = (provider: string) => () => setStatus(`${provider} sign-in isn’t connected in this preview yet.`);
+  const sso = (provider: string) => () =>
+    setStatus(`${provider} sign-in isn’t connected in this preview yet.`);
 
   return (
     <AuthShell withAside>
       <AuthPanel>
-        <AuthHead title="Sign in to Know Meet" sub="Pick up your meetings, agents and recordings." />
+        <AuthHead
+          title="Sign in to Know Meet"
+          sub="Pick up your meetings, agents and recordings."
+        />
         {user === null ? null : <SignedInNotice user={user} onSignOut={onSignOut} />}
         {isError ? (
           <ErrorSummary onMagicLink={goMagicLink} signUpHash={authHash("sign-up", { ...params })} />
@@ -120,7 +144,13 @@ export function SignInView({ params, isError, user, onSignOut }: SignInViewProps
         <p aria-hidden="true" className="text-center text-sm text-muted-foreground">
           or with email
         </p>
-        <form ref={formRef} noValidate aria-labelledby="form-title" onSubmit={onSubmit} className="grid gap-s4">
+        <form
+          ref={formRef}
+          noValidate
+          aria-labelledby="form-title"
+          onSubmit={onSubmit}
+          className="grid gap-s4"
+        >
           <h2 id="form-title" className="sr-only">
             Sign in with email
           </h2>

@@ -11,25 +11,36 @@ import { cn } from "@know-meet/ui/lib/utils";
 import { useId, useState } from "react";
 import type { SessionUserView } from "../../shared/session";
 import { formatTime } from "../../workspace/application/format";
-import { CALENDAR_CONNECTIONS, CALENDAR_ORDER, CALENDAR_PROVIDERS } from "../application/settings-fixtures";
+import {
+  CALENDAR_CONNECTIONS,
+  CALENDAR_ORDER,
+  CALENDAR_PROVIDERS,
+} from "../application/settings-fixtures";
 import type { CalendarConnection, CalendarProvider } from "../domain/settings";
 import { ConfirmDialog, type ConfirmRequest } from "./confirm-dialog";
 import { CheckRow, SelectField, SwitchRow } from "./settings-fields";
+import { SettingsLink } from "./settings-link";
 import { BusyContent, NeutralChip, PanelSurface, StatusChip } from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useBusyAction } from "./use-static-delay";
-import { SettingsLink } from "./settings-link";
 
 /** settings.html `.prov-mark`: the provider's letter mark on a muted tile. */
 export function ProviderMark({ mark }: { readonly mark: string }) {
   return (
-    <span aria-hidden="true" className="grid size-11 flex-none place-items-center rounded-base bg-muted font-display text-15 font-bold text-foreground">
+    <span
+      aria-hidden="true"
+      className="grid size-11 flex-none place-items-center rounded-base bg-muted font-display text-15 font-bold text-foreground"
+    >
       {mark}
     </span>
   );
 }
 
-function ConnectedBody({ provider, connection, onDisconnect }: {
+function ConnectedBody({
+  provider,
+  connection,
+  onDisconnect,
+}: {
   readonly provider: CalendarProvider;
   readonly connection: CalendarConnection;
   readonly onDisconnect: () => void;
@@ -47,7 +58,7 @@ function ConnectedBody({ provider, connection, onDisconnect }: {
         <span id={legendId} className="mb-1.5 text-sm font-semibold">
           Calendars to sync
         </span>
-        <div role="group" aria-labelledby={legendId}>
+        <fieldset className="m-0 min-w-0 p-0" aria-labelledby={legendId}>
           {provider.calendars.map((cal) => (
             <CheckRow
               key={cal.id}
@@ -57,7 +68,10 @@ function ConnectedBody({ provider, connection, onDisconnect }: {
               onCheckedChange={(checked) => {
                 const next = { ...selected, [cal.id]: checked };
                 if (!Object.values(next).some(Boolean)) {
-                  toast.add({ title: "Keep at least one calendar selected, or disconnect instead", type: "error" });
+                  toast.add({
+                    title: "Keep at least one calendar selected, or disconnect instead",
+                    type: "error",
+                  });
                   return;
                 }
                 setSelected(next);
@@ -65,7 +79,7 @@ function ConnectedBody({ provider, connection, onDisconnect }: {
               }}
             />
           ))}
-        </div>
+        </fieldset>
       </div>
       <SwitchRow
         label="Add KnowMe link to events I create"
@@ -76,7 +90,11 @@ function ConnectedBody({ provider, connection, onDisconnect }: {
       <SelectField
         label="Sync window"
         value={syncWindow}
-        options={[["14", "Next 2 weeks"], ["30", "Next 30 days"], ["90", "Next 90 days"]]}
+        options={[
+          ["14", "Next 2 weeks"],
+          ["30", "Next 30 days"],
+          ["90", "Next 90 days"],
+        ]}
         onValueChange={setSyncWindow}
       />
       <div className="flex flex-wrap items-center justify-between gap-s2">
@@ -125,10 +143,17 @@ function ConnectedBody({ provider, connection, onDisconnect }: {
   );
 }
 
-function ProviderPanel({ provider, email }: { readonly provider: CalendarProvider; readonly email: string }) {
+function ProviderPanel({
+  provider,
+  email,
+}: {
+  readonly provider: CalendarProvider;
+  readonly email: string;
+}) {
   const [connection, setConnection] = useState(CALENDAR_CONNECTIONS[provider.key]);
   const headingId = useId();
-  const account = provider.key === "caldav" ? `${connection.user ?? ""} · ${connection.server ?? ""}` : email;
+  const account =
+    provider.key === "caldav" ? `${connection.user ?? ""} · ${connection.server ?? ""}` : email;
   return (
     <PanelSurface aria-labelledby={headingId}>
       <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-s4 max-bp768:grid-cols-[auto_minmax(0,1fr)]">
@@ -137,32 +162,46 @@ function ProviderPanel({ provider, email }: { readonly provider: CalendarProvide
           <h2 id={headingId} className="text-lg">
             {provider.name}
           </h2>
-          <span className="truncate text-sm text-muted-foreground" title={connection.connected ? account : undefined}>
+          <span
+            className="truncate text-sm text-muted-foreground"
+            title={connection.connected ? account : undefined}
+          >
             {connection.connected ? account : "Not connected"}
           </span>
         </div>
         <span className="max-bp768:col-start-2 max-bp768:row-start-1 max-bp768:justify-self-start">
-          {connection.connected ? <StatusChip tone="green">Connected</StatusChip> : <NeutralChip>Not connected</NeutralChip>}
+          {connection.connected ? (
+            <StatusChip tone="green">Connected</StatusChip>
+          ) : (
+            <NeutralChip>Not connected</NeutralChip>
+          )}
         </span>
       </div>
       <div className="grid min-w-0 gap-s3">
-          {connection.connected ? (
-            <ConnectedBody provider={provider} connection={connection} onDisconnect={() => setConnection({ ...connection, connected: false })} />
-          ) : (
-            <>
-              <p className="text-sm text-muted-foreground">
-                {provider.key === "caldav"
-                  ? "Connect iCloud or any CalDAV server with an app-specific password."
-                  : `Sign in with ${provider.name.split(" /")[0]} to sync events and add KnowMe links.`}
-              </p>
-              <div>
-                <SettingsLink hash={`calendar-connect:${provider.key}`} className={cn(buttonVariants({ size: "sm" }), focusFillClass)}>
-                  <KmIcon name="link" className="size-4" />
-                  <span>Connect</span>
-                </SettingsLink>
-              </div>
-            </>
-          )}
+        {connection.connected ? (
+          <ConnectedBody
+            provider={provider}
+            connection={connection}
+            onDisconnect={() => setConnection({ ...connection, connected: false })}
+          />
+        ) : (
+          <>
+            <p className="text-sm text-muted-foreground">
+              {provider.key === "caldav"
+                ? "Connect iCloud or any CalDAV server with an app-specific password."
+                : `Sign in with ${provider.name.split(" /")[0]} to sync events and add KnowMe links.`}
+            </p>
+            <div>
+              <SettingsLink
+                hash={`calendar-connect:${provider.key}`}
+                className={cn(buttonVariants({ size: "sm" }), focusFillClass)}
+              >
+                <KmIcon name="link" className="size-4" />
+                <span>Connect</span>
+              </SettingsLink>
+            </div>
+          </>
+        )}
       </div>
     </PanelSurface>
   );

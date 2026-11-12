@@ -14,7 +14,13 @@ import { focusFirstError } from "../../shared/focus-first-error";
 import { useSessionUser } from "../../shared/session";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { newJoinCode, timeZoneLabel } from "../application/dashboard-fixtures";
-import { buildInvitePreview, initialScheduleValues, type ScheduleError, type ScheduleValues, validateSchedule } from "../application/schedule-form";
+import {
+  buildInvitePreview,
+  initialScheduleValues,
+  type ScheduleError,
+  type ScheduleValues,
+  validateSchedule,
+} from "../application/schedule-form";
 import { buildScheduledMeeting } from "../application/schedule-result";
 import { type DashboardMeeting, MAX_FILE_BYTES } from "../domain/dashboard";
 import { commitInvitees } from "../domain/invitee-rules";
@@ -24,7 +30,13 @@ import { RequiredMark } from "./form-field";
 import { InviteesSection } from "./invitees-section";
 import { NotFoundView } from "./not-found-view";
 import { SchedulePreviewPanel } from "./schedule-preview-panel";
-import { AgentsSection, CalendarSection, DetailsSection, KnowledgeSection, OptionsSection } from "./schedule-sections";
+import {
+  AgentsSection,
+  CalendarSection,
+  DetailsSection,
+  KnowledgeSection,
+  OptionsSection,
+} from "./schedule-sections";
 import { ScheduledView } from "./scheduled-view";
 
 const SAVE_MS = 1300;
@@ -33,11 +45,24 @@ export function ScheduleView({ editId }: { readonly editId: string | undefined }
   const { getMeeting } = useDashboard();
   const [round, setRound] = useState(0);
   const editing = editId === undefined ? null : getMeeting(editId);
-  if (editId !== undefined && (editing === null || editing.cancelled)) return <NotFoundView id={editId} />;
-  return <ScheduleForm key={`${editId ?? "new"}-${round}`} editing={editing} onReset={() => setRound((n) => n + 1)} />;
+  if (editId !== undefined && (editing === null || editing.cancelled))
+    return <NotFoundView id={editId} />;
+  return (
+    <ScheduleForm
+      key={`${editId ?? "new"}-${round}`}
+      editing={editing}
+      onReset={() => setRound((n) => n + 1)}
+    />
+  );
 }
 
-function ErrorSummary({ errors, editing }: { readonly errors: readonly ScheduleError[]; readonly editing: boolean }) {
+function ErrorSummary({
+  errors,
+  editing,
+}: {
+  readonly errors: readonly ScheduleError[];
+  readonly editing: boolean;
+}) {
   const things = errors.length === 1 ? "1 thing" : `${errors.length} things`;
   return (
     <div role="alert" className="grid gap-s2 rounded-tile bg-red-soft px-s5 py-s4">
@@ -67,14 +92,22 @@ function ErrorSummary({ errors, editing }: { readonly errors: readonly ScheduleE
   );
 }
 
-function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting | null; readonly onReset: () => void }) {
+function ScheduleForm({
+  editing,
+  onReset,
+}: {
+  readonly editing: DashboardMeeting | null;
+  readonly onReset: () => void;
+}) {
   const model = useDashboard();
   const { workspace, now, localTz, joinUrlFor } = model;
   const user = useSessionUser();
   const hostName = user?.name ?? workspace.user.name;
   useDocumentTitle(`${editing ? "Edit meeting" : "Schedule meeting"} · Know Meet`);
 
-  const [values, setValues] = useState<ScheduleValues>(() => initialScheduleValues(editing, workspace, now, localTz, newJoinCode()));
+  const [values, setValues] = useState<ScheduleValues>(() =>
+    initialScheduleValues(editing, workspace, now, localTz, newJoinCode()),
+  );
   const [draft, setDraft] = useState("");
   const [errors, setErrors] = useState<Readonly<Record<string, string>>>({});
   const [summary, setSummary] = useState<readonly ScheduleError[]>([]);
@@ -90,7 +123,9 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
   }, [attempt]);
 
   if (result !== null) {
-    return <ScheduledView meeting={result} wasEdit={editing !== null} onScheduleAnother={onReset} />;
+    return (
+      <ScheduledView meeting={result} wasEdit={editing !== null} onScheduleAnother={onReset} />
+    );
   }
 
   const update = (patch: Partial<ScheduleValues>) => {
@@ -121,8 +156,12 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const committed = draft.trim() ? commitInvitees(draft, values.invitees, workspace.people) : null;
-    const checked: ScheduleValues = committed ? { ...values, invitees: committed.invitees } : values;
+    const committed = draft.trim()
+      ? commitInvitees(draft, values.invitees, workspace.people)
+      : null;
+    const checked: ScheduleValues = committed
+      ? { ...values, invitees: committed.invitees }
+      : values;
     if (committed) {
       setValues(checked);
       setDraft(committed.rest);
@@ -138,7 +177,13 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
     timer.current = window.setTimeout(() => {
       const outcome = buildScheduledMeeting(checked, editing, workspace, new Date());
       if (editing) model.dispatch({ type: "override", id: editing.id, changes: outcome.meeting });
-      else model.dispatch({ type: "create", meeting: outcome.meeting, deliveries: outcome.deliveries, preReads: checked.files });
+      else
+        model.dispatch({
+          type: "create",
+          meeting: outcome.meeting,
+          deliveries: outcome.deliveries,
+          preReads: checked.files,
+        });
       setResult(outcome.meeting);
     }, SAVE_MS);
   };
@@ -148,13 +193,24 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
     let files = values.files;
     for (const file of Array.from(list)) {
       if (file.size > MAX_FILE_BYTES) tooBig.push(file.name);
-      else if (!files.some((x) => x.name === file.name)) files = [...files, { name: file.name, size: file.size }];
+      else if (!files.some((x) => x.name === file.name))
+        files = [...files, { name: file.name, size: file.size }];
     }
     update({ files });
-    setFileError(tooBig.length ? `${tooBig.join(", ")} is over 50 MB. Share a link to it in the description instead.` : "");
+    setFileError(
+      tooBig.length
+        ? `${tooBig.join(", ")} is over 50 MB. Share a link to it in the description instead.`
+        : "",
+    );
   };
 
-  const preview = buildInvitePreview(values, workspace, hostName, joinUrlFor(values.code), timeZoneLabel(values.tz, localTz));
+  const preview = buildInvitePreview(
+    values,
+    workspace,
+    hostName,
+    joinUrlFor(values.code),
+    timeZoneLabel(values.tz, localTz),
+  );
 
   return (
     <>
@@ -171,7 +227,13 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
       </PageHead>
       {editing ? null : <DashTabs active="schedule" />}
       <div className="grid grid-cols-[minmax(0,1fr)_380px] items-start gap-s5 max-bp1024:grid-cols-[minmax(0,1fr)]">
-        <form ref={form} noValidate aria-labelledby="sched-h1" className="grid min-w-0 gap-s4" onSubmit={onSubmit}>
+        <form
+          ref={form}
+          noValidate
+          aria-labelledby="sched-h1"
+          className="grid min-w-0 gap-s4"
+          onSubmit={onSubmit}
+        >
           {summary.length ? <ErrorSummary errors={summary} editing={editing !== null} /> : null}
           <p className="text-sm text-muted-foreground">
             <RequiredMark /> Required
@@ -184,10 +246,20 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
             disabled={busy}
             onDraftChange={setDraft}
             onCommit={commitDraft}
-            onRemove={(index) => update({ invitees: values.invitees.filter((_, i) => i !== index) })}
+            onRemove={(index) =>
+              update({ invitees: values.invitees.filter((_, i) => i !== index) })
+            }
           />
-          <CalendarSection value={values.calendar} disabled={busy} onChange={(calendar) => update({ calendar })} />
-          <OptionsSection options={values.options} disabled={busy} onChange={(options) => update({ options })} />
+          <CalendarSection
+            value={values.calendar}
+            disabled={busy}
+            onChange={(calendar) => update({ calendar })}
+          />
+          <OptionsSection
+            options={values.options}
+            disabled={busy}
+            onChange={(options) => update({ options })}
+          />
           <AgentsSection values={values} update={update} disabled={busy} />
           <KnowledgeSection
             files={values.files}
@@ -205,8 +277,19 @@ function ScheduleForm({ editing, onReset }: { readonly editing: DashboardMeeting
               Cancel
             </Link>
             <Button type="submit" disabled={busy} aria-busy={busy || undefined}>
-              <KmIcon name={busy ? "refresh" : editing ? "check" : "send"} className={busy ? cn("size-4", busySpinClass) : undefined} />
-              <span>{busy ? (editing ? "Saving…" : "Scheduling…") : editing ? "Save changes" : "Schedule meeting"}</span>
+              <KmIcon
+                name={busy ? "refresh" : editing ? "check" : "send"}
+                className={busy ? cn("size-4", busySpinClass) : undefined}
+              />
+              <span>
+                {busy
+                  ? editing
+                    ? "Saving…"
+                    : "Scheduling…"
+                  : editing
+                    ? "Save changes"
+                    : "Schedule meeting"}
+              </span>
             </Button>
           </div>
         </form>

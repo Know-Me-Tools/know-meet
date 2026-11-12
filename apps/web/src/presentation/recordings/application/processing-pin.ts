@@ -17,7 +17,10 @@ export interface PinnedProgress {
 }
 
 /** Parses the raw pin value; null when absent or not an integer in 0..stepCount. */
-export function parseProcessingPin(raw: string | null | undefined, stepCount: number): number | null {
+export function parseProcessingPin(
+  raw: string | null | undefined,
+  stepCount: number,
+): number | null {
   if (raw === null || raw === undefined || raw === "") return null;
   const value = Number(raw);
   return Number.isInteger(value) && value >= 0 && value <= stepCount ? value : null;
@@ -27,7 +30,10 @@ export function pinnedProgress(steps: readonly ProcessingStep[], pin: number): P
   const total = steps.reduce((sum, step) => sum + step.durationMs, 0);
   const doneMs = steps.slice(0, pin).reduce((sum, step) => sum + step.durationMs, 0);
   const current = steps[pin];
-  const percent = current === undefined || total === 0 ? 100 : Math.round(((doneMs + current.durationMs / 2) / total) * 100);
+  const percent =
+    current === undefined || total === 0
+      ? 100
+      : Math.round(((doneMs + current.durationMs / 2) / total) * 100);
   return {
     percent,
     steps: steps.map((_, index) =>

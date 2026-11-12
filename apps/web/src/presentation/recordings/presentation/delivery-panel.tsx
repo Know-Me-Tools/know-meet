@@ -14,9 +14,14 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { initialsOf } from "../../workspace/application/format";
 import type { Recording, Workspace } from "../../workspace/domain/workspace";
-import type { DeliveryChannel, DeliveryReceipts, DeliveryRow, DeliveryStatus } from "../domain/recording-details";
 import { deliveryRows, isHeldForReview } from "../application/recordings-model";
 import { detailHash } from "../application/recordings-route";
+import type {
+  DeliveryChannel,
+  DeliveryReceipts,
+  DeliveryRow,
+  DeliveryStatus,
+} from "../domain/recording-details";
 import { BusyLabel } from "./busy-label";
 import { ConfirmDialog } from "./confirm-dialog";
 import { Note, StatusChip } from "./recording-parts";
@@ -61,7 +66,10 @@ export function DeliveryPanel({
 
   const resend = (row: DeliveryRow) =>
     run(rowKey(row), 1200, () => {
-      setReceipts((current) => ({ ...current, [row.name]: { ...current[row.name], [row.channel]: "Delivered" } }));
+      setReceipts((current) => ({
+        ...current,
+        [row.name]: { ...current[row.name], [row.channel]: "Delivered" },
+      }));
       toast.add({
         title: `${row.channel === "sms" ? "SMS link resent to " : "Email resent to "}${row.name}`,
         type: "success",
@@ -74,10 +82,15 @@ export function DeliveryPanel({
         <div className="grid gap-s2">
           <h2 id="tab-h">Delivery</h2>
           <p className="text-sm text-muted-foreground">
-            Who received the transcript and summary when the meeting closed. SMS messages carry a link, sent via Telnyx.
+            Who received the transcript and summary when the meeting closed. SMS messages carry a
+            link, sent via Telnyx.
           </p>
         </div>
-        <Link to="/settings" hash="delivery" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}>
+        <Link
+          to="/settings"
+          hash="delivery"
+          className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+        >
           <KmIcon name="settings" className="size-4" />
           <span>Delivery settings</span>
         </Link>
@@ -86,11 +99,16 @@ export function DeliveryPanel({
         <Note kind="warn" icon="clock">
           <div className="grid gap-s2">
             <span>
-              This summary is held for your review because delivery timing was set to “After I review”. Nothing has been
-              sent yet.
+              This summary is held for your review because delivery timing was set to “After I
+              review”. Nothing has been sent yet.
             </span>
             <div className="flex flex-wrap items-center gap-s2">
-              <Button size="sm" disabled={busy.has("send-all")} aria-busy={busy.has("send-all")} onClick={() => setConfirming(true)}>
+              <Button
+                size="sm"
+                disabled={busy.has("send-all")}
+                aria-busy={busy.has("send-all")}
+                onClick={() => setConfirming(true)}
+              >
                 {busy.has("send-all") ? (
                   <BusyLabel label="Sending…" />
                 ) : (
@@ -150,13 +168,22 @@ export function DeliveryPanel({
                   </span>
                 </td>
                 <td>
-                  <span className="font-mono text-13 [overflow-wrap:anywhere]">{row.destination}</span>
+                  <span className="font-mono text-13 [overflow-wrap:anywhere]">
+                    {row.destination}
+                  </span>
                 </td>
                 <td>
                   <StatusChip status={sending ? "Sending…" : row.status} />
                 </td>
                 <td className="text-right! tabular-nums">
-                  <Button variant="secondary" size="sm" aria-label={label} aria-busy={sending} disabled={sending} onClick={() => resend(row)}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    aria-label={label}
+                    aria-busy={sending}
+                    disabled={sending}
+                    onClick={() => resend(row)}
+                  >
                     {sending ? (
                       <BusyLabel label="Sending…" />
                     ) : (
@@ -174,13 +201,13 @@ export function DeliveryPanel({
       </TableRegion>
       {rows.some((row) => row.status === "Bounced") ? (
         <Note kind="err" icon="alert">
-          One email bounced. Check the address with the participant, then resend. Their SMS link was delivered, so they
-          still have access.
+          One email bounced. Check the address with the participant, then resend. Their SMS link was
+          delivered, so they still have access.
         </Note>
       ) : null}
       <p className="text-xs text-muted-foreground">
-        Opened is reported for email only. SMS status comes from Telnyx delivery receipts. Recipients without a KnowMe
-        account can open the link without signing in until it expires.
+        Opened is reported for email only. SMS status comes from Telnyx delivery receipts.
+        Recipients without a KnowMe account can open the link without signing in until it expires.
       </p>
       <ConfirmDialog
         open={confirming}
@@ -189,7 +216,8 @@ export function DeliveryPanel({
         confirmLabel="Send now"
         onConfirm={sendAll}
       >
-        The transcript and summary will be emailed to every participant, and an SMS link sent to those with a phone number.
+        The transcript and summary will be emailed to every participant, and an SMS link sent to
+        those with a phone number.
       </ConfirmDialog>
     </>
   );

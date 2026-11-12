@@ -4,9 +4,10 @@
 // head (chips, actions, speaking badge), media, foot (name, host chip, muted).
 // Speaking is the D-6 badge in the head plus sr-only "speaking" text, never a ring
 // or colour alone; muted is an icon tile plus sr-only text.
-import { AgentGlyph, PhoneGlyph } from "@know-meet/ui/components/glyph";
+
 import { Badge } from "@know-meet/ui/components/badge";
 import { Button } from "@know-meet/ui/components/button";
+import { AgentGlyph, PhoneGlyph } from "@know-meet/ui/components/glyph";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { Orb } from "@know-meet/ui/components/orb";
 import { SpeakBadge } from "@know-meet/ui/components/speak-badge";
@@ -67,7 +68,13 @@ function TileFoot({ children }: { readonly children: React.ReactNode }) {
   return <div className="flex min-h-11 items-center gap-s2 px-s3 pt-s2 pb-s3">{children}</div>;
 }
 
-function TileName({ children, title }: { readonly children: React.ReactNode; readonly title?: string }) {
+function TileName({
+  children,
+  title,
+}: {
+  readonly children: React.ReactNode;
+  readonly title?: string;
+}) {
   return (
     <span title={title} className="block min-w-0 flex-1 truncate text-sm font-semibold">
       {children}
@@ -77,7 +84,10 @@ function TileName({ children, title }: { readonly children: React.ReactNode; rea
 
 function MutedMark({ label }: { readonly label: string }) {
   return (
-    <span title={label} className="inline-grid size-7 flex-none place-items-center rounded-8 bg-red-soft">
+    <span
+      title={label}
+      className="inline-grid size-7 flex-none place-items-center rounded-8 bg-red-soft"
+    >
       <KmIcon name="mic-off" className="size-4" />
       <span className="sr-only">{label}</span>
     </span>
@@ -265,7 +275,13 @@ function TileBody({ tile, actions }: { readonly tile: RoomTile; readonly actions
 }
 
 /** One stubbed media tile; the list item carries the participant's name and role. */
-export function RoomTileView({ tile, actions }: { readonly tile: RoomTile; readonly actions: TileActions }) {
+export function RoomTileView({
+  tile,
+  actions,
+}: {
+  readonly tile: RoomTile;
+  readonly actions: TileActions;
+}) {
   const state = tile.kind === "dot" || tile.kind === "agent" ? tile.state : undefined;
   return (
     <li

@@ -21,7 +21,9 @@ export function DeviceToggle({ id, label, onIcon, offIcon, checked, onChange }: 
       <KmIcon name={checked ? onIcon : offIcon} />
       <label htmlFor={id} className="grid cursor-pointer">
         <strong className="block">{label}</strong>
-        <small className="block text-xs text-muted-foreground">{checked ? "On when you join" : "Off when you join"}</small>
+        <small className="block text-xs text-muted-foreground">
+          {checked ? "On when you join" : "Off when you join"}
+        </small>
       </label>
       <Switch id={id} checked={checked} onCheckedChange={onChange} />
     </div>

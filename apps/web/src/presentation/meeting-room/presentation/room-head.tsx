@@ -47,7 +47,10 @@ export function RoomHead({ room, participantCount, onUnavailable, themeControl }
       <Link
         to="/"
         aria-label="Know Meet home"
-        className={cn("inline-flex flex-none items-center rounded-base text-foreground", focusFillClass)}
+        className={cn(
+          "inline-flex flex-none items-center rounded-base text-foreground",
+          focusFillClass,
+        )}
       >
         <BrandMark />
       </Link>

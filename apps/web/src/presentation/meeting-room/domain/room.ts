@@ -90,7 +90,9 @@ export function tileLabel(tile: RoomTile): string {
     case "dot":
       return `${tile.name}, ${tile.ownerLabel}, persistent dot`;
     case "agent":
-      return tile.system ? `${tile.name}, system agent` : `${tile.name}, LiveKit agent, ${tile.role}`;
+      return tile.system
+        ? `${tile.name}, system agent`
+        : `${tile.name}, LiveKit agent, ${tile.role}`;
     case "phone":
       return `${tile.label}, dialed in, audio only${tile.mutedByHost ? ", muted by host" : ""}`;
   }

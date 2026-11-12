@@ -62,7 +62,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-/** An h3 by default (km.css `.card h3`); pass `render={<h2 />}` to fit the outline. */
+/** An h3 by default (km.css `.card h3`); pass `render={(headingProps) => <h2 {...headingProps} />}` to fit the outline. */
 function CardTitle({ className, render, ...props }: useRender.ComponentProps<"h3">) {
   return useRender({
     defaultTagName: "h3",

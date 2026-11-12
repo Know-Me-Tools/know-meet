@@ -5,7 +5,8 @@
 /** Returns the error copy, or null when the value is valid. */
 export type Validator = (value: string) => string | null;
 
-export const requiredMessage = (label: string): string => `Enter ${label.toLowerCase()} — this field is required.`;
+export const requiredMessage = (label: string): string =>
+  `Enter ${label.toLowerCase()} — this field is required.`;
 
 export const validateDisplayName: Validator = (v) =>
   v.length < 2 ? "Use at least 2 characters so people recognise you." : null;
@@ -34,18 +35,27 @@ export const validateTelnyxKey: Validator = (v) =>
     : "Telnyx v2 API keys start with KEY followed by at least 16 letters or numbers. Paste the full key.";
 
 export const validateSipName: Validator = (v) =>
-  /^[a-z0-9-]{3,48}$/i.test(v) ? null : "Use 3–48 letters, numbers or hyphens, matching the name in Telnyx.";
+  /^[a-z0-9-]{3,48}$/i.test(v)
+    ? null
+    : "Use 3–48 letters, numbers or hyphens, matching the name in Telnyx.";
 
 export const validateAreaCode: Validator = (v) =>
-  /^[2-9]\d{2}$/.test(v) ? null : "Enter a 3-digit area code that doesn’t start with 0 or 1, like 415.";
+  /^[2-9]\d{2}$/.test(v)
+    ? null
+    : "Enter a 3-digit area code that doesn’t start with 0 or 1, like 415.";
 
 export const validateCalDavServer: Validator = (v) =>
-  /^https:\/\/[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/\S*)?$/i.test(v) ? null : "Use the full https:// address of your CalDAV server.";
+  /^https:\/\/[a-z0-9.-]+\.[a-z]{2,}(:\d+)?(\/\S*)?$/i.test(v)
+    ? null
+    : "Use the full https:// address of your CalDAV server.";
 
 export const validateS3Endpoint: Validator = (v) => {
-  if (!/^https:\/\//i.test(v)) return "The endpoint must start with https:// — LiveKit Egress only writes over TLS.";
+  if (!/^https:\/\//i.test(v))
+    return "The endpoint must start with https:// — LiveKit Egress only writes over TLS.";
   if (/[<>]/.test(v)) return "Replace the placeholder in angle brackets with your own value.";
-  return /^https:\/\/[a-z0-9.-]+(:\d+)?(\/\S*)?$/i.test(v) ? null : "That doesn’t look like a valid URL. Check for spaces or typos.";
+  return /^https:\/\/[a-z0-9.-]+(:\d+)?(\/\S*)?$/i.test(v)
+    ? null
+    : "That doesn’t look like a valid URL. Check for spaces or typos.";
 };
 
 export const validateBucket: Validator = (v) =>
@@ -74,7 +84,8 @@ export interface FieldRule {
 /** settings.html `field().check()`: required first, then the format rule. */
 export function checkField(rule: FieldRule, raw: string): string | null {
   const value = raw.trim();
-  if (rule.required === true && value === "") return rule.requiredMessage ?? requiredMessage(rule.label);
+  if (rule.required === true && value === "")
+    return rule.requiredMessage ?? requiredMessage(rule.label);
   if (value !== "" && rule.validate !== undefined) return rule.validate(value);
   return null;
 }

@@ -22,9 +22,20 @@ type WorkerField = Extract<DraftField, "url" | "apiKey" | "apiSecret" | "agentNa
 const revealClass = "grid gap-s4 rounded-tile bg-surface p-s4";
 
 /** km.css `.code` block: a named, focusable scroller (it scrolls sideways at narrow widths). */
-export function CodeBlock({ label, children, className }: { readonly label: string; readonly children: string; readonly className?: string }) {
+export function CodeBlock({
+  label,
+  children,
+  className,
+}: {
+  readonly label: string;
+  readonly children: string;
+  readonly className?: string;
+}) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: the <pre> is itself the scroll container; a <section> wrapper would split the scroller from the named region.
     <pre
+      role="region"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrolling code block must be keyboard-focusable so keyboard users can scroll it (WCAG 2.1.1).
       tabIndex={0}
       aria-label={label}
       className={cn(
@@ -38,9 +49,23 @@ export function CodeBlock({ label, children, className }: { readonly label: stri
   );
 }
 
-function CopyButton({ label, text, ariaLabel }: { readonly label: string; readonly text: string; readonly ariaLabel?: string }) {
+function CopyButton({
+  label,
+  text,
+  ariaLabel,
+}: {
+  readonly label: string;
+  readonly text: string;
+  readonly ariaLabel?: string;
+}) {
   return (
-    <Button type="button" variant="secondary" size="sm" aria-label={ariaLabel} onClick={() => void copyText(text)}>
+    <Button
+      type="button"
+      variant="secondary"
+      size="sm"
+      aria-label={ariaLabel}
+      onClick={() => void copyText(text)}
+    >
       <KmIcon name="copy" className="size-4" />
       <span>{label}</span>
     </Button>
@@ -65,7 +90,12 @@ export function WizardWorker() {
         onSubmit={(event) => {
           event.preventDefault();
           const values = own
-            ? { url: draft.url, apiKey: secrets.apiKey, apiSecret: secrets.apiSecret, agentName: draft.agentName }
+            ? {
+                url: draft.url,
+                apiKey: secrets.apiKey,
+                apiSecret: secrets.apiSecret,
+                agentName: draft.agentName,
+              }
             : { agentName: draft.agentName };
           if (form.submit(values)) void navigate({ to: "/agents", hash: "register:3" });
         }}
@@ -130,8 +160,9 @@ export function WizardWorker() {
             <Notice icon="shield">
               <strong>Stored server-side only</strong>
               <span>
-                Your key and secret are sent to KnowMe once and kept on the server. They’re never shown again — afterwards
-                you’ll only see a masked value, and you can replace them at any time.
+                Your key and secret are sent to KnowMe once and kept on the server. They’re never
+                shown again — afterwards you’ll only see a masked value, and you can replace them at
+                any time.
               </span>
             </Notice>
           </div>
@@ -142,14 +173,20 @@ export function WizardWorker() {
               label="Project URL"
               hint={
                 <>
-                  Run your worker with this project’s LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET. Find them in{" "}
+                  Run your worker with this project’s LIVEKIT_URL, LIVEKIT_API_KEY and
+                  LIVEKIT_API_SECRET. Find them in{" "}
                   <Link to="/settings" hash="livekit">
                     Settings › LiveKit
                   </Link>
                   .
                 </>
               }
-              control={{ value: managedUrl, onValueChange: () => undefined, readOnly: true, face: "mono" }}
+              control={{
+                value: managedUrl,
+                onValueChange: () => undefined,
+                readOnly: true,
+                face: "mono",
+              }}
               addon={<CopyButton label="Copy" text={managedUrl} ariaLabel="Copy project URL" />}
             />
           </div>
@@ -160,8 +197,9 @@ export function WizardWorker() {
           required
           hint={
             <>
-              KnowMe dispatches your worker by this exact name. It must match <InlineCode>agent_name</InlineCode> in your
-              worker’s WorkerOptions (or AgentServer). Lowercase letters, numbers and hyphens.
+              KnowMe dispatches your worker by this exact name. It must match{" "}
+              <InlineCode>agent_name</InlineCode> in your worker’s WorkerOptions (or AgentServer).
+              Lowercase letters, numbers and hyphens.
             </>
           }
           error={form.errorOf("agentName")}
@@ -183,7 +221,8 @@ export function WizardWorker() {
             <CopyButton label="Copy code" text={workerSnippet(draft, managedUrl)} />
           </div>
           <p className="text-sm text-muted-foreground">
-            Start it with <InlineCode>python worker.py start</InlineCode>. Keep it running so it can accept dispatches.
+            Start it with <InlineCode>python worker.py start</InlineCode>. Keep it running so it can
+            accept dispatches.
           </p>
           <CodeBlock label="Python worker example">{workerSnippet(draft, managedUrl)}</CodeBlock>
         </div>

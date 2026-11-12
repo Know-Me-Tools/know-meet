@@ -1,0 +1,484 @@
+00:00 +0: loading /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/meeting_room/meeting_room_screens_test.dart
+00:00 +0: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/meeting_room/meeting_room_screens_test.dart: meet.room (signed in) renders the title, roster and every named control
+00:00 +1: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +3: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +4: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account renders its heading signed in
+00:01 +5: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +6: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +7: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +8: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library renders "KnowMe-managed storage"
+00:01 +9: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.upcoming shows "Meetings"
+00:01 +10: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +11: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +12: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +13: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.account meets the a11y gate (dark, 375)
+00:01 +14: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library meets the a11y gate (dark, 375)
+00:01 +15: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:01 +16: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:01 +17: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:02 +18: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.schedule shows "Schedule a meeting"
+00:02 +19: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.library meets the a11y gate (light, 375)
+00:02 +20: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents screens render agents.register.4 renders at phone width
+00:02 +21: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit renders its heading signed in
+00:02 +22: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit renders its heading signed in
+00:02 +23: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard renders dashboard.meeting.partner-onboarding shows "Partner onboarding review"
+00:02 +24: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +25: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 renders "6,910 words · speaker-attributed"
+00:02 +26: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (dark, 375)
+00:02 +27: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (dark, 375)
+00:02 +28: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (dark, 375)
+00:02 +29: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +30: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +31: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +32: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014 meets the a11y gate (dark, 375)
+00:02 +33: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (light, 375)
+00:02 +34: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.livekit meets the a11y gate (light, 375)
+00:02 +35: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:02 +36: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:02 +37: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:02 +38: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +39: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +40: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +41: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +42: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +43: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +44: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +45: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +46: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +47: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +48: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +49: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +50: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +51: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +52: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +53: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +54: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:03 +55: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +56: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +57: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +58: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +59: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +60: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +61: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +62: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default renders "What happens in a KnowMe meeting"
+00:04 +63: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.upcoming meets the a11y gate (dark, 375)
+00:04 +64: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary renders "Action items"
+00:04 +65: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary renders "Action items"
+00:04 +66: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary renders "Action items"
+00:04 +67: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:04 +68: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:04 +69: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:04 +70: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:04 +71: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (dark, 375)
+00:04 +72: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (dark, 375)
+00:04 +73: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.schedule meets the a11y gate (dark, 375)
+00:04 +74: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars meets the a11y gate (light, 375)
+00:04 +75: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars meets the a11y gate (light, 375)
+00:05 +76: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendars meets the a11y gate (light, 375)
+00:05 +77: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (light, 375)
+00:05 +78: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: index.default meets the a11y gate (light, 375)
+00:05 +79: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.summary meets the a11y gate (light, 375)
+00:05 +80: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.register-error meets the a11y gate (dark, 375)
+00:05 +81: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google renders its heading signed in
+00:05 +82: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (dark, 375)
+00:05 +83: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (dark, 375)
+00:05 +84: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (dark, 375)
+00:05 +85: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:05 +86: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:05 +87: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery renders "Delivery settings"
+00:05 +88: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.google meets the a11y gate (dark, 375)
+00:05 +89: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (light, 375)
+00:05 +90: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.partner-onboarding meets the a11y gate (light, 375)
+00:05 +91: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: auth.sign-in meets the a11y gate (light, 375)
+00:05 +92: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +93: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +94: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +95: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +96: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +97: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (dark, 375)
+00:05 +98: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.outlook renders its heading signed in
+00:05 +99: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: auth.sign-up meets the a11y gate (dark, 375)
+00:05 +100: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/agents/agents_screens_test.dart: agents a11y gate agents.detail.facilitator meets the a11y gate (dark, 375)
+00:05 +101: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.cohort-kickoff meets the a11y gate (light, 375)
+00:05 +102: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:05 +103: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:05 +104: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:05 +105: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:05 +106: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.delivery meets the a11y gate (light, 375)
+00:05 +107: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.product-sync meets the a11y gate (dark, 375)
+00:05 +108: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.product-sync meets the a11y gate (dark, 375)
+00:05 +109: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.product-sync meets the a11y gate (dark, 375)
+00:05 +110: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.outlook meets the a11y gate (light, 375)
+00:06 +111: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.outlook meets the a11y gate (light, 375)
+00:06 +112: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.outlook meets the a11y gate (light, 375)
+00:06 +113: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage renders "Egress type"
+00:06 +114: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.product-sync meets the a11y gate (light, 375)
+00:06 +115: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: auth.sign-in-error renders "That email and password don’t match"
+00:06 +116: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: auth.sign-in-error renders "That email and password don’t match"
+00:06 +117: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav renders its heading signed in
+00:06 +118: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:06 +119: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:06 +120: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:06 +121: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:06 +122: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (dark, 375)
+00:06 +123: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (dark, 375)
+00:06 +124: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (dark, 375)
+00:06 +125: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.pricing-review meets the a11y gate (light, 375)
+00:06 +126: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.meeting.pricing-review meets the a11y gate (light, 375)
+00:06 +127: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:06 +128: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:06 +129: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.partner-onboarding-1014.storage meets the a11y gate (light, 375)
+00:06 +130: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:06 +131: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:06 +132: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:06 +133: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.calendar-connect.caldav meets the a11y gate (light, 375)
+00:06 +134: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:07 +135: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:07 +136: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:07 +137: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:07 +138: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (dark, 375)
+00:07 +139: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage renders its heading signed in
+00:07 +140: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.design-crit-1009 meets the a11y gate (dark, 375)
+00:07 +141: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: join.invite meets the a11y gate (dark, 375)
+00:07 +142: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:07 +143: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:07 +144: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:07 +145: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:07 +146: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.invites meets the a11y gate (light, 375)
+00:07 +147: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:07 +148: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:07 +149: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:07 +150: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:07 +151: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage meets the a11y gate (light, 375)
+00:07 +152: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.empty meets the a11y gate (light, 375)
+00:07 +153: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/dashboard/dashboard_screens_test.dart: dashboard.empty meets the a11y gate (light, 375)
+00:07 +154: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:07 +155: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:07 +156: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:07 +157: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:07 +158: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.detail.vendor-call-1002 meets the a11y gate (dark, 375)
+00:07 +159: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: join.expired meets the a11y gate (light, 375)
+00:07 +160: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:08 +161: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:08 +162: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:08 +163: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:08 +164: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (dark, 375)
+00:08 +165: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.processing.partner-onboarding-1014 renders "Step 1 of 5: Finalize composite"
+00:08 +166: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: the home hero headline renders as a heading
+00:08 +167: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: the home hero headline renders as a heading
+00:08 +168: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: the home hero headline renders as a heading
+00:08 +169: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-s3 meets the a11y gate (light, 375)
+00:08 +170: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.processing.partner-onboarding-1014 meets the a11y gate (light, 375)
+00:08 +171: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/public/public_screens_test.dart: the sign-in error state marks the password field
+00:08 +172: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs renders its heading signed in
+00:08 +173: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty renders "No recordings yet"
+00:08 +174: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty renders "No recordings yet"
+00:08 +175: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (dark, 375)
+00:08 +176: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (dark, 375)
+00:08 +177: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.empty meets the a11y gate (dark, 375)
+00:08 +178: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/architecture/import_boundaries_test.dart: features never import another feature
+00:08 +179: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:08 +180: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:09 +181: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-ipfs meets the a11y gate (light, 375)
+00:09 +182: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.gate-signed-out renders the sign-in gate
+00:09 +183: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed renders its heading signed in
+00:09 +184: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed renders its heading signed in
+00:09 +185: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: recordings.gate-signed-out meets the a11y gate (light, 375)
+00:09 +186: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.storage-test-failed meets the a11y gate (dark, 375)
+00:09 +187: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:09 +188: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a detail tab is selected from the route and navigates on tap
+00:09 +189: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.recording renders its heading signed in
+00:09 +190: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +191: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +192: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +193: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +194: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +195: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +196: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +197: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +198: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +199: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +200: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +201: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +202: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +203: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +204: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +205: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +206: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +207: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +208: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +209: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +210: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +211: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +212: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +213: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +214: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +215: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +216: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +217: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +218: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +219: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +220: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +221: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +222: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +223: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +224: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +225: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +226: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +227: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +228: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +229: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:09 +230: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:10 +231: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/recordings/recordings_screens_test.dart: a chapter chip seeks the stubbed player
+00:10 +232: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/features/settings/settings_screens_test.dart: settings.recording meets the a11y gate (light, 375)
+00:10 +233: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +234: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +235: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:10 +236: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +237: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +238: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: kit controls show keyboard focus by fill every kit control takes the focus fill (dark)
+00:11 +239: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +240: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +241: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: index.default is still under reduced motion
+00:11 +242: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmBottomBar at 375.0
+00:11 +243: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmBottomBar at 375.0
+00:12 +244: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +245: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +246: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +247: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +248: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +249: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +250: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +251: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +252: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +253: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +254: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +255: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +256: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +257: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +258: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:12 +259: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +260: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +261: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +262: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +263: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +264: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +265: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +266: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +267: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +268: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +269: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +270: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +271: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +272: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +273: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +274: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +275: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 375)
+00:13 +276: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.upcoming is still under reduced motion
+00:13 +277: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmInlineNav at 1440.0
+00:13 +278: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: placement by width class KmInlineNav at 1440.0
+00:13 +279: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:14 +280: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:14 +281: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:14 +282: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:14 +283: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (light, 375)
+00:14 +284: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state meet.room-guest draws no border, outline, ring or divider
+00:14 +285: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states rail: 80 wide, 80 x 64 items
+00:14 +286: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.meeting.partner-onboarding is still under reduced motion
+00:14 +287: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.meeting.partner-onboarding is still under reduced motion
+00:14 +288: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.meeting.partner-onboarding is still under reduced motion
+00:14 +289: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-in meets the a11y gate (dark, 375)
+00:14 +290: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:15 +291: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:15 +292: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:15 +293: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:15 +294: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states keyboard focus fills the whole item with focus (>= 3:1 vs bar)
+00:15 +295: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state dashboard.meeting.partner-onboarding draws no border, outline, ring or divider
+00:15 +296: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.account-menu-open meets the a11y gate (dark, 375)
+00:15 +297: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.meeting.pricing-review is still under reduced motion
+00:15 +298: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: anatomy and states the bar hides while the on-screen keyboard is open
+00:15 +299: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state dashboard.meeting.cohort-kickoff draws no border, outline, ring or divider
+00:15 +300: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.account-menu-open meets the a11y gate (light, 375)
+00:15 +301: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.account-menu-open meets the a11y gate (light, 375)
+00:15 +302: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.account-menu-open meets the a11y gate (light, 375)
+00:15 +303: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.account-menu-open meets the a11y gate (light, 375)
+00:15 +304: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.invites is still under reduced motion
+00:15 +305: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: dashboard.invites is still under reduced motion
+00:16 +306: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion reduced motion: crossing 600 is instant
+00:16 +307: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-bar meets the a11y gate (dark, 375)
+00:16 +308: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-bar meets the a11y gate (dark, 375)
+00:16 +309: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-bar meets the a11y gate (dark, 375)
+00:16 +310: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +311: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +312: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +313: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +314: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +315: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:16 +316: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:17 +317: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:17 +318: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:17 +319: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:17 +320: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion motion allowed: the bar leaves and the rail enters once
+00:17 +321: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:17 +322: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:17 +323: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-rail meets the a11y gate (light, 768)
+00:17 +324: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +325: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +326: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +327: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +328: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +329: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +329 -1: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +329 -1: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/coverage_test.dart: the inventory has the 70 in-scope states c12 was planned against [E]
+  Expected: an object with length of <70>
+    Actual: [
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              Instance of 'KmInventoryState',
+              ...
+            ]
+     Which: has length of <71>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/goldens/coverage_test.dart 26:5                main.<fn>
+  
+00:17 +329 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +329 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/coverage_test.dart: every in-scope state has a golden or a recorded reason [E]
+  Expected: empty
+    Actual: ['frame.nav-inline']
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/goldens/coverage_test.dart 41:5                main.<fn>
+  
+00:17 +330 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +331 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +332 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +333 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/adaptive_nav_test.dart: resize motion focus survives the morph (rail -> inline links)
+00:17 +334 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-links meets the a11y gate (light, 1024)
+00:17 +335 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-links meets the a11y gate (light, 1024)
+00:17 +336 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-links meets the a11y gate (light, 1024)
+00:17 +337 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-links meets the a11y gate (light, 1024)
+00:17 +338 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.nav-links meets the a11y gate (light, 1024)
+00:18 +339 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: agents.dot.iris is still under reduced motion
+00:18 +340 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: agents.dot.iris is still under reduced motion
+00:18 +341 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 768)
+00:18 +342 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 768)
+00:18 +343 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 768)
+00:18 +344 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 768)
+00:18 +345 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: a11y gate: frame states frame.appbar-signed-out meets the a11y gate (dark, 768)
+00:18 +346 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state agents.dots draws no border, outline, ring or divider
+00:18 +347 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014 is still under reduced motion
+00:18 +348 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014 is still under reduced motion
+00:18 +349 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014 is still under reduced motion
+00:18 +350 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.library draws no border, outline, ring or divider
+00:18 +351 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: focus traversal order guest: skip link, brand, start, theme, sign in
+00:18 +352 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.transcript is still under reduced motion
+00:18 +353 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014 draws no border, outline, ring or divider
+00:18 +354 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: focus traversal order signed in: the account button replaces sign in
+00:18 +355 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.summary is still under reduced motion
+00:19 +356 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.transcript draws no border, outline, ring or divider
+00:19 +357 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.transcript draws no border, outline, ring or divider
+00:19 +358 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.delivery is still under reduced motion
+00:19 +359 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.delivery is still under reduced motion
+00:19 +360 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.summary draws no border, outline, ring or divider
+00:19 +361 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: focus traversal order Escape closes the account menu and returns focus
+00:19 +362 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.partner-onboarding-1014.storage is still under reduced motion
+00:19 +363 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.delivery draws no border, outline, ring or divider
+00:19 +364 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.delivery draws no border, outline, ring or divider
+00:19 +365 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: reduced motion (MediaQuery.disableAnimations) the account menu appears without animation when disabled
+00:20 +366 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: recordings.detail.vendor-call-1002 is still under reduced motion
+00:20 +367 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.partner-onboarding-1014.storage draws no border, outline, ring or divider
+00:20 +368 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: reduced motion (MediaQuery.disableAnimations) the account menu pops in when animations are allowed
+00:20 +369 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: reduced motion (MediaQuery.disableAnimations) the account menu pops in when animations are allowed
+00:20 +370 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: reduced motion (MediaQuery.disableAnimations) the account menu pops in when animations are allowed
+00:20 +371 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: reduced motion (MediaQuery.disableAnimations) the account menu pops in when animations are allowed
+00:20 +372 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.detail.vendor-call-1002 draws no border, outline, ring or divider
+00:20 +373 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.account is still under reduced motion
+00:20 +374 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: the account button shows open by the selected fill, not a ring
+00:20 +375 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.processing.partner-onboarding-1014 draws no border, outline, ring or divider
+00:20 +376 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.livekit is still under reduced motion
+00:20 +377 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:21 +378 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:21 +379 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:21 +380 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:21 +381 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/frame_a11y_test.dart: theme toggle switches theme and icon (sun in dark, moon in light)
+00:21 +382 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.livekit draws no border, outline, ring or divider
+00:21 +383 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendars is still under reduced motion
+00:21 +384 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.telnyx-sms draws no border, outline, ring or divider
+00:21 +385 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendar-connect.google is still under reduced motion
+00:21 +386 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.telnyx-voice draws no border, outline, ring or divider
+00:21 +387 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendar-connect.outlook is still under reduced motion
+00:21 +388 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.calendars draws no border, outline, ring or divider
+00:22 +389 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.calendar-connect.caldav is still under reduced motion
+00:22 +390 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.calendar-connect.google draws no border, outline, ring or divider
+00:22 +391 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.storage is still under reduced motion
+00:22 +392 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.calendar-connect.outlook draws no border, outline, ring or divider
+00:22 +393 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.storage-s3 is still under reduced motion
+00:22 +394 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.calendar-connect.caldav draws no border, outline, ring or divider
+00:22 +395 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.storage-ipfs is still under reduced motion
+00:22 +396 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.storage draws no border, outline, ring or divider
+00:22 +397 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.storage-test-failed is still under reduced motion
+00:22 +398 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.storage-s3 draws no border, outline, ring or divider
+00:22 +399 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.recording is still under reduced motion
+00:22 +400 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.storage-ipfs draws no border, outline, ring or divider
+00:22 +401 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.delivery is still under reduced motion
+00:22 +402 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.storage-test-failed draws no border, outline, ring or divider
+00:23 +403 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.templates is still under reduced motion
+00:23 +404 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.recording draws no border, outline, ring or divider
+00:23 +405 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: settings.notifications is still under reduced motion
+00:23 +406 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.delivery draws no border, outline, ring or divider
+00:23 +407 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.delivery draws no border, outline, ring or divider
+00:23 +408 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: agents.gate-signed-out is still under reduced motion
+00:23 +409 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.templates draws no border, outline, ring or divider
+00:23 +410 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.templates draws no border, outline, ring or divider
+00:23 +411 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.templates draws no border, outline, ring or divider
+00:23 +412 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.appbar-signed-out is still under reduced motion
+00:23 +413 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.notifications draws no border, outline, ring or divider
+00:24 +414 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.appbar-signed-in is still under reduced motion
+00:24 +415 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state dashboard.gate-signed-out draws no border, outline, ring or divider
+00:24 +416 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.account-menu-open is still under reduced motion
+00:24 +417 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.account-menu-open is still under reduced motion
+00:24 +418 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state recordings.gate-signed-out draws no border, outline, ring or divider
+00:24 +419 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.nav-bar is still under reduced motion
+00:24 +420 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state settings.gate-signed-out draws no border, outline, ring or divider
+00:24 +421 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.nav-rail is still under reduced motion
+00:24 +422 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.appbar-signed-out draws no border, outline, ring or divider
+00:24 +423 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.appbar-signed-out draws no border, outline, ring or divider
+00:25 +424 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.appbar-signed-out draws no border, outline, ring or divider
+00:25 +425 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.theme-toggle is still under reduced motion
+00:25 +426 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/reduced_motion_test.dart: frame.theme-toggle is still under reduced motion
+00:25 +427 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.account-menu-open draws no border, outline, ring or divider
+00:25 +428 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.nav-bar draws no border, outline, ring or divider
+00:25 +429 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.nav-rail draws no border, outline, ring or divider
+00:25 +430 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.nav-inline draws no border, outline, ring or divider
+00:25 +431 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.skip-link-focused draws no border, outline, ring or divider
+00:26 +432 -2: /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/a11y/focus_fill_test.dart: Flat 2.0: no strokes in any in-scope state frame.theme-toggle draws no border, outline, ring or divider
+00:26 +433 -2: Some tests failed.
+
+Failing tests:
+  /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/coverage_test.dart: every in-scope state has a golden or a recorded reason
+  /Users/gqadonis/Projects/know-me/know-meet/apps/mobile/test/goldens/coverage_test.dart: the inventory has the 70 in-scope states c12 was planned against

@@ -2,7 +2,20 @@
 // km.js `fmt`: the prototype's display formats, ported verbatim (local time,
 // en-US month/day names, 12-hour clock).
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+] as const;
 const DAY_MS = 86_400_000;
 
 type DateInput = Date | string;
@@ -77,7 +90,10 @@ export function formatNumber(n: number): string {
 
 /** km.js `initials`: first and last word initials, uppercase; "?" when empty. */
 export function initialsOf(name: string): string {
-  const parts = name.trim().split(/\s+/).filter((part) => part !== "");
+  const parts = name
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part !== "");
   const first = parts[0];
   if (first === undefined) return "?";
   const last = parts.length > 1 ? (parts[parts.length - 1] ?? "") : "";

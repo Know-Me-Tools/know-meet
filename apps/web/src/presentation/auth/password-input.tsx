@@ -9,13 +9,23 @@ import { cn } from "@know-meet/ui/lib/utils";
 import type * as React from "react";
 import { useState } from "react";
 
-type PasswordInputProps = Omit<React.ComponentProps<typeof Input>, "type"> & { readonly id: string };
+type PasswordInputProps = Omit<React.ComponentProps<typeof Input>, "type"> & {
+  readonly id: string;
+};
 
 export function PasswordInput({ id, className, ...props }: PasswordInputProps) {
   const [shown, setShown] = useState(false);
   return (
     <div className="relative">
-      <Input id={id} name={id} type={shown ? "text" : "password"} required aria-required="true" className={cn("pr-14", className)} {...props} />
+      <Input
+        id={id}
+        name={id}
+        type={shown ? "text" : "password"}
+        required
+        aria-required="true"
+        className={cn("pr-14", className)}
+        {...props}
+      />
       <Button
         variant="ghost"
         size="icon"

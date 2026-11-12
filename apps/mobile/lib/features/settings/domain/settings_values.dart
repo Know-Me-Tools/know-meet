@@ -3,6 +3,7 @@
 /// Static sample values the settings screens show. No credential is ever
 /// held here: LiveKit, Telnyx and S3 secrets stay server-side, and the
 /// screens only show variable names and masked placeholders.
+library;
 
 /// One calendar inside a connected account, with its sync choice.
 final class SyncedCalendar {

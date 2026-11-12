@@ -79,6 +79,7 @@ function Field({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: a Field groups one control with its label and help; <fieldset> is FieldSet's job and adds UA min-width and legend semantics that would change the layout.
     <div
       role="group"
       data-slot="field"
@@ -172,9 +173,12 @@ function FieldError({
   className,
   children,
   errors,
+  announce = true,
   ...props
 }: React.ComponentProps<"div"> & {
   errors?: Array<{ message?: string } | undefined>;
+  /** `false` drops role="alert" when the form announces errors itself (for example on submit). */
+  announce?: boolean;
 }) {
   const content = useMemo(() => {
     if (children) {
@@ -189,8 +193,8 @@ function FieldError({
     }
     return (
       <ul className="m-0 ml-s4 flex list-disc flex-col gap-1 p-0">
-        {uniqueErrors.map((error, index) =>
-          error?.message ? <li key={index}>{error.message}</li> : null,
+        {uniqueErrors.map((error) =>
+          error?.message ? <li key={error.message}>{error.message}</li> : null,
         )}
       </ul>
     );
@@ -202,7 +206,7 @@ function FieldError({
 
   return (
     <div
-      role="alert"
+      role={announce ? "alert" : undefined}
       data-slot="field-error"
       className={cn(
         "flex items-start gap-1.5 text-sm font-medium text-foreground [&>svg]:mt-0.5 [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-red",

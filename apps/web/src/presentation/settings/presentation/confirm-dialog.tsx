@@ -21,7 +21,13 @@ export interface ConfirmRequest {
   readonly onConfirm: () => void;
 }
 
-export function ConfirmDialog({ request, onClose }: { readonly request: ConfirmRequest | null; readonly onClose: () => void }) {
+export function ConfirmDialog({
+  request,
+  onClose,
+}: {
+  readonly request: ConfirmRequest | null;
+  readonly onClose: () => void;
+}) {
   return (
     <AlertDialog open={request !== null} onOpenChange={(open) => (open ? undefined : onClose())}>
       {request === null ? null : (

@@ -8,7 +8,11 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <textarea
       data-slot="textarea"
-      className={cn(fieldControlClass, "flex min-h-size-textarea-min-h resize-y leading-body", className)}
+      className={cn(
+        fieldControlClass,
+        "flex min-h-size-textarea-min-h resize-y leading-body",
+        className,
+      )}
       {...props}
     />
   );

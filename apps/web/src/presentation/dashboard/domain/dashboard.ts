@@ -5,7 +5,13 @@ import type { Meeting, MeetingStatus } from "../../workspace/domain/workspace";
 
 export type DashboardViewKey = "upcoming" | "schedule" | "meeting" | "invites" | "empty";
 
-const VIEW_KEYS: readonly DashboardViewKey[] = ["upcoming", "schedule", "meeting", "invites", "empty"];
+const VIEW_KEYS: readonly DashboardViewKey[] = [
+  "upcoming",
+  "schedule",
+  "meeting",
+  "invites",
+  "empty",
+];
 
 /** km.js `route(handlers, 'upcoming')`: unknown views fall back to upcoming. */
 export function resolveDashboardView(view: string): DashboardViewKey {

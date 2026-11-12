@@ -7,6 +7,9 @@ import { type RefObject, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { focusFirstError } from "../../shared/focus-first-error";
 
+/** Field -> message. A mapped type, because TS 7 rejects `{}` for Readonly<Partial<Record<F, …>>> over a generic F. */
+type StepErrors<F extends string> = { readonly [P in F]?: string };
+
 export interface StepForm<F extends string> {
   readonly formRef: RefObject<HTMLFormElement | null>;
   readonly errorOf: (field: F) => string;
@@ -16,9 +19,11 @@ export interface StepForm<F extends string> {
   readonly submit: (values: Readonly<Partial<Record<F, string>>>) => boolean;
 }
 
-export function useStepForm<F extends string>(validate: (field: F, value: string) => string): StepForm<F> {
+export function useStepForm<F extends string>(
+  validate: (field: F, value: string) => string,
+): StepForm<F> {
   const formRef = useRef<HTMLFormElement>(null);
-  const [errors, setErrors] = useState<Readonly<Partial<Record<F, string>>>>({});
+  const [errors, setErrors] = useState<StepErrors<F>>({});
   return {
     formRef,
     errorOf: (field) => errors[field] ?? "",

@@ -9,7 +9,15 @@ import { useState } from "react";
 import { MESSAGING_PROFILES, MESSAGING_WEBHOOK } from "../application/settings-fixtures";
 import { type FieldRule, validateTelnyxKey } from "../application/validators";
 import { InputGroup, SelectField, SwitchRow, TextField } from "./settings-fields";
-import { BusyContent, FieldRow, FormFoot, Note, Panel, RequiredNote, Stack } from "./settings-parts";
+import {
+  BusyContent,
+  FieldRow,
+  FormFoot,
+  Note,
+  Panel,
+  RequiredNote,
+  Stack,
+} from "./settings-parts";
 import { SmsTester, type SmsTestResult } from "./sms-tester";
 import { useFormErrors } from "./use-form-errors";
 import { useBusyAction, useLater } from "./use-static-delay";
@@ -28,7 +36,13 @@ const KEY_RULES: Readonly<Record<"key", FieldRule>> = {
 
 type KeyState = "unchecked" | "loading" | "valid";
 
-function ProfilePickers({ keyState, profile, number, onProfile, onNumber }: {
+function ProfilePickers({
+  keyState,
+  profile,
+  number,
+  onProfile,
+  onNumber,
+}: {
   readonly keyState: KeyState;
   readonly profile: string;
   readonly number: string;
@@ -38,8 +52,21 @@ function ProfilePickers({ keyState, profile, number, onProfile, onNumber }: {
   if (keyState === "unchecked") {
     return (
       <Stack>
-        <SelectField label="Messaging profile" required disabled value="" options={[["", "Validate your API key first"]]} hint="Available after the key is validated." />
-        <SelectField label="Sender number" required disabled value="" options={[["", "Choose a profile first"]]} />
+        <SelectField
+          label="Messaging profile"
+          required
+          disabled
+          value=""
+          options={[["", "Validate your API key first"]]}
+          hint="Available after the key is validated."
+        />
+        <SelectField
+          label="Sender number"
+          required
+          disabled
+          value=""
+          options={[["", "Choose a profile first"]]}
+        />
       </Stack>
     );
   }
@@ -48,7 +75,10 @@ function ProfilePickers({ keyState, profile, number, onProfile, onNumber }: {
       <div className="grid gap-1.5">
         <span className="text-sm font-semibold">Messaging profile</span>
         <p role="status" className="flex items-center gap-s2 text-sm text-muted-foreground">
-          <KmIcon name="refresh" className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none" />
+          <KmIcon
+            name="refresh"
+            className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none"
+          />
           <span>Loading messaging profiles from Telnyx…</span>
         </p>
       </div>
@@ -61,7 +91,10 @@ function ProfilePickers({ keyState, profile, number, onProfile, onNumber }: {
         label="Messaging profile"
         required
         value={profile}
-        options={[["", "Select a profile"], ...Object.keys(MESSAGING_PROFILES).map((p) => [p, p] as const)]}
+        options={[
+          ["", "Select a profile"],
+          ...Object.keys(MESSAGING_PROFILES).map((p) => [p, p] as const),
+        ]}
         onValueChange={onProfile}
       />
       <SelectField
@@ -69,15 +102,25 @@ function ProfilePickers({ keyState, profile, number, onProfile, onNumber }: {
         required
         disabled={profile === ""}
         value={number}
-        hint={profile === "" ? "Choose a profile first." : `${numbers.length} ${numbers.length === 1 ? "number" : "numbers"} on this profile.`}
-        options={[["", profile === "" ? "Choose a profile first" : "Select a number"], ...numbers.map((n) => [n, n] as const)]}
+        hint={
+          profile === ""
+            ? "Choose a profile first."
+            : `${numbers.length} ${numbers.length === 1 ? "number" : "numbers"} on this profile.`
+        }
+        options={[
+          ["", profile === "" ? "Choose a profile first" : "Select a number"],
+          ...numbers.map((n) => [n, n] as const),
+        ]}
         onValueChange={onNumber}
       />
     </FieldRow>
   );
 }
 
-export function SmsConnectForm({ onConnected, onCancel }: {
+export function SmsConnectForm({
+  onConnected,
+  onCancel,
+}: {
   readonly onConnected: (connection: SmsConnection) => void;
   readonly onCancel: () => void;
 }) {
@@ -94,7 +137,10 @@ export function SmsConnectForm({ onConnected, onCancel }: {
   const later = useLater();
 
   return (
-    <Panel title="Connect Telnyx Messaging" description="Your key is stored encrypted on KnowMe servers and only used to send messages.">
+    <Panel
+      title="Connect Telnyx Messaging"
+      description="Your key is stored encrypted on KnowMe servers and only used to send messages."
+    >
       <form
         ref={formRef}
         noValidate
@@ -168,7 +214,15 @@ export function SmsConnectForm({ onConnected, onCancel }: {
             checked={receipts}
             onCheckedChange={setReceipts}
           />
-          <TextField id="sms-webhook" label="Webhook URL" readOnly mono copyable value={MESSAGING_WEBHOOK} hint="Set this as the webhook URL on the messaging profile in Telnyx." />
+          <TextField
+            id="sms-webhook"
+            label="Webhook URL"
+            readOnly
+            mono
+            copyable
+            value={MESSAGING_WEBHOOK}
+            hint="Set this as the webhook URL on the messaging profile in Telnyx."
+          />
         </Stack>
         {profile !== "" && number !== "" ? (
           <Stack gap="sm">

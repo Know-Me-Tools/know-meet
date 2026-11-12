@@ -6,7 +6,13 @@
 import { buttonVariants } from "@know-meet/ui/components/button";
 import { cardVariants } from "@know-meet/ui/components/card";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
-import { PageEyebrow, PageHead, PageHeadText, PageSub, PageTitle } from "@know-meet/ui/components/page-head";
+import {
+  PageEyebrow,
+  PageHead,
+  PageHeadText,
+  PageSub,
+  PageTitle,
+} from "@know-meet/ui/components/page-head";
 import { Switch } from "@know-meet/ui/components/switch";
 import { toast } from "@know-meet/ui/components/toast";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
@@ -26,19 +32,42 @@ const TILE: Readonly<Record<StepState, string>> = {
   ok: "bg-green-soft text-green-text",
 };
 
-function StepTile({ state, number, pinned }: { readonly state: StepState; readonly number: number; readonly pinned: boolean }) {
+function StepTile({
+  state,
+  number,
+  pinned,
+}: {
+  readonly state: StepState;
+  readonly number: number;
+  readonly pinned: boolean;
+}) {
   return (
-    <span aria-hidden="true" className={cn("grid size-9 place-items-center rounded-round", TILE[state])}>
+    <span
+      aria-hidden="true"
+      className={cn("grid size-9 place-items-center rounded-round", TILE[state])}
+    >
       {state === "wait" ? <span className="font-mono text-13">{number}</span> : null}
       {state === "run" ? (
-        <KmIcon name="refresh" className={cn(!pinned && "animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none")} />
+        <KmIcon
+          name="refresh"
+          className={cn(
+            !pinned &&
+              "animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none",
+          )}
+        />
       ) : null}
       {state === "ok" ? <KmIcon name="check" /> : null}
     </span>
   );
 }
 
-export function ProcessingView({ recording, email }: { readonly recording: Recording; readonly email: string }) {
+export function ProcessingView({
+  recording,
+  email,
+}: {
+  readonly recording: Recording;
+  readonly email: string;
+}) {
   const steps = useMemo(() => processingSteps(recording), [recording]);
   const progress = usePipelineProgress(steps);
   const [notify, setNotify] = useState(true);
@@ -52,7 +81,8 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
   // A pinned capture frame is static: no toast.
   const [pinned] = useState(() => readProcessingPin(steps.length) !== null);
   useEffect(() => {
-    if (progress.complete && !pinned) toast.add({ title: `Recording ready: ${recording.title}`, type: "success" });
+    if (progress.complete && !pinned)
+      toast.add({ title: `Recording ready: ${recording.title}`, type: "success" });
   }, [progress.complete, pinned, recording.title]);
 
   return (
@@ -69,8 +99,8 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
           <PageEyebrow>Still finalizing</PageEyebrow>
           <PageTitle>{recording.title}</PageTitle>
           <PageSub>
-            The meeting has ended. Your recording is being finalized, stored and pinned. You can leave this page — we’ll
-            notify you when it’s ready.
+            The meeting has ended. Your recording is being finalized, stored and pinned. You can
+            leave this page — we’ll notify you when it’s ready.
           </PageSub>
         </PageHeadText>
       </PageHead>
@@ -89,7 +119,10 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
               aria-valuetext={`${progress.percent}% · ${overallLabel}`}
               className={meterTrackClass}
             >
-              <span className="block h-full rounded-[inherit] bg-ember-btn" style={{ width: `${progress.percent}%` }} />
+              <span
+                className="block h-full rounded-[inherit] bg-ember-btn"
+                style={{ width: `${progress.percent}%` }}
+              />
             </div>
             <span className="text-sm text-muted-foreground">{overallLabel}</span>
           </div>
@@ -97,7 +130,8 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
             {steps.map((step, index) => {
               const state = progress.steps[index]?.state ?? "wait";
               const fraction = progress.steps[index]?.fraction ?? 0;
-              const stateLabel = state === "ok" ? step.doneLabel : state === "run" ? "In progress" : "Waiting";
+              const stateLabel =
+                state === "ok" ? step.doneLabel : state === "run" ? "In progress" : "Waiting";
               return (
                 <li
                   key={step.title}
@@ -106,7 +140,9 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
                   <StepTile state={state} number={index + 1} pinned={pinned} />
                   <span className="grid min-w-0 gap-0.5">
                     <b className="block">{step.title}</b>
-                    <small className="block text-sm text-muted-foreground [overflow-wrap:anywhere]">{step.detail}</small>
+                    <small className="block text-sm text-muted-foreground [overflow-wrap:anywhere]">
+                      {step.detail}
+                    </small>
                   </span>
                   <span
                     className={cn(
@@ -116,9 +152,15 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
                   >
                     {stateLabel}
                   </span>
-                  <span aria-hidden="true" className="col-[2/-1] h-1 overflow-hidden rounded-pill bg-muted">
+                  <span
+                    aria-hidden="true"
+                    className="col-[2/-1] h-1 overflow-hidden rounded-pill bg-muted"
+                  >
                     <span
-                      className={cn("block h-full w-full origin-left", state === "ok" ? "bg-green" : "bg-amber")}
+                      className={cn(
+                        "block h-full w-full origin-left",
+                        state === "ok" ? "bg-green" : "bg-amber",
+                      )}
                       style={{ transform: `scaleX(${fraction})` }}
                     />
                   </span>
@@ -132,17 +174,26 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
                 <b>Recording ready</b>
                 <span>
                   Stored, pinned to IPFS, and the summary has{" "}
-                  {recording.summarySent ? "been sent to participants." : "been held for your review."}
+                  {recording.summarySent
+                    ? "been sent to participants."
+                    : "been held for your review."}
                 </span>
                 <div className="flex flex-wrap items-center gap-s2">
-                  <Link to="/recordings" hash={detailHash(recording.id)} className={cn(buttonVariants({ size: "sm" }), focusFillClass)}>
+                  <Link
+                    to="/recordings"
+                    hash={detailHash(recording.id)}
+                    className={cn(buttonVariants({ size: "sm" }), focusFillClass)}
+                  >
                     <KmIcon name="play" className="size-4" />
                     <span>Open recording</span>
                   </Link>
                   <Link
                     to="/recordings"
                     hash={detailHash(recording.id, "storage")}
-                    className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+                    className={cn(
+                      buttonVariants({ variant: "secondary", size: "sm" }),
+                      focusFillClass,
+                    )}
                   >
                     <span>View storage details</span>
                   </Link>
@@ -166,7 +217,10 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
               checked={notify}
               onCheckedChange={(checked) => {
                 setNotify(checked);
-                toast.add({ title: checked ? "We’ll email you when it’s ready" : "Notification turned off", type: "success" });
+                toast.add({
+                  title: checked ? "We’ll email you when it’s ready" : "Notification turned off",
+                  type: "success",
+                });
               }}
             />
           </label>
@@ -180,7 +234,11 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
             <dt className="pt-0.5 text-sm text-muted-foreground max-bp768:mt-s3">Destination</dt>
             <dd className="m-0 font-mono text-13 [overflow-wrap:anywhere]">{recording.bucket}</dd>
           </dl>
-          <Link to="/recordings" hash="library" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}>
+          <Link
+            to="/recordings"
+            hash="library"
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}
+          >
             <KmIcon name="film" className="size-4" />
             <span>Back to recordings</span>
           </Link>

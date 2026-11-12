@@ -2,10 +2,10 @@
   "schemaVersion": "5",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 226,
-  "derivedRevision": 226,
+  "sourceRevision": 230,
+  "derivedRevision": 230,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 226
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
   },
   "conflictCount": 0,
   "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
@@ -21,8 +21,8 @@
   "phase": "hybrid-shell-foundation",
   "parentPhase": null,
   "childPointer": null,
-  "change": "c16-agentic-core-gates",
-  "currentTask": "16.1",
+  "change": "c13-fidelity-verification-and-evidence",
+  "currentTask": "13.2",
   "status": "ready",
   "lifecycle": "ready",
   "stageId": "execute",
@@ -31,9 +31,9 @@
   "implementationCompleted": 13,
   "implementationTotal": 16,
   "planRevision": 1,
-  "revision": 226,
+  "revision": 230,
   "exactNextCommand": "/kbd-assess hybrid-shell-foundation",
-  "nextChange": "c16-agentic-core-gates",
-  "nextTask": "16.1",
-  "updatedAt": "2026-11-12T14:24:07.062681Z"
+  "nextChange": "c13-fidelity-verification-and-evidence",
+  "nextTask": "13.2",
+  "updatedAt": "2026-11-12T14:40:26.886778Z"
 }

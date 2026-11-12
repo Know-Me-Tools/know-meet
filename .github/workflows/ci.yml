@@ -17,8 +17,12 @@ permissions:
   contents: read
 
 env:
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  # Remote cache credentials exist only on trusted pushes to main. Pull-request code (same-repo or
+  # fork) never sees TURBO_TOKEN, so it cannot write to or poison the shared remote cache; PRs use
+  # the local cache only. Entries are signed (turbo.json remoteCache.signature) and verified on read.
+  TURBO_TOKEN: ${{ github.event_name == 'push' && secrets.TURBO_TOKEN || '' }}
+  TURBO_TEAM: ${{ github.event_name == 'push' && vars.TURBO_TEAM || '' }}
+  TURBO_REMOTE_CACHE_SIGNATURE_KEY: ${{ github.event_name == 'push' && secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY || '' }}
   AFFECTED: ${{ github.event_name == 'pull_request' && '--affected' || '' }}
 
 jobs:

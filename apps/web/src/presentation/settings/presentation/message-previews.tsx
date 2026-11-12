@@ -8,7 +8,13 @@ import { buttonVariants } from "@know-meet/ui/components/button";
 import { cn } from "@know-meet/ui/lib/utils";
 import type * as React from "react";
 
-export function EmailPreview({ label, from, to, subject, children }: {
+export function EmailPreview({
+  label,
+  from,
+  to,
+  subject,
+  children,
+}: {
   readonly label: string;
   readonly from: string;
   readonly to: string;
@@ -16,7 +22,10 @@ export function EmailPreview({ label, from, to, subject, children }: {
   readonly children: React.ReactNode;
 }) {
   return (
-    <article aria-label={label} className="grid overflow-hidden rounded-tile bg-card shadow-(--shadow-card)">
+    <article
+      aria-label={label}
+      className="grid overflow-hidden rounded-tile bg-card shadow-(--shadow-card)"
+    >
       <dl className="m-0 grid gap-1 bg-bg-2 px-s4 py-s3 text-sm">
         {(
           [
@@ -44,9 +53,18 @@ export function EmailPreview({ label, from, to, subject, children }: {
 }
 
 /** A decorative button inside an email preview (not interactive). */
-export function FakeButton({ variant, children }: { readonly variant: "default" | "secondary"; readonly children: string }) {
+export function FakeButton({
+  variant,
+  children,
+}: {
+  readonly variant: "default" | "secondary";
+  readonly children: string;
+}) {
   return (
-    <span aria-hidden="true" className={cn(buttonVariants({ variant, size: "sm" }), "justify-self-start")}>
+    <span
+      aria-hidden="true"
+      className={cn(buttonVariants({ variant, size: "sm" }), "justify-self-start")}
+    >
       {children}
     </span>
   );
@@ -54,7 +72,11 @@ export function FakeButton({ variant, children }: { readonly variant: "default" 
 
 export function SmsPreview({ from, text }: { readonly from: string; readonly text: string }) {
   return (
-    <div role="img" aria-label={`SMS preview: ${text}`} className="grid w-[min(100%,340px)] gap-s2 rounded-28 bg-bg-2 p-s4">
+    <div
+      role="img"
+      aria-label={`SMS preview: ${text}`}
+      className="grid w-[min(100%,340px)] gap-s2 rounded-28 bg-bg-2 p-s4"
+    >
       <span className="text-center text-xs text-muted-foreground">Text message · from {from}</span>
       <div className="max-w-[88%] justify-self-start rounded-[18px_18px_18px_6px] bg-muted px-3.5 py-2.5 text-sm leading-[1.45] whitespace-pre-wrap text-foreground [overflow-wrap:anywhere]">
         {text}

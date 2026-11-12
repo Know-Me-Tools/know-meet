@@ -82,7 +82,7 @@ async function installHelpers(page: Page): Promise<void> {
       let acc: [number, number, number] = [255, 255, 255];
       for (const layer of layers.reverse()) {
         const a = (layer[3] ?? 0) / 255;
-        acc = [0, 1, 2].map((i) => (layer[i] ?? 0) * a + acc[i]! * (1 - a)) as [
+        acc = [0, 1, 2].map((i) => (layer[i] ?? 0) * a + (acc[i] ?? 0) * (1 - a)) as [
           number,
           number,
           number,
@@ -96,10 +96,16 @@ async function installHelpers(page: Page): Promise<void> {
       for (const side of ["Top", "Right", "Bottom", "Left"] as const) {
         const width = Number.parseFloat(style[`border${side}Width`]);
         if (width > 0 && style[`border${side}Style`] !== "none")
-          out.push(focus ? `border-${side.toLowerCase()}` : `border-${side.toLowerCase()} ${width}px`);
+          out.push(
+            focus ? `border-${side.toLowerCase()}` : `border-${side.toLowerCase()} ${width}px`,
+          );
       }
       if (Number.parseFloat(style.outlineWidth) > 0 && style.outlineStyle !== "none")
-        out.push(focus ? `outline ${style.outlineWidth} ${style.outlineStyle}` : `outline ${style.outlineWidth}`);
+        out.push(
+          focus
+            ? `outline ${style.outlineWidth} ${style.outlineStyle}`
+            : `outline ${style.outlineWidth}`,
+        );
       // A ring is a zero-blur box-shadow with spread (Tailwind ring-*); soft elevation is allowed.
       for (const shadow of style.boxShadow.split(/,(?![^(]*\))/)) {
         const numbers = shadow.match(/-?\d+(\.\d+)?px/g) ?? [];
@@ -275,7 +281,11 @@ export async function auditFlatControls(page: Page): Promise<FlatReport> {
 
   for (let index = 0; index < MAX_TAB_STOPS; index += 1) {
     await page.keyboard.press("Tab");
-    const { focus, blurred, unsettled: running } = await readAfterTab(
+    const {
+      focus,
+      blurred,
+      unsettled: running,
+    } = await readAfterTab(
       page,
       pending.map((p) => p.id),
     );
@@ -299,7 +309,8 @@ export async function auditFlatControls(page: Page): Promise<FlatReport> {
     if (before === undefined) return;
     const blurFill = afterBlur.get(index)?.get(visit.id);
     const contrastToRestPass = contrastRatio(visit.fill, before.fill);
-    const contrastAfterBlur = blurFill === undefined ? contrastToRestPass : contrastRatio(visit.fill, blurFill);
+    const contrastAfterBlur =
+      blurFill === undefined ? contrastToRestPass : contrastRatio(visit.fill, blurFill);
     const stop: FocusStop = {
       id: visit.id,
       label: before.label,
@@ -312,7 +323,9 @@ export async function auditFlatControls(page: Page): Promise<FlatReport> {
     stops.push(stop);
     if (stop.strokes.length > 0) problems.push(`focus ${stop.label}: ${stop.strokes.join(", ")}`);
     if (stop.contrastToRest < MIN_FILL_CONTRAST)
-      problems.push(`focus ${stop.label}: fill changes by only ${stop.contrastToRest.toFixed(2)}:1`);
+      problems.push(
+        `focus ${stop.label}: fill changes by only ${stop.contrastToRest.toFixed(2)}:1`,
+      );
     if (stop.contrastToSurface < MIN_FILL_CONTRAST)
       problems.push(`focus ${stop.label}: ${stop.contrastToSurface.toFixed(2)}:1 against surface`);
   });

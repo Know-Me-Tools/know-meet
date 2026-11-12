@@ -12,10 +12,15 @@ import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { formatBytes, formatDate, formatMinutes } from "../../workspace/application/format";
 import type { Recording, Workspace } from "../../workspace/domain/workspace";
-import type { RecordingMeta, RecordingTab } from "../domain/recording-details";
 import { DELIVERY_RECEIPTS, SUMMARIES, TRANSCRIPTS } from "../application/recording-fixtures";
-import { chaptersOf, flattenTranscript, objectKey, segmentIndexAt } from "../application/recordings-model";
+import {
+  chaptersOf,
+  flattenTranscript,
+  objectKey,
+  segmentIndexAt,
+} from "../application/recordings-model";
 import { detailHash, isRecordingTab, RECORDING_TABS } from "../application/recordings-route";
+import type { RecordingMeta, RecordingTab } from "../domain/recording-details";
 import { BusyLabel } from "./busy-label";
 import { DeliveryPanel } from "./delivery-panel";
 import { RecordingChips, RecordingsCrumbs } from "./recording-parts";
@@ -70,13 +75,19 @@ export function DetailView({ workspace, recording, meta, tab, onDeleted }: Detai
 
   const download = () =>
     run("download", 900, () =>
-      toast.add({ title: `Download started: ${fileName} (${formatBytes(recording.sizeBytes)})`, type: "success" }),
+      toast.add({
+        title: `Download started: ${fileName} (${formatBytes(recording.sizeBytes)})`,
+        type: "success",
+      }),
     );
 
   return (
     <>
       <div className="mb-s5 grid gap-s3">
-        <RecordingsCrumbs items={[{ label: "Recordings", hash: "library" }, { label: recording.title }]} className="mb-0" />
+        <RecordingsCrumbs
+          items={[{ label: "Recordings", hash: "library" }, { label: recording.title }]}
+          className="mb-0"
+        />
         <div className="flex flex-wrap items-start justify-between gap-s4">
           <div className="grid min-w-0 gap-s2">
             <h1 tabIndex={-1} className="text-2xl font-bold [overflow-wrap:anywhere] outline-none">
@@ -85,7 +96,12 @@ export function DetailView({ workspace, recording, meta, tab, onDeleted }: Detai
             <MetaLine recording={recording} host={meta.host} />
           </div>
           <div className="flex flex-wrap items-center gap-s2">
-            <Button variant="secondary" disabled={preparing} aria-busy={preparing} onClick={download}>
+            <Button
+              variant="secondary"
+              disabled={preparing}
+              aria-busy={preparing}
+              onClick={download}
+            >
               {preparing ? (
                 <BusyLabel label="Preparing…" />
               ) : (
@@ -151,16 +167,30 @@ export function DetailView({ workspace, recording, meta, tab, onDeleted }: Detai
               />
             ) : null}
             {tab === "summary" ? (
-              <SummaryPanel recording={recording} summary={SUMMARIES[recording.id] ?? { paragraphs: [], decisions: [], actions: [] }} />
+              <SummaryPanel
+                recording={recording}
+                summary={SUMMARIES[recording.id] ?? { paragraphs: [], decisions: [], actions: [] }}
+              />
             ) : null}
             {tab === "delivery" ? (
-              <DeliveryPanel workspace={workspace} recording={recording} initialReceipts={DELIVERY_RECEIPTS[recording.id] ?? {}} />
+              <DeliveryPanel
+                workspace={workspace}
+                recording={recording}
+                initialReceipts={DELIVERY_RECEIPTS[recording.id] ?? {}}
+              />
             ) : null}
-            {tab === "storage" ? <StoragePanel recording={recording} meta={meta} onDeleted={onDeleted} /> : null}
+            {tab === "storage" ? (
+              <StoragePanel recording={recording} meta={meta} onDeleted={onDeleted} />
+            ) : null}
           </TabsContent>
         </Tabs>
       </div>
-      <ShareDialog recording={recording} host={meta.host} open={sharing} onOpenChange={setSharing} />
+      <ShareDialog
+        recording={recording}
+        host={meta.host}
+        open={sharing}
+        onOpenChange={setSharing}
+      />
     </>
   );
 }

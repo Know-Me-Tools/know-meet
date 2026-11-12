@@ -4,11 +4,23 @@
 // The table scrolls in its own named region when it is wider than the page.
 import { buttonVariants } from "@know-meet/ui/components/button";
 import { Checkbox } from "@know-meet/ui/components/checkbox";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@know-meet/ui/components/empty";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@know-meet/ui/components/empty";
 import { Input } from "@know-meet/ui/components/input";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { NativeSelect, NativeSelectOption } from "@know-meet/ui/components/native-select";
-import { PageActions, PageHead, PageHeadText, PageSub, PageTitle } from "@know-meet/ui/components/page-head";
+import {
+  PageActions,
+  PageHead,
+  PageHeadText,
+  PageSub,
+  PageTitle,
+} from "@know-meet/ui/components/page-head";
 import { TableRegion } from "@know-meet/ui/components/table-region";
 import { ToggleGroup, ToggleGroupItem } from "@know-meet/ui/components/toggle-group";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
@@ -17,7 +29,12 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { formatDate, formatTime } from "../../workspace/application/format";
-import { CHANNEL_LABEL, type Delivery, type DeliveryChannel, isOpenFailure } from "../domain/dashboard";
+import {
+  CHANNEL_LABEL,
+  type Delivery,
+  type DeliveryChannel,
+  isOpenFailure,
+} from "../domain/dashboard";
 import { useDashboard } from "./dashboard-context";
 import { ChannelChip, DashTabs, ResolvedByEmailChip, StatusChip } from "./dashboard-parts";
 import { BulkResendButton, ResendButton, SendEmailInsteadButton } from "./delivery-actions";
@@ -68,11 +85,14 @@ export function InvitesView() {
     .filter((d) => {
       if (filters.channel !== "all" && d.channel !== filters.channel) return false;
       if (filters.status === "failed" && !isOpenFailure(d)) return false;
-      if (filters.status !== "all" && filters.status !== "failed" && d.status !== filters.status) return false;
+      if (filters.status !== "all" && filters.status !== "failed" && d.status !== filters.status)
+        return false;
       const title = getMeeting(d.meetingId)?.title ?? "";
       return q === "" || `${d.name} ${d.to ?? ""} ${title}`.toLowerCase().includes(q);
     })
-    .sort((a, b) => Number(!isOpenFailure(a)) - Number(!isOpenFailure(b)) || startOf(a) - startOf(b));
+    .sort(
+      (a, b) => Number(!isOpenFailure(a)) - Number(!isOpenFailure(b)) || startOf(a) - startOf(b),
+    );
   const shownSelected = rows.filter((d) => selected.has(d.id));
   const failedAll = deliveries.filter(isOpenFailure);
   const allSelected = rows.length > 0 && shownSelected.length === rows.length;
@@ -90,7 +110,10 @@ export function InvitesView() {
       <PageHead>
         <PageHeadText>
           <PageTitle>Invites</PageTitle>
-          <PageSub>Every invite you’ve sent for upcoming meetings, with delivery status by email, SMS and calendar.</PageSub>
+          <PageSub>
+            Every invite you’ve sent for upcoming meetings, with delivery status by email, SMS and
+            calendar.
+          </PageSub>
         </PageHeadText>
         <PageActions>
           <Link to="/dashboard" hash="schedule" className={cn(buttonVariants(), focusFillClass)}>
@@ -135,7 +158,10 @@ export function InvitesView() {
             ))}
           </NativeSelect>
           <div className="relative max-w-[360px] flex-[1_1_220px]">
-            <KmIcon name="search" className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2" />
+            <KmIcon
+              name="search"
+              className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2"
+            />
             <label htmlFor="inv-search" className="sr-only">
               Search invites
             </label>
@@ -156,7 +182,12 @@ export function InvitesView() {
           {rows.length} {rows.length === 1 ? "invite" : "invites"}
         </span>
         <div className="flex flex-wrap items-center gap-s2">
-          <BulkResendButton deliveries={failedAll} icon="alert" label={`Resend failed (${failedAll.length})`} onDone={() => setSelected(new Set())} />
+          <BulkResendButton
+            deliveries={failedAll}
+            icon="alert"
+            label={`Resend failed (${failedAll.length})`}
+            onDone={() => setSelected(new Set())}
+          />
           <BulkResendButton
             primary
             deliveries={shownSelected}
@@ -175,7 +206,11 @@ export function InvitesView() {
             <EmptyTitle>No invites match these filters</EmptyTitle>
             <EmptyDescription>Try another channel or status, or clear the search.</EmptyDescription>
           </EmptyHeader>
-          <button type="button" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)} onClick={() => setFilters(NO_FILTERS)}>
+          <button
+            type="button"
+            className={cn(buttonVariants({ variant: "secondary", size: "sm" }), focusFillClass)}
+            onClick={() => setFilters(NO_FILTERS)}
+          >
             Clear filters
           </button>
         </Empty>
@@ -188,7 +223,9 @@ export function InvitesView() {
                   aria-label={`Select all ${rows.length} shown invites`}
                   checked={allSelected}
                   indeterminate={!allSelected && shownSelected.length > 0}
-                  onCheckedChange={(on) => setSelected(on ? new Set(rows.map((d) => d.id)) : new Set())}
+                  onCheckedChange={(on) =>
+                    setSelected(on ? new Set(rows.map((d) => d.id)) : new Set())
+                  }
                 />
               </th>
               <th scope="col">Invitee</th>
@@ -203,7 +240,12 @@ export function InvitesView() {
           </thead>
           <tbody>
             {rows.map((d) => (
-              <InviteRow key={d.id} delivery={d} checked={selected.has(d.id)} onToggle={(on) => toggle(d.id, on)} />
+              <InviteRow
+                key={d.id}
+                delivery={d}
+                checked={selected.has(d.id)}
+                onToggle={(on) => toggle(d.id, on)}
+              />
             ))}
           </tbody>
         </TableRegion>
@@ -212,7 +254,15 @@ export function InvitesView() {
   );
 }
 
-function InviteRow({ delivery: d, checked, onToggle }: { readonly delivery: Delivery; readonly checked: boolean; readonly onToggle: (on: boolean) => void }) {
+function InviteRow({
+  delivery: d,
+  checked,
+  onToggle,
+}: {
+  readonly delivery: Delivery;
+  readonly checked: boolean;
+  readonly onToggle: (on: boolean) => void;
+}) {
   const { getMeeting } = useDashboard();
   const meeting = getMeeting(d.meetingId);
   if (meeting === null) return null;
@@ -221,7 +271,11 @@ function InviteRow({ delivery: d, checked, onToggle }: { readonly delivery: Deli
   return (
     <tr>
       <td className="w-[1%]">
-        <Checkbox aria-label={`Select invite to ${d.name} by ${channel} for ${meeting.title}`} checked={checked} onCheckedChange={onToggle} />
+        <Checkbox
+          aria-label={`Select invite to ${d.name} by ${channel} for ${meeting.title}`}
+          checked={checked}
+          onCheckedChange={onToggle}
+        />
       </td>
       <td>
         <div className="grid min-w-40 gap-0.5 *:block">
@@ -230,25 +284,46 @@ function InviteRow({ delivery: d, checked, onToggle }: { readonly delivery: Deli
         </div>
       </td>
       <td>
-        <Link to="/dashboard" hash={`meeting:${meeting.id}`} title={meeting.title} className="block max-w-[28ch] truncate">
+        <Link
+          to="/dashboard"
+          hash={`meeting:${meeting.id}`}
+          title={meeting.title}
+          className="block max-w-[28ch] truncate"
+        >
           {meeting.title}
         </Link>
-        <span className="text-xs whitespace-nowrap text-muted-foreground">{formatDate(meeting.start)}</span>
+        <span className="text-xs whitespace-nowrap text-muted-foreground">
+          {formatDate(meeting.start)}
+        </span>
       </td>
       <td>
         <ChannelChip channel={d.channel} />
       </td>
       <td>
-        {d.resolvedByEmail ? <ResolvedByEmailChip label="Failed · email sent instead" /> : <StatusChip status={d.status} />}
-        {failed ? <p className="max-w-[34ch] text-xs text-muted-foreground">{d.reason}. Suggestion: send an email invite instead.</p> : null}
+        {d.resolvedByEmail ? (
+          <ResolvedByEmailChip label="Failed · email sent instead" />
+        ) : (
+          <StatusChip status={d.status} />
+        )}
+        {failed ? (
+          <p className="max-w-[34ch] text-xs text-muted-foreground">
+            {d.reason}. Suggestion: send an email invite instead.
+          </p>
+        ) : null}
       </td>
       <td>
-        <span className="text-sm whitespace-nowrap">{d.resentAt ? `Resent ${formatTime(d.resentAt)}` : formatDate(d.sentAt)}</span>
+        <span className="text-sm whitespace-nowrap">
+          {d.resentAt ? `Resent ${formatTime(d.resentAt)}` : formatDate(d.sentAt)}
+        </span>
       </td>
       <td className="w-[1%]">
         <div className="flex flex-wrap justify-end gap-s2">
           {failed && d.landline ? <SendEmailInsteadButton delivery={d} /> : null}
-          <ResendButton deliveries={[d]} name={d.name} ariaLabel={`Resend ${channel} invite to ${d.name}`} />
+          <ResendButton
+            deliveries={[d]}
+            name={d.name}
+            ariaLabel={`Resend ${channel} invite to ${d.name}`}
+          />
         </div>
       </td>
     </tr>

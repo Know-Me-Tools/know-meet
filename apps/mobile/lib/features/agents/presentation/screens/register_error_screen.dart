@@ -61,7 +61,12 @@ class _RegisterErrorScreenState extends ConsumerState<RegisterErrorScreen> {
                 tone: AgentNoticeTone.danger,
                 icon: LucideIcons.circleAlert,
                 title: 'No worker is registered with agent_name $name.',
-                titleWidget: Wrap(
+                // One sentence for assistive tech; the name chip and the full
+                // stop are not separate stops.
+                titleWidget: Semantics(
+                  label: 'No worker is registered with agent_name $name.',
+                  excludeSemantics: true,
+                  child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: <Widget>[
                     Text(
@@ -71,6 +76,7 @@ class _RegisterErrorScreenState extends ConsumerState<RegisterErrorScreen> {
                     AgentCode(name),
                     Text('.', style: KmText.small(context)),
                   ],
+                ),
                 ),
                 body: Text(
                   'KnowMe reached the LiveKit project, but no running worker announced that '

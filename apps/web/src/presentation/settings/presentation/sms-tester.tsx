@@ -18,9 +18,19 @@ export interface SmsTestResult {
   readonly at: string;
 }
 
-type Outcome = { readonly kind: "sending" | "ok" | "fail"; readonly to: string; readonly time?: string };
+type Outcome = {
+  readonly kind: "sending" | "ok" | "fail";
+  readonly to: string;
+  readonly time?: string;
+};
 
-export function SmsTester({ idPrefix, onResult }: { readonly idPrefix: string; readonly onResult?: (result: SmsTestResult) => void }) {
+export function SmsTester({
+  idPrefix,
+  onResult,
+}: {
+  readonly idPrefix: string;
+  readonly onResult?: (result: SmsTestResult) => void;
+}) {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -90,7 +100,8 @@ export function SmsTester({ idPrefix, onResult }: { readonly idPrefix: string; r
         ) : (
           <Note kind="err" icon="alert">
             <p>
-              <b>Not delivered. </b>The destination carrier rejected the message — the number may be a landline or unreachable by SMS. Try a mobile number that can receive texts.
+              <b>Not delivered. </b>The destination carrier rejected the message — the number may be
+              a landline or unreachable by SMS. Try a mobile number that can receive texts.
             </p>
             <p>Provider code: Telnyx 40300</p>
           </Note>

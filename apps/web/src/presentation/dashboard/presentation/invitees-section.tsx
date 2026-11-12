@@ -26,7 +26,15 @@ interface InviteesSectionProps {
 const HINT =
   "Press Enter or comma to add. Email addresses get an email invite; phone numbers get an SMS via Telnyx; people with both on file get both. Invitees don’t need an account.";
 
-export function InviteesSection({ invitees, draft, error, disabled, onDraftChange, onCommit, onRemove }: InviteesSectionProps) {
+export function InviteesSection({
+  invitees,
+  draft,
+  error,
+  disabled,
+  onDraftChange,
+  onCommit,
+  onRemove,
+}: InviteesSectionProps) {
   const { workspace } = useDashboard();
   const input = useRef<HTMLInputElement>(null);
   const count = invitees.length;
@@ -38,7 +46,14 @@ export function InviteesSection({ invitees, draft, error, disabled, onDraftChang
           {count ? `${count} ${count === 1 ? "invitee" : "invitees"}` : "No invitees yet"}
         </span>
       </div>
-      <FormField id="f-invitee" label="Add people by email or phone number" required hint={HINT} hintId="f-invitee-hint" error={error}>
+      <FormField
+        id="f-invitee"
+        label="Add people by email or phone number"
+        required
+        hint={HINT}
+        hintId="f-invitee-hint"
+        error={error}
+      >
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s2">
           <Input
             ref={input}
@@ -84,12 +99,18 @@ export function InviteesSection({ invitees, draft, error, disabled, onDraftChang
         {invitees.map((inv, index) => {
           const named = inv.name !== inv.value;
           return (
-            <li key={inv.key} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-card py-1.5 pr-1.5 pl-s3">
+            <li
+              key={inv.key}
+              className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-card py-1.5 pr-1.5 pl-s3"
+            >
               <span className="grid size-8 place-items-center rounded-9 bg-muted">
                 <KmIcon name={inv.kind === "email" ? "mail" : "sms"} className="size-4" />
               </span>
               <span className="grid min-w-0 gap-0.5 *:block">
-                <span className="truncate text-sm" title={named ? `${inv.name} — ${inv.value}` : inv.value}>
+                <span
+                  className="truncate text-sm"
+                  title={named ? `${inv.name} — ${inv.value}` : inv.value}
+                >
                   {named ? <strong>{inv.name} </strong> : null}
                   <span className={named ? "text-muted-foreground" : undefined}>{inv.value}</span>
                 </span>

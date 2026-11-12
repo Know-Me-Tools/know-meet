@@ -15,15 +15,27 @@ import { Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { formatBytes } from "../../workspace/application/format";
 import { CALENDAR_ACCOUNTS, timeZoneOptions } from "../application/dashboard-fixtures";
-import { type CalendarChoice, DURATION_OPTIONS, isoDate, type ScheduleOptions, type ScheduleValues } from "../application/schedule-form";
+import {
+  type CalendarChoice,
+  DURATION_OPTIONS,
+  isoDate,
+  type ScheduleOptions,
+  type ScheduleValues,
+} from "../application/schedule-form";
 import type { PreRead } from "../domain/dashboard";
 import { useDashboard } from "./dashboard-context";
-import { smallLinkClass, StateLine, SwitchRow } from "./dashboard-parts";
+import { StateLine, SwitchRow, smallLinkClass } from "./dashboard-parts";
 import { describedBy, FormField } from "./form-field";
 
 type Update = (patch: Partial<ScheduleValues>) => void;
 
-export function Panel({ labelledBy, children }: { readonly labelledBy: string; readonly children: React.ReactNode }) {
+export function Panel({
+  labelledBy,
+  children,
+}: {
+  readonly labelledBy: string;
+  readonly children: React.ReactNode;
+}) {
   return (
     <section
       aria-labelledby={labelledBy}
@@ -34,7 +46,13 @@ export function Panel({ labelledBy, children }: { readonly labelledBy: string; r
   );
 }
 
-export function PanelTitle({ id, children }: { readonly id: string; readonly children: React.ReactNode }) {
+export function PanelTitle({
+  id,
+  children,
+}: {
+  readonly id: string;
+  readonly children: React.ReactNode;
+}) {
   return (
     <h2 id={id} className="text-lg">
       {children}
@@ -97,7 +115,12 @@ export function DetailsSection({ values, update, errors, disabled }: DetailsProp
           />
         </FormField>
         <FormField id="f-duration" label="Duration">
-          <NativeSelect id="f-duration" value={values.duration} disabled={disabled} onChange={(e) => update({ duration: e.target.value })}>
+          <NativeSelect
+            id="f-duration"
+            value={values.duration}
+            disabled={disabled}
+            onChange={(e) => update({ duration: e.target.value })}
+          >
             {DURATION_OPTIONS.map((o) => (
               <NativeSelectOption key={o.value} value={o.value}>
                 {o.label}
@@ -107,7 +130,12 @@ export function DetailsSection({ values, update, errors, disabled }: DetailsProp
         </FormField>
       </div>
       <FormField id="f-tz" label="Time zone">
-        <NativeSelect id="f-tz" value={values.tz} disabled={disabled} onChange={(e) => update({ tz: e.target.value })}>
+        <NativeSelect
+          id="f-tz"
+          value={values.tz}
+          disabled={disabled}
+          onChange={(e) => update({ tz: e.target.value })}
+        >
           {timeZoneOptions(localTz).map(([id, label]) => (
             <NativeSelectOption key={id} value={id}>
               {label}
@@ -136,7 +164,15 @@ export function DetailsSection({ values, update, errors, disabled }: DetailsProp
   );
 }
 
-export function CalendarSection({ value, onChange, disabled }: { readonly value: CalendarChoice; readonly onChange: (v: CalendarChoice) => void; readonly disabled: boolean }) {
+export function CalendarSection({
+  value,
+  onChange,
+  disabled,
+}: {
+  readonly value: CalendarChoice;
+  readonly onChange: (v: CalendarChoice) => void;
+  readonly disabled: boolean;
+}) {
   return (
     <Panel labelledBy="s-cal">
       <PanelTitle id="s-cal">Calendar</PanelTitle>
@@ -150,24 +186,38 @@ export function CalendarSection({ value, onChange, disabled }: { readonly value:
             if (next === "google" || next === "outlook" || next === "none") onChange(next);
           }}
         >
-          <NativeSelectOption value="google">Google Calendar — {CALENDAR_ACCOUNTS.google.account}</NativeSelectOption>
-          <NativeSelectOption value="outlook">Outlook — {CALENDAR_ACCOUNTS.outlook.account}</NativeSelectOption>
+          <NativeSelectOption value="google">
+            Google Calendar — {CALENDAR_ACCOUNTS.google.account}
+          </NativeSelectOption>
+          <NativeSelectOption value="outlook">
+            Outlook — {CALENDAR_ACCOUNTS.outlook.account}
+          </NativeSelectOption>
           <NativeSelectOption value="none">Don’t add to a calendar</NativeSelectOption>
         </NativeSelect>
       </FormField>
       <p className="flex items-start gap-s2 rounded-base bg-card p-s3 text-sm text-muted-foreground">
         <KmIcon name="info" className="mt-px size-[18px] text-cyan-text" />
         <span>
-          The KnowMe join link and dial-in details are inserted into the calendar event, so they appear for everyone who gets it.
+          The KnowMe join link and dial-in details are inserted into the calendar event, so they
+          appear for everyone who gets it.
         </span>
       </p>
     </Panel>
   );
 }
 
-export function OptionsSection({ options, onChange, disabled }: { readonly options: ScheduleOptions; readonly onChange: (o: ScheduleOptions) => void; readonly disabled: boolean }) {
+export function OptionsSection({
+  options,
+  onChange,
+  disabled,
+}: {
+  readonly options: ScheduleOptions;
+  readonly onChange: (o: ScheduleOptions) => void;
+  readonly disabled: boolean;
+}) {
   const { workspace } = useDashboard();
-  const set = (key: keyof ScheduleOptions) => (checked: boolean) => onChange({ ...options, [key]: checked });
+  const set = (key: keyof ScheduleOptions) => (checked: boolean) =>
+    onChange({ ...options, [key]: checked });
   const [first, second] = workspace.telnyx.dialIn;
   const pin = workspace.meetings[0]?.dialIn.pin ?? "";
   return (
@@ -214,7 +264,10 @@ export function OptionsSection({ options, onChange, disabled }: { readonly optio
           onCheckedChange={set("dial")}
         >
           {options.dial && first ? (
-            <div id="dial-preview" className="mt-s2 flex flex-wrap gap-x-s4 gap-y-s2 rounded-base bg-card px-s3 py-s2 font-mono text-13">
+            <div
+              id="dial-preview"
+              className="mt-s2 flex flex-wrap gap-x-s4 gap-y-s2 rounded-base bg-card px-s3 py-s2 font-mono text-13"
+            >
               <span className="inline-flex items-center gap-1">
                 <KmIcon name="phone-in" className="size-4" /> {first.number} ({first.region})
               </span>
@@ -243,17 +296,30 @@ export function OptionsSection({ options, onChange, disabled }: { readonly optio
 const pickClass =
   "grid min-h-14 cursor-pointer grid-cols-[auto_auto_minmax(0,1fr)] items-center gap-s3 rounded-base bg-card px-s3 py-s2";
 
-export function AgentsSection({ values, update, disabled }: { readonly values: ScheduleValues; readonly update: Update; readonly disabled: boolean }) {
+export function AgentsSection({
+  values,
+  update,
+  disabled,
+}: {
+  readonly values: ScheduleValues;
+  readonly update: Update;
+  readonly disabled: boolean;
+}) {
   const { workspace } = useDashboard();
   const toggleAgent = (id: string, checked: boolean) =>
-    update({ agents: checked ? [...values.agents.filter((a) => a !== id), id] : values.agents.filter((a) => a !== id) });
+    update({
+      agents: checked
+        ? [...values.agents.filter((a) => a !== id), id]
+        : values.agents.filter((a) => a !== id),
+    });
   return (
     <Panel labelledBy="s-agents">
       <div className="flex flex-wrap items-start justify-between gap-s3">
         <div className="grid min-w-0 gap-0.5">
           <PanelTitle id="s-agents">Agents to bring</PanelTitle>
           <span className="text-sm text-muted-foreground">
-            Concierge is always in the room. Pick the registered agents and dots to dispatch at start.
+            Concierge is always in the room. Pick the registered agents and dots to dispatch at
+            start.
           </span>
         </div>
         <Link to="/agents" hash="registry" className={smallLinkClass}>
@@ -280,12 +346,23 @@ export function AgentsSection({ values, update, disabled }: { readonly values: S
                   <span className="truncate text-xs text-muted-foreground" title={agent.desc}>
                     {agent.role}
                   </span>
-                  <StateLine status={agent.status} label={agent.status === "online" ? "Online" : "Offline — joins if online at start"} />
+                  <StateLine
+                    status={agent.status}
+                    label={
+                      agent.status === "online" ? "Online" : "Offline — joins if online at start"
+                    }
+                  />
                 </span>
               </label>
             ))}
           <label className={pickClass}>
-            <Checkbox name="dot" value="iris" checked={values.iris} disabled={disabled} onCheckedChange={(checked) => update({ iris: checked })} />
+            <Checkbox
+              name="dot"
+              value="iris"
+              checked={values.iris}
+              disabled={disabled}
+              onCheckedChange={(checked) => update({ iris: checked })}
+            />
             <Orb className="w-7" />
             <span className="grid min-w-0 gap-0.5 *:block">
               <strong className="text-sm">Iris</strong>
@@ -349,7 +426,12 @@ export function KnowledgeSection({ files, error, disabled, onAdd, onRemove }: Kn
   );
 }
 
-export function FileList({ files, onRemove, emptyText = "No pre-reads attached.", metaSuffix = "" }: {
+export function FileList({
+  files,
+  onRemove,
+  emptyText = "No pre-reads attached.",
+  metaSuffix = "",
+}: {
   readonly files: readonly PreRead[];
   readonly onRemove?: (index: number) => void;
   readonly emptyText?: string;
@@ -359,7 +441,10 @@ export function FileList({ files, onRemove, emptyText = "No pre-reads attached."
     <ul aria-label="Pre-reads attached" className="m-0 grid list-none gap-s2 p-0">
       {files.length === 0 ? <li className="text-sm text-muted-foreground">{emptyText}</li> : null}
       {files.map((file, index) => (
-        <li key={file.name} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-card py-1 pr-1 pl-s3">
+        <li
+          key={file.name}
+          className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-card py-1 pr-1 pl-s3"
+        >
           <KmIcon name="book" className="size-4" />
           <span className="grid min-w-0 *:block">
             <span className="truncate text-sm" title={file.name}>
@@ -370,20 +455,33 @@ export function FileList({ files, onRemove, emptyText = "No pre-reads attached."
               {metaSuffix}
             </span>
           </span>
-          {onRemove ? <RemoveFileButton name={file.name} onClick={() => onRemove(index)} /> : <span />}
+          {onRemove ? (
+            <RemoveFileButton name={file.name} onClick={() => onRemove(index)} />
+          ) : (
+            <span />
+          )}
         </li>
       ))}
     </ul>
   );
 }
 
-function RemoveFileButton({ name, onClick }: { readonly name: string; readonly onClick: () => void }) {
+function RemoveFileButton({
+  name,
+  onClick,
+}: {
+  readonly name: string;
+  readonly onClick: () => void;
+}) {
   return (
     <button
       type="button"
       aria-label={`Remove ${name}`}
       onClick={onClick}
-      className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "outline-none focus-visible:bg-focus! focus-visible:text-on-focus!")}
+      className={cn(
+        buttonVariants({ variant: "ghost", size: "icon" }),
+        "outline-none focus-visible:bg-focus! focus-visible:text-on-focus!",
+      )}
     >
       <KmIcon name="trash" className="size-4" />
     </button>

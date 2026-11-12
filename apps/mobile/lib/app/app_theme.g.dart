@@ -58,4 +58,4 @@ final class KmThemeFactoryProvider
   }
 }
 
-String _$kmThemeFactoryHash() => r'1f4d8565e2ab6a8d76f358cd2df0aa46d60827aa';
+String _$kmThemeFactoryHash() => r'2a2b7e73a3bb19d1e2e77fcc9d14ea77adf26376';

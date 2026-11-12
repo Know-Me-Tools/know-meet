@@ -17,7 +17,13 @@ function slug(text: string): string {
   );
 }
 
-const AGENT_IDS: readonly AgentId[] = ["concierge", "scribe", "researcher", "facilitator", "translator"];
+const AGENT_IDS: readonly AgentId[] = [
+  "concierge",
+  "scribe",
+  "researcher",
+  "facilitator",
+  "translator",
+];
 
 function isAgentId(value: string): value is AgentId {
   return AGENT_IDS.some((id) => id === value);
@@ -64,14 +70,30 @@ export function buildScheduledMeeting(
   values.invitees.forEach((inv, index) => {
     for (const channel of channelsFor(inv)) {
       deliveries.push({
-        id: `${id}-${index}-${channel}`, meetingId: id, name: inv.name, personId: null, channel,
-        to: channel === "sms" ? inv.phone : inv.email, status: "delivered", reason: null, landline: false, sentAt,
+        id: `${id}-${index}-${channel}`,
+        meetingId: id,
+        name: inv.name,
+        personId: null,
+        channel,
+        to: channel === "sms" ? inv.phone : inv.email,
+        status: "delivered",
+        reason: null,
+        landline: false,
+        sentAt,
       });
     }
     if (values.calendar !== "none" && inv.email) {
       deliveries.push({
-        id: `${id}-${index}-calendar`, meetingId: id, name: inv.name, personId: null, channel: "calendar",
-        to: inv.email, status: "delivered", reason: null, landline: false, sentAt,
+        id: `${id}-${index}-calendar`,
+        meetingId: id,
+        name: inv.name,
+        personId: null,
+        channel: "calendar",
+        to: inv.email,
+        status: "delivered",
+        reason: null,
+        landline: false,
+        sentAt,
       });
     }
   });

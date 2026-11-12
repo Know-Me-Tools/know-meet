@@ -15,9 +15,12 @@ interface CodePanelProps extends Omit<React.ComponentProps<"pre">, "aria-label">
 
 function CodePanel({ label, tone = "surface", className, ...props }: CodePanelProps) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: the <pre> is itself the scroll container; a <section> wrapper would split the scroller from the region and change the kit's DOM contract.
     <pre
       data-slot="code-panel"
       data-tone={tone}
+      role="region"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrolling region must be keyboard-focusable so keyboard users can scroll it (WCAG 2.1.1).
       tabIndex={0}
       aria-label={label}
       className={cn(

@@ -2,7 +2,12 @@
 // Browser-side invite actions: the invite URL, the .ics download and clipboard
 // copy. Each returns the sentence to announce, so the screen's polite status line
 // tells every user what happened (or what to do instead) without a toast.
-import { type DialInNumber, hostOf, meetingEnd, type SampleMeeting } from "../public-shared/sample-meetings";
+import {
+  type DialInNumber,
+  hostOf,
+  meetingEnd,
+  type SampleMeeting,
+} from "../public-shared/sample-meetings";
 import { buildIcs } from "./application/build-ics";
 
 export function inviteUrl(meeting: SampleMeeting): string {
@@ -13,7 +18,10 @@ export function dialInSummary(meeting: SampleMeeting, numbers: readonly DialInNu
   return `${meeting.title}\n${numbers.map((d) => `${d.region}: ${d.number}`).join("\n")}\nPIN: ${meeting.pin}#`;
 }
 
-export function downloadInviteIcs(meeting: SampleMeeting, numbers: readonly DialInNumber[]): string {
+export function downloadInviteIcs(
+  meeting: SampleMeeting,
+  numbers: readonly DialInNumber[],
+): string {
   const host = hostOf(meeting);
   const url = inviteUrl(meeting);
   const dial = numbers.map((d) => `${d.region} ${d.number}`).join(" / ");

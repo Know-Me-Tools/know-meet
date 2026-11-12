@@ -47,7 +47,13 @@ const PATHS = {
 
 export type KmIconName = keyof typeof PATHS;
 
-export function KmIcon({ name, className }: { readonly name: KmIconName; readonly className?: string }) {
+export function KmIcon({
+  name,
+  className,
+}: {
+  readonly name: KmIconName;
+  readonly className?: string;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"

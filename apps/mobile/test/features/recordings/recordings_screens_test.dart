@@ -2,7 +2,6 @@
 @Tags(<String>['a11y'])
 library;
 
-import 'package:flutter/rendering.dart' show SemanticsHandle;
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../support/km_a11y.dart';
@@ -47,7 +46,6 @@ void main() {
     WidgetTester tester,
   ) async {
     final SemanticsHandle semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
     setKmViewport(tester, width: 375);
     await pumpKmApp(
       tester,
@@ -58,11 +56,11 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Summary'));
     await tester.pumpAndSettle();
     expect(find.text('Action items'), findsOneWidget);
+    semantics.dispose();
   });
 
   testWidgets('a chapter chip seeks the stubbed player', (WidgetTester tester) async {
     final SemanticsHandle semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
     setKmViewport(tester, width: 375);
     await pumpKmApp(
       tester,
@@ -76,5 +74,6 @@ void main() {
     await tester.tap(find.bySemanticsLabel(RegExp(r'^Jump to 07:00, Integration timeline$')));
     await tester.pumpAndSettle();
     expect(find.text('07:00 / 46:00'), findsOneWidget);
+    semantics.dispose();
   });
 }

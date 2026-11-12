@@ -14,7 +14,10 @@ type NotificationKey = keyof typeof NOTIFICATION_DEFAULTS;
 
 const PHONE_RULE = { label: "Mobile number for SMS", validate: validatePhone } as const;
 
-function SmsPanel({ prefs, toggle }: {
+function SmsPanel({
+  prefs,
+  toggle,
+}: {
   readonly prefs: Readonly<Record<NotificationKey, boolean>>;
   readonly toggle: (key: NotificationKey) => (checked: boolean) => void;
 }) {
@@ -59,7 +62,10 @@ function SmsPanel({ prefs, toggle }: {
                 }
                 const value = phone.trim();
                 setSavedPhone(value);
-                toast.add({ title: value === "" ? "Mobile number removed" : "Mobile number saved", type: "success" });
+                toast.add({
+                  title: value === "" ? "Mobile number removed" : "Mobile number saved",
+                  type: "success",
+                });
               }}
             >
               Save number
@@ -73,8 +79,20 @@ function SmsPanel({ prefs, toggle }: {
         )}
         <fieldset disabled={!smsOn} className="m-0 min-w-0 p-0 disabled:opacity-55">
           <legend className="sr-only">SMS notifications</legend>
-          <SwitchRow label="Meeting starting" description="A text 5 minutes before meetings you host or were invited to." checked={prefs.smsStart} disabled={!smsOn} onCheckedChange={toggle("smsStart")} />
-          <SwitchRow label="Summary link" description="A short link to the summary when a meeting closes." checked={prefs.smsSummary} disabled={!smsOn} onCheckedChange={toggle("smsSummary")} />
+          <SwitchRow
+            label="Meeting starting"
+            description="A text 5 minutes before meetings you host or were invited to."
+            checked={prefs.smsStart}
+            disabled={!smsOn}
+            onCheckedChange={toggle("smsStart")}
+          />
+          <SwitchRow
+            label="Summary link"
+            description="A short link to the summary when a meeting closes."
+            checked={prefs.smsSummary}
+            disabled={!smsOn}
+            onCheckedChange={toggle("smsSummary")}
+          />
         </fieldset>
       </Stack>
     </Panel>
@@ -82,20 +100,45 @@ function SmsPanel({ prefs, toggle }: {
 }
 
 export function NotificationsSection() {
-  const [prefs, setPrefs] = useState<Readonly<Record<NotificationKey, boolean>>>(NOTIFICATION_DEFAULTS);
+  const [prefs, setPrefs] =
+    useState<Readonly<Record<NotificationKey, boolean>>>(NOTIFICATION_DEFAULTS);
   const toggle = (key: NotificationKey) => (checked: boolean) => {
     setPrefs((current) => ({ ...current, [key]: checked }));
     toast.add({ title: "Saved", type: "success" });
   };
   return (
     <>
-      <SettingsHead section="notifications" title="Notifications" description="Choose what KnowMe tells you about, and where." />
+      <SettingsHead
+        section="notifications"
+        title="Notifications"
+        description="Choose what KnowMe tells you about, and where."
+      />
       <Panel title="Email">
         <div>
-          <SwitchRow label="Recording ready" description="When a recording finishes processing and is pinned." checked={prefs.recReady} onCheckedChange={toggle("recReady")} />
-          <SwitchRow label="Summary and transcript" description="Your own copy after each meeting you join." checked={prefs.summary} onCheckedChange={toggle("summary")} />
-          <SwitchRow label="Invite responses" description="When invitees accept or decline." checked={prefs.responses} onCheckedChange={toggle("responses")} />
-          <SwitchRow label="Weekly digest" description="Open action items assigned to you across meetings." checked={prefs.digest} onCheckedChange={toggle("digest")} />
+          <SwitchRow
+            label="Recording ready"
+            description="When a recording finishes processing and is pinned."
+            checked={prefs.recReady}
+            onCheckedChange={toggle("recReady")}
+          />
+          <SwitchRow
+            label="Summary and transcript"
+            description="Your own copy after each meeting you join."
+            checked={prefs.summary}
+            onCheckedChange={toggle("summary")}
+          />
+          <SwitchRow
+            label="Invite responses"
+            description="When invitees accept or decline."
+            checked={prefs.responses}
+            onCheckedChange={toggle("responses")}
+          />
+          <SwitchRow
+            label="Weekly digest"
+            description="Open action items assigned to you across meetings."
+            checked={prefs.digest}
+            onCheckedChange={toggle("digest")}
+          />
         </div>
       </Panel>
       <SmsPanel prefs={prefs} toggle={toggle} />

@@ -4,7 +4,11 @@
 // Progress is state, not decoration, so it still advances under reduced motion
 // (only the spinner stops).
 import { useEffect, useState } from "react";
-import { PROCESSING_PIN_PARAM, parseProcessingPin, pinnedProgress } from "../application/processing-pin";
+import {
+  PROCESSING_PIN_PARAM,
+  parseProcessingPin,
+  pinnedProgress,
+} from "../application/processing-pin";
 import type { ProcessingStep } from "../domain/recording-details";
 
 const START_DELAY_MS = 400;

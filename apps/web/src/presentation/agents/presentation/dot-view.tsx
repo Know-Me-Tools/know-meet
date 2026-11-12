@@ -94,7 +94,10 @@ function IrisSettingsForm() {
         surface="card"
         value={form.join}
         options={{
-          always: { label: "Always join my meetings", desc: "Joins as soon as a meeting you’re in starts." },
+          always: {
+            label: "Always join my meetings",
+            desc: "Joins as soon as a meeting you’re in starts.",
+          },
           ask: { label: "Ask me first", desc: "Asks in the lobby before each meeting." },
         }}
         onValueChange={(join) => setForm((current) => ({ ...current, join }))}
@@ -105,7 +108,10 @@ function IrisSettingsForm() {
         surface="card"
         value={form.speak}
         options={{
-          asked: { label: "Only when asked", desc: "Speaks when you or someone addresses it by name." },
+          asked: {
+            label: "Only when asked",
+            desc: "Speaks when you or someone addresses it by name.",
+          },
           never: { label: "Never", desc: "Listens and remembers for you, but stays silent." },
         }}
         onValueChange={(speak) => setForm((current) => ({ ...current, speak }))}
@@ -116,11 +122,19 @@ function IrisSettingsForm() {
         surface="card"
         value={form.scope}
         options={{
-          summaries: { label: "Transcript summaries", desc: "Decisions and action items from meetings it attends." },
-          conversations: { label: "My private agent conversations", desc: "What you ask it directly, in or out of meetings." },
+          summaries: {
+            label: "Transcript summaries",
+            desc: "Decisions and action items from meetings it attends.",
+          },
+          conversations: {
+            label: "My private agent conversations",
+            desc: "What you ask it directly, in or out of meetings.",
+          },
           files: { label: "Files I upload", desc: "Documents you add to its memory yourself." },
         }}
-        onToggle={(key, checked) => setForm((current) => ({ ...current, scope: { ...current.scope, [key]: checked } }))}
+        onToggle={(key, checked) =>
+          setForm((current) => ({ ...current, scope: { ...current.scope, [key]: checked } }))
+        }
       />
       <div className="flex flex-wrap items-center gap-s2">
         <Button type="submit" disabled={saving} aria-busy={saving || undefined}>
@@ -159,14 +173,19 @@ function MemoryList() {
               key={memory.id}
               className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-surface px-s4 py-s3 shadow-(--shadow-card) max-bp768:grid-cols-[auto_minmax(0,1fr)]"
             >
-              <span aria-hidden="true" className="grid size-10 place-items-center rounded-10 bg-muted text-foreground">
+              <span
+                aria-hidden="true"
+                className="grid size-10 place-items-center rounded-10 bg-muted text-foreground"
+              >
                 <KmIcon name="book" />
               </span>
               <div className="grid min-w-0 gap-0.5">
                 <span className="block truncate font-semibold" title={memory.meeting}>
                   {memory.meeting}
                 </span>
-                <span className="block text-sm text-muted-foreground">{formatDate(memory.date)}</span>
+                <span className="block text-sm text-muted-foreground">
+                  {formatDate(memory.date)}
+                </span>
                 <p className="text-sm text-foreground [overflow-wrap:anywhere]">{memory.text}</p>
               </div>
               <div className="flex flex-wrap items-center justify-end gap-s2 max-bp768:col-span-full max-bp768:justify-start">
@@ -211,8 +230,18 @@ export function DotView() {
           <Orb className={cn("w-full", iris.paused && "animate-none opacity-45 grayscale")} />
         </span>
         <div className="grid min-w-0 gap-s2">
-          <Crumbs items={[{ label: "Agents", to: "registry" }, { label: "Dots", to: "dots" }, { label: iris.name }]} />
-          <h1 tabIndex={-1} className="block truncate text-2xl font-bold outline-none" title={iris.name}>
+          <Crumbs
+            items={[
+              { label: "Agents", to: "registry" },
+              { label: "Dots", to: "dots" },
+              { label: iris.name },
+            ]}
+          />
+          <h1
+            tabIndex={-1}
+            className="block truncate text-2xl font-bold outline-none"
+            title={iris.name}
+          >
             {iris.name}
           </h1>
           <div className="flex flex-wrap items-center gap-x-s4 gap-y-s2 text-sm text-muted-foreground">
@@ -229,7 +258,10 @@ export function DotView() {
           checked={iris.paused}
           onCheckedChange={(paused) => {
             updateIris({ paused });
-            toast.add({ title: paused ? `${iris.name} paused` : `${iris.name} resumed`, type: "success" });
+            toast.add({
+              title: paused ? `${iris.name} paused` : `${iris.name} resumed`,
+              type: "success",
+            });
           }}
         />
       </div>

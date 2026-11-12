@@ -1,8 +1,9 @@
 // TJ-ARCH-MOB-001 compliant
 // Hash parameters carried between the auth states (`#sign-up?email=…&next=…`).
-// Values are opaque display strings; `next` is passed through untouched because
-// sign-in itself is not wired in this phase (contract exclusion: no real auth).
+// `email` and `name` are opaque display strings. `next` is a post-sign-in
+// destination, so it is restricted to internal route names (auth-next.ts).
 import { toHash } from "../shared/use-hash-route";
+import { safeNext } from "./auth-next";
 
 export type AuthView = "sign-in" | "sign-in-error" | "sign-up" | "check-email" | "magic-link-sent";
 
@@ -16,7 +17,7 @@ export function authParams(params: Readonly<Record<string, string>>): AuthParams
   const out: { email?: string; name?: string; next?: string } = {};
   if (params["email"]) out.email = params["email"];
   if (params["name"]) out.name = params["name"];
-  if (params["next"]) out.next = params["next"];
+  if (params["next"]) out.next = safeNext(params["next"]);
   return out;
 }
 

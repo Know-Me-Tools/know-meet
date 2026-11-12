@@ -14,7 +14,11 @@ export interface ChecksResult {
 const STEP_MS = 850;
 
 function initialRows(steps: readonly CheckStep[]): readonly CheckRowState[] {
-  return steps.map((step) => ({ state: "wait", text: step.initial ?? "Waiting", detail: step.detail }));
+  return steps.map((step) => ({
+    state: "wait",
+    text: step.initial ?? "Waiting",
+    detail: step.detail,
+  }));
 }
 
 export function useStagedChecks(steps: readonly CheckStep[], preset?: readonly CheckRowState[]) {

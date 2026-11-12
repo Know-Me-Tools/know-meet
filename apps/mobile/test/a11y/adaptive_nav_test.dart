@@ -75,7 +75,7 @@ void main() {
       expect(item.height, greaterThanOrEqualTo(KmTokens.sizeTarget));
       expect(
         tester.getSemantics(find.descendant(of: find.byType(KmBottomBar), matching: find.bySemanticsLabel('Meetings'))),
-        containsSemantics(label: 'Meetings', isButton: true, isSelected: true),
+        isSemantics(label: 'Meetings', isButton: true, isSelected: true),
       );
       final Iterable<Color?> fills = tester
           .widgetList(find.descendant(of: find.byKey(meetings), matching: find.byKey(const ValueKey<String>('km-nav-current'))))
@@ -128,7 +128,7 @@ void main() {
       expect(find.byType(KmNavRail), findsOneWidget);
       expect(find.byType(KmBottomBar), findsNothing);
       expect(find.byKey(const ValueKey<String>('km-nav-outgoing-bar')), findsNothing);
-      expect(tester.hasRunningAnimations, isFalse);
+      expect(kmHasRunningAnimations(tester), isFalse);
     });
 
     testWidgets('motion allowed: the bar leaves and the rail enters once', (WidgetTester tester) async {
@@ -136,7 +136,7 @@ void main() {
       tester.view.physicalSize = const Size(768, 1024);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 50));
-      expect(tester.hasRunningAnimations, isTrue);
+      expect(kmHasRunningAnimations(tester), isTrue);
       expect(find.byKey(const ValueKey<String>('km-nav-outgoing-bar')), findsOneWidget);
       expect(find.byType(KmNavRail), findsOneWidget);
       await tester.pump(KmTokens.durNavMorph);
@@ -145,7 +145,7 @@ void main() {
       // Resizing inside the class does not animate again.
       tester.view.physicalSize = const Size(900, 1024);
       await tester.pump();
-      expect(tester.hasRunningAnimations, isFalse);
+      expect(kmHasRunningAnimations(tester), isFalse);
     });
 
     testWidgets('focus survives the morph (rail -> inline links)', (WidgetTester tester) async {

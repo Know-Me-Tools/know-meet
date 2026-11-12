@@ -28,7 +28,13 @@ function clock(seconds: number): string {
   return formatDuration(seconds * 1000);
 }
 
-export function RecordingPlayer({ workspace, recording, chapters, current, playback }: RecordingPlayerProps) {
+export function RecordingPlayer({
+  workspace,
+  recording,
+  chapters,
+  current,
+  playback,
+}: RecordingPlayerProps) {
   const { t, total } = playback;
   const currentChapter = chapterIndexAt(chapters, t);
   return (
@@ -77,7 +83,10 @@ export function RecordingPlayer({ workspace, recording, chapters, current, playb
             aria-label={playback.playing ? "Pause" : "Play"}
             onClick={playback.toggle}
           >
-            <KmIcon name={playback.playing ? "pause" : "play"} className={playback.playing ? undefined : "fill-current"} />
+            <KmIcon
+              name={playback.playing ? "pause" : "play"}
+              className={playback.playing ? undefined : "fill-current"}
+            />
           </Button>
           <span className="font-mono text-13 whitespace-nowrap text-muted-foreground tabular-nums">
             {clock(t)} / {clock(total)}
@@ -110,7 +119,7 @@ export function RecordingPlayer({ workspace, recording, chapters, current, playb
             <KmIcon name="cc" />
           </Button>
         </div>
-        <div role="group" aria-label="Chapters" className="flex flex-wrap gap-1.5">
+        <fieldset aria-label="Chapters" className="m-0 min-w-0 p-0 flex flex-wrap gap-1.5">
           {chapters.map((chapter, index) => (
             <Badge
               key={chapter.title}
@@ -125,7 +134,7 @@ export function RecordingPlayer({ workspace, recording, chapters, current, playb
               <span>{chapter.title}</span>
             </Badge>
           ))}
-        </div>
+        </fieldset>
       </div>
     </section>
   );

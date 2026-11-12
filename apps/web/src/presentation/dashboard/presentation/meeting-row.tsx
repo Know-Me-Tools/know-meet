@@ -19,7 +19,10 @@ const MINUTE_MS = 60_000;
 
 export function LiveBanner({ meeting }: { readonly meeting: DashboardMeeting }) {
   const { now } = useDashboard();
-  const minutes = Math.max(1, Math.round((now.getTime() - new Date(meeting.start).getTime()) / MINUTE_MS));
+  const minutes = Math.max(
+    1,
+    Math.round((now.getTime() - new Date(meeting.start).getTime()) / MINUTE_MS),
+  );
   return (
     <section
       aria-labelledby="live-title"
@@ -32,11 +35,16 @@ export function LiveBanner({ meeting }: { readonly meeting: DashboardMeeting }) 
           {meeting.title}
         </h2>
         <span className="text-sm text-muted-foreground">
-          Started {minutes} min ago · {meeting.invitees.length} invitees{meeting.record ? " · Recording on" : ""}
+          Started {minutes} min ago · {meeting.invitees.length} invitees
+          {meeting.record ? " · Recording on" : ""}
         </span>
       </div>
       <div className="flex flex-wrap items-center gap-s2 max-bp768:col-span-full">
-        <Link to="/dashboard" hash={`meeting:${meeting.id}`} className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}>
+        <Link
+          to="/dashboard"
+          hash={`meeting:${meeting.id}`}
+          className={cn(buttonVariants({ variant: "ghost", size: "sm" }), focusFillClass)}
+        >
           <span>Details</span>
         </Link>
         <Link to="/meet" hash="lobby" className={cn(buttonVariants(), focusFillClass)}>
@@ -61,8 +69,12 @@ export function MeetingRow({ meeting }: { readonly meeting: DashboardMeeting }) 
       className="grid grid-cols-[92px_minmax(0,1fr)_auto] items-center gap-s4 rounded-base bg-surface p-s4 shadow-(--shadow-card) max-bp768:grid-cols-[minmax(0,1fr)] max-bp768:gap-s3"
     >
       <div className="grid gap-0.5 max-bp768:flex max-bp768:items-baseline max-bp768:gap-s2">
-        <strong className="font-display text-base font-semibold whitespace-nowrap">{formatTime(start)}</strong>
-        <span className="text-sm whitespace-nowrap text-muted-foreground">{formatMinutes(meeting.durationMin)}</span>
+        <strong className="font-display text-base font-semibold whitespace-nowrap">
+          {formatTime(start)}
+        </strong>
+        <span className="text-sm whitespace-nowrap text-muted-foreground">
+          {formatMinutes(meeting.durationMin)}
+        </span>
       </div>
       <div className="grid min-w-0 gap-s2">
         <Link

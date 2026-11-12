@@ -23,9 +23,15 @@ import { useBusyAction } from "./use-static-delay";
 
 const RULE = { label: "Area code", required: true, validate: validateAreaCode } as const;
 
-type Results = { readonly kind: "none"; readonly area: string } | { readonly kind: "list"; readonly numbers: readonly string[] };
+type Results =
+  | { readonly kind: "none"; readonly area: string }
+  | { readonly kind: "list"; readonly numbers: readonly string[] };
 
-function NumberResults({ results, picked, onPick }: {
+function NumberResults({
+  results,
+  picked,
+  onPick,
+}: {
   readonly results: Results;
   readonly picked: string;
   readonly onPick: (value: string) => void;
@@ -42,7 +48,12 @@ function NumberResults({ results, picked, onPick }: {
       <span id="num-results-legend" className="text-sm font-semibold">
         {results.numbers.length} numbers available
       </span>
-      <RadioGroup aria-labelledby="num-results-legend" value={picked} onValueChange={(value) => onPick(String(value))} className="gap-s2">
+      <RadioGroup
+        aria-labelledby="num-results-legend"
+        value={picked}
+        onValueChange={(value) => onPick(String(value))}
+        className="gap-s2"
+      >
         {results.numbers.map((n, i) => (
           <label
             key={n}
@@ -59,7 +70,11 @@ function NumberResults({ results, picked, onPick }: {
   );
 }
 
-export function AddNumberDialog({ open, onOpenChange, onAdd }: {
+export function AddNumberDialog({
+  open,
+  onOpenChange,
+  onAdd,
+}: {
   readonly open: boolean;
   readonly onOpenChange: (open: boolean) => void;
   readonly onAdd: (number: string) => void;
@@ -99,7 +114,9 @@ export function AddNumberDialog({ open, onOpenChange, onAdd }: {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add a dial-in number</DialogTitle>
-          <DialogDescription>Numbers are bought on your Telnyx account and routed to LiveKit SIP.</DialogDescription>
+          <DialogDescription>
+            Numbers are bought on your Telnyx account and routed to LiveKit SIP.
+          </DialogDescription>
         </DialogHeader>
         <DialogBody>
           <Stack ref={bodyRef}>
@@ -111,29 +128,38 @@ export function AddNumberDialog({ open, onOpenChange, onAdd }: {
               }}
             >
               <InputGroup className="items-end">
-              <TextField
-                id="add-num-area"
-                label="Area code"
-                required
-                inputMode="numeric"
-                maxLength={3}
-                placeholder="415"
-                hint="Search US and Canada local numbers."
-                value={area}
-                error={error}
-                onValueChange={(value) => {
-                  setArea(value);
-                  if (error !== null && checkField(RULE, value) === null) setError(null);
-                }}
-              />
-              <Button type="submit" variant="secondary" disabled={searching.busy} aria-busy={searching.busy || undefined}>
-                <BusyContent busy={searching.busy} busyLabel="Searching…" icon="search">
-                  Search
-                </BusyContent>
-              </Button>
+                <TextField
+                  id="add-num-area"
+                  label="Area code"
+                  required
+                  inputMode="numeric"
+                  maxLength={3}
+                  placeholder="415"
+                  hint="Search US and Canada local numbers."
+                  value={area}
+                  error={error}
+                  onValueChange={(value) => {
+                    setArea(value);
+                    if (error !== null && checkField(RULE, value) === null) setError(null);
+                  }}
+                />
+                <Button
+                  type="submit"
+                  variant="secondary"
+                  disabled={searching.busy}
+                  aria-busy={searching.busy || undefined}
+                >
+                  <BusyContent busy={searching.busy} busyLabel="Searching…" icon="search">
+                    Search
+                  </BusyContent>
+                </Button>
               </InputGroup>
             </form>
-            <div aria-live="polite">{results === null ? null : <NumberResults results={results} picked={picked} onPick={setPicked} />}</div>
+            <div aria-live="polite">
+              {results === null ? null : (
+                <NumberResults results={results} picked={picked} onPick={setPicked} />
+              )}
+            </div>
           </Stack>
         </DialogBody>
         <DialogFooter>

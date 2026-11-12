@@ -1,6 +1,6 @@
 // TJ-ARCH-MOB-001 compliant
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:sovereign_hybrid_mobile/app/app_theme.dart';
 
 /// `--dart-define=KM_GOLDEN_THEME_OVERRIDE=<value>` for the golden suite

@@ -1,7 +1,13 @@
 // TJ-ARCH-MOB-001 compliant
 // Registration draft and its validation rules (agents.html `V` and `stepErrors`).
 // Messages give the problem and the fix (PRODUCT.md voice; VoiceOver finding F9).
-import type { AutoJoin, DispatchScope, KnowledgeAccess, MediaMode, ProjectKind } from "./agent-config";
+import type {
+  AutoJoin,
+  DispatchScope,
+  KnowledgeAccess,
+  MediaMode,
+  ProjectKind,
+} from "./agent-config";
 
 export interface RegistrationDraft {
   readonly name: string;
@@ -41,7 +47,12 @@ export const EMPTY_DRAFT: RegistrationDraft = {
 
 export const EMPTY_SECRETS: RegistrationSecrets = { apiKey: "", apiSecret: "" };
 
-export const STEPS = ["Identity", "Worker & dispatch", "Permissions & knowledge", "Test & finish"] as const;
+export const STEPS = [
+  "Identity",
+  "Worker & dispatch",
+  "Permissions & knowledge",
+  "Test & finish",
+] as const;
 
 /** The agent_name the sample test treats as not running (prototype FAIL_WORKER). */
 export const FAIL_WORKER = "missing-worker";
@@ -51,7 +62,16 @@ const GLYPH_RE = /^[A-Za-z0-9]{2}$/;
 const URL_RE = /^wss:\/\/[A-Za-z0-9.-]+(:\d+)?(\/.*)?$/;
 const TAG_RE = /^[a-z0-9-]{2,32}$/;
 
-export type DraftField = "name" | "desc" | "role" | "glyph" | "url" | "apiKey" | "apiSecret" | "agentName" | "tag";
+export type DraftField =
+  | "name"
+  | "desc"
+  | "role"
+  | "glyph"
+  | "url"
+  | "apiKey"
+  | "apiSecret"
+  | "agentName"
+  | "tag";
 
 export const FIELD_LABEL: Readonly<Record<DraftField, string>> = {
   name: "Name",
@@ -66,7 +86,11 @@ export const FIELD_LABEL: Readonly<Record<DraftField, string>> = {
 };
 
 /** One rule per field; '' means valid. `takenWorkers` holds agent_names already registered. */
-export function validateField(field: DraftField, raw: string, takenWorkers: readonly string[] = []): string {
+export function validateField(
+  field: DraftField,
+  raw: string,
+  takenWorkers: readonly string[] = [],
+): string {
   const v = raw.trim();
   switch (field) {
     case "name":
@@ -95,12 +119,14 @@ export function validateField(field: DraftField, raw: string, takenWorkers: read
     case "agentName":
       if (v === "") return "Enter the agent_name your worker registers with.";
       if (v.length < 3 || v.length > 48) return "Use 3–48 characters.";
-      if (!SLUG_RE.test(v)) return "Use lowercase letters, numbers and single hyphens only, e.g. “scribe-notes”.";
+      if (!SLUG_RE.test(v))
+        return "Use lowercase letters, numbers and single hyphens only, e.g. “scribe-notes”.";
       return takenWorkers.includes(v)
         ? `One of your agents already uses “${v}”. Each registration needs its own agent_name.`
         : "";
     case "tag":
-      if (v === "") return "Enter the meeting tag that should bring this agent in, e.g. “workshop”.";
+      if (v === "")
+        return "Enter the meeting tag that should bring this agent in, e.g. “workshop”.";
       return TAG_RE.test(v) ? "" : "Use 2–32 lowercase letters, numbers or hyphens.";
   }
 }
@@ -140,10 +166,17 @@ export function draftErrors(
 
 /** km.js `initials`-based glyph suggestion when the name is set and the glyph is empty. */
 export function suggestGlyph(name: string): string {
-  const words = name.trim().split(/\s+/).filter((w) => w !== "");
+  const words = name
+    .trim()
+    .split(/\s+/)
+    .filter((w) => w !== "");
   const first = words[0] ?? "";
   const last = words.length > 1 ? (words[words.length - 1] ?? "") : "";
   let glyph = (first.charAt(0) + last.charAt(0)).toUpperCase().replace(/[^A-Z0-9]/g, "");
-  if (glyph.length === 1) glyph = name.replace(/[^A-Za-z0-9]/g, "").slice(0, 2).toUpperCase();
+  if (glyph.length === 1)
+    glyph = name
+      .replace(/[^A-Za-z0-9]/g, "")
+      .slice(0, 2)
+      .toUpperCase();
   return GLYPH_RE.test(glyph) ? glyph : "";
 }

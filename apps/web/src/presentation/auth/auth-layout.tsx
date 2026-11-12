@@ -10,15 +10,22 @@ import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
 import type * as React from "react";
-import type { SessionUserView } from "../shared/session";
 import { buttonLinkClass, h1Class } from "../public-shared/ui-classes";
+import type { SessionUserView } from "../shared/session";
 
-export function AuthShell({ withAside, children }: { readonly withAside: boolean; readonly children: React.ReactNode }) {
+export function AuthShell({
+  withAside,
+  children,
+}: {
+  readonly withAside: boolean;
+  readonly children: React.ReactNode;
+}) {
   return (
     <div
       className={cn(
         "mx-auto grid w-full max-w-[1040px] grid-cols-[minmax(0,480px)] items-start justify-center gap-s6 px-s5 pt-s6 pb-s8 max-bp600:px-s4 max-bp600:pt-s4 max-bp600:pb-s7",
-        withAside && "grid-cols-[minmax(0,480px)_minmax(0,400px)] max-bp900:grid-cols-[minmax(0,480px)]",
+        withAside &&
+          "grid-cols-[minmax(0,480px)_minmax(0,400px)] max-bp900:grid-cols-[minmax(0,480px)]",
       )}
     >
       {children}
@@ -55,8 +62,15 @@ interface AuthHeadProps {
 export function AuthHead({ title, sub, tone = "brand", icon }: AuthHeadProps) {
   return (
     <div className="grid gap-s2">
-      <div aria-hidden="true" className={cn("mb-s2 grid size-13 place-items-center rounded-14", MARK_TONE[tone])}>
-        {icon === undefined ? <BrandMark className="size-[30px]" /> : <KmIcon name={icon} className="size-7" />}
+      <div
+        aria-hidden="true"
+        className={cn("mb-s2 grid size-13 place-items-center rounded-14", MARK_TONE[tone])}
+      >
+        {icon === undefined ? (
+          <BrandMark className="size-[30px]" />
+        ) : (
+          <KmIcon name={icon} className="size-7" />
+        )}
       </div>
       <h1 id="auth-title" className={h1Class}>
         {title}
@@ -71,7 +85,13 @@ export function Address({ children }: { readonly children: string }) {
   return <span className="font-semibold text-foreground [overflow-wrap:anywhere]">{children}</span>;
 }
 
-export function HintBox({ icon, children }: { readonly icon: KmIconName; readonly children: React.ReactNode }) {
+export function HintBox({
+  icon,
+  children,
+}: {
+  readonly icon: KmIconName;
+  readonly children: React.ReactNode;
+}) {
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-s3 rounded-base bg-card p-s4 text-sm text-muted-foreground">
       <KmIcon name={icon} className="text-foreground" />
@@ -106,7 +126,10 @@ interface SignedInNoticeProps {
 /** Shown on sign-in when km-auth is already set. */
 export function SignedInNotice({ user, onSignOut }: SignedInNoticeProps) {
   return (
-    <div role="status" className="flex flex-wrap items-center gap-x-s3 gap-y-s2 rounded-base bg-card px-s4 py-s3 text-sm">
+    <div
+      role="status"
+      className="flex flex-wrap items-center gap-x-s3 gap-y-s2 rounded-base bg-card px-s4 py-s3 text-sm"
+    >
       <Avatar size="sm" tone="ember" aria-hidden="true">
         <AvatarFallback>{user.initials}</AvatarFallback>
       </Avatar>

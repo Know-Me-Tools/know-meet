@@ -137,7 +137,8 @@ class _DetailHead extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text('Worker ', style: sub),
+                Text('Worker', style: sub),
+                const SizedBox(width: 4),
                 AgentCode(agent.worker),
                 KmIconButton(
                   icon: LucideIcons.copy,

@@ -14,8 +14,8 @@ import { RadioGroup, RadioGroupItem } from "@know-meet/ui/components/radio-group
 import { Switch } from "@know-meet/ui/components/switch";
 import { Textarea } from "@know-meet/ui/components/textarea";
 import { cn } from "@know-meet/ui/lib/utils";
-import { useState } from "react";
 import type * as React from "react";
+import { useState } from "react";
 import type { OptionCopy } from "../domain/agent-config";
 
 export function RequiredMark() {
@@ -60,7 +60,14 @@ interface FieldShellProps {
 }
 
 /** km.css `.field`: label, control, hint, error line (6px stack). */
-export function FieldShell({ id, label, required = false, hint, error = "", children }: FieldShellProps) {
+export function FieldShell({
+  id,
+  label,
+  required = false,
+  hint,
+  error = "",
+  children,
+}: FieldShellProps) {
   const hintId = hint === undefined ? undefined : `${id}-hint`;
   const errorId = error === "" ? undefined : `${id}-err`;
   const describedBy = [hintId, errorId].filter((part) => part !== undefined).join(" ") || undefined;
@@ -134,7 +141,13 @@ interface TextAreaFieldProps extends Omit<FieldShellProps, "children"> {
   readonly maxLength?: number;
 }
 
-export function TextAreaField({ value, onValueChange, placeholder, maxLength, ...shell }: TextAreaFieldProps) {
+export function TextAreaField({
+  value,
+  onValueChange,
+  placeholder,
+  maxLength,
+  ...shell
+}: TextAreaFieldProps) {
   return (
     <FieldShell {...shell}>
       {(describedBy, invalid) => (
@@ -170,7 +183,13 @@ export function SecretField({ control, ...shell }: Omit<TextFieldProps, "addon">
       <span>{shown ? "Hide" : "Show"}</span>
     </Button>
   );
-  return <TextField {...shell} control={{ ...control, type: shown ? "text" : "password" }} addon={toggle} />;
+  return (
+    <TextField
+      {...shell}
+      control={{ ...control, type: shown ? "text" : "password" }}
+      addon={toggle}
+    />
+  );
 }
 
 interface SelectFieldProps<T extends string> {
@@ -181,7 +200,13 @@ interface SelectFieldProps<T extends string> {
   readonly onValueChange: (value: T) => void;
 }
 
-export function SelectField<T extends string>({ id, label, value, options, onValueChange }: SelectFieldProps<T>) {
+export function SelectField<T extends string>({
+  id,
+  label,
+  value,
+  options,
+  onValueChange,
+}: SelectFieldProps<T>) {
   return (
     <FieldShell id={id} label={label}>
       {() => (
@@ -237,7 +262,12 @@ function ChoiceShell({ legend, required = false, hint, columns = 1, children }: 
         {required ? <RequiredMark /> : null}
       </legend>
       {hint === undefined ? null : <p className="text-sm text-muted-foreground">{hint}</p>}
-      <div className={cn("grid gap-s2", columns === 3 && "grid-cols-3 max-bp768:grid-cols-[minmax(0,1fr)]")}>
+      <div
+        className={cn(
+          "grid gap-s2",
+          columns === 3 && "grid-cols-3 max-bp768:grid-cols-[minmax(0,1fr)]",
+        )}
+      >
         {children}
       </div>
     </fieldset>
@@ -276,7 +306,10 @@ export function ChoiceGroup<T extends string>({
         className="contents"
       >
         {keys.map((key) => (
-          <label key={key} className={cn(choiceCardClass, surface === "card" ? "bg-card" : "bg-surface")}>
+          <label
+            key={key}
+            className={cn(choiceCardClass, surface === "card" ? "bg-card" : "bg-surface")}
+          >
             <RadioGroupItem value={key} className={indicatorInFocusClass} />
             <OptionCopyText copy={options[key]} />
           </label>
@@ -293,12 +326,21 @@ interface CheckGroupProps<T extends string> extends Omit<ChoiceShellProps, "chil
   readonly surface?: ChoiceSurface;
 }
 
-export function CheckGroup<T extends string>({ value, options, onToggle, surface = "page", ...shell }: CheckGroupProps<T>) {
+export function CheckGroup<T extends string>({
+  value,
+  options,
+  onToggle,
+  surface = "page",
+  ...shell
+}: CheckGroupProps<T>) {
   const keys = Object.keys(options) as T[];
   return (
     <ChoiceShell {...shell}>
       {keys.map((key) => (
-        <label key={key} className={cn(choiceCardClass, surface === "card" ? "bg-card" : "bg-surface")}>
+        <label
+          key={key}
+          className={cn(choiceCardClass, surface === "card" ? "bg-card" : "bg-surface")}
+        >
           <Checkbox
             checked={value[key]}
             onCheckedChange={(checked) => onToggle(key, checked)}
@@ -321,7 +363,14 @@ interface SwitchRowProps {
 }
 
 /** km.css `.switch-row`: copy (label + description) then the switch. */
-export function SwitchRow({ id, label, desc, checked, disabled = false, onCheckedChange }: SwitchRowProps) {
+export function SwitchRow({
+  id,
+  label,
+  desc,
+  checked,
+  disabled = false,
+  onCheckedChange,
+}: SwitchRowProps) {
   const descId = desc === undefined ? undefined : `${id}-desc`;
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s4 py-s3">

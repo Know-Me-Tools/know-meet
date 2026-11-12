@@ -2,7 +2,8 @@
 # installers for six targets, uploaded to a DRAFT GitHub Release. A human publishes the draft.
 # Runbook: docs/release/desktop-releases.md. Toolchains come from tooling/versions.toml via
 # package.json (packageManager, engines.node) and rust-toolchain.toml; nothing is restated here.
-# Signing is optional: each signing step is skipped when its secrets are absent.
+# Tag builds REQUIRE signing secrets (the desktop job fails without them); branch/dispatch runs skip
+# signing when secrets are absent. Release builds never use the Turborepo remote cache.
 name: release
 
 on:
@@ -18,8 +19,8 @@ permissions:
   contents: read
 
 env:
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  # Release artifacts must be built from source: no remote cache (no TURBO_TOKEN) and no cache reads.
+  TURBO_FORCE: "true"
 
 jobs:
   full:
@@ -137,6 +138,34 @@ jobs:
       - name: Build apps/web's workspace dependencies (turbo cache); web itself builds in beforeBuildCommand
         run: pnpm exec turbo run build --filter=@know-meet/web^...
 
+      - name: Require signing secrets on tag builds
+        if: github.ref_type == 'tag' && (matrix.os == 'macos' || matrix.os == 'windows')
+        shell: bash
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_PRIVATE_KEY: ${{ secrets.APPLE_API_PRIVATE_KEY }}
+          WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+          WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+          TARGET_OS: ${{ matrix.os }}
+        run: |
+          if [ "$TARGET_OS" = macos ]; then
+            required="APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD APPLE_SIGNING_IDENTITY APPLE_API_ISSUER APPLE_API_KEY APPLE_API_PRIVATE_KEY"
+          else
+            required="WINDOWS_CERTIFICATE WINDOWS_CERTIFICATE_PASSWORD"
+          fi
+          missing=""
+          for name in $required; do
+            if [ -z "${!name}" ]; then missing="$missing $name"; fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::tag build refuses to ship unsigned installers; missing secrets:$missing"
+            exit 1
+          fi
+
       - name: macOS signing and notarisation secrets (skipped when absent)
         if: matrix.os == 'macos' && env.HAS_APPLE_CERT == 'true'
         env:
@@ -150,7 +179,11 @@ jobs:
           # Export only non-empty values: Tauri treats a set-but-empty variable as present.
           for name in APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD APPLE_SIGNING_IDENTITY APPLE_API_ISSUER APPLE_API_KEY; do
             value="${!name}"
-            if [ -n "$value" ]; then echo "$name=$value" >> "$GITHUB_ENV"; fi
+            if [ -n "$value" ]; then
+              # Random heredoc delimiter: a secret containing a newline cannot inject extra variables.
+              delimiter="ghadelim_$(uuidgen)"
+              { echo "$name<<$delimiter"; printf '%s\n' "$value"; echo "$delimiter"; } >> "$GITHUB_ENV"
+            fi
           done
           if [ -n "$APPLE_API_PRIVATE_KEY" ]; then
             key_path="$RUNNER_TEMP/AuthKey_${APPLE_API_KEY}.p8"

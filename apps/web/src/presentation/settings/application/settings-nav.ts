@@ -42,8 +42,20 @@ export const SETTINGS_NAV: readonly SettingsNavGroup[] = [
 ];
 
 const SECTIONS: readonly SettingsSection[] = [
-  "account", "notifications", "livekit", "telnyx-sms", "telnyx-voice", "calendars", "calendar-connect",
-  "storage", "storage-s3", "storage-ipfs", "storage-test-failed", "recording", "delivery", "templates",
+  "account",
+  "notifications",
+  "livekit",
+  "telnyx-sms",
+  "telnyx-voice",
+  "calendars",
+  "calendar-connect",
+  "storage",
+  "storage-s3",
+  "storage-ipfs",
+  "storage-test-failed",
+  "recording",
+  "delivery",
+  "templates",
 ];
 
 /** Unknown or empty hash views fall back to Account (km.js `route(handlers, 'account')`). */
@@ -66,5 +78,7 @@ export function activeNavKey(section: SettingsSection): SettingsNavKey {
 
 export function groupLabelOf(section: SettingsSection): string {
   const key = activeNavKey(section);
-  return SETTINGS_NAV.find((group) => group.items.some((item) => item.key === key))?.label ?? "Settings";
+  return (
+    SETTINGS_NAV.find((group) => group.items.some((item) => item.key === key))?.label ?? "Settings"
+  );
 }

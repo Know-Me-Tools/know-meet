@@ -2,16 +2,21 @@
 // The schedule form model (dashboard.html `renderSchedule`): defaults for a new or
 // edited meeting, submit-time validation with cause-then-fix copy, and the email
 // and SMS invite previews. Pure functions of the form values and `now`.
-import { formatDate, formatDay, formatMinutes, formatTime } from "../../workspace/application/format";
+import {
+  formatDate,
+  formatDay,
+  formatMinutes,
+  formatTime,
+} from "../../workspace/application/format";
 import type { Workspace } from "../../workspace/domain/workspace";
 import type { DashboardMeeting, Invitee, PreRead } from "../domain/dashboard";
 import { parseInvitee } from "../domain/invitee-rules";
 
 const MINUTE_MS = 60_000;
 
-export const DURATION_OPTIONS: readonly { readonly value: string; readonly label: string }[] = [15, 30, 45, 60, 90, 120].map(
-  (n) => ({ value: String(n), label: formatMinutes(n) }),
-);
+export const DURATION_OPTIONS: readonly { readonly value: string; readonly label: string }[] = [
+  15, 30, 45, 60, 90, 120,
+].map((n) => ({ value: String(n), label: formatMinutes(n) }));
 
 export type CalendarChoice = "google" | "outlook" | "none";
 
@@ -55,9 +60,21 @@ function inviteesFromMeeting(meeting: DashboardMeeting, workspace: Workspace): r
   return meeting.invitees.flatMap((name) => {
     const person = workspace.people.find((p) => p.name === name);
     if (person) {
-      return [{ key: person.email.toLowerCase(), value: person.email, kind: "email" as const, name: person.name, email: person.email, phone: person.phone }];
+      return [
+        {
+          key: person.email.toLowerCase(),
+          value: person.email,
+          kind: "email" as const,
+          name: person.name,
+          email: person.email,
+          phone: person.phone,
+        },
+      ];
     }
-    const parsed = parseInvitee(name === workspace.user.name ? workspace.user.email : name, workspace.people);
+    const parsed = parseInvitee(
+      name === workspace.user.name ? workspace.user.email : name,
+      workspace.people,
+    );
     return parsed.ok ? [{ ...parsed.invitee, name }] : [];
   });
 }
@@ -126,15 +143,27 @@ function timeError(values: ScheduleValues, now: Date): string {
 }
 
 /** Submit-time validation in field order (the order focus follows, F6). */
-export function validateSchedule(values: ScheduleValues, pendingInviteeError: string, now: Date): readonly ScheduleError[] {
+export function validateSchedule(
+  values: ScheduleValues,
+  pendingInviteeError: string,
+  now: Date,
+): readonly ScheduleError[] {
   const checks: readonly ScheduleError[] = [
-    { id: "f-title", label: "Title", message: values.title.trim() ? "" : "Add a title so invitees know what the meeting is about." },
+    {
+      id: "f-title",
+      label: "Title",
+      message: values.title.trim() ? "" : "Add a title so invitees know what the meeting is about.",
+    },
     { id: "f-date", label: "Date", message: dateError(values, now) },
     { id: "f-time", label: "Start time", message: timeError(values, now) },
     {
       id: "f-invitee",
       label: "Invitees",
-      message: pendingInviteeError || (values.invitees.length ? "" : "Add at least one invitee by email address or phone number."),
+      message:
+        pendingInviteeError ||
+        (values.invitees.length
+          ? ""
+          : "Add at least one invitee by email address or phone number."),
     },
   ];
   return checks.filter((check) => check.message !== "");
@@ -154,7 +183,13 @@ export interface InvitePreview {
   readonly smsMeta: string;
 }
 
-export function buildInvitePreview(values: ScheduleValues, workspace: Workspace, hostName: string, link: string, tzLabel: string): InvitePreview {
+export function buildInvitePreview(
+  values: ScheduleValues,
+  workspace: Workspace,
+  hostName: string,
+  link: string,
+  tzLabel: string,
+): InvitePreview {
   const title = values.title.trim() || "Untitled meeting";
   const start = startOf(values);
   const end = start ? new Date(start.getTime() + Number(values.duration) * MINUTE_MS) : null;
@@ -163,12 +198,15 @@ export function buildInvitePreview(values: ScheduleValues, workspace: Workspace,
   const first = emails[0];
   const dial = workspace.telnyx.dialIn[0];
   const pin = workspace.meetings[0]?.dialIn.pin ?? "";
-  const agentNames = values.agents.map((id) => workspace.agents.find((a) => a.id === id)?.name ?? id);
+  const agentNames = values.agents.map(
+    (id) => workspace.agents.find((a) => a.id === id)?.name ?? id,
+  );
   if (values.iris) agentNames.push(`Iris (${hostName.split(" ")[0]}’s dot)`);
   const notices: string[] = [];
   if (values.options.record) notices.push("This meeting will be recorded.");
   if (values.options.transcribe) notices.push("Live transcription is on.");
-  if (values.options.summary) notices.push("The transcript and summary are sent to participants afterwards.");
+  if (values.options.summary)
+    notices.push("The transcript and summary are sent to participants afterwards.");
   notices.push("No KnowMe account needed to join.");
   const dialLine = dial ? `${dial.number}, PIN ${pin}` : null;
   const sms =
@@ -191,6 +229,8 @@ export function buildInvitePreview(values: ScheduleValues, workspace: Workspace,
     sms,
     smsMeta:
       `${sms.length} characters · ${segments} SMS segment${segments === 1 ? "" : "s"} · from ${workspace.telnyx.smsFrom}` +
-      (smsCount ? ` · to ${smsCount}${smsCount === 1 ? " number" : " numbers"}` : " · no phone invitees yet"),
+      (smsCount
+        ? ` · to ${smsCount}${smsCount === 1 ? " number" : " numbers"}`
+        : " · no phone invitees yet"),
   };
 }

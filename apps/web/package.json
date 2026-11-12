@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "build": "node scripts/build.mjs",
     "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test \"tests/unit/**/*.test.ts\"",
     "test:e2e": "node tests/restart.mjs"
   },
   "dependencies": {

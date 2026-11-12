@@ -22,8 +22,8 @@ import {
 } from "@know-meet/ui/components/page-head";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link } from "@tanstack/react-router";
-import { Fragment } from "react";
 import type * as React from "react";
+import { Fragment } from "react";
 
 export interface Crumb {
   readonly label: string;
@@ -41,7 +41,7 @@ export function Crumbs({ items }: { readonly items: readonly Crumb[] }) {
     <Breadcrumb className="mb-s2">
       <BreadcrumbList>
         {items.map((crumb, index) => (
-          <Fragment key={`${crumb.label}-${index}`}>
+          <Fragment key={`${crumb.to ?? ""}:${crumb.label}`}>
             {index > 0 ? (
               <BreadcrumbSeparator>
                 <KmIcon name="chevron-right" className="size-3.5" />
@@ -118,14 +118,22 @@ export function DotStatusChip({ paused }: { readonly paused: boolean }) {
 }
 
 /** km.css `.state-line`: shape + colour + words (round green = live, filled square = not live). */
-export function StateLine({ status, children }: { readonly status: "online" | "offline"; readonly children: React.ReactNode }) {
+export function StateLine({
+  status,
+  children,
+}: {
+  readonly status: "online" | "offline";
+  readonly children: React.ReactNode;
+}) {
   return (
     <span data-state={status} className="inline-flex items-center gap-2 text-sm font-semibold">
       <span
         aria-hidden="true"
         className={cn(
           "flex-none",
-          status === "online" ? "size-2.5 rounded-round bg-pip-green" : "size-size-pip bg-muted-foreground",
+          status === "online"
+            ? "size-2.5 rounded-round bg-pip-green"
+            : "size-size-pip bg-muted-foreground",
         )}
       />
       {children}
@@ -167,7 +175,9 @@ export function Notice({
 /** km.css `code:not(.code)`. */
 export function InlineCode({ children }: { readonly children: React.ReactNode }) {
   return (
-    <code className="rounded-6 bg-muted px-1.5 py-px font-mono text-[0.88em] [overflow-wrap:anywhere]">{children}</code>
+    <code className="rounded-6 bg-muted px-1.5 py-px font-mono text-[0.88em] [overflow-wrap:anywhere]">
+      {children}
+    </code>
   );
 }
 
@@ -214,12 +224,18 @@ export function RowChevron() {
 }
 
 /** km.css `.kv` definition list; `plain` rows use the body face. */
-export function KeyValues({ rows }: { readonly rows: readonly (readonly [string, React.ReactNode, "mono" | "plain"])[] }) {
+export function KeyValues({
+  rows,
+}: {
+  readonly rows: readonly (readonly [string, React.ReactNode, "mono" | "plain"])[];
+}) {
   return (
     <dl className="m-0 grid grid-cols-[minmax(120px,max-content)_minmax(0,1fr)] gap-x-s5 gap-y-s2 max-bp768:grid-cols-[minmax(0,1fr)] max-bp768:gap-0.5">
       {rows.map(([term, value, face]) => (
         <Fragment key={term}>
-          <dt className="pt-0.5 text-sm text-muted-foreground max-bp768:[&:not(:first-child)]:mt-s3">{term}</dt>
+          <dt className="pt-0.5 text-sm text-muted-foreground max-bp768:[&:not(:first-child)]:mt-s3">
+            {term}
+          </dt>
           <dd
             className={cn(
               "m-0 min-w-0 [overflow-wrap:anywhere]",

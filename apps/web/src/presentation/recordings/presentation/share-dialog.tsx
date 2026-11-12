@@ -51,8 +51,8 @@ export function ShareDialog({ recording, host, open, onOpenChange }: ShareDialog
             </div>
           </div>
           <Note kind="info" icon="lock">
-            People need to sign in to open this link. Participants already have access; anyone else you share with gets
-            view-only access to the recording, transcript and summary.
+            People need to sign in to open this link. Participants already have access; anyone else
+            you share with gets view-only access to the recording, transcript and summary.
           </Note>
           <div className="grid gap-1.5">
             <span className="text-sm font-semibold">People with access</span>

@@ -22,7 +22,9 @@ const expect = (path: string, label: string, actual: string | undefined, wanted:
     });
 };
 
-const source = JSON.parse(read("tooling/versions.source.json")) as { sha256: string };
+const source = JSON.parse(read("tooling/versions.source.json")) as {
+  sha256: string;
+};
 const digest = createHash("sha256")
   .update(readFileSync(join(cwd, "tooling/versions.toml")))
   .digest("hex");

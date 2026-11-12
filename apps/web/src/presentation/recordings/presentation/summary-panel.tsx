@@ -25,12 +25,30 @@ function generatedLabel(recording: Recording): string {
   return `Generated ${formatDate(at)}`;
 }
 
-function ActionRow({ item, index, onToggle }: { readonly item: ActionItem; readonly index: number; readonly onToggle: (done: boolean) => void }) {
+function ActionRow({
+  item,
+  index,
+  onToggle,
+}: {
+  readonly item: ActionItem;
+  readonly index: number;
+  readonly onToggle: (done: boolean) => void;
+}) {
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-s3 py-s3">
-      <Checkbox id={`act-${index}`} checked={item.done} onCheckedChange={(checked) => onToggle(checked)} className="mt-0.5" />
+      <Checkbox
+        id={`act-${index}`}
+        checked={item.done}
+        onCheckedChange={(checked) => onToggle(checked)}
+        className="mt-0.5"
+      />
       <label htmlFor={`act-${index}`} className="cursor-pointer">
-        <span className={cn("block font-medium [overflow-wrap:anywhere]", item.done && "text-muted-foreground line-through")}>
+        <span
+          className={cn(
+            "block font-medium [overflow-wrap:anywhere]",
+            item.done && "text-muted-foreground line-through",
+          )}
+        >
           {item.text}
         </span>
         <span className="block text-sm text-muted-foreground">{item.owner}</span>
@@ -62,7 +80,12 @@ function SummaryEditor({
       fieldRef.current?.focus();
       return;
     }
-    onSave(value.split(/\n\s*\n/).map((p) => p.trim()).filter((p) => p !== ""));
+    onSave(
+      value
+        .split(/\n\s*\n/)
+        .map((p) => p.trim())
+        .filter((p) => p !== ""),
+    );
   };
   return (
     <div className={panelClass}>
@@ -86,7 +109,10 @@ function SummaryEditor({
         {invalid ? (
           <p id="sum-err" className="flex items-center gap-1.5 text-sm font-medium text-foreground">
             <KmIcon name="alert" className="size-4 text-red-text" />
-            <span>The summary can’t be empty. Write at least one sentence, or cancel to keep the current version.</span>
+            <span>
+              The summary can’t be empty. Write at least one sentence, or cancel to keep the current
+              version.
+            </span>
           </p>
         ) : null}
       </div>
@@ -103,7 +129,13 @@ function SummaryEditor({
   );
 }
 
-export function SummaryPanel({ recording, summary }: { readonly recording: Recording; readonly summary: RecordingSummary }) {
+export function SummaryPanel({
+  recording,
+  summary,
+}: {
+  readonly recording: Recording;
+  readonly summary: RecordingSummary;
+}) {
   const [paragraphs, setParagraphs] = useState<readonly string[]>(summary.paragraphs);
   const [actions, setActions] = useState<readonly ActionItem[]>(summary.actions);
   const [generated, setGenerated] = useState(() => generatedLabel(recording));
@@ -132,11 +164,22 @@ export function SummaryPanel({ recording, summary }: { readonly recording: Recor
           <span className="text-sm text-muted-foreground">{generated}</span>
         </div>
         <div className="flex flex-wrap items-center gap-s2">
-          <Button variant="secondary" size="sm" disabled={editing || regenerating} onClick={() => setEditing(true)}>
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={editing || regenerating}
+            onClick={() => setEditing(true)}
+          >
             <KmIcon name="edit" className="size-4" />
             <span>Edit</span>
           </Button>
-          <Button variant="secondary" size="sm" disabled={editing || regenerating} aria-busy={regenerating} onClick={regenerate}>
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={editing || regenerating}
+            aria-busy={regenerating}
+            onClick={regenerate}
+          >
             {regenerating ? (
               <BusyLabel label="Regenerating…" />
             ) : (
@@ -160,7 +203,10 @@ export function SummaryPanel({ recording, summary }: { readonly recording: Recor
           }}
         />
       ) : (
-        <div className={cn("grid gap-s4 transition-opacity", regenerating && "opacity-50")} aria-busy={regenerating}>
+        <div
+          className={cn("grid gap-s4 transition-opacity", regenerating && "opacity-50")}
+          aria-busy={regenerating}
+        >
           <div className={cn(panelClass, "max-w-[68ch] gap-0 [&>p+p]:mt-s3")}>
             {paragraphs.map((p) => (
               <p key={p}>{p}</p>
@@ -183,7 +229,12 @@ export function SummaryPanel({ recording, summary }: { readonly recording: Recor
             </div>
             <div>
               {actions.map((item, index) => (
-                <ActionRow key={item.text} item={item} index={index} onToggle={(done) => toggle(index, done)} />
+                <ActionRow
+                  key={item.text}
+                  item={item}
+                  index={index}
+                  onToggle={(done) => toggle(index, done)}
+                />
               ))}
             </div>
           </section>

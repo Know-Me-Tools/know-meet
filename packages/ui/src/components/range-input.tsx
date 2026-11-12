@@ -16,7 +16,8 @@ const rangeClass = cn(
   "focus-visible:[&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--on-focus)_var(--pct),var(--control)_var(--pct))] focus-visible:[&::-webkit-slider-thumb]:bg-on-focus focus-visible:[&::-moz-range-progress]:bg-on-focus focus-visible:[&::-moz-range-thumb]:bg-on-focus",
 );
 
-interface RangeInputProps extends Omit<React.ComponentProps<"input">, "type" | "value" | "min" | "max"> {
+interface RangeInputProps
+  extends Omit<React.ComponentProps<"input">, "type" | "value" | "min" | "max"> {
   readonly value: number;
   readonly min?: number;
   readonly max: number;

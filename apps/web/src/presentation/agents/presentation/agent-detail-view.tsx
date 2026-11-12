@@ -37,14 +37,24 @@ function DetailHead({ agent }: { readonly agent: RegistryAgent }) {
       </AgentGlyph>
       <div className="grid min-w-0 gap-s2 *:min-w-0">
         <Crumbs items={[{ label: "Agents", to: "registry" }, { label: agent.name }]} />
-        <h1 tabIndex={-1} className="block truncate text-2xl font-bold outline-none" title={agent.name}>
+        <h1
+          tabIndex={-1}
+          className="block truncate text-2xl font-bold outline-none"
+          title={agent.name}
+        >
           {agent.name}
         </h1>
         <div className="flex flex-wrap items-center gap-x-s4 gap-y-s2 text-sm text-muted-foreground">
           <StateLine status={agent.status}>
-            {agent.status === "online" ? "Online — worker connected" : "Offline — worker not connected"}
+            {agent.status === "online"
+              ? "Online — worker connected"
+              : "Offline — worker not connected"}
           </StateLine>
-          {agent.system ? <Badge variant="ember">System agent</Badge> : <span>{agent.role || "Agent"}</span>}
+          {agent.system ? (
+            <Badge variant="ember">System agent</Badge>
+          ) : (
+            <span>{agent.role || "Agent"}</span>
+          )}
           {agent.paused ? (
             <Badge variant="amber">
               <BadgePip />
@@ -67,12 +77,20 @@ function DetailHead({ agent }: { readonly agent: RegistryAgent }) {
       </div>
       <div className="max-bp768:col-span-full">
         {agent.system ? (
-          <Link to="/agents" hash="concierge" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/agents"
+            hash="concierge"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="info" className="size-4" />
             <span>What guests get</span>
           </Link>
         ) : (
-          <Link to="/meet" hash="room:agents" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+          <Link
+            to="/meet"
+            hash="room:agents"
+            className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+          >
             <KmIcon name="agent-add" className="size-4" />
             <span>Dispatch in a meeting</span>
           </Link>
@@ -82,10 +100,18 @@ function DetailHead({ agent }: { readonly agent: RegistryAgent }) {
   );
 }
 
-function DetailBody({ agent, initialTab }: { readonly agent: RegistryAgent; readonly initialTab: string | undefined }) {
+function DetailBody({
+  agent,
+  initialTab,
+}: {
+  readonly agent: RegistryAgent;
+  readonly initialTab: string | undefined;
+}) {
   useDocumentTitle(`${agent.name} — Know Meet`);
   const tabs = agent.system ? TABS.slice(0, 2) : TABS;
-  const [tab, setTab] = useState<DetailTab>(() => tabs.find(([key]) => key === initialTab)?.[0] ?? "overview");
+  const [tab, setTab] = useState<DetailTab>(
+    () => tabs.find(([key]) => key === initialTab)?.[0] ?? "overview",
+  );
   return (
     <>
       <DetailHead agent={agent} />
@@ -126,7 +152,13 @@ function DetailBody({ agent, initialTab }: { readonly agent: RegistryAgent; read
   );
 }
 
-export function AgentDetailView({ id, params }: { readonly id: string | null; readonly params: Readonly<Record<string, string>> }) {
+export function AgentDetailView({
+  id,
+  params,
+}: {
+  readonly id: string | null;
+  readonly params: Readonly<Record<string, string>>;
+}) {
   const { registry } = useAgentsState();
   const agent = id === null ? undefined : registry.find((candidate) => candidate.id === id);
   if (agent === undefined) {

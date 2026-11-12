@@ -49,8 +49,8 @@ export function WaitingView({ meeting, guestName, camera, mic }: WaitingViewProp
         The host will let you in soon
       </h1>
       <p>
-        You’re asking to join <strong>{meeting.title}</strong> as{" "}
-        <strong>{guestName}</strong>. {host.name} has been notified. Keep this page open.
+        You’re asking to join <strong>{meeting.title}</strong> as <strong>{guestName}</strong>.{" "}
+        {host.name} has been notified. Keep this page open.
       </p>
       <p role="status" className="inline-flex items-center gap-s2 font-semibold">
         <span>Waiting for {host.name} to let you in…</span>
@@ -74,7 +74,8 @@ export function WaitingView({ meeting, guestName, camera, mic }: WaitingViewProp
           <AlertDialogHeader>
             <AlertDialogTitle>Leave the waiting room?</AlertDialogTitle>
             <AlertDialogDescription>
-              {host.name} won’t see you waiting any more. You can come back any time from your invite link.
+              {host.name} won’t see you waiting any more. You can come back any time from your
+              invite link.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -82,7 +83,12 @@ export function WaitingView({ meeting, guestName, camera, mic }: WaitingViewProp
             <Button
               variant="destructive"
               type="button"
-              onClick={() => void navigate({ to: "/join", hash: toHash("invite", undefined, { code: meeting.joinCode }) })}
+              onClick={() =>
+                void navigate({
+                  to: "/join",
+                  hash: toHash("invite", undefined, { code: meeting.joinCode }),
+                })
+              }
             >
               Leave
             </Button>
@@ -148,7 +154,13 @@ export function ExpiredView({ meeting, meetings }: ExpiredViewProps) {
   );
 }
 
-export function WrongCodeView({ tried, meetings }: { readonly tried: string; readonly meetings: readonly SampleMeeting[] }) {
+export function WrongCodeView({
+  tried,
+  meetings,
+}: {
+  readonly tried: string;
+  readonly meetings: readonly SampleMeeting[];
+}) {
   return (
     <CenterCard labelledBy="wc-title">
       <StateBadge icon="search" tone="error" />
@@ -159,10 +171,16 @@ export function WrongCodeView({ tried, meetings }: { readonly tried: string; rea
         <p>Enter the meeting code from your invite to find the meeting.</p>
       ) : (
         <p>
-          No meeting uses the code <InlineCode>{tried}</InlineCode>. Check it against your invite and try again.
+          No meeting uses the code <InlineCode>{tried}</InlineCode>. Check it against your invite
+          and try again.
         </p>
       )}
-      <CodeForm idSuffix="retry" meetings={meetings} initialCode={tried} focusOnMount={tried !== ""} />
+      <CodeForm
+        idSuffix="retry"
+        meetings={meetings}
+        initialCode={tried}
+        focusOnMount={tried !== ""}
+      />
       <OptionList>
         <OptionItem
           icon="info"

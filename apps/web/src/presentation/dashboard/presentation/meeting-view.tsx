@@ -26,7 +26,7 @@ import { timeZoneLabel } from "../application/dashboard-fixtures";
 import { meetingEndOf, statusOf } from "../application/dashboard-state";
 import type { DashboardMeeting } from "../domain/dashboard";
 import { useDashboard } from "./dashboard-context";
-import { CopyLinkButton, MeetingsCrumbs, MeetingStatusChip, SourceChip } from "./dashboard-parts";
+import { CopyLinkButton, MeetingStatusChip, MeetingsCrumbs, SourceChip } from "./dashboard-parts";
 import { AgentsCard, JoinInfoCard, PreReadsCard, RecordingCard } from "./meeting-cards";
 import { InviteesCard } from "./meeting-invitees-card";
 import { NotFoundView } from "./not-found-view";
@@ -45,8 +45,8 @@ function CancelMeetingButton({ meeting }: { readonly meeting: DashboardMeeting }
         <AlertDialogHeader>
           <AlertDialogTitle>Cancel “{title}”?</AlertDialogTitle>
           <AlertDialogDescription>
-            All {meeting.invitees.length} invitees are told by email and SMS, and the calendar event is removed. The join link stops
-            working. This can’t be undone.
+            All {meeting.invitees.length} invitees are told by email and SMS, and the calendar event
+            is removed. The join link stops working. This can’t be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -92,11 +92,15 @@ export function MeetingView({ id }: { readonly id: string | null }) {
           <SourceChip source={meeting.source} />
           <span>Host: {hosting ? "You" : meeting.host}</span>
         </div>
-        {meeting.description ? <p className="max-w-[68ch] text-muted-foreground">{meeting.description}</p> : null}
+        {meeting.description ? (
+          <p className="max-w-[68ch] text-muted-foreground">{meeting.description}</p>
+        ) : null}
         {meeting.cancelled ? (
           <p className="flex items-center gap-s2 rounded-base bg-red-soft px-s4 py-s3 font-medium text-foreground">
             <KmIcon name="alert" className="text-red-text" />
-            <span>This meeting was cancelled. Invitees were notified and the join link no longer works.</span>
+            <span>
+              This meeting was cancelled. Invitees were notified and the join link no longer works.
+            </span>
           </p>
         ) : null}
         <div className="flex flex-wrap items-center gap-s2">
@@ -106,7 +110,13 @@ export function MeetingView({ id }: { readonly id: string | null }) {
               <span>Join</span>
             </Link>
           ) : null}
-          {meeting.cancelled ? null : <CopyLinkButton url={joinUrlFor(meeting.joinCode)} title={meeting.title} size="default" />}
+          {meeting.cancelled ? null : (
+            <CopyLinkButton
+              url={joinUrlFor(meeting.joinCode)}
+              title={meeting.title}
+              size="default"
+            />
+          )}
           {canChange ? (
             <>
               <Link

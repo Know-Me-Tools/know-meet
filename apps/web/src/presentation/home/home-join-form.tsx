@@ -11,7 +11,12 @@ import { useNavigate } from "@tanstack/react-router";
 import type * as React from "react";
 import { useRef } from "react";
 import { describedBy, FormField, hintId } from "../public-shared/form-field";
-import { CODE_EXAMPLE, CODE_MAX_LENGTH, codeFormatError, normalizeCode } from "../public-shared/join-code";
+import {
+  CODE_EXAMPLE,
+  CODE_MAX_LENGTH,
+  codeFormatError,
+  normalizeCode,
+} from "../public-shared/join-code";
 import { findByCode, type SampleMeeting } from "../public-shared/sample-meetings";
 import { submitForm, useField } from "../public-shared/use-field";
 import { toHash } from "../shared/use-hash-route";
@@ -47,7 +52,13 @@ export function HomeJoinForm({ meetings }: { readonly meetings: readonly SampleM
       onSubmit={onSubmit}
       className="grid max-w-[460px] gap-1.5 rounded-tile bg-surface p-s4 shadow-(--shadow-card)"
     >
-      <FormField id={ID} label="Join with a code" error={code.error} hint="The code is in your email, SMS or calendar invite." announceError>
+      <FormField
+        id={ID}
+        label="Join with a code"
+        error={code.error}
+        hint="The code is in your email, SMS or calendar invite."
+        announceError
+      >
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s2">
           <Input
             id={ID}

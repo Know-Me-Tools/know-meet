@@ -32,7 +32,12 @@ import { useBusyAction } from "./use-static-delay";
 
 type CapabilityState = "ok" | "pending";
 
-function CapabilityRow({ icon, title, description, state }: {
+function CapabilityRow({
+  icon,
+  title,
+  description,
+  state,
+}: {
   readonly icon: "record" | "phone-in";
   readonly title: string;
   readonly description: string;
@@ -48,7 +53,11 @@ function CapabilityRow({ icon, title, description, state }: {
         <span className="block text-sm text-muted-foreground">{description}</span>
       </span>
       <span className="max-bp768:col-start-2 max-bp768:justify-self-start">
-        {state === "ok" ? <StatusChip tone="green">Available</StatusChip> : <StatusChip tone="amber">Not checked yet</StatusChip>}
+        {state === "ok" ? (
+          <StatusChip tone="green">Available</StatusChip>
+        ) : (
+          <StatusChip tone="amber">Not checked yet</StatusChip>
+        )}
       </span>
     </div>
   );
@@ -58,8 +67,18 @@ function CapabilitiesPanel({ state }: { readonly state: CapabilityState }) {
   return (
     <Panel title="Capabilities" description="What this connection supports for Know Meet.">
       <div>
-        <CapabilityRow icon="record" title="Egress" description="Room Composite recording to MP4 or HLS on S3-compatible storage" state={state} />
-        <CapabilityRow icon="phone-in" title="SIP" description="Inbound trunk for Telnyx voice dial-in (no outbound calling)" state={state} />
+        <CapabilityRow
+          icon="record"
+          title="Egress"
+          description="Room Composite recording to MP4 or HLS on S3-compatible storage"
+          state={state}
+        />
+        <CapabilityRow
+          icon="phone-in"
+          title="SIP"
+          description="Inbound trunk for Telnyx voice dial-in (no outbound calling)"
+          state={state}
+        />
       </div>
     </Panel>
   );
@@ -68,9 +87,19 @@ function CapabilitiesPanel({ state }: { readonly state: CapabilityState }) {
 function ManagedProject({ workspace }: { readonly workspace: Workspace }) {
   return (
     <>
-      <Panel title="KnowMe-managed project" description="KnowMe runs and scales the LiveKit project for you.">
+      <Panel
+        title="KnowMe-managed project"
+        description="KnowMe runs and scales the LiveKit project for you."
+      >
         <Stack>
-          <TextField id="lk-managed-url" label="Server URL" readOnly mono copyable value={workspace.livekit.url} />
+          <TextField
+            id="lk-managed-url"
+            label="Server URL"
+            readOnly
+            mono
+            copyable
+            value={workspace.livekit.url}
+          />
           <div className="grid gap-1.5">
             <span className="text-sm font-semibold">Credentials</span>
             <Stack gap="sm">
@@ -79,7 +108,9 @@ function ManagedProject({ workspace }: { readonly workspace: Workspace }) {
             </Stack>
             <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
               <KmIcon name="lock" className="size-4" />
-              <span>Managed by KnowMe — stored server-side. Values are never shown in the browser.</span>
+              <span>
+                Managed by KnowMe — stored server-side. Values are never shown in the browser.
+              </span>
             </p>
           </div>
         </Stack>
@@ -98,10 +129,18 @@ const OWN_RULES: Readonly<Record<OwnKey, FieldRule>> = {
 };
 
 function OwnProject() {
-  const [values, setValues] = useState<Readonly<Record<OwnKey, string>>>({ url: "", key: "", secret: "" });
+  const [values, setValues] = useState<Readonly<Record<OwnKey, string>>>({
+    url: "",
+    key: "",
+    secret: "",
+  });
   const [region, setRegion] = useState("auto");
   const [tested, setTested] = useState(false);
-  const [outcome, setOutcome] = useState<{ readonly ok: boolean; readonly message: string; readonly step?: string } | null>(null);
+  const [outcome, setOutcome] = useState<{
+    readonly ok: boolean;
+    readonly message: string;
+    readonly step?: string;
+  } | null>(null);
   const [showChecks, setShowChecks] = useState(false);
   const [confirm, setConfirm] = useState<ConfirmRequest | null>(null);
   const { formRef, errors, validate, revalidate } = useFormErrors(OWN_RULES);
@@ -137,7 +176,10 @@ function OwnProject() {
 
   return (
     <>
-      <Panel title="Your LiveKit project" description="Use a LiveKit Cloud or self-hosted project you control.">
+      <Panel
+        title="Your LiveKit project"
+        description="Use a LiveKit Cloud or self-hosted project you control."
+      >
         <form
           ref={formRef}
           noValidate
@@ -158,12 +200,47 @@ function OwnProject() {
           }}
         >
           <Stack>
-            <TextField id="lk-url" label="Server URL" required mono placeholder="wss://your-project.livekit.cloud" hint="The WebSocket URL from your LiveKit project settings." value={values.url} error={errors.url} onValueChange={set("url")} />
+            <TextField
+              id="lk-url"
+              label="Server URL"
+              required
+              mono
+              placeholder="wss://your-project.livekit.cloud"
+              hint="The WebSocket URL from your LiveKit project settings."
+              value={values.url}
+              error={errors.url}
+              onValueChange={set("url")}
+            />
             <FieldRow>
-              <TextField id="lk-key" label="API key" required mono placeholder="APIxxxxxxxxxxxx" value={values.key} error={errors.key} onValueChange={set("key")} />
-              <TextField id="lk-secret" label="API secret" kind="password" required mono hint="Stored encrypted on KnowMe servers and never shown again." value={values.secret} error={errors.secret} onValueChange={set("secret")} />
+              <TextField
+                id="lk-key"
+                label="API key"
+                required
+                mono
+                placeholder="APIxxxxxxxxxxxx"
+                value={values.key}
+                error={errors.key}
+                onValueChange={set("key")}
+              />
+              <TextField
+                id="lk-secret"
+                label="API secret"
+                kind="password"
+                required
+                mono
+                hint="Stored encrypted on KnowMe servers and never shown again."
+                value={values.secret}
+                error={errors.secret}
+                onValueChange={set("secret")}
+              />
             </FieldRow>
-            <SelectField label="Region" value={region} options={LIVEKIT_REGIONS} hint="Leave on Auto unless your project is pinned to a region." onValueChange={setRegion} />
+            <SelectField
+              label="Region"
+              value={region}
+              options={LIVEKIT_REGIONS}
+              hint="Leave on Auto unless your project is pinned to a region."
+              onValueChange={setRegion}
+            />
           </Stack>
           <FormFoot>
             <Button
@@ -180,8 +257,16 @@ function OwnProject() {
                   setTested(result.ok);
                   setOutcome(
                     result.ok
-                      ? { ok: true, message: "Connection works. Egress and SIP are available on this project. Save to use it for new meetings." }
-                      : { ok: false, message: result.error ?? "", step: steps[result.at ?? 0]?.label },
+                      ? {
+                          ok: true,
+                          message:
+                            "Connection works. Egress and SIP are available on this project. Save to use it for new meetings.",
+                        }
+                      : {
+                          ok: false,
+                          message: result.error ?? "",
+                          step: steps[result.at ?? 0]?.label,
+                        },
                   );
                 });
               }}
@@ -202,7 +287,9 @@ function OwnProject() {
               <ChecksList steps={steps} rows={checks.rows} label="Connection test" />
               <div aria-live="polite">
                 {outcome === null ? null : outcome.ok ? (
-                  <Note kind="ok" icon="check">{outcome.message}</Note>
+                  <Note kind="ok" icon="check">
+                    {outcome.message}
+                  </Note>
                 ) : (
                   <Note kind="err" icon="alert">
                     <p>
@@ -226,7 +313,11 @@ export function LiveKitSection({ workspace }: { readonly workspace: Workspace })
   const [mode, setMode] = useState<LiveKitMode>("managed");
   return (
     <>
-      <SettingsHead section="livekit" title="LiveKit" description="All meeting audio, video, agents, recording (Egress) and phone dial-in (SIP) run on LiveKit." />
+      <SettingsHead
+        section="livekit"
+        title="LiveKit"
+        description="All meeting audio, video, agents, recording (Egress) and phone dial-in (SIP) run on LiveKit."
+      />
       <div className="flex flex-wrap items-center justify-between gap-s2">
         <SegmentField
           label="Connection mode"
@@ -241,7 +332,9 @@ export function LiveKitSection({ workspace }: { readonly workspace: Workspace })
           Active now: <b>KnowMe-managed</b>
         </p>
       </div>
-      <Stack>{mode === "managed" ? <ManagedProject workspace={workspace} /> : <OwnProject />}</Stack>
+      <Stack>
+        {mode === "managed" ? <ManagedProject workspace={workspace} /> : <OwnProject />}
+      </Stack>
     </>
   );
 }

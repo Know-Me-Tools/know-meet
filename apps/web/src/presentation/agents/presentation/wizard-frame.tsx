@@ -18,14 +18,27 @@ export type WizardStep = 1 | 2 | 3 | 4;
 
 export const WIZARD_FORM_ID = "wiz-form";
 
-const WIZARD_CRUMBS: readonly Crumb[] = [{ label: "Agents", to: "registry" }, { label: "Register an agent" }];
+const WIZARD_CRUMBS: readonly Crumb[] = [
+  { label: "Agents", to: "registry" },
+  { label: "Register an agent" },
+];
 
-export function WizardHead({ step, crumbs = WIZARD_CRUMBS, title = "Register an agent" }: {
+export function WizardHead({
+  step,
+  crumbs = WIZARD_CRUMBS,
+  title = "Register an agent",
+}: {
   readonly step: WizardStep;
   readonly crumbs?: readonly Crumb[];
   readonly title?: string;
 }) {
-  return <AgentsPageHead crumbs={crumbs} eyebrow={`Step ${step} of 4 · ${STEPS[step - 1]}`} title={title} />;
+  return (
+    <AgentsPageHead
+      crumbs={crumbs}
+      eyebrow={`Step ${step} of 4 · ${STEPS[step - 1]}`}
+      title={title}
+    />
+  );
 }
 
 export function WizardStepper({ current }: { readonly current: WizardStep }) {
@@ -53,15 +66,29 @@ export function WizardFoot({ children }: { readonly children: React.ReactNode })
   );
 }
 
-export function WizardFrame({ step, children }: { readonly step: WizardStep; readonly children: React.ReactNode }) {
+export function WizardFrame({
+  step,
+  children,
+}: {
+  readonly step: WizardStep;
+  readonly children: React.ReactNode;
+}) {
   useDocumentTitle(`Register an agent — ${STEPS[step - 1]} — Know Meet`);
   const back =
     step > 1 ? (
-      <Link to="/agents" hash={`register:${step - 1}`} className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+      <Link
+        to="/agents"
+        hash={`register:${step - 1}`}
+        className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+      >
         <span>Back</span>
       </Link>
     ) : (
-      <Link to="/agents" hash="registry" className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}>
+      <Link
+        to="/agents"
+        hash="registry"
+        className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}
+      >
         <span>Cancel</span>
       </Link>
     );

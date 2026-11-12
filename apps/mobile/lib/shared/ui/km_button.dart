@@ -59,6 +59,15 @@ class KmButton extends StatelessWidget {
         small && kmFinePointer() ? KmTokens.sizeControlHSm : KmTokens.sizeTarget;
     final double iconSize = small ? 16 : 20;
     final Widget button = shad.Button(
+      // shadcn animates a padding change over a fixed 150ms that ignores the
+      // platform's reduced-motion setting. Under reduced motion a different
+      // padding shape (icon-only vs labelled, size) remounts the button
+      // instead, so the change is instant.
+      key: context.kmReduceMotion
+          ? ValueKey<String>(
+              'km-button-$showLabel-${size.name}-${icon != null}',
+            )
+          : null,
       style: KmButtonStyle(variant: variant, size: size, iconOnly: !showLabel),
       onPressed: onPressed,
       focusNode: focusNode,

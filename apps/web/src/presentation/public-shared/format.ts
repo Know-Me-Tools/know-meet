@@ -1,7 +1,20 @@
 // TJ-ARCH-MOB-001 compliant
 // km.js `fmt`: the prototype's date, time and duration wording (en-US, 12-hour).
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+] as const;
 const DAY_MS = 86_400_000;
 
 function pad(value: number): string {
@@ -47,7 +60,10 @@ export function formatMinutes(minutes: number): string {
 
 /** "Avery Chen" → "AC" (first and last word). */
 export function initialsOf(name: string): string {
-  const parts = name.trim().split(/\s+/).filter((part) => part !== "");
+  const parts = name
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part !== "");
   const picked = parts.length > 1 ? [parts[0], parts[parts.length - 1]] : parts;
   return picked.map((part) => (part ?? "").charAt(0).toUpperCase()).join("");
 }

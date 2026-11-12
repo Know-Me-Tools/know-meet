@@ -109,7 +109,10 @@ export function Note({
   return (
     <div
       role={role ?? (kind === "err" ? "alert" : undefined)}
-      className={cn("flex items-start gap-s3 rounded-base px-s4 py-s3 text-sm text-foreground", NOTE_FILL[kind])}
+      className={cn(
+        "flex items-start gap-s3 rounded-base px-s4 py-s3 text-sm text-foreground",
+        NOTE_FILL[kind],
+      )}
     >
       <KmIcon name={icon} className="mt-px" />
       <div className="min-w-0">{children}</div>
@@ -118,7 +121,13 @@ export function Note({
 }
 
 /** recordings.html `.meter`: 10px muted track with an ember (or cyan) fill. */
-export function MeterBar({ percent, className }: { readonly percent: number; readonly className?: string }) {
+export function MeterBar({
+  percent,
+  className,
+}: {
+  readonly percent: number;
+  readonly className?: string;
+}) {
   return (
     <span
       aria-hidden="true"
@@ -136,7 +145,13 @@ export interface Crumb {
   readonly hash?: string;
 }
 
-export function RecordingsCrumbs({ items, className }: { readonly items: readonly Crumb[]; readonly className?: string }) {
+export function RecordingsCrumbs({
+  items,
+  className,
+}: {
+  readonly items: readonly Crumb[];
+  readonly className?: string;
+}) {
   return (
     <Breadcrumb className={cn("mb-s2", className)}>
       <BreadcrumbList>
@@ -151,7 +166,9 @@ export function RecordingsCrumbs({ items, className }: { readonly items: readonl
               {item.hash === undefined ? (
                 <BreadcrumbPage className="text-muted-foreground">{item.label}</BreadcrumbPage>
               ) : (
-                <BreadcrumbLink render={<Link to="/recordings" hash={item.hash} />}>{item.label}</BreadcrumbLink>
+                <BreadcrumbLink render={<Link to="/recordings" hash={item.hash} />}>
+                  {item.label}
+                </BreadcrumbLink>
               )}
             </BreadcrumbItem>
           </Fragment>

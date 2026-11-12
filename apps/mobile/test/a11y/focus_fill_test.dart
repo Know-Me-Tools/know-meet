@@ -140,7 +140,11 @@ Future<void> _tabTo(WidgetTester tester, Key key) async {
   for (int i = 0; i < 40; i++) {
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
-    if (focusIsWithin(key)) return;
+    if (focusIsWithin(key)) {
+      // Let the fill animation finish before the fill is read.
+      await tester.pumpAndSettle();
+      return;
+    }
   }
   fail('Tab never reached $key');
 }

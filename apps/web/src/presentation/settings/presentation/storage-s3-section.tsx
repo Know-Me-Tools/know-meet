@@ -10,17 +10,30 @@ import { cn } from "@know-meet/ui/lib/utils";
 import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { isS3Provider, S3_PROVIDER_ORDER, S3_PROVIDERS } from "../application/settings-fixtures";
-import { type FieldRule, validateBucket, validatePrefix, validateS3Endpoint } from "../application/validators";
+import {
+  type FieldRule,
+  validateBucket,
+  validatePrefix,
+  validateS3Endpoint,
+} from "../application/validators";
 import type { CheckStep, S3ProviderKey } from "../domain/settings";
 import { ChecksList } from "./checks-list";
 import { ConfirmDialog, type ConfirmRequest } from "./confirm-dialog";
 import { SelectField, SwitchRow, TextField } from "./settings-fields";
-import { BusyContent, FieldRow, FormFoot, Note, Panel, RequiredNote, Stack } from "./settings-parts";
+import { SettingsLink } from "./settings-link";
+import {
+  BusyContent,
+  FieldRow,
+  FormFoot,
+  Note,
+  Panel,
+  RequiredNote,
+  Stack,
+} from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
 import { useFormErrors } from "./use-form-errors";
 import { useStagedChecks } from "./use-staged-checks";
 import { useBusyAction, useLater } from "./use-static-delay";
-import { SettingsLink } from "./settings-link";
 
 type S3Key = "endpoint" | "region" | "bucket" | "prefix" | "keyId" | "secret";
 
@@ -37,7 +50,14 @@ const TEST_OBJECT = ".knowme-test-mk2q8z.txt";
 
 export function StorageS3Section() {
   const [provider, setProvider] = useState<S3ProviderKey>("r2");
-  const [values, setValues] = useState<Readonly<Record<S3Key, string>>>({ endpoint: "", region: "auto", bucket: "", prefix: "meet/", keyId: "", secret: "" });
+  const [values, setValues] = useState<Readonly<Record<S3Key, string>>>({
+    endpoint: "",
+    region: "auto",
+    bucket: "",
+    prefix: "meet/",
+    keyId: "",
+    secret: "",
+  });
   const [pathStyle, setPathStyle] = useState(true);
   const [tested, setTested] = useState(false);
   const [testState, setTestState] = useState<"idle" | "running" | "ok" | "failed">("idle");
@@ -113,20 +133,73 @@ export function StorageS3Section() {
                 setPathStyle(next !== "aws");
                 setValues((current) => ({
                   ...current,
-                  region: current.region === "" || current.region === "auto" || next === "r2" ? S3_PROVIDERS[next].region : current.region,
-                  endpoint: next === "aws" && current.endpoint === "" ? `https://s3.${current.region || "us-east-1"}.amazonaws.com` : current.endpoint,
+                  region:
+                    current.region === "" || current.region === "auto" || next === "r2"
+                      ? S3_PROVIDERS[next].region
+                      : current.region,
+                  endpoint:
+                    next === "aws" && current.endpoint === ""
+                      ? `https://s3.${current.region || "us-east-1"}.amazonaws.com`
+                      : current.endpoint,
                 }));
               }}
             />
-            <TextField id="s3-region" label="Region" required mono hint="R2 uses auto." value={values.region} error={errors.region} onValueChange={set("region")} />
+            <TextField
+              id="s3-region"
+              label="Region"
+              required
+              mono
+              hint="R2 uses auto."
+              value={values.region}
+              error={errors.region}
+              onValueChange={set("region")}
+            />
           </FieldRow>
-          <TextField id="s3-endpoint" label="Endpoint URL" required mono placeholder={hint} hint={`e.g. ${hint}`} value={values.endpoint} error={errors.endpoint} onValueChange={set("endpoint")} />
+          <TextField
+            id="s3-endpoint"
+            label="Endpoint URL"
+            required
+            mono
+            placeholder={hint}
+            hint={`e.g. ${hint}`}
+            value={values.endpoint}
+            error={errors.endpoint}
+            onValueChange={set("endpoint")}
+          />
           <FieldRow>
-            <TextField id="s3-bucket" label="Bucket" required mono placeholder="acme-meet-archive" value={values.bucket} error={errors.bucket} onValueChange={set("bucket")} />
-            <TextField id="s3-prefix" label="Path prefix" optional mono placeholder="meet/" hint="Recordings are written under this folder, e.g. meet/2026/10/14/…" value={values.prefix} error={errors.prefix} onValueChange={set("prefix")} />
+            <TextField
+              id="s3-bucket"
+              label="Bucket"
+              required
+              mono
+              placeholder="acme-meet-archive"
+              value={values.bucket}
+              error={errors.bucket}
+              onValueChange={set("bucket")}
+            />
+            <TextField
+              id="s3-prefix"
+              label="Path prefix"
+              optional
+              mono
+              placeholder="meet/"
+              hint="Recordings are written under this folder, e.g. meet/2026/10/14/…"
+              value={values.prefix}
+              error={errors.prefix}
+              onValueChange={set("prefix")}
+            />
           </FieldRow>
           <FieldRow>
-            <TextField id="s3-key" label="Access key ID" required mono autoComplete="off" value={values.keyId} error={errors.keyId} onValueChange={set("keyId")} />
+            <TextField
+              id="s3-key"
+              label="Access key ID"
+              required
+              mono
+              autoComplete="off"
+              value={values.keyId}
+              error={errors.keyId}
+              onValueChange={set("keyId")}
+            />
             <TextField
               id="s3-secret"
               label="Secret access key"
@@ -173,7 +246,10 @@ export function StorageS3Section() {
                 Save
               </BusyContent>
             </Button>
-            <SettingsLink hash="storage" className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}>
+            <SettingsLink
+              hash="storage"
+              className={cn(buttonVariants({ variant: "ghost" }), focusFillClass)}
+            >
               Back to storage
             </SettingsLink>
             <RequiredNote />

@@ -17,7 +17,7 @@ void main() {
       setKmViewport(tester, width: 375, disableAnimations: true);
       await pumpKmApp(tester, stateId: s.id, signedIn: s.signedIn);
       await tester.pump(const Duration(seconds: 5));
-      expect(tester.hasRunningAnimations, isFalse);
+      expect(kmHasRunningAnimations(tester), isFalse);
     });
   }
 }

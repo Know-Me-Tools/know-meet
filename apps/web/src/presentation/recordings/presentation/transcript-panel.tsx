@@ -15,8 +15,8 @@ import { type ReactNode, useEffect, useRef, useState } from "react";
 import { copyText } from "../../shared/copy-text";
 import { formatDuration, formatNumber } from "../../workspace/application/format";
 import type { Recording, Workspace } from "../../workspace/domain/workspace";
-import type { TranscriptChapter } from "../domain/recording-details";
 import { agentByName, type FlatSegment } from "../application/recordings-model";
+import type { TranscriptChapter } from "../domain/recording-details";
 import type { Playback } from "./use-playback";
 
 interface TranscriptPanelProps {
@@ -53,13 +53,23 @@ function highlight(text: string, query: string): ReactNode {
   return parts;
 }
 
-export function TranscriptPanel({ workspace, recording, chapters, segments, currentIndex, playback }: TranscriptPanelProps) {
+export function TranscriptPanel({
+  workspace,
+  recording,
+  chapters,
+  segments,
+  currentIndex,
+  playback,
+}: TranscriptPanelProps) {
   const [query, setQuery] = useState("");
-  const listRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLElement>(null);
   const q = query.trim();
-  const matches = q === "" ? 0 : segments.filter((s) => s.text.toLowerCase().includes(q.toLowerCase())).length;
+  const matches =
+    q === "" ? 0 : segments.filter((s) => s.text.toLowerCase().includes(q.toLowerCase())).length;
   const count =
-    q === "" ? `${segments.length} lines` : `${matches}${matches === 1 ? " line matches" : " lines match"} “${q}”`;
+    q === ""
+      ? `${segments.length} lines`
+      : `${matches}${matches === 1 ? " line matches" : " lines match"} “${q}”`;
 
   useEffect(() => {
     const list = listRef.current;
@@ -110,7 +120,10 @@ export function TranscriptPanel({ workspace, recording, chapters, segments, curr
             />
           </div>
         </div>
-        <label htmlFor="tx-follow" className="flex min-h-11 cursor-pointer items-start gap-s3 py-s2">
+        <label
+          htmlFor="tx-follow"
+          className="flex min-h-11 cursor-pointer items-start gap-s3 py-s2"
+        >
           <Checkbox
             id="tx-follow"
             checked={playback.follow}
@@ -124,12 +137,14 @@ export function TranscriptPanel({ workspace, recording, chapters, segments, curr
         <span className="text-sm text-muted-foreground" aria-live="polite">
           {count}
         </span>
-        <span className="text-xs text-muted-foreground">Select a line to jump the player to that moment.</span>
+        <span className="text-xs text-muted-foreground">
+          Select a line to jump the player to that moment.
+        </span>
       </div>
-      <div
+      <section
         ref={listRef}
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: the transcript scrolls, so the region must be keyboard-focusable for keyboard scrolling (WCAG 2.1.1).
         tabIndex={0}
-        role="region"
         aria-label="Transcript"
         className={cn(
           "relative grid max-h-[620px] gap-s4 overflow-y-auto overscroll-contain rounded-tile bg-surface p-s3 shadow-(--shadow-card)",
@@ -192,7 +207,7 @@ export function TranscriptPanel({ workspace, recording, chapters, segments, curr
             </ol>
           </section>
         ))}
-      </div>
+      </section>
     </>
   );
 }

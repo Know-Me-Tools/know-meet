@@ -39,9 +39,13 @@ interface Fixtures {
 }
 
 export const test = base.extend<Fixtures>({
+  // biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
   inventory: async ({}, use) => use(loadInventory()),
+  // biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
   oracle: async ({}, use) => use(loadOracle()),
+  // biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
   manifest: async ({}, use) => use(loadManifest()),
+  // biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
   appStateMap: async ({}, use) => use(loadAppStateMap()),
   appTarget: async ({ appStateMap, baseURL }, use) => {
     const origin = baseURL ?? "";
@@ -58,6 +62,7 @@ export const test = base.extend<Fixtures>({
       selector: (role: UiRole) => appStateMap.roles[role],
     });
   },
+  // biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
   scenario: async ({}, use) => {
     const state: ScenarioState = { cleanups: [] };
     await use(state);

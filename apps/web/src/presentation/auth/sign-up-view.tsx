@@ -15,10 +15,16 @@ import { useRef, useState } from "react";
 import { describedBy, errorId, FormField } from "../public-shared/form-field";
 import { requiredMarkClass } from "../public-shared/ui-classes";
 import { submitForm, useField } from "../public-shared/use-field";
-import { type AuthParams, authHash } from "./auth-params";
 import { AuthFoot, AuthHead, AuthPanel, AuthShell, FootLine, GuestLink } from "./auth-layout";
+import { type AuthParams, authHash } from "./auth-params";
 import { PasswordInput } from "./password-input";
-import { emailError, fullNameError, newPasswordError, passwordRules, TERMS_ERROR } from "./validators";
+import {
+  emailError,
+  fullNameError,
+  newPasswordError,
+  passwordRules,
+  TERMS_ERROR,
+} from "./validators";
 
 function PasswordRuleList({ value }: { readonly value: string }) {
   const rules = passwordRules(value);
@@ -29,7 +35,11 @@ function PasswordRuleList({ value }: { readonly value: string }) {
   return (
     <ul id="password-hint" className="m-0 grid list-none gap-0.5 p-0 text-sm text-muted-foreground">
       {items.map((item) => (
-        <li key={item.key} data-ok={item.ok} className="flex items-center gap-1.5 data-[ok=true]:text-foreground">
+        <li
+          key={item.key}
+          data-ok={item.ok}
+          className="flex items-center gap-1.5 data-[ok=true]:text-foreground"
+        >
           <KmIcon name="check" className={item.ok ? "size-4 text-green-text" : "size-4"} />
           <span>{item.text}</span>
           {item.ok ? <span className="sr-only">(met)</span> : null}
@@ -39,10 +49,21 @@ function PasswordRuleList({ value }: { readonly value: string }) {
   );
 }
 
-function TermsField({ checked, error, onChange }: { readonly checked: boolean; readonly error: string; readonly onChange: (checked: boolean) => void }) {
+function TermsField({
+  checked,
+  error,
+  onChange,
+}: {
+  readonly checked: boolean;
+  readonly error: string;
+  readonly onChange: (checked: boolean) => void;
+}) {
   return (
     <div className="grid gap-1.5">
-      <label htmlFor="terms" className="flex min-h-size-target cursor-pointer items-start gap-s3 py-s2">
+      <label
+        htmlFor="terms"
+        className="flex min-h-size-target cursor-pointer items-start gap-s3 py-s2"
+      >
         <Checkbox
           id="terms"
           className="mt-0.5"
@@ -65,12 +86,13 @@ function TermsField({ checked, error, onChange }: { readonly checked: boolean; r
           What you’re agreeing to
         </summary>
         <p className="mt-s2">
-          KnowMe stores your account details, the meetings you host, and — only when you turn them on — recordings,
-          transcripts and summaries in KnowMe-managed or your own storage. You decide who receives meeting summaries in
-          Delivery settings, and you can delete your recordings at any time.
+          KnowMe stores your account details, the meetings you host, and — only when you turn them
+          on — recordings, transcripts and summaries in KnowMe-managed or your own storage. You
+          decide who receives meeting summaries in Delivery settings, and you can delete your
+          recordings at any time.
         </p>
       </details>
-      <FieldError id={errorId("terms")} role={undefined}>
+      <FieldError id={errorId("terms")} announce={false}>
         {error === "" ? null : error}
       </FieldError>
     </div>
@@ -97,7 +119,11 @@ export function SignUpView({ params }: { readonly params: AuthParams }) {
     if (!submitForm(formRef.current, [name.check, email.check, password.check, checkTerms])) return;
     void navigate({
       to: "/auth",
-      hash: authHash("check-email", { email: email.value.trim(), name: name.value.trim(), ...next }),
+      hash: authHash("check-email", {
+        email: email.value.trim(),
+        name: name.value.trim(),
+        ...next,
+      }),
     });
   };
 
@@ -115,7 +141,13 @@ export function SignUpView({ params }: { readonly params: AuthParams }) {
           </span>
           <span className="sr-only">with an asterisk</span> are required.
         </p>
-        <form ref={formRef} noValidate onSubmit={onSubmit} aria-labelledby="auth-title" className="grid gap-s4">
+        <form
+          ref={formRef}
+          noValidate
+          onSubmit={onSubmit}
+          aria-labelledby="auth-title"
+          className="grid gap-s4"
+        >
           <FormField id="name" label="Full name" required error={name.error}>
             <Input
               id="name"

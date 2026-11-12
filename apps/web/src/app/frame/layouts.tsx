@@ -28,7 +28,11 @@ export function FramedLayout() {
 
 /** Sign-in and join: their own slim header (no navigation), as in auth.html / join.html. */
 export function FocusedLayout() {
-  const flow: FocusedFlow = useLocation({ select: (location) => location.pathname }).startsWith("/join") ? "join" : "auth";
+  const flow: FocusedFlow = useLocation({ select: (location) => location.pathname }).startsWith(
+    "/join",
+  )
+    ? "join"
+    : "auth";
   return (
     <div className="km-framed flex flex-1 flex-col">
       <FocusedTopBar flow={flow} />

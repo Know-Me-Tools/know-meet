@@ -14,16 +14,23 @@ const COMMITTING_ATTRIBUTE = "data-nav-committing";
 // Keyframe properties a group animation may keep: transform plus timing. The UA
 // also tweens width, height and backdrop-filter; those are dropped so the group
 // snaps to its new box and its snapshots crossfade (opacity only, frame.css).
-const COMPOSITOR_KEYS: ReadonlySet<string> = new Set(["transform", "offset", "easing", "composite"]);
+const COMPOSITOR_KEYS: ReadonlySet<string> = new Set([
+  "transform",
+  "offset",
+  "easing",
+  "composite",
+]);
 
 function transformOnlyGroups(doc: Document): void {
   for (const animation of doc.getAnimations()) {
     const effect = animation.effect;
     if (!(effect instanceof KeyframeEffect)) continue;
     if (!effect.pseudoElement?.startsWith(GROUP_PSEUDO_PREFIX)) continue;
-    const frames = effect.getKeyframes().map((frame) =>
-      Object.fromEntries(Object.entries(frame).filter(([key]) => COMPOSITOR_KEYS.has(key))),
-    );
+    const frames = effect
+      .getKeyframes()
+      .map((frame) =>
+        Object.fromEntries(Object.entries(frame).filter(([key]) => COMPOSITOR_KEYS.has(key))),
+      );
     effect.setKeyframes(frames);
   }
 }

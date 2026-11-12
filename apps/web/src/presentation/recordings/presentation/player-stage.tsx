@@ -20,12 +20,22 @@ interface PlayerStageProps {
 }
 
 function tileOrder(workspace: Workspace, recording: Recording, speaker: string): readonly string[] {
-  const tiles = [...recording.participants, ...recordingAgents(workspace, recording).map((agent) => agent.name)];
+  const tiles = [
+    ...recording.participants,
+    ...recordingAgents(workspace, recording).map((agent) => agent.name),
+  ];
   if (recording.layout === "grid") return tiles.slice(0, 6);
   return [speaker, ...tiles.filter((name) => name !== speaker)].slice(0, 5);
 }
 
-export function PlayerStage({ workspace, recording, current, captions, playing, onPlay }: PlayerStageProps) {
+export function PlayerStage({
+  workspace,
+  recording,
+  current,
+  captions,
+  playing,
+  onPlay,
+}: PlayerStageProps) {
   const isGrid = recording.layout === "grid";
   const speaker = current?.who ?? recording.participants[0] ?? "";
   const layoutName = isGrid ? "grid" : "speaker";
@@ -39,7 +49,8 @@ export function PlayerStage({ workspace, recording, current, captions, playing, 
       )}
     >
       <p className="sr-only">
-        Room Composite recording, {layoutName} layout.{current === null ? "" : ` ${speaker} speaking.`}
+        Room Composite recording, {layoutName} layout.
+        {current === null ? "" : ` ${speaker} speaking.`}
       </p>
       {tileOrder(workspace, recording, speaker).map((name, index) => {
         const agent = agentByName(workspace, name);
@@ -71,7 +82,10 @@ export function PlayerStage({ workspace, recording, current, captions, playing, 
               </span>
             )}
             {speaking ? (
-              <SpeakBadge tone={agent === null ? "person" : "agent"} className="absolute top-1.5 right-1.5" />
+              <SpeakBadge
+                tone={agent === null ? "person" : "agent"}
+                className="absolute top-1.5 right-1.5"
+              />
             ) : null}
             <span
               className={cn(

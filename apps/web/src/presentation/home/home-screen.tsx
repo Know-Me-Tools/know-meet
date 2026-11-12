@@ -29,16 +29,23 @@ function HomeFooter() {
           <Link
             to="/"
             aria-label="Know Meet home"
-            className={cn("inline-flex items-center gap-2.5 rounded-base text-foreground no-underline", focusFillClass)}
+            className={cn(
+              "inline-flex items-center gap-2.5 rounded-base text-foreground no-underline",
+              focusFillClass,
+            )}
           >
             <BrandMark />
-            <span aria-hidden="true" className="font-display text-lg font-bold tracking-heading whitespace-nowrap max-bp768:text-base">
+            <span
+              aria-hidden="true"
+              className="font-display text-lg font-bold tracking-heading whitespace-nowrap max-bp768:text-base"
+            >
               Know <b className="font-bold text-ember-text in-focus-visible:text-current">Meet</b>
             </span>
           </Link>
           <p className="mt-s3 max-w-[70ch] text-xs text-muted-foreground">
-            Prototype. Meetings, agents, recordings, SMS, phone and calendar connections on these pages are simulated with
-            fictional sample data — nothing is sent or stored outside this browser.
+            Prototype. Meetings, agents, recordings, SMS, phone and calendar connections on these
+            pages are simulated with fictional sample data — nothing is sent or stored outside this
+            browser.
           </p>
         </div>
         <nav aria-label="Footer">

@@ -4,8 +4,9 @@
 // and the last failed connection test. Nothing is persisted or sent anywhere
 // (contract exclusion: no backend this phase). One provider at the screen root, so
 // every hash sub-state (registry, wizard steps, detail, dots) shares it.
-import { createContext, use, useMemo, useState } from "react";
+
 import type * as React from "react";
+import { createContext, use, useMemo, useState } from "react";
 import { useSessionUser } from "../../shared/session";
 import type { Workspace } from "../../workspace/domain/workspace";
 import { useSampleWorkspace } from "../../workspace/use-workspace";

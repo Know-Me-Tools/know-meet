@@ -23,7 +23,10 @@ export function useLater(): (ms: number, fn: () => void) => void {
 }
 
 /** A button's busy state: `start(ms, done)` shows the busy label, then runs `done`. */
-export function useBusyAction(): { readonly busy: boolean; readonly start: (ms: number, done: () => void) => void } {
+export function useBusyAction(): {
+  readonly busy: boolean;
+  readonly start: (ms: number, done: () => void) => void;
+} {
   const [busy, setBusy] = useState(false);
   const later = useLater();
   const start = useCallback(

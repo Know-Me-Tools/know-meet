@@ -11,13 +11,14 @@ import { MESSAGING_WEBHOOK } from "../application/settings-fixtures";
 import { ConfirmDialog, type ConfirmRequest } from "./confirm-dialog";
 import { KeyValue, KeyValueList, Masked, Note, Panel, Stack, StatusChip } from "./settings-parts";
 import { SettingsHead } from "./settings-shell";
-import { type SmsConnection, SmsConnectForm } from "./sms-connect-form";
+import { SmsConnectForm, type SmsConnection } from "./sms-connect-form";
 import { SmsTester } from "./sms-tester";
 
 export function TelnyxScopeNote() {
   return (
     <Note kind="info" icon="info">
-      Telnyx is used only for SMS (invites and summary links) and inbound voice dial-in. Meeting audio and video always run on LiveKit.
+      Telnyx is used only for SMS (invites and summary links) and inbound voice dial-in. Meeting
+      audio and video always run on LiveKit.
     </Note>
   );
 }
@@ -27,10 +28,13 @@ function OptOutPanel() {
     <Panel title="Opt-outs">
       <Stack gap="sm" className="text-sm">
         <p>
-          Recipients can reply <code>STOP</code>, <code>UNSUBSCRIBE</code>, <code>CANCEL</code>, <code>END</code> or <code>QUIT</code> to opt out. Telnyx blocks further messages to that number from your profile, and KnowMe stops texting them and falls back to email.
+          Recipients can reply <code>STOP</code>, <code>UNSUBSCRIBE</code>, <code>CANCEL</code>,{" "}
+          <code>END</code> or <code>QUIT</code> to opt out. Telnyx blocks further messages to that
+          number from your profile, and KnowMe stops texting them and falls back to email.
         </p>
         <p className="text-muted-foreground">
-          Every message KnowMe sends ends with “Reply STOP to opt out.” HELP replies return your organisation name and a support contact.
+          Every message KnowMe sends ends with “Reply STOP to opt out.” HELP replies return your
+          organisation name and a support contact.
         </p>
       </Stack>
     </Panel>
@@ -45,9 +49,12 @@ function NotConnected({ onConnect }: { readonly onConnect: () => void }) {
         <EmptyMedia variant="icon">
           <KmIcon name="sms" />
         </EmptyMedia>
-        <EmptyTitle render={<h2 id={headingId} />}>Not connected</EmptyTitle>
+        <EmptyTitle id={headingId} render={(headingProps) => <h2 {...headingProps} />}>
+          Not connected
+        </EmptyTitle>
         <EmptyDescription>
-          Connect a Telnyx account to text meeting invites and summary links. Without it, KnowMe sends everything by email only.
+          Connect a Telnyx account to text meeting invites and summary links. Without it, KnowMe
+          sends everything by email only.
         </EmptyDescription>
         <Button onClick={onConnect}>
           <KmIcon name="plus" />
@@ -58,11 +65,19 @@ function NotConnected({ onConnect }: { readonly onConnect: () => void }) {
   );
 }
 
-function Connected({ connection, onDisconnect }: { readonly connection: SmsConnection; readonly onDisconnect: () => void }) {
+function Connected({
+  connection,
+  onDisconnect,
+}: {
+  readonly connection: SmsConnection;
+  readonly onDisconnect: () => void;
+}) {
   const [lastTest, setLastTest] = useState(connection.lastTest);
   const [confirm, setConfirm] = useState<ConfirmRequest | null>(null);
   const last =
-    lastTest === null ? "No test sent yet" : `${lastTest.ok ? "Delivered to " : "Failed to "}${lastTest.to} · ${lastTest.at}`;
+    lastTest === null
+      ? "No test sent yet"
+      : `${lastTest.ok ? "Delivered to " : "Failed to "}${lastTest.to} · ${lastTest.at}`;
   return (
     <>
       <Panel title="Connected" trail={<StatusChip tone="green">Active</StatusChip>}>
@@ -72,7 +87,9 @@ function Connected({ connection, onDisconnect }: { readonly connection: SmsConne
               <StatusChip tone="green">Connected</StatusChip>
             </KeyValue>
             <KeyValue label="API key">
-              <Masked label={`API key ending in ${connection.keyLast4}`}>{`KEY••••••••••••${connection.keyLast4}`}</Masked>
+              <Masked
+                label={`API key ending in ${connection.keyLast4}`}
+              >{`KEY••••••••••••${connection.keyLast4}`}</Masked>
             </KeyValue>
             <KeyValue label="Messaging profile" plain="plain">
               {connection.profile}
@@ -120,7 +137,11 @@ export function TelnyxSmsSection() {
   const [formOpen, setFormOpen] = useState(false);
   return (
     <>
-      <SettingsHead section="telnyx-sms" title="Telnyx SMS" description="Telnyx Messaging sends SMS invites and summary links to participants with a phone number." />
+      <SettingsHead
+        section="telnyx-sms"
+        title="Telnyx SMS"
+        description="Telnyx Messaging sends SMS invites and summary links to participants with a phone number."
+      />
       <TelnyxScopeNote />
       {connection !== null ? (
         <>

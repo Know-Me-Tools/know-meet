@@ -54,8 +54,8 @@ export function DetailOverview({ agent }: { readonly agent: RegistryAgent }) {
           <Notice icon="shield">
             <strong>Managed by KnowMe</strong>
             <span>
-              The Concierge can’t be unregistered or reconfigured. It joins every meeting, including guest meetings, and
-              keeps nothing after the meeting ends.
+              The Concierge can’t be unregistered or reconfigured. It joins every meeting, including
+              guest meetings, and keeps nothing after the meeting ends.
             </span>
           </Notice>
         ) : null}
@@ -68,7 +68,9 @@ export function DetailOverview({ agent }: { readonly agent: RegistryAgent }) {
           rows={[
             ["agent_name", agent.worker, "mono"],
             ["LiveKit project", project, "mono"],
-            ...(agent.project === "own" ? ([["API key", <Masked key="key" />, "plain"]] as const) : []),
+            ...(agent.project === "own"
+              ? ([["API key", <Masked key="key" />, "plain"]] as const)
+              : []),
             ["Media", MEDIA[agent.media].label, "plain"],
             ["Knowledge", KNOWLEDGE[agent.knowledge].label, "plain"],
             ["Dispatch", dispatchText(agent), "plain"],
@@ -90,11 +92,17 @@ export function DetailActivity({ agent }: { readonly agent: RegistryAgent }) {
         <EmptyMedia variant="icon">
           <KmIcon name="clock" />
         </EmptyMedia>
-        <EmptyTitle render={<h2 />}>No dispatches yet</EmptyTitle>
+        <EmptyTitle render={(headingProps) => <h2 {...headingProps} />}>
+          No dispatches yet
+        </EmptyTitle>
         <EmptyDescription>
           {`When ${agent.name} joins a meeting, it shows up here with how long it stayed and how it went.`}
         </EmptyDescription>
-        <Link to="/dashboard" hash="upcoming" className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}>
+        <Link
+          to="/dashboard"
+          hash="upcoming"
+          className={cn(buttonVariants({ variant: "secondary" }), focusFillClass)}
+        >
           <KmIcon name="calendar" className="size-4" />
           <span>See upcoming meetings</span>
         </Link>
@@ -116,17 +124,19 @@ export function DetailActivity({ agent }: { readonly agent: RegistryAgent }) {
           </tr>
         </thead>
         <tbody>
-          {records.map((record, index) => {
+          {records.map((record) => {
             const outcome = OUTCOME[record.outcome];
             const live = record.outcome === "live";
             return (
-              <tr key={`${record.meeting}-${index}`}>
+              <tr key={`${record.meeting}-${record.date}`}>
                 <td>
                   <span className="line-clamp-2" title={record.meeting}>
                     {record.meeting}
                   </span>
                 </td>
-                <td className="whitespace-nowrap">{live ? `Today · ${formatTime(record.date)}` : formatDate(record.date)}</td>
+                <td className="whitespace-nowrap">
+                  {live ? `Today · ${formatTime(record.date)}` : formatDate(record.date)}
+                </td>
                 <td className="text-right! whitespace-nowrap tabular-nums">
                   {live ? "In progress" : record.min ? formatMinutes(record.min) : "—"}
                 </td>
@@ -210,7 +220,9 @@ export function DetailSettings({ agent }: { readonly agent: RegistryAgent }) {
               : "Joins every meeting you host as soon as it starts."
           }
           checked={next.autoJoin !== "never"}
-          onCheckedChange={(on) => change({ autoJoin: on ? (agent.autoJoin === "tagged" ? "tagged" : "mine") : "never" })}
+          onCheckedChange={(on) =>
+            change({ autoJoin: on ? (agent.autoJoin === "tagged" ? "tagged" : "mine") : "never" })
+          }
         />
         <SwitchRow
           id="s-files"
@@ -229,7 +241,10 @@ export function DetailSettings({ agent }: { readonly agent: RegistryAgent }) {
         id="s-media"
         label="In meetings it can"
         value={next.media}
-        options={(Object.keys(MEDIA) as MediaMode[]).map((key) => ({ value: key, label: MEDIA[key].label }))}
+        options={(Object.keys(MEDIA) as MediaMode[]).map((key) => ({
+          value: key,
+          label: MEDIA[key].label,
+        }))}
         onValueChange={(media) => change({ media })}
       />
       <div className="flex flex-wrap items-center gap-s2">
@@ -249,7 +264,10 @@ export function DetailDanger({ agent }: { readonly agent: RegistryAgent }) {
   const { removeAgent } = useAgentsState();
   const navigate = useNavigate();
   return (
-    <section aria-labelledby="dz-title" className={cn(cardVariants({ variant: "panel" }), "shadow-none")}>
+    <section
+      aria-labelledby="dz-title"
+      className={cn(cardVariants({ variant: "panel" }), "shadow-none")}
+    >
       <h2 id="dz-title" className="flex items-center gap-s2 text-xl">
         <KmIcon name="alert" className="text-red-text" />
         <span>Danger zone</span>
@@ -258,7 +276,8 @@ export function DetailDanger({ agent }: { readonly agent: RegistryAgent }) {
         <div className="grid min-w-0 gap-0.5">
           <strong>Unregister this agent</strong>
           <p className="text-sm text-muted-foreground">
-            Removes it from your registry and from every meeting’s agent list. Activity history is removed too.
+            Removes it from your registry and from every meeting’s agent list. Activity history is
+            removed too.
           </p>
         </div>
         <ConfirmDialog
@@ -277,7 +296,10 @@ export function DetailDanger({ agent }: { readonly agent: RegistryAgent }) {
           }}
         >
           <p>{`KnowMe will stop dispatching “${agent.worker}”. Meetings where it’s present now will lose it at their next agent refresh.`}</p>
-          <p>Your worker keeps running on your side — stop it there if you no longer need it. You can register it again later.</p>
+          <p>
+            Your worker keeps running on your side — stop it there if you no longer need it. You can
+            register it again later.
+          </p>
         </ConfirmDialog>
       </div>
     </section>

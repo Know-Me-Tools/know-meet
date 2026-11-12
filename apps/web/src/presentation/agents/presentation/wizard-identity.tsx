@@ -29,13 +29,18 @@ function patchFor(field: IdentityField, value: string): Partial<RegistrationDraf
 
 function TilePreview() {
   const { draft } = useAgentsState();
-  const glyph = (draft.glyph || (draft.name.trim() === "" ? "" : initialsOf(draft.name)) || "?").slice(0, 2).toUpperCase();
+  const glyph = (draft.glyph || (draft.name.trim() === "" ? "" : initialsOf(draft.name)) || "?")
+    .slice(0, 2)
+    .toUpperCase();
   return (
     <aside
       aria-labelledby="pv-title"
       className="sticky top-[calc(var(--spacing-header-h)+var(--spacing-s5))] grid min-w-0 content-start gap-s3 rounded-tile bg-surface p-s5 shadow-(--shadow-card) max-bp1024:static max-bp768:p-s4"
     >
-      <h2 id="pv-title" className="font-mono text-11 font-semibold tracking-eyebrow text-muted-foreground uppercase">
+      <h2
+        id="pv-title"
+        className="font-mono text-11 font-semibold tracking-eyebrow text-muted-foreground uppercase"
+      >
         Tile preview
       </h2>
       <div className="grid justify-items-center gap-s3 rounded-tile bg-background px-s4 py-s6 text-center *:max-w-full">
@@ -73,7 +78,12 @@ export function WizardIdentity() {
           className="grid content-start gap-s5"
           onSubmit={(event) => {
             event.preventDefault();
-            const valid = form.submit({ name: draft.name, role: draft.role, desc: draft.desc, glyph: draft.glyph });
+            const valid = form.submit({
+              name: draft.name,
+              role: draft.role,
+              desc: draft.desc,
+              glyph: draft.glyph,
+            });
             if (valid) void navigate({ to: "/agents", hash: "register:2" });
           }}
         >
@@ -101,7 +111,12 @@ export function WizardIdentity() {
             id="a-role"
             label="Role"
             error={form.errorOf("role")}
-            control={{ value: draft.role, onValueChange: (value) => change("role", value), maxLength: 40, placeholder: "e.g. Note-taker" }}
+            control={{
+              value: draft.role,
+              onValueChange: (value) => change("role", value),
+              maxLength: 40,
+              placeholder: "e.g. Note-taker",
+            }}
           />
           <TextAreaField
             id="a-desc"

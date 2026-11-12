@@ -91,7 +91,11 @@ function agentTiles(workspace: Workspace, ids: readonly string[]): AgentTile[] {
 }
 
 /** The room as it renders on entry. `selfName` is the signed-in user's name (full mode). */
-export function buildRoomModel(workspace: Workspace, mode: RoomMode, selfName: string | null): RoomModel {
+export function buildRoomModel(
+  workspace: Workspace,
+  mode: RoomMode,
+  selfName: string | null,
+): RoomModel {
   const meeting = workspace.meetings[0];
   const name = mode === "full" && selfName !== null ? selfName : GUEST_NAME;
   const tiles: RoomTile[] =
