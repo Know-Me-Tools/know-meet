@@ -6,13 +6,13 @@ same look on every surface.** Product context is in [PRODUCT.md](PRODUCT.md).
 
 ## Sources of truth (in precedence order)
 
-1. `docs/design/tokens.json` (v1.3.0): every value. Generated outputs come only from
+1. `docs/design/tokens.json` (v1.4.0): every value. Generated outputs come only from
    `pnpm --filter @know-meet/design-tokens generate`: web `tokens.css`, `theme.css`
    (Tailwind 4), `shadcn.css`, Flutter `tokens.g.dart` (`KmPalette`, `KmTokens`) and
    `km_theme.g.dart` (`buildKmTheme`). Never hand-edit a generated file.
 2. This file: rules that tokens alone cannot carry (control states, layout, motion).
 3. `docs/design/brand-guide.html`, then `docs/design/prototype/` (visual reference,
-   revision v2: renders tokens v1.3.0, the Flat 2.0 rules and the adaptive navigation
+   revision v2: renders tokens v1.4.0, the Flat 2.0 rules and the adaptive navigation
    below), then `docs/design/live/` (room layout reference). The root `live/` folder
    is not a source. `docs/design/prototype-v1-archive/` is the frozen pre-v2 copy
    (history only, never a source).
@@ -38,6 +38,38 @@ SC 1.4.11 by fill (>= 3:1 against the surface), text on every fill meets SC 1.4.
 (>= 4.5:1), and keyboard focus is a fill change of >= 3:1 against both the
 unfocused state and the surface (SC 2.4.7; the whole control changes, which exceeds
 the SC 2.4.13 area guidance). Every pair is computed in the contrast record.
+
+### No strokes, shadows or rules anywhere (RV-30..F5-7, tokens v1.4.0)
+
+The scan covers **every element and every `::before` / `::after`**, not only controls.
+It reports a non-zero border or outline, any `box-shadow`, an `<hr>`, and any
+generated thin-line pseudo-element, and the count is 0 in every in-scope state.
+`shadow-float`, `shadow-card` and `switch-thumb-shadow` are `none` in both themes (the
+tokens stay so consumers keep compiling); floating layers (menu, sheet, dialog) are
+told apart by fill and the scrim, never a shadow. Replacements, shared by prototype
+and app:
+
+| Was | Now |
+|---|---|
+| 3-4px red stripe on an error summary (sign-in, schedule) | `red-soft` fill + alert icon (`red-text`) + heading and text; the message is never carried by colour alone |
+| "or with email" rules either side of the label | the label alone, centred, separated by spacing (`s1` above and below inside the form stack) |
+| amber ring around a transcript search hit | `amber-soft` fill behind the text, text stays `inherit` (`fg` >= 4.5:1 on it); the match count in the search status line carries the same information |
+| hollow ring "Offline" pip | filled square pip in `fg-sub` (the not-live glyph, as `.state-glyph`) |
+| three-bar "speaking" glyph drawn with copies of a shadow | three filled bars drawn as backgrounds; the box keeps a 4px footprint |
+| email and SMS preview inset rings, card hairline shadow | fill steps only (`card` / `bg-2` on the panel surface) |
+| row, section, footer and header hairlines in `live/` | removed; `live/*.html` is the prototype plus only the LiveKit changes |
+
+Open owner decision: in the light theme `card` (#FFFFFF), `surface` (#FAFBFC) and `bg`
+(#F7F7F8) are 1.02-1.07:1 apart, and the hairline shadows were what separated them.
+Separation is now spacing and corner radius. If that reads too flat, deepen one light
+fill step (a token change needing approval); nothing was deepened here.
+
+### Deterministic processing capture (RV-36)
+
+`recordings.html?km-processing-pin=N#processing:<id>` (or `html[data-km-processing-pin=N]`
+set before load) renders the pipeline frozen: N steps done, step N at 50% with a static
+icon, the rest waiting; `N=5` is the finished state. No timers, no toast. The app's processing view
+must honour the same parameter (request to ui-engineer and bdd-quality).
 
 ### Roles
 
@@ -124,7 +156,7 @@ Rules that follow from the table:
   surface it renders on (contrast record, RV-26).
 - **Tooltip = toast style** (operator, 2026-11-11): `fg` fill, `bg` text, 14px medium,
   radius 12, padding `size-tooltip-pad-y` x `size-tooltip-pad-x`, max width
-  `size-tooltip-max-w` (320), float shadow, appears after 500ms hover or on focus,
+  `size-tooltip-max-w` (320), no shadow, appears after 500ms hover or on focus,
   dismisses on Escape (SC 1.4.13), never holds the only copy of information.
 - **Lines that are removed**, with their fill replacement: app bar bottom rule
   (bar sits on `bg`, content on `bg`: separation by spacing); tab-list rule (none);

@@ -109,5 +109,25 @@
    "app-state-map.json: map the three new IDs to the app testids above and drop the two retired IDs.",
    "Recapture all baselines from the v2 prototype (every page changed: tokens v1.3.0 and Flat 2.0 fills), record the new baselineSetSha256, then delivery-lead records the contract amendment (ADJ-4)."
   ]
+ },
+ "notes": {
+  "recordedBy": "design-lead",
+  "at": "2026-11-11",
+  "processingPin": {
+   "purpose": "recordings.processing.* is timer-driven (5 pipeline steps, 1.3-2.0 s each, 400 ms start delay); a capture taken at any wall-clock moment differs. The prototype now freezes it deterministically (RV-36).",
+   "prototype": "Load docs/design/prototype/recordings.html?km-processing-pin=N#processing:<id>. The query parameter must come before the hash. Equivalent: set html[data-km-processing-pin=N] before the script runs (addInitScript on document.documentElement).",
+   "values": "N is an integer 0..5. N steps are Done/Pinned, step N is In progress at 50% with a static (non-spinning) icon, later steps are Waiting; N=5 is the finished state (all done, 'Recording ready' note, meter 100%). No timers, no toast.",
+   "suggestedPins": {
+    "recordings.processing.partner-onboarding-1014": 2
+   },
+   "suggestedPinReason": "2 shows done, in-progress and waiting rows in one frame. Use one value for every viewport/theme; do not capture without the pin.",
+   "driverChange": "state-drivers.ts is bdd-quality's: for entry.id starting 'recordings.processing.' append '?km-processing-pin=2' to the prototype URL (target.urlFor) before the hash. The app's processing view must read the same query parameter and render the same frozen frame (request to ui-engineer); until it does, app cells for this state stay non-deterministic.",
+   "recaptureNeeded": "recordings.processing.partner-onboarding-1014 for all 8 theme x viewport cells, prototype and app."
+  },
+  "noStrokeScan": {
+   "tool": "tests/fidelity/src/a11y/all-elements-stroke-probe.ts, run as 'node tests/fidelity/src/cli/prototype-probes.ts strokes'",
+   "scope": "every element and ::before/::after in every in-scope state x theme x viewport (same cells as flat/overflow); reports non-zero border/outline, any box-shadow, <hr>, thin-line pseudo-elements. text-decoration is informational only.",
+   "appliesToApp": "The same scanAllStrokes(page) works on the built app through renderCell with the app RenderTarget; wire it into the c13 boundary run so reference and app both report 0."
+  }
  }
 }

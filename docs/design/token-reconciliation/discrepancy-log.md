@@ -376,3 +376,51 @@ server, Playwright Chromium 1.65, every in-scope state x dark/light x 375/768/10
 Recapture needed only for captures that show a focused slider, file label, tab panel,
 scroll region or text link (`frame.skip-link-focused` is unchanged); rest states are
 pixel-identical.
+
+### F5b. Reference revision v2.3: whole-page no-stroke scan (2026-11-11, tokens v1.4.0)
+
+The v2.2 no-stroke probe only inspected controls. Building c10/c11 showed decorative
+strokes elsewhere on the pages. `tests/fidelity/src/a11y/all-elements-stroke-probe.ts`
+(`prototype-probes.ts strokes`) now walks every element and `::before` / `::after` of
+every in-scope state x theme x viewport and reports non-zero borders and outlines, any
+`box-shadow`, `<hr>` and thin-line pseudo-elements. First run: the light theme alone
+had one `shadow-card` hairline shadow on every card, row and button; the dark theme
+had float shadows, two inset rings and the `.or` rules. Fixed in
+`prototype/**` and `live/**` (km.css stays byte-identical across both).
+
+| ID | Finding | Cause | Fix |
+|---|---|---|---|
+| RV-29 | 4px (dashboard schedule error) and 3px (auth sign-in error) red stripe on `.err-summary` | `box-shadow: inset 4px 0 0 var(--red)` | Stripe removed. `red-soft` fill + alert icon in `red-text` + heading and text, as `.error-card` and the app's `ErrorSummary` (`bg-red-soft`, icon, text). Meaning is not carried by colour alone |
+| RV-30 | "or with email" rules (auth) | `.or::before/::after` 1px lines | Label only, centred, `margin: s1 0`; matches the app's `<p aria-hidden>` |
+| RV-31 | 1px amber ring on transcript search hits (recordings) | `mark { box-shadow: 0 0 0 1px var(--amber) }` | `amber-soft` fill, `color: inherit`; `fg` on it is 10.2-11.2:1 dark and 16.4-16.9:1 light (>= 4.5:1). Same as the app's `<mark class="bg-amber-soft">`, `screens`, `meet` |
+| RV-32 | Hollow "Offline" pip (agents, 2px inset ring) and the "speaking" state glyph (two shadow copies) | `box-shadow: inset 0 0 0 2px` and `box-shadow: 6px 0 0 / -6px 0 0` | Filled `fg-sub` square (the not-live glyph); three filled bars as background gradients, 4px footprint kept by -6px margins. The app's offline pip needs the same change (request to ui-engineer) |
+| RV-33 | Email and SMS preview inset 1px rings (settings) and the card hairline shadow | `inset 0 0 0 1px var(--muted)` | Rings removed; separation by the existing `card` / `bg-2` fills |
+| RV-34 | Light `shadow-card` / `switch-thumb-shadow`, dark and light `shadow-float` (menus, sheet, toast, tooltip, big-play) | Elevation shadows were tokens | `docs/design/tokens.json` v1.4.0: all four are `none`; regenerated `tokens.css`, `generated/web/tokens.css`, `tokens.g.dart` (`shadowFloat`, `shadowCard` empty), manifest. Names stay so consumers compile. Floating layers rely on fill, radius and the scrim. `brand.css` (brand documents, not a prototype or app surface) keeps its own hairlines and is outside this scan |
+| RV-35 | `live/*.html` still carried v1 hairlines, rings and a ring pulse (row and section rules, `auth-foot`, `.wiz-foot`, option ring, `.file-drop`, `.mtile.is-speaking`, `.wait .ring`, `.vt.speaking`, `.danger-panel`) | The live copy was forked before D-5 to D-8 and had not been resynced | Every live page is the prototype page plus only the LiveKit hunks (`room.html` links, live copy, the settings token-service panel, the lobby code redirect). Supersedes RV-28. `live/meet.html` `.drop` is fixed by the same resync |
+| RV-36 | `recordings.processing.*` is timer-driven (5 steps, 1.3-2.0 s each) | Capture depended on wall-clock timing | `?km-processing-pin=N` (query before the hash) or `html[data-km-processing-pin=N]` freezes the frame: N done, step N 50% with a static icon, rest waiting, N=5 finished; no timers or toast. Documented in `tests/fidelity/oracle/proposed-nav-states.json` `notes.processingPin` |
+| RV-37 | Probe gap | `auditFlatControls` reads controls only | `scanAllStrokes` added (`prototype-probes.ts strokes`); `text-decoration` (link underline, `line-through` on a done to-do) is reported as informational, not counted: an underlined in-copy link is the non-colour cue SC 1.4.1 needs and the strike carries the done state with its checked box |
+
+Open owner decision (not changed): without hairline shadows the light theme's `card`,
+`surface` and `bg` steps are 1.02-1.07:1 apart, so separation is spacing and radius
+only. See DESIGN.md "No strokes, shadows or rules anywhere".
+
+Verification (design-lead, 2026-11-11; prototype served by `tests/fidelity`'s static
+server, every in-scope state x dark/light x 375/768/1024/1440 = 552 cells; logs in
+`/tmp/probe-*.txt`, not tracked):
+
+- `strokes` (all elements): **0** findings over 102,947 elements and pseudo-elements
+  (first run: hundreds, dominated by `shadow-card`/`shadow-float`). Informational:
+  24 distinct text-decoration runs (underlined links, one `line-through`), not counted.
+- `flat` (controls): 0 findings, 21,182 focus stops. `overflow`: 0 cells over
+  viewport. `scroll`: 0 findings, 32 overflowing regions all focusable.
+- `live/*.html` (10 pages and their start/lobby/ended/sign-in-error/sign-up hashes,
+  dark/light x 375/1440, signed in): 0 findings with the same scan. `live/room.html`
+  in-room states need a LiveKit connection and were not scanned.
+- Contrast record: 254 pairs, 0 failing. Tokens: `generate --check` clean at 1.4.0.
+
+Recapture needed (prototype and app): every light-theme cell (card, button and row
+hairline shadows gone); dark cells of `frame.account-menu-open`, the recordings player
+(`big-play`), the agents list/detail with an offline agent, any speaking-state glyph,
+settings delivery previews (email and SMS), `auth.sign-in.error`, `auth.*` (the `or`
+label), `dashboard` schedule error, recordings transcript search, and
+`recordings.processing.*` (pinned, RV-36).

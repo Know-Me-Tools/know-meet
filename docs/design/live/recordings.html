@@ -54,7 +54,8 @@
   .poster.layout-speaker .pt.main { grid-row: 1 / -1; }
   .poster.layout-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
   .poster .pt { display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 8px; background: var(--tile); color: var(--fg-sub); font-family: var(--font-display); font-weight: 600; font-size: 13px; }
-  .poster .pt.main { background: var(--tile-2); color: var(--fg); font-size: clamp(18px, 3vw, 30px); box-shadow: inset 0 0 0 2px var(--ember); }
+  .poster .pt.main { background: var(--tile-2); color: var(--fg); font-size: clamp(18px, 3vw, 30px); position: relative; }
+  .poster .pt.main::after { content: ""; position: absolute; top: 6px; right: 6px; width: var(--size-speak-badge); height: var(--size-speak-badge); border-radius: var(--radius-8); background: var(--speak-bars), var(--speak-person); }
   .poster .pt.agent { background: var(--cyan-soft); color: var(--cyan-text); font-family: var(--font-mono); }
   .poster .badge { position: absolute; right: 14px; bottom: 14px; padding: 2px 8px; border-radius: 999px; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
 
@@ -92,7 +93,8 @@
   .vt.main .avatar { width: clamp(48px, 12vw, 96px); height: clamp(48px, 12vw, 96px); font-size: clamp(18px, 4vw, 34px); }
   .vt:not(.main) .avatar { width: clamp(22px, 4vw, 40px); height: clamp(22px, 4vw, 40px); font-size: clamp(10px, 1.4vw, 14px); }
   .vt .agent-glyph { width: clamp(24px, 30%, 64px); border-radius: 10px; font-size: clamp(10px, 1.4vw, 16px); }
-  .vt.speaking { box-shadow: inset 0 0 0 2px var(--ember); }
+  .vt.speaking::after { content: ""; position: absolute; top: 6px; right: 6px; width: var(--size-speak-badge); height: var(--size-speak-badge); border-radius: var(--radius-8); background: var(--speak-bars), var(--speak-person); }
+  .vt.speaking:has(.agent-glyph)::after { background: var(--speak-bars), var(--speak-agent); }
   .vt .nm { position: absolute; left: 6px; bottom: 6px; max-width: calc(100% - 12px); padding: 1px 8px; border-radius: 999px; background: var(--bg-2); color: var(--fg); font-size: 11px; font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .stage .rec-tag { position: absolute; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px; background: var(--bg-2); color: var(--fg); font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
   .stage .captions { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); width: max-content; max-width: 84%; padding: 6px 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-size: clamp(12px, 1.3vw, 15px); line-height: 1.4; text-align: center; }
@@ -104,7 +106,7 @@
   .markers { position: absolute; left: 8px; right: 8px; top: 0; height: 10px; }
   .markers button { position: absolute; top: 0; width: 4px; height: 10px; padding: 0; border: 0; border-radius: 2px; background: var(--fg-sub); transform: translateX(-50%); }
   .markers button.on { background: var(--ember); }
-  .scrub { width: 100%; margin: 0; min-height: 28px; accent-color: var(--ember-btn); cursor: pointer; }
+  .scrub { width: 100%; margin: 0; min-height: 28px; cursor: pointer; }
   .ctrl-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
   .ctrl-row .time { font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; color: var(--fg-sub); white-space: nowrap; }
   .ctrl-row .spacer { flex: 1 1 auto; }
@@ -128,11 +130,10 @@
   .seg-btn.is-current .ts { color: var(--ember-text); }
   .seg-btn .spk { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: var(--text-sm); }
   .seg-btn .txt { display: block; font-size: var(--text-sm); line-height: 1.55; overflow-wrap: anywhere; }
-  mark { background: var(--amber-soft); color: inherit; border-radius: 3px; box-shadow: 0 0 0 1px var(--amber); }
+  mark { background: var(--amber-soft); color: inherit; border-radius: 3px; padding: 0 2px; } /* highlight fill only: fg on amber-soft >= 4.5:1, no ring (RV-31) */
 
   /* summary */
   .todo { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s3); align-items: start; padding: var(--s3) 0; }
-  .todo + .todo { box-shadow: inset 0 1px 0 var(--muted); }
   .todo input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--ember-btn); }
   .todo .t { display: block; font-weight: 500; overflow-wrap: anywhere; }
   .todo.done .t { text-decoration: line-through; color: var(--fg-sub); }
@@ -1103,6 +1104,48 @@
 
     var total = steps.reduce(function (s, x) { return s + x[2]; }, 0), elapsed = 0;
     var meter = document.getElementById('pp-meter');
+    /* Deterministic capture (RV-36): ?km-processing-pin=N (or html[data-km-processing-pin=N]) renders the
+       pipeline frozen with N steps done, step N at 50% in progress (static icon, no spin) and the rest waiting;
+       N=5 is the finished state. No timers, no toast, so repeated captures are identical. */
+    function markStepDone(i) {
+      var row = rows[i];
+      row.li.setAttribute('data-s', 'ok');
+      KM.clear(row.st); row.st.appendChild(icon('check'));
+      row.state.textContent = i === 2 ? 'Pinned' : (i === 4 && !r.summarySent ? 'Held for review' : 'Done');
+    }
+    function readPin() {
+      var raw = new URLSearchParams(location.search).get('km-processing-pin') || document.documentElement.getAttribute('data-km-processing-pin');
+      var n = raw === null || raw === '' ? NaN : Number(raw);
+      return Number.isInteger(n) && n >= 0 && n <= steps.length ? n : null;
+    }
+    function applyPin(n) {
+      var doneMs = 0;
+      for (var i = 0; i < n; i++) { markStepDone(i); rows[i].bar.style.transform = 'scaleX(1)'; doneMs += steps[i][2]; }
+      var pct;
+      if (n < steps.length) {
+        var cur = rows[n];
+        cur.li.setAttribute('data-s', 'run');
+        KM.clear(cur.st); cur.st.appendChild(icon('refresh'));
+        cur.state.textContent = 'In progress';
+        cur.bar.style.transform = 'scaleX(0.5)';
+        overallLbl.textContent = 'Step ' + (n + 1) + ' of ' + steps.length + ': ' + steps[n][0];
+        pct = Math.round((doneMs + steps[n][2] / 2) / total * 100);
+      } else {
+        pct = 100;
+        overallLbl.textContent = 'All steps complete';
+        done.hidden = false;
+        KM.clear(done);
+        done.appendChild(h('div', { class: 'note note-ok', role: 'status' }, icon('check'),
+          h('div', { class: 'stack-sm' },
+            h('b', { text: 'Recording ready' }),
+            h('span', { text: 'Stored, pinned to IPFS, and the summary has ' + (r.summarySent ? 'been sent to participants.' : 'been held for your review.') }),
+            h('div', { class: 'btn-row' },
+              h('a', { class: 'btn btn-primary btn-sm', href: '#detail:' + r.id }, icon('play', 'ic-sm'), h('span', { text: 'Open recording' })),
+              h('a', { class: 'btn btn-sm', href: '#detail:' + r.id + ':storage' }, h('span', { text: 'View storage details' }))))));
+      }
+      overall.style.width = pct + '%';
+      meter.setAttribute('aria-valuenow', String(pct));
+    }
     function stepRun(i) {
       if (run !== processingRun) return;
       if (i >= steps.length) {
@@ -1135,13 +1178,13 @@
         if (f >= 1) {
           clearInterval(iv);
           elapsed += dur;
-          row.li.setAttribute('data-s', 'ok');
-          KM.clear(row.st); row.st.appendChild(icon('check'));
-          row.state.textContent = i === 2 ? 'Pinned' : (i === 4 && !r.summarySent ? 'Held for review' : 'Done');
+          markStepDone(i);
           stepRun(i + 1);
         }
       }, 100);
     }
+    var pin = readPin();
+    if (pin !== null) { applyPin(pin); return; }
     setTimeout(function () { stepRun(0); }, 400);
   }
 

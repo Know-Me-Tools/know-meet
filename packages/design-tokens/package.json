@@ -1,6 +1,6 @@
 {
   "name": "@know-meet/design-tokens",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "Know Meet design tokens: generates web CSS variables, the shadcn mapping, the Tailwind 4 theme and Flutter tokens/ThemeData from docs/design/tokens.json.",
   "type": "module",

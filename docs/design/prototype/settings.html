@@ -95,7 +95,7 @@
 
   /* previews */
   .tpl-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
-  .email-card { display: grid; border-radius: var(--radius-tile); background: var(--card); box-shadow: var(--shadow-card), inset 0 0 0 1px var(--muted); overflow: hidden; }
+  .email-card { display: grid; border-radius: var(--radius-tile); background: var(--card); overflow: hidden; }
   .email-meta { display: grid; gap: 4px; padding: var(--s3) var(--s4); background: var(--bg-2); font-size: var(--text-sm); }
   .email-meta > div { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--s2); }
   .email-meta dt { color: var(--fg-sub); }
@@ -106,7 +106,7 @@
   .email-body ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   .email-body .btn { justify-self: start; }
   .email-body .foot { color: var(--fg-sub); font-size: var(--text-xs); }
-  .phone-frame { width: min(100%, 340px); padding: var(--s4); border-radius: 28px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--muted); display: grid; gap: var(--s2); }
+  .phone-frame { width: min(100%, 340px); padding: var(--s4); border-radius: 28px; background: var(--bg-2); display: grid; gap: var(--s2); }
   .phone-frame .from { text-align: center; color: var(--fg-sub); font-size: var(--text-xs); }
   .bubble { justify-self: start; max-width: 88%; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: var(--muted); color: var(--fg); font-size: var(--text-sm); line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; }
   .counter { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; font-size: var(--text-sm); color: var(--fg-sub); }
