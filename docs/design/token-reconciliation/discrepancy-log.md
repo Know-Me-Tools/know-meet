@@ -399,10 +399,14 @@ had float shadows, two inset rings and the `.or` rules. Fixed in
 | RV-35 | `live/*.html` still carried v1 hairlines, rings and a ring pulse (row and section rules, `auth-foot`, `.wiz-foot`, option ring, `.file-drop`, `.mtile.is-speaking`, `.wait .ring`, `.vt.speaking`, `.danger-panel`) | The live copy was forked before D-5 to D-8 and had not been resynced | Every live page is the prototype page plus only the LiveKit hunks (`room.html` links, live copy, the settings token-service panel, the lobby code redirect). Supersedes RV-28. `live/meet.html` `.drop` is fixed by the same resync |
 | RV-36 | `recordings.processing.*` is timer-driven (5 steps, 1.3-2.0 s each) | Capture depended on wall-clock timing | `?km-processing-pin=N` (query before the hash) or `html[data-km-processing-pin=N]` freezes the frame: N done, step N 50% with a static icon, rest waiting, N=5 finished; no timers or toast. Documented in `tests/fidelity/oracle/proposed-nav-states.json` `notes.processingPin` |
 | RV-37 | Probe gap | `auditFlatControls` reads controls only | `scanAllStrokes` added (`prototype-probes.ts strokes`); `text-decoration` (link underline, `line-through` on a done to-do) is reported as informational, not counted: an underlined in-copy link is the non-colour cue SC 1.4.1 needs and the strike carries the done state with its checked box |
+| RV-38 | Light `bg` / `surface` / `card` 1.03 / 1.04:1 apart (1.07 page to raised) once shadows were `none` (RV-34); dark 1.14 / 1.10:1 | Hierarchy was carried by the hairline shadows | Operator decision 2026-11-12 ("do as you recommend"): fill steps of ~1.15-1.25:1, no strokes or shadows. `tokens.json` v1.5.0. Light: `bg` `#F7F7F8` -> `#DCDEE0`, `surface` `#FAFBFC` -> `#ECEEF1`, `card` `#FFFFFF` kept: **1.16 / 1.16**. Dark: `bg` `#0B0F14` kept, `surface` (and `tile`) `#161D29` -> `#181F2B`, `card` (and `tile-2`) `#1C2535` -> `#222B3B`: **1.16 / 1.16**. `muted` follows (dark `#253044` -> `#2A3548`, 1.15 above `card`; light `#EEF0F3` -> `#D4D7DC`, it had merged with the new `surface`, now 1.24 below it); dark `card-hov` `#202B40` -> `#252F41` (stays between `card` and `muted`). Contrast record gains kind `surface-step` (min 1.15, max 1.25), pairs `surface-step-surface-vs-bg` and `surface-step-card-vs-surface` in both themes |
+| RV-39 | Control fills under 3:1 on the new levels: light `control` `#858F9E` 2.42:1 on `bg`; dark `control` `#64718A` would be 2.91:1 on `card`; dark `control-invalid` `#DC2626` 2.94:1 on `card` | The page (light) and raised level (dark) moved toward the control fill | Light `control` / `switch-track` -> `#757E8E` (3.03 on `bg`, `on-control` 4.69), `control-hov` `#7C8696` -> `#737C8B` (`on-control` 4.56; stays darker than rest), `control-placeholder` `#1C2230` -> `#0E1218` (4.58; the old value was 3.88). Dark `control` / `switch-track` -> `#68758E` (3.06 on `card`, `on-control` 4.64), `control-placeholder` `#F5F7FA` -> `#FBFCFD` (4.51; old 4.33), `control-invalid` (both themes) -> `#E12727` (3.06 on dark `card`, `on-control-invalid` 4.64). Focus fills unchanged: every focus pair still >= 3:1 against rest and surface |
+| RV-40 | Light text under 4.5:1 on the deeper page / panel: `ember-text` `#C13E1E` 3.92 on `bg`, `cyan-text` `#0E7490` 3.97 on `bg`, `amber-text` `#B45309` 4.32 on `surface` | Same cause | `ember-text` -> `#B0391D` (4.51), `cyan-text` -> `#0B6680` (4.82, the existing `cyan-text-on-tile` value), `amber-text` -> `#A64C08` (4.93). Fills `ember-btn` and `selected` (`#C13E1E`) unchanged; `pip-amber` unchanged |
+| RV-41 | Light brand graphics under 3:1 on the new page: `ember` `#E04E28` 2.94 (symbol core, orb), `cyan` `#0891B2` 2.73 (agent dot, `orb--cyan`) | Same cause | Light `ember` -> `#DC4D27` (3.03), light `cyan` -> `#0889A8` (3.02). Dark brand ember `#FF6A3D` and `speak-agent` `#0891B2` unchanged |
 
-Open owner decision (not changed): without hairline shadows the light theme's `card`,
-`surface` and `bg` steps are 1.02-1.07:1 apart, so separation is spacing and radius
-only. See DESIGN.md "No strokes, shadows or rules anywhere".
+Resolved by RV-38 (operator 2026-11-12): the surface levels are 1.16:1 apart in both
+themes (DESIGN.md "Surface hierarchy"). The verification block below is the v1.4.0 run;
+the v1.5.0 run follows it.
 
 Verification (design-lead, 2026-11-11; prototype served by `tests/fidelity`'s static
 server, every in-scope state x dark/light x 375/768/1024/1440 = 552 cells; logs in
@@ -424,3 +428,24 @@ hairline shadows gone); dark cells of `frame.account-menu-open`, the recordings 
 settings delivery previews (email and SMS), `auth.sign-in.error`, `auth.*` (the `or`
 label), `dashboard` schedule error, recordings transcript search, and
 `recordings.processing.*` (pinned, RV-36).
+
+Verification of tokens v1.5.0 (RV-38 to RV-41; design-lead, 2026-11-12; prototype served by
+`tests/fidelity`'s static server, Playwright Chromium, every in-scope state x dark/light x
+375/768/1024/1440 = 552 cells; `prototype/assets/km.css` and `live/assets/km.css` token
+block re-copied from `generated/web/tokens.css` and byte-identical to it; logs in
+`/tmp/kmsurf/probe-*.log` and `/tmp/kmsurf/probes.log`, not tracked):
+
+- Contrast record: **258 pairs, 0 failing** (120 text, 134 UI and graphic, 4 surface-step).
+  `generate --check` clean at 1.5.0 (web, shadcn, Tailwind, Flutter, `docs/design/tokens.css`).
+- `strokes`: **0** findings over 102,946 elements and pseudo-elements (24 informational
+  text-decoration runs, unchanged). `flat` (focus fill): **0** findings over 21,179 focus
+  stops. `overflow`: 0 of 552 cells. `scroll`: 0 findings, 32 overflowing regions, all
+  focusable. `controls` negative controls: 4/4 still detected.
+- Rendered check (dashboard and settings, light, 1440): page, panel and raised levels read
+  as three fills; no layout change.
+
+Recapture needed: **every cell in both themes** (the surface, card, muted, control and
+light text values changed). Open for the owner: dark `bg-2` (app bar, nav, menus) is
+1.06:1 above `bg`; `control-hov` is not in the record (dark hover fill is 2.54:1 on `card`,
+was 2.74 in v1.4.0); light `control-placeholder` now sits within 1.2:1 of the value text
+(placeholders keep the "e.g." rule).

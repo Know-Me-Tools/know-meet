@@ -10,12 +10,12 @@
   /* colour */
   --km-bg: #0B0F14;
   --km-bg-2: #111620;
-  --km-surface: #161D29;
-  --km-card: #1C2535;
-  --km-card-hov: #202B40;
-  --km-muted: #253044;
-  --km-tile: #161D29;
-  --km-tile-2: #1C2535;
+  --km-surface: #181F2B;
+  --km-card: #222B3B;
+  --km-card-hov: #252F41;
+  --km-muted: #2A3548;
+  --km-tile: #181F2B;
+  --km-tile-2: #222B3B;
   --km-fg: #E8EDF3;
   --km-fg-sub: #A7B0BC;
   --km-ember: #FF6A3D;
@@ -40,11 +40,11 @@
   --km-danger-btn: #DC2626;
   --km-danger-btn-hov: #B91C1C;
   --km-on-danger: #FFFFFF;
-  --km-control: #64718A;
+  --km-control: #68758E;
   --km-control-hov: #5C6880;
   --km-on-control: #FFFFFF;
-  --km-control-placeholder: #F5F7FA;
-  --km-control-invalid: #DC2626;
+  --km-control-placeholder: #FBFCFD;
+  --km-control-invalid: #E12727;
   --km-on-control-invalid: #FFFFFF;
   --km-selected: #FA5F30;
   --km-on-selected: #0B0F14;
@@ -64,7 +64,7 @@
   --km-shadow-float: none;
   --km-shadow-card: none;
   /* colour */
-  --km-switch-track: #64718A;
+  --km-switch-track: #68758E;
   --km-switch-thumb: #E8EDF3;
   --km-switch-thumb-on: #0B0F14;
   /* shadow */
@@ -257,39 +257,39 @@
 
 [data-theme="light"] {
   color-scheme: light;
-  --km-bg: #F7F7F8;
+  --km-bg: #DCDEE0;
   --km-bg-2: #FFFFFF;
-  --km-surface: #FAFBFC;
+  --km-surface: #ECEEF1;
   --km-card: #FFFFFF;
   --km-card-hov: #F2F4F7;
-  --km-muted: #EEF0F3;
+  --km-muted: #D4D7DC;
   --km-tile: #E9ECF1;
   --km-tile-2: #DDE2E9;
   --km-fg: #0B0F14;
   --km-fg-sub: #4B5563;
-  --km-ember: #E04E28;
+  --km-ember: #DC4D27;
   --km-ember-btn: #C13E1E;
   --km-ember-btn-hov: #A93518;
   --km-on-ember: #FFFFFF;
-  --km-ember-text: #C13E1E;
+  --km-ember-text: #B0391D;
   --km-ember-soft: #FCECE7;
-  --km-cyan: #0891B2;
-  --km-cyan-text: #0E7490;
+  --km-cyan: #0889A8;
+  --km-cyan-text: #0B6680;
   --km-cyan-text-on-tile: #0B6680;
   --km-cyan-soft: rgba(8, 145, 178, 0.1);
   --km-green: #16A34A;
   --km-green-text: #166534;
   --km-green-soft: rgba(22, 163, 74, 0.12);
   --km-amber: #D97706;
-  --km-amber-text: #B45309;
+  --km-amber-text: #A64C08;
   --km-amber-soft: rgba(217, 119, 6, 0.12);
   --km-red: #DC2626;
   --km-red-text: #B91C1C;
   --km-red-soft: rgba(220, 38, 38, 0.1);
-  --km-control: #858F9E;
-  --km-control-hov: #7C8696;
+  --km-control: #757E8E;
+  --km-control-hov: #737C8B;
   --km-on-control: #0B0F14;
-  --km-control-placeholder: #1C2230;
+  --km-control-placeholder: #0E1218;
   --km-selected: #C13E1E;
   --km-on-selected: #FFFFFF;
   --km-focus: #0B0F14;
@@ -302,7 +302,7 @@
   --km-scrim: rgba(11, 15, 20, 0.4);
   --km-shadow-float: none;
   --km-shadow-card: none;
-  --km-switch-track: #858F9E;
+  --km-switch-track: #757E8E;
   --km-switch-thumb: #FFFFFF;
   --km-switch-thumb-on: #FFFFFF;
   --km-switch-thumb-shadow: none;

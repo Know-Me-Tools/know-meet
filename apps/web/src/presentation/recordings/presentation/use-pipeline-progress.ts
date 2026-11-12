@@ -4,6 +4,7 @@
 // Progress is state, not decoration, so it still advances under reduced motion
 // (only the spinner stops).
 import { useEffect, useState } from "react";
+import { PROCESSING_PIN_PARAM, parseProcessingPin, pinnedProgress } from "../application/processing-pin";
 import type { ProcessingStep } from "../domain/recording-details";
 
 const START_DELAY_MS = 400;
@@ -21,11 +22,26 @@ export interface PipelineProgress {
   readonly complete: boolean;
 }
 
+/** Reads the deterministic capture pin from the URL query or the root attribute. */
+export function readProcessingPin(stepCount: number): number | null {
+  const raw =
+    new URLSearchParams(window.location.search).get(PROCESSING_PIN_PARAM) ??
+    document.documentElement.getAttribute(`data-${PROCESSING_PIN_PARAM}`);
+  return parseProcessingPin(raw, stepCount);
+}
+
 export function usePipelineProgress(steps: readonly ProcessingStep[]): PipelineProgress {
+  const [pin] = useState(() => readProcessingPin(steps.length));
+  const live = useLiveProgress(steps, pin === null);
+  return pin === null ? live : pinnedProgress(steps, pin);
+}
+
+function useLiveProgress(steps: readonly ProcessingStep[], enabled: boolean): PipelineProgress {
   const total = steps.reduce((sum, step) => sum + step.durationMs, 0);
   const [elapsed, setElapsed] = useState(-1);
 
   useEffect(() => {
+    if (!enabled) return undefined;
     let started = 0;
     let timer = 0;
     const startTimer = window.setTimeout(() => {
@@ -41,7 +57,7 @@ export function usePipelineProgress(steps: readonly ProcessingStep[]): PipelineP
       window.clearTimeout(startTimer);
       window.clearInterval(timer);
     };
-  }, [total]);
+  }, [total, enabled]);
 
   let offset = 0;
   let active = elapsed < 0 ? -1 : steps.length;

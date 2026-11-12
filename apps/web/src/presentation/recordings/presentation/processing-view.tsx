@@ -18,7 +18,7 @@ import type { Recording } from "../../workspace/domain/workspace";
 import { processingSteps } from "../application/recordings-model";
 import { detailHash } from "../application/recordings-route";
 import { meterTrackClass, Note, RecordingsCrumbs } from "./recording-parts";
-import { type StepState, usePipelineProgress } from "./use-pipeline-progress";
+import { readProcessingPin, type StepState, usePipelineProgress } from "./use-pipeline-progress";
 
 const TILE: Readonly<Record<StepState, string>> = {
   wait: "bg-muted text-muted-foreground",
@@ -26,12 +26,12 @@ const TILE: Readonly<Record<StepState, string>> = {
   ok: "bg-green-soft text-green-text",
 };
 
-function StepTile({ state, number }: { readonly state: StepState; readonly number: number }) {
+function StepTile({ state, number, pinned }: { readonly state: StepState; readonly number: number; readonly pinned: boolean }) {
   return (
     <span aria-hidden="true" className={cn("grid size-9 place-items-center rounded-round", TILE[state])}>
       {state === "wait" ? <span className="font-mono text-13">{number}</span> : null}
       {state === "run" ? (
-        <KmIcon name="refresh" className="animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none" />
+        <KmIcon name="refresh" className={cn(!pinned && "animate-spin [animation-duration:var(--anim-spin)] motion-reduce:animate-none")} />
       ) : null}
       {state === "ok" ? <KmIcon name="check" /> : null}
     </span>
@@ -49,9 +49,11 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
       ? "Starting…"
       : `Step ${progress.active + 1} of ${steps.length}: ${activeStep.title}`;
 
+  // A pinned capture frame is static: no toast.
+  const [pinned] = useState(() => readProcessingPin(steps.length) !== null);
   useEffect(() => {
-    if (progress.complete) toast.add({ title: `Recording ready: ${recording.title}`, type: "success" });
-  }, [progress.complete, recording.title]);
+    if (progress.complete && !pinned) toast.add({ title: `Recording ready: ${recording.title}`, type: "success" });
+  }, [progress.complete, pinned, recording.title]);
 
   return (
     <>
@@ -101,7 +103,7 @@ export function ProcessingView({ recording, email }: { readonly recording: Recor
                   key={step.title}
                   className="grid grid-cols-[36px_minmax(0,1fr)_auto] items-center gap-s3 rounded-base bg-surface px-s4 py-s3 shadow-(--shadow-card) max-bp768:grid-cols-[36px_minmax(0,1fr)]"
                 >
-                  <StepTile state={state} number={index + 1} />
+                  <StepTile state={state} number={index + 1} pinned={pinned} />
                   <span className="grid min-w-0 gap-0.5">
                     <b className="block">{step.title}</b>
                     <small className="block text-sm text-muted-foreground [overflow-wrap:anywhere]">{step.detail}</small>

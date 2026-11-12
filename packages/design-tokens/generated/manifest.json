@@ -2,13 +2,13 @@
   "generatedBy": "@know-meet/design-tokens generator",
   "source": {
     "path": "docs/design/tokens.json",
-    "version": "1.4.0",
-    "sha256": "d6d29d3c7259a6b66f58c367a757c8ac6ed6204ecc06d1c160fcd9a57e0be33b"
+    "version": "1.5.0",
+    "sha256": "fc7102ccb9dc37cb5d9f878002f66b874b34b4d49963c391aee3a8aa4f756cd1"
   },
   "outputs": [
     {
       "path": "packages/design-tokens/generated/web/tokens.css",
-      "sha256": "6ee107b4e51481f98600707f473d761b2d67caac362604e27cf09ef2d4b310a6"
+      "sha256": "10ac633dfb5d848a618811dde03e3d93f53f59bd51bfe086f6cb5ce606456ec3"
     },
     {
       "path": "packages/design-tokens/generated/web/fonts.css",
@@ -24,7 +24,7 @@
     },
     {
       "path": "packages/design-tokens/generated/flutter/tokens.g.dart",
-      "sha256": "aca80776075b63868653678aa948a61da48b9fae224961d6a98d8b153045a25d"
+      "sha256": "7f5236e6e5946cb5b7810c0bca06e933f8db6b342b88e55e17455290ae4c6a1b"
     },
     {
       "path": "packages/design-tokens/generated/flutter/km_theme.g.dart",
@@ -32,7 +32,7 @@
     },
     {
       "path": "docs/design/tokens.css",
-      "sha256": "ed4bcf902d435b8ebe59a94f3febeaac29fbd257bcc78082709199a019324570"
+      "sha256": "ea863e831889dfff2de029ffa8005d30220851ac88aef6f24537a4cc6065af03"
     }
   ]
 }

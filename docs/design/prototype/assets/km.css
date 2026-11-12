@@ -62,7 +62,7 @@
    ========================================================================== */
 
 /* ============================================================ 1. tokens
-   Tokens v1.3.0: verbatim copy of packages/design-tokens/generated/web/tokens.css
+   Tokens v1.5.0: verbatim copy of packages/design-tokens/generated/web/tokens.css
    (generated from docs/design/tokens.json). Reference revision v2: refresh by
    re-copying that file, never by editing values here. */
 :root {
@@ -70,12 +70,12 @@
   /* colour */
   --bg: #0B0F14;
   --bg-2: #111620;
-  --surface: #161D29;
-  --card: #1C2535;
-  --card-hov: #202B40;
-  --muted: #253044;
-  --tile: #161D29;
-  --tile-2: #1C2535;
+  --surface: #181F2B;
+  --card: #222B3B;
+  --card-hov: #252F41;
+  --muted: #2A3548;
+  --tile: #181F2B;
+  --tile-2: #222B3B;
   --fg: #E8EDF3;
   --fg-sub: #A7B0BC;
   --ember: #FF6A3D;
@@ -100,11 +100,11 @@
   --danger-btn: #DC2626;
   --danger-btn-hov: #B91C1C;
   --on-danger: #FFFFFF;
-  --control: #64718A;
+  --control: #68758E;
   --control-hov: #5C6880;
   --on-control: #FFFFFF;
-  --control-placeholder: #F5F7FA;
-  --control-invalid: #DC2626;
+  --control-placeholder: #FBFCFD;
+  --control-invalid: #E12727;
   --on-control-invalid: #FFFFFF;
   --selected: #FA5F30;
   --on-selected: #0B0F14;
@@ -124,7 +124,7 @@
   --shadow-float: none;
   --shadow-card: none;
   /* colour */
-  --switch-track: #64718A;
+  --switch-track: #68758E;
   --switch-thumb: #E8EDF3;
   --switch-thumb-on: #0B0F14;
   /* shadow */
@@ -317,39 +317,39 @@
 
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #F7F7F8;
+  --bg: #DCDEE0;
   --bg-2: #FFFFFF;
-  --surface: #FAFBFC;
+  --surface: #ECEEF1;
   --card: #FFFFFF;
   --card-hov: #F2F4F7;
-  --muted: #EEF0F3;
+  --muted: #D4D7DC;
   --tile: #E9ECF1;
   --tile-2: #DDE2E9;
   --fg: #0B0F14;
   --fg-sub: #4B5563;
-  --ember: #E04E28;
+  --ember: #DC4D27;
   --ember-btn: #C13E1E;
   --ember-btn-hov: #A93518;
   --on-ember: #FFFFFF;
-  --ember-text: #C13E1E;
+  --ember-text: #B0391D;
   --ember-soft: #FCECE7;
-  --cyan: #0891B2;
-  --cyan-text: #0E7490;
+  --cyan: #0889A8;
+  --cyan-text: #0B6680;
   --cyan-text-on-tile: #0B6680;
   --cyan-soft: rgba(8, 145, 178, 0.1);
   --green: #16A34A;
   --green-text: #166534;
   --green-soft: rgba(22, 163, 74, 0.12);
   --amber: #D97706;
-  --amber-text: #B45309;
+  --amber-text: #A64C08;
   --amber-soft: rgba(217, 119, 6, 0.12);
   --red: #DC2626;
   --red-text: #B91C1C;
   --red-soft: rgba(220, 38, 38, 0.1);
-  --control: #858F9E;
-  --control-hov: #7C8696;
+  --control: #757E8E;
+  --control-hov: #737C8B;
   --on-control: #0B0F14;
-  --control-placeholder: #1C2230;
+  --control-placeholder: #0E1218;
   --selected: #C13E1E;
   --on-selected: #FFFFFF;
   --focus: #0B0F14;
@@ -362,7 +362,7 @@
   --scrim: rgba(11, 15, 20, 0.4);
   --shadow-float: none;
   --shadow-card: none;
-  --switch-track: #858F9E;
+  --switch-track: #757E8E;
   --switch-thumb: #FFFFFF;
   --switch-thumb-on: #FFFFFF;
   --switch-thumb-shadow: none;

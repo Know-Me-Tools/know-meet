@@ -44,6 +44,7 @@ import {
   PROTOTYPE_SELECTORS,
   planState,
   type RenderTarget,
+  prototypeStatePath,
 } from "../support/state-drivers.ts";
 import type {
   BaselineManifest,
@@ -117,7 +118,7 @@ function git(args: readonly string[]): string {
 function prototypeTarget(origin: string): RenderTarget {
   return {
     name: "prototype",
-    urlFor: (entry) => `${origin}/${entry.file.replace(/^docs\/design\//, "")}${entry.hash}`,
+    urlFor: (entry) => `${origin}/${prototypeStatePath(entry)}`,
     selector: (role) => PROTOTYPE_SELECTORS[role],
   };
 }

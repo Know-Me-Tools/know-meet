@@ -6,13 +6,13 @@ same look on every surface.** Product context is in [PRODUCT.md](PRODUCT.md).
 
 ## Sources of truth (in precedence order)
 
-1. `docs/design/tokens.json` (v1.4.0): every value. Generated outputs come only from
+1. `docs/design/tokens.json` (v1.5.0): every value. Generated outputs come only from
    `pnpm --filter @know-meet/design-tokens generate`: web `tokens.css`, `theme.css`
    (Tailwind 4), `shadcn.css`, Flutter `tokens.g.dart` (`KmPalette`, `KmTokens`) and
    `km_theme.g.dart` (`buildKmTheme`). Never hand-edit a generated file.
 2. This file: rules that tokens alone cannot carry (control states, layout, motion).
 3. `docs/design/brand-guide.html`, then `docs/design/prototype/` (visual reference,
-   revision v2: renders tokens v1.4.0, the Flat 2.0 rules and the adaptive navigation
+   revision v2: renders tokens v1.5.0, the Flat 2.0 rules and the adaptive navigation
    below), then `docs/design/live/` (room layout reference). The root `live/` folder
    is not a source. `docs/design/prototype-v1-archive/` is the frozen pre-v2 copy
    (history only, never a source).
@@ -59,10 +59,34 @@ and app:
 | email and SMS preview inset rings, card hairline shadow | fill steps only (`card` / `bg-2` on the panel surface) |
 | row, section, footer and header hairlines in `live/` | removed; `live/*.html` is the prototype plus only the LiveKit changes |
 
-Open owner decision: in the light theme `card` (#FFFFFF), `surface` (#FAFBFC) and `bg`
-(#F7F7F8) are 1.02-1.07:1 apart, and the hairline shadows were what separated them.
-Separation is now spacing and corner radius. If that reads too flat, deepen one light
-fill step (a token change needing approval); nothing was deepened here.
+### Surface hierarchy (operator decision 2026-11-12, tokens v1.5.0)
+
+With no strokes and no shadows, the three surface levels are told apart **by fill
+alone**, and every adjacent step is **1.15-1.25:1** (luminance contrast) in both
+themes. The contrast record checks it as kind `surface-step` (min 1.15, max 1.25), so
+a token edit that flattens the hierarchy fails the record.
+
+| Level | Token | Dark | Light | Used by | Step to the level below |
+|---|---|---|---|---|---|
+| Page | `bg` | `#0B0F14` | `#DCDEE0` | page ground, room stage | n/a |
+| Panel | `surface` | `#181F2B` | `#ECEEF1` | `.card`, `.panel`, `.stat`, `.empty`, even table rows, code blocks | 1.16 / 1.16 |
+| Raised | `card` | `#222B3B` | `#FFFFFF` | `.card-raised`, secondary button | 1.16 / 1.16 |
+
+Rules:
+- Light is lighter-is-higher, like dark: the page is the deepest fill and raised
+  content is white. Never invert a level to make one screen read better.
+- `muted` (chips, count pills, list-row leads, avatars, inline code) sits on a panel or
+  raised level and is a recessed fill one step past the panel: dark `#2A3548`
+  (1.15 above `card`), light `#D4D7DC` (1.24 below `surface`). `card-hov` stays a
+  hover tint between levels and is never a level. `tile` / `tile-2` equal `surface` /
+  `card` in dark; light tiles are unchanged.
+- `bg-2` (app bar, nav bar and rail, menus, table header) is chrome, not a level:
+  white in light; in dark it stays `#111620` (1.06:1 above `bg`), an open owner question.
+- Every text role keeps 4.5:1 and every control fill 3:1 on every level. Moving the
+  levels apart moved these with them (v1.5.0): `control`, `control-hov`,
+  `control-placeholder`, `switch-track`, `control-invalid`, light `ember-text`,
+  `cyan-text`, `amber-text`, and the light brand `ember` / `cyan` graphics (3:1 on the
+  page). Values and ratios: discrepancy-log F5b, RV-38 to RV-41.
 
 ### Deterministic processing capture (RV-36)
 
@@ -75,11 +99,11 @@ must honour the same parameter (request to ui-engineer and bdd-quality).
 
 | Token | Dark | Light | Job |
 |---|---|---|---|
-| `control` | `#64718A` | `#858F9E` | Resting fill of every control whose boundary must be seen |
-| `control-hov` | `#5C6880` | `#7C8696` | Hover fill (`@media (hover: hover)` only) |
+| `control` | `#68758E` | `#757E8E` | Resting fill of every control whose boundary must be seen |
+| `control-hov` | `#5C6880` | `#737C8B` | Hover fill (`@media (hover: hover)` only) |
 | `on-control` | `#FFFFFF` | `#0B0F14` | Value text, labels and glyphs on `control` |
-| `control-placeholder` | `#F5F7FA` | `#1C2230` | Placeholder on `control` |
-| `control-invalid` / `on-control-invalid` | `#DC2626` / `#FFFFFF` | same | Invalid text control |
+| `control-placeholder` | `#FBFCFD` | `#0E1218` | Placeholder on `control` |
+| `control-invalid` / `on-control-invalid` | `#E12727` / `#FFFFFF` | same | Invalid text control |
 | `selected` / `on-selected` | `#FA5F30` / `#0B0F14` | `#C13E1E` / `#FFFFFF` | Checked, pressed, current, selected |
 | `focus` / `on-focus` | `#FFFFFF` / `#0B0F14` | `#0B0F14` / `#FFFFFF` | Keyboard focus fill and its content |
 | `focus-placeholder` | `#4B5563` | `#C3CAD4` | Placeholder in a focused empty field |
@@ -339,7 +363,7 @@ layout animates once per crossing; continuous resizing inside a class never anim
 
 ## Verification hooks
 
-- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (254 pairs).
+- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (258 pairs, including the four `surface-step` pairs).
 - Fidelity: the oracle compares against baselines captured from prototype v2, so
   this file's rules are the reference, not exceptions (`thresholds.json` ADJ-1 to
   ADJ-3 superseded; ADJ-4 contract amendment pending).

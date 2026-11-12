@@ -181,6 +181,25 @@ export const PAIRS = [
     ["#FFFFFF", "media-tag-bg"],
     "Poor-connection bars on a video tile tag (live.css)",
   ),
+  // ---- Surface hierarchy (operator 2026-11-12, tokens v1.5.0): with no strokes and no
+  // shadows, the page, panel and raised levels are told apart by fill alone. Each adjacent
+  // step must be 1.15-1.25:1 in both themes (DESIGN.md "Surface hierarchy").
+  {
+    id: "surface-step-surface-vs-bg",
+    kind: "surface-step",
+    fg: ["surface"],
+    bg: ["bg"],
+    max: 1.25,
+    use: "Panel level (.card, .panel, .stat, .empty, even table rows) against the page",
+  },
+  {
+    id: "surface-step-card-vs-surface",
+    kind: "surface-step",
+    fg: ["card"],
+    bg: ["surface"],
+    max: 1.25,
+    use: "Raised level (.card-raised, secondary button) against the panel",
+  },
   {
     id: "brand-ember-on-bg",
     kind: "graphic",

@@ -186,7 +186,7 @@
    "access": "sign-in"
   },
   "recordings.processing.partner-onboarding-1014": {
-   "path": "/recordings#processing:partner-onboarding-1014",
+   "path": "/recordings?km-processing-pin=2#processing:partner-onboarding-1014",
    "access": "sign-in"
   },
   "recordings.empty": {

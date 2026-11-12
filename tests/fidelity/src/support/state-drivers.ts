@@ -11,6 +11,20 @@ export type UiRole =
   | "nav-rail"
   | "nav-inline";
 
+/** Deterministic pin for the recordings "processing" frame (design-lead RV-36, tokens v1.5.0). */
+export const PROCESSING_PIN_QUERY = "km-processing-pin=2";
+
+/**
+ * Prototype URL for a state, relative to the served design root. The processing pin is appended
+ * exactly once, as a query before the hash, and only for `recordings.processing.*`. The app
+ * target does not use this: its pin lives in oracle/app-state-map.json and is never appended.
+ */
+export function prototypeStatePath(entry: InventoryEntry): string {
+  const file = entry.file.replace(/^docs\/design\//, "");
+  const query = entry.id.startsWith("recordings.processing.") ? `?${PROCESSING_PIN_QUERY}` : "";
+  return `${file}${query}${entry.hash}`;
+}
+
 /** Where a state is rendered: the frozen prototype or the built app. */
 export interface RenderTarget {
   readonly name: "prototype" | "app";

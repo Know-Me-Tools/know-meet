@@ -17,7 +17,7 @@ import { contextOptions, prepareContext } from "../support/capture-environment.t
 import { findEntry, inScopeEntries, loadInventory, type Theme } from "../support/inventory.ts";
 import { DESIGN_DIR, FONTS_DIR } from "../support/repo-paths.ts";
 import { renderCell } from "../support/render-cell.ts";
-import { PROTOTYPE_SELECTORS, type RenderTarget } from "../support/state-drivers.ts";
+import { PROTOTYPE_SELECTORS, prototypeStatePath, type RenderTarget } from "../support/state-drivers.ts";
 
 const which = new Set(process.argv.slice(2));
 const run = (name: string): boolean =>
@@ -32,7 +32,7 @@ const server = await startStaticServer(DESIGN_DIR, FONTS_DIR);
 const browser = await chromium.launch();
 const target: RenderTarget = {
   name: "prototype",
-  urlFor: (entry) => `${server.origin}/${entry.file.replace(/^docs\/design\//, "")}${entry.hash}`,
+  urlFor: (entry) => `${server.origin}/${prototypeStatePath(entry)}`,
   selector: (role) => PROTOTYPE_SELECTORS[role],
 };
 const inventory = loadInventory();

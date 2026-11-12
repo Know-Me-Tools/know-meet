@@ -194,3 +194,9 @@ Provenance: user (explicit form answers, Travis James).
 - Prototype v2 still carries decorative strokes the implementation dropped under Flat 2.0 (error-summary red stripe, "or with email" divider lines, amber ring on transcript search hits) → design-lead to remove from the prototype and recapture affected states before c13. Recordings "processing" state uses real-time timing → capture driver must pin it.
 
 - 2026-11-12: prototype decorative strokes removed (RV-29..37; tokens v1.4.0 shadows → none; live/ resynced to the prototype + LiveKit changes); all-element stroke scan 0 across 552 cells / 102,947 elements; processing state pinned via ?km-processing-pin=2 (app side pending). Open: light-theme bg/surface/card now separate by only 1.02–1.07:1 without shadows — operator decision before recapture.
+
+## 2026-11-12 — operator: light-theme surface separation "do as you recommend"
+
+- Light theme bg / surface / card get fill-only steps of ~1.15–1.25:1 (no strokes or shadows) for hierarchy; dark theme unchanged unless also under-separated. Then full recapture and VS-1 contract amendment (operator authorised signing the reference update, 2026-11-11).
+
+- 2026-11-12: reference v2.3 (tokens v1.5.0, strokes removed, processing pinned): 600 images recaptured, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d; nav-morph probes pass. VS-1 amendment signed with the operator key and adopted as contract-adoption-hybrid-shell-foundation-261ec2fd (supersedes 138ce337, bound revision 4); VLBV re-bound.
