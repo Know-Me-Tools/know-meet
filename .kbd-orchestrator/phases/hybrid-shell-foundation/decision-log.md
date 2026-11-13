@@ -205,3 +205,18 @@ Provenance: user (explicit form answers, Travis James).
 
 - c13 boundary run starts. The adopted contract (261ec2fd) references no c08/8.3, c15 or c16 task, so the agentic-UI layer (8.3) and the open gate 16.1 (macOS minimised window, Windows WebView2) are carried as follow-up outside this boundary; 8.3 stays blocked on c16.
 - Stage A (build + fix boundary failures): web/desktop, Rust/BFF/FRB, Flutter in parallel. Stage B: VS-1 fidelity matrix, VS-4, VS-8, a11y gate, security trace, independent review.
+
+## 2026-11-12 — c13 Stage A green (commit 425ae27)
+
+- All aggregate commands pass: lint (all rules incl. Biome 0 findings, clippy, flutter analyze), typecheck 6/6, test (Flutter 435/435, goldens 282 matching, Rust, repo-rules, web unit), build (web, Tauri .app via standard path, bundle identity, Android debug APK, iOS simulator).
+- Operator approved installing CocoaPods 1.17.0 (Homebrew) for the iOS simulator build.
+- 13.2/13.6/13.7/13.8 complete. 13.3 awaits design-lead approval of goldens. Stage B (13.1, 13.4, 13.5 re-run, 13.9, 13.10) next.
+- Left uncommitted: OpenSpec tool files under .claude/.qwen/.opencode rewritten outside this work.
+- Operator to add repo secret TURBO_REMOTE_CACHE_SIGNATURE_KEY.
+
+## 2026-11-12 — operator approves Flutter goldens; Turbo signing key set
+
+- Operator approved all 282 Flutter goldens (72 states, light/dark, 375/768 plus nav states at 1024/1440) on behalf of design-lead. Recorded in apps/mobile/test/goldens/approvals.json with golden, prototype-baseline and tokens sha256; goldens re-verified (282/282).
+- Published for review on IPFS: site bafybeicc5ciunxlpsnmusgiyrdizgc4eazovupqommgrzw4bscp3qtqhnm (index.html + screenshots/), screenshots folder bafybeianlsskyrdphj7zg6wmxyi2srpia2guc4qwgvenqrvsnyeogym5em. Local copy: ~/Projects/know-me/know-meet-artifacts/flutter-reference-screenshots-2026-11-12/.
+- TURBO_REMOTE_CACHE_SIGNATURE_KEY generated (384-bit random) and set as a repo secret; copy in the macOS keychain (service turbo-remote-cache-signature-key). Note: no TURBO_TOKEN secret exists yet, so the remote cache stays off until one is added.
+- c13 13.3 complete.

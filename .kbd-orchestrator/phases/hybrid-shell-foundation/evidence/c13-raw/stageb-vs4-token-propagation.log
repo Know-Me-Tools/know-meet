@@ -1,0 +1,9 @@
+[WebServer] $ vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4175 --strictPort
+
+Running 3 tests using 1 worker
+
+  ✓  1 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:11:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › Changing one dark-theme colour changes exactly its three outputs @VS-4 @value-critical @cli @tokens @boundary-only @smoke (2.0s)
+  ✓  2 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:21:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › An invalid colour stops the generator @VS-4 @value-critical @cli @tokens @boundary-only @negative-control (1.3s)
+  ✓  3 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:28:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › A missing output directory stops the generator @VS-4 @value-critical @cli @tokens @boundary-only @negative-control (1.4s)
+
+  3 passed (7.8s)

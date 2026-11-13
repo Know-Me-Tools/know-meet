@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 230,
-  "derivedRevision": 230,
+  "sourceRevision": 236,
+  "derivedRevision": 236,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 236
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-12T14:40:26.886778Z",
+  "last_updated": "2026-11-13T01:02:16.513685Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
   "changes_completed": 13,
@@ -205,11 +205,11 @@
     {
       "id": "c13-fidelity-verification-and-evidence",
       "title": "Single boundary run, fidelity, security and accessibility evidence",
-      "status": "IN_PROGRESS",
-      "implementation_status": "IN_PROGRESS",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
       "tasks_total": 10,
-      "tasks_done": 0,
-      "last_task_completed": null,
+      "tasks_done": 5,
+      "last_task_completed": "Perform the authoritative security trace across web, Tauri, Flutter, bridge and PEM and rerun secret scans",
       "next_task_pending": "Run the web fidelity matrix (VS-1)",
       "blockers": []
     },
