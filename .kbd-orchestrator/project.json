@@ -52,7 +52,7 @@
   ],
   "agents_config": {
     "claude": {
-      "entry": "Claude Code slash commands (/kbd-*, /opsx:*)",
+      "entry": "Claude Code slash commands (/kbd-*) and OpenSpec skills (/openspec-*, linked from .agents/skills)",
       "strengths": [
         "planning",
         "multi-file features"
@@ -65,7 +65,7 @@
       ]
     },
     "opencode": {
-      "entry": "OpenCode CLI (/opsx-*)",
+      "entry": "OpenCode CLI (openspec-* skills, read from .agents/skills)",
       "strengths": [
         "quick targeted edits"
       ]
@@ -83,7 +83,7 @@
       ]
     },
     "qwen-code": {
-      "entry": "Qwen Code (/opsx-*)",
+      "entry": "Qwen Code (openspec-* skills, read from .agents/skills)",
       "strengths": [
         "implementation"
       ]
