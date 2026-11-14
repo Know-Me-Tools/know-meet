@@ -2,13 +2,13 @@
   "generatedBy": "@know-meet/design-tokens generator",
   "source": {
     "path": "docs/design/tokens.json",
-    "version": "1.2.0",
-    "sha256": "c872cf1d89266453afaf16fc7513476ec4f06f4bf8993dc0e0db2428a530af32"
+    "version": "1.5.0",
+    "sha256": "fc7102ccb9dc37cb5d9f878002f66b874b34b4d49963c391aee3a8aa4f756cd1"
   },
   "outputs": [
     {
       "path": "packages/design-tokens/generated/web/tokens.css",
-      "sha256": "21c6c1b94a4b74fdbb4ae1aef365cc4a5be56512fcf5bdb3769dbef2d05762cd"
+      "sha256": "10ac633dfb5d848a618811dde03e3d93f53f59bd51bfe086f6cb5ce606456ec3"
     },
     {
       "path": "packages/design-tokens/generated/web/fonts.css",
@@ -16,23 +16,23 @@
     },
     {
       "path": "packages/design-tokens/generated/web/theme.css",
-      "sha256": "22232d96ae0a6f49d66c29f51b382c10d21323a0a87d71e9159edf7efa9e37d9"
+      "sha256": "4865c534175b2e73058d428d034f8458323958c82fc27abe97e5e8e00271206b"
     },
     {
       "path": "packages/design-tokens/generated/web/shadcn.css",
-      "sha256": "0563f206b576c790ff6cc0b7a37a4e25c6ff95e9fadf37f4509a8d8db9ea8545"
+      "sha256": "ba128175c780e98646c46263352f242f08b752253e9f5992204701d4191354b5"
     },
     {
       "path": "packages/design-tokens/generated/flutter/tokens.g.dart",
-      "sha256": "1029dd823565b50e20c900574031862d4eebe6ce47109196fc445e24517237dc"
+      "sha256": "7f5236e6e5946cb5b7810c0bca06e933f8db6b342b88e55e17455290ae4c6a1b"
     },
     {
       "path": "packages/design-tokens/generated/flutter/km_theme.g.dart",
-      "sha256": "0e13fe598163cf0a8fe30f77b5c492570cb6ab99b68f8dd0027d9a7cde91df1a"
+      "sha256": "911634346508ad3b3cc5d3471c2ff5bad8117ad05d430bde0c9d1f0c22df55ac"
     },
     {
       "path": "docs/design/tokens.css",
-      "sha256": "58f251c0e42798cfdc28a07f62f9d4671bb15114fb995f912d1a8d1386c4980a"
+      "sha256": "ea863e831889dfff2de029ffa8005d30220851ac88aef6f24537a4cc6065af03"
     }
   ]
 }

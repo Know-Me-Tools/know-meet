@@ -1,0 +1,66 @@
+// TJ-ARCH-MOB-001 compliant
+// The prototype's upload / processing bar (meet.html `.k-progress`): a 4px muted
+// pill track with an ember fill that eases at --dur-progress.
+import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
+import { cn } from "#lib/utils";
+
+function Progress({ className, children, value, ...props }: ProgressPrimitive.Root.Props) {
+  return (
+    <ProgressPrimitive.Root
+      value={value}
+      data-slot="progress"
+      className={cn("flex flex-wrap items-baseline gap-x-s3 gap-y-1", className)}
+      {...props}
+    >
+      {children}
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
+    </ProgressPrimitive.Root>
+  );
+}
+
+function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
+  return (
+    <ProgressPrimitive.Track
+      className={cn("relative block h-1 w-full overflow-hidden rounded-pill bg-muted", className)}
+      data-slot="progress-track"
+      {...props}
+    />
+  );
+}
+
+function ProgressIndicator({ className, ...props }: ProgressPrimitive.Indicator.Props) {
+  return (
+    <ProgressPrimitive.Indicator
+      data-slot="progress-indicator"
+      className={cn(
+        "block h-full bg-ember transition-all duration-(--dur-progress) ease-linear",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
+  return (
+    <ProgressPrimitive.Label
+      className={cn("text-sm font-semibold text-foreground", className)}
+      data-slot="progress-label"
+      {...props}
+    />
+  );
+}
+
+function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
+  return (
+    <ProgressPrimitive.Value
+      className={cn("ml-auto font-mono text-xs text-muted-foreground tabular-nums", className)}
+      data-slot="progress-value"
+      {...props}
+    />
+  );
+}
+
+export { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue };

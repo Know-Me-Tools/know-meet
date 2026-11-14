@@ -74,14 +74,27 @@ function kmNavigate(config: DriverConfig, w: WebviewInstrumentation, index: numb
   location.replace(url.toString());
 }
 
-function kmMetrics(w: WebviewInstrumentation, settle: { status: RunStatus; at: number }): WebviewMetrics {
+/**
+ * The first settle, observed two ways: event-driven render-complete (instrumentation.ts
+ * renderSettle, the reported total) and the legacy 20 ms setTimeout poll (kept for comparison;
+ * hidden pages clamp it to ~1 s). Awaiting the poll keeps the step pacing of earlier runs.
+ */
+async function kmFirstSettle(w: WebviewInstrumentation): Promise<{ legacy: { status: RunStatus; at: number }; event: { status: string; at: number } | null }> {
+  const legacy = await kmWaitSettled([], KM_FIRST_SETTLE_TIMEOUT_MS, 20);
+  return { legacy, event: w.renderSettle };
+}
+
+function kmMetrics(w: WebviewInstrumentation, first: { legacy: { status: RunStatus; at: number }; event: { status: string; at: number } | null }): WebviewMetrics {
   const submitAt = w.submitAt;
+  const settle = first.event ?? first.legacy;
   const tasks = w.longTaskSupported && submitAt !== null ? w.longTasks.filter((t) => t.start >= submitAt) : null;
   const memory = (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory;
   return {
     timeToFirstTokenMs: submitAt === null || w.firstTokenAt === null ? null : w.firstTokenAt - submitAt,
     totalStreamMs: submitAt === null ? null : settle.at - submitAt,
-    firstSettleStatus: settle.status,
+    totalStreamSource: first.event === null ? "legacy-poll-fallback" : "mutation-render-settle",
+    legacyPollTotalStreamMs: submitAt === null ? null : first.legacy.at - submitAt,
+    firstSettleStatus: first.legacy.status,
     counts: window.__spike?.renderCounts() ?? null,
     longTaskTotalMs: tasks === null ? null : tasks.reduce((s, t) => s + t.duration, 0),
     longTaskCount: tasks === null ? null : tasks.length,
@@ -124,11 +137,11 @@ async function kmDrive(ctx: StepContext, scenario: ScenarioFile, driven: Driven)
   if (step.scenarioId.startsWith("hostile/")) driven.finalizeMs = await kmFinalizeMs(config.hostileMessageId);
   const cancelsFirst = scenario.interactions[0]?.do === "cancel-run";
   if (step.mode === "measure" || !cancelsFirst) {
-    driven.metrics = kmMetrics(w, await kmWaitSettled([], KM_FIRST_SETTLE_TIMEOUT_MS, 20));
+    driven.metrics = kmMetrics(w, await kmFirstSettle(w));
   }
   if (step.mode === "conformance") {
     for (const interaction of scenario.interactions) await kmPerformInteraction(config.harnessUrl, sessionId, interaction, driven.deviations);
-    if (driven.metrics === null) driven.metrics = kmMetrics(w, await kmWaitSettled([], KM_FIRST_SETTLE_TIMEOUT_MS, 20));
+    if (driven.metrics === null) driven.metrics = kmMetrics(w, await kmFirstSettle(w));
   }
   await kmWaitServerIdle(config.harnessUrl, sessionId);
   if (step.mode === "conformance") driven.axe = await kmAxe(config);

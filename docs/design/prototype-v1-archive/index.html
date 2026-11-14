@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>Know Meet — agentic video meetings</title>
+<!-- og:start -->
+<link rel="canonical" href="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/index.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Know Meet" />
+<meta property="og:title" content="Know Meet — meetings where agents do the follow-through" />
+<meta property="og:description" content="Agentic video meetings on LiveKit: people, persistent dots and registered agents around one shared memory. Start as a guest with the Concierge." />
+<meta property="og:url" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/index.html" />
+<meta property="og:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The Know Meet home page: start a meeting as a guest or join with a code, beside a live meeting room with people, a dot and an agent." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Know Meet — meetings where agents do the follow-through" />
+<meta name="twitter:description" content="Agentic video meetings on LiveKit: people, persistent dots and registered agents around one shared memory. Start as a guest with the Concierge." />
+<meta name="twitter:image" content="https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/assets/og-home.png" />
+<!-- og:end -->
+<meta name="description" content="Know Meet: video meetings on LiveKit with your dot, registered agents and a Concierge in the room, live transcription, and a summary sent when you close.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>(function(){var t=null;try{t=localStorage.getItem('km-meet-theme')}catch(_){}if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t})();</script>
+<link rel="stylesheet" href="assets/km.css">
+<style>
+  /* ---------- page rhythm */
+  .home { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--s5); }
+  .home > section { padding-block: var(--s8); }
+  .home > section + section { box-shadow: inset 0 1px 0 var(--muted); }
+  .sec-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s5) var(--s7); align-items: end; margin-bottom: var(--s6); }
+  .sec-head h2 { font-size: var(--text-2xl); max-width: 18ch; }
+  .sec-head .eyebrow { margin-bottom: var(--s3); }
+  .sec-head p { color: var(--fg-sub); max-width: 58ch; }
+
+  /* ---------- hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: var(--s7); align-items: center; padding-top: var(--s7) !important; }
+  .hero-copy { display: grid; gap: var(--s5); align-content: start; }
+  .hero-copy .display { max-width: 12ch; }
+  .hero-copy .display em { font-style: normal; color: var(--ember-text); }
+  .hero-copy .lede { max-width: 52ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; }
+  .hero-actions .btn { min-height: 48px; padding: 0 var(--s5); }
+
+  .join-form { display: grid; gap: 6px; max-width: 460px; padding: var(--s4); border-radius: var(--radius-tile); background: var(--surface); box-shadow: var(--shadow-card); }
+  .join-form label { font-weight: 600; font-size: var(--text-sm); }
+  .join-form .hint { font-size: var(--text-sm); color: var(--fg-sub); }
+  .join-form .input { font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .join-form .btn[aria-busy="true"] { opacity: 0.7; }
+
+  .next-card { display: grid; gap: var(--s3); max-width: 460px; padding: var(--s4) var(--s5); border-radius: var(--radius-tile); background: var(--card); box-shadow: var(--shadow-card); }
+  .next-card .row { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+  .next-card h3 { font-size: var(--text-lg); }
+  .next-card .meta { color: var(--fg-sub); font-size: var(--text-sm); }
+  .next-card .avatar-stack .avatar { box-shadow: 0 0 0 2px var(--card); }
+
+  /* ---------- miniature room (composed from real UI parts) */
+  .mini { position: relative; margin: 0; padding: var(--s3); border-radius: var(--radius-lg); background: var(--bg-2); box-shadow: var(--shadow-float); display: grid; gap: var(--s3); }
+  [data-theme="light"] .mini { background: var(--card); }
+  .mini-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: var(--s1) var(--s2) 0; }
+  .mini-title { font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm); }
+  .rec { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--fg); padding: 4px 10px; border-radius: 999px; background: var(--red-soft); }
+  .rec i { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+  .mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+  .mtile { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: var(--radius); background: var(--tile); overflow: hidden; }
+  .mtile.is-speaking { box-shadow: inset 0 0 0 2px var(--cyan); }
+  .mtile .avatar { width: 46%; max-width: 64px; height: auto; aspect-ratio: 1; font-size: clamp(13px, 1.4vw, 20px); background: var(--tile-2); }
+  .mtile .orb { width: 42%; }
+  .mtile .agent-glyph, .mtile .phone-glyph { width: 44%; border-radius: 14px; font-size: clamp(12px, 1vw + 4px, 17px); }
+  .mtile .tag { position: absolute; left: 6px; bottom: 6px; right: 6px; display: flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--fg); }
+  .mtile .tag span { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 2px 6px; border-radius: 6px; background: var(--bg-2); }
+  [data-theme="light"] .mtile .tag span { background: var(--card); }
+  .mini-caption { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s2); align-items: start; padding: var(--s3); border-radius: var(--radius); background: var(--surface); font-size: var(--text-sm); }
+  .mini-caption b { font-weight: 600; }
+  .mini-caption .ic { color: var(--cyan-text); margin-top: 1px; }
+  .mini figcaption { font-size: var(--text-xs); color: var(--fg-sub); padding: 0 var(--s2) var(--s1); }
+
+  /* ---------- bento */
+  .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s3); }
+  .feat { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--radius-tile); background: var(--surface); box-shadow: var(--shadow-card); min-width: 0; }
+  .feat h3 { font-size: var(--text-lg); }
+  .feat p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .feat .f-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--muted); color: var(--fg); }
+  .feat .f-foot { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: auto; }
+  .f-dots { grid-column: span 4; grid-row: span 2; background: var(--card); grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); align-items: center; gap: var(--s5); }
+  .f-dots h3 { font-size: var(--text-xl); }
+  .f-dots .dots-copy { display: grid; gap: var(--s3); }
+  .dots-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+  .dot-card { display: grid; justify-items: center; gap: var(--s2); padding: var(--s4) var(--s2); border-radius: var(--radius); background: var(--surface); text-align: center; }
+  .dot-card .orb { width: 64%; }
+  .dot-card strong { font-family: var(--font-display); }
+  .dot-card span { font-size: var(--text-xs); color: var(--fg-sub); }
+  .f-agents { grid-column: span 2; grid-row: span 2; }
+  .agent-roll { display: grid; gap: var(--s2); }
+  .agent-roll li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: center; font-size: var(--text-sm); }
+  .agent-roll li > div { display: grid; }
+  .agent-roll li > div > * { display: block; }
+  .agent-roll small { color: var(--fg-sub); font-size: var(--text-xs); }
+  .f-private, .f-knowledge, .f-record { grid-column: span 2; }
+  .f-close { grid-column: span 3; background: var(--card); }
+  .f-recall { grid-column: span 3; }
+  .f-cal { grid-column: span 2; }
+  .f-invite { grid-column: span 4; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .f-invite .f-body { display: grid; gap: var(--s3); }
+  .channels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+  .channels li { display: flex; align-items: center; gap: var(--s2); padding: var(--s3); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); font-weight: 600; }
+  .channels li .ic { color: var(--ember-text); }
+  .cid { display: grid; gap: 4px; padding: var(--s3); border-radius: var(--radius); background: var(--bg); }
+  [data-theme="light"] .cid { background: var(--muted); }
+  .cid .mono { font-size: 12px; }
+  .cid .label { font-size: var(--text-xs); color: var(--fg-sub); }
+  .deliver { display: grid; gap: var(--s2); }
+  .deliver li { display: flex; align-items: center; gap: var(--s2); font-size: var(--text-sm); }
+  .deliver li .ic { color: var(--green-text); }
+  .only-you { display: grid; gap: 6px; padding: var(--s3); border-radius: var(--radius); background: var(--card); font-size: var(--text-sm); }
+  .only-you .eyebrow { font-size: 10px; }
+
+  /* ---------- comparison table */
+  .compare .table th[scope="row"] { font-family: var(--font-body); font-size: var(--text-sm); letter-spacing: 0; text-transform: none; color: var(--fg); font-weight: 600; white-space: normal; box-shadow: none; }
+  .compare .table thead th:not(:first-child) { width: 30%; }
+  .compare .table td, .compare .table th[scope="row"] { vertical-align: top; }
+  .compare .table tbody tr + tr th { box-shadow: inset 0 1px 0 var(--muted); }
+  .cell { display: inline-flex; align-items: flex-start; gap: 8px; }
+  .cell .ic { width: 18px; height: 18px; margin-top: 1px; }
+  .cell.yes .ic { color: var(--green-text); }
+  .cell.no { color: var(--fg-sub); }
+  .cell small { display: block; color: var(--fg-sub); font-size: var(--text-xs); }
+  .row-note { display: block; color: var(--fg-sub); font-weight: 400; font-size: var(--text-xs); margin-top: 2px; }
+  .compare-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); margin-top: var(--s4); }
+  .compare-foot p { color: var(--fg-sub); font-size: var(--text-sm); max-width: 64ch; }
+
+  /* ---------- concierge strip */
+  .concierge { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s6); align-items: center; padding: var(--s6); border-radius: var(--radius-lg); background: var(--ember-soft); }
+  .concierge .glyph-wrap { display: grid; place-items: center; width: 132px; aspect-ratio: 1; border-radius: 28px; background: var(--bg-2); position: relative; }
+  [data-theme="light"] .concierge .glyph-wrap { background: var(--card); }
+  .concierge .glyph-wrap .agent-glyph { width: 60%; border-radius: 18px; }
+  .concierge .glyph-wrap .orb { position: absolute; right: -10px; top: -10px; width: 36px; }
+  .concierge h2 { font-size: var(--text-2xl); }
+  .concierge .c-copy { display: grid; gap: var(--s3); }
+  .concierge .c-copy p { color: var(--fg); max-width: 60ch; }
+  .concierge ul { display: flex; flex-wrap: wrap; gap: 6px; }
+  .concierge .chip { background: var(--bg-2); color: var(--fg); }
+  [data-theme="light"] .concierge .chip { background: var(--card); }
+  .concierge .btn-col { display: grid; gap: var(--s2); }
+
+  /* ---------- flow */
+  .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s3); counter-reset: flow; }
+  .flow li { position: relative; }
+  .flow a { display: grid; gap: var(--s2); height: 100%; padding: var(--s5); border-radius: var(--radius-tile); background: var(--surface); box-shadow: var(--shadow-card); color: inherit; text-decoration: none; transition: background-color var(--dur-fast) ease; }
+  @media (hover: hover) { .flow a:hover { background: var(--card-hov); } .flow a:hover .go { transform: translateX(3px); } }
+  .flow .n { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ember-text); }
+  .flow h3 { font-size: var(--text-lg); }
+  .flow p { color: var(--fg-sub); font-size: var(--text-sm); }
+  .flow .go { display: inline-flex; align-items: center; gap: 4px; margin-top: auto; padding-top: var(--s2); font-size: var(--text-sm); font-weight: 600; color: var(--ember-text); transition: transform var(--dur-fast) var(--ease-out); }
+  .flow .go .ic { width: 16px; height: 16px; }
+
+  /* ---------- footer */
+  .site-foot { box-shadow: inset 0 1px 0 var(--muted); }
+  .site-foot .inner { max-width: 1240px; margin: 0 auto; padding: var(--s6) var(--s5) var(--s7); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s5); align-items: start; }
+  .site-foot nav ul { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s2); }
+  .site-foot nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s3); border-radius: var(--radius); color: var(--fg); font-weight: 600; font-size: var(--text-sm); text-decoration: none; }
+  @media (hover: hover) { .site-foot nav a:hover { background: var(--card-hov); } }
+  .site-foot .fine { color: var(--fg-sub); font-size: var(--text-xs); max-width: 70ch; margin-top: var(--s3); }
+
+  /* ---------- responsive */
+  @media (max-width: 1023px) {
+    .hero { grid-template-columns: minmax(0, 1fr); gap: var(--s6); }
+    .hero-copy .display { max-width: 16ch; }
+    .mini { max-width: 640px; }
+    .sec-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bento > .feat { grid-column: span 1; grid-row: auto; }
+    .f-dots, .f-invite { grid-column: span 2 !important; }
+    .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .concierge { grid-template-columns: auto minmax(0, 1fr); }
+    .concierge .btn-col { grid-column: 1 / -1; display: flex; flex-wrap: wrap; }
+  }
+  @media (max-width: 767px) {
+    .home { padding: 0 var(--s4); }
+    .home > section { padding-block: var(--s7); }
+    .bento { grid-template-columns: minmax(0, 1fr); }
+    .f-dots, .f-invite { grid-column: auto !important; grid-template-columns: minmax(0, 1fr); }
+    .flow { grid-template-columns: minmax(0, 1fr); }
+    .concierge { grid-template-columns: minmax(0, 1fr); padding: var(--s5); gap: var(--s4); }
+    .concierge .glyph-wrap { width: 96px; }
+    .site-foot .inner { grid-template-columns: minmax(0, 1fr); padding-inline: var(--s4); }
+    .compare .table thead th:not(:first-child) { width: auto; }
+  }
+  @media (max-width: 420px) {
+    .hero-actions .btn { width: 100%; }
+    .channels { grid-template-columns: minmax(0, 1fr); }
+    .mtile .tag { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="appbar"></header>
+
+<main id="main" class="home">
+
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <span class="eyebrow">Know Meet · agentic video meetings</span>
+      <h1 id="hero-title" class="display">Meetings where agents do the <em>follow-through.</em></h1>
+      <p class="lede">Your dot, the agents you register and a Concierge sit in the call with you, transcribe as you talk, and send everyone the transcript, summary and action items when you close.</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="meet.html#start"><span data-ic="cam"></span><span>Start a meeting</span></a>
+        <a class="btn" id="hero-signin" href="auth.html#sign-in?next=dashboard.html"><span data-ic="user"></span><span>Sign in</span></a>
+        <a class="btn" id="hero-dashboard" href="dashboard.html" hidden><span data-ic="calendar"></span><span>Your meetings</span></a>
+      </div>
+      <p class="small sub" id="hero-guest-note">No account needed to start: guests get the Concierge and live transcription.</p>
+
+      <form class="join-form" id="join-form" novalidate aria-describedby="join-hint">
+        <label for="join-code">Join with a code</label>
+        <div class="input-group">
+          <input class="input" id="join-code" name="code" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="km-4fq-82x" maxlength="20" aria-describedby="join-hint join-error">
+          <button class="btn btn-primary" type="submit" id="join-btn"><span>Join</span><span data-ic="chevron-right" data-ic-class="ic-sm"></span></button>
+        </div>
+        <span class="hint" id="join-hint">The code is in your email, SMS or calendar invite.</span>
+        <span class="field-error" id="join-error" role="alert"><span data-ic="alert" data-ic-class="ic-sm"></span><span class="msg"></span></span>
+      </form>
+
+      <div id="next-slot"></div>
+    </div>
+
+    <figure class="mini" role="group" aria-labelledby="mini-cap">
+      <div class="mini-top" aria-hidden="true">
+        <span class="mini-title od-truncate">Partner onboarding review</span>
+        <span class="rec"><i></i>REC 18:04</span>
+      </div>
+      <div class="mini-grid" aria-hidden="true">
+        <div class="mtile is-speaking"><span class="avatar">AC</span><div class="tag"><span>Avery Chen</span></div></div>
+        <div class="mtile"><span class="avatar">MO</span><div class="tag"><span>Marcus Oyelaran</span></div></div>
+        <div class="mtile"><span class="avatar">JR</span><div class="tag"><span>Jordan Reyes</span></div></div>
+        <div class="mtile"><span class="orb"></span><div class="tag"><span>Iris · your dot</span></div></div>
+        <div class="mtile"><span class="agent-glyph is-system">CG</span><div class="tag"><span>Concierge</span></div></div>
+        <div class="mtile"><span class="phone-glyph"><span data-ic="phone"></span></span><div class="tag"><span>Priya · dial-in</span></div></div>
+      </div>
+      <div class="mini-caption" aria-hidden="true">
+        <span data-ic="cc" data-ic-class="ic-sm"></span>
+        <span><b>Avery Chen:</b> Let’s confirm the onboarding checklist before Friday — Scribe, can you capture that as an action?</span>
+      </div>
+      <figcaption id="mini-cap">A KnowMe room: three people on video, Priya on the phone dial-in, your dot Iris, and the Concierge — with live captions and recording on.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 3. Features -->
+  <section aria-labelledby="feat-title">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">01 — Inside the room</span>
+        <h2 id="feat-title">What happens in a KnowMe meeting</h2>
+      </div>
+      <p>Every room is a LiveKit room with agents as real participants. They hear the same audio, read the same transcript, and work from the same shared knowledge — so the work after the meeting is already done when it ends.</p>
+    </div>
+
+    <div class="bento">
+      <article class="feat f-dots" aria-labelledby="f-dots">
+        <div class="dots-copy">
+          <span class="eyebrow">Persistent dots</span>
+          <h3 id="f-dots">A dot that remembers you across every meeting</h3>
+          <p>A dot is your always-on personal agent with its own private memory. Iris joins your calls, recalls what was decided last time, and keeps notes only you can read. Your colleagues bring theirs — Avery’s is Sol.</p>
+          <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="agents.html#dots">How dots work</a></div>
+        </div>
+        <div class="dots-pair" aria-hidden="true">
+          <div class="dot-card"><span class="orb"></span><strong>Iris</strong><span>Your dot</span></div>
+          <div class="dot-card"><span class="orb orb--cyan"></span><strong>Sol</strong><span>Avery’s dot</span></div>
+        </div>
+      </article>
+
+      <article class="feat f-agents" aria-labelledby="f-agents">
+        <span class="f-icon"><span data-ic="agent-add"></span></span>
+        <h3 id="f-agents">Dispatch registered agents into the room</h3>
+        <p>Register your own LiveKit agent workers once, then add them to any meeting mid-call.</p>
+        <ul class="agent-roll">
+          <li><span class="agent-glyph agent-glyph-sm">SC</span><div><strong>Scribe</strong><small>Notes, decisions, action items</small></div></li>
+          <li><span class="agent-glyph agent-glyph-sm">RS</span><div><strong>Researcher</strong><small>Cited answers from meeting knowledge</small></div></li>
+          <li><span class="agent-glyph agent-glyph-sm">FA</span><div><strong>Facilitator</strong><small>Agenda and time boxes</small></div></li>
+          <li><span class="agent-glyph agent-glyph-sm">TR</span><div><strong>Translator</strong><small>Live speech and captions</small></div></li>
+        </ul>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="agents.html#registry">Agent registry</a></div>
+      </article>
+
+      <article class="feat f-private" aria-labelledby="f-private">
+        <span class="f-icon"><span data-ic="eye-off"></span></span>
+        <h3 id="f-private">A private agent panel only you see</h3>
+        <p>Ask your dot or an agent a question mid-meeting without interrupting. Nobody else sees the thread.</p>
+        <div class="only-you" aria-hidden="true">
+          <span class="eyebrow">Only you · Iris</span>
+          <span>What did Marcus commit to on Oct 14?</span>
+        </div>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span></div>
+      </article>
+
+      <article class="feat f-knowledge" aria-labelledby="f-knowledge">
+        <span class="f-icon"><span data-ic="book"></span></span>
+        <h3 id="f-knowledge">Shared meeting knowledge</h3>
+        <p>Files you upload and every transcript segment feed one knowledge base that all agents in the room can read — including the Concierge.</p>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Uploads: sign-in</span><span class="chip chip-green"><span data-ic="check"></span>Live transcript: guests too</span></div>
+      </article>
+
+      <article class="feat f-record" aria-labelledby="f-record">
+        <span class="f-icon"><span data-ic="record"></span></span>
+        <h3 id="f-record">Record and transcribe on the fly</h3>
+        <p>Start recording any time. LiveKit Room Composite egress captures everyone in one layout as MP4 or HLS, with consent asked in the room.</p>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="meet.html#room:record-consent">See the consent prompt</a></div>
+      </article>
+
+      <article class="feat f-close" aria-labelledby="f-close">
+        <span class="f-icon"><span data-ic="send"></span></span>
+        <h3 id="f-close">Transcript, summary and action items, sent at close</h3>
+        <p>When the host ends the meeting, KnowMe writes the summary and action items and delivers them to every participant automatically, per your delivery settings.</p>
+        <ul class="deliver">
+          <li><span data-ic="mail" data-ic-class="ic-sm"></span>Email with transcript and summary attached</li>
+          <li><span data-ic="sms" data-ic-class="ic-sm"></span>SMS with a link to the summary</li>
+        </ul>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="settings.html#delivery">Delivery settings</a></div>
+      </article>
+
+      <article class="feat f-recall" aria-labelledby="f-recall">
+        <span class="f-icon"><span data-ic="database"></span></span>
+        <h3 id="f-recall">Recall the whole session</h3>
+        <p>The combined video lands in S3-compatible storage, then KnowMe pins it to IPFS and keeps the CID with the transcript. Use KnowMe-managed storage or bring your own bucket and pinning service.</p>
+        <div class="cid">
+          <span class="label">IPFS CID · Partner onboarding review</span>
+          <span class="mono od-truncate" title="bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi">bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi</span>
+        </div>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="recordings.html#detail:partner-onboarding-1014:storage">Open a stored recording</a></div>
+      </article>
+
+      <article class="feat f-cal" aria-labelledby="f-cal">
+        <span class="f-icon"><span data-ic="calendar"></span></span>
+        <h3 id="f-cal">Your calendars, connected</h3>
+        <p>Meetings you schedule land on the calendar you already use, with the join link and dial-in attached.</p>
+        <ul class="chips">
+          <li class="chip">Google Calendar</li>
+          <li class="chip">Microsoft 365 / Outlook</li>
+          <li class="chip">iCloud / CalDAV</li>
+        </ul>
+        <div class="f-foot"><span class="chip"><span data-ic="lock"></span>Sign-in</span><a class="small" href="settings.html#calendars">Connect a calendar</a></div>
+      </article>
+
+      <article class="feat f-invite" aria-labelledby="f-invite">
+        <div class="f-body">
+          <span class="f-icon"><span data-ic="users"></span></span>
+          <h3 id="f-invite">Invite anyone — no account required</h3>
+          <p>Invitees open a link and join in the browser, or call in. Phone callers come in through a Telnyx SIP trunk and join audio-only with a PIN.</p>
+          <div class="f-foot"><span class="chip chip-green"><span data-ic="check"></span>Invitees: no account</span><a class="small" href="join.html#invite">See what invitees see</a></div>
+        </div>
+        <ul class="channels">
+          <li><span data-ic="mail"></span>Email</li>
+          <li><span data-ic="sms"></span>SMS</li>
+          <li><span data-ic="calendar"></span>Calendar invite</li>
+          <li><span data-ic="phone-in"></span>Phone dial-in</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4. Guest vs signed in -->
+  <section class="compare" aria-labelledby="cmp-title">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">02 — Access</span>
+        <h2 id="cmp-title">Guest or signed in</h2>
+      </div>
+      <p>Anyone can start or join a meeting. Signing in turns on everything that needs to remember you: agents, recording, delivery, storage and calendars.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <caption class="sr-only">Capabilities available to guests compared with signed-in users</caption>
+        <thead>
+          <tr><th scope="col">Capability</th><th scope="col">Guest</th><th scope="col">Signed in</th></tr>
+        </thead>
+        <tbody id="cmp-body"></tbody>
+      </table>
+    </div>
+    <div class="compare-foot">
+      <p id="cmp-status">You’re browsing as a guest. Invitees never need an account, whichever column the host is in.</p>
+      <a class="btn" id="cmp-cta" href="auth.html#sign-in?next=dashboard.html"><span data-ic="user"></span><span>Sign in</span></a>
+    </div>
+  </section>
+
+  <!-- 5. Concierge -->
+  <section aria-labelledby="cg-title">
+    <div class="concierge">
+      <div class="glyph-wrap" aria-hidden="true">
+        <span class="agent-glyph is-system">CG</span>
+        <span class="orb"></span>
+      </div>
+      <div class="c-copy">
+        <span class="eyebrow">03 — The system agent</span>
+        <h2 id="cg-title">Meet the Concierge</h2>
+        <p>The Concierge is in every room, including guest rooms. It greets people as they arrive, explains what’s happening, answers questions from the live transcript, and tells guests what signing in would add. It’s the only agent guests get.</p>
+        <ul aria-label="What the Concierge does">
+          <li class="chip">Greets and orients</li>
+          <li class="chip">Answers from the live transcript</li>
+          <li class="chip">Routes questions to the right agent</li>
+        </ul>
+      </div>
+      <div class="btn-col">
+        <a class="btn btn-primary" href="agents.html#concierge"><span>About the Concierge</span><span data-ic="chevron-right" data-ic-class="ic-sm"></span></a>
+        <a class="btn" href="meet.html#start"><span data-ic="cam"></span><span>Try it as a guest</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Flow -->
+  <section aria-labelledby="flow-title">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">04 — Start to finish</span>
+        <h2 id="flow-title">How a meeting flows</h2>
+      </div>
+      <p>Four steps, each one a screen you can open now.</p>
+    </div>
+    <ol class="flow">
+      <li><a href="dashboard.html#schedule">
+        <span class="n">01</span><h3>Schedule &amp; invite</h3>
+        <p>Pick a time, add people by email or phone, and choose which agents join. Invites go out by email, SMS and calendar.</p>
+        <span class="go">Schedule form<span data-ic="chevron-right"></span></span></a></li>
+      <li><a href="meet.html#room:agents">
+        <span class="n">02</span><h3>Meet with agents</h3>
+        <p>Your dot and the Concierge are already there. Dispatch Scribe, Researcher or others whenever you need them.</p>
+        <span class="go">Add an agent<span data-ic="chevron-right"></span></span></a></li>
+      <li><a href="meet.html#room:transcript">
+        <span class="n">03</span><h3>Record &amp; transcribe</h3>
+        <p>The transcript builds as you talk. Start a Room Composite recording when everyone has agreed.</p>
+        <span class="go">Live transcript<span data-ic="chevron-right"></span></span></a></li>
+      <li><a href="meet.html#processing">
+        <span class="n">04</span><h3>Summary delivered</h3>
+        <p>On close: recording finalized to S3, pinned to IPFS, summary written and sent to every participant.</p>
+        <span class="go">After the meeting<span data-ic="chevron-right"></span></span></a></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="inner">
+    <div>
+      <a class="brand" href="index.html" aria-label="Know Meet home"><span data-ic-brand></span><span class="brand-word" aria-hidden="true">Know <b>Meet</b></span></a>
+      <p class="fine">Prototype. Meetings, agents, recordings, SMS, phone and calendar connections on these pages are simulated with fictional sample data — nothing is sent or stored outside this browser.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="screens.html">All screens</a></li>
+        <li><a href="agents.html">Agents</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="join.html#invite">Join as invitee</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/km.js"></script>
+<script>
+(function () {
+  'use strict';
+  var KM = window.KM, h = KM.h, fmt = KM.fmt;
+  var CODE_RE = /^km-[a-z0-9]{3}-[a-z0-9]{3}$/;
+
+  /* icons + brand mark placeholders */
+  KM.$$('[data-ic]').forEach(function (s) { s.parentNode.replaceChild(KM.icon(s.getAttribute('data-ic'), s.getAttribute('data-ic-class') || ''), s); });
+  KM.$$('[data-ic-brand]').forEach(function (s) { s.parentNode.replaceChild(KM.brandMark(), s); });
+
+  KM.mountAppBar(KM.$('#appbar'), { active: 'home' });
+
+  /* ---------- join with a code */
+  var form = KM.$('#join-form'), input = KM.$('#join-code'), err = KM.$('#join-error'), btn = KM.$('#join-btn');
+  function normalize(v) { return String(v || '').trim().toLowerCase().replace(/\s+/g, ''); }
+  function showErr(msg) {
+    err.querySelector('.msg').textContent = msg;
+    err.classList.toggle('show', !!msg);
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  }
+  function check(v, requireValue) {
+    if (!v) return requireValue ? 'Enter the code from your invite, for example km-4fq-82x.' : '';
+    if (!CODE_RE.test(v)) return 'Codes look like km-4fq-82x: “km”, then two groups of three letters or numbers, joined by hyphens.';
+    return '';
+  }
+  input.addEventListener('blur', function () { showErr(check(normalize(input.value), false)); });
+  input.addEventListener('input', function () { if (input.getAttribute('aria-invalid') === 'true' && !check(normalize(input.value), false)) showErr(''); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = normalize(input.value);
+    var msg = check(v, true);
+    showErr(msg);
+    if (msg) { input.focus(); return; }
+    input.value = v;
+    var match = KM.data.meetings.filter(function (m) { return m.joinCode === v; })[0];
+    btn.setAttribute('aria-busy', 'true');
+    btn.disabled = true;
+    btn.firstChild.textContent = 'Checking…';
+    setTimeout(function () {
+      location.href = match
+        ? 'join.html#invite?code=' + encodeURIComponent(v)
+        : 'join.html#wrong-code?code=' + encodeURIComponent(v);
+    }, 500);
+  });
+  window.addEventListener('pageshow', function () { btn.disabled = false; btn.removeAttribute('aria-busy'); btn.firstChild.textContent = 'Join'; });
+
+  /* ---------- comparison table */
+  var ROWS = [
+    ['Start or join a meeting', null, [1, 'Included'], [1, 'Included']],
+    ['Concierge agent', 'The system agent in every room', [1, 'Included'], [1, 'Included']],
+    ['Live transcription', null, [1, 'Included', 'Deleted when the meeting ends'], [1, 'Included', 'Saved with the meeting']],
+    ['Phone dial-in for invitees', 'Audio-only, via PIN', [1, 'Included'], [1, 'Included']],
+    ['Registered agents', 'Scribe, Researcher, Facilitator, Translator, your own', [0], [1, 'Included']],
+    ['Your dot and private agent panel', 'Iris, with private memory', [0], [1, 'Included']],
+    ['Uploads to meeting knowledge', null, [0], [1, 'Included']],
+    ['Recording', 'LiveKit Room Composite egress, MP4 or HLS', [0], [1, 'Included']],
+    ['Transcript, summary and action items sent at close', 'Email and SMS', [0], [1, 'Included']],
+    ['Recordings library', 'S3-compatible storage, pinned to IPFS', [0], [1, 'Included']],
+    ['Scheduling and calendar connections', 'Google, Microsoft 365, iCloud / CalDAV', [0], [1, 'Included']],
+    ['Settings and delivery preferences', null, [0], [1, 'Included']]
+  ];
+  function cell(c) {
+    if (c[0]) return h('td', null, h('span', { class: 'cell yes' }, KM.icon('check'), h('span', null, c[1], c[2] ? h('small', { text: c[2] }) : null)));
+    return h('td', null, h('span', { class: 'cell no' }, KM.icon('lock'), h('span', { text: 'Sign in required' })));
+  }
+  var tbody = KM.$('#cmp-body');
+  ROWS.forEach(function (r) {
+    tbody.appendChild(h('tr', null,
+      h('th', { scope: 'row' }, r[0], r[1] ? h('span', { class: 'row-note', text: r[1] }) : null),
+      cell(r[2]), cell(r[3])));
+  });
+
+  /* ---------- signed-in state */
+  function pickNext() {
+    var list = KM.data.meetings.map(function (m) { return { m: m, s: KM.data.meetingStatus(m) }; })
+      .filter(function (x) { return x.s !== 'ended'; })
+      .sort(function (a, b) {
+        if (a.s !== b.s) return a.s === 'live' ? -1 : 1;
+        return new Date(a.m.start) - new Date(b.m.start);
+      });
+    return list[0] || null;
+  }
+  function nextCard(x) {
+    var m = x.m, live = x.s === 'live';
+    var end = KM.data.meetingEnd(m);
+    var people = m.invitees.slice(0, 3);
+    return h('section', { class: 'next-card', 'aria-labelledby': 'next-title' },
+      h('div', { class: 'row' },
+        h('span', { class: 'eyebrow', text: 'Your next meeting' }),
+        live ? h('span', { class: 'chip chip-green' }, h('span', { class: 'pip' }), 'Live now')
+             : h('span', { class: 'chip' }, KM.icon('clock'), fmt.relDay(m.start))),
+      h('h3', { id: 'next-title', class: 'od-clamp-2', title: m.title, text: m.title }),
+      h('p', { class: 'meta', text: fmt.relDay(m.start) + ' · ' + fmt.time(m.start) + '–' + fmt.time(end) + ' · ' + fmt.mins(m.durationMin) + ' · Host ' + m.host }),
+      h('div', { class: 'row' },
+        h('span', { class: 'avatar-stack', 'aria-label': 'Invitees: ' + m.invitees.join(', '), role: 'img' },
+          people.map(function (p) { return h('span', { class: 'avatar avatar-sm', text: fmt.initials(p) }); }),
+          m.invitees.length > 3 ? h('span', { class: 'avatar avatar-sm', text: '+' + (m.invitees.length - 3) }) : null),
+        h('div', { class: 'btn-row' },
+          live ? h('a', { class: 'btn btn-primary btn-sm', href: 'meet.html#lobby?meeting=' + encodeURIComponent(m.id) }, KM.icon('cam', 'ic-sm'), h('span', { text: 'Join now' }))
+               : h('a', { class: 'btn btn-sm', href: 'dashboard.html#meeting:' + encodeURIComponent(m.id) }, h('span', { text: 'Open details' })),
+          h('a', { class: 'btn btn-ghost btn-sm', href: 'dashboard.html#upcoming' }, h('span', { text: 'All meetings' })))));
+  }
+  function renderAuth() {
+    var user = KM.auth.get();
+    var slot = KM.clear(KM.$('#next-slot'));
+    KM.$('#hero-signin').hidden = !!user;
+    KM.$('#hero-dashboard').hidden = !user;
+    KM.$('#hero-guest-note').hidden = !!user;
+    var status = KM.$('#cmp-status'), cta = KM.$('#cmp-cta');
+    if (user) {
+      var x = pickNext();
+      slot.appendChild(x ? nextCard(x) : h('section', { class: 'next-card', 'aria-labelledby': 'next-title' },
+        h('span', { class: 'eyebrow', text: 'Your next meeting' }),
+        h('h3', { id: 'next-title', text: 'Nothing scheduled' }),
+        h('p', { class: 'meta', text: 'Schedule a meeting or connect a calendar to see it here.' }),
+        h('div', { class: 'btn-row' }, h('a', { class: 'btn btn-sm', href: 'dashboard.html#schedule', text: 'Schedule a meeting' }))));
+      status.textContent = 'You’re signed in as ' + user.name + ', so everything in the Signed in column is on for meetings you host.';
+      cta.hidden = true;
+    } else {
+      status.textContent = 'You’re browsing as a guest. Invitees never need an account, whichever column the host is in.';
+      cta.hidden = false;
+    }
+  }
+  KM.auth.onChange(renderAuth);
+  renderAuth();
+})();
+</script>
+</body>
+</html>

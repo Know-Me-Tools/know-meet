@@ -7,21 +7,60 @@ const text = (id, fg, bg, use, extra = {}) => ({ id, kind: "text", fg: [fg], bg,
 const ui = (id, fg, bg, use, extra = {}) => ({ id, kind: "ui", fg: [fg], bg, use, ...extra });
 
 const SURFACES = ["bg", "bg-2", "surface", "card", "card-hov", "muted", "tile", "tile-2"];
+// Surfaces a control may sit on (DESIGN.md "Flat 2.0 controls": never on card-hov, muted or tile).
+const CONTROL_SURFACES = ["bg", "bg-2", "surface", "card"];
 
 export const PAIRS = [
   ...SURFACES.map((s) => text(`fg-on-${s}`, "fg", [s], "Body and heading text")),
   ...["bg", "bg-2", "surface", "card", "card-hov", "muted", "tile"].map((s) =>
     text(`fg-sub-on-${s}`, "fg-sub", [s], "Secondary text, captions, mono labels, inactive tabs"),
   ),
+  // D-6 control text: value, placeholder and label on every control fill state.
   text(
-    "placeholder-on-card",
-    "fg-sub",
-    ["card"],
-    "Input placeholder (.input::placeholder opacity 0.85)",
+    "on-control-on-control",
+    "on-control",
+    ["control"],
+    "Value text, unpressed segment and chip labels on the control fill",
+  ),
+  text(
+    "on-control-on-control-hov",
+    "on-control",
+    ["control-hov"],
+    "Value text on the hovered control fill",
+  ),
+  text(
+    "placeholder-on-control",
+    "control-placeholder",
+    ["control"],
+    "Placeholder text on the control fill",
     {
-      fgOpacity: 0.85,
-      note: "Placeholder text is exempt from 1.4.3 only when it is not the sole label; prototype fields all have visible labels.",
+      note: "Placeholder and value are both near the light (dark theme) or dark (light theme) end, because a 3:1 fill boundary leaves no room for a dim placeholder. DESIGN.md: placeholders show an example prefixed 'e.g.' and never replace the visible label.",
     },
+  ),
+  text("on-focus-on-focus", "on-focus", ["focus"], "Value text and labels on the focus fill"),
+  text(
+    "focus-placeholder-on-focus",
+    "focus-placeholder",
+    ["focus"],
+    "Placeholder text on a focused empty field",
+  ),
+  text(
+    "on-control-invalid-on-control-invalid",
+    "on-control-invalid",
+    ["control-invalid"],
+    "Value and placeholder text on the invalid fill",
+  ),
+  text(
+    "on-selected-on-selected",
+    "on-selected",
+    ["selected"],
+    "Current tab, current nav item, pressed segment, selected chip labels",
+  ),
+  text(
+    "a2ui-primary-label",
+    "on-ember",
+    ["ember-btn"],
+    "A2UI Button > Text label: inherits on-ember (decision log 16.4 axe failure was fg on ember)",
   ),
   ...["bg", "surface", "card", "card-hov"].map((s) =>
     text(`ember-text-on-${s}`, "ember-text", [s], "Links, eyebrows, small ember text"),
@@ -112,26 +151,92 @@ export const PAIRS = [
       },
     ),
   ]),
-  ...["bg", "bg-2", "surface", "card"].map((s) =>
-    ui(`focus-ring-on-${s}`, "ember", [s], ":focus-visible 2px ember outline, offset 2px"),
-  ),
-  ui("input-focus-ring-on-card", "ember", ["card"], ".input:focus-visible inset 2px ember"),
-  ui("input-invalid-ring-on-card", "red", ["card"], ".input[aria-invalid] inset 2px red"),
-  // D-5: the input boundary is a 1px inset ring in both themes (input-only exception to Flat 2.0).
-  ...["card", "bg", "surface"].map((s) =>
+  // ---- D-6 (operator 2026-11-11): Flat 2.0 with no strokes. Control boundaries are
+  // fills (>= 3:1 against every surface a control sits on), focus is a fill swap
+  // (>= 3:1 against the unfocused fill AND the surface), selected is a fill.
+  ...CONTROL_SURFACES.map((s) =>
     ui(
-      `input-ring-vs-${s}`,
-      "ring-input",
+      `control-fill-vs-${s}`,
+      "control",
       [s],
-      `1px inset input ring against ${s === "card" ? "the input fill" : `the ${s} around it`}`,
+      `Control fill (input, select, textarea, unchecked box, radio, switch-off track, segmented track, slider track, toggle chip, drop zone) against ${s}`,
     ),
   ),
-  ...["surface", "card"].map((s) =>
+  ...CONTROL_SURFACES.map((s) =>
+    ui(`invalid-fill-vs-${s}`, "control-invalid", [s], `Invalid text control fill against ${s}`),
+  ),
+  ...CONTROL_SURFACES.map((s) =>
     ui(
-      `switch-track-off-vs-${s}`,
-      "switch-track",
+      `selected-fill-vs-${s}`,
+      "selected",
       [s],
-      "Switch off: track against the row surface",
+      `Selected fill (checked box/radio, pressed segment, current tab, current nav item, selected chip, slider range, drop zone over) against ${s}`,
+    ),
+  ),
+  ...CONTROL_SURFACES.map((s) =>
+    ui(
+      `focus-fill-vs-${s}`,
+      "focus",
+      [s],
+      `Focus fill against ${s} (ghost buttons, links, nav items, interactive cards, and every control)`,
+    ),
+  ),
+  ...[
+    ["control", "control fill"],
+    ["control-invalid", "invalid fill"],
+    ["selected", "selected/checked/pressed/current fill"],
+    ["ember-btn", "primary button"],
+    ["danger-btn", "danger button"],
+    ["card", "secondary button (card fill)"],
+    ["switch-track", "switch-off track"],
+  ].map(([fill, what]) =>
+    ui(
+      `focus-fill-vs-unfocused-${fill}`,
+      "focus",
+      [fill],
+      `Focus change: focus fill against the unfocused ${what} (>= 3:1, operator D-6)`,
+    ),
+  ),
+  ui(
+    "check-glyph-on-selected",
+    "on-selected",
+    ["selected"],
+    "Checkbox tick and radio dot on the checked fill",
+  ),
+  ui(
+    "check-glyph-on-focus",
+    "on-focus",
+    ["focus"],
+    "Tick, radio dot, switch thumb, slider thumb and slider range while focused (the switch track and the slider plate take the focus fill)",
+  ),
+  // RV-22: a focused slider sits on a `focus` plate (the whole 44px control box);
+  // the unfilled track keeps `control`, range and thumb take `on-focus`.
+  ui(
+    "slider-track-on-focus-plate",
+    "control",
+    ["focus"],
+    "Focused slider: unfilled track against the focus plate",
+  ),
+  ui(
+    "slider-thumb-focused-vs-track",
+    "on-focus",
+    ["control"],
+    "Focused slider: thumb and range (on-focus) against the unfilled track",
+  ),
+  // RV-26: focus on a control or link that sits on a translucent "-soft" fill, measured
+  // composited over the surface it renders on (chip-cyan in the room bar, notes in panels).
+  ui(
+    "focus-fill-vs-unfocused-cyan-soft-over-bg",
+    "focus",
+    ["bg", "cyan-soft"],
+    "Focus change: Sources chip (chip-cyan) in the room bar",
+  ),
+  ...["amber", "red", "green", "cyan"].map((c) =>
+    ui(
+      `focus-fill-vs-${c}-soft-over-surface`,
+      "focus",
+      ["surface", `${c}-soft`],
+      `Focus fill of a text link inside a ${c} note on a panel (surface)`,
     ),
   ),
   ui(
@@ -140,38 +245,17 @@ export const PAIRS = [
     ["switch-track"],
     "Switch off: thumb against track",
   ),
-  ...["surface", "card"].map((s) =>
-    ui(
-      `switch-track-on-vs-${s}`,
-      "ember-btn",
-      [s],
-      "Switch on: ember track against the row surface",
-    ),
+  ...CONTROL_SURFACES.map((s) =>
+    ui(`switch-track-on-vs-${s}`, "ember-btn", [s], `Switch on: ember track against ${s}`),
   ),
   ui(
     "switch-thumb-on-vs-track-on",
     "switch-thumb-on",
     ["ember-btn"],
-    "Switch on: white thumb against ember track",
+    "Switch on: thumb against ember track",
   ),
-  ui(
-    "seg-pressed-vs-seg",
-    "card",
-    ["muted"],
-    "Segmented control: pressed segment against the track",
-  ),
-  ui("tab-indicator-vs-bg", "ember", ["bg"], "Selected tab 2px ember underline"),
-  ...["green", "amber", "red"].map((c) =>
-    ui(`${c}-pip-on-${c}-soft-over-card`, c, ["card", `${c}-soft`], `Status pip in chip-${c}`),
-  ),
-  ui("cyan-ring-vs-tile", "cyan", ["tile"], "Agent/dot activity 3px inset ring on a room tile"),
-  ui("ember-ring-vs-tile", "ember", ["tile"], "Active speaker 3px inset ring on a room tile"),
-  ui("green-ring-vs-tile", "green", ["tile"], "Speaking (person) 3px inset ring on a room tile"),
-  ui(
-    "drop-outline-vs-surface",
-    "drop-outline",
-    ["surface"],
-    "Knowledge drop zone 2px dashed outline",
+  ...["control", "selected", ...CONTROL_SURFACES].map((s) =>
+    ui(`slider-thumb-vs-${s}`, "slider-thumb", [s], `Slider thumb against ${s}`),
   ),
   ui(
     "primary-btn-fill-vs-bg",
@@ -179,12 +263,64 @@ export const PAIRS = [
     ["bg"],
     "Primary button fill against the page (label also identifies it)",
   ),
+  ...["green", "amber", "red"].map((c) =>
+    ui(
+      `pip-${c}-on-${c}-soft-over-card`,
+      `pip-${c}`,
+      ["card", `${c}-soft`],
+      `Status pip in chip-${c} (D-6: pip role)`,
+    ),
+  ),
+  ...["green", "amber", "red"].map((c) =>
+    ui(
+      `pip-${c}-on-${c}-soft-over-surface`,
+      `pip-${c}`,
+      ["surface", `${c}-soft`],
+      `Status pip in chip-${c} on a surface`,
+    ),
+  ),
+  // Speaking state: a solid badge in the tile head replaces the 3px inset ring.
+  ...["speak-person", "speak-agent", "speak-phone"].flatMap((b) => [
+    ui(`${b}-badge-vs-tile`, b, ["tile"], `Speaking badge (${b}) on a room tile`),
+    ui(
+      `${b}-badge-vs-white-frame`,
+      b,
+      ["#FFFFFF"],
+      `Speaking badge (${b}) over a white video frame`,
+    ),
+    ui(
+      `${b}-badge-vs-black-frame`,
+      b,
+      ["#000000"],
+      `Speaking badge (${b}) over a black video frame`,
+    ),
+    ui(`on-speak-bars-on-${b}`, "on-speak", [b], `Voice bars inside the ${b} badge`),
+  ]),
   ui(
     "media-quality-poor-on-media-tag-bg-over-white-frame",
     "media-quality-poor",
     ["#FFFFFF", "media-tag-bg"],
     "Poor-connection bars on a video tile tag (live.css)",
   ),
+  // ---- Surface hierarchy (operator 2026-11-12, tokens v1.5.0): with no strokes and no
+  // shadows, the page, panel and raised levels are told apart by fill alone. Each adjacent
+  // step must be 1.15-1.25:1 in both themes (DESIGN.md "Surface hierarchy").
+  {
+    id: "surface-step-surface-vs-bg",
+    kind: "surface-step",
+    fg: ["surface"],
+    bg: ["bg"],
+    max: 1.25,
+    use: "Panel level (.card, .panel, .stat, .empty, even table rows) against the page",
+  },
+  {
+    id: "surface-step-card-vs-surface",
+    kind: "surface-step",
+    fg: ["card"],
+    bg: ["surface"],
+    max: 1.25,
+    use: "Raised level (.card-raised, secondary button) against the panel",
+  },
   {
     id: "brand-ember-on-bg",
     kind: "graphic",

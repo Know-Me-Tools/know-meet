@@ -1,0 +1,7 @@
+# Test tags for apps/mobile (c12). `flutter test --tags golden` is the VS-3
+# production entry; `--exclude-tags golden` is the fast per-change path.
+tags:
+  golden:
+    description: Pixel goldens against the approved prototype baselines (VS-3).
+  a11y:
+    description: Semantics, focus-order, reduced-motion and a11y-gate checks.

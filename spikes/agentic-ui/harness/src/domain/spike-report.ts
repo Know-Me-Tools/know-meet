@@ -33,8 +33,15 @@ export interface DriverConfig {
 export interface WebviewMetrics {
   /** Submit click to the first assistant text in the DOM (same definition as src/measure/page-timeline.ts). */
   readonly timeToFirstTokenMs: number | null;
-  /** Submit click to the first settle, 20 ms polling. */
+  /**
+   * Submit click to the render-complete of the first settle, event-driven: the MutationObserver
+   * callback in which km-transcript drops aria-busy and runStatus is settled (gate 16.1 follow-up,
+   * 2026-11-11). Falls back to the legacy poll only if no such mutation was seen (totalStreamSource).
+   */
   readonly totalStreamMs: number | null;
+  readonly totalStreamSource?: "mutation-render-settle" | "legacy-poll-fallback";
+  /** LEGACY: submit click to the first settle read by a 20 ms setTimeout poll (clamped to ~1 s in hidden pages). */
+  readonly legacyPollTotalStreamMs?: number | null;
   readonly firstSettleStatus: RunStatus | null;
   /** renderCounts() at the first settle (as the browser measure script reads it). */
   readonly counts: RenderCounts | null;

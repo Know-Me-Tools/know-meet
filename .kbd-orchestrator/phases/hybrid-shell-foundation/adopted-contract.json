@@ -6,7 +6,7 @@
     "runId": "hybrid-shell-foundation-20261109T083641Z",
     "phaseId": "hybrid-shell-foundation",
     "planRevision": 1,
-    "contractDigest": "768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855"
+    "contractDigest": "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6"
   },
   "digestNormalization": {
     "algorithm": "sha256",
@@ -50,9 +50,9 @@
         "Vite production build",
         "Chromium/WebKit/Firefox via Playwright"
       ],
-      "oracle": "Per-route screenshots at 375/768/1024/1440 in dark and light are within the spec tolerance of the prototype baselines captured in c03.",
+      "oracle": "Per-route/state screenshots at 375/768/1024/1440 in dark and light are within the spec tolerance of reference revision v2: baselines captured from the operator-updated prototype (Flat 2.0 with no strokes, fill-based WCAG 2.2 AA focus, adaptive bottom-bar/rail/app-bar navigation; operator decisions 2026-11-11) into tests/fidelity/baselines, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d. The v1 reference is archived in tests/fidelity/baselines-v1-archive and docs/design/prototype-v1-archive.",
       "negativeControl": "Same comparison against a build with tokens reverted to pre-reconciliation tokens.json must FAIL.",
-      "fixtures": "Baselines captured from docs/design/prototype at a recorded git digest into tests/fidelity/baselines; scratch output dir per run.",
+      "fixtures": "Reference revision v2 baselines captured from docs/design/prototype at the recorded source digests into tests/fidelity/baselines (manifest.json, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d); scratch output dir per run.",
       "evidence": "Playwright report, diff images, argv, exit code, baseline digest."
     },
     {

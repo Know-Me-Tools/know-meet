@@ -22,8 +22,8 @@
   --destructive: var(--danger-btn); /* .btn-danger fill */
   --destructive-foreground: var(--on-danger); /* .btn-danger label */
   --border: transparent; /* Flat 2.0: no visible borders; regions separate by fill */
-  --input: var(--ring-input); /* input-only 1px ring (D-5 exception to Flat 2.0) */
-  --ring: var(--ember); /* :focus-visible ring */
+  --input: var(--control); /* control fill (bg-input); boundary >= 3:1 by fill, never a stroke */
+  --ring: var(--focus); /* focus fill (bg-ring + text-on-focus); never an outline or ring */
   --chart-1: var(--ember);
   --chart-2: var(--cyan);
   --chart-3: var(--green);
@@ -36,7 +36,7 @@
   --sidebar-accent: var(--card-hov);
   --sidebar-accent-foreground: var(--fg);
   --sidebar-border: transparent; /* Flat 2.0 */
-  --sidebar-ring: var(--ember);
+  --sidebar-ring: var(--focus); /* focus fill */
 }
 
 @theme inline {

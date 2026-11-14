@@ -1,8 +1,10 @@
 // TJ-ARCH-MOB-001 compliant
+
+import { TooltipProvider } from "@know-meet/ui/components/tooltip";
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
-import { TooltipProvider } from "../presentation/components/ui/tooltip";
 import { NotesServicesContext } from "../presentation/notes/notes-services";
+import { SessionContext } from "../presentation/shared/session";
 import { type AppServices, AppServicesContext } from "./app-services";
 import type { createAppRouter } from "./router";
 
@@ -16,9 +18,11 @@ export function AppRoot({ services, router }: AppRootProps) {
     <StrictMode>
       <AppServicesContext value={services}>
         <NotesServicesContext value={services.notes}>
-          <TooltipProvider>
-            <RouterProvider router={router} />
-          </TooltipProvider>
+          <SessionContext value={services.session}>
+            <TooltipProvider>
+              <RouterProvider router={router} />
+            </TooltipProvider>
+          </SessionContext>
         </NotesServicesContext>
       </AppServicesContext>
     </StrictMode>

@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/styles/global.css",
+    "css": "../../packages/ui/src/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
@@ -14,8 +14,8 @@
   "rtl": false,
   "aliases": {
     "components": "@/presentation/components",
-    "utils": "@/presentation/lib/utils",
-    "ui": "@/presentation/components/ui",
+    "utils": "@know-meet/ui/lib/utils",
+    "ui": "@know-meet/ui/components",
     "lib": "@/presentation/lib",
     "hooks": "@/presentation/hooks"
   },

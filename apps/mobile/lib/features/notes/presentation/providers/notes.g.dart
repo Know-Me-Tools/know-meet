@@ -1,4 +1,3 @@
-// TJ-ARCH-MOB-001 compliant
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'notes.dart';

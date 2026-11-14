@@ -1,0 +1,19 @@
+run own-gate-final-focused-conformance-mwc03cxs: 84 steps, app log /Users/gqadonis/Projects/know-me/know-meet/spikes/agentic-ui/harness/reports/webview-driver/own-gate-final-focused-conformance-mwc03cxs.app.log
+(node:9078) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  frontmost request: exit 0 
+  step 0/84
+  step 1/84
+  step 2/84
+  step 3/84
+  step 4/84
+  step 5/84
+  step 6/84
+  step 10/84
+  step 12/84
+  step 14/84
+  step 15/84
+  step 17/84
+  step 19/84
+  step 22/84
+  step 25/84

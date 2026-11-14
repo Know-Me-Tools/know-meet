@@ -195,8 +195,10 @@ When(
     const base = scenario.scratchBaseUrl ?? "";
     const scratchTarget: RenderTarget = {
       ...appTarget,
-      urlFor: (entry) =>
-        `${base}${new URL(appTarget.urlFor(entry)).pathname}${new URL(appTarget.urlFor(entry)).hash}`,
+      urlFor: (entry) => {
+        const url = new URL(appTarget.urlFor(entry));
+        return `${base}${url.pathname}${url.search}${url.hash}`;
+      },
     };
     scenario.exceededCells = [];
     for (const stateId of [a, b, c])

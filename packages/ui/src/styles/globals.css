@@ -1,0 +1,144 @@
+/* TJ-ARCH-MOB-001 compliant */
+/* @know-meet/ui stylesheet: the single entry an app imports (c08).
+   Order matters: Tailwind, motion utilities, fonts, tokens (both themes), the
+   Tailwind @theme, then the shadcn variable mapping. Never add colour, font or
+   spacing literals here; every value is a generated token (packages/design-tokens). */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@know-meet/design-tokens/fonts.css";
+@import "@know-meet/design-tokens/tokens.css";
+@import "@know-meet/design-tokens/theme.css";
+@import "@know-meet/design-tokens/shadcn.css";
+@import "./presence.css";
+
+/* Kit sources (relative to this file). Apps add their own @source if needed. */
+@source "../components";
+
+/* Theme switch: tokens are dark on :root and light on [data-theme="light"]
+   (apps/web theme-adapters, storage key km-meet-theme). `dark:` therefore means
+   "not inside a light subtree" so it can never disagree with the tokens. Kit
+   components don't use `dark:`; the tokens switch by themselves. This variant
+   only keeps the uncurated components left in apps/web consistent. */
+@custom-variant dark (&:not(:where([data-theme="light"], [data-theme="light"] *)));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+    /* theme-behaviour.md: only body animates the theme switch. */
+    transition:
+      background-color var(--dur) var(--ease-standard),
+      color var(--dur) var(--ease-standard);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
+  }
+
+  a {
+    color: var(--ember-text);
+    text-underline-offset: 3px;
+  }
+
+  /* Flat 2.0 focus (DESIGN.md, D-6): keyboard focus is a fill, never an outline.
+     Kit components set their own `focus-visible:bg-focus!` (lib/focus.ts); this
+     zero-specificity fallback gives every other focusable element the same fill so
+     focus is never invisible. Elements focused only programmatically
+     (tabindex="-1", e.g. main after the skip link) are excluded. */
+  :focus-visible {
+    outline: none;
+  }
+
+  :where(
+    a[href],
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [role="button"],
+    [role="link"],
+    [role="tab"],
+    [role="menuitem"],
+    [role="option"],
+    [role="checkbox"],
+    [role="radio"],
+    [role="switch"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    background-color: var(--focus);
+    color: var(--on-focus);
+  }
+
+  /* Choice card (DESIGN.md): the focused card takes the focus fill, and the
+     radio/checkbox inside keeps its state fill so state stays visible. Layer
+     order makes this !important beat the indicator's own focus utility. */
+  /* biome-ignore-start lint/complexity/noImportantStyles: the choice-card indicator must keep its state fill over its own Tailwind focus utility, which sits in a later cascade layer */
+  [data-slot="field-label"]
+    :is([data-slot="checkbox"], [data-slot="radio-group-item"]):focus-visible {
+    background-color: var(--control) !important;
+    color: var(--on-control) !important;
+  }
+
+  [data-slot="field-label"]
+    :is([data-slot="checkbox"], [data-slot="radio-group-item"])[data-checked]:focus-visible {
+    background-color: var(--selected) !important;
+    color: var(--on-selected) !important;
+  }
+  /* biome-ignore-end lint/complexity/noImportantStyles: the choice-card indicator must keep its state fill over its own Tailwind focus utility, which sits in a later cascade layer */
+
+  /* Forced colours drop every fill, so the system draws a focus outline there
+     only. This is the one outline in the product and never renders otherwise. */
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  ::selection {
+    background: var(--ember-soft);
+    color: var(--fg);
+  }
+
+  input,
+  textarea {
+    caret-color: currentColor; /* on-control / on-focus: legible on every control fill */
+  }
+
+  /* biome-ignore-start lint/complexity/noImportantStyles: the hidden attribute must win over display utilities in the utilities layer */
+  [hidden] {
+    display: none !important;
+  }
+  /* biome-ignore-end lint/complexity/noImportantStyles: the hidden attribute must win over display utilities in the utilities layer */
+
+  /* km.css: all motion stops under reduced motion (PRODUCT.md, constraints.md). */
+  /* biome-ignore-start lint/complexity/noImportantStyles: reduced motion must override every component and utility duration (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: var(--dur-reduced-motion) !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: var(--dur-reduced-motion) !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* biome-ignore-end lint/complexity/noImportantStyles: reduced motion must override every component and utility duration (WCAG 2.3.3) */
+}

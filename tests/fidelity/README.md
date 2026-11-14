@@ -44,9 +44,21 @@ disabled and the caret is hidden. Google Fonts requests are answered with
 `@font-face` rules for the self-hosted files in `packages/design-tokens/fonts`, which are the
 same files the shells ship. Every other external request is blocked and
 recorded. Frame states that need an interaction use the prototype's own controls
-(`.acct-btn`, `.appnav-toggle`, Tab).
+(`.acct-btn`, `.theme-toggle`, Tab).
 
-`frame.nav-collapsed` and `frame.nav-open` exist only at ≤ 899px, so their 1024
-and 1440 cells are recorded as not applicable. The live room's in-call view
-needs a LiveKit connection, so its reference capture un-hides `#v-room` in the
-DOM. That gives the layout skeleton only.
+Reference revision v2 (route inventory v2.0.0, `docs/design/token-reconciliation/discrepancy-log.md`
+section F; prototype corrections through v2.2, F5 RV-19 to RV-28, recaptured in full): 71 in-scope states, 568 cells, 16 not applicable, 552 captures, plus 48 reference
+captures. The v1 set is kept in `baselines-v1-archive/`. Navigation is adaptive: km.js sets
+`html[data-nav-class]` to `bar` (< 600), `rail` (600 to 1023) or `inline` (>= 1024).
+`frame.nav-bar` exists only at 375, `frame.nav-rail` only at 768 and `frame.nav-inline` only at
+1024 and 1440; their other cells are recorded as not applicable. Nav states are captured
+full-page after requiring the expected nav class; the fixed bar and rail render at their
+first-viewport position, exactly as in the app, which is captured the same way.
+
+The capture is resumable: finished cells are journaled in `baselines/.capture-journal.jsonl`
+and a relaunch reuses those whose capture key (drivers, environment, shared sources, fonts,
+inventory) and page-source sha256 are unchanged. The journal is removed when the manifest is
+written.
+
+The live room's in-call view needs a LiveKit connection, so its reference capture
+un-hides `#v-room` in the DOM. That gives the layout skeleton only.

@@ -1,17 +1,15 @@
 // TJ-ARCH-MOB-001 compliant
 import { type ErrorComponentProps, Link } from "@tanstack/react-router";
 
-/** Placeholder for the home route until c10 builds the designed home screen. */
-export function HomePlaceholder() {
-  return <h1>Know Meet</h1>;
-}
-
+/** Unmatched paths render at the root, outside every layout, so this owns main#main. */
 export function RouteNotFound() {
   return (
-    <section aria-labelledby="not-found-heading">
-      <h1 id="not-found-heading">Page not found</h1>
-      <Link to="/">Go to the home page</Link>
-    </section>
+    <main id="main" tabIndex={-1} className="km-main px-s5 pt-s6">
+      <section aria-labelledby="not-found-heading" className="grid gap-s3">
+        <h1 id="not-found-heading">Page not found</h1>
+        <Link to="/">Go to the home page</Link>
+      </section>
+    </main>
   );
 }
 

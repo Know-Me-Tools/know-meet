@@ -33,6 +33,7 @@ When(
   },
 );
 
+// biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
 Then("frontendDist in {string} resolves to {string}", async ({}, conf: string, dist: string) => {
   const parsed = JSON.parse(readFileSync(repoPath(conf), "utf8")) as {
     build?: { frontendDist?: string };

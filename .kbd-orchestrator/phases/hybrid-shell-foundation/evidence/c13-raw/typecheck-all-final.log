@@ -1,0 +1,24 @@
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 7 packages
+   • Remote caching disabled
+
+@know-meet/domain:typecheck: cache hit, replaying logs 9da47eafcaaec65a
+@know-meet/design-tokens:typecheck: cache hit, replaying logs 66401111e51f35de
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/application:typecheck: cache hit, replaying logs 9924705d52567375
+@know-meet/ui:typecheck: cache hit, replaying logs 79c8926a5716c088
+@know-meet/application:typecheck: $ tsc -p tsconfig.json
+@know-meet/ui:typecheck: $ tsc --noEmit -p tsconfig.json
+@know-meet/web:typecheck: cache hit, replaying logs ec89d645cb29079d
+@know-meet/web:typecheck: $ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json
+@know-meet/fidelity-tests:typecheck: cache hit, replaying logs 1b3061cc957c3151
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+
+ Tasks:    6 successful, 6 total
+Cached:    6 cached, 6 total
+  Time:    130ms >>> FULL TURBO
+

@@ -20,8 +20,12 @@ export const CAPTURE_ENVIRONMENT = {
   /** Viewport heights paired with the four adopted widths. */
   viewportHeights: { 375: 812, 768: 1024, 1024: 768, 1440: 900 } as Record<number, number>,
   screenshot: { animations: "disabled", caret: "hide", scale: "css" } as const,
-  /** Navigation breakpoint from km.css (bp-899): the nav collapses at <= 899px. */
-  navCollapseMaxWidth: 899,
+  /**
+   * Window tokens (DESIGN.md D-8, km.css --window-medium / --window-expanded):
+   * nav class bar < 600, rail 600-1023, inline >= 1024.
+   */
+  windowMedium: 600,
+  windowExpanded: 1024,
 } as const;
 
 /** Self-hosted copies of the families the prototype requests from Google Fonts. */

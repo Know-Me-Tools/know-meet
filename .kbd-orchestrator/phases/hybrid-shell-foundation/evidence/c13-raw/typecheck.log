@@ -1,0 +1,43 @@
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 7 packages
+   • Remote caching disabled
+
+@know-meet/design-tokens:typecheck: cache miss, executing 56a95611f262136b
+@know-meet/domain:typecheck: cache miss, executing 9da47eafcaaec65a
+@know-meet/fidelity-tests:typecheck: cache miss, executing 63f3759d0ab64403
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/application:typecheck: cache miss, executing 9924705d52567375
+@know-meet/fidelity-tests:typecheck: playwright.config.ts(17,32): error TS2345: Argument of type '{ featuresRoot: "../../features"; steps: readonly ["steps/**/*.ts"]; outputDir: string; tags: string; }' is not assignable to parameter of type 'BDDInputConfig'.
+@know-meet/fidelity-tests:typecheck:   Type '{ featuresRoot: "../../features"; steps: readonly ["steps/**/*.ts"]; outputDir: string; tags: string; }' is not assignable to type '{ steps?: string | string[]; features?: string | string[]; featuresRoot?: string; outputDir?: string; importTestFrom?: string | ImportTestFrom; language?: string; verbose?: boolean; ... 9 more ...; aiFix?: { ...; }; }'.
+@know-meet/fidelity-tests:typecheck:     Types of property 'steps' are incompatible.
+@know-meet/fidelity-tests:typecheck:       Type 'readonly ["steps/**/*.ts"]' is not assignable to type 'string | string[]'.
+@know-meet/fidelity-tests:typecheck:         The type 'readonly ["steps/**/*.ts"]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+@know-meet/fidelity-tests:typecheck: playwright.config.ts(23,32): error TS2345: Argument of type '{ featuresRoot: "../../features"; steps: readonly ["steps/**/*.ts"]; outputDir: string; tags: string; }' is not assignable to parameter of type 'BDDInputConfig'.
+@know-meet/fidelity-tests:typecheck:   Type '{ featuresRoot: "../../features"; steps: readonly ["steps/**/*.ts"]; outputDir: string; tags: string; }' is not assignable to type '{ steps?: string | string[]; features?: string | string[]; featuresRoot?: string; outputDir?: string; importTestFrom?: string | ImportTestFrom; language?: string; verbose?: boolean; ... 9 more ...; aiFix?: { ...; }; }'.
+@know-meet/fidelity-tests:typecheck:     Types of property 'steps' are incompatible.
+@know-meet/fidelity-tests:typecheck:       Type 'readonly ["steps/**/*.ts"]' is not assignable to type 'string | string[]'.
+@know-meet/fidelity-tests:typecheck:         The type 'readonly ["steps/**/*.ts"]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+@know-meet/fidelity-tests:typecheck: playwright.config.ts(29,29): error TS2769: No overload matches this call.
+@know-meet/fidelity-tests:typecheck:   The last overload gave the following error.
+@know-meet/fidelity-tests:typecheck:     Argument of type '{ fullyParallel: false; forbidOnly: true; retries: number; workers: number; timeout: number; updateSnapshots: "none"; snapshotDir: string; snapshotPathTemplate: string; outputDir: string; reporter: (["list"] | [string, unknown])[]; use: { ...; }; projects: ({ ...; } | { ...; })[]; webServer: { ...; } | undefined; }' is not assignable to parameter of type 'PlaywrightTestConfig<unknown, unknown>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+@know-meet/fidelity-tests:typecheck:       Types of property 'webServer' are incompatible.
+@know-meet/fidelity-tests:typecheck:         Type '{ command: string; cwd: string; url: string; reuseExistingServer: false; timeout: number; } | undefined' is not assignable to type 'TestConfigWebServer[] | TestConfigWebServer'.
+@know-meet/fidelity-tests:typecheck:           Type 'undefined' is not assignable to type 'TestConfigWebServer[] | TestConfigWebServer'.
+@know-meet/fidelity-tests:typecheck: [ELIFECYCLE] Command failed with exit code 1.
+@know-meet/fidelity-tests#typecheck:  ERROR  command (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity) /usr/local/bin/pnpm run typecheck exited (1)
+
+ Tasks:    2 successful, 4 total
+Cached:    0 cached, 4 total
+  Time:    1.296s 
+Failed:    @know-meet/fidelity-tests#typecheck
+
+ WARNING  no output files found for task @know-meet/design-tokens#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/domain#typecheck. Please check your `outputs` key in `turbo.json`
+ ERROR  run failed: command  exited (1)
+[ELIFECYCLE] Command failed with exit code 1.
+exit=1

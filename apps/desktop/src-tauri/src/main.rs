@@ -5,6 +5,21 @@ use tauri::Manager;
 struct NotesState {
     database: PathBuf,
 }
+/// Generic message for storage failures: details are logged, never returned to the webview.
+const STORAGE_ERROR: &str = "Could not access note storage";
+fn public_error(error: gen_ui_notes::NoteError) -> String {
+    match error {
+        gen_ui_notes::NoteError::InvalidTitle => error.to_string(),
+        gen_ui_notes::NoteError::Storage(_) => {
+            eprintln!("note storage error: {error}");
+            STORAGE_ERROR.to_owned()
+        }
+    }
+}
+fn join_error(error: tauri::Error) -> String {
+    eprintln!("note storage task failed: {error}");
+    STORAGE_ERROR.to_owned()
+}
 #[tauri::command]
 async fn list_notes(
     state: tauri::State<'_, NotesState>,
@@ -12,8 +27,8 @@ async fn list_notes(
     let path = state.database.clone();
     tauri::async_runtime::spawn_blocking(move || gen_ui_notes::open(&path)?.list())
         .await
-        .map_err(|e| e.to_string())?
-        .map_err(|e| e.to_string())
+        .map_err(join_error)?
+        .map_err(public_error)
 }
 #[tauri::command]
 async fn create_note(
@@ -23,12 +38,12 @@ async fn create_note(
     let path = state.database.clone();
     tauri::async_runtime::spawn_blocking(move || gen_ui_notes::open(&path)?.create(&title))
         .await
-        .map_err(|e| e.to_string())?
-        .map_err(|e| e.to_string())
+        .map_err(join_error)?
+        .map_err(public_error)
 }
 #[tauri::command]
 fn list_capabilities() -> Result<Vec<gen_ui_notes::Capability>, String> {
-    gen_ui_notes::capabilities().map_err(|e| e.to_string())
+    gen_ui_notes::capabilities().map_err(public_error)
 }
 fn main() {
     tauri::Builder::default()

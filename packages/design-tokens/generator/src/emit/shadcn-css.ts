@@ -11,7 +11,12 @@
 import { ToolError } from "../errors.ts";
 import type { TokenSet } from "../tokens-json-adapter.ts";
 
-/** shadcn variable -> Know Meet token, or a literal for Flat 2.0 lines. */
+/**
+ * shadcn variable -> Know Meet token, or a literal for Flat 2.0 lines.
+ * D-6 (operator 2026-11-11): no borders, outlines or rings anywhere. --input is
+ * the control FILL (use bg-input, never border-input); --ring is the focus FILL
+ * (use bg-ring with text-on-focus on :focus-visible, never ring-* or outline-*).
+ */
 const MAPPING: ReadonlyArray<readonly [string, string, string]> = [
   ["background", "bg", "page ground (body)"],
   ["foreground", "fg", "body text"],
@@ -28,8 +33,8 @@ const MAPPING: ReadonlyArray<readonly [string, string, string]> = [
   ["destructive", "danger-btn", ".btn-danger fill"],
   ["destructive-foreground", "on-danger", ".btn-danger label"],
   ["border", "", "Flat 2.0: no visible borders; regions separate by fill"],
-  ["input", "ring-input", "input-only 1px ring (D-5 exception to Flat 2.0)"],
-  ["ring", "ember", ":focus-visible ring"],
+  ["input", "control", "control fill (bg-input); boundary >= 3:1 by fill, never a stroke"],
+  ["ring", "focus", "focus fill (bg-ring + text-on-focus); never an outline or ring"],
   ["chart-1", "ember", ""],
   ["chart-2", "cyan", ""],
   ["chart-3", "green", ""],
@@ -42,7 +47,7 @@ const MAPPING: ReadonlyArray<readonly [string, string, string]> = [
   ["sidebar-accent", "card-hov", ""],
   ["sidebar-accent-foreground", "fg", ""],
   ["sidebar-border", "", "Flat 2.0"],
-  ["sidebar-ring", "ember", ""],
+  ["sidebar-ring", "focus", "focus fill"],
 ];
 
 function target(tokens: TokenSet, token: string): string {

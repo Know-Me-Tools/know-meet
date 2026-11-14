@@ -80,7 +80,11 @@ function resolveLayers(layers, values) {
   return colour;
 }
 
-const thresholds = { text: 4.5, "large-text": 3, ui: 3, graphic: 3 };
+// "surface-step": operator rule of 2026-11-12 (tokens v1.5.0). Adjacent surface levels
+// (bg -> surface -> card) differ by fill alone, ~1.15-1.25:1, with no strokes or shadows.
+// Not a WCAG criterion: it keeps the Flat 2.0 hierarchy visible. `max` bounds the step.
+const thresholds = { text: 4.5, "large-text": 3, ui: 3, graphic: 3, "surface-step": 1.15 };
+const SC = { "surface-step": "Flat 2.0 surface hierarchy (operator 2026-11-12)" };
 const rows = [];
 for (const pair of PAIRS) {
   for (const theme of pair.themes ?? ["dark", "light"]) {
@@ -95,14 +99,15 @@ for (const pair of PAIRS) {
       theme,
       kind: pair.kind,
       use: pair.use,
-      sc: pair.kind.endsWith("text") ? "1.4.3" : "1.4.11",
+      sc: SC[pair.kind] ?? (pair.kind.endsWith("text") ? "1.4.3" : "1.4.11"),
       fg: pair.fg.join(" over "),
       bg: pair.bg.join(" over "),
       fgHex: toHex(fg),
       bgHex: toHex(bg),
       ratio: r,
       required: need,
-      result: r >= need ? "PASS" : "FAIL",
+      ...(pair.max === undefined ? {} : { max: pair.max }),
+      result: r >= need && (pair.max === undefined || r <= pair.max) ? "PASS" : "FAIL",
       note: pair.note ?? null,
     });
   }
@@ -111,7 +116,7 @@ for (const pair of PAIRS) {
 const record = {
   generatedBy: "packages/design-tokens/scripts/contrast-record.mjs",
   standard:
-    "WCAG 2.2 AA (SC 1.4.3 text 4.5:1, large text 3:1; SC 1.4.11 non-text 3:1). Ratios truncated, not rounded, to 2 decimals.",
+    "WCAG 2.2 AA (SC 1.4.3 text 4.5:1, large text 3:1; SC 1.4.11 non-text 3:1), plus the operator surface-step rule (adjacent surface levels 1.15-1.25:1, fill only). Ratios truncated, not rounded, to 2 decimals.",
   tokens: {
     path: "docs/design/tokens.json",
     sha256: createHash("sha256").update(raw).digest("hex"),

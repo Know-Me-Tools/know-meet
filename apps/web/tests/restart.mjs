@@ -36,7 +36,7 @@ const metadata = JSON.parse(
 const binary = join(
   metadata.target_directory,
   "debug",
-  "bff" + (process.platform === "win32" ? ".exe" : ""),
+  `bff${process.platform === "win32" ? ".exe" : ""}`,
 );
 const data = mkdtempSync(join(tmpdir(), "notes-restart-"));
 let child, browser;
@@ -56,7 +56,7 @@ async function start() {
     });
     child.once("exit", (code) => {
       clearTimeout(timer);
-      reject(new Error("Server exited: " + code));
+      reject(new Error(`Server exited: ${code}`));
     });
     child.stderr.on("data", (data) => process.stderr.write(data));
     child.stdout.on("data", (data) => {
@@ -82,7 +82,7 @@ try {
   const page = await browser.newPage();
   // c06: the notes baseline lives at /notes (home is the Know Meet frame). Needs the
   // BFF to serve index.html for client routes (request to build-platform).
-  await page.goto(url + "/notes");
+  await page.goto(`${url}/notes`);
   if (process.env.EXPECTED_CAPABILITY) {
     await page.getByText(process.env.EXPECTED_CAPABILITY, { exact: false }).waitFor();
   }
@@ -91,13 +91,13 @@ try {
   await page.getByText("A note that survives restart", { exact: true }).waitFor();
   await stop();
   url = await start();
-  await page.goto(url + "/notes");
+  await page.goto(`${url}/notes`);
   await page.getByText("A note that survives restart", { exact: true }).waitFor();
-  assert.equal((await page.request.get(url + "/api/runtime")).status(), 503);
+  assert.equal((await page.request.get(`${url}/api/runtime`)).status(), 503);
   await page.getByRole("button", { name: "Save note", exact: true }).click();
   await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
-  console.log(
-    "PASS: real browser -> Axum -> Rust SQLite -> process restart recovery; invalid note rejected; UAR unavailable explicitly",
+  process.stdout.write(
+    "PASS: real browser -> Axum -> Rust SQLite -> process restart recovery; invalid note rejected; UAR unavailable explicitly\n",
   );
 } finally {
   await browser?.close();

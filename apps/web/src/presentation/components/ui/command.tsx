@@ -1,14 +1,14 @@
-import { Command as CommandPrimitive } from "cmdk";
-import { cn } from "cn";
-import { CheckIcon, SearchIcon } from "lucide-react";
-import type * as React from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/presentation/components/ui/dialog";
+} from "@know-meet/ui/components/dialog";
+import { Command as CommandPrimitive } from "cmdk";
+import { cn } from "cn";
+import { CheckIcon, SearchIcon } from "lucide-react";
+import type * as React from "react";
 import { InputGroup, InputGroupAddon } from "@/presentation/components/ui/input-group";
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
@@ -60,7 +60,7 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+      <InputGroup className="h-8! rounded-lg! bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2! bg-input text-on-control">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(

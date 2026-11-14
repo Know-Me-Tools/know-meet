@@ -12,7 +12,7 @@ const PREVIEW_PORT = Number(process.env["KM_WEB_PREVIEW_PORT"] ?? "4173");
 const BASE_URL = process.env["KM_WEB_BASE_URL"] ?? `http://127.0.0.1:${PREVIEW_PORT}`;
 const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
 
-const shared = { featuresRoot: "../../features", steps: ["steps/**/*.ts"] } as const;
+const shared = { featuresRoot: "../../features", steps: ["steps/**/*.ts"] };
 
 const webDir = defineBddConfig({
   ...shared,
@@ -52,8 +52,9 @@ export default defineConfig({
     { name: "web", testDir: webDir, use: { ...devices["Desktop Chrome"] } },
     { name: "cli", testDir: cliDir },
   ],
+  // An external KM_WEB_BASE_URL means no local server; [] is "none" under exactOptionalPropertyTypes.
   webServer: process.env["KM_WEB_BASE_URL"]
-    ? undefined
+    ? []
     : {
         command: `pnpm --filter @know-meet/web preview --host 127.0.0.1 --port ${PREVIEW_PORT} --strictPort`,
         cwd: "../..",

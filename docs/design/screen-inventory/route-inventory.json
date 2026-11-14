@@ -1,10 +1,16 @@
 {
   "$schema": "know-meet-inventory/v1",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "referenceRevision": {
+    "revision": "v2",
+    "decidedAt": "2026-11-11",
+    "authority": "operator approval 2026-11-11 (\"Yes, go ahead\"): update the design reference so the fidelity oracle compares against the current design; DESIGN.md D-6, D-7, D-8; tokens.json v1.3.0",
+    "change": "docs/design/prototype/** renders tokens v1.3.0, Flat 2.0 fills and the adaptive navigation. v1 is frozen in docs/design/prototype-v1-archive/ (sha256-manifest.txt). Retired: frame.nav-collapsed, frame.nav-open (hamburger). Added: frame.nav-bar, frame.nav-rail, frame.nav-inline (bdd-quality proposal, tests/fidelity/oracle/proposed-nav-states.json). Change log: docs/design/token-reconciliation/discrepancy-log.md section F."
+  },
   "scopeDecision": "Q-A3 (operator, 2026-11-09): app frame + static screens of home, sign-in, join, dashboard, agents, recordings, settings + meeting-room layout with media stubbed",
   "routeSource": {
     "path": "docs/design/prototype/screens.html",
-    "sha256": "eb86232aacbc5ba62b797f2d9e9bbfc980d46bb9668c3ab4f4102dc63a5d9891"
+    "sha256": "597851a25181461960fe461b6f3a02e4adbff2e895f5d03f9f3b72c218e9bcb3"
   },
   "captureMatrix": {
     "themes": [
@@ -19,13 +25,14 @@
     ],
     "themeSetBy": "localStorage km-meet-theme ('dark'|'light') before load",
     "signInSetBy": "localStorage km-auth = {\"name\":\"Avery Chen\",\"email\":\"avery@example.com\"} for access=sign-in",
-    "clock": "Freeze Date: km.js buildData() derives meetings and recordings from the current time"
+    "clock": "Freeze Date: km.js buildData() derives meetings and recordings from the current time",
+    "navClassSetBy": "km.js sets <html data-nav-class> from window.innerWidth against the km.css window tokens: bar < 600 (375), rail 600-1023 (768), inline >= 1024 (1024, 1440). Fixed bar/rail render at their first-viewport position in full-page captures (same in the app)."
   },
   "idRule": "<page>.<hash without #, : replaced by .>; default route is <page>.default; frame.* are shell states; ids are stable and never reused",
   "counts": {
-    "total": 85,
-    "inScope": 70,
-    "outOfScope": 15,
+    "total": 88,
+    "inScope": 71,
+    "outOfScope": 17,
     "inScopeByPage": {
       "index": 1,
       "auth": 5,
@@ -35,9 +42,12 @@
       "agents": 14,
       "recordings": 11,
       "settings": 17,
-      "frame": 7
+      "frame": 8
     },
-    "baselineCaptures": 560
+    "baselineCaptures": 568,
+    "notApplicableCells": 16,
+    "applicableCaptures": 552,
+    "countsNote": "baselineCaptures = inScope x 2 themes x 4 viewports (matrix cells). Not applicable: frame.nav-bar at 768/1024/1440, frame.nav-rail at 375/1024/1440, frame.nav-inline at 375/768, both themes (16). v1 was 70 states, 560 cells, 8 not applicable (hamburger at 1024/1440), 552 captures."
   },
   "routes": [
     { "id": "index.default", "file": "docs/design/prototype/index.html", "hash": "", "title": "Home", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: static screens of home", "source": "screens.html" },
@@ -117,8 +127,11 @@
     { "id": "frame.appbar-signed-out", "file": "docs/design/prototype/index.html", "hash": "", "title": "App bar, signed out", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "Default load without km-auth" },
     { "id": "frame.appbar-signed-in", "file": "docs/design/prototype/dashboard.html", "hash": "#upcoming", "title": "App bar, signed in, active nav item", "access": "sign-in", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "km-auth set; aria-current on Meetings" },
     { "id": "frame.account-menu-open", "file": "docs/design/prototype/dashboard.html", "hash": "#upcoming", "title": "Account menu open", "access": "sign-in", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "Click .acct-btn" },
-    { "id": "frame.nav-collapsed", "file": "docs/design/prototype/index.html", "hash": "", "title": "App bar with nav collapsed behind the menu button", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "Viewport <= 899px (km.css)" },
-    { "id": "frame.nav-open", "file": "docs/design/prototype/index.html", "hash": "", "title": "Mobile nav open", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "Viewport <= 899px, click .appnav-toggle" },
+    { "id": "frame.nav-collapsed", "file": "docs/design/prototype/index.html", "hash": "", "title": "App bar with nav collapsed behind the menu button (retired)", "access": "guest", "inScope": false, "scopeBasis": "Retired by reference revision v2: the hamburger no longer exists at any width (D-8, ADJ-2). Replaced by frame.nav-bar and frame.nav-rail. ID kept, never reused.", "source": "km.js mountAppBar (v1 only)", "how": "v1: viewport <= 899px (km.css)" },
+    { "id": "frame.nav-open", "file": "docs/design/prototype/index.html", "hash": "", "title": "Mobile nav open (retired)", "access": "guest", "inScope": false, "scopeBasis": "Retired by reference revision v2: the hamburger no longer exists at any width (D-8, ADJ-2). ID kept, never reused.", "source": "km.js mountAppBar (v1 only)", "how": "v1: viewport <= 899px, click .appnav-toggle" },
+    { "id": "frame.nav-bar", "file": "docs/design/prototype/index.html", "hash": "", "title": "Bottom navigation bar, compact width", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation (reference revision v2)", "source": "DESIGN.md Adaptive layout; km.js mountAppBar", "how": "Viewport < 600 (375 captured): html[data-nav-class=bar], five items, Home current (aria-current=page)", "viewports": [375], "appTestids": ["km-appnav[data-nav-class=bar]", "km-nav-item", "km-nav-indicator"] },
+    { "id": "frame.nav-rail", "file": "docs/design/prototype/index.html", "hash": "", "title": "Navigation rail, medium width", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation (reference revision v2)", "source": "DESIGN.md Adaptive layout; km.js mountAppBar", "how": "Viewport 600 to 1023 (768 captured): html[data-nav-class=rail], rail 80 wide under the app bar, five items, Home current", "viewports": [768], "appTestids": ["km-appnav[data-nav-class=rail]", "km-nav-item", "km-nav-indicator"] },
+    { "id": "frame.nav-inline", "file": "docs/design/prototype/index.html", "hash": "", "title": "Inline links in the app bar, expanded width", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation (reference revision v2)", "source": "DESIGN.md Adaptive layout; km.js mountAppBar", "how": "Viewport >= 1024 (1024 and 1440 captured): html[data-nav-class=inline], pill links, current link as selected pill", "viewports": [1024, 1440], "appTestids": ["km-appnav[data-nav-class=inline]", "km-nav-item"] },
     { "id": "frame.skip-link-focused", "file": "docs/design/prototype/index.html", "hash": "", "title": "Skip link focused", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "First Tab press" },
     { "id": "frame.theme-toggle", "file": "docs/design/prototype/index.html", "hash": "", "title": "Theme toggle, both icons", "access": "guest", "inScope": true, "scopeBasis": "Q-A3: app frame", "source": "km.js mountAppBar", "how": "Sun icon in dark, moon icon in light" },
     { "id": "live-room.start", "file": "docs/design/live/room.html", "hash": "#start", "title": "Start a live meeting", "access": "guest", "inScope": false, "scopeBasis": "Live LiveKit media is a contract exclusion (VS-6 deferred); reference only", "source": "docs/design/live/screens.html" },

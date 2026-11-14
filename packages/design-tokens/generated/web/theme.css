@@ -85,6 +85,35 @@
   --spacing-header-h: 64px;
   --container-page-max: 1200px;
   --spacing-rs-w: 400px;
+  --spacing-size-target-min: 24px;
+  --spacing-size-target: 44px;
+  --spacing-size-control-h: 48px;
+  --spacing-size-control-h-sm: 36px;
+  --spacing-size-input-pad-x: 14px;
+  --spacing-size-input-pad-y: 12px;
+  --spacing-size-select-pad-end: 40px;
+  --spacing-size-textarea-min-h: 96px;
+  --spacing-size-check: 20px;
+  --spacing-size-switch-w: 48px;
+  --spacing-size-switch-h: 28px;
+  --spacing-size-switch-thumb: 22px;
+  --spacing-size-switch-thumb-inset: 3px;
+  --spacing-size-switch-travel: 20px;
+  --spacing-size-slider-track-h: 6px;
+  --spacing-size-slider-thumb: 20px;
+  --spacing-size-pip: 8px;
+  --spacing-size-speak-badge: 24px;
+  --spacing-size-dialog-w: 560px;
+  --spacing-size-sheet-w: 440px;
+  --spacing-size-toast-w: 440px;
+  --spacing-size-tooltip-max-w: 320px;
+  --spacing-size-tooltip-pad-x: 12px;
+  --spacing-size-tooltip-pad-y: 8px;
+  --spacing-size-nav-bar-h: 64px;
+  --spacing-size-nav-rail-w: 80px;
+  --spacing-size-nav-indicator-w: 56px;
+  --spacing-size-nav-indicator-h: 32px;
+  --container-measure-empty: 46ch;
   --breakpoint-bp381: 381px; /* bp-380: max-bp381: = @media (max-width: 380px) */
   --breakpoint-bp421: 421px; /* bp-420: max-bp421: = @media (max-width: 420px) */
   --breakpoint-bp481: 481px; /* bp-480: max-bp481: = @media (max-width: 480px) */
@@ -93,11 +122,14 @@
   --breakpoint-bp900: 900px; /* bp-899: max-bp900: = @media (max-width: 899px) */
   --breakpoint-bp1024: 1024px; /* bp-1023: max-bp1024: = @media (max-width: 1023px) */
   --breakpoint-bp1200: 1200px; /* bp-1199: max-bp1200: = @media (max-width: 1199px) */
+  --breakpoint-medium: 600px;
+  --breakpoint-expanded: 1024px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.55, 0, 0.75, 0.25);
   --ease-standard: ease;
   --ease-in-out: ease-in-out;
   --ease-linear: linear;
+  --ease-layout: cubic-bezier(0.2, 0, 0, 1);
 }
 
 @theme inline {
@@ -133,12 +165,29 @@
   --color-danger-btn: var(--danger-btn);
   --color-danger-btn-hov: var(--danger-btn-hov);
   --color-on-danger: var(--on-danger);
+  --color-control: var(--control);
+  --color-control-hov: var(--control-hov);
+  --color-on-control: var(--on-control);
+  --color-control-placeholder: var(--control-placeholder);
+  --color-control-invalid: var(--control-invalid);
+  --color-on-control-invalid: var(--on-control-invalid);
+  --color-selected: var(--selected);
+  --color-on-selected: var(--on-selected);
+  --color-focus: var(--focus);
+  --color-on-focus: var(--on-focus);
+  --color-focus-placeholder: var(--focus-placeholder);
+  --color-slider-thumb: var(--slider-thumb);
+  --color-pip-green: var(--pip-green);
+  --color-pip-amber: var(--pip-amber);
+  --color-pip-red: var(--pip-red);
+  --color-speak-person: var(--speak-person);
+  --color-speak-agent: var(--speak-agent);
+  --color-speak-phone: var(--speak-phone);
+  --color-on-speak: var(--on-speak);
   --color-scrim: var(--scrim);
-  --color-ring-input: var(--ring-input);
   --color-switch-track: var(--switch-track);
   --color-switch-thumb: var(--switch-thumb);
   --color-switch-thumb-on: var(--switch-thumb-on);
-  --color-drop-outline: var(--drop-outline);
   --color-media-bg: var(--media-bg);
   --color-on-media: var(--on-media);
   --color-media-foot-scrim: var(--media-foot-scrim);

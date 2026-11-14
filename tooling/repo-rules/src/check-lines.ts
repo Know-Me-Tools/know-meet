@@ -2,7 +2,10 @@ import { countLines, listRepoFiles, matchesAny, readText } from "./lib/files.ts"
 import { cwdFromArgs, report, type Violation } from "./lib/report.ts";
 import { ALL_LINE_EXCEPTION_GLOBS, LINE_LIMIT } from "./line-exceptions.ts";
 
-export function checkLines(cwd: string): { violations: Violation[]; scanned: number } {
+export function checkLines(cwd: string): {
+  violations: Violation[];
+  scanned: number;
+} {
   const violations: Violation[] = [];
   let scanned = 0;
   for (const path of listRepoFiles(cwd)) {

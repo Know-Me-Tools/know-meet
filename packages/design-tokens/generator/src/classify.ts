@@ -28,6 +28,9 @@ export type Category =
   | "space"
   | "radius"
   | "layout"
+  | "size"
+  | "measure"
+  | "window"
   | "breakpoint"
   | "z-index"
   | "duration"
@@ -49,6 +52,10 @@ const RULES: ReadonlyArray<readonly [Category, RegExp]> = [
   ["easing", /^ease-/],
   ["gradient", /^orb-/],
   ["layout", /^(header-h|page-max|rs-w)$/],
+  // D-7: component sizes (px) and text measures (ch); D-8: adaptive window classes (min-width px).
+  ["size", /^size-/],
+  ["measure", /^measure-/],
+  ["window", /^window-/],
 ];
 
 /** Theme-dependent categories: the only ones light may override. */
@@ -100,11 +107,16 @@ export function validate(category: Category, value: string, where: string): void
       return;
     case "space":
     case "layout":
+    case "size":
+    case "window":
     case "breakpoint":
       parsePx(value, where);
       return;
     case "radius":
       requireOne(tryPx(value) !== null || tryPercent(value) !== null, where, "px or %", value);
+      return;
+    case "measure":
+      requireOne(/^\d+(\.\d+)?ch$/.test(value), where, "a measure in ch", value);
       return;
     case "z-index":
       requireOne(/^-?\d+$/.test(value), where, "an integer z-index", value);

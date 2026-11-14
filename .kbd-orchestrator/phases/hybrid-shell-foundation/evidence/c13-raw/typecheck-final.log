@@ -1,0 +1,66 @@
+$ pnpm run typecheck  (2026-11-12T14:57:06Z)
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 7 packages
+   • Remote caching disabled
+
+@know-meet/design-tokens:typecheck: cache hit, replaying logs 66401111e51f35de
+@know-meet/domain:typecheck: cache hit, replaying logs 9da47eafcaaec65a
+@know-meet/fidelity-tests:typecheck: cache hit, replaying logs 1b3061cc957c3151
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/application:typecheck: cache hit, replaying logs 9924705d52567375
+@know-meet/ui:typecheck: cache hit, replaying logs 79c8926a5716c088
+@know-meet/ui:typecheck: $ tsc --noEmit -p tsconfig.json
+@know-meet/application:typecheck: $ tsc -p tsconfig.json
+@know-meet/web:typecheck: cache hit, replaying logs c2614bccdc5da230
+@know-meet/web:typecheck: $ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json
+
+ Tasks:    6 successful, 6 total
+Cached:    6 cached, 6 total
+  Time:    37ms >>> FULL TURBO
+
+tooling/repo-rules/src/lib/native-steps.ts(32,23): error TS4111: Property 'FLUTTER_ROOT' comes from an index signature, so it must be accessed with ['FLUTTER_ROOT'].
+tooling/repo-rules/src/lib/native-steps.ts(34,26): error TS4111: Property 'PATH' comes from an index signature, so it must be accessed with ['PATH'].
+tooling/repo-rules/src/lib/native-steps.ts(114,73): error TS4111: Property 'PATH' comes from an index signature, so it must be accessed with ['PATH'].
+[ELIFECYCLE] Command failed with exit code 1.
+exit=1
+
+$ pnpm --filter @know-meet/web run build
+dist/assets/index-DPKAtmTh.js                       1,101.97 kB │ gzip: 325.52 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 524ms
+exit=
+web build exit=0 (re-run 2026-11-12T14:57:21Z)
+
+== c13 13.8 follow-up 2026-11-12T15:00:59Z ==
+$ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json
+web typecheck exit=0
+✔ keeps internal route names and their hash sub-states (0.493667ms)
+✔ falls back to the default for anything that is not an internal route (0.086334ms)
+✔ escapeText escapes TEXT specials and every kind of line break (0.633792ms)
+✔ quoteParam DQUOTE-quotes and drops characters a parameter cannot carry (0.085ms)
+✔ httpsUrl accepts https only (0.111333ms)
+✔ a hostile title, name and description cannot inject a property (1.286875ms)
+✔ a non-https URL is left out; an https URL is written (0.441125ms)
+✔ an organizer email that is not a plain address is left out (0.235125ms)
+✔ lines fold at 75 octets without splitting a character (0.415292ms)
+✔ the meta/Tauri policy carries base-uri, form-action and object-src (0.595792ms)
+✔ the header policy adds frame-ancestors 'none' to the shared policy (0.277042ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.726417
+web build exit=0

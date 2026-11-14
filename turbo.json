@@ -1,6 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
+  "remoteCache": { "signature": true },
   "globalDependencies": ["tooling/versions.toml", "tsconfig.base.json"],
   "tasks": {
     "build": {

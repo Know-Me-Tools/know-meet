@@ -20,6 +20,7 @@ const findings = new WeakMap<ScenarioState, ProvenanceFinding[]>();
 const dartSources = new WeakMap<ScenarioState, string>();
 let stockThemeRequested = false;
 
+// biome-ignore lint/correctness/noEmptyPattern: Playwright reads the first parameter of a fixture or step and requires an object-destructuring pattern, even when no fixture is used.
 Given("the Flutter golden provenance rule {string}", async ({}, path: string) => {
   const rule = JSON.parse(readFileSync(repoPath(path), "utf8")) as {
     approver: string;

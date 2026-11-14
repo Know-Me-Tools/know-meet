@@ -130,6 +130,8 @@ did not load.
     owner approval. Route through `prometheus-ui-ux`; build components with
     `shadcn`; use `ui-ux-pro-max` for reasoned lookups only, never as a second
     direction; UI review uses `prometheus-ui-review`.
+- **Flat 2.0 and WCAG (operator 2026-11-11).** No borders, outlines or strokes on any surface or control. WCAG 2.2 AA is mandatory everywhere: control boundaries meet SC 1.4.11 through fill contrast (at least 3:1 against the adjacent surface), and keyboard focus is shown by a fill or elevation change with at least 3:1 contrast against the unfocused state, never an outline. Text meets SC 1.4.3. Motion respects `prefers-reduced-motion`.
+- **Adaptive layout (operator 2026-11-11).** Web and Flutter share one navigation spec (DESIGN.md): bottom bar on phones, rail on medium widths, full navigation on desktop. The mobile web app and the Flutter app look the same. Resizing a desktop window down to mobile animates smoothly with token motion.
 - **Agentic UI (decided 2026-11-10: own core).** Agent UIs use Know Meet's own AG-UI core: an SSE transport and a pure reducer on `@ag-ui/core` types in domain/application, with `@prometheus-ags/entity-graph` as the store of record; Streamdown with explicit origin allowlists for markdown; `@a2ui/react` with a Know Meet component catalog for A2UI; shadcn AI Elements patterns themed by the tokens. AG-UI and A2UI are the only wire contracts. Don't add assistant-ui, CopilotKit or another chat framework. Reference implementation: `spikes/agentic-ui/own/`. Product adoption waits on the c16 gates.
 - **React and TypeScript.** Load `vercel-react-best-practices` for every React
   component, hook or data-loading change, `vercel-composition-patterns` for

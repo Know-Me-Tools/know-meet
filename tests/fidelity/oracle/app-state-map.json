@@ -10,11 +10,15 @@
  "roles": {
   "appbar": "[data-testid=\"km-appbar\"]",
   "account-button": "[data-testid=\"km-account-button\"]",
-  "nav-toggle": "[data-testid=\"km-nav-toggle\"]",
   "theme-toggle": "[data-testid=\"km-theme-toggle\"]",
   "titlebar": "[data-testid=\"km-titlebar\"]",
   "appnav": "[data-testid=\"km-appnav\"]",
-  "main": "main#main"
+  "main": "main#main",
+  "nav-bar": "[data-testid=\"km-appnav\"][data-nav-class=\"bar\"]",
+  "nav-rail": "[data-testid=\"km-appnav\"][data-nav-class=\"rail\"]",
+  "nav-inline": "[data-testid=\"km-appnav\"][data-nav-class=\"inline\"]",
+  "nav-item": "[data-testid=\"km-nav-item\"]",
+  "nav-indicator": "[data-testid=\"km-nav-indicator\"]"
  },
  "states": {
   "index.default": {
@@ -182,7 +186,7 @@
    "access": "sign-in"
   },
   "recordings.processing.partner-onboarding-1014": {
-   "path": "/recordings#processing:partner-onboarding-1014",
+   "path": "/recordings?km-processing-pin=2#processing:partner-onboarding-1014",
    "access": "sign-in"
   },
   "recordings.empty": {
@@ -281,14 +285,6 @@
    "path": "/dashboard#upcoming",
    "access": "sign-in"
   },
-  "frame.nav-collapsed": {
-   "path": "/",
-   "access": "guest"
-  },
-  "frame.nav-open": {
-   "path": "/",
-   "access": "guest"
-  },
   "frame.skip-link-focused": {
    "path": "/",
    "access": "guest"
@@ -296,6 +292,68 @@
   "frame.theme-toggle": {
    "path": "/",
    "access": "guest"
+  },
+  "frame.nav-bar": {
+   "path": "/",
+   "access": "guest",
+   "navClass": "bar",
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)",
+   "viewports": [
+    375
+   ]
+  },
+  "frame.nav-rail": {
+   "path": "/",
+   "access": "guest",
+   "navClass": "rail",
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)",
+   "viewports": [
+    768
+   ]
+  },
+  "frame.nav-inline": {
+   "path": "/",
+   "access": "guest",
+   "viewports": [
+    1024,
+    1440
+   ],
+   "navClass": "inline",
+   "adjudication": "reference revision v2 (route-inventory.json v2.0.0)"
+  }
+ },
+ "navigation": {
+  "source": "DESIGN.md Adaptive layout (D-8, operator 2026-11-11); reference revision v2 (route-inventory.json v2.0.0, discrepancy-log.md section F). frame.nav-collapsed and frame.nav-open are retired (inScope false) and have no app route.",
+  "rule": "One <nav aria-label=\"Primary\" data-testid=\"km-appnav\"> in every width class; the class is exposed as data-nav-class = bar (<600) | rail (600-1023) | inline (>=1024). Never separate DOM nodes, so focus survives the morph. km-nav-toggle is retired and must not render at any width.",
+  "status": "proposed: client-shell must confirm the data-nav-class and km-nav-item/km-nav-indicator testids before c09 merges; until then these cells are BLOCKED, never skipped",
+  "classBounds": {
+   "bar": "width < 600",
+   "rail": "600 <= width < 1024",
+   "inline": "width >= 1024"
+  },
+  "morphTokens": {
+   "duration": "dur-nav-morph",
+   "label": "dur-nav-label",
+   "reflow": "dur-reflow",
+   "easing": "ease-layout"
+  }
+ },
+ "checks": {
+  "frame.nav-resize-reduced-motion": {
+   "kind": "a11y-motion-check",
+   "feature": "features/motion.feature",
+   "scenarios": [
+    "Crossing a width class morphs the navigation with the nav tokens",
+    "Reduced motion makes the navigation morph instant"
+   ],
+   "pixelCell": false,
+   "adjudication": "ADJ-2"
+  },
+  "frame.flat-controls": {
+   "kind": "a11y-computed-style-check",
+   "feature": "features/flat-controls.feature",
+   "pixelCell": false,
+   "adjudication": "ADJ-3"
   }
  }
 }

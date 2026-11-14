@@ -1,19 +1,19 @@
 "use client";
 
+import { Button } from "@know-meet/ui/components/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import * as React from "react";
-import { Button } from "@/presentation/components/ui/button";
 
 const codeBlockVariants = cva(
-  "group/code-block relative flex w-full min-w-0 flex-col overflow-hidden rounded-lg text-sm has-[>[data-slot=code-block-content]:focus-visible]:ring-3 has-[>[data-slot=code-block-content]:focus-visible]:ring-ring/50 data-[size=sm]:text-xs",
+  "group/code-block relative flex w-full min-w-0 flex-col overflow-hidden rounded-lg text-sm has-[>[data-slot=code-block-content]:focus-visible]:bg-focus! has-[>[data-slot=code-block-content]:focus-visible]:text-on-focus! data-[size=sm]:text-xs",
   {
     variants: {
       variant: {
         default:
-          "border border-input text-foreground has-[>[data-slot=code-block-content]:focus-visible]:border-ring dark:bg-input/30",
-        destructive: "border border-destructive/30 text-destructive dark:border-destructive/40",
+          "text-foreground has-[>[data-slot=code-block-content]:focus-visible]:bg-focus! has-[>[data-slot=code-block-content]:focus-visible]:text-on-focus! bg-input text-on-control",
+        destructive: "text-destructive",
       },
     },
     defaultVariants: {
@@ -71,7 +71,7 @@ function CodeBlockActions({ className, ...props }: React.ComponentProps<"div">) 
     <div
       data-slot="code-block-actions"
       className={cn(
-        "-my-1 ms-auto -me-1.5 flex shrink-0 items-center gap-1 [[data-slot=code-block]>&]:absolute [[data-slot=code-block]>&]:end-2 [[data-slot=code-block]>&]:top-2 [[data-slot=code-block]>&]:z-10 [[data-slot=code-block]>&]:m-0 [[data-slot=code-block]>&]:opacity-0 [[data-slot=code-block]>&]:transition-opacity [[data-slot=code-block]>&]:group-focus-within/code-block:opacity-100 [[data-slot=code-block]>&]:group-hover/code-block:opacity-100 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:end-1.5 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:top-1.5 [[data-slot=code-block]>&]:pointer-coarse:opacity-100 [[data-slot=code-block]>&]:*:[button]:bg-background [[data-slot=code-block]>&]:*:[button]:ring-1 [[data-slot=code-block]>&]:*:[button]:ring-foreground/10",
+        "-my-1 ms-auto -me-1.5 flex shrink-0 items-center gap-1 [[data-slot=code-block]>&]:absolute [[data-slot=code-block]>&]:end-2 [[data-slot=code-block]>&]:top-2 [[data-slot=code-block]>&]:z-10 [[data-slot=code-block]>&]:m-0 [[data-slot=code-block]>&]:opacity-0 [[data-slot=code-block]>&]:transition-opacity [[data-slot=code-block]>&]:group-focus-within/code-block:opacity-100 [[data-slot=code-block]>&]:group-hover/code-block:opacity-100 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:end-1.5 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:top-1.5 [[data-slot=code-block]>&]:pointer-coarse:opacity-100 [[data-slot=code-block]>&]:*:[button]:bg-background",
         className,
       )}
       {...props}
@@ -144,6 +144,7 @@ function CodeBlockContent({
       data-wrap={wrap || undefined}
       data-numbered={lineNumbers || undefined}
       dir="ltr"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrolling code block must be keyboard-focusable so keyboard users can scroll it (WCAG 2.1.1).
       tabIndex={0}
       style={{ counterReset: `line ${startLine - 1}`, ...style }}
       className={cn(
@@ -160,7 +161,8 @@ function CodeBlockContent({
           ? children
               .replace(/\n$/, "")
               .split("\n")
-              .map((line, index) => <CodeBlockLine key={index}>{line}</CodeBlockLine>)
+              .map((text, offset) => ({ lineNumber: startLine + offset, text }))
+              .map((line) => <CodeBlockLine key={line.lineNumber}>{line.text}</CodeBlockLine>)
           : children}
       </code>
     </pre>

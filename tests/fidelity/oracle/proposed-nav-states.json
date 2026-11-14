@@ -1,0 +1,133 @@
+{
+ "schema": "know-meet-proposed-nav-states/v1",
+ "status": "adopted",
+ "adoption": {
+  "by": "design-lead",
+  "at": "2026-11-11",
+  "into": "docs/design/screen-inventory/route-inventory.json v2.0.0 (reference revision v2)",
+  "result": "frame.nav-collapsed and frame.nav-open retired (inScope false, IDs kept); frame.nav-bar, frame.nav-rail, frame.nav-inline added as proposed. In scope: 71 states, 568 matrix cells, 16 not applicable, 552 captures.",
+  "reference": "docs/design/prototype/** now renders the adaptive nav (km.js sets html[data-nav-class] = bar | rail | inline; nav items are .appnav a > .nav-ind + .nav-label). v1 frozen in docs/design/prototype-v1-archive/."
+ },
+ "owner": "bdd-quality (proposal); docs/design/screen-inventory/route-inventory.json belongs to design-lead",
+ "request": "design-lead: add these entries to route-inventory.json (inScope true) and retire the two hamburger entries, per ADJ-1 and ADJ-2 in tests/fidelity/oracle/thresholds.json. The frozen perState thresholds, matrix and baselines are not changed here; new cells need design-lead replacement baselines before c13 (ADJ-1 'pending').",
+ "authority": "DESIGN.md Adaptive layout (D-8); operator design answers 2026-11-11 item 4; ADJ-1, ADJ-2",
+ "retire": [
+  {
+   "id": "frame.nav-collapsed",
+   "reason": "hamburger retired at every width (ADJ-2)"
+  },
+  {
+   "id": "frame.nav-open",
+   "reason": "hamburger retired at every width (ADJ-2)"
+  }
+ ],
+ "add": [
+  {
+   "id": "frame.nav-bar",
+   "file": "docs/design/prototype/index.html",
+   "hash": "",
+   "title": "Bottom navigation bar, compact width",
+   "access": "guest",
+   "inScope": true,
+   "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation",
+   "source": "DESIGN.md Adaptive layout",
+   "how": "Viewport < 600 (375 captured); five items, Home current (aria-current=page); replacement baseline from the prototype rendered with the adaptive nav",
+   "viewports": [
+    375
+   ],
+   "appTestids": [
+    "km-appnav[data-nav-class=bar]",
+    "km-nav-item",
+    "km-nav-indicator"
+   ]
+  },
+  {
+   "id": "frame.nav-rail",
+   "file": "docs/design/prototype/index.html",
+   "hash": "",
+   "title": "Navigation rail, medium width",
+   "access": "guest",
+   "inScope": true,
+   "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation",
+   "source": "DESIGN.md Adaptive layout",
+   "how": "Viewport 600 to 1023 (768 captured); rail 80 wide under the app bar, five items",
+   "viewports": [
+    768
+   ],
+   "appTestids": [
+    "km-appnav[data-nav-class=rail]",
+    "km-nav-item",
+    "km-nav-indicator"
+   ]
+  },
+  {
+   "id": "frame.nav-inline",
+   "file": "docs/design/prototype/index.html",
+   "hash": "",
+   "title": "Inline links in the app bar, expanded width",
+   "access": "guest",
+   "inScope": true,
+   "scopeBasis": "Q-A3: app frame; D-8 adaptive navigation",
+   "source": "DESIGN.md Adaptive layout",
+   "how": "Viewport >= 1024 (1024 and 1440 captured); unchanged prototype desktop nav, current link as selected pill (ADJ-3)",
+   "viewports": [
+    1024,
+    1440
+   ],
+   "appTestids": [
+    "km-appnav[data-nav-class=inline]",
+    "km-nav-item"
+   ]
+  }
+ ],
+ "checksNotCells": [
+  {
+   "id": "frame.nav-resize-reduced-motion",
+   "kind": "a11y-motion-check",
+   "evidence": "features/motion.feature (resize scenarios, negative controls)",
+   "expected": "Crossing 1024 or 600 animates dur-nav-morph 280 ms, ease-layout, transform/opacity only; no animation inside a class; instant under prefers-reduced-motion"
+  },
+  {
+   "id": "frame.flat-controls",
+   "kind": "a11y-computed-style-check",
+   "evidence": "features/flat-controls.feature",
+   "expected": "No non-zero border or outline width on any interactive control, rest or :focus-visible; focus is a fill change >= 3:1"
+  }
+ ],
+ "knownConflicts": [
+  "features/vs-1-web-fidelity.feature still lists frame.nav-collapsed and frame.nav-open in its state table; it is bound to the frozen thresholds and is left unchanged until delivery-lead records the operator-adopted contract amendment ADJ-4 asks for.",
+  "features/accessibility.feature 'Keyboard focus is visible' accepts outline or box-shadow as the focus indicator, which contradicts D-6; left unchanged pending the same approval. features/flat-controls.feature is the replacement oracle."
+ ],
+ "driverChangesNeeded": {
+  "owner": "bdd-quality (tests/fidelity/src/support/state-drivers.ts, capture-environment.ts, oracle/app-state-map.json)",
+  "why": "The nav change breaks how the nav states are reached: without a case in planState the three new IDs fall to the default (full-page index capture at all four viewports), and the two retired cases reference .appnav-toggle, which no longer exists.",
+  "changes": [
+   "planState: add frame.nav-bar (applicable only when viewport < 600), frame.nav-rail (600 <= viewport < 1024) and frame.nav-inline (viewport >= 1024); otherwise not-applicable with reason 'nav class <bar|rail|inline> exists only at <range> (DESIGN.md D-8)'. Suggested region: element crop of the nav (new UiRole 'appnav': prototype '.appnav', app '[data-testid=km-appnav]'), so the cell isolates the nav from page content.",
+   "planState: delete the frame.nav-collapsed and frame.nav-open cases and the 'nav-toggle' UiRole / PROTOTYPE_SELECTORS entry; NAV_ONLY_BELOW and CAPTURE_ENVIRONMENT.navCollapseMaxWidth (899) are obsolete. Replace with the window tokens (windowMedium 600, windowExpanded 1024) if a constant is still wanted; changing CAPTURE_ENVIRONMENT is fine because every baseline is recaptured anyway.",
+   "Full-page captures: Chromium renders the position:fixed bar (375) and rail (768) at their first-viewport position, so in long full-page captures the bar sits over content at y = viewport height - 64 and the rail stops at the first viewport height. The app frame uses the same fixed geometry, so reference and app match; no change required, but either keep full-page for both or switch frame-bearing pages at 375/768 to viewport captures for both, never one of each.",
+   "Unchanged and still valid: frame.appbar-signed-out/in crop to #appbar (the fixed bar/rail is outside its box), frame.account-menu-open (.acct-btn), frame.theme-toggle (.theme-toggle), frame.skip-link-focused (Tab). Frozen clock, theme/auth storage keys, font routing and SHARED_SOURCES paths are unchanged.",
+   "app-state-map.json: map the three new IDs to the app testids above and drop the two retired IDs.",
+   "Recapture all baselines from the v2 prototype (every page changed: tokens v1.3.0 and Flat 2.0 fills), record the new baselineSetSha256, then delivery-lead records the contract amendment (ADJ-4)."
+  ]
+ },
+ "notes": {
+  "recordedBy": "design-lead",
+  "at": "2026-11-11",
+  "processingPin": {
+   "purpose": "recordings.processing.* is timer-driven (5 pipeline steps, 1.3-2.0 s each, 400 ms start delay); a capture taken at any wall-clock moment differs. The prototype now freezes it deterministically (RV-36).",
+   "prototype": "Load docs/design/prototype/recordings.html?km-processing-pin=N#processing:<id>. The query parameter must come before the hash. Equivalent: set html[data-km-processing-pin=N] before the script runs (addInitScript on document.documentElement).",
+   "values": "N is an integer 0..5. N steps are Done/Pinned, step N is In progress at 50% with a static (non-spinning) icon, later steps are Waiting; N=5 is the finished state (all done, 'Recording ready' note, meter 100%). No timers, no toast.",
+   "suggestedPins": {
+    "recordings.processing.partner-onboarding-1014": 2
+   },
+   "suggestedPinReason": "2 shows done, in-progress and waiting rows in one frame. Use one value for every viewport/theme; do not capture without the pin.",
+   "driverChange": "state-drivers.ts is bdd-quality's: for entry.id starting 'recordings.processing.' append '?km-processing-pin=2' to the prototype URL (target.urlFor) before the hash. The app's processing view must read the same query parameter and render the same frozen frame (request to ui-engineer); until it does, app cells for this state stay non-deterministic.",
+   "recaptureNeeded": "recordings.processing.partner-onboarding-1014 for all 8 theme x viewport cells, prototype and app."
+  },
+  "noStrokeScan": {
+   "tool": "tests/fidelity/src/a11y/all-elements-stroke-probe.ts, run as 'node tests/fidelity/src/cli/prototype-probes.ts strokes'",
+   "scope": "every element and ::before/::after in every in-scope state x theme x viewport (same cells as flat/overflow); reports non-zero border/outline, any box-shadow, <hr>, thin-line pseudo-elements. text-decoration is informational only.",
+   "appliesToApp": "The same scanAllStrokes(page) works on the built app through renderCell with the app RenderTarget; wire it into the c13 boundary run so reference and app both report 0."
+  }
+ }
+}

@@ -2,27 +2,27 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 183,
-  "derivedRevision": 183,
+  "sourceRevision": 236,
+  "derivedRevision": 236,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 183
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 236
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-11T08:32:21.264101Z",
+  "last_updated": "2026-11-13T01:02:16.513685Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
-  "changes_completed": 8,
+  "changes_completed": 13,
   "implementation_total": 16,
-  "implementation_completed": 8,
+  "implementation_completed": 13,
   "completion": {
     "primaryCounter": "implementation",
     "implementation": {
-      "completed": 8,
+      "completed": 13,
       "total": 16,
-      "status": "BLOCKED"
+      "status": "IN_PROGRESS"
     },
     "evidence": {
       "status": "NOT_TRACKED",
@@ -49,9 +49,9 @@
     "runId": "hybrid-shell-foundation-20261109T083641Z",
     "primaryCounter": "implementation",
     "implementation": {
-      "completed": 8,
+      "completed": 13,
       "total": 16,
-      "status": "BLOCKED"
+      "status": "IN_PROGRESS"
     },
     "evidence": {
       "status": "PENDING",
@@ -153,53 +153,53 @@
       "status": "PENDING",
       "implementation_status": "PENDING",
       "tasks_total": 3,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Initialize shadcn in packages/ui with Tailwind 4, generated CSS variables and class-based dark mode, kebab-case files",
+      "tasks_done": 2,
+      "last_task_completed": "Add and restyle the components the in-scope screens use to match docs/design prototype components",
+      "next_task_pending": "Agentic UI layer with assistant-ui in packages/ui (stubbed runtime)",
       "blockers": []
     },
     {
       "id": "c09-app-frame-and-navigation",
       "title": "App frame, TanStack Router navigation, theme toggle and Tauri titlebar",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
       "tasks_total": 2,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Build the TanStack Router route tree, app bar, navigation and theme toggle with accessible names, focus and reduced motion",
+      "tasks_done": 2,
+      "last_task_completed": "Build the Tauri custom titlebar",
+      "next_task_pending": null,
       "blockers": []
     },
     {
       "id": "c10-public-screens",
       "title": "Static home, sign-in and join screens matching the prototype",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
       "tasks_total": 3,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Build the home screen",
+      "tasks_done": 3,
+      "last_task_completed": "Build the join screen",
+      "next_task_pending": null,
       "blockers": []
     },
     {
       "id": "c11-app-screens",
       "title": "Static dashboard, agents, recordings, settings and meeting-room layout with media stubbed",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
       "tasks_total": 5,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Build the dashboard screen",
+      "tasks_done": 5,
+      "last_task_completed": "Build the meeting-room layout with media tiles stubbed",
+      "next_task_pending": null,
       "blockers": []
     },
     {
       "id": "c12-flutter-frame-and-screens",
       "title": "Flutter frame and in-scope screens with goldens and accessibility",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
       "tasks_total": 3,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Build the shadcn_flutter app frame with mobile navigation",
+      "tasks_done": 3,
+      "last_task_completed": "Add goldens approved by design-lead plus semantics, focus-order and reduced-motion tests",
+      "next_task_pending": null,
       "blockers": []
     },
     {
@@ -208,20 +208,20 @@
       "status": "PENDING",
       "implementation_status": "PENDING",
       "tasks_total": 10,
-      "tasks_done": 0,
-      "last_task_completed": null,
+      "tasks_done": 5,
+      "last_task_completed": "Perform the authoritative security trace across web, Tauri, Flutter, bridge and PEM and rerun secret scans",
       "next_task_pending": "Run the web fidelity matrix (VS-1)",
       "blockers": []
     },
     {
       "id": "c14-aggregate-commands",
       "title": "Real build, test and lint commands across web, desktop, Rust/BFF and Flutter",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
       "tasks_total": 2,
-      "tasks_done": 0,
-      "last_task_completed": null,
-      "next_task_pending": "Extend root build, test and lint scripts to cover web, desktop, Rust/BFF and Flutter with zero-warning flags",
+      "tasks_done": 2,
+      "last_task_completed": "Set build_health_command, test_command and lint_command in .kbd-orchestrator/project.json",
+      "next_task_pending": null,
       "blockers": []
     },
     {
@@ -238,15 +238,13 @@
     {
       "id": "c16-agentic-core-gates",
       "title": "Agentic-core gates for adopting O",
-      "status": "BLOCKED",
-      "implementation_status": "BLOCKED",
+      "status": "IN_PROGRESS",
+      "implementation_status": "IN_PROGRESS",
       "tasks_total": 7,
       "tasks_done": 6,
       "last_task_completed": "Write the end-to-end Flutter agentic-UI plan (AG-UI transport incl. evaluating community ag_ui, HITL, reconnec",
       "next_task_pending": "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised",
-      "blockers": [
-        "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised"
-      ]
+      "blockers": []
     }
   ],
   "children": {},

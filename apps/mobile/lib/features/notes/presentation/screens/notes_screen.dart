@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../shared/ui/ui.dart';
 import '../providers/notes.dart';
 import '../providers/capabilities.dart';
 
@@ -50,18 +51,23 @@ class _NotesScreenState extends ConsumerState<NotesScreen> {
             children: [
               const Text('A small place for things worth keeping.'),
               const SizedBox(height: 24),
-              TextField(
-                key: const Key('note-title'),
-                controller: controller,
-                decoration: const InputDecoration(
-                  labelText: 'New note',
-                  filled: true,
+              // D-6: visible label above a fill-only field (no floating label,
+              // no outline); the label is also the field's accessible name.
+              const KmFieldLabel('New note'),
+              const SizedBox(height: 6),
+              Semantics(
+                label: 'New note',
+                child: TextField(
+                  key: const Key('note-title'),
+                  controller: controller,
+                  style: kmFieldStyle(context),
+                  decoration: kmFieldDecoration(context),
+                  onSubmitted: (_) {
+                    if (!saving) {
+                      save();
+                    }
+                  },
                 ),
-                onSubmitted: (_) {
-                  if (!saving) {
-                    save();
-                  }
-                },
               ),
               const SizedBox(height: 12),
               FilledButton(

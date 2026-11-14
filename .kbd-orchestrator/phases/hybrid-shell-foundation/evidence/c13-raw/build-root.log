@@ -1,0 +1,45 @@
+$ turbo run build && node tooling/repo-rules/src/run-aggregate.ts build
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running build in 7 packages
+   • Remote caching disabled
+
+@know-meet/design-tokens:generate: cache bypass, force executing f18c83c31a6d85cd
+@know-meet/design-tokens:generate: $ node generator/src/cli.ts
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:generate: unchanged docs/design/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:generate: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/design-tokens:build: cache miss, executing dcd10a9b77be3171
+@know-meet/design-tokens:build: $ node generator/src/cli.ts --check
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:build: unchanged docs/design/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:build: design tokens 1.5.0 (224 keys) -> 8 files
+@know-meet/web:build: cache miss, executing 37596dc808a13b07
+@know-meet/web:build: $ node scripts/build.mjs
+@know-meet/web:build: src/presentation/agents/presentation/use-step-form.ts(23,78): error TS2345: Argument of type '{}' is not assignable to parameter of type 'Readonly<Partial<Record<F, string>>> | (() => Readonly<Partial<Record<F, string>>>)'.
+@know-meet/web:build: src/presentation/components/ui/sidebar/sidebar-context.tsx(129,26): error TS2484: Export declaration conflicts with exported declaration of 'SidebarContextProps'.
+@know-meet/web:build: src/presentation/settings/presentation/use-form-errors.ts(14,56): error TS2345: Argument of type '{}' is not assignable to parameter of type 'Readonly<Partial<Record<K, string | null>>> | (() => Readonly<Partial<Record<K, string | null>>>)'.
+@know-meet/web:build: [ELIFECYCLE] Command failed with exit code 1.
+@know-meet/web#build:  ERROR  command (/Users/gqadonis/Projects/know-me/know-meet/apps/web) /usr/local/bin/pnpm run build exited (1)
+
+ Tasks:    2 successful, 3 total
+Cached:    0 cached, 3 total
+  Time:    3.273s 
+Failed:    @know-meet/web#build
+
+ ERROR  run failed: command  exited (1)
+[ELIFECYCLE] Command failed with exit code 1.
+pnpm run build  5.09s user 1.17s system 158% cpu 3.956 total

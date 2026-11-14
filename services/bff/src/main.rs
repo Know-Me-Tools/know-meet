@@ -1,5 +1,12 @@
 // TJ-ARCH-MOB-001 compliant
-use axum::{Json, Router, extract::State, http::StatusCode, response::IntoResponse, routing::get};
+use axum::{
+    Json, Router,
+    extract::{Request, State},
+    http::{HeaderName, HeaderValue, StatusCode, header},
+    middleware::{self, Next},
+    response::{IntoResponse, Response},
+    routing::get,
+};
 use gen_ui_notes::{Note, NoteError};
 use std::path::PathBuf;
 #[derive(Clone)]
@@ -50,6 +57,32 @@ async fn capabilities() -> Result<Json<Vec<gen_ui_notes::Capability>>, ApiError>
     );
     Ok(Json(registry))
 }
+/// DNS-rebinding guard: the BFF only answers requests addressed to its own loopback origin.
+fn host_allowed(host: &str, port: u16) -> bool {
+    let host = host.to_ascii_lowercase();
+    host == format!("127.0.0.1:{port}") || host == format!("localhost:{port}")
+}
+async fn guard(State(port): State<u16>, request: Request, next: Next) -> Response {
+    let allowed = request
+        .headers()
+        .get(header::HOST)
+        .and_then(|value| value.to_str().ok())
+        .is_some_and(|host| host_allowed(host, port));
+    if !allowed {
+        return (StatusCode::FORBIDDEN, "Host not allowed").into_response();
+    }
+    let mut response = next.run(request).await;
+    let headers = response.headers_mut();
+    headers.insert(
+        header::X_CONTENT_TYPE_OPTIONS,
+        HeaderValue::from_static("nosniff"),
+    );
+    headers.insert(
+        HeaderName::from_static("x-frame-options"),
+        HeaderValue::from_static("DENY"),
+    );
+    response
+}
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let data = PathBuf::from(std::env::var_os("APP_DATA_DIR").unwrap_or_else(|| ".data".into()));
@@ -76,6 +109,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let port = std::env::var("PORT")
         .unwrap_or_else(|_| "3000".to_owned())
         .parse::<u16>()?;
+    let app = app.layer(middleware::from_fn_with_state(port, guard));
     let listener = tokio::net::TcpListener::bind((std::net::Ipv4Addr::LOCALHOST, port)).await?;
     println!("Notes ready at http://{}", listener.local_addr()?);
     axum::serve(listener, app)
@@ -84,4 +118,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
     Ok(())
+}
+#[cfg(test)]
+mod tests {
+    use super::host_allowed;
+    #[test]
+    fn accepts_only_own_loopback_origin() {
+        assert!(host_allowed("127.0.0.1:3000", 3000));
+        assert!(host_allowed("LocalHost:3000", 3000));
+        assert!(!host_allowed("evil.example:3000", 3000));
+        assert!(!host_allowed("127.0.0.1:3001", 3000));
+        assert!(!host_allowed("127.0.0.1", 3000));
+    }
 }

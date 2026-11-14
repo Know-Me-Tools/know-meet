@@ -1,0 +1,12 @@
+Analyzing mobile...                                             
+
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/app/frame/km_app_frame.dart:81:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/features/agents/presentation/widgets/agent_widgets.dart:115:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/features/dashboard/data/fixture_meetings_repository.dart:94:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/features/dashboard/data/fixture_meetings_repository.dart:208:13 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/features/recordings/presentation/providers/recordings_providers.dart:90:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/features/recordings/presentation/providers/recordings_providers.dart:92:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • lib/shared/ui/km_page.dart:159:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block. Try wrapping the statement in a block • test/architecture/import_boundaries_test.dart:75:11 • curly_braces_in_flow_control_structures
+
+8 issues found. (ran in 4.3s)

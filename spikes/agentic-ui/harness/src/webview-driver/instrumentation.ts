@@ -19,6 +19,47 @@ export interface WebviewInstrumentation {
   firstTokenAt: number | null;
   ownNavigation: boolean;
   readonly frames: number[];
+  /**
+   * Event-driven render-complete of the first settle (gate 16.1 follow-up): the first
+   * MutationObserver callback after submit in which km-transcript is no longer aria-busy
+   * (after having been busy) and __spike.snapshot().runStatus is settled. The callback
+   * runs as a microtask of the task that committed the DOM change, so no timer clamping
+   * (hidden pages clamp setTimeout to ~1 s) can delay the timestamp.
+   */
+  renderSettle: { at: number; status: string } | null;
+  sawBusy: boolean;
+  readonly settleWaiters: ((s: { at: number; status: string }) => void)[];
+}
+
+/** Run statuses that count as settled (page-actions.ts KM_SETTLED; repeated: this file runs first). */
+const KM_SETTLED_STATUSES = ["finished", "interrupted", "cancelled", "error"];
+
+function kmObserveSettle(w: WebviewInstrumentation): void {
+  const check = (): void => {
+    if (w.submitAt === null || w.renderSettle !== null) return;
+    const transcript = document.querySelector('[data-testid="km-transcript"]');
+    if (transcript === null) return;
+    if (transcript.getAttribute("aria-busy") === "true") {
+      w.sawBusy = true;
+      return;
+    }
+    // snapshot() only runs while the transcript is not busy, so a streaming run pays nothing.
+    const status = (window as Window & { __spike?: { snapshot(): { runStatus: string } } }).__spike?.snapshot().runStatus;
+    if (status === undefined || !KM_SETTLED_STATUSES.includes(status) || !w.sawBusy) return;
+    w.renderSettle = { at: performance.now(), status };
+    observer.disconnect();
+    for (const resolve of w.settleWaiters.splice(0)) resolve(w.renderSettle);
+  };
+  const observer = new MutationObserver(check);
+  const start = (): void =>
+    observer.observe(document.documentElement, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["aria-busy", "data-status"] });
+  if (document.documentElement === null) document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+}
+
+/** Resolves at the event-driven render-complete of the first settle (see renderSettle). */
+export function kmWaitRenderSettle(w: WebviewInstrumentation): Promise<{ at: number; status: string }> {
+  return w.renderSettle !== null ? Promise.resolve(w.renderSettle) : new Promise((resolve) => w.settleWaiters.push(resolve));
 }
 
 export function kmStartFrameProbe(w: WebviewInstrumentation): void {
@@ -40,6 +81,9 @@ export function kmInstallInstrumentation(): WebviewInstrumentation {
     firstTokenAt: null,
     ownNavigation: false,
     frames: [],
+    renderSettle: null,
+    sawBusy: false,
+    settleWaiters: [],
   };
   Object.defineProperty(window, "__kmXss", {
     value: (id: string) => {
@@ -108,5 +152,6 @@ export function kmInstallInstrumentation(): WebviewInstrumentation {
   const start = (): void => observer.observe(document.documentElement, { subtree: true, childList: true, characterData: true });
   if (document.documentElement === null) document.addEventListener("DOMContentLoaded", start, { once: true });
   else start();
+  kmObserveSettle(w);
   return w;
 }

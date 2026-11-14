@@ -2,25 +2,25 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 183,
-  "derivedRevision": 183,
+  "sourceRevision": 230,
+  "derivedRevision": 230,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 183
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-11T08:32:21.264101Z",
+  "updatedAt": "2026-11-12T14:40:26.886778Z",
   "cursor": [
     "hybrid-shell-foundation",
     "execute",
-    "c16-agentic-core-gates",
-    "16.1"
+    "c13-fidelity-verification-and-evidence",
+    "13.2"
   ],
   "root": {
     "type": "phase",
     "id": "80abee42-ead8-4e6f-b617-e458847775d3",
     "status": "ready",
     "progress": {
-      "done": 8,
+      "done": 13,
       "total": 16
     },
     "children": [
@@ -30,7 +30,7 @@
         "canonicalId": "hybrid-shell-foundation",
         "status": "PENDING",
         "progress": {
-          "done": 8,
+          "done": 13,
           "total": 16
         },
         "children": [
@@ -102,50 +102,50 @@
             "id": "c08-shared-ui-kit",
             "status": "PENDING",
             "progress": {
-              "done": 0,
+              "done": 2,
               "total": 3
             }
           },
           {
             "type": "change",
             "id": "c09-app-frame-and-navigation",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 2,
               "total": 2
             }
           },
           {
             "type": "change",
             "id": "c10-public-screens",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 3,
               "total": 3
             }
           },
           {
             "type": "change",
             "id": "c11-app-screens",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 5,
               "total": 5
             }
           },
           {
             "type": "change",
             "id": "c12-flutter-frame-and-screens",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 3,
               "total": 3
             }
           },
           {
             "type": "change",
             "id": "c13-fidelity-verification-and-evidence",
-            "status": "PENDING",
+            "status": "IN_PROGRESS",
             "progress": {
               "done": 0,
               "total": 10
@@ -154,9 +154,9 @@
           {
             "type": "change",
             "id": "c14-aggregate-commands",
-            "status": "PENDING",
+            "status": "COMPLETE",
             "progress": {
-              "done": 0,
+              "done": 2,
               "total": 2
             }
           },
@@ -172,7 +172,7 @@
           {
             "type": "change",
             "id": "c16-agentic-core-gates",
-            "status": "BLOCKED",
+            "status": "IN_PROGRESS",
             "progress": {
               "done": 6,
               "total": 7

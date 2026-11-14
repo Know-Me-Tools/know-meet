@@ -136,7 +136,18 @@ function invariantLines(key: string, tokens: TokenSet, viewports: readonly numbe
       ];
     case "space":
     case "layout":
+    case "size":
       return [`  static const double ${id} = ${dartNum(px ?? 0)};`];
+    case "window":
+      return [
+        `  /// Adaptive window class: width >= ${value} (DESIGN.md, Adaptive layout).`,
+        `  static const double ${id} = ${dartNum(px ?? 0)};`,
+      ];
+    case "measure":
+      return [
+        `  /// ${value}: multiply by the advance width of "0" in the body font.`,
+        `  static const double ${id}Ch = ${dartNum(Number.parseFloat(value))};`,
+      ];
     case "breakpoint":
       return [
         `  /// Prototype @media (max-width: ${value}).`,

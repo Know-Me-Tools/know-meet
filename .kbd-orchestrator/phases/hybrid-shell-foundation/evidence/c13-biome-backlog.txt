@@ -1,5 +1,5 @@
 $ biome ci --config-path=tooling/biome --error-on-warnings --no-errors-on-unmatched
-apps/desktop/scripts/tauri-cli.ts:38:80 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+apps/desktop/scripts/tauri-cli.ts:38:80 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -17,7 +17,29 @@ apps/desktop/scripts/tauri-cli.ts:38:80 lint/complexity/useLiteralKeys  FIXABLE 
     38 │ ··const·bin·=·typeof·manifest.bin·===·"string"·?·manifest.bin·:·manifest.bin?.["tauri"];
        │                                                                               --     -- 
 
-apps/web/src/infrastructure/http/decode.ts:10:77 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:10:42 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+     9 │ function isNote(value: unknown): value is Note {
+  > 10 │   return isRecord(value) && typeof value["id"] === "string" && typeof value["title"] === "string";
+       │                                          ^^^^
+    11 │ }
+    12 │ 
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+     8  8 │   
+     9  9 │   function isNote(value: unknown): value is Note {
+    10    │ - ··return·isRecord(value)·&&·typeof·value["id"]·===·"string"·&&·typeof·value["title"]·===·"string";
+       10 │ + ··return·isRecord(value)·&&·typeof·value.id·===·"string"·&&·typeof·value["title"]·===·"string";
+    11 11 │   }
+    12 12 │   
+  
+
+apps/web/src/infrastructure/http/decode.ts:10:77 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -39,7 +61,7 @@ apps/web/src/infrastructure/http/decode.ts:10:77 lint/complexity/useLiteralKeys 
     12 12 │   
   
 
-apps/web/src/infrastructure/http/decode.ts:16:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:16:18 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -62,7 +84,7 @@ apps/web/src/infrastructure/http/decode.ts:16:18 lint/complexity/useLiteralKeys 
     18 18 │       typeof value["kind"] === "string"
   
 
-apps/web/src/infrastructure/http/decode.ts:17:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:17:18 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -85,7 +107,7 @@ apps/web/src/infrastructure/http/decode.ts:17:18 lint/complexity/useLiteralKeys 
     19 19 │     );
   
 
-apps/web/src/infrastructure/http/decode.ts:18:18 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:18:18 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -108,7 +130,7 @@ apps/web/src/infrastructure/http/decode.ts:18:18 lint/complexity/useLiteralKeys 
     20 20 │   }
   
 
-apps/web/src/infrastructure/http/decode.ts:41:33 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:41:33 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -131,7 +153,7 @@ apps/web/src/infrastructure/http/decode.ts:41:33 lint/complexity/useLiteralKeys 
     43 43 │     }
   
 
-apps/web/src/infrastructure/http/decode.ts:44:35 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/http/decode.ts:44:35 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -154,29 +176,7 @@ apps/web/src/infrastructure/http/decode.ts:44:35 lint/complexity/useLiteralKeys 
     46 46 │   
   
 
-apps/web/src/infrastructure/http/decode.ts:10:42 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
-
-  ℹ The computed expression can be simplified without the use of a string literal.
-  
-     9 │ function isNote(value: unknown): value is Note {
-  > 10 │   return isRecord(value) && typeof value["id"] === "string" && typeof value["title"] === "string";
-       │                                          ^^^^
-    11 │ }
-    12 │ 
-  
-  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
-  
-  ℹ Unsafe fix: Use a literal key instead.
-  
-     8  8 │   
-     9  9 │   function isNote(value: unknown): value is Note {
-    10    │ - ··return·isRecord(value)·&&·typeof·value["id"]·===·"string"·&&·typeof·value["title"]·===·"string";
-       10 │ + ··return·isRecord(value)·&&·typeof·value.id·===·"string"·&&·typeof·value["title"]·===·"string";
-    11 11 │   }
-    12 12 │   
-  
-
-apps/web/src/infrastructure/theme/theme-adapters.ts:42:20 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+apps/web/src/infrastructure/theme/theme-adapters.ts:42:20 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -199,7 +199,7 @@ apps/web/src/infrastructure/theme/theme-adapters.ts:42:20 lint/complexity/useLit
     44 44 │     };
   
 
-apps/web/tests/restart.mjs:39:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/tests/restart.mjs:39:3 ]8;;https://biomejs.dev/linter/rules/use-template\lint/style/useTemplate]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ℹ Template literals are preferred over string concatenation.
   
@@ -222,7 +222,7 @@ apps/web/tests/restart.mjs:39:3 lint/style/useTemplate  FIXABLE  ━━━━━
      41  41 │   const data = mkdtempSync(join(tmpdir(), "notes-restart-"));
   
 
-apps/web/tests/restart.mjs:59:24 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/tests/restart.mjs:59:24 ]8;;https://biomejs.dev/linter/rules/use-template\lint/style/useTemplate]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ℹ Template literals are preferred over string concatenation.
   
@@ -245,7 +245,7 @@ apps/web/tests/restart.mjs:59:24 lint/style/useTemplate  FIXABLE  ━━━━�
      61  61 │       child.stderr.on("data", (data) => process.stderr.write(data));
   
 
-apps/web/tests/restart.mjs:85:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/tests/restart.mjs:85:19 ]8;;https://biomejs.dev/linter/rules/use-template\lint/style/useTemplate]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ℹ Template literals are preferred over string concatenation.
   
@@ -268,7 +268,7 @@ apps/web/tests/restart.mjs:85:19 lint/style/useTemplate  FIXABLE  ━━━━�
      87  87 │       await page.getByText(process.env.EXPECTED_CAPABILITY, { exact: false }).waitFor();
   
 
-apps/web/tests/restart.mjs:94:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/tests/restart.mjs:94:19 ]8;;https://biomejs.dev/linter/rules/use-template\lint/style/useTemplate]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ℹ Template literals are preferred over string concatenation.
   
@@ -291,7 +291,7 @@ apps/web/tests/restart.mjs:94:19 lint/style/useTemplate  FIXABLE  ━━━━�
      96  96 │     assert.equal((await page.request.get(url + "/api/runtime")).status(), 503);
   
 
-apps/web/tests/restart.mjs:96:40 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/tests/restart.mjs:96:40 ]8;;https://biomejs.dev/linter/rules/use-template\lint/style/useTemplate]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ℹ Template literals are preferred over string concatenation.
   
@@ -314,30 +314,7 @@ apps/web/tests/restart.mjs:96:40 lint/style/useTemplate  FIXABLE  ━━━━�
      98  98 │     await page.getByRole("alert").filter({ hasText: "enter a note" }).waitFor();
   
 
-packages/design-tokens/generator/src/config.ts:107:25 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
-
-  ℹ The computed expression can be simplified without the use of a string literal.
-  
-    105 │   const at = (p: string): string => resolve(dirname(configPath), p);
-    106 │ 
-  > 107 │   const viewports = doc["fluidViewports"];
-        │                         ^^^^^^^^^^^^^^^^
-    108 │   if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
-    109 │     throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
-  
-  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
-  
-  ℹ Unsafe fix: Use a literal key instead.
-  
-    105 105 │     const at = (p: string): string => resolve(dirname(configPath), p);
-    106 106 │   
-    107     │ - ··const·viewports·=·doc["fluidViewports"];
-        107 │ + ··const·viewports·=·doc.fluidViewports;
-    108 108 │     if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
-    109 109 │       throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
-  
-
-packages/design-tokens/generator/src/config.ts:59:23 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+packages/design-tokens/generator/src/config.ts:59:23 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -359,7 +336,7 @@ packages/design-tokens/generator/src/config.ts:59:23 lint/complexity/useLiteralK
      61  61 │       throw new ToolError('config: "fonts.faces" must be a non-empty array', EXIT.usage);
   
 
-packages/design-tokens/generator/src/config.ts:79:15 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+packages/design-tokens/generator/src/config.ts:79:15 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -381,7 +358,7 @@ packages/design-tokens/generator/src/config.ts:79:15 lint/complexity/useLiteralK
      81  81 │     const aliases = brand["valueAliases"] ?? {};
   
 
-packages/design-tokens/generator/src/config.ts:81:25 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+packages/design-tokens/generator/src/config.ts:81:25 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -404,7 +381,30 @@ packages/design-tokens/generator/src/config.ts:81:25 lint/complexity/useLiteralK
      83  83 │       throw new ToolError(
   
 
-packages/design-tokens/generator/src/tokens-json-adapter.ts:125:23 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+packages/design-tokens/generator/src/config.ts:107:25 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
+
+  ℹ The computed expression can be simplified without the use of a string literal.
+  
+    105 │   const at = (p: string): string => resolve(dirname(configPath), p);
+    106 │ 
+  > 107 │   const viewports = doc["fluidViewports"];
+        │                         ^^^^^^^^^^^^^^^^
+    108 │   if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
+    109 │     throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
+  
+  ℹ A literal key is easier to read, and tools such as type checkers and minifiers can understand the property name.
+  
+  ℹ Unsafe fix: Use a literal key instead.
+  
+    105 105 │     const at = (p: string): string => resolve(dirname(configPath), p);
+    106 106 │   
+    107     │ - ··const·viewports·=·doc["fluidViewports"];
+        107 │ + ··const·viewports·=·doc.fluidViewports;
+    108 108 │     if (!Array.isArray(viewports) || !viewports.every((v) => Number.isInteger(v) && v > 0)) {
+    109 109 │       throw new ToolError('config: "fluidViewports" must be positive integer widths', EXIT.usage);
+  
+
+packages/design-tokens/generator/src/tokens-json-adapter.ts:125:23 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -427,7 +427,7 @@ packages/design-tokens/generator/src/tokens-json-adapter.ts:125:23 lint/complexi
     127 127 │   
   
 
-packages/design-tokens/generator/src/tokens-json-adapter.ts:126:20 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+packages/design-tokens/generator/src/tokens-json-adapter.ts:126:20 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -450,7 +450,7 @@ packages/design-tokens/generator/src/tokens-json-adapter.ts:126:20 lint/complexi
     128 128 │     return {
   
 
-tests/fidelity/playwright.config.ts:11:41 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+tests/fidelity/playwright.config.ts:11:41 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -473,7 +473,7 @@ tests/fidelity/playwright.config.ts:11:41 lint/complexity/useLiteralKeys  FIXABL
     13 13 │   const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"] ?? "reports";
   
 
-tests/fidelity/playwright.config.ts:12:30 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+tests/fidelity/playwright.config.ts:12:30 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -495,7 +495,7 @@ tests/fidelity/playwright.config.ts:12:30 lint/complexity/useLiteralKeys  FIXABL
     14 14 │   
   
 
-tests/fidelity/playwright.config.ts:13:34 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+tests/fidelity/playwright.config.ts:13:34 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -518,7 +518,7 @@ tests/fidelity/playwright.config.ts:13:34 lint/complexity/useLiteralKeys  FIXABL
     15 15 │   const shared = { featuresRoot: "../../features", steps: ["steps/**/*.ts"] } as const;
   
 
-tests/fidelity/playwright.config.ts:55:26 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━━━━━━━━
+tests/fidelity/playwright.config.ts:55:26 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -541,7 +541,7 @@ tests/fidelity/playwright.config.ts:55:26 lint/complexity/useLiteralKeys  FIXABL
     57 57 │       : {
   
 
-tests/fidelity/steps/repo-and-rust.steps.ts:69:24 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+tests/fidelity/steps/repo-and-rust.steps.ts:69:24 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -564,7 +564,7 @@ tests/fidelity/steps/repo-and-rust.steps.ts:69:24 lint/complexity/useLiteralKeys
      71  71 │   });
   
 
-tests/fidelity/steps/repo-and-rust.steps.ts:67:15 lint/complexity/useLiteralKeys  FIXABLE  ━━━━━━━━━━
+tests/fidelity/steps/repo-and-rust.steps.ts:67:15 ]8;;https://biomejs.dev/linter/rules/use-literal-keys\lint/complexity/useLiteralKeys]8;;\  FIXABLE  ━━━━━━━━━━
 
   ℹ The computed expression can be simplified without the use of a string literal.
   
@@ -587,7 +587,7 @@ tests/fidelity/steps/repo-and-rust.steps.ts:67:15 lint/complexity/useLiteralKeys
      69  69 │       delete process.env["CARGO_TARGET_DIR"];
   
 
-apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:66:7 lint/suspicious/noDocumentCookie ━━━━━━━━━━
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:66:7 ]8;;https://biomejs.dev/linter/rules/no-document-cookie\lint/suspicious/noDocumentCookie]8;;\ ━━━━━━━━━━
 
   ⚠ Direct assigning to document.cookie is not recommended.
   
@@ -599,10 +599,99 @@ apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:66:7 lint/su
   
   ℹ Writing to document.cookie directly is error-prone, because the value is a string that must be built and escaped by hand. It is also a synchronous API that can slow the page down.
   
-  ℹ Consider using the Cookie Store API.
+  ℹ Consider using the ]8;;https://developer.mozilla.org/en-US/docs/Web/API/CookieStore\Cookie Store API]8;;\.
   
 
-tests/fidelity/steps/web-smoke.steps.ts:76:45 lint/performance/useDomNodeTextContent  FIXABLE  ━━━━━━━━━━
+packages/ui/src/styles/globals.css:71:19 ]8;;https://biomejs.dev/linter/rules/no-important-styles\lint/complexity/noImportantStyles]8;;\  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ⚠ Avoid the use of the !important style.
+  
+    70 │   [hidden] {
+  > 71 │     display: none !important;
+       │                   ^^^^^^^^^^
+    72 │   }
+    73 │ 
+  
+  ℹ This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+  
+  ℹ Unsafe fix: Remove the style.
+  
+    71 │ ····display:·none·!important;
+       │                  ----------- 
+
+packages/ui/src/styles/globals.css:79:53 ]8;;https://biomejs.dev/linter/rules/no-important-styles\lint/complexity/noImportantStyles]8;;\  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ⚠ Avoid the use of the !important style.
+  
+    77 │     *::before,
+    78 │     *::after {
+  > 79 │       animation-duration: var(--dur-reduced-motion) !important;
+       │                                                     ^^^^^^^^^^
+    80 │       animation-iteration-count: 1 !important;
+    81 │       transition-duration: var(--dur-reduced-motion) !important;
+  
+  ℹ This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+  
+  ℹ Unsafe fix: Remove the style.
+  
+    79 │ ······animation-duration:·var(--dur-reduced-motion)·!important;
+       │                                                    ----------- 
+
+packages/ui/src/styles/globals.css:80:36 ]8;;https://biomejs.dev/linter/rules/no-important-styles\lint/complexity/noImportantStyles]8;;\  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ⚠ Avoid the use of the !important style.
+  
+    78 │     *::after {
+    79 │       animation-duration: var(--dur-reduced-motion) !important;
+  > 80 │       animation-iteration-count: 1 !important;
+       │                                    ^^^^^^^^^^
+    81 │       transition-duration: var(--dur-reduced-motion) !important;
+    82 │       scroll-behavior: auto !important;
+  
+  ℹ This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+  
+  ℹ Unsafe fix: Remove the style.
+  
+    80 │ ······animation-iteration-count:·1·!important;
+       │                                   ----------- 
+
+packages/ui/src/styles/globals.css:81:54 ]8;;https://biomejs.dev/linter/rules/no-important-styles\lint/complexity/noImportantStyles]8;;\  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ⚠ Avoid the use of the !important style.
+  
+    79 │       animation-duration: var(--dur-reduced-motion) !important;
+    80 │       animation-iteration-count: 1 !important;
+  > 81 │       transition-duration: var(--dur-reduced-motion) !important;
+       │                                                      ^^^^^^^^^^
+    82 │       scroll-behavior: auto !important;
+    83 │     }
+  
+  ℹ This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+  
+  ℹ Unsafe fix: Remove the style.
+  
+    81 │ ······transition-duration:·var(--dur-reduced-motion)·!important;
+       │                                                     ----------- 
+
+packages/ui/src/styles/globals.css:82:29 ]8;;https://biomejs.dev/linter/rules/no-important-styles\lint/complexity/noImportantStyles]8;;\  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ⚠ Avoid the use of the !important style.
+  
+    80 │       animation-iteration-count: 1 !important;
+    81 │       transition-duration: var(--dur-reduced-motion) !important;
+  > 82 │       scroll-behavior: auto !important;
+       │                             ^^^^^^^^^^
+    83 │     }
+    84 │   }
+  
+  ℹ This style reverses the cascade logic, and precedence is reversed. This could lead to having styles with higher specificity being overridden by styles with lower specificity.
+  
+  ℹ Unsafe fix: Remove the style.
+  
+    82 │ ······scroll-behavior:·auto·!important;
+       │                            ----------- 
+
+tests/fidelity/steps/web-smoke.steps.ts:76:45 ]8;;https://biomejs.dev/linter/rules/use-dom-node-text-content\lint/performance/useDomNodeTextContent]8;;\  FIXABLE  ━━━━━━━━━━
 
   ⚠ innerText is not recommended for reading DOM node text.
   
@@ -627,68 +716,116 @@ tests/fidelity/steps/web-smoke.steps.ts:76:45 lint/performance/useDomNodeTextCon
      78  78 │       observations.set(scenario, observation);
   
 
-apps/web/src/presentation/components/ui/breadcrumb.tsx:54:5 lint/a11y/useFocusableInteractive ━━━━━━━━━━
+apps/mobile/deps-note.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  ✖ The HTML element with the interactive role "link" is not focusable.
+  ✖ File content differs from formatting output
   
-    52 │ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
-    53 │   return (
-  > 54 │     <span
-       │     ^^^^^
-  > 55 │       data-slot="breadcrumb-page"
-        ...
-  > 60 │       {...props}
-  > 61 │     />
-       │     ^^
-    62 │   );
-    63 │ }
-  
-  ℹ A non-interactive HTML element that is not focusable may not be reachable for users that rely on keyboard navigation, even with an added role like "link".
-  
-  ℹ Add a tabIndex attribute to make this element focusable.
-  
-
-apps/web/src/presentation/components/ui/breadcrumb.tsx:56:7 lint/a11y/useSemanticElements ━━━━━━━━━━
-
-  ✖ The elements with this role can be changed to the following elements:
-    <a>
-    <link>
-  
-    54 │     <span
-    55 │       data-slot="breadcrumb-page"
-  > 56 │       role="link"
-       │       ^^^^^^^^^^^
-    57 │       aria-disabled="true"
-    58 │       aria-current="page"
-  
-  ℹ For examples and more information, see WAI-ARIA Roles
-  
-  ℹ Replace with one of these elements:
-  
-  - <a>
-  - <link>
+     6  6 │   3.47.5 (Dart 3.13.4), the `tooling/versions.toml` toolchain pin.
+     7  7 │   
+     8    │ - |·Package····················|·Pin····|·Source·of·the·pin··································································|·Latest·on·pub.dev·(2026-11-09)·|·Licence·····························|
+     9    │ - |·--------------------------·|·------·|·----------------------------------------------------------------------------------·|·------------------------------·|·-----------------------------------·|
+    10    │ - |·`flutter_riverpod`·········|·3.3.1··|·`tooling/versions.toml`·`riverpod`·(3.3.2+·conflicts·with·Freezed's·analyzer·line)·|·3.5.0·(2026-11-06)·············|·MIT·(generator·baseline,·unchanged)·|
+    11    │ - |·`riverpod_annotation`······|·4.0.2··|·`tooling/versions.toml`·coherent·set···············································|·4.0.8··························|·MIT·(unchanged)·····················|
+    12    │ - |·`riverpod_generator`·(dev)·|·4.0.3··|·`tooling/versions.toml`·coherent·set···············································|·4.0.10·························|·MIT·(unchanged)·····················|
+    13    │ - |·`go_router`················|·18.1.3·|·latest,·checked·in·c07·(published·2026-11-04;·needs·Dart·^3.12,·Flutter·>=3.44)····|·18.1.3·························|·BSD-3-Clause························|
+    14    │ - |·`shared_preferences`·······|·2.5.6··|·latest,·checked·in·c07·(published·2026-10-05;·needs·Dart·^3.11,·Flutter·>=3.41)····|·2.5.6··························|·BSD-3-Clause························|
+    15    │ - |·`flutter_lints`·(dev)······|·6.0.0··|·latest,·checked·in·c07·(published·2025-05-27)······································|·6.0.0··························|·BSD-3-Clause························|
+    16    │ - |·`shadcn_flutter`···········|·0.0.55·|·cand-009;·latest,·checked·in·c12·on·2026-11-11·(published·2026-10-01;·needs·Dart·>=3.13,·Flutter·>=3.47)·|·0.0.55·····················|·BSD-3-Clause························|
+    17    │ - |·`flutter_rust_bridge`······|·2.12.0·|·`tooling/versions.toml`·(runtime,·Dart·package·and·codegen·move·together)··········|·not·changed····················|·MIT·(unchanged)·····················|
+        8 │ + |·Package····················|·Pin····|·Source·of·the·pin························································································|·Latest·on·pub.dev·(2026-11-09)·|·Licence·····························|
+        9 │ + |·--------------------------·|·------·|·--------------------------------------------------------------------------------------------------------·|·------------------------------·|·-----------------------------------·|
+       10 │ + |·`flutter_riverpod`·········|·3.3.1··|·`tooling/versions.toml`·`riverpod`·(3.3.2+·conflicts·with·Freezed's·analyzer·line)·······················|·3.5.0·(2026-11-06)·············|·MIT·(generator·baseline,·unchanged)·|
+       11 │ + |·`riverpod_annotation`······|·4.0.2··|·`tooling/versions.toml`·coherent·set·····································································|·4.0.8··························|·MIT·(unchanged)·····················|
+       12 │ + |·`riverpod_generator`·(dev)·|·4.0.3··|·`tooling/versions.toml`·coherent·set·····································································|·4.0.10·························|·MIT·(unchanged)·····················|
+       13 │ + |·`go_router`················|·18.1.3·|·latest,·checked·in·c07·(published·2026-11-04;·needs·Dart·^3.12,·Flutter·>=3.44)··························|·18.1.3·························|·BSD-3-Clause························|
+       14 │ + |·`shared_preferences`·······|·2.5.6··|·latest,·checked·in·c07·(published·2026-10-05;·needs·Dart·^3.11,·Flutter·>=3.41)··························|·2.5.6··························|·BSD-3-Clause························|
+       15 │ + |·`flutter_lints`·(dev)······|·6.0.0··|·latest,·checked·in·c07·(published·2025-05-27)····························································|·6.0.0··························|·BSD-3-Clause························|
+       16 │ + |·`shadcn_flutter`···········|·0.0.55·|·cand-009;·latest,·checked·in·c12·on·2026-11-11·(published·2026-10-01;·needs·Dart·>=3.13,·Flutter·>=3.47)·|·0.0.55·························|·BSD-3-Clause························|
+       17 │ + |·`flutter_rust_bridge`······|·2.12.0·|·`tooling/versions.toml`·(runtime,·Dart·package·and·codegen·move·together)································|·not·changed····················|·MIT·(unchanged)·····················|
+    18 18 │   
+    19 19 │   Riverpod is deliberately behind latest: the newer set is not validated with
   
 
-apps/web/src/presentation/components/ui/button-group.tsx:32:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+apps/mobile/test/a11y/README.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+     6  6 │   **passed** when its test output is recorded there.
+     7  7 │   
+     8    │ - |·Checklist·item·|·How·it·is·covered·|·Where·|
+     9    │ - |·---·|·---·|·---·|
+    10    │ - |·Contrast·≥·AA·in·both·themes·|·`textContrastGuideline`·on·every·in-scope·state,·dark·and·light,·at·375·|·`kmA11yGate`·in·`test/support/km_a11y.dart`,·called·from·each·`test/features/*/*_screens_test.dart`·and·`test/a11y/frame_a11y_test.dart`·|
+    11    │ - |·Every·actionable·element·has·an·accessible·name·|·`labeledTapTargetGuideline`·on·every·state;·kit·controls·require·a·label·(`KmButton.label`,·`KmIconButton.label`)·and·wrap·shadcn·buttons·in·`Semantics(button,·label,·onTap)`·|·`lib/shared/ui/km_button.dart`,·`km_controls.dart`,·`km_page.dart`;·`kmA11yGate`·|
+    12    │ - |·Target·size·≥·24×24·(2.5.8);·44·recommended·|·`MinimumTapTargetGuideline(24×24)`·on·every·state;·primary·controls·are·44px·as·in·the·prototype,·small·buttons·36px,·crumbs·24px·|·`wcagTargetSizeGuideline`·in·`km_a11y.dart`·|
+    13    │ - |·Keyboard·reachable,·logical·order,·no·trap,·visible·focus·|·Tab·order·through·the·frame·(skip·link·→·brand·→·start·→·theme·→·sign·in/account·→·menu),·skip·link·moves·focus·to·main,·Escape·closes·the·account·menu·and·returns·focus·|·`test/a11y/frame_a11y_test.dart`;·`OrderedTraversalPolicy`·in·`lib/app/frame/km_app_frame.dart`·|
+    14    │ - |·Images/media·labelled;·decorative·excluded·|·Brand·mark,·avatars,·glyphs·and·orbs·are·`ExcludeSemantics`;·the·adjacent·text·names·the·person·or·agent.·The·stubbed·player's·control·is·"Play·recording"·|·`km_brand.dart`,·`km_avatar.dart`,·`km_orb.dart`,·recordings·feature·|
+    15    │ - |·Reduced·motion·honoured·|·Every·in-scope·state·settles·with·no·running·animation·under·`disableAnimations`;·the·nav·menu·appears·without·animation;·the·room's·dots·animate·only·when·motion·is·allowed·|·`test/a11y/reduced_motion_test.dart`,·`frame_a11y_test.dart`,·`test/features/meeting_room/meeting_room_screens_test.dart`;·`KmMotion`,·`KmPopIn`,·`KmOrb`·|
+    16    │ - |·Live·regions·announce·status·|·The·room's·"You·joined"·notice·and·field·errors·are·`liveRegion`·semantics·|·`km_fields.dart`,·meeting_room·feature·|
+    17    │ - |·Status·not·by·colour·alone·|·Chips·carry·text;·status·pips·sit·next·to·a·text·label;·the·selected·tab,·segment·and·destination·are·announced·as·selected·|·`km_surfaces.dart`·(`KmChip`),·`km_controls.dart`,·`km_nav_bars.dart`·|
+    18    │ - |·Large·text·does·not·overflow·|·**Not·covered·yet.**·No·test·pumps·a·text·scale·above·1.0;·recorded·as·an·open·item·for·c13·|·—·|
+        8 │ + |·Checklist·item············································|·How·it·is·covered······························································································································································|·Where·····················································································································································|
+        9 │ + |·---------------------------------------------------------·|·------------------------------------------------------------------------------------------------------------------------------------------------------------------------------·|·---------------------------------------------------------------------------------------------------------------------------------------------------------·|
+       10 │ + |·Contrast·≥·AA·in·both·themes······························|·`textContrastGuideline`·on·every·in-scope·state,·dark·and·light,·at·375········································································································|·`kmA11yGate`·in·`test/support/km_a11y.dart`,·called·from·each·`test/features/*/*_screens_test.dart`·and·`test/a11y/frame_a11y_test.dart`··················|
+       11 │ + |·Every·actionable·element·has·an·accessible·name···········|·`labeledTapTargetGuideline`·on·every·state;·kit·controls·require·a·label·(`KmButton.label`,·`KmIconButton.label`)·and·wrap·shadcn·buttons·in·`Semantics(button,·label,·onTap)`·|·`lib/shared/ui/km_button.dart`,·`km_controls.dart`,·`km_page.dart`;·`kmA11yGate`··········································································|
+       12 │ + |·Target·size·≥·24×24·(2.5.8);·44·recommended···············|·`MinimumTapTargetGuideline(24×24)`·on·every·state;·primary·controls·are·44px·as·in·the·prototype,·small·buttons·36px,·crumbs·24px··············································|·`wcagTargetSizeGuideline`·in·`km_a11y.dart`···············································································································|
+       13 │ + |·Keyboard·reachable,·logical·order,·no·trap,·visible·focus·|·Tab·order·through·the·frame·(skip·link·→·brand·→·start·→·theme·→·sign·in/account·→·menu),·skip·link·moves·focus·to·main,·Escape·closes·the·account·menu·and·returns·focus······|·`test/a11y/frame_a11y_test.dart`;·`OrderedTraversalPolicy`·in·`lib/app/frame/km_app_frame.dart`···························································|
+       14 │ + |·Images/media·labelled;·decorative·excluded················|·Brand·mark,·avatars,·glyphs·and·orbs·are·`ExcludeSemantics`;·the·adjacent·text·names·the·person·or·agent.·The·stubbed·player's·control·is·"Play·recording"·····················|·`km_brand.dart`,·`km_avatar.dart`,·`km_orb.dart`,·recordings·feature······················································································|
+       15 │ + |·Reduced·motion·honoured···································|·Every·in-scope·state·settles·with·no·running·animation·under·`disableAnimations`;·the·nav·menu·appears·without·animation;·the·room's·dots·animate·only·when·motion·is·allowed··|·`test/a11y/reduced_motion_test.dart`,·`frame_a11y_test.dart`,·`test/features/meeting_room/meeting_room_screens_test.dart`;·`KmMotion`,·`KmPopIn`,·`KmOrb`·|
+       16 │ + |·Live·regions·announce·status······························|·The·room's·"You·joined"·notice·and·field·errors·are·`liveRegion`·semantics·····································································································|·`km_fields.dart`,·meeting_room·feature····················································································································|
+       17 │ + |·Status·not·by·colour·alone································|·Chips·carry·text;·status·pips·sit·next·to·a·text·label;·the·selected·tab,·segment·and·destination·are·announced·as·selected····················································|·`km_surfaces.dart`·(`KmChip`),·`km_controls.dart`,·`km_nav_bars.dart`·····················································································|
+       18 │ + |·Large·text·does·not·overflow······························|·**Not·covered·yet.**·No·test·pumps·a·text·scale·above·1.0;·recorded·as·an·open·item·for·c13····················································································|·—·························································································································································|
+    19 19 │   
+    20 20 │   Navigation placement (mobile-navigation skill) is checked in the same file:
+  
+
+apps/mobile/test/goldens/README.md format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+    39 39 │   at 375 (oracle) and 768 (tablet check):
+    40 40 │   
+    41    │ - |·File·|·States·|
+    42    │ - |·---·|·---·|
+    43    │ - |·`frame_golden_test.dart`·|·7·`frame.*`·|
+    44    │ - |·`public_golden_test.dart`·|·`index.default`,·5·`auth.*`,·4·`join.*`·|
+    45    │ - |·`dashboard_golden_test.dart`·|·9·`dashboard.*`·(incl.·the·signed-out·gate)·|
+    46    │ - |·`agents_golden_test.dart`·|·14·`agents.*`·|
+    47    │ - |·`recordings_golden_test.dart`·|·11·`recordings.*`·|
+    48    │ - |·`settings_golden_test.dart`·|·17·`settings.*`·|
+    49    │ - |·`meeting_room_golden_test.dart`·|·`meet.room`,·`meet.room-guest`·|
+       41 │ + |·File····························|·States······································|
+       42 │ + |·-------------------------------·|·-------------------------------------------·|
+       43 │ + |·`frame_golden_test.dart`········|·7·`frame.*`·································|
+       44 │ + |·`public_golden_test.dart`·······|·`index.default`,·5·`auth.*`,·4·`join.*`·····|
+       45 │ + |·`dashboard_golden_test.dart`····|·9·`dashboard.*`·(incl.·the·signed-out·gate)·|
+       46 │ + |·`agents_golden_test.dart`·······|·14·`agents.*`·······························|
+       47 │ + |·`recordings_golden_test.dart`···|·11·`recordings.*`···························|
+       48 │ + |·`settings_golden_test.dart`·····|·17·`settings.*`·····························|
+       49 │ + |·`meeting_room_golden_test.dart`·|·`meet.room`,·`meet.room-guest`··············|
+    50 50 │   
+    51 51 │   `coverage_test.dart` (untagged, fast path) fails if an in-scope state has no
+  
+
+apps/web/src/presentation/components/ui/button-group.tsx:31:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━
 
   ✖ The elements with this role can be changed to the following elements:
     <fieldset>
   
-    30 │   return (
-    31 │     <div
-  > 32 │       role="group"
+    29 │   return (
+    30 │     <div
+  > 31 │       role="group"
        │       ^^^^^^^^^^^^
-    33 │       data-slot="button-group"
-    34 │       data-orientation={orientation}
+    32 │       data-slot="button-group"
+    33 │       data-orientation={orientation}
   
-  ℹ For examples and more information, see WAI-ARIA Roles
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
   ℹ Replace with one of these elements:
   
   - <fieldset>
   
 
-apps/web/src/presentation/components/ui/calendar.tsx:115:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+apps/web/src/presentation/components/ui/calendar.tsx:115:9 ]8;;https://biomejs.dev/linter/rules/no-component-hook-factories\lint/correctness/noComponentHookFactories]8;;\ ━━━━━━━━━━
 
   ✖ Do not define component Root inside a function.
   
@@ -702,35 +839,7 @@ apps/web/src/presentation/components/ui/calendar.tsx:115:9 lint/correctness/noCo
   ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
   
 
-apps/web/src/presentation/components/ui/calendar.tsx:118:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
-
-  ✖ Do not define component Chevron inside a function.
-  
-    116 │           return <div data-slot="calendar" ref={rootRef} className={cn(className)} {...props} />;
-    117 │         },
-  > 118 │         Chevron: ({ className, orientation, ...props }) => {
-        │         ^^^^^^^
-    119 │           if (orientation === "left") {
-    120 │             return <ChevronLeftIcon className={cn("size-4", className)} {...props} />;
-  
-  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
-  
-
-apps/web/src/presentation/components/ui/calendar.tsx:129:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
-
-  ✖ Do not define component DayButton inside a function.
-  
-    127 │           return <ChevronDownIcon className={cn("size-4", className)} {...props} />;
-    128 │         },
-  > 129 │         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
-        │         ^^^^^^^^^
-    130 │         WeekNumber: ({ children, ...props }) => {
-    131 │           return (
-  
-  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
-  
-
-apps/web/src/presentation/components/ui/calendar.tsx:130:9 lint/correctness/noComponentHookFactories ━━━━━━━━━━
+apps/web/src/presentation/components/ui/calendar.tsx:130:9 ]8;;https://biomejs.dev/linter/rules/no-component-hook-factories\lint/correctness/noComponentHookFactories]8;;\ ━━━━━━━━━━
 
   ✖ Do not define component WeekNumber inside a function.
   
@@ -744,26 +853,35 @@ apps/web/src/presentation/components/ui/calendar.tsx:130:9 lint/correctness/noCo
   ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
   
 
-apps/web/src/presentation/components/ui/carousel.tsx:147:7 lint/a11y/useSemanticElements ━━━━━━━━━━━
+apps/web/src/presentation/components/ui/calendar.tsx:129:9 ]8;;https://biomejs.dev/linter/rules/no-component-hook-factories\lint/correctness/noComponentHookFactories]8;;\ ━━━━━━━━━━
 
-  ✖ The elements with this role can be changed to the following elements:
-    <fieldset>
+  ✖ Do not define component DayButton inside a function.
   
-    145 │   return (
-    146 │     <div
-  > 147 │       role="group"
-        │       ^^^^^^^^^^^^
-    148 │       aria-roledescription="slide"
-    149 │       data-slot="carousel-item"
+    127 │           return <ChevronDownIcon className={cn("size-4", className)} {...props} />;
+    128 │         },
+  > 129 │         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
+        │         ^^^^^^^^^
+    130 │         WeekNumber: ({ children, ...props }) => {
+    131 │           return (
   
-  ℹ For examples and more information, see WAI-ARIA Roles
-  
-  ℹ Replace with one of these elements:
-  
-  - <fieldset>
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
   
 
-apps/web/src/presentation/components/ui/carousel.tsx:118:9 lint/a11y/useSemanticElements ━━━━━━━━━━━
+apps/web/src/presentation/components/ui/calendar.tsx:118:9 ]8;;https://biomejs.dev/linter/rules/no-component-hook-factories\lint/correctness/noComponentHookFactories]8;;\ ━━━━━━━━━━
+
+  ✖ Do not define component Chevron inside a function.
+  
+    116 │           return <div data-slot="calendar" ref={rootRef} className={cn(className)} {...props} />;
+    117 │         },
+  > 118 │         Chevron: ({ className, orientation, ...props }) => {
+        │         ^^^^^^^
+    119 │           if (orientation === "left") {
+    120 │             return <ChevronLeftIcon className={cn("size-4", className)} {...props} />;
+  
+  ℹ React treats components defined inside functions as completely different on each call, destroying the entire subtree and losing all state. Move it to the module level.
+  
+
+apps/web/src/presentation/components/ui/carousel.tsx:118:9 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━
 
   ✖ The elements with this role can be changed to the following elements:
     <section>
@@ -775,55 +893,33 @@ apps/web/src/presentation/components/ui/carousel.tsx:118:9 lint/a11y/useSemantic
     119 │         aria-roledescription="carousel"
     120 │         data-slot="carousel"
   
-  ℹ For examples and more information, see WAI-ARIA Roles
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
   ℹ Replace with one of these elements:
   
   - <section>
   
 
-apps/web/src/presentation/components/ui/chart.tsx:86:7 lint/security/noDangerouslySetInnerHtml ━━━━━━━━━━
+apps/web/src/presentation/components/ui/carousel.tsx:147:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━
 
-  ✖ Avoid passing content using the dangerouslySetInnerHTML prop.
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
   
-    84 │   return (
-    85 │     <style
-  > 86 │       dangerouslySetInnerHTML={{
-       │       ^^^^^^^^^^^^^^^^^^^^^^^
-    87 │         __html: Object.entries(THEMES)
-    88 │           .map(
+    145 │   return (
+    146 │     <div
+  > 147 │       role="group"
+        │       ^^^^^^^^^^^^
+    148 │       aria-roledescription="slide"
+    149 │       data-slot="carousel-item"
   
-  ⚠ Setting content using code can expose users to cross-site scripting (XSS) attacks
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
-  ℹ Pass the content as JSX children instead. If you must render HTML, sanitize it first.
+  ℹ Replace with one of these elements:
   
-
-apps/web/src/presentation/components/ui/chart.tsx:183:22 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
-
-  ✖ Avoid using the index of an array as key property in an element.
-  
-    181 │             return (
-    182 │               <div
-  > 183 │                 key={index}
-        │                      ^^^^^
-    184 │                 className={cn(
-    185 │                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
-  
-  ℹ This is the source of the key value.
-  
-    174 │         {payload
-    175 │           .filter((item) => item.type !== "none")
-  > 176 │           .map((item, index) => {
-        │                       ^^^^^
-    177 │             const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
-    178 │             const itemConfig = getPayloadConfigFromPayload(config, item, key);
-  
-  ℹ The order of the items may change, and this also affects performances and component state.
-  
-  ℹ Check the React documentation. 
+  - <fieldset>
   
 
-apps/web/src/presentation/components/ui/chart.tsx:281:20 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+apps/web/src/presentation/components/ui/chart.tsx:281:20 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━━
 
   ✖ Avoid using the index of an array as key property in an element.
   
@@ -845,10 +941,51 @@ apps/web/src/presentation/components/ui/chart.tsx:281:20 lint/suspicious/noArray
   
   ℹ The order of the items may change, and this also affects performances and component state.
   
-  ℹ Check the React documentation. 
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
   
 
-apps/web/src/presentation/components/ui/code-block.tsx:147:7 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━
+apps/web/src/presentation/components/ui/chart.tsx:86:7 ]8;;https://biomejs.dev/linter/rules/no-dangerously-set-inner-html\lint/security/noDangerouslySetInnerHtml]8;;\ ━━━━━━━━━━
+
+  ✖ Avoid passing content using the dangerouslySetInnerHTML prop.
+  
+    84 │   return (
+    85 │     <style
+  > 86 │       dangerouslySetInnerHTML={{
+       │       ^^^^^^^^^^^^^^^^^^^^^^^
+    87 │         __html: Object.entries(THEMES)
+    88 │           .map(
+  
+  ⚠ Setting content using code can expose users to cross-site scripting (XSS) attacks
+  
+  ℹ Pass the content as JSX children instead. If you must render HTML, sanitize it first.
+  
+
+apps/web/src/presentation/components/ui/chart.tsx:183:22 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    181 │             return (
+    182 │               <div
+  > 183 │                 key={index}
+        │                      ^^^^^
+    184 │                 className={cn(
+    185 │                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+  
+  ℹ This is the source of the key value.
+  
+    174 │         {payload
+    175 │           .filter((item) => item.type !== "none")
+  > 176 │           .map((item, index) => {
+        │                       ^^^^^
+    177 │             const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
+    178 │             const itemConfig = getPayloadConfigFromPayload(config, item, key);
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
+  
+
+apps/web/src/presentation/components/ui/code-block.tsx:147:7 ]8;;https://biomejs.dev/linter/rules/no-noninteractive-tabindex\lint/a11y/noNoninteractiveTabindex]8;;\  FIXABLE  ━━━━━━━━━━
 
   ✖ The HTML element pre is non-interactive. Do not use tabIndex.
   
@@ -870,7 +1007,7 @@ apps/web/src/presentation/components/ui/code-block.tsx:147:7 lint/a11y/noNoninte
     149 148 │         className={cn(
   
 
-apps/web/src/presentation/components/ui/code-block.tsx:163:57 lint/suspicious/noArrayIndexKey ━━━━━━━━━━
+apps/web/src/presentation/components/ui/code-block.tsx:163:57 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━
 
   ✖ Avoid using the index of an array as key property in an element.
   
@@ -892,129 +1029,67 @@ apps/web/src/presentation/components/ui/code-block.tsx:163:57 lint/suspicious/no
   
   ℹ The order of the items may change, and this also affects performances and component state.
   
-  ℹ Check the React documentation. 
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
   
 
-apps/web/src/presentation/components/ui/field.tsx:190:72 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
-
-  ✖ Avoid using the index of an array as key property in an element.
-  
-    188 │     return (
-    189 │       <ul className="ml-4 flex list-disc flex-col gap-1">
-  > 190 │         {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
-        │                                                                        ^^^^^
-    191 │       </ul>
-    192 │     );
-  
-  ℹ This is the source of the key value.
-  
-    188 │     return (
-    189 │       <ul className="ml-4 flex list-disc flex-col gap-1">
-  > 190 │         {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
-        │                                   ^^^^^
-    191 │       </ul>
-    192 │     );
-  
-  ℹ The order of the items may change, and this also affects performances and component state.
-  
-  ℹ Check the React documentation. 
-  
-
-apps/web/src/presentation/components/ui/field.tsx:74:7 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━
+apps/web/src/presentation/components/ui/input-group.tsx:14:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━
 
   ✖ The elements with this role can be changed to the following elements:
     <fieldset>
   
-    72 │   return (
-    73 │     <div
-  > 74 │       role="group"
+    12 │     <div
+    13 │       data-slot="input-group"
+  > 14 │       role="group"
        │       ^^^^^^^^^^^^
-    75 │       data-slot="field"
-    76 │       data-orientation={orientation}
+    15 │       className={cn(
+    16 │         "group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-in...
   
-  ℹ For examples and more information, see WAI-ARIA Roles
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
   ℹ Replace with one of these elements:
   
   - <fieldset>
   
 
-apps/web/src/presentation/components/ui/field.tsx:184:30 lint/suspicious/noDoubleEquals  FIXABLE  ━━━━━━━━━━
-
-  ✖ Using == may be unsafe if you are relying on type coercion.
-  
-    182 │     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()];
-    183 │ 
-  > 184 │     if (uniqueErrors?.length == 1) {
-        │                              ^^
-    185 │       return uniqueErrors[0]?.message;
-    186 │     }
-  
-  ℹ == is only allowed when comparing against null.
-  
-  ℹ Unsafe fix: Use === instead.
-  
-    184 │ ····if·(uniqueErrors?.length·===·1)·{
-        │                                +     
-
-apps/web/src/presentation/components/ui/input-group.tsx:15:7 lint/a11y/useSemanticElements ━━━━━━━━━━
-
-  ✖ The elements with this role can be changed to the following elements:
-    <fieldset>
-  
-    13 │     <div
-    14 │       data-slot="input-group"
-  > 15 │       role="group"
-       │       ^^^^^^^^^^^^
-    16 │       className={cn(
-    17 │         "group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-in...
-  
-  ℹ For examples and more information, see WAI-ARIA Roles
-  
-  ℹ Replace with one of these elements:
-  
-  - <fieldset>
-  
-
-apps/web/src/presentation/components/ui/input-group.tsx:50:5 lint/a11y/useKeyWithClickEvents ━━━━━━━━━━
+apps/web/src/presentation/components/ui/input-group.tsx:49:5 ]8;;https://biomejs.dev/linter/rules/use-key-with-click-events\lint/a11y/useKeyWithClickEvents]8;;\ ━━━━━━━━━━
 
   ✖ Enforce to have the onClick mouse event with the onKeyUp, the onKeyDown, or the onKeyPress keyboard event.
   
-    48 │ }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
-    49 │   return (
-  > 50 │     <div
+    47 │ }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
+    48 │   return (
+  > 49 │     <div
        │     ^^^^
-  > 51 │       role="group"
+  > 50 │       role="group"
         ...
-  > 61 │       {...props}
-  > 62 │     />
+  > 60 │       {...props}
+  > 61 │     />
        │     ^^
-    63 │   );
-    64 │ }
+    62 │   );
+    63 │ }
   
   ℹ Actions triggered using mouse events should have corresponding keyboard events to account for keyboard-only navigation.
   
 
-apps/web/src/presentation/components/ui/input-group.tsx:51:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+apps/web/src/presentation/components/ui/input-group.tsx:50:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━
 
   ✖ The elements with this role can be changed to the following elements:
     <fieldset>
   
-    49 │   return (
-    50 │     <div
-  > 51 │       role="group"
+    48 │   return (
+    49 │     <div
+  > 50 │       role="group"
        │       ^^^^^^^^^^^^
-    52 │       data-slot="input-group-addon"
-    53 │       data-align={align}
+    51 │       data-slot="input-group-addon"
+    52 │       data-align={align}
   
-  ℹ For examples and more information, see WAI-ARIA Roles
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
   ℹ Replace with one of these elements:
   
   - <fieldset>
   
 
-apps/web/src/presentation/components/ui/input-otp.tsx:75:7 lint/a11y/useSemanticElements ━━━━━━━━━━━
+apps/web/src/presentation/components/ui/input-otp.tsx:75:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━
 
   ✖ The elements with this role can be changed to the following elements:
     <hr>
@@ -1026,58 +1101,14 @@ apps/web/src/presentation/components/ui/input-otp.tsx:75:7 lint/a11y/useSemantic
     76 │       {...props}
     77 │     >
   
-  ℹ For examples and more information, see WAI-ARIA Roles
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
   
   ℹ Replace with one of these elements:
   
   - <hr>
   
 
-apps/web/src/presentation/components/ui/item.tsx:12:7 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━
-
-  ✖ The elements with this role can be changed to the following elements:
-    <ol>
-    <ul>
-  
-    10 │   return (
-    11 │     <div
-  > 12 │       role="list"
-       │       ^^^^^^^^^^^
-    13 │       data-slot="item-group"
-    14 │       className={cn(
-  
-  ℹ For examples and more information, see WAI-ARIA Roles
-  
-  ℹ Replace with one of these elements:
-  
-  - <ol>
-  - <ul>
-  
-
-apps/web/src/presentation/components/ui/label.tsx:8:5 lint/a11y/noLabelWithoutControl ━━━━━━━━━━━━━━
-
-  ✖ A form label must be associated with an input.
-  
-     6 │ function Label({ className, ...props }: React.ComponentProps<"label">) {
-     7 │   return (
-   > 8 │     <label
-       │     ^^^^^^
-   > 9 │       data-slot="label"
-        ...
-  > 14 │       {...props}
-  > 15 │     />
-       │     ^^
-    16 │   );
-    17 │ }
-  
-  ℹ Assistive technologies rely on a label being associated with a control to announce it. Without the association, screen reader users cannot tell what the control is for.
-  
-  ℹ Consider adding an accessible text content to the label element.
-  
-  ℹ Consider adding a "for" or "htmlFor" attribute to the label element or moving the input element to inside the label element.
-  
-
-apps/web/src/presentation/components/ui/pagination.tsx:9:12 lint/a11y/noRedundantRoles  FIXABLE  ━━━━━━━━━━
+apps/web/src/presentation/components/ui/pagination.tsx:9:12 ]8;;https://biomejs.dev/linter/rules/no-redundant-roles\lint/a11y/noRedundantRoles]8;;\  FIXABLE  ━━━━━━━━━━
 
   ✖ Using the role attribute 'navigation' on the 'nav' element is redundant.
   
@@ -1099,7 +1130,7 @@ apps/web/src/presentation/components/ui/pagination.tsx:9:12 lint/a11y/noRedundan
      11  10 │         data-slot="pagination"
   
 
-apps/web/src/presentation/components/ui/scroll-area.tsx:3:13 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+apps/web/src/presentation/components/ui/scroll-area.tsx:3:13 ]8;;https://biomejs.dev/linter/rules/no-unused-imports\lint/correctness/noUnusedImports]8;;\  FIXABLE  ━━━━━━━━━━
 
   ✖ This import is unused.
   
@@ -1121,7 +1152,7 @@ apps/web/src/presentation/components/ui/scroll-area.tsx:3:13 lint/correctness/no
      5  4 │   function ScrollArea({ className, children, ...props }: ScrollAreaPrimitive.Root.Props) {
   
 
-apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:72:31 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:72:31 ]8;;https://biomejs.dev/linter/rules/use-exhaustive-dependencies\lint/correctness/useExhaustiveDependencies]8;;\  FIXABLE  ━━━━━━━━━━
 
   ✖ This hook specifies more dependencies than necessary: setOpenMobile.
   
@@ -1149,7 +1180,7 @@ apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:72:31 lint/c
     74 │ ··},·[isMobile,·setOpen,·setOpenMobile]);
        │                        ---------------   
 
-apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:93:30 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:93:30 ]8;;https://biomejs.dev/linter/rules/use-exhaustive-dependencies\lint/correctness/useExhaustiveDependencies]8;;\  FIXABLE  ━━━━━━━━━━
 
   ✖ This hook specifies more dependencies than necessary: setOpenMobile.
   
@@ -1178,7 +1209,7 @@ apps/web/src/presentation/components/ui/sidebar/sidebar-context.tsx:93:30 lint/c
     103 │ ····[state,·open,·setOpen,·isMobile,·openMobile,·setOpenMobile,·toggleSidebar],
         │                                                  ---------------               
 
-apps/web/src/presentation/components/ui/slider.tsx:42:18 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━
+apps/web/src/presentation/components/ui/slider.tsx:42:18 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━━
 
   ✖ Avoid using the index of an array as key property in an element.
   
@@ -1200,10 +1231,10 @@ apps/web/src/presentation/components/ui/slider.tsx:42:18 lint/suspicious/noArray
   
   ℹ The order of the items may change, and this also affects performances and component state.
   
-  ℹ Check the React documentation. 
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
   
 
-apps/web/src/presentation/lib/highlighter.tsx:96:20 lint/suspicious/noArrayIndexKey ━━━━━━━━━━━━━━━━
+apps/web/src/presentation/lib/highlighter.tsx:96:20 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━━━━━━━
 
   ✖ Avoid using the index of an array as key property in an element.
   
@@ -1225,10 +1256,22 @@ apps/web/src/presentation/lib/highlighter.tsx:96:20 lint/suspicious/noArrayIndex
   
   ℹ The order of the items may change, and this also affects performances and component state.
   
-  ℹ Check the React documentation. 
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
   
 
-apps/web/tests/restart.mjs:99:3 lint/suspicious/noConsole  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+apps/web/src/styles/global.css:8:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Tailwind-specific syntax is disabled.
+  
+    7 │ /* This app's own sources (relative to this file); the kit registers its own. */
+  > 8 │ @source "..";
+      │  ^^^^^^^^^^^^
+    9 │ 
+  
+  ℹ Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+  
+
+apps/web/tests/restart.mjs:99:3 ]8;;https://biomejs.dev/linter/rules/no-console\lint/suspicious/noConsole]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Don't use console.
   
@@ -1252,7 +1295,178 @@ apps/web/tests/restart.mjs:99:3 lint/suspicious/noConsole  FIXABLE  ━━━━
     103 100 │     await browser?.close();
   
 
-tests/fidelity/steps/desktop-bundle.steps.ts:36:62 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━
+packages/ui/src/components/breadcrumb.tsx:59:5 ]8;;https://biomejs.dev/linter/rules/use-focusable-interactive\lint/a11y/useFocusableInteractive]8;;\ ━━━━━━━━━━━━━━━━━━━
+
+  ✖ The HTML element with the interactive role "link" is not focusable.
+  
+    57 │ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
+    58 │   return (
+  > 59 │     <span
+       │     ^^^^^
+  > 60 │       data-slot="breadcrumb-page"
+        ...
+  > 65 │       {...props}
+  > 66 │     />
+       │     ^^
+    67 │   );
+    68 │ }
+  
+  ℹ A non-interactive HTML element that is not focusable may not be reachable for users that rely on keyboard navigation, even with an added role like "link".
+  
+  ℹ Add a tabIndex attribute to make this element focusable.
+  
+
+packages/ui/src/components/breadcrumb.tsx:61:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <a>
+    <link>
+  
+    59 │     <span
+    60 │       data-slot="breadcrumb-page"
+  > 61 │       role="link"
+       │       ^^^^^^^^^^^
+    62 │       aria-disabled="true"
+    63 │       aria-current="page"
+  
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
+  
+  ℹ Replace with one of these elements:
+  
+  - <a>
+  - <link>
+  
+
+packages/ui/src/components/field.tsx:82:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    80 │   return (
+    81 │     <div
+  > 82 │       role="group"
+       │       ^^^^^^^^^^^^
+    83 │       data-slot="field"
+    84 │       data-orientation={orientation}
+  
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
+  
+  ℹ Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+packages/ui/src/components/field.tsx:192:37 ]8;;https://biomejs.dev/linter/rules/no-array-index-key\lint/suspicious/noArrayIndexKey]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Avoid using the index of an array as key property in an element.
+  
+    190 │       <ul className="m-0 ml-s4 flex list-disc flex-col gap-1 p-0">
+    191 │         {uniqueErrors.map((error, index) =>
+  > 192 │           error?.message ? <li key={index}>{error.message}</li> : null,
+        │                                     ^^^^^
+    193 │         )}
+    194 │       </ul>
+  
+  ℹ This is the source of the key value.
+  
+    189 │     return (
+    190 │       <ul className="m-0 ml-s4 flex list-disc flex-col gap-1 p-0">
+  > 191 │         {uniqueErrors.map((error, index) =>
+        │                                   ^^^^^
+    192 │           error?.message ? <li key={index}>{error.message}</li> : null,
+    193 │         )}
+  
+  ℹ The order of the items may change, and this also affects performances and component state.
+  
+  ℹ Check the ]8;;https://reactjs.org/docs/lists-and-keys.html#keys\React documentation]8;;\. 
+  
+
+packages/ui/src/components/item.tsx:18:7 ]8;;https://biomejs.dev/linter/rules/use-semantic-elements\lint/a11y/useSemanticElements]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <ol>
+    <ul>
+  
+    16 │   return (
+    17 │     <div
+  > 18 │       role="list"
+       │       ^^^^^^^^^^^
+    19 │       data-slot="item-group"
+    20 │       className={cn("group/item-group flex w-full flex-col gap-s2", className)}
+  
+  ℹ For examples and more information, see ]8;;https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles\WAI-ARIA Roles]8;;\
+  
+  ℹ Replace with one of these elements:
+  
+  - <ol>
+  - <ul>
+  
+
+packages/ui/src/components/label.tsx:8:5 ]8;;https://biomejs.dev/linter/rules/no-label-without-control\lint/a11y/noLabelWithoutControl]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ A form label must be associated with an input.
+  
+     6 │ function Label({ className, ...props }: React.ComponentProps<"label">) {
+     7 │   return (
+   > 8 │     <label
+       │     ^^^^^^
+   > 9 │       data-slot="label"
+        ...
+  > 14 │       {...props}
+  > 15 │     />
+       │     ^^
+    16 │   );
+    17 │ }
+  
+  ℹ Assistive technologies rely on a label being associated with a control to announce it. Without the association, screen reader users cannot tell what the control is for.
+  
+  ℹ Consider adding an accessible text content to the label element.
+  
+  ℹ Consider adding a "for" or "htmlFor" attribute to the label element or moving the input element to inside the label element.
+  
+
+packages/ui/src/styles/globals.css:21:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Tailwind-specific syntax is disabled.
+  
+    19 │    components don't use `dark:`; the tokens switch by themselves. This variant
+    20 │    only keeps the uncurated components left in apps/web consistent. */
+  > 21 │ @custom-variant dark (&:not(:where([data-theme="light"], [data-theme="light"] *)));
+       │  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    22 │ @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+    23 │ 
+  
+  ℹ Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+  
+
+packages/ui/src/styles/globals.css:14:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Tailwind-specific syntax is disabled.
+  
+    13 │ /* Kit sources (relative to this file). Apps add their own @source if needed. */
+  > 14 │ @source "../components";
+       │  ^^^^^^^^^^^^^^^^^^^^^^^
+    15 │ 
+    16 │ /* Theme switch: tokens are dark on :root and light on [data-theme="light"]
+  
+  ℹ Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+  
+
+packages/ui/src/styles/globals.css:22:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Tailwind-specific syntax is disabled.
+  
+    20 │    only keeps the uncurated components left in apps/web consistent. */
+    21 │ @custom-variant dark (&:not(:where([data-theme="light"], [data-theme="light"] *)));
+  > 22 │ @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+       │  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    23 │ 
+    24 │ @layer base {
+  
+  ℹ Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+  
+
+tests/fidelity/steps/desktop-bundle.steps.ts:36:62 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1268,7 +1482,7 @@ tests/fidelity/steps/desktop-bundle.steps.ts:36:62 lint/correctness/noEmptyPatte
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/fixtures.ts:42:21 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/fixtures.ts:42:21 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1283,7 +1497,7 @@ tests/fidelity/steps/fixtures.ts:42:21 lint/correctness/noEmptyPattern ━━━
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/fixtures.ts:43:18 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/fixtures.ts:43:18 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1299,7 +1513,7 @@ tests/fidelity/steps/fixtures.ts:43:18 lint/correctness/noEmptyPattern ━━━
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/fixtures.ts:44:20 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/fixtures.ts:44:20 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1315,7 +1529,7 @@ tests/fidelity/steps/fixtures.ts:44:20 lint/correctness/noEmptyPattern ━━━
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/fixtures.ts:45:23 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/fixtures.ts:45:23 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1331,7 +1545,7 @@ tests/fidelity/steps/fixtures.ts:45:23 lint/correctness/noEmptyPattern ━━━
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/fixtures.ts:61:20 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/fixtures.ts:61:20 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1347,7 +1561,7 @@ tests/fidelity/steps/fixtures.ts:61:20 lint/correctness/noEmptyPattern ━━━
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/flutter.steps.ts:23:61 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/flutter.steps.ts:23:61 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1363,7 +1577,7 @@ tests/fidelity/steps/flutter.steps.ts:23:61 lint/correctness/noEmptyPattern ━�
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-tests/fidelity/steps/motion.steps.ts:48:58 lint/correctness/noEmptyPattern ━━━━━━━━━━━━━━━━━━━━━━━━━
+tests/fidelity/steps/motion.steps.ts:48:58 ]8;;https://biomejs.dev/linter/rules/no-empty-pattern\lint/correctness/noEmptyPattern]8;;\ ━━━━━━━━━━━━━━━━━━━━━━━━━
 
   ✖ Unexpected empty object pattern.
   
@@ -1379,9 +1593,69 @@ tests/fidelity/steps/motion.steps.ts:48:58 lint/correctness/noEmptyPattern ━�
   ℹ Add the names you want to extract, or remove the pattern.
   
 
-Checked 217 files in 79ms. No fixes applied.
-Found 38 errors.
-Found 2 warnings.
+tooling/repo-rules/src/run-aggregate.ts:1:1 ]8;;https://biomejs.dev/assist/actions/organize-imports\assist/source/organizeImports]8;;\  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+   > 1 │ import { cwdFromArgs } from "./lib/report.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 2 │ import {
+   > 3 │   FLUTTER_PREP,
+   > 4 │   flutterStep,
+   > 5 │   type NativeStep,
+   > 6 │   rootStep,
+   > 7 │   runSteps,
+   > 8 │ } from "./lib/native-steps.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ 
+    10 │ /**
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     1    │ - import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     2    │ - import·{
+     3    │ - ··FLUTTER_PREP,
+     4    │ - ··flutterStep,
+     5    │ - ··type·NativeStep,
+     6    │ - ··rootStep,
+     7    │ - ··runSteps,
+     8    │ - }·from·"./lib/native-steps.ts";
+        1 │ + import·{
+        2 │ + ··FLUTTER_PREP,
+        3 │ + ··flutterStep,
+        4 │ + ··type·NativeStep,
+        5 │ + ··rootStep,
+        6 │ + ··runSteps,
+        7 │ + }·from·"./lib/native-steps.ts";
+        8 │ + import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     9  9 │   
+    10 10 │   /**
+  
+
+tooling/repo-rules/src/run-native-lints.ts:1:1 ]8;;https://biomejs.dev/assist/actions/organize-imports\assist/source/organizeImports]8;;\  FIXABLE  ━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+  > 1 │ import { cwdFromArgs } from "./lib/report.ts";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 2 │ import { FLUTTER_PREP, flutterStep, rootStep, runSteps } from "./lib/native-steps.ts";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    3 │ 
+    4 │ /**
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     1    │ - import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     2    │ - import·{·FLUTTER_PREP,·flutterStep,·rootStep,·runSteps·}·from·"./lib/native-steps.ts";
+        1 │ + import·{·FLUTTER_PREP,·flutterStep,·rootStep,·runSteps·}·from·"./lib/native-steps.ts";
+        2 │ + import·{·cwdFromArgs·}·from·"./lib/report.ts";
+     3  3 │   
+     4  4 │   /**
+  
+
+Checked 229 files in 97ms. No fixes applied.
+Found 48 errors.
+Found 7 warnings.
 Found 26 infos.
 ci ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

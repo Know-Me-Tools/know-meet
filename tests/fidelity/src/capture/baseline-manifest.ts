@@ -39,6 +39,13 @@ export interface ReferenceRecord {
   readonly gating: false;
 }
 
+export interface TreeDigest {
+  readonly path: string;
+  /** sha256 over "<path>\0<sha256>\n" of every file, sorted (support/digests.ts). */
+  readonly digest: string;
+  readonly files: number;
+}
+
 export interface BaselineManifest {
   readonly schema: "know-meet-baselines/v1";
   readonly capturedAt: string;
@@ -46,12 +53,26 @@ export interface BaselineManifest {
   readonly change: "c03-value-scenarios-and-baselines";
   readonly git: { readonly head: string; readonly designTreeStatus: string };
   readonly inventory: { readonly path: string; readonly sha256: string; readonly version: string };
+  /** Design reference the set was captured from, with content digests of each tree. */
+  readonly referenceRevision: {
+    readonly revision: string;
+    readonly decidedAt: string;
+    readonly changeLog: string;
+    readonly prototype: TreeDigest;
+    readonly live: TreeDigest;
+    readonly archivedV1: TreeDigest;
+  };
+  /** The set this one replaces (kept, never deleted). */
+  readonly previousBaselineSet: { readonly path: string; readonly baselineSetDigest: string };
   readonly tokens: { readonly path: string; readonly sha256: string };
   readonly sharedSources: ReadonlyArray<{ readonly path: string; readonly sha256: string }>;
   readonly fonts: ReadonlyArray<{ readonly path: string; readonly sha256: string }>;
   readonly environment: Readonly<Record<string, unknown>>;
   readonly counts: {
     readonly inScopeStates: number;
+    /** inScopeStates x themes x viewports. */
+    readonly matrixCells: number;
+    /** matrixCells minus not-applicable cells. */
     readonly expectedCaptures: number;
     readonly captured: number;
     readonly notApplicable: number;

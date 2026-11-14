@@ -47,13 +47,13 @@
   .row-meta > span { min-width: 0; overflow-wrap: anywhere; }
   .row-meta .mono { color: var(--fg); }
   .row-chev { color: var(--fg-sub); }
-  .pip-hollow { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 2px var(--fg-sub); }
+  .pip-hollow { width: 8px; height: 8px; flex: none; background: var(--fg-sub); } /* filled square = not live, as .state-glyph (RV-32) */
 
   /* wizard */
   .wiz-steps { margin: 0 0 var(--s6); }
   .wiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s6); align-items: start; }
   .wiz-form { display: grid; gap: var(--s5); align-content: start; }
-  .wiz-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s3); margin-top: var(--s6); padding-top: var(--s5); box-shadow: inset 0 1px 0 var(--muted); }
+  .wiz-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s3); margin-top: var(--s6); padding-top: var(--s5); }
   .wiz-foot .btn-row { margin-left: auto; }
   .preview { position: sticky; top: calc(var(--header-h) + var(--s5)); }
   .preview-tile { display: grid; justify-items: center; gap: var(--s3); padding: var(--s6) var(--s4); border-radius: var(--radius-tile); background: var(--bg); text-align: center; }
@@ -66,10 +66,14 @@
   .options-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .option { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s3); align-items: start; padding: var(--s3) var(--s4); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-card); cursor: pointer; transition: background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease; }
   .card .option, .panel .option { background: var(--card); }
-  .option input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--ember-btn); }
-  .option:has(input:checked) { box-shadow: inset 0 0 0 2px var(--ember); }
-  .option:has(input:focus-visible) { outline: 2px solid var(--ember); outline-offset: 2px; }
-  .option input:focus-visible { outline: none; }
+  /* choice card (DESIGN.md): the indicator carries state; checked card fill
+     ember-soft is supplementary; focus fills the whole card */
+  .option input { margin: 2px 0 0; }
+  @media (hover: hover) { .option:not(:has(input:checked)):hover { background: var(--card-hov); } }
+  .option:has(input:checked) { background: var(--ember-soft); }
+  .option:has(input:focus-visible) { background: var(--focus); color: var(--on-focus); }
+  .option:has(input:focus-visible) * { color: inherit; }
+  .option input:focus-visible { background: var(--on-focus); color: var(--focus); }
   @media (hover: hover) { .option:hover { background: var(--card-hov); } }
   .option-copy { display: grid; gap: 2px; min-width: 0; }
   .option-title { font-weight: 600; font-size: var(--text-sm); }
@@ -123,8 +127,7 @@
   .worker-pill code { overflow-wrap: anywhere; }
   .worker-pill .icon-btn { width: 36px; height: 36px; }
   .tab-panel { padding-top: var(--s5); }
-  .tab-panel:focus-visible { outline-offset: 4px; }
-  .danger-panel { box-shadow: inset 0 0 0 1px var(--red-soft); }
+  .danger-panel { box-shadow: none; } /* ring removed (D-6); the danger button and copy identify it */
   .danger-panel h2 { display: flex; align-items: center; gap: var(--s2); }
   .danger-panel h2 .ic { color: var(--red-text); }
   .dirty-note { font-size: var(--text-sm); color: var(--fg-sub); }

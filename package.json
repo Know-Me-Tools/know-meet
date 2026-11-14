@@ -20,13 +20,16 @@
     "lint:biome": "biome ci --config-path=tooling/biome --error-on-warnings --no-errors-on-unmatched",
     "lint:native": "node tooling/repo-rules/src/run-native-lints.ts",
     "typecheck": "turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json",
-    "test": "turbo run test && node --test \"tooling/repo-rules/test/**/*.test.ts\"",
+    "test": "turbo run test && node --test \"tooling/repo-rules/test/**/*.test.ts\" && node tooling/repo-rules/src/run-aggregate.ts test",
+    "test:fidelity": "pnpm --filter @know-meet/fidelity-tests run test:boundary",
+    "verify:bundle-identity": "pnpm --filter @know-meet/fidelity-tests run check:bundle-identity",
     "test:external": "turbo run test:external",
-    "build": "turbo run build",
+    "build": "turbo run build && node tooling/repo-rules/src/run-aggregate.ts build",
     "verify:toolchain": "node tooling/repo-rules/src/check-toolchain.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.6",
+    "@fission-ai/openspec": "2.0.0",
     "@ls-lint/ls-lint": "2.3.2",
     "@types/node": "26.5.1",
     "turbo": "2.11.10",
