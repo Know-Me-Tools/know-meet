@@ -269,6 +269,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # pin returns 3 for "already pinned" (success, nothing to do) and any other non-zero
+          # status for a real failure. set -e does not apply inside a function called from ||,
+          # so the status is checked explicitly; the commit is its last command.
           pin() {
             # Never move the site backwards: if main already pins this commit or a later one, stop.
             local current
@@ -276,7 +279,7 @@ jobs:
             if [[ "$current" =~ ^[0-9a-f]{40}$ ]] && git cat-file -e "$current^{commit}" 2>/dev/null \
               && git merge-base --is-ancestor "$TAG" "$current"; then
               echo "main already pins $current, which contains $TAG; nothing to deploy."
-              return 1
+              return 3
             fi
             if [ "$(grep -c '^    newTag: ' "$OVERLAY")" -ne 2 ]; then
               echo "::error::$OVERLAY must have exactly two newTag lines."
@@ -293,7 +296,7 @@ jobs:
               -m "Pins both release images to $TAG. Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
           }
 
-          pin || exit 0
+          pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               {
@@ -306,7 +309,7 @@ jobs:
             echo "push attempt $attempt was rejected; re-applying on the latest main."
             git fetch -q origin main
             git reset -q --hard origin/main
-            pin || exit 0
+            pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
           done
           echo "::error::could not push the tag pin after 3 attempts."
           exit 1

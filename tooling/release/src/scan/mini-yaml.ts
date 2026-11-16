@@ -4,11 +4,11 @@
  * plain, quoted and block scalars, `{}` and `[]`, JSON-style flow collections and `---`
  * documents. It has no dependency because tooling/ has no package manifest.
  *
- * A quoted scalar may continue on more-indented lines, as `kustomize build` writes long
- * header values; the lines are folded with single spaces, as YAML folds them.
+ * A quoted or plain scalar may continue on more-indented lines, as `kustomize build` writes
+ * long header values; the lines are folded with single spaces, as YAML folds them.
  *
  * It fails closed: anchors, aliases, tags, tab indentation, multi-line flow collections,
- * multi-line plain scalars, backslash line continuations and unexpected indentation throw
+ * continuation lines that look like keys, items or comments, backslash line continuations and unexpected indentation throw
  * a ScanError (exit 2) instead of being guessed.
  * A manifest the scan cannot read is never a pass.
  */
@@ -201,6 +201,36 @@ function readQuotedContinuation(cur: Cursor, first: string, parentIndent: number
   return text.slice(0, end + 1);
 }
 
+/**
+ * A plain scalar that continues on more-indented lines, as `kustomize build` writes long
+ * header values. Returns null when the next line is not a continuation. Continuation lines are
+ * folded with one space; a blank line between them becomes a line break. A continuation line
+ * that looks like a mapping entry, a sequence item or a comment is refused, not guessed.
+ */
+function readPlainContinuation(cur: Cursor, first: string, parentIndent: number): Yaml {
+  const parts = [first];
+  let index = cur.pos;
+  let blanks = 0;
+  while (index < cur.lines.length) {
+    const line = cur.line(index);
+    if (line.trim() === "") {
+      blanks += 1;
+      index += 1;
+      continue;
+    }
+    if (indentOf(line) <= parentIndent) break;
+    const text = line.trim();
+    if (text.startsWith("#") || / #/.test(text) || isSeqItem(text) || /:( |$)/.test(text)) {
+      throw unsupported();
+    }
+    parts.push(blanks > 0 ? `${"\n".repeat(blanks)}${text}` : ` ${text}`);
+    blanks = 0;
+    index += 1;
+    cur.pos = index;
+  }
+  return parts.length === 1 ? null : parts.join("");
+}
+
 /** The value after `key:` (or after `- `), with `cur.pos` already past that line. */
 function parseValue(cur: Cursor, restRaw: string, parentIndent: number): Yaml {
   const rest = stripComment(restRaw);
@@ -216,6 +246,10 @@ function parseValue(cur: Cursor, restRaw: string, parentIndent: number): Yaml {
   if (rest[0] === "|" || rest[0] === ">") return parseBlockScalar(cur, parentIndent);
   if ((rest[0] === "'" || rest[0] === '"') && closingQuote(rest, 0) < 0) {
     return parseScalar(readQuotedContinuation(cur, rest, parentIndent));
+  }
+  if (!"'\"[{&*!".includes(rest[0] ?? "")) {
+    const folded = readPlainContinuation(cur, rest, parentIndent);
+    if (folded !== null) return folded;
   }
   return parseScalar(rest);
 }
