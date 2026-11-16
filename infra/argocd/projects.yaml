@@ -7,6 +7,10 @@
 # platform objects (namespace envoy-gateway-system). Each project accepts only this repository
 # as a source and only the kinds its Application renders today. A pull request that adds any
 # other kind, namespace or repository fails to sync instead of reaching the cluster.
+#
+# Cluster-scoped kinds are also limited by name (Argo CD allows `name` only there): a destination
+# namespace does not constrain a cluster-scoped object, so without `name` the app project could
+# adopt, and later prune, any Namespace (envoy-gateway-system included).
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -22,6 +26,7 @@ spec:
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
+      name: know-meet
   namespaceResourceWhitelist:
     - group: apps
       kind: Deployment
@@ -47,6 +52,7 @@ spec:
   clusterResourceWhitelist:
     - group: gateway.networking.k8s.io
       kind: GatewayClass
+      name: eg
   namespaceResourceWhitelist:
     - group: gateway.networking.k8s.io
       kind: Gateway

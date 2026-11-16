@@ -117,3 +117,6 @@ in project `default` also synced `platform`. In order:
 
 Applying `know-meet.yaml` with project `know-meet` before step 2 makes its sync fail (the
 platform kinds are not allowed), which deletes nothing but stops deploys until step 2.
+Applying `know-meet-platform.yaml` before step 2 makes both Applications claim the same three
+objects (a SharedResourceWarning; their tracking annotation flips on each sync). That too
+deletes nothing, because of `Prune=false`, but keep to the order.
