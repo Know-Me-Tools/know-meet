@@ -1,140 +1,84 @@
 // TJ-ARCH-MOB-001 compliant
-// c11 task 11.5: the meeting-room layout (meet.html #room and #room-guest) with
-// media stubbed. RoomLayout gives this screen <main id="main"> and no app bar; the
-// room owns its chrome: head, participant stage with captions, control bar.
-// Out of scope this phase (D-2): side panels, #start, #lobby, #ended and
-// #processing. Any other hash renders the room for the current session (signed
-// in: full room; signed out: guest room), as meet.html `routeRoom` does for #room.
-import { Toaster, toast } from "@know-meet/ui/components/toast";
-import { focusFillClass } from "@know-meet/ui/lib/focus";
-import { cn } from "@know-meet/ui/lib/utils";
+// /meet (wr05 5.3): the guest meeting room, driven by the RealtimeRoom snapshot. The lobby
+// joins (token, connect, devices) and then opens `/meet#room:<code>`; this screen only reads
+// the room and acts through the use cases. RoomLayout gives it <main id="main"> and no app
+// bar. Views: in the room while connecting, connected or reconnecting (R0-R6); "You were
+// disconnected" when the connection could not be restored (R7); "You left the meeting"
+// after Leave, or with the reload line when this page load never joined (R8; a reload ends
+// the media session). The root carries `km-screen-meet` in every view.
+// Leaving this screen any other way (browser Back, a typed URL) also leaves the meeting, so a
+// guest is never left publishing camera and microphone from a page that no longer shows the room.
+import { isInRoom } from "@know-meet/domain";
 import type * as React from "react";
-import { useCallback, useMemo, useRef, useState } from "react";
-import { useSessionUser } from "../../shared/session";
+import { useEffect, useRef } from "react";
+import { readBlockedDevices, readRoomCode } from "../../guest-meeting/meeting-routes";
+import { useMeetingServices, useRoomSnapshot } from "../../guest-meeting/meeting-services";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { useHashRoute } from "../../shared/use-hash-route";
-import { useSampleWorkspace } from "../../workspace/use-workspace";
-import { buildRoomModel, roomModeFor } from "../application/room-fixture";
-import type { RoomTile } from "../domain/room";
-import { RoomControls } from "./room-controls";
-import { RoomHead } from "./room-head";
-import { RoomTileView, type TileActions } from "./room-tiles";
-import { useStageLayout } from "./use-stage-layout";
+import { type EndReason, RoomEndView } from "./room-end-view";
+import { RoomView } from "./room-view";
 
-/** Applies the local control state (mic, camera, paused dot) to the fixture tiles. */
-function withLocalState(
-  tiles: readonly RoomTile[],
-  micOn: boolean,
-  cameraOn: boolean,
-  pausedDots: ReadonlySet<string>,
-): RoomTile[] {
-  return tiles.map((tile) => {
-    if (tile.kind === "person" && tile.isSelf) return { ...tile, muted: !micOn, cameraOn };
-    if (tile.kind === "dot" && pausedDots.has(tile.id)) return { ...tile, state: "paused" };
-    return tile;
-  });
+function endReason(status: string, reason: string | null, code: string | null): EndReason {
+  if (status === "disconnected") return reason === "connection-lost" ? "disconnected" : "left";
+  return code === null ? "no-meeting" : "reloaded";
 }
 
-function Captions() {
-  return (
-    <div className="flex justify-center px-s5 pb-s3 max-bp768:px-s3 max-bp768:pb-s2">
-      <div
-        aria-live="polite"
-        className="grid min-h-[72px] w-[min(100%,760px)] gap-0.5 rounded-base bg-surface px-s4 py-s3 shadow-(--shadow-card)"
-      >
-        <span className="block font-mono text-11 font-semibold tracking-[0.08em] text-muted-foreground uppercase">
-          Captions
-        </span>
-        <span className="block leading-[1.5]">Waiting for someone to speak…</span>
-      </div>
-    </div>
-  );
+/**
+ * Leaves the meeting when the room screen unmounts while the session is live. The leave is
+ * deferred one tick and cancelled by a re-mount, because React StrictMode (development) runs
+ * cleanup and setup back to back on the same instance. The state is read from the room at that
+ * moment, so a normal Leave (already disconnected) does nothing here.
+ */
+function useLeaveOnUnmount(services: ReturnType<typeof useMeetingServices>): void {
+  const pending = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (pending.current !== null) {
+      clearTimeout(pending.current);
+      pending.current = null;
+    }
+    return () => {
+      pending.current = setTimeout(() => {
+        pending.current = null;
+        const { connection } = services.room.getSnapshot();
+        if (isInRoom(connection) || connection.status === "connecting") {
+          void services.useCases.leave();
+        }
+      }, 0);
+    };
+  }, [services]);
 }
 
 export function MeetingRoomScreen({ themeControl }: { readonly themeControl: React.ReactNode }) {
-  const { view } = useHashRoute();
-  const user = useSessionUser();
-  const { workspace } = useSampleWorkspace();
-  const mode = roomModeFor(view, user !== null);
-  const room = useMemo(
-    () => buildRoomModel(workspace, mode, user?.name ?? null),
-    [workspace, mode, user],
-  );
-  useDocumentTitle(`Know Meet — ${room.title}`);
-
-  const [startedAt] = useState(() => Date.now());
-  const [micOn, setMicOn] = useState(true);
-  const [cameraOn, setCameraOn] = useState(false);
-  const [captionsOn, setCaptionsOn] = useState(true);
-  const [pausedDots, setPausedDots] = useState<ReadonlySet<string>>(() => new Set());
-
-  const tiles = withLocalState(room.tiles, micOn, cameraOn, pausedDots);
-  const stageRef = useRef<HTMLElement>(null);
-  const stage = useStageLayout(stageRef, tiles.length);
-
-  const onUnavailable = useCallback((what: string) => {
-    toast.add({ title: `${what} opens in a later release.`, type: "info" });
-  }, []);
-  const actions = useMemo<TileActions>(
-    () => ({
-      onUnavailable,
-      onToggleDotPause: (id) =>
-        setPausedDots((prev) => {
-          const next = new Set(prev);
-          if (next.has(id)) next.delete(id);
-          else next.add(id);
-          return next;
-        }),
-    }),
-    [onUnavailable],
-  );
+  const services = useMeetingServices();
+  const snapshot = useRoomSnapshot(services.room);
+  const route = useHashRoute();
+  const code = readRoomCode(route);
+  const { connection } = snapshot;
+  const live = code !== null && (isInRoom(connection) || connection.status === "connecting");
+  useDocumentTitle(code === null ? "Meeting — Know Meet" : `Meeting ${code} — Know Meet`);
+  useLeaveOnUnmount(services);
 
   return (
-    <Toaster>
-      <div className="grid h-[calc(100dvh-var(--km-titlebar-h,0px))] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden">
-        <RoomHead
-          room={room}
-          participantCount={tiles.length}
-          onUnavailable={onUnavailable}
+    <div data-testid="km-screen-meet">
+      {live ? (
+        <RoomView
+          services={services}
+          snapshot={snapshot}
+          code={code}
+          blockedAtJoin={readBlockedDevices(route)}
           themeControl={themeControl}
         />
-        <div className="relative grid min-h-0 grid-rows-[minmax(0,1fr)_auto]">
-          <section
-            ref={stageRef}
-            aria-label="Participants"
-            tabIndex={stage.scrollable ? 0 : undefined}
-            className={cn(
-              "min-h-0 overflow-y-auto px-s5 pt-s2 pb-s4 max-bp768:px-s3 max-bp768:pb-s3",
-              stage.scrollable &&
-                cn(
-                  focusFillClass,
-                  "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!",
-                ),
-            )}
-          >
-            <ul
-              className="grid content-start gap-s3"
-              style={{ gridTemplateColumns: `repeat(${stage.columns}, minmax(0, 1fr))` }}
-            >
-              {tiles.map((tile) => (
-                <RoomTileView key={tile.id} tile={tile} actions={actions} />
-              ))}
-            </ul>
-          </section>
-          {captionsOn ? <Captions /> : <div aria-hidden="true" />}
-        </div>
-        <RoomControls
-          mode={room.mode}
-          startedAt={startedAt}
-          micOn={micOn}
-          cameraOn={cameraOn}
-          captionsOn={captionsOn}
-          onToggleMic={() => setMicOn((on) => !on)}
-          onToggleCamera={() => setCameraOn((on) => !on)}
-          onToggleCaptions={() => setCaptionsOn((on) => !on)}
-          onUnavailable={onUnavailable}
+      ) : (
+        <RoomEndView
+          reason={endReason(
+            connection.status,
+            connection.status === "disconnected" ? connection.reason : null,
+            code,
+          )}
+          code={code}
+          themeControl={themeControl}
         />
-      </div>
-    </Toaster>
+      )}
+    </div>
   );
 }

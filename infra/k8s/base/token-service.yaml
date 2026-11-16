@@ -1,0 +1,144 @@
+# Token service (image built from services/livekit/Dockerfile). Runs as 65532:65532,
+# listens on KM_BIND_ADDR and serves GET /api/healthz. The tag is set only by the
+# production overlay's images block.
+#
+# ONE replica, Recreate strategy: room codes and rate-limit buckets live in process memory.
+# A second replica would hold a different code store and a different set of buckets, so a
+# code created on one pod would not resolve on the other, and the effective rate limit would
+# double. Recreate keeps a rollout from running old and new pods side by side for the same
+# reason. A restart drops every stored code; that is the accepted cost of the in-memory store.
+#
+# LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET come from the Secret know-meet-livekit,
+# which the operator creates in the cluster (docs/release runbook). It is not in Git.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: know-meet-token-service
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/name: know-meet-token-service
+    app.kubernetes.io/part-of: know-meet
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: know-meet-token-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: know-meet-token-service
+        app.kubernetes.io/part-of: know-meet
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: token-service
+          image: ghcr.io/know-me-tools/know-meet-token-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: LIVEKIT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: know-meet-livekit
+                  key: LIVEKIT_URL
+            - name: LIVEKIT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: know-meet-livekit
+                  key: LIVEKIT_API_KEY
+            - name: LIVEKIT_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: know-meet-livekit
+                  key: LIVEKIT_API_SECRET
+            # POSTs must carry exactly this Origin.
+            - name: KM_SITE_ORIGIN
+              value: https://meet.know-me.tools
+            # The image default, written out so the probe port and the bind address agree.
+            - name: KM_BIND_ADDR
+              value: 0.0.0.0:8080
+            # One trusted hop: Envoy appends the address of its TCP peer to X-Forwarded-For,
+            # and the service takes the rightmost entry. Unverified on this cluster; see
+            # infra/README.md "Client address".
+            - name: KM_TRUSTED_PROXY_HOPS
+              value: "1"
+            # Same values as tooling/release/compose.yaml (the service defaults). The release
+            # suite's KM_RELEASE_* run inputs must match them.
+            - name: KM_TOKEN_TTL_SECONDS
+              value: "600"
+            - name: KM_RATE_LIMIT_BURST
+              value: "10"
+            - name: KM_RATE_LIMIT_REFILL_SECONDS
+              value: "60"
+            # Meeting-creation limits (security review H1), written out at the service
+            # defaults. POST /api/meetings also spends a second bucket: 3 at once, refilled
+            # fully in 600 s (one per 200 s). A code no token was requested for expires after
+            # 900 s; the first token keeps it for KM_CODE_TTL_SECONDS (default 86400) from
+            # creation. One client address holds at most 5 live codes. tooling/release/
+            # compose.yaml must mirror these, or say why it differs.
+            - name: KM_MEETING_RATE_LIMIT_BURST
+              value: "3"
+            - name: KM_MEETING_RATE_LIMIT_REFILL_SECONDS
+              value: "600"
+            - name: KM_UNUSED_CODE_TTL_SECONDS
+              value: "900"
+            - name: KM_MAX_CODES_PER_CLIENT
+              value: "5"
+          readinessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: know-meet-token-service
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/name: know-meet-token-service
+    app.kubernetes.io/part-of: know-meet
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: know-meet-token-service
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP

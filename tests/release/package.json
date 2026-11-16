@@ -1,0 +1,17 @@
+{
+  "name": "@know-meet/release-tests",
+  "private": true,
+  "description": "Know Meet web-release scenarios WR-1 to WR-5 and WR-8 (Playwright, packaged and hosted projects). Boundary-only: no `test` script, so per-change `turbo run test` never runs it.",
+  "type": "module",
+  "scripts": {
+    "test:packaged": "playwright test -c playwright.config.ts --project=packaged",
+    "test:hosted": "playwright test -c playwright.config.ts --project=hosted",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.0",
+    "@types/node": "26.5.1",
+    "typescript": "7.0.2"
+  }
+}

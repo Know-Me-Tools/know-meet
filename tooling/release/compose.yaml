@@ -1,0 +1,75 @@
+# Local stack for the packaged release run (wr07 task 7.4; used by wr09 task 9.2).
+# Two locally built images plus a test-only proxy that applies the cluster route split:
+#   http://localhost:8080   same-origin entry: /api/* -> token-service, everything else -> web
+#   http://127.0.0.1:8081   the static web image alone, no proxy (WR-3 negative control)
+# The token service is not published; it is reachable only through the proxy.
+#
+# Run from the repository root (no value is written to any file; see tooling/release/README.md):
+#   export LIVEKIT_URL=wss://... LIVEKIT_API_KEY=... LIVEKIT_API_SECRET=...   # from your shell
+#   docker compose -f tooling/release/compose.yaml up --build --detach
+#
+# LIVEKIT_* pass through from the shell by NAME ONLY. Compose never sees a value here, an unset
+# variable stays unset inside the container, and the token service then exits naming it.
+name: know-meet-release
+
+services:
+  web:
+    image: know-meet-web:boundary
+    build:
+      context: ../..
+      dockerfile: apps/web/Dockerfile
+      args:
+        # The public LiveKit URL (not a secret). It is baked into the bundle and its CSP, so it
+        # must be the same URL the token service returns: one variable feeds both.
+        KM_LIVEKIT_URL: ${LIVEKIT_URL:?set LIVEKIT_URL to the public wss:// URL}
+    ports:
+      - "127.0.0.1:8081:8080"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  token-service:
+    image: know-meet-livekit:boundary
+    build:
+      context: ../..
+      dockerfile: services/livekit/Dockerfile
+    environment:
+      # By name only: values come from the shell environment of the person running compose.
+      - LIVEKIT_URL
+      - LIVEKIT_API_KEY
+      - LIVEKIT_API_SECRET
+      # Non-secret run configuration. Defaults are the service defaults, written out so the
+      # release run inputs can be read from one place. Override from the shell if needed.
+      - KM_SITE_ORIGIN=${KM_SITE_ORIGIN:-http://localhost:8080}
+      - KM_TRUSTED_PROXY_HOPS=${KM_TRUSTED_PROXY_HOPS:-1}
+      - KM_TOKEN_TTL_SECONDS=${KM_TOKEN_TTL_SECONDS:-600}
+      - KM_RATE_LIMIT_BURST=${KM_RATE_LIMIT_BURST:-10}
+      - KM_RATE_LIMIT_REFILL_SECONDS=${KM_RATE_LIMIT_REFILL_SECONDS:-60}
+      # Meeting creation (security review H1): its own stricter bucket, a per-address cap on live
+      # codes, and a short lifetime for codes no token was ever issued for.
+      - KM_MEETING_RATE_LIMIT_BURST=${KM_MEETING_RATE_LIMIT_BURST:-3}
+      - KM_MEETING_RATE_LIMIT_REFILL_SECONDS=${KM_MEETING_RATE_LIMIT_REFILL_SECONDS:-600}
+      - KM_UNUSED_CODE_TTL_SECONDS=${KM_UNUSED_CODE_TTL_SECONDS:-900}
+      - KM_MAX_CODES_PER_CLIENT=${KM_MAX_CODES_PER_CLIENT:-5}
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  proxy:
+    # nginx-unprivileged: official nginx build that runs as a non-root user and listens on 8080.
+    # Pinned by tag and by the multi-arch index digest Docker Hub reports for that tag.
+    image: nginxinc/nginx-unprivileged:1.30.6-alpine-slim@sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./proxy/nginx-split.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - web
+      - token-service
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

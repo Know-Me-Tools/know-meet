@@ -17,6 +17,8 @@ import type { WidthClass } from "./width-class";
 interface AppBarProps {
   readonly widthClass: WidthClass;
   readonly withNav: boolean;
+  /** Brand and theme toggle only: no Start meeting link, no sign-in or account (hosted build). */
+  readonly minimal: boolean;
 }
 
 function StartMeeting({ iconOnly }: { readonly iconOnly: boolean }) {
@@ -36,16 +38,16 @@ function StartMeeting({ iconOnly }: { readonly iconOnly: boolean }) {
   );
 }
 
-export function AppBar({ widthClass, withNav }: AppBarProps) {
+export function AppBar({ widthClass, withNav, minimal }: AppBarProps) {
   return (
     <header data-testid="km-appbar" className="km-appbar">
       <div className="km-appbar-inner">
         <Brand />
         {withNav ? <PrimaryNav widthClass={widthClass} /> : null}
         <div className="ml-auto flex flex-none items-center gap-s2">
-          <StartMeeting iconOnly={widthClass === "bar"} />
+          {minimal ? null : <StartMeeting iconOnly={widthClass === "bar"} />}
           <ThemeToggle />
-          <AccountMenu />
+          {minimal ? null : <AccountMenu />}
         </div>
       </div>
     </header>

@@ -9,6 +9,7 @@ import { registerNoteEntities } from "../infrastructure/entities/register-note-e
 import { createStaticCapabilitySource } from "../infrastructure/http/http-capability-source";
 import { loadPlatformAdapters } from "../infrastructure/platform/platform-adapters";
 import { createLocalStorageSession } from "../infrastructure/session/local-session";
+import { createSignedOutSession } from "../infrastructure/session/signed-out-session";
 import {
   createDocumentThemeApplier,
   createLocalStorageThemePreference,
@@ -16,6 +17,8 @@ import {
   subscribeToStoredTheme,
 } from "../infrastructure/theme/theme-adapters";
 import type { AppServices } from "./app-services";
+import { HOSTED_BUILD } from "./build-mode";
+import { composeMeeting } from "./compose-meeting";
 import { createWidthClassStore } from "./frame/width-class-store";
 
 /**
@@ -45,7 +48,9 @@ export async function composeApp(view: Window): Promise<AppServices> {
   return {
     theme,
     notes: { createNote: (title) => feed.create(title), draftStore: createNoteDraftStore() },
-    session: createLocalStorageSession(view),
+    // The hosted build has no sign-in: km-auth is never read, so it changes nothing visible.
+    session: HOSTED_BUILD ? createSignedOutSession() : createLocalStorageSession(view),
     layout,
+    meeting: composeMeeting(),
   };
 }

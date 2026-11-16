@@ -1,0 +1,85 @@
+# Static web bundle on static-web-server (image built from apps/web/Dockerfile).
+# The image runs as 10001:10001, listens on 8080 and serves GET /health (SERVER_HEALTH=true).
+# The tag is set only by the production overlay's images block.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: know-meet-web
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/name: know-meet-web
+    app.kubernetes.io/part-of: know-meet
+spec:
+  # Stateless: two replicas so a rollout or a node drain keeps the site up.
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: know-meet-web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: know-meet-web
+        app.kubernetes.io/part-of: know-meet
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: web
+          image: ghcr.io/know-me-tools/know-meet-web
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: know-meet-web
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/name: know-meet-web
+    app.kubernetes.io/part-of: know-meet
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: know-meet-web
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP

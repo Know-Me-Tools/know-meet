@@ -1,0 +1,315 @@
+# Image lane (wr07 task 7.3). Builds the two release images from the repository root, scans them
+# for secrets, then pushes them to GHCR tagged with the full commit SHA and records both digests.
+#
+#   ghcr.io/know-me-tools/know-meet-web            apps/web/Dockerfile        (port 8080)
+#   ghcr.io/know-me-tools/know-meet-token-service  services/livekit/Dockerfile
+#
+# Tags are the commit SHA only: no `latest`, never reused. If a tag already exists the run fails
+# before anything is pushed. Credentials: the workflow token for GHCR is the only one. No
+# LIVEKIT_* value exists in this workflow; the scan below uses per-run random stand-ins, so the
+# comparison against the real LiveKit values runs at the release boundary (wr09 task 9.1).
+#
+# Operator inputs (repository settings):
+#   variable KM_LIVEKIT_URL   public wss:// LiveKit URL, baked into the web bundle and its CSP.
+#                             A variable, not a secret.
+#   after the first push      make both GHCR packages public (or add a cluster pull secret).
+#
+# Reading the result:
+#   - job outputs `tag`, `web-digest`, `token-service-digest`, `digests`
+#   - the job summary lists both pinned references
+#   - artifact `image-digests-<sha>` holds image-digests.json and the scan report
+#
+# Continuous deployment (operator decision 2026-11-16): after a push to main builds and pushes
+# both images, the `deploy` job sets the two `newTag` lines of the production overlay to that
+# commit SHA and pushes one commit to main. Argo CD syncs main automatically, so every main
+# check-in reaches https://meet.know-me.tools. The bot commit touches infra/** only, and a push
+# made with the workflow token starts no workflow, so it never loops.
+name: images
+
+on:
+  push:
+    branches: [main]
+    # Manifest, doc and planning-only merges do not need new images. Pinning the tag in the
+    # overlay (infra/**) must not itself trigger a build.
+    paths-ignore:
+      - "infra/**"
+      - "docs/**"
+      - "openspec/**"
+      - "**/*.md"
+      - ".kbd-orchestrator/**"
+      - ".agent-team/**"
+  workflow_dispatch:
+
+concurrency:
+  group: images-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  WEB_IMAGE: ghcr.io/know-me-tools/know-meet-web
+  TOKEN_IMAGE: ghcr.io/know-me-tools/know-meet-token-service
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  images:
+    name: build, scan, push, record digests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      tag: ${{ github.sha }}
+      web-digest: ${{ steps.push.outputs.web-digest }}
+      token-service-digest: ${{ steps.push.outputs.token-service-digest }}
+      digests: ${{ steps.push.outputs.digests }}
+    steps:
+      - name: Require the public LiveKit URL
+        env:
+          KM_LIVEKIT_URL: ${{ vars.KM_LIVEKIT_URL }}
+        run: |
+          if ! printf '%s' "$KM_LIVEKIT_URL" | grep -Eq '^wss://[A-Za-z0-9.-]+(:[0-9]+)?$'; then
+            echo "::error::Repository variable KM_LIVEKIT_URL is missing or is not a bare wss://host[:port] origin."
+            exit 1
+          fi
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: package.json
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Built into the local daemon first (load, no push) so the scan sees exactly what is pushed.
+      # The source label links each package to this repository, which lets the workflow token push.
+      - name: Build web image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          build-args: |
+            KM_LIVEKIT_URL=${{ vars.KM_LIVEKIT_URL }}
+          tags: ${{ env.WEB_IMAGE }}:${{ env.IMAGE_TAG }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          load: true
+          push: false
+          provenance: false
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,scope=web,mode=max
+
+      - name: Build token service image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: services/livekit/Dockerfile
+          tags: ${{ env.TOKEN_IMAGE }}:${{ env.IMAGE_TAG }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          load: true
+          push: false
+          provenance: false
+          cache-from: type=gha,scope=token-service
+          cache-to: type=gha,scope=token-service,mode=max
+
+      - name: Both images declare a non-root user
+        run: |
+          for ref in "$WEB_IMAGE:$IMAGE_TAG" "$TOKEN_IMAGE:$IMAGE_TAG"; do
+            user="$(docker image inspect --format '{{.Config.User}}' "$ref")"
+            case "$user" in
+              ""|root|0|0:*|root:*)
+                echo "::error::$ref runs as root (Config.User is '$user')."
+                exit 1
+                ;;
+            esac
+            echo "$ref runs as $user"
+          done
+
+      # Contract: tests/release/scan-contract.md. The scan reads LIVEKIT_* values from its own
+      # environment; here they are random per-run stand-ins that never leave this step. The
+      # empty bundle and manifest inputs are explicit: the bundle is inside the web image layers,
+      # and rendered manifests are scanned at the boundary run (wr09 task 9.1).
+      - name: Artifact scan and its negative control
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/scan"
+          mkdir -p "$work/empty-bundle" "$work/control" "$RUNNER_TEMP/image-digests"
+          : > "$work/empty-manifests.yaml"
+          scan() {
+            node tooling/release/src/scan-artifacts.ts --bundle "$work/empty-bundle" --manifests "$work/empty-manifests.yaml" "$@"
+          }
+
+          LIVEKIT_API_KEY="$(openssl rand -hex 8)" LIVEKIT_API_SECRET="$(openssl rand -hex 20)" \
+            scan --repo . \
+              --image "$WEB_IMAGE:$IMAGE_TAG" --image "$TOKEN_IMAGE:$IMAGE_TAG" \
+              --json "$RUNNER_TEMP/image-digests/scan-report.json"
+
+          # The scan must fail on an image that carries a planted dummy secret.
+          dummy="$(openssl rand -hex 20)"
+          printf 'FROM scratch\nENV LIVEKIT_API_SECRET=%s\n' "$dummy" \
+            | docker build --tag km-scan-control:ci --file - "$work/control"
+          set +e
+          LIVEKIT_API_SECRET="$dummy" scan --repo . --image km-scan-control:ci \
+            > "$work/control.out" 2> "$work/control.err"
+          code=$?
+          set -e
+          docker image rm km-scan-control:ci
+          if [ "$code" -ne 1 ]; then
+            echo "::error::scan negative control exited $code, expected 1."
+            exit 1
+          fi
+          if grep -F -q -- "$dummy" "$work/control.out" "$work/control.err"; then
+            echo "::error::scan negative control output contains the planted value."
+            exit 1
+          fi
+
+      # Both tags are checked before either is pushed, so a conflict never leaves one image behind.
+      - name: Push images and record digests
+        id: push
+        run: |
+          set -euo pipefail
+          web_ref="$WEB_IMAGE:$IMAGE_TAG"
+          token_ref="$TOKEN_IMAGE:$IMAGE_TAG"
+          for ref in "$web_ref" "$token_ref"; do
+            if docker buildx imagetools inspect "$ref" > /dev/null 2>&1; then
+              echo "::error::$ref already exists. Tags are immutable; push a new commit."
+              exit 1
+            fi
+          done
+
+          push_digest() {
+            local ref="$1" out digest
+            out="$(docker push "$ref")"
+            printf '%s\n' "$out" >&2
+            digest="$(printf '%s\n' "$out" | sed -n 's/.*digest: \(sha256:[0-9a-f]\{64\}\).*/\1/p' | tail -n 1)"
+            if [ -z "$digest" ]; then
+              echo "::error::no digest in the push output for $ref"
+              exit 1
+            fi
+            docker buildx imagetools inspect "${ref%:*}@$digest" > /dev/null
+            printf '%s' "$digest"
+          }
+          web_digest="$(push_digest "$web_ref")"
+          token_digest="$(push_digest "$token_ref")"
+
+          {
+            echo "web-digest=$web_digest"
+            echo "token-service-digest=$token_digest"
+            echo "digests=know-meet-web=$web_digest,know-meet-token-service=$token_digest"
+          } >> "$GITHUB_OUTPUT"
+
+          jq -n \
+            --arg tag "$IMAGE_TAG" \
+            --arg run "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --arg webImage "$WEB_IMAGE" --arg webDigest "$web_digest" \
+            --arg tokenImage "$TOKEN_IMAGE" --arg tokenDigest "$token_digest" \
+            '{tag: $tag, run: $run, images: {
+               "know-meet-web": {image: $webImage, digest: $webDigest, ref: "\($webImage)@\($webDigest)"},
+               "know-meet-token-service": {image: $tokenImage, digest: $tokenDigest, ref: "\($tokenImage)@\($tokenDigest)"}}}' \
+            > "$RUNNER_TEMP/image-digests/image-digests.json"
+
+          {
+            echo "### Images for \`$IMAGE_TAG\`"
+            echo
+            echo "Overlay tag (both images): \`$IMAGE_TAG\`"
+            echo
+            echo '```text'
+            echo "$WEB_IMAGE@$web_digest"
+            echo "$TOKEN_IMAGE@$token_digest"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: image-digests-${{ github.sha }}
+          path: ${{ runner.temp }}/image-digests/
+          if-no-files-found: error
+          retention-days: 90
+
+  # Continuous deployment: pin both images to this commit on main. Argo CD syncs main.
+  deploy:
+    name: pin the release tag on main (Argo CD deploys it)
+    needs: images
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    concurrency:
+      group: deploy-main
+      cancel-in-progress: false
+    env:
+      TAG: ${{ needs.images.outputs.tag }}
+      OVERLAY: infra/k8s/overlays/production/kustomization.yaml
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Pin both images and push to main
+        run: |
+          set -euo pipefail
+          if ! [[ "$TAG" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::image tag '$TAG' is not a full commit SHA."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # pin returns 3 for "already pinned" (success, nothing to do) and any other non-zero
+          # status for a real failure. set -e does not apply inside a function called from ||,
+          # so the status is checked explicitly; the commit is its last command.
+          pin() {
+            # Never move the site backwards: if main already pins this commit or a later one, stop.
+            local current
+            current="$(awk '/name: ghcr.io\/know-me-tools\/know-meet-web$/ { getline; print $2 }' "$OVERLAY")"
+            if [[ "$current" =~ ^[0-9a-f]{40}$ ]] && git cat-file -e "$current^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$TAG" "$current"; then
+              echo "main already pins $current, which contains $TAG; nothing to deploy."
+              return 3
+            fi
+            if [ "$(grep -c '^    newTag: ' "$OVERLAY")" -ne 2 ]; then
+              echo "::error::$OVERLAY must have exactly two newTag lines."
+              exit 1
+            fi
+            sed -E -i "s#^(    newTag: ).*\$#\1$TAG#" "$OVERLAY"
+            # The commit may change the two newTag lines and nothing else.
+            if [ "$(git diff --numstat)" != "$(printf '2\t2\t%s' "$OVERLAY")" ]; then
+              echo "::error::the tag edit changed more than the two newTag lines:"
+              git diff
+              exit 1
+            fi
+            git commit -q -am "chore(release): deploy ${TAG:0:12} to meet.know-me.tools" \
+              -m "Pins both release images to $TAG. Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+          }
+
+          pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              {
+                echo "### Deployed \`$TAG\`"
+                echo
+                echo "Commit \`$(git rev-parse HEAD)\` pins both images on main. Argo CD syncs it to https://meet.know-me.tools."
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "push attempt $attempt was rejected; re-applying on the latest main."
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
+          done
+          echo "::error::could not push the tag pin after 3 attempts."
+          exit 1

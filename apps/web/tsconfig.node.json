@@ -8,6 +8,7 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
+    "lib": ["es2024", "dom"],
     "types": ["node"]
   },
   "include": ["vite.config.ts", "scripts/**/*.ts", "tests/unit/**/*.ts"]

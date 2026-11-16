@@ -159,4 +159,90 @@ export const BIOME_FIXTURES: readonly RuleFixture[] = [
     },
     mustFail: false,
   },
+  {
+    id: "biome-livekit-server-sdk-in-domain",
+    checker: "biome",
+    files: {
+      "packages/domain/src/token.ts":
+        'import { AccessToken } from "livekit-server-sdk";\n\nexport const make = AccessToken;\n',
+    },
+    mustFail: true,
+    expectPath: "packages/domain/src/token.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-realtime-in-application",
+    checker: "biome",
+    files: {
+      "packages/application/src/join.ts":
+        'import { connect } from "@know-meet/realtime";\n\nexport const join = connect;\n',
+    },
+    mustFail: true,
+    expectPath: "packages/application/src/join.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-apps-in-domain",
+    checker: "biome",
+    files: {
+      "packages/domain/src/room.ts":
+        'import { shell } from "../../../apps/web/src/main.ts";\n\nexport const room = shell;\n',
+    },
+    mustFail: true,
+    expectPath: "packages/domain/src/room.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-react-in-realtime",
+    checker: "biome",
+    files: {
+      "packages/realtime/src/use-room.ts":
+        'import { useState } from "react";\n\nexport const useRoom = useState;\n',
+    },
+    mustFail: true,
+    expectPath: "packages/realtime/src/use-room.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-apps-in-realtime",
+    checker: "biome",
+    files: {
+      "packages/realtime/src/adapter.ts":
+        'import { shell } from "../../../apps/web/src/main.ts";\n\nexport const adapter = shell;\n',
+    },
+    mustFail: true,
+    expectPath: "packages/realtime/src/adapter.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-livekit-in-realtime-ok",
+    checker: "biome",
+    files: {
+      "packages/realtime/src/adapter.ts":
+        'import { Room } from "livekit-client";\n\nexport const make = (): Room => new Room();\n',
+    },
+    mustFail: false,
+  },
+  {
+    id: "biome-livekit-in-web-presentation",
+    checker: "biome",
+    files: {
+      "apps/web/src/presentation/room/room-view.ts":
+        'import { Room } from "livekit-client";\n\nexport const make = (): Room => new Room();\n',
+    },
+    mustFail: true,
+    expectPath: "apps/web/src/presentation/room/room-view.ts",
+    expectText: "noRestrictedImports",
+  },
+  {
+    id: "biome-livekit-in-ui-package",
+    checker: "biome",
+    files: {
+      "packages/ui/src/components/tile.ts":
+        'import { Room } from "livekit-client";\n\nexport const make = (): Room => new Room();\n',
+    },
+    mustFail: true,
+    expectPath: "packages/ui/src/components/tile.ts",
+    expectText: "noRestrictedImports",
+  },
 ];

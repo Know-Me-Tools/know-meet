@@ -1,9 +1,18 @@
 // TJ-ARCH-MOB-001 compliant
-import type { ThemeStore } from "@know-meet/application";
+import type { MeetingUseCases, RealtimeRoom, ThemeStore } from "@know-meet/application";
 import { createContext, use } from "react";
 import type { SessionSource } from "../infrastructure/session/local-session";
 import type { NotesServices } from "../presentation/notes/notes-services";
 import type { WidthClassStore } from "./frame/width-class-store";
+
+/**
+ * Meetings: `useCases` starts, joins, leaves and mutes; `room` is read through `getSnapshot`
+ * and `subscribe` (`useSyncExternalStore`) and bound to media elements with `attachMedia`.
+ */
+export interface MeetingServices {
+  readonly useCases: MeetingUseCases;
+  readonly room: RealtimeRoom;
+}
 
 /** Everything the composition root wires: use cases and stores, never raw adapters. */
 export interface AppServices {
@@ -13,6 +22,7 @@ export interface AppServices {
   readonly session: SessionSource;
   /** Current adaptive width class (bar / rail / inline) and its morph. */
   readonly layout: WidthClassStore;
+  readonly meeting: MeetingServices;
 }
 
 export const AppServicesContext = createContext<AppServices | null>(null);

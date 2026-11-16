@@ -1,5 +1,25 @@
 export { createCapabilityCatalog } from "./capabilities/capability-catalog.ts";
 export {
+  createMeetingUseCases,
+  type JoinError,
+  type JoinedMeeting,
+  type JoinRequest,
+  type MeetingPorts,
+  type MeetingUseCases,
+} from "./meeting/meeting-use-cases.ts";
+export type {
+  ConnectError,
+  CreateMeetingError,
+  MediaError,
+  MediaTarget,
+  RealtimeRoom,
+  RoomCredentials,
+  RoomSnapshot,
+  TokenIssuer,
+  TokenRequest,
+  TokenRequestError,
+} from "./meeting/ports.ts";
+export {
   createNoteDraftStore,
   type NoteDraftState,
   type NoteDraftStore,

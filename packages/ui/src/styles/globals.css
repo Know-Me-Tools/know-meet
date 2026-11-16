@@ -13,6 +13,8 @@
 
 /* Kit sources (relative to this file). Apps add their own @source if needed. */
 @source "../components";
+/* Shared class strings (for example lib/field-control.ts) live outside components/. */
+@source "../lib";
 
 /* Theme switch: tokens are dark on :root and light on [data-theme="light"]
    (apps/web theme-adapters, storage key km-meet-theme). `dark:` therefore means

@@ -1,0 +1,8 @@
+# Shared platform objects: the GatewayClass, the Gateway and its certificate. Pulled into
+# the production overlay as a directory resource, so one Argo CD Application syncs them.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - gateway-class.yaml
+  - certificate.yaml
+  - gateway.yaml

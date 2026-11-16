@@ -7,6 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "build": "node scripts/build.mjs",
+    "build:hosted": "node scripts/build-hosted.ts",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test \"tests/unit/**/*.test.ts\"",
     "test:e2e": "node tests/restart.mjs"
@@ -16,6 +17,7 @@
     "@know-meet/application": "workspace:*",
     "@know-meet/design-tokens": "workspace:*",
     "@know-meet/domain": "workspace:*",
+    "@know-meet/realtime": "workspace:*",
     "@know-meet/ui": "workspace:*",
     "@prometheus-ags/entity-graph-core": "4.3.0",
     "@prometheus-ags/entity-graph-react": "4.3.0",

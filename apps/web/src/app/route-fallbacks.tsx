@@ -1,13 +1,25 @@
 // TJ-ARCH-MOB-001 compliant
 import { type ErrorComponentProps, Link } from "@tanstack/react-router";
+import { HOSTED_BUILD } from "./build-mode";
 
-/** Unmatched paths render at the root, outside every layout, so this owns main#main. */
+/**
+ * Unmatched paths render at the root, outside every layout, so this owns main#main.
+ * The hosted build says what the site does have (docs/design/web-release-acceptance.md
+ * 7.3); the default build keeps its wording. The test id is the same in both.
+ */
 export function RouteNotFound() {
   return (
     <main id="main" tabIndex={-1} className="km-main px-s5 pt-s6">
-      <section aria-labelledby="not-found-heading" className="grid gap-s3">
-        <h1 id="not-found-heading">Page not found</h1>
-        <Link to="/">Go to the home page</Link>
+      <section
+        data-testid="km-not-found"
+        aria-labelledby="not-found-heading"
+        className="grid gap-s3"
+      >
+        <h1 id="not-found-heading">
+          {HOSTED_BUILD ? "This page isn’t available" : "Page not found"}
+        </h1>
+        {HOSTED_BUILD ? <p>This site has the home page and meetings only.</p> : null}
+        <Link to="/">{HOSTED_BUILD ? "Home" : "Go to the home page"}</Link>
       </section>
     </main>
   );

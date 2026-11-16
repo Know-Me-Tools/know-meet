@@ -1,47 +1,42 @@
 // TJ-ARCH-MOB-001 compliant
-// index.html "Join with a code": a surface card with the mono code input and a
-// Join button. The format is checked on blur and submit (never mid-typing); an
-// invalid submit announces the error (`role="alert"`) and returns focus to the
-// input (F6). A well-formed code opens the invite, or "Code not found" when no
-// sample meeting uses it, as the prototype does.
+// index.html "Join with a code" (acceptance H1, H3): a surface card with the mono code
+// input and Join. The format is checked on blur and submit, never while typing; an invalid
+// submit announces the error (`role="alert"`) and returns focus to the field. A well-formed
+// code opens the lobby for it; only the token service can say whether it exists, so an
+// unknown code is reported in the lobby (L7), when Join meeting asks for a token.
 import { Button } from "@know-meet/ui/components/button";
 import { Input } from "@know-meet/ui/components/input";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { useNavigate } from "@tanstack/react-router";
 import type * as React from "react";
 import { useRef } from "react";
+import { CODE_EXAMPLE, HOME_COPY } from "../guest-meeting/meeting-copy";
+import { lobbyHash } from "../guest-meeting/meeting-routes";
 import { describedBy, FormField, hintId } from "../public-shared/form-field";
-import {
-  CODE_EXAMPLE,
-  CODE_MAX_LENGTH,
-  codeFormatError,
-  normalizeCode,
-} from "../public-shared/join-code";
-import { findByCode, type SampleMeeting } from "../public-shared/sample-meetings";
+import { CODE_MAX_LENGTH, normalizeCode } from "../public-shared/join-code";
 import { submitForm, useField } from "../public-shared/use-field";
-import { toHash } from "../shared/use-hash-route";
+import { codeProblem } from "./code-problem";
 
 const ID = "join-code";
 
-export function HomeJoinForm({ meetings }: { readonly meetings: readonly SampleMeeting[] }) {
+export function HomeJoinForm() {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const code = useField((value) => codeFormatError(normalizeCode(value), false));
+  const code = useField((value) => codeProblem(normalizeCode(value), false));
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const value = normalizeCode(code.value);
-    const problem = codeFormatError(value, true);
-    const ok = submitForm(formRef.current, [
+    const problem = codeProblem(value, true);
+    const valid = submitForm(formRef.current, [
       () => {
         code.setError(problem);
         return problem === "";
       },
     ]);
-    if (!ok) return;
+    if (!valid) return;
     code.setValue(value);
-    const view = findByCode(meetings, value) === null ? "wrong-code" : "invite";
-    void navigate({ to: "/join", hash: toHash(view, undefined, { code: value }) });
+    void navigate({ to: "/join", hash: lobbyHash(value, "joiner") });
   };
 
   return (
@@ -50,13 +45,13 @@ export function HomeJoinForm({ meetings }: { readonly meetings: readonly SampleM
       noValidate
       aria-describedby={hintId(ID)}
       onSubmit={onSubmit}
-      className="grid max-w-[460px] gap-1.5 rounded-tile bg-surface p-s4 shadow-(--shadow-card)"
+      className="grid max-w-[460px] gap-1.5 rounded-tile bg-surface p-s4"
     >
       <FormField
         id={ID}
         label="Join with a code"
         error={code.error}
-        hint="The code is in your email, SMS or calendar invite."
+        hint={HOME_COPY.codeHint}
         announceError
       >
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-s2">
@@ -70,11 +65,12 @@ export function HomeJoinForm({ meetings }: { readonly meetings: readonly SampleM
             spellCheck={false}
             placeholder={CODE_EXAMPLE}
             maxLength={CODE_MAX_LENGTH}
+            data-testid="km-home-join-code"
             aria-describedby={describedBy(ID, true)}
             className="font-mono tracking-[0.04em]"
             {...code.inputProps}
           />
-          <Button type="submit">
+          <Button type="submit" data-testid="km-home-join">
             <span>Join</span>
             <KmIcon name="chevron-right" className="size-4" />
           </Button>

@@ -24,7 +24,9 @@ export const MEDIA_ORIGINS_ENV = "KM_MEDIA_ORIGINS";
 
 type Directives = ReadonlyArray<readonly [string, readonly string[]]>;
 
-/** `ipc:` and `http://ipc.localhost` are the Tauri IPC origins; inert in a browser. */
+/** Tauri IPC origins. Only the default (desktop) build lists them; the hosted build omits both. */
+const TAURI_IPC_ORIGINS: readonly string[] = ["ipc:", "http://ipc.localhost"];
+
 const BASE_DIRECTIVES: Directives = [
   ["default-src", ["'self'"]],
   ["script-src", ["'self'"]],
@@ -32,7 +34,7 @@ const BASE_DIRECTIVES: Directives = [
   ["img-src", ["'self'", "data:"]],
   ["media-src", ["'self'"]],
   ["font-src", ["'self'"]],
-  ["connect-src", ["'self'", "ipc:", "http://ipc.localhost"]],
+  ["connect-src", ["'self'", ...TAURI_IPC_ORIGINS]],
   // Hardening (c13 security review L3): no <base> rewriting, forms post only to
   // this origin, no plugins. All three are valid in a <meta> CSP and in Tauri's.
   ["base-uri", ["'none'"]],
@@ -113,6 +115,8 @@ export function mediaOrigins(raw: string | undefined): string[] {
 export interface ContentSecurityPolicyInput {
   readonly livekitUrl: string | undefined;
   readonly mediaOrigins?: string | undefined;
+  /** Hosted (public-site) build: connect-src drops the Tauri IPC origins. Default false. */
+  readonly hosted?: boolean | undefined;
 }
 
 export function buildContentSecurityPolicy(input: ContentSecurityPolicyInput): string {
@@ -121,7 +125,10 @@ export function buildContentSecurityPolicy(input: ContentSecurityPolicyInput): s
   return BASE_DIRECTIVES.map(([name, sources]) => {
     const all =
       name === "connect-src"
-        ? [...sources, ...extraConnect]
+        ? [
+            ...sources.filter((s) => input.hosted !== true || !TAURI_IPC_ORIGINS.includes(s)),
+            ...extraConnect,
+          ]
         : name === "img-src" || name === "media-src"
           ? [...sources, ...extraMedia]
           : sources;

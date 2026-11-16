@@ -1,0 +1,86 @@
+# Production: the one path the Argo CD Application syncs (infra/argocd/know-meet.yaml).
+# It pulls in the shared platform objects too, so one sync creates the GatewayClass, the
+# Gateway, its Certificate, the namespace, the workloads and the routes.
+#
+# No `namespace:` field here: it would also rewrite the namespace of the platform objects.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+  - ../../../platform
+  - routes.yaml
+  - security-headers.yaml
+
+# Release tag. The `deploy` job of .github/workflows/images.yml sets both lines to the commit
+# SHA of each main build it pushed (continuous deployment); edit nothing else in this block.
+# The first placeholder names no image that exists, so a sync before the first deploy fails at
+# image pull instead of running something unreviewed. Never `latest`.
+images:
+  - name: ghcr.io/know-me-tools/know-meet-web
+    newTag: pin-commit-sha-in-task-8-6
+  - name: ghcr.io/know-me-tools/know-meet-token-service
+    newTag: pin-commit-sha-in-task-8-6
+
+# Copies each generated header value (security-headers.yaml, a local-config ConfigMap that
+# kustomize reads but does not emit) into the ResponseHeaderModifier of every HTTPS rule.
+replacements:
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.strict-transport-security
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=Strict-Transport-Security].value
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.content-security-policy
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=Content-Security-Policy].value
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.x-content-type-options
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=X-Content-Type-Options].value
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.x-frame-options
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=X-Frame-Options].value
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.referrer-policy
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=Referrer-Policy].value
+  - source:
+      kind: ConfigMap
+      name: know-meet-security-headers
+      fieldPath: data.permissions-policy
+    targets:
+      - select:
+          kind: HTTPRoute
+          name: know-meet-https
+        fieldPaths:
+          - spec.rules.*.filters.[type=ResponseHeaderModifier].responseHeaderModifier.set.[name=Permissions-Policy].value

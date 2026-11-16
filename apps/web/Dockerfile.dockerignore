@@ -1,0 +1,38 @@
+# Ignore file for apps/web/Dockerfile (BuildKit reads <Dockerfile>.dockerignore next to
+# the Dockerfile in preference to a root .dockerignore). Context: the repository root.
+# The Dockerfile COPYs only what it names; this keeps the context upload small and
+# keeps local secrets and build output out of it.
+
+.git
+**/node_modules
+**/.turbo
+**/dist
+**/dist-hosted
+**/dist-hosted-csp.txt
+**/*.tsbuildinfo
+
+# Never in an image context.
+**/.env
+**/.env.*
+
+# Surfaces and trees the web image does not use.
+apps/mobile
+apps/desktop/src-tauri
+target
+crates
+services
+spikes
+docs
+live
+openspec
+.kbd-orchestrator
+.agent-team
+.agents
+.claude
+.codex
+.dsh
+.kimi-code
+.opencode
+.qwen
+.impeccable
+.github

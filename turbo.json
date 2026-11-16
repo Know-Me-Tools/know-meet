@@ -9,6 +9,11 @@
       "env": ["KM_LIVEKIT_URL", "KM_MEDIA_ORIGINS"],
       "outputs": ["dist/**", "build/**"]
     },
+    "build:hosted": {
+      "dependsOn": ["^build"],
+      "env": ["KM_BUILD_MODE", "KM_LIVEKIT_URL", "KM_MEDIA_ORIGINS"],
+      "outputs": ["dist-hosted/**", "dist-hosted-csp.txt"]
+    },
     "typecheck": {
       "dependsOn": ["^typecheck"],
       "outputs": ["*.tsbuildinfo", "**/*.tsbuildinfo"]
