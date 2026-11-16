@@ -14,6 +14,7 @@ method nothing here has been rendered or applied before the release boundary run
 | `k8s/overlays/production/` | Pulls in `k8s/base` and `platform`; HTTPRoutes `know-meet-https` and `know-meet-http-redirect`; image tags; security headers. |
 | `k8s/overlays/production/security-headers.yaml` | Generated. A local-config ConfigMap kustomize reads and does not apply. |
 | `platform/` | GatewayClass `eg`, Gateway `main-gateway` and Certificate `meet-know-me-tools` (namespace `envoy-gateway-system`). Shared. |
+| `github/` | The `main` ruleset and the deploy app setup (who may change `main`, so who may deploy). |
 
 One Application, one source path. The overlay includes `platform` as a directory resource,
 so one sync creates the GatewayClass, Gateway, certificate, namespace, workloads and routes.
@@ -32,10 +33,11 @@ and admit routes from namespace `know-meet` only.
 
 ## Placeholders to replace before release
 
-**Image tag.** `k8s/overlays/production/kustomization.yaml` sets `newTag:
-pin-commit-sha-in-task-8-6` for both images. No such image exists, so a sync before the
-pin fails at image pull. Task 8.6 replaces both lines with the release commit SHA (the
-`tag` output of the `images` workflow) by pull request.
+**Image pin.** Each image entry of `k8s/overlays/production/kustomization.yaml` has a
+`newTag` (the commit SHA) and a `digest` (what that commit's `images` run pushed). The
+`deploy` job of `.github/workflows/images.yml` rewrites those four lines on every main build
+and changes nothing else. kustomize renders `image:tag@digest`, so the cluster pulls by
+digest and a re-pushed tag cannot change what runs.
 
 **Content-Security-Policy.** `security-headers.yaml` holds a placeholder CSP
 (`default-src 'none'; frame-ancestors 'none'`). It fails closed: with it the site serves a

@@ -20,10 +20,15 @@
 #   - artifact `image-digests-<sha>` holds image-digests.json and the scan report
 #
 # Continuous deployment (operator decision 2026-11-16): after a push to main builds and pushes
-# both images, the `deploy` job sets the two `newTag` lines of the production overlay to that
-# commit SHA and pushes one commit to main. Argo CD syncs main automatically, so every main
-# check-in reaches https://meet.know-me.tools. The bot commit touches infra/** only, and a push
-# made with the workflow token starts no workflow, so it never loops.
+# both images, the `deploy` job pins each image of the production overlay to that commit SHA
+# (`newTag`, for traceability) and to the digest this run pushed (`digest`, what the cluster
+# pulls), then pushes one commit to main. Argo CD syncs main automatically, so every main
+# check-in reaches https://meet.know-me.tools.
+#
+# The push uses a short-lived token of the deploy GitHub App, the only bypass actor of the main
+# ruleset (infra/github/README.md). Operator inputs: variable KM_DEPLOY_APP_CLIENT_ID and secret
+# KM_DEPLOY_APP_PRIVATE_KEY. An app-token push does start workflows: `images` ignores infra/**,
+# so the bot commit never loops; `ci` runs on it.
 name: images
 
 on:
@@ -241,26 +246,49 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  # Continuous deployment: pin both images to this commit on main. Argo CD syncs main.
+  # Continuous deployment: pin both images to this commit and its digests on main. Argo CD syncs main.
   deploy:
-    name: pin the release tag on main (Argo CD deploys it)
+    name: pin the release digests on main (Argo CD deploys them)
     needs: images
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
-      contents: write
+      contents: read
     concurrency:
       group: deploy-main
       cancel-in-progress: false
     env:
       TAG: ${{ needs.images.outputs.tag }}
+      WEB_DIGEST: ${{ needs.images.outputs.web-digest }}
+      TOKEN_DIGEST: ${{ needs.images.outputs.token-service-digest }}
       OVERLAY: infra/k8s/overlays/production/kustomization.yaml
     steps:
+      - name: Require the deploy app configuration
+        env:
+          CLIENT_ID: ${{ vars.KM_DEPLOY_APP_CLIENT_ID }}
+          HAS_KEY: ${{ secrets.KM_DEPLOY_APP_PRIVATE_KEY != '' }}
+        run: |
+          if [ -z "$CLIENT_ID" ] || [ "$HAS_KEY" != "true" ]; then
+            echo "::error::Variable KM_DEPLOY_APP_CLIENT_ID or secret KM_DEPLOY_APP_PRIVATE_KEY is missing (infra/github/README.md)."
+            exit 1
+          fi
+
+      # Contents: write on this repository only; the token expires after an hour and is revoked
+      # when the job ends.
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app-token
+        with:
+          client-id: ${{ vars.KM_DEPLOY_APP_CLIENT_ID }}
+          private-key: ${{ secrets.KM_DEPLOY_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Pin both images and push to main
         run: |
@@ -269,8 +297,26 @@ jobs:
             echo "::error::image tag '$TAG' is not a full commit SHA."
             exit 1
           fi
+          for digest in "$WEB_DIGEST" "$TOKEN_DIGEST"; do
+            if ! [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]; then
+              echo "::error::image digest '$digest' is not a sha256 digest."
+              exit 1
+            fi
+          done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Rewrites the newTag and digest lines of one images entry (name, then newTag, then
+          # digest, in that order).
+          set_image() {
+            awk -v name="$1" -v tag="$TAG" -v digest="$2" '
+              $0 == "  - name: " name { inside = 1; print; next }
+              /^  - name: / { inside = 0 }
+              inside && /^    newTag: / { print "    newTag: " tag; next }
+              inside && /^    digest: / { print "    digest: " digest; next }
+              { print }' "$OVERLAY" > "$OVERLAY.tmp"
+            mv "$OVERLAY.tmp" "$OVERLAY"
+          }
 
           # pin returns 3 for "already pinned" (success, nothing to do) and any other non-zero
           # status for a real failure. set -e does not apply inside a function called from ||,
@@ -284,19 +330,24 @@ jobs:
               echo "main already pins $current, which contains $TAG; nothing to deploy."
               return 3
             fi
-            if [ "$(grep -c '^    newTag: ' "$OVERLAY")" -ne 2 ]; then
-              echo "::error::$OVERLAY must have exactly two newTag lines."
+            if [ "$(grep -c '^    newTag: ' "$OVERLAY")" -ne 2 ] || [ "$(grep -c '^    digest: ' "$OVERLAY")" -ne 2 ]; then
+              echo "::error::$OVERLAY must have exactly two newTag and two digest lines."
               exit 1
             fi
-            sed -E -i "s#^(    newTag: ).*\$#\1$TAG#" "$OVERLAY"
-            # The commit may change the two newTag lines and nothing else.
-            if [ "$(git diff --numstat)" != "$(printf '2\t2\t%s' "$OVERLAY")" ]; then
-              echo "::error::the tag edit changed more than the two newTag lines:"
+            set_image ghcr.io/know-me-tools/know-meet-web "$WEB_DIGEST"
+            set_image ghcr.io/know-me-tools/know-meet-token-service "$TOKEN_DIGEST"
+            # The commit may change the newTag and digest lines and nothing else, and every one
+            # of them must now hold this run's values.
+            if [ "$(git diff --name-only)" != "$OVERLAY" ] \
+              || git diff -U0 -- "$OVERLAY" | grep -E '^[+-] ' | grep -Eqv '^[+-]    (newTag|digest): ' \
+              || [ "$(grep -c "^    newTag: $TAG\$" "$OVERLAY")" -ne 2 ] \
+              || [ "$(grep -cxF -e "    digest: $WEB_DIGEST" -e "    digest: $TOKEN_DIGEST" "$OVERLAY")" -ne 2 ]; then
+              echo "::error::the pin changed more than the newTag and digest lines, or missed one:"
               git diff
               exit 1
             fi
             git commit -q -am "chore(release): deploy ${TAG:0:12} to meet.know-me.tools" \
-              -m "Pins both release images to $TAG. Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+              -m "Pins both release images to $TAG by digest (web $WEB_DIGEST, token service $TOKEN_DIGEST). Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
           }
 
           pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
@@ -305,7 +356,7 @@ jobs:
               {
                 echo "### Deployed \`$TAG\`"
                 echo
-                echo "Commit \`$(git rev-parse HEAD)\` pins both images on main. Argo CD syncs it to https://meet.know-me.tools."
+                echo "Commit \`$(git rev-parse HEAD)\` pins both images by digest on main. Argo CD syncs it to https://meet.know-me.tools."
               } >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
@@ -314,5 +365,5 @@ jobs:
             git reset -q --hard origin/main
             pin || { status=$?; [ "$status" -eq 3 ] && exit 0; exit "$status"; }
           done
-          echo "::error::could not push the tag pin after 3 attempts."
+          echo "::error::could not push the pin after 3 attempts."
           exit 1
