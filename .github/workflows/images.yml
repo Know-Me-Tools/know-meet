@@ -158,7 +158,10 @@ jobs:
 
           # The scan must fail on an image that carries a planted dummy secret.
           dummy="$(openssl rand -hex 20)"
-          printf 'FROM scratch\nENV LIVEKIT_API_SECRET=%s\n' "$dummy" \
+          # One file layer: `docker save` fails on a layer-less image, and that error (exit 2)
+          # would hide the finding the control exists to produce.
+          printf 'control\n' > "$work/control/marker"
+          printf 'FROM scratch\nCOPY marker /marker\nENV LIVEKIT_API_SECRET=%s\n' "$dummy" \
             | docker build --tag km-scan-control:ci --file - "$work/control"
           set +e
           LIVEKIT_API_SECRET="$dummy" scan --repo . --image km-scan-control:ci \
