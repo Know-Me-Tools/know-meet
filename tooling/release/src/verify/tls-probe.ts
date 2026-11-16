@@ -5,7 +5,12 @@
  * verification result is recorded in `trusted` and `authorizationError` instead.
  * Nothing is sent after the handshake.
  */
-import { checkServerIdentity, connect, type PeerCertificate, type TLSSocket } from "node:tls";
+import {
+  checkServerIdentity,
+  connect,
+  type DetailedPeerCertificate,
+  type TLSSocket,
+} from "node:tls";
 
 import { ProbeError } from "./probe-error.ts";
 
@@ -30,9 +35,9 @@ function attribute(value: unknown): string | undefined {
   return undefined;
 }
 
-function chainNames(leaf: PeerCertificate): string[] {
+function chainNames(leaf: DetailedPeerCertificate): string[] {
   const names = [attribute(leaf.issuer.O), attribute(leaf.issuer.CN)];
-  const next: PeerCertificate | undefined = leaf.issuerCertificate;
+  const next: DetailedPeerCertificate | undefined = leaf.issuerCertificate;
   if (next !== undefined && next !== leaf) {
     names.push(attribute(next.issuer.O), attribute(next.issuer.CN));
   }

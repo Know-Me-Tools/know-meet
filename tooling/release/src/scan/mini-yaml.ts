@@ -4,8 +4,12 @@
  * plain, quoted and block scalars, `{}` and `[]`, JSON-style flow collections and `---`
  * documents. It has no dependency because tooling/ has no package manifest.
  *
- * It fails closed: anchors, aliases, tags, tab indentation, multi-line flow or quoted
- * scalars and unexpected indentation throw a ScanError (exit 2) instead of being guessed.
+ * A quoted scalar may continue on more-indented lines, as `kustomize build` writes long
+ * header values; the lines are folded with single spaces, as YAML folds them.
+ *
+ * It fails closed: anchors, aliases, tags, tab indentation, multi-line flow collections,
+ * multi-line plain scalars, backslash line continuations and unexpected indentation throw
+ * a ScanError (exit 2) instead of being guessed.
  * A manifest the scan cannot read is never a pass.
  */
 import { ScanError } from "./model.ts";
@@ -171,6 +175,32 @@ function parseBlockScalar(cur: Cursor, parentIndent: number): Yaml {
   return parts.join("\n").trim();
 }
 
+/**
+ * A quoted scalar that does not close on its first line. Continuation lines must be more
+ * indented than `parentIndent`; they are folded with one space, and a blank line becomes a
+ * line break. Returns the complete quoted text for parseScalar.
+ */
+function readQuotedContinuation(cur: Cursor, first: string, parentIndent: number): string {
+  const quote = first[0];
+  let text = first;
+  while (closingQuote(text, 0) < 0) {
+    if (quote === '"' && text.endsWith("\\")) throw unsupported();
+    const index = cur.pos;
+    if (index >= cur.lines.length) throw unsupported();
+    const line = cur.line(index);
+    cur.pos = index + 1;
+    if (line.trim() === "") {
+      text += "\n";
+      continue;
+    }
+    if (indentOf(line) <= parentIndent) throw unsupported();
+    text += `${text.endsWith("\n") ? "" : " "}${line.trim()}`;
+  }
+  const end = closingQuote(text, 0);
+  if (stripComment(text.slice(end + 1)).trim() !== "") throw unsupported();
+  return text.slice(0, end + 1);
+}
+
 /** The value after `key:` (or after `- `), with `cur.pos` already past that line. */
 function parseValue(cur: Cursor, restRaw: string, parentIndent: number): Yaml {
   const rest = stripComment(restRaw);
@@ -184,6 +214,9 @@ function parseValue(cur: Cursor, restRaw: string, parentIndent: number): Yaml {
     return null;
   }
   if (rest[0] === "|" || rest[0] === ">") return parseBlockScalar(cur, parentIndent);
+  if ((rest[0] === "'" || rest[0] === '"') && closingQuote(rest, 0) < 0) {
+    return parseScalar(readQuotedContinuation(cur, rest, parentIndent));
+  }
   return parseScalar(rest);
 }
 
