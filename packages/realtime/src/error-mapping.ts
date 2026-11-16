@@ -1,5 +1,5 @@
-import { meetingErrors, type TrackKind } from "@know-meet/domain";
 import type { ConnectError, MediaError } from "@know-meet/application";
+import { meetingErrors, type TrackKind } from "@know-meet/domain";
 
 /**
  * Names of errors that mean "this device could not be used": getUserMedia DOMExceptions (the

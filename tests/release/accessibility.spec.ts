@@ -6,7 +6,7 @@
  * The meeting room needs a live meeting, so each theme starts one meeting and
  * audits home, lobby and room at the four widths without reloading.
  */
-import { expect, type Browser, type Page, type TestInfo, test } from "@playwright/test";
+import { type Browser, expect, type Page, type TestInfo, test } from "@playwright/test";
 import {
   auditCell,
   type CellAudit,
@@ -37,10 +37,10 @@ async function themedPage(
   reducedMotion: "reduce" | "no-preference" = "no-preference",
 ): Promise<Page> {
   const context = await browser.newContext({ colorScheme: theme, reducedMotion });
-  await context.addInitScript(
-    ({ key, value }) => window.localStorage.setItem(key, value),
-    { key: STORAGE.theme, value: theme },
-  );
+  await context.addInitScript(({ key, value }) => window.localStorage.setItem(key, value), {
+    key: STORAGE.theme,
+    value: theme,
+  });
   return context.newPage();
 }
 

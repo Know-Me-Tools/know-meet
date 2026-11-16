@@ -80,8 +80,9 @@ test("only the hosted boolean enters the bundle: no LiveKit credential name is r
   const inputs = resolveBuildInputs({
     [BUILD_MODE_ENV]: "hosted",
     [LIVEKIT_URL_ENV]: "wss://lk.example",
-    LIVEKIT_API_KEY: "key-must-not-appear",
-    LIVEKIT_API_SECRET: "secret-must-not-appear",
+    // Placeholders stay under 16 characters so they cannot look like a credential to lint:secrets.
+    LIVEKIT_API_KEY: "must-not-appear",
+    LIVEKIT_API_SECRET: "must-not-appear",
   });
   const serialised = JSON.stringify({ inputs, defines: buildDefines(inputs) });
   assert.equal(serialised.includes("must-not-appear"), false);

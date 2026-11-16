@@ -5,7 +5,7 @@
  * verification result is recorded in `trusted` and `authorizationError` instead.
  * Nothing is sent after the handshake.
  */
-import { type PeerCertificate, checkServerIdentity, connect, type TLSSocket } from "node:tls";
+import { checkServerIdentity, connect, type PeerCertificate, type TLSSocket } from "node:tls";
 
 import { ProbeError } from "./probe-error.ts";
 

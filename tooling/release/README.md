@@ -7,11 +7,11 @@ task 9.2. Under the VLBV method nothing here has been run before the boundary ru
 
 ## Services
 
-| Service | Image | Published | Role |
-|---|---|---|---|
-| `proxy` | `nginxinc/nginx-unprivileged:1.30.6-alpine-slim` (pinned by digest) | `127.0.0.1:8080` | Same-origin entry: `/api/*` to `token-service`, everything else to `web`. Adds no HSTS, CSP or redirect. |
-| `web` | `know-meet-web:boundary`, built from `apps/web/Dockerfile` | `127.0.0.1:8081` | The static image alone, no proxy. Also the proxy's upstream. |
-| `token-service` | `know-meet-livekit:boundary`, built from `services/livekit/Dockerfile` | none | Reachable only through the proxy. |
+| Service         | Image                                                                  | Published        | Role                                                                                                     |
+| --------------- | ---------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `proxy`         | `nginxinc/nginx-unprivileged:1.30.6-alpine-slim` (pinned by digest)    | `127.0.0.1:8080` | Same-origin entry: `/api/*` to `token-service`, everything else to `web`. Adds no HSTS, CSP or redirect. |
+| `web`           | `know-meet-web:boundary`, built from `apps/web/Dockerfile`             | `127.0.0.1:8081` | The static image alone, no proxy. Also the proxy's upstream.                                             |
+| `token-service` | `know-meet-livekit:boundary`, built from `services/livekit/Dockerfile` | none             | Reachable only through the proxy.                                                                        |
 
 The image tags are the ones `tests/release/scan-contract.md` defaults to.
 
@@ -48,30 +48,30 @@ variable is unset, the token service exits and logs the variable name, not a val
 
 ## Token service settings in this stack
 
-| Variable | Value here | Why |
-|---|---|---|
-| `KM_SITE_ORIGIN` | `http://localhost:8080` | Must equal the page origin the browser sends as `Origin`; matches the packaged project's default base URL. |
-| `KM_TRUSTED_PROXY_HOPS` | `1` | One proxy (nginx) appends to `X-Forwarded-For`. |
-| `KM_TOKEN_TTL_SECONDS` | `600` | Service default. |
-| `KM_RATE_LIMIT_BURST` | `10` | Service default. Headroom for the specs that share the one client bucket. |
-| `KM_RATE_LIMIT_REFILL_SECONDS` | `60` | Service default. 6 seconds per token, above the 5 second floor WR-4 needs; WR-4 waits this long before each burst. |
+| Variable                       | Value here              | Why                                                                                                                |
+| ------------------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `KM_SITE_ORIGIN`               | `http://localhost:8080` | Must equal the page origin the browser sends as `Origin`; matches the packaged project's default base URL.         |
+| `KM_TRUSTED_PROXY_HOPS`        | `1`                     | One proxy (nginx) appends to `X-Forwarded-For`.                                                                    |
+| `KM_TOKEN_TTL_SECONDS`         | `600`                   | Service default.                                                                                                   |
+| `KM_RATE_LIMIT_BURST`          | `10`                    | Service default. Headroom for the specs that share the one client bucket.                                          |
+| `KM_RATE_LIMIT_REFILL_SECONDS` | `60`                    | Service default. 6 seconds per token, above the 5 second floor WR-4 needs; WR-4 waits this long before each burst. |
 
 Override any of them from the shell before `docker compose up`; then export the same values
 into the run inputs below.
 
 ## Run inputs for `tests/release`
 
-| Run input | Produced from this stack |
-|---|---|
-| `KM_RELEASE_BASE_URL` | `http://localhost:8080` (the `proxy` service). |
-| `KM_RELEASE_STATIC_URL` | `http://127.0.0.1:8081` (the `web` service, no proxy). |
-| `KM_RELEASE_TOKEN_TTL_SECONDS` | The value of `KM_TOKEN_TTL_SECONDS` above: `600`. |
-| `KM_RELEASE_RATE_LIMIT_BURST` | The value of `KM_RATE_LIMIT_BURST` above: `10`. |
-| `KM_RELEASE_RATE_LIMIT_REFILL_SECONDS` | The value of `KM_RATE_LIMIT_REFILL_SECONDS` above: `60`. |
-| `KM_RELEASE_CSP_FILE` | Not from the stack. Build on the host with the same URL: `KM_LIVEKIT_URL="$LIVEKIT_URL" pnpm --filter @know-meet/web run build:hosted`, then `KM_RELEASE_CSP_FILE="$PWD/apps/web/dist-hosted-csp.txt"`. The image's bundle and this file come from the same inputs, so they carry the same policy. |
-| `KM_RELEASE_DEFAULT_BUILD_URL` | Not from the stack. The default build of the same commit: `pnpm --filter @know-meet/web run build`, then `pnpm --filter @know-meet/web preview --host 127.0.0.1 --port 4173 --strictPort` (Vite preview on `http://127.0.0.1:4173`). The default build runs only after both images are built and scanned, so it cannot enter an image; the preview runs in the background for the packaged run only. |
-| `KM_RELEASE_IMAGE_DIGESTS` | Locally built images have an image ID, not a registry digest: `docker image inspect know-meet-web:boundary know-meet-livekit:boundary --format '{{index .RepoTags 0}}={{.Id}}' \| paste -sd, -`. For the pushed images use the `digests` output of the `images` workflow run. |
-| `KM_EVIDENCE_DIR` | Chosen by the runner; see `tests/release/README.md`. |
+| Run input                              | Produced from this stack                                                                                                                                                                                                                                                                                                                                                                             |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `KM_RELEASE_BASE_URL`                  | `http://localhost:8080` (the `proxy` service).                                                                                                                                                                                                                                                                                                                                                       |
+| `KM_RELEASE_STATIC_URL`                | `http://127.0.0.1:8081` (the `web` service, no proxy).                                                                                                                                                                                                                                                                                                                                               |
+| `KM_RELEASE_TOKEN_TTL_SECONDS`         | The value of `KM_TOKEN_TTL_SECONDS` above: `600`.                                                                                                                                                                                                                                                                                                                                                    |
+| `KM_RELEASE_RATE_LIMIT_BURST`          | The value of `KM_RATE_LIMIT_BURST` above: `10`.                                                                                                                                                                                                                                                                                                                                                      |
+| `KM_RELEASE_RATE_LIMIT_REFILL_SECONDS` | The value of `KM_RATE_LIMIT_REFILL_SECONDS` above: `60`.                                                                                                                                                                                                                                                                                                                                             |
+| `KM_RELEASE_CSP_FILE`                  | Not from the stack. Build on the host with the same URL: `KM_LIVEKIT_URL="$LIVEKIT_URL" pnpm --filter @know-meet/web run build:hosted`, then `KM_RELEASE_CSP_FILE="$PWD/apps/web/dist-hosted-csp.txt"`. The image's bundle and this file come from the same inputs, so they carry the same policy.                                                                                                   |
+| `KM_RELEASE_DEFAULT_BUILD_URL`         | Not from the stack. The default build of the same commit: `pnpm --filter @know-meet/web run build`, then `pnpm --filter @know-meet/web preview --host 127.0.0.1 --port 4173 --strictPort` (Vite preview on `http://127.0.0.1:4173`). The default build runs only after both images are built and scanned, so it cannot enter an image; the preview runs in the background for the packaged run only. |
+| `KM_RELEASE_IMAGE_DIGESTS`             | Locally built images have an image ID, not a registry digest: `docker image inspect know-meet-web:boundary know-meet-livekit:boundary --format '{{index .RepoTags 0}}={{.Id}}' \| paste -sd, -`. For the pushed images use the `digests` output of the `images` workflow run.                                                                                                                        |
+| `KM_EVIDENCE_DIR`                      | Chosen by the runner; see `tests/release/README.md`.                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Build-time pins
 
@@ -133,11 +133,11 @@ Both print one line per check (`PASS`, `FAIL`, `INCOMPLETE`, `INFO`, `SKIP`, the
 and a short detail) and a `SUMMARY` line, and take `--json <path>` to write the same results as
 a JSON report for the evidence folder. Exit codes:
 
-| Code | Meaning |
-|---|---|
-| 0 | Every check passed. |
-| 1 | At least one check failed: the cluster or endpoint differs from what the manifests need. |
-| 2 | A check could not be completed (kubectl missing, no credentials, cluster or network unreachable, timeout), or the command line, `--csp-file` or `--json` path was wrong. Wins over 1: nothing can be certified. |
+| Code | Meaning                                                                                                                                                                                                         |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0    | Every check passed.                                                                                                                                                                                             |
+| 1    | At least one check failed: the cluster or endpoint differs from what the manifests need.                                                                                                                        |
+| 2    | A check could not be completed (kubectl missing, no credentials, cluster or network unreachable, timeout), or the command line, `--csp-file` or `--json` path was wrong. Wins over 1: nothing can be certified. |
 
 ### `verify-cluster.ts`: before the apply
 
@@ -150,17 +150,17 @@ node tooling/release/src/verify-cluster.ts --context gke_knowme-corporate_us-sou
 argument array (never a shell), the explicit `--context`, `--request-timeout=30s` and the verb
 `get` or `api-versions`. The JSON report lists every argv it spawned (`kubectlCalls`).
 
-| Check id | Passes when |
-|---|---|
-| `cluster-api` | `kubectl api-versions` answers. If not, nothing else is run (exit 2). |
-| `gateway-api-v1` | `gateway.networking.k8s.io/v1` is in the served API versions. |
-| `envoy-gateway-controller` | A Deployment in `envoy-gateway-system` runs an `envoyproxy/gateway` image with tag `v1.10.0` and all wanted replicas ready. |
-| `cluster-issuer-letsencrypt-staging`, `cluster-issuer-letsencrypt-prod` | The ClusterIssuer exists and its `Ready` condition is `True`. |
-| `external-dns` | A Deployment in `external-dns` runs an external-dns image, ready. `external-dns-sources` (info) lists its `--source=` values. |
-| `argocd` | Every Deployment and StatefulSet in `argocd` is ready, and there is at least one. |
-| `namespace-know-meet`, `secret-know-meet-livekit`, `secret-keys` | Namespace `know-meet` exists, Secret `know-meet-livekit` is in it, and it has the key names `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`. A failure says which of namespace, Secret or key is missing. |
-| `existing-gatewayclasses`, `existing-gateways`, `existing-httproutes`, `existing-certificates` | Always `INFO`: what already exists. No GatewayClass is required before the apply. |
-| `hostname-conflicts` | No existing object collides with `meet.know-me.tools` (rules in the header of `src/verify/cluster-routing.ts`: an existing `main-gateway` with another hostname, another Gateway or an HTTPRoute outside `know-meet` covering the host, or a route in `know-meet` or attached to `main-gateway` with another hostname). |
+| Check id                                                                                       | Passes when                                                                                                                                                                                                                                                                                                             |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cluster-api`                                                                                  | `kubectl api-versions` answers. If not, nothing else is run (exit 2).                                                                                                                                                                                                                                                   |
+| `gateway-api-v1`                                                                               | `gateway.networking.k8s.io/v1` is in the served API versions.                                                                                                                                                                                                                                                           |
+| `envoy-gateway-controller`                                                                     | A Deployment in `envoy-gateway-system` runs an `envoyproxy/gateway` image with tag `v1.10.0` and all wanted replicas ready.                                                                                                                                                                                             |
+| `cluster-issuer-letsencrypt-staging`, `cluster-issuer-letsencrypt-prod`                        | The ClusterIssuer exists and its `Ready` condition is `True`.                                                                                                                                                                                                                                                           |
+| `external-dns`                                                                                 | A Deployment in `external-dns` runs an external-dns image, ready. `external-dns-sources` (info) lists its `--source=` values.                                                                                                                                                                                           |
+| `argocd`                                                                                       | Every Deployment and StatefulSet in `argocd` is ready, and there is at least one.                                                                                                                                                                                                                                       |
+| `namespace-know-meet`, `secret-know-meet-livekit`, `secret-keys`                               | Namespace `know-meet` exists, Secret `know-meet-livekit` is in it, and it has the key names `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`. A failure says which of namespace, Secret or key is missing.                                                                                                        |
+| `existing-gatewayclasses`, `existing-gateways`, `existing-httproutes`, `existing-certificates` | Always `INFO`: what already exists. No GatewayClass is required before the apply.                                                                                                                                                                                                                                       |
+| `hostname-conflicts`                                                                           | No existing object collides with `meet.know-me.tools` (rules in the header of `src/verify/cluster-routing.ts`: an existing `main-gateway` with another hostname, another Gateway or an HTTPRoute outside `know-meet` covering the host, or a route in `know-meet` or attached to `main-gateway` with another hostname). |
 
 **Secret handling.** The Secret is read in three steps, none of which prints a value: the
 namespace list (`-o name`), the Secret list of the namespace (`-o name`), then one named Secret
@@ -196,14 +196,14 @@ literal). `--csp-file` makes the CSP header have to equal the file's content byt
 trailing newline in the file is ignored). `--allow-staging` (off by default) reports a Let's
 Encrypt staging certificate as `INFO` instead of `FAIL`, for the staging-first step.
 
-| Check id | Passes when |
-|---|---|
-| `dns` | The name resolves to at least one address. If not, the network checks are skipped. |
-| `tls-identity`, `tls-validity` | The certificate names the host, and now is inside its validity period. |
-| `tls-issuer` | The issuer Organization is `Let's Encrypt`, no name on the presented chain contains `(STAGING)`, and the chain is trusted. |
-| `tls-chain-trusted` | Node's root store verifies the chain for the host. |
-| `http-redirect` | `http://<host>/` answers 301, 302, 303, 307 or 308 with a `Location` of `https://<host>` (default port). Not followed. |
-| `https-root`, `https-healthz` | `GET /` and `GET /api/healthz` return 200 and carry the WR-3 headers: Strict-Transport-Security with a positive max-age, Content-Security-Policy (equal to `--csp-file` when given), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` or CSP `frame-ancestors 'none'`, Referrer-Policy, and a Permissions-Policy whose `camera` and `microphone` allow only `self` or `"https://<host>"`. |
+| Check id                       | Passes when                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dns`                          | The name resolves to at least one address. If not, the network checks are skipped.                                                                                                                                                                                                                                                                                                                  |
+| `tls-identity`, `tls-validity` | The certificate names the host, and now is inside its validity period.                                                                                                                                                                                                                                                                                                                              |
+| `tls-issuer`                   | The issuer Organization is `Let's Encrypt`, no name on the presented chain contains `(STAGING)`, and the chain is trusted.                                                                                                                                                                                                                                                                          |
+| `tls-chain-trusted`            | Node's root store verifies the chain for the host.                                                                                                                                                                                                                                                                                                                                                  |
+| `http-redirect`                | `http://<host>/` answers 301, 302, 303, 307 or 308 with a `Location` of `https://<host>` (default port). Not followed.                                                                                                                                                                                                                                                                              |
+| `https-root`, `https-healthz`  | `GET /` and `GET /api/healthz` return 200 and carry the WR-3 headers: Strict-Transport-Security with a positive max-age, Content-Security-Policy (equal to `--csp-file` when given), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` or CSP `frame-ancestors 'none'`, Referrer-Policy, and a Permissions-Policy whose `camera` and `microphone` allow only `self` or `"https://<host>"`. |
 
 The header rules mirror `tests/release/src/header-checks.ts` (WR-3) and must be kept in step
 with it. Response headers are printed (`HEADER <request> <name>: <value>`) and kept in the JSON

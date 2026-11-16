@@ -8,8 +8,8 @@
 // the media session). The root carries `km-screen-meet` in every view.
 import { isInRoom } from "@know-meet/domain";
 import type * as React from "react";
-import { useMeetingServices, useRoomSnapshot } from "../../guest-meeting/meeting-services";
 import { readBlockedDevices, readRoomCode } from "../../guest-meeting/meeting-routes";
+import { useMeetingServices, useRoomSnapshot } from "../../guest-meeting/meeting-services";
 import { useDocumentTitle } from "../../shared/use-document-title";
 import { useHashRoute } from "../../shared/use-hash-route";
 import { type EndReason, RoomEndView } from "./room-end-view";

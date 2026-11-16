@@ -51,7 +51,10 @@ describe("fake realtime room", () => {
     room.setRemote(remote("guest-c", false));
     room.setRemote(remote("guest-b", true));
     const remotes = room.getSnapshot().remotes;
-    assert.deepEqual(remotes.map((entry) => entry.identity), ["guest-b", "guest-c"]);
+    assert.deepEqual(
+      remotes.map((entry) => entry.identity),
+      ["guest-b", "guest-c"],
+    );
     assert.equal(remotes[0]?.microphone.muted, true);
   });
 

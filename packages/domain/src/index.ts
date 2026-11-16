@@ -13,8 +13,8 @@ export {
   type Forbidden,
   type InvalidRequest,
   type MeetingError,
-  meetingErrors,
   type MeetingNotFound,
+  meetingErrors,
   type PermissionDenied,
   type RateLimited,
 } from "./meeting/meeting-error.ts";
@@ -26,8 +26,8 @@ export {
   type ParticipantIdentity,
   type RemoteParticipant,
   type RemoteTrackState,
-  toParticipantIdentity,
   type TrackKind,
+  toParticipantIdentity,
   withLocalTrackMuted,
 } from "./meeting/participant.ts";
 export { parseRoomCode, type RoomCode } from "./meeting/room-code.ts";

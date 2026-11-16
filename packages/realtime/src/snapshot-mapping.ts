@@ -1,3 +1,4 @@
+import type { RoomSnapshot } from "@know-meet/application";
 import {
   type ConnectionState,
   isInRoom,
@@ -5,7 +6,6 @@ import {
   type RemoteParticipant,
   toParticipantIdentity,
 } from "@know-meet/domain";
-import type { RoomSnapshot } from "@know-meet/application";
 import { IDLE, sameConnection } from "./connection-mapping.ts";
 
 /**
@@ -38,7 +38,11 @@ export const UNPUBLISHED: TrackFacts = { muted: true, subscribed: false };
 
 const NO_REMOTES: readonly RemoteParticipant[] = [];
 
-export const INITIAL_SNAPSHOT: RoomSnapshot = { connection: IDLE, local: null, remotes: NO_REMOTES };
+export const INITIAL_SNAPSHOT: RoomSnapshot = {
+  connection: IDLE,
+  local: null,
+  remotes: NO_REMOTES,
+};
 
 /**
  * The snapshot for `facts`, reusing every unchanged part of `previous`. Returns `previous`
@@ -54,9 +58,7 @@ export function nextSnapshot(previous: RoomSnapshot, facts: RoomFacts): RoomSnap
   const local = inRoom && facts.local !== null ? nextLocal(previous.local, facts.local) : null;
   const remotes = nextRemotes(previous.remotes, inRoom ? facts.remotes : []);
   const unchanged =
-    connection === previous.connection &&
-    local === previous.local &&
-    remotes === previous.remotes;
+    connection === previous.connection && local === previous.local && remotes === previous.remotes;
   if (unchanged) return previous;
   return { connection, local, remotes };
 }

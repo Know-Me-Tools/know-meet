@@ -36,6 +36,7 @@ const DEFAULT_LIMIT = 600;
 
 /** Keeps text on one printable line and bounded. Control characters become `?`. */
 export function printable(text: string, limit: number = DEFAULT_LIMIT): string {
+  // biome-ignore lint/suspicious/noControlCharactersInRegex: matching control characters is the point; they are replaced so output stays on one line.
   const flat = text.replace(/[\u0000-\u001f\u007f]/g, "?");
   return flat.length > limit ? `${flat.slice(0, limit)}...` : flat;
 }

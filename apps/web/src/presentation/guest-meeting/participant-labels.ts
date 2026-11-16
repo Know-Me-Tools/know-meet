@@ -5,7 +5,10 @@ import type { Participant } from "@know-meet/domain";
 
 /** Up to two initials from a display name; "?" before a name is typed (lobby L2). */
 export function initialsOf(name: string): string {
-  const words = name.trim().split(/\s+/).filter((word) => word !== "");
+  const words = name
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word !== "");
   const first = words[0];
   if (first === undefined) return "?";
   const last = words.length > 1 ? words[words.length - 1] : undefined;

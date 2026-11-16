@@ -69,9 +69,7 @@ export function RoomEndView({ reason, code, themeControl }: RoomEndViewProps) {
   }, []);
   const disconnected = reason === "disconnected";
   const rejoin =
-    code === null
-      ? null
-      : () => void navigate({ to: "/join", hash: lobbyHash(code, "joiner") });
+    code === null ? null : () => void navigate({ to: "/join", hash: lobbyHash(code, "joiner") });
 
   return (
     <>

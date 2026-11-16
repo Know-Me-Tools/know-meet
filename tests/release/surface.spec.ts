@@ -38,10 +38,9 @@ test.describe("WR-5 Screens on sample data are not reachable in the hosted build
         report.problems.filter((p) => p.endsWith("did not render")),
         "the default build renders the three screens",
       ).toEqual([]);
-      expect(
-        report.problems,
-        "the default build is detected by the same checks",
-      ).toContain("/dashboard: does not render the not-found state");
+      expect(report.problems, "the default build is detected by the same checks").toContain(
+        "/dashboard: does not render the not-found state",
+      );
     },
   );
 });

@@ -7,8 +7,8 @@
  * service per run.
  */
 import { expect, test } from "@playwright/test";
-import { STATUS, carriesToken, isApiError } from "./src/api-contract.ts";
 import { requestToken, unissuedCode } from "./src/api-client.ts";
+import { carriesToken, isApiError, STATUS } from "./src/api-contract.ts";
 import { attachJson, attachScreenshot } from "./src/evidence.ts";
 import { expectOneRemoteWithMedia, expectRemoteMuted, remoteTiles } from "./src/media-probes.ts";
 import {

@@ -80,7 +80,11 @@ function inspectFields(raw: string, ref: string): ReadonlyArray<readonly [string
 function layerId(name: string): string {
   const digest = /[0-9a-f]{64}/.exec(name);
   if (digest !== null) return digest[0].slice(0, 12);
-  const base = name.split("/").filter((part) => part !== "").pop() ?? "unnamed";
+  const base =
+    name
+      .split("/")
+      .filter((part) => part !== "")
+      .pop() ?? "unnamed";
   return base.slice(0, 40);
 }
 

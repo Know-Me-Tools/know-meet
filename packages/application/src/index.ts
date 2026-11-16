@@ -1,8 +1,8 @@
 export { createCapabilityCatalog } from "./capabilities/capability-catalog.ts";
 export {
   createMeetingUseCases,
-  type JoinedMeeting,
   type JoinError,
+  type JoinedMeeting,
   type JoinRequest,
   type MeetingPorts,
   type MeetingUseCases,

@@ -1,3 +1,10 @@
+import type {
+  ConnectError,
+  MediaError,
+  MediaTarget,
+  RealtimeRoom,
+  RoomCredentials,
+} from "@know-meet/application";
 import {
   type ConnectionState,
   err,
@@ -7,13 +14,6 @@ import {
   type Result,
   type TrackKind,
 } from "@know-meet/domain";
-import type {
-  ConnectError,
-  MediaError,
-  MediaTarget,
-  RealtimeRoom,
-  RoomCredentials,
-} from "@know-meet/application";
 import { ConnectionErrorReason, Room, type RoomOptions } from "livekit-client";
 import {
   CONNECTED,
@@ -133,7 +133,10 @@ export function createLiveKitRealtimeRoom(options: LiveKitRealtimeRoomOptions = 
     onAudioPlayback: (playing) => report({ type: "audio-playback", playing }),
   });
 
-  const attempt = async (room: Room, credentials: RoomCredentials): Promise<Result<void, unknown>> => {
+  const attempt = async (
+    room: Room,
+    credentials: RoomCredentials,
+  ): Promise<Result<void, unknown>> => {
     try {
       await room.connect(credentials.url, credentials.token);
       return ok(undefined);

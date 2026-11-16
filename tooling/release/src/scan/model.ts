@@ -27,6 +27,7 @@ export class ScanError extends Error {
 
 /** Keeps a location on one printable line. Paths can hold any byte, so control characters become `?`. */
 export function printable(text: string): string {
+  // biome-ignore lint/suspicious/noControlCharactersInRegex: matching control characters is the point; they are replaced so output stays on one line.
   return text.replace(/[\u0000-\u001f\u007f]/g, "?");
 }
 

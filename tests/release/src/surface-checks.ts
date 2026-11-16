@@ -4,14 +4,7 @@
  * same checks against different base URLs.
  */
 import type { Browser, Page } from "@playwright/test";
-import {
-  EXCLUDED_PATHS,
-  HOSTED_PATHS,
-  SCREEN,
-  STATE,
-  STORAGE,
-  byTestId,
-} from "./test-ids.ts";
+import { byTestId, EXCLUDED_PATHS, HOSTED_PATHS, SCREEN, STATE, STORAGE } from "./test-ids.ts";
 
 const SCREEN_OF: Readonly<Record<string, string>> = {
   "/": SCREEN.home,
@@ -47,6 +40,7 @@ async function showsNotFound(page: Page): Promise<boolean> {
 
 /** Visible text plus the accessibility tree of the page body. */
 async function visibleState(page: Page): Promise<string> {
+  // biome-ignore lint/performance/useDomNodeTextContent: the check is about what a visitor sees, so it needs rendered text; textContent would also return hidden text.
   const text = await page.locator("body").innerText();
   const tree = await page.locator("body").ariaSnapshot();
   return `${text}\n---\n${tree}`;
@@ -60,10 +54,10 @@ async function withPage<T>(
 ): Promise<T> {
   const context = await browser.newContext({ baseURL: baseUrl });
   if (signedIn) {
-    await context.addInitScript(
-      ({ key, value }) => window.localStorage.setItem(key, value),
-      { key: STORAGE.auth, value: SIGNED_IN_USER },
-    );
+    await context.addInitScript(({ key, value }) => window.localStorage.setItem(key, value), {
+      key: STORAGE.auth,
+      value: SIGNED_IN_USER,
+    });
   }
   const page = await context.newPage();
   try {

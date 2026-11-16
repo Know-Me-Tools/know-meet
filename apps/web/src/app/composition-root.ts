@@ -16,9 +16,9 @@ import {
   createMediaQuerySystemTheme,
   subscribeToStoredTheme,
 } from "../infrastructure/theme/theme-adapters";
-import { composeMeeting } from "./compose-meeting";
 import type { AppServices } from "./app-services";
 import { HOSTED_BUILD } from "./build-mode";
+import { composeMeeting } from "./compose-meeting";
 import { createWidthClassStore } from "./frame/width-class-store";
 
 /**

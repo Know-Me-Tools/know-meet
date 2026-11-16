@@ -7,7 +7,7 @@
  * by its own checks (tls-*), so a certificate problem cannot hide a header problem.
  * Nothing sensitive is sent: a GET with a fixed user agent and no credentials.
  */
-import { type IncomingHttpHeaders, type IncomingMessage, request as httpRequest } from "node:http";
+import { request as httpRequest, type IncomingHttpHeaders, type IncomingMessage } from "node:http";
 import { request as httpsRequest } from "node:https";
 
 import { ProbeError } from "./probe-error.ts";

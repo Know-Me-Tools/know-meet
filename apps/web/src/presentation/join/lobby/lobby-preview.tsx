@@ -135,6 +135,7 @@ export function LobbyPreview({ preview, name, announce }: LobbyPreviewProps) {
       </div>
       <div hidden={!showMeter} className="flex min-h-size-target items-center gap-s3">
         <KmIcon name="mic" className="text-muted-foreground" />
+        {/* biome-ignore lint/a11y/useSemanticElements: a native <meter> cannot take the token-styled fill bar; role="meter" with aria-value* gives the same semantics. */}
         <div
           ref={meterRef}
           role="meter"

@@ -23,7 +23,9 @@ let header: string;
 try {
   header = hostedContentSecurityPolicyHeader(resolveBuildInputs(process.env));
 } catch (error) {
-  console.error(`build:hosted failed: ${error instanceof Error ? error.message : String(error)}`);
+  process.stderr.write(
+    `build:hosted failed: ${error instanceof Error ? error.message : String(error)}\n`,
+  );
   process.exit(1);
 }
 
@@ -40,4 +42,4 @@ if (typecheck.status !== 0) process.exit(typecheck.status ?? 1);
 
 await build({ root: appRoot });
 writeCspArtifact(artifactPath, header);
-console.log(`build:hosted wrote ${CSP_ARTIFACT_FILE}: ${header}`);
+process.stdout.write(`build:hosted wrote ${CSP_ARTIFACT_FILE}: ${header}\n`);

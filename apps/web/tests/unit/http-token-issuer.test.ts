@@ -75,7 +75,11 @@ test("requestToken maps each documented status", async () => {
   ];
   for (const [status, expected] of cases) {
     const { issuer } = stub(() => json(status, { ok: false, error: { code: "x", message: "" } }));
-    assert.deepEqual(await issuer.requestToken(REQUEST), { ok: false, error: expected }, `${status}`);
+    assert.deepEqual(
+      await issuer.requestToken(REQUEST),
+      { ok: false, error: expected },
+      `${status}`,
+    );
   }
 });
 
@@ -90,7 +94,9 @@ test("429 carries Retry-After seconds, or null when absent or not a number", asy
     ok: false,
     error: { code: "rate-limited", retryAfterSeconds: null },
   });
-  const date = stub(() => json(429, { ok: false }, { "Retry-After": "Wed, 21 Oct 2026 07:28:00 GMT" }));
+  const date = stub(() =>
+    json(429, { ok: false }, { "Retry-After": "Wed, 21 Oct 2026 07:28:00 GMT" }),
+  );
   assert.deepEqual(await date.issuer.createMeeting(), {
     ok: false,
     error: { code: "rate-limited", retryAfterSeconds: null },

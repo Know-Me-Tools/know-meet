@@ -4,9 +4,9 @@ The React 19 web app. The Tauri desktop host loads the same default build.
 
 ## Builds
 
-| Script | Output | Use |
-|---|---|---|
-| `pnpm --filter @know-meet/web run build` | `dist/` | Default build: every route. Desktop (Tauri) and local development. |
+| Script                                          | Output                                   | Use                                                                     |
+| ----------------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------- |
+| `pnpm --filter @know-meet/web run build`        | `dist/`                                  | Default build: every route. Desktop (Tauri) and local development.      |
 | `pnpm --filter @know-meet/web run build:hosted` | `dist-hosted/` and `dist-hosted-csp.txt` | Hosted build for the public site: web bundle only, no Tauri or Flutter. |
 
 ## Hosted build
@@ -28,10 +28,10 @@ How it works:
 
 ### Input
 
-| Variable | Required | Meaning |
-|---|---|---|
-| `KM_LIVEKIT_URL` | yes, for `build:hosted` | Public LiveKit signalling URL, a bare `wss://host[:port]` origin. Not a secret. Added to `connect-src` (`wss://` and `https://` of that host). The build stops with a message naming this variable if it is missing or not a bare `wss://` origin. |
-| `KM_MEDIA_ORIGINS` | no | Comma-separated `https://` origins for agent-rendered media. |
+| Variable           | Required                | Meaning                                                                                                                                                                                                                                            |
+| ------------------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `KM_LIVEKIT_URL`   | yes, for `build:hosted` | Public LiveKit signalling URL, a bare `wss://host[:port]` origin. Not a secret. Added to `connect-src` (`wss://` and `https://` of that host). The build stops with a message naming this variable if it is missing or not a bare `wss://` origin. |
+| `KM_MEDIA_ORIGINS` | no                      | Comma-separated `https://` origins for agent-rendered media.                                                                                                                                                                                       |
 
 `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` are never read by this build and never enter
 the bundle. Clients receive short-lived tokens from the token service.

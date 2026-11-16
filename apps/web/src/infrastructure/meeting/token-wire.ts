@@ -1,6 +1,6 @@
 // TJ-ARCH-MOB-001 compliant
 import type { RoomCredentials } from "@know-meet/application";
-import { parseRoomCode, toParticipantIdentity, type RoomCode } from "@know-meet/domain";
+import { parseRoomCode, type RoomCode, toParticipantIdentity } from "@know-meet/domain";
 
 /**
  * Trust-boundary decoding for the token service's `{ ok: true, data }` envelope

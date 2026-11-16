@@ -107,6 +107,7 @@ export function LocalTile({
 }) {
   const videoRef = useMediaBinding<HTMLVideoElement>(room, local.identity, "camera");
   return (
+    // biome-ignore lint/a11y/useSemanticElements: a video tile is not a form group, so <fieldset> would be wrong; role="group" with the participant name labels the tile.
     <div
       role="group"
       aria-label={tileName(local)}
@@ -139,6 +140,7 @@ export function RemoteTile({
   const videoRef = useMediaBinding<HTMLVideoElement>(room, remote.identity, "camera");
   const audioRef = useMediaBinding<HTMLAudioElement>(room, remote.identity, "microphone");
   return (
+    // biome-ignore lint/a11y/useSemanticElements: a video tile is not a form group, so <fieldset> would be wrong; role="group" with the participant name labels the tile.
     <div
       role="group"
       aria-label={tileName(remote)}

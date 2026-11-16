@@ -7,7 +7,6 @@
  * keyed on the forwarded client address.
  */
 import { expect, test } from "@playwright/test";
-import { STATUS, carriesToken, isApiError, isTokenResponse } from "./src/api-contract.ts";
 import {
   createMeeting,
   decodeJwtClaims,
@@ -16,6 +15,7 @@ import {
   sleep,
   unissuedCode,
 } from "./src/api-client.ts";
+import { carriesToken, isApiError, isTokenResponse, STATUS } from "./src/api-contract.ts";
 import { attachJson } from "./src/evidence.ts";
 import { abuseLimits } from "./src/release-env.ts";
 
@@ -84,27 +84,26 @@ test.describe("WR-4 The public token endpoint bounds abuse", () => {
     },
   );
 
-  test(
-    "a foreign Origin is refused",
-    { tag: ["@WR-4", "@value-critical"] },
-    async ({ request, baseURL }) => {
-      await freshBucket();
-      const origin = new URL(baseURL ?? "").origin;
-      const foreignCreate = await createMeeting(request, { origin: FOREIGN_ORIGIN });
-      expect(foreignCreate.status(), "create meeting from a foreign origin").toBe(
-        STATUS.forbiddenOrigin,
-      );
+  test("a foreign Origin is refused", { tag: ["@WR-4", "@value-critical"] }, async ({
+    request,
+    baseURL,
+  }) => {
+    await freshBucket();
+    const origin = new URL(baseURL ?? "").origin;
+    const foreignCreate = await createMeeting(request, { origin: FOREIGN_ORIGIN });
+    expect(foreignCreate.status(), "create meeting from a foreign origin").toBe(
+      STATUS.forbiddenOrigin,
+    );
 
-      const code = await issuedCode(request, { origin });
-      const foreignToken = await requestToken(request, code, "Guest A", {
-        origin: FOREIGN_ORIGIN,
-      });
-      expect(foreignToken.status(), "token from a foreign origin").toBe(STATUS.forbiddenOrigin);
-      const body: unknown = await foreignToken.json();
-      expect(isApiError(body, "forbidden-origin"), "error body matches the contract").toBe(true);
-      expect(carriesToken(body), "no token in the refusal").toBe(false);
-    },
-  );
+    const code = await issuedCode(request, { origin });
+    const foreignToken = await requestToken(request, code, "Guest A", {
+      origin: FOREIGN_ORIGIN,
+    });
+    expect(foreignToken.status(), "token from a foreign origin").toBe(STATUS.forbiddenOrigin);
+    const body: unknown = await foreignToken.json();
+    expect(isApiError(body, "forbidden-origin"), "error body matches the contract").toBe(true);
+    expect(carriesToken(body), "no token in the refusal").toBe(false);
+  });
 
   test(
     "an arbitrary client-chosen room is refused with 404",
@@ -141,9 +140,10 @@ test.describe("WR-4 The public token endpoint bounds abuse", () => {
         statuses.push((await requestToken(request, code, `Guest ${i}`, { origin })).status());
       }
       await attachJson(testInfo, "wr-4-below-limit.json", { burst, sent: burst - 1, statuses });
-      expect(statuses.every((s) => s === STATUS.ok), "every request below the limit succeeds").toBe(
-        true,
-      );
+      expect(
+        statuses.every((s) => s === STATUS.ok),
+        "every request below the limit succeeds",
+      ).toBe(true);
     },
   );
 

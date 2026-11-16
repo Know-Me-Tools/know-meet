@@ -2,7 +2,7 @@
  * Thin client for the token service contract (api-contract.ts). Uses
  * Playwright's APIRequestContext so requests appear in the trace.
  */
-import { expect, type APIRequestContext, type APIResponse } from "@playwright/test";
+import { type APIRequestContext, type APIResponse, expect } from "@playwright/test";
 import { API, isCreateMeetingResponse, ROOM_CODE_PATTERN, STATUS } from "./api-contract.ts";
 
 export interface PostOptions {

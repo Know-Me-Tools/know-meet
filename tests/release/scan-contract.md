@@ -28,12 +28,12 @@ node tooling/release/src/scan-artifacts.ts \
 The boundary packet calls it with no arguments, so the defaults are the
 release inputs:
 
-| Input | Default | How it is read |
-|---|---|---|
-| Tracked files | `--repo .` | `git ls-files -z`, then each file's bytes. Untracked and ignored files are out of scope. |
-| Web bundle | `--bundle apps/web/dist` (the `build:hosted` output directory; wr06 names it, and the default follows that name) | Every file under the directory, recursively. |
-| Images | `--image know-meet-web:boundary` and `--image know-meet-livekit:boundary` (repeatable; the tags the packet builds) | `docker image inspect` for `Config.Env`, `Config.Labels`, `Config.Cmd`, `Config.Entrypoint`; `docker image save` for every layer, every file in each layer tar, and the image config JSON. |
-| Rendered manifests | `--manifests`, default: `kustomize build infra/k8s/overlays/production` run by the tool (or `kubectl kustomize`), output held in memory | Every YAML document. |
+| Input              | Default                                                                                                                                 | How it is read                                                                                                                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Tracked files      | `--repo .`                                                                                                                              | `git ls-files -z`, then each file's bytes. Untracked and ignored files are out of scope.                                                                                                   |
+| Web bundle         | `--bundle apps/web/dist` (the `build:hosted` output directory; wr06 names it, and the default follows that name)                        | Every file under the directory, recursively.                                                                                                                                               |
+| Images             | `--image know-meet-web:boundary` and `--image know-meet-livekit:boundary` (repeatable; the tags the packet builds)                      | `docker image inspect` for `Config.Env`, `Config.Labels`, `Config.Cmd`, `Config.Entrypoint`; `docker image save` for every layer, every file in each layer tar, and the image config JSON. |
+| Rendered manifests | `--manifests`, default: `kustomize build infra/k8s/overlays/production` run by the tool (or `kubectl kustomize`), output held in memory | Every YAML document.                                                                                                                                                                       |
 
 A missing input (bundle directory absent, image not present locally, render
 command fails) is an error, exit 2. The scan never skips an input silently.
@@ -76,11 +76,11 @@ There is no path allowlist. A real finding is fixed at its source, not excused.
 
 ## Exit codes
 
-| Code | Meaning |
-|---|---|
-| 0 | Every input was read and nothing was found. |
-| 1 | At least one finding. |
-| 2 | The scan could not complete: a missing input, an unreadable layer, a failed render, a missing `LIVEKIT_` value. Not a pass. |
+| Code | Meaning                                                                                                                     |
+| ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 0    | Every input was read and nothing was found.                                                                                 |
+| 1    | At least one finding.                                                                                                       |
+| 2    | The scan could not complete: a missing input, an unreadable layer, a failed render, a missing `LIVEKIT_` value. Not a pass. |
 
 ## Output
 

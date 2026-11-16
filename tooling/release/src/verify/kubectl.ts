@@ -144,11 +144,7 @@ export async function tryRead<T>(
   }
 }
 
-export async function guarded(
-  rec: Recorder,
-  id: string,
-  step: () => Promise<void>,
-): Promise<void> {
+export async function guarded(rec: Recorder, id: string, step: () => Promise<void>): Promise<void> {
   await tryRead(rec, id, step);
 }
 

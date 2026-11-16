@@ -96,8 +96,8 @@ export function MeetingNotFoundView({ tried }: { readonly tried: string }) {
               <code className="rounded-6 bg-muted px-1.5 py-px font-mono text-code-inline">
                 {tried}
               </code>
-              . Check each character with the person who shared it: 0 and o, or 1 and l, are
-              easy to mix up.
+              . Check each character with the person who shared it: 0 and o, or 1 and l, are easy to
+              mix up.
             </>
           )}
         </p>

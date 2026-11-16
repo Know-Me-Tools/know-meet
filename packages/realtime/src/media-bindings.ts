@@ -31,7 +31,11 @@ interface Binding {
 export function createMediaBindings(): MediaBindings {
   const attached = new Map<Binding, AttachableTrack | null>();
 
-  const update = (binding: Binding, current: AttachableTrack | null, next: AttachableTrack | null) => {
+  const update = (
+    binding: Binding,
+    current: AttachableTrack | null,
+    next: AttachableTrack | null,
+  ) => {
     if (next === current) return;
     if (current !== null) current.detach(binding.element);
     if (next !== null) next.attach(binding.element);

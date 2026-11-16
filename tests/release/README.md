@@ -8,17 +8,17 @@ contract is `.kbd-orchestrator/phases/web-release/adopted-contract.json`
 
 ## Map from scenario to suite
 
-| ID | Feature | Runs in | Executed by |
-|---|---|---|---|
-| WR-1 | `features/wr-1-guest-meeting.feature` | packaged, hosted | `meeting.spec.ts` |
-| WR-2 | `features/wr-2-deep-links.feature` | packaged, hosted | `hosting.spec.ts` |
-| WR-3 | `features/wr-3-tls-and-headers.feature` | hosted (positive), packaged (negative control) | `headers.spec.ts` |
-| WR-4 | `features/wr-4-token-abuse.feature` | packaged, hosted | `token-abuse.spec.ts` |
-| WR-5 | `features/wr-5-hosted-surface.feature` | packaged, hosted (negative control: packaged) | `surface.spec.ts` |
-| WR-6 | `features/wr-6-secret-hygiene.feature` | command | `pnpm run lint:secrets` and `tooling/release/src/scan-artifacts.ts` ([scan-contract.md](scan-contract.md)) |
-| WR-7 | `features/wr-7-reproducible-deployment.feature` | command | `argocd app get know-meet --output json` against the workflow digests (wr09 9.4) |
-| WR-8 | `features/wr-8-accessible-screens.feature` | packaged | `accessibility.spec.ts` (automated part); the UI review is wr09 9.3 |
-| WR-9 | `features/wr-9-repository-rules.feature` | command | `pnpm run lint && pnpm run typecheck && pnpm run test && cargo check --workspace` |
+| ID   | Feature                                         | Runs in                                        | Executed by                                                                                                                                              |
+| ---- | ----------------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| WR-1 | `features/wr-1-guest-meeting.feature`           | packaged, hosted                               | `meeting.spec.ts`                                                                                                                                        |
+| WR-2 | `features/wr-2-deep-links.feature`              | packaged, hosted                               | `hosting.spec.ts`                                                                                                                                        |
+| WR-3 | `features/wr-3-tls-and-headers.feature`         | hosted (positive), packaged (negative control) | `headers.spec.ts`                                                                                                                                        |
+| WR-4 | `features/wr-4-token-abuse.feature`             | packaged, hosted                               | `token-abuse.spec.ts`                                                                                                                                    |
+| WR-5 | `features/wr-5-hosted-surface.feature`          | packaged, hosted (negative control: packaged)  | `surface.spec.ts`                                                                                                                                        |
+| WR-6 | `features/wr-6-secret-hygiene.feature`          | command                                        | `pnpm run lint:secrets` and `tooling/release/src/scan-artifacts.ts` ([scan-contract.md](scan-contract.md))                                               |
+| WR-7 | `features/wr-7-reproducible-deployment.feature` | command                                        | `kubectl --context gke_knowme-corporate_us-south1_main -n argocd get applications.argoproj.io/know-meet -o json` against the workflow digests (wr09 9.4) |
+| WR-8 | `features/wr-8-accessible-screens.feature`      | packaged                                       | `accessibility.spec.ts` (automated part); the UI review is wr09 9.3                                                                                      |
+| WR-9 | `features/wr-9-repository-rules.feature`        | command                                        | `pnpm run lint && pnpm run typecheck && pnpm run test && cargo check --workspace`                                                                        |
 
 The feature files do not carry `@ui` or `@cli`, so the fidelity suite
 (`tests/fidelity`, which selects on those tags) never generates them. They are
@@ -27,10 +27,10 @@ the WR id as a tag and `@negative-control` on its control.
 
 ## Projects and invocation
 
-| Project | Base URL | Excludes |
-|---|---|---|
-| `packaged` | `KM_RELEASE_BASE_URL`, default `http://localhost:8080` (the compose stack's same-origin entry: static image plus `/api` to the token service) | tests tagged `@hosted-only` |
-| `hosted` | `https://meet.know-me.tools` | tests tagged `@packaged-only` |
+| Project    | Base URL                                                                                                                                      | Excludes                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `packaged` | `KM_RELEASE_BASE_URL`, default `http://localhost:8080` (the compose stack's same-origin entry: static image plus `/api` to the token service) | tests tagged `@hosted-only`   |
+| `hosted`   | `https://meet.know-me.tools`                                                                                                                  | tests tagged `@packaged-only` |
 
 Both use Desktop Chrome with `--use-fake-device-for-media-stream`,
 `--use-fake-ui-for-media-stream` and camera and microphone permissions. Trace,
@@ -52,17 +52,17 @@ contract's boundary packet writes it, does not work with this layout: the root
 
 ## Run inputs (environment)
 
-| Variable | Needed by | Meaning |
-|---|---|---|
-| `KM_EVIDENCE_DIR` | all | Evidence folder. Use a new dated folder per invocation, for example `evidence/boundary-<date>/packaged`. Unset: `tests/release/reports/<timestamp>` (gitignored). |
-| `KM_RELEASE_BASE_URL` | packaged | Same-origin entry of the compose stack. |
-| `KM_RELEASE_STATIC_URL` | WR-3 negative control | The static image alone, without the test proxy or Gateway. Defaults to the base URL; set it if the proxy adds headers. |
-| `KM_RELEASE_DEFAULT_BUILD_URL` | WR-5 negative control | The default (non-hosted) build of the same commit. Default `http://127.0.0.1:4173` (Vite preview, as the fidelity suite serves it). |
-| `KM_RELEASE_CSP_FILE` | WR-3 | Path of the CSP header value written by `build:hosted` (wr06 task 6.3). |
-| `KM_RELEASE_TOKEN_TTL_SECONDS` | WR-4 | Token lifetime from the deployed configuration. |
-| `KM_RELEASE_RATE_LIMIT_BURST` | WR-4 | Requests one client may send back to back with a full bucket (both POST endpoints together). At least 2. |
-| `KM_RELEASE_RATE_LIMIT_REFILL_SECONDS` | WR-4 | Time for an empty bucket to refill completely. WR-4 waits this long before each burst. |
-| `KM_RELEASE_IMAGE_DIGESTS` | WR-1 evidence | The two image digests of the run, recorded as given. |
+| Variable                               | Needed by             | Meaning                                                                                                                                                           |
+| -------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `KM_EVIDENCE_DIR`                      | all                   | Evidence folder. Use a new dated folder per invocation, for example `evidence/boundary-<date>/packaged`. Unset: `tests/release/reports/<timestamp>` (gitignored). |
+| `KM_RELEASE_BASE_URL`                  | packaged              | Same-origin entry of the compose stack.                                                                                                                           |
+| `KM_RELEASE_STATIC_URL`                | WR-3 negative control | The static image alone, without the test proxy or Gateway. Defaults to the base URL; set it if the proxy adds headers.                                            |
+| `KM_RELEASE_DEFAULT_BUILD_URL`         | WR-5 negative control | The default (non-hosted) build of the same commit. Default `http://127.0.0.1:4173` (Vite preview, as the fidelity suite serves it).                               |
+| `KM_RELEASE_CSP_FILE`                  | WR-3                  | Path of the CSP header value written by `build:hosted` (wr06 task 6.3).                                                                                           |
+| `KM_RELEASE_TOKEN_TTL_SECONDS`         | WR-4                  | Token lifetime from the deployed configuration.                                                                                                                   |
+| `KM_RELEASE_RATE_LIMIT_BURST`          | WR-4                  | Requests one client may send back to back with a full bucket (both POST endpoints together). At least 2.                                                          |
+| `KM_RELEASE_RATE_LIMIT_REFILL_SECONDS` | WR-4                  | Time for an empty bucket to refill completely. WR-4 waits this long before each burst.                                                                            |
+| `KM_RELEASE_IMAGE_DIGESTS`             | WR-1 evidence         | The two image digests of the run, recorded as given.                                                                                                              |
 
 A missing required input fails the test with a message starting `BLOCKED:`. It
 never skips. The test runner holds no LiveKit credential: tokens come from the
@@ -109,11 +109,11 @@ follows the name field.
 
 wr03 (livekit-platform) implements this behind same-origin `/api`.
 
-| Method and path | Request | Success | Errors |
-|---|---|---|---|
-| `POST /api/meetings` | `{}` | 201 `{ ok: true, data: { code } }`, code matches `^km-[a-z0-9]{3}-[a-z0-9]{3}$` | 403, 429 |
-| `POST /api/token` | `{ code, name }`, name 1 to 60 characters | 200 `{ ok: true, data: { url, token, identity, room, expiresIn } }`, `room` equals `code` | 400, 403, 404 for any code not issued (any shape), 429 |
-| `GET /api/healthz` | none | 200 `{ ok: true, data: { status: "ok" } }` | none |
+| Method and path      | Request                                   | Success                                                                                   | Errors                                                 |
+| -------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `POST /api/meetings` | `{}`                                      | 201 `{ ok: true, data: { code } }`, code matches `^km-[a-z0-9]{3}-[a-z0-9]{3}$`           | 403, 429                                               |
+| `POST /api/token`    | `{ code, name }`, name 1 to 60 characters | 200 `{ ok: true, data: { url, token, identity, room, expiresIn } }`, `room` equals `code` | 400, 403, 404 for any code not issued (any shape), 429 |
+| `GET /api/healthz`   | none                                      | 200 `{ ok: true, data: { status: "ok" } }`                                                | none                                                   |
 
 Errors are `{ ok: false, error: { code, message } }` with `code` one of
 `invalid-request` (400), `forbidden-origin` (403), `meeting-not-found` (404),
