@@ -17,9 +17,9 @@ resources:
 # image pull instead of running something unreviewed. Never `latest`.
 images:
   - name: ghcr.io/know-me-tools/know-meet-web
-    newTag: pin-commit-sha-in-task-8-6
+    newTag: 8d4c47f6ebb224ae97ced15546f40f7523c180b2
   - name: ghcr.io/know-me-tools/know-meet-token-service
-    newTag: pin-commit-sha-in-task-8-6
+    newTag: 8d4c47f6ebb224ae97ced15546f40f7523c180b2
 
 # Copies each generated header value (security-headers.yaml, a local-config ConfigMap that
 # kustomize reads but does not emit) into the ResponseHeaderModifier of every HTTPS rule.
