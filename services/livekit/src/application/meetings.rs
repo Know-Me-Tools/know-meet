@@ -2,8 +2,9 @@
 //! for a code this service issued.
 
 use std::fmt;
+use std::net::IpAddr;
 use std::sync::Arc;
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
 use thiserror::Error;
 
@@ -24,6 +25,8 @@ pub enum MeetingError {
     NotFound,
     #[error("no more meetings can be stored right now")]
     CapacityExceeded,
+    #[error("this client already holds the maximum number of live meetings")]
+    TooManyLiveMeetings { retry_after: Duration },
     #[error(transparent)]
     Random(#[from] RandomError),
     #[error(transparent)]
@@ -59,13 +62,17 @@ impl MeetingService {
         Self { codes, random, issuer }
     }
 
-    pub fn create_meeting(&self, now: Instant) -> Result<RoomCode, MeetingError> {
+    /// `owner` is the client's rate-limit key; it bounds how many live codes one client holds.
+    pub fn create_meeting(&self, owner: IpAddr, now: Instant) -> Result<RoomCode, MeetingError> {
         for _ in 0..MAX_CODE_ATTEMPTS {
             let code = RoomCode::generate(|buf| self.random.fill(buf))?;
-            match self.codes.insert(code.clone(), now) {
+            match self.codes.insert(code.clone(), owner, now) {
                 Ok(()) => return Ok(code),
                 Err(StoreError::Duplicate) => continue,
                 Err(StoreError::Full) => return Err(MeetingError::CapacityExceeded),
+                Err(StoreError::OwnerLimit { retry_after }) => {
+                    return Err(MeetingError::TooManyLiveMeetings { retry_after });
+                }
             }
         }
         Err(MeetingError::CapacityExceeded)
@@ -82,6 +89,7 @@ impl MeetingService {
         self.random.fill(&mut suffix)?;
         let identity = participant_identity(&name, &suffix);
         let issued = self.issuer.issue(&TokenRequest { room: &room, identity: &identity, name: &name })?;
+        self.codes.mark_used(&room, now);
         Ok(TokenGrant { room, identity, token: issued.token, expires_in_secs: issued.expires_in_secs })
     }
 }
@@ -90,6 +98,7 @@ impl MeetingService {
 mod tests {
     use super::*;
     use crate::application::IssuedToken;
+    use crate::application::code_store::CodePolicy;
     use std::sync::Mutex;
     use std::time::Duration;
 
@@ -117,10 +126,23 @@ mod tests {
         }
     }
 
+    const UNUSED_TTL: Duration = Duration::from_secs(900);
+    const USED_TTL: Duration = Duration::from_secs(3600);
+    const PER_OWNER: usize = 3;
+
+    fn owner() -> IpAddr {
+        "203.0.113.7".parse().unwrap()
+    }
+
     fn service(capacity: usize) -> (MeetingService, Arc<RecordingIssuer>) {
         let issuer = Arc::new(RecordingIssuer::default());
         let service = MeetingService::new(
-            CodeStore::new(Duration::from_secs(3600), capacity),
+            CodeStore::new(CodePolicy {
+                unused_ttl: UNUSED_TTL,
+                used_ttl: USED_TTL,
+                capacity,
+                per_owner: PER_OWNER,
+            }),
             Arc::new(CountingRandom(Mutex::new(0))),
             issuer.clone(),
         );
@@ -131,7 +153,7 @@ mod tests {
     fn a_token_is_issued_for_a_generated_code_and_names_that_room() {
         let (service, issuer) = service(10);
         let now = Instant::now();
-        let code = service.create_meeting(now).unwrap();
+        let code = service.create_meeting(owner(), now).unwrap();
         let grant = service.issue_token(code.as_str(), "Guest A", now).unwrap();
         assert_eq!(grant.room, code);
         assert!(grant.identity.starts_with("guest-a-"));
@@ -149,19 +171,44 @@ mod tests {
     }
 
     #[test]
-    fn an_expired_code_is_not_found() {
+    fn an_unused_code_expires_after_the_short_lifetime() {
         let (service, _) = service(10);
         let now = Instant::now();
-        let code = service.create_meeting(now).unwrap();
-        let later = now + Duration::from_secs(3600);
+        let code = service.create_meeting(owner(), now).unwrap();
+        let later = now + UNUSED_TTL;
         assert!(matches!(service.issue_token(code.as_str(), "A", later), Err(MeetingError::NotFound)));
+    }
+
+    #[test]
+    fn issuing_a_token_keeps_the_code_for_the_long_lifetime() {
+        let (service, _) = service(10);
+        let now = Instant::now();
+        let code = service.create_meeting(owner(), now).unwrap();
+        service.issue_token(code.as_str(), "Host", now + Duration::from_secs(60)).unwrap();
+        let after_unused = now + UNUSED_TTL + Duration::from_secs(1);
+        assert!(service.issue_token(code.as_str(), "Guest", after_unused).is_ok());
+        assert!(matches!(service.issue_token(code.as_str(), "Late", now + USED_TTL), Err(MeetingError::NotFound)));
+    }
+
+    #[test]
+    fn a_client_over_its_live_code_cap_is_told_when_to_retry() {
+        let (service, _) = service(10);
+        let now = Instant::now();
+        for _ in 0..PER_OWNER {
+            service.create_meeting(owner(), now).unwrap();
+        }
+        match service.create_meeting(owner(), now) {
+            Err(MeetingError::TooManyLiveMeetings { retry_after }) => assert_eq!(retry_after, UNUSED_TTL),
+            other => panic!("expected TooManyLiveMeetings, got {other:?}"),
+        }
+        assert!(service.create_meeting("198.51.100.2".parse().unwrap(), now).is_ok());
     }
 
     #[test]
     fn an_invalid_name_is_refused_before_signing() {
         let (service, issuer) = service(10);
         let now = Instant::now();
-        let code = service.create_meeting(now).unwrap();
+        let code = service.create_meeting(owner(), now).unwrap();
         assert!(matches!(service.issue_token(code.as_str(), "  ", now), Err(MeetingError::InvalidName(_))));
         assert!(issuer.0.lock().unwrap().is_empty());
     }
@@ -170,8 +217,8 @@ mod tests {
     fn a_full_store_reports_capacity_exceeded() {
         let (service, _) = service(1);
         let now = Instant::now();
-        service.create_meeting(now).unwrap();
-        assert!(matches!(service.create_meeting(now), Err(MeetingError::CapacityExceeded)));
+        service.create_meeting(owner(), now).unwrap();
+        assert!(matches!(service.create_meeting(owner(), now), Err(MeetingError::CapacityExceeded)));
     }
 
     #[test]

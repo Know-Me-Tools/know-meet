@@ -46,6 +46,12 @@ services:
       - KM_TOKEN_TTL_SECONDS=${KM_TOKEN_TTL_SECONDS:-600}
       - KM_RATE_LIMIT_BURST=${KM_RATE_LIMIT_BURST:-10}
       - KM_RATE_LIMIT_REFILL_SECONDS=${KM_RATE_LIMIT_REFILL_SECONDS:-60}
+      # Meeting creation (security review H1): its own stricter bucket, a per-address cap on live
+      # codes, and a short lifetime for codes no token was ever issued for.
+      - KM_MEETING_RATE_LIMIT_BURST=${KM_MEETING_RATE_LIMIT_BURST:-3}
+      - KM_MEETING_RATE_LIMIT_REFILL_SECONDS=${KM_MEETING_RATE_LIMIT_REFILL_SECONDS:-600}
+      - KM_UNUSED_CODE_TTL_SECONDS=${KM_UNUSED_CODE_TTL_SECONDS:-900}
+      - KM_MAX_CODES_PER_CLIENT=${KM_MAX_CODES_PER_CLIENT:-5}
     read_only: true
     cap_drop:
       - ALL

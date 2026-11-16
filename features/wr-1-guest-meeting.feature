@@ -39,6 +39,12 @@ Feature: WR-1 Two guests hold a real meeting at the public URL
     Then context B shows zero remote participants
     And the room code, screenshots of both contexts, the trace and the image digests are recorded
 
+  Scenario: A guest who presses browser Back is no longer shown in the meeting
+    Given guest A has started a meeting and guest B has joined it with the issued room code
+    And context B shows one remote participant with a subscribed video track
+    When guest A presses the browser Back button
+    Then context B shows zero remote participants
+
   @negative-control
   Scenario: A well-formed code that was never issued is refused
     Given a well-formed room code that the service never issued

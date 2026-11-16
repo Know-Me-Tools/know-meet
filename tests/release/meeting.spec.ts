@@ -77,6 +77,39 @@ test.describe("WR-1 Two guests hold a real meeting at the public URL", () => {
   );
 
   test(
+    "a guest who presses browser Back is no longer shown in the meeting",
+    { tag: ["@WR-1", "@value-critical", "@smoke"] },
+    async ({ browser }, testInfo) => {
+      test.setTimeout(MEETING_TEST_TIMEOUT_MS);
+      const contextA = await browser.newContext();
+      const contextB = await browser.newContext();
+      const pageA = await contextA.newPage();
+      const pageB = await contextB.newPage();
+      try {
+        const { code } = await startMeeting(pageA, "Guest A");
+        const tokenB = await joinByCode(pageB, code, "Guest B");
+        expect(tokenB.status(), "B: POST /api/token status").toBe(STATUS.ok);
+        await expectInRoom(pageB, code);
+
+        // Precondition: B sees A before Back, so a zero count afterwards is a change.
+        const seenByB = await expectOneRemoteWithMedia(pageB, "context B before A presses Back");
+        await attachJson(testInfo, "wr-1-back-remote-media.json", { roomCode: code, seenByB });
+        await attachScreenshot(testInfo, pageB, "wr-1-back-context-b-sees-a");
+
+        await pageA.goBack();
+
+        await expect(remoteTiles(pageB), "context B after A presses Back").toHaveCount(0, {
+          timeout: CONNECT_TIMEOUT_MS,
+        });
+        await attachScreenshot(testInfo, pageB, "wr-1-back-context-b-alone");
+      } finally {
+        await contextA.close();
+        await contextB.close();
+      }
+    },
+  );
+
+  test(
     "a well-formed code that was never issued is refused",
     { tag: ["@WR-1", "@negative-control"] },
     async ({ browser, baseURL, request }, testInfo) => {

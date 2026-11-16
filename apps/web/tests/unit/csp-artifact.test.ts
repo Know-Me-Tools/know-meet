@@ -39,6 +39,7 @@ test("the hosted header is the existing builder's value for the same inputs", ()
     buildContentSecurityPolicyHeader({
       livekitUrl: "wss://lk.example",
       mediaOrigins: "https://cdn.example",
+      hosted: true,
     }),
   );
 });
@@ -49,7 +50,7 @@ test("the header allows the LiveKit signalling origin, adds frame-ancestors, and
   const connect = header.split("; ").find((d) => d.startsWith("connect-src "));
   assert.ok(connect?.includes("wss://lk.example"), "connect-src has the wss origin");
   assert.ok(header.endsWith("; frame-ancestors 'none'"));
-  const meta = buildContentSecurityPolicy({ livekitUrl: "wss://lk.example" });
+  const meta = buildContentSecurityPolicy({ livekitUrl: "wss://lk.example", hosted: true });
   assert.ok(header.startsWith(`${meta}; `), "the meta policy is the header minus header-only part");
 });
 
@@ -81,4 +82,13 @@ test("an empty or multi-line value is refused and nothing is written", () => {
     assert.throws(() => writeCspArtifact(path, "a; b\nc"), /single line/);
     assert.equal(existsSync(path), false);
   });
+});
+
+test("hosted connect-src omits the Tauri IPC origins and the default build keeps them", () => {
+  const connectOf = (policy: string): string[] =>
+    (policy.split("; ").find((d) => d.startsWith("connect-src ")) ?? "").split(" ").slice(1);
+  const hosted = connectOf(hostedContentSecurityPolicyHeader(resolveBuildInputs(HOSTED_ENV)));
+  assert.deepEqual(hosted, ["'self'", "wss://lk.example", "https://lk.example"]);
+  const desktop = connectOf(buildContentSecurityPolicy({ livekitUrl: undefined }));
+  assert.deepEqual(desktop, ["'self'", "ipc:", "http://ipc.localhost"]);
 });

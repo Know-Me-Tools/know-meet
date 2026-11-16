@@ -106,3 +106,43 @@ async fn with_zero_trusted_hops_the_forwarded_header_is_ignored() {
     // Same TCP peer, different header: still the same bucket.
     assert_eq!(create_meeting(&app, CLIENT_B).await.status, StatusCode::TOO_MANY_REQUESTS);
 }
+
+/// Security review H1: meeting creation has its own, stricter per-client bucket.
+#[tokio::test]
+async fn meeting_creation_has_a_stricter_bucket_that_token_requests_do_not_share() {
+    let app = app(&[
+        (env::RATE_LIMIT_BURST, "100"),
+        (env::MEETING_RATE_LIMIT_BURST, "3"),
+        (env::MEETING_RATE_LIMIT_REFILL_SECONDS, "600"),
+    ]);
+    let code = issued_code(&app, CLIENT_A).await;
+    issued_code(&app, CLIENT_A).await;
+    issued_code(&app, CLIENT_A).await;
+    let refused = create_meeting(&app, CLIENT_A).await;
+    assert_eq!(refused.status, StatusCode::TOO_MANY_REQUESTS);
+    assert_eq!(refused.error_code(), Some("rate-limited"));
+    let retry: u64 = refused.headers[header::RETRY_AFTER].to_str().unwrap().parse().unwrap();
+    assert!((1..=200).contains(&retry), "Retry-After {retry}");
+    // Token requests from the same client are unaffected, and other clients still create.
+    assert_eq!(request_token(&app, &code, "Guest A", CLIENT_A).await.status, StatusCode::OK);
+    assert_eq!(create_meeting(&app, CLIENT_B).await.status, StatusCode::CREATED);
+}
+
+/// Security review H1: one client cannot hold more than its share of live codes.
+#[tokio::test]
+async fn a_client_at_its_live_code_cap_is_rate_limited_and_others_are_not() {
+    let app = app(&[
+        (env::RATE_LIMIT_BURST, "100"),
+        (env::MEETING_RATE_LIMIT_BURST, "100"),
+        (env::MAX_CODES_PER_CLIENT, "2"),
+        (env::UNUSED_CODE_TTL_SECONDS, "900"),
+    ]);
+    issued_code(&app, CLIENT_A).await;
+    issued_code(&app, CLIENT_A).await;
+    let refused = create_meeting(&app, CLIENT_A).await;
+    assert_eq!(refused.status, StatusCode::TOO_MANY_REQUESTS);
+    assert_eq!(refused.error_code(), Some("rate-limited"));
+    let retry: u64 = refused.headers[header::RETRY_AFTER].to_str().unwrap().parse().unwrap();
+    assert!((1..=900).contains(&retry), "Retry-After {retry}");
+    assert_eq!(create_meeting(&app, CLIENT_B).await.status, StatusCode::CREATED);
+}

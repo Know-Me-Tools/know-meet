@@ -26,6 +26,10 @@ pub mod env {
     pub const RATE_LIMIT_REFILL_SECONDS: &str = "KM_RATE_LIMIT_REFILL_SECONDS";
     pub const CODE_TTL_SECONDS: &str = "KM_CODE_TTL_SECONDS";
     pub const MAX_STORED_CODES: &str = "KM_MAX_STORED_CODES";
+    pub const MEETING_RATE_LIMIT_BURST: &str = "KM_MEETING_RATE_LIMIT_BURST";
+    pub const MEETING_RATE_LIMIT_REFILL_SECONDS: &str = "KM_MEETING_RATE_LIMIT_REFILL_SECONDS";
+    pub const UNUSED_CODE_TTL_SECONDS: &str = "KM_UNUSED_CODE_TTL_SECONDS";
+    pub const MAX_CODES_PER_CLIENT: &str = "KM_MAX_CODES_PER_CLIENT";
     pub const REQUEST_TIMEOUT_SECONDS: &str = "KM_REQUEST_TIMEOUT_SECONDS";
     pub const ROOM_MAX_PARTICIPANTS: &str = "KM_ROOM_MAX_PARTICIPANTS";
     pub const ROOM_EMPTY_TIMEOUT_SECONDS: &str = "KM_ROOM_EMPTY_TIMEOUT_SECONDS";
@@ -69,9 +73,17 @@ pub struct Config {
     pub trusted_proxy_hops: usize,
     pub bind_addr: SocketAddr,
     pub token_ttl: Duration,
+    /// Shared by every POST endpoint.
     pub rate_limit: RateLimitConfig,
+    /// A second, stricter bucket that only `POST /api/meetings` spends.
+    pub meeting_rate_limit: RateLimitConfig,
+    /// Lifetime of a code once a token has been issued for it, counted from creation.
     pub code_ttl: Duration,
+    /// Lifetime of a code no token has been issued for yet. Never above `code_ttl`.
+    pub unused_code_ttl: Duration,
     pub max_stored_codes: usize,
+    /// Live codes one client address may hold at once.
+    pub max_codes_per_client: usize,
     pub request_timeout: Duration,
     pub room: RoomLimits,
 }
@@ -94,8 +106,18 @@ impl Config {
         let token_ttl = optional_bounded(lookup, env::TOKEN_TTL_SECONDS, 600, MIN_TOKEN_TTL_SECONDS, MAX_TOKEN_TTL_SECONDS)?;
         let burst = optional_bounded(lookup, env::RATE_LIMIT_BURST, 10, 1, 1000)?;
         let refill = optional_bounded(lookup, env::RATE_LIMIT_REFILL_SECONDS, 60, 1, 86_400)?;
+        let meeting_burst = optional_bounded(lookup, env::MEETING_RATE_LIMIT_BURST, 3, 1, 1000)?;
+        let meeting_refill = optional_bounded(lookup, env::MEETING_RATE_LIMIT_REFILL_SECONDS, 600, 1, 86_400)?;
         let code_ttl = optional_bounded(lookup, env::CODE_TTL_SECONDS, 86_400, 60, 604_800)?;
+        let unused_code_ttl = optional_bounded(lookup, env::UNUSED_CODE_TTL_SECONDS, 900, 60, 86_400)?;
+        if unused_code_ttl > code_ttl {
+            return Err(ConfigError::Invalid {
+                name: env::UNUSED_CODE_TTL_SECONDS,
+                reason: format!("must not exceed {}", env::CODE_TTL_SECONDS),
+            });
+        }
         let max_stored_codes = optional_bounded(lookup, env::MAX_STORED_CODES, 10_000, 1, 1_000_000)?;
+        let max_codes_per_client = optional_bounded(lookup, env::MAX_CODES_PER_CLIENT, 5, 1, 10_000)?;
         let request_timeout = optional_bounded(lookup, env::REQUEST_TIMEOUT_SECONDS, 10, 1, 60)?;
         let max_participants = optional_bounded(lookup, env::ROOM_MAX_PARTICIPANTS, 10, 2, 100)?;
         let empty_timeout = optional_bounded(lookup, env::ROOM_EMPTY_TIMEOUT_SECONDS, 300, 10, 86_400)?;
@@ -107,8 +129,14 @@ impl Config {
             bind_addr,
             token_ttl: Duration::from_secs(token_ttl),
             rate_limit: RateLimitConfig { burst: to_u32(burst), refill: Duration::from_secs(refill) },
+            meeting_rate_limit: RateLimitConfig {
+                burst: to_u32(meeting_burst),
+                refill: Duration::from_secs(meeting_refill),
+            },
             code_ttl: Duration::from_secs(code_ttl),
+            unused_code_ttl: Duration::from_secs(unused_code_ttl),
             max_stored_codes: to_usize(max_stored_codes),
+            max_codes_per_client: to_usize(max_codes_per_client),
             request_timeout: Duration::from_secs(request_timeout),
             room: RoomLimits {
                 max_participants: to_u32(max_participants),

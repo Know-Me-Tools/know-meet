@@ -1,4 +1,5 @@
-//! One token bucket per client address, shared by every POST endpoint.
+//! One token bucket per client address. The service holds two limiters: one shared by
+//! every POST endpoint and a stricter one spent only by meeting creation.
 //!
 //! In memory, so the limit is per replica; the service runs as one replica.
 

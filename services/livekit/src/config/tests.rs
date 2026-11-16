@@ -30,6 +30,42 @@ fn loads_with_defaults() {
 }
 
 #[test]
+fn meeting_creation_defaults_are_strict() {
+    let config = load(&base()).unwrap();
+    assert_eq!(config.meeting_rate_limit, RateLimitConfig { burst: 3, refill: Duration::from_secs(600) });
+    assert_eq!(config.unused_code_ttl, Duration::from_secs(900));
+    assert_eq!(config.code_ttl, Duration::from_secs(86_400));
+    assert_eq!(config.max_codes_per_client, 5);
+}
+
+#[test]
+fn an_unused_code_lifetime_above_the_code_lifetime_is_refused() {
+    let mut vars = base();
+    vars.insert(env::CODE_TTL_SECONDS, "600".to_owned());
+    vars.insert(env::UNUSED_CODE_TTL_SECONDS, "601".to_owned());
+    let error = load(&vars).unwrap_err();
+    assert!(matches!(error, ConfigError::Invalid { name, .. } if name == env::UNUSED_CODE_TTL_SECONDS));
+    assert!(!error.to_string().contains("601"), "{error}");
+    vars.insert(env::UNUSED_CODE_TTL_SECONDS, "600".to_owned());
+    assert_eq!(load(&vars).unwrap().unused_code_ttl, Duration::from_secs(600));
+}
+
+#[test]
+fn the_new_meeting_limits_are_bounded() {
+    for (name, bad) in [
+        (env::MEETING_RATE_LIMIT_BURST, "0"),
+        (env::MEETING_RATE_LIMIT_REFILL_SECONDS, "0"),
+        (env::UNUSED_CODE_TTL_SECONDS, "59"),
+        (env::MAX_CODES_PER_CLIENT, "0"),
+        (env::MAX_CODES_PER_CLIENT, "10001"),
+    ] {
+        let mut vars = base();
+        vars.insert(name, bad.to_owned());
+        assert!(matches!(load(&vars), Err(ConfigError::Invalid { name: n, .. }) if n == name), "{name}={bad}");
+    }
+}
+
+#[test]
 fn each_missing_required_variable_is_named_without_any_value() {
     for name in [
         env::LIVEKIT_URL,

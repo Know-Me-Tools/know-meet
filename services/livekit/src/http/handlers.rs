@@ -1,6 +1,9 @@
 //! `/api` handlers. Every POST runs the same gate, in this order: `Origin`, rate limit,
 //! `Content-Type`, body size. A refused `Origin` costs no rate-limit token; every
 //! request that passes it does, whether or not it then succeeds.
+//!
+//! `POST /api/meetings` then also spends a token from a second, stricter per-client
+//! bucket, after its body has been accepted and before a code is generated.
 
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use std::sync::Arc;
@@ -16,14 +19,17 @@ use serde::{Deserialize, Serialize};
 use super::client_addr::client_address;
 use super::error::ApiError;
 use super::guards::{is_json, origin_allowed};
-use crate::application::{MeetingService, RateLimiter};
+use crate::application::{MeetingService, RateLimiter, bucket_key};
 use crate::domain::Decision;
 
 pub const MAX_BODY_BYTES: usize = 4096;
 
 pub struct Shared {
     pub meetings: MeetingService,
+    /// Shared by every POST endpoint.
     pub limiter: RateLimiter,
+    /// Spent only by `POST /api/meetings`, in addition to `limiter`.
+    pub meeting_limiter: RateLimiter,
     pub site_origin: String,
     /// Public `wss://` URL handed to clients.
     pub livekit_url: String,
@@ -82,15 +88,21 @@ pub async fn health() -> Response {
 }
 
 pub async fn create_meeting(State(state): State<AppState>, request: Request) -> Result<Response, ApiError> {
-    let body = gate(&state.0, request).await?;
+    let (client, body) = gate(&state.0, request).await?;
     serde_json::from_slice::<CreateMeetingBody>(&body).map_err(|_| ApiError::InvalidRequest(BODY_MESSAGE))?;
-    let code = state.0.meetings.create_meeting(Instant::now()).map_err(log_failure)?;
+    let owner = bucket_key(client);
+    let now = Instant::now();
+    if let Decision::Limited { retry_after } = state.0.meeting_limiter.check(owner, now) {
+        tracing::info!(event = "request_refused", code = "rate-limited", limit = "meeting-creation");
+        return Err(ApiError::rate_limited(retry_after));
+    }
+    let code = state.0.meetings.create_meeting(owner, now).map_err(log_failure)?;
     tracing::info!(event = "meeting_created");
     Ok(success(StatusCode::CREATED, CreatedMeeting { code: code.as_str() }))
 }
 
 pub async fn issue_token(State(state): State<AppState>, request: Request) -> Result<Response, ApiError> {
-    let body = gate(&state.0, request).await?;
+    let (_, body) = gate(&state.0, request).await?;
     let TokenBody { code, name } =
         serde_json::from_slice(&body).map_err(|_| ApiError::InvalidRequest(BODY_MESSAGE))?;
     let grant = state.0.meetings.issue_token(&code, &name, Instant::now()).map_err(log_failure)?;
@@ -108,13 +120,23 @@ pub async fn issue_token(State(state): State<AppState>, request: Request) -> Res
 }
 
 /// Logs the outcome class only: never the code, the name, the token or the address.
+/// A full store is a warning: it means meeting creation is down for everyone.
 fn log_failure(error: crate::application::MeetingError) -> ApiError {
+    use crate::application::MeetingError;
+    let cap_hit = matches!(error, MeetingError::TooManyLiveMeetings { .. });
     let api = ApiError::from(error);
-    tracing::info!(event = "request_refused", code = api.code());
+    if api == ApiError::CapacityExceeded {
+        tracing::warn!(event = "request_refused", code = api.code());
+    } else if cap_hit {
+        tracing::info!(event = "request_refused", code = api.code(), limit = "live-codes-per-client");
+    } else {
+        tracing::info!(event = "request_refused", code = api.code());
+    }
     api
 }
 
-async fn gate(shared: &Shared, request: Request) -> Result<Bytes, ApiError> {
+/// Returns the client address (before keying) and the body.
+async fn gate(shared: &Shared, request: Request) -> Result<(IpAddr, Bytes), ApiError> {
     let (parts, body) = request.into_parts();
     if !origin_allowed(&parts.headers, &shared.site_origin) {
         tracing::info!(event = "request_refused", code = "forbidden-origin");
@@ -132,5 +154,6 @@ async fn gate(shared: &Shared, request: Request) -> Result<Bytes, ApiError> {
     if !is_json(&parts.headers) {
         return Err(ApiError::InvalidRequest(BODY_MESSAGE));
     }
-    to_bytes(body, MAX_BODY_BYTES).await.map_err(|_| ApiError::InvalidRequest(BODY_MESSAGE))
+    let bytes = to_bytes(body, MAX_BODY_BYTES).await.map_err(|_| ApiError::InvalidRequest(BODY_MESSAGE))?;
+    Ok((client, bytes))
 }

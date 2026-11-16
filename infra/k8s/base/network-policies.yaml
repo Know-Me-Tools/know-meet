@@ -1,0 +1,74 @@
+# NetworkPolicies for the know-meet namespace (security review M2). Without them any pod in
+# the shared cluster can call the token service directly, write its own X-Forwarded-For and
+# escape the per-client rate limit.
+#
+# ENFORCEMENT IS NOT YET CONFIRMED. The cluster check (web-release/cluster-check.md) observed
+# LEGACY_DATAPATH, where GKE enforces NetworkPolicy only if network policy enforcement is
+# enabled on the cluster. Until enforcement is confirmed at the boundary these objects apply
+# cleanly but change nothing.
+#
+# Kubelet probes: assumed unaffected. With GKE Dataplane V2, or with GKE network policy
+# enforcement on the legacy datapath, traffic from the node's own kubelet to its pods is
+# allowed regardless of NetworkPolicy. Confirm at the boundary that both Deployments stay Ready.
+#
+# Envoy data-plane pods are selected by namespace envoy-gateway-system plus the labels Envoy
+# Gateway v1.10 puts on proxy pods: app.kubernetes.io/component: proxy and
+# app.kubernetes.io/managed-by: envoy-gateway. These labels come from the Envoy Gateway
+# convention, not from the cluster; confirm them at the boundary with
+# `kubectl get pods -n envoy-gateway-system --show-labels` once the Gateway exists.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: know-meet-token-service
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/part-of: know-meet
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: know-meet-token-service
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: envoy-gateway-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: proxy
+              app.kubernetes.io/managed-by: envoy-gateway
+      ports:
+        - protocol: TCP
+          port: 8080
+  # Deny all egress. The service signs tokens locally with the LiveKit API secret
+  # (livekit-api access-token feature only, no HTTP client) and opens no outbound
+  # connection, so it needs neither DNS nor any other destination.
+  egress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: know-meet-web
+  namespace: know-meet
+  labels:
+    app.kubernetes.io/part-of: know-meet
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: know-meet-web
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: envoy-gateway-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: proxy
+              app.kubernetes.io/managed-by: envoy-gateway
+      ports:
+        - protocol: TCP
+          port: 8080

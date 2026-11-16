@@ -16,6 +16,7 @@ export function hostedContentSecurityPolicyHeader(inputs: BuildInputs): string {
   return buildContentSecurityPolicyHeader({
     livekitUrl: inputs.livekitUrl,
     mediaOrigins: inputs.mediaOrigins,
+    hosted: true,
   });
 }
 

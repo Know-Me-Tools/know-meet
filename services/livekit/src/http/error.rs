@@ -71,6 +71,8 @@ impl From<MeetingError> for ApiError {
             MeetingError::InvalidName(_) => Self::InvalidRequest(NAME_MESSAGE),
             MeetingError::NotFound => Self::MeetingNotFound,
             MeetingError::CapacityExceeded => Self::CapacityExceeded,
+            // Same 429 shape and Retry-After the web client already maps for /api/meetings.
+            MeetingError::TooManyLiveMeetings { retry_after } => Self::rate_limited(retry_after),
             // Both are logged where they occur, without key material.
             MeetingError::Random(_) | MeetingError::Issue(_) => Self::Internal,
         }
@@ -118,5 +120,12 @@ mod tests {
         assert_eq!((ApiError::MeetingNotFound.status().as_u16(), ApiError::MeetingNotFound.code()), (404, "meeting-not-found"));
         let limited = ApiError::RateLimited { retry_after_secs: 5 };
         assert_eq!((limited.status().as_u16(), limited.code()), (429, "rate-limited"));
+        assert_eq!((ApiError::CapacityExceeded.status().as_u16(), ApiError::CapacityExceeded.code()), (503, "capacity-exceeded"));
+    }
+
+    #[test]
+    fn a_live_code_cap_is_reported_as_rate_limited_with_retry_after() {
+        let error = ApiError::from(MeetingError::TooManyLiveMeetings { retry_after: Duration::from_millis(899_500) });
+        assert_eq!(error, ApiError::RateLimited { retry_after_secs: 900 });
     }
 }

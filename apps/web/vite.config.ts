@@ -17,6 +17,7 @@ const buildInputs = resolveBuildInputs(process.env);
 const contentSecurityPolicy = buildContentSecurityPolicy({
   livekitUrl: buildInputs.livekitUrl,
   mediaOrigins: buildInputs.mediaOrigins,
+  hosted: buildInputs.hosted,
 });
 
 export default defineConfig({
