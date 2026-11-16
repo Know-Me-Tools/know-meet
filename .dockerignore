@@ -1,0 +1,37 @@
+# Build context for both release images is the repository root (wr07). This is a blocklist on
+# purpose: the Rust image needs every Cargo workspace member manifest and the pnpm image needs
+# every workspace package.json, so source trees are not excluded wholesale. Keep it in step with
+# .gitignore. Secrets and key material never enter a build context.
+.git
+**/node_modules
+**/target
+**/dist
+**/dist-hosted*
+**/.turbo
+**/.dart_tool
+apps/mobile/build
+.env
+.env.*
+**/*.pem
+**/*.p8
+**/*.p12
+**/*.pfx
+**/*.key
+**/*.jks
+**/*.keystore
+**/key.properties
+tests/*/reports
+tests/*/test-results
+tests/*/playwright-report
+evidence
+.prometheus
+.kbd-orchestrator
+.agent-team
+.claude
+.codex
+.dsh
+.kimi-code
+.opencode
+.qwen
+.agents
+.impeccable

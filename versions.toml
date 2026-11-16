@@ -7,6 +7,27 @@ created = "2026-11-09"
 
 [pins]
 # name = "x.y.z"
+# web-release phase, added 2026-11-15. Scoped npm names are written without "@" and "/".
+
+# npm
+livekit-client = "2.24.1"                 # Apache-2.0. Fallback if the 24-hour age rule blocks it: 2.24.0
+dom-mediacapture-record-types = "1.0.22"  # @types/dom-mediacapture-record; MIT; peer of livekit-client
+axe-core-playwright = "4.14.0"            # @axe-core/playwright; MPL-2.0; already used by tests/fidelity
+playwright-test = "1.65.0"                # @playwright/test; existing repo pin, not bumped
+
+# crates for services/livekit
+livekit-api = "0.10.2"                    # Apache-2.0; default-features = false, features = ["access-token"]
+tower_governor = "0.8.0"                  # MIT OR Apache-2.0; candidate, evaluated in task 3.3
+tracing-subscriber = "0.3.23"             # MIT
+getrandom = "0.4.3"                       # MIT OR Apache-2.0; for room codes
+serde_json = "1.0.145"
+tracing = "0.1.44"
+thiserror = "2.0.17"
+
+# container bases (recorded only; pinned by digest when the Dockerfiles are written)
+static-web-server-image = "joseluisq/static-web-server:2.44.2"
+rust-builder-image = "rust:1.97.1-slim-trixie"
+runtime-base-image = "gcr.io/distroless/static-debian13:nonroot"
 
 [decisions]
 # id = "rationale"

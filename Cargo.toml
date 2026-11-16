@@ -1,6 +1,7 @@
 # Root Cargo workspace (c05). Package manifests belong to their owning roles:
-# crates/** architect, services/bff/** build-platform, apps/desktop/src-tauri
-# client-shell. Toolchain comes from rust-toolchain.toml (tooling/versions.toml).
+# crates/** architect, services/bff/** build-platform, services/livekit/**
+# livekit-platform (wr03/wr07), apps/desktop/src-tauri client-shell. Toolchain comes
+# from rust-toolchain.toml (tooling/versions.toml).
 [workspace]
 resolver = "3"
 members = [
@@ -8,6 +9,7 @@ members = [
   "crates/gen-ui-db",
   "crates/gen-ui-notes",
   "services/bff",
+  "services/livekit",
   "apps/desktop/src-tauri",
 ]
 # The flutter_rust_bridge crate keeps its generated standalone lockfile and is

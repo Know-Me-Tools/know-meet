@@ -1,0 +1,104 @@
+# Public routes for meet.know-me.tools. Same split as tooling/release/proxy/nginx-split.conf:
+# /api to the token service, everything else to the static web server. The routes live in
+# the know-meet namespace next to their Services (no ReferenceGrant needed) and attach to
+# the shared main-gateway, whose listeners admit routes from this namespace only.
+#
+# Every route names the one hostname explicitly. Never remove `hostnames`: a route without
+# it inherits the listener's host today, but the hostname is what external-dns publishes.
+#
+# Security headers: every HTTPS rule carries the same ResponseHeaderModifier. The `value`
+# fields below are filled by the replacements in kustomization.yaml from
+# security-headers.yaml, which tooling/release/src/render-gateway-headers.ts generates.
+# `set` replaces a header the backend already sent (the token service sends
+# X-Content-Type-Options), so no header appears twice. The static image sends none of them
+# (SERVER_SECURITY_HEADERS=false in apps/web/Dockerfile).
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: know-meet-https
+  namespace: know-meet
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: main-gateway
+      namespace: envoy-gateway-system
+      sectionName: https-meet
+  hostnames:
+    - meet.know-me.tools
+  rules:
+    # /api and /api/... (PathPrefix matches whole path segments, so /apiary is not matched).
+    # /api/healthz is in this rule, so it carries the headers too.
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      filters:
+        - type: ResponseHeaderModifier
+          responseHeaderModifier:
+            set:
+              - name: Strict-Transport-Security
+                value: from-security-headers
+              - name: Content-Security-Policy
+                value: from-security-headers
+              - name: X-Content-Type-Options
+                value: from-security-headers
+              - name: X-Frame-Options
+                value: from-security-headers
+              - name: Referrer-Policy
+                value: from-security-headers
+              - name: Permissions-Policy
+                value: from-security-headers
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: know-meet-token-service
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: ResponseHeaderModifier
+          responseHeaderModifier:
+            set:
+              - name: Strict-Transport-Security
+                value: from-security-headers
+              - name: Content-Security-Policy
+                value: from-security-headers
+              - name: X-Content-Type-Options
+                value: from-security-headers
+              - name: X-Frame-Options
+                value: from-security-headers
+              - name: Referrer-Policy
+                value: from-security-headers
+              - name: Permissions-Policy
+                value: from-security-headers
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: know-meet-web
+          port: 8080
+---
+# Plain HTTP: every request is redirected to the same path on https://meet.know-me.tools.
+# No port is set, so the Location header carries none (443 is the scheme's default).
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: know-meet-http-redirect
+  namespace: know-meet
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: main-gateway
+      namespace: envoy-gateway-system
+      sectionName: http-meet
+  hostnames:
+    - meet.know-me.tools
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301

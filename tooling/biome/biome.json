@@ -113,16 +113,93 @@
                       "@tauri-apps/**",
                       "livekit-client",
                       "livekit-client/**",
+                      "livekit-server-sdk",
+                      "livekit-server-sdk/**",
                       "@livekit/**",
                       "@radix-ui/**",
                       "@know-meet/ui",
                       "@know-meet/ui/**",
+                      "@know-meet/realtime",
+                      "@know-meet/realtime/**",
+                      "@know-meet/web",
+                      "@know-meet/web/**",
+                      "@know-meet/desktop",
+                      "@know-meet/desktop/**",
+                      "apps/**",
+                      "**/apps/**",
+                      "**/packages/realtime",
+                      "**/packages/realtime/**",
                       "**/infrastructure",
                       "**/infrastructure/**",
                       "**/presentation",
                       "**/presentation/**"
                     ],
-                    "message": "Clean architecture: domain and application code must not import UI, Tauri, LiveKit or outer layers. Depend on an application-owned port instead."
+                    "message": "Clean architecture: domain and application code must not import UI, Tauri, LiveKit, packages/realtime, apps or outer layers. Depend on an application-owned port instead."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/packages/realtime/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "react",
+                      "react/**",
+                      "react-dom",
+                      "react-dom/**",
+                      "@tauri-apps/**",
+                      "@radix-ui/**",
+                      "@know-meet/ui",
+                      "@know-meet/ui/**",
+                      "@know-meet/web",
+                      "@know-meet/web/**",
+                      "@know-meet/desktop",
+                      "@know-meet/desktop/**",
+                      "apps/**",
+                      "**/apps/**"
+                    ],
+                    "message": "packages/realtime is the LiveKit adapter: it may import livekit-client, application and domain, but no UI framework, Tauri or apps."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/apps/web/**/presentation/**",
+        "**/packages/ui/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "livekit-client",
+                      "livekit-client/**",
+                      "livekit-server-sdk",
+                      "livekit-server-sdk/**"
+                    ],
+                    "message": "Presentation code must not import livekit-client directly. Consume the application port, wired through packages/realtime."
                   }
                 ]
               }

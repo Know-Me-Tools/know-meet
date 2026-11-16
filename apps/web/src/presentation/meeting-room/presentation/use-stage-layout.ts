@@ -4,7 +4,7 @@
 // control of its own, it joins the tab order so keyboard users can scroll it
 // (RV-23 focusable region; axe scrollable-region-focusable).
 import { type RefObject, useLayoutEffect, useState } from "react";
-import { columnsFor } from "../domain/room";
+import { columnsFor } from "../domain/guest-room";
 
 export interface StageLayout {
   readonly columns: number;

@@ -1,0 +1,23 @@
+{
+  "name": "@know-meet/realtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Know Meet realtime adapter: the RealtimeRoom port over livekit-client. No React, UI or Tauri imports; no LiveKit type leaves the package.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test \"tests/unit/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@know-meet/application": "workspace:*",
+    "@know-meet/domain": "workspace:*",
+    "livekit-client": "2.24.1"
+  },
+  "devDependencies": {
+    "@types/dom-mediacapture-record": "1.0.22",
+    "typescript": "7.0.2"
+  }
+}

@@ -1,0 +1,8 @@
+# Environment-independent workloads. Every manifest names its namespace itself; no
+# namespace transformer is used, so nothing here can move a shared resource.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - web.yaml
+  - token-service.yaml

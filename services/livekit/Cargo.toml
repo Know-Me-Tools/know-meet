@@ -1,0 +1,25 @@
+[package]
+name = "km-token-service"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Know Meet token service: room codes and short-lived LiveKit guest tokens"
+
+[dependencies]
+axum = "=0.8.8"
+getrandom = "=0.4.3"
+# access-token only: no server-API client, no reqwest, no TLS stack. livekit-token
+# installs its own HMAC-only jsonwebtoken CryptoProvider, so no crypto feature is needed.
+livekit-api = { version = "=0.10.2", default-features = false, features = ["access-token"] }
+# Already a transitive dependency of livekit-api 0.10.2 (^0.8.3). Named directly only for
+# RoomConfiguration, which livekit-api does not re-export. Not yet pinned in versions.toml.
+livekit-protocol = "=0.8.3"
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+thiserror = "=2.0.17"
+tokio = { version = "=1.49.0", features = ["macros", "rt-multi-thread", "net", "signal", "time"] }
+tracing = "=0.1.44"
+tracing-subscriber = { version = "=0.3.23", default-features = false, features = ["std", "fmt", "json", "env-filter"] }
+
+[dev-dependencies]
+tower = { version = "=0.5.3", features = ["util"] }

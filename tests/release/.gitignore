@@ -1,0 +1,3 @@
+# Default evidence folder when KM_EVIDENCE_DIR is unset. Boundary evidence is
+# written to the dated folder the runner names, never here.
+reports/

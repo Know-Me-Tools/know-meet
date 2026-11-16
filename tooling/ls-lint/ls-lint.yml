@@ -40,7 +40,11 @@ ignore:
   - apps/web/node_modules
   # Build output (hashed chunk names such as window-NXMoSWIO.js); gitignored, never hand-named.
   - apps/web/dist
+  # Hosted build output (wr06): hashed chunk names, gitignored.
+  - apps/web/dist-hosted
   - tests/fidelity/reports
+  - tests/release/reports
+  - tests/release/node_modules
   - tests/fidelity/.features-gen
   - apps/desktop/node_modules
   - packages/application/node_modules
@@ -73,6 +77,12 @@ ignore:
   # E-N3 / E-N4 / E-N5: extensionless tool-mandated files, native scaffolding
   # and generator output.
   - docs/design/live/assets/vendor/LICENSE
+  # E-N3 (wr07): Docker mandates the name "Dockerfile" and BuildKit reads "Dockerfile.dockerignore"
+  # beside it. One pair of entries per image.
+  - apps/web/Dockerfile
+  - apps/web/Dockerfile.dockerignore
+  - services/livekit/Dockerfile
+  - services/livekit/Dockerfile.dockerignore
   - live
   - apps/mobile/android
   - apps/mobile/ios

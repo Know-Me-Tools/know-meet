@@ -1,0 +1,40 @@
+# static-web-server configuration for the hosted Know Meet web image
+# (apps/web/Dockerfile, wr07 task 7.1). General settings (port, root, health, log
+# level) come from SERVER_* environment variables set in the Dockerfile; this file
+# holds only what the environment cannot express: URL rewrites and per-path headers.
+#
+# Why rewrites and not SERVER_FALLBACK_PAGE: in static-web-server 2.44.2 the fallback
+# page answers EVERY unmatched GET with the page and status 200 (fallback_page.rs,
+# can_serve: GET + 404 + non-empty page; no path or Accept test), so a missing
+# /assets/x.js would return the app document. WR-2 requires 404 there. A rewrite
+# applies only to the paths listed, so unknown asset paths stay 404.
+#
+# The app routes are the hosted router's three (/ is served by the index file, /join,
+# /meet) plus the paths the hosted build must render as its in-app not-found state
+# (features/wr-5-hosted-surface.feature). A new client route needs a line here.
+
+[[advanced.rewrites]]
+source = "/{join,meet,dashboard,agents,recordings,settings,notes,auth}"
+destination = "/index.html"
+
+[[advanced.rewrites]]
+source = "/{join,meet,dashboard,agents,recordings,settings,notes,auth}/**"
+destination = "/index.html"
+
+# Custom headers run last in the handler and replace the built-in Cache-Control.
+# Matching is against the request path after the rewrite, so /, /join and /meet all
+# match "/index.html".
+
+# The app document and the unhashed theme script must revalidate on every load.
+[[advanced.headers]]
+source = "/index.html"
+headers = { Cache-Control = "no-cache" }
+
+[[advanced.headers]]
+source = "/theme-init.js"
+headers = { Cache-Control = "no-cache" }
+
+# Vite emits content-hashed files under /assets: safe to cache for a year.
+[[advanced.headers]]
+source = "/assets/**"
+headers = { Cache-Control = "public, max-age=31536000, immutable" }

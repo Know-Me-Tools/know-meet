@@ -1,71 +1,57 @@
 // TJ-ARCH-MOB-001 compliant
-// meet.html `nav.controls` (km.css `.ctl`): clock, then media toggles, then panels
-// and Leave. Labels show under the icon from 900px; below that the label is
-// visually hidden (still the accessible name) and buttons shrink to 48px; under
-// 768px the bar scrolls sideways in one row. Mic, camera and captions toggle local
-// state (no media is captured). Share, record, chat, transcript, knowledge,
-// invite, add agent and the private agent open panels that are out of scope this
-// phase (D-2): they stay for layout fidelity and, when pressed, say so in a toast;
-// each carries the same accessible description.
+// meet.html `nav.controls` for the guest room (acceptance R2-R5, R9; section 3): the clock
+// (left, hidden below 900), the media group centred (mic, camera) and the end group (Copy
+// join link in the Invite slot, O-4; Leave). Labels show under the icon from 900px; below
+// that they are visually hidden (still in the name) and controls are 48px, and the four
+// controls fit one row at 375 without a sideways scroller. Mic and camera are action
+// buttons whose name and label change, with no aria-pressed (K-1); `data-state` carries
+// on/off. Rest uses the `control` fill, off `control-invalid`, Leave `danger-btn`, so every
+// control boundary meets 3:1 on the stage. Leave opens the prototype dialog (O-7).
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@know-meet/ui/components/alert-dialog";
+import { Button } from "@know-meet/ui/components/button";
 import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
-import { Link } from "@tanstack/react-router";
 import type * as React from "react";
 import { useEffect, useState } from "react";
+import { ROOM_COPY } from "../../guest-meeting/meeting-copy";
 import { formatDuration } from "../../workspace/application/format";
-import type { RoomMode } from "../domain/room";
-
-export const LATER_NOTE_ID = "room-later-note";
 
 const ctlClass = cn(
-  "relative grid min-h-14 min-w-16 flex-none content-center justify-items-center gap-0.5 rounded-base bg-card px-2 py-1.5 text-foreground shadow-(--shadow-card) transition-colors duration-(--dur-fast) ease-standard",
-  "[@media(hover:hover)]:hover:bg-card-hov max-bp1024:min-w-[54px] max-bp900:min-h-12 max-bp900:min-w-12 max-bp900:px-3 max-bp900:py-0",
+  "relative grid min-h-14 min-w-16 flex-none content-center justify-items-center gap-0.5 rounded-base px-2 py-1.5 transition-colors duration-(--dur-fast) ease-standard",
+  "max-bp1024:min-w-[54px] max-bp900:min-h-12 max-bp900:min-w-12 max-bp900:px-3 max-bp900:py-0",
+  "data-[tone=rest]:bg-control data-[tone=rest]:text-on-control [@media(hover:hover)]:data-[tone=rest]:hover:bg-control-hov",
+  "data-[tone=off]:bg-control-invalid data-[tone=off]:text-on-control-invalid",
+  "data-[tone=leave]:bg-danger-btn data-[tone=leave]:text-on-danger [@media(hover:hover)]:data-[tone=leave]:hover:bg-danger-btn-hov",
   focusFillClass,
 );
 
 const labelClass =
   "block text-xs font-semibold whitespace-nowrap max-bp900:absolute max-bp900:size-px max-bp900:overflow-hidden max-bp900:[clip:rect(0_0_0_0)]";
 
-type CtlTone = "rest" | "panel-on" | "off" | "leave";
-
-const toneClass: Readonly<Record<CtlTone, string>> = {
-  rest: "",
-  "panel-on": "bg-ember-soft text-ember-text",
-  off: "bg-red-soft [@media(hover:hover)]:hover:bg-red-soft [@media(hover:hover)]:hover:brightness-[1.12]",
-  leave: "bg-danger-btn text-on-danger [@media(hover:hover)]:hover:bg-danger-btn-hov",
-};
+type CtlTone = "rest" | "off" | "leave";
 
 interface CtlProps extends Omit<React.ComponentProps<"button">, "children"> {
   readonly icon: KmIconName;
   readonly label: string;
-  readonly tone?: CtlTone;
-  readonly locked?: boolean;
+  readonly tone: CtlTone;
 }
 
-function Ctl({ icon, label, tone = "rest", locked = false, className, ...props }: CtlProps) {
+function Ctl({ icon, label, tone, className, ...props }: CtlProps) {
   return (
-    <button type="button" className={cn(ctlClass, toneClass[tone], className)} {...props}>
+    <button type="button" data-tone={tone} className={cn(ctlClass, className)} {...props}>
       <KmIcon name={icon} />
       <span className={labelClass}>{label}</span>
-      {locked ? (
-        <span
-          aria-hidden="true"
-          className="absolute top-1 right-1.5 grid size-5 place-items-center rounded-round bg-muted text-muted-foreground in-focus-visible:bg-transparent in-focus-visible:text-current"
-        >
-          <KmIcon name="lock" className="size-3" />
-        </span>
-      ) : null}
     </button>
-  );
-}
-
-function CtlGroup({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      className={cn("flex flex-wrap items-center gap-s2 max-bp768:flex-nowrap", className)}
-      {...props}
-    />
   );
 }
 
@@ -87,123 +73,90 @@ function RoomClock({ startedAt }: { readonly startedAt: number }) {
   );
 }
 
+function LeaveControl({ onLeave }: { readonly onLeave: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger
+        render={
+          <button
+            type="button"
+            data-tone="leave"
+            data-testid="km-room-leave"
+            className={ctlClass}
+          />
+        }
+      >
+        <KmIcon name="leave" />
+        <span className={labelClass}>Leave</span>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{ROOM_COPY.leaveTitle}</AlertDialogTitle>
+          <AlertDialogDescription>{ROOM_COPY.leaveText}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel variant="ghost">Stay</AlertDialogCancel>
+          <Button
+            type="button"
+            variant="destructive"
+            data-testid="km-room-leave-confirm"
+            onClick={() => {
+              setOpen(false);
+              onLeave();
+            }}
+          >
+            Leave meeting
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
+
 export interface RoomControlsProps {
-  readonly mode: RoomMode;
   readonly startedAt: number;
   readonly micOn: boolean;
   readonly cameraOn: boolean;
-  readonly captionsOn: boolean;
   readonly onToggleMic: () => void;
   readonly onToggleCamera: () => void;
-  readonly onToggleCaptions: () => void;
-  readonly onUnavailable: (what: string) => void;
+  readonly onCopyLink: () => void;
+  readonly onLeave: () => void;
 }
 
 export function RoomControls(props: RoomControlsProps) {
-  const { mode, micOn, cameraOn, captionsOn, onUnavailable } = props;
-  const guest = mode === "guest";
-  const later = (what: string) => () => onUnavailable(what);
+  const { micOn, cameraOn } = props;
   return (
     <nav
       aria-label="Meeting controls"
-      className="flex flex-wrap items-center justify-between gap-s3 px-s5 pt-s3 pb-s4 max-bp900:justify-center max-bp768:flex-nowrap max-bp768:justify-start max-bp768:gap-s2 max-bp768:overflow-x-auto max-bp768:px-s3 max-bp768:pt-s2 max-bp768:pb-s3 max-bp768:[scrollbar-width:none]"
+      className="grid grid-cols-[1fr_auto_1fr] items-center gap-s3 px-s5 pt-s3 pb-s4 max-bp900:flex max-bp900:justify-center max-bp768:gap-s2 max-bp768:px-s3 max-bp768:pt-s2 max-bp768:pb-s3"
     >
-      <span id={LATER_NOTE_ID} hidden>
-        Opens in a later release.
-      </span>
-      <CtlGroup className="max-bp900:hidden">
+      <div className="flex items-center max-bp900:hidden">
         <RoomClock startedAt={props.startedAt} />
-      </CtlGroup>
-      <CtlGroup>
+      </div>
+      <div className="flex items-center gap-s2">
         <Ctl
           icon={micOn ? "mic" : "mic-off"}
           label={micOn ? "Mute" : "Unmute"}
           aria-label={micOn ? "Mute microphone" : "Unmute microphone"}
-          aria-pressed={micOn}
           tone={micOn ? "rest" : "off"}
+          data-testid="km-room-mute-mic"
+          data-state={micOn ? "on" : "off"}
           onClick={props.onToggleMic}
         />
         <Ctl
           icon={cameraOn ? "cam" : "cam-off"}
           label={cameraOn ? "Stop video" : "Start video"}
-          aria-label={cameraOn ? "Turn camera off" : "Turn camera on"}
-          aria-pressed={cameraOn}
           tone={cameraOn ? "rest" : "off"}
+          data-testid="km-room-mute-camera"
+          data-state={cameraOn ? "on" : "off"}
           onClick={props.onToggleCamera}
         />
-        <Ctl
-          icon="screen"
-          label="Share"
-          aria-label="Share your screen"
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later("Screen sharing")}
-        />
-        <Ctl
-          icon="cc"
-          label="Captions"
-          aria-label={captionsOn ? "Hide captions" : "Show captions"}
-          aria-pressed={captionsOn}
-          tone={captionsOn ? "panel-on" : "rest"}
-          onClick={props.onToggleCaptions}
-        />
-        <Ctl
-          icon="record"
-          label="Record"
-          aria-label={guest ? "Record (sign in to unlock)" : "Start recording"}
-          aria-describedby={LATER_NOTE_ID}
-          locked={guest}
-          onClick={later("Recording")}
-        />
-      </CtlGroup>
-      <CtlGroup>
-        <Ctl
-          icon="chat"
-          label="Chat"
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later("Meeting chat")}
-        />
-        <Ctl
-          icon="wave"
-          label="Transcript"
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later("The live transcript")}
-        />
-        <Ctl
-          icon="book"
-          label="Knowledge"
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later("Meeting knowledge")}
-        />
-        <Ctl
-          icon="users"
-          label="Invite"
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later("Inviting people")}
-        />
-        <Ctl
-          icon="agent-add"
-          label="Add agent"
-          aria-label={guest ? "Add agent (sign in to unlock)" : "Add agent"}
-          aria-describedby={LATER_NOTE_ID}
-          locked={guest}
-          onClick={later("Adding agents")}
-        />
-        <Ctl
-          icon={guest ? "info" : "dot"}
-          label={guest ? "Concierge" : "My agent"}
-          aria-label={guest ? "Ask the Concierge" : "Your private agent"}
-          aria-describedby={LATER_NOTE_ID}
-          onClick={later(guest ? "Asking the Concierge" : "Your private agent panel")}
-        />
-        <Link
-          to="/"
-          aria-label="Leave meeting"
-          className={cn(ctlClass, toneClass.leave, "no-underline")}
-        >
-          <KmIcon name="leave" />
-          <span className={labelClass}>Leave</span>
-        </Link>
-      </CtlGroup>
+      </div>
+      <div className="flex items-center justify-end gap-s2">
+        <Ctl icon="link" label="Copy join link" tone="rest" onClick={props.onCopyLink} />
+        <LeaveControl onLeave={props.onLeave} />
+      </div>
     </nav>
   );
 }

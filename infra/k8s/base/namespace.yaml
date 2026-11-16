@@ -1,0 +1,12 @@
+# Know Meet application namespace. Managed in Git, so the Argo CD Application does not
+# set CreateNamespace. The Gateway admits routes from this namespace only, matched on the
+# kubernetes.io/metadata.name label that the API server sets on every namespace.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: know-meet
+  labels:
+    app.kubernetes.io/part-of: know-meet
+    # Restricted Pod Security Standard: both Deployments are written to pass it.
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest

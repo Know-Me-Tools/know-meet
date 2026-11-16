@@ -8,6 +8,8 @@
 node_modules/
 .turbo/
 dist/
+# Hosted web build (wr06): bundle and the CSP header artifact written next to it
+dist-hosted*
 coverage/
 *.tsbuildinfo
 target/

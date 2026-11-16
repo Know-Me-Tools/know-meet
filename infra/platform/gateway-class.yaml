@@ -1,0 +1,14 @@
+# Cluster-scoped and shared. The Envoy Gateway controller (Helm release eg, v1.10.0) runs,
+# but no class existed for it (cluster-check.md). Creating it here is the adopted default.
+#
+# Prune=false and Delete=false: removing this file from Git, or deleting the Argo CD
+# Application, must not delete a class other workloads may come to depend on.
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: eg
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
