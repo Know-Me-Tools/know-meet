@@ -17,9 +17,9 @@ resources:
 # image pull instead of running something unreviewed. Never `latest`.
 images:
   - name: ghcr.io/know-me-tools/know-meet-web
-    newTag: 8d4c47f6ebb224ae97ced15546f40f7523c180b2
+    newTag: 744dea5bbfb3c32feca33e40c738574761479ab0
   - name: ghcr.io/know-me-tools/know-meet-token-service
-    newTag: 8d4c47f6ebb224ae97ced15546f40f7523c180b2
+    newTag: 744dea5bbfb3c32feca33e40c738574761479ab0
 
 # Copies each generated header value (security-headers.yaml, a local-config ConfigMap that
 # kustomize reads but does not emit) into the ResponseHeaderModifier of every HTTPS rule.
