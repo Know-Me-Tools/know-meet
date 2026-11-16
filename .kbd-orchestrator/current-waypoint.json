@@ -2,38 +2,38 @@
   "schemaVersion": "5",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 230,
-  "derivedRevision": 230,
+  "sourceRevision": 536,
+  "derivedRevision": 536,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
   },
   "conflictCount": 0,
   "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
   "runId": "hybrid-shell-foundation-20261109T083641Z",
   "path": [
-    "hybrid-shell-foundation"
+    "web-release"
   ],
   "phaseIds": [
-    "hybrid-shell-foundation"
+    "web-release"
   ],
-  "activePhaseId": "hybrid-shell-foundation",
-  "activePhase": "hybrid-shell-foundation",
-  "phase": "hybrid-shell-foundation",
+  "activePhaseId": "web-release",
+  "activePhase": "web-release",
+  "phase": "web-release",
   "parentPhase": null,
   "childPointer": null,
-  "change": "c13-fidelity-verification-and-evidence",
-  "currentTask": "13.2",
+  "change": null,
+  "currentTask": null,
   "status": "ready",
   "lifecycle": "ready",
   "stageId": "execute",
-  "stageStatus": "IN_PROGRESS",
+  "stageStatus": "COMPLETE",
   "completionMetric": "implementation",
-  "implementationCompleted": 13,
-  "implementationTotal": 16,
+  "implementationCompleted": 22,
+  "implementationTotal": 25,
   "planRevision": 1,
-  "revision": 230,
-  "exactNextCommand": "/kbd-assess hybrid-shell-foundation",
-  "nextChange": "c13-fidelity-verification-and-evidence",
-  "nextTask": "13.2",
-  "updatedAt": "2026-11-12T14:40:26.886778Z"
+  "revision": 536,
+  "exactNextCommand": "/kbd-assess web-release",
+  "nextChange": null,
+  "nextTask": null,
+  "updatedAt": "2026-11-16T21:13:37.796536Z"
 }

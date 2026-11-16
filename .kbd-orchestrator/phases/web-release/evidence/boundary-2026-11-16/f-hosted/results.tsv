@@ -1,0 +1,3 @@
+01	0	2026-11-16T15:24:03Z	node tooling/release/src/verify-endpoint.ts --host meet.know-me.tools --csp-file apps/web/dist-hosted-csp.txt --json "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/verify-endpoint.json"
+02	0	2026-11-16T15:24:04Z	/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/check-livekit-url.sh served
+03	0	2026-11-16T15:25:04Z	pnpm --filter @know-meet/release-tests exec playwright test --project=hosted --grep "@WR-1|@WR-2|@WR-3|@WR-5" --grep-invert "@negative-control"

@@ -1,0 +1,41 @@
+{
+  "mode": "artifact",
+  "verdict": "PASS",
+  "judge_model": "glm-5.3",
+  "producer_model": "claude-fable-5-2",
+  "isolation_mode": "rest-gateway:http://localhost:4000/v1",
+  "cross_model_check": "unverified-producer-unknown",
+  "findings": [
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Task 1.6 is assigned to livekit-platform and routed R-L (the lead acting in the delivery-lead role), but wr01's declared role list omits livekit-platform, so under the plan's own ownership rule the task's write ownership is undefined; the role lists are unreliable in both directions (wr05 lists design-lead and wr08 lists build-platform with no corresponding tasks).",
+      "evidence": "Preamble: \"Role names are the `.agent-team/know-meet-team` roles; each writes only inside its owned paths.\" wr01 entry: \"- Roles: bdd-quality, design-lead, delivery-lead, build-platform\" \u2014 yet the task table row is \"| wr01 | 1.6 | Verify cluster-context.md against the live cluster, read-only | livekit-platform | WR-3, WR-7 |\", and the model row for 1.6 gives \"Claude Code, R-L | lead session\" where R-L is defined as \"the lead session (`claude-fable-5-2`) acting in the delivery-lead role\" \u2014 three different assignments for one task. Conversely, wr05 declares \"Roles: ui-engineer, design-lead\" but tasks 5.1\u20135.4 are all ui-engineer, and wr08 declares \"Roles: livekit-platform, build-platform, delivery-lead\" but tasks 8.1\u20138.5 are livekit-platform and 8.6 is delivery-lead.",
+      "suggested_fix": "Add livekit-platform to wr01's role list (or reassign 1.6 to a listed role and give it a route that matches), and either assign tasks to design-lead in wr05 and build-platform in wr08 or drop them from those changes' role lists."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Operator Batch 1 is scheduled 'before Round 2 starts' although the Round-1 tasks 1.4 and 1.6 depend on it \u2014 the task model itself calls the gcloud login 'pre-execution' \u2014 so Round 1 (wr01) cannot complete in the order given.",
+      "evidence": "\"**Batch 1, before Round 2 starts:** - Say what the 138 uncommitted changes in the current checkout are, so a clean branch can be cut (task 1.4). ... `gcloud auth login`, so task 1.6 can read the cluster.\" But the execution order is \"Round 1: wr01\", which contains tasks 1.4 and 1.6, whose prerequisites are \"operator answer on the dirty tree\" (1.4) and \"gcloud auth login (pre-execution batch)\" (1.6). The batch that satisfies Round-1 prerequisites arrives, by the plan's own wording, after Round 1 has started or ended.",
+      "suggested_fix": "State that Batch 1 is requested once at the phase boundary before Round 1 begins (or at minimum before tasks 1.4 and 1.6 execute), not 'before Round 2 starts'."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The plan's entire acceptance basis \u2014 the nine scenarios WR-1 to WR-9, releaseClaim, exclusions, boundaryPacket, budgets and the ownerTask map \u2014 lives in adopted-contract.json, which the packet never confirms exists (it is absent from cited_paths while every sibling phase file is confirmed) and whose status is DRAFT with an unstamped digest, so the plan's scenario-coverage claims cannot be checked from the packet.",
+      "evidence": "Header: \"Contract: .kbd-orchestrator/phases/web-release/adopted-contract.json / status DRAFT, not adopted; digest is stamped by the adoption writer\"; \"The contract's `releaseClaim`, `exclusions` and nine scenarios (WR-1 to WR-9) are the acceptance; this file orders the work that reaches them\"; \"The map is the `ownerTask` field of each scenario in the contract.\" cited_paths confirms cluster-context.md, decision-log.md, library-candidates.json, method-context.md, prior-context.md and versions.toml under .kbd-orchestrator/phases/web-release \u2014 but not adopted-contract.json, so no packet artifact defines what WR-1..WR-9 actually assert.",
+      "suggested_fix": "Inline or attach the draft contract's scenario list (IDs, statements, ownerTask) in the plan, and confirm adopted-contract.json exists on disk before adoption is requested."
+    }
+  ],
+  "judge_identity": {
+    "providerConnectionId": "kimi-coding-plan",
+    "providerId": "moonshot",
+    "modelId": "k3.1-pro"
+  },
+  "sycophancy_screen": {
+    "reject_cap": 2,
+    "cap_overridden": false,
+    "cap_default": 2
+  }
+}

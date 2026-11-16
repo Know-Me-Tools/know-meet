@@ -1,0 +1,6 @@
+# Stage A: static gates (contract boundaryPacket.commands 1-5)
+pnpm install --frozen-lockfile
+pnpm run lint
+pnpm run typecheck
+pnpm run test
+cargo check --workspace

@@ -1,0 +1,62 @@
+{
+  "mode": "artifact",
+  "verdict": "BLOCK",
+  "judge_model": "glm-5.3",
+  "producer_model": "claude-fable-5-2",
+  "isolation_mode": "rest-gateway:http://localhost:4000/v1",
+  "cross_model_check": "unverified-producer-unknown",
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "The goal-mandated cluster-setup extraction (Surreal Memory MCP, findings recorded with sources) is covered by no change or task, and the plan authors all cluster manifests on facts both prior handoffs record as unverified.",
+      "evidence": "Goal: 'Use the Surreal Memory MCP server to extract how the target cluster is set up (ingress, TLS, DNS, registry, GitOps, namespaces, secrets) and configure the deployment to match it; record the findings with their sources.' Assess handoff: 'cluster facts are from memory only.' Analyze handoff open risks: 'cluster facts unverified.' The plan's only use of cluster facts is boundary step 5, 'Read-only cluster verification against cluster-context.md' \u2014 i.e., at wr09, after wr08 has already written the Gateway, HTTPRoutes, cert-manager path, Argo CD Application and runbook. No task populates or verifies cluster-context.md before Round 5, the Risks section (items 1-5) omits the unverified-facts risk entirely, and 'Surreal Memory' appears nowhere in the plan.",
+      "suggested_fix": "Add a task before Round 5 (e.g., wr08.0) that runs the Surreal Memory MCP extraction into cluster-context.md with per-fact sources, make wr08.1-8.5 depend on it, and add 'cluster facts unverified' to Risks."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "The operator-actions schedule is self-contradictory: dependencies must be pinned before wr03/wr04 execute, but the plan states all operator-only actions are asked once 'at the boundary', which the Boundary packet places after wr01 to wr08 are complete.",
+      "evidence": "Section header: 'Asked once, at the boundary, per the recalled lesson \"Ask once at phase boundary for operator-only actions\"' immediately followed by the list item 'Pin new dependencies in `versions.toml` (before wr03 and wr04).' Tasks 3.1, 3.2, 3.3 and 4.1 list Prerequisites 'pins'. Yet 'One packet, in the contract (`boundaryPacket`). It runs after wr01 to wr08 are complete' \u2014 after wr03 and wr04 have run. Conversely, if the single ask happens at execution start, 'Merge the pull requests' and 'Make the two GHCR packages public' are impossible (no PRs or packages exist yet). Under either reading, Round 2 either stalls on unmet 'pins' prerequisites or proceeds with unpinned dependencies, which the analyze handoff flagged as an open risk ('versions.toml has no pins').",
+      "suggested_fix": "Split the asks into two batches with explicit timing: pre-execution (version pins, before Round 2) and boundary (gcloud auth, Secret, Argo CD connection, GHCR visibility, spending alert, PR merges), and restate task 3.x/4.1 prerequisites against the pre-execution batch."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Scenario WR-9 has no defining task in wr01, contradicting the plan's own invariant that every scenario is defined before any production code.",
+      "evidence": "The plan asserts 'Every scenario has a defining task in wr01, at least one building task, and a verifying task in wr09,' but the task table assigns scenarios to wr01 tasks as: 1.1 'WR-1 to WR-5, WR-7', 1.2 'WR-6', 1.3 'WR-8' \u2014 WR-9 appears nowhere in wr01. WR-9 is first referenced at task 2.3 ('Extend boundary lint to packages/realtime and services/livekit', WR-9) and is verified by 9.1, so a worker following the table would leave 9.1 verifying an undefined scenario, breaking the stated safety design 'acceptance is defined in wr01 before any production code.'",
+      "suggested_fix": "Extend task 1.1's scenario set to include WR-9 (or add a 1.x task owning the WR-9 Gherkin) so the definition exists before tasks 2.3 and 7.4 implement against it."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Creation of the DNS record for meet.know-me.tools is assigned to no task and no operator action, though go-live at the public URL depends on it.",
+      "evidence": "Task 9.5 is only 'Confirm DNS and issue the certificate' \u2014 confirm presupposes the record exists. The operator-only actions list (pins, gcloud auth, LIVEKIT_* Secret, Argo CD connection, GHCR packages public, spending alert, merge PRs) contains no DNS record creation. wr08.2's rationale even presupposes an unassigned creation step: 'A wrong hostname makes a DNS record nothing deletes.'",
+      "suggested_fix": "Assign DNS record creation (operator action or a 9.5 subtask) with the record name, type and target value, and make 9.5 depend on it."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The image-tag bump pull request \u2014 the decided promotion mechanism and the only rollback mechanism \u2014 has no producing task anywhere in wr01 to wr09.",
+      "evidence": "Operator decisions: 'a pull request bumps the image tag.' Risk 5: 'Rollback for the first release is reverting the tag-bump pull request, unrehearsed.' Task 7.3 pushes images 'tagged by commit SHA and records digests.' Boundary step 6 ('Argo CD does the rest') and task 9.4 'Verify the cluster, sync and compare digests' require the production overlay to reference the new SHA, but no change or task creates the bump PR, and the overlay is authored in wr08 before any image SHA exists.",
+      "suggested_fix": "Add a boundary task (or operator action) that opens the tag-bump PR against the production overlay after 7.3's workflow records digests and before Argo sync verification in 9.4."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "wr04's declared dependencies omit wr03, although task 4.2's HTTP TokenIssuer adapter must match the token service's HTTP contract defined in wr03.",
+      "evidence": "wr04 states 'Depends on: wr02' only, and task 4.2 ('Add the HTTP TokenIssuer adapter and composition wiring') lists Prerequisites 'none', while the endpoint, request and response shapes it calls are created by task 3.2 ('Issue room codes and scoped short-lived tokens'). The round order (wr03 in Round 2, wr04 in Round 3) incidentally masks the missing edge, so the declared graph permits wr04 to run against an undefined API contract if wr03 slips or is reordered.",
+      "suggested_fix": "Add wr03 to wr04's dependency list and set 4.2's prerequisite to the wr03 API shape."
+    }
+  ],
+  "judge_identity": {
+    "providerConnectionId": "kimi-coding-plan",
+    "providerId": "moonshot",
+    "modelId": "k3.1-pro"
+  },
+  "sycophancy_screen": {
+    "reject_cap": 2,
+    "cap_overridden": false,
+    "cap_default": 2
+  }
+}

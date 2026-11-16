@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 236,
-  "derivedRevision": 236,
+  "sourceRevision": 509,
+  "derivedRevision": 509,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 236
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 509
   },
   "conflictCount": 0,
   "phase": "hybrid-shell-foundation",
   "phaseId": "hybrid-shell-foundation",
   "parentPhase": null,
-  "last_updated": "2026-11-13T01:02:16.513685Z",
+  "last_updated": "2026-11-16T14:38:42.839477Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 16,
   "changes_completed": 13,
@@ -22,7 +22,7 @@
     "implementation": {
       "completed": 13,
       "total": 16,
-      "status": "IN_PROGRESS"
+      "status": "BLOCKED"
     },
     "evidence": {
       "status": "NOT_TRACKED",
@@ -49,9 +49,9 @@
     "runId": "hybrid-shell-foundation-20261109T083641Z",
     "primaryCounter": "implementation",
     "implementation": {
-      "completed": 13,
-      "total": 16,
-      "status": "IN_PROGRESS"
+      "completed": 20,
+      "total": 25,
+      "status": "BLOCKED"
     },
     "evidence": {
       "status": "PENDING",
@@ -59,9 +59,14 @@
       "blockers": []
     },
     "certification": {
-      "status": "PENDING",
-      "summary": null,
-      "blockers": []
+      "status": "BLOCKED",
+      "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+      "blockers": [
+        "hsf-c13-cycle4-acceptance",
+        "hsf-c13-cycle4-budget-exhausted",
+        "hsf-c13-cycle4-rule-regression",
+        "hsf-c13-isolated-review-approval"
+      ]
     },
     "publication": {
       "status": "PENDING",
@@ -205,13 +210,17 @@
     {
       "id": "c13-fidelity-verification-and-evidence",
       "title": "Single boundary run, fidelity, security and accessibility evidence",
-      "status": "PENDING",
-      "implementation_status": "PENDING",
+      "status": "BLOCKED",
+      "implementation_status": "BLOCKED",
       "tasks_total": 10,
-      "tasks_done": 5,
+      "tasks_done": 7,
       "last_task_completed": "Perform the authoritative security trace across web, Tauri, Flutter, bridge and PEM and rerun secret scans",
       "next_task_pending": "Run the web fidelity matrix (VS-1)",
-      "blockers": []
+      "blockers": [
+        "Run the web fidelity matrix (VS-1)",
+        "Run the accessibility gate at every viewport and theme",
+        "Run the independent UI and code review via the liter-llm judge"
+      ]
     },
     {
       "id": "c14-aggregate-commands",

@@ -1,0 +1,8 @@
+{
+  "input_note": "Prose sections of assessment.md (headline, build health, risks, goal progress, uncomfortable point); tables were summarised, not sent verbatim.",
+  "audit_trail": {"agent_did": null, "executed_at": "2026-11-14T13:27:14.967006Z", "hook_log": [], "passes": 0, "skill_id": "sycophancy.correction", "strictness": "standard", "version": "1.0.0"},
+  "classifications": [],
+  "correction_mandatory": false,
+  "delta_summary": "No changes needed: score below clean threshold and no sycophancy patterns were detected.",
+  "sycophancy_score": 0.0
+}

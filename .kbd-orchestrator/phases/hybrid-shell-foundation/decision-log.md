@@ -220,3 +220,32 @@ Provenance: user (explicit form answers, Travis James).
 - Published for review on IPFS: site bafybeicc5ciunxlpsnmusgiyrdizgc4eazovupqommgrzw4bscp3qtqhnm (index.html + screenshots/), screenshots folder bafybeianlsskyrdphj7zg6wmxyi2srpia2guc4qwgvenqrvsnyeogym5em. Local copy: ~/Projects/know-me/know-meet-artifacts/flutter-reference-screenshots-2026-11-12/.
 - TURBO_REMOTE_CACHE_SIGNATURE_KEY generated (384-bit random) and set as a repo secret; copy in the macOS keychain (service turbo-remote-cache-signature-key). Note: no TURBO_TOKEN secret exists yet, so the remote cache stays off until one is added.
 - c13 13.3 complete.
+
+## 2026-11-13 — operator requests reconciliation and c13 Stage B continuation
+
+- Operator: “Reconcile the KBD state with the latest evidence, then continue c13 Stage B and fix the fidelity failures.” Continue the already authorized boundary; do not restart Assess or reset budgets.
+- Readiness: READY for contract 261ec2fd, plan revision 1. Canonical revision 236 records 13/16 changes complete; 11 OpenSpec tasks lag their canonical completion.
+- Latest saved fidelity result: 54 failed / 20 passed, with 324 failed screenshot comparisons. VS-4 records 3 passed but lacks a current-candidate receipt. Prior Stage A and Flutter golden evidence stays historical.
+- Dispatch: current Codex native delivery driver with ui-engineer, client-shell and bdd-quality ownership; inherited model settings, four-slot concurrency. Historical Claude implementation assignments are replaced for this operator-requested continuation; cross-model independent review remains required at the completed batch boundary.
+- Plan and evidence recovery: `execution.md` and `evidence/c13-state-reconciliation.md`. c08.8.3/c16 remain outside the shell boundary as already decided. Preserve existing dirty work, frozen baselines, thresholds, old receipts and unknown prior budget consumption.
+
+## 2026-11-13 — operator approves narrow references and one additional repair cycle
+
+- Operator approved the proposed deterministic schedule captures, correction of the light/768 processing reference, and comparison-reference removal of the prototype-only All screens footer link. The resulting affected set is 25 images (8 schedule, 16 footer-bearing, 1 processing); original images and receipts remain archived and pixel thresholds stay unchanged.
+- Operator approved one additional batched correction-and-verification cycle for observed Stage B harness failures and independent review findings. Recovered consumed repair lower bound is 3; the authorized total becomes 4, not a fresh four-attempt budget. Time/tool consumption remains UNKNOWN and all earlier effects/evidence stay preserved.
+- Implement the concrete support correction plan and isolated reviewer findings together; capture proposed reference replacements separately, review them, then adopt the exact reference/budget amendment through the signed runtime boundary before final verification.
+- The first repair batch built and typechecked. Stage B support result: 17 passed / 28 failed, 98.2 seconds. VS-4 and VS-5 are fresh passes; accessibility and complete fidelity are not yet established. Independent same-family fresh-context review is BLOCK after the cross-model gateway returned upstream 524.
+
+## 2026-11-13 — approved reference v2.4 and fourth-cycle amendment adopted
+
+- Independent design adjudication rejected scratch-b schedule8 for unrelated font changes, then approved exact scratch-d25 after same-origin font correction. All six faces load; remaining schedule changes stay inside invite previews. The other17 images are byte-identical to the accepted scratch-b references. Both outcomes and all candidate receipts are retained.
+- Exactly25 images promoted; baseline-set sha256 `ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79`. Other527 gating and48 informational records retain original provenance. Thresholds, matrix, rubric and verdict rule are unchanged.
+- Signed amendment v5 adopted as `contract-adoption-hybrid-shell-foundation-6d674890`, digest `6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4`, binding revision5, plan1; supersedes261ec2fd. Repair limit4 retains the prior lower bound3 and UNKNOWN time/tool history.
+- Complete correction batch proceeds to the single authorized fourth-cycle gate described in execution.md. Reference approval establishes the comparison input only; application fidelity and accessibility remain unverified until that gate. No fifth repair cycle is authorized.
+
+## 2026-11-13 — fourth attempt checkpoint: BLOCKED
+
+- Contract6d674890, baselineef382d34, candidate8261acbf at HEAD3590e0a1. BuildPASS; root typecheckFAIL TS4111; real-Git isolation4/4PASS; BDD generationPASS. Browser gate interrupted under required safety-failure stop condition:16 completed,5passed/11failed;108 without completed result. No fresh fullVS1, native or lint result. Exact receipts in evidence/c13-stage-b-2026-11-13/approved-cycle-4/result.md.
+- Known repair consumption4/4; no fifth authorization. The runner continued collecting after failures before the driver stopped it; the checkpoint records this limitation. Source identity independently reconciled unchanged after snapshot enumeration hit ENOBUFS from untracked evidence volume. Preview4191 stopped; root is the only worktree.
+- Execute and certification BLOCKED. Runtime will not reopen terminal13.6; explicit current-regression blocker preserves the distinction between historical completion and present failure. Reconcile clean:true/drifted0/errors[]. Derived waypoint's c16 pending selection and stale assess suggestion are not authorization to resume excluded c16 work.
+- Final independent local correction confirmation BLOCK; four original criticals addressed, current acceptance failures unresolved. Automatic approval review rejected private packet transmission to OpenAI pending explicit operator approval; no isolated confirmation transmitted. Preserve pending question and all prior judge receipts.

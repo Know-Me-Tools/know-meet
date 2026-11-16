@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
   "kind": "kbd.derived-method-context",
-  "generatedAt": "2026-11-12T14:24:07.824Z",
+  "generatedAt": "2026-11-13T11:34:35.057Z",
   "authority": "derived-read-only-index; canonical signed decisions, phase binding, contract and governing host policy remain authority",
   "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
   "runId": "hybrid-shell-foundation-20261109T083641Z",
   "phaseId": "hybrid-shell-foundation",
-  "sourceRevision": 226,
+  "sourceRevision": 274,
   "phaseDirectory": ".kbd-orchestrator/phases/hybrid-shell-foundation",
   "contract": {
     "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json",
     "observation": "observed",
-    "sha256": "9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c",
-    "contractDigest": "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6",
+    "sha256": "e44ba1474e8ee61e3e5ae5fc434993e386cda4e013a485610a0c2892924b66a6",
+    "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
     "binding": {
       "contractPath": ".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json",
-      "contractDigest": "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6",
+      "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
       "scenarioDigests": {
-        "VS-1": "8443f5505bde33f19740fb6db3b97b9a434858a6fe548188159c6e723943fb99",
+        "VS-1": "78a4fb3e3764f24dfd8fa4e39997b22cc0fa60620335c36ac9b14c9dd34fbcfd",
         "VS-2": "aad9a3498cca88f179d6f1d12139c3d235dd811032184310babde06a9011f197",
         "VS-3": "8c329c9bbc8441fcb1b7df523dc2280563a0e13fcd176c53c2876724290d6d9c",
         "VS-4": "6428a194914a4d7dd92074b453ddac4bd91eec7efd9f40faf8634cfe9657bf26",
@@ -26,15 +26,15 @@
         "VS-9": "8fdb290032f4c54fdbdc3aed111f4b3a0b2b1dc9d39af734f3f6357dfbef8e66"
       },
       "planRevision": 1,
-      "adoptionDecisionId": "contract-adoption-hybrid-shell-foundation-261ec2fd",
-      "bindingRevision": 4,
+      "adoptionDecisionId": "contract-adoption-hybrid-shell-foundation-6d674890",
+      "bindingRevision": 5,
       "amendedScenarios": [
         "VS-1"
       ],
       "authority": {
-        "manifestRaw": "{\"action\":\"amend-contract\",\"approver\":\"travis@tribehealthsolutions.com\",\"contractPath\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"kind\":\"kbd.scope-authority\",\"namespace\":\"prometheus-kbd-scope-amendment\",\"newContractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"nonce\":\"bc1e7e9d615a0f31d93384b0fb1407a5\",\"phaseId\":\"hybrid-shell-foundation\",\"previousContractDigest\":\"138ce337ef0298a6bb79712dfce9eae690695c9398b2c89f260b6fbfea6c1e58\",\"projectId\":\"80abee42-ead8-4e6f-b617-e458847775d3\",\"reason\":\"Reference revision v2.3: prototype decorative strokes removed and tokens v1.5.0 light/dark surface separation (operator decision 2026-11-12); VS-1 baseline-set digest updated; thresholds unchanged.\",\"runId\":\"hybrid-shell-foundation-20261109T083641Z\",\"scenarioChanges\":{\"added\":[],\"modified\":[\"VS-1\"],\"removed\":[]},\"schemaVersion\":\"1\",\"timestamp\":\"2026-11-12T14:23:53Z\"}",
-        "manifestSha256": "806debbad789fca9227e0fa880b0b6f16145fd504e402f54eee8824a4c240d77",
-        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgsgqOvzJMpDfEY0CKRyfxixLl97\nUxT+bg/r6Jl4BBHFcAAAAecHJvbWV0aGV1cy1rYmQtc2NvcGUtYW1lbmRtZW50AAAAAAAA\nAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAAQL4xvXhkBGXlHwt0FdWCql8MVvG7/W\nyGdHe6GN3CQO4vRtz01wzeGNHSdGaJjWyINspASAPGKxm+B9ptE4SW9wY=\n-----END SSH SIGNATURE-----\n",
+        "manifestRaw": "{\"action\":\"amend-contract\",\"approver\":\"travis@tribehealthsolutions.com\",\"contractPath\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"kind\":\"kbd.scope-authority\",\"namespace\":\"prometheus-kbd-scope-amendment\",\"newContractDigest\":\"6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4\",\"nonce\":\"a720393429ef17fb60dbfe43bd012ee5\",\"phaseId\":\"hybrid-shell-foundation\",\"previousContractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"projectId\":\"80abee42-ead8-4e6f-b617-e458847775d3\",\"reason\":\"Operator approved 25 narrow reference corrections with unchanged thresholds and one extra repair cycle, total four preserving three prior attempts and UNKNOWN time/tool usage.\",\"runId\":\"hybrid-shell-foundation-20261109T083641Z\",\"scenarioChanges\":{\"added\":[],\"modified\":[\"VS-1\"],\"removed\":[]},\"schemaVersion\":\"1\",\"timestamp\":\"2026-11-13T10:54:54Z\"}",
+        "manifestSha256": "8a4435a6fb4846016fe35eda3c82f489e2eef70459c22c976f3d1f743155e74a",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgsgqOvzJMpDfEY0CKRyfxixLl97\nUxT+bg/r6Jl4BBHFcAAAAecHJvbWV0aGV1cy1rYmQtc2NvcGUtYW1lbmRtZW50AAAAAAAA\nAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAAQIcesvDOZwKhB/X4fpXddx9c9RAcN2\nQn4DEhgtd4JGkCeSbPs4Vpc+lXXZxLr9EkdwY4l8g/DcTUUesvu5u7UAE=\n-----END SSH SIGNATURE-----\n",
         "approver": "travis@tribehealthsolutions.com",
         "namespace": "prometheus-kbd-scope-amendment",
         "allowedSignersSha256": "4c32adefb70e281e6c78f3ecb562088ef82209c54a9a01b1ed630ba3ed78a573"
@@ -45,23 +45,23 @@
       "runId": "hybrid-shell-foundation-20261109T083641Z",
       "phaseId": "hybrid-shell-foundation",
       "planRevision": 1,
-      "contractDigest": "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6"
+      "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4"
     }
   },
   "selectedMethod": "VLBV",
   "methodDecision": {
-    "id": "kbd-method-hybrid-shell-foundation-261ec2fd",
-    "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"2adf8bca9598c148d2dc424340e4f9ba55836ff047d1757428c9105b6c38c6ec\"}]}",
+    "id": "kbd-method-hsf-cycle4-blocked-20261113",
+    "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"e44ba1474e8ee61e3e5ae5fc434993e386cda4e013a485610a0c2892924b66a6\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"93997de2875bf3ebf19d06eb14c2a9bf64dfa1b3c9ac6f1cd5230da1bd04b0d9\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/execution.md\",\"sha256\":\"ea952bcbbcbff6b176fbc1a6f5ea876f4a4170ceac2f37fec55fee4bb4117391\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-state-reconciliation.md\",\"sha256\":\"5598207d6cebd31e67de5d17ffb820ea1fbf1dff08eea37394f3cce7a8e7d1e0\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/result.md\",\"sha256\":\"65b2d17aa39af3847b09ce3bc05e3fd5fa3ecd2086bb896f72aaa2fa17c98c60\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/remaining-work.md\",\"sha256\":\"391113e784c850667c62e054864efecf1c00c0b11c9035c5282658c52e9d23f4\"},{\"path\":\"docs/design/token-reconciliation/c13-reference-adjudication.md\",\"sha256\":\"a940b745a8c3238fcd0120e9bd81f4bc8630d6e852253cc47b56532b4a82d102\"},{\"path\":\".agent-team/reviews/code/c13-stage-b-2026-11-13/cycle-4-confirmation/review.md\",\"sha256\":\"dfb5b48a915fe8911effe6c3d670a5075356a4f0d742a5d9628e57f722a3ef7a\"}]}",
     "planRevision": 1,
-    "supersedes": "kbd-method-hybrid-shell-foundation-138ce337"
+    "supersedes": "kbd-method-hsf-v5-cycle4-20261113"
   },
   "retiredMethods": [],
   "references": [
     {
       "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json",
       "observation": "observed",
-      "sha256": "9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c",
-      "expectedSha256": "9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c",
+      "sha256": "e44ba1474e8ee61e3e5ae5fc434993e386cda4e013a485610a0c2892924b66a6",
+      "expectedSha256": "e44ba1474e8ee61e3e5ae5fc434993e386cda4e013a485610a0c2892924b66a6",
       "matches": true
     },
     {
@@ -74,8 +74,50 @@
     {
       "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md",
       "observation": "observed",
-      "sha256": "2adf8bca9598c148d2dc424340e4f9ba55836ff047d1757428c9105b6c38c6ec",
-      "expectedSha256": "2adf8bca9598c148d2dc424340e4f9ba55836ff047d1757428c9105b6c38c6ec",
+      "sha256": "93997de2875bf3ebf19d06eb14c2a9bf64dfa1b3c9ac6f1cd5230da1bd04b0d9",
+      "expectedSha256": "93997de2875bf3ebf19d06eb14c2a9bf64dfa1b3c9ac6f1cd5230da1bd04b0d9",
+      "matches": true
+    },
+    {
+      "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/execution.md",
+      "observation": "observed",
+      "sha256": "ea952bcbbcbff6b176fbc1a6f5ea876f4a4170ceac2f37fec55fee4bb4117391",
+      "expectedSha256": "ea952bcbbcbff6b176fbc1a6f5ea876f4a4170ceac2f37fec55fee4bb4117391",
+      "matches": true
+    },
+    {
+      "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-state-reconciliation.md",
+      "observation": "observed",
+      "sha256": "5598207d6cebd31e67de5d17ffb820ea1fbf1dff08eea37394f3cce7a8e7d1e0",
+      "expectedSha256": "5598207d6cebd31e67de5d17ffb820ea1fbf1dff08eea37394f3cce7a8e7d1e0",
+      "matches": true
+    },
+    {
+      "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/result.md",
+      "observation": "observed",
+      "sha256": "65b2d17aa39af3847b09ce3bc05e3fd5fa3ecd2086bb896f72aaa2fa17c98c60",
+      "expectedSha256": "65b2d17aa39af3847b09ce3bc05e3fd5fa3ecd2086bb896f72aaa2fa17c98c60",
+      "matches": true
+    },
+    {
+      "path": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/remaining-work.md",
+      "observation": "observed",
+      "sha256": "391113e784c850667c62e054864efecf1c00c0b11c9035c5282658c52e9d23f4",
+      "expectedSha256": "391113e784c850667c62e054864efecf1c00c0b11c9035c5282658c52e9d23f4",
+      "matches": true
+    },
+    {
+      "path": "docs/design/token-reconciliation/c13-reference-adjudication.md",
+      "observation": "observed",
+      "sha256": "a940b745a8c3238fcd0120e9bd81f4bc8630d6e852253cc47b56532b4a82d102",
+      "expectedSha256": "a940b745a8c3238fcd0120e9bd81f4bc8630d6e852253cc47b56532b4a82d102",
+      "matches": true
+    },
+    {
+      "path": ".agent-team/reviews/code/c13-stage-b-2026-11-13/cycle-4-confirmation/review.md",
+      "observation": "observed",
+      "sha256": "dfb5b48a915fe8911effe6c3d670a5075356a4f0d742a5d9628e57f722a3ef7a",
+      "expectedSha256": "dfb5b48a915fe8911effe6c3d670a5075356a4f0d742a5d9628e57f722a3ef7a",
       "matches": true
     }
   ],
@@ -155,7 +197,7 @@
     "adopted": {
       "timeMinutes": 2400,
       "toolCalls": 3000,
-      "repairAttempts": 3,
+      "repairAttempts": 4,
       "noProgressLimit": 3,
       "tokenBudget": "UNKNOWN",
       "tokenFallback": "Checkpoint after each change; stop and report if a change exceeds 2x its size estimate.",
@@ -164,8 +206,56 @@
     "consumption": "UNKNOWN; recover original canonical/evidence receipts before execution"
   },
   "unresolved": {
-    "boundaryObligations": {},
-    "blockers": [],
+    "boundaryObligations": {
+      "change:c13-fidelity-verification-and-evidence": {
+        "key": "change:c13-fidelity-verification-and-evidence",
+        "receiptId": "21209ac29b39055e21540fcd346d6c762fcb1774d42196c0ffa9c9b6c691a3d0",
+        "boundary": "change",
+        "subject": "c13-fidelity-verification-and-evidence",
+        "sourceRevision": 239,
+        "exactSignal": "Starting change 13 out of 16: Single boundary run, fidelity, security and accessibility evidence"
+      },
+      "task:c13-fidelity-verification-and-evidence/13.1": {
+        "key": "task:c13-fidelity-verification-and-evidence/13.1",
+        "receiptId": "282bc42370010cf1210e58db88787be1c23af0126c92c2daa174894cfb223f93",
+        "boundary": "task",
+        "subject": "c13-fidelity-verification-and-evidence/13.1",
+        "sourceRevision": 240,
+        "exactSignal": "Starting task 1 out of 10: Run the web fidelity matrix (VS-1)"
+      }
+    },
+    "blockers": [
+      {
+        "id": "hsf-c13-cycle4-acceptance",
+        "summary": "Fourth-cycle boundary blocked: root TypeScript TS4111; partial browser16 completed5passed11failed; required WCAG text contrast and label/target-size failures plus scroll-selector defect. Stopped under adopted safety-failure condition.108 scenarios lack result; VS1 andremaininggates unverified. Evidence approved-cycle-4/partial-result.json and remaining-work.md.",
+        "resolved": false,
+        "resolution": null
+      },
+      {
+        "id": "hsf-c13-cycle4-budget-exhausted",
+        "summary": "Known repair consumption4 of authorized4; fourth attempt stopped after required WCAG contrast failures. No fifth repair or verification cycle authorized. Prior UNKNOWN time/tool usage and all evidence retained.",
+        "resolved": false,
+        "resolution": null
+      },
+      {
+        "id": "hsf-c13-cycle4-rule-regression",
+        "summary": "Task13.6 remains terminal Complete for historical Stage A evidence because runtime rejects reopening Complete to Blocked. Current candidate is NOT verified: root pnpm typecheck fails TS4111 at reference-correction-capture.ts118 and lint was not reached. This explicit regression blocker prevents certification; do not infer currentPASS from checkbox.",
+        "resolved": false,
+        "resolution": null
+      },
+      {
+        "id": "hsf-c13-harness-failures",
+        "summary": "Current Stage B support run45 scenarios:17 passed28 failed. Required320/600/1000 widths rejected by screenshot viewport helper; keyboard name approximation and two focus negative controls fail. Reports/command exits/candidate hashes: evidence/c13-stage-b-2026-11-13. No pass or threshold waiver inferred.",
+        "resolved": false,
+        "resolution": null
+      },
+      {
+        "id": "hsf-c13-isolated-review-approval",
+        "summary": "Automatic approval review rejected sending private358KB scoped packet to OpenAI Codex CLI pending explicit payload/destination approval. Async operator request pending. Local independent correction review can report findings but cannot claim completed isolated judge.",
+        "resolved": false,
+        "resolution": null
+      }
+    ],
     "instruction": "Unknown side effects require reconciliation before retry, not a fresh attempt assumption."
   },
   "preserve": [
@@ -176,7 +266,7 @@
   ],
   "hostCapabilities": {
     "platform": "darwin",
-    "nodeVersion": "v26.8.2",
+    "nodeVersion": "v24.21.0",
     "observedInterfaces": [
       "canonical status",
       "typed phase disposition",

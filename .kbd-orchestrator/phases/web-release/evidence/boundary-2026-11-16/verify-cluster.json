@@ -1,0 +1,218 @@
+{
+  "tool": "verify-cluster",
+  "context": "gke_knowme-corporate_us-south1_main",
+  "completed": true,
+  "exitCode": 0,
+  "summary": {
+    "pass": 11,
+    "fail": 0,
+    "incomplete": 0,
+    "info": 5,
+    "skipped": 0
+  },
+  "checks": [
+    {
+      "id": "cluster-api",
+      "status": "pass",
+      "detail": "context gke_knowme-corporate_us-south1_main answers; 51 API versions"
+    },
+    {
+      "id": "gateway-api-v1",
+      "status": "pass",
+      "detail": "gateway.networking.k8s.io/v1 is served"
+    },
+    {
+      "id": "envoy-gateway-controller",
+      "status": "pass",
+      "detail": "Deployment envoy-gateway 1/1, image tag v1.10.0"
+    },
+    {
+      "id": "cluster-issuer-letsencrypt-staging",
+      "status": "pass",
+      "detail": "ClusterIssuer letsencrypt-staging Ready=true (ACMEAccountRegistered)"
+    },
+    {
+      "id": "cluster-issuer-letsencrypt-prod",
+      "status": "pass",
+      "detail": "ClusterIssuer letsencrypt-prod Ready=true (ACMEAccountRegistered)"
+    },
+    {
+      "id": "external-dns",
+      "status": "pass",
+      "detail": "Deployment external-dns 1/1"
+    },
+    {
+      "id": "external-dns-sources",
+      "status": "info",
+      "detail": "watches: service, gateway-httproute, gateway-grpcroute, gateway-tlsroute (gateway-httproute is the source that creates the record)"
+    },
+    {
+      "id": "argocd",
+      "status": "pass",
+      "detail": "7/7 workloads ready"
+    },
+    {
+      "id": "namespace-know-meet",
+      "status": "pass",
+      "detail": "namespace know-meet exists"
+    },
+    {
+      "id": "secret-know-meet-livekit",
+      "status": "pass",
+      "detail": "Secret know-meet-livekit exists in know-meet"
+    },
+    {
+      "id": "secret-keys",
+      "status": "pass",
+      "detail": "Secret know-meet-livekit has keys LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET (values not read)"
+    },
+    {
+      "id": "existing-gatewayclasses",
+      "status": "info",
+      "detail": "none; none is required before apply"
+    },
+    {
+      "id": "existing-gateways",
+      "status": "info",
+      "detail": "none"
+    },
+    {
+      "id": "existing-httproutes",
+      "status": "info",
+      "detail": "none"
+    },
+    {
+      "id": "existing-certificates",
+      "status": "info",
+      "detail": "none"
+    },
+    {
+      "id": "hostname-conflicts",
+      "status": "pass",
+      "detail": "no existing object conflicts with meet.know-me.tools"
+    }
+  ],
+  "kubectlCalls": [
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "api-versions"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "deployments",
+      "-n",
+      "envoy-gateway-system",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "clusterissuers.cert-manager.io",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "deployments",
+      "-n",
+      "external-dns",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "deployments,statefulsets",
+      "-n",
+      "argocd",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "namespaces",
+      "-o",
+      "name"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "secrets",
+      "-n",
+      "know-meet",
+      "-o",
+      "name"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "secret",
+      "know-meet-livekit",
+      "-n",
+      "know-meet",
+      "-o",
+      "go-template",
+      "--template",
+      "{{range $key, $unused := .data}}{{$key}}{{\"\\n\"}}{{end}}"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "gatewayclasses.gateway.networking.k8s.io",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "gateways.gateway.networking.k8s.io",
+      "-A",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "httproutes.gateway.networking.k8s.io",
+      "-A",
+      "-o",
+      "json"
+    ],
+    [
+      "--context",
+      "gke_knowme-corporate_us-south1_main",
+      "--request-timeout=30s",
+      "get",
+      "certificates.cert-manager.io",
+      "-A",
+      "-o",
+      "json"
+    ]
+  ]
+}

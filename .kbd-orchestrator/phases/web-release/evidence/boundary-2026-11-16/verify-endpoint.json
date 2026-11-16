@@ -1,0 +1,103 @@
+{
+  "tool": "verify-endpoint",
+  "host": "meet.know-me.tools",
+  "allowStaging": false,
+  "cspChecked": true,
+  "completed": true,
+  "exitCode": 0,
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "incomplete": 0,
+    "info": 1,
+    "skipped": 0
+  },
+  "checks": [
+    {
+      "id": "dns",
+      "status": "pass",
+      "detail": "meet.know-me.tools resolves to 8.236.202.95"
+    },
+    {
+      "id": "tls-certificate",
+      "status": "info",
+      "detail": "DNS:meet.know-me.tools; sha256 5C:D5:E2:BC:AC:1D:21:E6:F3:5C:57:BE:94:DF:E7:F8:C2:08:3A:21:F2:81:15:23:C1:E8:34:70:9D:02:2E:38"
+    },
+    {
+      "id": "tls-identity",
+      "status": "pass",
+      "detail": "certificate names meet.know-me.tools"
+    },
+    {
+      "id": "tls-validity",
+      "status": "pass",
+      "detail": "valid until 2027-02-14T14:24:35.000Z (89 days left)"
+    },
+    {
+      "id": "tls-issuer",
+      "status": "pass",
+      "detail": "issuer O=Let's Encrypt CN=YR2 (Let's Encrypt production)"
+    },
+    {
+      "id": "tls-chain-trusted",
+      "status": "pass",
+      "detail": "chain verified for the host by Node's root store (TLSv1.3)"
+    },
+    {
+      "id": "http-redirect",
+      "status": "pass",
+      "detail": "http://meet.know-me.tools/ returned 301 to https://meet.know-me.tools/"
+    },
+    {
+      "id": "https-root",
+      "status": "pass",
+      "detail": "GET / returned 200 with every required header"
+    },
+    {
+      "id": "https-healthz",
+      "status": "pass",
+      "detail": "GET /api/healthz returned 200 with every required header"
+    }
+  ],
+  "responses": [
+    {
+      "label": "GET /",
+      "status": 200,
+      "headers": {
+        "content-length": "1008",
+        "content-type": "text/html; charset=utf-8",
+        "accept-ranges": "bytes",
+        "last-modified": "Mon, 16 Nov 2026 14:54:58 GMT",
+        "vary": "accept-encoding",
+        "cache-control": "no-cache",
+        "date": "Mon, 16 Nov 2026 15:24:03 GMT",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' wss://knowme-23fkf8pz.livekit.cloud https://knowme-23fkf8pz.livekit.cloud; base-uri 'none'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(self), microphone=(self), geolocation=(), payment=(), usb=()",
+        "connection": "close"
+      },
+      "cookieCount": 0
+    },
+    {
+      "label": "GET /api/healthz",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "content-length": "34",
+        "date": "Mon, 16 Nov 2026 15:24:03 GMT",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' wss://knowme-23fkf8pz.livekit.cloud https://knowme-23fkf8pz.livekit.cloud; base-uri 'none'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(self), microphone=(self), geolocation=(), payment=(), usb=()",
+        "connection": "close"
+      },
+      "cookieCount": 0
+    }
+  ]
+}

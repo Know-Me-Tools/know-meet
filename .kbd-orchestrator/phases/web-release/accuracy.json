@@ -1,0 +1,59 @@
+{
+  "phase": "web-release",
+  "contractDigest": "bae48b5f2265b41042be31dbc8601ca176ad4bbc6221df7f6a826fb706e60c4f",
+  "amendmentsAfterAdoption": {
+    "duringExecution": 2,
+    "afterExecution": 1,
+    "total": 4
+  },
+  "blockedCausedByContract": {
+    "count": 2,
+    "items": [
+      "compose host ports 8080/8081 already in use",
+      "hosted suite exceeded production rate limits"
+    ]
+  },
+  "notExercised": {
+    "count": 0,
+    "note": "WR-4, WR-6, WR-8, WR-9 exercised on the packaged stack only, by amendment 3"
+  },
+  "repairAttempts": {
+    "used": 7,
+    "allowedSigned": 7,
+    "allowedAtAdoption": 3,
+    "unsigned": []
+  },
+  "escapesCaughtByReviewBeforeGoLive": {
+    "count": 3,
+    "items": [
+      "H1 meeting-code store exhaustion",
+      "C1 leaving the page did not leave the room",
+      "B1 field padding and placeholder contrast"
+    ]
+  },
+  "postGoLiveEscapes": {
+    "count": 1,
+    "items": [
+      "CI negative control failed on first run on main"
+    ]
+  },
+  "boundaryReviewFindings": {
+    "criticalOrBlock": 3,
+    "high": 2,
+    "status": "all fixed and re-checked"
+  },
+  "budgetMetering": {
+    "timeMinutes": {
+      "value": 1944,
+      "class": "measured",
+      "method": "wall-clock"
+    },
+    "toolCalls": {
+      "value": 1713,
+      "class": "measured",
+      "method": "transcript count, lower bound"
+    },
+    "note": "measured after the run, not during it"
+  },
+  "closure": "CLOSED PASS 2026-11-16, contract bae48b5f, evidence sha256 abecbb9c, budget-exhausted (repairs at ceiling)"
+}

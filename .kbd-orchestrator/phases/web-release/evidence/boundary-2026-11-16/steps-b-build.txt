@@ -1,0 +1,7 @@
+# Stage B: hosted build, header render and commit, images, scan (contract commands 6-11)
+pnpm --filter @know-meet/web run build:hosted
+node tooling/release/src/render-gateway-headers.ts
+git diff --quiet HEAD -- infra/k8s/overlays/production/security-headers.yaml && echo "skipped: rendered file identical to HEAD, nothing to commit" || git commit --only infra/k8s/overlays/production/security-headers.yaml -m "chore(release): render gateway security headers"
+node tooling/release/src/render-gateway-headers.ts --check
+docker compose -f tooling/release/compose.yaml build
+node tooling/release/src/scan-artifacts.ts

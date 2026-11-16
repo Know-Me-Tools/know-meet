@@ -1,0 +1,10 @@
+{
+  "phase": "web-release",
+  "dispatchedAt": "2026-11-15T12:15:00Z",
+  "backend": "openspec",
+  "contractDigest": "9ccc9805a32894ca4d4c227cbc4c2baa3435f88f05897a66bad74abee29a4052",
+  "method": "VLBV",
+  "assignedChanges": ["wr01-release-scenarios"],
+  "pendingChanges": ["wr02-meeting-domain-and-ports", "wr03-token-service", "wr04-realtime-adapter", "wr05-guest-meeting-flow", "wr06-hosted-release-surface", "wr07-container-images", "wr08-cluster-manifests", "wr09-release-boundary"],
+  "pendingOperatorActions": ["pin new dependencies in versions.toml", "gcloud auth login for task 1.6"]
+}

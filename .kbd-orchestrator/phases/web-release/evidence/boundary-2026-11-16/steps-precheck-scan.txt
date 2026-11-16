@@ -1,0 +1,2 @@
+# pre-check of the artifact scan with the repair-3 reader (not evidence)
+node tooling/release/src/scan-artifacts.ts

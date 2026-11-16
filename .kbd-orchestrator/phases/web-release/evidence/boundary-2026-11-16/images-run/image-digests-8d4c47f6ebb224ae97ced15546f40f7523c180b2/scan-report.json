@@ -1,0 +1,13 @@
+{
+  "completed": true,
+  "findings": [],
+  "summary": {
+    "inputs": 5,
+    "files": 5623,
+    "findings": 0,
+    "shortValuesSkipped": 0,
+    "excluded": [
+      "LIVEKIT_URL"
+    ]
+  }
+}

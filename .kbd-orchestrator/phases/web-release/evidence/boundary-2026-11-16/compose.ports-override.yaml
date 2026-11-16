@@ -1,0 +1,11 @@
+# Boundary run only (operator decision 2026-11-16, "Use other ports"): host ports 8080 and
+# 8081 are taken on this machine (knowme-web container, openai-proxy MCP port). This file
+# changes host ports only; images, environment and container ports are unchanged.
+# The token service's site origin follows through KM_SITE_ORIGIN, set by run-packaged.sh.
+services:
+  proxy:
+    ports: !override
+      - "127.0.0.1:18080:8080"
+  web:
+    ports: !override
+      - "127.0.0.1:18081:8080"
