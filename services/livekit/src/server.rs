@@ -30,6 +30,7 @@ pub fn build_router(config: Config) -> Router {
         unused_code_ttl,
         max_stored_codes,
         max_codes_per_client,
+        max_used_codes_per_client,
         request_timeout,
         room,
         ..
@@ -39,7 +40,8 @@ pub fn build_router(config: Config) -> Router {
         unused_ttl: unused_code_ttl,
         used_ttl: code_ttl,
         capacity: max_stored_codes,
-        per_owner: max_codes_per_client,
+        per_owner_unused: max_codes_per_client,
+        per_owner_used: max_used_codes_per_client,
     });
     let meetings = MeetingService::new(codes, Arc::new(SystemRandom), Arc::new(issuer));
     let limiter = RateLimiter::new(BucketPolicy::new(rate_limit.burst, rate_limit.refill), MAX_TRACKED_CLIENTS);
@@ -79,6 +81,7 @@ where
         unused_code_ttl_secs = config.unused_code_ttl.as_secs(),
         max_stored_codes = config.max_stored_codes,
         max_codes_per_client = config.max_codes_per_client,
+        max_used_codes_per_client = config.max_used_codes_per_client,
         room_max_participants = config.room.max_participants,
         room_empty_timeout_secs = config.room.empty_timeout_secs,
     );

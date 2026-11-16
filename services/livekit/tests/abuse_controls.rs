@@ -146,3 +146,23 @@ async fn a_client_at_its_live_code_cap_is_rate_limited_and_others_are_not() {
     assert!((1..=900).contains(&retry), "Retry-After {retry}");
     assert_eq!(create_meeting(&app, CLIENT_B).await.status, StatusCode::CREATED);
 }
+
+/// Security review N1: a code a token was issued for stops counting against the small
+/// unused cap and counts against the larger used cap instead.
+#[tokio::test]
+async fn used_codes_count_against_their_own_cap() {
+    let app = app(&[
+        (env::RATE_LIMIT_BURST, "100"),
+        (env::MEETING_RATE_LIMIT_BURST, "100"),
+        (env::MAX_CODES_PER_CLIENT, "1"),
+        (env::MAX_USED_CODES_PER_CLIENT, "2"),
+    ]);
+    for _ in 0..2 {
+        let code = issued_code(&app, CLIENT_A).await;
+        assert_eq!(request_token(&app, &code, "Host", CLIENT_A).await.status, StatusCode::OK);
+    }
+    let refused = create_meeting(&app, CLIENT_A).await;
+    assert_eq!(refused.status, StatusCode::TOO_MANY_REQUESTS);
+    assert_eq!(refused.error_code(), Some("rate-limited"));
+    assert_eq!(create_meeting(&app, CLIENT_B).await.status, StatusCode::CREATED);
+}

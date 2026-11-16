@@ -36,6 +36,8 @@ fn meeting_creation_defaults_are_strict() {
     assert_eq!(config.unused_code_ttl, Duration::from_secs(900));
     assert_eq!(config.code_ttl, Duration::from_secs(86_400));
     assert_eq!(config.max_codes_per_client, 5);
+    assert_eq!(config.max_used_codes_per_client, 50);
+    assert_eq!(config.max_stored_codes, 100_000);
 }
 
 #[test]
@@ -58,6 +60,8 @@ fn the_new_meeting_limits_are_bounded() {
         (env::UNUSED_CODE_TTL_SECONDS, "59"),
         (env::MAX_CODES_PER_CLIENT, "0"),
         (env::MAX_CODES_PER_CLIENT, "10001"),
+        (env::MAX_USED_CODES_PER_CLIENT, "0"),
+        (env::MAX_USED_CODES_PER_CLIENT, "10001"),
     ] {
         let mut vars = base();
         vars.insert(name, bad.to_owned());
