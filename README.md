@@ -11,6 +11,7 @@ memory. Your dot, the agents you register and the **Concierge** sit in the call 
 you and transcribe as you talk. When the meeting closes, everyone gets the
 transcript, summary and action items.
 
+- **Live app (real meetings, guests only):** https://meet.know-me.tools
 - **Live prototype and brand kit (always the latest build):** https://ipfs.prometheusags.ai/ipns/k51qzi5uqu5dmgkudr78a92hn7q69se47kfuka78widws7k9hggom5xwvsra6m/
 - **Home page, pinned build:** https://ipfs.prometheusags.ai/ipfs/bafybeigaqukvi2iiexaukw3vakyshrmfnp6rnd3ci6323eqmouensdeo6e/
 - **Mirror (GitHub Pages):** https://know-me-tools.github.io/know-meet/ (brand kit at `/docs/design/brand-guide.html`)
@@ -19,6 +20,21 @@ transcript, summary and action items.
 > The prototype is simulated. Meetings, agents, recordings, SMS, phone and calendar
 > connections use fictional sample data. Nothing is sent or stored outside the
 > browser.
+
+## What is live today
+
+https://meet.know-me.tools runs the first web release (2026-11-16): **real video
+meetings for guests.** No account, no download.
+
+- Start a meeting from the home page and share its code or link.
+- Others join by code or link, check camera and microphone in the lobby, and meet.
+  Audio and video run on LiveKit Cloud.
+- In the room: mute, camera on or off, copy the join link, leave.
+
+Everything else this README describes (dots, registered agents, the Concierge,
+transcription, recording, delivery at close, calendars, sign-in) is the product
+direction and is **not** in this release; the prototype above shows it with sample
+data. See the [release notes](docs/release/web-release-notes.md).
 
 ## What happens in a meeting
 
@@ -111,8 +127,28 @@ remember you. Invitees never need an account, whichever column the host is in.
 | `scripts/build-site.sh` | Stages the published site layout into a folder; used by both publish scripts |
 | `scripts/publish-ipfs.sh` | Publishes the site to IPFS (pinned) and points the `know-meet` IPNS name at it |
 | `scripts/publish-pages.sh` | Rebuilds the GitHub Pages mirror on the `gh-pages` branch |
+| [`apps/web/`](apps/web/README.md) | The React 19 web app; `build:hosted` makes the public-site build |
+| `packages/domain/`, `packages/application/`, `packages/realtime/` | Meeting domain, use cases and ports, and the LiveKit adapter |
+| `services/livekit/` | The token service (Rust): meeting codes and short-lived LiveKit tokens |
+| `infra/` | Kustomize manifests and the Argo CD Application for the cluster |
+| [`tooling/release/`](tooling/release/README.md) | Release tools: header render, artifact scan, cluster and endpoint checks |
+| `tests/release/` | Playwright release scenarios (WR-1 to WR-8), packaged and hosted |
+| [`docs/release/`](docs/release/web-release-runbook.md) | Runbook, operations guide and release notes |
 
-## Publishing
+## Deploying the web app
+
+Every push to `main` that changes application code deploys to
+https://meet.know-me.tools with no manual step. The `images` workflow builds both
+images, scans them for secrets and pushes them to GHCR. Its `deploy` job then pins
+both image tags in `infra/k8s/overlays/production` with one bot commit, and Argo CD
+syncs `main` to the cluster. Manifest-only changes under `infra/` sync directly.
+The first release, the cluster setup and teardown are in the
+[runbook](docs/release/web-release-runbook.md) and the
+[operations guide](docs/release/web-release-operations.md).
+
+`main` has no branch protection yet, so a push to `main` is a public deploy.
+
+## Publishing the prototype
 
 Both published copies are staged by `scripts/build-site.sh`, so they have the same
 layout: the prototype at `/` and the brand kit at `/docs/design/`. Run either
