@@ -9,14 +9,18 @@ method nothing here has been rendered or applied before the release boundary run
 
 | Path | Creates |
 |---|---|
-| `argocd/know-meet.yaml` | Argo CD Application `know-meet` (namespace `argocd`). Syncs `k8s/overlays/production` from `main`. |
+| `argocd/projects.yaml` | Argo CD AppProjects `know-meet` and `know-meet-platform`: this repository only, one namespace each, only the kinds each Application renders. |
+| `argocd/know-meet.yaml` | Argo CD Application `know-meet` (project `know-meet`). Syncs `k8s/overlays/production` from `main`. |
+| `argocd/know-meet-platform.yaml` | Argo CD Application `know-meet-platform` (project `know-meet-platform`). Syncs `platform` from `main`. |
 | `k8s/base/` | Namespace `know-meet`; Deployments and Services `know-meet-web` and `know-meet-token-service`. |
-| `k8s/overlays/production/` | Pulls in `k8s/base` and `platform`; HTTPRoutes `know-meet-https` and `know-meet-http-redirect`; image tags; security headers. |
+| `k8s/overlays/production/` | Pulls in `k8s/base`; HTTPRoutes `know-meet-https` and `know-meet-http-redirect`; image tags; security headers. |
 | `k8s/overlays/production/security-headers.yaml` | Generated. A local-config ConfigMap kustomize reads and does not apply. |
 | `platform/` | GatewayClass `eg`, Gateway `main-gateway` and Certificate `meet-know-me-tools` (namespace `envoy-gateway-system`). Shared. |
 
-One Application, one source path. The overlay includes `platform` as a directory resource,
-so one sync creates the GatewayClass, Gateway, certificate, namespace, workloads and routes.
+Two Applications in two projects. An AppProject's kind whitelist applies to every namespace
+it allows, so the app (namespace `know-meet`: Namespace, Deployment, Service, HTTPRoute,
+NetworkPolicy) and the shared platform (namespace `envoy-gateway-system`: Gateway,
+Certificate; cluster-scoped GatewayClass) each get a project that admits exactly their kinds.
 
 The Secret `know-meet-livekit` (keys `LIVEKIT_URL`, `LIVEKIT_API_KEY`,
 `LIVEKIT_API_SECRET`) is **not** in Git. The operator creates it in namespace `know-meet`
@@ -90,12 +94,26 @@ the Service uses `Cluster`, the peer is a node address, every client shares one 
 bucket, and the limit fails closed (too strict, never forgeable). Check the observed
 behaviour at the boundary.
 
-## Apply (boundary only)
+## Apply
 
-The release boundary applies the Application once; Argo CD does the rest:
+The operator applies the projects and Applications; Argo CD does the rest. Every later change
+is a merged pull request.
 
 ```bash
+kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/projects.yaml
 kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet.yaml
+kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet-platform.yaml
 ```
 
-Described here, not run. After that, every change is a merged pull request.
+**Moving from the single Application (once).** Before this split, Application `know-meet`
+in project `default` also synced `platform`. In order:
+
+1. Apply `projects.yaml`. Nothing syncs differently yet.
+2. Merge the pull request that removes `platform` from the overlay. `know-meet` stops
+   rendering the three platform objects; they carry `Prune=false,Delete=false`, so Argo CD
+   leaves them running (the Application shows them as needing a prune it will not do).
+3. Apply `know-meet.yaml` (now project `know-meet`) and `know-meet-platform.yaml`. The new
+   Application adopts the three objects unchanged; only their tracking annotation moves.
+
+Applying `know-meet.yaml` with project `know-meet` before step 2 makes its sync fail (the
+platform kinds are not allowed), which deletes nothing but stops deploys until step 2.

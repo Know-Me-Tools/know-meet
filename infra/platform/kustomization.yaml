@@ -1,5 +1,5 @@
-# Shared platform objects: the GatewayClass, the Gateway and its certificate. Pulled into
-# the production overlay as a directory resource, so one Argo CD Application syncs them.
+# Shared platform objects: the GatewayClass, the Gateway and its certificate. Synced by Argo CD
+# Application know-meet-platform (infra/argocd/know-meet-platform.yaml).
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
