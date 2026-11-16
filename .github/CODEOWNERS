@@ -1,0 +1,4 @@
+# Deployment and CI changes need a code-owner review before they merge to main. The main
+# ruleset (infra/github/main-ruleset.json) enforces it; infra/github/README.md explains it.
+/infra/   @GQAdonis
+/.github/ @GQAdonis

@@ -11,15 +11,18 @@ resources:
   - routes.yaml
   - security-headers.yaml
 
-# Release tag. The `deploy` job of .github/workflows/images.yml sets both lines to the commit
-# SHA of each main build it pushed (continuous deployment); edit nothing else in this block.
-# The first placeholder names no image that exists, so a sync before the first deploy fails at
-# image pull instead of running something unreviewed. Never `latest`.
+# Release pin. The `deploy` job of .github/workflows/images.yml rewrites these four lines for
+# each main build it pushed (continuous deployment): `newTag` is the commit SHA, `digest` the
+# digest that run pushed. kustomize renders `image:tag@digest`, so the cluster pulls by digest
+# and the tag only records which commit it is. Keep the order name, newTag, digest; edit
+# nothing else in this block. Never `latest`.
 images:
   - name: ghcr.io/know-me-tools/know-meet-web
     newTag: 744dea5bbfb3c32feca33e40c738574761479ab0
+    digest: sha256:dfe44a775e7c43d5c09aa76cee09159ef63bfa9a890992d115f010eaa84ad368
   - name: ghcr.io/know-me-tools/know-meet-token-service
     newTag: 744dea5bbfb3c32feca33e40c738574761479ab0
+    digest: sha256:74ac2547c7d58392386e9aed08ff4b9546077132e70248201f7abbf4dd4586f5
 
 # Copies each generated header value (security-headers.yaml, a local-config ConfigMap that
 # kustomize reads but does not emit) into the ResponseHeaderModifier of every HTTPS rule.

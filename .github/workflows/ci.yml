@@ -9,8 +9,10 @@ on:
   push:
     branches: [main]
 
+# Pull requests cancel their own superseded runs. Pushes to main each keep their own run: the
+# deploy app's pin commit lands on main minutes after a merge and must not cancel that merge's CI.
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.event_name == 'push' && github.sha || github.ref }}
   cancel-in-progress: true
 
 permissions:
