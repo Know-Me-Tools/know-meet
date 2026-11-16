@@ -11,8 +11,9 @@ resources:
   - routes.yaml
   - security-headers.yaml
 
-# Release tag. One placeholder per image; task 8.6 replaces both with the release commit SHA
-# by pull request. The placeholder names no image that exists, so a sync before 8.6 fails at
+# Release tag. The `deploy` job of .github/workflows/images.yml sets both lines to the commit
+# SHA of each main build it pushed (continuous deployment); edit nothing else in this block.
+# The first placeholder names no image that exists, so a sync before the first deploy fails at
 # image pull instead of running something unreviewed. Never `latest`.
 images:
   - name: ghcr.io/know-me-tools/know-meet-web

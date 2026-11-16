@@ -14,10 +14,16 @@
 #                             A variable, not a secret.
 #   after the first push      make both GHCR packages public (or add a cluster pull secret).
 #
-# Reading the result (wr08 task 8.6 bumps the overlay tag by pull request):
+# Reading the result:
 #   - job outputs `tag`, `web-digest`, `token-service-digest`, `digests`
 #   - the job summary lists both pinned references
 #   - artifact `image-digests-<sha>` holds image-digests.json and the scan report
+#
+# Continuous deployment (operator decision 2026-11-16): after a push to main builds and pushes
+# both images, the `deploy` job sets the two `newTag` lines of the production overlay to that
+# commit SHA and pushes one commit to main. Argo CD syncs main automatically, so every main
+# check-in reaches https://meet.know-me.tools. The bot commit touches infra/** only, and a push
+# made with the workflow token starts no workflow, so it never loops.
 name: images
 
 on:
@@ -231,3 +237,76 @@ jobs:
           path: ${{ runner.temp }}/image-digests/
           if-no-files-found: error
           retention-days: 90
+
+  # Continuous deployment: pin both images to this commit on main. Argo CD syncs main.
+  deploy:
+    name: pin the release tag on main (Argo CD deploys it)
+    needs: images
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    concurrency:
+      group: deploy-main
+      cancel-in-progress: false
+    env:
+      TAG: ${{ needs.images.outputs.tag }}
+      OVERLAY: infra/k8s/overlays/production/kustomization.yaml
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Pin both images and push to main
+        run: |
+          set -euo pipefail
+          if ! [[ "$TAG" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::image tag '$TAG' is not a full commit SHA."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          pin() {
+            # Never move the site backwards: if main already pins this commit or a later one, stop.
+            local current
+            current="$(awk '/name: ghcr.io\/know-me-tools\/know-meet-web$/ { getline; print $2 }' "$OVERLAY")"
+            if [[ "$current" =~ ^[0-9a-f]{40}$ ]] && git cat-file -e "$current^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$TAG" "$current"; then
+              echo "main already pins $current, which contains $TAG; nothing to deploy."
+              return 1
+            fi
+            if [ "$(grep -c '^    newTag: ' "$OVERLAY")" -ne 2 ]; then
+              echo "::error::$OVERLAY must have exactly two newTag lines."
+              exit 1
+            fi
+            sed -E -i "s#^(    newTag: ).*\$#\1$TAG#" "$OVERLAY"
+            # The commit may change the two newTag lines and nothing else.
+            if [ "$(git diff --numstat)" != "$(printf '2\t2\t%s' "$OVERLAY")" ]; then
+              echo "::error::the tag edit changed more than the two newTag lines:"
+              git diff
+              exit 1
+            fi
+            git commit -q -am "chore(release): deploy ${TAG:0:12} to meet.know-me.tools" \
+              -m "Pins both release images to $TAG. Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+          }
+
+          pin || exit 0
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              {
+                echo "### Deployed \`$TAG\`"
+                echo
+                echo "Commit \`$(git rev-parse HEAD)\` pins both images on main. Argo CD syncs it to https://meet.know-me.tools."
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "push attempt $attempt was rejected; re-applying on the latest main."
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            pin || exit 0
+          done
+          echo "::error::could not push the tag pin after 3 attempts."
+          exit 1
