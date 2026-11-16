@@ -1,30 +1,29 @@
-# The one Argo CD Application for Know Meet. Applied once by the operator:
+# The Argo CD Application for the Know Meet app (namespace know-meet). Project know-meet
+# (infra/argocd/projects.yaml) limits it to this repository, namespace know-meet and the kinds
+# it renders. The shared platform objects are Application know-meet-platform. Applied by the
+# operator:
 #   kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet.yaml
 # The repository is public, so Argo CD clones it over HTTPS with no repository credential.
 #
 # Sync policy:
 # - automated: a merged pull request is the deployment; nobody runs a manual sync.
 # - prune: true: an app object removed from Git (a route, a Service) is removed from the
-#   cluster. The shared GatewayClass, Gateway and Certificate carry Prune=false,Delete=false,
-#   so removing their files or deleting this Application never takes the public address or the
-#   certificate away from other tenants.
-# - selfHeal: true: a manual edit to a managed object is reverted to Git. Changes to the shared
-#   Gateway therefore go through this repository by pull request.
+#   cluster.
+# - selfHeal: true: a manual edit to a managed object is reverted to Git. Changes to the managed
+#   objects therefore go through this repository by pull request.
 # - No CreateNamespace: the know-meet Namespace is a manifest in Git (infra/k8s/base).
 # - No resources finalizer: deleting the Application leaves every object running; removal is a
 #   deliberate, separate step.
 #
-# Ordering: the Certificate and GatewayClass are in sync wave -1. Argo CD waits for the
-# Certificate to be Ready before wave 0 applies the Gateway, so the HTTPS listener never
-# references a missing Secret. HTTPRoutes need no ordering: a route created before its Gateway
-# is accepted once the Gateway exists.
+# Ordering: HTTPRoutes need no ordering against the Gateway in know-meet-platform: a route
+# created before its Gateway is accepted once the Gateway exists.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: know-meet
   namespace: argocd
 spec:
-  project: default
+  project: know-meet
   source:
     repoURL: https://github.com/Know-Me-Tools/know-meet.git
     targetRevision: main

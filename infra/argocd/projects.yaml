@@ -1,0 +1,60 @@
+# Argo CD AppProjects for Know Meet (security review M4). Applied by the operator, before the
+# Applications that use them:
+#   kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/projects.yaml
+#
+# An AppProject's namespaced-kind whitelist applies to every destination it allows, so the two
+# halves of Know Meet live in two projects: the app (namespace know-meet) and the shared
+# platform objects (namespace envoy-gateway-system). Each project accepts only this repository
+# as a source and only the kinds its Application renders today. A pull request that adds any
+# other kind, namespace or repository fails to sync instead of reaching the cluster.
+#
+# Cluster-scoped kinds are also limited by name (Argo CD allows `name` only there): a destination
+# namespace does not constrain a cluster-scoped object, so without `name` the app project could
+# adopt, and later prune, any Namespace (envoy-gateway-system included).
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: know-meet
+  namespace: argocd
+spec:
+  description: Know Meet app at meet.know-me.tools (namespace know-meet).
+  sourceRepos:
+    - https://github.com/Know-Me-Tools/know-meet.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: know-meet
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+      name: know-meet
+  namespaceResourceWhitelist:
+    - group: apps
+      kind: Deployment
+    - group: ""
+      kind: Service
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+    - group: networking.k8s.io
+      kind: NetworkPolicy
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: know-meet-platform
+  namespace: argocd
+spec:
+  description: Shared GatewayClass, Gateway and certificate for meet.know-me.tools.
+  sourceRepos:
+    - https://github.com/Know-Me-Tools/know-meet.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: envoy-gateway-system
+  clusterResourceWhitelist:
+    - group: gateway.networking.k8s.io
+      kind: GatewayClass
+      name: eg
+  namespaceResourceWhitelist:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+    - group: cert-manager.io
+      kind: Certificate

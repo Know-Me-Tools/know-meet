@@ -1,13 +1,10 @@
-# Production: the one path the Argo CD Application syncs (infra/argocd/know-meet.yaml).
-# It pulls in the shared platform objects too, so one sync creates the GatewayClass, the
-# Gateway, its Certificate, the namespace, the workloads and the routes.
-#
-# No `namespace:` field here: it would also rewrite the namespace of the platform objects.
+# Production: the path Argo CD Application know-meet syncs (infra/argocd/know-meet.yaml): the
+# namespace, the workloads and the routes. The shared platform objects (infra/platform) are
+# Application know-meet-platform, in a project of their own.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base
-  - ../../../platform
   - routes.yaml
   - security-headers.yaml
 
