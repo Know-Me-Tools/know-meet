@@ -30,6 +30,7 @@ pub mod env {
     pub const MEETING_RATE_LIMIT_REFILL_SECONDS: &str = "KM_MEETING_RATE_LIMIT_REFILL_SECONDS";
     pub const UNUSED_CODE_TTL_SECONDS: &str = "KM_UNUSED_CODE_TTL_SECONDS";
     pub const MAX_CODES_PER_CLIENT: &str = "KM_MAX_CODES_PER_CLIENT";
+    pub const MAX_USED_CODES_PER_CLIENT: &str = "KM_MAX_USED_CODES_PER_CLIENT";
     pub const REQUEST_TIMEOUT_SECONDS: &str = "KM_REQUEST_TIMEOUT_SECONDS";
     pub const ROOM_MAX_PARTICIPANTS: &str = "KM_ROOM_MAX_PARTICIPANTS";
     pub const ROOM_EMPTY_TIMEOUT_SECONDS: &str = "KM_ROOM_EMPTY_TIMEOUT_SECONDS";
@@ -82,8 +83,10 @@ pub struct Config {
     /// Lifetime of a code no token has been issued for yet. Never above `code_ttl`.
     pub unused_code_ttl: Duration,
     pub max_stored_codes: usize,
-    /// Live codes one client address may hold at once.
+    /// Live codes no token was issued for that one client address may hold at once.
     pub max_codes_per_client: usize,
+    /// Live codes a token was issued for that one client address may hold at once.
+    pub max_used_codes_per_client: usize,
     pub request_timeout: Duration,
     pub room: RoomLimits,
 }
@@ -116,8 +119,9 @@ impl Config {
                 reason: format!("must not exceed {}", env::CODE_TTL_SECONDS),
             });
         }
-        let max_stored_codes = optional_bounded(lookup, env::MAX_STORED_CODES, 10_000, 1, 1_000_000)?;
+        let max_stored_codes = optional_bounded(lookup, env::MAX_STORED_CODES, 100_000, 1, 1_000_000)?;
         let max_codes_per_client = optional_bounded(lookup, env::MAX_CODES_PER_CLIENT, 5, 1, 10_000)?;
+        let max_used_codes_per_client = optional_bounded(lookup, env::MAX_USED_CODES_PER_CLIENT, 50, 1, 10_000)?;
         let request_timeout = optional_bounded(lookup, env::REQUEST_TIMEOUT_SECONDS, 10, 1, 60)?;
         let max_participants = optional_bounded(lookup, env::ROOM_MAX_PARTICIPANTS, 10, 2, 100)?;
         let empty_timeout = optional_bounded(lookup, env::ROOM_EMPTY_TIMEOUT_SECONDS, 300, 10, 86_400)?;
@@ -137,6 +141,7 @@ impl Config {
             unused_code_ttl: Duration::from_secs(unused_code_ttl),
             max_stored_codes: to_usize(max_stored_codes),
             max_codes_per_client: to_usize(max_codes_per_client),
+            max_used_codes_per_client: to_usize(max_used_codes_per_client),
             request_timeout: Duration::from_secs(request_timeout),
             room: RoomLimits {
                 max_participants: to_u32(max_participants),

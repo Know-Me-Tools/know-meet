@@ -86,7 +86,8 @@ spec:
             # defaults. POST /api/meetings also spends a second bucket: 3 at once, refilled
             # fully in 600 s (one per 200 s). A code no token was requested for expires after
             # 900 s; the first token keeps it for KM_CODE_TTL_SECONDS (default 86400) from
-            # creation. One client address holds at most 5 live codes. tooling/release/
+            # creation. One client address holds at most 5 live unused and 50 live used codes
+            # (security review N1); the store holds 100000 (R1). tooling/release/
             # compose.yaml must mirror these, or say why it differs.
             - name: KM_MEETING_RATE_LIMIT_BURST
               value: "3"
@@ -96,6 +97,10 @@ spec:
               value: "900"
             - name: KM_MAX_CODES_PER_CLIENT
               value: "5"
+            - name: KM_MAX_USED_CODES_PER_CLIENT
+              value: "50"
+            - name: KM_MAX_STORED_CODES
+              value: "100000"
           readinessProbe:
             httpGet:
               path: /api/healthz

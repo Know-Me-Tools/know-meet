@@ -112,11 +112,14 @@ timeouts cover slow clients before they reach the service.
 
 There are 36^6 (about 2.18 billion) codes. A guess costs one token from the
 guesser's bucket. With the defaults (burst 10, refill 60 s) one address gets about
-14,400 guesses a day; with 10,000 live codes that is roughly a 6.6% chance per
-address per day of hitting some live meeting. An attacker with many addresses
-scales that linearly. Keep `KM_CODE_TTL_SECONDS` and `KM_MAX_STORED_CODES` as low as
-the product allows, and watch for `request_refused` events with code
-`meeting-not-found` in volume.
+14,400 guesses a day. The risk scales with the number of codes actually live: with
+10,000 live codes that is roughly a 6.6% chance per address per day of hitting some
+live meeting; with the store full at the default 100,000 it is about 48%. An attacker
+with many addresses scales that linearly. `KM_MAX_STORED_CODES` was raised to 100,000
+so that filling the store takes about 2,000 addresses at the per-address caps (security
+review R1); the cost is this higher guessing ceiling once that many codes are live.
+Keep `KM_CODE_TTL_SECONDS` as low as the product allows, and watch for
+`request_refused` events with code `meeting-not-found` in volume.
 
 ### Client address behind the Gateway
 
@@ -158,7 +161,9 @@ variable, never its value.
 | `KM_RATE_LIMIT_BURST` | no | 10 | 1 to 1000 | Bucket size per client |
 | `KM_RATE_LIMIT_REFILL_SECONDS` | no | 60 | 1 to 86400 | Time to refill an empty bucket |
 | `KM_CODE_TTL_SECONDS` | no | 86400 | 60 to 604800 | How long a room code accepts token requests |
-| `KM_MAX_STORED_CODES` | no | 10000 | 1 to 1000000 | Live codes held before 503 |
+| `KM_MAX_STORED_CODES` | no | 100000 | 1 to 1000000 | Live codes held before 503 |
+| `KM_MAX_CODES_PER_CLIENT` | no | 5 | 1 to 10000 | Live codes one address holds that no token was issued for |
+| `KM_MAX_USED_CODES_PER_CLIENT` | no | 50 | 1 to 10000 | Live codes one address holds that a token was issued for |
 | `KM_REQUEST_TIMEOUT_SECONDS` | no | 10 | 1 to 60 | Per-request handler timeout |
 | `KM_ROOM_MAX_PARTICIPANTS` | no | 10 | 2 to 100 | `roomConfig.maxParticipants` |
 | `KM_ROOM_EMPTY_TIMEOUT_SECONDS` | no | 300 | 10 to 86400 | `roomConfig.emptyTimeout` and `departureTimeout` |
