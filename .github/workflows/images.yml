@@ -25,10 +25,11 @@
 # pulls), then pushes one commit to main. Argo CD syncs main automatically, so every main
 # check-in reaches https://meet.know-me.tools.
 #
-# The push uses a short-lived token of the deploy GitHub App, the only bypass actor of the main
-# ruleset (infra/github/README.md). Operator inputs: variable KM_DEPLOY_APP_CLIENT_ID and secret
-# KM_DEPLOY_APP_PRIVATE_KEY. An app-token push does start workflows: `images` ignores infra/**,
-# so the bot commit never loops; `ci` runs on it.
+# The push uses a short-lived token of the deploy GitHub App, which the main ruleset lets push
+# directly (infra/github/README.md). Operator inputs: variable KM_DEPLOY_APP_CLIENT_ID, and
+# secret KM_DEPLOY_APP_PRIVATE_KEY in environment `production`, which only main may use: a
+# workflow on any other branch cannot read the key. An app-token push does start workflows:
+# `images` ignores infra/**, so the bot commit never loops; `ci` runs on it.
 name: images
 
 on:
@@ -253,6 +254,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    # The app key lives only in this environment, whose deployment branch policy is main only.
+    environment:
+      name: production
+      url: https://meet.know-me.tools
     permissions:
       contents: read
     concurrency:
@@ -270,7 +275,7 @@ jobs:
           HAS_KEY: ${{ secrets.KM_DEPLOY_APP_PRIVATE_KEY != '' }}
         run: |
           if [ -z "$CLIENT_ID" ] || [ "$HAS_KEY" != "true" ]; then
-            echo "::error::Variable KM_DEPLOY_APP_CLIENT_ID or secret KM_DEPLOY_APP_PRIVATE_KEY is missing (infra/github/README.md)."
+            echo "::error::Variable KM_DEPLOY_APP_CLIENT_ID or environment secret KM_DEPLOY_APP_PRIVATE_KEY is missing (infra/github/README.md)."
             exit 1
           fi
 
@@ -291,6 +296,9 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Pin both images and push to main
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
         run: |
           set -euo pipefail
           if ! [[ "$TAG" =~ ^[0-9a-f]{40}$ ]]; then
@@ -303,8 +311,10 @@ jobs:
               exit 1
             fi
           done
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Commit as the app that pushes, so the author matches the pusher.
+          bot_id="$(gh api "/users/${APP_SLUG}%5Bbot%5D" --jq .id)"
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${bot_id}+${APP_SLUG}[bot]@users.noreply.github.com"
 
           # Rewrites the newTag and digest lines of one images entry (name, then newTag, then
           # digest, in that order).
@@ -339,9 +349,11 @@ jobs:
             # The commit may change the newTag and digest lines and nothing else, and every one
             # of them must now hold this run's values.
             if [ "$(git diff --name-only)" != "$OVERLAY" ] \
-              || git diff -U0 -- "$OVERLAY" | grep -E '^[+-] ' | grep -Eqv '^[+-]    (newTag|digest): ' \
+              || git diff -U0 -- "$OVERLAY" | grep -E '^[+-]' | grep -Ev '^(\+\+\+|---) ' \
+                | grep -Eqv '^[+-]    (newTag|digest): ' \
               || [ "$(grep -c "^    newTag: $TAG\$" "$OVERLAY")" -ne 2 ] \
-              || [ "$(grep -cxF -e "    digest: $WEB_DIGEST" -e "    digest: $TOKEN_DIGEST" "$OVERLAY")" -ne 2 ]; then
+              || [ "$(grep -cxF "    digest: $WEB_DIGEST" "$OVERLAY")" -ne 1 ] \
+              || [ "$(grep -cxF "    digest: $TOKEN_DIGEST" "$OVERLAY")" -ne 1 ]; then
               echo "::error::the pin changed more than the newTag and digest lines, or missed one:"
               git diff
               exit 1
