@@ -1,6 +1,7 @@
 # Know Meet token service image (wr07 task 7.2).
 #
-# Build context: the repository root.
+# Build context: the repository root. Every change to this file rebuilds and deploys the image
+# (continuous deployment from main, .github/workflows/images.yml).
 #   docker build -f services/livekit/Dockerfile \
 #     -t ghcr.io/know-me-tools/know-meet-token-service:<commit-sha> .
 #
