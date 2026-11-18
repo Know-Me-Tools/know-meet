@@ -1,0 +1,7 @@
+01	0	2026-11-16T13:27:37Z	pnpm --filter @know-meet/web run build:hosted
+02	0	2026-11-16T13:27:49Z	node tooling/release/src/render-gateway-headers.ts
+03	0	2026-11-16T13:27:50Z	git diff --quiet HEAD -- infra/k8s/overlays/production/security-headers.yaml && echo "skipped: rendered file identical to HEAD, nothing to commit" || git commit --only infra/k8s/overlays/production/security-headers.yaml -m "chore(release): render gateway security headers"
+04	0	2026-11-16T13:28:29Z	node tooling/release/src/render-gateway-headers.ts --check
+05	0	2026-11-16T13:28:30Z	docker compose -f tooling/release/compose.yaml build
+06	2	2026-11-16T13:29:42Z	node tooling/release/src/scan-artifacts.ts
+STOP: step 06 exited 2

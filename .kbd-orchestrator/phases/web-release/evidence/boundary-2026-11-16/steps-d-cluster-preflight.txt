@@ -1,0 +1,6 @@
+# Stage D: on main after the tag pin (88429eac). Read-only. Contract commands: second scan,
+# LiveKit URL checks (local and cluster), verify-cluster.
+node tooling/release/src/scan-artifacts.ts
+/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/check-livekit-url.sh local
+/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/check-livekit-url.sh cluster
+node tooling/release/src/verify-cluster.ts --context gke_knowme-corporate_us-south1_main --json "$KM_EVIDENCE_DIR/verify-cluster.json"

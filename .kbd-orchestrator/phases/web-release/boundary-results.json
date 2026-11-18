@@ -1,0 +1,104 @@
+{
+  "phase": "web-release",
+  "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+  "runId": "hybrid-shell-foundation-20261109T083641Z",
+  "contractDigest": "bae48b5f2265b41042be31dbc8601ca176ad4bbc6221df7f6a826fb706e60c4f",
+  "testedCommit": "bb399985cddd61f77194482615d3692a277a2e3c",
+  "sourceDigests": {
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/tested-commit.txt": "58bafbfffd5172419faf17496f2c09ed1648a93b5c8e5822e85cef706074fa9b",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/verify-cluster.json": "16312c145ab75596daaedf8ef31a42f81430327248335767145af407e22d420b",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/verify-endpoint.json": "15bdd161c878759a174bbbb57051e28aec81d11f25d8f80b538b25d25b853fe3",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T142305Z/playwright.json": "174172d5e14ef50e86c72a2c2c4878089ffc7860363a9f0dfe4380f2a89247f7",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/playwright.json": "8b5a4ddd9e56a2554a4778ee3b2b89b4d322a40e69c308eff312b8b755c77072",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/images-run/image-digests-8d4c47f6ebb224ae97ced15546f40f7523c180b2/image-digests.json": "476060b44bf968b2c2859c0d149c54d8c340d556d0ebabc33adf60cdfa7a1a8b",
+    ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/images-run/image-digests-8d4c47f6ebb224ae97ced15546f40f7523c180b2/scan-report.json": "e086e4255139eed5e6214e2fed0fb5d38a97ec2610e15ffa9f43b74dc87fc10a"
+  },
+  "scenarios": [
+    {
+      "id": "WR-1",
+      "status": "PASS",
+      "attempted": "Two guests meet, mute and leave; Back leaves the meeting (packaged and hosted)",
+      "observed": "packaged 2/2 and hosted 2/2 specs passed",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/playwright.json"
+    },
+    {
+      "id": "WR-2",
+      "status": "PASS",
+      "attempted": "Deep links and reloads for /, /join, /meet; missing asset is 404",
+      "observed": "packaged 4/4 and hosted 3/3 passed",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/playwright.json"
+    },
+    {
+      "id": "WR-3",
+      "status": "PASS",
+      "attempted": "Production certificate, HTTPS redirect and security headers at the public URL; control on bare static image",
+      "observed": "hosted spec passed; endpoint check 8/8, LE production cert to 2027-02-14; control failed as required",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/verify-endpoint.json"
+    },
+    {
+      "id": "WR-4",
+      "status": "PASS",
+      "attempted": "Token endpoint: generated codes only, foreign Origin, arbitrary room, burst and 429",
+      "observed": "packaged 6/6 passed",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T142305Z/playwright.json"
+    },
+    {
+      "id": "WR-5",
+      "status": "PASS",
+      "attempted": "Only home, join and meeting room reachable; control on default build",
+      "observed": "packaged 2/2 and hosted 1/1 passed",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/playwright.json"
+    },
+    {
+      "id": "WR-6",
+      "status": "PASS",
+      "attempted": "Artifact scan over bundle, images and rendered manifests",
+      "observed": "scan-artifacts exit 0, findings=0",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/d-cluster-preflight/01.log"
+    },
+    {
+      "id": "WR-7",
+      "status": "PASS",
+      "attempted": "Running image digests equal the images workflow output for tag 8d4c47f6",
+      "observed": "digests equal; verify-cluster exit 0",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/images-run/image-digests-8d4c47f6ebb224ae97ced15546f40f7523c180b2/image-digests.json"
+    },
+    {
+      "id": "WR-8",
+      "status": "PASS",
+      "attempted": "axe and fill probe in both themes at all widths, keyboard, reduced motion; lowered-fill control",
+      "observed": "packaged 5/5 passed; UI re-check PASS after repair 6",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T142305Z/playwright.json"
+    },
+    {
+      "id": "WR-9",
+      "status": "PASS",
+      "attempted": "frozen install, lint, typecheck, test, cargo check --workspace",
+      "observed": "stage A 5/5 steps exit 0",
+      "evidence": ".kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/a-static/results.tsv"
+    }
+  ],
+  "budgetConsumption": {
+    "source": "amendment-4-proposal.md: attempts.tsv, decision-log.md, execute-dispatch.json and execute stage completion, session transcripts",
+    "values": {
+      "timeMinutes": {
+        "value": 1944,
+        "class": "measured",
+        "method": "wall-clock dispatch to execute complete"
+      },
+      "toolCalls": {
+        "value": 1713,
+        "class": "measured",
+        "method": "tool_use count in project transcripts; lower bound"
+      },
+      "repairAttempts": {
+        "value": 7,
+        "class": "measured"
+      },
+      "noProgress": {
+        "value": 0,
+        "class": "measured"
+      }
+    }
+  }
+}

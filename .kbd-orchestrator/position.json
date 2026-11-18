@@ -2,26 +2,24 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 230,
-  "derivedRevision": 230,
+  "sourceRevision": 536,
+  "derivedRevision": 536,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 230
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-12T14:40:26.886778Z",
+  "updatedAt": "2026-11-16T21:13:37.796536Z",
   "cursor": [
-    "hybrid-shell-foundation",
-    "execute",
-    "c13-fidelity-verification-and-evidence",
-    "13.2"
+    "web-release",
+    "execute"
   ],
   "root": {
     "type": "phase",
     "id": "80abee42-ead8-4e6f-b617-e458847775d3",
     "status": "ready",
     "progress": {
-      "done": 13,
-      "total": 16
+      "done": 22,
+      "total": 25
     },
     "children": [
       {
@@ -145,9 +143,9 @@
           {
             "type": "change",
             "id": "c13-fidelity-verification-and-evidence",
-            "status": "IN_PROGRESS",
+            "status": "BLOCKED",
             "progress": {
-              "done": 0,
+              "done": 7,
               "total": 10
             }
           },
@@ -175,6 +173,100 @@
             "status": "IN_PROGRESS",
             "progress": {
               "done": 6,
+              "total": 7
+            }
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "type": "phase",
+        "id": "web-release",
+        "canonicalId": "web-release",
+        "status": "COMPLETE",
+        "progress": {
+          "done": 9,
+          "total": 9
+        },
+        "children": [
+          {
+            "type": "change",
+            "id": "wr01-release-scenarios",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 6,
+              "total": 6
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr02-meeting-domain-and-ports",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr03-token-service",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr04-realtime-adapter",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 2,
+              "total": 2
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr05-guest-meeting-flow",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr06-hosted-release-surface",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr07-container-images",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr08-cluster-manifests",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 6,
+              "total": 6
+            }
+          },
+          {
+            "type": "change",
+            "id": "wr09-release-boundary",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 7,
               "total": 7
             }
           }

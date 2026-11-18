@@ -1,0 +1,7 @@
+01	0	2026-11-16T12:26:24Z	pnpm --filter @know-meet/web run build:hosted
+02	0	2026-11-16T12:26:27Z	node tooling/release/src/render-gateway-headers.ts
+03	0	2026-11-16T12:26:27Z	git commit --only infra/k8s/overlays/production/security-headers.yaml -m "chore(release): render gateway security headers"
+04	0	2026-11-16T12:26:34Z	node tooling/release/src/render-gateway-headers.ts --check
+05	0	2026-11-16T12:26:35Z	docker compose -f tooling/release/compose.yaml build
+06	2	2026-11-16T12:27:50Z	node tooling/release/src/scan-artifacts.ts
+STOP: step 06 exited 2

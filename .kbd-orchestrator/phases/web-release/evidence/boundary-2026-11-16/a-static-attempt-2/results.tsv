@@ -1,0 +1,6 @@
+01	0	2026-11-16T12:24:57Z	pnpm install --frozen-lockfile
+02	0	2026-11-16T12:24:58Z	pnpm run lint
+03	0	2026-11-16T12:25:19Z	pnpm run typecheck
+04	0	2026-11-16T12:25:19Z	pnpm run test
+05	0	2026-11-16T12:26:23Z	cargo check --workspace
+DONE: 5 steps

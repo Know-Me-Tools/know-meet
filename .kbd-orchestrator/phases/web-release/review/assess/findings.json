@@ -1,0 +1,83 @@
+{
+  "mode": "artifact",
+  "verdict": "PASS",
+  "judge_model": "MiniMax-M3",
+  "producer_model": "claude-fable-5-2",
+  "isolation_mode": "rest-gateway:http://localhost:4000/v1",
+  "cross_model_check": "unverified-producer-unknown",
+  "findings": [
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The load-bearing headline claim that the BFF is the only server in the repo is false, and the assessment never mentions the root `live/server.mjs` duplicate that the constraints explicitly forbid using as a source.",
+      "evidence": "Headline: \"The only server in the repo cannot run on a cluster as written.\" The file tree contains `./live/server.mjs` and the cited paths include `docs/design/live/server.mjs`; the artifact itself contradicts the headline in Spec gap summary: \"The repo has three candidates and none is ready: the BFF (loopback only), the prototype's Node server (prototype only), or a static file server (not present).\" Constraints state: \"`live/` at the repo root is a stale duplicate of `docs/design/live/`. It is pending removal and must not be used as a source.\" The assessment never references root `live/` at all.",
+      "suggested_fix": "Rewrite the headline to enumerate every server artifact in the repo (services/bff, docs/design/live/server.mjs, live/server.mjs) and add an explicit finding that root `live/` is a stale duplicate that must not be deployed, sourced from, or mistaken for the product server."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The preamble guarantees every claim is sourced, but multiple load-bearing claims \u2014 including cluster facts that a plan would encode into manifests \u2014 carry no file, command, or record citation.",
+      "evidence": "Preamble: \"Every claim cites the file or command it came from.\" Contradicting examples: \"HSTS, Referrer-Policy and Permissions-Policy are not set anywhere.\"; \"Policy is `upsert-only` with no domain filter, across nine zones.\"; \"Memory records 2 nodes with no machine type or autoscaling.\"; the VS-A constraint \"Certificate from `letsencrypt-prod`\". None cites a file path, command, or memory record identifier, and the artifact itself says the issuer manifest is \"recorded as living only in that session's scratchpad\", so the issuer name that the plan would hardcode is effectively unverified.",
+      "suggested_fix": "Cite each such claim to a specific file, command output, or memory record identifier, or downgrade it to UNKNOWN; correct the preamble so it does not assert a guarantee the body does not meet."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The Surreal Memory cluster-extraction goal is marked PARTIAL without a per-category assessment of the seven areas the goal names, without confirming the MCP server was the source, and with the missing items left unidentified.",
+      "evidence": "Goal progress row: \"Extract cluster setup from Surreal Memory and configure to match | PARTIAL | Extraction done and sourced in `cluster-context.md`. Configuration not started. Eight items are not in memory.\" The goal requires \"ingress, TLS, DNS, registry, GitOps, namespaces, secrets\" recorded \"with their sources\", but the assessment reports only \"Envoy Gateway, cert-manager, external-dns and Argo CD are recorded as installed; the shared `main-gateway` is recorded as not created\", leaves registry as \"**Q3. Container registry.** Not in memory.\", reports no namespace finding, and never identifies which eight items are absent or the source records behind any of them.",
+      "suggested_fix": "Add a per-category table (ingress, TLS, DNS, registry, GitOps, namespaces, secrets) with the exact source record for each extracted value and explicit UNKNOWN entries for the gaps; name the eight missing items and state explicitly whether the extraction was performed through the Surreal Memory MCP server."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The assessment asserts that no web deployment/publishing path and no web-only build path exist without inspecting the three publishing scripts that the file tree shows in the repo.",
+      "evidence": "\"**No deployment packaging exists.** There is no Dockerfile, container build, Kubernetes manifest, Helm chart, Kustomize overlay, Argo CD Application or web deploy workflow in the repo.\" and \"Note that `pnpm run build` and `release.yml` build desktop and mobile, so a web release needs a web-only build path.\" The file tree contains `./scripts/build-site.sh`, `./scripts/publish-pages.sh` and `./scripts/publish-ipfs.sh`; none is cited, opened, or assessed.",
+      "suggested_fix": "Inspect scripts/build-site.sh, scripts/publish-pages.sh and scripts/publish-ipfs.sh and state for each whether it is a docs/site-only script or a usable web build/publish entry point, then revise the 'no deployment packaging' and 'needs a web-only build path' conclusions accordingly."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The 'NONE' test-coverage claim ignores the BDD feature specifications and fidelity tests already present in the repo, including one named for the web-without-Tauri case.",
+      "evidence": "\"test coverage: **NONE** for deployment. Web unit tests exist under `apps/web/tests/unit`; nothing tests a container, a manifest or the hosted behaviour (SPA fallback, headers, health).\" The file tree lists `./features/vs-5-web-without-tauri.feature`, `./features/vs-8-repository-rules.feature`, `./features/accessibility.feature`, `./features/motion.feature`, `./features/vs-1-web-fidelity.feature` and `./tests/fidelity`; none of these is inspected or acknowledged.",
+      "suggested_fix": "Inspect `features/` and `tests/fidelity` and enumerate which existing specifications already cover web-only hosting, routing/headers and repository rules, and which remain uncovered."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "Hosted security-header readiness is reported as PARTIAL on the strength of the BFF, which the assessment itself says may not be the serving component, so the status is unsupported for the release.",
+      "evidence": "\"| Security headers when hosted | PARTIAL | ... The BFF sets `nosniff` and `X-Frame-Options: DENY` only.\" compared with \"**Q7. Serving component.** Static file server, the BFF made deployable, or a new service. Depends on Q1.\" and the gap statement that the static file server candidate is \"not present\"; if a static server or new component is chosen, no header-setting code exists (\"Nothing calls it from a server\").",
+      "suggested_fix": "Break the status out per candidate serving component and mark hosted-header readiness MISSING until a serving component that emits CSP, HSTS, Referrer-Policy and Permissions-Policy is identified and evidenced."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The headline asserts a proven web-build capability that the Build health section explicitly says was never verified.",
+      "evidence": "Headline: \"The repository can build a web bundle, but nothing in it can put that bundle on a cluster\". Build health: \"build check: **UNKNOWN**. Not run.\", \"Web build health on `main`: UNKNOWN.\", and \"`apps/web/dist/` may be the bundle the blocked c13 evidence run is bound to\"; the only supporting signal is \"`apps/web/dist/` exists, dated 2026-11-13\" on a tree with \"138 uncommitted changes from other work\".",
+      "suggested_fix": "Restate the headline as 'a web bundle artifact exists but the build is unverified', and record the unverified main-branch build as an explicit gap that must be closed before release planning relies on it."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The constraint check omits a constraint obligation that binds this phase and ignores the repository-rule tooling visible in the file tree before declaring that no violations were observed.",
+      "evidence": "Constraints: \"Build, test and lint commands are not defined yet (see `project.json`).\" and, for max-500-lines-per-file, \"Checker script to be added to lint, pre-commit and CI in this phase\". The file tree lists `./tooling/repo-rules`, `./tooling/git-hooks`, `./tooling/ls-lint` and `./tooling/biome`. The assessment instead reports \"known violations: UNKNOWN (lint not run, same reason)\" and \"constraints.md violations: NONE observed\" without inspecting any of that tooling or recording the checker-script work as a gap.",
+      "suggested_fix": "Report the current state of tooling/repo-rules, tooling/ls-lint and tooling/git-hooks (does the 500-line checker already exist?), list the required checker and lint/pre-commit/CI enforcement as an explicit gap, and state that build/test/lint commands are still undefined."
+    },
+    {
+      "severity": "WARNING",
+      "file": "assessment.md",
+      "claim": "The DNS precondition for shipping at meet.know-me.tools is never assessed: which zone owns the domain, whether external-dns manages it, and who can create the record are all left implicit.",
+      "evidence": "The goal requires the release at \"https://meet.know-me.tools\"; the assessment reports only \"`dig +short meet.know-me.tools` returned nothing\" and Risk 5: \"external-dns never deletes. Policy is `upsert-only` with no domain filter, across nine zones\" plus \"A wrong hostname on a route creates a record that stays until removed by hand\". The nine managed zones are not identified, know-me.tools is never matched to a zone, and no finding covers manual DNS versus external-dns ownership or cleanup responsibility.",
+      "suggested_fix": "Add a finding stating whether know-me.tools is in an external-dns-managed zone (with source), who owns the record, and what removal path exists if a wrong hostname is published."
+    }
+  ],
+  "judge_identity": {
+    "providerConnectionId": "kimi-coding-plan",
+    "providerId": "moonshot",
+    "modelId": "k3.1-pro"
+  },
+  "sycophancy_screen": {
+    "reject_cap": 2,
+    "cap_overridden": false,
+    "cap_default": 2
+  }
+}

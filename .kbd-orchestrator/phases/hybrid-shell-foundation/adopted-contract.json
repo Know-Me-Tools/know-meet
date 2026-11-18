@@ -6,7 +6,7 @@
     "runId": "hybrid-shell-foundation-20261109T083641Z",
     "phaseId": "hybrid-shell-foundation",
     "planRevision": 1,
-    "contractDigest": "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6"
+    "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4"
   },
   "digestNormalization": {
     "algorithm": "sha256",
@@ -14,7 +14,7 @@
     "rationale": "Frozen per contract; digest excludes self-referential and decision-bound fields.",
     "stalenessRule": "REJECT-STALE when the digest differs from the latest non-superseded adoption decision for this contract path."
   },
-  "adoptionSource": "Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction.",
+  "adoptionSource": "Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. Operator answers 2026-11-13 explicitly approve the 25 narrow reference corrections and one additional repair cycle (total four, at least three already consumed; historical time/tool consumption remains UNKNOWN).",
   "decisionOwner": "Travis James (operator)",
   "amendmentPolicy": "Material scope or acceptance changes require explicit operator adoption recorded as a new canonical decision with supersedes; suggestions never auto-enter task totals.",
   "releaseClaim": {
@@ -50,9 +50,9 @@
         "Vite production build",
         "Chromium/WebKit/Firefox via Playwright"
       ],
-      "oracle": "Per-route/state screenshots at 375/768/1024/1440 in dark and light are within the spec tolerance of reference revision v2: baselines captured from the operator-updated prototype (Flat 2.0 with no strokes, fill-based WCAG 2.2 AA focus, adaptive bottom-bar/rail/app-bar navigation; operator decisions 2026-11-11) into tests/fidelity/baselines, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d. The v1 reference is archived in tests/fidelity/baselines-v1-archive and docs/design/prototype-v1-archive.",
+      "oracle": "Per-route/state screenshots at 375/768/1024/1440 in dark and light are within the spec tolerance of reference revision v2.4: baselines captured from the operator-updated prototype (Flat 2.0 with no strokes, fill-based WCAG 2.2 AA focus, adaptive bottom-bar/rail/app-bar navigation; operator decisions 2026-11-11) into tests/fidelity/baselines, baseline-set sha256 ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79. The v1 reference is archived in tests/fidelity/baselines-v1-archive and docs/design/prototype-v1-archive. Revision v2.4 changes exactly 25 images: eight deterministic schedule invite captures, sixteen comparison-only footer captures without the prototype catalog link, and the corrected light/768 processing capture. Operator approval 2026-11-13; independent review docs/design/token-reconciliation/c13-reference-adjudication.md; original v2.3 images and rejected scratch captures retained under evidence/c13-stage-b-2026-11-13/reference-correction/. Pixel thresholds, matrix and rubric remain unchanged.",
       "negativeControl": "Same comparison against a build with tokens reverted to pre-reconciliation tokens.json must FAIL.",
-      "fixtures": "Reference revision v2 baselines captured from docs/design/prototype at the recorded source digests into tests/fidelity/baselines (manifest.json, baseline-set sha256 00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d); scratch output dir per run.",
+      "fixtures": "Reference revision v2.4 baselines captured from docs/design/prototype at the recorded source digests into tests/fidelity/baselines (manifest.json, baseline-set sha256 ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79); scratch output dir per run. Targeted correction receipt: .kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/reference-correction/candidate-scratch-d/receipt.json; unchanged images retain their original capture provenance.",
       "evidence": "Playwright report, diff images, argv, exit code, baseline digest."
     },
     {
@@ -182,7 +182,7 @@
   "budgets": {
     "timeMinutes": 2400,
     "toolCalls": 3000,
-    "repairAttempts": 3,
+    "repairAttempts": 4,
     "noProgressLimit": 3,
     "tokenBudget": "UNKNOWN",
     "tokenFallback": "Checkpoint after each change; stop and report if a change exceeds 2x its size estimate.",

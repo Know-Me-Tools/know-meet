@@ -1,0 +1,559 @@
+{
+  "phase": "web-release",
+  "generated_at": "2026-11-14T17:00:00Z",
+  "research_budget": {
+    "max_queries_per_tier": 8,
+    "max_minutes": 20,
+    "queries_used": {
+      "tier1": 5,
+      "tier2": 8,
+      "tier3": 11,
+      "tier4": 0,
+      "memory": 2,
+      "note": "Tier 3 exceeded the cap of 8 by 3 lookups (process deviation). Tier 2 reached the cap after two follow-up calls made in response to review findings. One memory result (about 220,000 characters) was not read."
+    }
+  },
+  "gaps_addressed": [
+    "G1-realtime-client",
+    "G2-token-service",
+    "G3-livekit-server",
+    "G4-room-access",
+    "G5-serving",
+    "G6-security-headers",
+    "G7-registry",
+    "G8-manifests-and-delivery",
+    "G9-cluster-secrets",
+    "G10-proof"
+  ],
+  "candidates": [
+    {
+      "id": "cand-001",
+      "name": "livekit-client",
+      "kind": "library",
+      "repo_url": "https://github.com/livekit/client-sdk-js",
+      "registry": "npm",
+      "fit_for_gap": "G1-realtime-client",
+      "verdict": "adopt",
+      "coverage_estimate": 0.6,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "2.24.1 (registry modified 2026-11-14)",
+        "stars": 668,
+        "open_issues": 69
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://www.npmjs.com/package/livekit-client",
+          "claim": "npm view: version 2.24.1, license Apache-2.0, modified 2026-11-14."
+        },
+        {
+          "tier": 2,
+          "source_url": "https://github.com/livekit/client-sdk-js/blob/main/README.md",
+          "claim": "Room.connect(url, token) with adaptiveStream and dynacast; ConnectionError exposes reason and status for a rejected token."
+        },
+        {
+          "tier": 1,
+          "source_url": ".agent-team/know-meet-team/team.json",
+          "claim": "Team manifest assigns the RealtimeRoom port over livekit-client to webrtc-engineer."
+        }
+      ],
+      "risks": [
+        "Not pinned in versions.toml; the operator must pin it.",
+        "The same bundle runs in the Tauri webview; desktop is unverified in this phase."
+      ],
+      "decision_rationale": "Official browser SDK, already named by the team design. Lives behind the RealtimeRoom port in an infrastructure adapter."
+    },
+    {
+      "id": "cand-002",
+      "name": "@livekit/components-react",
+      "kind": "library",
+      "repo_url": "https://github.com/livekit/components-js",
+      "registry": "npm",
+      "fit_for_gap": "G1-realtime-client",
+      "verdict": "reject",
+      "coverage_estimate": 0.3,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "2.9.25 (registry modified 2026-11-05)",
+        "stars": 476,
+        "open_issues": 41
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://www.npmjs.com/package/@livekit/components-react",
+          "claim": "npm view: version 2.9.25; peer react >=18, livekit-client ^2.20.1."
+        },
+        {
+          "tier": 1,
+          "source_url": "CLAUDE.md",
+          "claim": "UI primitives come from the shared shadcn/ui set themed with the tokens; components are not copied per app."
+        }
+      ],
+      "risks": [
+        "Prefab components carry their own styling and would diverge from the Know Meet design."
+      ],
+      "decision_rationale": "Rejected as the UI layer. May be read for behaviour (track handling, device selection)."
+    },
+    {
+      "id": "cand-003",
+      "name": "livekit-api (feature access-token)",
+      "kind": "library",
+      "repo_url": "https://github.com/livekit/rust-sdks",
+      "registry": "crates",
+      "fit_for_gap": "G2-token-service",
+      "verdict": "adopt",
+      "coverage_estimate": 0.4,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "0.10.2",
+        "stars": 508,
+        "open_issues": 177
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://crates.io/crates/livekit-api/0.10.2",
+          "claim": "cargo info: default features are services, access-token, webhooks; access-token alone depends only on livekit-token."
+        },
+        {
+          "tier": 2,
+          "source_url": "https://github.com/livekit/rust-sdks/blob/main/livekit-api/README.md",
+          "claim": "AccessToken::with_api_key(..).with_identity(..).with_grants(VideoGrants{room_join, room, ..}).with_ttl(..).to_jwt(); default TTL is 6 hours."
+        }
+      ],
+      "risks": [
+        "Version 0.x: the API may change between minor releases.",
+        "Default TTL is 6 hours; the service must set a short TTL explicitly.",
+        "Not pinned in versions.toml."
+      ],
+      "decision_rationale": "Official Rust server SDK; the repo's services are Rust and Axum. Use default-features = false with access-token."
+    },
+    {
+      "id": "cand-004",
+      "name": "docs/design/live/server.mjs",
+      "kind": "pattern",
+      "fit_for_gap": "G2-token-service",
+      "registry": "none",
+      "verdict": "reference",
+      "coverage_estimate": 0.5,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "docs/design/live/server.mjs",
+          "claim": "Mints HS256 tokens with roomJoin, canPublish and canPublishData; identity is a slug of the name plus random hex; response carries url, token, identity, room, expiresIn."
+        },
+        {
+          "tier": 1,
+          "source_url": ".agent-team/know-meet-team/team.json",
+          "claim": "The token service in services/livekit supersedes docs/design/live/server.mjs."
+        }
+      ],
+      "risks": [
+        "Frozen prototype code with no login; it must not be deployed."
+      ],
+      "decision_rationale": "Behaviour reference for the new token endpoint."
+    },
+    {
+      "id": "cand-005",
+      "name": "livekit-server-sdk (Node)",
+      "kind": "library",
+      "registry": "npm",
+      "fit_for_gap": "G2-token-service",
+      "verdict": "reject",
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "2.19.3 (registry modified 2026-11-10)"
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://www.npmjs.com/package/livekit-server-sdk",
+          "claim": "npm view: version 2.19.3, Apache-2.0."
+        }
+      ],
+      "decision_rationale": "Would add a Node service runtime to a repo whose services are Rust."
+    },
+    {
+      "id": "cand-006",
+      "name": "LiveKit Cloud (existing KnowMe project)",
+      "kind": "service",
+      "fit_for_gap": "G3-livekit-server",
+      "registry": "none",
+      "verdict": "adopt",
+      "coverage_estimate": 1.0,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "surreal-memory:1e1964ca747d27d6",
+          "claim": "Recorded 2026-10-25: ~/.bash_profile has the three LIVEKIT_ settings, the URL points to a LiveKit Cloud project, listing rooms succeeded."
+        },
+        {
+          "tier": 1,
+          "source_url": "surreal-memory:1c2acef65bb6cafc",
+          "claim": "Recorded 2026-10-19: the same three variables are set; values were not printed."
+        }
+      ],
+      "risks": [
+        "Not re-verified in this session.",
+        "Usage is billed; a public token endpoint exposes that cost.",
+        "Whether this project is the production project is unconfirmed."
+      ],
+      "decision_rationale": "No media server, UDP firewall or TURN to operate. Pending operator confirmation (A2)."
+    },
+    {
+      "id": "cand-007",
+      "name": "Self-hosted LiveKit on GKE",
+      "kind": "service",
+      "repo_url": "https://github.com/Know-Me-Tools/conduit",
+      "fit_for_gap": "G3-livekit-server",
+      "registry": "none",
+      "verdict": "reject",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/conduit/blob/HEAD/.github/workflows/deploy.yaml",
+          "claim": "The conduit deploy creates a livekit-webrtc firewall rule targeting node tags and carries k8s/livekit and k8s/lk-jwt-service."
+        },
+        {
+          "tier": 1,
+          "source_url": ".kbd-orchestrator/phases/web-release/cluster-context.md",
+          "claim": "The target cluster has 2 nodes of unrecorded size."
+        }
+      ],
+      "decision_rationale": "Operational cost is out of proportion for a first release on a two-node cluster."
+    },
+    {
+      "id": "cand-008",
+      "name": "static-web-server",
+      "kind": "service",
+      "repo_url": "https://github.com/static-web-server/static-web-server",
+      "fit_for_gap": "G5-serving",
+      "registry": "none",
+      "verdict": "adopt",
+      "coverage_estimate": 0.9,
+      "license": "Apache-2.0",
+      "maintenance": {
+        "last_release": "v2.44.2 (2026-11-12)",
+        "stars": 2410,
+        "open_issues": 44
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://github.com/static-web-server/static-web-server/releases/latest",
+          "claim": "gh api: latest release v2.44.2 published 2026-11-12; Apache-2.0; pushed 2026-11-14."
+        },
+        {
+          "tier": 2,
+          "source_url": "https://github.com/static-web-server/static-web-server/blob/master/src/settings/cli.rs",
+          "claim": "page-fallback (env SERVER_FALLBACK_PAGE) serves an HTML file with status 200 for missing paths and keeps 404 for missing assets; default port 8080; custom headers per glob in [[advanced.headers]]; a health endpoint exists."
+        }
+      ],
+      "risks": [
+        "Only the SPDX id reported by the GitHub API was read; the licence file itself was not.",
+        "Not exercised with this bundle yet; deep-link behaviour is proven only by the hosted check."
+      ],
+      "decision_rationale": "The bundle is static files. A server with no application code is the smallest internet-facing surface."
+    },
+    {
+      "id": "cand-009",
+      "name": "services/bff made deployable",
+      "kind": "pattern",
+      "fit_for_gap": "G5-serving",
+      "registry": "none",
+      "verdict": "reject",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "services/bff/src/main.rs",
+          "claim": "Binds loopback, allows only loopback Host values, serves an unauthenticated notes API on one SQLite file, and has no SPA fallback."
+        }
+      ],
+      "decision_rationale": "Built for the local desktop case. Stays unchanged for desktop and local development."
+    },
+    {
+      "id": "cand-010",
+      "name": "GitHub Container Registry",
+      "kind": "service",
+      "fit_for_gap": "G7-registry",
+      "registry": "none",
+      "verdict": "adopt",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/conduit/blob/HEAD/.github/workflows/deploy.yaml",
+          "claim": "Organisation images are published as ghcr.io/know-me-tools/*, pushed with the workflow token."
+        },
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/know-meet",
+          "claim": "gh repo view: visibility PUBLIC, default branch main."
+        }
+      ],
+      "risks": [
+        "Packages must be made public by the operator, or the cluster needs a pull secret."
+      ],
+      "decision_rationale": "Organisation precedent; no new cloud IAM."
+    },
+    {
+      "id": "cand-011",
+      "name": "Google Artifact Registry",
+      "kind": "service",
+      "fit_for_gap": "G7-registry",
+      "registry": "none",
+      "verdict": "reject",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": ".kbd-orchestrator/phases/web-release/cluster-context.md",
+          "claim": "No registry is recorded and Workload Identity is not enabled."
+        }
+      ],
+      "decision_rationale": "Nothing recorded to build on; revisit if images must be private."
+    },
+    {
+      "id": "cand-012",
+      "name": "Kustomize manifests in this repo with one Argo CD Application",
+      "kind": "pattern",
+      "fit_for_gap": "G8-manifests-and-delivery",
+      "registry": "none",
+      "verdict": "adopt",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": ".kbd-orchestrator/phases/web-release/cluster-context.md",
+          "claim": "Argo CD v3.6.1 is installed with no repository, Application or AppProject."
+        }
+      ],
+      "risks": [
+        "Argo CD has no repository connected; connecting one is an operator-approved action.",
+        "Image tag promotion needs a pull request, an image updater or a CI commit."
+      ],
+      "decision_rationale": "Pull-based delivery from a public repo; no cluster credential stored in GitHub."
+    },
+    {
+      "id": "cand-013",
+      "name": "kubectl apply from GitHub Actions",
+      "kind": "pattern",
+      "repo_url": "https://github.com/Know-Me-Tools/conduit",
+      "fit_for_gap": "G8-manifests-and-delivery",
+      "registry": "none",
+      "verdict": "reference",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/conduit/blob/HEAD/.github/workflows/deploy.yaml",
+          "claim": "Authenticates with a service-account key held as a GitHub secret, then applies manifests file by file."
+        }
+      ],
+      "risks": [
+        "Long-lived cluster credential in GitHub."
+      ],
+      "decision_rationale": "Fallback if Argo CD cannot be connected."
+    },
+    {
+      "id": "cand-014",
+      "name": "conduit Gateway, Certificate and HTTPRoute manifests",
+      "kind": "skeleton",
+      "repo_url": "https://github.com/Know-Me-Tools/conduit",
+      "fit_for_gap": "G8-manifests-and-delivery",
+      "registry": "none",
+      "verdict": "adapt",
+      "coverage_estimate": 0.5,
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/conduit/tree/HEAD/k8s/conduit",
+          "claim": "Gateway with gatewayClassName eg, HTTPS 443 and HTTP 80 listeners, a Certificate, an HTTPS HTTPRoute and an HTTP redirect route."
+        }
+      ],
+      "risks": [
+        "Written for a different cluster (client-cluster); issuer and class names must be verified on the target."
+      ],
+      "decision_rationale": "Same gateway class and issuer naming as the target baseline."
+    },
+    {
+      "id": "cand-015",
+      "name": "Gateway API ResponseHeaderModifier",
+      "kind": "pattern",
+      "repo_url": "https://github.com/envoyproxy/gateway",
+      "fit_for_gap": "G6-security-headers",
+      "registry": "none",
+      "verdict": "adopt",
+      "evidence": [
+        {
+          "tier": 2,
+          "source_url": "https://github.com/envoyproxy/gateway/blob/v1.10.0/site/content/en/news/releases/v0.3.md",
+          "claim": "Envoy Gateway supports the HTTPRoute ResponseHeaderModifier filter."
+        },
+        {
+          "tier": 1,
+          "source_url": "apps/web/scripts/content-security-policy.ts",
+          "claim": "buildContentSecurityPolicyHeader() exists for hosted serving and is called by no server."
+        }
+      ],
+      "risks": [
+        "Permissions-Policy must allow camera and microphone for this origin."
+      ],
+      "decision_rationale": "Headers set once, as response headers, in a reviewed manifest generated from the existing CSP builder."
+    },
+    {
+      "id": "cand-016",
+      "name": "Operator-created Kubernetes Secret (value on stdin)",
+      "kind": "pattern",
+      "fit_for_gap": "G9-cluster-secrets",
+      "registry": "none",
+      "verdict": "adopt",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "surreal-memory:522abb83-981a-47de-b5b7-fb1b44d47ee7",
+          "claim": "Recorded pattern for this cluster: pipe the value into kubectl create secret ... --from-file=key=/dev/stdin."
+        }
+      ],
+      "risks": [
+        "Manual rotation.",
+        "Not restored from Git if the cluster is rebuilt."
+      ],
+      "decision_rationale": "No secret enters the repo, image or CI. Sufficient for one secret."
+    },
+    {
+      "id": "cand-017",
+      "name": "Sealed Secrets",
+      "kind": "service",
+      "repo_url": "https://github.com/bitnami/sealed-secrets",
+      "fit_for_gap": "G9-cluster-secrets",
+      "registry": "none",
+      "verdict": "reference",
+      "license": "Apache-2.0",
+      "maintenance": {
+        "stars": 9344,
+        "open_issues": 77
+      },
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://github.com/bitnami/sealed-secrets",
+          "claim": "gh api: Apache-2.0, pushed 2026-11-10."
+        }
+      ],
+      "decision_rationale": "Next step when more than one secret is managed through Git. Installation not researched."
+    },
+    {
+      "id": "cand-018",
+      "name": "livekit-examples/meet",
+      "kind": "skeleton",
+      "repo_url": "https://github.com/livekit-examples/meet",
+      "fit_for_gap": "G1-realtime-client",
+      "registry": "none",
+      "verdict": "reference",
+      "license": "Apache-2.0",
+      "maintenance": {
+        "stars": 991,
+        "open_issues": 23
+      },
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "https://github.com/Know-Me-Tools/meet",
+          "claim": "The organisation holds a fork: video conferencing on LiveKit Components, LiveKit Cloud and Next.js."
+        }
+      ],
+      "decision_rationale": "Different framework. Read for lobby and pre-join flow only."
+    },
+    {
+      "id": "cand-019",
+      "name": "Playwright two-context meeting check with fake media devices",
+      "kind": "pattern",
+      "fit_for_gap": "G10-proof",
+      "registry": "none",
+      "verdict": "adopt",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "playwright.config.ts",
+          "claim": "Playwright is already configured in the repo."
+        }
+      ],
+      "risks": [
+        "Chromium fake-device flags are not set in playwright.config.ts today and were not verified against the pinned @playwright/test 1.65.0; verify early in the plan, with an agent-run machine with real devices as fallback.",
+        "The check drives the public token endpoint of the built or deployed service, so the test runner never holds the LiveKit secret. It still uses LiveKit Cloud minutes."
+      ],
+      "decision_rationale": "Automated proof of the user operation against the real service and the deployed URL."
+    },
+    {
+      "id": "cand-020",
+      "name": "tower_governor",
+      "kind": "library",
+      "registry": "crates",
+      "fit_for_gap": "G2-token-service",
+      "verdict": "reference",
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://crates.io/crates/tower_governor",
+          "claim": "cargo search: tower_governor 0.8.0, a rate-limiting middleware for Tower backed by the governor crate."
+        }
+      ],
+      "risks": [
+        "Only the registry listing was read; Axum 0.8 compatibility, key extraction behind a proxy and licence are unverified."
+      ],
+      "decision_rationale": "Candidate for the per-IP rate limit on the token endpoint. Evaluate at spec time before hand-rolling. Behind the Gateway the client address comes from a forwarded header, which the limiter must be configured to trust correctly."
+    },
+    {
+      "id": "cand-021",
+      "name": "scripts/build-site.sh, publish-pages.sh, publish-ipfs.sh",
+      "kind": "pattern",
+      "registry": "none",
+      "fit_for_gap": "G8-manifests-and-delivery",
+      "verdict": "reject",
+      "evidence": [
+        {
+          "tier": 1,
+          "source_url": "scripts/build-site.sh",
+          "claim": "Stages docs/design (brand kit and static prototype) for GitHub Pages and IPFS; does not build or publish apps/web."
+        }
+      ],
+      "decision_rationale": "They publish the design site to static hosts with no server side. The release needs a token service and a cluster, so they are not the delivery path."
+    }
+  ],
+  "build_required": [
+    {
+      "need": "Meeting domain types plus RealtimeRoom and TokenIssuer ports with in-memory fakes",
+      "why_no_candidate": "Project-specific; defined in the team manifest and not yet written.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "RealtimeRoom adapter over livekit-client in the web infrastructure layer",
+      "why_no_candidate": "Adapter to this project's port.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "services/livekit token service: token endpoint, server-generated room codes, abuse controls, health endpoint",
+      "why_no_candidate": "The SDK mints tokens; the policy around it is this product's.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Wire /meet and /join to a real room with the existing UI kit",
+      "why_no_candidate": "Know Meet screens; prefab components are rejected.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Guest path, and an honest state for screens still on sample data",
+      "why_no_candidate": "Product decision and UI work.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Dockerfiles, Kustomize tree, Argo CD Application, build-and-push workflow, web-only build path",
+      "why_no_candidate": "Repository-specific configuration; conduit manifests are adapted, not adopted.",
+      "capability_gap_id": null
+    },
+    {
+      "need": "Hosted checks: deep links, response headers, TLS, two-participant meeting",
+      "why_no_candidate": "Tests of this deployment.",
+      "capability_gap_id": null
+    }
+  ]
+}

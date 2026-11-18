@@ -1,0 +1,10 @@
+attempt-0	c3aae0dc	lint failed: names, secrets, biome
+repair-1	e4ef959f	lint fixes
+repair-2	ca49bb8e	tsconfig.node.json lib dom
+header	5b6ec4e7	header commit (attempt 2)
+repair-3	3b02b792	scan reader folded scalars; tls-probe type
+cd	e059e1db	CD deploy job (operator decision)
+repair-4	f4e1fb2e	correction round for both reviews (operator-authorized)
+header	4ce9b016	header commit (no Tauri origins)
+repair-5	b5f7fe84	scan reader plain folding; deploy job exit codes
+repair-6	bb399985	Tailwind scans packages/ui/src/lib (text-field padding and placeholder)

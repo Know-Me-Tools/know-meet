@@ -1,0 +1,5 @@
+01	0	2026-11-16T14:22:59Z	docker compose -f tooling/release/compose.yaml -f /Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/compose.ports-override.yaml up -d --wait
+02	0	2026-11-16T14:23:03Z	pnpm --filter @know-meet/web run build
+03	bg	2026-11-16T14:23:03Z	pnpm --filter @know-meet/web preview --host 127.0.0.1 --port 4173 --strictPort
+04	0	2026-11-16T14:31:44Z	pnpm --filter @know-meet/release-tests exec playwright test --project=packaged
+99	0	2026-11-16T14:31:46Z	docker compose -f tooling/release/compose.yaml -f /Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/compose.ports-override.yaml down

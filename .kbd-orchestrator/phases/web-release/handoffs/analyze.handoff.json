@@ -1,0 +1,12 @@
+{
+  "stage": "analyze",
+  "completedAt": "2026-11-14T21:01:36Z",
+  "outputs": [
+    "analysis.md",
+    "library-candidates.json"
+  ],
+  "nextStage": "spec",
+  "summaryForNext": "21 candidates. Recommended (not adopted): livekit-client behind the RealtimeRoom port; new services/livekit token service on livekit-api (access-token feature); existing LiveKit Cloud project; guests only; static-web-server image plus token service behind one HTTPRoute; headers via Gateway ResponseHeaderModifier generated from the CSP builder; GHCR; Kustomize in repo with Argo CD; operator-created Secret. Recommendation BLOCKED until the operator answers A1-A4 (guests only, LiveKit project, sample-data screens, c13 gate) and A8 (image tag promotion vs VS-C) and adopts the outcome contract and a method. Review PASS 0/5/3 by glm-5.3 (independence unverified by tool); warnings addressed, not re-reviewed: DNS record ownership, proof vs secret rule, static server docs, VS-C deviation, publish scripts. Open risks: public token endpoint spends LiveKit Cloud minutes; cluster facts unverified; versions.toml has no pins; tier-3 research cap exceeded by 3.",
+  "skipped": false,
+  "skipReason": null
+}

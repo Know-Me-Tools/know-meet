@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "2",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 536,
+  "derivedRevision": 536,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
+  },
+  "conflictCount": 0,
+  "phase": "web-release",
+  "phaseId": "web-release",
+  "parentPhase": null,
+  "last_updated": "2026-11-16T21:13:37.796536Z",
+  "last_updated_by": "kbd-runtime",
+  "changes_total": 9,
+  "changes_completed": 9,
+  "implementation_total": 9,
+  "implementation_completed": 9,
+  "completion": {
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 9,
+      "total": 9,
+      "status": "COMPLETE"
+    },
+    "evidence": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "completionScopes": {
+    "completion": "phase",
+    "runCompletion": "run"
+  },
+  "runCompletion": {
+    "scope": "run",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 22,
+      "total": 25,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "BLOCKED",
+      "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+      "blockers": [
+        "hsf-c13-cycle4-acceptance",
+        "hsf-c13-cycle4-budget-exhausted",
+        "hsf-c13-cycle4-rule-regression",
+        "hsf-c13-isolated-review-approval"
+      ]
+    },
+    "publication": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "changes": [
+    {
+      "id": "wr01-release-scenarios",
+      "title": "Release scenarios",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 6,
+      "tasks_done": 6,
+      "last_task_completed": "Verify cluster-context.md against the live cluster, read-only",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr02-meeting-domain-and-ports",
+      "title": "Meeting domain and ports",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Extend boundary lint to packages/realtime and services/livekit",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr03-token-service",
+      "title": "Token service",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Document the service and its configuration",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr04-realtime-adapter",
+      "title": "Realtime adapter",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 2,
+      "tasks_done": 2,
+      "last_task_completed": "Add the HTTP TokenIssuer adapter and composition wiring",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr05-guest-meeting-flow",
+      "title": "Guest meeting flow",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Audit and polish the three screens",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr06-hosted-release-surface",
+      "title": "Hosted release surface",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Add build:hosted and emit the CSP header artifact",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr07-container-images",
+      "title": "Container images",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Add the local compose stack and extend repo rules",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr08-cluster-manifests",
+      "title": "Cluster manifests",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 6,
+      "tasks_done": 6,
+      "last_task_completed": "Pin the release image tags in the production overlay by pull request",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wr09-release-boundary",
+      "title": "Release boundary and go-live",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 7,
+      "tasks_done": 7,
+      "last_task_completed": "Update the README and release notes to match what shipped",
+      "next_task_pending": null,
+      "blockers": []
+    }
+  ],
+  "children": {},
+  "migrationStatus": null
+}

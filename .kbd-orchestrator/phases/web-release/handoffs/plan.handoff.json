@@ -1,0 +1,19 @@
+{
+  "stage": "plan",
+  "completedAt": "2026-11-15T12:01:00Z",
+  "outputs": [
+    "plan.md",
+    "adopted-contract.json"
+  ],
+  "nextStage": "execute",
+  "summaryForNext": "9 OpenSpec changes, 39 tasks, 6 rounds, all validated strictly and registered. Order: wr01 acceptance, clean worktree, pins and read-only cluster check first; then domain ports, token service and hosted surface in parallel; realtime adapter; guest UI and images; cluster manifests; one boundary run (wr09) that stops before the cluster if the packaged run fails and needs a second operator approval before any cluster change. Contract adopted by the operator: sha256 9ccc9805, method VLBV. First work: wr01 tasks 1.1-1.3 and 1.5; tasks 1.4 and 1.6 need operator batch 1 (versions.toml pins, gcloud auth login). Task model assignments are in plan.md; all subagent routes are configured, not verified. Review: round 1 BLOCK (2 critical, fixed), round 2 PASS with 3 warnings fixed and not re-reviewed; judge glm-5.3, independence unverified by the tool. Unresolved: tooling/release ownership for the verification tools; cluster facts unobserved until task 1.6.",
+  "skipped": false,
+  "skipReason": null,
+  "identity": {
+    "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "phaseId": "web-release",
+    "planRevision": 1,
+    "contractDigest": "9ccc9805a32894ca4d4c227cbc4c2baa3435f88f05897a66bad74abee29a4052"
+  }
+}

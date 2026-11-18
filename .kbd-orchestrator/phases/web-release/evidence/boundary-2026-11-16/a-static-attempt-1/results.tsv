@@ -1,0 +1,4 @@
+01	0	2026-11-16T12:19:10Z	pnpm install --frozen-lockfile
+02	0	2026-11-16T12:19:10Z	pnpm run lint
+03	1	2026-11-16T12:19:32Z	pnpm run typecheck
+STOP: step 03 exited 1

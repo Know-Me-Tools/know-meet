@@ -1,0 +1,16 @@
+{
+  "tag": "8d4c47f6ebb224ae97ced15546f40f7523c180b2",
+  "run": "https://github.com/Know-Me-Tools/know-meet/actions/runs/43893155412",
+  "images": {
+    "know-meet-web": {
+      "image": "ghcr.io/know-me-tools/know-meet-web",
+      "digest": "sha256:3666e02dd75c2ba787c09262ea93b282739e8f7d1db91c8ad275257880919acb",
+      "ref": "ghcr.io/know-me-tools/know-meet-web@sha256:3666e02dd75c2ba787c09262ea93b282739e8f7d1db91c8ad275257880919acb"
+    },
+    "know-meet-token-service": {
+      "image": "ghcr.io/know-me-tools/know-meet-token-service",
+      "digest": "sha256:178b1af32ee1824a3c8de41846429e60ec88217d0abfdde00bfd2a0fe281ced3",
+      "ref": "ghcr.io/know-me-tools/know-meet-token-service@sha256:178b1af32ee1824a3c8de41846429e60ec88217d0abfdde00bfd2a0fe281ced3"
+    }
+  }
+}

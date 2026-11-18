@@ -1,0 +1,358 @@
+{
+  "contractVersion": "1",
+  "kind": "kbd.adopted-contract",
+  "identity": {
+    "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "phaseId": "web-release",
+    "planRevision": 1,
+    "contractDigest": "abf8d22d66112ffbd92b1ff79ccf8b754acd6befa0828225c28cee4ac01882db"
+  },
+  "digestNormalization": {
+    "algorithm": "sha256",
+    "command": "jq -S -c 'del(.identity.contractDigest) | del(.identity.planRevision)'",
+    "rationale": "Frozen per contract; digest excludes self-referential and decision-bound fields.",
+    "stalenessRule": "REJECT-STALE when the digest differs from the latest non-superseded adoption decision for this contract path."
+  },
+  "adoptionSource": "Operator Travis James, explicit answer \"Adopt as drafted\" to the contract question on 2026-11-14 (decision-log.md), following his decisions of the same day recorded as runtime decisions web-release-scope-real-meetings, web-release-access-guests-only, web-release-livekit-existing-cloud-project, web-release-sample-screens-excluded, web-release-c13-not-a-gate and web-release-promotion-by-pr. Adoption includes the infrastructure defaults: GitHub Container Registry with public packages, manifests in this repository deployed by Argo CD, a shared main-gateway, and an operator-created Secret. Amendment 1: operator answer \"Approve amendment\" on 2026-11-15 to the four differences in wr01-reconciliation.md (Playwright command form, WR-8 fill-contrast control, WR-5 link oracle, WR-3 and WR-5 control wording) and the missing run inputs. Scope, exclusions, safety checks and budgets are unchanged. The amendment also includes a fifth point, operator answer \"Yes, add it\" on 2026-11-15: no GatewayClass exists on the cluster (cluster-check.md), so verify-cluster no longer requires one and Argo CD creates GatewayClass eg with the shared gateway. Amendment 2: operator answer \"Approve as drafted\" on 2026-11-16 to amendment-2-proposal.md: working compose path; header render and commit inside the run; packaged run before any push or merge, with task 8.6 after the second approval; namespace created by the operator before the Secret; Application waits by kubectl instead of the Argo CD CLI; staging and production endpoint checks around the issuer merge; no deletion of the shared TLS Secret; evidence rule for the tag-pin and issuer commits. Scope, exclusions, safety checks, budgets and the release claim are unchanged.",
+  "decisionOwner": "Travis James (operator)",
+  "amendmentPolicy": "Material scope or acceptance changes require explicit operator adoption recorded as a new canonical decision with supersedes; suggestions never auto-enter task totals.",
+  "releaseClaim": {
+    "userOperation": "A visitor opens https://meet.know-me.tools in a browser, enters a display name, starts a meeting and shares its code; a second visitor joins with that code; both are in one real LiveKit room and see and hear each other, can mute and unmute microphone and camera, and can leave.",
+    "supportedEnvironments": [
+      "Web only: current Chrome, Safari and Firefox on desktop",
+      "Mobile browsers at 375 px width: layout supported, media behaviour not verified",
+      "Hosting: GKE cluster main, project knowme-corporate, region us-south1, behind Envoy Gateway",
+      "Media: the existing LiveKit Cloud project"
+    ],
+    "currentCapabilities": "The web app renders home, join and meeting-room screens on sample data with no realtime client. No token service exists outside the frozen design prototype. No container image, manifest or web delivery workflow exists. meet.know-me.tools does not resolve. The web build on main was not verified in assess or analyze.",
+    "explicitUnknowns": [
+      "Live state of the cluster: every cluster fact is from memory and unverified",
+      "Whether the LIVEKIT_ variables in the operator shell profile still work",
+      "LiveKit Cloud plan limits and cost for public guest use",
+      "Whether Docker is available on the development host for the packaged run",
+      "Whether Chromium fake media devices work with the pinned Playwright 1.65.0",
+      "Whether external-dns creates the record for the HTTPRoute hostname as recorded",
+      "Node machine type and spare capacity on the cluster",
+      "Whether the web build on main is green today",
+      "Safari and Firefox media behaviour: verified by one manual-equivalent automated pass in Playwright WebKit and Firefox only where fake devices are supported"
+    ]
+  },
+  "statusVocabulary": [
+    "PASS",
+    "FAIL",
+    "BLOCKED",
+    "NOT_EXERCISED"
+  ],
+  "scenarioMatrix": [
+    {
+      "id": "WR-1",
+      "name": "Two guests hold a real meeting at the public URL",
+      "ownerTask": "wr01-release-scenarios/1.1+wr02-meeting-domain-and-ports/2.1+wr02-meeting-domain-and-ports/2.2+wr03-token-service/3.1+wr03-token-service/3.2+wr04-realtime-adapter/4.1+wr04-realtime-adapter/4.2+wr05-guest-meeting-flow/5.1+wr05-guest-meeting-flow/5.2+wr05-guest-meeting-flow/5.3+wr09-release-boundary/9.2+wr09-release-boundary/9.6",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test meeting.spec.ts --project=hosted (base URL https://meet.know-me.tools); the same spec runs first with --project=packaged against the built images",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "services/livekit token service",
+        "static web image",
+        "Envoy Gateway HTTPRoute",
+        "Chromium with fake media devices"
+      ],
+      "oracle": "Context A starts a meeting and receives a room code. Context B joins with that code. Each context reports one remote participant with a subscribed video track whose rendered dimensions are greater than zero and a subscribed audio track. Muting A's microphone is observed as muted in B. After A leaves, B reports zero remote participants.",
+      "negativeControl": "Context B joining with a well-formed code that was never issued must be refused with the user-facing 'meeting not found' state and must not connect.",
+      "fixtures": "Room codes generated by the service per run; no fixed rooms. Fake camera and microphone from Chromium flags. Evidence written to a new dated folder per run. The two image digests are given to the run as KM_RELEASE_IMAGE_DIGESTS.",
+      "evidence": "Playwright report and trace, argv, exit code, room code, image digests, screenshots of both contexts."
+    },
+    {
+      "id": "WR-2",
+      "name": "Deep links and reloads return the app",
+      "ownerTask": "wr01-release-scenarios/1.1+wr07-container-images/7.1+wr08-cluster-manifests/8.2+wr09-release-boundary/9.2+wr09-release-boundary/9.6",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test hosting.spec.ts --project=hosted",
+      "realCollaborators": [
+        "static web image",
+        "Envoy Gateway HTTPRoute"
+      ],
+      "oracle": "GET / , /join and /meet each return status 200 with the app document, and a reload on each keeps the same route rendered.",
+      "negativeControl": "GET /assets/does-not-exist.js must return 404, not the app document.",
+      "fixtures": "None beyond the deployed build.",
+      "evidence": "Status codes, response content types, argv, exit code."
+    },
+    {
+      "id": "WR-3",
+      "name": "Valid TLS and security headers at the public URL",
+      "ownerTask": "wr01-release-scenarios/1.1+wr01-release-scenarios/1.6+wr06-hosted-release-surface/6.3+wr08-cluster-manifests/8.2+wr08-cluster-manifests/8.3+wr09-release-boundary/9.5+wr09-release-boundary/9.6",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test headers.spec.ts --project=hosted",
+      "realCollaborators": [
+        "cert-manager letsencrypt-prod",
+        "Envoy Gateway",
+        "external-dns on Cloudflare"
+      ],
+      "oracle": "The certificate for meet.know-me.tools is issued by Let's Encrypt production and is valid. HTTP redirects to HTTPS. Responses for / and /api/healthz carry Strict-Transport-Security, Content-Security-Policy equal to the generated policy, X-Content-Type-Options nosniff, a frame-denying policy, Referrer-Policy, and a Permissions-Policy that allows camera and microphone for this origin only.",
+      "negativeControl": "The same header check run against the packaged static image alone (KM_RELEASE_STATIC_URL), without the Gateway filter, must report Strict-Transport-Security as missing. The control is a test that passes only when the check reports that problem.",
+      "fixtures": "Generated CSP value produced by the existing builder at build time and recorded with its digest. The path of the generated value is given to the run as KM_RELEASE_CSP_FILE.",
+      "evidence": "Certificate issuer and expiry, header dump, argv, exit code."
+    },
+    {
+      "id": "WR-4",
+      "name": "The public token endpoint bounds abuse",
+      "ownerTask": "wr01-release-scenarios/1.1+wr03-token-service/3.2+wr03-token-service/3.3+wr09-release-boundary/9.2+wr09-release-boundary/9.6",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test token-abuse.spec.ts --project=hosted",
+      "realCollaborators": [
+        "services/livekit token service",
+        "Envoy Gateway forwarded client address"
+      ],
+      "oracle": "A token is issued only for a room code the service generated. The decoded token grants join to that one room, expires within the configured short lifetime, and carries no admin or room-create grant. Requests above the configured per-client rate receive 429. A request with a foreign Origin is refused.",
+      "negativeControl": "A request naming an arbitrary client-chosen room must be refused with 404; a burst below the limit must succeed.",
+      "fixtures": "Rate limit and lifetime values read from the deployed configuration and recorded. Given to the run as KM_RELEASE_TOKEN_TTL_SECONDS, KM_RELEASE_RATE_LIMIT_BURST and KM_RELEASE_RATE_LIMIT_REFILL_SECONDS.",
+      "evidence": "Status codes, decoded token claims with the signature removed, argv, exit code."
+    },
+    {
+      "id": "WR-5",
+      "name": "Screens on sample data are not reachable in the hosted build",
+      "ownerTask": "wr01-release-scenarios/1.1+wr06-hosted-release-surface/6.1+wr06-hosted-release-surface/6.2+wr09-release-boundary/9.2+wr09-release-boundary/9.6",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test surface.spec.ts --project=hosted",
+      "realCollaborators": [
+        "hosted web build"
+      ],
+      "oracle": "Every same-origin link rendered on home, join and the meeting room goes to /, /join or /meet; the hosted build has no primary navigation, because DESIGN.md keeps navigation out of the join and room flows. Visiting /dashboard, /agents, /recordings, /settings, /notes and /auth renders the not-found state. Setting localStorage km-auth changes nothing visible.",
+      "negativeControl": "The same checks run against the default (non-hosted) web build of the same commit, served at KM_RELEASE_DEFAULT_BUILD_URL, must report that /dashboard renders. The control is a test that first confirms the default build is really served and passes only when the checks report that problem.",
+      "fixtures": "Hosted build and default build of the same commit. The default build is served locally for the packaged run only.",
+      "evidence": "Playwright report, argv, exit code."
+    },
+    {
+      "id": "WR-6",
+      "name": "No secret in the repo, the bundle, the images or the manifests",
+      "ownerTask": "wr01-release-scenarios/1.2+wr03-token-service/3.1+wr07-container-images/7.2+wr08-cluster-manifests/8.4+wr09-release-boundary/9.1",
+      "productionEntry": "pnpm run lint:secrets && node tooling/release/src/scan-artifacts.ts",
+      "realCollaborators": [
+        "tooling/repo-rules secret check",
+        "built images",
+        "web bundle",
+        "rendered Kustomize output"
+      ],
+      "oracle": "The scan finds no LiveKit API secret, no token-shaped string and no value of any LIVEKIT_ variable in tracked files, the web bundle, either image's layers and environment, or the rendered manifests. The manifests refer to the Secret by name only.",
+      "negativeControl": "A scratch image built with a dummy secret baked into an environment variable must make the scan exit non-zero.",
+      "fixtures": "Scratch image with a dummy value, built outside the committed tree.",
+      "evidence": "Scan output, argv, exit codes.",
+      "classification": "safety"
+    },
+    {
+      "id": "WR-7",
+      "name": "The deployment is reproducible from the repo",
+      "ownerTask": "wr01-release-scenarios/1.1+wr07-container-images/7.3+wr08-cluster-manifests/8.1+wr01-release-scenarios/1.6+wr08-cluster-manifests/8.5+wr08-cluster-manifests/8.6+wr09-release-boundary/9.4",
+      "productionEntry": "kubectl --context gke_knowme-corporate_us-south1_main -n argocd get applications.argoproj.io/know-meet -o json, compared with the image digests recorded by the build workflow",
+      "realCollaborators": [
+        "Argo CD",
+        "GitHub Container Registry",
+        "GitHub Actions"
+      ],
+      "oracle": "The Argo CD application is Synced and Healthy at a commit of this repository, and the running image digests equal the digests the workflow pushed for the tag pinned in that commit.",
+      "negativeControl": "A manifest pinned to a tag that does not exist must leave the application not Healthy.",
+      "fixtures": "Image tags are immutable commit SHAs.",
+      "evidence": "Argo CD application status, workflow run URL, digest pairs."
+    },
+    {
+      "id": "WR-8",
+      "name": "The three shipped screens are accessible and match the Know Meet design",
+      "ownerTask": "wr01-release-scenarios/1.3+wr05-guest-meeting-flow/5.1+wr05-guest-meeting-flow/5.2+wr05-guest-meeting-flow/5.3+wr05-guest-meeting-flow/5.4+wr09-release-boundary/9.3",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test accessibility.spec.ts --project=packaged, plus prometheus-ui-review of screenshots",
+      "realCollaborators": [
+        "axe-core through Playwright",
+        "independent UI reviewer"
+      ],
+      "oracle": "Home, join lobby and meeting room in dark and light at 375, 768, 1024 and 1440 have zero axe violations at WCAG 2.2 AA and zero fill-contrast probe problems (every control that paints its own fill contrasts at least 3:1 with the adjacent surface), every control is reachable and operable by keyboard with focus shown by fill, motion stops under prefers-reduced-motion, and the independent UI review records no CRITICAL finding against DESIGN.md and the prototype room.",
+      "negativeControl": "With one control repainted in the rendered page to the colour of the surface behind it, the fill-contrast probe must report that control. axe-core does not test non-text contrast, so the probe carries this control, and it runs on the rendered page, not on a scratch build.",
+      "fixtures": "Screenshots written to a new dated evidence folder.",
+      "evidence": "axe report, screenshots, UI review file."
+    },
+    {
+      "id": "WR-9",
+      "name": "Repository rules hold and the other shells still build",
+      "ownerTask": "wr01-release-scenarios/1.1+wr02-meeting-domain-and-ports/2.3+wr07-container-images/7.4+wr09-release-boundary/9.1",
+      "productionEntry": "pnpm run lint && pnpm run typecheck && pnpm run test && cargo check --workspace",
+      "realCollaborators": [
+        "Biome",
+        "ls-lint",
+        "tooling/repo-rules",
+        "tsc",
+        "cargo"
+      ],
+      "oracle": "All commands exit 0. New Dockerfiles, YAML and shell files are covered by the naming and 500-line checks.",
+      "negativeControl": "A scratch 501-line YAML manifest must make the line check exit non-zero.",
+      "fixtures": "Scratch file outside the committed tree.",
+      "evidence": "argv, exit codes, offending-path output.",
+      "classification": "delivery"
+    }
+  ],
+  "functionalScope": [
+    "Meeting domain types and the RealtimeRoom and TokenIssuer ports with in-memory fakes",
+    "Token service in services/livekit with server-generated room codes and abuse controls",
+    "RealtimeRoom adapter over livekit-client in packages/realtime",
+    "Guest flow on home, join lobby and meeting room: start, join by code, device preview, tiles, mute, leave, error states",
+    "Hosted build that exposes only home, join and the meeting room",
+    "Two container images and a build-and-push workflow to GitHub Container Registry",
+    "Kustomize manifests, Gateway, HTTPRoute with security headers, certificate and one Argo CD Application",
+    "Release documentation and an operator runbook",
+    "Release scenarios and their evidence"
+  ],
+  "resilienceScope": {
+    "policy": "Adopted requirements never defer via budget overflow; exhaustion means checkpoint + BLOCKED. Only never-adopted optional items may defer.",
+    "deferredOptional": [
+      "Rollback rehearsal between two released tags",
+      "Automatic image promotion",
+      "Screen sharing and in-room chat",
+      "Sealed Secrets or another secret manager",
+      "Observability stack and alerting on the cluster",
+      "Media verification on physical phones"
+    ]
+  },
+  "exclusions": [
+    "Desktop (Tauri) and mobile (Flutter) releases",
+    "Accounts, sign-in and any identity service",
+    "Agents, dots, the Concierge, transcription, recording, summaries and delivery",
+    "Dashboard, agents, recordings, settings, notes and sign-in screens in the hosted build",
+    "Calendars, SMS, SIP dial-in",
+    "Self-hosted LiveKit",
+    "Deploying services/bff or either prototype server",
+    "Unblocking c13 or c16 in hybrid-shell-foundation",
+    "Use of the root live/ folder",
+    "Writes to /Users/gqadonis/Projects/hybrid-mobile-architecture-src"
+  ],
+  "requiredSafetyChecks": [
+    "No secret in tracked files, the web bundle, image layers or manifests",
+    "The LiveKit API secret is read only by the token service from a Kubernetes Secret and never reaches a browser",
+    "No unauthenticated write endpoint other than the bounded token and room-code endpoints is reachable from the internet",
+    "Tokens are scoped to one service-generated room with a short lifetime and no admin grant",
+    "Containers run as non-root with a read-only root filesystem",
+    "TLS is valid and security headers are present as response headers",
+    "WCAG 2.2 AA on the three shipped screens in both themes",
+    "Every cluster-changing command is run only after explicit operator approval, and the hostname on the HTTPRoute is reviewed before it is applied",
+    "Security review of the token service by a reviewer separate from its builder, with no CRITICAL finding open"
+  ],
+  "budgets": {
+    "timeMinutes": 1800,
+    "toolCalls": 2500,
+    "repairAttempts": 3,
+    "noProgressLimit": 3,
+    "tokenBudget": "UNKNOWN",
+    "tokenFallback": "Checkpoint after each change; stop and report if a change exceeds 2x its size estimate.",
+    "consumedAtAuthoring": {
+      "note": "Assess, analyze and plan stages are not counted against this budget. Their time and tool use were not measured."
+    },
+    "exhaustion": "checkpoint + BLOCKED; never silent PASS; docs/state may be saved without running product tests."
+  },
+  "evidenceInvalidation": "Keyed by contract digest, git commit of the tested tree, the two image digests and the rendered manifest digest. Only evidence whose key changed is invalidated; history is preserved in dated folders. Amendment 2: the tested tree is identified by KM_TESTED_COMMIT. Evidence from the packaged run stays valid for the deployed commits while their only differences from the tested commit are the two newTag lines of the production kustomization.yaml and the one issuerRef.name line of infra/platform/certificate.yaml. Any other difference invalidates it. The packaged run tests locally built images; the cluster runs the images the workflow built from the same tree, and their digests differ. Only the hosted run and WR-7 are evidence about the deployed images.",
+  "workerRoutes": {
+    "agent": "Claude Code native subagents bound to .agent-team/know-meet-team roles",
+    "model": "claude-opus-5-5 for design, security-sensitive and integration tasks; claude-sonnet-5-5 for mechanical tasks; per-task assignments in plan.md",
+    "billing": "Claude Code session; adversarial reviews through the local liter-llm gateway (glm-5.3 judge; MiniMax-M3 and k3.1-pro as alternates)",
+    "subagents": "Native team subagents per role; delivery-lead activates roles; reviewers dormant until the boundary",
+    "reviewRoundsMax": 2
+  },
+  "boundaryPacket": {
+    "postImplementationOnly": true,
+    "singleRun": true,
+    "commands": [
+      "pnpm install --frozen-lockfile",
+      "pnpm run lint",
+      "pnpm run typecheck",
+      "pnpm run test",
+      "cargo check --workspace",
+      "pnpm --filter @know-meet/web run build:hosted",
+      "node tooling/release/src/render-gateway-headers.ts",
+      "git commit --only infra/k8s/overlays/production/security-headers.yaml -m \"chore(release): render gateway security headers\"",
+      "node tooling/release/src/render-gateway-headers.ts --check",
+      "docker compose -f tooling/release/compose.yaml build",
+      "node tooling/release/src/scan-artifacts.ts",
+      "docker compose -f tooling/release/compose.yaml up -d --wait",
+      "pnpm --filter @know-meet/web run build",
+      "pnpm --filter @know-meet/web preview --host 127.0.0.1 --port 4173 --strictPort",
+      "pnpm --filter @know-meet/release-tests exec playwright test --project=packaged",
+      "docker compose -f tooling/release/compose.yaml down",
+      "git fetch origin main",
+      "git diff --exit-code \"$KM_TESTED_COMMIT\" origin/main -- . \":(exclude)infra/k8s/overlays/production/kustomization.yaml\"",
+      "node tooling/release/src/scan-artifacts.ts",
+      "node tooling/release/src/verify-cluster.ts --context gke_knowme-corporate_us-south1_main --json \"$KM_EVIDENCE_DIR/verify-cluster.json\"",
+      "kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet.yaml",
+      "kubectl --context gke_knowme-corporate_us-south1_main -n argocd wait applications.argoproj.io/know-meet --for=jsonpath='{.status.sync.status}'=Synced --timeout=600s",
+      "kubectl --context gke_knowme-corporate_us-south1_main -n argocd wait applications.argoproj.io/know-meet --for=jsonpath='{.status.health.status}'=Healthy --timeout=600s",
+      "node tooling/release/src/verify-endpoint.ts --host meet.know-me.tools --allow-staging --json \"$KM_EVIDENCE_DIR/verify-endpoint-staging.json\"",
+      "kubectl --context gke_knowme-corporate_us-south1_main -n argocd wait applications.argoproj.io/know-meet --for=jsonpath='{.status.sync.revision}'=\"$KM_ISSUER_COMMIT\" --timeout=600s",
+      "kubectl --context gke_knowme-corporate_us-south1_main -n argocd wait applications.argoproj.io/know-meet --for=jsonpath='{.status.health.status}'=Healthy --timeout=600s",
+      "node tooling/release/src/verify-endpoint.ts --host meet.know-me.tools --csp-file apps/web/dist-hosted-csp.txt --json \"$KM_EVIDENCE_DIR/verify-endpoint.json\"",
+      "pnpm --filter @know-meet/release-tests exec playwright test --project=hosted"
+    ],
+    "expectedEffects": [
+      "All commands exit 0",
+      "The header generator writes the Content-Security-Policy of this build into security-headers.yaml and the boundary runner commits that one file on the release branch. The commit after it is the tested commit (KM_TESTED_COMMIT). The static gates ran on its parent, which differs by that file only; both SHAs are recorded. On a repeat run that renders an identical file there is nothing to commit; the commit step is then recorded as skipped, not as a failure",
+      "docker compose build produces know-meet-web:boundary and know-meet-livekit:boundary from the two Dockerfiles, with KM_LIVEKIT_URL passed to the web image as the compose file defines",
+      "scan-artifacts runs without --manifests, so it renders the production overlay itself and scans that render. It runs twice: on the tested commit, and again on main after the tag pin",
+      "The packaged run passes WR-1, WR-2, WR-4, WR-5 and WR-8 against the built images before any push, merge or cluster command",
+      "The default-build and preview commands run after both images are built and scanned, so the default build cannot enter an image; the preview runs in the background only for the packaged run",
+      "The git diff command proves that main after the tag pin equals the tested commit in every file except the production kustomization.yaml, and that file differs only in the two newTag lines. Any other difference stops the run",
+      "verify-cluster is read-only and confirms the Envoy Gateway controller is running at v1.10.0 (the version in cluster-context.md) and serves gateway.networking.k8s.io/v1, both ClusterIssuers, external-dns, Argo CD, the namespace know-meet and the operator-created Secret with its three key names. It does not require a GatewayClass: the cluster check of 2026-11-15 found none",
+      "The apply creates one Argo CD Application; Argo CD creates the GatewayClass eg (controller gateway.envoyproxy.io/gatewayclass-controller), two Deployments, two Services, the Gateway, the HTTPRoutes and the Certificate, and takes over the namespace know-meet that the operator created",
+      "The Application is Synced and Healthy at the tag-pin commit. The waits read the Application object with kubectl; no Argo CD login, port-forward or password is used",
+      "external-dns creates the A record for meet.know-me.tools pointing at the Gateway load balancer address",
+      "cert-manager issues a staging certificate into Secret meet-know-me-tools-tls. After the staging endpoint check and the issuer merge, cert-manager reissues from production into the same Secret. The boundary runner waits, by read-only get, until the issuer recorded on that Secret is letsencrypt-prod before the production endpoint check",
+      "The production endpoint check and the hosted run pass WR-1 to WR-5 at the public URL",
+      "WR-7: the running image digests equal the digests the workflow pushed for the pinned tag"
+    ],
+    "requiredApprovals": "Before execution (batch 1, done): pins, an account of the uncommitted changes, and the cluster login for task 1.6. Before the single boundary run starts: operator approval. It covers the commands up to the packaged run, the reviews, and one commit of the generated security-headers.yaml on the release branch. It covers no push, merge or cluster command. After the packaged run and the reviews (batch 2): a second explicit operator approval with the reviewed HTTPRoute hostname shown. It covers, in this order: pushing the release branch and merging its pull request; the images workflow; making the GHCR packages public; a recorded LiveKit spending control; the tag-pin pull request (task 8.6); creating the namespace know-meet and the LIVEKIT Secret from the shell; the Argo CD repository credential only if the repository is private; the apply of the Application; and the one-line issuer pull request. The operator performs every merge, the namespace and Secret creation and any account setting. The second approval covers no hostname other than meet.know-me.tools.",
+    "receipts": [
+      "evidence/boundary-<date>/argv-and-exit.json",
+      "Playwright reports for the packaged and hosted projects",
+      "Image digests and the workflow run URL",
+      "Argo CD application status",
+      "Certificate issuer and header dump",
+      "Security review and UI review files"
+    ],
+    "cleanup": [
+      "Stop and remove the local compose stack",
+      "Remove scratch images and negative-control builds",
+      "Do not delete Secret meet-know-me-tools-tls: staging and production share it and production issuance overwrites it in place. Record the issuer on the Secret and the issuer the endpoint serves",
+      "Keep evidence folders",
+      "Stop the default-build preview server before any push, merge or cluster command",
+      "Treat Playwright traces as sensitive because they hold short-lived tokens; do not publish raw traces"
+    ],
+    "stopConditions": [
+      "Any required safety check fails",
+      "The packaged run fails: no cluster command is run",
+      "The operator does not give the second approval",
+      "verify-cluster finds the cluster differs from cluster-context.md in a way the manifests depend on",
+      "A DNS record or certificate is created for any hostname other than meet.know-me.tools",
+      "A command fails after the repair budget is exhausted",
+      "Contract digest changes during the run",
+      "The repository variable KM_LIVEKIT_URL differs from LIVEKIT_URL in the shell that builds the packaged images",
+      "main moved, or the merge changed the tree: the git diff between the tested commit and main shows any difference outside the two newTag lines",
+      "The pull-request checks or the images workflow fail; a repair is a new commit and consumes a repair attempt, and the packaged run is repeated on the new tested commit",
+      "The issuer pull request changes anything other than spec.issuerRef.name in infra/platform/certificate.yaml"
+    ],
+    "runInputs": [
+      "KM_EVIDENCE_DIR: a new dated folder per Playwright invocation under evidence/boundary-<date>/ (set by the boundary runner, wr09 9.2 and 9.6)",
+      "KM_RELEASE_BASE_URL: the same-origin entry of the local compose stack (wr07, used by wr09 9.2)",
+      "KM_RELEASE_STATIC_URL: the static image alone, without a proxy or the Gateway, for the WR-3 control",
+      "KM_RELEASE_DEFAULT_BUILD_URL: http://127.0.0.1:4173, the default build served by the preview command, for the WR-5 control",
+      "KM_RELEASE_CSP_FILE: the CSP header value written by build:hosted (wr06 6.3)",
+      "KM_RELEASE_TOKEN_TTL_SECONDS, KM_RELEASE_RATE_LIMIT_BURST, KM_RELEASE_RATE_LIMIT_REFILL_SECONDS: read from the token service configuration under test (wr03 3.3) and recorded",
+      "KM_RELEASE_IMAGE_DIGESTS: the two image digests of the run",
+      "A missing required input fails the test with a BLOCKED message; it never skips. No LIVEKIT_ value is a run input.",
+      "KM_LIVEKIT_URL: the public wss URL for build:hosted, set from LIVEKIT_URL in the shell and equal to the repository variable of the same name. It is public and is not a secret.",
+      "LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET must be set in the shell that starts the compose stack. Compose passes them to the token service by name. They are never printed, passed as arguments or written to a file, and they are not inputs of the tests.",
+      "KM_TESTED_COMMIT: the commit of the release branch after the header commit. KM_ISSUER_COMMIT: the merge commit of the issuer pull request on main. Both are recorded in the evidence folder."
+    ],
+    "operatorSteps": [
+      "Before the run starts: the work of wr01 to wr08 (tasks 8.1 to 8.5) is committed on the release branch at the operator's request. It is not pushed. The repository variable KM_LIVEKIT_URL is set to the same public URL as LIVEKIT_URL in the operator's shell.",
+      "After the packaged run and the reviews, the lead shows every line that names a host in the render of the tested commit (kubectl kustomize infra/k8s/overlays/production, a local render) and the packaged verdicts. The operator gives or withholds the second approval.",
+      "After the second approval: the release branch is pushed and its pull request opened; the operator merges it. The images workflow builds and pushes both images tagged with the merge commit SHA.",
+      "The operator makes the two GHCR packages public and records a spending control for the LiveKit Cloud project.",
+      "Task 8.6: the lead prepares the tag-pin pull request (the two newTag lines only); the operator merges it. The cluster commands run from main at that commit.",
+      "Before verify-cluster: the operator runs kubectl --context gke_knowme-corporate_us-south1_main create namespace know-meet, then creates Secret know-meet-livekit in it as written in docs/release/web-release-runbook.md section 3.3 and checks it as in 3.4. No value is printed, passed as an argument or written to a file.",
+      "Only if the repository is private: the operator creates the Argo CD repository credential as in runbook section 4.1, branch B.",
+      "After the staging endpoint check: the lead prepares the one-line issuer pull request (letsencrypt-staging to letsencrypt-prod in infra/platform/certificate.yaml); the operator merges it. Its merge commit is KM_ISSUER_COMMIT.",
+      "If the A record for meet.know-me.tools has not resolved 10 minutes after the Gateway has an address, the operator creates it in Cloudflare by hand."
+    ]
+  },
+  "status": {
+    "implementationComplete": false
+  }
+}
