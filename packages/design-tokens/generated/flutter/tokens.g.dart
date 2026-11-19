@@ -57,6 +57,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     required this.pipGreen,
     required this.pipAmber,
     required this.pipRed,
+    required this.meterFill,
     required this.speakPerson,
     required this.speakAgent,
     required this.speakPhone,
@@ -124,6 +125,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     pipGreen: Color(0xFF22C55E),
     pipAmber: Color(0xFFF59E0B),
     pipRed: Color(0xFFEF4444),
+    meterFill: Color(0xFF22C55E),
     speakPerson: Color(0xFFE8532A),
     speakAgent: Color(0xFF0891B2),
     speakPhone: Color(0xFF15803D),
@@ -191,6 +193,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     pipGreen: Color(0xFF166534),
     pipAmber: Color(0xFFB45309),
     pipRed: Color(0xFFDC2626),
+    meterFill: Color(0xFF166534),
     speakPerson: Color(0xFFE8532A),
     speakAgent: Color(0xFF0891B2),
     speakPhone: Color(0xFF15803D),
@@ -257,6 +260,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
   final Color pipGreen;
   final Color pipAmber;
   final Color pipRed;
+  final Color meterFill;
   final Color speakPerson;
   final Color speakAgent;
   final Color speakPhone;
@@ -324,6 +328,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     Color? pipGreen,
     Color? pipAmber,
     Color? pipRed,
+    Color? meterFill,
     Color? speakPerson,
     Color? speakAgent,
     Color? speakPhone,
@@ -390,6 +395,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       pipGreen: pipGreen ?? this.pipGreen,
       pipAmber: pipAmber ?? this.pipAmber,
       pipRed: pipRed ?? this.pipRed,
+      meterFill: meterFill ?? this.meterFill,
       speakPerson: speakPerson ?? this.speakPerson,
       speakAgent: speakAgent ?? this.speakAgent,
       speakPhone: speakPhone ?? this.speakPhone,
@@ -461,6 +467,7 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       pipGreen: Color.lerp(pipGreen, other.pipGreen, t) ?? pipGreen,
       pipAmber: Color.lerp(pipAmber, other.pipAmber, t) ?? pipAmber,
       pipRed: Color.lerp(pipRed, other.pipRed, t) ?? pipRed,
+      meterFill: Color.lerp(meterFill, other.meterFill, t) ?? meterFill,
       speakPerson: Color.lerp(speakPerson, other.speakPerson, t) ?? speakPerson,
       speakAgent: Color.lerp(speakAgent, other.speakAgent, t) ?? speakAgent,
       speakPhone: Color.lerp(speakPhone, other.speakPhone, t) ?? speakPhone,

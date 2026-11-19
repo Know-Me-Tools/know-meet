@@ -55,6 +55,7 @@
   --km-pip-green: #22C55E;
   --km-pip-amber: #F59E0B;
   --km-pip-red: #EF4444;
+  --km-meter-fill: #22C55E;
   --km-speak-person: #E8532A;
   --km-speak-agent: #0891B2;
   --km-speak-phone: #15803D;
@@ -299,6 +300,7 @@
   --km-pip-green: #166534;
   --km-pip-amber: #B45309;
   --km-pip-red: #DC2626;
+  --km-meter-fill: #166534;
   --km-scrim: rgba(11, 15, 20, 0.4);
   --km-shadow-float: none;
   --km-shadow-card: none;
