@@ -12,7 +12,7 @@ metadata:
     config.kubernetes.io/local-config: "true"
 data:
   strict-transport-security: "max-age=31536000; includeSubDomains"
-  content-security-policy: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' wss://knowme-23fkf8pz.livekit.cloud https://knowme-23fkf8pz.livekit.cloud; base-uri 'none'; form-action 'self'; object-src 'none'; frame-ancestors 'none'"
+  content-security-policy: "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self' wss://knowme-23fkf8pz.livekit.cloud https://knowme-23fkf8pz.livekit.cloud; base-uri 'none'; form-action 'self'; object-src 'none'; worker-src 'self' blob:; frame-ancestors 'none'"
   x-content-type-options: "nosniff"
   x-frame-options: "DENY"
   referrer-policy: "strict-origin-when-cross-origin"
