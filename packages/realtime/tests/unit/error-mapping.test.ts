@@ -6,7 +6,7 @@ import {
   isTokenRejection,
   mapConnectError,
   mapMediaError,
-} from "../../src/error-mapping.ts";
+} from "../../src/realtime-room/domain/error-mapping.ts";
 
 /** Stand-in for the SDK's `ConnectionErrorReason.NotAllowed`; the real value is passed in. */
 const NOT_ALLOWED = 0;

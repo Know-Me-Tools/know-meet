@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="t">
+  <title id="t">Know Meet background: Dusk</title>
+  <!-- Brand tokens only (dark theme values): bg #0B0F14, bg-2 #111620, ember-soft #2B1A18,
+       ember #FF6A3D, ember-btn #FA5F30, speak-person #E8532A.
+       Filled shapes only: no strokes, no text, no photography. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0F14"/>
+      <stop offset="0.45" stop-color="#111620"/>
+      <stop offset="1" stop-color="#2B1A18"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="300" cy="780" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF6A3D" stop-opacity="0.62"/>
+      <stop offset="0.35" stop-color="#E8532A" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#2B1A18" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="0.36" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#FA5F30" stop-opacity="0.6"/>
+      <stop offset="0.6" stop-color="#E8532A" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#2B1A18" stop-opacity="0.2"/>
+    </radialGradient>
+    <linearGradient id="vignette" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#0B0F14" stop-opacity="0.7"/>
+      <stop offset="0.5" stop-color="#0B0F14" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <!-- The setting orb: the brand orb, low on the left, cropped by the frame edge. -->
+  <circle cx="250" cy="720" r="230" fill="url(#orb)"/>
+  <rect width="1280" height="720" fill="url(#vignette)"/>
+</svg>

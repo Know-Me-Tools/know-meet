@@ -1,5 +1,12 @@
-export type { DiagnosticSink, RealtimeDiagnostic } from "./diagnostics.ts";
 export {
+  type BackgroundAssetPaths,
+  createBackgroundProcessorHook,
   createLiveKitRealtimeRoom,
+  type DiagnosticSink,
+  type DropReason,
   type LiveKitRealtimeRoomOptions,
-} from "./livekit-realtime-room.ts";
+  type MessageChannel,
+  type ProcessedBackgroundEffect,
+  type RealtimeDiagnostic,
+  type VideoProcessorHook,
+} from "./realtime-room/index.ts";

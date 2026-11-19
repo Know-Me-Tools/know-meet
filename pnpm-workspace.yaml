@@ -8,6 +8,9 @@ packages:
 
 # Pins come from tooling/versions.toml; refuse installs on the wrong engine.
 engineStrict: true
+minimumReleaseAgeExclude:
+  - '@prometheus-ags/entity-graph-core@5.0.1'
+  - '@prometheus-ags/entity-graph-react@5.0.1'
 packageManagerStrict: true
 packageManagerStrictVersion: true
 saveExact: true

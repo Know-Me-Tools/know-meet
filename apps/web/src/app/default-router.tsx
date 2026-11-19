@@ -14,6 +14,7 @@ import { AgentsRoute, DashboardRoute, RecordingsRoute, SettingsRoute } from "./r
 import { AuthRoute } from "./routes/auth-route";
 import { HomeRoute } from "./routes/home-route";
 import { JoinRoute } from "./routes/join-route";
+import { HistoryRoute } from "./routes/local-routes";
 import { MeetRoute } from "./routes/meet-route";
 
 export function createDefaultRouter() {
@@ -47,6 +48,15 @@ export function createDefaultRouter() {
     path: "recordings",
     component: RecordingsRoute,
   });
+  /**
+   * Local meeting history (wc09). Off the five-item nav; registered here so the
+   * route types the hosted navigation links to exist in the registered tree.
+   */
+  const historyRoute = createRoute({
+    getParentRoute: () => framed,
+    path: "history",
+    component: HistoryRoute,
+  });
   const settingsRoute = createRoute({
     getParentRoute: () => framed,
     path: "settings",
@@ -78,6 +88,7 @@ export function createDefaultRouter() {
       dashboardRoute,
       agentsRoute,
       recordingsRoute,
+      historyRoute,
       settingsRoute,
       notesRoute,
     ]),

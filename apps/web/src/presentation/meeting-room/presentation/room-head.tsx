@@ -2,7 +2,9 @@
 // meet.html `.room-head` for the guest room (acceptance R0-R6, section 3): the Gathering
 // mark as a non-interactive mark (O-5: a brand link would leave the call without asking),
 // h1 "Meeting {code}" (focused on entry), the meta line "{code} · {n} in the call", the
-// connection chip and the theme toggle. Recording, Guest and Sources chips are removed.
+// connection chip and the theme toggle. Guest and Sources chips are removed; the
+// recording notice (`.rec-ind`, wc10 task 10.4) sits before the connection chip while a
+// recording runs, passed in by the room view.
 // The chip text is always visible (K-3); disconnected never shows as a chip (view R7).
 import type { ConnectionState } from "@know-meet/domain";
 import { BrandMark } from "@know-meet/ui/components/brand-mark";
@@ -16,6 +18,8 @@ interface RoomHeadProps {
   readonly connection: ConnectionState;
   /** The frame's theme toggle, injected by the route (presentation never imports app code). */
   readonly themeControl: React.ReactNode;
+  /** The recording notice while a recording runs anywhere in the room; null otherwise. */
+  readonly recordingIndicator: React.ReactNode;
 }
 
 function ConnectionChip({ connection }: { readonly connection: ConnectionState }) {
@@ -48,7 +52,13 @@ function ConnectionChip({ connection }: { readonly connection: ConnectionState }
   );
 }
 
-export function RoomHead({ code, participantCount, connection, themeControl }: RoomHeadProps) {
+export function RoomHead({
+  code,
+  participantCount,
+  connection,
+  themeControl,
+  recordingIndicator,
+}: RoomHeadProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
@@ -68,6 +78,7 @@ export function RoomHead({ code, participantCount, connection, themeControl }: R
           {inCall ? ` · ${participantCount} in the call` : " · Connecting…"}
         </span>
       </div>
+      {recordingIndicator}
       <ConnectionChip connection={connection} />
       {themeControl}
     </header>

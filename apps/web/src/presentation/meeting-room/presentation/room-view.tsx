@@ -1,26 +1,51 @@
 // TJ-ARCH-MOB-001 compliant
-// The live guest room (acceptance R0-R6, R9): head, the device error card when a device was
-// refused, the participant stage (own tile, one tile per remote participant, and the share
-// card while alone, R1) and the controls bar. The stage spans the full width with no
-// captions bar and no side sheet, and is centred vertically when the tiles do not fill it.
+// The live guest room (acceptance R0-R6, R9; wc04): head; the notices row (the device
+// error card when a device was refused, the Enable audio prompt while playback is
+// blocked); the room body (the participant stage with screen-share tiles, and the room
+// side sheet over it); the controls bar. The room acts only through use cases: meeting
+// use cases for mic, camera and leave, conferencing use cases for share, chat, audio,
+// devices and background effects. The sheet has two panes: Chat (wc04) and Settings, the
+// "Audio and video" pane with the device pickers and the Background section (wc05, wc07),
+// opened by the Settings control after Chat. Toasts (an unplugged device) stack over it.
+// Recording (wc10 task 10.4): the Record control after Share, the recording notice in
+// the head while a recording runs anywhere in the room, the requester's waiting note and
+// one-time notices in the notices row, and the consent question for everyone else.
 import type { RoomSnapshot } from "@know-meet/application";
 import type { TrackKind } from "@know-meet/domain";
-import { focusFillClass } from "@know-meet/ui/lib/focus";
-import { cn } from "@know-meet/ui/lib/utils";
+import { Toaster } from "@know-meet/ui/components/toast";
 import type * as React from "react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ErrorCard } from "../../guest-meeting/error-card";
 import { LiveStatus, useAnnouncer } from "../../guest-meeting/live-status";
-import { ROOM_COPY } from "../../guest-meeting/meeting-copy";
 import type { MeetingServicesView } from "../../guest-meeting/meeting-services";
 import { copyJoinLink } from "../../guest-meeting/share-actions";
-import { ShareCard } from "../../guest-meeting/share-card";
+import { videoProcessorName } from "./background/background-options";
+import { ChatControl } from "./chat/chat-control";
+import { ChatPanel } from "./chat/chat-panel";
+import { useChat } from "./chat/use-chat";
+import { DeviceSettingsPane } from "./device-settings/device-settings-pane";
+import { SettingsControl } from "./device-settings/settings-control";
+import { EnableAudioPrompt } from "./enable-audio-prompt";
+import { ConsentPrompt } from "./recording/consent-prompt";
+import { RecordControl } from "./recording/record-control";
+import { RecordingIndicator } from "./recording/recording-indicator";
+import { RecordingNotice } from "./recording/recording-notice";
+import { type RecordingUi, useRecordingUi } from "./recording/use-recording-ui";
 import { RoomControls } from "./room-controls";
 import { RoomHead } from "./room-head";
-import { LocalTile, RemoteTile } from "./room-tiles";
+import { RoomSheet, RoomSheetScrim } from "./room-sheet/room-sheet";
+import { useRoomSheet } from "./room-sheet/use-room-sheet";
+import { RoomStage } from "./room-stage";
+import { useScreenShare } from "./screen-share/use-screen-share";
+import { useConferencing } from "./use-conferencing";
 import { useLocalMedia } from "./use-local-media";
 import { useRoomAnnouncements } from "./use-room-announcements";
-import { useStageLayout } from "./use-stage-layout";
+
+/** Who the head's recording notice names: "you" here, the recorder's name elsewhere. */
+function recorderName({ recording, nameOf }: RecordingUi): string {
+  const { state } = recording;
+  return state.status === "remote-recording" ? nameOf(state.recorder) : "you";
+}
 
 interface RoomViewProps {
   readonly services: MeetingServicesView;
@@ -33,73 +58,109 @@ interface RoomViewProps {
 export function RoomView({ services, snapshot, code, blockedAtJoin, themeControl }: RoomViewProps) {
   const { room, useCases } = services;
   const { local, remotes, connection } = snapshot;
+  const conferencing = useConferencing(services);
   const { message, announce } = useAnnouncer();
   useRoomAnnouncements(snapshot, announce);
   const media = useLocalMedia(useCases, local, blockedAtJoin, announce);
+  const share = useScreenShare(conferencing, snapshot.screenShares, snapshot.support, announce);
+  const sheet = useRoomSheet("chat");
+  const chatOpen = sheet.isOpen("chat");
+  const settingsOpen = sheet.isOpen("settings");
+  const chat = useChat(conferencing, snapshot.chat, chatOpen, announce);
+  const rec = useRecordingUi(snapshot, announce);
   const [startedAt] = useState(() => Date.now());
-  const alone = remotes.length === 0;
-  const cells = (local === null ? 0 : 1) + remotes.length + (alone ? 1 : 0);
-  const stageRef = useRef<HTMLElement>(null);
-  const stage = useStageLayout(stageRef, cells);
+
+  const closeSheet = () => {
+    chat.markSeen();
+    sheet.close();
+  };
+  const toggleChat = () => {
+    chat.markSeen();
+    sheet.toggle("chat");
+  };
 
   return (
-    <div className="grid h-[calc(100dvh-var(--km-titlebar-h,0px))] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-hidden">
-      <RoomHead
-        code={code}
-        participantCount={(local === null ? 0 : 1) + remotes.length}
-        connection={connection}
-        themeControl={themeControl}
-      />
-      {media.problem === null ? (
-        <div />
-      ) : (
-        <div className="px-s5 pb-s2 max-bp768:px-s4">
-          <ErrorCard
-            copy={media.problem.copy}
-            {...(media.problem.permission ? { testId: "km-state-permission-denied" } : {})}
-            className="mx-auto w-[min(100%,760px)]"
-          />
-        </div>
-      )}
-      <section
-        ref={stageRef}
-        aria-label="Participants"
-        tabIndex={stage.scrollable ? 0 : undefined}
-        className={cn(
-          "grid min-h-0 overflow-y-auto px-s5 pt-s2 pb-s4 [align-content:safe_center] max-bp768:px-s4 max-bp768:pb-s3",
-          stage.scrollable &&
-            cn(focusFillClass, "focus-visible:**:bg-transparent! focus-visible:**:text-inherit!"),
-        )}
-      >
-        <div
-          className="grid gap-s3"
-          style={{ gridTemplateColumns: `repeat(${stage.columns}, minmax(0, 1fr))` }}
-        >
-          {local === null ? null : <LocalTile room={room} local={local} />}
-          {remotes.map((remote) => (
-            <RemoteTile key={remote.identity} room={room} remote={remote} />
-          ))}
-          {alone ? (
-            <ShareCard
-              code={code}
-              line={ROOM_COPY.aloneLine}
-              announce={announce}
-              className="min-h-[160px] content-center"
-              heading={<h2 className="font-display text-lg">{ROOM_COPY.aloneHeading}</h2>}
+    <Toaster>
+      <div className="grid h-[calc(100dvh-var(--km-titlebar-h,0px))] grid-cols-[minmax(0,1fr)] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-hidden">
+        <RoomHead
+          code={code}
+          participantCount={(local === null ? 0 : 1) + remotes.length}
+          connection={connection}
+          themeControl={themeControl}
+          recordingIndicator={
+            rec.recording.indicatorOn ? <RecordingIndicator recorder={recorderName(rec)} /> : null
+          }
+        />
+        <div className="grid gap-s2 empty:hidden px-s5 pb-s2 max-bp768:px-s4">
+          {media.problem === null ? null : (
+            <ErrorCard
+              copy={media.problem.copy}
+              {...(media.problem.permission ? { testId: "km-state-permission-denied" } : {})}
+              className="mx-auto w-[min(100%,760px)]"
             />
+          )}
+          {snapshot.audioPlayback === "blocked" ? (
+            <EnableAudioPrompt conferencing={conferencing} announce={announce} />
           ) : null}
+          <RecordingNotice recording={rec.recording} nameOf={rec.nameOf} />
         </div>
-      </section>
-      <RoomControls
-        startedAt={startedAt}
-        micOn={local !== null && !local.microphone.muted}
-        cameraOn={local !== null && !local.camera.muted}
-        onToggleMic={() => media.toggle("microphone")}
-        onToggleCamera={() => media.toggle("camera")}
-        onCopyLink={() => copyJoinLink(code, announce)}
-        onLeave={() => void useCases.leave()}
-      />
-      <LiveStatus message={message} />
-    </div>
+        <div className="relative grid min-h-0 grid-cols-[minmax(0,1fr)]">
+          <RoomStage
+            room={room}
+            code={code}
+            local={local}
+            localProcessor={videoProcessorName(snapshot.backgroundEffect)}
+            remotes={remotes}
+            shares={snapshot.screenShares}
+            sheetOpen={sheet.state.open}
+            announce={announce}
+          />
+          <RoomSheetScrim open={sheet.state.open} onClose={closeSheet} />
+          <RoomSheet state={sheet.state} onClose={closeSheet}>
+            <ChatPanel
+              shown={sheet.state.pane === "chat"}
+              active={chatOpen}
+              messages={snapshot.chat}
+              remotes={remotes}
+              chat={chat}
+              onClose={closeSheet}
+            />
+            <DeviceSettingsPane
+              room={room}
+              snapshot={snapshot}
+              conferencing={conferencing}
+              announce={announce}
+              blockedAtJoin={blockedAtJoin}
+              shown={sheet.state.pane === "settings"}
+              active={settingsOpen}
+              onClose={closeSheet}
+            />
+          </RoomSheet>
+        </div>
+        <RoomControls
+          startedAt={startedAt}
+          micOn={local !== null && !local.microphone.muted}
+          cameraOn={local !== null && !local.camera.muted}
+          onToggleMic={() => media.toggle("microphone")}
+          onToggleCamera={() => media.toggle("camera")}
+          share={share}
+          recordControl={<RecordControl action={rec.action} onPress={rec.onRecordControl} />}
+          panelControls={
+            <>
+              <ChatControl open={chatOpen} unread={chat.unread} onToggle={toggleChat} />
+              <SettingsControl open={settingsOpen} onToggle={() => sheet.toggle("settings")} />
+            </>
+          }
+          onCopyLink={() => copyJoinLink(code, announce)}
+          onLeave={() => void useCases.leave()}
+        />
+        <ConsentPrompt
+          prompt={rec.recording.prompt}
+          nameOf={rec.nameOf}
+          onAnswer={rec.recording.answer}
+        />
+        <LiveStatus message={message} />
+      </div>
+    </Toaster>
   );
 }

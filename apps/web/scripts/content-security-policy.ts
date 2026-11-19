@@ -43,6 +43,37 @@ const BASE_DIRECTIVES: Directives = [
 ];
 
 /**
+ * Hosted-only additions (wc06, WC-10). They widen the policy of the public web build
+ * for the in-browser media features (background effects, local recording, the local
+ * history database). They are applied only when `hosted === true`, so the default
+ * build and the Tauri host (tauri-cli.ts, tauri.conf.json) keep the base policy
+ * byte for byte. Desktop use of the same features needs its own reviewed change.
+ *
+ * - script-src 'wasm-unsafe-eval': compile WebAssembly (MediaPipe, PGlite). It does
+ *   not allow eval() or new Function(); 'unsafe-eval' stays out.
+ * - img-src / media-src blob:: object URLs for recorded media and processed frames.
+ * - connect-src is NOT widened: every WASM, worker and model file is served from
+ *   'self', so nothing is fetched from a CDN or a model bucket.
+ */
+const HOSTED_ONLY_SOURCES: Readonly<Record<string, readonly string[]>> = {
+  "script-src": ["'wasm-unsafe-eval'"],
+  "img-src": ["blob:"],
+  "media-src": ["blob:"],
+};
+
+/**
+ * Hosted-only directive. worker-src falls back to script-src when absent, and
+ * script-src has no blob:, so a worker needs its own directive. 'self' loads
+ * same-origin worker files. blob: is kept for one reason: @livekit/track-processors
+ * 0.8.3 creates a one-line frame-ticker worker from a Blob URL (FrameTicker.ts),
+ * and that is its only worker. The library falls back to a window timer when the
+ * worker is blocked, so dropping blob: is safe but throttles background effects in
+ * hidden tabs. wc07 may narrow this to ['self'] (patch the ticker to a static
+ * same-origin worker); change HOSTED_WORKER_SOURCES only, tests follow.
+ */
+const HOSTED_WORKER_SOURCES: readonly string[] = ["'self'", "blob:"];
+
+/**
  * Header-only directives. Browsers ignore `frame-ancestors` in a <meta> CSP, and
  * the Tauri webview is never framed, so it is not part of the shared policy.
  */
@@ -122,18 +153,19 @@ export interface ContentSecurityPolicyInput {
 export function buildContentSecurityPolicy(input: ContentSecurityPolicyInput): string {
   const extraConnect = livekitOrigins(input.livekitUrl);
   const extraMedia = mediaOrigins(input.mediaOrigins);
-  return BASE_DIRECTIVES.map(([name, sources]) => {
+  const hosted = input.hosted === true;
+  const directives = BASE_DIRECTIVES.map(([name, sources]) => {
+    const hostedOnly = hosted ? (HOSTED_ONLY_SOURCES[name] ?? []) : [];
     const all =
       name === "connect-src"
-        ? [
-            ...sources.filter((s) => input.hosted !== true || !TAURI_IPC_ORIGINS.includes(s)),
-            ...extraConnect,
-          ]
+        ? [...sources.filter((s) => !hosted || !TAURI_IPC_ORIGINS.includes(s)), ...extraConnect]
         : name === "img-src" || name === "media-src"
-          ? [...sources, ...extraMedia]
-          : sources;
+          ? [...sources, ...hostedOnly, ...extraMedia]
+          : [...sources, ...hostedOnly];
     return `${name} ${all.join(" ")}`;
-  }).join("; ");
+  });
+  if (hosted) directives.push(`worker-src ${HOSTED_WORKER_SOURCES.join(" ")}`);
+  return directives.join("; ");
 }
 
 /**

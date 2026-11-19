@@ -1,11 +1,11 @@
 /**
- * TranscriptStore on @prometheus-ags/entity-graph-core 4.4.0 (the store of
+ * TranscriptStore on @prometheus-ags/entity-graph-core 5.0.1 (the store of
  * record). Each commit diffs the immutable transcript against the last
  * committed one by reference and writes only changed entities, all of them in
  * one `batchGraphWrites` (one atomic graph publication per commit; 4.3.0 needed
  * one `upsertEntities` publication per entity type). Shared agent state goes
  * through the package's AG-UI bridge (applyAgUiSnapshot / applyAgUiDelta), which
- * in 4.4.0 publishes once per event and removes entities the agent removed.
+ * since 4.4.0 publishes once per event and removes entities the agent removed.
  */
 import { applyAgUiDelta, applyAgUiSnapshot, batchGraphWrites, graphStore, type AgUiStateMapping } from "@prometheus-ags/entity-graph-core";
 import type { CommitReason, TranscriptStore } from "../application/ports.ts";

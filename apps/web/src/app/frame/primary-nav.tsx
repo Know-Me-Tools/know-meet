@@ -1,15 +1,23 @@
 // TJ-ARCH-MOB-001 compliant
 // DESIGN.md "Adaptive layout": ONE <nav aria-label="Primary"> in every width
 // class; the class (data-nav-class = bar | rail | inline) changes layout only,
-// never the DOM, so a focused destination keeps focus through the morph.
+// never the DOM, so a focused destination keeps focus through the morph and each
+// item's test id is unique on the page (one variant rendered at a time).
 // Layout and states live in styles/frame.css; test hooks follow
-// tests/fidelity/oracle/app-state-map.json (km-appnav, km-nav-item, km-nav-indicator).
+// tests/fidelity/oracle/app-state-map.json (km-appnav, km-nav-item, km-nav-indicator)
+// and, in the hosted build, tests/release/src/wc-test-ids.ts (km-nav-home,
+// km-nav-history, km-nav-recordings).
 import { Link } from "@tanstack/react-router";
-import { DESTINATIONS } from "./destinations";
+import type { Destination } from "./destinations";
 import { KmIcon } from "./km-icons";
 import type { WidthClass } from "./width-class";
 
-export function PrimaryNav({ widthClass }: { readonly widthClass: WidthClass }) {
+interface PrimaryNavProps {
+  readonly widthClass: WidthClass;
+  readonly destinations: readonly Destination[];
+}
+
+export function PrimaryNav({ widthClass, destinations }: PrimaryNavProps) {
   return (
     <nav
       aria-label="Primary"
@@ -18,11 +26,11 @@ export function PrimaryNav({ widthClass }: { readonly widthClass: WidthClass }) 
       className="km-nav"
     >
       <ul className="km-nav-list">
-        {DESTINATIONS.map((destination) => (
+        {destinations.map((destination) => (
           <li key={destination.to}>
             <Link
               to={destination.to}
-              data-testid="km-nav-item"
+              data-testid={destination.testId}
               className="km-nav-item"
               activeOptions={{ exact: destination.to === "/", includeHash: false }}
               activeProps={{ "aria-current": "page" }}

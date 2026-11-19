@@ -1,4 +1,6 @@
 import {
+  DEFAULT_DEVICE_CHOICE,
+  type DeviceChoice,
   err,
   isInRoom,
   isTrackMuted,
@@ -30,9 +32,14 @@ export interface JoinRequest {
   readonly code: string;
   /** The name as typed in the lobby; trimmed and checked here. */
   readonly displayName: string;
-  /** The lobby's device choices, applied after connecting. */
+  /** The lobby's on/off choices, applied after connecting. */
   readonly microphoneEnabled: boolean;
   readonly cameraEnabled: boolean;
+  /**
+   * The microphone and camera picked in the lobby (WC-5), handed to the room before any
+   * device opens. Omitted means the system defaults.
+   */
+  readonly devices?: DeviceChoice;
 }
 
 export interface JoinedMeeting {
@@ -49,7 +56,8 @@ export interface MeetingUseCases {
   /** Asks the token service for a new room code. Connects nothing. */
   start(signal?: AbortSignal): Promise<Result<RoomCode, CreateMeetingError>>;
   /**
-   * Checks the code and name, asks for a token, connects, then applies the device choices.
+   * Checks the code and name, asks for a token, connects with the chosen devices, then turns
+   * on the ones the guest left on.
    * A code that cannot exist, or that the issuer refuses, ends here and never connects.
    */
   join(request: JoinRequest, signal?: AbortSignal): Promise<Result<JoinedMeeting, JoinError>>;
@@ -81,7 +89,8 @@ async function joinMeeting(
   if (displayName === null) return err(meetingErrors.invalidRequest());
   const credentials = await ports.issuer.requestToken({ code, displayName }, signal);
   if (!credentials.ok) return credentials;
-  const connected = await ports.room.connect(credentials.value);
+  const devices = request.devices ?? DEFAULT_DEVICE_CHOICE;
+  const connected = await ports.room.connect(credentials.value, { devices });
   if (!connected.ok) return connected;
   const deniedDevices = await applyDeviceChoices(ports.room, request);
   return ok({ code, identity: credentials.value.identity, deniedDevices });

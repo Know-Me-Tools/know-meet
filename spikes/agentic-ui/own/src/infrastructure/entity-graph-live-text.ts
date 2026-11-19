@@ -1,5 +1,5 @@
 /**
- * LiveTextOverlay on @prometheus-ags/entity-graph-core 4.4.0's render-only live layer
+ * LiveTextOverlay on @prometheus-ags/entity-graph-core 5.0.1's render-only live layer
  * (`createLiveLayer`). Streaming text is held as a live `text` field of the KmMessage entity:
  * no graph write, no persistence, no devtools event; per-entity subscriptions. The durable text
  * still arrives through the store's boundary/checkpoint commits, so the overlay is discarded

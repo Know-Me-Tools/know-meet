@@ -9,9 +9,10 @@ import { createHostedRouter } from "./hosted-router";
 export type AppRouter = ReturnType<typeof createDefaultRouter>;
 
 export function createAppRouter(): AppRouter {
-  // The hosted tree is a subset of the registered one: every route it has exists in
-  // the full tree with the same path and component, so the cast only drops route
-  // types that the hosted tree never matches at runtime.
+  // The hosted tree is a subset of the registered one: every path it has exists in
+  // the full tree (the hosted /recordings renders the browser-local library instead of
+  // the prototype screen, with the same path and no params), so the cast only drops
+  // route types that the hosted tree never matches at runtime.
   return HOSTED_BUILD ? (createHostedRouter() as unknown as AppRouter) : createDefaultRouter();
 }
 

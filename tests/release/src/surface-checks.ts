@@ -4,13 +4,29 @@
  * same checks against different base URLs.
  */
 import type { Browser, Page } from "@playwright/test";
-import { byTestId, EXCLUDED_PATHS, HOSTED_PATHS, SCREEN, STATE, STORAGE } from "./test-ids.ts";
+import {
+  byTestId,
+  EXCLUDED_PATHS,
+  HOSTED_PATHS,
+  NAV_PATHS,
+  SCREEN,
+  STATE,
+  STORAGE,
+} from "./test-ids.ts";
+import { HISTORY, RECORDING } from "./wc-test-ids.ts";
 
 const SCREEN_OF: Readonly<Record<string, string>> = {
   "/": SCREEN.home,
   "/join": SCREEN.join,
   "/meet": SCREEN.meet,
+  "/history": HISTORY.screen,
+  "/recordings": RECORDING.library,
 };
+/** The screens of the web release proper; the negative control relies on these existing in the default build. */
+export const RELEASE_PATHS: readonly string[] = ["/", "/join", "/meet"];
+/** Widths of the three navigation forms: phone (bottom bar), medium (rail), desktop (full). */
+const NAV_WIDTHS: readonly number[] = [375, 768, 1440];
+const NAV_HEIGHT = 900;
 const RENDER_TIMEOUT_MS = 15_000;
 /** Shape of a signed-in user in km-auth, as the prototype and the fidelity suite write it. */
 const SIGNED_IN_USER = JSON.stringify({ name: "Avery Chen", email: "avery@example.com" });
@@ -36,6 +52,18 @@ async function showsNotFound(page: Page): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+/** Same-origin paths of the links inside navigation landmarks that are rendered (not display:none). */
+async function visibleNavPaths(page: Page): Promise<string[]> {
+  const paths = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("nav a[href], [role=navigation] a[href]"))
+      .filter((anchor) => anchor.getClientRects().length > 0)
+      .map((anchor) => new URL((anchor as HTMLAnchorElement).href, location.href))
+      .filter((url) => url.origin === location.origin)
+      .map((url) => url.pathname),
+  );
+  return [...new Set(paths)].sort();
 }
 
 /** Visible text plus the accessibility tree of the page body. */
@@ -90,6 +118,26 @@ export async function surfaceProblems(browser: Browser, baseUrl: string): Promis
       await page.goto(path);
       if (!(await showsNotFound(page))) {
         problems.push(`${path}: does not render the not-found state`);
+      }
+    }
+  });
+
+  await withPage(browser, baseUrl, false, async (page) => {
+    for (const width of NAV_WIDTHS) {
+      await page.setViewportSize({ width, height: NAV_HEIGHT });
+      await page.goto("/");
+      try {
+        await page.locator(byTestId(SCREEN.home)).waitFor({ timeout: RENDER_TIMEOUT_MS });
+      } catch {
+        problems.push(`/ at ${width}: home did not render`);
+        continue;
+      }
+      const nav = await visibleNavPaths(page);
+      linksByPath[`nav@${width}`] = nav;
+      if (nav.join(" ") !== [...NAV_PATHS].sort().join(" ")) {
+        problems.push(
+          `navigation at ${width}: shows ${nav.join(", ") || "nothing"}, expected ${NAV_PATHS.join(", ")}`,
+        );
       }
     }
   });

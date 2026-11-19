@@ -1,6 +1,6 @@
 # Contract WR-2. Owner tasks: wr01-release-scenarios/1.1, wr07-container-images/7.1,
 # wr08-cluster-manifests/8.2, wr09-release-boundary/9.2, wr09-release-boundary/9.6.
-# Oracle: GET / , /join and /meet each return status 200 with the app document, and a reload on each
+# Oracle: GET / , /join, /meet, /history and /recordings each return status 200 with the app document, and a reload on each
 # keeps the same route rendered.
 # Negative control: GET /assets/does-not-exist.js must return 404, not the app document.
 # Executed by tests/release/hosting.spec.ts in the packaged and hosted projects.
@@ -23,6 +23,8 @@ Feature: WR-2 Deep links and reloads return the app
       | /     |
       | /join |
       | /meet |
+      | /history |
+      | /recordings |
 
   @negative-control
   Scenario: A missing asset is a 404, not the app document

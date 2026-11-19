@@ -97,14 +97,26 @@ export const STORAGE = {
   auth: "km-auth",
 } as const;
 
-/** Paths the hosted build serves; every other path renders STATE.notFound. */
-export const HOSTED_PATHS: readonly string[] = ["/", "/join", "/meet"];
+/**
+ * Paths the hosted build serves; every other path renders STATE.notFound.
+ * /history and /recordings are device-local screens (web-conferencing-features,
+ * operator decision batch2-approval-web-conferencing-features, 2026-11-18); the
+ * rest is the web release.
+ */
+export const HOSTED_PATHS: readonly string[] = ["/", "/join", "/meet", "/history", "/recordings"];
 
-/** Paths excluded from the hosted build by the contract (WR-5). */
+/**
+ * Destinations of the shared adaptive navigation in the hosted build: Home,
+ * History, Recordings (bottom bar on phones, rail on medium widths, full
+ * navigation on desktop). Join and the meeting room are reached from Home and
+ * are not navigation destinations.
+ */
+export const NAV_PATHS: readonly string[] = ["/", "/history", "/recordings"];
+
+/** Signed-in-only paths excluded from the hosted build by the contract (WR-5). */
 export const EXCLUDED_PATHS: readonly string[] = [
   "/dashboard",
   "/agents",
-  "/recordings",
   "/settings",
   "/notes",
   "/auth",

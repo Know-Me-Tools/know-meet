@@ -1,22 +1,25 @@
 // TJ-ARCH-MOB-001 compliant
-// prototype meet.html `#lobby .preview-card` (acceptance L1-L5): the mirrored live preview
-// (or `#preview-empty` with the initials avatar), the Mic and Camera toggles, the mic level
-// meter and, when the browser refused a device, the media error card (`#lb-media-error`).
-// Toggles keep the prototype's state labels ("Mic on") with no aria-pressed and expose
-// `data-state`. While the permission prompt is open they are aria-disabled (still
-// focusable, described by the preview text). Device pickers are not shown: the join use
-// case cannot pass a device choice to the meeting (gap reported in wr05).
-import type { TrackKind } from "@know-meet/domain";
+// prototype meet.html `#lobby .preview-card` (acceptance L1-L5; wc05 task 5.1, WC-5, WC-13):
+// the mirrored live preview (or `#preview-empty` with the initials avatar), the Mic and
+// Camera toggles, then the Microphone picker with the level meter under it (feedback next
+// to its control), the Camera picker and, when the browser refused a device, the media
+// error card (`#lb-media-error`). The preview follows the chosen camera. Toggles keep the
+// prototype's state labels ("Mic on") with no aria-pressed and expose `data-state`. While
+// the permission prompt is open they are aria-disabled (still focusable, described by the
+// preview text). Focus order (DS-3): Mic toggle, Camera toggle, Microphone, Camera.
+// Scenario contract: km-lobby-mic-level (role="meter", aria-valuenow 0 to 100).
+import type { MediaDevice, TrackKind } from "@know-meet/domain";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import { useEffect, useRef } from "react";
+import { LevelMeter } from "../../guest-meeting/devices/level-meter";
 import { ErrorCard } from "../../guest-meeting/error-card";
 import type { Announce } from "../../guest-meeting/live-status";
 import { deviceProblemCopy, LOBBY_COPY } from "../../guest-meeting/meeting-copy";
 import { initialsOf } from "../../guest-meeting/participant-labels";
+import { LobbyDeviceField } from "./lobby-device-field";
 import type { DevicePreview } from "./use-device-preview";
-import { useMicLevel } from "./use-mic-level";
 
 const PREVIEW_TEXT_ID = "lobby-preview-text";
 const DEVICE_ERROR_ID = "lobby-device-error";
@@ -62,18 +65,17 @@ function DeviceToggle({ kind, on, locked, describedBy, onToggle }: DeviceToggleP
 
 interface LobbyPreviewProps {
   readonly preview: DevicePreview;
+  /** The devices the browser lists (the room's device list, readable before joining). */
+  readonly devices: readonly MediaDevice[];
   readonly name: string;
   readonly announce: Announce;
 }
 
-export function LobbyPreview({ preview, name, announce }: LobbyPreviewProps) {
+export function LobbyPreview({ preview, devices, name, announce }: LobbyPreviewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const meterRef = useRef<HTMLDivElement>(null);
-  const fillRef = useRef<HTMLDivElement>(null);
   const { stream, wishes, pending, problems } = preview;
   const showVideo = wishes.camera && (stream?.getVideoTracks().length ?? 0) > 0;
   const showMeter = wishes.microphone && (stream?.getAudioTracks().length ?? 0) > 0;
-  useMicLevel(showMeter ? stream : null, meterRef, fillRef);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -133,25 +135,9 @@ export function LobbyPreview({ preview, name, announce }: LobbyPreviewProps) {
           onToggle={() => toggle("camera")}
         />
       </div>
-      <div hidden={!showMeter} className="flex min-h-size-target items-center gap-s3">
-        <KmIcon name="mic" className="text-muted-foreground" />
-        {/* biome-ignore lint/a11y/useSemanticElements: a native <meter> cannot take the token-styled fill bar; role="meter" with aria-value* gives the same semantics. */}
-        <div
-          ref={meterRef}
-          role="meter"
-          aria-label="Microphone level"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={0}
-          className="h-2 flex-1 overflow-hidden rounded-pill bg-muted"
-        >
-          <div
-            ref={fillRef}
-            style={{ transform: "scaleX(0)" }}
-            className="h-full w-full origin-left bg-green"
-          />
-        </div>
-      </div>
+      <LobbyDeviceField kind="microphone" devices={devices} preview={preview} announce={announce} />
+      <LevelMeter stream={stream} hidden={!showMeter} testId="km-lobby-mic-level" />
+      <LobbyDeviceField kind="camera" devices={devices} preview={preview} announce={announce} />
       {errorCopy === null ? null : (
         <ErrorCard
           copy={errorCopy}

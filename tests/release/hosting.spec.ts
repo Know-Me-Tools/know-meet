@@ -7,11 +7,14 @@
 import { expect, test } from "@playwright/test";
 import { attachJson } from "./src/evidence.ts";
 import { SCREEN } from "./src/test-ids.ts";
+import { HISTORY, RECORDING } from "./src/wc-test-ids.ts";
 
 const ROUTES: ReadonlyArray<{ path: string; screen: string }> = [
   { path: "/", screen: SCREEN.home },
   { path: "/join", screen: SCREEN.join },
   { path: "/meet", screen: SCREEN.meet },
+  { path: "/history", screen: HISTORY.screen },
+  { path: "/recordings", screen: RECORDING.library },
 ];
 
 const APP_MOUNT = '<div id="root"></div>';

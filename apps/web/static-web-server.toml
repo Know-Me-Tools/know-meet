@@ -14,11 +14,11 @@
 # (features/wr-5-hosted-surface.feature). A new client route needs a line here.
 
 [[advanced.rewrites]]
-source = "/{join,meet,dashboard,agents,recordings,settings,notes,auth}"
+source = "/{join,meet,dashboard,agents,recordings,history,settings,notes,auth}"
 destination = "/index.html"
 
 [[advanced.rewrites]]
-source = "/{join,meet,dashboard,agents,recordings,settings,notes,auth}/**"
+source = "/{join,meet,dashboard,agents,recordings,history,settings,notes,auth}/**"
 destination = "/index.html"
 
 # Custom headers run last in the handler and replace the built-in Cache-Control.
@@ -38,3 +38,23 @@ headers = { Cache-Control = "no-cache" }
 [[advanced.headers]]
 source = "/assets/**"
 headers = { Cache-Control = "public, max-age=31536000, immutable" }
+
+# MediaPipe files for background effects (wc07 task 7.1). Names are not hashed (the
+# library requests them by fixed name), so revalidate daily rather than cache forever.
+# Content types are stated here so a worker or WebAssembly.compileStreaming never depends
+# on extension guessing: `.wasm` must be application/wasm, the loader a JavaScript type.
+[[advanced.headers]]
+source = "/mediapipe/**/*.wasm"
+headers = { Content-Type = "application/wasm", Cache-Control = "public, max-age=86400" }
+
+[[advanced.headers]]
+source = "/mediapipe/**/*.js"
+headers = { Content-Type = "text/javascript; charset=utf-8", Cache-Control = "public, max-age=86400" }
+
+[[advanced.headers]]
+source = "/mediapipe/**/*.tflite"
+headers = { Content-Type = "application/octet-stream", Cache-Control = "public, max-age=86400" }
+
+[[advanced.headers]]
+source = "/backgrounds/**"
+headers = { Cache-Control = "public, max-age=86400" }

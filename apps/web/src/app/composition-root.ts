@@ -5,7 +5,9 @@ import {
   createNoteFeed,
   createThemeStore,
 } from "@know-meet/application";
+import { registerHistoryEntities } from "../infrastructure/entities/register-history-entities";
 import { registerNoteEntities } from "../infrastructure/entities/register-note-entities";
+import { registerRecordingEntities } from "../infrastructure/entities/register-recording-entities";
 import { createStaticCapabilitySource } from "../infrastructure/http/http-capability-source";
 import { loadPlatformAdapters } from "../infrastructure/platform/platform-adapters";
 import { createLocalStorageSession } from "../infrastructure/session/local-session";
@@ -20,6 +22,8 @@ import type { AppServices } from "./app-services";
 import { HOSTED_BUILD } from "./build-mode";
 import { composeMeeting } from "./compose-meeting";
 import { createWidthClassStore } from "./frame/width-class-store";
+import { composeHistory } from "./history/compose-history";
+import { composeRecordings } from "./recordings/compose-recordings";
 
 /**
  * The only place adapters meet use cases. Theme is resolved and applied first,
@@ -45,12 +49,20 @@ export async function composeApp(view: Window): Promise<AppServices> {
     platform.hostCapabilities,
   ]);
   registerNoteEntities(feed, capabilities);
+  // Local history opens its database on first use, not here: composing it costs nothing.
+  const history = composeHistory();
+  registerHistoryEntities(history.repository);
+  // Recordings open their files and index on first use too (wc10).
+  const recordings = composeRecordings(history);
+  registerRecordingEntities(recordings.library);
   return {
     theme,
     notes: { createNote: (title) => feed.create(title), draftStore: createNoteDraftStore() },
     // The hosted build has no sign-in: km-auth is never read, so it changes nothing visible.
     session: HOSTED_BUILD ? createSignedOutSession() : createLocalStorageSession(view),
     layout,
-    meeting: composeMeeting(),
+    meeting: composeMeeting(history, recordings),
+    history,
+    recordings,
   };
 }

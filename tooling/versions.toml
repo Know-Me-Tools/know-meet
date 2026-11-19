@@ -44,6 +44,11 @@ vite = "8.1.5"
 react = "19.2.7"
 zustand = "5.0.14"
 prometheus_entity_management = "4.2.0" # React/core compatibility alias and maintained entity packages in generated shells
+entity_graph = "5.0.1"          # @prometheus-ags/entity-graph-core and -react, both exact. npm latest = 5.0.1 (checked 2026-11-18).
+                                # Peers loro-crdt, @ag-ui/core, @tauri-apps/plugin-sql are optional; react peer >=19 <20.
+livekit_track_processors = "0.8.3"  # @livekit/track-processors; peer livekit-client ^1.12.0 || ^2.1.0 (repo has 2.24.1)
+mediapipe_tasks_vision = "0.10.14"  # @mediapipe/tasks-vision. FORCED: track-processors 0.8.3 depends on exactly 0.10.14;
+                                # npm latest is 1.2.3, and a different direct pin would install two copies.
 openspec = "1.10.0"             # @fission-ai/openspec — never the squatted bare package.
                                 # Adopted 2026-08-22 (c300): the pin sat at 1.6.0 while the
                                 # installed CLI had moved to 1.10.0, so `openspec update` wrote
@@ -80,7 +85,7 @@ pglite_oxide = "0.5.1"          # desktop config-DB only (macOS arm64 / Win x64 
 
 [sync]
 # C-125 local-first pins (references/sync/decisions.md ADR-LFS-1..5).
-pglite = "0.5.4"                # web local store (@electric-sql/pglite)
+pglite = "0.5.16"               # web local store (@electric-sql/pglite); raised from 0.5.4, npm latest (2026-11-18)
 pglite_pgvector = "0.0.5"       # pgvector for web PGlite — NOT bundled in core wasm (verified C-123)
 pglite_sync = "0.4"             # Electric read-path FALLBACK only (ADR-LFS-1: FRF/PES is the lane)
 loro_crdt = "1.13"              # the CRDT, everywhere (ADR-LFS-5; loro-crdt npm / loro crate)

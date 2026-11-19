@@ -66,6 +66,16 @@ is in `docs/design/prototype/` (`screens.html` lists them).
 - **Telnyx:** SMS, and inbound phone dial-in over a SIP trunk (audio-only, PIN).
 - **Recording storage:** S3-compatible (managed by KnowMe or the user's own bucket),
   then pinned to IPFS; the CID is stored with the transcript.
+- **Browser-local recording (free version, operator 2026-11-18):** a participant can
+  also record in the browser without LiveKit Egress. The app composites every
+  participant's video and any screen share and mixes all audio; the file stays in
+  that browser's local storage and is never uploaded. Consent before capture still
+  applies: anyone may ask to record, the room is asked, and everyone sees that
+  recording is on.
+- **Local history (operator 2026-11-18, decision D5):** each browser keeps a history
+  of the meetings it joined and the chat messages it received, other people's
+  messages included, in local storage only. It is never uploaded or synced, is not
+  offered to late joiners (D3), and the history screen says so and offers delete.
 - **Calendars:** Google Calendar, Microsoft 365 / Outlook, iCloud / CalDAV.
 - **Shared meeting knowledge:** uploaded files and every transcript segment feed one
   knowledge base all agents in the room can read, including the Concierge.
@@ -73,10 +83,13 @@ is in `docs/design/prototype/` (`screens.html` lists them).
 - **The Concierge:** the system agent, present in every room including guest rooms;
   the only agent guests get.
 - **Guest vs signed in:** guests get start/join, the Concierge, phone dial-in for
-  invitees and a live transcript deleted when the meeting ends. Registered agents,
-  dots, the private panel, uploads, recording, delivery at close, the recordings
-  library, scheduling, calendars and settings require sign-in. Invitees never need
-  an account.
+  invitees and a live transcript deleted when the meeting ends. Guests and invitees
+  also get the on-device features (decision D1, operator 2026-11-18): local history,
+  browser-local recording after the room consents, and the on-device recordings
+  library, all kept only in that browser. Registered agents, dots, the private
+  panel, uploads, server-side recording (Room Composite to storage and IPFS),
+  delivery at close, the cloud recordings library, scheduling, calendars and
+  settings require sign-in. Invitees never need an account.
 - **Security:** LiveKit and Telnyx secrets stay server-side; clients only receive
   minted tokens.
 - **Terminology:** dot, Concierge, registered agent, private agent panel, shared

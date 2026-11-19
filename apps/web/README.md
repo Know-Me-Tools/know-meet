@@ -50,6 +50,15 @@ same inputs, so the header is the meta policy plus `frame-ancestors 'none'` (a d
 browsers ignore in a `<meta>` tag). The file sits next to `dist-hosted/`, not inside it,
 so the web server does not serve it. A failed build removes any older copy first.
 
+The hosted policy adds `script-src 'wasm-unsafe-eval'`, `worker-src 'self' blob:`,
+`media-src blob:` and `img-src blob:` for in-browser media features; `connect-src` is not
+widened, so every WASM, worker and model file must be served from `'self'`. These sources
+exist only when the build is hosted. The default build and the Tauri host
+(`apps/desktop/src-tauri/tauri.conf.json`) keep the base policy byte for byte. The one
+`blob:` worker is the frame ticker in `@livekit/track-processors`, which falls back to a
+window timer if the worker is blocked; narrowing `worker-src` to `'self'` is a one-line
+change to `HOSTED_WORKER_SOURCES` once wc07 serves a static ticker worker.
+
 The release suite reads it through `KM_RELEASE_CSP_FILE`:
 
 ```bash

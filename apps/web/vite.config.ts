@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 import { buildDefines, outDirOverride, resolveBuildInputs } from "./scripts/build-mode.ts";
 import { buildContentSecurityPolicy } from "./scripts/content-security-policy.ts";
 import { cspMetaPlugin } from "./scripts/csp-meta-plugin.ts";
+import { mediapipeAssetsPlugin } from "./scripts/mediapipe-assets-plugin.ts";
 
 const SOURCE_ROOT = fileURLToPath(new URL("./src/", import.meta.url));
 
@@ -21,9 +22,14 @@ const contentSecurityPolicy = buildContentSecurityPolicy({
 });
 
 export default defineConfig({
-  plugins: [tailwindcss(), cspMetaPlugin(contentSecurityPolicy)],
+  plugins: [tailwindcss(), cspMetaPlugin(contentSecurityPolicy), mediapipeAssetsPlugin()],
   define: buildDefines(buildInputs),
   build: outDirOverride(buildInputs),
+  // wc09: the local-history worker (PGlite) is an ES module worker with its own chunks;
+  // the default iife format cannot code-split. PGlite loads its WASM through ?url
+  // imports, so it must not be pre-bundled by the dev optimizer.
+  worker: { format: "es" },
+  optimizeDeps: { exclude: ["@electric-sql/pglite"] },
   resolve: {
     alias: [{ find: /^@\//, replacement: SOURCE_ROOT }],
   },

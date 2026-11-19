@@ -4,14 +4,20 @@ import { createContext, use } from "react";
 import type { SessionSource } from "../infrastructure/session/local-session";
 import type { NotesServices } from "../presentation/notes/notes-services";
 import type { WidthClassStore } from "./frame/width-class-store";
+import type { HistoryServices } from "./history/history-services";
+import type { RecordingsServices } from "./recordings/recordings-services";
+import type { RoomRecording } from "./recordings/room-recording";
 
 /**
  * Meetings: `useCases` starts, joins, leaves and mutes; `room` is read through `getSnapshot`
  * and `subscribe` (`useSyncExternalStore`) and bound to media elements with `attachMedia`.
+ * `recording` is the consent session of the joined room (WC-8, WC-9); screens read it
+ * through `useRoomRecording` in `./recordings/hooks`.
  */
 export interface MeetingServices {
   readonly useCases: MeetingUseCases;
   readonly room: RealtimeRoom;
+  readonly recording: RoomRecording;
 }
 
 /** Everything the composition root wires: use cases and stores, never raw adapters. */
@@ -23,6 +29,10 @@ export interface AppServices {
   /** Current adaptive width class (bar / rail / inline) and its morph. */
   readonly layout: WidthClassStore;
   readonly meeting: MeetingServices;
+  /** This device's meeting history; screens read it through the hooks in `./history/hooks`. */
+  readonly history: HistoryServices;
+  /** The recordings kept on this device; screens use the hooks in `./recordings/hooks`. */
+  readonly recordings: RecordingsServices;
 }
 
 export const AppServicesContext = createContext<AppServices | null>(null);

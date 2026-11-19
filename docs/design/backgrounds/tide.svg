@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="t">
+  <title id="t">Know Meet background: Tide</title>
+  <!-- Brand tokens only (dark theme values): bg #0B0F14, bg-2 #111620, surface #181F2B,
+       cyan #00C2DC, speak-agent #0891B2.
+       Filled shapes only: no strokes, no text, no photography. -->
+  <defs>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0F14"/>
+      <stop offset="0.6" stop-color="#111620"/>
+      <stop offset="1" stop-color="#181F2B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="1020" cy="800" r="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00C2DC" stop-opacity="0.42"/>
+      <stop offset="0.45" stop-color="#0891B2" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0891B2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#deep)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <!-- Three tide bands, back to front; each a filled path, never a line. -->
+  <path d="M0 470 C 220 420 420 520 660 480 S 1080 400 1280 440 L 1280 720 L 0 720 Z" fill="#0891B2" fill-opacity="0.10"/>
+  <path d="M0 545 C 260 500 470 590 720 555 S 1100 490 1280 520 L 1280 720 L 0 720 Z" fill="#00C2DC" fill-opacity="0.12"/>
+  <path d="M0 625 C 240 590 500 665 760 635 S 1120 580 1280 610 L 1280 720 L 0 720 Z" fill="#0B0F14" fill-opacity="0.55"/>
+</svg>

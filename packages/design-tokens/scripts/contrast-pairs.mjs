@@ -239,6 +239,14 @@ export const PAIRS = [
       `Focus fill of a text link inside a ${c} note on a panel (surface)`,
     ),
   ),
+  // batch2-approval-web-conferencing-features (2026-11-18, tokens v1.6.0): the level meter
+  // value is a graphic against its muted track (was green, 2.28:1 in light).
+  ui(
+    "meter-fill-on-muted",
+    "meter-fill",
+    ["muted"],
+    "Microphone level meter fill against its track (lobby and room settings)",
+  ),
   ui(
     "switch-thumb-vs-track-off",
     "switch-thumb",

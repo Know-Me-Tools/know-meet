@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@prometheus-ags/entity-graph-core@5.0.1'

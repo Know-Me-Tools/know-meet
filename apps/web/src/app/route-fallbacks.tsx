@@ -18,7 +18,9 @@ export function RouteNotFound() {
         <h1 id="not-found-heading">
           {HOSTED_BUILD ? "This page isn’t available" : "Page not found"}
         </h1>
-        {HOSTED_BUILD ? <p>This site has the home page and meetings only.</p> : null}
+        {HOSTED_BUILD ? (
+          <p>This site has the home page, meetings, history and recordings only.</p>
+        ) : null}
         <Link to="/">{HOSTED_BUILD ? "Home" : "Go to the home page"}</Link>
       </section>
     </main>

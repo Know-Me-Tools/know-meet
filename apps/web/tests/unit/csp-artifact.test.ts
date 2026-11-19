@@ -84,6 +84,20 @@ test("an empty or multi-line value is refused and nothing is written", () => {
   });
 });
 
+test("the artifact carries the adopted web sources and the meta policy carries them too", () => {
+  const header = hostedContentSecurityPolicyHeader(resolveBuildInputs(HOSTED_ENV));
+  const has = (directive: string, source: string): boolean =>
+    (header.split("; ").find((d) => d.startsWith(`${directive} `)) ?? "")
+      .split(" ")
+      .includes(source);
+  assert.ok(has("script-src", "'wasm-unsafe-eval'"));
+  assert.ok(has("worker-src", "'self'") && has("worker-src", "blob:"));
+  assert.ok(has("media-src", "blob:") && has("img-src", "blob:"));
+  assert.equal(has("connect-src", "blob:"), false, "connect-src is not widened");
+  const meta = buildContentSecurityPolicy({ livekitUrl: "wss://lk.example", hosted: true });
+  assert.ok(meta.includes("worker-src 'self' blob:"));
+});
+
 test("hosted connect-src omits the Tauri IPC origins and the default build keeps them", () => {
   const connectOf = (policy: string): string[] =>
     (policy.split("; ").find((d) => d.startsWith("connect-src ")) ?? "").split(" ").slice(1);

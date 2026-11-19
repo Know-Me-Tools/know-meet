@@ -4,15 +4,20 @@
  * - Positive scenario: hosted project only (@hosted-only). TLS is checked with
  *   node:tls against the system trust store, so a staging or self-signed
  *   certificate fails.
+ * - Web CSP (WC-10 inputs, wc06-web-csp 6.3): the served policy lists the adopted
+ *   directives and keeps connect-src as the previous release served it
+ *   (cspDirectiveProblems; KM_RELEASE_PREVIOUS_CSP_FILE, BLOCKED if unset).
+ * - Desktop policy: packaged project only; tauri.conf.json is unchanged.
  * - Negative control: packaged project only (@packaged-only). The same header
  *   assertions against the bare static image must report the missing HSTS.
  */
 import { connect, type PeerCertificate } from "node:tls";
 import { expect, test } from "@playwright/test";
 import { API } from "./src/api-contract.ts";
+import { DESKTOP_CSP_GOLDEN } from "./src/csp-delta.ts";
 import { attachJson } from "./src/evidence.ts";
-import { HSTS, headerProblems } from "./src/header-checks.ts";
-import { expectedCsp, staticImageUrl } from "./src/release-env.ts";
+import { cspDirectiveProblems, HSTS, headerProblems } from "./src/header-checks.ts";
+import { desktopCsp, expectedCsp, previousCsp, staticImageUrl } from "./src/release-env.ts";
 
 const TLS_TIMEOUT_MS = 15_000;
 const LETS_ENCRYPT_PRODUCTION_ORG = "Let's Encrypt";
@@ -63,6 +68,7 @@ test.describe("WR-3 Valid TLS and security headers at the public URL", () => {
     async ({ request, baseURL }, testInfo) => {
       const site = new URL(baseURL ?? "");
       const csp = expectedCsp();
+      const previous = previousCsp();
 
       const tls = await observeTls(site.hostname);
       await attachJson(testInfo, "wr-3-certificate.json", tls);
@@ -91,10 +97,24 @@ test.describe("WR-3 Valid TLS and security headers at the public URL", () => {
         expect(response.status(), `GET ${path} status`).toBe(200);
         problems.push(
           ...headerProblems(headers, { csp, origin: site.origin }).map((p) => `${path} ${p}`),
+          ...cspDirectiveProblems(headers["content-security-policy"] ?? "", previous).map(
+            (p) => `${path} ${p}`,
+          ),
         );
       }
       await attachJson(testInfo, "wr-3-header-dump.json", dump);
       expect(problems, "security header problems").toEqual([]);
+    },
+  );
+
+  test(
+    "the desktop policy in tauri.conf.json is unchanged by the web policy",
+    { tag: ["@WR-3", "@value-critical", "@packaged-only"] },
+    async ({ baseURL }, testInfo) => {
+      const csp = desktopCsp();
+      await attachJson(testInfo, "wr-3-desktop-csp.json", { baseURL, csp });
+      expect(csp, "tauri.conf.json app.security.csp").toBe(DESKTOP_CSP_GOLDEN);
+      expect(csp, "the desktop policy is not the hosted policy").not.toBe(expectedCsp());
     },
   );
 

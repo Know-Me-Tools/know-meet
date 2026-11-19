@@ -1,9 +1,10 @@
 // TJ-ARCH-MOB-001 compliant
 // Join meeting (acceptance L6, L6e, L7): releases the preview so the meeting connection
 // can open the devices, then runs the join use case (name and code check, token request,
-// connect, device choices). Success opens the room; a code the service never issued shows
-// the not-found view and never connects (WR-1 negative control); other failures show the
-// lobby error card and bring the preview back. A join that finishes after the lobby has
+// connect with the microphone and camera picked in the lobby (WC-5), device on/off).
+// Success opens the room; a code the service never issued shows the not-found view and
+// never connects (WR-1 negative control); other failures show the lobby error card and
+// bring the preview back. A join that finishes after the lobby has
 // unmounted (Back or Home pressed while joining) does not navigate, and leaves if it connected.
 import type { JoinError } from "@know-meet/application";
 import { useNavigate } from "@tanstack/react-router";
@@ -36,7 +37,7 @@ export function useJoinMeeting(code: string, preview: DevicePreview): JoinMeetin
       mounted.current = false;
     };
   }, []);
-  const { wishes, release, resume } = preview;
+  const { wishes, choice, release, resume } = preview;
 
   const join = useCallback(
     (displayName: string) => {
@@ -49,6 +50,7 @@ export function useJoinMeeting(code: string, preview: DevicePreview): JoinMeetin
         displayName,
         microphoneEnabled: wishes.microphone,
         cameraEnabled: wishes.camera,
+        devices: choice,
       };
       void useCases.join(request).then((result) => {
         inFlight.current = false;
@@ -74,7 +76,7 @@ export function useJoinMeeting(code: string, preview: DevicePreview): JoinMeetin
         );
       });
     },
-    [code, wishes.microphone, wishes.camera, release, resume, useCases, navigate],
+    [code, wishes.microphone, wishes.camera, choice, release, resume, useCases, navigate],
   );
 
   return { outcome, join };

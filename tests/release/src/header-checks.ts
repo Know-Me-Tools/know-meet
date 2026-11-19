@@ -4,6 +4,8 @@
  * Each problem string starts with the header it concerns.
  */
 
+import { parseCsp } from "./csp-delta.ts";
+
 export type HeaderMap = Readonly<Record<string, string>>;
 
 export interface HeaderExpectations {
@@ -90,5 +92,44 @@ export function headerProblems(headers: HeaderMap, expected: HeaderExpectations)
   if (frame !== null) problems.push(frame);
   if ((headers["referrer-policy"] ?? "").trim() === "") problems.push("referrer-policy: missing");
   problems.push(...permissionProblems(headers["permissions-policy"], expected.origin));
+  return problems;
+}
+
+/**
+ * WC-10 directives the hosted policy must carry in its served form (WR-3 task
+ * wc06-web-csp/6.3). Each entry is a directive and the sources it must list.
+ */
+export const REQUIRED_WEB_SOURCES: Readonly<Record<string, readonly string[]>> = {
+  "script-src": ["'wasm-unsafe-eval'"],
+  "worker-src": ["'self'", "blob:"],
+  "media-src": ["blob:"],
+  "img-src": ["blob:"],
+};
+
+function sameSources(a: readonly string[], b: readonly string[]): boolean {
+  return a.length === b.length && [...a].sort().join(" ") === [...b].sort().join(" ");
+}
+
+/**
+ * The served Content-Security-Policy carries the adopted web directives, keeps
+ * connect-src exactly as the previous release served it, and adds no
+ * 'unsafe-eval'. Each problem names the directive.
+ */
+export function cspDirectiveProblems(served: string, previous: string): string[] {
+  const now = parseCsp(served);
+  const before = parseCsp(previous);
+  const problems: string[] = [];
+  for (const [directive, required] of Object.entries(REQUIRED_WEB_SOURCES)) {
+    const sources = now.get(directive) ?? [];
+    for (const source of required) {
+      if (!sources.includes(source)) problems.push(`csp ${directive}: missing ${source}`);
+    }
+  }
+  if (!sameSources(now.get("connect-src") ?? [], before.get("connect-src") ?? [])) {
+    problems.push("csp connect-src: differs from the previous release");
+  }
+  for (const [directive, sources] of now) {
+    if (sources.includes("'unsafe-eval'")) problems.push(`csp ${directive}: adds 'unsafe-eval'`);
+  }
   return problems;
 }
