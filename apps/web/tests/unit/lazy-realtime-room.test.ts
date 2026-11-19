@@ -59,12 +59,20 @@ test("the first connect loads once, adopts listeners and bindings, then delegate
   lazy.subscribe(() => {
     notified += 1;
   });
+  // The application fake publishes on its own (connecting, then connected, per connect).
+  // Count those directly so the assertion isolates what the lazy room adds.
+  let published = 0;
+  fake.fake.subscribe(() => {
+    published += 1;
+  });
   const element = {} as HTMLMediaElement;
   lazy.attachMedia({ identity: toParticipantIdentity("p1"), kind: "camera" }, element);
   const [first, second] = await Promise.all([lazy.connect(CREDENTIALS), lazy.connect(CREDENTIALS)]);
   assert.equal(first.ok && second.ok, true);
   assert.equal(loads, 1);
-  assert.equal(notified, 1);
+  assert.ok(published > 0);
+  // One notification for the swap to the loaded room, then every room publication forwarded.
+  assert.equal(notified, 1 + published);
   assert.equal(fake.subscribers(), 1);
   assert.deepEqual(
     fake.fake.attachments().map((attachment) => attachment.target.identity),

@@ -46,6 +46,14 @@ Stop and remove: `docker compose -f tooling/release/compose.yaml down`.
 If `LIVEKIT_URL` is unset, compose stops before building and names it. If a `LIVEKIT_*`
 variable is unset, the token service exits and logs the variable name, not a value.
 
+## Host ports
+
+The proxy and the bare web image publish on `127.0.0.1:8080` and `127.0.0.1:8081` by default.
+When those ports are taken, set `KM_PROXY_PORT` and `KM_STATIC_PORT` before `docker compose up`,
+and move the three values that name them together: `KM_SITE_ORIGIN=http://localhost:$KM_PROXY_PORT`,
+`KM_RELEASE_BASE_URL=http://localhost:$KM_PROXY_PORT` and
+`KM_RELEASE_STATIC_URL=http://127.0.0.1:$KM_STATIC_PORT`.
+
 ## Token service settings in this stack
 
 | Variable                       | Value here              | Why                                                                                                                |

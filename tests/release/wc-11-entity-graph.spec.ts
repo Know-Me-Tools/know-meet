@@ -15,7 +15,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import {
-  ENTITY_GRAPH_IMPORTERS,
+  ENTITY_GRAPH_LOCK_TARGETS,
   ENTITY_GRAPH_PACKAGES,
   lockfileProblems,
   versionsTomlProblems,
@@ -23,10 +23,10 @@ import {
 import { attachJson, attachScreenshot } from "./src/evidence.ts";
 import { defaultBuildUrl, repoRoot } from "./src/release-env.ts";
 
-/** A minimal pnpm lockfile with every importer pinned to `version`, for the control. */
+/** A minimal pnpm lockfile with the web importer pinned to `version`, for the control. */
 function syntheticLock(version: string): string {
   const lines = ["lockfileVersion: '9.0'", "", "importers:", ""];
-  for (const importer of ENTITY_GRAPH_IMPORTERS) {
+  for (const importer of ["apps/web"]) {
     lines.push(`  ${importer}:`, "    dependencies:");
     for (const name of ENTITY_GRAPH_PACKAGES) {
       lines.push(
@@ -50,9 +50,15 @@ test.describe("WC-11 Entity graph 5.0.1 from npm, and notes still work", () => {
     { tag: ["@WC-11", "@value-critical", "@smoke"] },
     async ({ baseURL }, testInfo) => {
       const root = repoRoot();
-      const lock = readFileSync(join(root, "pnpm-lock.yaml"), "utf8");
       const toml = readFileSync(join(root, "tooling/versions.toml"), "utf8");
-      const problems = [...lockfileProblems(lock), ...versionsTomlProblems(toml)];
+      const lockProblems = ENTITY_GRAPH_LOCK_TARGETS.flatMap((target) =>
+        lockfileProblems(
+          readFileSync(join(root, target.lockfile), "utf8"),
+          target.importer,
+          target.packages,
+        ).map((problem) => `${target.lockfile}: ${problem}`),
+      );
+      const problems = [...lockProblems, ...versionsTomlProblems(toml)];
       await attachJson(testInfo, "wc-11-pin-problems.json", { baseURL, problems });
       expect(problems, "entity graph pin problems").toEqual([]);
     },
@@ -69,6 +75,10 @@ test.describe("WC-11 Entity graph 5.0.1 from npm, and notes still work", () => {
       "toml 4.3.0 is flagged",
     ).toBeGreaterThan(0);
     expect(versionsTomlProblems('entity_graph = "5.0.1"'), "toml 5.0.1 passes").toEqual([]);
+    expect(
+      versionsTomlProblems('entity_graph = "5.0.1"\nprometheus_entity_management = "4.2.0"'),
+      "the separate entity-management pin is not an entity graph pin",
+    ).toEqual([]);
   });
 
   test(

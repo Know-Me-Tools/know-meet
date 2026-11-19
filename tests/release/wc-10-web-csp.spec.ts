@@ -67,7 +67,7 @@ async function discoverAssets(
 test.describe("WC-10 The hosted page serves the new web CSP and nothing else is widened", () => {
   test(
     "HTML, scripts, workers and wasm carry the generated CSP; it differs from the previous one only by the adopted sources",
-    { tag: ["@WC-10", "@value-critical", "@smoke"] },
+    { tag: ["@WC-10", "@value-critical", "@smoke", "@hosted-only"] },
     async ({ request, baseURL }, testInfo) => {
       const origin = new URL(baseURL ?? "").origin;
       const csp = expectedCsp();

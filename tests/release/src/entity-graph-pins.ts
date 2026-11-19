@@ -12,11 +12,33 @@ export const ENTITY_GRAPH_PACKAGES: readonly string[] = [
   "@prometheus-ags/entity-graph-react",
 ];
 
-/** The web app and both agentic-ui spikes. */
-export const ENTITY_GRAPH_IMPORTERS: readonly string[] = [
-  "apps/web",
-  "spikes/agentic-ui/own",
-  "spikes/agentic-ui/hybrid",
+/** One lockfile importer whose entity-graph pins WC-11 checks. */
+export interface EntityGraphLockTarget {
+  /** Lockfile path relative to the repo root. */
+  readonly lockfile: string;
+  /** Importer key inside that lockfile. */
+  readonly importer: string;
+  /** The entity-graph packages this importer depends on. */
+  readonly packages: readonly string[];
+}
+
+/**
+ * The web app (root workspace) and both agentic-ui spikes. The spikes are
+ * standalone, outside the root workspace, so each has its own lockfile with
+ * the importer "."; the hybrid spike depends on the core package only.
+ */
+export const ENTITY_GRAPH_LOCK_TARGETS: readonly EntityGraphLockTarget[] = [
+  { lockfile: "pnpm-lock.yaml", importer: "apps/web", packages: ENTITY_GRAPH_PACKAGES },
+  {
+    lockfile: "spikes/agentic-ui/own/pnpm-lock.yaml",
+    importer: ".",
+    packages: ENTITY_GRAPH_PACKAGES,
+  },
+  {
+    lockfile: "spikes/agentic-ui/hybrid/pnpm-lock.yaml",
+    importer: ".",
+    packages: ["@prometheus-ags/entity-graph-core"],
+  },
 ];
 
 interface ImporterPin {
@@ -82,28 +104,33 @@ function resolvedPackages(lock: string): ResolvedPackage[] {
   return out;
 }
 
-/** Problems with the lockfile; empty when every importer resolves 5.0.1 from npm with an integrity hash. */
-export function lockfileProblems(lock: string): string[] {
+/**
+ * Problems with one lockfile; empty when the importer resolves 5.0.1 from npm
+ * with an integrity hash for every package it depends on.
+ */
+export function lockfileProblems(
+  lock: string,
+  importer = "apps/web",
+  names: readonly string[] = ENTITY_GRAPH_PACKAGES,
+): string[] {
   const problems: string[] = [];
   const pins = importerPins(lock);
-  for (const importer of ENTITY_GRAPH_IMPORTERS) {
-    for (const name of ENTITY_GRAPH_PACKAGES) {
-      const pin = pins.find((p) => p.importer === importer && p.name === name);
-      if (pin === undefined) {
-        problems.push(`${importer}: ${name} is not an importer dependency`);
-        continue;
-      }
-      const resolved = pin.version.split("(")[0] ?? "";
-      if (pin.specifier !== EXPECTED_ENTITY_GRAPH_VERSION) {
-        problems.push(`${importer}: ${name} specifier ${pin.specifier}`);
-      }
-      if (resolved !== EXPECTED_ENTITY_GRAPH_VERSION) {
-        problems.push(`${importer}: ${name} resolves ${resolved}`);
-      }
+  for (const name of names) {
+    const pin = pins.find((p) => p.importer === importer && p.name === name);
+    if (pin === undefined) {
+      problems.push(`${importer}: ${name} is not an importer dependency`);
+      continue;
+    }
+    const resolved = pin.version.split("(")[0] ?? "";
+    if (pin.specifier !== EXPECTED_ENTITY_GRAPH_VERSION) {
+      problems.push(`${importer}: ${name} specifier ${pin.specifier}`);
+    }
+    if (resolved !== EXPECTED_ENTITY_GRAPH_VERSION) {
+      problems.push(`${importer}: ${name} resolves ${resolved}`);
     }
   }
   const packages = resolvedPackages(lock);
-  for (const name of ENTITY_GRAPH_PACKAGES) {
+  for (const name of names) {
     const versions = packages.filter((p) => p.name === name);
     if (versions.length === 0) problems.push(`${name}: no resolved package`);
     for (const resolved of versions) {
@@ -120,13 +147,15 @@ export function lockfileProblems(lock: string): string[] {
   return problems;
 }
 
-/** Problems with tooling/versions.toml: every entity-graph or entity-management pin must be 5.0.1. */
+/**
+ * Problems with tooling/versions.toml: every entity-graph pin must be 5.0.1.
+ * The separate prometheus_entity_management pin (generated shells) is not part
+ * of WC-11 and is not checked.
+ */
 export function versionsTomlProblems(toml: string): string[] {
   const lines = toml
     .split("\n")
-    .filter(
-      (line) => /entity[-_]?(graph|management)/i.test(line) && !line.trimStart().startsWith("#"),
-    );
+    .filter((line) => /^\s*entity[-_]?graph\b/i.test(line) && !line.trimStart().startsWith("#"));
   if (lines.length === 0) return ["tooling/versions.toml: no entity graph pin"];
   const problems: string[] = [];
   for (const line of lines) {
