@@ -59,15 +59,19 @@ test.describe("WC-7 History survives a reload and never leaves the device", () =
   test(
     "the meeting and both messages survive a reload; nothing carrying them is sent; delete removes it",
     { tag: ["@WC-7", "@value-critical", "@smoke", "@cross-engine"] },
-    async ({ browser, browserType, browserName, baseURL, launchOptions }, testInfo) => {
+    async ({ browser, playwright, browserName, baseURL, launchOptions }, testInfo) => {
       test.setTimeout(TEST_TIMEOUT_MS);
       const media = mediaFor(browser);
-      const context = await launchProfile(browserType, testInfo.outputPath("profile-a"), {
-        baseURL,
-        launchOptions,
-        browserName,
-        harPath: testInfo.outputPath("guest-a.har"),
-      });
+      const context = await launchProfile(
+        playwright[browserName],
+        testInfo.outputPath("profile-a"),
+        {
+          baseURL,
+          launchOptions,
+          browserName,
+          harPath: testInfo.outputPath("guest-a.har"),
+        },
+      );
       const a = await participantInContext(context, "Guest A");
       const b = await newParticipant(browser, "Guest B", testInfo);
       try {
@@ -148,13 +152,17 @@ test.describe("WC-7 History survives a reload and never leaves the device", () =
   test(
     "a fresh profile shows an empty history, and the leak detector flags a deliberate upload",
     { tag: ["@WC-7", "@negative-control", "@cross-engine"] },
-    async ({ browserType, browserName, baseURL, launchOptions }, testInfo) => {
+    async ({ playwright, browserName, baseURL, launchOptions }, testInfo) => {
       test.setTimeout(TEST_TIMEOUT_MS);
-      const context = await launchProfile(browserType, testInfo.outputPath("profile-fresh"), {
-        baseURL,
-        launchOptions,
-        browserName,
-      });
+      const context = await launchProfile(
+        playwright[browserName],
+        testInfo.outputPath("profile-fresh"),
+        {
+          baseURL,
+          launchOptions,
+          browserName,
+        },
+      );
       const fresh = await participantInContext(context, "Guest Fresh");
       try {
         await fresh.page.goto("/");
