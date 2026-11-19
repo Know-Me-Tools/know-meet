@@ -9,6 +9,7 @@ import {
   type BrowserContext,
   type BrowserContextOptions,
   expect,
+  type Locator,
   type Page,
   type Response,
   type TestInfo,
@@ -60,9 +61,17 @@ export async function newParticipant(
 ): Promise<Participant> {
   const harOptions =
     options.har === true
-      ? { recordHar: { path: testInfo.outputPath(`${slug(name)}.har`), content: "omit" as const } }
+      ? {
+          recordHar: {
+            path: testInfo.outputPath(`${slug(name)}.har`),
+            content: "omit" as const,
+          },
+        }
       : {};
-  const context = await browser.newContext({ ...options.contextOptions, ...harOptions });
+  const context = await browser.newContext({
+    ...options.contextOptions,
+    ...harOptions,
+  });
   await installTaps(context);
   const page = await context.newPage();
   const net = await recordNetwork(context, page);
@@ -124,7 +133,7 @@ export async function openLobbyForNewMeeting(page: Page): Promise<LobbyHandle> {
 export async function openLobbyForCode(page: Page, code: string): Promise<void> {
   await page.goto("/");
   await expect(page.getByTestId(SCREEN.home)).toBeVisible();
-  await page.getByTestId(HOME.joinCode).fill(code);
+  await setValueWithoutActivation(page.getByTestId(HOME.joinCode), code);
   await page.getByTestId(HOME.join).click();
   await expect(page.getByTestId(SCREEN.join)).toBeVisible();
 }
@@ -161,7 +170,22 @@ export async function joinRoom(
 }
 
 /**
- * Joins with synthetic clicks only (HTMLElement.click is not a user activation),
+ * Sets an input's value through the native setter and a bubbling input event, so
+ * React sees the change. Playwright's fill() types through trusted input events,
+ * which grant user activation and would unlock audio before WC-12 checks for it.
+ */
+async function setValueWithoutActivation(input: Locator, value: string): Promise<void> {
+  await input.evaluate((element, next) => {
+    const field = element as HTMLInputElement;
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set;
+    if (setter === undefined) throw new Error("HTMLInputElement value setter is unavailable");
+    setter.call(field, next);
+    field.dispatchEvent(new Event("input", { bubbles: true }));
+  }, value);
+}
+
+/**
+ * Joins with synthetic clicks and synthetic input only (HTMLElement.click is not a user activation),
  * so the page has no sticky user activation. WC-12 needs this: a trusted click
  * on "Join meeting" would itself unlock audio playback.
  */
@@ -175,7 +199,7 @@ export async function joinRoomWithoutUserActivation(
   await page.getByTestId(HOME.joinCode).fill(code);
   await page.getByTestId(HOME.join).evaluate((element) => (element as HTMLElement).click());
   await expect(page.getByTestId(SCREEN.join)).toBeVisible();
-  await page.getByTestId(LOBBY.displayName).fill(participant.name);
+  await setValueWithoutActivation(page.getByTestId(LOBBY.displayName), participant.name);
   const token = waitForPost(page, API.token);
   await page.getByTestId(LOBBY.join).evaluate((element) => (element as HTMLElement).click());
   expect((await token).status(), "POST /api/token status").toBe(STATUS.ok);
