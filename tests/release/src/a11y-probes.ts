@@ -37,10 +37,26 @@ export interface FillMeasure {
   readonly fill: string;
   readonly surface: string;
   readonly ratio: number;
+  /** Set when the control is exempt from the boundary rule; such a measure never fails. */
+  readonly exempt?: "text-identified";
+}
+
+export interface FillOptions {
+  /**
+   * DESIGN.md "Text-identified components" (owner decision D-6): a button or link whose
+   * visible text identifies it needs no boundary (W3C Understanding 1.4.11), so it is
+   * measured and recorded but not failed. Inputs, selects, switches and controls whose
+   * label is visually hidden still need a 3:1 fill. Off by default (WR-8 keeps its rule).
+   */
+  readonly exemptTextIdentified?: boolean;
 }
 
 /** Measures every visible control that paints a fill of its own. Runs in the page. */
-function measureFillsInPage(selector: string): FillMeasure[] {
+function measureFillsInPage(args: {
+  selector: string;
+  exemptTextIdentified: boolean;
+}): FillMeasure[] {
+  const { selector, exemptTextIdentified } = args;
   const canvas = document.createElement("canvas");
   canvas.width = 1;
   canvas.height = 1;
@@ -83,6 +99,19 @@ function measureFillsInPage(selector: string): FillMeasure[] {
     const [hi, lo] = [luminance(x), luminance(y)].sort((p, q) => q - p) as [number, number];
     return (hi + 0.05) / (lo + 0.05);
   };
+  // True when the control shows text on screen (a visually hidden label does not count).
+  const showsText = (element: Element): boolean => {
+    if (!element.matches('button, a[href], [role="button"], [role="link"]')) return false;
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node !== null; node = walker.nextNode()) {
+      if ((node.textContent ?? "").trim() === "") continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const box = range.getBoundingClientRect();
+      if (box.width > 2 && box.height > 2) return true;
+    }
+    return false;
+  };
   const css = (c: Rgba): string => `rgba(${c.map((v) => Math.round(v * 100) / 100).join(",")})`;
   const out: FillMeasure[] = [];
   for (const element of Array.from(document.querySelectorAll(selector))) {
@@ -101,18 +130,22 @@ function measureFillsInPage(selector: string): FillMeasure[] {
       fill: css(fill),
       surface: css(surface),
       ratio: ratio(fill, surface),
+      ...(exemptTextIdentified && showsText(element) ? { exempt: "text-identified" as const } : {}),
     });
   }
   return out;
 }
 
-export async function fillMeasures(page: Page): Promise<FillMeasure[]> {
-  return page.evaluate(measureFillsInPage, CONTROL_SELECTOR);
+export async function fillMeasures(page: Page, options: FillOptions = {}): Promise<FillMeasure[]> {
+  return page.evaluate(measureFillsInPage, {
+    selector: CONTROL_SELECTOR,
+    exemptTextIdentified: options.exemptTextIdentified ?? false,
+  });
 }
 
 export function fillProblems(measures: readonly FillMeasure[]): string[] {
   return measures
-    .filter((m) => m.ratio < MIN_NON_TEXT_CONTRAST)
+    .filter((m) => m.exempt === undefined && m.ratio < MIN_NON_TEXT_CONTRAST)
     .map((m) => `fill-contrast ${m.control}: ${m.ratio.toFixed(2)}:1 (${m.fill} on ${m.surface})`);
 }
 
@@ -220,7 +253,9 @@ function readFocusStopInPage(): FocusStop | null {
 
 /** Disables CSS transitions so fill reads are final values. Measurement aid only. */
 export async function freezeTransitions(page: Page): Promise<void> {
-  await page.addStyleTag({ content: "*,*::before,*::after{transition:none!important}" });
+  await page.addStyleTag({
+    content: "*,*::before,*::after{transition:none!important}",
+  });
 }
 
 export async function readFocusStop(page: Page): Promise<FocusStop | null> {

@@ -79,17 +79,6 @@ export function lengthLabel(ms: number | null): string {
   return `${Math.round(ms / MINUTE_MS)} min`;
 }
 
-/** "21 minutes", "45 seconds", "unknown length", for accessible names. */
-export function spokenLength(ms: number | null): string {
-  if (ms === null) return "unknown length";
-  if (ms < MINUTE_MS) {
-    const s = Math.max(1, Math.round(ms / SECOND_MS));
-    return `${s} ${s === 1 ? "second" : "seconds"}`;
-  }
-  const m = Math.round(ms / MINUTE_MS);
-  return `${m} ${m === 1 ? "minute" : "minutes"}`;
-}
-
 /** "MP4" or "WebM" (the container), from the MIME type the recorder wrote. */
 export function formatName(mimeType: string): string {
   const subtype = mimeType.split(";")[0]?.split("/")[1]?.trim().toLowerCase() ?? "";
@@ -116,26 +105,6 @@ export function detailFacts(facts: RecordingFacts): string {
     formatBytes(facts.sizeBytes),
     formatName(facts.mimeType),
   ].join(" · ");
-}
-
-const CONDITION_WORDS: Readonly<Record<RecordingCondition, string>> = {
-  recording: "recording now",
-  complete: "",
-  "stopped-early": "stopped early",
-  incomplete: "incomplete",
-  missing: "file missing",
-};
-
-/** RL-2: "Meeting 4KQ-9ZD, 18 Nov 14:30, 21 minutes" plus any condition. */
-export function itemName(facts: RecordingFacts): string {
-  const d = new Date(facts.startedAt);
-  const parts = [
-    recordingTitle(facts),
-    `${d.getDate()} ${MONTHS[d.getMonth()]} ${clockTime(facts.startedAt)}`,
-    spokenLength(recordedMs(facts)),
-  ];
-  const condition = CONDITION_WORDS[facts.state];
-  return (condition === "" ? parts : [...parts, condition]).join(", ");
 }
 
 /** `know-meet-4KQ-9ZD-2026-11-18-1430.webm`. */

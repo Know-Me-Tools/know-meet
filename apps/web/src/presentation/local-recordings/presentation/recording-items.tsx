@@ -4,7 +4,9 @@
 // content, plus Download as a trailing 44px icon link), and the not-focusable card of a
 // recording still being written in another tab. Linked cards drop their inner fills
 // while focused (DESIGN.md interactive card). Scenario contract: `km-recording-item` on
-// each link, with `data-duration-ms` (when known) and `data-size-bytes`.
+// each link, with `data-duration-ms` (when known) and `data-size-bytes`. A link is named
+// by its visible content (title, facts, chips), so every visible word is in the name
+// (SC 2.5.3 Label in Name; WC-13, 2026-11-20).
 import { buttonVariants } from "@know-meet/ui/components/button";
 import { cardVariants } from "@know-meet/ui/components/card";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
@@ -15,7 +17,6 @@ import { type Recordings, useRecordingPlayback } from "../../../app/recordings/h
 import {
   clockTime,
   downloadFilename,
-  itemName,
   metaLine,
   recordedMs,
   recordingTitle,
@@ -59,7 +60,6 @@ export function RecordingCard({ row }: { readonly row: LibraryRow }) {
       <Link
         to="/recordings"
         hash={recordingDetailHash(row.id)}
-        aria-label={itemName(row)}
         data-testid="km-recording-item"
         data-recording-id={row.id}
         data-size-bytes={row.sizeBytes}
@@ -86,7 +86,6 @@ export function RecordingRow({ row }: { readonly row: LibraryRow }) {
       <Link
         to="/recordings"
         hash={recordingDetailHash(row.id)}
-        aria-label={itemName(row)}
         data-testid="km-recording-item"
         data-recording-id={row.id}
         data-size-bytes={row.sizeBytes}

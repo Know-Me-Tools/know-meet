@@ -17,7 +17,8 @@ export const RECORD_COPY = {
   controlCancel: "Cancel",
   controlCancelName: "Cancel recording request",
   controlStop: "Stop rec",
-  controlStopName: "Stop recording",
+  // Same as the visible label (prototype copy), so voice control users can say it (SC 2.5.3).
+  controlStopName: "Stop rec",
   unsupported:
     "This browser can't record meetings. Recording works in current Chrome, Edge, Firefox and Safari on a computer.",
   busyPrompted: "Answer the open recording question first.",

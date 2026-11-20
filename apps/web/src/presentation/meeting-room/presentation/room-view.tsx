@@ -91,7 +91,10 @@ export function RoomView({ services, snapshot, code, blockedAtJoin, themeControl
             rec.recording.indicatorOn ? <RecordingIndicator recorder={recorderName(rec)} /> : null
           }
         />
-        <div className="grid gap-s2 empty:hidden px-s5 pb-s2 max-bp768:px-s4">
+        {/* The notices row stays in the grid when empty (no padding, zero height). Hiding
+            it would move the body into the `auto` row and the controls into the `1fr`
+            row: the sheet shrinks to the tiles and the bar floats (WC-13, 2026-11-20). */}
+        <div className="grid gap-s2 px-s5 pb-s2 empty:pb-0 max-bp768:px-s4">
           {media.problem === null ? null : (
             <ErrorCard
               copy={media.problem.copy}
@@ -104,7 +107,7 @@ export function RoomView({ services, snapshot, code, blockedAtJoin, themeControl
           ) : null}
           <RecordingNotice recording={rec.recording} nameOf={rec.nameOf} />
         </div>
-        <div className="relative grid min-h-0 grid-cols-[minmax(0,1fr)]">
+        <div className="relative grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)]">
           <RoomStage
             room={room}
             code={code}

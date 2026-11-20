@@ -4,6 +4,7 @@
 // cause, then the fix. Domain and application carry codes only.
 import type { ChatSendError } from "@know-meet/application";
 import { MAX_CHAT_TEXT_LENGTH } from "@know-meet/domain";
+import { badgeText } from "../room-control";
 
 export const CHAT_COPY = {
   title: "Meeting chat",
@@ -33,9 +34,12 @@ export function recipientLeft(name: string): string {
   return `${name} left the meeting, so nothing was sent. Choose Everyone or someone still here.`;
 }
 
-/** The chat control's accessible name, with the unread count when there is one. */
+/**
+ * The chat control's accessible name, with the unread count as the badge draws it, so
+ * the visible label and count are both in the name (SC 2.5.3 Label in Name).
+ */
 export function chatControlName(unread: number): string {
-  return unread === 0 ? "Chat" : `Chat, ${unread} unread`;
+  return unread === 0 ? "Chat" : `Chat, ${badgeText(unread)} unread`;
 }
 
 export function receivedAnnouncement(fromName: string, isPrivate: boolean): string {

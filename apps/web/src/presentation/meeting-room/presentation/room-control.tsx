@@ -37,18 +37,26 @@ export interface CtlProps extends Omit<React.ComponentProps<"button">, "children
 
 const BADGE_MAX = 9;
 
+/** The badge as drawn ("9+" past nine); accessible names repeat it so the label is in the name. */
+export function badgeText(count: number): string {
+  return count > BADGE_MAX ? `${BADGE_MAX}+` : String(count);
+}
+
 export function Ctl({ icon, label, tone, badge, className, ...props }: CtlProps) {
   return (
     <button type="button" data-tone={tone} className={cn(ctlClass, className)} {...props}>
       <KmIcon name={icon} />
       <span className={ctlLabelClass}>{label}</span>
       {badge === undefined || badge === 0 ? null : (
-        <span
-          aria-hidden="true"
-          className="absolute top-1 right-1.5 min-w-[18px] rounded-pill bg-ember-btn px-1.5 text-center text-11 leading-[18px] font-bold text-on-ember"
-        >
-          {badge > BADGE_MAX ? `${BADGE_MAX}+` : badge}
-        </span>
+        <>
+          {/* Keeps the label and the count separate words in the visible text (SC 2.5.3). */}{" "}
+          <span
+            aria-hidden="true"
+            className="absolute top-1 right-1.5 min-w-[18px] rounded-pill bg-ember-btn px-1.5 text-center text-11 leading-[18px] font-bold text-on-ember"
+          >
+            {badgeText(badge)}
+          </span>
+        </>
       )}
     </button>
   );
