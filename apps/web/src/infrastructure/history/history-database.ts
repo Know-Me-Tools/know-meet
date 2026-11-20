@@ -18,6 +18,8 @@ export interface HistoryDatabase extends SqlRunner {
 interface PgliteLike {
   query<T>(sql: string, params?: unknown[]): Promise<{ rows: T[] }>;
   transaction<T>(work: (tx: PgliteLikeTransaction) => Promise<T>): Promise<T>;
+  /** Writes committed data to the IndexedDB data directory now. */
+  syncToFs(): Promise<void>;
 }
 
 interface PgliteLikeTransaction {
@@ -30,10 +32,21 @@ function runner(source: PgliteLikeTransaction): SqlRunner {
   };
 }
 
-/** Wraps a PGlite or PGliteWorker instance as a `HistoryDatabase`. */
+/**
+ * Wraps a PGlite or PGliteWorker instance as a `HistoryDatabase`.
+ *
+ * PGlite 0.5.16 flushes to IndexedDB after BEGIN but not after COMMIT, so a committed
+ * transaction stays in memory until the next statement, and a reload loses it (WC-7,
+ * evidence/wc7-investigation-2026-11-20). Each transaction is therefore flushed before it
+ * resolves.
+ */
 export function adaptPglite(db: PgliteLike): HistoryDatabase {
   return {
     ...runner(db),
-    transaction: (work) => db.transaction((tx) => work(runner(tx))),
+    transaction: async (work) => {
+      const result = await db.transaction((tx) => work(runner(tx)));
+      await db.syncToFs();
+      return result;
+    },
   };
 }

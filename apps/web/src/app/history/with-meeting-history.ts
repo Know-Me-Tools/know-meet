@@ -66,8 +66,11 @@ export function withMeetingHistory(
       return result;
     },
     leave: async () => {
+      // End history when Leave is pressed, not after the room has disconnected: the end
+      // time must reach storage before the person can reload or close the tab (WC-7).
+      const ending = endHistorySession();
       await inner.leave();
-      await endHistorySession();
+      await ending;
     },
   };
 }

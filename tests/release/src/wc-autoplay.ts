@@ -5,8 +5,9 @@
  * call is sent with `userGesture: true` (playwright-core `Runtime.callFunctionOn`), so a
  * driven page always counts as user-activated and audio is never blocked. This script
  * reproduces what the policy does at the API the app and the SDK actually see: an unmuted
- * `HTMLMediaElement.play()` is refused with `NotAllowedError` until the page receives a
- * trusted pointer event (a real click). The app's prompt, its click handler and the SDK's
+ * `HTMLMediaElement.play()` is refused with `NotAllowedError`, and unmuted playback started
+ * by an `autoplay` attribute is paused, until the page receives a trusted pointer event
+ * (a real click). The app's prompt, its click handler and the SDK's
  * `startAudio` all run unchanged.
  */
 import type { BrowserContext, Page } from "@playwright/test";
@@ -25,6 +26,11 @@ const BLOCK_SCRIPT = `(() => {
     }
     return play.call(this);
   };
+  // An autoplay attribute starts playback without calling play(); the real policy blocks that too.
+  document.addEventListener("play", (event) => {
+    const el = event.target;
+    if (!window.${UNLOCKED_FLAG} && el instanceof HTMLMediaElement && !el.muted) el.pause();
+  }, true);
 })();`;
 
 export async function emulateAutoplayBlock(context: BrowserContext): Promise<void> {
