@@ -56,6 +56,9 @@ export function withMeetingHistory(
           history: dependencies.history,
           newHistoryId: newMeetingHistoryId,
           now: Date.now,
+          onStopped: (reason, detail) =>
+            // biome-ignore lint/suspicious/noConsole: WC-7 diagnostic, the only record of why history stopped
+            console.error("[know-meet] meeting history stopped", reason, detail),
           ...(dependencies.recording === undefined ? {} : { recording: dependencies.recording }),
         },
         { code: result.value.code },

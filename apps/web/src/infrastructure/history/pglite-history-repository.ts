@@ -118,8 +118,11 @@ export function createPgliteHistoryRepository(
       const value = await work(db);
       signal?.throwIfAborted();
       return ok(value);
-    } catch {
+    } catch (error) {
       if (signal?.aborted === true) throw signal.reason;
+      // WC-7: the result carries only the code, so the cause is logged here or nowhere.
+      // biome-ignore lint/suspicious/noConsole: WC-7 diagnostic, the only record of why history stopped
+      console.error("[know-meet] history storage failed", error);
       return err(historyErrors.storageFailed());
     }
   };
@@ -171,10 +174,16 @@ export function createPgliteHistoryRepository(
             "SELECT * FROM chat_message WHERE meeting_id = $1 ORDER BY sent_at, id",
             [id],
           );
-          return {
-            meeting,
-            chat: chat.rows.map(toHistoryChatMessageRow).filter((m) => m !== null),
-          };
+          const parsed = chat.rows.map(toHistoryChatMessageRow).filter((m) => m !== null);
+          if (parsed.length !== chat.rows.length) {
+            // WC-7: an unreadable stored row would otherwise vanish from the detail silently.
+            // biome-ignore lint/suspicious/noConsole: WC-7 diagnostic, the only record of why history stopped
+            console.error(
+              "[know-meet] history chat rows unreadable",
+              chat.rows.length - parsed.length,
+            );
+          }
+          return { meeting, chat: parsed };
         }),
     );
 

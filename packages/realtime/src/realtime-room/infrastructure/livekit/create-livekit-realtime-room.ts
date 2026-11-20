@@ -90,7 +90,7 @@ export function createLiveKitRealtimeRoom(options: LiveKitRealtimeRoomOptions = 
   return {
     connect: lifecycle.connect,
     disconnect: lifecycle.disconnect,
-    setMediaEnabled: createSetMediaEnabled(host, catalog),
+    setMediaEnabled: createSetMediaEnabled(host, catalog, () => devices.requested()),
     getSnapshot: store.get,
     subscribe: store.subscribe,
     attachMedia: (target: MediaTarget, element: HTMLMediaElement) =>

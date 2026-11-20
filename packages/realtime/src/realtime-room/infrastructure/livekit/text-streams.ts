@@ -52,9 +52,19 @@ export interface TextStreams {
   onConsentMessage(listener: (envelope: ConsentEnvelope) => void): () => void;
 }
 
+/** Consent envelopes kept while no listener exists; older ones are dropped first. */
+const MAX_HELD_CONSENT = 16;
+
 export function createTextStreams(host: SessionHost): TextStreams {
   let chat: readonly ChatMessage[] = [];
   const consentListeners = new Set<(envelope: ConsentEnvelope) => void>();
+  /**
+   * WC-9: a late joiner's consent session starts only after its join resolves, but the
+   * recorder sends "recording is running" as soon as the joiner appears. Envelopes that
+   * arrive while nobody listens are held (bounded, this session only) and handed to the
+   * first listener, so the prompt and indicator do not depend on which side was ready first.
+   */
+  let heldConsent: ConsentEnvelope[] = [];
 
   const append = (message: ChatMessage): void => {
     chat = [...chat, message];
@@ -113,6 +123,10 @@ export function createTextStreams(host: SessionHost): TextStreams {
     }
     // The sender is the identity the media server reported, never a payload field.
     const envelope: ConsentEnvelope = { from: toParticipantIdentity(from), message };
+    if (consentListeners.size === 0) {
+      heldConsent = [...heldConsent, envelope].slice(-MAX_HELD_CONSENT);
+      return;
+    }
     for (const listener of [...consentListeners]) listener(envelope);
   };
 
@@ -148,6 +162,7 @@ export function createTextStreams(host: SessionHost): TextStreams {
     },
     reset: () => {
       chat = [];
+      heldConsent = [];
     },
     sendChat: async (outgoing) => {
       const session = host.live();
@@ -176,6 +191,9 @@ export function createTextStreams(host: SessionHost): TextStreams {
     },
     onConsentMessage: (listener) => {
       consentListeners.add(listener);
+      const held = heldConsent;
+      heldConsent = [];
+      for (const envelope of held) listener(envelope);
       return () => {
         consentListeners.delete(listener);
       };

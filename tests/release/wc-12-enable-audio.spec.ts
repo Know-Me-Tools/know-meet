@@ -3,17 +3,17 @@
  * (features/wc-12-enable-audio.feature). Packaged then hosted, Chromium, two
  * launches with different autoplay policies (src/browser-args.ts).
  *
- * B must never receive a user activation before the prompt is observed: a
- * trusted click on "Join meeting" would itself unlock playback. B therefore
- * joins with synthetic clicks (joinRoomWithoutUserActivation) and the spec
- * checks navigator.userActivation.hasBeenActive is false as a precondition. A
- * run that cannot establish the precondition is BLOCKED, never a pass.
+ * Playwright sends every Chromium evaluate and locator call as a user gesture,
+ * so the browser's real autoplay policy never blocks a driven page. B's context
+ * therefore emulates the block (src/wc-autoplay.ts): unmuted play() is refused
+ * until a trusted pointer event. B joins with synthetic clicks and input
+ * (joinRoomWithoutUserActivation), so the first trusted click is the prompt's.
  */
 import { type Browser, chromium, expect, type Page, test } from "@playwright/test";
 import { AUTOPLAY_ALLOWED_ARG, AUTOPLAY_BLOCKED_ARG, FAKE_MEDIA_ARGS } from "./src/browser-args.ts";
 import { attachJson, attachScreenshot } from "./src/evidence.ts";
-import { blocked } from "./src/release-env.ts";
 import { ROOM, SCREEN } from "./src/test-ids.ts";
+import { autoplayStillBlocked, emulateAutoplayBlock } from "./src/wc-autoplay.ts";
 import {
   closeAll,
   contextDefaults,
@@ -27,15 +27,6 @@ import { AUDIO_PROMPT } from "./src/wc-test-ids.ts";
 
 const TEST_TIMEOUT_MS = 5 * 60 * 1000;
 const NEGATIVE_WINDOW_MS = 5_000;
-
-async function hasBeenActive(page: Page): Promise<boolean> {
-  const value: unknown = await page.evaluate(
-    "navigator.userActivation ? navigator.userActivation.hasBeenActive : null",
-  );
-  if (typeof value !== "boolean")
-    throw blocked("navigator.userActivation is not available in this browser");
-  return value;
-}
 
 /** True when a remote audio element is attached to a decoded, playing stream. */
 async function remoteAudioPlaying(page: Page): Promise<boolean> {
@@ -61,13 +52,15 @@ test.describe("WC-12 Enable audio appears when autoplay is blocked and starts au
       const contextOptions = contextDefaults(baseURL);
       const a = await newParticipant(browser, "Guest A", testInfo, { contextOptions });
       const b = await newParticipant(browser, "Guest B", testInfo, { contextOptions });
+      await emulateAutoplayBlock(b.context);
       try {
         const code = await startRoom(a);
         await joinRoomWithoutUserActivation(b, code);
         await expectRemoteCount(b.page, 1, "B: remote tiles");
-        expect(await hasBeenActive(b.page), "precondition: B has had no user activation").toBe(
-          false,
-        );
+        expect(
+          await autoplayStillBlocked(b.page),
+          "precondition: B's audio is blocked until a click",
+        ).toBe(true);
 
         const prompt = b.page.getByRole("button", { name: AUDIO_PROMPT.buttonName });
         await expect(prompt, "B shows Enable audio").toBeVisible({ timeout: 30_000 });
@@ -92,6 +85,7 @@ test.describe("WC-12 Enable audio appears when autoplay is blocked and starts au
         await attachJson(testInfo, "wc-12-run.json", {
           roomCode: code,
           policy: AUTOPLAY_BLOCKED_ARG,
+          block: "emulated: unmuted play() refused until a trusted pointer event (wc-autoplay.ts)",
         });
         await attachScreenshot(testInfo, b.page, "wc-12-after-click");
       } finally {

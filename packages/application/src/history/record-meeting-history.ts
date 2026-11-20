@@ -40,6 +40,12 @@ export interface MeetingHistoryPorts {
    * the recorder is running (`local-recording`); a request that never started is not.
    */
   readonly recording?: RecordingStateSource;
+  /**
+   * Told once when history stops for this session, with the error code or the thrown
+   * error's name. A stop is otherwise silent (history never interrupts the meeting), so
+   * this is the only record of why a later message is missing.
+   */
+  readonly onStopped?: (reason: "unavailable" | "failed" | "deleted", detail: string) => void;
 }
 
 /** The meeting being joined. */
@@ -108,16 +114,17 @@ export function recordMeetingHistory(
     for (const unsubscribe of unsubscribers.splice(0)) unsubscribe();
   };
 
-  const stop = (reason: "unavailable" | "failed" | "deleted"): void => {
+  const stop = (reason: "unavailable" | "failed" | "deleted", detail: string): void => {
     if (state.status === "waiting" || state.status === "stopped") return;
     state = { status: "stopped", reason, meetingId: state.meetingId };
     unsubscribeAll();
+    ports.onStopped?.(reason, detail);
   };
 
   const stopFor = (error: HistoryError): void => {
-    if (error.code === "history-unavailable") stop("unavailable");
-    else if (error.code === "history-entry-not-found") stop("deleted");
-    else stop("failed");
+    if (error.code === "history-unavailable") stop("unavailable", error.code);
+    else if (error.code === "history-entry-not-found") stop("deleted", error.code);
+    else stop("failed", error.code);
   };
 
   /** Queues one write. Once stopped, queued writes are skipped. A throw counts as failed. */
@@ -127,8 +134,8 @@ export function recordMeetingHistory(
       try {
         const result = await operation();
         if (!result.ok) stopFor(result.error);
-      } catch {
-        stop("failed");
+      } catch (error) {
+        stop("failed", error instanceof Error ? `${error.name}: ${error.message}` : "thrown");
       }
     });
   };
