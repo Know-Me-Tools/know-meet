@@ -9,13 +9,11 @@ method nothing here has been rendered or applied before the release boundary run
 
 | Path | Creates |
 |---|---|
-| `argocd/projects.yaml` | Argo CD AppProjects `know-meet` and `know-meet-platform`: this repository only, one namespace each, only the kinds each Application renders. |
+| `argocd/projects.yaml` | Argo CD AppProject `know-meet`: this repository only, namespace `know-meet`, only the kinds its Application renders. |
 | `argocd/know-meet.yaml` | Argo CD Application `know-meet` (project `know-meet`). Syncs `k8s/overlays/production` from `main`. |
-| `argocd/know-meet-platform.yaml` | Argo CD Application `know-meet-platform` (project `know-meet-platform`). Syncs `platform` from `main`. |
 | `k8s/base/` | Namespace `know-meet`; Deployments and Services `know-meet-web` and `know-meet-token-service`. |
 | `k8s/overlays/production/` | Pulls in `k8s/base`; HTTPRoutes `know-meet-https` and `know-meet-http-redirect`; image tags; security headers. |
 | `k8s/overlays/production/security-headers.yaml` | Generated. A local-config ConfigMap kustomize reads and does not apply. |
-| `platform/` | GatewayClass `eg`, Gateway `main-gateway` and Certificate `meet-know-me-tools` (namespace `envoy-gateway-system`). Shared. |
 | `github/` | The `main` ruleset and the deploy app setup (who may change `main`, so who may deploy). |
 
 Two Applications in two projects. An AppProject's kind whitelist applies to every namespace
@@ -104,21 +102,9 @@ is a merged pull request.
 ```bash
 kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/projects.yaml
 kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet.yaml
-kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet-platform.yaml
 ```
 
-**Moving from the single Application (once).** Before this split, Application `know-meet`
-in project `default` also synced `platform`. In order:
-
-1. Apply `projects.yaml`. Nothing syncs differently yet.
-2. Merge the pull request that removes `platform` from the overlay. `know-meet` stops
-   rendering the three platform objects; they carry `Prune=false,Delete=false`, so Argo CD
-   leaves them running (the Application shows them as needing a prune it will not do).
-3. Apply `know-meet.yaml` (now project `know-meet`) and `know-meet-platform.yaml`. The new
-   Application adopts the three objects unchanged; only their tracking annotation moves.
-
-Applying `know-meet.yaml` with project `know-meet` before step 2 makes its sync fail (the
-platform kinds are not allowed), which deletes nothing but stops deploys until step 2.
-Applying `know-meet-platform.yaml` before step 2 makes both Applications claim the same three
-objects (a SharedResourceWarning; their tracking annotation flips on each sync). That too
-deletes nothing, because of `Prune=false`, but keep to the order.
+**Shared gateway.** GatewayClass `eg`, Gateway `envoy-gateway-system/main-gateway` and
+Certificate `meet-know-me-tools` are owned by `Know-Me-Tools/platform` (Application
+`platform-gateway`, path `platform/gateway/base`), copied spec-equal from this repository's
+former `infra/platform` at `31e891fb`. Know Meet's routes keep attaching to `main-gateway`.

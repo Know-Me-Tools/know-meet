@@ -1,6 +1,6 @@
 # The Argo CD Application for the Know Meet app (namespace know-meet). Project know-meet
 # (infra/argocd/projects.yaml) limits it to this repository, namespace know-meet and the kinds
-# it renders. The shared platform objects are Application know-meet-platform. Applied by the
+# it renders. The shared gateway is Application platform-gateway in Know-Me-Tools/platform. Applied by the
 # operator:
 #   kubectl --context gke_knowme-corporate_us-south1_main apply -f infra/argocd/know-meet.yaml
 # The repository is public, so Argo CD clones it over HTTPS with no repository credential.
@@ -15,7 +15,7 @@
 # - No resources finalizer: deleting the Application leaves every object running; removal is a
 #   deliberate, separate step.
 #
-# Ordering: HTTPRoutes need no ordering against the Gateway in know-meet-platform: a route
+# Ordering: HTTPRoutes need no ordering against the Gateway (Know-Me-Tools/platform): a route
 # created before its Gateway is accepted once the Gateway exists.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
