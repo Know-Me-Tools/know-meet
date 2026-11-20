@@ -1,6 +1,6 @@
 # Production: the path Argo CD Application know-meet syncs (infra/argocd/know-meet.yaml): the
-# namespace, the workloads and the routes. The shared platform objects (infra/platform) are
-# Application know-meet-platform, in a project of their own.
+# namespace, the workloads and the routes. The shared gateway objects are owned by
+# Know-Me-Tools/platform (Application platform-gateway).
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
