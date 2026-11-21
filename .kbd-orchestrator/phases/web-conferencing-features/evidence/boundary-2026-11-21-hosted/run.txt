@@ -1,0 +1,32 @@
+candidate 6d6512ba1910a3a50c354fea1ec0502b1ba9f1d1 started 2026-11-21T13:18:43Z
+start hosted--wc-1-screen-share 2026-11-21T13:18:43Z
+exit hosted--wc-1-screen-share 0 2026-11-21T13:19:08Z
+start hosted--wc-2-chat-everyone 2026-11-21T13:29:08Z
+exit hosted--wc-2-chat-everyone 0 2026-11-21T13:30:05Z
+start hosted--wc-3-chat-private 2026-11-21T13:40:05Z
+exit hosted--wc-3-chat-private 0 2026-11-21T13:40:30Z
+start hosted--wc-4-background-effects 2026-11-21T13:50:31Z
+exit hosted--wc-4-background-effects 0 2026-11-21T13:51:00Z
+start hosted--wc-5-device-choice 2026-11-21T14:01:00Z
+exit hosted--wc-5-device-choice 0 2026-11-21T14:01:14Z
+start hosted--wc-7-local-history 2026-11-21T14:11:14Z
+exit hosted--wc-7-local-history 1 2026-11-21T14:11:45Z
+start hosted--wc-8-local-recording 2026-11-21T14:21:45Z
+exit hosted--wc-8-local-recording 0 2026-11-21T14:22:25Z
+start hosted--wc-12-enable-audio 2026-11-21T14:32:25Z
+exit hosted--wc-12-enable-audio 0 2026-11-21T14:32:46Z
+start hosted--wc-13-accessibility 2026-11-21T14:42:46Z
+exit hosted--wc-13-accessibility 1 2026-11-21T14:42:47Z
+start hosted-firefox--wc-2-chat-everyone 2026-11-21T14:52:47Z
+exit hosted-firefox--wc-2-chat-everyone 1 2026-11-21T14:52:48Z
+start hosted-webkit--wc-2-chat-everyone 2026-11-21T15:02:48Z
+exit hosted-webkit--wc-2-chat-everyone 0 2026-11-21T15:03:46Z
+start hosted-firefox--wc-3-chat-private 2026-11-21T15:13:46Z
+exit hosted-firefox--wc-3-chat-private 1 2026-11-21T15:14:08Z
+start hosted-webkit--wc-3-chat-private 2026-11-21T15:24:08Z
+exit hosted-webkit--wc-3-chat-private 0 2026-11-21T15:24:37Z
+start hosted-firefox--wc-7-local-history 2026-11-21T15:34:37Z
+exit hosted-firefox--wc-7-local-history 1 2026-11-21T15:35:09Z
+start hosted-webkit--wc-7-local-history 2026-11-21T15:45:09Z
+exit hosted-webkit--wc-7-local-history 0 2026-11-21T15:45:38Z
+finished 2026-11-21T15:45:38Z

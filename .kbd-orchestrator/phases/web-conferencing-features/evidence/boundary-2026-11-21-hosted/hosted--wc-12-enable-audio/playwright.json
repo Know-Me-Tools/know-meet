@@ -1,0 +1,363 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "wc-12-enable-audio.spec.ts",
+      "--project=hosted"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream",
+              "--auto-select-desktop-capture-source=Entire screen"
+            ]
+          },
+          "baseURL": "https://meet.know-me.tools"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "hosted"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "wc-12-enable-audio.spec.ts",
+      "file": "wc-12-enable-audio.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-12 Enable audio appears when autoplay is blocked and starts audio",
+          "file": "wc-12-enable-audio.spec.ts",
+          "line": 45,
+          "column": 6,
+          "specs": [
+            {
+              "title": "with autoplay blocked B shows Enable audio; one click starts audio and the prompt goes",
+              "ok": true,
+              "tags": [
+                "WC-12",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7061,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T14:32:26.869Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-12-blocked-prompt",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-c5b2f-s-audio-and-the-prompt-goes-hosted/attachments/wc-12-blocked-prompt-b4b5bef01abf38292856fae6f8df9a669e556ec5.png"
+                        },
+                        {
+                          "name": "wc-12-run.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS00cGotZTZnIiwKICAicG9saWN5IjogIi0tYXV0b3BsYXktcG9saWN5PWRvY3VtZW50LXVzZXItYWN0aXZhdGlvbi1yZXF1aXJlZCIsCiAgImJsb2NrIjogImVtdWxhdGVkOiB1bm11dGVkIHBsYXkoKSByZWZ1c2VkIHVudGlsIGEgdHJ1c3RlZCBwb2ludGVyIGV2ZW50ICh3Yy1hdXRvcGxheS50cykiCn0="
+                        },
+                        {
+                          "name": "wc-12-after-click",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-c5b2f-s-audio-and-the-prompt-goes-hosted/attachments/wc-12-after-click-ad1ace26f664b0a589136b337532ea86d969ad3a.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-c5b2f-s-audio-and-the-prompt-goes-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-c5b2f-s-audio-and-the-prompt-goes-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-c5b2f-s-audio-and-the-prompt-goes-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d564211c1708b2843c87-053c132ae93fa60f581b",
+              "file": "wc-12-enable-audio.spec.ts",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "with autoplay allowed no Enable audio prompt is shown",
+              "ok": true,
+              "tags": [
+                "WC-12",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11260,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T14:32:34.465Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-12-allowed-no-prompt",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-19e41-nable-audio-prompt-is-shown-hosted/attachments/wc-12-allowed-no-prompt-b1068bd569dadc4b82083386175d0f75716e2cb0.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-19e41-nable-audio-prompt-is-shown-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-19e41-nable-audio-prompt-is-shown-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/test-results/wc-12-enable-audio-WC-12-E-19e41-nable-audio-prompt-is-shown-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d564211c1708b2843c87-783e05bf547e7f9f146f",
+              "file": "wc-12-enable-audio.spec.ts",
+              "line": 98,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-21T14:32:26.607Z",
+    "duration": 19787.786,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

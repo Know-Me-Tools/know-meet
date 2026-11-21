@@ -1,0 +1,292 @@
+{
+  "mode": "diff",
+  "verdict": "BLOCK",
+  "judge_model": "glm-5.3",
+  "producer_model": "claude-opus-5-5",
+  "cross_model_check": "verified-distinct",
+  "isolation_mode": "rest-gateway:http://localhost:4000/v1",
+  "base": "main",
+  "head": "11ecd347",
+  "packets": 7,
+  "findings": [
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/meeting-room/presentation/chat/chat-panel.tsx",
+      "line": 47,
+      "claim": "Chat messages that arrive while the pane is hidden never scroll the log, so reopening the chat shows a stale scroll position even though the reader never scrolled up, violating the file's own stick-to-end contract on the most common path (message arrives while panel closed, then user opens chat).",
+      "evidence": "useEffect(() => { const body = bodyRef.current; if (body !== null && atEnd.current && count > 0) body.scrollTop = body.scrollHeight; }, [count]); — the effect only runs when `count` changes. While the pane is hidden (RoomSheetPane sets hidden={!shown}; the sheet is also invisible when closed) scrollHeight is 0, so the write is a no-op; when the pane becomes visible no effect re-runs (count unchanged), and `atEnd.current` stays true so no scroll event fires either.",
+      "suggested_fix": "Re-run the stick-to-end scroll when the pane becomes visible: add `shown`/`active` to the effect deps (or use a ResizeObserver on the body), scrolling to the end when atEnd.current is true and the pane goes from hidden to shown.",
+      "packet": 1
+    },
+    {
+      "severity": "WARNING",
+      "file": "packages/realtime/src/realtime-room/infrastructure/livekit/text-streams.ts",
+      "line": 92,
+      "claim": "Received chat messages are appended in stream-completion order, not send order, so the 'oldest first' log can display messages out of order; with the 10s READ_TIMEOUT a stalled earlier message appends after later ones.",
+      "evidence": "const receiveChat = async (session, reader, from) => { const text = await readText(reader, \"chat\", MAX_CHAT_STREAM_BYTES); ... append(message); } — each handler appends only after readText resolves, so two concurrent streams append in completion order (e.g. a large or slow first message lands after a later small one).",
+      "suggested_fix": "Insert received messages ordered by reader.info.timestamp (insertion sort into `chat`, or buffer per arrival with a small ordering window) instead of blind append, so the log and the use-chat index bookkeeping match chronological order.",
+      "packet": 1
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/meeting-room/presentation/room-sheet/use-room-sheet.ts",
+      "line": 17,
+      "claim": "Focus is not returned to the opening control when the sheet is closed via the scrim, because the guard no-ops once the click has blurred focus out of the sheet; in Chromium focus ends up on body and keyboard users restart from the top of the document (WCAG 2.4.3).",
+      "evidence": "function returnFocusTo(pane: RoomPaneId): void { const sheet = document.getElementById(ROOM_SHEET_ID); if (sheet === null || !sheet.contains(document.activeElement)) return; ... } — RoomSheetScrim's onClick path runs after mousedown on a non-focusable div has already moved activeElement to body, so the guard returns early.",
+      "suggested_fix": "Capture document.activeElement when toggle() opens the sheet and unconditionally restore focus to it (or to paneControlId(pane)) in close(), rather than conditioning on focus still being inside the sheet.",
+      "packet": 1
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/presentation/meeting-room/presentation/chat/chat-composer.tsx",
+      "line": 82,
+      "claim": "Text typed while a send is in flight is silently destroyed: the textarea stays editable during `sending`, but the success path unconditionally clears it.",
+      "evidence": "setSending(true); void onSend(text, sentChoice).then((result) => { ... if (result.ok) { setText(\"\"); ... } — a user who keeps typing between pressing Send and the promise resolving loses everything they added.",
+      "suggested_fix": "Only clear when the field is unchanged since the send (compare to the sent text), or make the textarea readOnly while sending.",
+      "packet": 1
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/application/src/meeting/realtime-room.ts",
+      "line": 38,
+      "claim": "The session chat array grows without bound; the 2000-code-point limit bounds only a single message, so a remote participant (or script) can flood the topic and grow every receiving client's memory and rendered log without limit.",
+      "evidence": "readonly chat: readonly ChatMessage[]; — 'Append-only while connected' with no cap, and text-streams.ts appends every accepted stream (append = () => { chat = [...chat, message]; host.refresh(); }).",
+      "suggested_fix": "Cap retained chat entries (count or total bytes) with drop-oldest, and note the truncation in the UI, so a flood cannot exhaust memory on all participants.",
+      "packet": 1
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/realtime/src/realtime-room/domain/chat-codec.ts",
+      "line": 53,
+      "claim": "The private/everyone label shown to recipients is taken solely from a sender-supplied attribute while actual delivery is controlled by destinationIdentities, so a non-conforming or modified client can broadcast a message to everyone that every recipient renders as 'Private to you' — misrepresenting a public message as 1:1.",
+      "evidence": "export function receivedAudience(attributes, localIdentity) { return attributes?.[AUDIENCE_ATTRIBUTE] === PRIVATE ? privateTo(localIdentity) : EVERYONE; } — nothing ties the 'private' attribute to the presence of a single destination identity.",
+      "suggested_fix": "Document and verify (server-side rule or client-side cross-check where the transport exposes destinations) that a 'private'-attributed stream always carries exactly one destination identity; otherwise word received private copy without implying exclusivity.",
+      "packet": 1
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/guest-meeting/devices/use-mic-level.ts",
+      "line": 22,
+      "claim": "The mic level meter can be permanently silent: the AudioContext is created outside a user gesture and never resumed, so on Safari (always) and on Chrome/Firefox when the page has no sticky activation (join link opened fresh, permission granted via the browser prompt, which is not page activation) the context stays 'suspended', getByteTimeDomainData returns silence, and the meter reads 0 while the microphone works. This hits both the lobby preview and the room pane meter, breaking the 'levels and preview before and during a meeting' goal.",
+      "evidence": "const context = new AudioContext(); ... source.connect(analyser); ... (no context.resume(), no statechange handling anywhere in the hook)",
+      "suggested_fix": "After creating the context, if context.state === \"suspended\", attach a one-shot pointerdown/keydown listener (and context.onstatechange) that calls context.resume(); also treat a suspended context explicitly (e.g., show no level rather than a false zero) so the meter starts as soon as a gesture occurs. Same treatment applies to use-test-sound.ts, though there the click gesture already covers it.",
+      "packet": 2
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/guest-meeting/devices/use-device-loss.ts",
+      "line": 30,
+      "claim": "Unplugging the device in use is never detected when it is the system default (id null), which is the common case (WC-5 negative control: fresh profile choice is null). In the lobby, watched = preview.choice[kind] which is null for the default, so useDeviceLoss returns early: no announcement, no fallBack, and since the preview effect deps (wishes/choice/released) do not change, the stream with ended tracks is never re-acquired — the video shows a frozen last frame (showVideo counts the ended track) and the meter goes silent with no feedback. The room pane (use-room-device watching active[kind]) has the same hole when active is null.",
+      "evidence": "const lost = before.watched; if (lost === null || before.devices === devices) return; — with lobby call useDeviceLoss(devices, kind, chosen, ...) where chosen = preview.choice[kind] (null = system default), and const showVideo = wishes.camera && (stream?.getVideoTracks().length ?? 0) > 0; counting ended tracks",
+      "suggested_fix": "Watch the resolved device in use (e.g., shownDeviceId(devices, kind, choice) or the track's own deviceId via track.getSettings()) instead of the raw choice, and/or listen for the preview tracks' 'ended' events to trigger re-acquire/announcement when the active device disappears.",
+      "packet": 2
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/meeting-room/presentation/background/use-background-choice.ts",
+      "line": 55,
+      "claim": "The hook ignores the room-reported failure state. The domain documents BackgroundEffectStatus \"failed\" (\"the processor could not start; the camera is sent without an effect\"), which can arrive asynchronously via the snapshot after setBackgroundEffect resolved ok, but the hook only sets its failure UI from the promise's error code. In that async case the radio keeps the effect checked with status \"none\" (no failure line, no revert to None), while videoProcessorName reports \"none\" for the same state — the participant believes blur/image is applied when it is not.",
+      "evidence": "const waiting = state.status === \"pending\" || state.status === \"applying\"; ... if (result.error.code === \"effect-failed\") { setFailed(true); ... } — no branch anywhere for state.status === \"failed\"",
+      "suggested_fix": "Derive the failed state from the snapshot too: if state.status === \"failed\", setFailed(true) (and keep/withdraw the request as designed) so the selection returns to None and the failure line shows regardless of whether the failure surfaced via the promise or the snapshot.",
+      "packet": 2
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/presentation/meeting-room/presentation/background/use-background-choice.ts",
+      "line": 33,
+      "claim": "Two smaller state bugs in choose(): (1) the success announcement fires unconditionally even when a later choice already replaced this one, producing stale double announcements; (2) clearing the optimistic picked before the room snapshot reflects the new effect makes checked fall back to the previous requested value for a render, so the radio visibly flickers back to the old choice (e.g., None) before snapping to the new one.",
+      "evidence": "setPicked((current) => (current === choice.id ? null : current)); if (result.ok) { announce(`Background: ${choice.name}.`); return; } — announce not guarded by the same currency check, and checked = failed ? \"none\" : (picked ?? requested) re-reads the old requested once picked is cleared",
+      "suggested_fix": "Announce only when the choice is still current (use the functional setPicked result or compare against a ref), and keep checked optimistic until the snapshot's state.effect matches the request (e.g., clear picked only when choiceOfEffect(state.effect)?.id === choice.id or on failure).",
+      "packet": 2
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/presentation/guest-meeting/devices/device-field.tsx",
+      "line": 88,
+      "claim": "Locking the select by preventDefault on mousedown does not stop the native picker on touch devices (iOS/Android fire the picker from touch, not mousedown), so a 'locked' (pre-permission) picker opens and shows the placeholder option on mobile, contrary to the documented 'it ignores changes and does not open' behavior.",
+      "evidence": "onMouseDown={(event) => { if (locked) event.preventDefault(); }} — no touchstart/click guard",
+      "suggested_fix": "Also preventDefault on touchstart/click (or pointerdown) when locked, or render the locked state as a non-select control that keeps the same accessible name/description so nothing opens.",
+      "packet": 2
+    },
+    {
+      "severity": "WARNING",
+      "file": "packages/realtime/src/realtime-room/domain/device-mapping.ts",
+      "line": 62,
+      "claim": "toMediaDevices marks the first listed device of each kind as the system default (`isDefault`), but the Media Capture spec does not guarantee default-first ordering and Firefox/Safari list no default pseudo-device at all, so on those browsers an arbitrary device is reported as the system default. A picker that labels or pre-selects by `isDefault` misinforms the user and can target the wrong device.",
+      "evidence": " * The browser lists the system default\n * of each kind first (Media Capture spec), so the first entry per kind is `isDefault`.\n */\nexport function toMediaDevices(infos: readonly DeviceInfoFacts[]): readonly MediaDevice[] {\n  const seen = new Set<DeviceKind>();\n  ... devices.push({ kind, id, label: info.label, isDefault: !seen.has(kind) });",
+      "suggested_fix": "Do not infer the default from list position. Either drop `isDefault` and let the UI label the Chromium `\\\"default\\\"` alias by its deviceId/label, or detect the default only where the browser actually exposes one (e.g. deviceId === 'default' or a label prefixed with 'Default') and set isDefault false otherwise.",
+      "packet": 3
+    },
+    {
+      "severity": "WARNING",
+      "file": "packages/realtime/src/realtime-room/infrastructure/browser/device-catalog.ts",
+      "line": 66,
+      "claim": "The device list is only ever re-read on `devicechange`, and the initial read runs before the site has any media permission (when Chrome/Firefox/Safari report deviceId '' for every device, all of which toMediaDevices filters out). Permission being granted afterwards does not fire `devicechange` in Firefox, and Safari did not support `devicechange` at all before ~17.4, so `availableDevices` can stay empty (or label-less) through the whole lobby preview, defeating 'pick mic/camera/speaker with preview before a meeting' on first run. The only in-package re-reads are `refreshDevices()` and a successful in-meeting enable, both too late for the lobby.",
+      "evidence": "  media?.addEventListener(\"devicechange\", () => {\n    void refresh();\n  });\n  void refresh();  // runs at page load, i.e. before any permission; ids are '' and filtered by toMediaDevices",
+      "suggested_fix": "Re-enumerate when permission state can have changed: subscribe to navigator.permissions.query({name:'microphone'}/{name:'camera'}) 'change' events (and re-read once after any successful getUserMedia path the package controls), falling back to a refresh exposed to the lobby preview flow.",
+      "packet": 3
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/realtime/src/realtime-room/infrastructure/livekit/background-effect.ts",
+      "line": 60,
+      "claim": "reset() bumps `generation` but leaves `busy` pointing at the previous session's in-flight hook call (which may be a slow MediaPipe/model load on a track belonging to a room that was just disposed). A setBackgroundEffect on the new session then blocks in settle() behind that stale promise, and the stale call's rejection is reported as a `background-effect-failed` diagnostic for the new session even though its result was discarded (generation mismatch). Worst case the new session's first effect is delayed by, or hangs behind, the old session's asset load.",
+      "evidence": "    busy = call()\n      .then(\n        () => { if (started === generation) onDone(true); },\n        (error: unknown) => {\n          host.report({ type: \"background-effect-failed\", errorName: errorName(error) });\n          if (started === generation) onDone(false);\n        },\n      )\n      ... reset: () => { generation += 1; requested = NO_BACKGROUND_EFFECT; status = \"idle\"; applied = null; failedTrack = null; }  // busy not detached",
+      "suggested_fix": "In reset(), detach from the in-flight call (e.g. keep a `stopped` flag or per-run token checked in the report handler) so stale failures are not reported, and have settle() only await runs of the current generation rather than any pending promise.",
+      "packet": 3
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/realtime/src/realtime-room/domain/error-mapping.ts",
+      "line": 113,
+      "claim": "mapDeviceSwitchError maps every non-'device gone' speaker failure to `unsupported('speakerSelection')`, including transient errors (abort, invalid state, connection loss mid-switch), telling the user the feature is unsupported on this browser when it was a momentary failure. The same error for a microphone/camera correctly maps to connection-lost, so the speaker branch is inconsistent and misleading for diagnostics-driven UI copy.",
+      "evidence": "export function mapDeviceSwitchError(error: unknown, kind: DeviceKind): DeviceError {\n  const name = errorName(error);\n  if (DEVICE_GONE_NAMES.has(name)) return conferencingErrors.deviceNotFound(kind);\n  if (kind === \"speaker\") return conferencingErrors.unsupported(\"speakerSelection\");",
+      "suggested_fix": "Map only genuine setSinkId-permission/absence failures (NotAllowedError, no setSinkId) to unsupported; map other speaker errors the same way input errors are mapped (e.g. connectionLost or a generic effect/device failure).",
+      "packet": 3
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "apps/web/src/infrastructure/history/pglite-history-repository.ts",
+      "line": "approx. 190-305 (createMeeting, updateMeeting, deleteMeeting, deleteAll)",
+      "claim": "Four of the six write paths bypass the syncToFs flush that the adapter exists to provide, so committed writes can be lost on reload: the meeting's end time written on leave() is lost (duration shows 'Unknown'), a freshly created session can vanish entirely, and deletions can be silently rolled back, resurrecting chat history (including other people's private messages) the user believes was deleted.",
+      "evidence": "history-database.ts documents the hazard and fixes it only for transactions: \"PGlite 0.5.16 flushes to IndexedDB after BEGIN but not after COMMIT, so a committed transaction stays in memory until the next statement, and a reload loses it (WC-7 ...) Each transaction is therefore flushed before it resolves.\" with `transaction: async (work) => { const result = await db.transaction(...); await db.syncToFs(); ... }`. But the repository runs createMeeting, updateMeeting, deleteMeeting and deleteAll as bare statements with no flush: `const inserted = await db.query<{ id: string }>(\\`INSERT INTO meeting_session ...`, `const updated = await db.query<{ id: string }>(\\`UPDATE meeting_session SET title = $2, left_at = $3 ...`, `\"DELETE FROM meeting_session WHERE id = $1 RETURNING id\"`, `run(undefined, (db) => db.query(\"DELETE FROM meeting_session\"))`. The leave() path in with-meeting-history.ts relies on exactly this write: \"the end time must reach storage before the person can reload or close the tab (WC-7)\" — and nothing after leave() issues another statement to trigger the BEGIN flush, so the tab close loses it.",
+      "suggested_fix": "Flush every statement, not just transactions: in adaptPglite, wrap `query` so it does `await source.query(...); await db.syncToFs();` (or route createMeeting/updateMeeting/deleteMeeting/deleteAll through `db.transaction`, e.g. `db.transaction((tx) => tx.query(...))`). Add a regression test that writes via updateMeeting and reloads the store from idb:// before any other statement runs.",
+      "packet": 4
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/infrastructure/history/pglite-history-repository.ts",
+      "line": "approx. 88-106 (database())",
+      "claim": "Any failure to open or migrate the store — including transient ones like the worker script or WASM asset failing to load, or a migration error on an existing store — is conflated with 'blocked' storage, producing the wrong user message ('This browser blocked local storage, which happens in some private windows'), an empty list presented as 'No meetings on this device yet', and a permanent stop of the live session's history even though the open is retried on the next call and might succeed.",
+      "evidence": "database() collapses every open/migrate failure into null: `.catch((): null => null)`, and status() turns null into `\"blocked\"`, whose UI copy is exclusively the private-window case. open-history-database.ts itself says rejection covers much more: \"Rejects when the browser cannot keep history (no Worker or IndexedDB, IndexedDB refused in a private window, the worker or its WASM failed to start)\". register-history-entities.ts then renders unavailable as an empty list: `if (page.error.code === \"history-unavailable\") return { rows: [], total: 0 };` and record-meeting-history.ts stops the session permanently on the same code: `if (error.code === \"history-unavailable\") stop(\"unavailable\", error.code);` — so one failed asset fetch discards the whole meeting's history with a misdiagnosis.",
+      "suggested_fix": "Distinguish 'unsupported/blocked' (no Worker/IndexedDB APIs, private-window refusal — detectable synchronously or via the specific error) from 'open failed' (transient worker/WASM/migration errors). Report the latter as history-storage-failed so the screen shows the read-error/retry state, and let record-meeting-history retry a transient open instead of stopping on 'unavailable'.",
+      "packet": 4
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/application/src/history/record-meeting-history.ts",
+      "line": "approx. 185-215 (onRoomChange / onRecordingChange)",
+      "claim": "A recording that is already in the 'local-recording' state before the room reaches the in-room state is never linked to the session, because onRecordingChange() is only invoked at construction and on recording-state events, not after begin().",
+      "evidence": "onRoomChange does `if (state.status === \"waiting\") { if (!isInRoom(snapshot.connection)) return; begin(snapshot); }` and then only runs noteParticipants/noteChat. The one-time construction call `onRoomChange(); onRecordingChange();` happens while state is still \"waiting\" when the room is not yet connected (onRecordingChange returns early: `if (state.status !== \"recording\" || ports.recording === undefined) return;`), and no later room event re-evaluates the recording state, so `linked.add(recording.requestId)` never runs for an already-active recording until its state changes again.",
+      "suggested_fix": "Call onRecordingChange() at the end of begin() (or after the state becomes \"recording\" in onRoomChange) so a recording already running when the session starts is linked.",
+      "packet": 4
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/infrastructure/recording/desired-media.ts",
+      "line": 48,
+      "claim": "The recording silently omits the recording participant's own screen-share audio, so a recorded presentation with sound loses its audio.",
+      "evidence": "`if (share.hasAudio && !share.isLocal) {` — only remote share audio is mixed. The file's own doc justifies excluding exactly one thing, the local microphone (\"The local microphone is not here on purpose: the room never hands a participant their own microphone through `attachMedia`\"), implying local share media IS obtainable; indeed the local share's *video* tile is included via the same loop.",
+      "suggested_fix": "Also request `screen-share-audio` for local shares (or capture it alongside the local microphone in local-microphone.ts). If the room port truly cannot provide it, document why in the comment so the content gap is a stated decision.",
+      "packet": 5
+    },
+    {
+      "severity": "WARNING",
+      "file": "packages/domain/src/conferencing/consent-transitions.ts",
+      "line": 285,
+      "claim": "A participant's \"declined\" answer can be silently lost: the state moves to idle before the send, and when the send fails the resulting command-failed is dropped, leaving the requester waiting forever and the decliner with no prompt and no notice (recovery only by leaving and rejoining).",
+      "evidence": "In `fromPrompted` the decline path is `return { state: idle(null), commands: [send(privateTo(requester), { ... \"declined\" ... })] };` — state is already idle when the send fails, and `fromIdle` handles command-failed via `if (event.type !== \"received\") return stay(state);`, i.e. it is ignored with no notice. Contrast the \"agreed\" path (`stay({ ...state, answer: null })`) and `fromRemoteRecording`'s `case \"command-failed\": return stay({ ...state, localConsent: \"asked\" })`, which both restore the prompt.",
+      "suggested_fix": "On a failed decline send, either keep the participant in `prompted` with `answer: null` (like the agreed path) or surface a notice (e.g. `request-not-sent`) so they can retry; the requester must not be left awaiting an answer that will never come.",
+      "packet": 5
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/infrastructure/recording/composite-recorder.ts",
+      "line": 150,
+      "claim": "If pipeline construction throws after `writer.open` succeeded, a zero-byte OPFS file is left behind with no index row; the library then lists it forever as an \"incomplete\" recording the user must delete by hand.",
+      "evidence": "`} catch { await writer.close(); return err(conferencingErrors.recorderFailed(\"failed\")); }` — the worker's `open` already ran `directory.getFileHandle(request.fileName, { create: true })`, and `close()` keeps the file; `describeOrphan`/`stateOf` then classify it as `\"incomplete\"`.",
+      "suggested_fix": "On this failure path remove the just-created file (add a `writer.remove()`/abort to the protocol, or have the worker delete the file if nothing was appended before close), or defer `writer.open` until the pipeline has been constructed successfully.",
+      "packet": 5
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "packages/application/src/recording/recording-consent.ts",
+      "line": 78,
+      "claim": "Consent state listeners are invoked without a guard, so one throwing listener aborts the whole step: the state has already been set (e.g. `local-starting`, indicator on) but the remaining commands — including `start-recorder` and the stop announcement — are skipped by the chain's catch, with no command-failed dispatched, leaving an inconsistent state.",
+      "evidence": "`const setState = (next: RecordingConsentState): void => { if (next === state) return; state = next; for (const listener of listeners) listener(); };` and `chain = chain.then(() => step(event)).catch(() => undefined);` — while recording-change-bus deliberately wraps its loop (`try { listener(change); } catch { /* One failing listener must not stop the others ... */ }`).",
+      "suggested_fix": "Wrap each `listener()` call in try/catch (as the change bus does) so a UI-listener throw cannot abort command execution mid-step.",
+      "packet": 5
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/infrastructure/recording/writer/opfs-writer-client.ts",
+      "line": 100,
+      "claim": "When `close()` times out, it resolves with the stale `finalSize` (0 unless a prior closed/failed event set it), so `index.finish` records `sizeBytes: 0` for a file that actually contains data.",
+      "evidence": "`const timer = setTimeout(() => { settleClose = null; ended = true; stopWorker(); resolve(finalSize); }, CLOSE_TIMEOUT_MS);` with `let finalSize = 0;` only assigned in `onEvent` — the client never learns how many bytes the worker flushed before it went silent.",
+      "suggested_fix": "On timeout, resolve with the real size (e.g. have the worker report progress per flush, or stat the file via `getFile()` in `recording-files` before writing the index row).",
+      "packet": 5
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/local-recordings/presentation/storage-strip.tsx",
+      "line": 66,
+      "claim": "The 'Keep recordings' action has no failure path: if requestPersistence() (or the entity mutation) rejects, the .then never runs, the promise rejection is unhandled, the button just re-enables, and the user gets no feedback. useRecordingStorage also discards mutation.state.error entirely, so no consumer can show it.",
+      "evidence": "const onKeep = () => { void requestPersistence().then(() => { setAnswer(\"asked\"); requestAnimationFrame(() => lineRef.current?.focus({ preventScroll: true })); }); };  // no .catch ; and in use-recording-storage.ts: requestPersistence: async () => { await mutation.mutate(); } with no error surfaced in the RecordingStorage interface",
+      "suggested_fix": "Add a .catch (or try/catch around mutation.mutate) that sets a failure state, render a line for it in the strip, and expose mutation.state.error from useRecordingStorage so callers can react.",
+      "packet": 6
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/local-recordings/presentation/recording-items.tsx",
+      "line": 29,
+      "claim": "Every library row opens its OPFS file, creates a blob object URL, and mounts a decoding <video preload=\"metadata\"> with a seek — all simultaneously, on every library mount and again after every grid/list toggle (component types swap, so all hooks re-run). With the stated 'dozens' of large local recordings this is dozens of concurrent file handles, object URLs and media/decoder instances on the main list screen; browsers cap concurrent decoders, so posters can fail en masse (falling back to the glyph) and memory/IO pressure can jank or stall low-end tabs. It also re-churns all opens on each visit since URLs are revoked on unmount.",
+      "evidence": "function usePosterUrl(row: LibraryRow): string | null { const playable = row.state !== \"recording\" && row.state !== \"missing\"; const playback = useRecordingPlayback(playable ? row.id : null); return playback.status === \"ready\" ? playback.url : null; }  // called from RecordingCard and RecordingRow for every row",
+      "suggested_fix": "Generate posters lazily (IntersectionObserver per card, unmounting the video off-screen), cap the number of simultaneously opened files, or keep only URLs (no <video>) until a card is visible; cache poster state per recording id across layout toggles.",
+      "packet": 6
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/presentation/meeting-room/presentation/recording/recording-notice.tsx",
+      "line": 78,
+      "claim": "Withdrawing a recording request from the notice's 'Cancel request' button gives screen-reader users no feedback: the note is deliberately aria-live=\"off\" (announcements are the room status region's job), but the 'withdrawn' announcement exists only in the Record control path (use-recording-ui onRecordControl). The same action is announced when triggered from the control and silent when triggered from the notice (WCAG 4.1.3 status messages).",
+      "evidence": "<Button type=\"button\" variant=\"secondary\" onClick={recording.withdraw}>{RECORD_COPY.cancelRequest}</Button>  vs use-recording-ui.ts: case \"withdraw\": recording.withdraw(); announce(RECORD_COPY.withdrawn); — and the Note renders role=\"status\" aria-live=\"off\"",
+      "suggested_fix": "Route the notice button through the same handler that announces (e.g. pass onRecordControl-style callback or move the announce into a shared withdraw wrapper), or have the domain set a one-time notice on withdraw so useNoticeAnnouncements picks it up.",
+      "packet": 6
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/presentation/local-recordings/application/recording-format.ts",
+      "line": 163,
+      "claim": "downloadFilename forces a .webm extension for every non-MP4 MIME type, so a Matroska/QuickTime/unknown container gets a .webm name (e.g. 'video/x-matroska' → 'know-meet-CODE-...webm'), producing misnamed downloads that some players will refuse or mis-handle.",
+      "evidence": "const extension = formatName(facts.mimeType) === \"MP4\" ? \"mp4\" : \"webm\";",
+      "suggested_fix": "Derive the extension from the MIME subtype (webm → .webm, mp4 → .mp4, quicktime → .mov, x-matroska → .mkv) and fall back to .webm only for genuinely unknown/webm-family types (or omit the extension).",
+      "packet": 6
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/src/infrastructure/entities/register-recording-entities.ts",
+      "line": 64,
+      "claim": "The recording subscription silently drops a change when the follow-up library.get fails once (e.g. transient OPFS lock contention with the tab still writing): no onChange is emitted and no retry/refetch happens, so a list can show a stale row (e.g. still 'recording' after it ended) indefinitely until a manual reload.",
+      "evidence": "void library.get(change.id).then((found) => { if (!active || !found.ok) return; ...",
+      "suggested_fix": "On a failed get, retry once after a short delay or fall back to onChange({ op: \"refetch\" })-style invalidation so the entity graph re-lists.",
+      "packet": 6
+    },
+    {
+      "severity": "WARNING",
+      "file": "apps/web/src/app/compose-meeting.ts",
+      "line": 40,
+      "claim": "End-of-meeting persistence for local history (WC-7) and recording finalization is initiated only as fire-and-forget async work inside a `pagehide` listener. Browsers routinely tear down the document before async IndexedDB/OPFS transactions and WebSocket sends started in `pagehide` complete, and closing the tab is the most common way users leave a meeting. If the history session is only persisted at end (the domain API start/end session shape suggests it is), the meeting disappears from this device's history entirely on tab close, and the consent 'recording ended' notification to other participants likely never delivers. The code's own comment concedes the writes may not finish ('the writes may not finish before the tab goes'). Additionally, `pagehide` also fires when the page enters the back/forward cache (`event.persisted`), so a user who navigates away and returns via Back restores a page whose history session and recording consent have already been terminated while the room object still exists — an inconsistent state with no re-arm path.",
+      "evidence": "addEventListener(\"pagehide\", () => {\n      void recording.end();\n      void useCases.endHistorySession();\n    });\n  }\n  return { useCases, room, recording }; — plus the comment: \"The page closing ends both, best effort (the writes may not finish before the tab goes; a recording cut off that way stays in the library as incomplete).\"",
+      "suggested_fix": "Persist incrementally: write the history session (and recording manifest) on join and checkpoint on each observable event (participant/chat/recording state changes) so the page can die at any moment with only the tail lost; flush on `visibilitychange` → hidden rather than waiting for `pagehide`; in the `pagehide` handler check `event.persisted` and skip destructive end-of-session work when the page may be restored from bfcache.",
+      "packet": 7
+    },
+    {
+      "severity": "WARNING",
+      "file": "infra/k8s/overlays/production/security-headers.yaml",
+      "line": 15,
+      "claim": "The CSP relaxations needed by the new features (`'wasm-unsafe-eval'` for PGlite/MediaPipe WASM, `blob:` in img-src/media-src/worker-src for local recordings and blob workers) are applied only to the Kubernetes response header, while the app also ships a second, independently authored policy injected as a `<meta http-equiv=\"Content-Security-Policy\">` by `cspMetaPlugin(buildContentSecurityPolicy(...))` in vite.config.ts. When a document receives both a header and a meta policy, the effective policy is the intersection of the two — so unless `buildContentSecurityPolicy` was extended in lockstep, every capability added to the YAML is still blocked in production (WASM instantiation, blob workers, blob media playback), and the feature works in one deployment path (static image alone, header-less) while silently failing behind the proxy. Two hand-maintained CSP sources for the same document is itself the defect; nothing in this diff keeps them equal.",
+      "evidence": "vite.config.ts: `plugins: [tailwindcss(), cspMetaPlugin(contentSecurityPolicy), mediapipeAssetsPlugin()],` where `contentSecurityPolicy = buildContentSecurityPolicy({...})`, vs. the header edit: `content-security-policy: \"default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; ... img-src 'self' data: blob:; media-src 'self' blob:; ... worker-src 'self' blob:; ...\"`",
+      "suggested_fix": "Make one source of truth: either generate the security-headers.yaml value from `buildContentSecurityPolicy` (script that emits the header string), or drop the injected meta policy in production builds, or add a CI check that asserts the two policies are byte-identical. Verify that the meta policy produced for the production build actually contains `'wasm-unsafe-eval'`, `img-src ... blob:`, `media-src ... blob:` and `worker-src 'self' blob:`.",
+      "packet": 7
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "apps/web/vite.config.ts",
+      "line": 31,
+      "claim": "Setting `worker: { format: \"es\" }` makes every worker an ES module worker with no fallback. Module workers are unsupported on older Safari (≤14) and Firefox (<114); on those browsers the PGlite history worker fails to construct, so the 'local history stays on the device' acceptance criterion silently yields an empty/broken history with no surfaced error path in this config.",
+      "evidence": "worker: { format: \"es\" },\n  optimizeDeps: { exclude: [\"@electric-sql/pglite\"] },",
+      "suggested_fix": "Either document the browser-support floor (and surface a friendly 'history unavailable on this browser' state from the history services), or add a classic-format fallback worker build for environments without module worker support.",
+      "packet": 7
+    }
+  ]
+}

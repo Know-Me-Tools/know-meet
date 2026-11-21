@@ -1,0 +1,224 @@
+{
+ "schema": "know-meet-selective-reference-promotion/v1",
+ "promotedAt": "2026-11-13T10:54:24.765808+00:00",
+ "revision": "v2.4",
+ "originalBaselineSetDigest": "00d11d22e84a6f8910c8d5fb016097b26c68e1187a41e2c59c11e6960e166e5d",
+ "baselineSetDigest": "ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79",
+ "manifestSha256": "7b657eb8322b039a6b4d215c79da0c483fa55574936148ac6b998a154cdd69d9",
+ "oracleSha256BeforeContractBinding": "9d22aff43e46425ace96dcafe8ca57a59862ad51e86f297fc33be7b3bfe575be",
+ "captureReceipt": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/reference-correction/candidate-scratch-d/receipt.json",
+ "captureReceiptSha256": "038bf6231d3dfbdab9a2dbdbb48b092c9aa693dc6b390d3d792bb2722c8c4324",
+ "designAdjudication": "docs/design/token-reconciliation/c13-reference-adjudication.md",
+ "designAdjudicationSha256": "a940b745a8c3238fcd0120e9bd81f4bc8630d6e852253cc47b56532b4a82d102",
+ "changes": [
+  {
+   "path": "dark/1024/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "0aadd732246bd94bc2f1f58a2ec7724e13decd74571acab944a6f82fcc040dfa",
+   "sha256": "91bf2108287e0825c2f4cedd1d00c3e1b770026a4d7656a56415349a00e39853",
+   "width": 1024,
+   "height": 2735
+  },
+  {
+   "path": "dark/1024/frame-nav-inline.png",
+   "kind": "footer",
+   "previousSha256": "c86e2ad3ddcb0eabf4600c960bf788ad3c2f4c582fbc32fb1516f98722ebb973",
+   "sha256": "6d8264f52c2ec971531881cac7b5dac7dd432ea696114cda658cbdd8466c909f",
+   "width": 1024,
+   "height": 4868
+  },
+  {
+   "path": "dark/1024/index-default.png",
+   "kind": "footer",
+   "previousSha256": "c86e2ad3ddcb0eabf4600c960bf788ad3c2f4c582fbc32fb1516f98722ebb973",
+   "sha256": "6d8264f52c2ec971531881cac7b5dac7dd432ea696114cda658cbdd8466c909f",
+   "width": 1024,
+   "height": 4868
+  },
+  {
+   "path": "dark/1440/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "ccc80eadcbee0939e16842d044798731a8f5ca47b930b991d1906ce3b48560aa",
+   "sha256": "349937cae867ee1c66187f068451a6a81dde8908032782d82c7b0bc8f7f94f42",
+   "width": 1440,
+   "height": 2558
+  },
+  {
+   "path": "dark/1440/frame-nav-inline.png",
+   "kind": "footer",
+   "previousSha256": "772937b9567e0061bba7a380dacdf2dc78983380e2116c201f367809ff035ac7",
+   "sha256": "aa956f6228a695e5e22b77af3777caa11a1137e536f0da2a7945e6433492d476",
+   "width": 1440,
+   "height": 4601
+  },
+  {
+   "path": "dark/1440/index-default.png",
+   "kind": "footer",
+   "previousSha256": "772937b9567e0061bba7a380dacdf2dc78983380e2116c201f367809ff035ac7",
+   "sha256": "aa956f6228a695e5e22b77af3777caa11a1137e536f0da2a7945e6433492d476",
+   "width": 1440,
+   "height": 4601
+  },
+  {
+   "path": "dark/375/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "306bcfe213a0204a58d12bb8d51ad247e117bf61f653712f25fcf8d7c208d7db",
+   "sha256": "fb1e5f5a34beee9da3e31e29ecf75b0a9f1d5f3944ccb4cc60d632e7c3376d77",
+   "width": 375,
+   "height": 4366
+  },
+  {
+   "path": "dark/375/frame-nav-bar.png",
+   "kind": "footer",
+   "previousSha256": "a3e4387cd42af4c38473dffd0b7d6837b3c5c2c7e3cc3e8a2544ccc1eab886a1",
+   "sha256": "8ed5247f878745c18dc4f73e080ff78cc71e015078879477cc9d15172656fe60",
+   "width": 375,
+   "height": 9304
+  },
+  {
+   "path": "dark/375/index-default.png",
+   "kind": "footer",
+   "previousSha256": "a3e4387cd42af4c38473dffd0b7d6837b3c5c2c7e3cc3e8a2544ccc1eab886a1",
+   "sha256": "8ed5247f878745c18dc4f73e080ff78cc71e015078879477cc9d15172656fe60",
+   "width": 375,
+   "height": 9304
+  },
+  {
+   "path": "dark/768/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "ae433ee3de70b61b655a7001128a05ccc2f7123a5b9ea07cca848948d7f285db",
+   "sha256": "364836ca3a5057a09cfa427d12af3ca8f7ad1b6e62ca3848c3a9c2ebe401ffa4",
+   "width": 768,
+   "height": 3382
+  },
+  {
+   "path": "dark/768/frame-nav-rail.png",
+   "kind": "footer",
+   "previousSha256": "d11cd594a3def744e9dea97fa97917e93caeea8bdfbefe4f12e222e7dca9b863",
+   "sha256": "4d92e6a5ab41aa70dae18c36b512bb3b1bb61203d309bf4818ef53fb5d7a3e5f",
+   "width": 768,
+   "height": 6595
+  },
+  {
+   "path": "dark/768/index-default.png",
+   "kind": "footer",
+   "previousSha256": "d11cd594a3def744e9dea97fa97917e93caeea8bdfbefe4f12e222e7dca9b863",
+   "sha256": "4d92e6a5ab41aa70dae18c36b512bb3b1bb61203d309bf4818ef53fb5d7a3e5f",
+   "width": 768,
+   "height": 6595
+  },
+  {
+   "path": "light/1024/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "f81456014e37561d1a399498022eda11f85d93be58aa5d1cee1b3c1b65ee4790",
+   "sha256": "312de82ffe4a735abbd85d9eaebadfc6360172d0287d51be8f7a78507e1ce679",
+   "width": 1024,
+   "height": 2735
+  },
+  {
+   "path": "light/1024/frame-nav-inline.png",
+   "kind": "footer",
+   "previousSha256": "529132e20f0f034a1f668982ec13750a8fa236dc4ed6e1098fa74ea97fc8f953",
+   "sha256": "2304bf1498f31b480a1c6e4dbc20a1996fcb6333ff21956e5ce018a1b98d137d",
+   "width": 1024,
+   "height": 4868
+  },
+  {
+   "path": "light/1024/index-default.png",
+   "kind": "footer",
+   "previousSha256": "529132e20f0f034a1f668982ec13750a8fa236dc4ed6e1098fa74ea97fc8f953",
+   "sha256": "2304bf1498f31b480a1c6e4dbc20a1996fcb6333ff21956e5ce018a1b98d137d",
+   "width": 1024,
+   "height": 4868
+  },
+  {
+   "path": "light/1440/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "19cccdb2e05f644fbd3b27bda3a14cdeb26bb20bc32da1238a270d039cd91983",
+   "sha256": "ec6eb829fa98dace1430f154fef88dfd71c22bbfc654132a3eb76544c2bb0dcb",
+   "width": 1440,
+   "height": 2558
+  },
+  {
+   "path": "light/1440/frame-nav-inline.png",
+   "kind": "footer",
+   "previousSha256": "357c9b63e56f01c4d919a3210792b213124bcdacdd6b141d94ebe5134ba39aca",
+   "sha256": "c79b1d9ce0e467226a1056e3c3188a2c86c12c8feefc3b1f03003c8f103b3fdb",
+   "width": 1440,
+   "height": 4601
+  },
+  {
+   "path": "light/1440/index-default.png",
+   "kind": "footer",
+   "previousSha256": "357c9b63e56f01c4d919a3210792b213124bcdacdd6b141d94ebe5134ba39aca",
+   "sha256": "c79b1d9ce0e467226a1056e3c3188a2c86c12c8feefc3b1f03003c8f103b3fdb",
+   "width": 1440,
+   "height": 4601
+  },
+  {
+   "path": "light/375/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "1d38ee39f6bebb82f85bf1467a5c3efaab405aad17b47b59b2ef62ff01561d62",
+   "sha256": "292d6ceba6e7f567db28795559c6434f798c2a10b40d1db93072858f673b8589",
+   "width": 375,
+   "height": 4366
+  },
+  {
+   "path": "light/375/frame-nav-bar.png",
+   "kind": "footer",
+   "previousSha256": "c1452bbb94a0b5a007541a79d6c2ebc8b22f1fa4e28ace45a1d4e78f355a2a3b",
+   "sha256": "b77f3d36600c7878be41cc8055040293ed93890ef51efe63fa833b777ffb4798",
+   "width": 375,
+   "height": 9304
+  },
+  {
+   "path": "light/375/index-default.png",
+   "kind": "footer",
+   "previousSha256": "c1452bbb94a0b5a007541a79d6c2ebc8b22f1fa4e28ace45a1d4e78f355a2a3b",
+   "sha256": "b77f3d36600c7878be41cc8055040293ed93890ef51efe63fa833b777ffb4798",
+   "width": 375,
+   "height": 9304
+  },
+  {
+   "path": "light/768/dashboard-schedule.png",
+   "kind": "schedule",
+   "previousSha256": "659737f44cdf25f38a71056d6adeec1cecc8b7dcfcd593fa47b010cdf1d15407",
+   "sha256": "c6e73779d4b6d6c7b520ca2c51cc3dc38d2131cdc5a8b6bb242474c768034c44",
+   "width": 768,
+   "height": 3382
+  },
+  {
+   "path": "light/768/frame-nav-rail.png",
+   "kind": "footer",
+   "previousSha256": "c36e1a0081d75c821b05dc8f06d3f4bb4dee46b9abebb5e6f574bad4ca0aa602",
+   "sha256": "347ed32679ebf190f4200df4d03b3bb9ba55514c428c1abb71561134ded3e8ec",
+   "width": 768,
+   "height": 6595
+  },
+  {
+   "path": "light/768/index-default.png",
+   "kind": "footer",
+   "previousSha256": "c36e1a0081d75c821b05dc8f06d3f4bb4dee46b9abebb5e6f574bad4ca0aa602",
+   "sha256": "347ed32679ebf190f4200df4d03b3bb9ba55514c428c1abb71561134ded3e8ec",
+   "width": 768,
+   "height": 6595
+  },
+  {
+   "path": "light/768/recordings-processing-partner-onboarding-1014.png",
+   "kind": "processing",
+   "previousSha256": "82594af1edb25dbd3bc5e26c8f7e79dfa231b98c89d6b8b1a2881dbb6048bbc3",
+   "sha256": "6bcfc686ba2145595a1edbe2f2a65ad1977a23703895ed3c22c4e0bcebe3c8e1",
+   "width": 768,
+   "height": 1031
+  }
+ ],
+ "unchanged": "527 other gating images,48 informational references, frozen environment, pixel defaults, per-state thresholds, matrix and rubric",
+ "contractBinding": {
+  "status": "adopted",
+  "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
+  "bindingRevision": 5,
+  "planVersion": 1,
+  "decisionId": "contract-adoption-hybrid-shell-foundation-6d674890"
+ },
+ "oracleSha256AfterContractBinding": "6bf32574df71ee978368b0e88e905ce62bf6c0b937202a3843c6bf0180d654ea"
+}

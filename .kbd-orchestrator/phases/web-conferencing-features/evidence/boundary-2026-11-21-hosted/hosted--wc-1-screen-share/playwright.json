@@ -1,0 +1,368 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "wc-1-screen-share.spec.ts",
+      "--project=hosted"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream",
+              "--auto-select-desktop-capture-source=Entire screen"
+            ]
+          },
+          "baseURL": "https://meet.know-me.tools"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "hosted"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "wc-1-screen-share.spec.ts",
+      "file": "wc-1-screen-share.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-1 Screen share reaches the other participant and stops cleanly",
+          "file": "wc-1-screen-share.spec.ts",
+          "line": 94,
+          "column": 6,
+          "specs": [
+            {
+              "title": "B sees A's screen share with rendered size, and it is gone within 10 s of A stopping",
+              "ok": true,
+              "tags": [
+                "WC-1",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8660,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T13:18:45.587Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-1-share-observed-by-b.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS02eDEta2VrIiwKICAic2VlbiI6IHsKICAgICJ0aWxlcyI6IDEsCiAgICAic291cmNlIjogInNjcmVlbl9zaGFyZSIsCiAgICAibGl2ZVZpZGVvVHJhY2siOiB0cnVlLAogICAgInZpZGVvV2lkdGgiOiA5NjAsCiAgICAidmlkZW9IZWlnaHQiOiA1NDAsCiAgICAiYm94V2lkdGgiOiAxMjMyLAogICAgImJveEhlaWdodCI6IDM3NC4zOTA2MjUKICB9Cn0="
+                        },
+                        {
+                          "name": "wc-1-b-sees-share",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/attachments/wc-1-b-sees-share-e56b0782165a97ec1f9c991545a8e93df496286b.png"
+                        },
+                        {
+                          "name": "wc-1-a-sharing",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/attachments/wc-1-a-sharing-01feb095b73c4ec5427e4bf4c9b0484c3545b60a.png"
+                        },
+                        {
+                          "name": "wc-1-b-after-stop",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/attachments/wc-1-b-after-stop-116965871ede19b86b32ee44780f27ccf39fe3fa.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-3aec6-e-within-10-s-of-A-stopping-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "25470f1d70d334d05e5c-5e879d316133b3211572",
+              "file": "wc-1-screen-share.spec.ts",
+              "line": 95,
+              "column": 3
+            },
+            {
+              "title": "without starting a share, B reports no ScreenShare track",
+              "ok": true,
+              "tags": [
+                "WC-1",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T13:18:55.313Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-1-negative-b-no-share",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-f3a80-eports-no-ScreenShare-track-hosted/attachments/wc-1-negative-b-no-share-43164dcb52d8d3075f2eb93c6feb43f9b348a7b1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-f3a80-eports-no-ScreenShare-track-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-f3a80-eports-no-ScreenShare-track-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/test-results/wc-1-screen-share-WC-1-Scr-f3a80-eports-no-ScreenShare-track-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "25470f1d70d334d05e5c-97581b6704b368e390bf",
+              "file": "wc-1-screen-share.spec.ts",
+              "line": 140,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-21T13:18:45.292Z",
+    "duration": 22744.377999999997,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

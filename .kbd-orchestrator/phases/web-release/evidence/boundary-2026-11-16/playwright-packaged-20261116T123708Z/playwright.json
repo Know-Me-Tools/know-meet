@@ -1,0 +1,1444 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "--project=packaged"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream"
+            ]
+          },
+          "baseURL": "http://localhost:18080"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "packaged"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accessibility.spec.ts",
+      "file": "accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-8 The three shipped screens are accessible",
+          "file": "accessibility.spec.ts",
+          "line": 102,
+          "column": 6,
+          "specs": [
+            {
+              "title": "home, join lobby and meeting room pass axe and the fill probe in dark at all widths",
+              "ok": true,
+              "tags": [
+                "WR-8",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12514,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:10.706Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-8-home-dark-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-home-dark-375-59974416e53311b13b527c1afeae6c6e462779a1.png"
+                        },
+                        {
+                          "name": "wr-8-home-dark-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-home-dark-768-b76dcbc56b92224161a3006db91867a1f7304b56.png"
+                        },
+                        {
+                          "name": "wr-8-home-dark-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-home-dark-1024-972c9bb329c418e586eb854b896ebf1f66c1cbb5.png"
+                        },
+                        {
+                          "name": "wr-8-home-dark-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-home-dark-1440-2668c495f572aa60f057f2ae9721b4f4ec9d6566.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-dark-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-join-lobby-dark-375-0857846f8896c751cf74320740257fc8e67c7cb4.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-dark-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-join-lobby-dark-768-74268173e70eebaed4418b143e091acd7c81399e.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-dark-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-join-lobby-dark-1024-b8f9b189be79d7b0d5d3f1f47251122ce3ee4259.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-dark-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-join-lobby-dark-1440-c1f6df4b4f2a1987c3a8e8be84aae4483301deae.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-dark-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-meeting-room-dark-375-08d9ee659c97a5a6bed36fa3cbd3cdd0abce6f63.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-dark-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-meeting-room-dark-768-0e0a70cb0b4249674fafbe622c08ef543ca15f48.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-dark-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-meeting-room-dark-1024-f4c46c83b4e78eaec5506d4bdbf9393b214290f9.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-dark-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/attachments/wr-8-meeting-room-dark-1440-b20278426ca08803622cd467def0d863b8ad704d.png"
+                        },
+                        {
+                          "name": "wr-8-axe-dark.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJob21lL2RhcmsvMzc1IjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1zdGFydC1tZWV0aW5nIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDI1MCw5NSw0OCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNi4xNzI0MjMyNDA1MjMwNTk1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4tY29kZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyNCwzMSw0MywxKSIsCiAgICAgICAgInJhdGlvIjogMy41NjI3ODQ5ODc0Njk4MDAzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4iLAogICAgICAgICJmaWxsIjogInJnYmEoMjUwLDk1LDQ4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDI0LDMxLDQzLDEpIiwKICAgICAgICAicmF0aW8iOiA1LjMxMTcwODM3MTkxNzExOQogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJob21lL2RhcmsvNzY4IjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1zdGFydC1tZWV0aW5nIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDI1MCw5NSw0OCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNi4xNzI0MjMyNDA1MjMwNTk1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4tY29kZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyNCwzMSw0MywxKSIsCiAgICAgICAgInJhdGlvIjogMy41NjI3ODQ5ODc0Njk4MDAzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4iLAogICAgICAgICJmaWxsIjogInJnYmEoMjUwLDk1LDQ4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDI0LDMxLDQzLDEpIiwKICAgICAgICAicmF0aW8iOiA1LjMxMTcwODM3MTkxNzExOQogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJob21lL2RhcmsvMTAyNCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtc3RhcnQtbWVldGluZyIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDYuMTcyNDIzMjQwNTIzMDU5NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luLWNvZGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjQsMzEsNDMsMSkiLAogICAgICAgICJyYXRpbyI6IDMuNTYyNzg0OTg3NDY5ODAwMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDI1MCw5NSw0OCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyNCwzMSw0MywxKSIsCiAgICAgICAgInJhdGlvIjogNS4zMTE3MDgzNzE5MTcxMTkKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAiaG9tZS9kYXJrLzE0NDAiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLXN0YXJ0LW1lZXRpbmciLAogICAgICAgICJmaWxsIjogInJnYmEoMjUwLDk1LDQ4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA2LjE3MjQyMzI0MDUyMzA1OTUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbi1jb2RlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDI0LDMxLDQzLDEpIiwKICAgICAgICAicmF0aW8iOiAzLjU2Mjc4NDk4NzQ2OTgwMDMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjQsMzEsNDMsMSkiLAogICAgICAgICJyYXRpbyI6IDUuMzExNzA4MzcxOTE3MTE5CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgImpvaW4tbG9iYnkvZGFyay8zNzUiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1taWMtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktY2FtZXJhLXRvZ2dsZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LWRpc3BsYXktbmFtZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LWpvaW4iLAogICAgICAgICJmaWxsIjogInJnYmEoMjUwLDk1LDQ4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA2LjE3MjQyMzI0MDUyMzA1OTUKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAiam9pbi1sb2JieS9kYXJrLzc2OCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LW1pYy10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1jYW1lcmEtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktZGlzcGxheS1uYW1lIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDYuMTcyNDIzMjQwNTIzMDU5NQogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJqb2luLWxvYmJ5L2RhcmsvMTAyNCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LW1pYy10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1jYW1lcmEtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktZGlzcGxheS1uYW1lIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDYuMTcyNDIzMjQwNTIzMDU5NQogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJqb2luLWxvYmJ5L2RhcmsvMTQ0MCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LW1pYy10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1jYW1lcmEtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktZGlzcGxheS1uYW1lIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDYuMTcyNDIzMjQwNTIzMDU5NQogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJtZWV0aW5nLXJvb20vZGFyay8zNzUiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtbWljIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1tdXRlLWNhbWVyYSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImJ1dHRvbiBcIkNvcHkgam9pbiBsaW5rXCIiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLWxlYXZlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDIyMCwzOCwzOCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogMy45Nzk2MDk5OTA3NDUwMDIKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAibWVldGluZy1yb29tL2RhcmsvNzY4IjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1tdXRlLW1pYyIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbXV0ZS1jYW1lcmEiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJidXR0b24gXCJDb3B5IGpvaW4gbGlua1wiIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1sZWF2ZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyMjAsMzgsMzgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDMuOTc5NjA5OTkwNzQ1MDAyCiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgIm1lZXRpbmctcm9vbS9kYXJrLzEwMjQiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtbWljIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1tdXRlLWNhbWVyYSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImJ1dHRvbiBcIkNvcHkgam9pbiBsaW5rXCIiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLWxlYXZlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDIyMCwzOCwzOCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogMy45Nzk2MDk5OTA3NDUwMDIKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAibWVldGluZy1yb29tL2RhcmsvMTQ0MCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbXV0ZS1taWMiLAogICAgICAgICJmaWxsIjogInJnYmEoMTA0LDExNywxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDQuMTQwMTAyNDUyNTIwMDMzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtY2FtZXJhIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjE0MDEwMjQ1MjUyMDAzMwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAiYnV0dG9uIFwiQ29weSBqb2luIGxpbmtcIiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMDQsMTE3LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgxMSwxNSwyMCwxKSIsCiAgICAgICAgInJhdGlvIjogNC4xNDAxMDI0NTI1MjAwMzMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbGVhdmUiLAogICAgICAgICJmaWxsIjogInJnYmEoMjIwLDM4LDM4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiAzLjk3OTYwOTk5MDc0NTAwMgogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9Cn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-af7b9-probe-in-dark-at-all-widths-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ddd864604af8a6a0198f-a783aa9800342b58f19a",
+              "file": "accessibility.spec.ts",
+              "line": 104,
+              "column": 5
+            },
+            {
+              "title": "home, join lobby and meeting room pass axe and the fill probe in light at all widths",
+              "ok": true,
+              "tags": [
+                "WR-8",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11834,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:24.488Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-8-home-light-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-home-light-375-7c742f8c68231c766dd53c32174e4a4bf56b2e08.png"
+                        },
+                        {
+                          "name": "wr-8-home-light-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-home-light-768-c156ce80bfd2c8576e0f6d52803bc1a597ee4461.png"
+                        },
+                        {
+                          "name": "wr-8-home-light-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-home-light-1024-9c4a1ccb73dded36a5ef8b07faa6de0d7f9b6e15.png"
+                        },
+                        {
+                          "name": "wr-8-home-light-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-home-light-1440-293b19507d739965e4682c1bf823a2d5ea6bb265.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-light-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-join-lobby-light-375-b915e8243de57683cca50480e598e404cc8e0d8a.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-light-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-join-lobby-light-768-b39fc6b98ea56b9a9d5e0faa28dd4f266e2caceb.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-light-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-join-lobby-light-1024-b9a39e274e83d06884e9b60f0031e3d3d8968999.png"
+                        },
+                        {
+                          "name": "wr-8-join-lobby-light-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-join-lobby-light-1440-f05208b44c713ce4132a1900b1c0f00fdc324e3e.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-light-375",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-meeting-room-light-375-c1318d1891da5554a73b95a5534709b04b99c7f4.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-light-768",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-meeting-room-light-768-12999e99baf3daa3607abdec7ff031d92ac296d8.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-light-1024",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-meeting-room-light-1024-79f9003aca532f2c6feab3c5e22c85b77025c91b.png"
+                        },
+                        {
+                          "name": "wr-8-meeting-room-light-1440",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/attachments/wr-8-meeting-room-light-1440-a2b664cea54cce34b4babb298c1e45e4b975200d.png"
+                        },
+                        {
+                          "name": "wr-8-axe-light.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJob21lL2xpZ2h0LzM3NSI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtc3RhcnQtbWVldGluZyIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxOTMsNjIsMzAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuOTE2MTk0NDM1NTMzOTY5MwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luLWNvZGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjM2LDIzOCwyNDEsMSkiLAogICAgICAgICJyYXRpbyI6IDMuNTIwODM5NjM4MDUxMDAyOAogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDE5Myw2MiwzMCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMzYsMjM4LDI0MSwxKSIsCiAgICAgICAgInJhdGlvIjogNC41NDQ3MTcyNDg0MjQyMjQKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAiaG9tZS9saWdodC83NjgiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLXN0YXJ0LW1lZXRpbmciLAogICAgICAgICJmaWxsIjogInJnYmEoMTkzLDYyLDMwLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjkxNjE5NDQzNTUzMzk2OTMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbi1jb2RlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIzNiwyMzgsMjQxLDEpIiwKICAgICAgICAicmF0aW8iOiAzLjUyMDgzOTYzODA1MTAwMjgKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxOTMsNjIsMzAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjM2LDIzOCwyNDEsMSkiLAogICAgICAgICJyYXRpbyI6IDQuNTQ0NzE3MjQ4NDI0MjI0CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgImhvbWUvbGlnaHQvMTAyNCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtc3RhcnQtbWVldGluZyIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxOTMsNjIsMzAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuOTE2MTk0NDM1NTMzOTY5MwogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luLWNvZGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjM2LDIzOCwyNDEsMSkiLAogICAgICAgICJyYXRpbyI6IDMuNTIwODM5NjM4MDUxMDAyOAogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1qb2luIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDE5Myw2MiwzMCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMzYsMjM4LDI0MSwxKSIsCiAgICAgICAgInJhdGlvIjogNC41NDQ3MTcyNDg0MjQyMjQKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAiaG9tZS9saWdodC8xNDQwIjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20taG9tZS1zdGFydC1tZWV0aW5nIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDE5Myw2MiwzMCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy45MTYxOTQ0MzU1MzM5NjkzCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4tY29kZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMzYsMjM4LDI0MSwxKSIsCiAgICAgICAgInJhdGlvIjogMy41MjA4Mzk2MzgwNTEwMDI4CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLWpvaW4iLAogICAgICAgICJmaWxsIjogInJnYmEoMTkzLDYyLDMwLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIzNiwyMzgsMjQxLDEpIiwKICAgICAgICAicmF0aW8iOiA0LjU0NDcxNzI0ODQyNDIyNAogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJqb2luLWxvYmJ5L2xpZ2h0LzM3NSI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LW1pYy10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktY2FtZXJhLXRvZ2dsZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1kaXNwbGF5LW5hbWUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxOTMsNjIsMzAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuOTE2MTk0NDM1NTMzOTY5MwogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJqb2luLWxvYmJ5L2xpZ2h0Lzc2OCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LW1pYy10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktY2FtZXJhLXRvZ2dsZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1kaXNwbGF5LW5hbWUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxOTMsNjIsMzAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuOTE2MTk0NDM1NTMzOTY5MwogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJqb2luLWxvYmJ5L2xpZ2h0LzEwMjQiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1taWMtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LWNhbWVyYS10b2dnbGUiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktZGlzcGxheS1uYW1lIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LWpvaW4iLAogICAgICAgICJmaWxsIjogInJnYmEoMTkzLDYyLDMwLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjkxNjE5NDQzNTUzMzk2OTMKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfSwKICAiam9pbi1sb2JieS9saWdodC8xNDQwIjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tbG9iYnktbWljLXRvZ2dsZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1jYW1lcmEtdG9nZ2xlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWxvYmJ5LWRpc3BsYXktbmFtZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1sb2JieS1qb2luIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDE5Myw2MiwzMCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy45MTYxOTQ0MzU1MzM5NjkzCiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgIm1lZXRpbmctcm9vbS9saWdodC8zNzUiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtbWljIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbXV0ZS1jYW1lcmEiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAiYnV0dG9uIFwiQ29weSBqb2luIGxpbmtcIiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLWxlYXZlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDIyMCwzOCwzOCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy41ODAxOTkyMTI1ODI0NDc2CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgIm1lZXRpbmctcm9vbS9saWdodC83NjgiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtbWljIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbXV0ZS1jYW1lcmEiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAiYnV0dG9uIFwiQ29weSBqb2luIGxpbmtcIiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLWxlYXZlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDIyMCwzOCwzOCwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy41ODAxOTkyMTI1ODI0NDc2CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgIm1lZXRpbmctcm9vbS9saWdodC8xMDI0IjogewogICAgImF4ZSI6IFtdLAogICAgImZpbGxzIjogWwogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1tdXRlLW1pYyIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1yb29tLW11dGUtY2FtZXJhIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImJ1dHRvbiBcIkNvcHkgam9pbiBsaW5rXCIiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1sZWF2ZSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyMjAsMzgsMzgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuNTgwMTk5MjEyNTgyNDQ3NgogICAgICB9CiAgICBdLAogICAgInByb2JsZW1zIjogW10KICB9LAogICJtZWV0aW5nLXJvb20vbGlnaHQvMTQ0MCI6IHsKICAgICJheGUiOiBbXSwKICAgICJmaWxscyI6IFsKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbXV0ZS1taWMiLAogICAgICAgICJmaWxsIjogInJnYmEoMTE3LDEyNiwxNDIsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjIwLDIyMiwyMjQsMSkiLAogICAgICAgICJyYXRpbyI6IDMuMDMzOTE2NDg5MjQzMzE3NQogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbnRyb2wiOiAia20tcm9vbS1tdXRlLWNhbWVyYSIsCiAgICAgICAgImZpbGwiOiAicmdiYSgxMTcsMTI2LDE0MiwxKSIsCiAgICAgICAgInN1cmZhY2UiOiAicmdiYSgyMjAsMjIyLDIyNCwxKSIsCiAgICAgICAgInJhdGlvIjogMy4wMzM5MTY0ODkyNDMzMTc1CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJidXR0b24gXCJDb3B5IGpvaW4gbGlua1wiIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDExNywxMjYsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjAzMzkxNjQ4OTI0MzMxNzUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLXJvb20tbGVhdmUiLAogICAgICAgICJmaWxsIjogInJnYmEoMjIwLDM4LDM4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDIyMCwyMjIsMjI0LDEpIiwKICAgICAgICAicmF0aW8iOiAzLjU4MDE5OTIxMjU4MjQ0NzYKICAgICAgfQogICAgXSwKICAgICJwcm9ibGVtcyI6IFtdCiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-1435d-robe-in-light-at-all-widths-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ddd864604af8a6a0198f-0532fd0b3aea429c8c8f",
+              "file": "accessibility.spec.ts",
+              "line": 104,
+              "column": 5
+            },
+            {
+              "title": "the guest flow is reachable and operable by keyboard with focus shown by fill",
+              "ok": true,
+              "tags": [
+                "WR-8",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3235,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:42.663Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-8-keyboard.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwcm9ibGVtcyI6IFtdCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-5689b-rd-with-focus-shown-by-fill-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-5689b-rd-with-focus-shown-by-fill-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ddd864604af8a6a0198f-9b3e28fbddc9edf45c05",
+              "file": "accessibility.spec.ts",
+              "line": 138,
+              "column": 3
+            },
+            {
+              "title": "motion stops under prefers-reduced-motion",
+              "ok": true,
+              "tags": [
+                "WR-8",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2660,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:46.157Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-8-reduced-motion.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJmb3VuZCI6IFtdCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-725bf-nder-prefers-reduced-motion-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-725bf-nder-prefers-reduced-motion-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ddd864604af8a6a0198f-f2c26af2405cf7724782",
+              "file": "accessibility.spec.ts",
+              "line": 197,
+              "column": 3
+            },
+            {
+              "title": "a control fill lowered below 3:1 fails the audit",
+              "ok": true,
+              "tags": [
+                "WR-8",
+                "negative-control",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1124,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:48.884Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-8-negative.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiZWZvcmUiOiB7CiAgICAiYXhlIjogW10sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLXN0YXJ0LW1lZXRpbmciLAogICAgICAgICJmaWxsIjogInJnYmEoMjUwLDk1LDQ4LDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDExLDE1LDIwLDEpIiwKICAgICAgICAicmF0aW8iOiA2LjE3MjQyMzI0MDUyMzA1OTUKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbi1jb2RlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDI0LDMxLDQzLDEpIiwKICAgICAgICAicmF0aW8iOiAzLjU2Mjc4NDk4NzQ2OTgwMDMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjQsMzEsNDMsMSkiLAogICAgICAgICJyYXRpbyI6IDUuMzExNzA4MzcxOTE3MTE5CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbXQogIH0sCiAgImFmdGVyIjogewogICAgImF4ZSI6IFsKICAgICAgewogICAgICAgICJpZCI6ICJjb2xvci1jb250cmFzdCIsCiAgICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgICAibm9kZXMiOiAxCiAgICAgIH0KICAgIF0sCiAgICAiZmlsbHMiOiBbCiAgICAgIHsKICAgICAgICAiY29udHJvbCI6ICJrbS1ob21lLXN0YXJ0LW1lZXRpbmciLAogICAgICAgICJmaWxsIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMTEsMTUsMjAsMSkiLAogICAgICAgICJyYXRpbyI6IDEKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbi1jb2RlIiwKICAgICAgICAiZmlsbCI6ICJyZ2JhKDEwNCwxMTcsMTQyLDEpIiwKICAgICAgICAic3VyZmFjZSI6ICJyZ2JhKDI0LDMxLDQzLDEpIiwKICAgICAgICAicmF0aW8iOiAzLjU2Mjc4NDk4NzQ2OTgwMDMKICAgICAgfSwKICAgICAgewogICAgICAgICJjb250cm9sIjogImttLWhvbWUtam9pbiIsCiAgICAgICAgImZpbGwiOiAicmdiYSgyNTAsOTUsNDgsMSkiLAogICAgICAgICJzdXJmYWNlIjogInJnYmEoMjQsMzEsNDMsMSkiLAogICAgICAgICJyYXRpbyI6IDUuMzExNzA4MzcxOTE3MTE5CiAgICAgIH0KICAgIF0sCiAgICAicHJvYmxlbXMiOiBbCiAgICAgICJheGUgY29sb3ItY29udHJhc3QgKHNlcmlvdXMsIDEgbm9kZXMpIiwKICAgICAgImZpbGwtY29udHJhc3Qga20taG9tZS1zdGFydC1tZWV0aW5nOiAxLjAwOjEgKHJnYmEoMTEsMTUsMjAsMSkgb24gcmdiYSgxMSwxNSwyMCwxKSkiCiAgICBdCiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-db447-d-below-3-1-fails-the-audit-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/accessibility-WR-8-The-thr-db447-d-below-3-1-fails-the-audit-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ddd864604af8a6a0198f-1ca8a04cf9aefbd20a42",
+              "file": "accessibility.spec.ts",
+              "line": 247,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "headers.spec.ts",
+      "file": "headers.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-3 Valid TLS and security headers at the public URL",
+          "file": "headers.spec.ts",
+          "line": 59,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the same header assertions fail for HSTS on the bare static image",
+              "ok": true,
+              "tags": [
+                "WR-3",
+                "negative-control",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:50.177Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-3-negative.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJ0YXJnZXQiOiAiaHR0cDovLzEyNy4wLjAuMToxODA4MS8iLAogICJzdGF0dXMiOiAyMDAsCiAgImhlYWRlcnMiOiB7CiAgICAidmFyeSI6ICJhY2NlcHQtZW5jb2RpbmciLAogICAgImNvbnRlbnQtdHlwZSI6ICJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiLAogICAgImFjY2VwdC1yYW5nZXMiOiAiYnl0ZXMiLAogICAgImxhc3QtbW9kaWZpZWQiOiAiTW9uLCAxNiBOb3YgMjAyNiAxMjoyNzozNiBHTVQiLAogICAgImNvbnRlbnQtZW5jb2RpbmciOiAiYnIiLAogICAgImNhY2hlLWNvbnRyb2wiOiAibm8tY2FjaGUiLAogICAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiLAogICAgImRhdGUiOiAiTW9uLCAxNiBOb3YgMjAyNiAxMjozNzo1MCBHTVQiCiAgfSwKICAicHJvYmxlbXMiOiBbCiAgICAic3RyaWN0LXRyYW5zcG9ydC1zZWN1cml0eTogbWlzc2luZyIsCiAgICAiY29udGVudC1zZWN1cml0eS1wb2xpY3k6IG1pc3NpbmciLAogICAgIngtY29udGVudC10eXBlLW9wdGlvbnM6IG5vdCBub3NuaWZmIiwKICAgICJ4LWZyYW1lLW9wdGlvbnMvZnJhbWUtYW5jZXN0b3JzOiBmcmFtaW5nIGlzIG5vdCBkZW5pZWQiLAogICAgInJlZmVycmVyLXBvbGljeTogbWlzc2luZyIsCiAgICAicGVybWlzc2lvbnMtcG9saWN5OiBtaXNzaW5nIgogIF0KfQ=="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/headers-WR-3-Valid-TLS-and-ce289-TS-on-the-bare-static-image-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "367f6b702648c3bae834-e7bf0302de0e1b269b2b",
+              "file": "headers.spec.ts",
+              "line": 101,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "hosting.spec.ts",
+      "file": "hosting.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-2 Deep links and reloads return the app",
+          "file": "hosting.spec.ts",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the / route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 464,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:50.208Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-home.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi8iLAogICJzdGF0dXMiOiAyMDAsCiAgImNvbnRlbnRUeXBlIjogInRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIKfQ=="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-packaged/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-ee375fbd05c961ee3e6b",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            },
+            {
+              "title": "the /join route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:50.702Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-join.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi9qb2luIiwKICAic3RhdHVzIjogMjAwLAogICJjb250ZW50VHlwZSI6ICJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-packaged/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-58147560a50f4d038649",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            },
+            {
+              "title": "the /meet route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 355,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:51.130Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-meet.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi9tZWV0IiwKICAic3RhdHVzIjogMjAwLAogICJjb250ZW50VHlwZSI6ICJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-packaged/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-55e6d621c483ca7538a6",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            },
+            {
+              "title": "a missing asset is a 404, not the app document",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 21,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:51.508Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-missing-asset.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiA0MDQsCiAgImNvbnRlbnRUeXBlIjogInRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIKfQ=="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/hosting-WR-2-Deep-links-an-27dcc--a-404-not-the-app-document-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-20d3ca01ad5a1baec004",
+              "file": "hosting.spec.ts",
+              "line": 52,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "meeting.spec.ts",
+      "file": "meeting.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-1 Two guests hold a real meeting at the public URL",
+          "file": "meeting.spec.ts",
+          "line": 28,
+          "column": 6,
+          "specs": [
+            {
+              "title": "two guests see and hear each other, mute, and leave",
+              "ok": true,
+              "tags": [
+                "WR-1",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5683,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:51.542Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-1-run.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAiLAogICJyb29tQ29kZSI6ICJrbS1lOTEtYjcyIiwKICAiaW1hZ2VEaWdlc3RzIjogInNoYTI1NjplNjQ4MTFjZWIwY2MyNzZjNDRjMGY2YzllYjJmNjAxODM2YmZmYjI0ODA3NmM4YjNjNTllNTUyMzA1ZmUxYzgyLHNoYTI1NjpjYzI5MmE2ODExNjE2Njk5OGNjMDkxY2RhOTBjYWYzM2UyZmZhMTc2MDk3YTkwN2Q0ZTY3ZDNiZmJlNGNhZWM4IiwKICAicHJvamVjdCI6ICJwYWNrYWdlZCIKfQ=="
+                        },
+                        {
+                          "name": "wr-1-remote-media.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzZWVuQnlBIjogewogICAgInJlbW90ZVBhcnRpY2lwYW50cyI6IDEsCiAgICAidmlkZW8iOiB7CiAgICAgICJsaXZlVmlkZW9UcmFjayI6IHRydWUsCiAgICAgICJ2aWRlb1dpZHRoIjogMzIwLAogICAgICAidmlkZW9IZWlnaHQiOiAxODAsCiAgICAgICJib3hXaWR0aCI6IDYxMCwKICAgICAgImJveEhlaWdodCI6IDM4MS4yNQogICAgfSwKICAgICJhdWRpbyI6IHsKICAgICAgImxpdmVBdWRpb1RyYWNrIjogdHJ1ZQogICAgfQogIH0sCiAgInNlZW5CeUIiOiB7CiAgICAicmVtb3RlUGFydGljaXBhbnRzIjogMSwKICAgICJ2aWRlbyI6IHsKICAgICAgImxpdmVWaWRlb1RyYWNrIjogdHJ1ZSwKICAgICAgInZpZGVvV2lkdGgiOiAxMjgwLAogICAgICAidmlkZW9IZWlnaHQiOiA3MjAsCiAgICAgICJib3hXaWR0aCI6IDYxMCwKICAgICAgImJveEhlaWdodCI6IDM4MS4yNQogICAgfSwKICAgICJhdWRpbyI6IHsKICAgICAgImxpdmVBdWRpb1RyYWNrIjogdHJ1ZQogICAgfQogIH0KfQ=="
+                        },
+                        {
+                          "name": "wr-1-context-a-connected",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/attachments/wr-1-context-a-connected-3c94670abb227ca556af50b4d22f2fc159885b27.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-connected",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/attachments/wr-1-context-b-connected-538927326fd14053f0c9bb0f4c8fd82b57e1f1fe.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-sees-a-muted",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/attachments/wr-1-context-b-sees-a-muted-0adc5623237b4df74ea4019862263ee07a3e0e03.png"
+                        },
+                        {
+                          "name": "wr-1-context-a-left",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/attachments/wr-1-context-a-left-4f2b9a58f3e45526900906af64c6efcfaa8cb98c.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-alone",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/attachments/wr-1-context-b-alone-9edc96507100f3cc553b0d83a57dec589e684f69.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e3edbeebe5c900494fe7-f758d4310e30c809f8d2",
+              "file": "meeting.spec.ts",
+              "line": 29,
+              "column": 3
+            },
+            {
+              "title": "a well-formed code that was never issued is refused",
+              "ok": true,
+              "tags": [
+                "WR-1",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 700,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:57.487Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-1-negative-meeting-not-found",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-a5fd5-was-never-issued-is-refused-packaged/attachments/wr-1-negative-meeting-not-found-ca865a45dfcf9e7666372c743950dd12a0a184cc.png"
+                        },
+                        {
+                          "name": "wr-1-negative.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb2RlIjogImttLXM5ei1ubzIiLAogICJ3ZWJTb2NrZXRzIjogW10KfQ=="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-a5fd5-was-never-issued-is-refused-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/meeting-WR-1-Two-guests-ho-a5fd5-was-never-issued-is-refused-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e3edbeebe5c900494fe7-275535fe60e8685120bb",
+              "file": "meeting.spec.ts",
+              "line": 79,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "surface.spec.ts",
+      "file": "surface.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-5 Screens on sample data are not reachable in the hosted build",
+          "file": "surface.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "only home, join and the meeting room are reachable",
+              "ok": true,
+              "tags": [
+                "WR-5",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1861,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:37:58.265Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-5-surface.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAiLAogICJwcm9ibGVtcyI6IFtdLAogICJsaW5rc0J5UGF0aCI6IHsKICAgICIvIjogWwogICAgICAiLyIsCiAgICAgICIvIiwKICAgICAgIi8iCiAgICBdLAogICAgIi9qb2luIjogWwogICAgICAiL2pvaW4iLAogICAgICAiLyIKICAgIF0sCiAgICAiL21lZXQiOiBbCiAgICAgICIvbWVldCIsCiAgICAgICIvIiwKICAgICAgIi8iCiAgICBdCiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-packaged/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7387f18eb7e0b24c642c-66e53edd296548407c2b",
+              "file": "surface.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "the same checks fail on the default build because /dashboard renders",
+              "ok": false,
+              "tags": [
+                "WR-5",
+                "negative-control",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 126444,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/auth\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/auth\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/auth\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/auth\", waiting until \"load\"\u001b[22m\n\n    at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:90:18\n    at withPage (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:64:12)\n    at surfaceProblems (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:74:3)\n    at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/surface.spec.ts:34:22",
+                        "location": {
+                          "file": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts",
+                          "column": 18,
+                          "line": 90
+                        },
+                        "snippet": "   at src/surface-checks.ts:90\n\n  88 |     }\n  89 |     for (const path of EXCLUDED_PATHS) {\n> 90 |       await page.goto(path);\n     |                  ^\n  91 |       if (!(await showsNotFound(page))) {\n  92 |         problems.push(`${path}: does not render the not-found state`);\n  93 |       }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts",
+                            "column": 18,
+                            "line": 90
+                          },
+                          "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/auth\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/auth\", waiting until \"load\"\u001b[22m\n\n\n   at src/surface-checks.ts:90\n\n  88 |     }\n  89 |     for (const path of EXCLUDED_PATHS) {\n> 90 |       await page.goto(path);\n     |                  ^\n  91 |       if (!(await showsNotFound(page))) {\n  92 |         problems.push(`${path}: does not render the not-found state`);\n  93 |       }\n    at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:90:18\n    at withPage (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:64:12)\n    at surfaceProblems (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:74:3)\n    at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/surface.spec.ts:34:22"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:38:00.179Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts",
+                        "column": 18,
+                        "line": 90
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7387f18eb7e0b24c642c-7e42ca6875bae62d8a2c",
+              "file": "surface.spec.ts",
+              "line": 28,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "token-abuse.spec.ts",
+      "file": "token-abuse.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-4 The public token endpoint bounds abuse",
+          "file": "token-abuse.spec.ts",
+          "line": 43,
+          "column": 6,
+          "specs": [
+            {
+              "title": "a token is issued only for a generated code and is narrowly scoped",
+              "ok": true,
+              "tags": [
+                "WR-4",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 60154,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:40:19.194Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-4-limits.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJ0b2tlblR0bFNlY29uZHMiOiA2MDAsCiAgImJ1cnN0IjogMTAsCiAgInJlZmlsbFNlY29uZHMiOiA2MAp9"
+                        },
+                        {
+                          "name": "wr-4-claims-without-signature.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJjb2RlIjogImttLXc0dS15eG8iLAogICJjbGFpbXMiOiB7CiAgICAiZXhwIjogMTc5NDgzMzQ3OSwKICAgICJpc3MiOiAiQVBJdVRhaldCZmRpc3RkIiwKICAgICJuYmYiOiAxNzk0ODMyODc5LAogICAgInN1YiI6ICJndWVzdC1hLTFjNjA0NjdkYWY4MSIsCiAgICAibmFtZSI6ICJHdWVzdCBBIiwKICAgICJ2aWRlbyI6IHsKICAgICAgInJvb21Kb2luIjogdHJ1ZSwKICAgICAgInJvb20iOiAia20tdzR1LXl4byIsCiAgICAgICJjYW5QdWJsaXNoIjogdHJ1ZSwKICAgICAgImNhblN1YnNjcmliZSI6IHRydWUsCiAgICAgICJjYW5QdWJsaXNoRGF0YSI6IHRydWUsCiAgICAgICJjYW5VcGRhdGVPd25NZXRhZGF0YSI6IGZhbHNlCiAgICB9LAogICAgInJvb21Db25maWciOiB7CiAgICAgICJlbXB0eVRpbWVvdXQiOiAzMDAsCiAgICAgICJkZXBhcnR1cmVUaW1lb3V0IjogMzAwLAogICAgICAibWF4UGFydGljaXBhbnRzIjogMTAKICAgIH0KICB9Cn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/token-abuse-WR-4-The-publi-569b6-code-and-is-narrowly-scoped-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cbfeb7bf0390a974e9f-3845618ad67ffabda710",
+              "file": "token-abuse.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "a foreign Origin is refused",
+              "ok": true,
+              "tags": [
+                "WR-4",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 60062,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:41:19.578Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/token-abuse-WR-4-The-publi-c8bcd-a-foreign-Origin-is-refused-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cbfeb7bf0390a974e9f-5779d7f04b90b1cce7b4",
+              "file": "token-abuse.spec.ts",
+              "line": 87,
+              "column": 3
+            },
+            {
+              "title": "an arbitrary client-chosen room is refused with 404",
+              "ok": true,
+              "tags": [
+                "WR-4",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 60043,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:42:19.658Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-4-client-chosen-rooms.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJrbS1qYWctNHR4IjogNDA0LAogICJzdGFuZHVwIjogNDA0Cn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/token-abuse-WR-4-The-publi-31ff5-en-room-is-refused-with-404-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cbfeb7bf0390a974e9f-3e44369c24b59d0ecc88",
+              "file": "token-abuse.spec.ts",
+              "line": 108,
+              "column": 3
+            },
+            {
+              "title": "a burst below the limit succeeds",
+              "ok": true,
+              "tags": [
+                "WR-4",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 60106,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:43:19.719Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-4-below-limit.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJidXJzdCI6IDEwLAogICJzZW50IjogOSwKICAic3RhdHVzZXMiOiBbCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAsCiAgICAyMDAKICBdCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/token-abuse-WR-4-The-publi-9cddb-st-below-the-limit-succeeds-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cbfeb7bf0390a974e9f-bd9e7153f94d14836975",
+              "file": "token-abuse.spec.ts",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "requests above the per-client rate receive 429",
+              "ok": true,
+              "tags": [
+                "WR-4",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 120246,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:44:19.855Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-4-above-limit.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJidXJzdCI6IDEwLAogICJzdGF0dXNlcyI6IFsKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDIwMCwKICAgIDQyOSwKICAgIDQyOSwKICAgIDQyOQogIF0KfQ=="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/token-abuse-WR-4-The-publi-6d5ee-per-client-rate-receive-429-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0cbfeb7bf0390a974e9f-9a1aeaaf2289dd315a2f",
+              "file": "token-abuse.spec.ts",
+              "line": 150,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T12:37:10.241Z",
+    "duration": 549912.056,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

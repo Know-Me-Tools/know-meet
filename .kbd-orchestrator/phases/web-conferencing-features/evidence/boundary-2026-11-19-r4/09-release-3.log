@@ -1,0 +1,27 @@
+{"ok":true,"data":{"status":"ok"}}
+NAME                                IMAGE                                                                                                                    COMMAND                  SERVICE         CREATED         STATUS                  PORTS
+know-meet-release-proxy-1           nginxinc/nginx-unprivileged:1.30.6-alpine-slim@sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6   "/docker-entrypoint.…"   proxy           3 seconds ago   Up Less than a second   127.0.0.1:18080->8080/tcp
+know-meet-release-token-service-1   know-meet-livekit:boundary                                                                                               "/usr/local/bin/km-t…"   token-service   3 seconds ago   Up 1 second             8080/tcp
+know-meet-release-web-1             know-meet-web:boundary                                                                                                   "/static-web-server"     web             3 seconds ago   Up 1 second             80/tcp, 127.0.0.1:18081->8080/tcp
+ Network know-meet-release_default Creating 
+ Network know-meet-release_default Creating 
+ Network know-meet-release_default Created 
+ Network know-meet-release_default Created 
+ Container know-meet-release-web-1 Creating 
+ Container know-meet-release-token-service-1 Creating 
+ Container know-meet-release-token-service-1 Created 
+ Container know-meet-release-web-1 Created 
+ Container know-meet-release-proxy-1 Creating 
+ Container know-meet-release-proxy-1 Created 
+ Container know-meet-release-token-service-1 Starting 
+ Container know-meet-release-web-1 Starting 
+ Container know-meet-release-token-service-1 Started 
+ Container know-meet-release-web-1 Started 
+ Container know-meet-release-proxy-1 Starting 
+ Container know-meet-release-proxy-1 Started 
+ Container know-meet-release-token-service-1 Waiting 
+ Container know-meet-release-proxy-1 Waiting 
+ Container know-meet-release-web-1 Waiting 
+ Container know-meet-release-token-service-1 Healthy 
+ Container know-meet-release-web-1 Healthy 
+ Container know-meet-release-proxy-1 Healthy 

@@ -1,0 +1,452 @@
+{
+  "phase": "web-conferencing-features",
+  "generated_at": "2026-11-18T13:30:00Z",
+  "gaps_addressed": [
+    "G1-screen-share",
+    "G2-chat",
+    "G3-background-effects",
+    "G4-devices-and-enable-audio",
+    "G5-local-history",
+    "G6-local-recording",
+    "G7-entity-graph-5-from-main",
+    "G8-csp"
+  ],
+  "research_budget": {
+    "max_queries_per_tier": 8,
+    "max_minutes": 20,
+    "queries_used": {
+      "tier1": 2,
+      "tier2": 4,
+      "tier3": 7,
+      "tier4": 4,
+      "note": "Two parallel research passes (media; storage and entity graph) plus lead spot checks. Wall-clock about 14 minutes for the passes. Browser support read from @mdn/browser-compat-data 8.1.9 locally; livekit-client facts read from the installed 2.24.1 package."
+    }
+  },
+  "candidates": [
+    {
+      "id": "C-01",
+      "name": "livekit-client",
+      "kind": "library",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G1-screen-share",
+        "G2-chat",
+        "G4-devices-and-enable-audio"
+      ],
+      "license": "Apache-2.0",
+      "registry": "npm",
+      "repo_url": "https://github.com/livekit/client-sdk-js",
+      "maintenance": {
+        "last_release": "2.24.1 (already pinned in versions.toml and packages/realtime)"
+      },
+      "coverage_estimate": 0.7,
+      "evidence": [
+        {
+          "tier": 2,
+          "claim": "2.24.1 dist/src/room/video/extension.d.ts: setScreenShareEnabled(enabled, options?, publishOptions?); remote sources ScreenShare and ScreenShareAudio."
+        },
+        {
+          "tier": 2,
+          "source_url": "https://docs.livekit.io/transport/data/text-streams/",
+          "claim": "sendText(text, {topic, destinationIdentities}); destinationIdentities empty means all participants; registerTextStreamHandler(topic, handler)."
+        },
+        {
+          "tier": 2,
+          "claim": "2.24.1 room/chat/extension.d.ts: sendChatMessage is @deprecated in favour of sendText."
+        },
+        {
+          "tier": 2,
+          "claim": "2.24.1 Room: static getLocalDevices(kind, requestPermissions), switchActiveDevice(kind, deviceId, exact) throws for audiooutput without setSinkId; canPlaybackAudio, startAudio(), RoomEvent.AudioPlaybackStatusChanged."
+        }
+      ],
+      "decision_rationale": "Every needed realtime API exists in the pinned version; the gap is our port, adapter and UI.",
+      "risks": [
+        "Private chat is routed by the server but not encrypted.",
+        "Audio output selection unavailable on Android browsers; must be gated."
+      ]
+    },
+    {
+      "id": "C-02",
+      "name": "@livekit/track-processors",
+      "kind": "library",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G3-background-effects"
+      ],
+      "license": "Apache-2.0",
+      "registry": "npm",
+      "repo_url": "https://github.com/livekit/track-processors-js",
+      "maintenance": {
+        "last_release": "0.8.3 (published 2026-11-12)"
+      },
+      "coverage_estimate": 0.85,
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://www.npmjs.com/package/@livekit/track-processors",
+          "claim": "npm view: 0.8.3, Apache-2.0, modified 2026-11-12; peer livekit-client ^1.12.0 || ^2.1.0; depends on @mediapipe/tasks-vision 0.10.14."
+        },
+        {
+          "tier": 2,
+          "claim": "0.8.3 dist/index.mjs:1137-1141: default WASM from cdn.jsdelivr.net tasks-vision 0.10.14 and model from storage.googleapis.com selfie_segmenter latest; assetPaths {tasksVisionFileSet, modelAssetPath} overrides both."
+        },
+        {
+          "tier": 2,
+          "claim": "BackgroundProcessor({mode}) with switchTo(); BackgroundBlur and VirtualBackground deprecated; supportsBackgroundProcessors() requires OffscreenCanvas, VideoFrame, createImageBitmap, WebGL2."
+        }
+      ],
+      "decision_rationale": "Official LiveKit processor for blur and image backgrounds; only works under our CSP if its assets are self-hosted.",
+      "risks": [
+        "Needs script-src 'wasm-unsafe-eval' and ideally worker-src blob:.",
+        "About 9.6 MB of WASM to self-host and lazy-load.",
+        "Fast path Chromium-only; Safari and Firefox use a slower canvas fallback (versions inferred, not tested)."
+      ]
+    },
+    {
+      "id": "C-03",
+      "name": "@mediapipe/tasks-vision",
+      "kind": "library",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G3-background-effects"
+      ],
+      "license": "Apache-2.0",
+      "registry": "npm",
+      "repo_url": "https://github.com/google-ai-edge/mediapipe",
+      "maintenance": {
+        "last_release": "0.10.14 (exact version required by C-02)"
+      },
+      "coverage_estimate": 1.0,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "tasks-vision 0.10.14 wasm/: vision_wasm_internal.wasm 9.4 MB plus 210 KB loader, and a no-SIMD pair; loader injected as a script element."
+        }
+      ],
+      "decision_rationale": "Transitive dependency of C-02; its wasm folder and a pinned selfie_segmenter model are copied to our origin at build time.",
+      "risks": [
+        "Upstream model URL is an unpinned 'latest'; we pin our own copy."
+      ]
+    },
+    {
+      "id": "C-04",
+      "name": "@electric-sql/pglite",
+      "kind": "library",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G5-local-history",
+        "G6-local-recording"
+      ],
+      "license": "Apache-2.0",
+      "registry": "npm",
+      "repo_url": "https://github.com/electric-sql/pglite",
+      "maintenance": {
+        "last_release": "0.5.16"
+      },
+      "coverage_estimate": 0.8,
+      "evidence": [
+        {
+          "tier": 3,
+          "source_url": "https://www.npmjs.com/package/@electric-sql/pglite",
+          "claim": "npm view: 0.5.16, Apache-2.0."
+        },
+        {
+          "tier": 2,
+          "claim": "pglite docs/docs/filesystems.md: idb:// works in Chrome, Safari, Firefox on the main thread; opfs-ahp:// worker-only and broken on Safari (252 handle limit)."
+        },
+        {
+          "tier": 2,
+          "claim": "pglite docs/docs/multi-tab-worker.md: PGliteWorker with leader election shares one instance across tabs."
+        },
+        {
+          "tier": 3,
+          "claim": "0.5.16 tarball: pglite.wasm 3.24 MB, pglite.data 1.85 MB, initdb.wasm 0.13 MB gzipped; assets loaded via new URL(..., import.meta.url)."
+        }
+      ],
+      "decision_rationale": "The local store named by the operator and by pem-local-first; works in all target browsers on idb://.",
+      "risks": [
+        "Needs script-src 'wasm-unsafe-eval'.",
+        "About 5.2 MB gzipped; lazy-load after first paint.",
+        "Data is lost if the user clears site data."
+      ]
+    },
+    {
+      "id": "C-05",
+      "name": "pem-local-first pattern (hybrid-mobile-architecture)",
+      "kind": "pattern",
+      "verdict": "adapt",
+      "fit_for_gap": [
+        "G5-local-history"
+      ],
+      "license": "internal",
+      "registry": "none",
+      "repo_url": "/Users/gqadonis/.claude/plugins/cache/knowme-builder/hybrid-mobile-architecture/2.0.0-alpha.5/skills/pem-local-first/SKILL.md",
+      "maintenance": {
+        "last_release": "2.0.0-alpha.5 (names PEM 4.2.0)"
+      },
+      "coverage_estimate": 0.7,
+      "evidence": [
+        {
+          "tier": 1,
+          "claim": "SKILL.md:25-80: transports read the local store and honour ListQuery; persistence adapter and startLocalFirstGraph wired once; Zustand transient only; no TanStack Query."
+        },
+        {
+          "tier": 1,
+          "claim": "entity-graph-core src/adapters/pglite-persistence.ts:142-171 at 84d010b: createPGlitePersistenceAdapter stores the graph as JSON rows in _graph_snapshot, rewritten on debounced change."
+        }
+      ],
+      "decision_rationale": "Follow the layering and transport rules; keep Know Meet's own history tables as the source and skip the snapshot adapter for history to avoid a second growing copy.",
+      "risks": [
+        "Deviation from the skill recipe must be recorded in the spec.",
+        "Skill assumes tenant_id and a sync queue; local-only uses a per-device id and no queue."
+      ]
+    },
+    {
+      "id": "C-06",
+      "name": "@prometheus-ags/entity-graph-core and entity-graph-react 5.0.0 at 84d010b",
+      "kind": "library",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G7-entity-graph-5-from-main",
+        "G5-local-history"
+      ],
+      "license": "MIT",
+      "registry": "git",
+      "repo_url": "https://github.com/Prometheus-AGS/prometheus-entity-management",
+      "maintenance": {
+        "last_release": "v5.0.0 tag; main 84d010b is 5 commits ahead with one unreleased fix (realtime batched flush)"
+      },
+      "coverage_estimate": 1.0,
+      "evidence": [
+        {
+          "tier": 1,
+          "claim": "upstream packages/entity-graph-core/package.json: scripts.build = tsup, no prepare; entity-graph-react peer @prometheus-ags/entity-graph-core workspace:^."
+        },
+        {
+          "tier": 1,
+          "claim": "core and react CHANGELOG 5.0.0: only listed break for these packages is the optional @ag-ui/core peer moving to ^1.0.0."
+        },
+        {
+          "tier": 1,
+          "claim": "Know Meet notes code uses registerEntityTransport, useEntityQuery, useEntityMutation; signatures unchanged at 84d010b (transport/registry.ts:32, hooks/use-entity-query.ts:104, hooks.ts:197-224)."
+        },
+        {
+          "tier": 2,
+          "claim": "pnpm 11 exec/prepare-package/src/index.ts:73-116: git deps are built only with a prepare script and only when approved in allowBuilds."
+        },
+        {
+          "tier": 1,
+          "claim": "upstream packages/entity-graph-core and entity-graph-react package.json license MIT; root LICENSE: MIT License, Copyright (c) 2026 Travis James / Prometheus AGS / KnowMe LLC."
+        },
+        {
+          "tier": 1,
+          "claim": "upstream packages/entity-graph-core and entity-graph-react package.json license MIT; root LICENSE: MIT License, Copyright (c) 2026 Travis James / Prometheus AGS / KnowMe LLC."
+        }
+      ],
+      "decision_rationale": "Operator instruction (pin 84d010b, build from source). Install via a pinned git submodule, a pre-install build and pnpm pack into file: tarballs, because a git-subdirectory install cannot build these packages.",
+      "risks": [
+        "New pre-install step in CI and the Docker build; CI checkout needs submodules.",
+        "Spikes using AG-UI must move @ag-ui/core to 1.x.",
+        "Lockfile integrity tied to upstream build output."
+      ]
+    },
+    {
+      "id": "C-07",
+      "name": "Mediabunny",
+      "kind": "library",
+      "verdict": "reference",
+      "fit_for_gap": [
+        "G6-local-recording"
+      ],
+      "license": "MPL-2.0",
+      "registry": "npm",
+      "repo_url": "https://github.com/Vanilagy/mediabunny",
+      "maintenance": {
+        "last_release": "1.66.0 (modified 2026-11-13)"
+      },
+      "coverage_estimate": 0.2,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "npm view: 1.66.0, MPL-2.0; successor to deprecated mp4-muxer and webm-muxer."
+        }
+      ],
+      "decision_rationale": "Only needed if we later encode with WebCodecs and mux ourselves; MediaRecorder is enough for this phase.",
+      "risks": [
+        "MPL-2.0 file-level copyleft if adopted later."
+      ]
+    },
+    {
+      "id": "C-08",
+      "name": "LiveKit documentation on client-side recording",
+      "kind": "pattern",
+      "verdict": "reference",
+      "fit_for_gap": [
+        "G6-local-recording"
+      ],
+      "license": "n/a",
+      "registry": "none",
+      "repo_url": "https://docs.livekit.io/transport/media/ingress-egress/egress/",
+      "maintenance": {},
+      "coverage_estimate": 0.0,
+      "evidence": [
+        {
+          "tier": 4,
+          "source_url": "https://docs.livekit.io/transport/media/ingress-egress/egress/",
+          "claim": "Search found only Egress docs; no official guidance for recording in the browser."
+        }
+      ],
+      "decision_rationale": "Confirms the recorder is ours to build and support.",
+      "risks": []
+    },
+    {
+      "id": "C-09",
+      "name": "OPFS + navigator.storage (platform)",
+      "kind": "pattern",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G6-local-recording"
+      ],
+      "license": "web platform",
+      "registry": "none",
+      "repo_url": "https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system",
+      "maintenance": {},
+      "coverage_estimate": 0.9,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "@mdn/browser-compat-data 8.1.9: createWritable Chrome 86, Firefox 111, Safari 26; createSyncAccessHandle Safari 15.2+ worker-only; storage.persist Chrome 55, Firefox 57, Safari 15.2."
+        },
+        {
+          "tier": 4,
+          "source_url": "https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria",
+          "claim": "Quotas: Chrome 60% of disk; Firefox min(10% disk, 10 GiB) or 50% when persisted; Safari 17+ about 60%; QuotaExceededError on overflow."
+        }
+      ],
+      "decision_rationale": "Stream recording chunks to OPFS from a same-origin worker so memory stays flat and Safari 15.2+ is covered.",
+      "risks": [
+        "Eviction without persist(); quota failure mid-recording must stop cleanly."
+      ]
+    },
+    {
+      "id": "C-10",
+      "name": "MediaRecorder + canvas.captureStream + AudioContext (platform)",
+      "kind": "pattern",
+      "verdict": "adopt",
+      "fit_for_gap": [
+        "G6-local-recording"
+      ],
+      "license": "web platform",
+      "registry": "none",
+      "repo_url": "https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder",
+      "maintenance": {},
+      "coverage_estimate": 0.8,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "BCD 8.1.9: MediaRecorder Chrome 47, Firefox 25, Safari 14.1; canvas.captureStream Chrome 51, Firefox 43, Safari 11; createMediaStreamDestination universal."
+        },
+        {
+          "tier": 4,
+          "source_url": "https://chromestatus.com/feature/5163469011943424",
+          "claim": "Chrome M126 records MP4 (avc1/mp4a) in MediaRecorder."
+        }
+      ],
+      "decision_rationale": "Platform primitives for the composite recorder we build.",
+      "risks": [
+        "Firefox records WebM only; choose the container at runtime with isTypeSupported.",
+        "CPU cost of compositing on low-end devices."
+      ]
+    },
+    {
+      "id": "C-11",
+      "name": "RecordRTC",
+      "kind": "library",
+      "verdict": "reject",
+      "fit_for_gap": [
+        "G6-local-recording"
+      ],
+      "license": "MIT",
+      "registry": "npm",
+      "repo_url": "https://github.com/muaz-khan/RecordRTC",
+      "maintenance": {
+        "last_release": "5.6.2 (last modified 2025-10)"
+      },
+      "coverage_estimate": 0.15,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "npm view: 5.6.2, MIT; a MediaRecorder wrapper without multi-participant compositing."
+        }
+      ],
+      "decision_rationale": "Adds a dependency for what MediaRecorder already does; does not composite.",
+      "risks": []
+    },
+    {
+      "id": "C-12",
+      "name": "entity-graph 5.0.0 from the npm registry, or an upstream 5.0.1 release",
+      "kind": "library",
+      "verdict": "reject",
+      "fit_for_gap": [
+        "G7-entity-graph-5-from-main"
+      ],
+      "license": "see upstream",
+      "registry": "npm",
+      "repo_url": "https://www.npmjs.com/package/@prometheus-ags/entity-graph-core",
+      "maintenance": {
+        "last_release": "5.0.0 (dist-tag latest)"
+      },
+      "coverage_estimate": 0.95,
+      "evidence": [
+        {
+          "tier": 3,
+          "claim": "npm dist-tags latest 5.0.0; main 84d010b adds .changeset/realtime-batched-flush.md, unreleased."
+        }
+      ],
+      "decision_rationale": "Rejected by operator instruction (from main, pinned commit, built from source). Recorded because a 5.0.1 release would remove the submodule and pre-install build.",
+      "risks": []
+    }
+  ],
+  "build_required": [
+    {
+      "capability_gap_id": "G1-screen-share",
+      "need": "RealtimeRoom port extensions (share, text with audience, devices incl. output, playback status, video processor) and adapter split into a feature directory; the join use case carries lobby-chosen device IDs into the room (wr05 gap, WC-5); the join use case carries lobby-chosen device IDs into the room (wr05 gap, WC-5)",
+      "why_no_candidate": "The port is Know Meet's own contract; it must stay free of livekit-client."
+    },
+    {
+      "capability_gap_id": "G6-local-recording",
+      "need": "Composite recorder: canvas compositor, mixed audio, MediaRecorder, OPFS worker writer",
+      "why_no_candidate": "No maintained browser library composites a multi-participant WebRTC meeting. Searched: gh search repos \"webrtc recording canvas composite browser\" and \"livekit client side recording\" (no maintained match); npm RecordRTC 5.6.2 (wrapper, no compositing); npm Mediabunny 1.66.0 (muxer only); docs.livekit.io search (Egress only). Searched: gh search repos \"webrtc recording canvas composite browser\" and \"livekit client side recording\" (no maintained match); npm RecordRTC 5.6.2 (wrapper, no compositing); npm Mediabunny 1.66.0 (muxer only); docs.livekit.io search (Egress only)."
+    },
+    {
+      "capability_gap_id": "G6-local-recording",
+      "need": "Recording consent protocol on a reserved text-stream topic, with indicator for everyone",
+      "why_no_candidate": "Product rule (PRODUCT.md principle 4) specific to Know Meet."
+    },
+    {
+      "capability_gap_id": "G5-local-history",
+      "need": "PGlite history tables, entity transports and a leader-elected PGlite worker",
+      "why_no_candidate": "Schema and transports are Know Meet domain code."
+    },
+    {
+      "capability_gap_id": "G7-entity-graph-5-from-main",
+      "need": "build-from-source script (submodule at 84d010b, filtered install, build, pnpm pack) wired into CI and the Docker build",
+      "why_no_candidate": "Upstream has no prepare script and uses workspace: peers, so pnpm cannot build it from git directly."
+    },
+    {
+      "capability_gap_id": "G3-background-effects",
+      "need": "Designs for background effects, device and speaker settings, local history and the local recordings library (impeccable shape, owner approval)",
+      "why_no_candidate": "Not in the prototypes; design is project-owned."
+    },
+    {
+      "capability_gap_id": "G8-csp",
+      "need": "Web-only CSP change in apps/web/scripts/content-security-policy.ts (script-src wasm-unsafe-eval, worker-src self blob:, media-src blob:, img-src blob: to confirm), keeping the desktop policy passed by apps/desktop/scripts/tauri-cli.ts unchanged with a guard; update content-security-policy.test.ts, csp-artifact.test.ts, features/wr-3-tls-and-headers.feature and the generated gateway header; security review before adoption",
+      "why_no_candidate": "Project security configuration; no library involved."
+    },
+    {
+      "capability_gap_id": "G8-csp",
+      "need": "Web-only CSP change in apps/web/scripts/content-security-policy.ts (script-src wasm-unsafe-eval, worker-src self blob:, media-src blob:, img-src blob: to confirm), keeping the desktop policy passed by apps/desktop/scripts/tauri-cli.ts unchanged with a guard; update content-security-policy.test.ts, csp-artifact.test.ts, features/wr-3-tls-and-headers.feature and the generated gateway header; security review before adoption",
+      "why_no_candidate": "Project security configuration; no library involved."
+    }
+  ]
+}

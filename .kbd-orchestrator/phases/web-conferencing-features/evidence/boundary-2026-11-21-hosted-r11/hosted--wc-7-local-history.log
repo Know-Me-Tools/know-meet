@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:72227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [hosted] › wc-7-local-history.spec.ts:59:3 › WC-7 History survives a reload and never leaves the device › the meeting and both messages survive a reload; nothing carrying them is sent; delete removes it @WC-7 @value-critical @smoke @cross-engine (13.4s)
+  ✓  2 [hosted] › wc-7-local-history.spec.ts:152:3 › WC-7 History survives a reload and never leaves the device › a fresh profile shows an empty history, and the leak detector flags a deliberate upload @WC-7 @negative-control @cross-engine (813ms)
+
+  2 passed (15.5s)

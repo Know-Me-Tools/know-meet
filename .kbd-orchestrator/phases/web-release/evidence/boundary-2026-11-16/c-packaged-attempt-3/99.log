@@ -1,0 +1,15 @@
+$ docker compose -f tooling/release/compose.yaml -f /Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/compose.ports-override.yaml down
+ Container know-meet-release-proxy-1 Stopping 
+ Container know-meet-release-proxy-1 Stopped 
+ Container know-meet-release-proxy-1 Removing 
+ Container know-meet-release-proxy-1 Removed 
+ Container know-meet-release-web-1 Stopping 
+ Container know-meet-release-token-service-1 Stopping 
+ Container know-meet-release-web-1 Stopped 
+ Container know-meet-release-web-1 Removing 
+ Container know-meet-release-web-1 Removed 
+ Container know-meet-release-token-service-1 Stopped 
+ Container know-meet-release-token-service-1 Removing 
+ Container know-meet-release-token-service-1 Removed 
+ Network know-meet-release_default Removing 
+ Network know-meet-release_default Removed 

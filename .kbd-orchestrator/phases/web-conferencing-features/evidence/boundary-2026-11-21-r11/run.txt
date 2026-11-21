@@ -1,0 +1,5 @@
+candidate 7635da8f01cc43c405dd94276bb1ed9b24bd803d
+packaged exit 0
+packaged-firefox exit 0
+packaged-webkit exit 1
+measure exit 0

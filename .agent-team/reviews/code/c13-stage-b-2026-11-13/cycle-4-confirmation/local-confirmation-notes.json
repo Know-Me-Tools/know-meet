@@ -1,0 +1,36 @@
+{
+  "status": "local-inspection-complete-final-evidence-pending",
+  "candidateDigest": "8261acbff6b7f7adef0d0dbb558704111f5319e4b7ad503621c2453d5c005b75",
+  "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
+  "originalCriticalFindings": {
+    "J1": "Addressed statically: --app now emits embedded-payload-presence, explicit limitations, no synthetic app digest/identical assertion; existing directory digest and launch oracle retained.",
+    "J2": "Addressed statically: normalization removed; HTML explicitly excluded from diagnostic; all HTML still included in directory digest.",
+    "J3": "Addressed statically and observed real-Git integration: --no-renames records source deletion; staged rename/deletion/executable/new-input case passed.",
+    "J4": "Addressed statically and observed real-Git integration: source and destination ancestor rejection; nested file/symlink overlay rejection; exclusive fd writes. Three symlink cases passed."
+  },
+  "originalLocalFindings": {
+    "R1": "Addressed statically: dedicated320 a11y context plus arbitrary-width motion context leaves frozen screenshot capture environment unchanged; current axe reaches page assertions.",
+    "R4": "Addressed statically: toHaveAccessibleName replaces hand-rolled name approximation. Await final keyboard scenario outcome.",
+    "R5": "Focus injection changed to inline important with observed styles and restoration; skip focus injection asserts computed fill. Await final two negative-control outcomes."
+  },
+  "observedBlockingEvidence": [
+    {
+      "severity": "CRITICAL",
+      "path": "tests/fidelity/src/capture/reference-correction-capture.ts",
+      "line": 118,
+      "evidence": "approved-cycle-4/02.log TS4111 dataset.navClass requires bracket access; workspace typecheck exit1."
+    },
+    {
+      "severity": "CRITICAL",
+      "paths": [
+        "apps/web/src/app/frame/account-menu.tsx:54",
+        "apps/web/src/presentation/dashboard/presentation/dashboard-parts.tsx:256"
+      ],
+      "evidence": "Current frame axe error context label-content-name-mismatch, serious; trace analysis by frame owner identifies account initials and3Copy link labels. Source matches names Account:<name> and Copy join link for<title>."
+    }
+  ],
+  "judgeConfirmation": "Pending explicit approval after auto-review rejected external packet transmission; no workaround attempted.",
+  "testsRunByReviewer": [],
+  "sourceEditsByReviewer": [],
+  "additionalCorrectionAuthority": false
+}

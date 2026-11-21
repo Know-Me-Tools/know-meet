@@ -1,0 +1,11 @@
+{
+  "observedAt": "2026-11-13T11:34:28.287381+00:00",
+  "runnerExitCode": 130,
+  "verifiedBoundaryGroup": 89628,
+  "boundaryProcessesRemaining": false,
+  "previewGroup": 91134,
+  "previewCleanupSignal": "SIGTERM",
+  "port4191ListenerOutput": "",
+  "worktreeList": "/Users/gqadonis/Projects/know-me/know-meet 3590e0a [feat/round-5-ui-kit-flutter-commands]",
+  "otherPreviewServers": "Unrelated preexisting preview untouched"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "awaiting-explicit-payload-and-destination-approval",
+  "attempt": "Rejected before execution; no CLI process or transmission from this attempt",
+  "reason": "The action packages extensive private repository source, diffs, contracts, and execution evidence and sends it to an external Codex/OpenAI review service; approval for one correction review does not specifically authorize this sensitive payload and destination.",
+  "destination": "OpenAI via installed Codex CLI",
+  "requestedModel": "gpt-6-astra",
+  "mode": "fresh ephemeral read-only",
+  "packetPath": ".agent-team/reviews/code/c13-stage-b-2026-11-13/cycle-4-confirmation/packet.json",
+  "promptPath": ".agent-team/reviews/code/c13-stage-b-2026-11-13/cycle-4-confirmation/prompt.txt",
+  "promptBytes": 358425,
+  "promptSha256": "c43478fe9d607f3905f7da34f9b5added3de1cf593f16a72848eaa6467d3af6c",
+  "priorCrossModelAttempt": "Kimi k3.1-pro via localhost4000 returned HTTP500/upstream524; no cross-model PASS",
+  "scope": "Single correction-confirmation; frozen candidate8261acbf; no fifth correction cycle authorized"
+}

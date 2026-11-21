@@ -1,0 +1,2 @@
+$ node tooling/release/src/render-gateway-headers.ts
+WROTE /Users/gqadonis/.claude/worktrees/know-meet-web-release/infra/k8s/overlays/production/security-headers.yaml

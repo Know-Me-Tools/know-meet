@@ -1,0 +1,45 @@
+$ pnpm run typecheck
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/realtime, @know-meet/release-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 9 packages
+   • Remote caching disabled, using shared worktree cache
+
+@know-meet/domain:typecheck: cache miss, executing f2dcda6342a90b97
+@know-meet/design-tokens:typecheck: cache miss, executing 3c956826a421ba93
+@know-meet/release-tests:typecheck: cache miss, executing 0cfc33bab58950ba
+@know-meet/fidelity-tests:typecheck: cache miss, executing b97c5590f0a76506
+@know-meet/release-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/application:typecheck: cache miss, executing b89725e0c4d39a40
+@know-meet/ui:typecheck: cache miss, executing d0ca5bf2bc28a9f4
+@know-meet/application:typecheck: $ tsc -p tsconfig.json
+@know-meet/ui:typecheck: $ tsc --noEmit -p tsconfig.json
+@know-meet/realtime:typecheck: cache miss, executing 62fe5bbcff276ca6
+@know-meet/realtime:typecheck: $ tsc -p tsconfig.json
+@know-meet/web:typecheck: cache miss, executing 71f3ec8fb92fbdd3
+@know-meet/web:typecheck: $ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json
+@know-meet/web:typecheck: src/infrastructure/meeting/lazy-realtime-room.ts(22,21): error TS2304: Cannot find name 'HTMLMediaElement'.
+@know-meet/web:typecheck: src/infrastructure/meeting/lazy-realtime-room.ts(89,54): error TS2304: Cannot find name 'HTMLMediaElement'.
+@know-meet/web:typecheck: tests/unit/lazy-realtime-room.test.ts(63,25): error TS2304: Cannot find name 'HTMLMediaElement'.
+@know-meet/web:typecheck: ../../packages/application/src/meeting/ports.ts(102,45): error TS2304: Cannot find name 'HTMLMediaElement'.
+@know-meet/web:typecheck: [ELIFECYCLE] Command failed with exit code 1.
+@know-meet/web#typecheck:  ERROR  command (/Users/gqadonis/.claude/worktrees/know-meet-web-release/apps/web) /usr/local/bin/pnpm run typecheck exited (1)
+
+ Tasks:    7 successful, 8 total
+Cached:    0 cached, 8 total
+  Time:    7.097s 
+Failed:    @know-meet/web#typecheck
+
+ WARNING  no output files found for task @know-meet/application#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/design-tokens#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/domain#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/fidelity-tests#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/realtime#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/release-tests#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/ui#typecheck. Please check your `outputs` key in `turbo.json`
+ ERROR  run failed: command  exited (1)
+[ELIFECYCLE] Command failed with exit code 1.

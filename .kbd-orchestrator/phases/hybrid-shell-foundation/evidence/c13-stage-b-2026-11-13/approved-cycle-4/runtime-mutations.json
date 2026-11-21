@@ -1,0 +1,193 @@
+[
+  {
+    "name": "acceptance-blocker",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "blocker",
+      "record",
+      "--id",
+      "hsf-c13-cycle4-acceptance",
+      "--summary",
+      "Fourth-cycle boundary blocked: root TypeScript TS4111; partial browser16 completed5passed11failed; required WCAG text contrast and label/target-size failures plus scroll-selector defect. Stopped under adopted safety-failure condition.108 scenarios lack result; VS1 andremaininggates unverified. Evidence approved-cycle-4/partial-result.json and remaining-work.md.",
+      "--command-id",
+      "hsf-c13-cycle4-acceptance-blocker-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  },
+  {
+    "name": "budget-blocker",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "blocker",
+      "record",
+      "--id",
+      "hsf-c13-repair-budget",
+      "--summary",
+      "All four authorized repair attempts consumed, including fourth partial safety-stop. No fifth repair/verification cycle authorized. Historical time/tool usage remains UNKNOWN; evidence retained.",
+      "--command-id",
+      "hsf-c13-cycle4-budget-blocker-20261113"
+    ],
+    "exitCode": 1,
+    "stderr": "Error: local runtime rejected the command\n\nCaused by:\n    blocker hsf-c13-repair-budget already exists\n"
+  },
+  {
+    "name": "review-blocker",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "blocker",
+      "record",
+      "--id",
+      "hsf-c13-isolated-review-approval",
+      "--summary",
+      "Automatic approval review rejected sending private358KB scoped packet to OpenAI Codex CLI pending explicit payload/destination approval. Async operator request pending. Local independent correction review can report findings but cannot claim completed isolated judge.",
+      "--command-id",
+      "hsf-c13-cycle4-review-blocker-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  },
+  {
+    "name": "task-13.1",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "task",
+      "transition",
+      "--phase",
+      "hybrid-shell-foundation",
+      "--change",
+      "c13-fidelity-verification-and-evidence",
+      "--id",
+      "13.1",
+      "--status",
+      "blocked",
+      "--summary",
+      "VS1 current candidate not exercised: fourth attempt stopped on required safety failures before screenshot matrix; historical54failed20passed remains latest complete VS1.",
+      "--command-id",
+      "hsf-c13-cycle4-task-13.1-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  },
+  {
+    "name": "task-13.6",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "task",
+      "transition",
+      "--phase",
+      "hybrid-shell-foundation",
+      "--change",
+      "c13-fidelity-verification-and-evidence",
+      "--id",
+      "13.6",
+      "--status",
+      "blocked",
+      "--summary",
+      "Current workspace typecheck failed TS4111 in reference-correction-capture.ts118. Historical rule pass does not establish current candidate. Lint not reached before safety stop.",
+      "--command-id",
+      "hsf-c13-cycle4-task-13.6-20261113"
+    ],
+    "exitCode": 1,
+    "stderr": "Error: local runtime rejected the command\n\nCaused by:\n    work item 13.6 cannot transition from Complete to Blocked\n"
+  },
+  {
+    "name": "task-13.9",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "task",
+      "transition",
+      "--phase",
+      "hybrid-shell-foundation",
+      "--change",
+      "c13-fidelity-verification-and-evidence",
+      "--id",
+      "13.9",
+      "--status",
+      "blocked",
+      "--summary",
+      "Local independent correction confirmation pending final report; isolated judge blocked on explicit private-packet transmission approval.",
+      "--command-id",
+      "hsf-c13-cycle4-task-13.9-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  },
+  {
+    "name": "task-13.10",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "task",
+      "transition",
+      "--phase",
+      "hybrid-shell-foundation",
+      "--change",
+      "c13-fidelity-verification-and-evidence",
+      "--id",
+      "13.10",
+      "--status",
+      "blocked",
+      "--summary",
+      "Fourth cycle completed11 failing accessibility scenarios; label/target-size/contrast failures and scroll probe selector defect. Other control/motion scenarios not completed.",
+      "--command-id",
+      "hsf-c13-cycle4-task-13.10-20261113"
+    ],
+    "exitCode": 1,
+    "stderr": "Error: local runtime rejected the command\n\nCaused by:\n    work item 13.10 cannot transition from Blocked to Blocked\n"
+  },
+  {
+    "name": "certification",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "completion",
+      "set",
+      "--dimension",
+      "certification",
+      "--completed",
+      "0",
+      "--total",
+      "1",
+      "--status",
+      "blocked",
+      "--summary",
+      "Cycle4 safety-stop; acceptance unverified/failed and repair limit consumed. No phase completion claim.",
+      "--blocker",
+      "hsf-c13-cycle4-acceptance",
+      "--blocker",
+      "hsf-c13-repair-budget",
+      "--blocker",
+      "hsf-c13-isolated-review-approval",
+      "--command-id",
+      "hsf-c13-cycle4-certification-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  },
+  {
+    "name": "execute-stage",
+    "argv": [
+      "prometheus",
+      "kbd",
+      "stage",
+      "transition",
+      "--phase",
+      "hybrid-shell-foundation",
+      "--id",
+      "execute",
+      "--status",
+      "blocked",
+      "--command-id",
+      "hsf-c13-cycle4-execute-stage-20261113"
+    ],
+    "exitCode": 0,
+    "stderr": ""
+  }
+]

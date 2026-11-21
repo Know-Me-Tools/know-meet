@@ -1,0 +1,12 @@
+candidate 7668ea05915c503a0a7fa1f0511994169078e5e7 started 2026-11-21T15:55:49Z
+start hosted--wc-7-local-history 2026-11-21T15:55:49Z
+exit hosted--wc-7-local-history 0 2026-11-21T15:56:06Z
+start hosted-webkit--wc-7-local-history 2026-11-21T16:06:06Z
+exit hosted-webkit--wc-7-local-history 0 2026-11-21T16:06:37Z
+start hosted-firefox--wc-7-local-history 2026-11-21T16:16:37Z
+exit hosted-firefox--wc-7-local-history 0 2026-11-21T16:16:57Z
+start hosted-firefox--wc-2-chat-everyone 2026-11-21T16:26:57Z
+exit hosted-firefox--wc-2-chat-everyone 0 2026-11-21T16:27:50Z
+start hosted-firefox--wc-3-chat-private 2026-11-21T16:37:50Z
+exit hosted-firefox--wc-3-chat-private 0 2026-11-21T16:38:13Z
+finished 2026-11-21T16:38:13Z

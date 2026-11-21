@@ -1,0 +1,15 @@
+{
+  "runnerExitCode": 130,
+  "termination": "SIGINT requested under adopted safety-failure stop condition; partial boundary, not completed suite",
+  "completedScenarios": 16,
+  "passed": 5,
+  "failed": 11,
+  "plannedScenarios": 124,
+  "withoutCompletedResult": 108,
+  "playwrightExitCode": null,
+  "playwrightExitCodeReason": "Runner interrupted while waiting; subprocess exit not observed",
+  "aggregateReport": "No completed playwright.json; cucumber.json is empty. Logs and completed failure trace ZIPs retained.",
+  "sourceReconciliation": true,
+  "logSha256": "303daaf15e60d45a75df273939243807a5aae7b9ac563ce083dcec96fbd1f653",
+  "recordedAt": "2026-11-13T11:30:03.771455+00:00"
+}

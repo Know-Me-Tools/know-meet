@@ -1,0 +1,13 @@
+{
+  "mode": "software-headless",
+  "startedAt": "2026-11-20T22:24:11.931Z",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+  "evaluateLatencyMs": 111,
+  "clickToActiveMs": 303,
+  "maxMainThreadGapMs": 5977,
+  "maxGapStartsMsAfterClick": 475,
+  "longTasksAfterClick": 144,
+  "longTaskTotalMs": 23890,
+  "longestTaskMs": 5961,
+  "nodeObserveMs": 30199
+}

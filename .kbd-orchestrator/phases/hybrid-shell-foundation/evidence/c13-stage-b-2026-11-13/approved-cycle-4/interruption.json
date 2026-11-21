@@ -1,0 +1,17 @@
+{
+  "requestedAt": "2026-11-13T11:28:56.688705+00:00",
+  "signal": "SIGINT",
+  "processGroup": 89628,
+  "runnerPid": 89628,
+  "playwrightPid": 91127,
+  "reason": "Adopted contract boundaryPacket.stopConditions: Any required safety check fails. Completed axe agents/recordings/meet traces show required WCAG text contrast failures. Root typecheck also failed. Stop fourth attempt; no fifth authorized.",
+  "unrun": [
+    "remaining Flat 2.0 audit",
+    "motion checks",
+    "VS-1 screenshot matrix",
+    "VS-2 desktop scenarios",
+    "VS-4",
+    "VS-5",
+    "repository lint"
+  ]
+}

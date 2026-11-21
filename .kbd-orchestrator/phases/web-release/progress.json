@@ -2,16 +2,16 @@
   "schemaVersion": "2",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 536,
-  "derivedRevision": 536,
+  "sourceRevision": 851,
+  "derivedRevision": 851,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 851
   },
   "conflictCount": 0,
   "phase": "web-release",
   "phaseId": "web-release",
   "parentPhase": null,
-  "last_updated": "2026-11-16T21:13:37.796536Z",
+  "last_updated": "2026-11-21T16:47:26.159631Z",
   "last_updated_by": "kbd-runtime",
   "changes_total": 9,
   "changes_completed": 9,
@@ -49,8 +49,8 @@
     "runId": "hybrid-shell-foundation-20261109T083641Z",
     "primaryCounter": "implementation",
     "implementation": {
-      "completed": 22,
-      "total": 25,
+      "completed": 33,
+      "total": 37,
       "status": "BLOCKED"
     },
     "evidence": {

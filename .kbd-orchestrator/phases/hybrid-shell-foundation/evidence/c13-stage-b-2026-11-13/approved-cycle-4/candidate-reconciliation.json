@@ -1,0 +1,10 @@
+{
+  "method": "Read-only Python reconstruction of the exact recorded candidate input/path/mode/content identity after generated helper failed ENOBUFS enumerating untracked evidence; no product tests or source changes",
+  "beforeDigest": "8261acbff6b7f7adef0d0dbb558704111f5319e4b7ad503621c2453d5c005b75",
+  "afterDigest": "8261acbff6b7f7adef0d0dbb558704111f5319e4b7ad503621c2453d5c005b75",
+  "head": "3590e0a1a6bc9e02e1678115e78b35b351c7fed3",
+  "sameInputs": true,
+  "differences": [],
+  "inputCount": 119,
+  "generatedHelperError": "spawnSync git ENOBUFS: execFileSync default output buffer exceeded by untracked evidence paths before exclusions apply"
+}

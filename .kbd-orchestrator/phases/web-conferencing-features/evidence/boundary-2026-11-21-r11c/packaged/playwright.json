@@ -1,0 +1,895 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "--project=packaged",
+      "--grep",
+      "@WC-6|@WC-9|@WC-10|@WC-11"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream",
+              "--auto-select-desktop-capture-source=Entire screen"
+            ]
+          },
+          "baseURL": "http://localhost:18080"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "packaged"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "wc-10-web-csp.spec.ts",
+      "file": "wc-10-web-csp.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-10 The hosted page serves the new web CSP and nothing else is widened",
+          "file": "wc-10-web-csp.spec.ts",
+          "line": 67,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the default build's meta CSP has none of the new sources",
+              "ok": true,
+              "tags": [
+                "WC-10",
+                "negative-control",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 29,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.875Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-10-default-build-meta.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJtZXRhIjogImRlZmF1bHQtc3JjICYjMzk7c2VsZiYjMzk7OyBzY3JpcHQtc3JjICYjMzk7c2VsZiYjMzk7OyBzdHlsZS1zcmMgJiMzOTtzZWxmJiMzOTsgJiMzOTt1bnNhZmUtaW5saW5lJiMzOTs7IGltZy1zcmMgJiMzOTtzZWxmJiMzOTsgZGF0YTo7IG1lZGlhLXNyYyAmIzM5O3NlbGYmIzM5OzsgZm9udC1zcmMgJiMzOTtzZWxmJiMzOTs7IGNvbm5lY3Qtc3JjICYjMzk7c2VsZiYjMzk7IGlwYzogaHR0cDovL2lwYy5sb2NhbGhvc3Q7IGJhc2UtdXJpICYjMzk7bm9uZSYjMzk7OyBmb3JtLWFjdGlvbiAmIzM5O3NlbGYmIzM5Ozsgb2JqZWN0LXNyYyAmIzM5O25vbmUmIzM5OyIKfQ=="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-10-web-csp-WC-10-The-ho-e1010-has-none-of-the-new-sources-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ad9854fa5818014343c2-f5da962dbadce929ee07",
+              "file": "wc-10-web-csp.spec.ts",
+              "line": 134,
+              "column": 3
+            },
+            {
+              "title": "the desktop policy in tauri.conf.json is byte-identical to the base commit's",
+              "ok": true,
+              "tags": [
+                "WC-10",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.927Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-10-desktop-csp.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAiLAogICJjc3AiOiAiZGVmYXVsdC1zcmMgJ3NlbGYnOyBzY3JpcHQtc3JjICdzZWxmJzsgc3R5bGUtc3JjICdzZWxmJyAndW5zYWZlLWlubGluZSc7IGltZy1zcmMgJ3NlbGYnIGRhdGE6OyBtZWRpYS1zcmMgJ3NlbGYnOyBmb250LXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjICdzZWxmJyBpcGM6IGh0dHA6Ly9pcGMubG9jYWxob3N0OyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSciCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-10-web-csp-WC-10-The-ho-7fa4d-ntical-to-the-base-commit-s-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ad9854fa5818014343c2-89baa4565ba8a4cadf0f",
+              "file": "wc-10-web-csp.spec.ts",
+              "line": 147,
+              "column": 3
+            },
+            {
+              "title": "the diff check flags a widened connect-src and an added eval source",
+              "ok": true,
+              "tags": [
+                "WC-10",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.937Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-10-web-csp-WC-10-The-ho-522a4-rc-and-an-added-eval-source-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ad9854fa5818014343c2-dbb69668b63fdb9524c6",
+              "file": "wc-10-web-csp.spec.ts",
+              "line": 157,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "wc-11-entity-graph.spec.ts",
+      "file": "wc-11-entity-graph.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-11 Entity graph 5.0.1 from npm, and notes still work",
+          "file": "wc-11-entity-graph.spec.ts",
+          "line": 47,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the lockfile and versions.toml pin 5.0.1 with npm integrity hashes in all three packages",
+              "ok": true,
+              "tags": [
+                "WC-11",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.949Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-11-pin-problems.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAiLAogICJwcm9ibGVtcyI6IFtdCn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-11-entity-graph-WC-11-E-3f420-ashes-in-all-three-packages-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7172a2dea08b9f3ba17c-41fe24d8e2e546138528",
+              "file": "wc-11-entity-graph.spec.ts",
+              "line": 48,
+              "column": 3
+            },
+            {
+              "title": "the pin checks fail for 4.3.0 and 5.0.0 and pass for 5.0.1 on the same synthetic lockfile",
+              "ok": true,
+              "tags": [
+                "WC-11",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.967Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-11-entity-graph-WC-11-E-1362a-the-same-synthetic-lockfile-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7172a2dea08b9f3ba17c-ffd926a9e1327f34ffe0",
+              "file": "wc-11-entity-graph.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "a note can be created and appears in the saved list",
+              "ok": true,
+              "tags": [
+                "WC-11",
+                "value-critical",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 669,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:44.973Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-11-notes",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-11-entity-graph-WC-11-E-137d4-d-appears-in-the-saved-list-packaged/attachments/wc-11-notes-5c112c86b49f07463ced42d0f24c3f63d501978b.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-11-entity-graph-WC-11-E-137d4-d-appears-in-the-saved-list-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-11-entity-graph-WC-11-E-137d4-d-appears-in-the-saved-list-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7172a2dea08b9f3ba17c-fd99701e7ce719c604ce",
+              "file": "wc-11-entity-graph.spec.ts",
+              "line": 84,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "wc-6-speaker.spec.ts",
+      "file": "wc-6-speaker.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-6 Speaker choice works where supported and is explained where not",
+          "file": "wc-6-speaker.spec.ts",
+          "line": 40,
+          "column": 6,
+          "specs": [
+            {
+              "title": "where setSinkId exists, choosing an output changes the remote audio element's sink and no explanation shows",
+              "ok": true,
+              "tags": [
+                "WC-6",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13830,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:38:46.015Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-6-supported.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJvdXRwdXRzIjogWwogICAgImRlZmF1bHQiLAogICAgImFiNzM2MTQ2NDQ3Y2RmYmRiNGU3YTQ5YzYxYzY5ZjdmZjQ2ZDA5YTBkYzU5ZWUyNzUwNjBlNDk1Yzg4MTNkYzMiLAogICAgImZkODY0YmY2NjgyMzFlZjQ4OWE5NWZkNDk5ZmM4ZjdlYjM2ZDBhYWFlOTJhMWU3YTllZjc1NThlOTIyNjQ3N2MiCiAgXSwKICAic2lua0JlZm9yZSI6ICIiLAogICJjaG9zZW4iOiAiYWI3MzYxNDY0NDdjZGZiZGI0ZTdhNDljNjFjNjlmN2ZmNDZkMDlhMGRjNTllZTI3NTA2MGU0OTVjODgxM2RjMyIKfQ=="
+                        },
+                        {
+                          "name": "wc-6-supported",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--ac0c3-nk-and-no-explanation-shows-packaged/attachments/wc-6-supported-178054508d499e091a3da1932a7b82f948dfefab.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--ac0c3-nk-and-no-explanation-shows-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--ac0c3-nk-and-no-explanation-shows-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--ac0c3-nk-and-no-explanation-shows-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fa9a200996f5865aa0b6-69cc51196ac895416ef8",
+              "file": "wc-6-speaker.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "where setSinkId is absent, the speaker control is not offered and an announced explanation is visible",
+              "ok": true,
+              "tags": [
+                "WC-6",
+                "value-critical",
+                "cross-engine"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5300,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:39:02.251Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-6-unsupported-room",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--dd939-nced-explanation-is-visible-packaged/attachments/wc-6-unsupported-room-c33e7521cc310e651c13c0bba080c78b24db6ec6.png"
+                        },
+                        {
+                          "name": "wc-6-unsupported.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS1mc2YtdWEwIiwKICAicm9sZSI6ICJzdGF0dXMiLAogICJsaXZlIjogbnVsbAp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--dd939-nced-explanation-is-visible-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-6-speaker-WC-6-Speaker--dd939-nced-explanation-is-visible-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fa9a200996f5865aa0b6-e552780184315296fce5",
+              "file": "wc-6-speaker.spec.ts",
+              "line": 94,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "wc-9-consent-declined.spec.ts",
+      "file": "wc-9-consent-declined.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-9 A declined consent means no recording",
+          "file": "wc-9-consent-declined.spec.ts",
+          "line": 64,
+          "column": 6,
+          "specs": [
+            {
+              "title": "B declines: A is told, nothing records for 20 s; then a consented request in the same run does record",
+              "ok": true,
+              "tags": [
+                "WC-9",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 36367,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:39:10.762Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-9-a-told-declined",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-61d3a-in-the-same-run-does-record-packaged/attachments/wc-9-a-told-declined-88fc5221ad68f0ac716f3a83ade49dfd12ec9801.png"
+                        },
+                        {
+                          "name": "wc-9-declined-run.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS1neXItYTNwIiwKICAibGlicmFyeSI6IFsKICAgIHsKICAgICAgImR1cmF0aW9uTXMiOiA1NDk2LAogICAgICAic2l6ZUJ5dGVzIjogNDg3MzQ4CiAgICB9CiAgXSwKICAicmVjb3JkZXIiOiB7CiAgICAiY29uc3RydWN0ZWQiOiAxLAogICAgInN0YXJ0ZWQiOiAxLAogICAgInN0b3BwZWQiOiAwLAogICAgImJ5dGVzIjogNDcyNDE1CiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-61d3a-in-the-same-run-does-record-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-61d3a-in-the-same-run-does-record-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-61d3a-in-the-same-run-does-record-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a4907568f12801d723ea-27bef0bd9872437f7af5",
+              "file": "wc-9-consent-declined.spec.ts",
+              "line": 65,
+              "column": 3
+            },
+            {
+              "title": "a late joiner who declines stops the running recording for everyone and the written part is kept",
+              "ok": true,
+              "tags": [
+                "WC-9",
+                "value-critical",
+                "late-joiner"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 35547,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:39:48.855Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-9-c-prompt",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-c5360-nd-the-written-part-is-kept-packaged/attachments/wc-9-c-prompt-8fa124654fb24a6f2e2597daa712851dc969a94a.png"
+                        },
+                        {
+                          "name": "wc-9-late-decline.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS1uZHctN3Q1IiwKICAibGlicmFyeSI6IFsKICAgIHsKICAgICAgImR1cmF0aW9uTXMiOiA3MDc4LAogICAgICAic2l6ZUJ5dGVzIjogNzIwMDE4CiAgICB9CiAgXSwKICAicmVjb3JkZXIiOiB7CiAgICAiY29uc3RydWN0ZWQiOiAxLAogICAgInN0YXJ0ZWQiOiAxLAogICAgInN0b3BwZWQiOiAxLAogICAgImJ5dGVzIjogNzIwMDE4CiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-c5360-nd-the-written-part-is-kept-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-c5360-nd-the-written-part-is-kept-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-c5360-nd-the-written-part-is-kept-packaged/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-c5360-nd-the-written-part-is-kept-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a4907568f12801d723ea-1cb10c6b7e07155b6aa8",
+              "file": "wc-9-consent-declined.spec.ts",
+              "line": 116,
+              "column": 3
+            },
+            {
+              "title": "a late joiner who agrees leaves the recording running",
+              "ok": true,
+              "tags": [
+                "WC-9",
+                "negative-control",
+                "late-joiner"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 26292,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T16:40:26.640Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-9-late-agree-a",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-8e84e-eaves-the-recording-running-packaged/attachments/wc-9-late-agree-a-40fc6e4976b31d82983da31b178f64a0af9a7589.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-8e84e-eaves-the-recording-running-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-8e84e-eaves-the-recording-running-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-8e84e-eaves-the-recording-running-packaged/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/test-results/wc-9-consent-declined-WC-9-8e84e-eaves-the-recording-running-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a4907568f12801d723ea-006306f41df7f802f6d6",
+              "file": "wc-9-consent-declined.spec.ts",
+              "line": 158,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-21T16:38:44.478Z",
+    "duration": 131214.472,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

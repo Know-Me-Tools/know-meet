@@ -1,0 +1,17 @@
+Scope: all 10 workspace projects
+✓ Lockfile passes supply-chain policies (verified 2d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ git config core.hooksPath tooling/git-hooks
+. prepare: Done
+Done in 735ms using pnpm v11.15.0
+
+Running 2 tests using 1 worker
+
+(node:7818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [hosted] › wc-1-screen-share.spec.ts:95:3 › WC-1 Screen share reaches the other participant and stops cleanly › B sees A's screen share with rendered size, and it is gone within 10 s of A stopping @WC-1 @value-critical @smoke (8.7s)
+  ✓  2 [hosted] › wc-1-screen-share.spec.ts:140:3 › WC-1 Screen share reaches the other participant and stops cleanly › without starting a share, B reports no ScreenShare track @WC-1 @negative-control (11.9s)
+
+  2 passed (22.7s)

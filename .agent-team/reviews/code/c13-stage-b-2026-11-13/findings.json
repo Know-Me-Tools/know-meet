@@ -1,0 +1,54 @@
+{
+  "mode": "diff",
+  "verdict": "BLOCK",
+  "judge_model": "gpt-6-astra",
+  "judge_provider": "openai",
+  "producer_model": "unknown",
+  "producer_family_reported": "GPT-6",
+  "isolation_mode": "fresh-codex-cli-read-only",
+  "cross_model_check": "same-model-family-fallback; exact-producer-unknown",
+  "failed_cross_model_route": {
+    "gateway": "http://localhost:4000/v1",
+    "judge_model": "k3.1-pro",
+    "exit_code": 3,
+    "http_status": 500,
+    "upstream_error": 524
+  },
+  "candidate_diff_sha256": "97a16084fb1a6de1d7b832300dc163919b0845064797fb26f81e44d6f080c60d",
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "tests/fidelity/src/bundle-identity/check-bundle-identity.ts",
+      "claim": "The app comparison can report identical bundles when assets are served at incorrect paths or additional assets are embedded.",
+      "evidence": "compareWithApp checks only bySha.has(file.sha256) or htmls.some(...), then constructs the app digest using the web build's paths and hashes through served.push(file). It never verifies the app's path-to-content mapping or rejects extra assets. Swapping two asset mappings leaves this check passing despite violating VS-2 bundle identity.",
+      "suggested_fix": "Compare independently obtained app asset paths and contents with the complete web manifest, rejecting missing, extra and incorrectly mapped assets."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "tests/fidelity/src/bundle-identity/embedded-assets.ts",
+      "claim": "HTML normalization treats behaviorally different documents as identical.",
+      "evidence": "normalizeHtml applies replace(/\\s+/g, \" \").trim() to every text token and discards whitespace-only tokens. Consequently, '<pre>a  b</pre>' and '<pre>a b</pre>' compare equal; inline JavaScript string literals with different whitespace also compare equal. compareWithApp substitutes the original web hash whenever sameHtml returns true, masking these content changes.",
+      "suggested_fix": "Use HTML-aware parsing and restrict normalization to proven serialization differences, preserving significant whitespace and raw script/style contents; add negative controls for these collisions."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "tests/fidelity/src/support/candidate-snapshot.ts",
+      "claim": "Detected renames are overlaid without removing their original paths, so negative controls can test a different source tree from the candidate.",
+      "evidence": "captureCandidate obtains tracked paths with git diff --name-only -z HEAD --. When Git detects a rename, this lists the destination rather than both paths. applyCandidate overlays that destination onto a HEAD checkout, leaving the old tracked file present. The subsequent captureCandidate digest comparison only checks the original working tree and cannot detect the extra scratch file.",
+      "suggested_fix": "Disable rename detection when collecting paths with --no-renames, or parse rename statuses and explicitly record deletion of each source path. Verify the resulting scratch tree against the captured candidate."
+    },
+    {
+      "severity": "CRITICAL",
+      "file": "tests/fidelity/src/support/candidate-snapshot.ts",
+      "claim": "Applying a candidate can write outside the scratch checkout through a symlink ancestor.",
+      "evidence": "applyCandidate creates captured symlinks and subsequently calls rmSync, writeFileSync and chmodSync on joined paths without checking ancestor containment. For a tracked directory replaced by an absolute symlink, captureCandidate can include both the new directory symlink and its formerly tracked child paths; lstatSync follows intermediate symlinks. Sorted application creates the symlink before processing those children, directing deletion and writes into its external target. This contradicts the isolation guarantee and can breach reference-repo-read-only.",
+      "suggested_fix": "Apply deletions before creating symlinks, reject overlays containing descendants of symlink entries, and verify that every mutation's resolved parent remains inside the scratch checkout."
+    }
+  ],
+  "scope": "Frozen pre-correction packet; no later edits reviewed",
+  "sycophancy_screen": {
+    "reject_cap": 2,
+    "cap_overridden": false,
+    "cap_default": 2
+  }
+}

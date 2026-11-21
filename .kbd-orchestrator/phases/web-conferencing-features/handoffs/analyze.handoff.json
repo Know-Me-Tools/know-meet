@@ -1,0 +1,12 @@
+{
+  "stage": "analyze",
+  "completedAt": "2026-11-18T12:34:38Z",
+  "outputs": [
+    "analysis.md",
+    "library-candidates.json"
+  ],
+  "nextStage": "spec",
+  "summaryForNext": "12 candidates (7 adopt, 1 adapt, 2 reference, 2 reject), 8 build entries. Adopt: livekit-client 2.24.1 for share, chat (sendText lk.chat, destinationIdentities), devices, Enable audio (no token change); @livekit/track-processors 0.8.3 + tasks-vision 0.10.14 self-hosted; PGlite 0.5.16 idb:// in a leader worker; entity graph 5.0.0 at 84d010b (MIT) via submodule + pre-install build + pnpm pack (git-subdirectory install cannot build upstream); OPFS and MediaRecorder platform APIs. Adapt pem-local-first: own history tables, writes via useEntityMutation -> HistoryRepository port -> PGlite, reads via SELECT + live query, no snapshot adapter for history. Build: port extensions + lobby device carry, composite recorder, consent protocol, history tables/worker, entity-graph build script, web-only CSP change with desktop guard, four designs. READY to spec; before plan: adopt CSP change (script-src wasm-unsafe-eval, worker-src self blob:, media-src blob:, img-src blob:) with security review, and re-record policy acks. Review: glm-5.3 PASS, 4 warnings + 4 suggestions all applied.",
+  "skipped": false,
+  "skipReason": null
+}

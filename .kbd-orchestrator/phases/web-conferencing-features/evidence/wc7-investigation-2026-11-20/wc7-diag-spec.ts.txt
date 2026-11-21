@@ -1,0 +1,56 @@
+import { expect, test } from "@playwright/test";
+import { writeFileSync } from "node:fs";
+import { leave } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/meeting-flow.ts";
+import { expectMessage, runTag, sendChat, uniqueText } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-chat.ts";
+import { reachNavigation } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-nav.ts";
+import { launchProfile } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-profile.ts";
+import { closeAll, expectRemoteCount, joinRoom, mediaFor, newParticipant, participantInContext, startRoom } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-room.ts";
+import { AUDIENCE_EVERYONE, HISTORY } from "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-test-ids.ts";
+
+// Logs every PGlite tab<->leader BroadcastChannel message in A's page. Read-only tap.
+const TAP = `(() => {
+  const Orig = window.BroadcastChannel; if (!Orig) return;
+  const t0 = performance.now();
+  const sqlOf = (args) => { try { const a = args && args[0]; if (!(a instanceof Uint8Array)) return undefined;
+    let s = ""; for (const b of a) s += (b >= 32 && b < 127) ? String.fromCharCode(b) : " ";
+    return s.replace(/ +/g, " ").trim().slice(0, 160); } catch { return undefined; } };
+  const log = (dir, name, d) => { if (!d || typeof d !== "object") return;
+    const e = { t: Math.round(performance.now() - t0), dir, ch: name.slice(0, 20), type: d.type, id: d.callId ? String(d.callId).slice(0, 8) : undefined, m: d.method, sql: d.method && d.method.startsWith("execProtocol") ? sqlOf(d.args) : undefined, err: d.error && d.error.message };
+    if (e.type === "tab-here") return;
+    console.log("[hist-tap] " + JSON.stringify(e)); };
+  window.BroadcastChannel = class extends Orig {
+    constructor(name) { super(name); const n = String(name);
+      this.addEventListener("message", (ev) => log("in", n, ev.data)); }
+    postMessage(d) { log("out", String(this.name), d); return super.postMessage(d); }
+  };
+})();`;
+
+test("wc7 diag", async ({ browser, playwright, browserName, baseURL, launchOptions }, testInfo) => {
+  const lines: string[] = [];
+  const mark = (s: string) => lines.push(`[mark] ${new Date().toISOString()} ${s}`);
+  const context = await launchProfile(playwright[browserName], testInfo.outputPath("profile-a"), { baseURL, launchOptions, browserName });
+  await context.addInitScript(TAP);
+  const a = await participantInContext(context, "Guest A");
+  a.page.on("console", (m) => lines.push(`[console.${m.type()}] ${m.text()}`));
+  a.page.on("pageerror", (e) => lines.push(`[pageerror] ${e.message}`));
+  const b = await newParticipant(browser, "Guest B", testInfo);
+  try {
+    const media = mediaFor(browser);
+    const code = await startRoom(a, media); mark("A in room");
+    await joinRoom(b, code, media); await expectRemoteCount(a.page, 1, "A: remote tiles"); mark("B joined");
+    const tag = runTag(); const fromA = uniqueText(tag, "from-a"); const fromB = uniqueText(tag, "from-b");
+    await sendChat(a.page, fromA, AUDIENCE_EVERYONE); await expectMessage(b.page, fromA, AUDIENCE_EVERYONE, "B"); mark("from-a delivered");
+        await sendChat(b.page, fromB, AUDIENCE_EVERYONE); await expectMessage(a.page, fromB, AUDIENCE_EVERYONE, "A"); mark("from-b delivered");
+        await leave(a.page); mark("A left");
+        await reachNavigation(a.page); await a.page.getByTestId(HISTORY.nav).click();
+    await expect(a.page.getByTestId(HISTORY.entry)).toHaveCount(1); mark("list shows entry");
+    await a.page.reload(); await expect(a.page.getByTestId(HISTORY.entry)).toHaveCount(1); mark("reloaded");
+    await a.page.getByTestId(HISTORY.entry).first().getByTestId(HISTORY.entryOpen).click();
+    await a.page.waitForTimeout(3000);
+    const shown = await a.page.getByTestId(HISTORY.message).allInnerTexts(); mark("detail before reload: " + JSON.stringify(shown));
+    const dur = await a.page.getByTestId(HISTORY.screen).innerText(); mark("detail text: " + dur.replace(/\s+/g, " ").slice(0, 400));
+  } finally {
+    writeFileSync("/private/tmp/claude-501/-Users-gqadonis-Projects-know-me-know-meet/3a98dfbf-2ede-4a4f-83d1-97de91f24882/scratchpad/diag/wc7-diag.log", lines.join("\n"));
+    await closeAll([a, b]);
+  }
+});

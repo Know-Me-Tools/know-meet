@@ -1,0 +1,283 @@
+
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/realtime, @know-meet/release-tests, @know-meet/ui, @know-meet/web
+   • Running test in 9 packages
+   • Remote caching disabled, using shared worktree cache
+
+@know-meet/domain:test: cache miss, executing 5aa375be6c0fa57c
+@know-meet/design-tokens:test: cache miss, executing f947a6b7313dc33c
+@know-meet/design-tokens:generate: cache bypass, force executing b8b71f4f567f8b21
+@know-meet/application:test: cache miss, executing 18344c565b93ddd1
+@know-meet/realtime:test: cache miss, executing afb0aae2dbc138bb
+@know-meet/realtime:test: $ node --test "tests/unit/**/*.test.ts"
+@know-meet/design-tokens:generate: $ node generator/src/cli.ts
+@know-meet/application:test: $ node --test "tests/unit/**/*.test.ts"
+@know-meet/design-tokens:test: $ node --test "generator/test/**/*.test.ts"
+@know-meet/domain:test: $ node --test "tests/unit/**/*.test.ts"
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:generate: unchanged docs/design/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:generate: design tokens 1.6.0 (225 keys) -> 8 files
+@know-meet/design-tokens:build: cache miss, executing aa70f450049c771c
+@know-meet/realtime:test: ▶ chat send options (privacy boundary, WC-3)
+@know-meet/realtime:test:   ✔ sends a private message to exactly its one recipient (121.660083ms)
+@know-meet/realtime:test:   ✔ sends a message to everyone without a destination list (11.424625ms)
+@know-meet/realtime:test:   ✔ keeps chat and consent on different topics (0.374417ms)
+@know-meet/realtime:test: ✔ chat send options (privacy boundary, WC-3) (148.267708ms)
+@know-meet/realtime:test: ▶ received chat
+@know-meet/realtime:test:   ✔ labels a stream marked private as private to this client (0.264333ms)
+@know-meet/realtime:test:   ✔ labels an unmarked stream as everyone and drops empty text (0.0825ms)
+@know-meet/realtime:test: ✔ received chat (3.243167ms)
+@know-meet/realtime:test: ▶ device list
+@know-meet/realtime:test:   ✔ maps kinds, skips id-less entries and marks the first of each kind default (0.152583ms)
+@know-meet/realtime:test: ✔ device list (0.222292ms)
+@know-meet/realtime:test: ▶ screen shares
+@know-meet/realtime:test:   ✔ puts the local share first, then remote shares in join order, and reuses entries (8.078708ms)
+@know-meet/realtime:test: ✔ screen shares (8.210792ms)
+@know-meet/realtime:test: ▶ background effect plan (WC-4)
+@know-meet/realtime:test:   ✔ applies to a camera track without the effect, including a replaced one (0.139875ms)
+@know-meet/realtime:test:   ✔ waits while the camera is off and keeps an applied effect (17.626084ms)
+@know-meet/application:test: ▶ chat audience
+@know-meet/application:test:   ✔ is required by the type of an outgoing message (12.455958ms)
+@know-meet/application:test:   ✔ refuses a private message to someone not in the room and sends nothing (1.011333ms)
+@know-meet/application:test:   ✔ refuses empty text (0.176125ms)
+@know-meet/application:test: ✔ chat audience (14.319625ms)
+@know-meet/realtime:test:   ✔ does not retry a failure on the same track, and removes on none (0.468625ms)
+@know-meet/realtime:test: ✔ background effect plan (WC-4) (18.526416ms)
+@know-meet/design-tokens:test: ℹ tests 0
+@know-meet/design-tokens:test: ℹ suites 0
+@know-meet/design-tokens:test: ℹ pass 0
+@know-meet/design-tokens:test: ℹ fail 0
+@know-meet/design-tokens:test: ℹ cancelled 0
+@know-meet/design-tokens:test: ℹ skipped 0
+@know-meet/design-tokens:test: ℹ todo 0
+@know-meet/design-tokens:test: ℹ duration_ms 22.178958
+@know-meet/application:test: ▶ lobby device choice
+@know-meet/application:test:   ✔ is handed to the room on connect (1.817625ms)
+@know-meet/application:test:   ✔ defaults to the system devices when no choice was made (0.823333ms)
+@know-meet/application:test: ✔ lobby device choice (3.109709ms)
+@know-meet/realtime:test: ▶ connect error mapping
+@know-meet/realtime:test:   ✔ maps a refused or expired token to forbidden (0.742958ms)
+@know-meet/realtime:test:   ✔ maps an unreachable server, a plain error and a non-error to connection-lost (0.108458ms)
+@know-meet/realtime:test:   ✔ does not treat another error type carrying the same reason as a token refusal (0.071417ms)
+@know-meet/realtime:test: ✔ connect error mapping (1.477375ms)
+@know-meet/realtime:test: ▶ media error mapping
+@know-meet/realtime:test:   ✔ maps a refused or unavailable device to permission-denied for that device (13.263709ms)
+@know-meet/realtime:test:   ✔ maps a publish failure to connection-lost (0.083583ms)
+@know-meet/realtime:test: ✔ media error mapping (39.221833ms)
+@know-meet/realtime:test: ▶ error names
+@know-meet/realtime:test:   ✔ reads the name and never the message (0.088375ms)
+@know-meet/realtime:test: ✔ error names (0.157833ms)
+@know-meet/realtime:test: ▶ media bindings
+@know-meet/realtime:test:   ✔ attaches later when bound before the track exists (6.77575ms)
+@know-meet/realtime:test:   ✔ does nothing when the resolved track is unchanged (0.399708ms)
+@know-meet/realtime:test:   ✔ moves to the new track after unsubscribe and resubscribe (0.207417ms)
+@know-meet/realtime:test:   ✔ detaches the old track before attaching a replacement (0.156416ms)
+@know-meet/realtime:test:   ✔ detaches once and stops following the target after the detach function runs (0.133334ms)
+@know-meet/realtime:test:   ✔ never attaches when the resolver withholds the track (the local microphone) (0.077ms)
+@know-meet/realtime:test: ✔ media bindings (8.915375ms)
+@know-meet/realtime:test: ▶ snapshot mapping
+@know-meet/realtime:test:   ✔ returns the previous snapshot when nothing changed (1.952ms)
+@know-meet/realtime:test:   ✔ keeps unchanged participants by reference and replaces the changed one (2.033292ms)
+@know-meet/realtime:test:   ✔ keeps join order and appends newcomers (0.579417ms)
+@know-meet/realtime:test:   ✔ drops a remote that left and reports zero remotes (0.119875ms)
+@know-meet/realtime:test:   ✔ maps an unpublished track to muted and unsubscribed (0.118417ms)
+@know-meet/realtime:test:   ✔ falls back to the identity when the name is missing or empty (0.092541ms)
+@know-meet/realtime:test:   ✔ keeps participants while reconnecting and clears them once disconnected (0.086209ms)
+@know-meet/realtime:test:   ✔ treats leaving and losing the connection as different states (0.080708ms)
+@know-meet/realtime:test:   ✔ maps the local participant with its own mute state (0.0985ms)
+@know-meet/realtime:test: ✔ snapshot mapping (6.158333ms)
+@know-meet/realtime:test: ▶ connection mapping
+@know-meet/realtime:test:   ✔ maps live SDK states and leaves the end of a session to the adapter (0.155417ms)
+@know-meet/realtime:test: ✔ connection mapping (0.234917ms)
+@know-meet/realtime:test: ▶ snapshot store
+@know-meet/realtime:test:   ✔ notifies on change, stays quiet otherwise, and stops after unsubscribe (0.647ms)
+@know-meet/realtime:test: ✔ snapshot store (1.143625ms)
+@know-meet/realtime:test: ℹ tests 33
+@know-meet/realtime:test: ℹ suites 12
+@know-meet/realtime:test: ℹ pass 33
+@know-meet/realtime:test: ℹ fail 0
+@know-meet/realtime:test: ℹ cancelled 0
+@know-meet/realtime:test: ℹ skipped 0
+@know-meet/realtime:test: ℹ todo 0
+@know-meet/realtime:test: ℹ duration_ms 640.333542
+@know-meet/application:test: ▶ fake realtime room
+@know-meet/application:test:   ✔ returns the same snapshot until something changes, then notifies (1.175209ms)
+@know-meet/application:test:   ✔ replaces a remote participant in place and keeps join order (0.228875ms)
+@know-meet/application:test:   ✔ records media bindings until they are detached (0.153583ms)
+@know-meet/application:test:   ✔ moves through reconnecting and a lost connection (0.161ms)
+@know-meet/application:test: ✔ fake realtime room (2.337791ms)
+@know-meet/application:test: ▶ start
+@know-meet/application:test:   ✔ returns a new code from the issuer and connects nothing (0.689708ms)
+@know-meet/application:test:   ✔ reports rate-limited from the issuer (0.476958ms)
+@know-meet/application:test: ✔ start (1.727458ms)
+@know-meet/application:test: ▶ join
+@know-meet/application:test:   ✔ asks the issuer for a token and connects with those credentials (17.436ms)
+@know-meet/application:test:   ✔ normalises a typed code and trims the name before asking for a token (8.811417ms)
+@know-meet/application:test:   ✔ reports meeting-not-found for a code never issued and does not connect (11.617667ms)
+@know-meet/application:test:   ✔ reports meeting-not-found for a malformed code without asking the issuer (0.146667ms)
+@know-meet/application:test:   ✔ reports invalid-request for a blank or too long name without asking the issuer (0.136959ms)
+@know-meet/application:test:   ✔ does not connect when the issuer is rate limiting (0.1365ms)
+@know-meet/application:test:   ✔ reports the room's connect error and leaves the room idle (0.141958ms)
+@know-meet/application:test:   ✔ enables the chosen devices and lists the ones the browser refused (0.261417ms)
+@know-meet/application:test:   ✔ leaves both devices off when the lobby chose off (0.11775ms)
+@know-meet/application:test: ✔ join (60.946542ms)
+@know-meet/application:test: ▶ mute
+@know-meet/application:test:   ✔ mutes and unmutes the microphone and the camera (0.704584ms)
+@know-meet/application:test:   ✔ toggles from the current state (0.652166ms)
+@know-meet/application:test:   ✔ reports connection-lost when not in a room (0.107834ms)
+@know-meet/application:test:   ✔ reports permission-denied when unmuting a refused device (0.101292ms)
+@know-meet/application:test: ✔ mute (1.805292ms)
+@know-meet/application:test: ▶ leave
+@know-meet/application:test:   ✔ disconnects and clears the local participant (0.108292ms)
+@know-meet/application:test: ✔ leave (0.148292ms)
+@know-meet/application:test: ▶ requesting a recording
+@know-meet/application:test:   ✔ does not start before every present participant agreed (2.295834ms)
+@know-meet/application:test:   ✔ announces, then starts, once the last participant agreed (0.3105ms)
+@know-meet/application:test:   ✔ never records when someone declines, and tells the requester (0.212958ms)
+@know-meet/application:test:   ✔ ignores an answer from someone who was not asked (0.153583ms)
+@know-meet/application:test:   ✔ does not start the recorder when the start announcement fails (0.2085ms)
+@know-meet/application:test:   ✔ refuses a second request while one is under way (0.131833ms)
+@know-meet/application:test: ✔ requesting a recording (10.250542ms)
+@know-meet/application:test: ▶ late joiner (D2)
+@know-meet/application:test:   ✔ keeps recording and asks the late joiner (0.293375ms)
+@know-meet/application:test:   ✔ stops for everyone and keeps the file when the late joiner declines (0.240292ms)
+@know-meet/application:test:   ✔ shows the indicator and a prompt to a participant who joins a running recording (2.349375ms)
+@know-meet/application:test: ✔ late joiner (D2) (3.036209ms)
+@know-meet/application:test: ▶ answering
+@know-meet/application:test:   ✔ sends the answer only to the requester (0.243042ms)
+@know-meet/application:test: ✔ answering (0.30425ms)
+@know-meet/application:test: ℹ tests 35
+@know-meet/application:test: ℹ suites 10
+@know-meet/application:test: ℹ pass 35
+@know-meet/application:test: ℹ fail 0
+@know-meet/application:test: ℹ cancelled 0
+@know-meet/application:test: ℹ skipped 0
+@know-meet/application:test: ℹ todo 0
+@know-meet/application:test: ℹ duration_ms 648.720208
+@know-meet/domain:test: ▶ parseRoomCode
+@know-meet/domain:test:   ✔ accepts the service's code shape (0.401833ms)
+@know-meet/domain:test:   ✔ trims and lowercases a typed code (0.103ms)
+@know-meet/domain:test:   ✔ rejects anything else (0.07025ms)
+@know-meet/domain:test: ✔ parseRoomCode (1.116292ms)
+@know-meet/domain:test: ▶ parseDisplayName
+@know-meet/domain:test:   ✔ trims and accepts 1 to 60 code points (0.097083ms)
+@know-meet/domain:test:   ✔ rejects blank, too long and non-string input (0.050625ms)
+@know-meet/domain:test: ✔ parseDisplayName (0.230958ms)
+@know-meet/domain:test: ▶ withLocalTrackMuted
+@know-meet/domain:test:   ✔ returns a copy and leaves the original unchanged (0.475292ms)
+@know-meet/domain:test: ✔ withLocalTrackMuted (0.541167ms)
+@know-meet/domain:test: ▶ isInRoom
+@know-meet/domain:test:   ✔ is true while connected or reconnecting only (0.086667ms)
+@know-meet/domain:test: ✔ isInRoom (0.169334ms)
+@know-meet/domain:test: ℹ tests 7
+@know-meet/domain:test: ℹ suites 4
+@know-meet/domain:test: ℹ pass 7
+@know-meet/domain:test: ℹ fail 0
+@know-meet/domain:test: ℹ cancelled 0
+@know-meet/domain:test: ℹ skipped 0
+@know-meet/domain:test: ℹ todo 0
+@know-meet/domain:test: ℹ duration_ms 189.997125
+@know-meet/design-tokens:build: $ node generator/src/cli.ts --check
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:build: unchanged docs/design/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:build: design tokens 1.6.0 (225 keys) -> 8 files
+@know-meet/web:test: cache miss, executing 5707dae5d32ec2f1
+@know-meet/web:test: $ node --test "tests/unit/**/*.test.ts"
+@know-meet/web:test: ✔ keeps internal route names and their hash sub-states (0.569ms)
+@know-meet/web:test: ✔ falls back to the default for anything that is not an internal route (0.090375ms)
+@know-meet/web:test: ✔ escapeText escapes TEXT specials and every kind of line break (0.561458ms)
+@know-meet/web:test: ✔ quoteParam DQUOTE-quotes and drops characters a parameter cannot carry (0.094209ms)
+@know-meet/web:test: ✔ httpsUrl accepts https only (0.115542ms)
+@know-meet/web:test: ✔ a hostile title, name and description cannot inject a property (1.96525ms)
+@know-meet/web:test: ✔ a non-https URL is left out; an https URL is written (1.955125ms)
+@know-meet/web:test: ✔ an organizer email that is not a plain address is left out (0.301666ms)
+@know-meet/web:test: ✔ lines fold at 75 octets without splitting a character (0.3625ms)
+@know-meet/web:test: ✔ an unset or empty mode is the default build (0.523584ms)
+@know-meet/web:test: ✔ hosted is the only other mode, and anything else fails loudly (0.246333ms)
+@know-meet/web:test: ✔ the default build defines the flag false, keeps dist and needs no LiveKit URL (0.452333ms)
+@know-meet/web:test: ✔ the default build passes the LiveKit and media inputs through untouched (0.076375ms)
+@know-meet/web:test: ✔ the hosted build defines the flag true and writes to its own directory (0.122958ms)
+@know-meet/web:test: ✔ the hosted build without the LiveKit URL fails and names the input (0.091125ms)
+@know-meet/web:test: ✔ the hosted build rejects a LiveKit URL that is not a bare wss origin (0.12375ms)
+@know-meet/web:test: ✔ only the hosted boolean enters the bundle: no LiveKit credential name is read or defined (0.096083ms)
+@know-meet/web:test: ✔ the meta/Tauri policy carries base-uri, form-action and object-src (1.1715ms)
+@know-meet/web:test: ✔ the header policy adds frame-ancestors 'none' to the shared policy (0.351625ms)
+@know-meet/web:test: ✔ the hosted policy adds only the adopted web sources (0.105292ms)
+@know-meet/web:test: ✔ media origins follow the hosted blob: sources (2.700375ms)
+@know-meet/web:test: ✔ the header policy keeps the hosted sources and adds frame-ancestors (0.168417ms)
+@know-meet/web:test: ✔ the default policy has no hosted-only source or directive (0.117125ms)
+@know-meet/web:test: ✔ the desktop policy in tauri.conf.json is the default builder output, unchanged (0.468458ms)
+@know-meet/web:test: ✔ the hosted header is the existing builder's value for the same inputs (1.489834ms)
+@know-meet/web:test: ✔ the header allows the LiveKit signalling origin, adds frame-ancestors, and extends the meta policy (0.160667ms)
+@know-meet/web:test: ✔ the artifact holds the value exactly, with no trailing newline (0.870625ms)
+@know-meet/web:test: ✔ a rewrite replaces the previous value and removal deletes the file (1.028708ms)
+@know-meet/web:test: ✔ an empty or multi-line value is refused and nothing is written (3.492875ms)
+@know-meet/web:test: ✔ the artifact carries the adopted web sources and the meta policy carries them too (0.263458ms)
+@know-meet/web:test: ✔ hosted connect-src omits the Tauri IPC origins and the default build keeps them (1.654416ms)
+@know-meet/web:test: ✔ createMeeting posts an empty JSON body and returns the parsed code (20.554916ms)
+@know-meet/web:test: ✔ requestToken posts code and name and returns domain credentials (0.353959ms)
+@know-meet/web:test: ✔ requestToken maps each documented status (0.609375ms)
+@know-meet/web:test: ✔ 429 carries Retry-After seconds, or null when absent or not a number (0.565375ms)
+@know-meet/web:test: ✔ createMeeting maps 403 and treats 404, 400 and 5xx as connection-lost (0.289209ms)
+@know-meet/web:test: ✔ a network failure is connection-lost for both calls (0.132458ms)
+@know-meet/web:test: ✔ malformed or off-contract bodies are connection-lost, never a value (0.970458ms)
+@know-meet/web:test: ✔ a body that is not JSON is connection-lost (0.131333ms)
+@know-meet/web:test: ✔ a success status other than the contract's is connection-lost (0.15725ms)
+@know-meet/web:test: ✔ the abort signal reaches fetch, and an abort resolves to connection-lost (0.166458ms)
+@know-meet/web:test: ✔ before connect it is idle, stable, has no background effect and loads nothing (0.735917ms)
+@know-meet/web:test: ✖ the first connect loads once, adopts listeners and bindings, then delegates (0.953417ms)
+@know-meet/web:test: ✔ a failed load is connection-lost and the next connect retries (0.538167ms)
+@know-meet/web:test: ✔ mute before the room exists is connection-lost (0.262041ms)
+@know-meet/web:test: ℹ tests 45
+@know-meet/web:test: ℹ suites 0
+@know-meet/web:test: ℹ pass 44
+@know-meet/web:test: ℹ fail 1
+@know-meet/web:test: ℹ cancelled 0
+@know-meet/web:test: ℹ skipped 0
+@know-meet/web:test: ℹ todo 0
+@know-meet/web:test: ℹ duration_ms 157.396958
+@know-meet/web:test: 
+@know-meet/web:test: ✖ failing tests:
+@know-meet/web:test: 
+@know-meet/web:test: test at tests/unit/lazy-realtime-room.test.ts:51:1
+@know-meet/web:test: ✖ the first connect loads once, adopts listeners and bindings, then delegates (0.953417ms)
+@know-meet/web:test:   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+@know-meet/web:test:   
+@know-meet/web:test:   5 !== 1
+@know-meet/web:test:   
+@know-meet/web:test:       at TestContext.<anonymous> (file:///Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/apps/web/tests/unit/lazy-realtime-room.test.ts:67:10)
+@know-meet/web:test:       at async Test.run (node:internal/test_runner/test:1389:7)
+@know-meet/web:test:       at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+@know-meet/web:test:     generatedMessage: true,
+@know-meet/web:test:     code: 'ERR_ASSERTION',
+@know-meet/web:test:     actual: 5,
+@know-meet/web:test:     expected: 1,
+@know-meet/web:test:     operator: 'strictEqual',
+@know-meet/web:test:     diff: 'simple'
+@know-meet/web:test:   }
+@know-meet/web:test: [ELIFECYCLE] Test failed. See above for more details.
+
+ Tasks:    6 successful, 7 total
+Cached:    0 cached, 7 total
+  Time:    3.798s 
+Failed:    @know-meet/web#test
+
+[ELIFECYCLE] Test failed. See above for more details.
+$ turbo run test && node --test "tooling/repo-rules/test/**/*.test.ts" && node tooling/repo-rules/src/run-aggregate.ts test
+@know-meet/web#test:  ERROR  command (/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/apps/web) /usr/local/bin/pnpm run test exited (1)
+ WARNING  no output files found for task @know-meet/application#test. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/design-tokens#test. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/domain#test. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/realtime#test. Please check your `outputs` key in `turbo.json`
+ ERROR  run failed: command  exited (1)

@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "step": 1,
+      "command": "pnpm install --frozen-lockfile",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:39:32.492Z",
+      "durationMs": 1640,
+      "log": "01-static-1.log"
+    },
+    {
+      "step": 2,
+      "command": "pnpm lint",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:39:34.134Z",
+      "durationMs": 78239,
+      "log": "02-static-2.log"
+    },
+    {
+      "step": 3,
+      "command": "pnpm exec turbo run typecheck --continue; a=$?; pnpm exec tsc -p tooling/repo-rules/tsconfig.json; b=$?; exit $(( a || b ))",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:40:52.374Z",
+      "durationMs": 6634,
+      "log": "03-static-3.log"
+    },
+    {
+      "step": 4,
+      "command": "pnpm exec turbo run test --continue; a=$?; node --test 'tooling/repo-rules/test/**/*.test.ts'; b=$?; node tooling/repo-rules/src/run-aggregate.ts test; c=$?; exit $(( a || b || c ))",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:40:59.009Z",
+      "durationMs": 266477,
+      "log": "04-static-4.log"
+    },
+    {
+      "step": 5,
+      "command": "pnpm exec turbo run build --continue; a=$?; node tooling/repo-rules/src/run-aggregate.ts build; b=$?; exit $(( a || b ))",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:45:25.487Z",
+      "durationMs": 153183,
+      "log": "05-static-5.log"
+    },
+    {
+      "step": 6,
+      "command": "pnpm --filter @know-meet/web build:hosted",
+      "commit": "aea6d7891e404d0c0408996744405651d97a183a",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:47:58.670Z",
+      "durationMs": 5275,
+      "log": "06-static-6.log"
+    },
+    {
+      "step": 7,
+      "command": "node tooling/release/src/render-gateway-headers.ts --check",
+      "commit": "72e2a1d8ca67dfeac3518b9b77711078278257d3",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:53:32.297Z",
+      "durationMs": 1941,
+      "log": "07-release-1.log"
+    },
+    {
+      "step": 8,
+      "command": "docker compose -f tooling/release/compose.yaml build && docker image inspect know-meet-web:boundary know-meet-livekit:boundary --format '{{index .RepoTags 0}}={{.Id}}' | paste -sd, - | tee image-digests.txt",
+      "commit": "72e2a1d8ca67dfeac3518b9b77711078278257d3",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:53:34.243Z",
+      "durationMs": 57970,
+      "log": "08-release-2.log"
+    },
+    {
+      "step": 9,
+      "command": "docker compose -f tooling/release/compose.yaml up -d --wait && curl -fsS http://localhost:18080/api/healthz && echo && docker compose -f tooling/release/compose.yaml ps",
+      "commit": "72e2a1d8ca67dfeac3518b9b77711078278257d3",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T20:54:32.214Z",
+      "durationMs": 4886,
+      "log": "09-release-3.log"
+    },
+    {
+      "step": 10,
+      "command": "pnpm --filter @know-meet/release-tests run test:packaged",
+      "commit": "72e2a1d8ca67dfeac3518b9b77711078278257d3",
+      "exit": 1,
+      "signal": null,
+      "startedAt": "2026-11-19T20:56:15.110Z",
+      "durationMs": 761783,
+      "log": "10-packaged-1.log"
+    }
+  ],
+  "candidateCommit": "aea6d7891e404d0c0408996744405651d97a183a"
+}

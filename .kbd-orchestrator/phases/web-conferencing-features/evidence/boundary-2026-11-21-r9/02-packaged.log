@@ -1,0 +1,115 @@
+Scope: all 10 workspace projects
+✓ Lockfile passes supply-chain policies (verified 1d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ git config core.hooksPath tooling/git-hooks
+. prepare: Done
+Done in 595ms using pnpm v11.15.0
+
+Running 8 tests using 1 worker
+
+(node:77003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [packaged] › wc-13-accessibility.spec.ts:56:5 › WC-13 New controls are accessible and match the approved designs › every new surface passes axe, the stroke scan and the fill probe in dark at all widths @WC-13 @value-critical @packaged-only (58.3s)
+  ✓  2 [packaged] › wc-13-accessibility.spec.ts:56:5 › WC-13 New controls are accessible and match the approved designs › every new surface passes axe, the stroke scan and the fill probe in light at all widths @WC-13 @value-critical @packaged-only (56.8s)
+  ✘  3 [packaged] › wc-13-accessibility.spec.ts:93:3 › WC-13 New controls are accessible and match the approved designs › every new control is reachable and operable by keyboard with focus shown by fill @WC-13 @value-critical @packaged-only (24.6s)
+(node:81546) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [packaged] › wc-13-accessibility.spec.ts:117:3 › WC-13 New controls are accessible and match the approved designs › motion stops under prefers-reduced-motion on every new surface @WC-13 @value-critical @packaged-only (12.9s)
+  ✓  5 [packaged] › wc-13-accessibility.spec.ts:150:3 › WC-13 New controls are accessible and match the approved designs › the audit fails on a fixture page with a known violation @WC-13 @negative-control @packaged-only (618ms)
+  ✓  6 [packaged] › wc-4-background-effects.spec.ts:94:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › blur, image and off are visible on B; no off-origin wasm or model and no CSP violation @WC-4 @value-critical @smoke (10.8s)
+  ✘  7 [packaged] › wc-4-background-effects.spec.ts:232:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › software graphics: effects are reported not available and the meeting stays responsive @WC-4 @value-critical (21.0s)
+(node:81900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  8 [packaged] › wc-4-background-effects.spec.ts:285:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › with effects never turned on, A's track reports no processor and B sees the original frame @WC-4 @negative-control (5.9s)
+
+
+  1) [packaged] › wc-13-accessibility.spec.ts:93:3 › WC-13 New controls are accessible and match the approved designs › every new control is reachable and operable by keyboard with focus shown by fill @WC-13 @value-critical @packaged-only 
+
+    TimeoutError: locator.focus: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('km-effect-off')
+
+
+       at src/wc-a11y-surfaces.ts:355
+
+      353 |       ? page.getByTestId(target)
+      354 |       : page.getByRole(target.role, { name: target.name, exact: true });
+    > 355 |   await locator.focus();
+          |                 ^
+      356 |   await page.keyboard.press(key);
+      357 | }
+      358 |
+        at pressOn (/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/src/wc-a11y-surfaces.ts:355:17)
+        at keyboardTour (/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/wc-13-accessibility.spec.ts:255:9)
+        at /Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/wc-13-accessibility.spec.ts:103:9
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-13-accessibility-WC-13--b9f41-rd-with-focus-shown-by-fill-packaged/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-13-accessibility-WC-13--b9f41-rd-with-focus-shown-by-fill-packaged/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-13-accessibility-WC-13--b9f41-rd-with-focus-shown-by-fill-packaged/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-13-accessibility-WC-13--b9f41-rd-with-focus-shown-by-fill-packaged/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-13-accessibility-WC-13--b9f41-rd-with-focus-shown-by-fill-packaged/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [packaged] › wc-4-background-effects.spec.ts:232:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › software graphics: effects are reported not available and the meeting stays responsive @WC-4 @value-critical 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('km-effect-unavailable')
+    Expected substring: "not available on this device"
+    Received string:    "Background effects aren’t available on this device. Your camera works normally. Effects need graphics acceleration, which current Chrome, Edge, Firefox and Safari on a computer usually have."
+    Timeout: 15000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('km-effect-unavailable') with timeout 15000ms
+      - waiting for getByTestId('km-effect-unavailable')
+        34 × locator resolved to <div data-testid="km-effect-unavailable" class="flex items-start gap-s2 rounded-base bg-surface p-s3 text-sm text-foreground">…</div>
+           - unexpected value "Background effects aren’t available on this device. Your camera works normally. Effects need graphics acceleration, which current Chrome, Edge, Firefox and Safari on a computer usually have."
+
+
+      257 |         await openRoomSettings(a.page);
+      258 |         await expect(a.page.getByTestId(EFFECTS.unavailable)).toBeVisible();
+    > 259 |         await expect(a.page.getByTestId(EFFECTS.unavailable)).toContainText(
+          |                                                               ^
+      260 |           "not available on this device",
+      261 |         );
+      262 |         await expect(a.page.getByRole("radiogroup", { name: EFFECTS.groupName })).toHaveCount(0);
+        at /Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/wc-4-background-effects.spec.ts:259:63
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-4-background-effects-WC-fdd97-he-meeting-stays-responsive-packaged/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-4-background-effects-WC-fdd97-he-meeting-stays-responsive-packaged/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-4-background-effects-WC-fdd97-he-meeting-stays-responsive-packaged/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-4-background-effects-WC-fdd97-he-meeting-stays-responsive-packaged/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/test-results/wc-4-background-effects-WC-fdd97-he-meeting-stays-responsive-packaged/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [packaged] › wc-13-accessibility.spec.ts:93:3 › WC-13 New controls are accessible and match the approved designs › every new control is reachable and operable by keyboard with focus shown by fill @WC-13 @value-critical @packaged-only 
+    [packaged] › wc-4-background-effects.spec.ts:232:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › software graphics: effects are reported not available and the meeting stays responsive @WC-4 @value-critical 
+  6 passed (3.5m)
+undefined
+/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: playwright test '--project=packaged' --grep '@WC-4|@WC-13'

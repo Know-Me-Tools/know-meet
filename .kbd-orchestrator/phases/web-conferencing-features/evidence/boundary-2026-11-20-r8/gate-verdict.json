@@ -1,0 +1,309 @@
+{
+  "verdict": "FAIL",
+  "project": "packaged",
+  "gate": [
+    {
+      "scenario": "WC-1",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-2",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-3",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-4",
+      "outcome": "FAIL"
+    },
+    {
+      "scenario": "WC-5",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-6",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-7",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-8",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-9",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-11",
+      "outcome": "PASS"
+    },
+    {
+      "scenario": "WC-12",
+      "outcome": "PASS"
+    }
+  ],
+  "wc13": "decided by the axe and UI reviews, not this report",
+  "gateFailures": [
+    {
+      "scenario": "WC-4",
+      "title": "blur, image and off are visible on B; no off-origin wasm or model and no CSP violation",
+      "project": "packaged",
+      "outcome": "FAIL",
+      "gate": true,
+      "firstError": "TimeoutError: locator.getAttribute: Timeout 15000ms exceeded."
+    }
+  ],
+  "signals": [
+    {
+      "scenario": "WR-8",
+      "title": "home, join lobby and meeting room pass axe and the fill probe in dark at all widths",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-8",
+      "title": "home, join lobby and meeting room pass axe and the fill probe in light at all widths",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-8",
+      "title": "the guest flow is reachable and operable by keyboard with focus shown by fill",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-8",
+      "title": "motion stops under prefers-reduced-motion",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-8",
+      "title": "a control fill lowered below 3:1 fails the audit",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-3",
+      "title": "the desktop policy in tauri.conf.json is unchanged by the web policy",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-3",
+      "title": "the same header assertions fail for HSTS on the bare static image",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "the / route returns the app document and survives a reload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "the /join route returns the app document and survives a reload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "the /meet route returns the app document and survives a reload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "the /history route returns the app document and survives a reload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "the /recordings route returns the app document and survives a reload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-2",
+      "title": "a missing asset is a 404, not the app document",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-1",
+      "title": "two guests see and hear each other, mute, and leave",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-1",
+      "title": "a guest who presses browser Back is no longer shown in the meeting",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-1",
+      "title": "a well-formed code that was never issued is refused",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-5",
+      "title": "only home, join, the meeting room, history and recordings are reachable",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-5",
+      "title": "the same checks fail on the default build because /dashboard renders",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-4",
+      "title": "a token is issued only for a generated code and is narrowly scoped",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-4",
+      "title": "a foreign Origin is refused",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-4",
+      "title": "an arbitrary client-chosen room is refused with 404",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-4",
+      "title": "a burst below the limit succeeds",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WR-4",
+      "title": "requests above the per-client rate receive 429",
+      "outcome": "FAIL",
+      "firstError": "Error: every request beyond the burst is 429"
+    },
+    {
+      "scenario": "WC-1",
+      "title": "without starting a share, B reports no ScreenShare track",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-10",
+      "title": "the default build's meta CSP has none of the new sources",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-10",
+      "title": "the desktop policy in tauri.conf.json is byte-identical to the base commit's",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-10",
+      "title": "the diff check flags a widened connect-src and an added eval source",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-11",
+      "title": "the lockfile and versions.toml pin 5.0.1 with npm integrity hashes in all three packages",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-11",
+      "title": "the pin checks fail for 4.3.0 and 5.0.0 and pass for 5.0.1 on the same synthetic lockfile",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-12",
+      "title": "with autoplay allowed no Enable audio prompt is shown",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-13",
+      "title": "every new surface passes axe, the stroke scan and the fill probe in dark at all widths",
+      "outcome": "FAIL",
+      "firstError": "Error: cells with axe, stroke or fill-contrast problems"
+    },
+    {
+      "scenario": "WC-13",
+      "title": "every new surface passes axe, the stroke scan and the fill probe in light at all widths",
+      "outcome": "FAIL",
+      "firstError": "Error: cells with axe, stroke or fill-contrast problems"
+    },
+    {
+      "scenario": "WC-13",
+      "title": "every new control is reachable and operable by keyboard with focus shown by fill",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-13",
+      "title": "motion stops under prefers-reduced-motion on every new surface",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-13",
+      "title": "the audit fails on a fixture page with a known violation",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-2",
+      "title": "a message that was never sent does not appear in any panel or data channel",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-4",
+      "title": "with effects never turned on, A's track reports no processor and B sees the original frame",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-5",
+      "title": "without a choice the default device is active",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-7",
+      "title": "a fresh profile shows an empty history, and the leak detector flags a deliberate upload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-8",
+      "title": "the recording-egress detector flags a deliberate WebM upload",
+      "outcome": "PASS",
+      "firstError": ""
+    },
+    {
+      "scenario": "WC-9",
+      "title": "a late joiner who agrees leaves the recording running",
+      "outcome": "PASS",
+      "firstError": ""
+    }
+  ]
+}

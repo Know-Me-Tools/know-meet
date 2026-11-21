@@ -1,0 +1,207 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "wc-13-accessibility.spec.ts",
+      "--project=hosted"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream",
+              "--auto-select-desktop-capture-source=Entire screen"
+            ]
+          },
+          "baseURL": "https://meet.know-me.tools"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "hosted"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-13-accessibility/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-21T14:42:47.186Z",
+    "duration": 77.30700000000002,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

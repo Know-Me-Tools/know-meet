@@ -1,0 +1,2 @@
+$ node tooling/release/src/scan-artifacts.ts
+SUMMARY inputs=5 files=5637 findings=0 short-values-skipped=0 excluded=LIVEKIT_URL

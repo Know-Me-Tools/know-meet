@@ -1,0 +1,12 @@
+[judge] WARN: canonical judge/producer identity is incomplete; independence is degraded
+[judge] WARN: PRODUCER_UNKNOWN — packet carries no producer_model, so the
+[judge]       judge!=producer check cannot be enforced for this review.
+[MODEL_ROUTING] phase=adv-review-judge class=frontier model=k3.1-pro producer=unknown
+[judge] retry 2/3: HTTP 000 looks like a timeout
+[judge]        at 900s; escalating timeout to 1800s and retrying.
+[judge] retry 3/3: HTTP 000 looks like a timeout
+[judge]        at 1800s; escalating timeout to 3600s and retrying.
+[judge] WARN: judge request to http://localhost:4000/v1 did not complete after
+[judge]       3 attempt(s), final timeout 3600s (HTTP 000).
+[judge]       Raise ADV_JUDGE_TIMEOUT or ADV_JUDGE_RETRIES, or reduce the
+[judge]       packet size — unavailable (exit 3)

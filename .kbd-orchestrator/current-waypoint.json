@@ -2,38 +2,38 @@
   "schemaVersion": "5",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 536,
-  "derivedRevision": 536,
+  "sourceRevision": 852,
+  "derivedRevision": 852,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 852
   },
   "conflictCount": 0,
   "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
   "runId": "hybrid-shell-foundation-20261109T083641Z",
   "path": [
-    "web-release"
+    "web-conferencing-features"
   ],
   "phaseIds": [
-    "web-release"
+    "web-conferencing-features"
   ],
-  "activePhaseId": "web-release",
-  "activePhase": "web-release",
-  "phase": "web-release",
+  "activePhaseId": "web-conferencing-features",
+  "activePhase": "web-conferencing-features",
+  "phase": "web-conferencing-features",
   "parentPhase": null,
   "childPointer": null,
-  "change": null,
-  "currentTask": null,
+  "change": "wc11-conferencing-boundary",
+  "currentTask": "11.3",
   "status": "ready",
   "lifecycle": "ready",
-  "stageId": "execute",
-  "stageStatus": "COMPLETE",
+  "stageId": null,
+  "stageStatus": null,
   "completionMetric": "implementation",
-  "implementationCompleted": 22,
-  "implementationTotal": 25,
+  "implementationCompleted": 33,
+  "implementationTotal": 37,
   "planRevision": 1,
-  "revision": 536,
-  "exactNextCommand": "/kbd-assess web-release",
-  "nextChange": null,
-  "nextTask": null,
-  "updatedAt": "2026-11-16T21:13:37.796536Z"
+  "revision": 852,
+  "exactNextCommand": "/kbd-status",
+  "nextChange": "wc11-conferencing-boundary",
+  "nextTask": "11.3",
+  "updatedAt": "2026-11-21T16:48:21.076002Z"
 }

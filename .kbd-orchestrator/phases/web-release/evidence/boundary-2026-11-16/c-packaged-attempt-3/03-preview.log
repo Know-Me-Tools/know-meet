@@ -1,0 +1,10 @@
+$ vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4173 --strictPort
+error when starting preview server:
+Error: Port 4173 is already in use
+    at httpServerStart (file:///Users/gqadonis/.claude/worktrees/know-meet-web-release/node_modules/.pnpm/vite@8.1.5_@types+node@26.5.1_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:11424:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async preview (file:///Users/gqadonis/.claude/worktrees/know-meet-web-release/node_modules/.pnpm/vite@8.1.5_@types+node@26.5.1_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:35090:2)
+    at async CAC.<anonymous> (file:///Users/gqadonis/.claude/worktrees/know-meet-web-release/node_modules/.pnpm/vite@8.1.5_@types+node@26.5.1_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/cli.js:807:18)
+/Users/gqadonis/.claude/worktrees/know-meet-web-release/apps/web:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @know-meet/web@0.1.0 preview: `vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4173 --strictPort`
+Exit status 1

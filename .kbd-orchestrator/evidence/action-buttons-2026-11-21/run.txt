@@ -1,0 +1,25 @@
+candidate fc5fe48c8fc0d8822b8aae7e811362010cbd1180 + working tree
+ DESIGN.md                                          | 14 +++++++++
+ apps/mobile/lib/shared/ui/km_palette_of.dart       |  5 ++++
+ .../src/presentation/components/ui/combobox.tsx    |  2 +-
+ .../web/src/presentation/components/ui/command.tsx |  2 +-
+ .../presentation/components/ui/context-menu.tsx    |  8 ++---
+ .../web/src/presentation/components/ui/menubar.tsx |  4 +--
+ apps/web/src/presentation/components/ui/select.tsx |  2 +-
+ .../src/presentation/join/lobby/lobby-preview.tsx  |  9 ++++--
+ .../meeting-room/presentation/room-control.tsx     | 11 ++++---
+ .../token-reconciliation/contrast-record.json      | 26 +++++++++++++++-
+ docs/design/tokens.css                             | 10 +++++++
+ docs/design/tokens.json                            | 10 +++++++
+ .../design-tokens/generated/flutter/tokens.g.dart  | 35 ++++++++++++++++++++++
+ packages/design-tokens/generated/manifest.json     | 10 +++----
+ packages/design-tokens/generated/web/theme.css     |  5 ++++
+ packages/design-tokens/generated/web/tokens.css    | 10 +++++++
+ packages/design-tokens/scripts/contrast-pairs.mjs  | 23 ++++++++++++++
+ packages/ui/src/components/button.tsx              | 14 +++++++--
+ packages/ui/src/components/dropdown-menu.tsx       |  2 +-
+ packages/ui/src/lib/focus.ts                       | 13 ++++++++
+ packages/ui/src/styles/globals.css                 | 18 +++++++++++
+ 21 files changed, 208 insertions(+), 25 deletions(-)
+visual exit 0
+packaged exit 1

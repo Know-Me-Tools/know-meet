@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "2",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 851,
+  "derivedRevision": 851,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 851
+  },
+  "conflictCount": 0,
+  "phase": "wc-boundary-defect-scope",
+  "phaseId": "web-conferencing-features::wc-boundary-defect-scope",
+  "parentPhase": "web-conferencing-features",
+  "last_updated": "2026-11-21T16:47:26.159631Z",
+  "last_updated_by": "kbd-runtime",
+  "changes_total": 1,
+  "changes_completed": 1,
+  "implementation_total": 1,
+  "implementation_completed": 1,
+  "completion": {
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 1,
+      "total": 1,
+      "status": "COMPLETE"
+    },
+    "evidence": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "completionScopes": {
+    "completion": "phase",
+    "runCompletion": "run"
+  },
+  "runCompletion": {
+    "scope": "run",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 33,
+      "total": 37,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "BLOCKED",
+      "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+      "blockers": [
+        "hsf-c13-cycle4-acceptance",
+        "hsf-c13-cycle4-budget-exhausted",
+        "hsf-c13-cycle4-rule-regression",
+        "hsf-c13-isolated-review-approval"
+      ]
+    },
+    "publication": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "changes": [
+    {
+      "id": "wc06-web-csp",
+      "title": "wc06-web-csp",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 1,
+      "tasks_done": 1,
+      "last_task_completed": "Regenerate the gateway security header",
+      "next_task_pending": null,
+      "blockers": []
+    }
+  ],
+  "children": {},
+  "migrationStatus": null
+}

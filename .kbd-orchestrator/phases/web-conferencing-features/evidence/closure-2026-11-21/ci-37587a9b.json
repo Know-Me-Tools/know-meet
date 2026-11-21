@@ -1,0 +1,24 @@
+{
+  "headSha": "37587a9b5992ae0ebaf0ca5eb4b80c98fa2f7597",
+  "status": "completed",
+  "conclusion": "failure",
+  "url": "https://github.com/Know-Me-Tools/know-meet/actions/runs/44920248801",
+  "jobs": [
+    {
+      "name": "cargo clippy (zero warnings), test, bff build",
+      "conclusion": "success"
+    },
+    {
+      "name": "web + tauri debug + bff + apk + ios simulator",
+      "conclusion": "success"
+    },
+    {
+      "name": "repo rules, typecheck, test, build",
+      "conclusion": "success"
+    },
+    {
+      "name": "flutter analyze (zero infos), test",
+      "conclusion": "failure"
+    }
+  ]
+}

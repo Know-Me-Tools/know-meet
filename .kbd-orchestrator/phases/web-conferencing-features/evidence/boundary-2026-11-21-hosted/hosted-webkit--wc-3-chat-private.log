@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:76377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [hosted-webkit] › wc-3-chat-private.spec.ts:42:3 › WC-3 A private message reaches only its recipient › A to B privately: B and A show it labelled private; C never receives it @WC-3 @value-critical @smoke @cross-engine @control-embedded (26.8s)
+
+  1 passed (28.3s)

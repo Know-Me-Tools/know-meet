@@ -1,0 +1,20 @@
+Scope: all 10 workspace projects
+✓ Lockfile passes supply-chain policies (verified 2d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ git config core.hooksPath tooling/git-hooks
+. prepare: Done
+Done in 1.8s using pnpm v11.15.0
+
+Running 5 tests using 1 worker
+
+(node:66091) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [packaged] › wc-2-chat-everyone.spec.ts:31:3 › WC-2 A message to everyone reaches every participant › A's message appears for B and C with the sent text and the label Everyone @WC-2 @value-critical @smoke @cross-engine (11.0s)
+  ✓  2 [packaged] › wc-2-chat-everyone.spec.ts:61:3 › WC-2 A message to everyone reaches every participant › a message that was never sent does not appear in any panel or data channel @WC-2 @negative-control @cross-engine (40.8s)
+  ✓  3 [packaged] › wc-3-chat-private.spec.ts:42:3 › WC-3 A private message reaches only its recipient › A to B privately: B and A show it labelled private; C never receives it @WC-3 @value-critical @smoke @cross-engine @control-embedded (21.0s)
+  ✓  4 [packaged] › wc-7-local-history.spec.ts:59:3 › WC-7 History survives a reload and never leaves the device › the meeting and both messages survive a reload; nothing carrying them is sent; delete removes it @WC-7 @value-critical @smoke @cross-engine (13.5s)
+  ✓  5 [packaged] › wc-7-local-history.spec.ts:152:3 › WC-7 History survives a reload and never leaves the device › a fresh profile shows an empty history, and the leak detector flags a deliberate upload @WC-7 @negative-control @cross-engine (682ms)
+
+  5 passed (1.5m)

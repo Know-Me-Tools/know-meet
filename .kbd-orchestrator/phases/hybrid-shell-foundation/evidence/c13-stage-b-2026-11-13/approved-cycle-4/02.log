@@ -1,0 +1,28 @@
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+
+   • turbo 2.11.10
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 7 packages
+   • Remote caching disabled
+
+@know-meet/fidelity-tests:typecheck: cache miss, executing ce26fa3db0b52190
+@know-meet/design-tokens:typecheck: cache miss, executing 3c956826a421ba93
+@know-meet/domain:typecheck: cache miss, executing 4d55de9de14aa007
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/fidelity-tests:typecheck: src/capture/reference-correction-capture.ts(118,50): error TS4111: Property 'navClass' comes from an index signature, so it must be accessed with ['navClass'].
+@know-meet/fidelity-tests:typecheck: [ELIFECYCLE] Command failed with exit code 1.
+@know-meet/application:typecheck: cache miss, executing ef243fda07cdf77c
+@know-meet/design-tokens:typecheck: [ELIFECYCLE] Command failed.
+@know-meet/design-tokens:typecheck: [WARN]  Local package.json exists, but node_modules missing, did you mean to install?
+@know-meet/fidelity-tests#typecheck:  ERROR  command (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity) /usr/local/bin/pnpm run typecheck exited (1)
+
+ Tasks:    1 successful, 4 total
+Cached:    0 cached, 4 total
+  Time:    771ms 
+Failed:    @know-meet/fidelity-tests#typecheck
+
+ WARNING  no output files found for task @know-meet/domain#typecheck. Please check your `outputs` key in `turbo.json`
+ ERROR  run failed: command  exited (1)
+[ELIFECYCLE] Command failed with exit code 1.

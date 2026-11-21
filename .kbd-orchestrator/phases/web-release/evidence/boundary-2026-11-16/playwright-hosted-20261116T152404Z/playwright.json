@@ -1,0 +1,679 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "--project=hosted",
+      "--grep",
+      "@WR-1|@WR-2|@WR-3|@WR-5",
+      "--grep-invert",
+      "@negative-control"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream"
+            ]
+          },
+          "baseURL": "https://meet.know-me.tools"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "hosted"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "headers.spec.ts",
+      "file": "headers.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-3 Valid TLS and security headers at the public URL",
+          "file": "headers.spec.ts",
+          "line": 59,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the public URL has a production certificate, an HTTPS redirect and the security headers",
+              "ok": true,
+              "tags": [
+                "WR-3",
+                "value-critical",
+                "hosted-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 420,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:08.274Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-3-certificate.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJhdXRob3JpemVkIjogdHJ1ZSwKICAiYXV0aG9yaXphdGlvbkVycm9yIjogbnVsbCwKICAiaXNzdWVyT3JnYW5pc2F0aW9uIjogIkxldCdzIEVuY3J5cHQiLAogICJpc3N1ZXJDb21tb25OYW1lIjogIllSMiIsCiAgInZhbGlkRnJvbSI6ICJOb3YgMTYgMTQ6MjQ6MzYgMjAyNiBHTVQiLAogICJ2YWxpZFRvIjogIkZlYiAxNCAxNDoyNDozNSAyMDI3IEdNVCIsCiAgInN1YmplY3RBbHROYW1lIjogIkROUzptZWV0Lmtub3ctbWUudG9vbHMiCn0="
+                        },
+                        {
+                          "name": "wr-3-redirect.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAzMDEsCiAgImxvY2F0aW9uIjogImh0dHBzOi8vbWVldC5rbm93LW1lLnRvb2xzLyIKfQ=="
+                        },
+                        {
+                          "name": "wr-3-header-dump.json",
+                          "contentType": "application/json",
+                          "body": "ewogICIvIjogewogICAgInN0YXR1cyI6IDIwMCwKICAgICJoZWFkZXJzIjogewogICAgICAidmFyeSI6ICJhY2NlcHQtZW5jb2RpbmciLAogICAgICAiY29udGVudC10eXBlIjogInRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIsCiAgICAgICJhY2NlcHQtcmFuZ2VzIjogImJ5dGVzIiwKICAgICAgImxhc3QtbW9kaWZpZWQiOiAiTW9uLCAxNiBOb3YgMjAyNiAxNDo1NDo1OCBHTVQiLAogICAgICAiY29udGVudC1lbmNvZGluZyI6ICJiciIsCiAgICAgICJjYWNoZS1jb250cm9sIjogIm5vLWNhY2hlIiwKICAgICAgImRhdGUiOiAiTW9uLCAxNiBOb3YgMjAyNiAxNToyNDowOCBHTVQiLAogICAgICAic3RyaWN0LXRyYW5zcG9ydC1zZWN1cml0eSI6ICJtYXgtYWdlPTMxNTM2MDAwOyBpbmNsdWRlU3ViRG9tYWlucyIsCiAgICAgICJjb250ZW50LXNlY3VyaXR5LXBvbGljeSI6ICJkZWZhdWx0LXNyYyAnc2VsZic7IHNjcmlwdC1zcmMgJ3NlbGYnOyBzdHlsZS1zcmMgJ3NlbGYnICd1bnNhZmUtaW5saW5lJzsgaW1nLXNyYyAnc2VsZicgZGF0YTo7IG1lZGlhLXNyYyAnc2VsZic7IGZvbnQtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMgJ3NlbGYnIHdzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkIGh0dHBzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQ7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgZnJhbWUtYW5jZXN0b3JzICdub25lJyIsCiAgICAgICJ4LWNvbnRlbnQtdHlwZS1vcHRpb25zIjogIm5vc25pZmYiLAogICAgICAieC1mcmFtZS1vcHRpb25zIjogIkRFTlkiLAogICAgICAicmVmZXJyZXItcG9saWN5IjogInN0cmljdC1vcmlnaW4td2hlbi1jcm9zcy1vcmlnaW4iLAogICAgICAicGVybWlzc2lvbnMtcG9saWN5IjogImNhbWVyYT0oc2VsZiksIG1pY3JvcGhvbmU9KHNlbGYpLCBnZW9sb2NhdGlvbj0oKSwgcGF5bWVudD0oKSwgdXNiPSgpIiwKICAgICAgInRyYW5zZmVyLWVuY29kaW5nIjogImNodW5rZWQiCiAgICB9CiAgfSwKICAiL2FwaS9oZWFsdGh6IjogewogICAgInN0YXR1cyI6IDIwMCwKICAgICJoZWFkZXJzIjogewogICAgICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iLAogICAgICAiY2FjaGUtY29udHJvbCI6ICJuby1zdG9yZSIsCiAgICAgICJjb250ZW50LWxlbmd0aCI6ICIzNCIsCiAgICAgICJkYXRlIjogIk1vbiwgMTYgTm92IDIwMjYgMTU6MjQ6MDggR01UIiwKICAgICAgInN0cmljdC10cmFuc3BvcnQtc2VjdXJpdHkiOiAibWF4LWFnZT0zMTUzNjAwMDsgaW5jbHVkZVN1YkRvbWFpbnMiLAogICAgICAiY29udGVudC1zZWN1cml0eS1wb2xpY3kiOiAiZGVmYXVsdC1zcmMgJ3NlbGYnOyBzY3JpcHQtc3JjICdzZWxmJzsgc3R5bGUtc3JjICdzZWxmJyAndW5zYWZlLWlubGluZSc7IGltZy1zcmMgJ3NlbGYnIGRhdGE6OyBtZWRpYS1zcmMgJ3NlbGYnOyBmb250LXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjICdzZWxmJyB3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZCBodHRwczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGZyYW1lLWFuY2VzdG9ycyAnbm9uZSciLAogICAgICAieC1jb250ZW50LXR5cGUtb3B0aW9ucyI6ICJub3NuaWZmIiwKICAgICAgIngtZnJhbWUtb3B0aW9ucyI6ICJERU5ZIiwKICAgICAgInJlZmVycmVyLXBvbGljeSI6ICJzdHJpY3Qtb3JpZ2luLXdoZW4tY3Jvc3Mtb3JpZ2luIiwKICAgICAgInBlcm1pc3Npb25zLXBvbGljeSI6ICJjYW1lcmE9KHNlbGYpLCBtaWNyb3Bob25lPShzZWxmKSwgZ2VvbG9jYXRpb249KCksIHBheW1lbnQ9KCksIHVzYj0oKSIKICAgIH0KICB9Cn0="
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/headers-WR-3-Valid-TLS-and-8b72b-ct-and-the-security-headers-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "367f6b702648c3bae834-5ecd57829c44a9b21837",
+              "file": "headers.spec.ts",
+              "line": 60,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "hosting.spec.ts",
+      "file": "hosting.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-2 Deep links and reloads return the app",
+          "file": "hosting.spec.ts",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the / route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4175,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:08.874Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-home.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi8iLAogICJzdGF0dXMiOiAyMDAsCiAgImNvbnRlbnRUeXBlIjogInRleHQvaHRtbDsgY2hhcnNldD11dGYtOCIKfQ=="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-hosted/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-1f19e-ument-and-survives-a-reload-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-644f7a8588ebe9a7e23d",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            },
+            {
+              "title": "the /join route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2656,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:14.977Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-join.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi9qb2luIiwKICAic3RhdHVzIjogMjAwLAogICJjb250ZW50VHlwZSI6ICJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-hosted/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-5e3a7-ument-and-survives-a-reload-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-2a10da01cbc6145c3d38",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            },
+            {
+              "title": "the /meet route returns the app document and survives a reload",
+              "ok": true,
+              "tags": [
+                "WR-2",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1595,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:18.134Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-2-km-screen-meet.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJwYXRoIjogIi9tZWV0IiwKICAic3RhdHVzIjogMjAwLAogICJjb250ZW50VHlwZSI6ICJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-hosted/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/hosting-WR-2-Deep-links-an-fe1b0-ument-and-survives-a-reload-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5dae9499dc1239277717-f925c933b80046c7bdf2",
+              "file": "hosting.spec.ts",
+              "line": 21,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "meeting.spec.ts",
+      "file": "meeting.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-1 Two guests hold a real meeting at the public URL",
+          "file": "meeting.spec.ts",
+          "line": 28,
+          "column": 6,
+          "specs": [
+            {
+              "title": "two guests see and hear each other, mute, and leave",
+              "ok": true,
+              "tags": [
+                "WR-1",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16212,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:19.909Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-1-run.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHBzOi8vbWVldC5rbm93LW1lLnRvb2xzIiwKICAicm9vbUNvZGUiOiAia20tNXc4LW9pNCIsCiAgImltYWdlRGlnZXN0cyI6ICJub3QgcHJvdmlkZWQiLAogICJwcm9qZWN0IjogImhvc3RlZCIKfQ=="
+                        },
+                        {
+                          "name": "wr-1-remote-media.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzZWVuQnlBIjogewogICAgInJlbW90ZVBhcnRpY2lwYW50cyI6IDEsCiAgICAidmlkZW8iOiB7CiAgICAgICJsaXZlVmlkZW9UcmFjayI6IHRydWUsCiAgICAgICJ2aWRlb1dpZHRoIjogMzIwLAogICAgICAidmlkZW9IZWlnaHQiOiAxODAsCiAgICAgICJib3hXaWR0aCI6IDYxMCwKICAgICAgImJveEhlaWdodCI6IDM4MS4yNQogICAgfSwKICAgICJhdWRpbyI6IHsKICAgICAgImxpdmVBdWRpb1RyYWNrIjogdHJ1ZQogICAgfQogIH0sCiAgInNlZW5CeUIiOiB7CiAgICAicmVtb3RlUGFydGljaXBhbnRzIjogMSwKICAgICJ2aWRlbyI6IHsKICAgICAgImxpdmVWaWRlb1RyYWNrIjogdHJ1ZSwKICAgICAgInZpZGVvV2lkdGgiOiA2NDAsCiAgICAgICJ2aWRlb0hlaWdodCI6IDM2MCwKICAgICAgImJveFdpZHRoIjogNjEwLAogICAgICAiYm94SGVpZ2h0IjogMzgxLjI1CiAgICB9LAogICAgImF1ZGlvIjogewogICAgICAibGl2ZUF1ZGlvVHJhY2siOiB0cnVlCiAgICB9CiAgfQp9"
+                        },
+                        {
+                          "name": "wr-1-context-a-connected",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/attachments/wr-1-context-a-connected-e912f01159f3daa3577404b0d0ec726ab0dd5c2f.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-connected",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/attachments/wr-1-context-b-connected-85b58d15fb77192cfc5658e810dff42d9e3bf098.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-sees-a-muted",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/attachments/wr-1-context-b-sees-a-muted-27df348bdd050b99f57a4aab180f717f1dfb5b32.png"
+                        },
+                        {
+                          "name": "wr-1-context-a-left",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/attachments/wr-1-context-a-left-fded367f635ec583a5e9788bbe7ccdceb1cf1fd4.png"
+                        },
+                        {
+                          "name": "wr-1-context-b-alone",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/attachments/wr-1-context-b-alone-e4f0e89a4eb88ac7797ffe4df8dd89dd01f75b0e.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-9d8bc-r-each-other-mute-and-leave-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e3edbeebe5c900494fe7-ad7f90f1e1c816a7f846",
+              "file": "meeting.spec.ts",
+              "line": 29,
+              "column": 3
+            },
+            {
+              "title": "a guest who presses browser Back is no longer shown in the meeting",
+              "ok": true,
+              "tags": [
+                "WR-1",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10738,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:37.512Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-1-back-remote-media.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS1lbjUtMnFnIiwKICAic2VlbkJ5QiI6IHsKICAgICJyZW1vdGVQYXJ0aWNpcGFudHMiOiAxLAogICAgInZpZGVvIjogewogICAgICAibGl2ZVZpZGVvVHJhY2siOiB0cnVlLAogICAgICAidmlkZW9XaWR0aCI6IDY0MCwKICAgICAgInZpZGVvSGVpZ2h0IjogMzYwLAogICAgICAiYm94V2lkdGgiOiA2MTAsCiAgICAgICJib3hIZWlnaHQiOiAzODEuMjUKICAgIH0sCiAgICAiYXVkaW8iOiB7CiAgICAgICJsaXZlQXVkaW9UcmFjayI6IHRydWUKICAgIH0KICB9Cn0="
+                        },
+                        {
+                          "name": "wr-1-back-context-b-sees-a",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-e6482-longer-shown-in-the-meeting-hosted/attachments/wr-1-back-context-b-sees-a-a17219d9da9e5cc1a7e1d90affddba4f0028a185.png"
+                        },
+                        {
+                          "name": "wr-1-back-context-b-alone",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-e6482-longer-shown-in-the-meeting-hosted/attachments/wr-1-back-context-b-alone-f43d745ab00eb74164950a2028cd0b40121473e6.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-e6482-longer-shown-in-the-meeting-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-e6482-longer-shown-in-the-meeting-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/meeting-WR-1-Two-guests-ho-e6482-longer-shown-in-the-meeting-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e3edbeebe5c900494fe7-f277a799860eddb6eed9",
+              "file": "meeting.spec.ts",
+              "line": 79,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "surface.spec.ts",
+      "file": "surface.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-5 Screens on sample data are not reachable in the hosted build",
+          "file": "surface.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "only home, join and the meeting room are reachable",
+              "ok": true,
+              "tags": [
+                "WR-5",
+                "value-critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3477,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T15:24:49.399Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-5-surface.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJiYXNlVVJMIjogImh0dHBzOi8vbWVldC5rbm93LW1lLnRvb2xzIiwKICAicHJvYmxlbXMiOiBbXSwKICAibGlua3NCeVBhdGgiOiB7CiAgICAiLyI6IFsKICAgICAgIi8iLAogICAgICAiLyIsCiAgICAgICIvIgogICAgXSwKICAgICIvam9pbiI6IFsKICAgICAgIi9qb2luIiwKICAgICAgIi8iCiAgICBdLAogICAgIi9tZWV0IjogWwogICAgICAiL21lZXQiLAogICAgICAiLyIsCiAgICAgICIvIgogICAgXQogIH0KfQ=="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-hosted/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-hosted-20261116T152404Z/test-results/surface-WR-5-Screens-on-sa-07177--meeting-room-are-reachable-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7387f18eb7e0b24c642c-111cf709e9255daf1ab6",
+              "file": "surface.spec.ts",
+              "line": 17,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T15:24:07.006Z",
+    "duration": 56900.644,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
