@@ -134,6 +134,10 @@ export const EFFECTS = {
    * is the product's claim; WC-4 proves it with the pixels on B (wc-frames.ts).
    */
   processorAttribute: "data-video-processor",
+  /** The section's status line; data-state is none|preparing|loading|camera-off|failed. */
+  status: "km-effect-status",
+  /** The note shown instead of the choices where effects are not available (repair 9). */
+  unavailable: "km-effect-unavailable",
 } as const;
 
 /** Local history (WC-7). */

@@ -27,6 +27,12 @@ export interface BackgroundEffects {
   /** Forgets the request (a new connect, or leaving). */
   reset(): void;
   setBackgroundEffect(effect: BackgroundEffect): Promise<Result<void, BackgroundEffectError>>;
+  /**
+   * Prepares the processor on the published camera when nothing else is due (repair 9): the
+   * one-time GPU program build then happens while the Background section shows "Preparing",
+   * not after the person chooses. Resolves once it ran, or at once when there is no camera on.
+   */
+  prepareBackgroundEffects(): Promise<void>;
 }
 
 interface Applied {
@@ -57,6 +63,8 @@ export function createBackgroundEffects(
   let failedTrack: LocalVideoTrack | null = null;
   let busy: Promise<void> | null = null;
   let generation = 0;
+  /** A prepare was asked for and the next idle reconcile should run it. */
+  let prepareWanted = false;
 
   /** Runs one hook call; its outcome counts only if no reset happened meanwhile. */
   const run = (call: () => Promise<void>, onDone: (succeeded: boolean) => void): void => {
@@ -94,7 +102,21 @@ export function createBackgroundEffects(
     });
     status = plan.status;
     const track = camera.track;
-    if (track === null) return;
+    if (track === null) {
+      prepareWanted = false;
+      return;
+    }
+    if (prepareWanted && plan.action === "none") {
+      prepareWanted = false;
+      // Only a live camera produces the frame segmentation needs; with the camera off the
+      // first effect builds the programs when the camera comes back.
+      if (camera.state === "on")
+        run(
+          () => hook.prepare(track),
+          () => undefined,
+        );
+      return;
+    }
     if (plan.action === "remove") {
       const removed = (): void => {
         applied = null;
@@ -130,6 +152,15 @@ export function createBackgroundEffects(
       status = "idle";
       applied = null;
       failedTrack = null;
+      prepareWanted = false;
+    },
+    prepareBackgroundEffects: async () => {
+      if (hook === undefined || support.backgroundEffects === "unsupported") return;
+      if (host.joined() === null) return;
+      prepareWanted = true;
+      host.refresh();
+      await settle();
+      prepareWanted = false;
     },
     setBackgroundEffect: async (effect) => {
       const active = host.joined();

@@ -9,9 +9,11 @@
 // and inverts the indicator so its state stays visible (DESIGN.md choice card). Under it,
 // one polite status line: loading (spinner, or the static clock under reduced motion),
 // camera off, or the failure. Without a camera the group is disabled with the reason; a
-// browser that cannot run effects gets a note instead of the group.
+// browser that cannot run effects gets a note instead of the group. While shown with the
+// camera on, the section prepares the processor ("Preparing background effects…", repair 9),
+// so the first choice does not freeze the page; choices stay available meanwhile.
 // Scenario contract: radiogroup "Background", km-effect-off, km-effect-blur,
-// km-effect-image-option.
+// km-effect-image-option, km-effect-status (data-state = the status), km-effect-unavailable.
 import type { ConferencingUseCases } from "@know-meet/application";
 import type { BackgroundEffectState, Support } from "@know-meet/domain";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
@@ -23,6 +25,7 @@ import { sectionHeadingClass } from "../device-settings/audio-section";
 import { BACKGROUND_COPY } from "./background-copy";
 import { BACKGROUND_CHOICES, type BackgroundChoice } from "./background-options";
 import { type BackgroundStatus, useBackgroundChoice } from "./use-background-choice";
+import { usePrepareBackground } from "./use-prepare-background";
 
 const HEADING_ID = "settings-background-heading";
 const HINT_ID = "settings-background-hint";
@@ -79,16 +82,18 @@ function StatusLine({ status }: { readonly status: BackgroundStatus }) {
     <p
       id={STATUS_ID}
       aria-live="polite"
+      data-testid="km-effect-status"
+      data-state={status}
       className={cn(
         "flex items-start gap-1.5 text-sm",
         status === "failed" ? "text-red-text" : "text-muted-foreground",
       )}
     >
-      {status === "loading" ? (
+      {status === "loading" || status === "preparing" ? (
         <>
           <Spinner aria-hidden="true" role="presentation" className="mt-0.5 motion-reduce:hidden" />
           <KmIcon name="clock" className="mt-0.5 hidden size-4 flex-none motion-reduce:block" />
-          <span>{BACKGROUND_COPY.loading}</span>
+          <span>{status === "loading" ? BACKGROUND_COPY.loading : BACKGROUND_COPY.preparing}</span>
         </>
       ) : status === "camera-off" ? (
         <span>{BACKGROUND_COPY.cameraOff}</span>
@@ -121,8 +126,9 @@ export function BackgroundSection({
   conferencing,
   announce,
 }: BackgroundSectionProps) {
-  const choice = useBackgroundChoice(state, cameraOn, conferencing, announce);
   const supported = support === "supported";
+  const preparing = usePrepareBackground(conferencing, supported && cameraOn && !noCamera);
+  const choice = useBackgroundChoice(state, cameraOn, conferencing, announce, preparing);
   return (
     <section aria-labelledby={HEADING_ID} className="grid gap-s3 pt-s2">
       <h3 id={HEADING_ID} className={sectionHeadingClass}>
@@ -136,7 +142,9 @@ export function BackgroundSection({
           <RadioGroup
             aria-labelledby={HEADING_ID}
             aria-describedby={HINT_ID}
-            aria-busy={choice.status === "loading" ? true : undefined}
+            aria-busy={
+              choice.status === "loading" || choice.status === "preparing" ? true : undefined
+            }
             aria-disabled={noCamera ? true : undefined}
             disabled={noCamera}
             value={choice.checked}
@@ -152,7 +160,10 @@ export function BackgroundSection({
           <StatusLine status={choice.status} />
         </>
       ) : (
-        <div className="flex items-start gap-s2 rounded-base bg-surface p-s3 text-sm text-foreground">
+        <div
+          data-testid="km-effect-unavailable"
+          className="flex items-start gap-s2 rounded-base bg-surface p-s3 text-sm text-foreground"
+        >
           <KmIcon name="info" className="mt-0.5 size-4 flex-none text-muted-foreground" />
           <span>{BACKGROUND_COPY.unsupported}</span>
         </div>

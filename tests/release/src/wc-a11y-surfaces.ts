@@ -259,6 +259,9 @@ export async function auditAllWidths(
     await page.setViewportSize(viewport);
     await settle(page);
     if (prepare !== undefined) await prepare();
+    // The pointer stays where the last click left it; a hover fill is not the resting state
+    // the audit measures (r8: the playback button's hover fill at 1440). Park it off content.
+    await page.mouse.move(0, 0);
     await settleAnimations(page);
     cells[`${surface}/${theme}/${viewport.width}`] = await auditSurface(page);
     const name = `wc-13-${surface}-${theme}-${viewport.width}`;

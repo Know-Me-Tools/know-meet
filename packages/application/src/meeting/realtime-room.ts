@@ -174,6 +174,14 @@ export interface RealtimeRoom {
   setBackgroundEffect(effect: BackgroundEffect): Promise<Result<void, BackgroundEffectError>>;
 
   /**
+   * Gets the background processor ready on the published camera without changing what others
+   * see, so the first effect a person chooses starts at once (WC-4, repair 9). Resolves when
+   * it is ready, when there is nothing to prepare (effects unsupported, camera off, not
+   * joined), or when preparing failed; a failure surfaces on the next `setBackgroundEffect`.
+   */
+  prepareBackgroundEffects(): Promise<void>;
+
+  /**
    * Sends one recording-consent message on the room's reserved consent topic, which is
    * never the chat topic. Only the consent use cases call it.
    */

@@ -5,14 +5,15 @@
 // busy ("Loading background effects…"); with the camera off the choice waits for it. A
 // processor that fails to start leaves the camera as captured: the selection returns to
 // None (the request is withdrawn) and the failure line stays until the next choice.
-// "Background: Blur." is announced politely once a choice is accepted.
+// "Background: Blur." is announced politely once a choice is accepted. While the section
+// prepares the processor (repair 9) and nothing else is under way, the status says so.
 import type { ConferencingUseCases } from "@know-meet/application";
 import { type BackgroundEffectState, NO_BACKGROUND_EFFECT } from "@know-meet/domain";
 import { useCallback, useState } from "react";
 import type { Announce } from "../../../guest-meeting/live-status";
 import { type BackgroundChoiceId, choiceById, choiceOfEffect } from "./background-options";
 
-export type BackgroundStatus = "none" | "loading" | "camera-off" | "failed";
+export type BackgroundStatus = "none" | "preparing" | "loading" | "camera-off" | "failed";
 
 export interface BackgroundChoiceState {
   readonly checked: BackgroundChoiceId;
@@ -25,6 +26,7 @@ export function useBackgroundChoice(
   cameraOn: boolean,
   conferencing: ConferencingUseCases,
   announce: Announce,
+  preparing: boolean,
 ): BackgroundChoiceState {
   const [picked, setPicked] = useState<BackgroundChoiceId | null>(null);
   const [failed, setFailed] = useState(false);
@@ -60,7 +62,9 @@ export function useBackgroundChoice(
       ? "camera-off"
       : checked !== "none" && (waiting || picked !== null)
         ? "loading"
-        : "none";
+        : preparing
+          ? "preparing"
+          : "none";
 
   return { checked, status, choose };
 }

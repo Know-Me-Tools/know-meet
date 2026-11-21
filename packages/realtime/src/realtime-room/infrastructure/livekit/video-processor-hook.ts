@@ -22,6 +22,13 @@ export interface VideoProcessorHook {
    * Loads its assets on the first call, not before.
    */
   apply(track: LocalVideoTrack, effect: ProcessedBackgroundEffect): Promise<void>;
+  /**
+   * Gets a processor ready on `track` without changing its picture: loads the library and
+   * its assets, and runs segmentation once so the GPU programs are built before the first
+   * effect is chosen. Leaves a pass-through processor on the track for `apply` to switch.
+   * Rejects (after taking its processor off) when the processor or its assets cannot load.
+   */
+  prepare(track: LocalVideoTrack): Promise<void>;
   /** Takes the hook's processor off `track`. Resolves when there is none. */
   remove(track: LocalVideoTrack): Promise<void>;
 }

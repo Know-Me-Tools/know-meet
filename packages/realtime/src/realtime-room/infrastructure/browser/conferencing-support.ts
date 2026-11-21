@@ -57,6 +57,12 @@ let backgroundProbe: boolean | null = null;
  * segmenter's OffscreenCanvas, VideoFrame, createImageBitmap and WebGL2, plus either the
  * insertable-streams path or the canvas fallback), without importing it: that module pulls
  * in MediaPipe. Read once; it opens a WebGL2 context to test.
+ *
+ * Also requires hardware-accelerated WebGL (repair 9). With software WebGL (SwiftShader,
+ * llvmpipe) the library's per-frame canvas read-back blocks the page for hundreds of
+ * milliseconds a frame, so the meeting stops responding for as long as an effect is on
+ * (evidence/wc4-profile-2026-11-20). There the feature is reported unsupported and the
+ * camera works normally.
  */
 function canProcessBackground(): boolean {
   backgroundProbe ??= probeBackgroundProcessing();
@@ -69,7 +75,7 @@ function probeBackgroundProcessing(): boolean {
     "OffscreenCanvas" in globalThis &&
     "VideoFrame" in globalThis &&
     "createImageBitmap" in globalThis &&
-    document.createElement("canvas").getContext("webgl2") !== null;
+    hasHardwareWebGl2();
   const streams =
     "MediaStreamTrackGenerator" in globalThis && "MediaStreamTrackProcessor" in globalThis;
   const fallback =
@@ -77,4 +83,23 @@ function probeBackgroundProcessing(): boolean {
     "VideoFrame" in globalThis &&
     "captureStream" in HTMLCanvasElement.prototype;
   return segmenter && (streams || fallback);
+}
+
+/** Renderer names browsers report for software WebGL. */
+const SOFTWARE_RENDERER = /swiftshader|llvmpipe|softpipe|software|basic render driver/i;
+
+/**
+ * A WebGL2 context the browser does not flag as slow. `failIfMajorPerformanceCaveat` refuses a
+ * context the browser would back with software; the renderer name catches browsers that
+ * still grant one. A browser that hides the renderer name is judged by the caveat alone.
+ */
+function hasHardwareWebGl2(): boolean {
+  const gl = document
+    .createElement("canvas")
+    .getContext("webgl2", { failIfMajorPerformanceCaveat: true });
+  if (gl === null) return false;
+  const info = gl.getExtension("WEBGL_debug_renderer_info");
+  const renderer = info === null ? "" : String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL));
+  gl.getExtension("WEBGL_lose_context")?.loseContext();
+  return !SOFTWARE_RENDERER.test(renderer);
 }

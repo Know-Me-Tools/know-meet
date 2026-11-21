@@ -11,6 +11,22 @@ import type {
 
 type TrackProcessorsModule = typeof import("@livekit/track-processors");
 
+/**
+ * How long `prepare` waits for the first segmented frame. A cold GPU program build measured
+ * 6.5 s on an M1 Max (evidence/wc4-measure-2026-11-20); past this the processor is left in
+ * pass-through and the first effect finishes the build instead.
+ */
+const PREPARE_FRAME_TIMEOUT_MS = 20_000;
+
+/**
+ * Blur radius 0 makes the library segment every frame but composite the frame over itself,
+ * so the picture others receive is unchanged while MediaPipe builds its GPU programs.
+ */
+const PASS_THROUGH_SEGMENTATION: SwitchBackgroundProcessorOptions = {
+  mode: "background-blur",
+  blurRadius: 0,
+};
+
 /** The effect as the processor's `switchTo` takes it. Blur keeps the library's default radius. */
 function toSwitchOptions(effect: ProcessedBackgroundEffect): SwitchBackgroundProcessorOptions {
   if (effect.kind === "blur") return { mode: "background-blur" };
@@ -32,6 +48,12 @@ function toSwitchOptions(effect: ProcessedBackgroundEffect): SwitchBackgroundPro
  *   the image rejects, the hook takes its processor off the track before rejecting, so the
  *   adapter's `failed` status is true of what others receive.
  *
+ * - **Prepared before a choice (repair 9).** The first segmented frame on a processor blocks
+ *   the page while MediaPipe builds its GPU programs (0.5 s warm, 6.5 s cold, profiled in
+ *   evidence/wc4-profile-2026-11-20). `prepare` runs that frame while the Background section
+ *   says "Preparing", with segmentation composited over the unchanged frame, then returns the
+ *   processor to `disabled`. `apply` later switches the same processor, already built.
+ *
  * `paths` are the same-origin locations of the tasks-vision WASM file set and the pinned
  * segmenter model. They go to every processor this hook constructs as `assetPaths`, so
  * MediaPipe never falls back to its CDN defaults (`connect-src` would block them).
@@ -42,6 +64,10 @@ export function createBackgroundProcessorHook(paths: BackgroundAssetPaths): Vide
     modelAssetPath: paths.modelAssetPath,
   };
   const ours = new WeakSet<object>();
+  /** Processors whose GPU programs have been built by a segmented frame. */
+  const built = new WeakSet<object>();
+  /** Resolvers waiting for a processor's next processed frame. */
+  const frameWaiters = new WeakMap<object, () => void>();
   let loading: Promise<TrackProcessorsModule> | null = null;
 
   /** Imports the library once; a failed import is forgotten so a later request can retry. */
@@ -67,12 +93,34 @@ export function createBackgroundProcessorHook(paths: BackgroundAssetPaths): Vide
     const existing = processorOn(track);
     if (existing !== null) return existing;
     const library = await loadLibrary();
-    const processor = library.BackgroundProcessor({ mode: "disabled", assetPaths });
+    const processor: BackgroundProcessorWrapper = library.BackgroundProcessor({
+      mode: "disabled",
+      assetPaths,
+      onFrameProcessed: () => {
+        built.add(processor);
+        const resolve = frameWaiters.get(processor);
+        frameWaiters.delete(processor);
+        resolve?.();
+      },
+    });
     ours.add(processor);
     // Rejects when the WASM file set or the model cannot load; the track keeps no processor.
     await track.setProcessor(processor);
     return processor;
   };
+
+  /** Resolves on the processor's next processed frame, or after the timeout. */
+  const nextProcessedFrame = (processor: BackgroundProcessorWrapper): Promise<void> =>
+    new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        frameWaiters.delete(processor);
+        resolve();
+      }, PREPARE_FRAME_TIMEOUT_MS);
+      frameWaiters.set(processor, () => {
+        clearTimeout(timer);
+        resolve();
+      });
+    });
 
   const remove = async (track: LocalVideoTrack): Promise<void> => {
     if (processorOn(track) === null) return;
@@ -80,6 +128,20 @@ export function createBackgroundProcessorHook(paths: BackgroundAssetPaths): Vide
   };
 
   return {
+    prepare: async (track) => {
+      try {
+        const processor = await attach(track);
+        // An effect already on the track has built the programs; never disturb it.
+        if (built.has(processor) || processor.mode !== "disabled") return;
+        const frame = nextProcessedFrame(processor);
+        await processor.switchTo(PASS_THROUGH_SEGMENTATION);
+        await frame;
+        await processor.switchTo({ mode: "disabled" });
+      } catch (error: unknown) {
+        await remove(track).catch(() => undefined);
+        throw error;
+      }
+    },
     apply: async (track, effect) => {
       try {
         const processor = await attach(track);

@@ -42,6 +42,8 @@ export interface ConferencingUseCases {
   /** The "Enable audio" click (WC-12). Call only from the click handler. */
   enableAudio(): Promise<Result<void, AudioStartError>>;
   setBackgroundEffect(effect: BackgroundEffect): Promise<Result<void, BackgroundEffectError>>;
+  /** Called when the Background section is shown; see `RealtimeRoom.prepareBackgroundEffects`. */
+  prepareBackgroundEffects(): Promise<void>;
 }
 
 export function createConferencingUseCases(room: RealtimeRoom): ConferencingUseCases {
@@ -53,6 +55,7 @@ export function createConferencingUseCases(room: RealtimeRoom): ConferencingUseC
     selectDevice: (kind, id) => room.selectDevice(kind, id),
     enableAudio: () => room.startAudio(),
     setBackgroundEffect: (effect) => room.setBackgroundEffect(effect),
+    prepareBackgroundEffects: () => room.prepareBackgroundEffects(),
   };
 }
 

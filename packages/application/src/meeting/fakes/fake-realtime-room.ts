@@ -280,6 +280,7 @@ export function createFakeRealtimeRoom(): FakeRealtimeRoom {
       publish({ ...snapshot, backgroundEffect: effectStateFor(effect, self) });
       return ok(undefined);
     },
+    prepareBackgroundEffects: async () => undefined,
     sendConsentMessage: async (message, to) => {
       if (sendingLocal() === null) return err(meetingErrors.connectionLost());
       const failure = takeSendFailure();

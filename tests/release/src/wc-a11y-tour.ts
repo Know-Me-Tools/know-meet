@@ -125,6 +125,15 @@ export async function tourSurfaces(
 
   await step("room-effects", async () => {
     await openRoomSettings(a.page);
+    // On software graphics (headless Chromium) the section shows the "not available" note
+    // instead of the choices (repair 9); that note is the surface to audit there.
+    const unavailable = a.page.getByTestId(EFFECTS.unavailable);
+    if (await unavailable.isVisible()) {
+      await visit("room-effects", a.page, () => unavailable.scrollIntoViewIfNeeded());
+      const settings = a.page.getByTestId(DEVICES.roomSettings);
+      if ((await settings.getAttribute("aria-expanded")) === "true") await settings.click();
+      return;
+    }
     const group = a.page.getByRole("radiogroup", { name: EFFECTS.groupName });
     await expect(group).toBeVisible();
     await a.page.getByTestId(EFFECTS.blur).click();

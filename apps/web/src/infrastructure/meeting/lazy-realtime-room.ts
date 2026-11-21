@@ -178,6 +178,7 @@ export function createLazyRealtimeRoom(
     selectDevice: (kind, id) => real?.selectDevice(kind, id) ?? notJoined(),
     startAudio: () => real?.startAudio() ?? notJoined(),
     setBackgroundEffect: (effect) => real?.setBackgroundEffect(effect) ?? notJoined(),
+    prepareBackgroundEffects: () => real?.prepareBackgroundEffects() ?? Promise.resolve(),
     sendConsentMessage: (message, to) => real?.sendConsentMessage(message, to) ?? notJoined(),
     onConsentMessage,
   };

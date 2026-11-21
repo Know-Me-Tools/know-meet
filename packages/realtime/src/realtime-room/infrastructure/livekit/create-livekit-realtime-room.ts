@@ -101,6 +101,7 @@ export function createLiveKitRealtimeRoom(options: LiveKitRealtimeRoomOptions = 
     selectDevice: devices.selectDevice,
     startAudio: createStartAudio(host),
     setBackgroundEffect: effects.setBackgroundEffect,
+    prepareBackgroundEffects: effects.prepareBackgroundEffects,
     sendConsentMessage: text.sendConsentMessage,
     onConsentMessage: text.onConsentMessage,
   };
