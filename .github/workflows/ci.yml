@@ -73,9 +73,12 @@ jobs:
       - run: cargo test --workspace --locked
       - run: cargo build -p bff --locked
 
+  # macOS arm64, the golden host: the goldens and the pixel-measured text-contrast gate
+  # (textContrastGuideline) are rendered on Apple Silicon. Linux rasterizes text
+  # differently, so every golden and 47 contrast checks failed there on unchanged code.
   flutter:
     name: flutter analyze (zero infos), test
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -96,6 +99,14 @@ jobs:
           dart run build_runner build --delete-conflicting-outputs
           flutter analyze --fatal-infos --fatal-warnings
           flutter test
+      - name: Keep the golden diffs of a failed run
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: flutter-golden-failures
+          path: apps/mobile/test/goldens/failures/
+          if-no-files-found: ignore
+          retention-days: 7
 
   # Heavy native bundles run on main only (release-shaped lane), not on every pull request:
   # `pnpm run build` is the same aggregate a developer runs locally.
