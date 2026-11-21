@@ -257,7 +257,7 @@ test.describe("WC-4 Blur and image backgrounds show remotely and turn off cleanl
         await openRoomSettings(a.page);
         await expect(a.page.getByTestId(EFFECTS.unavailable)).toBeVisible();
         await expect(a.page.getByTestId(EFFECTS.unavailable)).toContainText(
-          "not available on this device",
+          /aren.t available on this device/,
         );
         await expect(a.page.getByRole("radiogroup", { name: EFFECTS.groupName })).toHaveCount(0);
         await expect(a.page.getByTestId(EFFECTS.blur)).toHaveCount(0);

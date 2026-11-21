@@ -246,16 +246,23 @@ async function keyboardTour(a: Participant, b: Participant, problems: string[]):
     "aria-expanded",
     "true",
   );
+  // On software graphics the effect choices are replaced by a "not available" note
+  // (repair 9), so the effect radios are only toured when they are offered.
+  const effectsOffered = !(await pa.getByTestId(EFFECTS.unavailable).isVisible());
   await tabThrough(
     pa,
-    [DEVICES.roomMicSelect, DEVICES.roomCameraSelect, DEVICES.roomSpeakerSelect, EFFECTS.off],
+    effectsOffered
+      ? [DEVICES.roomMicSelect, DEVICES.roomCameraSelect, DEVICES.roomSpeakerSelect, EFFECTS.off]
+      : [DEVICES.roomMicSelect, DEVICES.roomCameraSelect, DEVICES.roomSpeakerSelect],
     problems,
     "settings",
   );
-  await pressOn(pa, EFFECTS.off, "ArrowRight");
-  await expect(pa.getByTestId(EFFECTS.blur), "arrow moves the effect choice").toBeChecked();
-  await pa.keyboard.press("ArrowLeft");
-  await expect(pa.getByTestId(EFFECTS.off), "arrow moves it back").toBeChecked();
+  if (effectsOffered) {
+    await pressOn(pa, EFFECTS.off, "ArrowRight");
+    await expect(pa.getByTestId(EFFECTS.blur), "arrow moves the effect choice").toBeChecked();
+    await pa.keyboard.press("ArrowLeft");
+    await expect(pa.getByTestId(EFFECTS.off), "arrow moves it back").toBeChecked();
+  }
   await pa.keyboard.press("Escape");
   if ((await settings.getAttribute("aria-expanded")) === "true") {
     problems.push("settings: Escape does not close the sheet");
