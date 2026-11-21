@@ -144,6 +144,7 @@ export const ROOM_COPY = {
   leftText:
     "The meeting stays open for anyone still in it. Rejoin with the same code while it’s open.",
   reloadText: "Reloading the page took you out of the meeting.",
+  savingHistory: "Saving this meeting to your history on this device…",
   leaveTitle: "Leave the meeting?",
   leaveText: "The meeting stays open for anyone still in it.",
   copyFailed: "Couldn’t copy. Select the code and copy it yourself.",

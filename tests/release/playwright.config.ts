@@ -44,7 +44,19 @@ function crossEngineProjects(prefix: string, baseURL: string) {
       name: `${prefix}-firefox`,
       grep: /@cross-engine/,
       grepInvert: exclude,
-      use: { ...devices["Desktop Firefox"], baseURL },
+      use: {
+        ...devices["Desktop Firefox"],
+        baseURL,
+        // Firefox has no fake-media flags; without these prefs the lobby's preview waits on a
+        // permission prompt that never shows, and its controls stay disabled (hosted run
+        // 2026-11-21, hosted-firefox--wc-3-chat-private).
+        launchOptions: {
+          firefoxUserPrefs: {
+            "media.navigator.streams.fake": true,
+            "media.navigator.permission.disabled": true,
+          },
+        },
+      },
     },
     {
       name: `${prefix}-webkit`,
