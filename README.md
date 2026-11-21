@@ -23,18 +23,30 @@ transcript, summary and action items.
 
 ## What is live today
 
-https://meet.know-me.tools runs the first web release (2026-11-16): **real video
-meetings for guests.** No account, no download.
+https://meet.know-me.tools runs **real video meetings for guests**. No account, no
+download. The first release (2026-11-16) brought meetings; the conferencing release
+(2026-11-21) added the rest of this list.
 
 - Start a meeting from the home page and share its code or link.
 - Others join by code or link, check camera and microphone in the lobby, and meet.
   Audio and video run on LiveKit Cloud.
 - In the room: mute, camera on or off, copy the join link, leave.
+- **Share your screen**, a window or a tab, and stop sharing.
+- **Chat** with everyone, or privately with one person.
+- **Blur your background or replace it with an image.** Browsers without graphics
+  acceleration are told effects aren't available; the meeting keeps working.
+- **Choose your microphone, camera and speaker**, with levels and a preview, before
+  and during a meeting. An "Enable audio" prompt appears when the browser blocks sound.
+- **History on this device.** Each meeting you join, who was there and its chat are
+  kept in your browser only (PGlite). Nothing is sent anywhere; you can delete it.
+- **Record in your browser.** Everyone is asked first; anyone declining stops it.
+  Recordings stay in your browser's storage. This is not LiveKit Egress.
 
 Everything else this README describes (dots, registered agents, the Concierge,
-transcription, recording, delivery at close, calendars, sign-in) is the product
-direction and is **not** in this release; the prototype above shows it with sample
-data. See the [release notes](docs/release/web-release-notes.md).
+transcription, server-side recording, delivery at close, calendars, sign-in) is the
+product direction and is **not** live; the prototype above shows it with sample
+data. See the release notes: [conferencing](docs/release/web-conferencing-release-notes.md)
+and [first release](docs/release/web-release-notes.md).
 
 ## What happens in a meeting
 
@@ -132,7 +144,7 @@ remember you. Invitees never need an account, whichever column the host is in.
 | `services/livekit/` | The token service (Rust): meeting codes and short-lived LiveKit tokens |
 | `infra/` | Kustomize manifests and the Argo CD Application for the cluster |
 | [`tooling/release/`](tooling/release/README.md) | Release tools: header render, artifact scan, cluster and endpoint checks |
-| `tests/release/` | Playwright release scenarios (WR-1 to WR-8), packaged and hosted |
+| `tests/release/` | Playwright release scenarios (WR-1 to WR-8, WC-1 to WC-13), packaged and hosted |
 | [`docs/release/`](docs/release/web-release-runbook.md) | Runbook, operations guide and release notes |
 
 ## Deploying the web app
@@ -146,7 +158,10 @@ The first release, the cluster setup and teardown are in the
 [runbook](docs/release/web-release-runbook.md) and the
 [operations guide](docs/release/web-release-operations.md).
 
-`main` has no branch protection yet, so a push to `main` is a public deploy.
+`main` is protected by a repository ruleset: changes land through pull requests,
+three CI checks must pass (repo rules, typecheck, test and build; cargo; the web,
+desktop and mobile builds), and only the deploy bot may push directly. Every merge
+to `main` is still a public deploy.
 
 ## Publishing the prototype
 
