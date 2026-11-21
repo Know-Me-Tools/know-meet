@@ -1,0 +1,20 @@
+{
+  "stage": "plan",
+  "completedAt": "2026-11-18T20:09:04Z",
+  "outputs": [
+    "plan.md",
+    "plan-tasks.md",
+    "adopted-contract.json"
+  ],
+  "nextStage": "execute",
+  "summaryForNext": "11 OpenSpec changes, 47 tasks, contract adopted (sha256 24260182..., planRevision 1) with D1-D5. Order: wc01 acceptance and installs, then wc02/wc06/wc08, wc03, wc04/wc05/wc07 serialized for one UI writer, wc09, wc10, one boundary run in wc11. Task model assignments are in plan-tasks.md. Open before execute: KBD-POLICY-ACK for AGENTS.md and CLAUDE.md, batch 1 pin and install approvals, and entity graph 5.0.1 on npm (blocks wc08 at 8.1). Review warnings: round 2 fixes (task 1.6, final pin list, PGlite Vite wiring) were applied after the two-round cap and not re-reviewed; CSP security review conditions bind wc06 and wc07.",
+  "skipped": false,
+  "skipReason": null,
+  "identity": {
+    "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "phaseId": "web-conferencing-features",
+    "planRevision": 1,
+    "contractDigest": "24260182fbf1b23999f1f04f26fd590fbb87756d6c275de434d9b6c777016930"
+  }
+}

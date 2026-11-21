@@ -1,0 +1,168 @@
+$ turbo run build && node tooling/repo-rules/src/run-aggregate.ts build --continue
+
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/realtime, @know-meet/release-tests, @know-meet/ui, @know-meet/web
+   • Running build in 9 packages
+   • Remote caching disabled, using shared worktree cache
+
+@know-meet/design-tokens:generate: cache bypass, force executing b8b71f4f567f8b21
+@know-meet/design-tokens:generate: $ node generator/src/cli.ts
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:generate: unchanged docs/design/tokens.css
+@know-meet/design-tokens:generate: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:generate: design tokens 1.6.0 (225 keys) -> 8 files
+@know-meet/design-tokens:build: cache hit, replaying logs aa70f450049c771c
+@know-meet/design-tokens:build: $ node generator/src/cli.ts --check
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/fonts.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/theme.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/web/shadcn.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/tokens.g.dart
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/flutter/km_theme.g.dart
+@know-meet/design-tokens:build: unchanged docs/design/tokens.css
+@know-meet/design-tokens:build: unchanged packages/design-tokens/generated/manifest.json
+@know-meet/design-tokens:build: design tokens 1.6.0 (225 keys) -> 8 files
+@know-meet/web:build: cache miss, executing 0247eb2a99214056
+@know-meet/web:build: $ node scripts/build.mjs
+@know-meet/web:build: vite v8.1.5 building client environment for production...
+@know-meet/web:build: [2K@know-meet/web:build: transforming...[plugin rolldown:vite-resolve] Module "node:module" has been externalized for browser compatibility, imported by "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-N66TTF7B.js". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+@know-meet/web:build: [plugin rolldown:vite-resolve] Module "node:module" has been externalized for browser compatibility, imported by "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-XZUEO4BZ.js". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+@know-meet/web:build: [33m[EVAL] [0mUse of direct `eval` function is strongly discouraged as it poses security risks and may cause issues with minification.
+@know-meet/web:build:  - Use of direct `eval` here. in ../../node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-N66TTF7B.js at 23104..23108
+@know-meet/web:build:  [38;5;240m │[0m 
+@know-meet/web:build:  [38;5;240m │[0m [38;5;115mHelp[0m: Consider using indirect eval. For more information, check the documentation: https://rolldown.rs/guide/troubleshooting#avoiding-direct-eval
+@know-meet/web:build: 
+@know-meet/web:build: [33m[EVAL] [0mUse of direct `eval` function is strongly discouraged as it poses security risks and may cause issues with minification.
+@know-meet/web:build:  - Use of direct `eval` here. in ../../node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-N66TTF7B.js at 23595..23599
+@know-meet/web:build:  [38;5;240m │[0m 
+@know-meet/web:build:  [38;5;240m │[0m [38;5;115mHelp[0m: Consider using indirect eval. For more information, check the documentation: https://rolldown.rs/guide/troubleshooting#avoiding-direct-eval
+@know-meet/web:build: 
+@know-meet/web:build: [33m[EVAL] [0mUse of direct `eval` function is strongly discouraged as it poses security risks and may cause issues with minification.
+@know-meet/web:build:  - Use of direct `eval` here. in ../../node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-XZUEO4BZ.js at 84931..84935
+@know-meet/web:build:  [38;5;240m │[0m 
+@know-meet/web:build:  [38;5;240m │[0m [38;5;115mHelp[0m: Consider using indirect eval. For more information, check the documentation: https://rolldown.rs/guide/troubleshooting#avoiding-direct-eval
+@know-meet/web:build: 
+@know-meet/web:build: [33m[EVAL] [0mUse of direct `eval` function is strongly discouraged as it poses security risks and may cause issues with minification.
+@know-meet/web:build:  - Use of direct `eval` here. in ../../node_modules/.pnpm/@electric-sql+pglite@0.5.16/node_modules/@electric-sql/pglite/dist/chunk-XZUEO4BZ.js at 85422..85426
+@know-meet/web:build:  [38;5;240m │[0m 
+@know-meet/web:build:  [38;5;240m │[0m [38;5;115mHelp[0m: Consider using indirect eval. For more information, check the documentation: https://rolldown.rs/guide/troubleshooting#avoiding-direct-eval
+@know-meet/web:build: 
+@know-meet/web:build: ✓ 3176 modules transformed.
+@know-meet/web:build: rendering chunks...
+@know-meet/web:build: computing gzip size...
+@know-meet/web:build: dist/assets/__vite-browser-external-BFrSgMGd.js           0.11 kB
+@know-meet/web:build: dist/assets/frame-tick-worker-C1rX-YAs.js                 0.16 kB
+@know-meet/web:build: dist/assets/nodefs-C7QU8oS1.js                            0.53 kB
+@know-meet/web:build: dist/assets/rolldown-runtime-Bh1tDfsg.js                  0.56 kB
+@know-meet/web:build: dist/index.html                                           0.96 kB │ gzip:     0.50 kB
+@know-meet/web:build: dist/assets/opfs-writer-worker-U1vAfCW8.js                1.45 kB
+@know-meet/web:build: dist/assets/memfs2opfs-BQwPxB94.js                        8.04 kB
+@know-meet/web:build: dist/assets/opfs-ahp-mVS0fKL7.js                          9.93 kB
+@know-meet/web:build: dist/assets/space-grotesk-variable-CzOCAti0.woff2        49.25 kB
+@know-meet/web:build: dist/assets/jetbrains-mono-medium-3S3k2nMz.woff2         93.82 kB
+@know-meet/web:build: dist/assets/jetbrains-mono-semibold-BM8Dc2t-.woff2       94.47 kB
+@know-meet/web:build: dist/assets/inter-regular-COLGFB3M.woff2                111.26 kB
+@know-meet/web:build: dist/assets/inter-medium-CDhBSFyE.woff2                 114.34 kB
+@know-meet/web:build: dist/assets/inter-semibold-BAEEcJ4E.woff2               114.81 kB
+@know-meet/web:build: dist/mediapipe/wasm/vision_wasm_nosimd_internal.js      209.73 kB
+@know-meet/web:build: dist/mediapipe/wasm/vision_wasm_internal.js             209.82 kB
+@know-meet/web:build: dist/assets/initdb-BJaOLL_I.wasm                        298.78 kB │ gzip:   132.40 kB
+@know-meet/web:build: dist/assets/history-worker-9I1LLAJi.js                  479.24 kB
+@know-meet/web:build: dist/assets/pglite-BE2Di5Vw.data                      6,242.27 kB
+@know-meet/web:build: dist/assets/pglite-VfT9wtrq.wasm                      9,086.48 kB │ gzip: 3,313.14 kB
+@know-meet/web:build: dist/mediapipe/wasm/vision_wasm_nosimd_internal.wasm  9,294.24 kB │ gzip: 2,903.09 kB
+@know-meet/web:build: dist/mediapipe/wasm/vision_wasm_internal.wasm         9,423.98 kB │ gzip: 2,906.66 kB
+@know-meet/web:build: dist/assets/index-UIHjwXIG.css                          217.44 kB │ gzip:    37.94 kB
+@know-meet/web:build: dist/assets/__vite-browser-external-BwOlUvCR.js           0.09 kB │ gzip:     0.10 kB
+@know-meet/web:build: dist/assets/tauri-adapters-9cvDIwn7.js                    0.38 kB │ gzip:     0.24 kB
+@know-meet/web:build: dist/assets/window-X429prUu.js                           14.13 kB │ gzip:     3.44 kB
+@know-meet/web:build: dist/assets/src-CmNEPBPQ.js                              17.96 kB │ gzip:     6.00 kB
+@know-meet/web:build: dist/assets/worker-DnSYKu5G.js                           32.51 kB │ gzip:    10.89 kB
+@know-meet/web:build: dist/assets/dist-DWXxgmK-.js                            163.50 kB │ gzip:    48.98 kB
+@know-meet/web:build: dist/assets/livekit-client.esm-DnATiNni.js              540.70 kB │ gzip:   142.02 kB
+@know-meet/web:build: dist/assets/index-DWm34b-e.js                         1,198.68 kB │ gzip:   355.59 kB
+@know-meet/web:build: 
+@know-meet/web:build: ✓ built in 1.15s
+@know-meet/web:build: [plugin builtin:vite-reporter] 
+@know-meet/web:build: (!) Some chunks are larger than 500 kB after minification. Consider:
+@know-meet/web:build: - Using dynamic import() to code-split the application
+@know-meet/web:build: - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+@know-meet/web:build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+ Tasks:    3 successful, 3 total
+Cached:    1 cached, 3 total
+  Time:    5.36s 
+
+
+-- cargo build -p bff: cargo build -p bff --locked
+   Compiling proc-macro2 v1.0.107
+   Compiling itoa v1.0.18
+   Compiling bytes v1.12.1
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-core v0.3.34
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling libc v0.2.189
+   Compiling smallvec v1.16.2
+   Compiling tower-service v0.3.3
+   Compiling once_cell v1.21.4
+error: could not compile `bytes` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name bytes --edition=2021 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bytes-1.12.1/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off --warn=unexpected_cfgs --check-cfg 'cfg(loom)' -C debug-assertions=on --cfg 'feature="default"' --cfg 'feature="std"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("default", "extra-platforms", "serde", "std"))' -C metadata=5a5f68f9bf63ac51 -C extra-filename=-690c0d9d856c1b48 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `itoa` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name itoa --edition=2021 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off -C debug-assertions=on --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("no-panic"))' -C metadata=00a5bc3eca9c0efd -C extra-filename=-2f45fad77e06d1e3 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+error: could not compile `pin-project-lite` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name pin_project_lite --edition=2018 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off '--warn=clippy::unused_trait_names' --warn=unreachable_pub --warn=unnameable_types --warn=unexpected_cfgs '--warn=clippy::undocumented_unsafe_blocks' '--warn=clippy::transmute_undefined_repr' '--warn=clippy::trailing_empty_array' --warn=single_use_lifetimes --warn=rust_2018_idioms '--warn=clippy::pedantic' --warn=non_ascii_idents '--warn=clippy::inline_asm_x86_att_syntax' --warn=improper_ctypes_definitions --warn=improper_ctypes --warn=deprecated_safe '--warn=clippy::default_union_representation' '--warn=clippy::as_underscore' '--warn=clippy::as_ptr_cast_mut' '--warn=clippy::all' '--allow=clippy::type_complexity' '--allow=clippy::too_many_lines' '--allow=clippy::too_many_arguments' '--allow=clippy::struct_field_names' '--allow=clippy::struct_excessive_bools' '--allow=clippy::single_match_else' '--allow=clippy::single_match' '--allow=clippy::similar_names' '--allow=clippy::range_plus_one' '--allow=clippy::nonminimal_bool' '--allow=clippy::naive_bytecount' '--allow=clippy::module_name_repetitions' '--allow=clippy::missing_errors_doc' '--allow=clippy::manual_range_contains' '--allow=clippy::manual_assert' '--allow=clippy::incompatible_msrv' '--allow=clippy::float_cmp' '--allow=clippy::doc_markdown' '--allow=clippy::declare_interior_mutable_const' '--allow=clippy::collapsible_match' '--allow=clippy::cast_lossless' '--allow=clippy::borrow_as_ptr' '--allow=clippy::bool_assert_comparison' -C debug-assertions=on --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values())' -C metadata=2f660eae68432edd -C extra-filename=-38e863ef1d3cbf6c --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+error: could not compile `futures-core` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name futures_core --edition=2018 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/futures-core-0.3.34/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off --warn=unreachable_pub --warn=unexpected_cfgs --warn=single_use_lifetimes --warn=rust_2018_idioms --warn=missing_debug_implementations --check-cfg 'cfg(futures_sanitizer)' -C debug-assertions=on --cfg 'feature="alloc"' --cfg 'feature="default"' --cfg 'feature="std"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("alloc", "cfg-target-has-atomic", "default", "portable-atomic", "std", "unstable"))' -C metadata=1163fa3b8c67681b -C extra-filename=-4ab724329bef03ae --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+error: could not compile `tower-service` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name tower_service --edition=2018 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tower-service-0.3.3/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off -C debug-assertions=on --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values())' -C metadata=9335977181d16ad4 -C extra-filename=-dc81ac4609ffc895 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+error: could not compile `smallvec` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name smallvec --edition=2018 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smallvec-1.16.2/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off -C debug-assertions=on --cfg 'feature="const_generics"' --cfg 'feature="const_new"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("arbitrary", "bincode", "const_generics", "const_new", "drain_filter", "drain_keep_rest", "impl_bincode", "malloc_size_of", "may_dangle", "serde", "specialization", "union", "unty", "write"))' -C metadata=f6fc68076666346e -C extra-filename=-ca0ee9d334190cc2 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow` (signal: 15, SIGTERM: termination signal)
+error: could not compile `libc` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name libc --edition=2021 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off --allow=unused_qualifications '--warn=clippy::unnecessary_semicolon' '--allow=clippy::unnecessary_cast' '--warn=clippy::ptr_as_ptr' '--allow=clippy::non_minimal_cfg' '--allow=clippy::missing_safety_doc' '--warn=clippy::map_unwrap_or' '--warn=clippy::manual_assert' '--allow=clippy::identity_op' '--warn=clippy::explicit_iter_loop' -C debug-assertions=on --cfg 'feature="default"' --cfg 'feature="std"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("align", "const-extern-fn", "default", "extra_traits", "rustc-dep-of-std", "rustc-std-workspace-core", "std", "use_std"))' -C metadata=1fdbb73c297b3357 -C extra-filename=-357b648c53d0b640 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow --cfg freebsd12 --check-cfg 'cfg(emscripten_old_stat_abi)' --check-cfg 'cfg(espidf_picolibc)' --check-cfg 'cfg(espidf_time32)' --check-cfg 'cfg(freebsd10)' --check-cfg 'cfg(freebsd11)' --check-cfg 'cfg(freebsd12)' --check-cfg 'cfg(freebsd13)' --check-cfg 'cfg(freebsd14)' --check-cfg 'cfg(freebsd15)' --check-cfg 'cfg(gnu_file_offset_bits64)' --check-cfg 'cfg(gnu_time_bits64)' --check-cfg 'cfg(libc_deny_warnings)' --check-cfg 'cfg(linux_time_bits64)' --check-cfg 'cfg(musl_v1_2_3)' --check-cfg 'cfg(musl32_time64)' --check-cfg 'cfg(musl_redir_time64)' --check-cfg 'cfg(vxworks_lt_25_09)' --check-cfg 'cfg(libc_pauthtest)' --check-cfg 'cfg(target_os,values("switch","aix","ohos","hurd","rtems","visionos","nuttx","cygwin","qurt","qnx"))' --check-cfg 'cfg(target_env,values("illumos","wasi","aix","ohos","nto71_iosock"))' --check-cfg 'cfg(target_arch,values("loongarch64","mips32r6","mips64r6","csky"))'` (signal: 15, SIGTERM: termination signal)
+error: could not compile `serde_core` (lib)
+
+Caused by:
+  process didn't exit successfully: `/opt/homebrew/bin/sccache /Users/gqadonis/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/rustc --crate-name serde_core --edition=2021 /Users/gqadonis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=2 -C embed-bitcode=no -C codegen-units=256 -C debuginfo=line-tables-only -C split-debuginfo=off -C debug-assertions=on --cfg 'feature="alloc"' --cfg 'feature="default"' --cfg 'feature="result"' --cfg 'feature="std"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("alloc", "default", "rc", "result", "std", "unstable"))' -C metadata=de51e79d5deb7364 -C extra-filename=-a1dfb0cadf7bccd8 --out-dir /Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps -L dependency=/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/deps --cap-lints allow --check-cfg 'cfg(if_docsrs_then_no_serde_core)' --check-cfg 'cfg(no_core_cstr)' --check-cfg 'cfg(no_core_error)' --check-cfg 'cfg(no_core_net)' --check-cfg 'cfg(no_core_num_saturating)' --check-cfg 'cfg(no_diagnostic_namespace)' --check-cfg 'cfg(no_serde_derive)' --check-cfg 'cfg(no_std_atomic)' --check-cfg 'cfg(no_std_atomic64)' --check-cfg 'cfg(no_target_has_atomic)'` (signal: 15, SIGTERM: termination signal)
+error: failed to run custom build command for `proc-macro2 v1.0.107`
+
+Caused by:
+  process didn't exit successfully: `/Volumes/T7/rust/cargo-build/74/bc0c96c9572afb/debug/build/proc-macro2-3b695c526ed54362/build-script-build` (signal: 15, SIGTERM: termination signal)
+  --- stdout
+  cargo:rustc-check-cfg=cfg(fuzzing)
+  cargo:rustc-check-cfg=cfg(no_is_available)
+  cargo:rustc-check-cfg=cfg(no_literal_byte_character)
+  cargo:rustc-check-cfg=cfg(no_literal_c_string)
+  cargo:rustc-check-cfg=cfg(no_source_text)
+  cargo:rustc-check-cfg=cfg(proc_macro_span)
+  cargo:rustc-check-cfg=cfg(proc_macro_span_file)
+  cargo:rustc-check-cfg=cfg(proc_macro_span_location)
+  cargo:rustc-check-cfg=cfg(procmacro2_backtrace)
+  cargo:rustc-check-cfg=cfg(procmacro2_build_probe)
+  cargo:rustc-check-cfg=cfg(procmacro2_nightly_testing)
+  cargo:rustc-check-cfg=cfg(procmacro2_semver_exempt)
+  cargo:rustc-check-cfg=cfg(randomize_layout)
+  cargo:rustc-check-cfg=cfg(span_locations)
+  cargo:rustc-check-cfg=cfg(super_unstable)
+  cargo:rustc-check-cfg=cfg(wrap_proc_macro)
+  cargo:rerun-if-changed=src/probe/proc_macro_span.rs
+[ELIFECYCLE] Command failed.

@@ -1,0 +1,22 @@
+[
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/fidelity-tests",
+      "exec",
+      "playwright",
+      "test",
+      "-c",
+      "playwright.config.ts",
+      "--grep",
+      "@VS-4|@VS-5|@a11y|@motion"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:32:52.148239+00:00",
+    "log": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/stage-b-support-local-1.log",
+    "exitCode": 1,
+    "finishedAt": "2026-11-13T10:34:32.065334+00:00",
+    "logSha256": "aff61f8b6e01e019cceefdd29204e5c35b79b18fa172fc2269b03652d1d21ee4"
+  }
+]

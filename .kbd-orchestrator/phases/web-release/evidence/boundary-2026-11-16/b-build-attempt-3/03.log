@@ -1,0 +1,2 @@
+$ git diff --quiet HEAD -- infra/k8s/overlays/production/security-headers.yaml && echo "skipped: rendered file identical to HEAD, nothing to commit" || git commit --only infra/k8s/overlays/production/security-headers.yaml -m "chore(release): render gateway security headers"
+skipped: rendered file identical to HEAD, nothing to commit

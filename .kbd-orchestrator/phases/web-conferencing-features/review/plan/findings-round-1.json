@@ -1,0 +1,60 @@
+{
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "The publish step (task 11.4, boundary step 5) depends on digest-pinned continuous deployment that the packet says does not exist yet, and the plan states no prerequisite or fallback for it.",
+      "evidence": "Plan: \"continuous deployment builds the image and pins it by digest; task 11.4 confirms that the live digest equals the workflow build of the merged commit\", and task 11.4's only prerequisite is \"batch 3 step 2\". But goals list as NOT adopted scope: \"Harden continuous deployment (branch protection with a deploy-bot bypass, a dedicated AppProject, deploy by digest). A follow-up session has PR #13\", and the analysis knowledge gaps record the current state as \"deploy by tag, not by digest\". Evidence invalidation is also keyed to \"the web image digest\".",
+      "suggested_fix": "Add an explicit prerequisite to task 11.4 (PR #13 merged and digest deployment verified on main) and a fallback verification path (e.g. resolve the running image digest from the deployed tag and compare against the workflow build) or list it in Risks."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Task 2.4 lists \"contract decision 2\" as a prerequisite, but the plan's operator-action schedule (the three batches) contains no contract-adoption action or round gate, so the prerequisite references an event the plan never schedules.",
+      "evidence": "Task table row wc02/2.4 prerequisites: \"contract decision 2\"; plan: \"Proposed with the contract, not yet decided (the contract question asks about each one)\" for decisions 1-5, while the operator section says only \"Three batches. Each batch is asked once\" (pins/install/publish; shapes; boundary approval) — none is adoption, and decisions 1-5 gate wc09/wc10 scope and the PRODUCT.md bullet.",
+      "suggested_fix": "State explicitly when adoption happens (e.g. a gate between Round 1 and Round 2, folded into batch 1 or as a fourth ask) and that Rounds 2+ wait on it."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "wc08 moves only the 'own' spike to @ag-ui/core 1.x, although the analysis states both spikes use AG-UI and must move to 1.x when bumped to entity graph 5.0.x.",
+      "evidence": "Analysis: \"The 5.0.0 major moves the optional `@ag-ui/core` peer to `^1.0.0`. The spikes use AG-UI and must move to 1.x when they are bumped.\" Plan wc08: \"The \\\"own\\\" spike also moves to `@ag-ui/core` 1.x.\" and task 8.4 is only \"Bump the hybrid spike to 5.0.1\" with no AG-UI move — a peer mismatch that under VLBV would surface only at the boundary run.",
+      "suggested_fix": "Either extend task 8.4 to move the hybrid spike's @ag-ui/core to 1.x, or record why the hybrid spike needs no AG-UI bump despite the analysis's plural."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Task 6.4 executes the render script against the CSP builder modified in task 6.1 during Round 2, contradicting the plan's own statement that no generated code runs before wc11; only dependency installs are carved out of VLBV.",
+      "evidence": "Plan Method: \"No generated code is run until wc11 … Installing dependencies (task 8.5 and the worktree install in task 1.4) is not running generated code.\" vs wc06 detail: \"the regenerated `security-headers.yaml` (render, then `--check`) change together, and ship in the same merge as the image\" and task 6.4 \"Regenerate the gateway security header\"; the security review specifies \"node tooling/release/src/render-gateway-headers.ts\" — execution of freshly changed code before the single boundary run.",
+      "suggested_fix": "Extend the VLBV carve-out to cover artifact-render steps (with operator approval in a batch), or defer the regeneration into the boundary packet's static-gate step and commit the rendered file before the push approval."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "No scheduled engine exercises WC-6's unsupported-speaker branch: the plan labels the Firefox/WebKit WC-6 run \"the explanation path\", but the analysis capability matrix says setSinkId is supported in Firefox 116+ and Safari/WebKit 18.4+.",
+      "evidence": "Plan engines: \"Firefox and WebKit run WC-2, WC-3, WC-6 (the explanation path) and WC-7.\" vs analysis matrix row: \"Speaker choice (`setSinkId`) | yes | 116+ | 18.4+ | no on Android; iOS 18.4+\" — so the \"explained where not\" half of WC-6 has no engine assignment at all.",
+      "suggested_fix": "Pick a concrete way to exercise the unsupported branch (an emulated capability, a forced flag, or a unit-level test of the gating logic) and record it in task 5.2 or 1.1."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "The operator-decided PRODUCT.md amendment has no implementing task; the plan attributes a repository-file edit to \"Adoption\", which is a decision event, not a writer.",
+      "evidence": "Decision log answer 4: \"PRODUCT.md: \\\"Yes, amend it\\\". Browser-local recording added as the free-version path; consent stays mandatory.\" The plan only says \"Adoption amends that PRODUCT.md bullet\", and the sole documentation task, 11.6, is \"Update the README and release notes to match what shipped\" — no task touches PRODUCT.md.",
+      "suggested_fix": "Assign the PRODUCT.md edit to a concrete task (naturally wc01's delivery-lead or wc10/wc11) so the amendment is committed with the code it describes."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "plan.md",
+      "claim": "Acceptance verifies only tab sharing while the goal enumerates screen, window and tab sharing.",
+      "evidence": "Goal: \"a participant can share a screen, window or tab with everyone in the meeting, and stop sharing\" vs WC-1: \"A participant shares a tab; the other sees it; stopping ends it cleanly\".",
+      "suggested_fix": "Either widen WC-1 to iterate the display-capture source types or record in wc01 that source selection is browser/OS UI outside the app's acceptance."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "plan.md",
+      "claim": "Round 2 double-books client-shell (wc06 tasks 6.1-6.2 and wc08 task 8.2) and architect (wc02 and wc08 task 8.3) across parallel changes with no serialization rule, unlike the explicit ui-engineer one-writer rule.",
+      "evidence": "\"Round 2 (parallel): wc02, wc06, wc08\" with wc06 roles \"client-shell, bdd-quality, livekit-platform\" and wc08 roles \"build-platform, client-shell, architect, ui-engineer\"; the plan serializes only \"wc04, wc05, wc07 and wc10 all edit `meeting-room-screen.tsx`, so the ui-engineer tasks run one at a time\".",
+      "suggested_fix": "State that same-role tasks across parallel changes in one round run sequentially (or confirm the different file paths make concurrency safe under the role-path rule)."
+    }
+  ]
+}

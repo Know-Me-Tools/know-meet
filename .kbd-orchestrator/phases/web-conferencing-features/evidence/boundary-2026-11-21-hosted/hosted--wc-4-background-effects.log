@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:85418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [hosted] › wc-4-background-effects.spec.ts:95:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › blur, image and off are visible on B; no off-origin wasm or model and no CSP violation @WC-4 @value-critical @smoke (12.6s)
+  ✓  2 [hosted] › wc-4-background-effects.spec.ts:233:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › software graphics: effects are reported not available and the meeting stays responsive @WC-4 @value-critical (7.0s)
+  ✓  3 [hosted] › wc-4-background-effects.spec.ts:286:3 › WC-4 Blur and image backgrounds show remotely and turn off cleanly › with effects never turned on, A's track reports no processor and B sees the original frame @WC-4 @negative-control (6.2s)
+
+  3 passed (28.2s)

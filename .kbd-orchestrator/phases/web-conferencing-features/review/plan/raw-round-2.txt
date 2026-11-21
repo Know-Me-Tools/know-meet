@@ -1,0 +1,34 @@
+```json
+{
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "file": "plan.md",
+      "claim": "No change or task adds the three adopted libraries (@livekit/track-processors 0.8.3, @mediapipe/tasks-vision 0.10.14, @electric-sql/pglite 0.5.16) to the app manifests or installs them, while the plan's VLBV carve-out and operator approvals cover only the task 1.4 worktree install and the task 8.5 entity-graph install, leaving Round 4–5 tasks (7.1, 7.2, 9.2) with no approved path to getting the packages on disk.",
+      "evidence": "Method section: \"Installing dependencies (task 8.5 and the worktree install in task 1.4) is not running generated code. The operator approves both in batch 1.\" Batch 1 approves only \"the pin list from task 1.5 for `tooling/versions.toml`\" and \"`pnpm install` in the new worktree\". Task 8.5 is scoped to entity graph only (\"A clean install refreshes the lockfile and replaces the 5.0.0 left in `apps/web/node_modules`\") and runs in Round 2, yet task 7.1's prerequisite is \"pins (batch 1)\" and task 9.2's is \"6.1, pins\", executing in Rounds 4 and 5. No task edits apps/web/package.json for these three libraries, and any later `pnpm add`/`pnpm patch` (7.2 explicitly contemplates `pnpm patch`) is outside the two approved installs, so execution either stalls or silently breaches the plan's own VLBV definition; the boundary's `pnpm install --frozen-lockfile` would also fail on a manifest edited without a lockfile refresh.",
+      "suggested_fix": "Add a task (build-platform/client-shell, in or before Round 2) that writes the three pins into tooling/versions.toml and apps/web/package.json and refreshes the lockfile; name that install in the Method's VLBV carve-out and in batch 1's approval wording, and make tasks 7.1, 7.2 and 9.2 depend on it."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "Batch 1, which is asked before Round 1, requires the operator to approve \"the pin list from task 1.5\", but task 1.5 is a Round 1 (wc01) task whose output cannot exist when the batch is asked, and no task is assigned to write the three library pins into tooling/versions.toml (task 8.1 covers only entity graph).",
+      "evidence": "\"**Batch 1, before Round 1:** … Approve the pin list from task 1.5 for `tooling/versions.toml`\" versus the round table \"Round 1: wc01\" containing task 1.5 \"Collect pins and operator prerequisites\". If 1.5 later collects versions that differ from the enumerated list (e.g. a newer tasks-vision patch), the operator has approved a stale list with no re-ask, since \"Each batch is asked once.\"",
+      "suggested_fix": "Either declare the enumerated pin list in batch 1 final and reduce 1.5 to recording/validation, or move the pin approval to batch 2 after task 1.5 runs; assign explicit ownership of the tooling/versions.toml edit for the three libraries."
+    },
+    {
+      "severity": "WARNING",
+      "file": "plan.md",
+      "claim": "wc09 omits the PGlite build wiring that the analysis marks as required — Vite `optimizeDeps.exclude` and hashed same-origin emission of the ~5.2 MB wasm/data assets — and no task owns that build-config work, an asymmetry with the effects assets, which get an explicit task (7.1).",
+      "evidence": "Analysis: \"Vite emits them as hashed same-origin files through `new URL(…, import.meta.url)`. Vite needs `optimizeDeps.exclude: [\\\"@electric-sql/pglite\\\"]`.\" The wc09 change details list only \"A `HistoryRepository` port\", \"PGlite 0.5.16 on `idb://` in a leader-elected same-origin worker, with tables…\", transports, mutations and the screen; task 9.2's title is \"Add the PGlite leader worker, schema and repository adapter\" with no build-config scope. Under the adopted CSP (`.wasm` served from 'self', `wasm-unsafe-eval`), WC-7 and WC-10 fail at the boundary if these assets are not emitted same-origin.",
+      "suggested_fix": "Add the Vite config change and same-origin asset emission to task 9.2's scope (or a dedicated build task), mirroring how 7.1 explicitly owns the MediaPipe asset pipeline."
+    },
+    {
+      "severity": "SUGGESTION",
+      "file": "plan.md",
+      "claim": "wc08's rationale asserts that `apps/web/node_modules` currently holds entity graph 5.0.0, contradicting the packet's own statements that the web app is on 4.3.0.",
+      "evidence": "Plan: \"A clean install refreshes the lockfile and replaces the 5.0.0 left in `apps/web/node_modules`\" versus the draft contract's currentCapabilities (\"entity graph 4.3.0\") and the decision log's pin inventory (\"apps/web/package.json (entity-graph-core/react 4.3.0)\"). Task 1.4 creates a fresh worktree from main, so its install would hold 4.3.0, not 5.0.0.",
+      "suggested_fix": "Correct the statement (the clean install moves the worktree from 4.3.0 to 5.0.1) or document where the stray 5.0.0 in node_modules comes from, so task 8.5's stop/check conditions rest on accurate repo state."
+    }
+  ]
+}
+```

@@ -1,0 +1,197 @@
+$ docker compose -f tooling/release/compose.yaml build
+ Image know-meet-web:boundary Building 
+ Image know-meet-livekit:boundary Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.20kB done
+#1 DONE 0.0s
+
+#2 [token-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.92kB done
+#2 DONE 0.1s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 4.61kB done
+#3 DONE 0.1s
+
+#4 [web internal] load metadata for docker.io/joseluisq/static-web-server:2.44.2
+#4 ...
+
+#5 [token-service internal] load metadata for gcr.io/distroless/static-debian13:nonroot@sha256:aafe993665bf6200db38a02c11a9351e782a84b6a45e7f33b6695638c88e3931
+#5 DONE 0.3s
+
+#6 [web internal] load metadata for docker.io/library/node:26.5.0-trixie-slim
+#6 ...
+
+#7 [token-service internal] load metadata for docker.io/library/rust:1.97.1-slim-trixie@sha256:8e8cf8f7fd54a2d23d5a743b3a03f56e26b6c774276c33fa0595111704ebb15c
+#7 DONE 0.6s
+
+#4 [web internal] load metadata for docker.io/joseluisq/static-web-server:2.44.2
+#4 DONE 0.6s
+
+#8 [token-service internal] load .dockerignore
+#8 transferring context: 771B done
+#8 DONE 0.1s
+
+#9 [token-service build 1/9] FROM docker.io/library/rust:1.97.1-slim-trixie@sha256:8e8cf8f7fd54a2d23d5a743b3a03f56e26b6c774276c33fa0595111704ebb15c
+#9 DONE 0.0s
+
+#10 [token-service runtime 1/2] FROM gcr.io/distroless/static-debian13:nonroot@sha256:aafe993665bf6200db38a02c11a9351e782a84b6a45e7f33b6695638c88e3931
+#10 DONE 0.0s
+
+#11 [token-service internal] load build context
+#11 ...
+
+#6 [web internal] load metadata for docker.io/library/node:26.5.0-trixie-slim
+#6 DONE 0.7s
+
+#12 [web build  1/19] FROM docker.io/library/node:26.5.0-trixie-slim@sha256:715e55e4b84e4bb0ff48e49b398a848f08e55daed8eb6a0ea1839ae53bc57583
+#12 DONE 0.0s
+
+#13 [web stage-2 1/3] FROM docker.io/joseluisq/static-web-server:2.44.2@sha256:23be6c04d474979d6e738081918f5874f88502a150d1123fd000719101a0f05c
+#13 DONE 0.0s
+
+#11 [token-service internal] load build context
+#11 transferring context: 706.50kB 0.2s done
+#11 DONE 0.2s
+
+#14 [token-service build 2/9] WORKDIR /build
+#14 CACHED
+
+#15 [token-service build 4/9] RUN <<'EOF' (set -euo pipefail...)
+#15 CACHED
+
+#16 [token-service build 6/9] COPY crates crates
+#16 CACHED
+
+#17 [token-service build 7/9] COPY services services
+#17 CACHED
+
+#18 [token-service build 8/9] COPY apps/desktop/src-tauri apps/desktop/src-tauri
+#18 CACHED
+
+#19 [token-service build 3/9] COPY rust-toolchain.toml /usr/src/rust-toolchain.pin
+#19 CACHED
+
+#20 [token-service build 9/9] RUN --mount=type=cache,target=/usr/local/cargo/registry,sharing=locked     --mount=type=cache,target=/usr/local/cargo/git,sharing=locked     --mount=type=cache,target=/build/target,id=km-token-service-target,sharing=locked     <<'EOF' (set -euo pipefail...)
+#20 CACHED
+
+#21 [token-service build 5/9] COPY Cargo.toml Cargo.lock ./
+#21 CACHED
+
+#22 [token-service runtime 2/2] COPY --from=build --chown=0:0 --chmod=0555 /out/km-token-service /usr/local/bin/km-token-service
+#22 CACHED
+
+#23 [web internal] load build context
+#23 ...
+
+#24 [token-service] exporting to image
+#24 exporting layers done
+#24 writing image sha256:d92bcaecb54ec7c41dba3fb2f0f74ecd406e511a11ff6267a88db39e700f866c done
+#24 naming to docker.io/library/know-meet-livekit:boundary done
+#24 DONE 0.0s
+
+#23 [web internal] load build context
+#23 transferring context: 2.51MB 0.4s done
+#23 DONE 0.4s
+
+#25 [token-service] resolving provenance for metadata file
+#25 DONE 0.0s
+
+#26 [web build  5/19] COPY apps/desktop/package.json apps/desktop/package.json
+#26 CACHED
+
+#27 [web build 15/19] COPY tsconfig.base.json ./
+#27 CACHED
+
+#28 [web build  8/19] COPY packages/design-tokens/package.json packages/design-tokens/package.json
+#28 CACHED
+
+#29 [web build 10/19] COPY packages/realtime/package.json packages/realtime/package.json
+#29 CACHED
+
+#30 [web build 14/19] RUN --mount=type=cache,target=/pnpm/store     pnpm install --frozen-lockfile --ignore-scripts --store-dir /pnpm/store       --filter "@know-meet/web..."
+#30 CACHED
+
+#31 [web build 12/19] COPY tests/fidelity/package.json tests/fidelity/package.json
+#31 CACHED
+
+#32 [web build  4/19] COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+#32 CACHED
+
+#33 [web build 13/19] COPY tests/release/package.json tests/release/package.json
+#33 CACHED
+
+#34 [web build 11/19] COPY packages/ui/package.json packages/ui/package.json
+#34 CACHED
+
+#35 [web build  2/19] RUN npm install --global "pnpm@11.15.0" && pnpm --version
+#35 CACHED
+
+#36 [web build  3/19] WORKDIR /repo
+#36 CACHED
+
+#37 [web build  9/19] COPY packages/domain/package.json packages/domain/package.json
+#37 CACHED
+
+#38 [web build  6/19] COPY apps/web/package.json apps/web/package.json
+#38 CACHED
+
+#39 [web build  7/19] COPY packages/application/package.json packages/application/package.json
+#39 CACHED
+
+#40 [web build 16/19] COPY apps/web apps/web
+#40 CACHED
+
+#41 [web build 17/19] COPY packages packages
+#41 DONE 0.4s
+
+#42 [web build 18/19] RUN test -n "<LIVEKIT_URL>" || { echo "KM_LIVEKIT_URL build argument is required" >&2; exit 1; }
+#42 DONE 0.7s
+
+#43 [web build 19/19] RUN KM_LIVEKIT_URL="<LIVEKIT_URL>" KM_MEDIA_ORIGINS=""     pnpm --filter @know-meet/web run build:hosted
+#43 1.553 $ node scripts/build-hosted.ts
+#43 4.461 vite v8.1.5 building client environment for production...
+#43 4.471 [2Ktransforming...✓ 3014 modules transformed.
+#43 5.187 rendering chunks...
+#43 5.371 computing gzip size...
+#43 5.380 dist-hosted/index.html                                       1.00 kB │ gzip:   0.51 kB
+#43 5.380 dist-hosted/assets/space-grotesk-variable-CzOCAti0.woff2    49.25 kB
+#43 5.380 dist-hosted/assets/jetbrains-mono-medium-3S3k2nMz.woff2     93.82 kB
+#43 5.380 dist-hosted/assets/jetbrains-mono-semibold-BM8Dc2t-.woff2   94.47 kB
+#43 5.380 dist-hosted/assets/inter-regular-COLGFB3M.woff2            111.26 kB
+#43 5.380 dist-hosted/assets/inter-medium-CDhBSFyE.woff2             114.34 kB
+#43 5.380 dist-hosted/assets/inter-semibold-BAEEcJ4E.woff2           114.81 kB
+#43 5.380 dist-hosted/assets/index-Bkj1absi.css                      212.58 kB │ gzip:  37.14 kB
+#43 5.380 dist-hosted/assets/tauri-adapters-D8-sLQ5B.js                0.38 kB │ gzip:   0.23 kB
+#43 5.380 dist-hosted/assets/window-Cr3tCsW5.js                       14.13 kB │ gzip:   3.44 kB
+#43 5.380 dist-hosted/assets/src-CEURw594.js                         547.58 kB │ gzip: 144.24 kB
+#43 5.380 dist-hosted/assets/index-COzpBTF-.js                       664.86 kB │ gzip: 209.31 kB
+#43 5.380 
+#43 5.381 [plugin builtin:vite-reporter] 
+#43 5.381 (!) Some chunks are larger than 500 kB after minification. Consider:
+#43 5.381 - Using dynamic import() to code-split the application
+#43 5.381 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+#43 5.381 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+#43 5.381 ✓ built in 918ms
+#43 5.381 build:hosted wrote dist-hosted-csp.txt: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' <LIVEKIT_URL> https://knowme-23fkf8pz.livekit.cloud; base-uri 'none'; form-action 'self'; object-src 'none'; frame-ancestors 'none'
+#43 DONE 5.6s
+
+#13 [web stage-2 1/3] FROM docker.io/joseluisq/static-web-server:2.44.2@sha256:23be6c04d474979d6e738081918f5874f88502a150d1123fd000719101a0f05c
+#13 CACHED
+
+#44 [web stage-2 2/3] COPY --from=build /repo/apps/web/dist-hosted /public
+#44 DONE 0.1s
+
+#45 [web stage-2 3/3] COPY apps/web/static-web-server.toml /etc/static-web-server/static-web-server.toml
+#45 DONE 0.1s
+
+#46 [web] exporting to image
+#46 exporting layers 0.1s done
+#46 writing image sha256:0f81e1c65fc40abea103c46fa9b32c6ed28e335b29246c523a7edce5905bd449 done
+#46 naming to docker.io/library/know-meet-web:boundary done
+#46 DONE 0.1s
+
+#47 [web] resolving provenance for metadata file
+#47 DONE 0.0s
+ Image know-meet-livekit:boundary Built 
+ Image know-meet-web:boundary Built 

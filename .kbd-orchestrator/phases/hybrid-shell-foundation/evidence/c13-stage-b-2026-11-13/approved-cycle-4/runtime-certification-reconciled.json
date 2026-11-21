@@ -1,0 +1,1308 @@
+{
+  "state": {
+    "schemaVersion": "2",
+    "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "revision": 273,
+    "frontier": {
+      "e98b9092-a344-4157-beea-4f0645ff46dd": 273
+    },
+    "replicaHeads": {
+      "e98b9092-a344-4157-beea-4f0645ff46dd": {
+        "eventId": "5c0f3992-08a4-465c-b82c-7bd77a3b7a0c",
+        "integrityHash": "e1d39a5762dd5c49d7081989c8a290d1f9439c8551fcb7fe9611766c6ca7c1ea",
+        "lamport": 273
+      }
+    },
+    "lastEventId": "5c0f3992-08a4-465c-b82c-7bd77a3b7a0c",
+    "lastEventHash": "e1d39a5762dd5c49d7081989c8a290d1f9439c8551fcb7fe9611766c6ca7c1ea",
+    "lastEventAt": "2026-11-13T11:31:42.781999Z",
+    "phaseDefinitionOrder": [
+      "hybrid-shell-foundation"
+    ],
+    "lifecycle": "ready",
+    "planRevision": 1,
+    "checkpoint": null,
+    "exactNextWork": "/kbd-assess hybrid-shell-foundation",
+    "activePath": {
+      "phasePath": [
+        "hybrid-shell-foundation"
+      ],
+      "phaseId": "hybrid-shell-foundation",
+      "stageId": "execute",
+      "changeId": "c16-agentic-core-gates",
+      "taskId": "16.1"
+    },
+    "phases": {
+      "hybrid-shell-foundation": {
+        "id": "hybrid-shell-foundation",
+        "slug": "hybrid-shell-foundation",
+        "title": "hybrid-shell-foundation",
+        "parentPhaseId": null,
+        "status": "pending",
+        "stages": {
+          "analyze": {
+            "id": "analyze",
+            "title": "Analyze",
+            "sequence": 0,
+            "status": "complete"
+          },
+          "assess": {
+            "id": "assess",
+            "title": "Assess",
+            "sequence": 0,
+            "status": "complete"
+          },
+          "execute": {
+            "id": "execute",
+            "title": "Execute",
+            "sequence": 0,
+            "status": "blocked"
+          },
+          "plan": {
+            "id": "plan",
+            "title": "Plan",
+            "sequence": 0,
+            "status": "complete"
+          }
+        },
+        "changes": {
+          "c01-workspace-and-repo-rules": {
+            "id": "c01-workspace-and-repo-rules",
+            "title": "pnpm workspace, toolchain pins and enforced repo rules (kebab-case, 500 lines, no any, no ad-hoc colours, secrets, depen",
+            "sequence": 1,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "1.1": {
+                "id": "1.1",
+                "title": "Create the pnpm workspace root, tsconfig base and turbo pipeline",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "build-platform round 1; evidence/c01-toolchain.md"
+              },
+              "1.2": {
+                "id": "1.2",
+                "title": "Check in tooling/versions.toml from the reference package with its digest and derive rust-toolchain, engines and packageManager pins",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "build-platform round 1; evidence/c01-toolchain.md"
+              },
+              "1.3": {
+                "id": "1.3",
+                "title": "Configure Biome (noExplicitAny, import rules), ls-lint with E-N exceptions, the line-count checker with E-L exceptions, and the hex-colour s",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "build-platform round 1; evidence/c01-toolchain.md"
+              },
+              "1.4": {
+                "id": "1.4",
+                "title": "Add lint, typecheck, test and build scripts including secret scans and zero-warning flags, a pre-commit hook and CI",
+                "sequence": 4,
+                "status": "complete",
+                "summary": "build-platform round 1; evidence/c01-toolchain.md"
+              },
+              "1.5": {
+                "id": "1.5",
+                "title": "Install and verify every pinned tool and knowme-builder alpha.5; block c05 and c06 on any mismatch",
+                "sequence": 5,
+                "status": "complete",
+                "summary": "build-platform round 1; evidence/c01-toolchain.md"
+              },
+              "1.6": {
+                "id": "1.6",
+                "title": "Delete the stale root live/ folder or record the operator-approved temporary exception (operator decision required)",
+                "sequence": 6,
+                "status": "complete",
+                "summary": "Operator chose temporary exception for root live/ (decision-log 2026-11-09)"
+              }
+            }
+          },
+          "c02-design-token-reconciliation": {
+            "id": "c02-design-token-reconciliation",
+            "title": "Reconcile prototype-rendered values into docs/design/tokens.json, self-host fonts, route/state inventory and source hier",
+            "sequence": 2,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "2.1": {
+                "id": "2.1",
+                "title": "Reconcile km.css values into docs/design/tokens.json for both themes with a WCAG 2.2 AA contrast record",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "design-lead round 1; see docs/design/token-reconciliation, screen-inventory, packages/design-tokens/fonts"
+              },
+              "2.2": {
+                "id": "2.2",
+                "title": "Self-host Space Grotesk, Inter and JetBrains Mono with licences in packages/design-tokens/fonts",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "design-lead round 1; see docs/design/token-reconciliation, screen-inventory, packages/design-tokens/fonts"
+              },
+              "2.3": {
+                "id": "2.3",
+                "title": "Write the machine-readable in-scope route/screen/state inventory, theme behaviour notes and the source hierarchy with resolved discrepancies",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "design-lead round 1; see docs/design/token-reconciliation, screen-inventory, packages/design-tokens/fonts"
+              }
+            }
+          },
+          "c03-value-scenarios-and-baselines": {
+            "id": "c03-value-scenarios-and-baselines",
+            "title": "Gherkin value scenarios, prototype screenshot baselines, fidelity oracle, accessibility and motion checks",
+            "sequence": 3,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "3.1": {
+                "id": "3.1",
+                "title": "Write Gherkin features for VS-1 to VS-5, VS-8 and VS-9 with negative controls",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "bdd-quality: 552/560 baselines (8 N/A), features, oracle frozen"
+              },
+              "3.2": {
+                "id": "3.2",
+                "title": "Capture prototype baselines for every route/state, theme and viewport; freeze per-route thresholds and the exception rubric with design-lead",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "bdd-quality: 552/560 baselines (8 N/A), features, oracle frozen"
+              },
+              "3.3": {
+                "id": "3.3",
+                "title": "Define the bundle-identity check, the no-Tauri web smoke, axe accessibility and motion/reduced-motion checks",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "bdd-quality: 552/560 baselines (8 N/A), features, oracle frozen"
+              }
+            }
+          },
+          "c04-token-generator": {
+            "id": "c04-token-generator",
+            "title": "Vendor and extend the hybrid-mobile-architecture token generator for web CSS, shadcn, Tailwind and Flutter ThemeData",
+            "sequence": 4,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "4.1": {
+                "id": "4.1",
+                "title": "Vendor gen-design-tokens unmodified under packages/design-tokens/generator/vendor with source version and licence",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "design-lead: generator vendored+extended; web/shadcn/Tailwind4/Dart outputs generated; D-5 applied"
+              },
+              "4.2": {
+                "id": "4.2",
+                "title": "Add extension modules for the tokens.json adapter, rgba colours, clamp breakpoint resolution, configurable fonts and hard errors on missing ",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "design-lead: generator vendored+extended; web/shadcn/Tailwind4/Dart outputs generated; D-5 applied"
+              },
+              "4.3": {
+                "id": "4.3",
+                "title": "Emit web CSS variables for both themes, the shadcn variable mapping and a Tailwind 4 @theme file",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "design-lead: generator vendored+extended; web/shadcn/Tailwind4/Dart outputs generated; D-5 applied"
+              },
+              "4.4": {
+                "id": "4.4",
+                "title": "Emit Dart tokens and a light/dark ThemeData builder",
+                "sequence": 4,
+                "status": "complete",
+                "summary": "design-lead: generator vendored+extended; web/shadcn/Tailwind4/Dart outputs generated; D-5 applied"
+              }
+            }
+          },
+          "c05-scaffold-generation-import": {
+            "id": "c05-scaffold-generation-import",
+            "title": "Generate sovereign-hybrid and governed-web-shell with knowme-builder and import every surface",
+            "sequence": 5,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "5.1": {
+                "id": "5.1",
+                "title": "Assign owners for crates/**, services/bff/**, every generated UAR directory and any separate PEM path",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "Owners applied per operator decision 2026-11-09: architect crates/** + packages/pem/**; build-platform services/bff/** + UAR dirs"
+              },
+              "5.2": {
+                "id": "5.2",
+                "title": "Capture knowme-builder doctor failures with causes and remediations; confirm React 19.2.7 and Flutter iOS/Android platform folders",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              },
+              "5.3": {
+                "id": "5.3",
+                "title": "Generate sovereign-hybrid and governed-web-shell in runnable mode into a scratch directory with manifest and digests",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              },
+              "5.4": {
+                "id": "5.4",
+                "title": "Import all surfaces into the workspace layout and a Cargo workspace, keeping UAR and PEM wiring",
+                "sequence": 4,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              },
+              "5.5": {
+                "id": "5.5",
+                "title": "Apply kebab-case renames with Dart and Rust exceptions and fix imports",
+                "sequence": 5,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              },
+              "5.6": {
+                "id": "5.6",
+                "title": "Inventory every imported file across all surfaces and split any over 500 lines by clean-architecture layer",
+                "sequence": 6,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              },
+              "5.7": {
+                "id": "5.7",
+                "title": "Trace every token and LiveKit-secret path in BFF, PEM, UAR and Tauri code (initial trace)",
+                "sequence": 7,
+                "status": "complete",
+                "summary": "build-platform c05; evidence/c05-*"
+              }
+            }
+          },
+          "c06-web-desktop-single-bundle": {
+            "id": "c06-web-desktop-single-bundle",
+            "title": "One React 19 bundle shared by web and Tauri, mapped onto four clean-architecture layers",
+            "sequence": 6,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "6.1": {
+                "id": "6.1",
+                "title": "Merge the duplicated React baselines into apps/web and map code onto packages/domain, packages/application, infrastructure and presentation",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "client-shell c06; single React 19 app, Tauri frontendDist ../../web/dist, CSP, tokens"
+              },
+              "6.2": {
+                "id": "6.2",
+                "title": "Configure apps/desktop src-tauri with frontendDist and before commands pointing at apps/web and guard every Tauri call with isTauri()",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "client-shell c06; single React 19 app, Tauri frontendDist ../../web/dist, CSP, tokens"
+              },
+              "6.3": {
+                "id": "6.3",
+                "title": "Load generated token CSS and self-hosted fonts and set the CSP font-src to self",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "client-shell c06; single React 19 app, Tauri frontendDist ../../web/dist, CSP, tokens"
+              }
+            }
+          },
+          "c07-flutter-shell-import": {
+            "id": "c07-flutter-shell-import",
+            "title": "Flutter app in apps/mobile with generated ThemeData and theme persistence",
+            "sequence": 7,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "7.1": {
+                "id": "7.1",
+                "title": "Move the mobile app into apps/mobile keeping flutter_rust_bridge, set up flutter_lints, pin dependencies and rerun the line checker",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "mobile-engineer c07; deps-note.md, fonts, theme wiring; build_runner deferred to c14"
+              },
+              "7.2": {
+                "id": "7.2",
+                "title": "Wire generated light/dark ThemeData and persist the theme mode",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "mobile-engineer c07; deps-note.md, fonts, theme wiring; build_runner deferred to c14"
+              }
+            }
+          },
+          "c08-shared-ui-kit": {
+            "id": "c08-shared-ui-kit",
+            "title": "Shared shadcn/ui kit in packages/ui themed by generated tokens",
+            "sequence": 8,
+            "status": "pending",
+            "implementationStatus": "pending",
+            "tasks": {
+              "8.1": {
+                "id": "8.1",
+                "title": "Initialize shadcn in packages/ui with Tailwind 4, generated CSS variables and class-based dark mode, kebab-case files",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "8.2": {
+                "id": "8.2",
+                "title": "Add and restyle the components the in-scope screens use to match docs/design prototype components",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "8.3": {
+                "id": "8.3",
+                "title": "Agentic UI layer with assistant-ui in packages/ui (stubbed runtime)",
+                "sequence": 3,
+                "status": "pending",
+                "summary": null
+              }
+            }
+          },
+          "c09-app-frame-and-navigation": {
+            "id": "c09-app-frame-and-navigation",
+            "title": "App frame, TanStack Router navigation, theme toggle and Tauri titlebar",
+            "sequence": 9,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "9.1": {
+                "id": "9.1",
+                "title": "Build the TanStack Router route tree, app bar, navigation and theme toggle with accessible names, focus and reduced motion",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "9.2": {
+                "id": "9.2",
+                "title": "Build the Tauri custom titlebar",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          },
+          "c10-public-screens": {
+            "id": "c10-public-screens",
+            "title": "Static home, sign-in and join screens matching the prototype",
+            "sequence": 10,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "10.1": {
+                "id": "10.1",
+                "title": "Build the home screen",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "10.2": {
+                "id": "10.2",
+                "title": "Build the sign-in screens",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "10.3": {
+                "id": "10.3",
+                "title": "Build the join screen",
+                "sequence": 3,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          },
+          "c11-app-screens": {
+            "id": "c11-app-screens",
+            "title": "Static dashboard, agents, recordings, settings and meeting-room layout with media stubbed",
+            "sequence": 11,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "11.1": {
+                "id": "11.1",
+                "title": "Build the dashboard screen",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "11.2": {
+                "id": "11.2",
+                "title": "Build the agents screen",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "11.3": {
+                "id": "11.3",
+                "title": "Build the recordings screen",
+                "sequence": 3,
+                "status": "complete",
+                "summary": null
+              },
+              "11.4": {
+                "id": "11.4",
+                "title": "Build the settings screen",
+                "sequence": 4,
+                "status": "complete",
+                "summary": null
+              },
+              "11.5": {
+                "id": "11.5",
+                "title": "Build the meeting-room layout with media tiles stubbed",
+                "sequence": 5,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          },
+          "c12-flutter-frame-and-screens": {
+            "id": "c12-flutter-frame-and-screens",
+            "title": "Flutter frame and in-scope screens with goldens and accessibility",
+            "sequence": 12,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "12.1": {
+                "id": "12.1",
+                "title": "Build the shadcn_flutter app frame with mobile navigation",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "12.2": {
+                "id": "12.2",
+                "title": "Build the in-scope phone screens",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "12.3": {
+                "id": "12.3",
+                "title": "Add goldens approved by design-lead plus semantics, focus-order and reduced-motion tests",
+                "sequence": 3,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          },
+          "c13-fidelity-verification-and-evidence": {
+            "id": "c13-fidelity-verification-and-evidence",
+            "title": "Single boundary run, fidelity, security and accessibility evidence",
+            "sequence": 13,
+            "status": "blocked",
+            "implementationStatus": "blocked",
+            "tasks": {
+              "13.1": {
+                "id": "13.1",
+                "title": "Run the web fidelity matrix (VS-1)",
+                "sequence": 1,
+                "status": "blocked",
+                "summary": "VS1 current candidate not exercised: fourth attempt stopped on required safety failures before screenshot matrix; historical54failed20passed remains latest complete VS1."
+              },
+              "13.10": {
+                "id": "13.10",
+                "title": "Run the accessibility gate at every viewport and theme",
+                "sequence": 10,
+                "status": "blocked",
+                "summary": "Support run17 passed28 failed; a11y/motion harness viewport/name/focus fixtures require correction. Candidate and exact argv/exit receipts retained."
+              },
+              "13.2": {
+                "id": "13.2",
+                "title": "Verify the desktop bundle identity and launch (VS-2)",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "13.3": {
+                "id": "13.3",
+                "title": "Run Flutter goldens (VS-3)",
+                "sequence": 3,
+                "status": "complete",
+                "summary": null
+              },
+              "13.4": {
+                "id": "13.4",
+                "title": "Run the token propagation check (VS-4)",
+                "sequence": 4,
+                "status": "complete",
+                "summary": "13.4 Run the token propagation check (VS-4)"
+              },
+              "13.5": {
+                "id": "13.5",
+                "title": "Run the no-Tauri web smoke (VS-5)",
+                "sequence": 5,
+                "status": "complete",
+                "summary": "13.5 Run the no-Tauri web smoke (VS-5)"
+              },
+              "13.6": {
+                "id": "13.6",
+                "title": "Run repository rule checks (VS-8)",
+                "sequence": 6,
+                "status": "complete",
+                "summary": null
+              },
+              "13.7": {
+                "id": "13.7",
+                "title": "Run kept-surface builds (VS-9)",
+                "sequence": 7,
+                "status": "complete",
+                "summary": null
+              },
+              "13.8": {
+                "id": "13.8",
+                "title": "Perform the authoritative security trace across web, Tauri, Flutter, bridge and PEM and rerun secret scans",
+                "sequence": 8,
+                "status": "complete",
+                "summary": null
+              },
+              "13.9": {
+                "id": "13.9",
+                "title": "Run the independent UI and code review via the liter-llm judge",
+                "sequence": 9,
+                "status": "blocked",
+                "summary": "Local independent correction confirmation pending final report; isolated judge blocked on explicit private-packet transmission approval."
+              }
+            }
+          },
+          "c14-aggregate-commands": {
+            "id": "c14-aggregate-commands",
+            "title": "Real build, test and lint commands across web, desktop, Rust/BFF and Flutter",
+            "sequence": 14,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "14.1": {
+                "id": "14.1",
+                "title": "Extend root build, test and lint scripts to cover web, desktop, Rust/BFF and Flutter with zero-warning flags",
+                "sequence": 1,
+                "status": "complete",
+                "summary": null
+              },
+              "14.2": {
+                "id": "14.2",
+                "title": "Set build_health_command, test_command and lint_command in .kbd-orchestrator/project.json",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          },
+          "c15-agentic-ui-spike": {
+            "id": "c15-agentic-ui-spike",
+            "title": "Agentic-UI spike: hybrid vs own on entity-graph",
+            "sequence": 15,
+            "status": "complete",
+            "implementationStatus": "complete",
+            "tasks": {
+              "15.1": {
+                "id": "15.1",
+                "title": "Build the shared harness: mock AG-UI SSE endpoint with a golden event corpus (all event types incl. CUSTOM, to",
+                "sequence": 1,
+                "status": "complete",
+                "summary": "harness: mock AG-UI server, corpus (14/8/44), contract.md, 74 checks, measure script; tsc 0 errors"
+              },
+              "15.2": {
+                "id": "15.2",
+                "title": "Build prototype H (assistant-ui AG-UI runtime behind a presentation port, entity-graph checkpoints/journal, St",
+                "sequence": 2,
+                "status": "complete",
+                "summary": "hybrid: 148/148 (Chromium+WebKit), 714KB gz initial JS, 2554 LOC, 4596 vs 164 React commits on long-markdown, ~31 eng-days"
+              },
+              "15.3": {
+                "id": "15.3",
+                "title": "Build prototype O (own AG-UI reducer on entity-graph, Streamdown, shadcn AI Elements patterns)",
+                "sequence": 3,
+                "status": "complete",
+                "summary": "own: 148/148 (Chromium+WebKit), 530KB gz initial JS, 3151 LOC, ~22 eng-days to productionise"
+              },
+              "15.4": {
+                "id": "15.4",
+                "title": "Run the A2UI golden surfaces through @a2ui/react and a2ui_flutter and record parity",
+                "sequence": 4,
+                "status": "complete",
+                "summary": "a2ui_flutter 0.2.0 (A2UI 1.0): 58/58 with KM catalog; 2 surfaces fail stock; ~2.5-3.5 eng-weeks to parity"
+              },
+              "15.5": {
+                "id": "15.5",
+                "title": "Run both prototypes against the harness in a Vite production build and inside Tauri (WebKit), recording confor",
+                "sequence": 5,
+                "status": "complete",
+                "summary": "measured: browsers 5x15 runs; Tauri WKWebView 14/14 conf, 42/44 hostile (CSP media); comparison.md"
+              },
+              "15.6": {
+                "id": "15.6",
+                "title": "Write the comparison report, run the cross-model adversarial review and record the operator decision",
+                "sequence": 6,
+                "status": "complete",
+                "summary": "report + cross-model review (MiniMax REVISE/inconclusive, Kimi REVISE/O conditional); operator adopted O 2026-11-10"
+              }
+            }
+          },
+          "c16-agentic-core-gates": {
+            "id": "c16-agentic-core-gates",
+            "title": "Agentic-core gates for adopting O",
+            "sequence": 16,
+            "status": "in_progress",
+            "implementationStatus": "in_progress",
+            "tasks": {
+              "16.1": {
+                "id": "16.1",
+                "title": "Replace sole reliance on requestAnimationFrame for publishing; pass focused, unfocused, occluded and minimised",
+                "sequence": 1,
+                "status": "in_progress",
+                "summary": null
+              },
+              "16.2": {
+                "id": "16.2",
+                "title": "entity-graph hardening upstream (atomic batched transactions without whole-graph copy, render-only live layer,",
+                "sequence": 2,
+                "status": "complete",
+                "summary": null
+              },
+              "16.3": {
+                "id": "16.3",
+                "title": "Re-measure O and H interleaved with non-profiling production builds to render-complete (long tasks, CPU, dropp",
+                "sequence": 3,
+                "status": "complete",
+                "summary": null
+              },
+              "16.4": {
+                "id": "16.4",
+                "title": "Run the full A2UI and a11y suites inside Tauri with trusted keyboard input and record a real VoiceOver pass",
+                "sequence": 4,
+                "status": "complete",
+                "summary": null
+              },
+              "16.5": {
+                "id": "16.5",
+                "title": "Streamdown origin and scheme allowlists in O and the apps/web CSP fix (img-src/media-src for allowed media ori",
+                "sequence": 5,
+                "status": "complete",
+                "summary": null
+              },
+              "16.6": {
+                "id": "16.6",
+                "title": "Produce one normalised work breakdown and first-year cost for O and H with identical scope",
+                "sequence": 6,
+                "status": "complete",
+                "summary": null
+              },
+              "16.7": {
+                "id": "16.7",
+                "title": "Write the end-to-end Flutter agentic-UI plan (AG-UI transport incl. evaluating community ag_ui, HITL, reconnec",
+                "sequence": 7,
+                "status": "complete",
+                "summary": null
+              }
+            }
+          }
+        },
+        "legacyReadOnly": false
+      }
+    },
+    "completion": {
+      "implementation": {
+        "completed": 13,
+        "total": 16,
+        "status": "blocked",
+        "summary": null,
+        "blockers": []
+      },
+      "evidence": {
+        "completed": 0,
+        "total": 0,
+        "status": "pending",
+        "summary": null,
+        "blockers": []
+      },
+      "certification": {
+        "completed": 0,
+        "total": 1,
+        "status": "blocked",
+        "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+        "blockers": [
+          "hsf-c13-cycle4-acceptance",
+          "hsf-c13-cycle4-budget-exhausted",
+          "hsf-c13-cycle4-rule-regression",
+          "hsf-c13-isolated-review-approval"
+        ]
+      },
+      "publication": {
+        "completed": 0,
+        "total": 0,
+        "status": "pending",
+        "summary": null,
+        "blockers": []
+      }
+    },
+    "decisions": {
+      "contract-adoption-hybrid-shell-foundation-138ce337": {
+        "id": "contract-adoption-hybrid-shell-foundation-138ce337",
+        "summary": "ADOPTED-CONTRACT path=.kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json sha256=138ce337ef0298a6bb79712dfce9eae690695c9398b2c89f260b6fbfea6c1e58 planRevision=1 adoptionSource=Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. owner=Travis James (operator) scenarios=VS-1,VS-2,VS-3,VS-4,VS-5,VS-8,VS-9",
+        "planRevision": 1,
+        "supersedes": "contract-adoption-hybrid-shell-foundation-768c585b"
+      },
+      "contract-adoption-hybrid-shell-foundation-261ec2fd": {
+        "id": "contract-adoption-hybrid-shell-foundation-261ec2fd",
+        "summary": "ADOPTED-CONTRACT path=.kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json sha256=261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6 planRevision=1 adoptionSource=Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. owner=Travis James (operator) scenarios=VS-1,VS-2,VS-3,VS-4,VS-5,VS-8,VS-9",
+        "planRevision": 1,
+        "supersedes": "contract-adoption-hybrid-shell-foundation-138ce337"
+      },
+      "contract-adoption-hybrid-shell-foundation-6d674890": {
+        "id": "contract-adoption-hybrid-shell-foundation-6d674890",
+        "summary": "ADOPTED-CONTRACT path=.kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json sha256=6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4 planRevision=1 adoptionSource=Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. Operator answers 2026-11-13 explicitly approve the 25 narrow reference corrections and one additional repair cycle (total four, at least three already consumed; historical time/tool consumption remains UNKNOWN). owner=Travis James (operator) scenarios=VS-1,VS-2,VS-3,VS-4,VS-5,VS-8,VS-9",
+        "planRevision": 1,
+        "supersedes": "contract-adoption-hybrid-shell-foundation-261ec2fd"
+      },
+      "contract-adoption-hybrid-shell-foundation-768c585b": {
+        "id": "contract-adoption-hybrid-shell-foundation-768c585b",
+        "summary": "ADOPTED-CONTRACT path=.kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json sha256=768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855 planRevision=1 adoptionSource=Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. owner=Travis James (operator) scenarios=VS-1,VS-2,VS-3,VS-4,VS-5,VS-8,VS-9",
+        "planRevision": 1,
+        "supersedes": "contract-adoption-hybrid-shell-foundation-f91e7c30"
+      },
+      "contract-adoption-hybrid-shell-foundation-f91e7c30": {
+        "id": "contract-adoption-hybrid-shell-foundation-f91e7c30",
+        "summary": "ADOPTED-CONTRACT path=.kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json sha256=f91e7c30ac98e27256e4b6d4bcbf4b630760061580f65cd3b923b07b86d786c9 planRevision=1 adoptionSource=Operator Travis James, explicit form answers kbd-plan-decisions on 2026-11-09 (decision-log.md) plus goals.md of 2026-11-09 and the 2026-11-09 naming/500-line instruction. owner=Travis James (operator) scenarios=VS-1,VS-2,VS-3,VS-4,VS-5,VS-8,VS-9",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "hsf-c13-continuation-20261113": {
+        "id": "hsf-c13-continuation-20261113",
+        "summary": "Operator requested KBD reconciliation and c13 Stage B fidelity repairs on 2026-11-13 in Codex. Continue authorized boundary, preserve contract 261ec2fd, prior receipts and unknown consumption. c08.8.3/c16 remain outside this boundary. Use Codex native team roles for this continuation; cross-model independent review remains required. See execution.md and evidence/c13-state-reconciliation.md.",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "hsf-c13-cycle4-start-20261113": {
+        "id": "hsf-c13-cycle4-start-20261113",
+        "summary": "Authorized repair cycle4 started at completed batch boundary under contract6d674890; candidate8261acbff6b7f7adef0d0dbb558704111f5319e4b7ad503621c2453d5c005b75 at HEAD3590e0a1. Prior repair lower bound3 retained; this is fourth consumed attempt, no fifth authorized. Exact argv/exit evidence in evidence/c13-stage-b-2026-11-13/approved-cycle-4. Unknown earlier wall time/tool usage remains UNKNOWN.",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "hsf-c13-extra-cycle-approved-20261113": {
+        "id": "hsf-c13-extra-cycle-approved-20261113",
+        "summary": "Operator explicitly approved narrow25-image reference corrections with unchanged thresholds and retained originals, plus one additional batched correction-and-verification cycle. Recovered repair lower bound3 retained; total permitted4. Scope: schedule8, footer16, processing light7681; observed harness and independent review findings. Adopt exact reference/budget amendment before final verification. Prior time/tool consumption UNKNOWN.",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "hsf-state-reconciliation-note-20261113": {
+        "id": "hsf-state-reconciliation-note-20261113",
+        "summary": "Canonical task 8.3 has an immutable legacy assistant-ui title. Typed task register rejected replacement with task already exists. Its authoritative interpretation is the adopted own AG-UI core task in openspec/changes/c08-shared-ui-kit/tasks.md; status remains pending on c16. Do not add a duplicate task, rewrite runtime events, or revive assistant-ui. Reconciliation of done flags is clean (0 drift, 0 errors). c13.13.4 saved log reports 3 passed (7.8s), but current candidate certification remains pending due missing source receipt.",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "kbd-method-hsf-reconcile-20261113": {
+        "id": "kbd-method-hsf-reconcile-20261113",
+        "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"99d68d911b131e6f7e4134d285b9c6865500c18f09acc4b877ea5a826389121d\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/execution.md\",\"sha256\":\"f0c08d69772c73d9301baee9d2532d5f41f906699990beeaeea5bd9c08b60b72\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-state-reconciliation.md\",\"sha256\":\"5598207d6cebd31e67de5d17ffb820ea1fbf1dff08eea37394f3cce7a8e7d1e0\"}]}",
+        "planRevision": 1,
+        "supersedes": "kbd-method-hybrid-shell-foundation-261ec2fd"
+      },
+      "kbd-method-hsf-v5-cycle4-20261113": {
+        "id": "kbd-method-hsf-v5-cycle4-20261113",
+        "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"e44ba1474e8ee61e3e5ae5fc434993e386cda4e013a485610a0c2892924b66a6\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"d8afc46f5ea422606a42e94e5a2339695d806e11acff60d4a4ee5dbba019aa86\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/execution.md\",\"sha256\":\"ea952bcbbcbff6b176fbc1a6f5ea876f4a4170ceac2f37fec55fee4bb4117391\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-state-reconciliation.md\",\"sha256\":\"5598207d6cebd31e67de5d17ffb820ea1fbf1dff08eea37394f3cce7a8e7d1e0\"},{\"path\":\"docs/design/token-reconciliation/c13-reference-adjudication.md\",\"sha256\":\"a940b745a8c3238fcd0120e9bd81f4bc8630d6e852253cc47b56532b4a82d102\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/reference-correction/promotion-receipt.json\",\"sha256\":\"0f256de6befdc266c300d02be2e9a554abb3891bcb8b83a9b6f58c97b7a16aa5\"}]}",
+        "planRevision": 1,
+        "supersedes": "kbd-method-hsf-reconcile-20261113"
+      },
+      "kbd-method-hybrid-shell-foundation-138ce337": {
+        "id": "kbd-method-hybrid-shell-foundation-138ce337",
+        "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"138ce337ef0298a6bb79712dfce9eae690695c9398b2c89f260b6fbfea6c1e58\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"d9e80e640e6b51f96a6575cfa90ccb7096ab462e2fe0ef1e9c0774660808e601\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"8ab25997b7768fefd84e5533a4a237473d1b59bbeeb3105aa4e21e2564a3d756\"}]}",
+        "planRevision": 1,
+        "supersedes": "kbd-method-hybrid-shell-foundation-768c585b"
+      },
+      "kbd-method-hybrid-shell-foundation-261ec2fd": {
+        "id": "kbd-method-hybrid-shell-foundation-261ec2fd",
+        "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"9fff7a313bbdbe9d4ee474a4b60cdcfcc076475d5bb4c8be72099b8a6632dd8c\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"2adf8bca9598c148d2dc424340e4f9ba55836ff047d1757428c9105b6c38c6ec\"}]}",
+        "planRevision": 1,
+        "supersedes": "kbd-method-hybrid-shell-foundation-138ce337"
+      },
+      "kbd-method-hybrid-shell-foundation-768c585b": {
+        "id": "kbd-method-hybrid-shell-foundation-768c585b",
+        "summary": "KBD-METHOD {\"phaseId\":\"hybrid-shell-foundation\",\"contractDigest\":\"768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855\",\"method\":\"VLBV\",\"retiredMethods\":[],\"references\":[{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"sha256\":\"aa768a993e49f1b5d75cd781891705434a6839d4f32e28eeeff5cd18f3bd88b9\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/plan.md\",\"sha256\":\"f9f71d739d69e462bdacf63589249d214a8472749137a11f3825f28a4618cc92\"},{\"path\":\".kbd-orchestrator/phases/hybrid-shell-foundation/decision-log.md\",\"sha256\":\"b1669a38711ec6e2e8a01042804e27fdb1782e16f4717b46382b8774dd4ce0bb\"}]}",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "policy-ack-hsf-agents-md-8c6e29": {
+        "id": "policy-ack-hsf-agents-md-8c6e29",
+        "summary": "KBD-POLICY-ACK {\"phaseId\":\"hybrid-shell-foundation\",\"path\":\"AGENTS.md\",\"sha256\":\"8c6e29eda78d87702cc7bfadb261d0032f9fd596b53f13c9080d25eec0f257ae\",\"issue\":\"Host compiler or cadence exception may conflict with selected VLBV; do not infer permission to run generated-code checks during generation.\",\"note\":\"Operator selected VLBV (decision-log 2026-11-09, KBD-METHOD kbd-method-hybrid-shell-foundation-138ce337): no generated-code builds, tests, lint or typecheck on product code until c13; the AGENTS.md 'narrow compiler checks' allowance is not used for product code. Only operator-approved exception: builds/runs inside spikes/agentic-ui/** (decision-log 2026-11-09 'Hybrid plus spike').\"}",
+        "planRevision": 1,
+        "supersedes": null
+      },
+      "policy-ack-hsf-claude-md-8c6e29": {
+        "id": "policy-ack-hsf-claude-md-8c6e29",
+        "summary": "KBD-POLICY-ACK {\"phaseId\":\"hybrid-shell-foundation\",\"path\":\"CLAUDE.md\",\"sha256\":\"8c6e29eda78d87702cc7bfadb261d0032f9fd596b53f13c9080d25eec0f257ae\",\"issue\":\"Host compiler or cadence exception may conflict with selected VLBV; do not infer permission to run generated-code checks during generation.\",\"note\":\"Operator selected VLBV (decision-log 2026-11-09, KBD-METHOD kbd-method-hybrid-shell-foundation-138ce337): no generated-code builds, tests, lint or typecheck on product code until c13; the AGENTS.md 'narrow compiler checks' allowance is not used for product code. Only operator-approved exception: builds/runs inside spikes/agentic-ui/** (decision-log 2026-11-09 'Hybrid plus spike').\"}",
+        "planRevision": 1,
+        "supersedes": null
+      }
+    },
+    "blockers": {
+      "hsf-c13-cycle4-acceptance": {
+        "id": "hsf-c13-cycle4-acceptance",
+        "summary": "Fourth-cycle boundary blocked: root TypeScript TS4111; partial browser16 completed5passed11failed; required WCAG text contrast and label/target-size failures plus scroll-selector defect. Stopped under adopted safety-failure condition.108 scenarios lack result; VS1 andremaininggates unverified. Evidence approved-cycle-4/partial-result.json and remaining-work.md.",
+        "resolved": false,
+        "resolution": null
+      },
+      "hsf-c13-cycle4-budget-exhausted": {
+        "id": "hsf-c13-cycle4-budget-exhausted",
+        "summary": "Known repair consumption4 of authorized4; fourth attempt stopped after required WCAG contrast failures. No fifth repair or verification cycle authorized. Prior UNKNOWN time/tool usage and all evidence retained.",
+        "resolved": false,
+        "resolution": null
+      },
+      "hsf-c13-cycle4-rule-regression": {
+        "id": "hsf-c13-cycle4-rule-regression",
+        "summary": "Task13.6 remains terminal Complete for historical Stage A evidence because runtime rejects reopening Complete to Blocked. Current candidate is NOT verified: root pnpm typecheck fails TS4111 at reference-correction-capture.ts118 and lint was not reached. This explicit regression blocker prevents certification; do not infer currentPASS from checkbox.",
+        "resolved": false,
+        "resolution": null
+      },
+      "hsf-c13-harness-failures": {
+        "id": "hsf-c13-harness-failures",
+        "summary": "Current Stage B support run45 scenarios:17 passed28 failed. Required320/600/1000 widths rejected by screenshot viewport helper; keyboard name approximation and two focus negative controls fail. Reports/command exits/candidate hashes: evidence/c13-stage-b-2026-11-13. No pass or threshold waiver inferred.",
+        "resolved": false,
+        "resolution": null
+      },
+      "hsf-c13-isolated-review-approval": {
+        "id": "hsf-c13-isolated-review-approval",
+        "summary": "Automatic approval review rejected sending private358KB scoped packet to OpenAI Codex CLI pending explicit payload/destination approval. Async operator request pending. Local independent correction review can report findings but cannot claim completed isolated judge.",
+        "resolved": false,
+        "resolution": null
+      },
+      "hsf-c13-reference-adoption": {
+        "id": "hsf-c13-reference-adoption",
+        "summary": "c13.13.1: frozen references contain nondeterministic schedule invite URLs and incorrect768px processing navigation. Narrow25-image correction proposal in tests/fidelity/baseline-defects.md; operator approval pending. Thresholds and baselines unchanged.",
+        "resolved": true,
+        "resolution": "Operator approved exactly25 references; design-lead approved scratch-d; promoted set ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79 signed and adopted in contract6d674890 revision5. Thresholds unchanged; prior evidence retained."
+      },
+      "hsf-c13-repair-budget": {
+        "id": "hsf-c13-repair-budget",
+        "summary": "c13 repair consumption lower bound3: saved run2 interrupted, run3 completed, current production repair batch. Current support suite17 passed/28 failed; one additional batched correction and verification cycle requested from operator, pending. Original time/tool consumption remains UNKNOWN; no reset.",
+        "resolved": true,
+        "resolution": "Operator approved exactly one additional cycle; prior3 retained, total4; signed amendment will bind exact revised contract before boundary."
+      }
+    },
+    "boundaryObligations": {
+      "change:c13-fidelity-verification-and-evidence": {
+        "key": "change:c13-fidelity-verification-and-evidence",
+        "receiptId": "21209ac29b39055e21540fcd346d6c762fcb1774d42196c0ffa9c9b6c691a3d0",
+        "boundary": "change",
+        "subject": "c13-fidelity-verification-and-evidence",
+        "sourceRevision": 239,
+        "exactSignal": "Starting change 13 out of 16: Single boundary run, fidelity, security and accessibility evidence"
+      },
+      "task:c13-fidelity-verification-and-evidence/13.1": {
+        "key": "task:c13-fidelity-verification-and-evidence/13.1",
+        "receiptId": "282bc42370010cf1210e58db88787be1c23af0126c92c2daa174894cfb223f93",
+        "boundary": "task",
+        "subject": "c13-fidelity-verification-and-evidence/13.1",
+        "sourceRevision": 240,
+        "exactSignal": "Starting task 1 out of 10: Run the web fidelity matrix (VS-1)"
+      }
+    },
+    "latestBoundaryReceipts": {
+      "change:c13-fidelity-verification-and-evidence": {
+        "id": "21209ac29b39055e21540fcd346d6c762fcb1774d42196c0ffa9c9b6c691a3d0",
+        "boundary": "change",
+        "edge": "before",
+        "subject": "c13-fidelity-verification-and-evidence",
+        "phaseId": "hybrid-shell-foundation",
+        "changeId": "c13-fidelity-verification-and-evidence",
+        "taskId": null,
+        "sourceRevision": 239,
+        "position": "hybrid-shell-foundation › c13-fidelity-verification-and-evidence",
+        "exactSignal": "Starting change 13 out of 16: Single boundary run, fidelity, security and accessibility evidence",
+        "outcome": "pass",
+        "findings": [],
+        "repairedProjections": [],
+        "observedAt": "2026-11-13T10:23:11.278596Z"
+      },
+      "task:c13-fidelity-verification-and-evidence/13.1": {
+        "id": "282bc42370010cf1210e58db88787be1c23af0126c92c2daa174894cfb223f93",
+        "boundary": "task",
+        "edge": "before",
+        "subject": "c13-fidelity-verification-and-evidence/13.1",
+        "phaseId": "hybrid-shell-foundation",
+        "changeId": "c13-fidelity-verification-and-evidence",
+        "taskId": "13.1",
+        "sourceRevision": 240,
+        "position": "hybrid-shell-foundation › c13-fidelity-verification-and-evidence › 13.1",
+        "exactSignal": "Starting task 1 out of 10: Run the web fidelity matrix (VS-1)",
+        "outcome": "pass",
+        "findings": [],
+        "repairedProjections": [],
+        "observedAt": "2026-11-13T10:23:11.820978Z"
+      },
+      "task:c13-fidelity-verification-and-evidence/13.4": {
+        "id": "2645364dfdc3fc5c95df5f3e68a66d6460c91baf90ac1cbbaae32678558afa67",
+        "boundary": "task",
+        "edge": "after",
+        "subject": "c13-fidelity-verification-and-evidence/13.4",
+        "phaseId": "hybrid-shell-foundation",
+        "changeId": "c13-fidelity-verification-and-evidence",
+        "taskId": "13.4",
+        "sourceRevision": 245,
+        "position": "hybrid-shell-foundation › c13-fidelity-verification-and-evidence › 13.4",
+        "exactSignal": "Completed task 4 out of 10: Run the token propagation check (VS-4)",
+        "outcome": "pass",
+        "findings": [],
+        "repairedProjections": [],
+        "observedAt": "2026-11-13T10:36:14.087819Z"
+      },
+      "task:c13-fidelity-verification-and-evidence/13.5": {
+        "id": "a3a80c40eb5ce8cc59279218a0dc46ae5e30254f02c0a53bddde88fd7b7c952b",
+        "boundary": "task",
+        "edge": "after",
+        "subject": "c13-fidelity-verification-and-evidence/13.5",
+        "phaseId": "hybrid-shell-foundation",
+        "changeId": "c13-fidelity-verification-and-evidence",
+        "taskId": "13.5",
+        "sourceRevision": 249,
+        "position": "hybrid-shell-foundation › c13-fidelity-verification-and-evidence › 13.5",
+        "exactSignal": "Completed task 5 out of 10: Run the no-Tauri web smoke (VS-5)",
+        "outcome": "pass",
+        "findings": [],
+        "repairedProjections": [],
+        "observedAt": "2026-11-13T10:36:25.656781Z"
+      }
+    },
+    "claims": {},
+    "submodulePins": {},
+    "replicaView": {
+      "replicaId": "e98b9092-a344-4157-beea-4f0645ff46dd",
+      "localHead": "3590e0a1a6bc9e02e1678115e78b35b351c7fed3",
+      "activePathStatus": "unknown",
+      "submodules": {}
+    },
+    "conflicts": {},
+    "devices": {
+      "ed25519:2c27c749aebaedf4ffa5dfe5b5021f360eb1356153f34a2f490883cfa7c32349": {
+        "deviceId": "unknown-device",
+        "keyId": "ed25519:2c27c749aebaedf4ffa5dfe5b5021f360eb1356153f34a2f490883cfa7c32349",
+        "publicKey": "871iU0Bs/8a3DP+tqTdJ4mW+QH5tyT7Qu8BA7zzadzc=",
+        "status": "active",
+        "enrolledAtRevision": 1,
+        "revokedAtRevision": null
+      }
+    },
+    "operatorKeyIds": [
+      "ed25519:2c27c749aebaedf4ffa5dfe5b5021f360eb1356153f34a2f490883cfa7c32349"
+    ],
+    "commandRevisions": {
+      "1d6a21be-eea4-4e58-8aa3-3f7e8d7a894a": 244,
+      "24d33cb5-0225-4121-af5f-5debd76878f7": 246,
+      "3e75f9f1-06b4-43bd-b704-ad6c98339486": 240,
+      "77ed4d64-73d3-4dbc-ba38-e8c9bd6d5000": 1,
+      "7ebe8882-651e-4d04-b8e3-f4a37917634b": 248,
+      "8cdae28f-8475-431f-8009-28b4d9e264c7": 250,
+      "analyze-complete-1794215381": 6,
+      "analyze-enter-1794214527": 5,
+      "apply:task-complete:hybrid-shell-foundation:c13-fidelity-verification-and-evidence:13.4": 245,
+      "apply:task-complete:hybrid-shell-foundation:c13-fidelity-verification-and-evidence:13.5": 249,
+      "apply:task-in-progress:hybrid-shell-foundation:c13-fidelity-verification-and-evidence:13.1": 239,
+      "apply:task-in-progress:hybrid-shell-foundation:c13-fidelity-verification-and-evidence:13.4": 243,
+      "apply:task-in-progress:hybrid-shell-foundation:c13-fidelity-verification-and-evidence:13.5": 247,
+      "assess-complete-1794214358": 4,
+      "assess-enter-1794213400": 3,
+      "contract-adopt-hybrid-shell-foundation-138ce337": 204,
+      "contract-adopt-hybrid-shell-foundation-261ec2fd": 225,
+      "contract-adopt-hybrid-shell-foundation-6d674890": 261,
+      "contract-adopt-hybrid-shell-foundation-768c585b": 81,
+      "contract-adopt-hybrid-shell-foundation-f91e7c30": 9,
+      "e028c05d-fc81-4abf-a1e0-408a88594f9b": 241,
+      "hsf-budget-exhausted-20261113": 271,
+      "hsf-c01-1.1-complete": 97,
+      "hsf-c01-1.2-complete": 98,
+      "hsf-c01-1.3-complete": 99,
+      "hsf-c01-1.4-complete": 100,
+      "hsf-c01-1.5-complete": 101,
+      "hsf-c01-1.6-complete-c": 93,
+      "hsf-c01-1.6-in-progress-c": 92,
+      "hsf-c01-workspace-and-repo-rules-1.1-in-progress": 84,
+      "hsf-c01-workspace-and-repo-rules-1.2-in-progress": 85,
+      "hsf-c01-workspace-and-repo-rules-1.3-in-progress": 86,
+      "hsf-c01-workspace-and-repo-rules-1.4-in-progress": 87,
+      "hsf-c01-workspace-and-repo-rules-1.5-in-progress": 88,
+      "hsf-c02-2.1-complete": 94,
+      "hsf-c02-2.2-complete": 95,
+      "hsf-c02-2.3-complete": 96,
+      "hsf-c02-design-token-reconciliation-2.1-in-progress": 89,
+      "hsf-c02-design-token-reconciliation-2.2-in-progress": 90,
+      "hsf-c02-design-token-reconciliation-2.3-in-progress": 91,
+      "hsf-c03-3.1-complete": 111,
+      "hsf-c03-3.2-complete": 112,
+      "hsf-c03-3.3-complete": 113,
+      "hsf-c03-value-scenarios-and-baselines-3.1-ip": 102,
+      "hsf-c03-value-scenarios-and-baselines-3.2-ip": 103,
+      "hsf-c03-value-scenarios-and-baselines-3.3-ip": 104,
+      "hsf-c04-4.1-complete": 120,
+      "hsf-c04-4.2-complete": 121,
+      "hsf-c04-4.3-complete": 122,
+      "hsf-c04-4.4-complete": 123,
+      "hsf-c04-token-generator-4.1-ip": 105,
+      "hsf-c04-token-generator-4.2-ip": 106,
+      "hsf-c04-token-generator-4.3-ip": 107,
+      "hsf-c04-token-generator-4.4-ip": 108,
+      "hsf-c05-5.1-complete": 110,
+      "hsf-c05-5.1-in-progress": 109,
+      "hsf-c05-5.2-complete": 124,
+      "hsf-c05-5.2-ip": 114,
+      "hsf-c05-5.3-complete": 125,
+      "hsf-c05-5.3-ip": 115,
+      "hsf-c05-5.4-complete": 126,
+      "hsf-c05-5.4-ip": 116,
+      "hsf-c05-5.5-complete": 127,
+      "hsf-c05-5.5-ip": 117,
+      "hsf-c05-5.6-complete": 128,
+      "hsf-c05-5.6-ip": 118,
+      "hsf-c05-5.7-complete": 129,
+      "hsf-c05-5.7-ip": 119,
+      "hsf-c06-6.1-complete": 137,
+      "hsf-c06-6.1-ip": 130,
+      "hsf-c06-6.2-complete": 138,
+      "hsf-c06-6.2-ip": 131,
+      "hsf-c06-6.3-complete": 139,
+      "hsf-c06-6.3-ip": 132,
+      "hsf-c07-7.1-complete": 135,
+      "hsf-c07-7.1-ip": 133,
+      "hsf-c07-7.2-complete": 136,
+      "hsf-c07-7.2-ip": 134,
+      "hsf-c08-8.3-register": 140,
+      "hsf-c08-shared-ui-kit-8.1-done-r5": 192,
+      "hsf-c08-shared-ui-kit-8.1-ip-r5": 184,
+      "hsf-c08-shared-ui-kit-8.2-done-r5": 193,
+      "hsf-c08-shared-ui-kit-8.2-ip-r5": 185,
+      "hsf-c09-9.1-done": 201,
+      "hsf-c09-9.1-ip": 199,
+      "hsf-c09-9.2-done": 202,
+      "hsf-c09-9.2-ip": 200,
+      "hsf-c10-10.1-done": 216,
+      "hsf-c10-10.1-ip": 208,
+      "hsf-c10-10.2-done": 217,
+      "hsf-c10-10.2-ip": 209,
+      "hsf-c10-10.3-done": 218,
+      "hsf-c10-10.3-ip": 210,
+      "hsf-c11-11.1-done": 219,
+      "hsf-c11-11.1-ip": 211,
+      "hsf-c11-11.2-done": 220,
+      "hsf-c11-11.2-ip": 212,
+      "hsf-c11-11.3-done": 221,
+      "hsf-c11-11.3-ip": 213,
+      "hsf-c11-11.4-done": 222,
+      "hsf-c11-11.4-ip": 214,
+      "hsf-c11-11.5-done": 223,
+      "hsf-c11-11.5-ip": 215,
+      "hsf-c12-flutter-frame-and-screens-12.1-done-r5": 194,
+      "hsf-c12-flutter-frame-and-screens-12.1-ip-r5": 186,
+      "hsf-c12-flutter-frame-and-screens-12.2-done-r5": 195,
+      "hsf-c12-flutter-frame-and-screens-12.2-ip-r5": 187,
+      "hsf-c12-flutter-frame-and-screens-12.3-done-r5": 196,
+      "hsf-c12-flutter-frame-and-screens-12.3-ip-r5": 188,
+      "hsf-c13-13.1-approved-cycle-20261113": 259,
+      "hsf-c13-13.1-blocked-20261113": 254,
+      "hsf-c13-13.10-blocked-20261113": 255,
+      "hsf-c13-13.2-done": 231,
+      "hsf-c13-13.2-ip": 227,
+      "hsf-c13-13.3-complete-c": 236,
+      "hsf-c13-13.3-ip": 228,
+      "hsf-c13-13.6-done": 232,
+      "hsf-c13-13.6-ip": 229,
+      "hsf-c13-13.7-done": 233,
+      "hsf-c13-13.7-ip": 230,
+      "hsf-c13-13.8-complete-b": 235,
+      "hsf-c13-13.8-in-progress-b": 234,
+      "hsf-c13-budget-approved-20261113": 258,
+      "hsf-c13-budget-blocker-20261113": 252,
+      "hsf-c13-certification-blocked-20261113": 256,
+      "hsf-c13-continuation-20261113": 237,
+      "hsf-c13-cycle4-acceptance-blocker-20261113": 265,
+      "hsf-c13-cycle4-certification-20261113": 269,
+      "hsf-c13-cycle4-execute-stage-20261113": 270,
+      "hsf-c13-cycle4-review-blocker-20261113": 266,
+      "hsf-c13-cycle4-start-20261113": 264,
+      "hsf-c13-cycle4-task-13.1-20261113": 267,
+      "hsf-c13-cycle4-task-13.9-20261113": 268,
+      "hsf-c13-extra-cycle-approved-20261113": 257,
+      "hsf-c13-harness-blocker-20261113": 253,
+      "hsf-c13-ref-cleared-v5-20261113": 263,
+      "hsf-c13-reference-blocker-20261113": 251,
+      "hsf-c14-aggregate-commands-14.1-done-r5": 197,
+      "hsf-c14-aggregate-commands-14.1-ip-r5": 189,
+      "hsf-c14-aggregate-commands-14.2-done-r5": 198,
+      "hsf-c14-aggregate-commands-14.2-ip-r5": 190,
+      "hsf-c15-15.1-done": 149,
+      "hsf-c15-15.1-ip": 148,
+      "hsf-c15-15.1-reg": 142,
+      "hsf-c15-15.2-done": 155,
+      "hsf-c15-15.2-ip": 150,
+      "hsf-c15-15.2-reg": 143,
+      "hsf-c15-15.3-done": 153,
+      "hsf-c15-15.3-ip": 151,
+      "hsf-c15-15.3-reg": 144,
+      "hsf-c15-15.4-done": 154,
+      "hsf-c15-15.4-ip": 152,
+      "hsf-c15-15.4-reg": 145,
+      "hsf-c15-15.5-done": 157,
+      "hsf-c15-15.5-ip": 156,
+      "hsf-c15-15.5-reg": 146,
+      "hsf-c15-15.6-done": 159,
+      "hsf-c15-15.6-ip": 158,
+      "hsf-c15-15.6-reg": 147,
+      "hsf-c15-register": 141,
+      "hsf-c16-16.1-blocked-b": 177,
+      "hsf-c16-16.1-ip": 168,
+      "hsf-c16-16.1-ip-r5": 191,
+      "hsf-c16-16.1-reg": 161,
+      "hsf-c16-16.2-done": 182,
+      "hsf-c16-16.2-ip": 179,
+      "hsf-c16-16.2-reg": 162,
+      "hsf-c16-16.3-done": 183,
+      "hsf-c16-16.3-in-progress": 172,
+      "hsf-c16-16.3-reg": 163,
+      "hsf-c16-16.4-blocked": 178,
+      "hsf-c16-16.4-done": 180,
+      "hsf-c16-16.4-done2": 181,
+      "hsf-c16-16.4-in-progress": 173,
+      "hsf-c16-16.4-reg": 164,
+      "hsf-c16-16.5-complete-b": 174,
+      "hsf-c16-16.5-ip": 169,
+      "hsf-c16-16.5-reg": 165,
+      "hsf-c16-16.6-complete-b": 175,
+      "hsf-c16-16.6-ip": 170,
+      "hsf-c16-16.6-reg": 166,
+      "hsf-c16-16.7-complete-b": 176,
+      "hsf-c16-16.7-ip": 171,
+      "hsf-c16-16.7-reg": 167,
+      "hsf-c16-register": 160,
+      "hsf-certification-reconciled-20261113": 273,
+      "hsf-execute-enter-768c": 83,
+      "hsf-method-v5-cycle4-20261113": 262,
+      "hsf-rule-regression-20261113": 272,
+      "hsf-state-reconciliation-note-20261113": 242,
+      "kbd-method-hsf-138ce337": 205,
+      "kbd-method-hsf-261ec2fd": 226,
+      "kbd-method-hsf-768c585b": 82,
+      "kbd-method-hsf-reconcile-20261113": 238,
+      "legacy-import-v2-hybrid-shell-foundation-20261109T083641Z": 2,
+      "phase-bind:hybrid-shell-foundation:138ce337ef0298a6": 203,
+      "phase-bind:hybrid-shell-foundation:261ec2fd7ff96c0d": 224,
+      "phase-bind:hybrid-shell-foundation:6d67489066e4dc6c": 260,
+      "phase-bind:hybrid-shell-foundation:768c585bd974ccb3": 80,
+      "phase-bind:hybrid-shell-foundation:f91e7c30ac98e272": 8,
+      "plan-complete-1794221411": 79,
+      "plan-enter-1794218211": 7,
+      "policy-ack-hsf-AGENTS.md-8c6e29": 206,
+      "policy-ack-hsf-CLAUDE.md-8c6e29": 207,
+      "reg-c01-workspace-and-repo-rules-1.1-1794221360": 11,
+      "reg-c01-workspace-and-repo-rules-1.2-1794221360": 12,
+      "reg-c01-workspace-and-repo-rules-1.3-1794221360": 13,
+      "reg-c01-workspace-and-repo-rules-1.4-1794221360": 14,
+      "reg-c01-workspace-and-repo-rules-1.5-1794221360": 15,
+      "reg-c01-workspace-and-repo-rules-1.6-1794221360": 16,
+      "reg-c01-workspace-and-repo-rules-1794221360": 10,
+      "reg-c02-design-token-reconciliation-1794221360": 17,
+      "reg-c02-design-token-reconciliation-2.1-1794221360": 18,
+      "reg-c02-design-token-reconciliation-2.2-1794221360": 19,
+      "reg-c02-design-token-reconciliation-2.3-1794221360": 20,
+      "reg-c03-value-scenarios-and-baselines-1794221360": 21,
+      "reg-c03-value-scenarios-and-baselines-3.1-1794221360": 22,
+      "reg-c03-value-scenarios-and-baselines-3.2-1794221360": 23,
+      "reg-c03-value-scenarios-and-baselines-3.3-1794221360": 24,
+      "reg-c04-token-generator-1794221360": 25,
+      "reg-c04-token-generator-4.1-1794221360": 26,
+      "reg-c04-token-generator-4.2-1794221360": 27,
+      "reg-c04-token-generator-4.3-1794221360": 28,
+      "reg-c04-token-generator-4.4-1794221360": 29,
+      "reg-c05-scaffold-generation-import-1794221360": 30,
+      "reg-c05-scaffold-generation-import-5.1-1794221360": 31,
+      "reg-c05-scaffold-generation-import-5.2-1794221360": 32,
+      "reg-c05-scaffold-generation-import-5.3-1794221360": 33,
+      "reg-c05-scaffold-generation-import-5.4-1794221360": 34,
+      "reg-c05-scaffold-generation-import-5.5-1794221360": 35,
+      "reg-c05-scaffold-generation-import-5.6-1794221360": 36,
+      "reg-c05-scaffold-generation-import-5.7-1794221360": 37,
+      "reg-c06-web-desktop-single-bundle-1794221360": 38,
+      "reg-c06-web-desktop-single-bundle-6.1-1794221360": 39,
+      "reg-c06-web-desktop-single-bundle-6.2-1794221360": 40,
+      "reg-c06-web-desktop-single-bundle-6.3-1794221360": 41,
+      "reg-c07-flutter-shell-import-1794221360": 42,
+      "reg-c07-flutter-shell-import-7.1-1794221360": 43,
+      "reg-c07-flutter-shell-import-7.2-1794221360": 44,
+      "reg-c08-shared-ui-kit-1794221360": 45,
+      "reg-c08-shared-ui-kit-8.1-1794221360": 46,
+      "reg-c08-shared-ui-kit-8.2-1794221360": 47,
+      "reg-c09-app-frame-and-navigation-1794221360": 48,
+      "reg-c09-app-frame-and-navigation-9.1-1794221360": 49,
+      "reg-c09-app-frame-and-navigation-9.2-1794221360": 50,
+      "reg-c10-public-screens-10.1-1794221360": 52,
+      "reg-c10-public-screens-10.2-1794221360": 53,
+      "reg-c10-public-screens-10.3-1794221360": 54,
+      "reg-c10-public-screens-1794221360": 51,
+      "reg-c11-app-screens-11.1-1794221360": 56,
+      "reg-c11-app-screens-11.2-1794221360": 57,
+      "reg-c11-app-screens-11.3-1794221360": 58,
+      "reg-c11-app-screens-11.4-1794221360": 59,
+      "reg-c11-app-screens-11.5-1794221360": 60,
+      "reg-c11-app-screens-1794221360": 55,
+      "reg-c12-flutter-frame-and-screens-12.1-1794221360": 62,
+      "reg-c12-flutter-frame-and-screens-12.2-1794221360": 63,
+      "reg-c12-flutter-frame-and-screens-12.3-1794221360": 64,
+      "reg-c12-flutter-frame-and-screens-1794221360": 61,
+      "reg-c13-fidelity-verification-and-evidence-13.1-1794221360": 66,
+      "reg-c13-fidelity-verification-and-evidence-13.10-1794221360": 75,
+      "reg-c13-fidelity-verification-and-evidence-13.2-1794221360": 67,
+      "reg-c13-fidelity-verification-and-evidence-13.3-1794221360": 68,
+      "reg-c13-fidelity-verification-and-evidence-13.4-1794221360": 69,
+      "reg-c13-fidelity-verification-and-evidence-13.5-1794221360": 70,
+      "reg-c13-fidelity-verification-and-evidence-13.6-1794221360": 71,
+      "reg-c13-fidelity-verification-and-evidence-13.7-1794221360": 72,
+      "reg-c13-fidelity-verification-and-evidence-13.8-1794221360": 73,
+      "reg-c13-fidelity-verification-and-evidence-13.9-1794221360": 74,
+      "reg-c13-fidelity-verification-and-evidence-1794221360": 65,
+      "reg-c14-aggregate-commands-14.1-1794221360": 77,
+      "reg-c14-aggregate-commands-14.2-1794221360": 78,
+      "reg-c14-aggregate-commands-1794221360": 76
+    },
+    "phaseClosure": {
+      "phases": {
+        "hybrid-shell-foundation": {
+          "binding": {
+            "contractPath": ".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json",
+            "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
+            "scenarioDigests": {
+              "VS-1": "78a4fb3e3764f24dfd8fa4e39997b22cc0fa60620335c36ac9b14c9dd34fbcfd",
+              "VS-2": "aad9a3498cca88f179d6f1d12139c3d235dd811032184310babde06a9011f197",
+              "VS-3": "8c329c9bbc8441fcb1b7df523dc2280563a0e13fcd176c53c2876724290d6d9c",
+              "VS-4": "6428a194914a4d7dd92074b453ddac4bd91eec7efd9f40faf8634cfe9657bf26",
+              "VS-5": "8064090ee62bcfa0232ba58a3e453206053310d80ad90960853d87fcc0217e10",
+              "VS-8": "cfa1df6155b318239bb9c9117119dc69c1a2d1b9b6651ad47ade8e97a8116b6d",
+              "VS-9": "8fdb290032f4c54fdbdc3aed111f4b3a0b2b1dc9d39af734f3f6357dfbef8e66"
+            },
+            "planRevision": 1,
+            "adoptionDecisionId": "contract-adoption-hybrid-shell-foundation-6d674890",
+            "bindingRevision": 5,
+            "amendedScenarios": [
+              "VS-1"
+            ],
+            "authority": {
+              "manifestRaw": "{\"action\":\"amend-contract\",\"approver\":\"travis@tribehealthsolutions.com\",\"contractPath\":\".kbd-orchestrator/phases/hybrid-shell-foundation/adopted-contract.json\",\"kind\":\"kbd.scope-authority\",\"namespace\":\"prometheus-kbd-scope-amendment\",\"newContractDigest\":\"6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4\",\"nonce\":\"a720393429ef17fb60dbfe43bd012ee5\",\"phaseId\":\"hybrid-shell-foundation\",\"previousContractDigest\":\"261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6\",\"projectId\":\"80abee42-ead8-4e6f-b617-e458847775d3\",\"reason\":\"Operator approved 25 narrow reference corrections with unchanged thresholds and one extra repair cycle, total four preserving three prior attempts and UNKNOWN time/tool usage.\",\"runId\":\"hybrid-shell-foundation-20261109T083641Z\",\"scenarioChanges\":{\"added\":[],\"modified\":[\"VS-1\"],\"removed\":[]},\"schemaVersion\":\"1\",\"timestamp\":\"2026-11-13T10:54:54Z\"}",
+              "manifestSha256": "8a4435a6fb4846016fe35eda3c82f489e2eef70459c22c976f3d1f743155e74a",
+              "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgsgqOvzJMpDfEY0CKRyfxixLl97\nUxT+bg/r6Jl4BBHFcAAAAecHJvbWV0aGV1cy1rYmQtc2NvcGUtYW1lbmRtZW50AAAAAAAA\nAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAAQIcesvDOZwKhB/X4fpXddx9c9RAcN2\nQn4DEhgtd4JGkCeSbPs4Vpc+lXXZxLr9EkdwY4l8g/DcTUUesvu5u7UAE=\n-----END SSH SIGNATURE-----\n",
+              "approver": "travis@tribehealthsolutions.com",
+              "namespace": "prometheus-kbd-scope-amendment",
+              "allowedSignersSha256": "4c32adefb70e281e6c78f3ecb562088ef82209c54a9a01b1ed630ba3ed78a573"
+            }
+          },
+          "boundAtRevision": 260,
+          "bindingHistory": [
+            "f91e7c30ac98e27256e4b6d4bcbf4b630760061580f65cd3b923b07b86d786c9",
+            "768c585bd974ccb301d18ed957e82749bda7832332f743a5dfc6e0182e85b855",
+            "138ce337ef0298a6bb79712dfce9eae690695c9398b2c89f260b6fbfea6c1e58",
+            "261ec2fd7ff96c0deaa35a4d59f8723858ecdcdeec2e417e0e090c27d7bec7b6"
+          ]
+        }
+      },
+      "consumedManifests": [
+        "806debbad789fca9227e0fa880b0b6f16145fd504e402f54eee8824a4c240d77",
+        "8a4435a6fb4846016fe35eda3c82f489e2eef70459c22c976f3d1f743155e74a",
+        "8b9a4adf6e684255260973b30f745edfa88e3da0a9d5bd39a8f688203981974e",
+        "d7d2fa3dac852c5ddb02fd1fbae6d2b8a39fba2042d76c75f029b2589c264822"
+      ]
+    }
+  },
+  "committedLocally": true,
+  "controlPlane": "disabled"
+}

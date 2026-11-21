@@ -1,0 +1,365 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "wc-7-local-history.spec.ts",
+      "--project=packaged-firefox"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "firefox",
+          "baseURL": "http://localhost:18080",
+          "launchOptions": {
+            "firefoxUserPrefs": {
+              "media.navigator.streams.fake": true,
+              "media.navigator.permission.disabled": true
+            }
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "packaged-firefox"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "wc-7-local-history.spec.ts",
+      "file": "wc-7-local-history.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-7 History survives a reload and never leaves the device",
+          "file": "wc-7-local-history.spec.ts",
+          "line": 58,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the meeting and both messages survive a reload; nothing carrying them is sent; delete removes it",
+              "ok": true,
+              "tags": [
+                "WC-7",
+                "value-critical",
+                "smoke",
+                "cross-engine"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged-firefox",
+                  "projectName": "packaged-firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11549,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T15:30:56.045Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-7-history-after-reload",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-d6032-m-is-sent-delete-removes-it-packaged-firefox/attachments/wc-7-history-after-reload-8840af10c9776dfc5d96ad72f44eeeb3de87c7dd.png"
+                        },
+                        {
+                          "name": "wc-7-network-summary.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyZXF1ZXN0cyI6IFsKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL3RoZW1lLWluaXQuanMiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL2luZGV4LUJ6N2JLODBnLmpzIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9pbmRleC1DMkRESjhwNi5jc3MiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL2ludGVyLXJlZ3VsYXItQ09MR0ZCM00ud29mZjIiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL3NwYWNlLWdyb3Rlc2stdmFyaWFibGUtQ3pPQ0F0aTAud29mZjIiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL2ludGVyLXNlbWlib2xkLUJBRUVjSjRFLndvZmYyIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9qZXRicmFpbnMtbW9uby1zZW1pYm9sZC1CTThEYzJ0LS53b2ZmMiIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvamV0YnJhaW5zLW1vbm8tbWVkaXVtLTNTM2sybk16LndvZmYyIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiUE9TVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hcGkvbWVldGluZ3MiLAogICAgICAiYm9keUJ5dGVzIjogMgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJQT1NUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2FwaS90b2tlbiIsCiAgICAgICJib2R5Qnl0ZXMiOiAzOAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL3NyYy1DdVl0eGQ3ai5qcyIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvbGl2ZWtpdC1jbGllbnQuZXNtLURuQVRpTm5pLmpzIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3NldHRpbmdzL3JlZ2lvbnMiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL3dvcmtlci1DYk1PXzd5Yi5qcyIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvaGlzdG9yeS13b3JrZXItOUkxTExBSmkuanMiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL3JvbGxkb3duLXJ1bnRpbWUtQmgxdERmc2cuanMiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL3BnbGl0ZS1WZlQ5d3RycS53YXNtIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9pbml0ZGItQkphT0xMX0kud2FzbSIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvcGdsaXRlLUJFMkRpNVZ3LmRhdGEiLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvaGlzdG9yeSIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC90aGVtZS1pbml0LmpzIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9pbmRleC1CejdiSzgwZy5qcyIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvd29ya2VyLUNiTU9fN3liLmpzIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9oaXN0b3J5LXdvcmtlci05STFMTEFKaS5qcyIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvcm9sbGRvd24tcnVudGltZS1CaDF0RGZzZy5qcyIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hc3NldHMvcGdsaXRlLVZmVDl3dHJxLndhc20iLAogICAgICAiYm9keUJ5dGVzIjogMAogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHA6Ly9sb2NhbGhvc3Q6MTgwODAvYXNzZXRzL2luaXRkYi1CSmFPTExfSS53YXNtIiwKICAgICAgImJvZHlCeXRlcyI6IDAKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwOi8vbG9jYWxob3N0OjE4MDgwL2Fzc2V0cy9wZ2xpdGUtQkUyRGk1VncuZGF0YSIsCiAgICAgICJib2R5Qnl0ZXMiOiAwCiAgICB9CiAgXSwKICAiZnJhbWVzIjogWwogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiA3NTUKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJyZWNlaXZlZCIsCiAgICAgICJieXRlcyI6IDk3CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiA2NzYKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTE2MTAKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTY5CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAic2VudCIsCiAgICAgICJieXRlcyI6IDE4MAogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjkKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTgwCiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAic2VudCIsCiAgICAgICJieXRlcyI6IDE2OQogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxODAKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTY5CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAic2VudCIsCiAgICAgICJieXRlcyI6IDE4MAogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjkKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTgwCiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiA1NDQ3CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiAxNzkKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJyZWNlaXZlZCIsCiAgICAgICJieXRlcyI6IDIwMQogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInJlY2VpdmVkIiwKICAgICAgImJ5dGVzIjogMTk1CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiAyMTkKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJyZWNlaXZlZCIsCiAgICAgICJieXRlcyI6IDE3NwogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjIKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogNAogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjIKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTYyCiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAic2VudCIsCiAgICAgICJieXRlcyI6IDE2MgogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjMKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogMTYyCiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAic2VudCIsCiAgICAgICJieXRlcyI6IDE2MwogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInNlbnQiLAogICAgICAiYnl0ZXMiOiAxNjIKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogODEKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJyZWNlaXZlZCIsCiAgICAgICJieXRlcyI6IDk3CiAgICB9LAogICAgewogICAgICAic29ja2V0IjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJkaXJlY3Rpb24iOiAicmVjZWl2ZWQiLAogICAgICAiYnl0ZXMiOiAxOTMKICAgIH0sCiAgICB7CiAgICAgICJzb2NrZXQiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImRpcmVjdGlvbiI6ICJzZW50IiwKICAgICAgImJ5dGVzIjogNAogICAgfSwKICAgIHsKICAgICAgInNvY2tldCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAiZGlyZWN0aW9uIjogInJlY2VpdmVkIiwKICAgICAgImJ5dGVzIjogNAogICAgfQogIF0sCiAgImVncmVzcyI6IFsKICAgIHsKICAgICAgInZpYSI6ICJmZXRjaCIsCiAgICAgICJ1cmwiOiAiL2FwaS9tZWV0aW5ncyIsCiAgICAgICJraW5kIjogInN0cmluZyIsCiAgICAgICJzaXplIjogMiwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJmZXRjaCIsCiAgICAgICJ1cmwiOiAiL2FwaS90b2tlbiIsCiAgICAgICJraW5kIjogInN0cmluZyIsCiAgICAgICJzaXplIjogMzgsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAiZmV0Y2giLAogICAgICAidXJsIjogImh0dHBzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvc2V0dGluZ3MvcmVnaW9ucyIsCiAgICAgICJraW5kIjogIm5vbmUiLAogICAgICAic2l6ZSI6IDAsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTE2MTAsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTY5LAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE4MCwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiAxNjksCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTgwLAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE2OSwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiAxODAsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTY5LAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE4MCwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiAxNjksCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTgwLAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE2MiwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiA0LAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE2MiwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiAxNjIsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTYyLAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE2MywKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiAxNjIsCiAgICAgICJ0eXBlIjogIiIKICAgIH0sCiAgICB7CiAgICAgICJ2aWEiOiAid2Vic29ja2V0IiwKICAgICAgInVybCI6ICJ3c3M6Ly9rbm93bWUtMjNma2Y4cHoubGl2ZWtpdC5jbG91ZC9ydGMvdjEiLAogICAgICAia2luZCI6ICJhcnJheWJ1ZmZlciIsCiAgICAgICJzaXplIjogMTYzLAogICAgICAidHlwZSI6ICIiCiAgICB9LAogICAgewogICAgICAidmlhIjogIndlYnNvY2tldCIsCiAgICAgICJ1cmwiOiAid3NzOi8va25vd21lLTIzZmtmOHB6LmxpdmVraXQuY2xvdWQvcnRjL3YxIiwKICAgICAgImtpbmQiOiAiYXJyYXlidWZmZXIiLAogICAgICAic2l6ZSI6IDE2MiwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiA4MSwKICAgICAgInR5cGUiOiAiIgogICAgfSwKICAgIHsKICAgICAgInZpYSI6ICJ3ZWJzb2NrZXQiLAogICAgICAidXJsIjogIndzczovL2tub3dtZS0yM2ZrZjhwei5saXZla2l0LmNsb3VkL3J0Yy92MSIsCiAgICAgICJraW5kIjogImFycmF5YnVmZmVyIiwKICAgICAgInNpemUiOiA0LAogICAgICAidHlwZSI6ICIiCiAgICB9CiAgXSwKICAiY3NwVmlvbGF0aW9ucyI6IFtdLAogICJjc3BDb25zb2xlIjogW10KfQ=="
+                        },
+                        {
+                          "name": "wc-7-run.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS00ZDEtdnNmIiwKICAiaGlzdG9yeUlkIjogIjxyZWRhY3RlZC1sb2NhbC1pZD4iCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-d6032-m-is-sent-delete-removes-it-packaged-firefox/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-d6032-m-is-sent-delete-removes-it-packaged-firefox/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-d6032-m-is-sent-delete-removes-it-packaged-firefox/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-d6032-m-is-sent-delete-removes-it-packaged-firefox/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f2655caf22eae0e29596-c4963ab03fae6534e858",
+              "file": "wc-7-local-history.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "a fresh profile shows an empty history, and the leak detector flags a deliberate upload",
+              "ok": true,
+              "tags": [
+                "WC-7",
+                "negative-control",
+                "cross-engine"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged-firefox",
+                  "projectName": "packaged-firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4294,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T15:31:08.918Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-7-canary.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJmbGFnZ2VkSW4iOiBbCiAgICB7CiAgICAgICJwbGFjZSI6ICJlZ3Jlc3MiLAogICAgICAidGFyZ2V0IjogImh0dHBzOi8vY2FuYXJ5LmludmFsaWQvbGVhayIKICAgIH0KICBdCn0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-5e0e1-r-flags-a-deliberate-upload-packaged-firefox/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-5e0e1-r-flags-a-deliberate-upload-packaged-firefox/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/2-packaged-firefox/test-results/wc-7-local-history-WC-7-Hi-5e0e1-r-flags-a-deliberate-upload-packaged-firefox/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f2655caf22eae0e29596-37f16627519a583ece36",
+              "file": "wc-7-local-history.spec.ts",
+              "line": 152,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-21T15:30:55.779Z",
+    "duration": 18118.527,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

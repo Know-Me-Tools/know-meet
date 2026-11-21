@@ -1,0 +1,42 @@
+{
+  "verdict": "BLOCK",
+  "reviewKind": "single final local correction confirmation",
+  "candidateDigest": "8261acbff6b7f7adef0d0dbb558704111f5319e4b7ad503621c2453d5c005b75",
+  "head": "3590e0a1a6bc9e02e1678115e78b35b351c7fed3",
+  "contractDigest": "6d67489066e4dc6cd06ee6772623d07a9ae0b0eaaa52c622e7d9d6a6173658f4",
+  "baselineDigest": "ef382d346d063bc1020ba1149a71884bd71e5abf31dc72dfbfd42108346cfa79",
+  "originalCriticalFindingsAddressedLocally": 4,
+  "newLocalFindingBuckets": {
+    "CRITICAL": 4,
+    "WARNING": 1
+  },
+  "boundary": {
+    "runnerExitCode": 130,
+    "playwrightExitCode": null,
+    "planned": 124,
+    "completed": 16,
+    "passed": 5,
+    "failed": 11,
+    "withoutCompletedResult": 108,
+    "aggregatePlaywrightReport": false,
+    "cucumberReportEmpty": true,
+    "webBuild": "PASS",
+    "rootTypecheck": "FAIL TS4111",
+    "realGitIntegration": "PASS 4/4",
+    "bddGeneration": "PASS",
+    "repositoryLint": "NOT_EXERCISED"
+  },
+  "candidateReconciliation": {
+    "sameInputs": true,
+    "differences": [],
+    "inputCount": 119,
+    "generatedHelper": "FAILED ENOBUFS; read-only reconstruction reconciled identity"
+  },
+  "isolatedJudgeConfirmation": "PENDING explicit external payload/destination approval; dispatch rejected before execution; no transmission",
+  "crossModelPass": false,
+  "reviewerRanProductChecks": false,
+  "reviewerChangedProductFiles": false,
+  "evidenceRoot": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4",
+  "report": "review.md",
+  "fifthRepairAuthorized": false
+}

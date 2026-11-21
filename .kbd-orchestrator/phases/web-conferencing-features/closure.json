@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "kind": "kbd.closure-view",
+  "generatedAt": "2026-11-21T16:43:52.291Z",
+  "authority": "derived view; the canonical disposition recorded by prometheus kbd phase close is authoritative",
+  "phaseId": "web-conferencing-features",
+  "contractVersion": "1",
+  "contractDigest": "3bf75c23c434b5fa6c872ace1f952400be0ccf2d917f26e29100222730f83d57",
+  "evidenceDigest": "90b935bc7a57f53395df01069e928892bccc0fe2314740fe84b6750e2e0f2424",
+  "disposition": "CLOSED",
+  "reason": "budget-exhausted",
+  "states": {
+    "implementationComplete": false,
+    "behaviorAccepted": true,
+    "releaseEligible": true,
+    "releaseAuthorized": false
+  },
+  "method": {
+    "name": "VLBV",
+    "source": "pack-default",
+    "deviation": null
+  },
+  "executedBy": null,
+  "preAuthorizationArtifacts": {
+    "status": "no-globs",
+    "authorizedAt": null,
+    "globs": [],
+    "scanned": 0,
+    "artifacts": []
+  },
+  "scenarios": [
+    {
+      "id": "WC-1",
+      "name": "Screen share reaches the other participant and stops cleanly",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "services/livekit token service",
+        "web image",
+        "Chromium with fake media and auto-accepted screen capture"
+      ]
+    },
+    {
+      "id": "WC-2",
+      "name": "A message to everyone reaches every participant",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "token service",
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-3",
+      "name": "A private message reaches only its recipient",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "token service",
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-4",
+      "name": "Blur and image backgrounds show remotely and turn off cleanly",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image with self-hosted MediaPipe assets",
+        "hosted CSP header"
+      ]
+    },
+    {
+      "id": "WC-5",
+      "name": "Chosen microphone and camera are the ones used",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image",
+        "Chromium fake devices"
+      ]
+    },
+    {
+      "id": "WC-6",
+      "name": "Speaker choice works where supported and is explained where not",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "web image",
+        "LiveKit Cloud project"
+      ]
+    },
+    {
+      "id": "WC-7",
+      "name": "History survives a reload and never leaves the device",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "web image",
+        "PGlite in the browser",
+        "LiveKit Cloud project"
+      ]
+    },
+    {
+      "id": "WC-8",
+      "name": "A consented recording runs, saves locally and plays back",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image",
+        "OPFS",
+        "MediaRecorder"
+      ]
+    },
+    {
+      "id": "WC-9",
+      "name": "A declined consent means no recording",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-10",
+      "name": "The hosted page serves the new web CSP and nothing else is widened",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "web image",
+        "gateway header filter",
+        "tauri.conf.json"
+      ]
+    },
+    {
+      "id": "WC-11",
+      "name": "Entity graph 5.0.1 from npm, and notes still work",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "npm registry",
+        "pnpm lockfile",
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-12",
+      "name": "Enable audio appears when autoplay is blocked and starts audio",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-13",
+      "name": "New controls are accessible and match the approved designs",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "web image"
+      ]
+    },
+    {
+      "id": "WC-14",
+      "name": "Repository rules hold and the other shells still build",
+      "actor": null,
+      "usefulOutcome": null,
+      "mandatory": true,
+      "verdict": "PASS",
+      "limitations": [],
+      "substitutedBoundaries": [],
+      "realCollaborators": [
+        "repo-rules tooling",
+        "turbo"
+      ]
+    }
+  ]
+}

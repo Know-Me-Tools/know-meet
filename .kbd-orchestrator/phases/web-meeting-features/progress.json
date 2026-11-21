@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 851,
+  "derivedRevision": 851,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 851
+  },
+  "conflictCount": 0,
+  "phase": "web-meeting-features",
+  "phaseId": "web-meeting-features",
+  "parentPhase": null,
+  "last_updated": "2026-11-21T16:47:26.159631Z",
+  "last_updated_by": "kbd-runtime",
+  "changes_total": 0,
+  "changes_completed": 0,
+  "implementation_total": 0,
+  "implementation_completed": 0,
+  "completion": {
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 0,
+      "total": 0,
+      "status": "PENDING"
+    },
+    "evidence": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "completionScopes": {
+    "completion": "phase",
+    "runCompletion": "run"
+  },
+  "runCompletion": {
+    "scope": "run",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 33,
+      "total": 37,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "BLOCKED",
+      "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+      "blockers": [
+        "hsf-c13-cycle4-acceptance",
+        "hsf-c13-cycle4-budget-exhausted",
+        "hsf-c13-cycle4-rule-regression",
+        "hsf-c13-isolated-review-approval"
+      ]
+    },
+    "publication": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "changes": [],
+  "children": {},
+  "migrationStatus": null
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "kind": "kbd.execute-dispatch",
+  "phase": "web-conferencing-features",
+  "dispatchedAt": "2026-11-18T23:51:55Z",
+  "backend": "openspec",
+  "dispatchedTo": "SELF (Claude Code lead) + agent-team subagents",
+  "contractDigest": "24260182fbf1b23999f1f04f26fd590fbb87756d6c275de434d9b6c777016930",
+  "planRevision": 1,
+  "worktree": "~/.claude/worktrees/know-meet-web-conferencing-features",
+  "branch": "feat/web-conferencing-features",
+  "assignedChanges": [
+    "wc01-conferencing-scenarios",
+    "wc02-conferencing-ports",
+    "wc03-realtime-adapter-features",
+    "wc04-share-and-chat-ui",
+    "wc05-device-settings",
+    "wc06-web-csp",
+    "wc07-background-effects",
+    "wc08-entity-graph-5-0-1",
+    "wc09-local-history",
+    "wc10-local-recording",
+    "wc11-conferencing-boundary"
+  ],
+  "pendingWork": "all 46 tasks; Round 1 (wc01) starting",
+  "gates": {
+    "batch1": "satisfied",
+    "batch2": "pending (after task 1.3)",
+    "batch3": "pending (boundary)"
+  }
+}

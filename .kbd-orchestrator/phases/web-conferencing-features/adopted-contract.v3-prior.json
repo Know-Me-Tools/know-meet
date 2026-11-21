@@ -1,0 +1,439 @@
+{
+  "kind": "kbd.adopted-contract",
+  "contractVersion": "1",
+  "identity": {
+    "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "phaseId": "web-conferencing-features",
+    "planRevision": 1,
+    "contractDigest": "fc068643c8f1523c3c18341cd17ef61a06155e01cd69c64c9131157ee290eb4e"
+  },
+  "status": {
+    "implementationComplete": false,
+    "draft": true,
+    "note": "DRAFT. Not adopted. Adoption is the operator's explicit answer, recorded as a runtime decision through kbd-contract-adopt.sh."
+  },
+  "adoptionSource": "PENDING: operator answer to the contract question. Inputs adopted in the operator's own words on 2026-11-18 (decision-log.md): the phase goals; answers 1-4, 7 and 8 to the assess questions; 'Yes, publish 5.0.1' (superseding answers 5 and 6); 'Adopt CSP, run plan'. Amendment 1: operator answer \"Approve and sign\" on 2026-11-19: repairAttempts 3 to 5 (one batched repair plus one reserve), timeMinutes 1500 to 2100, a batched repair policy, run-to-completion static gates, and five run inputs measured by child phase wc-boundary-defect-scope. No scope change. Amendment 2: operator answer \"Approve and sign\" on 2026-11-19: the boundary verdict is decided only by user-task scenarios (WC-1 to WC-9, WC-11 notes, WC-12, WC-13); lint, typecheck, unit tests, header, pin, repo-rule and token-abuse checks become non-gating signals; repairs count only for gate-scenario failures; repairAttempts 5 to 7 and timeMinutes 2100 to 2700, the last extension.",
+  "decisionOwner": "Travis James (operator)",
+  "digestNormalization": {
+    "algorithm": "sha256",
+    "command": "jq -S -c 'del(.identity.contractDigest) | del(.identity.planRevision)'",
+    "rationale": "Frozen per contract; digest excludes self-referential and decision-bound fields.",
+    "stalenessRule": "REJECT-STALE when the digest differs from the latest non-superseded adoption decision for this contract path."
+  },
+  "statusVocabulary": [
+    "PASS",
+    "FAIL",
+    "BLOCKED",
+    "NOT_EXERCISED"
+  ],
+  "amendmentPolicy": "Material scope or acceptance changes require explicit operator adoption recorded as a new canonical decision with supersedes; suggestions never auto-enter task totals.",
+  "releaseClaim": {
+    "userOperation": "A participant at https://meet.know-me.tools shares a screen, chats with everyone or privately with one person, blurs or replaces their background, chooses and tunes microphone, camera and speaker, clicks 'Enable audio' when the browser blocks playback, records the meeting into their own browser after the room agrees, and after a reload finds past meetings, chats and recordings on the same device.",
+    "supportedEnvironments": [
+      "Web only, hosted at https://meet.know-me.tools behind the existing gateway and continuous deployment",
+      "Current desktop Chrome, Edge, Firefox and Safari; controls a browser cannot support are hidden or explained",
+      "Phone browsers: chat, devices and history in layout; screen share and effects shown as unavailable where the browser cannot do them; media behaviour on phones not verified",
+      "Media: the existing LiveKit Cloud project"
+    ],
+    "currentCapabilities": "Guest meetings with default devices; mute, camera, copy link and leave; nothing stored locally except session and theme; no recording; entity graph 4.3.0.",
+    "desiredResult": "Each operation works end to end on the hosted app. History and recordings survive a reload and never leave the device."
+  },
+  "functionalScope": [
+    "RealtimeRoom port extensions: screen share, text messages with explicit audience, devices including output, audio playback status and start, video processor hook; lobby device choice carried into the room",
+    "Recording consent use cases on a reserved text-stream topic",
+    "LiveKit adapter split into a feature directory implementing the extended port",
+    "Share control and tile, chat panel with audience labels, Enable audio prompt",
+    "Lobby and in-room device settings with level meter, preview and gated speaker choice",
+    "Hosted-only CSP widening with a desktop byte-identity guard and regenerated gateway header",
+    "Background blur and image backgrounds through @livekit/track-processors with self-hosted assets",
+    "Entity graph 5.0.1 from npm in the web app and both spikes",
+    "Local history in PGlite (idb://, leader worker) behind a HistoryRepository port and entity transports, with a history screen and delete",
+    "Browser-local composited recording into OPFS with consent, indicator, library and playback",
+    "Value scenarios WC-1 to WC-14 and their evidence"
+  ],
+  "proposedDecisions": [
+    "D1 Guests may use local history and local recording; PRODUCT.md 'Guest vs signed in' is amended accordingly",
+    "D2 Late joiner while recording: recording continues, the late joiner sees the indicator and a consent prompt; a decline stops the recording for everyone and keeps what was written",
+    "D3 No chat backfill to late joiners from anyone's local history",
+    "D4 The recording follows the room grid; a screen share takes the large tile",
+    "D5 Each device keeps the chat it received, others' messages included, locally only; the history screen says so and offers delete"
+  ],
+  "requiredSafetyChecks": [
+    "No recording starts without every present participant's consent, and everyone sees an indicator while it runs",
+    "Every chat message carries an explicit audience; a private message is delivered only to its named recipient",
+    "No secret in tracked files, the web bundle or the image; LIVEKIT_ values stay server-side",
+    "No history or recording data is sent to any server (network log check)",
+    "The CSP change applies to hosted output only; the desktop policy is byte-identical; WASM, model and worker files are served from 'self'",
+    "WCAG 2.2 AA, Flat 2.0 and reduced motion on every new control"
+  ],
+  "exclusions": [
+    "Desktop (Tauri) and mobile (Flutter) releases",
+    "Server-side recording and LiveKit Egress",
+    "Peer-to-peer transport",
+    "Chat file attachments",
+    "End-to-end encryption",
+    "Cross-device sync of history",
+    "Transcription",
+    "Sign-in"
+  ],
+  "riskAcceptance": [
+    "Private chat passes through the LiveKit server and is readable there",
+    "Local history and recordings are lost when site data is cleared",
+    "Recordings are limited by browser storage quota",
+    "Composite and segmentation visual quality are judged from screenshots, not measured"
+  ],
+  "scenarioMatrix": [
+    {
+      "id": "WC-1",
+      "name": "Screen share reaches the other participant and stops cleanly",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc02-conferencing-ports/2.2+wc03-realtime-adapter-features/3.2+wc04-share-and-chat-ui/4.1+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "pnpm --filter @know-meet/release-tests exec playwright test wc-1-screen-share.spec.ts --project=packaged, then --project=hosted",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "services/livekit token service",
+        "web image",
+        "Chromium with fake media and auto-accepted screen capture"
+      ],
+      "oracle": "B reports a subscribed remote track with source ScreenShare whose rendered dimensions are greater than zero; after A stops, B reports no ScreenShare track within 10 s and A's share control returns to off.",
+      "negativeControl": "Without starting a share, B reports no ScreenShare track.",
+      "fixtures": "Room per run; Chromium --auto-select-desktop-capture-source.",
+      "evidence": "Playwright report and trace, screenshots of both contexts, argv and exit code."
+    },
+    {
+      "id": "WC-2",
+      "name": "A message to everyone reaches every participant",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc02-conferencing-ports/2.1+wc02-conferencing-ports/2.2+wc03-realtime-adapter-features/3.3+wc04-share-and-chat-ui/4.2+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-2-chat-everyone.spec.ts, packaged then hosted; Chromium, Firefox and WebKit",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "token service",
+        "web image"
+      ],
+      "oracle": "With three participants, a message sent by A appears in B's and C's chat panels with text equal to the sent text and the audience label 'Everyone'.",
+      "negativeControl": "A message never sent does not appear anywhere.",
+      "fixtures": "Three browser contexts, unique text per run.",
+      "evidence": "Report, trace, screenshots of all three panels."
+    },
+    {
+      "id": "WC-3",
+      "name": "A private message reaches only its recipient",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc02-conferencing-ports/2.1+wc03-realtime-adapter-features/3.3+wc04-share-and-chat-ui/4.2+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-3-chat-private.spec.ts, packaged then hosted; Chromium, Firefox and WebKit",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "token service",
+        "web image"
+      ],
+      "oracle": "A sends privately to B. B shows the text labelled private to B; A shows it labelled private to B; C's panel and C's received text-stream log never contain it after 10 s.",
+      "negativeControl": "The same run sends one Everyone message, which C does receive, proving C's listener was live.",
+      "fixtures": "Three contexts; unique text.",
+      "evidence": "Report, trace, C's received-stream log."
+    },
+    {
+      "id": "WC-4",
+      "name": "Blur and image backgrounds show remotely and turn off cleanly",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc01-conferencing-scenarios/1.6+wc02-conferencing-ports/2.2+wc03-realtime-adapter-features/3.5+wc07-background-effects/7.1+wc07-background-effects/7.2+wc07-background-effects/7.3+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-4-background-effects.spec.ts, packaged then hosted; Chromium",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image with self-hosted MediaPipe assets",
+        "hosted CSP header"
+      ],
+      "oracle": "After blur, A's published track reports an active processor and B's rendered frame differs from the pre-effect frame; after image, the same; after off, no processor and B still renders frames. No request leaves the origin for .wasm or .tflite files and no CSP violation is reported.",
+      "negativeControl": "With effects off, A's track reports no processor.",
+      "fixtures": "Fake camera from a fixed y4m file; one fixture background image.",
+      "evidence": "Report, frame screenshots (visual quality labelled judgement), network log, CSP violation log."
+    },
+    {
+      "id": "WC-5",
+      "name": "Chosen microphone and camera are the ones used",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc02-conferencing-ports/2.2+wc02-conferencing-ports/2.3+wc03-realtime-adapter-features/3.4+wc05-device-settings/5.1+wc05-device-settings/5.2+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-5-device-choice.spec.ts, packaged then hosted; Chromium",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image",
+        "Chromium fake devices"
+      ],
+      "oracle": "The lobby lists the devices and shows a moving level and a preview; the device chosen in the lobby is the active device after join; switching in the room changes the active device id and B keeps receiving.",
+      "negativeControl": "Without a choice, the default device is active.",
+      "fixtures": "Chromium fake media; device ids recorded per run.",
+      "evidence": "Report, active device ids, screenshots."
+    },
+    {
+      "id": "WC-6",
+      "name": "Speaker choice works where supported and is explained where not",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc03-realtime-adapter-features/3.4+wc05-device-settings/5.2+wc11-conferencing-boundary/11.2",
+      "productionEntry": "wc-6-speaker.spec.ts, packaged; Chromium for selection, WebKit and Firefox for the explanation path",
+      "realCollaborators": [
+        "web image",
+        "LiveKit Cloud project"
+      ],
+      "oracle": "Where setSinkId exists, choosing an output changes the active audiooutput device; where it is absent (forced by an init script removing it), the control is not offered and an explanation is visible and announced.",
+      "negativeControl": "With setSinkId present, no explanation is shown.",
+      "fixtures": "Init script for the unsupported path.",
+      "evidence": "Report, screenshots, accessibility snapshot."
+    },
+    {
+      "id": "WC-7",
+      "name": "History survives a reload and never leaves the device",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc01-conferencing-scenarios/1.6+wc01-conferencing-scenarios/1.2+wc09-local-history/9.1+wc09-local-history/9.2+wc09-local-history/9.3+wc09-local-history/9.4+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-7-local-history.spec.ts, packaged then hosted; Chromium, Firefox and WebKit",
+      "realCollaborators": [
+        "web image",
+        "PGlite in the browser",
+        "LiveKit Cloud project"
+      ],
+      "oracle": "After a meeting with two chat messages and a reload, the history screen lists the meeting with its date and both messages; the network log for the whole run contains no request body or URL containing either message text or the history ids; deleting the entry removes it after another reload.",
+      "negativeControl": "A fresh browser profile shows an empty history.",
+      "fixtures": "Persistent context per engine; unique message texts.",
+      "evidence": "Report, network HAR, screenshots."
+    },
+    {
+      "id": "WC-8",
+      "name": "A consented recording runs, saves locally and plays back",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc01-conferencing-scenarios/1.6+wc01-conferencing-scenarios/1.2+wc02-conferencing-ports/2.4+wc03-realtime-adapter-features/3.3+wc10-local-recording/10.1+wc10-local-recording/10.2+wc10-local-recording/10.3+wc10-local-recording/10.4+wc10-local-recording/10.5+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-8-local-recording.spec.ts, packaged then hosted; Chromium",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image",
+        "OPFS",
+        "MediaRecorder"
+      ],
+      "oracle": "A asks to record; B is prompted; after B agrees, both show the recording indicator; after 20 s A stops; A's library lists one recording with duration within 20 +/- 3 s and size greater than zero; it starts playing (currentTime advances); no network request carries recording bytes.",
+      "negativeControl": "Before B answers, no recording file exists and no indicator shows.",
+      "fixtures": "Two contexts, fake media.",
+      "evidence": "Report, network HAR, file metadata, screenshots of both indicators."
+    },
+    {
+      "id": "WC-9",
+      "name": "A declined consent means no recording",
+      "ownerTask": "wc01-conferencing-scenarios/1.2+wc02-conferencing-ports/2.4+wc10-local-recording/10.3+wc10-local-recording/10.4+wc11-conferencing-boundary/11.2",
+      "productionEntry": "wc-9-consent-declined.spec.ts, packaged; Chromium",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image"
+      ],
+      "oracle": "A asks; B declines; A is told the request was declined; no indicator appears for anyone and A's library stays empty after 20 s. A late joiner C declining during a running recording stops it for everyone (decision D2).",
+      "negativeControl": "WC-8 is the positive counterpart in the same run.",
+      "fixtures": "Three contexts for the late-joiner case.",
+      "evidence": "Report, library state, screenshots."
+    },
+    {
+      "id": "WC-10",
+      "name": "The hosted page serves the new web CSP and nothing else is widened",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc06-web-csp/6.1+wc06-web-csp/6.2+wc06-web-csp/6.3+wc06-web-csp/6.4+wc07-background-effects/7.1+wc11-conferencing-boundary/11.1+wc11-conferencing-boundary/11.3+wc11-conferencing-boundary/11.4+wc11-conferencing-boundary/11.5",
+      "productionEntry": "headers.spec.ts and wr-3 checks extended, packaged then hosted; the desktop identity unit test in pnpm test",
+      "realCollaborators": [
+        "web image",
+        "gateway header filter",
+        "tauri.conf.json"
+      ],
+      "oracle": "The hosted HTML and worker .js responses carry a CSP equal to the generated hosted value, which differs from the previous one only by the adopted sources; .wasm is served as application/wasm; the tauri.conf.json csp equals the default policy byte for byte; WC-4, WC-7 and WC-8 report no CSP violation.",
+      "negativeControl": "The default (non-hosted) build's meta CSP has none of the new sources.",
+      "fixtures": "Generated header artifact from build:hosted.",
+      "evidence": "Header captures, diff of old and new policy, unit test output."
+    },
+    {
+      "id": "WC-11",
+      "name": "Entity graph 5.0.1 from npm, and notes still work",
+      "ownerTask": "wc01-conferencing-scenarios/1.5+wc08-entity-graph-5-0-1/8.1+wc08-entity-graph-5-0-1/8.2+wc08-entity-graph-5-0-1/8.3+wc08-entity-graph-5-0-1/8.4+wc08-entity-graph-5-0-1/8.5+wc11-conferencing-boundary/11.2",
+      "productionEntry": "pnpm why @prometheus-ags/entity-graph-core in apps/web and both spikes; the existing notes scenario run against the packaged image",
+      "realCollaborators": [
+        "npm registry",
+        "pnpm lockfile",
+        "web image"
+      ],
+      "oracle": "The lockfile resolves entity-graph-core and -react to 5.0.1 with npm integrity hashes in all three packages; tooling/versions.toml says 5.0.1; the notes create-and-list flow passes.",
+      "negativeControl": "pnpm lint:pins fails if any package still pins 4.x or 5.0.0.",
+      "fixtures": "none",
+      "evidence": "pnpm why output, lockfile excerpt, notes report."
+    },
+    {
+      "id": "WC-12",
+      "name": "Enable audio appears when autoplay is blocked and starts audio",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc02-conferencing-ports/2.2+wc03-realtime-adapter-features/3.4+wc04-share-and-chat-ui/4.3+wc11-conferencing-boundary/11.2+wc11-conferencing-boundary/11.5",
+      "productionEntry": "wc-12-enable-audio.spec.ts, packaged then hosted; Chromium with --autoplay-policy=document-user-activation-required",
+      "realCollaborators": [
+        "LiveKit Cloud project",
+        "web image"
+      ],
+      "oracle": "With autoplay blocked, B shows 'Enable audio'; one click makes canPlaybackAudio true and the prompt disappears.",
+      "negativeControl": "With autoplay allowed, no prompt is shown.",
+      "fixtures": "Two Chromium launches with different autoplay policies.",
+      "evidence": "Report, screenshots."
+    },
+    {
+      "id": "WC-13",
+      "name": "New controls are accessible and match the approved designs",
+      "ownerTask": "wc01-conferencing-scenarios/1.3+wc04-share-and-chat-ui/4.1+wc04-share-and-chat-ui/4.2+wc04-share-and-chat-ui/4.3+wc05-device-settings/5.1+wc05-device-settings/5.2+wc07-background-effects/7.3+wc09-local-history/9.4+wc10-local-recording/10.4+wc10-local-recording/10.5+wc11-conferencing-boundary/11.3",
+      "productionEntry": "accessibility.spec.ts extended over the new surfaces at 375, 768, 1024 and 1440 in both themes; prometheus-ui-review against the approved shapes",
+      "realCollaborators": [
+        "web image"
+      ],
+      "oracle": "axe reports no WCAG 2.2 A or AA violation; every control is reachable and operable by keyboard with a fill or elevation focus change of at least 3:1; no borders or outlines; motion stops under reduced motion; the UI review reports no blocking deviation from the approved shapes.",
+      "negativeControl": "The axe run fails on a fixture page with a known violation.",
+      "fixtures": "Approved shapes from task 1.3.",
+      "evidence": "axe JSON, screenshots, UI review findings."
+    },
+    {
+      "id": "WC-14",
+      "name": "Repository rules hold and the other shells still build",
+      "ownerTask": "wc01-conferencing-scenarios/1.1+wc03-realtime-adapter-features/3.1+wc08-entity-graph-5-0-1/8.5+wc11-conferencing-boundary/11.1",
+      "productionEntry": "pnpm lint, pnpm typecheck, pnpm test, pnpm build",
+      "realCollaborators": [
+        "repo-rules tooling",
+        "turbo"
+      ],
+      "oracle": "All four commands exit 0; no file over 500 lines; names kebab-case; boundary lint passes; desktop and mobile builds succeed as in web-release WR-9.",
+      "negativeControl": "The line checker fails on a 501-line fixture.",
+      "fixtures": "none",
+      "evidence": "argv and exit codes, logs."
+    }
+  ],
+  "budgets": {
+    "timeMinutes": 1500,
+    "toolCalls": 2500,
+    "repairAttempts": 3,
+    "noProgressLimit": 3,
+    "tokenBudget": "UNKNOWN",
+    "tokenFallback": "Checkpoint after each change; stop and report if a change exceeds 2x its size estimate.",
+    "exhaustion": "checkpoint + BLOCKED; never silent PASS.",
+    "extensions": [
+      {
+        "id": "ext-1-batched-repair-and-reserve",
+        "repairAttempts": 2,
+        "timeMinutes": 600,
+        "toolCalls": 0,
+        "resultingCeilings": {
+          "timeMinutes": 2100,
+          "toolCalls": 2500,
+          "repairAttempts": 5,
+          "noProgressLimit": 3
+        },
+        "reason": "Repairs 1-3 were each spent on one defect because every boundary run stopped at its first failure. Child phase wc-boundary-defect-scope measured the full static set (D1-D7, children/wc-boundary-defect-scope/assessment.md). Repair 4 is one batched commit for D1-D5; repair 5 is a reserve for behaviour failures in the packaged run, which no static measurement can predict. Wall-clock since dispatch (2026-11-18T23:51:55Z) was 1237 minutes on 2026-11-19T20:29Z against a 1500 ceiling; +600 covers one full run including reviews, publish and the hosted run.",
+        "operatorAnswer": "Approve and sign",
+        "date": "2026-11-19"
+      },
+      {
+        "id": "ext-2-user-scenario-gate",
+        "repairAttempts": 2,
+        "timeMinutes": 600,
+        "toolCalls": 0,
+        "resultingCeilings": {
+          "timeMinutes": 2700,
+          "toolCalls": 2500,
+          "repairAttempts": 7,
+          "noProgressLimit": 3
+        },
+        "reason": "Repairs 1-4 went to lint, type, unit-test and harness failures, against AGENTS.md (unit and per-edit tests are not completion evidence; one integration gate through the real production path). No user scenario has yet reached its feature. Repair 5 sets the committed test environment and fixes the WC-12 helper; repairs 6 and 7 are for gate-scenario failures only. This is the last extension: if a gate scenario still fails after repair 7, the phase closes unmet.",
+        "operatorAnswer": "Approve and sign",
+        "date": "2026-11-19"
+      }
+    ]
+  },
+  "evidenceInvalidation": "Keyed by contract digest, the tested commit, the web image digest and the rendered hosted CSP header digest. Only evidence whose key changed is invalidated; history is preserved in dated folders.",
+  "workerRoutes": {
+    "agent": "Claude Code native subagents bound to .agent-team/know-meet-team roles",
+    "model": "claude-opus-5-5 for design, protocol, media and integration tasks; claude-sonnet-5-5 for mechanical tasks; per-task assignments in plan-tasks.md",
+    "billing": "Claude Code session; adversarial reviews through the local liter-llm gateway (glm-5.3 judge)",
+    "subagents": "Native team subagents per role; reviewers dormant until the boundary",
+    "reviewRoundsMax": 2
+  },
+  "resilienceScope": {
+    "policy": "Adopted requirements never defer via budget overflow; exhaustion means checkpoint + BLOCKED. Only never-adopted optional items may defer.",
+    "deferredOptional": [
+      "Trusted Types (report-only first)",
+      "Media proof on physical phones",
+      "Desktop CSP for PGlite or MediaPipe"
+    ]
+  },
+  "boundaryPacket": {
+    "postImplementationOnly": true,
+    "singleRun": true,
+    "runInputs": [
+      "KM_EVIDENCE_DIR: a new dated folder per invocation under .kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-<date>/",
+      "KM_RELEASE_BASE_URL: the local compose stack entry for packaged runs; https://meet.know-me.tools for hosted runs",
+      "KM_RELEASE_CSP_FILE: the hosted CSP header value written by build:hosted",
+      "KM_RELEASE_IMAGE_DIGESTS: the web and token service image digests of the run",
+      "LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET in the shell that starts compose only; never printed, passed as arguments or written to a file",
+      "A missing required input fails the test with a BLOCKED message; it never skips.",
+      "KM_LIVEKIT_URL: set from LIVEKIT_URL in the same shell for build:hosted (tooling/release/README.md); public, never printed; build logs are redacted of it before they are kept as evidence",
+      "Host ports: compose proxy and static-web ports are parameterised (KM_PROXY_PORT, KM_STATIC_PORT); 8080 and 8081 are held on the operator machine. KM_SITE_ORIGIN, KM_RELEASE_BASE_URL and KM_RELEASE_STATIC_URL move with them",
+      "KM_RELEASE_DEFAULT_BUILD_URL: a vite preview of the default (non-hosted) build, started by the lead for the WC-10 and WC-11 packaged-only tests and stopped at cleanup",
+      "KM_RELEASE_PREVIOUS_CSP_FILE: the committed gateway header value before task 6.4 regenerates it",
+      "RUSTC_WRAPPER unset for pnpm build: the shared sccache hung cargo build -p bff for 81 minutes on 2026-11-19",
+      "tooling/release/release-test.env (committed): local test values for the token service's per-address limits, the ports and KM_SITE_ORIGIN, read by compose and by the Playwright runner. The suite plays many people creating many meetings from one machine; the production limits are unchanged and are not a gate"
+    ],
+    "commands": [
+      "pnpm install --frozen-lockfile",
+      "KM_LIVEKIT_URL from LIVEKIT_URL: pnpm --filter @know-meet/web build:hosted; pnpm --filter @know-meet/web build (default build for the preview)",
+      "docker build -f apps/web/Dockerfile and -f services/livekit/Dockerfile; record digests",
+      "docker compose -f tooling/release/compose.yaml --env-file tooling/release/release-test.env up -d; vite preview of the default build",
+      "Packaged Playwright run to completion (no stop at first failure), with the same release-test.env exported to the runner; verdict computed from the gate scenarios only",
+      "Signals (non-gating): lint, typecheck, unit tests, header --check; recorded",
+      "Reviews: axe, prometheus-ui-review, security-reviewer, glm-5.3 adversarial diff review",
+      "STOP for operator approval",
+      "git push of the phase branch; gh pr create; operator merges",
+      "Wait for continuous deployment; compare the live web image digest with the workflow build of the merged commit",
+      "Hosted Playwright run of the gate scenarios"
+    ],
+    "expectedEffects": [
+      "Local images and a compose stack, removed at cleanup",
+      "Real LiveKit rooms created per run and emptied at the end",
+      "One pushed branch, one pull request, one merge to main, one continuous deployment"
+    ],
+    "requiredApprovals": "Batch 3: (1) start the boundary run; (2) after the packaged run and reviews, push and open the PR; the operator merges it.",
+    "operatorSteps": [
+      "Merge the pull request"
+    ],
+    "receipts": [
+      "evidence/boundary-<date>/argv-and-exit.json",
+      "evidence/boundary-<date>/README.md",
+      "Playwright reports, HARs and traces",
+      "review findings files",
+      "deployed digest comparison"
+    ],
+    "cleanup": [
+      "Stop and remove the local compose stack",
+      "Leave no LiveKit room occupied"
+    ],
+    "stopConditions": [
+      "Any gate scenario fails in the packaged run: nothing is pushed",
+      "A security review CRITICAL finding",
+      "The live digest differs from the merged build",
+      "Budget exhaustion: checkpoint + BLOCKED; no further extension, the phase closes unmet with its evidence"
+    ],
+    "repairPolicy": "A repair is counted only for gate-scenario failures. After one packaged run to completion lists every failing gate scenario, one commit fixes all of them, plus any signal failure known at that time. Signal failures alone never consume a repair.",
+    "gateScenarios": [
+      "WC-1",
+      "WC-2",
+      "WC-3",
+      "WC-4",
+      "WC-5",
+      "WC-6",
+      "WC-7",
+      "WC-8",
+      "WC-9",
+      "WC-11 (notes still work)",
+      "WC-12",
+      "WC-13"
+    ],
+    "gateRule": "The boundary verdict is decided only by the gate scenarios: tasks a person does in a meeting (share, chat, effects, devices, speaker, history, recording, consent, Enable audio, notes) and the accessibility and design-fidelity of the new controls. Each runs end to end through the built images and the browser. Anything else is a recorded signal: it never decides the verdict, never stops the run and never consumes a repair.",
+    "signals": [
+      "pnpm lint, pnpm typecheck, pnpm test (unit): run once, recorded; failures are fixed in the next batched repair if one happens, otherwise listed in the closure",
+      "render-gateway-headers.ts --check and the WC-10 header and default-build checks",
+      "WC-11 lockfile and versions.toml pin checks",
+      "WC-14 repository rules and other-shell builds",
+      "WR-4 token-abuse and the leak-detector negative controls"
+    ],
+    "gateEvidence": {
+      "consent before recording, indicator for everyone": "WC-8, WC-9",
+      "explicit chat audience; private delivered only to its recipient": "WC-2, WC-3",
+      "history and recordings never sent to a server": "WC-7, WC-8 network logs",
+      "no secret in tracked files, bundle or image": "security-reviewer at step 11 (review, not a test gate)",
+      "CSP hosted-only; WASM, model and worker files from 'self'": "WC-4 (effects load with no CSP violation); the desktop byte-identity check is a signal because desktop is out of scope",
+      "WCAG 2.2 AA, Flat 2.0, reduced motion": "WC-13"
+    }
+  }
+}

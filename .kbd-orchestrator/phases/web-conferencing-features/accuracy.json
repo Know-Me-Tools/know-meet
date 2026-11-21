@@ -1,0 +1,33 @@
+{
+  "phase": "web-conferencing-features",
+  "contractAmendmentsAfterAdoption": 6,
+  "blockedCausedByContract": 2,
+  "notExercisedAtClosure": 0,
+  "repairAttempts": {
+    "used": 11,
+    "allowed": 11,
+    "original": 3
+  },
+  "escapesPastPackagedGate": 1,
+  "postClosureEscapes": 0,
+  "closingReviewFindings": {
+    "critical": 0,
+    "warning": 4
+  },
+  "repairClasses": {
+    "staticTooling": 4,
+    "runInput": 1,
+    "product": 5,
+    "testOnly": 1
+  },
+  "timeMinutes": {
+    "used": 3889,
+    "ceiling": 4500,
+    "original": 1500
+  },
+  "toolCalls": {
+    "used": 2294,
+    "ceiling": 2500
+  },
+  "notes": "WC-7 escaped the packaged gate (timing-dependent persistence); Firefox cells first ran 2026-11-21"
+}

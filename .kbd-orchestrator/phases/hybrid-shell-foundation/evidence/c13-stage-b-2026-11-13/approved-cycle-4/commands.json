@@ -1,0 +1,76 @@
+[
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/web",
+      "build"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:56:19.302270+00:00",
+    "log": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/01.log",
+    "exitCode": 0,
+    "finishedAt": "2026-11-13T10:56:21.723393+00:00",
+    "logSha256": "781e3f5a4ae80e31521afbbb9eabf34c6cbc6362d675152081b0068dfefc24b5"
+  },
+  {
+    "argv": [
+      "pnpm",
+      "typecheck"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:56:21.724031+00:00",
+    "log": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/02.log",
+    "exitCode": 1,
+    "finishedAt": "2026-11-13T10:56:23.182260+00:00",
+    "logSha256": "93d63d06337479d19d184d89c8797facd0a81d30c334eaa41e4f2903b1d426ec"
+  },
+  {
+    "argv": [
+      "node",
+      "--test",
+      "tests/fidelity/src/support/candidate-snapshot.test.ts"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:56:23.182821+00:00",
+    "log": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/03.log",
+    "exitCode": 0,
+    "finishedAt": "2026-11-13T10:56:24.466418+00:00",
+    "logSha256": "a4a553263bab5131ff469fd8d55d62ef19791de7bc55696bc27dbf815265507a"
+  },
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/fidelity-tests",
+      "exec",
+      "bddgen",
+      "-c",
+      "playwright.config.ts"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:56:24.467242+00:00",
+    "log": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/04.log",
+    "exitCode": 0,
+    "finishedAt": "2026-11-13T10:56:26.044764+00:00",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/fidelity-tests",
+      "exec",
+      "playwright",
+      "test",
+      "-c",
+      "playwright.config.ts",
+      "--grep",
+      "@VS-1|@VS-2|@VS-4|@VS-5|@a11y|@motion"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:56:26.045485+00:00",
+    "log": ".kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/approved-cycle-4/05.log",
+    "exitCode": null
+  }
+]

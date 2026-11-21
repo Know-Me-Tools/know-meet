@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 [packaged] › surface.spec.ts:28:3 › WR-5 Screens on sample data are not reachable in the hosted build › the same checks fail on the default build because /dashboard renders @WR-5 @negative-control @packaged-only (1.9m)
+
+  1 passed (1.9m)

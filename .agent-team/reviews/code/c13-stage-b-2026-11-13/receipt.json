@@ -1,0 +1,36 @@
+{
+  "verdict": "BLOCK",
+  "review_phase": "completed pre-correction c13 Stage B repair boundary",
+  "diff_sha256": "97a16084fb1a6de1d7b832300dc163919b0845064797fb26f81e44d6f080c60d",
+  "cross_model_attempt": {
+    "judge": "k3.1-pro",
+    "gateway": "http://localhost:4000/v1",
+    "exitCode": 3,
+    "httpStatus": 500,
+    "upstreamError": 524,
+    "completed": false
+  },
+  "fallback": {
+    "harness": "Codex CLI ephemeral read-only",
+    "model": "gpt-6-astra",
+    "provider": "openai",
+    "crossModel": "same-model-family",
+    "exactProducerIdentity": "unknown",
+    "exitCode": 0,
+    "findings": {
+      "CRITICAL": 4,
+      "WARNING": 0,
+      "SUGGESTION": 0
+    }
+  },
+  "sycophancyScreen": {
+    "exitCode": 0,
+    "score": 0.0,
+    "strictness": "strict"
+  },
+  "reviewerRanTests": false,
+  "productFilesChanged": [],
+  "report": "review.md",
+  "findings": "findings.json",
+  "candidateStatus": "Frozen pre-correction; later authorized corrections are not reviewed by this receipt"
+}

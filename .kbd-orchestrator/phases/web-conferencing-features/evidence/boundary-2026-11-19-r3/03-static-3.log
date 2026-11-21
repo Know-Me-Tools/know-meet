@@ -1,0 +1,32 @@
+
+   • Packages in scope: @know-meet/application, @know-meet/design-tokens, @know-meet/desktop, @know-meet/domain, @know-meet/fidelity-tests, @know-meet/realtime, @know-meet/release-tests, @know-meet/ui, @know-meet/web
+   • Running typecheck in 9 packages
+   • Remote caching disabled, using shared worktree cache
+
+@know-meet/release-tests:typecheck: cache miss, executing ab029be909025b6f
+@know-meet/design-tokens:typecheck: cache hit, replaying logs fc5bd748a7c2d36e
+@know-meet/domain:typecheck: cache hit, replaying logs 2fc8b79297849248
+@know-meet/fidelity-tests:typecheck: cache hit, replaying logs 581243ad84fc4005
+@know-meet/fidelity-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/design-tokens:typecheck: $ tsc -p tsconfig.json
+@know-meet/domain:typecheck: $ tsc -p tsconfig.json
+@know-meet/application:typecheck: cache miss, executing 7379212830289e33
+@know-meet/ui:typecheck: cache miss, executing 77c3ebdff0f1515a
+@know-meet/application:typecheck: $ tsc -p tsconfig.json
+@know-meet/release-tests:typecheck: $ tsc -p tsconfig.json
+@know-meet/ui:typecheck: $ tsc --noEmit -p tsconfig.json
+@know-meet/realtime:typecheck: cache miss, executing e65d2c94730b3f95
+@know-meet/realtime:typecheck: $ tsc -p tsconfig.json
+@know-meet/web:typecheck: cache miss, executing 60bf8685232bd4de
+@know-meet/web:typecheck: $ tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json
+
+ Tasks:    8 successful, 8 total
+Cached:    3 cached, 8 total
+  Time:    3.534s 
+
+$ turbo run typecheck && tsc -p tooling/repo-rules/tsconfig.json
+ WARNING  no output files found for task @know-meet/application#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/realtime#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/release-tests#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/ui#typecheck. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @know-meet/web#typecheck. Please check your `outputs` key in `turbo.json`

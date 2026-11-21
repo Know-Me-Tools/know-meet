@@ -1,0 +1,1131 @@
+[WebServer] (node:53750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4191 --strictPort
+[WebServer] (node:53799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 45 tests using 1 worker
+
+(node:53815) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 [web] › .features-gen/web/accessibility.feature.spec.js:12:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every frame state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (50ms)
+(node:53828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 [web] › .features-gen/web/accessibility.feature.spec.js:18:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every index state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (52ms)
+(node:53878) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 [web] › .features-gen/web/accessibility.feature.spec.js:24:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every auth state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (63ms)
+(node:53918) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 [web] › .features-gen/web/accessibility.feature.spec.js:30:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every join state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (54ms)
+(node:53967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 [web] › .features-gen/web/accessibility.feature.spec.js:36:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every dashboard state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (93ms)
+(node:54023) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 [web] › .features-gen/web/accessibility.feature.spec.js:42:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every agents state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (92ms)
+(node:54108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 [web] › .features-gen/web/accessibility.feature.spec.js:48:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every recordings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (60ms)
+(node:54255) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 [web] › .features-gen/web/accessibility.feature.spec.js:54:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every settings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (60ms)
+(node:54420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 [web] › .features-gen/web/accessibility.feature.spec.js:60:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every meet state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (54ms)
+(node:54514) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 [web] › .features-gen/web/accessibility.feature.spec.js:68:3 › Accessibility gate for the web shell › Keyboard focus is shown by fill on the app frame controls @a11y @value-critical @ui @web @boundary-only @smoke (15.2s)
+(node:55380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 [web] › .features-gen/web/accessibility.feature.spec.js:77:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on index are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (62ms)
+(node:55401) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 [web] › .features-gen/web/accessibility.feature.spec.js:84:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on dashboard are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (52ms)
+(node:55426) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 [web] › .features-gen/web/accessibility.feature.spec.js:91:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on agents are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (43ms)
+(node:55437) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 [web] › .features-gen/web/accessibility.feature.spec.js:98:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on recordings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (50ms)
+(node:55455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 [web] › .features-gen/web/accessibility.feature.spec.js:105:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on settings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (46ms)
+(node:55465) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [web] › .features-gen/web/accessibility.feature.spec.js:114:3 › Accessibility gate for the web shell › The gate detects injected violations @a11y @value-critical @ui @web @boundary-only @negative-control (1.6s)
+  ✘  17 [web] › .features-gen/web/flat-controls.feature.spec.js:12:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every frame control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (22ms)
+(node:55512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  18 [web] › .features-gen/web/flat-controls.feature.spec.js:19:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every index control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (53ms)
+(node:55532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  19 [web] › .features-gen/web/flat-controls.feature.spec.js:26:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every auth control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (51ms)
+(node:55543) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 [web] › .features-gen/web/flat-controls.feature.spec.js:33:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every join control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (48ms)
+(node:55554) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  21 [web] › .features-gen/web/flat-controls.feature.spec.js:40:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every dashboard control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (58ms)
+(node:55568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  22 [web] › .features-gen/web/flat-controls.feature.spec.js:47:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every agents control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (53ms)
+(node:55579) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  23 [web] › .features-gen/web/flat-controls.feature.spec.js:54:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every recordings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (49ms)
+(node:55590) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  24 [web] › .features-gen/web/flat-controls.feature.spec.js:61:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every settings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (47ms)
+(node:55603) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  25 [web] › .features-gen/web/flat-controls.feature.spec.js:68:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every meet control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only (49ms)
+(node:55624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  26 [web] › .features-gen/web/flat-controls.feature.spec.js:77:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit detects injected strokes @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control (6.1s)
+  ✘  27 [web] › .features-gen/web/flat-controls.feature.spec.js:83:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit composites a translucent focus fill before measuring it @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control (6.2s)
+(node:56521) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  28 [web] › .features-gen/web/flat-controls.feature.spec.js:89:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit reads a focused-at-render skip link's true rest fill @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control (6.8s)
+(node:56702) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  29 [web] › .features-gen/web/motion.feature.spec.js:11:3 › Motion uses the design tokens and honours reduced motion › The theme switch transition uses the tokenized duration and easing @motion @ui @web @boundary-only @smoke (887ms)
+  ✓  30 [web] › .features-gen/web/motion.feature.spec.js:18:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #1 @motion @ui @web @boundary-only (1.2s)
+  ✓  31 [web] › .features-gen/web/motion.feature.spec.js:24:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #2 @motion @ui @web @boundary-only (1.2s)
+  ✘  32 [web] › .features-gen/web/motion.feature.spec.js:30:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #3 @motion @ui @web @boundary-only (23ms)
+(node:56807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  33 [web] › .features-gen/web/motion.feature.spec.js:36:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #4 @motion @ui @web @boundary-only (60ms)
+(node:56845) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  34 [web] › .features-gen/web/motion.feature.spec.js:44:3 › Motion uses the design tokens and honours reduced motion › Resizing inside one width class does not animate the navigation @motion @ui @web @boundary-only (1.1s)
+  ✓  35 [web] › .features-gen/web/motion.feature.spec.js:50:3 › Motion uses the design tokens and honours reduced motion › Reduced motion makes the navigation morph instant @motion @ui @web @boundary-only (970ms)
+  ✓  36 [web] › .features-gen/web/motion.feature.spec.js:56:3 › Motion uses the design tokens and honours reduced motion › Reduced motion removes transitions and stops the dot animations @motion @ui @web @boundary-only (788ms)
+  ✓  37 [web] › .features-gen/web/motion.feature.spec.js:62:3 › Motion uses the design tokens and honours reduced motion › The reduced-motion check fails when the preference is not set @motion @ui @web @boundary-only @negative-control (852ms)
+  ✓  38 [web] › .features-gen/web/motion.feature.spec.js:67:3 › Motion uses the design tokens and honours reduced motion › The token check fails on an off-token duration @motion @ui @web @boundary-only @negative-control (872ms)
+  ✓  39 [web] › .features-gen/web/motion.feature.spec.js:73:3 › Motion uses the design tokens and honours reduced motion › The instant-morph check fails when motion is not reduced @motion @ui @web @boundary-only @negative-control (1.2s)
+  ✓  40 [web] › .features-gen/web/motion.feature.spec.js:79:3 › Motion uses the design tokens and honours reduced motion › The nav-token check fails on an off-token morph duration @motion @ui @web @boundary-only @negative-control (1.7s)
+  ✓  41 [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:6:3 › VS-5 Plain web build works without the Tauri runtime › The home route renders cleanly in a plain browser @VS-5 @value-critical @ui @web @smoke @boundary-only (1.1s)
+  ✓  42 [web] › .features-gen/web/vs-5-web-without-tauri.feature.spec.js:15:3 › VS-5 Plain web build works without the Tauri runtime › An unguarded Tauri call is detected @VS-5 @value-critical @ui @web @smoke @boundary-only @negative-control (17.9s)
+(node:57776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  43 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:11:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › Changing one dark-theme colour changes exactly its three outputs @VS-4 @value-critical @cli @tokens @boundary-only @smoke (898ms)
+  ✓  44 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:21:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › An invalid colour stops the generator @VS-4 @value-critical @cli @tokens @boundary-only @negative-control (894ms)
+  ✓  45 [cli] › .features-gen/cli/vs-4-token-propagation.feature.spec.js:28:3 › VS-4 One token edit propagates to web, desktop and Flutter outputs › A missing output directory stops the generator @VS-4 @value-critical @cli @tokens @boundary-only @negative-control (918ms)
+
+
+  1) [web] › .features-gen/web/accessibility.feature.spec.js:12:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every frame state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "frame" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:13:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0cfef-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0cfef-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0cfef-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [web] › .features-gen/web/accessibility.feature.spec.js:18:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every index state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "index" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:19:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-298e7-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-298e7-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-298e7-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [web] › .features-gen/web/accessibility.feature.spec.js:24:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every auth state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "auth" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:25:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-4c3d4-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-4c3d4-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-4c3d4-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [web] › .features-gen/web/accessibility.feature.spec.js:30:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every join state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "join" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:31:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-d776f-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-d776f-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-d776f-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [web] › .features-gen/web/accessibility.feature.spec.js:36:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every dashboard state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "dashboard" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:37:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b975f-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b975f-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b975f-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [web] › .features-gen/web/accessibility.feature.spec.js:42:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every agents state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "agents" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:43:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b5ced-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b5ced-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-b5ced-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [web] › .features-gen/web/accessibility.feature.spec.js:48:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every recordings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "recordings" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:49:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-ddde1-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-ddde1-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-ddde1-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [web] › .features-gen/web/accessibility.feature.spec.js:54:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every settings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "settings" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:55:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-5a08a-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-5a08a-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-5a08a-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [web] › .features-gen/web/accessibility.feature.spec.js:60:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every meet state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only › When axe analyses every in-scope inventory state of page "meet" in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:61:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-1c011-orts-320-375-768-1024-1440--web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-1c011-orts-320-375-768-1024-1440--web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-1c011-orts-320-375-768-1024-1440--web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [web] › .features-gen/web/accessibility.feature.spec.js:68:3 › Accessibility gate for the web shell › Keyboard focus is shown by fill on the app frame controls @a11y @value-critical @ui @web @boundary-only @smoke › And every focused control has an accessible name 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 16
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "href": "",
+    +     "name": "",
+    +     "ring": false,
+    +     "tag": "input",
+    +     "theme": "dark",
+    +   },
+    +   Object {
+    +     "href": "",
+    +     "name": "",
+    +     "ring": false,
+    +     "tag": "input",
+    +     "theme": "light",
+    +   },
+    + ]
+
+       at steps/accessibility.steps.ts:164
+
+      162 |   );
+      163 |   expect(stops.length).toBeGreaterThan(1);
+    > 164 |   expect(stops.filter((s) => s.name.length === 0)).toEqual([]);
+          |                                                    ^
+      165 | });
+      166 |
+      167 | Then(
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:164:52)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:71:5
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-bd708-l-on-the-app-frame-controls-web/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-bd708-l-on-the-app-frame-controls-web/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-bd708-l-on-the-app-frame-controls-web/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-bd708-l-on-the-app-frame-controls-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-bd708-l-on-the-app-frame-controls-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [web] › .features-gen/web/accessibility.feature.spec.js:77:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on index are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only › When the scrollable table regions of page "index" are audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:78:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0a715-able-and-show-focus-by-fill-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0a715-able-and-show-focus-by-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-0a715-able-and-show-focus-by-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [web] › .features-gen/web/accessibility.feature.spec.js:84:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on dashboard are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only › When the scrollable table regions of page "dashboard" are audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:85:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-98642-able-and-show-focus-by-fill-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-98642-able-and-show-focus-by-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-98642-able-and-show-focus-by-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [web] › .features-gen/web/accessibility.feature.spec.js:91:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on agents are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only › When the scrollable table regions of page "agents" are audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:92:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-47dbc-able-and-show-focus-by-fill-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-47dbc-able-and-show-focus-by-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-47dbc-able-and-show-focus-by-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [web] › .features-gen/web/accessibility.feature.spec.js:98:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on recordings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only › When the scrollable table regions of page "recordings" are audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:99:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-9858e-able-and-show-focus-by-fill-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-9858e-able-and-show-focus-by-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-9858e-able-and-show-focus-by-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) [web] › .features-gen/web/accessibility.feature.spec.js:105:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on settings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only › When the scrollable table regions of page "settings" are audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:106:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-99095-able-and-show-focus-by-fill-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-99095-able-and-show-focus-by-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/accessibility.feature-Acce-99095-able-and-show-focus-by-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) [web] › .features-gen/web/flat-controls.feature.spec.js:12:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every frame control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "frame" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:13:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7d1c6--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7d1c6--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7d1c6--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) [web] › .features-gen/web/flat-controls.feature.spec.js:19:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every index control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "index" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:20:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f48f4--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f48f4--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f48f4--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  18) [web] › .features-gen/web/flat-controls.feature.spec.js:26:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every auth control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "auth" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:27:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-a72e0--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-a72e0--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-a72e0--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  19) [web] › .features-gen/web/flat-controls.feature.spec.js:33:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every join control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "join" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:34:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-afd9f--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-afd9f--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-afd9f--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  20) [web] › .features-gen/web/flat-controls.feature.spec.js:40:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every dashboard control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "dashboard" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:41:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-ce723--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-ce723--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-ce723--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  21) [web] › .features-gen/web/flat-controls.feature.spec.js:47:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every agents control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "agents" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:48:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7084b--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7084b--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-7084b--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  22) [web] › .features-gen/web/flat-controls.feature.spec.js:54:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every recordings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "recordings" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:55:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f0d56--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f0d56--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-f0d56--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  23) [web] › .features-gen/web/flat-controls.feature.spec.js:61:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every settings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "settings" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:62:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-4f8d6--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-4f8d6--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-4f8d6--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  24) [web] › .features-gen/web/flat-controls.feature.spec.js:68:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every meet control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only › When every interactive control of page "meet" is audited in each theme at each viewport 
+
+    Error: No adopted viewport for width 320
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:69:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-45770--and-focus-is-a-fill-change-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-45770--and-focus-is-a-fill-change-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-45770--and-focus-is-a-fill-change-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  25) [web] › .features-gen/web/flat-controls.feature.spec.js:83:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit composites a translucent focus fill before measuring it @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control › Then the flat-control audit reports every focus stop below 3:1 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 24
+
+    - Array []
+    + Array [
+    +   "a[Skip to content]",
+    +   "a[Know Meet home]",
+    +   "a[Start meeting]",
+    +   "button#base-ui-_r_1_[Switch to light theme]",
+    +   "a[Sign in]",
+    +   "a[Start a meeting]",
+    +   "a[Sign in]",
+    +   "input#join-code[]",
+    +   "button[Join]",
+    +   "a[Sign in]",
+    +   "a[About the Concierge]",
+    +   "a[Try it as a guest]",
+    +   "a[01Schedule & invitePick a time]",
+    +   "a[02Meet with agentsYour dot and]",
+    +   "a[03Record & transcribeThe trans]",
+    +   "a[04Summary deliveredOn close: r]",
+    +   "a[Know Meet home]",
+    +   "a[Agents]",
+    +   "a[Settings]",
+    +   "a[Join as invitee]",
+    +   "a[Skip to content]",
+    +   "a[Know Meet home]",
+    + ]
+
+       at steps/flat-controls.steps.ts:130
+
+      128 |     (s) => s.contrastToRest >= 3 && s.contrastToSurface >= 3,
+      129 |   );
+    > 130 |   expect(unreported.map((s) => s.label)).toEqual([]);
+          |                                          ^
+      131 | });
+      132 |
+      133 | When(
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:130:42)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:86:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-9d1a9-us-fill-before-measuring-it-web/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-9d1a9-us-fill-before-measuring-it-web/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-9d1a9-us-fill-before-measuring-it-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-9d1a9-us-fill-before-measuring-it-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  26) [web] › .features-gen/web/flat-controls.feature.spec.js:89:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit reads a focused-at-render skip link's true rest fill @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control › Then the flat-control audit reports the skip link fill as unchanged 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+       at steps/flat-controls.steps.ts:156
+
+      154 |   expect(
+      155 |     problems.some((p) => p.includes("Skip to content") && p.includes("fill changes by only")),
+    > 156 |   ).toBe(true);
+          |     ^
+      157 | });
+      158 |
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:156:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:92:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-1109b--skip-link-s-true-rest-fill-web/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-1109b--skip-link-s-true-rest-fill-web/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-1109b--skip-link-s-true-rest-fill-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/flat-controls.feature-Flat-1109b--skip-link-s-true-rest-fill-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  27) [web] › .features-gen/web/motion.feature.spec.js:30:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #3 @motion @ui @web @boundary-only › When the home route is opened at 1000 with no motion preference 
+
+    Error: No adopted viewport for width 1000
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at openHome (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:37:8)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:75:11)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/motion.feature.spec.js:31:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-99fdd-th-the-nav-tokens-Example-3-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-99fdd-th-the-nav-tokens-Example-3-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-99fdd-th-the-nav-tokens-Example-3-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28) [web] › .features-gen/web/motion.feature.spec.js:36:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #4 @motion @ui @web @boundary-only › When the home route is opened at 600 with no motion preference 
+
+    Error: No adopted viewport for width 600
+
+       at src/support/capture-environment.ts:51
+
+      49 | export function viewportFor(width: number): { width: number; height: number } {
+      50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];
+    > 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);
+         |                                   ^
+      52 |   return { width, height };
+      53 | }
+      54 |
+        at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)
+        at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)
+        at openHome (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:37:8)
+        at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:75:11)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48
+        at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)
+        at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19
+        at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)
+        at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/motion.feature.spec.js:37:7
+
+    Error Context: ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-de84a-th-the-nav-tokens-Example-4-web/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-de84a-th-the-nav-tokens-Example-4-web/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/suite/test-results/motion.feature-Motion-uses-de84a-th-the-nav-tokens-Example-4-web/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28 failed
+    [web] › .features-gen/web/accessibility.feature.spec.js:12:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every frame state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:18:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every index state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:24:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every auth state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:30:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every join state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:36:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every dashboard state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:42:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every agents state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:48:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every recordings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:54:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every settings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:60:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every meet state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:68:3 › Accessibility gate for the web shell › Keyboard focus is shown by fill on the app frame controls @a11y @value-critical @ui @web @boundary-only @smoke 
+    [web] › .features-gen/web/accessibility.feature.spec.js:77:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on index are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:84:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on dashboard are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:91:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on agents are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:98:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on recordings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/accessibility.feature.spec.js:105:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on settings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:12:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every frame control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:19:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every index control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:26:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every auth control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:33:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every join control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:40:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every dashboard control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:47:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every agents control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:54:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every recordings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:61:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every settings control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:68:5 › Flat 2.0 controls carry no strokes and focus is a fill change › Every <page> control is stroke-free and focus is a fill change › Every meet control is stroke-free and focus is a fill change @a11y @flat2 @value-critical @ui @web @boundary-only 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:83:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit composites a translucent focus fill before measuring it @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control 
+    [web] › .features-gen/web/flat-controls.feature.spec.js:89:3 › Flat 2.0 controls carry no strokes and focus is a fill change › The audit reads a focused-at-render skip link's true rest fill @a11y @flat2 @value-critical @ui @web @boundary-only @negative-control 
+    [web] › .features-gen/web/motion.feature.spec.js:30:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #3 @motion @ui @web @boundary-only 
+    [web] › .features-gen/web/motion.feature.spec.js:36:5 › Motion uses the design tokens and honours reduced motion › Crossing a width class morphs the navigation with the nav tokens › Example #4 @motion @ui @web @boundary-only 
+  17 passed (1.6m)
+undefined
+/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: playwright test -c playwright.config.ts --grep '@VS-4|@VS-5|@a11y|@motion'

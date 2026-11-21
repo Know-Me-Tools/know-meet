@@ -2,24 +2,25 @@
   "schemaVersion": "1",
   "generatedBy": "kbd-runtime",
   "projectionContractVersion": 2,
-  "sourceRevision": 536,
-  "derivedRevision": 536,
+  "sourceRevision": 852,
+  "derivedRevision": 852,
   "frontier": {
-    "e98b9092-a344-4157-beea-4f0645ff46dd": 536
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 852
   },
   "conflictCount": 0,
-  "updatedAt": "2026-11-16T21:13:37.796536Z",
+  "updatedAt": "2026-11-21T16:48:21.076002Z",
   "cursor": [
-    "web-release",
-    "execute"
+    "web-conferencing-features",
+    "wc11-conferencing-boundary",
+    "11.3"
   ],
   "root": {
     "type": "phase",
     "id": "80abee42-ead8-4e6f-b617-e458847775d3",
     "status": "ready",
     "progress": {
-      "done": 22,
-      "total": 25
+      "done": 33,
+      "total": 37
     },
     "children": [
       {
@@ -177,6 +178,164 @@
             }
           }
         ],
+        "annotations": []
+      },
+      {
+        "type": "phase",
+        "id": "web-conferencing-features",
+        "canonicalId": "web-conferencing-features",
+        "status": "COMPLETE",
+        "progress": {
+          "done": 10,
+          "total": 11
+        },
+        "children": [
+          {
+            "type": "phase",
+            "id": "wc-boundary-defect-scope",
+            "canonicalId": "web-conferencing-features::wc-boundary-defect-scope",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 1,
+              "total": 1
+            },
+            "children": [
+              {
+                "type": "change",
+                "id": "wc06-web-csp",
+                "status": "COMPLETE",
+                "progress": {
+                  "done": 1,
+                  "total": 1
+                }
+              }
+            ],
+            "annotations": []
+          },
+          {
+            "type": "phase",
+            "id": "wc-packaged-defect-scope",
+            "canonicalId": "web-conferencing-features::wc-packaged-defect-scope",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 0,
+              "total": 0
+            },
+            "children": [],
+            "annotations": []
+          },
+          {
+            "type": "change",
+            "id": "wc01-conferencing-scenarios",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 6,
+              "total": 6
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc02-conferencing-ports",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc03-realtime-adapter-features",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 5,
+              "total": 5
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc04-share-and-chat-ui",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc05-device-settings",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 2,
+              "total": 2
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc06-web-csp",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc07-background-effects",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 3,
+              "total": 3
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc08-entity-graph-5-0-1",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 5,
+              "total": 5
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc09-local-history",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 4,
+              "total": 4
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc10-local-recording",
+            "status": "COMPLETE",
+            "progress": {
+              "done": 5,
+              "total": 5
+            }
+          },
+          {
+            "type": "change",
+            "id": "wc11-conferencing-boundary",
+            "status": "PENDING",
+            "progress": {
+              "done": 2,
+              "total": 6
+            }
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "type": "phase",
+        "id": "web-meeting-features",
+        "canonicalId": "web-meeting-features",
+        "status": "PENDING",
+        "progress": {
+          "done": 0,
+          "total": 0
+        },
+        "children": [],
         "annotations": []
       },
       {

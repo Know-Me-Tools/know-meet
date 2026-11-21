@@ -1,0 +1,1651 @@
+
+== lint:pins
+check-pins: ok (3 item(s) checked)
+
+== lint:names
+apps/web/public/mediapipe/models/selfie_segmenter.tflite failed for `.*` rules: kebabcase
+
+== lint:lines
+check-lines: ok (1922 item(s) checked)
+
+== lint:colours
+check-colours: ok (672 item(s) checked)
+
+== lint:secrets
+check-secrets: ok (7 item(s) checked)
+
+== lint:boundaries
+check-boundaries: ok (23 item(s) checked)
+
+== lint:biome
+tests/release/src/wc-taps.ts:24:21 lint/complexity/noUselessStringRaw ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ℹ String.raw is useless when the raw string doesn't contain any escape sequence.
+  
+     22 │ import type { BrowserContext, Page } from "@playwright/test";
+     23 │ 
+   > 24 │ const TAPS_SOURCE = String.raw`(() => {
+        │                     ^^^^^^^^^^^^^^^^^^^
+   > 25 │   if (window.__kmTaps) return;
+         ...
+  > 146 │   };
+  > 147 │ })();`;
+        │ ^^^^^^
+    148 │ 
+    149 │ export async function installTaps(context: BrowserContext): Promise<void> {
+  
+  ℹ Remove the String.raw call because it's useless here, String.raw can deal with string which contains escape sequence like \n, \t, \r, \\, \", \'.
+  
+
+apps/web/src/presentation/local-recordings/presentation/recording-player.tsx:76:8 suppressions/unused ━━━━━━━━━━
+
+  ⚠ Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    74 │   return (
+    75 │     <div className="relative grid aspect-video place-items-center bg-media-bg">
+  > 76 │       {/* biome-ignore lint/a11y/useMediaCaption: a meeting recording made in the browser has no caption track */}
+       │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    77 │       <video
+    78 │         ref={player.videoRef}
+  
+
+apps/web/src/presentation/meeting-room/presentation/room-sheet/room-sheet-pane.tsx:62:8 suppressions/unused ━━━━━━━━━━
+
+  ⚠ Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    60 │         </Button>
+    61 │       </div>
+  > 62 │       {/* biome-ignore lint/a11y/noNoninteractiveTabindex: a named scroll region whose content may hold no control of its own (a chat log) must be keyboard-reachable to scroll (RV-23, WCAG 2.1.1). */}
+       │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    63 │       <section
+    64 │         ref={bodyRef}
+  
+
+apps/web/src/presentation/meeting-room/presentation/room-sheet/room-sheet.tsx:84:5 suppressions/unused ━━━━━━━━━━
+
+  ⚠ Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    82 │   if (!open) return null;
+    83 │   return (
+  > 84 │     // biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: pointer convenience only; keyboard users close the sheet with Escape or its close button.
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    85 │     <div
+    86 │       aria-hidden="true"
+  
+
+apps/web/src/presentation/meeting-room/presentation/room-sheet/room-sheet.tsx:84:5 suppressions/unused ━━━━━━━━━━
+
+  ⚠ Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    82 │   if (!open) return null;
+    83 │   return (
+  > 84 │     // biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: pointer convenience only; keyboard users close the sheet with Escape or its close button.
+       │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    85 │     <div
+    86 │       aria-hidden="true"
+  
+
+apps/web/src/app/composition-root.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     1 │ // TJ-ARCH-MOB-001 compliant
+   > 2 │ import {
+       │ ^^^^^^^^
+   > 3 │   createCapabilityCatalog,
+   > 4 │   createNoteDraftStore,
+        ...
+   > 9 │ import { registerRecordingEntities } from "../infrastructure/entities/register-recording-entities";
+  > 10 │ import { registerNoteEntities } from "../infrastructure/entities/register-note-entities";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    11 │ import { createStaticCapabilitySource } from "../infrastructure/http/http-capability-source";
+    12 │ import { loadPlatformAdapters } from "../infrastructure/platform/platform-adapters";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     7  7 │   } from "@know-meet/application";
+     8  8 │   import { registerHistoryEntities } from "../infrastructure/entities/register-history-entities";
+     9    │ - import·{·registerRecordingEntities·}·from·"../infrastructure/entities/register-recording-entities";
+    10    │ - import·{·registerNoteEntities·}·from·"../infrastructure/entities/register-note-entities";
+        9 │ + import·{·registerNoteEntities·}·from·"../infrastructure/entities/register-note-entities";
+       10 │ + import·{·registerRecordingEntities·}·from·"../infrastructure/entities/register-recording-entities";
+    11 11 │   import { createStaticCapabilitySource } from "../infrastructure/http/http-capability-source";
+    12 12 │   import { loadPlatformAdapters } from "../infrastructure/platform/platform-adapters";
+  
+
+apps/web/src/app/history/hooks/use-delete-meeting-history.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+  > 2 │ import type { MeetingHistoryId, MeetingSummary } from "@know-meet/domain";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 3 │ import { useEntityMutation } from "@prometheus-ags/entity-graph-react";
+  > 4 │ import { useAppServices } from "../../app-services";
+  > 5 │ import { MEETING_SUMMARY_ENTITY } from "../../../infrastructure/entities/history-entity-types";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 │ 
+    7 │ export interface DeleteMeetingHistory {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     2  2 │   import type { MeetingHistoryId, MeetingSummary } from "@know-meet/domain";
+     3  3 │   import { useEntityMutation } from "@prometheus-ags/entity-graph-react";
+     4    │ - import·{·useAppServices·}·from·"../../app-services";
+     5    │ - import·{·MEETING_SUMMARY_ENTITY·}·from·"../../../infrastructure/entities/history-entity-types";
+        4 │ + import·{·MEETING_SUMMARY_ENTITY·}·from·"../../../infrastructure/entities/history-entity-types";
+        5 │ + import·{·useAppServices·}·from·"../../app-services";
+     6  6 │   
+     7  7 │   export interface DeleteMeetingHistory {
+  
+
+apps/web/src/app/history/hooks/use-history-storage.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     1 │ // TJ-ARCH-MOB-001 compliant
+   > 2 │ import type { HistoryStorageStatus } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 3 │ import { useEntityMutation, useEntityQuery } from "@prometheus-ags/entity-graph-react";
+   > 4 │ import { useAppServices } from "../../app-services";
+        ...
+   > 8 │   type HistoryStorageRow,
+   > 9 │ } from "../../../infrastructure/entities/history-entity-types";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    10 │ 
+    11 │ export interface HistoryStorage {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     2  2 │   import type { HistoryStorageStatus } from "@know-meet/domain";
+     3  3 │   import { useEntityMutation, useEntityQuery } from "@prometheus-ags/entity-graph-react";
+     4    │ - import·{·useAppServices·}·from·"../../app-services";
+     5    │ - import·{
+     6    │ - ··HISTORY_STORAGE_ENTITY,
+     7    │ - ··HISTORY_STORAGE_ROW_ID,
+     8    │ - ··type·HistoryStorageRow,
+     9    │ - }·from·"../../../infrastructure/entities/history-entity-types";
+        4 │ + import·{
+        5 │ + ··HISTORY_STORAGE_ENTITY,
+        6 │ + ··HISTORY_STORAGE_ROW_ID,
+        7 │ + ··type·HistoryStorageRow,
+        8 │ + }·from·"../../../infrastructure/entities/history-entity-types";
+        9 │ + import·{·useAppServices·}·from·"../../app-services";
+    10 10 │   
+    11 11 │   export interface HistoryStorage {
+  
+
+apps/web/src/app/history/hooks/use-meeting-history-detail.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     1 │ // TJ-ARCH-MOB-001 compliant
+   > 2 │ import {
+       │ ^^^^^^^^
+   > 3 │   type HistoryChatMessage,
+   > 4 │   type MeetingHistoryId,
+        ...
+  > 13 │   type MeetingDetailRow,
+  > 14 │ } from "../../../infrastructure/entities/history-entity-types";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    15 │ 
+    16 │ export interface MeetingHistoryDetail {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     8  8 │   import { useEntity } from "@prometheus-ags/entity-graph-react";
+     9  9 │   import { useEffect } from "react";
+    10    │ - import·{·useAppServices·}·from·"../../app-services";
+    11    │ - import·{
+    12    │ - ··MEETING_DETAIL_ENTITY,
+    13    │ - ··type·MeetingDetailRow,
+    14    │ - }·from·"../../../infrastructure/entities/history-entity-types";
+       10 │ + import·{
+       11 │ + ··MEETING_DETAIL_ENTITY,
+       12 │ + ··type·MeetingDetailRow,
+       13 │ + }·from·"../../../infrastructure/entities/history-entity-types";
+       14 │ + import·{·useAppServices·}·from·"../../app-services";
+    15 15 │   
+    16 16 │   export interface MeetingHistoryDetail {
+  
+
+apps/web/src/app/recordings/recordings-services.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+     1  1 │   // TJ-ARCH-MOB-001 compliant
+     2  2 │   import type { RealtimeRoom } from "@know-meet/application";
+     3    │ - import·type·{
+     4    │ - ··CompositeRecorder,
+     5    │ - ··RecordingLibrary,
+     6    │ - }·from·"../../infrastructure/recording";
+        3 │ + import·type·{·CompositeRecorder,·RecordingLibrary·}·from·"../../infrastructure/recording";
+     7  4 │   
+     8  5 │   /**
+    ····· │ 
+    16 13 │      * starts. Call it once per page: the library asks the latest recorder what it is writing.
+    17 14 │      */
+    18    │ - ··readonly·createRecorder:·(
+    19    │ - ····room:·RealtimeRoom,
+    20    │ - ····roomCode:·()·=>·string·|·null,
+    21    │ - ··)·=>·CompositeRecorder;
+       15 │ + ··readonly·createRecorder:·(room:·RealtimeRoom,·roomCode:·()·=>·string·|·null)·=>·CompositeRecorder;
+    22 16 │   }
+    23 17 │   
+  
+
+apps/web/src/app/route-fallbacks.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+    19 19 │             {HOSTED_BUILD ? "This page isn’t available" : "Page not found"}
+    20 20 │           </h1>
+    21    │ - ········{HOSTED_BUILD·?·<p>This·site·has·the·home·page,·meetings,·history·and·recordings·only.</p>·:·null}
+       21 │ + ········{HOSTED_BUILD·?·(
+       22 │ + ··········<p>This·site·has·the·home·page,·meetings,·history·and·recordings·only.</p>
+       23 │ + ········)·:·null}
+    22 24 │           <Link to="/">{HOSTED_BUILD ? "Home" : "Go to the home page"}</Link>
+    23 25 │         </section>
+  
+
+apps/web/src/infrastructure/entities/register-history-entities.ts:3:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+    2 │ import { type HistoryRepository, toMeetingCursor } from "@know-meet/application";
+  > 3 │ import { type MeetingHistoryId, parseMeetingHistoryId, type MeetingSummary } from "@know-meet/domain";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 │ import { registerEntityTransport } from "@prometheus-ags/entity-graph-core";
+    5 │ import {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2   2 │   import { type HistoryRepository, toMeetingCursor } from "@know-meet/application";
+      3     │ - import·{·type·MeetingHistoryId,·parseMeetingHistoryId,·type·MeetingSummary·}·from·"@know-meet/domain";
+          3 │ + import·{·type·MeetingHistoryId,·type·MeetingSummary,·parseMeetingHistoryId·}·from·"@know-meet/domain";
+      4   4 │   import { registerEntityTransport } from "@prometheus-ags/entity-graph-core";
+      5   5 │   import {
+  
+
+apps/web/src/infrastructure/entities/register-history-entities.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2   2 │   import { type HistoryRepository, toMeetingCursor } from "@know-meet/application";
+      3     │ - import·{·type·MeetingHistoryId,·parseMeetingHistoryId,·type·MeetingSummary·}·from·"@know-meet/domain";
+          3 │ + import·{
+          4 │ + ··type·MeetingHistoryId,
+          5 │ + ··parseMeetingHistoryId,
+          6 │ + ··type·MeetingSummary,
+          7 │ + }·from·"@know-meet/domain";
+      4   8 │   import { registerEntityTransport } from "@prometheus-ags/entity-graph-core";
+      5   9 │   import {
+  
+
+apps/web/src/infrastructure/history/history-change-bus.ts:3:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+    2 │ import type { HistoryChange } from "@know-meet/application";
+  > 3 │ import { parseMeetingHistoryId, toChatMessageId, type ChatMessageId } from "@know-meet/domain";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 │ import { HISTORY_CHANNEL_NAME } from "./history-constants";
+    5 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     1  1 │   // TJ-ARCH-MOB-001 compliant
+     2  2 │   import type { HistoryChange } from "@know-meet/application";
+     3    │ - import·{·parseMeetingHistoryId,·toChatMessageId,·type·ChatMessageId·}·from·"@know-meet/domain";
+        3 │ + import·{·type·ChatMessageId,·parseMeetingHistoryId,·toChatMessageId·}·from·"@know-meet/domain";
+     4  4 │   import { HISTORY_CHANNEL_NAME } from "./history-constants";
+     5  5 │   
+  
+
+apps/web/src/infrastructure/history/pglite-history-repository.ts:9:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+     7 │   MeetingPage,
+     8 │ } from "@know-meet/application";
+   > 9 │ import {
+       │ ^^^^^^^^
+  > 10 │   type ChatMessageId,
+        ...
+  > 21 │   type Result,
+  > 22 │ } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    23 │ import type { HistoryChangeBus } from "./history-change-bus";
+    24 │ import { cursorFor, readCursor } from "./history-cursor";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     12  12 │     type HistoryChatMessage,
+     13  13 │     type HistoryEntryNotFound,
+     14     │ - ··historyErrors,
+     15     │ - ··type·HistoryStorageError,
+         14 │ + ··type·HistoryStorageError,
+     16  15 │     type HistoryStorageStatus,
+     17     │ - ··type·MeetingHistoryId,
+         16 │ + ··historyErrors,
+         17 │ + ··type·MeetingHistoryId,
+     18  18 │     type MeetingSession,
+     19  19 │     ok,
+  
+
+apps/web/src/infrastructure/history/pglite-history-repository.ts:121:14 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ✖ This variable error is unused.
+  
+    119 │       signal?.throwIfAborted();
+    120 │       return ok(value);
+  > 121 │     } catch (error) {
+        │              ^^^^^
+    122 │       if (signal?.aborted === true) throw signal.reason;
+    123 │       return err(historyErrors.storageFailed());
+  
+  ℹ Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  ℹ Unsafe fix: If this is intentional, prepend error with an underscore.
+  
+    119 119 │         signal?.throwIfAborted();
+    120 120 │         return ok(value);
+    121     │ - ····}·catch·(error)·{
+        121 │ + ····}·catch·(_error)·{
+    122 122 │         if (signal?.aborted === true) throw signal.reason;
+    123 123 │         return err(historyErrors.storageFailed());
+  
+
+apps/web/src/infrastructure/history/pglite-history-repository.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+    160 160 │   
+    161 161 │     const getMeeting = (id: MeetingHistoryId, signal?: AbortSignal) =>
+    162     │ - ····run(signal,·(db):·Promise<MeetingDetail·|·null>·=>
+    163     │ - ······db.transaction(async·(tx)·=>·{
+    164     │ - ········const·found·=·await·tx.query<SessionRow>(ONE_SUMMARY,·[id]);
+    165     │ - ········const·row·=·found.rows[0];
+    166     │ - ········const·meeting·=·row·===·undefined·?·null·:·toMeetingSummary(row);
+    167     │ - ········if·(meeting·===·null)·return·null;
+    168     │ - ········const·chat·=·await·tx.query<ChatRow>(
+    169     │ - ··········"SELECT·*·FROM·chat_message·WHERE·meeting_id·=·$1·ORDER·BY·sent_at,·id",
+    170     │ - ··········[id],
+    171     │ - ········);
+    172     │ - ········return·{·meeting,·chat:·chat.rows.map(toHistoryChatMessageRow).filter((m)·=>·m·!==·null)·};
+    173     │ - ······}),
+        162 │ + ····run(
+        163 │ + ······signal,
+        164 │ + ······(db):·Promise<MeetingDetail·|·null>·=>
+        165 │ + ········db.transaction(async·(tx)·=>·{
+        166 │ + ··········const·found·=·await·tx.query<SessionRow>(ONE_SUMMARY,·[id]);
+        167 │ + ··········const·row·=·found.rows[0];
+        168 │ + ··········const·meeting·=·row·===·undefined·?·null·:·toMeetingSummary(row);
+        169 │ + ··········if·(meeting·===·null)·return·null;
+        170 │ + ··········const·chat·=·await·tx.query<ChatRow>(
+        171 │ + ············"SELECT·*·FROM·chat_message·WHERE·meeting_id·=·$1·ORDER·BY·sent_at,·id",
+        172 │ + ············[id],
+        173 │ + ··········);
+        174 │ + ··········return·{
+        175 │ + ············meeting,
+        176 │ + ············chat:·chat.rows.map(toHistoryChatMessageRow).filter((m)·=>·m·!==·null),
+        177 │ + ··········};
+        178 │ + ········}),
+    174 179 │       );
+    175 180 │   
+    ······· │ 
+    295 300 │     };
+    296 301 │   }
+    297     │ - 
+    298 302 │   
+  
+
+apps/web/src/infrastructure/recording/composite-pipeline.ts:3:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Some imports or exports are not organized.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+    2 │ import type { RealtimeRoom } from "@know-meet/application";
+  > 3 │ import { createAudioMixer, type AudioMixer } from "./audio-mixer";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 4 │ import { startFrameClock, type FrameClock } from "./frame-clock";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 │ import { createFrameCompositor, readCompositePalette } from "./frame-compositor";
+    6 │ import {
+  
+  ℹ Sort the imported names.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+    2 │ import type { RealtimeRoom } from "@know-meet/application";
+  > 3 │ import { createAudioMixer, type AudioMixer } from "./audio-mixer";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 │ import { startFrameClock, type FrameClock } from "./frame-clock";
+    5 │ import { createFrameCompositor, readCompositePalette } from "./frame-compositor";
+  
+  ℹ Sort the imported names.
+  
+    2 │ import type { RealtimeRoom } from "@know-meet/application";
+    3 │ import { createAudioMixer, type AudioMixer } from "./audio-mixer";
+  > 4 │ import { startFrameClock, type FrameClock } from "./frame-clock";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 │ import { createFrameCompositor, readCompositePalette } from "./frame-compositor";
+    6 │ import {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2   2 │   import type { RealtimeRoom } from "@know-meet/application";
+      3     │ - import·{·createAudioMixer,·type·AudioMixer·}·from·"./audio-mixer";
+      4     │ - import·{·startFrameClock,·type·FrameClock·}·from·"./frame-clock";
+          3 │ + import·{·type·AudioMixer,·createAudioMixer·}·from·"./audio-mixer";
+          4 │ + import·{·type·FrameClock,·startFrameClock·}·from·"./frame-clock";
+      5   5 │   import { createFrameCompositor, readCompositePalette } from "./frame-compositor";
+      6   6 │   import {
+  
+
+apps/web/src/infrastructure/recording/composite-recorder.ts:13:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    11 │   type Support,
+    12 │ } from "@know-meet/domain";
+  > 13 │ import { createCompositePipeline, type CompositePipeline } from "./composite-pipeline";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    14 │ import type { RecordingIndexWriter } from "./library-types";
+    15 │ import { type CaptureMicrophone, captureMicrophoneFromBrowser } from "./local-microphone";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     11  11 │     type Support,
+     12  12 │   } from "@know-meet/domain";
+     13     │ - import·{·createCompositePipeline,·type·CompositePipeline·}·from·"./composite-pipeline";
+         13 │ + import·{·type·CompositePipeline,·createCompositePipeline·}·from·"./composite-pipeline";
+     14  14 │   import type { RecordingIndexWriter } from "./library-types";
+     15  15 │   import { type CaptureMicrophone, captureMicrophoneFromBrowser } from "./local-microphone";
+  
+
+apps/web/src/infrastructure/recording/composite-recorder.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+     55  55 │   
+     56  56 │   function failureFor(reason: WriterFailure): RecorderFailureReason {
+     57     │ - ··return·reason·===·"quota-exceeded"·?·"quota-exceeded"·:·reason·===·"storage-unavailable"·?·"storage-unavailable"·:·"failed";
+         57 │ + ··return·reason·===·"quota-exceeded"
+         58 │ + ····?·"quota-exceeded"
+         59 │ + ····:·reason·===·"storage-unavailable"
+         60 │ + ······?·"storage-unavailable"
+         61 │ + ······:·"failed";
+     58  62 │   }
+     59  63 │   
+    ······· │ 
+    145 149 │             onError: () => void stopItself(session, "failed", "failed"),
+    146 150 │           });
+    147     │ - ········const·stopListening·=·writer.onFailed((reason)·=>
+    148     │ - ··········void·stopItself(session,·reason·===·"quota-exceeded"·?·"storage-full"·:·"failed",·failureFor(reason)),
+        151 │ + ········const·stopListening·=·writer.onFailed(
+        152 │ + ··········(reason)·=>
+        153 │ + ············void·stopItself(
+        154 │ + ··············session,
+        155 │ + ··············reason·===·"quota-exceeded"·?·"storage-full"·:·"failed",
+        156 │ + ··············failureFor(reason),
+        157 │ + ············),
+    149 158 │           );
+    150     │ - ········session·=·{·id:·requestId,·pipeline,·writer,·stopListening,·chunks:·Promise.resolve(),·finalising:·null·};
+        159 │ + ········session·=·{
+        160 │ + ··········id:·requestId,
+        161 │ + ··········pipeline,
+        162 │ + ··········writer,
+        163 │ + ··········stopListening,
+        164 │ + ··········chunks:·Promise.resolve(),
+        165 │ + ··········finalising:·null,
+        166 │ + ········};
+    151 167 │         } catch {
+    152 168 │           await writer.close();
+  
+
+apps/web/src/infrastructure/recording/desired-media.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+    26 26 │     for (const remote of snapshot.remotes) names.set(remote.identity, remote.displayName);
+    27 27 │   
+    28    │ - ··const·people·=·[
+    29    │ - ····...(snapshot.local·===·null·?·[]·:·[snapshot.local]),
+    30    │ - ····...snapshot.remotes,
+    31    │ - ··];
+       28 │ + ··const·people·=·[...(snapshot.local·===·null·?·[]·:·[snapshot.local]),·...snapshot.remotes];
+    32 29 │     for (const person of people) {
+    33 30 │       media.push({
+  
+
+apps/web/src/infrastructure/recording/frame-compositor.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+  > 2 │ import type { BoundMedia } from "./media-bindings";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 3 │ import { computeGridLayout, type TileRect } from "./grid-layout";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 │ 
+    5 │ /** Colours and font for what is drawn into the recording, read from the design tokens. */
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2     │ - import·type·{·BoundMedia·}·from·"./media-bindings";
+      3     │ - import·{·computeGridLayout,·type·TileRect·}·from·"./grid-layout";
+          2 │ + 
+          3 │ + import·{·computeGridLayout,·type·TileRect·}·from·"./grid-layout";
+          4 │ + import·type·{·BoundMedia·}·from·"./media-bindings";
+      4   5 │   
+      5   6 │   /** Colours and font for what is drawn into the recording, read from the design tokens. */
+  
+
+apps/web/src/infrastructure/recording/frame-compositor.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+     42  42 │   
+     43  43 │   function initialsOf(name: string): string {
+     44     │ - ··const·parts·=·name.trim().split(/\s+/).filter((part)·=>·part·!==·"");
+         44 │ + ··const·parts·=·name
+         45 │ + ····.trim()
+         46 │ + ····.split(/\s+/)
+         47 │ + ····.filter((part)·=>·part·!==·"");
+     45  48 │     const letters = parts.slice(0, 2).map((part) => part.slice(0, 1).toUpperCase());
+     46  49 │     return letters.join("");
+    ······· │ 
+     63  66 │     const width = video.videoWidth * scale;
+     64  67 │     const height = video.videoHeight * scale;
+     65     │ - ··return·{·x:·rect.x·+·(rect.width·-·width)·/·2,·y:·rect.y·+·(rect.height·-·height)·/·2,·width,·height·};
+         68 │ + ··return·{
+         69 │ + ····x:·rect.x·+·(rect.width·-·width)·/·2,
+         70 │ + ····y:·rect.y·+·(rect.height·-·height)·/·2,
+         71 │ + ····width,
+         72 │ + ····height,
+         73 │ + ··};
+     66  74 │   }
+     67  75 │   
+    ······· │ 
+     94 102 │       ctx.textAlign = "left";
+     95 103 │       ctx.textBaseline = "middle";
+     96     │ - ····const·width·=·Math.min(rect.width·-·2·*·TAG_PADDING,·ctx.measureText(label).width·+·2·*·TAG_PADDING);
+        104 │ + ····const·width·=·Math.min(
+        105 │ + ······rect.width·-·2·*·TAG_PADDING,
+        106 │ + ······ctx.measureText(label).width·+·2·*·TAG_PADDING,
+        107 │ + ····);
+     97 108 │       const x = rect.x + TAG_PADDING;
+     98 109 │       const y = rect.y + rect.height - TAG_HEIGHT - TAG_PADDING;
+  
+
+apps/web/src/infrastructure/recording/media-bindings.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ File content differs from formatting output
+  
+    73 73 │           void element.play().catch(() => undefined);
+    74 74 │           entries.set(desired.key, {
+    75    │ - ··········bound:·{·key:·desired.key,·medium:·desired.medium,·kind:·kindOf(desired),·label:·desired.label,·element·},
+       75 │ + ··········bound:·{
+       76 │ + ············key:·desired.key,
+       77 │ + ············medium:·desired.medium,
+       78 │ + ············kind:·kindOf(desired),
+       79 │ + ············label:·desired.label,
+       80 │ + ············element,
+       81 │ + ··········},
+    76 82 │             detach,
+    77 83 │           });
+  
+
+apps/web/src/infrastructure/recording/recording-library.ts:170:16 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ✖ This variable error is unused.
+  
+    168 │       try {
+    169 │         return await readAll(signal);
+  > 170 │       } catch (error) {
+        │                ^^^^^
+    171 │         if (signal?.aborted === true) throw signal.reason;
+    172 │         return err(failed());
+  
+  ℹ Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  ℹ Unsafe fix: If this is intentional, prepend error with an underscore.
+  
+    168 168 │         try {
+    169 169 │           return await readAll(signal);
+    170     │ - ······}·catch·(error)·{
+        170 │ + ······}·catch·(_error)·{
+    171 171 │           if (signal?.aborted === true) throw signal.reason;
+    172 172 │           return err(failed());
+  
+
+apps/web/src/infrastructure/recording/store/recording-change-bus.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+  > 2 │ import { parseRecordingRequestId } from "@know-meet/domain";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 3 │ import { RECORDING_CHANNEL_NAME } from "../recording-constants";
+  > 4 │ import type { RecordingChange } from "../library-types";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 │ 
+    6 │ export interface RecordingChangeBus {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     1  1 │   // TJ-ARCH-MOB-001 compliant
+     2  2 │   import { parseRecordingRequestId } from "@know-meet/domain";
+     3    │ - import·{·RECORDING_CHANNEL_NAME·}·from·"../recording-constants";
+     4    │ - import·type·{·RecordingChange·}·from·"../library-types";
+        3 │ + import·type·{·RecordingChange·}·from·"../library-types";
+        4 │ + import·{·RECORDING_CHANNEL_NAME·}·from·"../recording-constants";
+     5  5 │   
+     6  6 │   export interface RecordingChangeBus {
+  
+
+apps/web/src/infrastructure/recording/store/recording-files.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    1 │ // TJ-ARCH-MOB-001 compliant
+  > 2 │ import { RECORDINGS_DIRECTORY, RECORDING_LOCK_PREFIX } from "../recording-constants";
+      │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    3 │ import {
+    4 │   type DirectoryHandleLike,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2     │ - import·{·RECORDINGS_DIRECTORY,·RECORDING_LOCK_PREFIX·}·from·"../recording-constants";
+          2 │ + import·{·RECORDING_LOCK_PREFIX,·RECORDINGS_DIRECTORY·}·from·"../recording-constants";
+      3   3 │   import {
+      4   4 │     type DirectoryHandleLike,
+  
+
+apps/web/src/infrastructure/recording/store/recording-files.ts:32:29 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  ✖ Describe callback must be a function.
+  
+    30 │     for await (const [name, handle] of directory.entries()) {
+    31 │       if (handle.kind !== "file") continue;
+  > 32 │       files.set(name, await describe(name, handle));
+       │                             ^^^^^^^^^^^^^^^^^^^^^^
+    33 │     }
+    34 │   } catch {
+  
+  ℹ The describe callback must be a function, not a string, number, object, or other type.
+  
+  ℹ Replace the callback with a function expression or arrow function.
+  
+
+apps/web/src/infrastructure/recording/writer/opfs-writer-worker.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     1 │ // TJ-ARCH-MOB-001 compliant
+   > 2 │ import {
+       │ ^^^^^^^^
+   > 3 │   type DirectoryHandleLike,
+   > 4 │   isDomError,
+   > 5 │   recordingsDirectory,
+   > 6 │   type SyncAccessHandleLike,
+   > 7 │ } from "../store/opfs-types";
+   > 8 │ import { RECORDINGS_DIRECTORY } from "../recording-constants";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ import type { WriterEvent, WriterFailure, WriterRequest } from "./writer-protocol";
+    10 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      1   1 │   // TJ-ARCH-MOB-001 compliant
+      2     │ - import·{
+      3     │ - ··type·DirectoryHandleLike,
+      4     │ - ··isDomError,
+      5     │ - ··recordingsDirectory,
+      6     │ - ··type·SyncAccessHandleLike,
+      7     │ - }·from·"../store/opfs-types";
+      8     │ - import·{·RECORDINGS_DIRECTORY·}·from·"../recording-constants";
+          2 │ + 
+          3 │ + import·{·RECORDINGS_DIRECTORY·}·from·"../recording-constants";
+          4 │ + import·{
+          5 │ + ··type·DirectoryHandleLike,
+          6 │ + ··isDomError,
+          7 │ + ··recordingsDirectory,
+          8 │ + ··type·SyncAccessHandleLike,
+          9 │ + }·from·"../store/opfs-types";
+      9  10 │   import type { WriterEvent, WriterFailure, WriterRequest } from "./writer-protocol";
+     10  11 │   
+  
+
+apps/web/src/presentation/join/lobby/lobby-device-field.tsx:10:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     8 │ // unplugged choice falls back to the default and says so politely.
+     9 │ // Scenario contract: km-lobby-mic-select, km-lobby-camera-select.
+  > 10 │ import type { MediaDevice, TrackKind } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 11 │ import type { Announce } from "../../guest-meeting/live-status";
+        ...
+  > 28 │ } from "../../guest-meeting/devices/device-options";
+  > 29 │ import { useDeviceLoss } from "../../guest-meeting/devices/use-device-loss";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    30 │ import type { DevicePreview } from "./use-device-preview";
+    31 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     9  9 │   // Scenario contract: km-lobby-mic-select, km-lobby-camera-select.
+    10 10 │   import type { MediaDevice, TrackKind } from "@know-meet/domain";
+    11    │ - import·type·{·Announce·}·from·"../../guest-meeting/live-status";
+    12    │ - import·{
+    13    │ - ··DEVICE_COPY,
+    14    │ - ··deviceChanged,
+    15    │ - ··deviceDisconnected,
+    16    │ - ··noDeviceOption,
+    17    │ - ··placeholderOption,
+    18    │ - ··switchFailed,
+    19    │ - }·from·"../../guest-meeting/devices/device-copy";
+    20    │ - import·{·DeviceField,·type·DeviceFieldMode·}·from·"../../guest-meeting/devices/device-field";
+    21    │ - import·{
+    22    │ - ··DEVICE_NOUN,
+    23    │ - ··deviceLabel,
+    24    │ - ··deviceOptions,
+    25    │ - ··hasDevicePermission,
+    26    │ - ··listedDeviceId,
+    27    │ - ··shownDeviceId,
+    28    │ - }·from·"../../guest-meeting/devices/device-options";
+    29    │ - import·{·useDeviceLoss·}·from·"../../guest-meeting/devices/use-device-loss";
+       11 │ + import·{
+       12 │ + ··DEVICE_COPY,
+       13 │ + ··deviceChanged,
+       14 │ + ··deviceDisconnected,
+       15 │ + ··noDeviceOption,
+       16 │ + ··placeholderOption,
+       17 │ + ··switchFailed,
+       18 │ + }·from·"../../guest-meeting/devices/device-copy";
+       19 │ + import·{·DeviceField,·type·DeviceFieldMode·}·from·"../../guest-meeting/devices/device-field";
+       20 │ + import·{
+       21 │ + ··DEVICE_NOUN,
+       22 │ + ··deviceLabel,
+       23 │ + ··deviceOptions,
+       24 │ + ··hasDevicePermission,
+       25 │ + ··listedDeviceId,
+       26 │ + ··shownDeviceId,
+       27 │ + }·from·"../../guest-meeting/devices/device-options";
+       28 │ + import·{·useDeviceLoss·}·from·"../../guest-meeting/devices/use-device-loss";
+       29 │ + import·type·{·Announce·}·from·"../../guest-meeting/live-status";
+    30 30 │   import type { DevicePreview } from "./use-device-preview";
+    31 31 │   
+  
+
+apps/web/src/presentation/join/lobby/lobby-view.tsx:10:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     8 │ // lazy room keeps before any connection (wc05); it is re-read once the preview has
+     9 │ // permission, because only then does the browser give device labels.
+  > 10 │ import type { DeviceId, MediaDevice, TrackKind } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 11 │ import { useEffect } from "react";
+        ...
+  > 16 │ import { useMeetingServices, useRoomSnapshot } from "../../guest-meeting/meeting-services";
+  > 17 │ import type { LobbyRole } from "../../guest-meeting/meeting-routes";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    18 │ import { ShareCard } from "../../guest-meeting/share-card";
+    19 │ import { eyebrowClass, h1Class } from "../../public-shared/ui-classes";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+    14 14 │   import { type Announce, LiveStatus, useAnnouncer } from "../../guest-meeting/live-status";
+    15 15 │   import { LOBBY_COPY } from "../../guest-meeting/meeting-copy";
+    16    │ - import·{·useMeetingServices,·useRoomSnapshot·}·from·"../../guest-meeting/meeting-services";
+    17    │ - import·type·{·LobbyRole·}·from·"../../guest-meeting/meeting-routes";
+       16 │ + import·type·{·LobbyRole·}·from·"../../guest-meeting/meeting-routes";
+       17 │ + import·{·useMeetingServices,·useRoomSnapshot·}·from·"../../guest-meeting/meeting-services";
+    18 18 │   import { ShareCard } from "../../guest-meeting/share-card";
+    19 19 │   import { eyebrowClass, h1Class } from "../../public-shared/ui-classes";
+  
+
+apps/web/src/presentation/local-history/presentation/history-detail-view.tsx:9:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     7 │ // hash change is not lost when the read finishes. The id was parsed by the route;
+     8 │ // it is never put in a request (WC-7).
+   > 9 │ import type { MeetingHistoryId, MeetingSummary } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 10 │ import { buttonVariants } from "@know-meet/ui/components/button";
+        ...
+  > 24 │ } from "../application/history-format";
+  > 25 │ import { useDocumentTitle } from "../../shared/use-document-title";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    26 │ import { HistoryChat } from "./history-chat";
+    27 │ import { HistoryReadError, HistorySkeleton, StorageBlockedNote } from "./history-list-states";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     16  16 │   import type * as React from "react";
+     17  17 │   import { useMeetingHistoryDetail } from "../../../app/history/hooks";
+     18     │ - import·{
+     19     │ - ··dayName,
+     20     │ - ··formatDuration,
+     21     │ - ··formatTime,
+     22     │ - ··meetingTitle,
+     23     │ - ··peopleLabel,
+     24     │ - }·from·"../application/history-format";
+     25     │ - import·{·useDocumentTitle·}·from·"../../shared/use-document-title";
+         18 │ + import·{·useDocumentTitle·}·from·"../../shared/use-document-title";
+         19 │ + import·{
+         20 │ + ··dayName,
+         21 │ + ··formatDuration,
+         22 │ + ··formatTime,
+         23 │ + ··meetingTitle,
+         24 │ + ··peopleLabel,
+         25 │ + }·from·"../application/history-format";
+     26  26 │   import { HistoryChat } from "./history-chat";
+     27  27 │   import { HistoryReadError, HistorySkeleton, StorageBlockedNote } from "./history-list-states";
+  
+
+apps/web/src/presentation/local-history/presentation/history-list-states.tsx:27:56 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <section>
+  
+    25 │ export function HistorySkeleton({ visible }: { readonly visible: boolean }) {
+    26 │   return (
+  > 27 │     <div aria-busy="true" aria-label="Loading history" role="region" className="grid gap-s2">
+       │                                                        ^^^^^^^^^^^^^
+    28 │       {visible
+    29 │         ? SKELETON_ROWS.map((key) => (
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <section>
+  
+
+apps/web/src/presentation/local-recordings/presentation/library-states.tsx:40:7 lint/a11y/useSemanticElements ━━━━━━━━━━
+
+  ✖ The elements with this role can be changed to the following elements:
+    <section>
+  
+    38 │   return (
+    39 │     <div
+  > 40 │       role="region"
+       │       ^^^^^^^^^^^^^
+    41 │       aria-busy="true"
+    42 │       aria-label="Loading recordings"
+  
+  ℹ For examples and more information, see WAI-ARIA Roles
+  
+  ℹ Replace with one of these elements:
+  
+  - <section>
+  
+
+apps/web/src/presentation/local-recordings/presentation/recording-detail-view.tsx:8:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     6 │ // meeting in History when one exists. The object URL is opened when the detail opens and
+     7 │ // revoked when it closes (useRecordingPlayback). A missing file offers only Delete.
+   > 8 │ import { parseMeetingHistoryId } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 9 │ import { buttonVariants } from "@know-meet/ui/components/button";
+        ...
+  > 32 │ import { RecordingPlayer } from "./recording-player";
+  > 33 │ import type { LibraryRow } from "./recording-items";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    34 │ 
+    35 │ const linkClass = cn(
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     29  29 │   } from "../application/recording-format";
+     30  30 │   import { DeleteRecordingDialog } from "./delete-recording-dialog";
+     31     │ - import·{·ConditionNote·}·from·"./recording-parts";
+     32     │ - import·{·RecordingPlayer·}·from·"./recording-player";
+     33     │ - import·type·{·LibraryRow·}·from·"./recording-items";
+         31 │ + import·type·{·LibraryRow·}·from·"./recording-items";
+         32 │ + import·{·ConditionNote·}·from·"./recording-parts";
+         33 │ + import·{·RecordingPlayer·}·from·"./recording-player";
+     34  34 │   
+     35  35 │   const linkClass = cn(
+  
+
+apps/web/src/presentation/meeting-room/presentation/background/background-section.tsx:15:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    13 │ // Scenario contract: radiogroup "Background", km-effect-off, km-effect-blur,
+    14 │ // km-effect-image-option.
+  > 15 │ import type { ConferencingUseCases } from "@know-meet/application";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 16 │ import type { BackgroundEffectState, Support } from "@know-meet/domain";
+        ...
+  > 23 │ import { BACKGROUND_CHOICES, type BackgroundChoice } from "./background-options";
+  > 24 │ import { BACKGROUND_COPY } from "./background-copy";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    25 │ import { type BackgroundStatus, useBackgroundChoice } from "./use-background-choice";
+    26 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     21  21 │   import type { Announce } from "../../../guest-meeting/live-status";
+     22  22 │   import { sectionHeadingClass } from "../device-settings/audio-section";
+     23     │ - import·{·BACKGROUND_CHOICES,·type·BackgroundChoice·}·from·"./background-options";
+     24     │ - import·{·BACKGROUND_COPY·}·from·"./background-copy";
+         23 │ + import·{·BACKGROUND_COPY·}·from·"./background-copy";
+         24 │ + import·{·BACKGROUND_CHOICES,·type·BackgroundChoice·}·from·"./background-options";
+     25  25 │   import { type BackgroundStatus, useBackgroundChoice } from "./use-background-choice";
+     26  26 │   
+  
+
+apps/web/src/presentation/meeting-room/presentation/chat/chat-panel.tsx:9:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     7 │ // messages keep the log scrolled to the end unless the reader has scrolled up.
+     8 │ // Scenario contract: km-chat-panel.
+   > 9 │ import type { ChatMessage, RemoteParticipant } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 10 │ import { KmIcon } from "@know-meet/ui/components/km-icon";
+        ...
+  > 14 │ import { CHAT_COPY } from "./chat-copy";
+  > 15 │ import { ChatComposer } from "./chat-composer";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    16 │ import { ChatMessageItem } from "./chat-message-item";
+    17 │ import type { ChatState } from "./use-chat";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     12  12 │   import { currentRecipientName } from "../../domain/chat-audience";
+     13  13 │   import { RoomSheetPane } from "../room-sheet/room-sheet-pane";
+     14     │ - import·{·CHAT_COPY·}·from·"./chat-copy";
+     15     │ - import·{·ChatComposer·}·from·"./chat-composer";
+         14 │ + import·{·ChatComposer·}·from·"./chat-composer";
+         15 │ + import·{·CHAT_COPY·}·from·"./chat-copy";
+     16  16 │   import { ChatMessageItem } from "./chat-message-item";
+     17  17 │   import type { ChatState } from "./use-chat";
+  
+
+apps/web/src/presentation/meeting-room/presentation/device-settings/use-room-device.ts:9:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     7 │ // The device in use being unplugged falls back to the default (the adapter switches) and
+     8 │ // is reported through `onLost`, which the pane shows as a toast.
+   > 9 │ import type { ConferencingUseCases, DeviceState } from "@know-meet/application";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 10 │ import type { DeviceId, DeviceKind } from "@know-meet/domain";
+        ...
+  > 29 │ } from "../../../guest-meeting/devices/device-options";
+  > 30 │ import { useDeviceLoss } from "../../../guest-meeting/devices/use-device-loss";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │ 
+    32 │ export interface RoomDevice {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     10  10 │   import type { DeviceId, DeviceKind } from "@know-meet/domain";
+     11  11 │   import { useCallback, useState } from "react";
+     12     │ - import·type·{·Announce·}·from·"../../../guest-meeting/live-status";
+     13     │ - import·{
+     14     │ - ··DEVICE_COPY,
+     15     │ - ··deviceChanged,
+     16     │ - ··deviceDisconnected,
+     17     │ - ··noDeviceOption,
+     18     │ - ··placeholderOption,
+     19     │ - ··switchFailed,
+     20     │ - }·from·"../../../guest-meeting/devices/device-copy";
+     21     │ - import·type·{·DeviceFieldMode·}·from·"../../../guest-meeting/devices/device-field";
+     22     │ - import·{
+     23     │ - ··type·DeviceOption,
+     24     │ - ··deviceLabel,
+     25     │ - ··deviceOptions,
+     26     │ - ··hasDevicePermission,
+     27     │ - ··listedDeviceId,
+     28     │ - ··shownDeviceId,
+     29     │ - }·from·"../../../guest-meeting/devices/device-options";
+     30     │ - import·{·useDeviceLoss·}·from·"../../../guest-meeting/devices/use-device-loss";
+         12 │ + import·{
+         13 │ + ··DEVICE_COPY,
+         14 │ + ··deviceChanged,
+         15 │ + ··deviceDisconnected,
+         16 │ + ··noDeviceOption,
+         17 │ + ··placeholderOption,
+         18 │ + ··switchFailed,
+         19 │ + }·from·"../../../guest-meeting/devices/device-copy";
+         20 │ + import·type·{·DeviceFieldMode·}·from·"../../../guest-meeting/devices/device-field";
+         21 │ + import·{
+         22 │ + ··type·DeviceOption,
+         23 │ + ··deviceLabel,
+         24 │ + ··deviceOptions,
+         25 │ + ··hasDevicePermission,
+         26 │ + ··listedDeviceId,
+         27 │ + ··shownDeviceId,
+         28 │ + }·from·"../../../guest-meeting/devices/device-options";
+         29 │ + import·{·useDeviceLoss·}·from·"../../../guest-meeting/devices/use-device-loss";
+         30 │ + import·type·{·Announce·}·from·"../../../guest-meeting/live-status";
+     31  31 │   
+     32  32 │   export interface RoomDevice {
+  
+
+apps/web/src/presentation/meeting-room/presentation/room-sheet/room-sheet-pane.tsx:66:9 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━
+
+  ✖ The HTML element section is non-interactive. Do not use tabIndex.
+  
+    64 │         ref={bodyRef}
+    65 │         aria-label={bodyLabel}
+  > 66 │         tabIndex={0}
+       │         ^^^^^^^^^^^^
+    67 │         className={cn(
+    68 │           "min-h-0 overflow-y-auto overscroll-contain rounded-base px-s5 pb-s4",
+  
+  ℹ Adding non-interactive elements to the keyboard navigation flow can confuse users.
+  
+  ℹ Unsafe fix: Remove the tabIndex attribute.
+  
+    64 64 │           ref={bodyRef}
+    65 65 │           aria-label={bodyLabel}
+    66    │ - ········tabIndex={0}
+    67 66 │           className={cn(
+    68 67 │             "min-h-0 overflow-y-auto overscroll-contain rounded-base px-s5 pb-s4",
+  
+
+packages/application/src/history/fakes/in-memory-history-repository.ts:1:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+   > 1 │ import {
+       │ ^^^^^^^^
+   > 2 │   type ChatMessageId,
+   > 3 │   err,
+   > 4 │   type HistoryChatMessage,
+        ...
+  > 13 │   type Result,
+  > 14 │ } from "@know-meet/domain";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    15 │ import {
+    16 │   type HistoryChange,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      3   3 │     err,
+      4   4 │     type HistoryChatMessage,
+      5     │ - ··historyErrors,
+      6     │ - ··type·HistoryStorageError,
+          5 │ + ··type·HistoryStorageError,
+      7   6 │     type HistoryStorageStatus,
+      8     │ - ··type·MeetingHistoryId,
+          7 │ + ··historyErrors,
+          8 │ + ··type·MeetingHistoryId,
+      9   9 │     type MeetingSession,
+     10  10 │     type MeetingSummary,
+  
+
+packages/domain/src/index.ts:93:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Some imports or exports are not organized.
+  
+     91 │   toHistoryChatMessage,
+     92 │ } from "./history/history-chat-message.ts";
+   > 93 │ export {
+        │ ^^^^^^^^
+   > 94 │   type HistoryEntryNotFound,
+         ...
+  > 105 │   parseMeetingHistoryId,
+  > 106 │ } from "./history/meeting-history-id.ts";
+        │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    107 │ export {
+    108 │   endMeetingSession,
+  
+  ℹ Sort the exported names.
+  
+     91 │   toHistoryChatMessage,
+     92 │ } from "./history/history-chat-message.ts";
+   > 93 │ export {
+        │ ^^^^^^^^
+   > 94 │   type HistoryEntryNotFound,
+         ...
+  > 100 │   type HistoryUnavailable,
+  > 101 │ } from "./history/history-error.ts";
+        │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    102 │ export {
+    103 │   MIN_MEETING_HISTORY_ID_LENGTH,
+  
+  ℹ Sort the exported names.
+  
+    100 │   type HistoryUnavailable,
+    101 │ } from "./history/history-error.ts";
+  > 102 │ export {
+        │ ^^^^^^^^
+  > 103 │   MIN_MEETING_HISTORY_ID_LENGTH,
+  > 104 │   type MeetingHistoryId,
+  > 105 │   parseMeetingHistoryId,
+  > 106 │ } from "./history/meeting-history-id.ts";
+        │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    107 │ export {
+    108 │   endMeetingSession,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     94  94 │     type HistoryEntryNotFound,
+     95  95 │     type HistoryError,
+     96     │ - ··historyErrors,
+     97     │ - ··type·HistoryStorageError,
+         96 │ + ··type·HistoryStorageError,
+     98  97 │     type HistoryStorageFailed,
+     99  98 │     type HistoryStorageStatus,
+    100  99 │     type HistoryUnavailable,
+        100 │ + ··historyErrors,
+    101 101 │   } from "./history/history-error.ts";
+    102 102 │   export {
+    103     │ - ··MIN_MEETING_HISTORY_ID_LENGTH,
+    104     │ - ··type·MeetingHistoryId,
+        103 │ + ··type·MeetingHistoryId,
+        104 │ + ··MIN_MEETING_HISTORY_ID_LENGTH,
+    105 105 │     parseMeetingHistoryId,
+    106 106 │   } from "./history/meeting-history-id.ts";
+  
+
+packages/realtime/src/realtime-room/index.ts:2:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━
+
+  ✖ Sort these exports.
+  
+     1 │ /** The LiveKit realtime room feature: public surface only. */
+   > 2 │ export type {
+       │ ^^^^^^^^^^^^^
+   > 3 │   DiagnosticSink,
+   > 4 │   DropReason,
+        ...
+  > 11 │ } from "./infrastructure/livekit/create-livekit-realtime-room.ts";
+  > 12 │ export { createBackgroundProcessorHook } from "./infrastructure/livekit/background-processor-hook.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    13 │ export type {
+    14 │   BackgroundAssetPaths,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     6  6 │     RealtimeDiagnostic,
+     7  7 │   } from "./application/diagnostics.ts";
+     8    │ - export·{
+     9    │ - ··createLiveKitRealtimeRoom,
+    10    │ - ··type·LiveKitRealtimeRoomOptions,
+    11    │ - }·from·"./infrastructure/livekit/create-livekit-realtime-room.ts";
+    12    │ - export·{·createBackgroundProcessorHook·}·from·"./infrastructure/livekit/background-processor-hook.ts";
+        8 │ + export·{·createBackgroundProcessorHook·}·from·"./infrastructure/livekit/background-processor-hook.ts";
+        9 │ + export·{
+       10 │ + ··createLiveKitRealtimeRoom,
+       11 │ + ··type·LiveKitRealtimeRoomOptions,
+       12 │ + }·from·"./infrastructure/livekit/create-livekit-realtime-room.ts";
+    13 13 │   export type {
+    14 14 │     BackgroundAssetPaths,
+  
+
+tests/release/headers.spec.ts:14:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    12 │  *   assertions against the bare static image must report the missing HSTS.
+    13 │  */
+  > 14 │ import { connect, type PeerCertificate } from "node:tls";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 15 │ import { expect, test } from "@playwright/test";
+  > 16 │ import { API } from "./src/api-contract.ts";
+  > 17 │ import { attachJson } from "./src/evidence.ts";
+  > 18 │ import { cspDirectiveProblems, HSTS, headerProblems } from "./src/header-checks.ts";
+  > 19 │ import { DESKTOP_CSP_GOLDEN } from "./src/csp-delta.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │ import { desktopCsp, expectedCsp, previousCsp, staticImageUrl } from "./src/release-env.ts";
+    21 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     15  15 │   import { expect, test } from "@playwright/test";
+     16  16 │   import { API } from "./src/api-contract.ts";
+     17     │ - import·{·attachJson·}·from·"./src/evidence.ts";
+     18     │ - import·{·cspDirectiveProblems,·HSTS,·headerProblems·}·from·"./src/header-checks.ts";
+     19     │ - import·{·DESKTOP_CSP_GOLDEN·}·from·"./src/csp-delta.ts";
+         17 │ + import·{·DESKTOP_CSP_GOLDEN·}·from·"./src/csp-delta.ts";
+         18 │ + import·{·attachJson·}·from·"./src/evidence.ts";
+         19 │ + import·{·cspDirectiveProblems,·HSTS,·headerProblems·}·from·"./src/header-checks.ts";
+     20  20 │   import { desktopCsp, expectedCsp, previousCsp, staticImageUrl } from "./src/release-env.ts";
+     21  21 │   
+  
+
+tests/release/src/wc-chat.ts:6:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+     4 │  * claim; the wire probe (wireContains) is the browser's, independent of it.
+     5 │  */
+   > 6 │ import { expect, type Locator, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 7 │ import { AUDIENCE_EVERYONE, CHAT } from "./wc-test-ids.ts";
+   > 8 │ import { readTaps } from "./wc-taps.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ 
+    10 │ export type Audience = typeof AUDIENCE_EVERYONE | { readonly privateTo: string };
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     5  5 │    */
+     6  6 │   import { expect, type Locator, type Page } from "@playwright/test";
+     7    │ - import·{·AUDIENCE_EVERYONE,·CHAT·}·from·"./wc-test-ids.ts";
+     8    │ - import·{·readTaps·}·from·"./wc-taps.ts";
+        7 │ + import·{·readTaps·}·from·"./wc-taps.ts";
+        8 │ + import·{·AUDIENCE_EVERYONE,·CHAT·}·from·"./wc-test-ids.ts";
+     9  9 │   
+    10 10 │   export type Audience = typeof AUDIENCE_EVERYONE | { readonly privateTo: string };
+  
+
+tests/release/src/wc-network.ts:16:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    14 │  */
+    15 │ import type { BrowserContext, Page } from "@playwright/test";
+  > 16 │ import { readTaps, type EgressEntry, type CspViolation } from "./wc-taps.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │ 
+    18 │ /** Chromium marks a bare EBML header (WebM and Matroska) with these four bytes. */
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     14  14 │    */
+     15  15 │   import type { BrowserContext, Page } from "@playwright/test";
+     16     │ - import·{·readTaps,·type·EgressEntry,·type·CspViolation·}·from·"./wc-taps.ts";
+         16 │ + import·{·type·CspViolation,·type·EgressEntry,·readTaps·}·from·"./wc-taps.ts";
+     17  17 │   
+     18  18 │   /** Chromium marks a bare EBML header (WebM and Matroska) with these four bytes. */
+  
+
+tests/release/src/wc-recording.ts:14:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    12 │  * the spec fails even if the indicator code is still correct.
+    13 │  */
+  > 14 │ import { expect, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 15 │ import { leave } from "./meeting-flow.ts";
+  > 16 │ import { reachNavigation } from "./wc-nav.ts";
+  > 17 │ import type { Participant } from "./wc-room.ts";
+  > 18 │ import { RECORDING } from "./wc-test-ids.ts";
+  > 19 │ import { opfsEntries, readTaps, type OpfsEntry } from "./wc-taps.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │ 
+    21 │ export const RECORD_WINDOW_MS = 20_000;
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     16  16 │   import { reachNavigation } from "./wc-nav.ts";
+     17  17 │   import type { Participant } from "./wc-room.ts";
+     18     │ - import·{·RECORDING·}·from·"./wc-test-ids.ts";
+     19     │ - import·{·opfsEntries,·readTaps,·type·OpfsEntry·}·from·"./wc-taps.ts";
+         18 │ + import·{·type·OpfsEntry,·opfsEntries,·readTaps·}·from·"./wc-taps.ts";
+         19 │ + import·{·RECORDING·}·from·"./wc-test-ids.ts";
+     20  20 │   
+     21  21 │   export const RECORD_WINDOW_MS = 20_000;
+  
+
+tests/release/src/wc-room.ts:7:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Some imports or exports are not organized.
+  
+     5 │  * (test-ids.ts, meeting-flow.ts): home, lobby, room.
+     6 │  */
+   > 7 │ import {
+       │ ^^^^^^^^
+   > 8 │   expect,
+        ...
+  > 18 │ import { DATA_STATE, HOME, LOBBY, ROOM, SCREEN } from "./test-ids.ts";
+  > 19 │ import { recordNetwork, type NetworkRecorder } from "./wc-network.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │ import { installTaps } from "./wc-taps.ts";
+    21 │ 
+  
+  ℹ Sort the imported names.
+  
+     5 │  * (test-ids.ts, meeting-flow.ts): home, lobby, room.
+     6 │  */
+   > 7 │ import {
+       │ ^^^^^^^^
+   > 8 │   expect,
+        ...
+  > 14 │   type TestInfo,
+  > 15 │ } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    16 │ import { API, isCreateMeetingResponse, STATUS } from "./api-contract.ts";
+    17 │ import { CONNECT_TIMEOUT_MS, expectInRoom, joinFromLobby } from "./meeting-flow.ts";
+  
+  ℹ Sort the imported names.
+  
+    17 │ import { CONNECT_TIMEOUT_MS, expectInRoom, joinFromLobby } from "./meeting-flow.ts";
+    18 │ import { DATA_STATE, HOME, LOBBY, ROOM, SCREEN } from "./test-ids.ts";
+  > 19 │ import { recordNetwork, type NetworkRecorder } from "./wc-network.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    20 │ import { installTaps } from "./wc-taps.ts";
+    21 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      6   6 │    */
+      7   7 │   import {
+      8     │ - ··expect,
+      9     │ - ··type·Browser,
+          8 │ + ··type·Browser,
+     10   9 │     type BrowserContext,
+     11  10 │     type BrowserContextOptions,
+     12     │ - ··type·Page,
+         11 │ + ··expect,
+         12 │ + ··type·Page,
+     13  13 │     type Response,
+     14  14 │     type TestInfo,
+    ······· │ 
+     17  17 │   import { CONNECT_TIMEOUT_MS, expectInRoom, joinFromLobby } from "./meeting-flow.ts";
+     18  18 │   import { DATA_STATE, HOME, LOBBY, ROOM, SCREEN } from "./test-ids.ts";
+     19     │ - import·{·recordNetwork,·type·NetworkRecorder·}·from·"./wc-network.ts";
+         19 │ + import·{·type·NetworkRecorder,·recordNetwork·}·from·"./wc-network.ts";
+     20  20 │   import { installTaps } from "./wc-taps.ts";
+     21  21 │   
+  
+
+tests/release/wc-1-screen-share.spec.ts:8:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  ✖ Some imports or exports are not organized.
+  
+     6 │  * Boundary-only (VLBV): never run per change.
+     7 │  */
+   > 8 │ import { expect, test, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 9 │ import { attachJson, attachScreenshot } from "./src/evidence.ts";
+        ...
+  > 19 │   type Participant,
+  > 20 │ } from "./src/wc-room.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    21 │ import { SHARE, SHARE_SOURCE } from "./src/wc-test-ids.ts";
+    22 │ 
+  
+  ℹ Sort the imported names.
+  
+     6 │  * Boundary-only (VLBV): never run per change.
+     7 │  */
+   > 8 │ import { expect, test, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ import { attachJson, attachScreenshot } from "./src/evidence.ts";
+    10 │ import { expectOneRemoteWithMedia, observeVideo, remoteTiles } from "./src/media-probes.ts";
+  
+  ℹ Sort the imported names.
+  
+    10 │ import { expectOneRemoteWithMedia, observeVideo, remoteTiles } from "./src/media-probes.ts";
+    11 │ import { DATA_STATE } from "./src/test-ids.ts";
+  > 12 │ import {
+       │ ^^^^^^^^
+  > 13 │   closeAll,
+        ...
+  > 19 │   type Participant,
+  > 20 │ } from "./src/wc-room.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    21 │ import { SHARE, SHARE_SOURCE } from "./src/wc-test-ids.ts";
+    22 │ 
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+      6   6 │    * Boundary-only (VLBV): never run per change.
+      7   7 │    */
+      8     │ - import·{·expect,·test,·type·Page·}·from·"@playwright/test";
+          8 │ + import·{·expect,·type·Page,·test·}·from·"@playwright/test";
+      9   9 │   import { attachJson, attachScreenshot } from "./src/evidence.ts";
+     10  10 │   import { expectOneRemoteWithMedia, observeVideo, remoteTiles } from "./src/media-probes.ts";
+    ······· │ 
+     16  16 │     joinRoom,
+     17  17 │     newParticipant,
+     18     │ - ··startRoom,
+     19     │ - ··type·Participant,
+         18 │ + ··type·Participant,
+         19 │ + ··startRoom,
+     20  20 │   } from "./src/wc-room.ts";
+     21  21 │   import { SHARE, SHARE_SOURCE } from "./src/wc-test-ids.ts";
+  
+
+tests/release/wc-10-web-csp.spec.ts:13:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    11 │  * serves the generated header (via the same render as the gateway filter).
+    12 │  */
+  > 13 │ import { expect, test, type APIRequestContext } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    14 │ import {
+    15 │   canonicalCsp,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     11  11 │    * serves the generated header (via the same render as the gateway filter).
+     12  12 │    */
+     13     │ - import·{·expect,·test,·type·APIRequestContext·}·from·"@playwright/test";
+         13 │ + import·{·type·APIRequestContext,·expect,·test·}·from·"@playwright/test";
+     14  14 │   import {
+     15  15 │     canonicalCsp,
+  
+
+tests/release/wc-12-enable-audio.spec.ts:12:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    10 │  * run that cannot establish the precondition is BLOCKED, never a pass.
+    11 │  */
+  > 12 │ import { chromium, expect, test, type Browser, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    13 │ import {
+    14 │   AUTOPLAY_ALLOWED_ARG,
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     10  10 │    * run that cannot establish the precondition is BLOCKED, never a pass.
+     11  11 │    */
+     12     │ - import·{·chromium,·expect,·test,·type·Browser,·type·Page·}·from·"@playwright/test";
+         12 │ + import·{·type·Browser,·chromium,·expect,·type·Page,·test·}·from·"@playwright/test";
+     13  13 │   import {
+     14  14 │     AUTOPLAY_ALLOWED_ARG,
+  
+
+tests/release/wc-4-background-effects.spec.ts:17:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    15 │  * Visual quality of the composite is a judgement from the attached frames.
+    16 │  */
+  > 17 │ import { writeFileSync } from "node:fs";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 18 │ import { chromium, expect, test, type Page } from "@playwright/test";
+        ...
+  > 35 │ } from "./src/wc-room.ts";
+  > 36 │ import { openRoomSettings } from "./src/wc-devices.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    37 │ import { EFFECTS } from "./src/wc-test-ids.ts";
+    38 │ import { buildY4m } from "./src/y4m.ts";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     21  21 │   import { expectOneRemoteWithMedia, observeVideo, remoteTiles } from "./src/media-probes.ts";
+     22  22 │   import { ROOM } from "./src/test-ids.ts";
+     23     │ - import·{·edgeEnergy,·frameDifference,·snapshotFrame·}·from·"./src/wc-frames.ts";
+     24     │ - import·{
+     25     │ - ··assetRequests,
+     26     │ - ··crossOriginAssets,
+     27     │ - ··summarise,
+     28     │ - }·from·"./src/wc-network.ts";
+         23 │ + import·{·openRoomSettings·}·from·"./src/wc-devices.ts";
+         24 │ + import·{·edgeEnergy,·frameDifference,·snapshotFrame·}·from·"./src/wc-frames.ts";
+     29  25 │   import {
+     30     │ - ··closeAll,
+     31     │ - ··contextDefaults,
+     32     │ - ··joinRoom,
+     33     │ - ··newParticipant,
+     34     │ - ··startRoom,
+     35     │ - }·from·"./src/wc-room.ts";
+     36     │ - import·{·openRoomSettings·}·from·"./src/wc-devices.ts";
+         26 │ + ··assetRequests,
+         27 │ + ··crossOriginAssets,
+         28 │ + ··summarise,
+         29 │ + }·from·"./src/wc-network.ts";
+         30 │ + import·{
+         31 │ + ··closeAll,
+         32 │ + ··contextDefaults,
+         33 │ + ··joinRoom,
+         34 │ + ··newParticipant,
+         35 │ + ··startRoom,
+         36 │ + }·from·"./src/wc-room.ts";
+     37  37 │   import { EFFECTS } from "./src/wc-test-ids.ts";
+     38  38 │   import { buildY4m } from "./src/y4m.ts";
+  
+
+tests/release/wc-7-local-history.spec.ts:25:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━
+
+  ✖ Sort these imports.
+  
+    23 │  * detector were blind, that test fails and the privacy claim is not credited.
+    24 │  */
+  > 25 │ import { expect, test, type Page } from "@playwright/test";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 26 │ import { attachJson, attachScreenshot } from "./src/evidence.ts";
+  > 27 │ import { leave } from "./src/meeting-flow.ts";
+  > 28 │ import { findLeaks, redactUrl, summarise } from "./src/wc-network.ts";
+  > 29 │ import { expectMessage, runTag, sendChat, uniqueText } from "./src/wc-chat.ts";
+  > 30 │ import { reachNavigation } from "./src/wc-nav.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │ import { launchProfile } from "./src/wc-profile.ts";
+    32 │ import {
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     26  26 │   import { attachJson, attachScreenshot } from "./src/evidence.ts";
+     27  27 │   import { leave } from "./src/meeting-flow.ts";
+     28     │ - import·{·findLeaks,·redactUrl,·summarise·}·from·"./src/wc-network.ts";
+     29     │ - import·{·expectMessage,·runTag,·sendChat,·uniqueText·}·from·"./src/wc-chat.ts";
+     30     │ - import·{·reachNavigation·}·from·"./src/wc-nav.ts";
+         28 │ + import·{·expectMessage,·runTag,·sendChat,·uniqueText·}·from·"./src/wc-chat.ts";
+         29 │ + import·{·reachNavigation·}·from·"./src/wc-nav.ts";
+         30 │ + import·{·findLeaks,·redactUrl,·summarise·}·from·"./src/wc-network.ts";
+     31  31 │   import { launchProfile } from "./src/wc-profile.ts";
+     32  32 │   import {
+  
+
+tests/release/wc-8-local-recording.spec.ts:15:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━
+
+  ✖ Sort the imported names.
+  
+    13 │ import { expectOneRemoteWithMedia } from "./src/media-probes.ts";
+    14 │ import { findRecordingEgress, summarise } from "./src/wc-network.ts";
+  > 15 │ import {
+       │ ^^^^^^^^
+  > 16 │   answerConsent,
+        ...
+  > 26 │   stopRecording,
+  > 27 │ } from "./src/wc-recording.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    28 │ import { closeAll, holdsFor, joinRoom, newParticipant, startRoom } from "./src/wc-room.ts";
+    29 │ import { opfsEntries, readTaps } from "./src/wc-taps.ts";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     21  21 │     observePlayer,
+     22  22 │     openLibraryAfterLeaving,
+     23     │ - ··readLibrary,
+     24     │ - ··RECORD_WINDOW_MS,
+         23 │ + ··RECORD_WINDOW_MS,
+         24 │ + ··readLibrary,
+     25  25 │     requestRecording,
+     26  26 │     stopRecording,
+  
+
+tests/release/wc-9-consent-declined.spec.ts:21:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━
+
+  ✖ Some imports or exports are not organized.
+  
+    19 │ import { attachJson, attachScreenshot } from "./src/evidence.ts";
+    20 │ import { expectOneRemoteWithMedia } from "./src/media-probes.ts";
+  > 21 │ import {
+       │ ^^^^^^^^
+  > 22 │   answerConsent,
+        ...
+  > 39 │   type Participant,
+  > 40 │ } from "./src/wc-room.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    41 │ import { opfsEntries, readTaps } from "./src/wc-taps.ts";
+    42 │ import { RECORDING } from "./src/wc-test-ids.ts";
+  
+  ℹ Sort the imported names.
+  
+    19 │ import { attachJson, attachScreenshot } from "./src/evidence.ts";
+    20 │ import { expectOneRemoteWithMedia } from "./src/media-probes.ts";
+  > 21 │ import {
+       │ ^^^^^^^^
+  > 22 │   answerConsent,
+        ...
+  > 30 │   stopRecording,
+  > 31 │ } from "./src/wc-recording.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    32 │ import {
+    33 │   closeAll,
+  
+  ℹ Sort the imported names.
+  
+    30 │   stopRecording,
+    31 │ } from "./src/wc-recording.ts";
+  > 32 │ import {
+       │ ^^^^^^^^
+  > 33 │   closeAll,
+        ...
+  > 39 │   type Participant,
+  > 40 │ } from "./src/wc-room.ts";
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    41 │ import { opfsEntries, readTaps } from "./src/wc-taps.ts";
+    42 │ import { RECORDING } from "./src/wc-test-ids.ts";
+  
+  ℹ Safe fix: Organize imports and exports (Biome)
+  
+     25  25 │     notRecordingProbe,
+     26  26 │     openLibraryAfterLeaving,
+     27     │ - ··readLibrary,
+     28     │ - ··RECORD_WINDOW_MS,
+         27 │ + ··RECORD_WINDOW_MS,
+         28 │ + ··readLibrary,
+     29  29 │     requestRecording,
+     30  30 │     stopRecording,
+    ······· │ 
+     36  36 │     joinRoom,
+     37  37 │     newParticipant,
+     38     │ - ··startRoom,
+     39     │ - ··type·Participant,
+         38 │ + ··type·Participant,
+         39 │ + ··startRoom,
+     40  40 │   } from "./src/wc-room.ts";
+     41  41 │   import { opfsEntries, readTaps } from "./src/wc-taps.ts";
+  
+
+Checked 766 files in 311ms. No fixes applied.
+Found 107 errors.
+Found 4 warnings.
+Found 1 info.
+ci ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Some warnings were emitted while running checks.
+  
+
+
+lint: FAILED lint:names, lint:biome
+31e891fb Merge pull request #14 from Know-Me-Tools/feat/round-5-ui-kit-flutter-commands
+     324

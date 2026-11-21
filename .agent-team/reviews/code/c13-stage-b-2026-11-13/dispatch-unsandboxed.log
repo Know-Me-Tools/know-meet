@@ -1,0 +1,6 @@
+[judge] WARN: canonical judge/producer identity is incomplete; independence is degraded
+[judge] WARN: PRODUCER_UNKNOWN — packet carries no producer_model, so the
+[judge]       judge!=producer check cannot be enforced for this review.
+[MODEL_ROUTING] phase=adv-review-judge class=frontier model=k3.1-pro producer=unknown
+[judge] ERROR: gateway returned HTTP 500 at http://localhost:4000/v1
+[judge]        body: {"error":{"message":"server error: error code: 524\n","type":"ServerError","param":null,"code":null}}

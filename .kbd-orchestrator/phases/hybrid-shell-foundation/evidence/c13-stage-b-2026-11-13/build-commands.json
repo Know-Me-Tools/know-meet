@@ -1,0 +1,30 @@
+[
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/web",
+      "build"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:31:08.149600+00:00",
+    "log": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/build-1.log",
+    "exitCode": 0,
+    "finishedAt": "2026-11-13T10:31:11.297849+00:00",
+    "logSha256": "12469dafe5425b51dcb8415c3ae7218f98e4627dfa4e72659919b4b5917eda48"
+  },
+  {
+    "argv": [
+      "pnpm",
+      "--filter",
+      "@know-meet/fidelity-tests",
+      "typecheck"
+    ],
+    "cwd": "/Users/gqadonis/Projects/know-me/know-meet",
+    "startedAt": "2026-11-13T10:31:11.298509+00:00",
+    "log": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/hybrid-shell-foundation/evidence/c13-stage-b-2026-11-13/build-2.log",
+    "exitCode": 0,
+    "finishedAt": "2026-11-13T10:31:12.165646+00:00",
+    "logSha256": "29c5ee0f6b0b20dbb259b99d01276198c3d28190090706394608d4deda6d2c0b"
+  }
+]

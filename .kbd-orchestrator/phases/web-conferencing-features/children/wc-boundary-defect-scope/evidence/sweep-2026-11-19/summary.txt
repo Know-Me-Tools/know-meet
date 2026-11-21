@@ -1,0 +1,8 @@
+candidate 440156e226b41d3891c0351c4eed6913fecf2e84
+1 exit=0 secs=35 :: pnpm lint
+2 exit=1 secs=2 :: pnpm typecheck --continue
+3 exit=1 secs=3 :: pnpm test --continue
+4 aborted: hung 81 min in cargo build -p bff on sccache; rerun as 04b with RUSTC_WRAPPER unset
+4b exit=0 secs=938 :: pnpm build (RUSTC_WRAPPER unset)
+5b exit=1 secs=2 :: pnpm --filter @know-meet/web build:hosted (RUSTC_WRAPPER unset)
+5c exit=0 secs=3 :: KM_LIVEKIT_URL from LIVEKIT_URL (README run-book form) pnpm --filter @know-meet/web build:hosted

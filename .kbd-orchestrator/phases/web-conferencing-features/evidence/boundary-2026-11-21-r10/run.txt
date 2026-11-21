@@ -1,0 +1,4 @@
+candidate fe60f63b311ba8302d271b483f884d7eb8bb5495 (product code unchanged since 8f6297ef: yes)
+images identical to r9
+healthz 200
+packaged exit 0

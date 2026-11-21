@@ -1,0 +1,35 @@
+{
+  "steps": [
+    {
+      "step": 1,
+      "command": "pnpm install --frozen-lockfile",
+      "commit": "917b82ce9e60a04222d154b6ef390651571d1061",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T18:25:22.399Z",
+      "durationMs": 1983,
+      "log": "01-static-1.log"
+    },
+    {
+      "step": 2,
+      "command": "pnpm lint",
+      "commit": "917b82ce9e60a04222d154b6ef390651571d1061",
+      "exit": 0,
+      "signal": null,
+      "startedAt": "2026-11-19T18:25:24.382Z",
+      "durationMs": 34590,
+      "log": "02-static-2.log"
+    },
+    {
+      "step": 3,
+      "command": "pnpm typecheck",
+      "commit": "917b82ce9e60a04222d154b6ef390651571d1061",
+      "exit": 1,
+      "signal": null,
+      "startedAt": "2026-11-19T18:25:58.972Z",
+      "durationMs": 4150,
+      "log": "03-static-3.log"
+    }
+  ],
+  "candidateCommit": "917b82ce9e60a04222d154b6ef390651571d1061"
+}

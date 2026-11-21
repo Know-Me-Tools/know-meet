@@ -1,0 +1,2 @@
+know-meet-web sha256:bf50fd765885233d91af5cd91ebb5ec7fcb248dadc6f9100bd796a57e3528345
+know-meet-token-service sha256:73fa3e972bc60866ccac3069da3694c45cabcd9e3043f258e0e2982a50663caf

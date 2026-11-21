@@ -1,0 +1,5 @@
+candidate 7668ea05915c503a0a7fa1f0511994169078e5e7
+1-packaged exit 0
+2-packaged-firefox exit 0
+3-packaged-webkit exit 0
+4-packaged-webkit exit 0

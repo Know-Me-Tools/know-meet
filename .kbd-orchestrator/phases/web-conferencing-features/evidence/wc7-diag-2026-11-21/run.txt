@@ -1,0 +1,2 @@
+packaged-1 exit 0
+packaged-2 exit 0

@@ -1,0 +1,236 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "--project=packaged",
+      "--grep",
+      "the same checks fail on the default build"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream"
+            ]
+          },
+          "baseURL": "http://localhost:18080"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "packaged"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "surface.spec.ts",
+      "file": "surface.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WR-5 Screens on sample data are not reachable in the hosted build",
+          "file": "surface.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the same checks fail on the default build because /dashboard renders",
+              "ok": true,
+              "tags": [
+                "WR-5",
+                "negative-control",
+                "packaged-only"
+              ],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "packaged",
+                  "projectName": "packaged",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 112664,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-16T12:47:47.885Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wr-5-negative.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJ0YXJnZXQiOiAiaHR0cDovLzEyNy4wLjAuMTo0MTczIiwKICAicHJvYmxlbXMiOiBbCiAgICAiLzogbGlua3MgdG8gL2Rhc2hib2FyZCIsCiAgICAiLzogbGlua3MgdG8gL3JlY29yZGluZ3MiLAogICAgIi86IGxpbmtzIHRvIC9hZ2VudHMiLAogICAgIi86IGxpbmtzIHRvIC9zZXR0aW5ncyIsCiAgICAiLzogbGlua3MgdG8gL2F1dGgiLAogICAgIi9kYXNoYm9hcmQ6IGRvZXMgbm90IHJlbmRlciB0aGUgbm90LWZvdW5kIHN0YXRlIiwKICAgICIvYWdlbnRzOiBkb2VzIG5vdCByZW5kZXIgdGhlIG5vdC1mb3VuZCBzdGF0ZSIsCiAgICAiL3JlY29yZGluZ3M6IGRvZXMgbm90IHJlbmRlciB0aGUgbm90LWZvdW5kIHN0YXRlIiwKICAgICIvc2V0dGluZ3M6IGRvZXMgbm90IHJlbmRlciB0aGUgbm90LWZvdW5kIHN0YXRlIiwKICAgICIvbm90ZXM6IGRvZXMgbm90IHJlbmRlciB0aGUgbm90LWZvdW5kIHN0YXRlIiwKICAgICIvYXV0aDogZG9lcyBub3QgcmVuZGVyIHRoZSBub3QtZm91bmQgc3RhdGUiLAogICAgIi86IHNldHRpbmcga20tYXV0aCBjaGFuZ2VzIHdoYXQgaXMgdmlzaWJsZSIsCiAgICAiL2Rhc2hib2FyZCB3aXRoIGttLWF1dGg6IGRvZXMgbm90IHJlbmRlciB0aGUgbm90LWZvdW5kIHN0YXRlIgogIF0sCiAgImxpbmtzQnlQYXRoIjogewogICAgIi8iOiBbCiAgICAgICIvIiwKICAgICAgIi8iLAogICAgICAiLyIsCiAgICAgICIvZGFzaGJvYXJkIiwKICAgICAgIi9yZWNvcmRpbmdzIiwKICAgICAgIi9hZ2VudHMiLAogICAgICAiL3NldHRpbmdzIiwKICAgICAgIi9tZWV0IiwKICAgICAgIi9hdXRoIiwKICAgICAgIi8iCiAgICBdLAogICAgIi9qb2luIjogWwogICAgICAiL2pvaW4iLAogICAgICAiLyIKICAgIF0sCiAgICAiL21lZXQiOiBbCiAgICAgICIvbWVldCIsCiAgICAgICIvIiwKICAgICAgIi8iCiAgICBdCiAgfQp9"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/test-finished-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/test-finished-3.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-wr5-20261116T124745Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7387f18eb7e0b24c642c-7e42ca6875bae62d8a2c",
+              "file": "surface.spec.ts",
+              "line": 28,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T12:47:47.078Z",
+    "duration": 116546.807,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

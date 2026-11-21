@@ -1,0 +1,68 @@
+$ pnpm --filter @know-meet/release-tests exec playwright test --project=packaged
+
+Running 19 tests using 1 worker
+
+  ✓   1 [packaged] › accessibility.spec.ts:104:5 › WR-8 The three shipped screens are accessible › home, join lobby and meeting room pass axe and the fill probe in dark at all widths @WR-8 @value-critical @packaged-only (12.5s)
+  ✓   2 [packaged] › accessibility.spec.ts:104:5 › WR-8 The three shipped screens are accessible › home, join lobby and meeting room pass axe and the fill probe in light at all widths @WR-8 @value-critical @packaged-only (11.8s)
+  ✓   3 [packaged] › accessibility.spec.ts:138:3 › WR-8 The three shipped screens are accessible › the guest flow is reachable and operable by keyboard with focus shown by fill @WR-8 @value-critical @packaged-only (3.2s)
+  ✓   4 [packaged] › accessibility.spec.ts:197:3 › WR-8 The three shipped screens are accessible › motion stops under prefers-reduced-motion @WR-8 @value-critical @packaged-only (2.7s)
+  ✓   5 [packaged] › accessibility.spec.ts:247:3 › WR-8 The three shipped screens are accessible › a control fill lowered below 3:1 fails the audit @WR-8 @negative-control @packaged-only (1.1s)
+  ✓   6 [packaged] › headers.spec.ts:101:3 › WR-3 Valid TLS and security headers at the public URL › the same header assertions fail for HSTS on the bare static image @WR-3 @negative-control @packaged-only (19ms)
+  ✓   7 [packaged] › hosting.spec.ts:21:5 › WR-2 Deep links and reloads return the app › the / route returns the app document and survives a reload @WR-2 @value-critical (464ms)
+  ✓   8 [packaged] › hosting.spec.ts:21:5 › WR-2 Deep links and reloads return the app › the /join route returns the app document and survives a reload @WR-2 @value-critical (397ms)
+  ✓   9 [packaged] › hosting.spec.ts:21:5 › WR-2 Deep links and reloads return the app › the /meet route returns the app document and survives a reload @WR-2 @value-critical (355ms)
+  ✓  10 [packaged] › hosting.spec.ts:52:3 › WR-2 Deep links and reloads return the app › a missing asset is a 404, not the app document @WR-2 @negative-control (21ms)
+  ✓  11 [packaged] › meeting.spec.ts:29:3 › WR-1 Two guests hold a real meeting at the public URL › two guests see and hear each other, mute, and leave @WR-1 @value-critical @smoke (5.7s)
+  ✓  12 [packaged] › meeting.spec.ts:79:3 › WR-1 Two guests hold a real meeting at the public URL › a well-formed code that was never issued is refused @WR-1 @negative-control (700ms)
+  ✓  13 [packaged] › surface.spec.ts:17:3 › WR-5 Screens on sample data are not reachable in the hosted build › only home, join and the meeting room are reachable @WR-5 @value-critical (1.9s)
+  ✘  14 [packaged] › surface.spec.ts:28:3 › WR-5 Screens on sample data are not reachable in the hosted build › the same checks fail on the default build because /dashboard renders @WR-5 @negative-control @packaged-only (2.1m)
+  ✓  15 [packaged] › token-abuse.spec.ts:44:3 › WR-4 The public token endpoint bounds abuse › a token is issued only for a generated code and is narrowly scoped @WR-4 @value-critical (1.0m)
+  ✓  16 [packaged] › token-abuse.spec.ts:87:3 › WR-4 The public token endpoint bounds abuse › a foreign Origin is refused @WR-4 @value-critical (1.0m)
+  ✓  17 [packaged] › token-abuse.spec.ts:108:3 › WR-4 The public token endpoint bounds abuse › an arbitrary client-chosen room is refused with 404 @WR-4 @negative-control (1.0m)
+  ✓  18 [packaged] › token-abuse.spec.ts:129:3 › WR-4 The public token endpoint bounds abuse › a burst below the limit succeeds @WR-4 @negative-control (1.0m)
+  ✓  19 [packaged] › token-abuse.spec.ts:150:3 › WR-4 The public token endpoint bounds abuse › requests above the per-client rate receive 429 @WR-4 @value-critical (2.0m)
+
+
+  1) [packaged] › surface.spec.ts:28:3 › WR-5 Screens on sample data are not reachable in the hosted build › the same checks fail on the default build because /dashboard renders @WR-5 @negative-control @packaged-only 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/auth
+    Call log:
+      - navigating to "http://127.0.0.1:4173/auth", waiting until "load"
+
+
+       at src/surface-checks.ts:90
+
+      88 |     }
+      89 |     for (const path of EXCLUDED_PATHS) {
+    > 90 |       await page.goto(path);
+         |                  ^
+      91 |       if (!(await showsNotFound(page))) {
+      92 |         problems.push(`${path}: does not render the not-found state`);
+      93 |       }
+        at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:90:18
+        at withPage (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:64:12)
+        at surfaceProblems (/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/src/surface-checks.ts:74:3)
+        at /Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release/surface.spec.ts:34:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/playwright-packaged-20261116T123708Z/test-results/surface-WR-5-Screens-on-sa-6d884-d-because-dashboard-renders-packaged/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: [packaged] › token-abuse.spec.ts (6.0m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    [packaged] › surface.spec.ts:28:3 › WR-5 Screens on sample data are not reachable in the hosted build › the same checks fail on the default build because /dashboard renders @WR-5 @negative-control @packaged-only 
+  18 passed (9.2m)
+undefined
+/Users/gqadonis/.claude/worktrees/know-meet-web-release/tests/release:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: playwright test '--project=packaged'

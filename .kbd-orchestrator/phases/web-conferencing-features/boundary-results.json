@@ -1,0 +1,153 @@
+{
+  "phase": "web-conferencing-features",
+  "projectId": "80abee42-ead8-4e6f-b617-e458847775d3",
+  "runId": "hybrid-shell-foundation-20261109T083641Z",
+  "contractDigest": "3bf75c23c434b5fa6c872ace1f952400be0ccf2d917f26e29100222730f83d57",
+  "testedCommit": "8eb98147cbf772b47f93482d1f2cf0f6a25f918f",
+  "sourceDigests": {
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/playwright.json": "84dbe86a63d3c253fc87723a819d24677578c3129dab5cae0c2a78f74a296158",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-2-chat-everyone/playwright.json": "dc2de5951af5a80d19aed1fb95f8ecb3ae103a4d4ecb6b23ec7cbce5d4a53aeb",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-3-chat-private/playwright.json": "ea68d7a91950d81711b4107bf84a3dae74dd43a09c471dfe912d972dc1772940",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-4-background-effects/playwright.json": "fd2ac458f20f6f5403159582179bddad31626630019d9d2d90a88f9885e6e8bc",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/playwright.json": "3e106f962cf22cbade7fb7e3cf0380406c510f232577aba233d350c2f488e301",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-8-local-recording/playwright.json": "885be4b31e38238945d87342fa877fc75f9f361988d62d47c1144907877f0d9c",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/playwright.json": "64d8c26ced13d2f7381e94ea9c692fa7c12691e8a9683aae2322628aabde1509",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-webkit--wc-2-chat-everyone/playwright.json": "623ad797417c830bc3821a40950a6cc55c6b77522a86155daf6abaaacad51f15",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-webkit--wc-3-chat-private/playwright.json": "742fd61e220290b772e48572696318a84ae436fb0d2aa1e219f6f81dd0c29cb4",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/deployed-digest-comparison.md": "ad708cc264206fefcf0ac4f163931a0ab2ce900a7261ee33021a4e1b4db3bf78",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted--wc-7-local-history/playwright.json": "98d0c019141c4fefde274d195965572b41798382e57485008857218ee59e338c",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-webkit--wc-7-local-history/playwright.json": "fc511480fc2969f9c8dd3efe9ffe06b602621912aa1335ac90370c4638b8922b",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-firefox--wc-7-local-history/playwright.json": "457a1f082c3368ae934855871550802a7bba40d0426a361c485869d9f41d2b12",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-firefox--wc-2-chat-everyone/playwright.json": "07652708196a0189c3d6bd2eb9dd845cff8ba978150ddf1f32d2c25123aa5f41",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-firefox--wc-3-chat-private/playwright.json": "37370c94e170c96d150a86f03d5a800df83e2be981753a5df7c2630178bd12d9",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/deployed-digest-comparison.md": "e2ded15df9c86d2324a3631fce846c4dc074de6896f6d44930f06f6a8431543e",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json": "6816dddd508963c7d96035061483f75b41c658ef90e2a3299395ee89d1062487",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11b/4-packaged-webkit/playwright.json": "3dc48c677d6395b8cf7872fb1073bd0cd14ab4da7310b81ce8800c6a8b427a6d",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r9/packaged/playwright.json": "6764fedbb55683f1f579b4f8d058d321839c8389daef15f80b5585a52a7c7d69",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r10/packaged/playwright.json": "880354b9245bf5e20d42ce3f8c5616cf80279076cbe9664f503cb1c29159f971",
+    ".kbd-orchestrator/phases/web-conferencing-features/evidence/closure-2026-11-21/ci-8eb98147.json": "309ca8b1956140c869f68bb62adc1e9206238f1ff87ca086f142afd45628bb8a"
+  },
+  "scenarios": [
+    {
+      "id": "WC-1",
+      "status": "PASS",
+      "attempted": "Screen share reaches the other participant and stops; negative control (hosted Chromium, build 59543ab1)",
+      "observed": "hosted 2/2 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-1-screen-share/playwright.json"
+    },
+    {
+      "id": "WC-2",
+      "status": "PASS",
+      "attempted": "Message to everyone reaches every participant; never-sent control (hosted Chromium and WebKit on 59543ab1, Firefox on 8eb98147)",
+      "observed": "hosted Chromium 2/2, WebKit 2/2, Firefox 2/2 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-firefox--wc-2-chat-everyone/playwright.json"
+    },
+    {
+      "id": "WC-3",
+      "status": "PASS",
+      "attempted": "Private message reaches only its recipient (hosted Chromium and WebKit on 59543ab1, Firefox on 8eb98147)",
+      "observed": "hosted Chromium 1/1, WebKit 1/1, Firefox 1/1 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted-firefox--wc-3-chat-private/playwright.json"
+    },
+    {
+      "id": "WC-4",
+      "status": "PASS",
+      "attempted": "Blur, image and off on a GPU-backed headed Chromium; software-graphics path reports not available and stays responsive; no-processor control (hosted, build 59543ab1)",
+      "observed": "hosted 3/3 passed; packaged r9 GPU gaps 51/51/46 ms, r10 software path mute in 83 ms",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-4-background-effects/playwright.json"
+    },
+    {
+      "id": "WC-5",
+      "status": "PASS",
+      "attempted": "Choose microphone and camera before and during a meeting (hosted Chromium, build 59543ab1)",
+      "observed": "hosted 2/2 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/playwright.json"
+    },
+    {
+      "id": "WC-6",
+      "status": "PASS",
+      "attempted": "Speaker choice where setSinkId exists; explanation where it is absent (packaged, built from 7668ea05 = merged 8eb98147)",
+      "observed": "packaged passed within r11c 11/11",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json"
+    },
+    {
+      "id": "WC-7",
+      "status": "PASS",
+      "attempted": "Meeting and both messages survive a reload and never leave the device; delete; fresh-profile control (hosted Chromium, WebKit, Firefox on 8eb98147 after repair 11; packaged r11b)",
+      "observed": "hosted Chromium 2/2, WebKit 2/2, Firefox 2/2; packaged r11b Chromium, Firefox, WebKit twice all 2/2",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted-r11/hosted--wc-7-local-history/playwright.json"
+    },
+    {
+      "id": "WC-8",
+      "status": "PASS",
+      "attempted": "Local recording with consent, kept in browser storage (hosted Chromium, build 59543ab1)",
+      "observed": "hosted 2/2 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-8-local-recording/playwright.json"
+    },
+    {
+      "id": "WC-9",
+      "status": "PASS",
+      "attempted": "Consent declined, including late joiners (packaged, merged build)",
+      "observed": "packaged passed within r11c 11/11",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json"
+    },
+    {
+      "id": "WC-10",
+      "status": "PASS",
+      "attempted": "Hosted CSP and desktop policy checks (packaged, merged build); recorded signal under the gate rule",
+      "observed": "packaged passed within r11c 11/11",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json"
+    },
+    {
+      "id": "WC-11",
+      "status": "PASS",
+      "attempted": "Entity graph 5.0.1 resolution and the notes flow (packaged, merged build)",
+      "observed": "packaged passed within r11c 11/11",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r11c/packaged/playwright.json"
+    },
+    {
+      "id": "WC-12",
+      "status": "PASS",
+      "attempted": "Enable audio prompt under autoplay restriction (hosted Chromium, build 59543ab1)",
+      "observed": "hosted 2/2 passed",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-12-enable-audio/playwright.json"
+    },
+    {
+      "id": "WC-13",
+      "status": "PASS",
+      "attempted": "Axe, stroke scan and fill probe over the new surfaces at 375-1440 in both themes (r9); keyboard tour (r10); UI review PASS; packaged-only by design",
+      "observed": "r9 audits passed, r10 keyboard problems []",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-r10/packaged/playwright.json"
+    },
+    {
+      "id": "WC-14",
+      "status": "PASS",
+      "attempted": "Repo rules, typecheck, test, build, desktop and mobile builds in CI on merge 8eb98147; recorded signal under the gate rule",
+      "observed": "repo rules/typecheck/test/build success; web + tauri debug + bff + apk + ios simulator success; cargo success (flutter analyze/test fails, outside the WC-14 oracle and failing on main before this phase)",
+      "evidence": ".kbd-orchestrator/phases/web-conferencing-features/evidence/closure-2026-11-21/ci-8eb98147.json"
+    }
+  ],
+  "budgetConsumption": {
+    "source": "decision-log.md, adopted-contract budgets, session transcript 3a98dfbf and its subagent transcripts",
+    "values": {
+      "timeMinutes": {
+        "value": 3889,
+        "class": "measured",
+        "method": "wall clock from dispatch 2026-11-18T23:51:55Z to 2026-11-21T16:41Z"
+      },
+      "toolCalls": {
+        "value": 2294,
+        "class": "measured",
+        "method": "unique tool_use ids since dispatch: 1009 main session + 1285 subagents; lower bound"
+      },
+      "repairAttempts": {
+        "value": 11,
+        "class": "measured"
+      },
+      "noProgress": {
+        "value": 0,
+        "class": "measured"
+      }
+    }
+  }
+}

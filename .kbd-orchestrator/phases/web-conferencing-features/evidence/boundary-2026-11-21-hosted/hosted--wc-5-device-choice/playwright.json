@@ -1,0 +1,353 @@
+{
+  "config": {
+    "argv": [
+      "/Users/gqadonis/.local/share/fnm/node-versions/v26.5.0/installation/bin/node",
+      "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/node_modules/@playwright/test/cli.js",
+      "test",
+      "wc-5-device-choice.spec.ts",
+      "--project=hosted"
+    ],
+    "configFile": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release/playwright.config.ts",
+    "rootDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged",
+        "name": "packaged",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted",
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-firefox",
+        "name": "packaged-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "packaged-webkit",
+        "name": "packaged-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-firefox",
+        "name": "hosted-firefox",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "hosted-webkit",
+        "name": "hosted-webkit",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "hosted",
+        "testDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "snapshotDir": "/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 120000,
+        "use": {
+          "trace": "on",
+          "video": "on",
+          "screenshot": "on",
+          "actionTimeout": 15000,
+          "navigationTimeout": 30000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.8127.18 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "permissions": [
+            "camera",
+            "microphone"
+          ],
+          "launchOptions": {
+            "args": [
+              "--use-fake-device-for-media-stream",
+              "--use-fake-ui-for-media-stream",
+              "--auto-select-desktop-capture-source=Entire screen"
+            ]
+          },
+          "baseURL": "https://meet.know-me.tools"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "hosted"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "wc-5-device-choice.spec.ts",
+      "file": "wc-5-device-choice.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "WC-5 Chosen microphone and camera are the ones used",
+          "file": "wc-5-device-choice.spec.ts",
+          "line": 33,
+          "column": 6,
+          "specs": [
+            {
+              "title": "the lobby shows level and preview; lobby choices are active after join; switching in the room switches the device",
+              "ok": true,
+              "tags": [
+                "WC-5",
+                "value-critical",
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7915,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T14:01:01.045Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "wc-5-lobby",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-ef701-he-room-switches-the-device-hosted/attachments/wc-5-lobby-dbd268f08555d6fcfebb2c2cb05fb995dfebf64d.png"
+                        },
+                        {
+                          "name": "wc-5-devices.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJyb29tQ29kZSI6ICJrbS10ZnYtMTIxIiwKICAibWljcyI6IFsKICAgICJkZWZhdWx0IiwKICAgICJmYmE5OWE2MWZmZGI1YWIzZjI3NWEwZTZjNzI4MTc3ZWIwN2E4ZTJlZmJjY2M3ZWZhMzNlOTA4MjVhNmVkOTJjIiwKICAgICJjNzg3NTk0YjQxNTBjOTE1Njk5OWVmYjJkMjYxY2M1NmU1YWU5NjdkZWI0Y2YwNWE2M2E1MmFhNzE5OTc0MTZkIgogIF0sCiAgImNhbWVyYXMiOiBbCiAgICAiNDY2NGI2ZmZmNTczZDBlY2U2MmViMjM4NWM4MTAzZDQwMDk5NjhmYzY2MWQ4ZGM5MzQxMDA2ZDU5ZmM4ZWMwMiIsCiAgICAiYTc4NzdlZDNjZmY5ZmYyNDYwN2I2YWY5YjEzNDQ5NzliOGU4M2I0MTJlNmNhYjNlMGUwOTlhYzMyNzZlM2VlMSIsCiAgICAiYWQ3YTBlZDI3MjEwMTJjODVhYTAyYWM1ZmFmOWUzM2Y1ODQ4ZjQzNDM4NzI2ODgwMmY0N2I1MWJiYmQ1ODFkMyIKICBdLAogICJjaG9zZW5NaWMiOiAiZmJhOTlhNjFmZmRiNWFiM2YyNzVhMGU2YzcyODE3N2ViMDdhOGUyZWZiY2NjN2VmYTMzZTkwODI1YTZlZDkyYyIsCiAgImNob3NlbkNhbWVyYSI6ICJhNzg3N2VkM2NmZjlmZjI0NjA3YjZhZjliMTM0NDk3OWI4ZTgzYjQxMmU2Y2FiM2UwZTA5OWFjMzI3NmUzZWUxIiwKICAic3dpdGNoZWRNaWMiOiAiZGVmYXVsdCIKfQ=="
+                        },
+                        {
+                          "name": "wc-5-room-settings",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-ef701-he-room-switches-the-device-hosted/attachments/wc-5-room-settings-582c63d563f63284a8240f6f420275fb518c4cc2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-ef701-he-room-switches-the-device-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-ef701-he-room-switches-the-device-hosted/test-finished-2.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-ef701-he-room-switches-the-device-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "50f00ce038988b7fc739-2ade3a3d52a61ed003e4",
+              "file": "wc-5-device-choice.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "without a choice the default device is active",
+              "ok": true,
+              "tags": [
+                "WC-5",
+                "negative-control"
+              ],
+              "tests": [
+                {
+                  "timeout": 360000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "hosted",
+                  "projectName": "hosted",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4151,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-21T14:01:09.559Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-9f370-he-default-device-is-active-hosted/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted--wc-5-device-choice/test-results/wc-5-device-choice-WC-5-Ch-9f370-he-default-device-is-active-hosted/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "50f00ce038988b7fc739-e61ee2ce0fb01190af15",
+              "file": "wc-5-device-choice.spec.ts",
+              "line": 124,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-21T14:01:00.743Z",
+    "duration": 13539.928,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

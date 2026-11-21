@@ -1,0 +1,48 @@
+[WebServer] (node:91134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4191 --strictPort
+[WebServer] (node:91180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 124 tests using 1 worker
+
+(node:91186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    1 [web] › .features-gen/web/accessibility.feature.spec.js:12:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every frame state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (1.6m)
+(node:94254) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    2 [web] › .features-gen/web/accessibility.feature.spec.js:18:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every index state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (15.9s)
+  ✓    3 [web] › .features-gen/web/accessibility.feature.spec.js:24:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every auth state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (1.0m)
+  ✓    4 [web] › .features-gen/web/accessibility.feature.spec.js:30:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every join state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (54.8s)
+  ✘    5 [web] › .features-gen/web/accessibility.feature.spec.js:36:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every dashboard state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (2.3m)
+(node:3008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    6 [web] › .features-gen/web/accessibility.feature.spec.js:42:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every agents state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (3.1m)
+(node:9359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    7 [web] › .features-gen/web/accessibility.feature.spec.js:48:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every recordings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (2.6m)
+(node:13748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    8 [web] › .features-gen/web/accessibility.feature.spec.js:54:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every settings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (3.8m)
+(node:20234) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    9 [web] › .features-gen/web/accessibility.feature.spec.js:60:5 › Accessibility gate for the web shell › Every <page> state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) › Every meet state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440) @a11y @value-critical @ui @web @boundary-only (27.0s)
+(node:20524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   10 [web] › .features-gen/web/accessibility.feature.spec.js:68:3 › Accessibility gate for the web shell › Keyboard focus is shown by fill on the app frame controls @a11y @value-critical @ui @web @boundary-only @smoke (14.8s)
+  ✘   11 [web] › .features-gen/web/accessibility.feature.spec.js:77:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on index are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (9.6s)
+(node:20988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   12 [web] › .features-gen/web/accessibility.feature.spec.js:84:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on dashboard are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (1.4m)
+(node:23040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   13 [web] › .features-gen/web/accessibility.feature.spec.js:91:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on agents are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (2.1m)
+(node:27670) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   14 [web] › .features-gen/web/accessibility.feature.spec.js:98:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on recordings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (1.6m)
+(node:29739) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   15 [web] › .features-gen/web/accessibility.feature.spec.js:105:5 › Accessibility gate for the web shell › Scrollable table regions on <page> are named, focusable and show focus by fill › Scrollable table regions on settings are named, focusable and show focus by fill @a11y @value-critical @ui @web @boundary-only (2.5m)
+(node:32023) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   16 [web] › .features-gen/web/accessibility.feature.spec.js:114:3 › Accessibility gate for the web shell › The gate detects injected violations @a11y @value-critical @ui @web @boundary-only @negative-control (1.6s)

@@ -1,0 +1,105 @@
+== packages/application/src/meeting/ports.ts:96-103
+export interface RealtimeRoom {
+  connect(credentials: RoomCredentials): Promise<Result<void, ConnectError>>;
+  disconnect(): Promise<void>;
+  setMediaEnabled(kind: TrackKind, enabled: boolean): Promise<Result<void, MediaError>>;
+  getSnapshot(): RoomSnapshot;
+  subscribe(listener: () => void): () => void;
+  attachMedia(target: MediaTarget, element: HTMLMediaElement): () => void;
+}
+== services/livekit/src/infrastructure/livekit_issuer.rs:50-72
+}
+
+/// The guest grant for exactly one room.
+pub fn guest_grants(room: &RoomCode) -> VideoGrants {
+    VideoGrants {
+        room_join: true,
+        room: room.as_str().to_owned(),
+        can_publish: Some(true),
+        can_subscribe: Some(true),
+        can_publish_data: Some(true),
+        can_update_own_metadata: Some(false),
+        room_create: false,
+        room_list: false,
+        room_record: false,
+        room_admin: false,
+        ingress_admin: false,
+        hidden: false,
+        recorder: false,
+        agent: false,
+        ..VideoGrants::default()
+    }
+}
+
+== apps/web/scripts/content-security-policy.ts:30-43
+const BASE_DIRECTIVES: Directives = [
+  ["default-src", ["'self'"]],
+  ["script-src", ["'self'"]],
+  ["style-src", ["'self'", "'unsafe-inline'"]],
+  ["img-src", ["'self'", "data:"]],
+  ["media-src", ["'self'"]],
+  ["font-src", ["'self'"]],
+  ["connect-src", ["'self'", ...TAURI_IPC_ORIGINS]],
+  // Hardening (c13 security review L3): no <base> rewriting, forms post only to
+  // this origin, no plugins. All three are valid in a <meta> CSP and in Tauri's.
+  ["base-uri", ["'none'"]],
+  ["form-action", ["'self'"]],
+  ["object-src", ["'none'"]],
+];
+== lobby-preview.tsx:1-8
+// TJ-ARCH-MOB-001 compliant
+// prototype meet.html `#lobby .preview-card` (acceptance L1-L5): the mirrored live preview
+// (or `#preview-empty` with the initials avatar), the Mic and Camera toggles, the mic level
+// meter and, when the browser refused a device, the media error card (`#lb-media-error`).
+// Toggles keep the prototype's state labels ("Mic on") with no aria-pressed and expose
+// `data-state`. While the permission prompt is open they are aria-disabled (still
+// focusable, described by the preview text). Device pickers are not shown: the join use
+// case cannot pass a device choice to the meeting (gap reported in wr05).
+== PRODUCT.md:45-70,107-118
+
+## Operating Context
+
+A meeting runs in four steps: schedule and invite (email, SMS, calendar invite, phone
+dial-in); meet with agents (your dot and the Concierge are already in the room; add
+Scribe, Researcher, Facilitator, Translator or your own agents as needed); record
+and transcribe (Room Composite recording only after in-room consent); summary
+delivered at close (email with attachments or SMS with a link, per each user's
+delivery settings).
+
+Surfaces: home, start/lobby/room (signed-in and guest), join (invitee, waiting room,
+expired link, wrong code), auth (magic link), dashboard (calendar meetings,
+scheduling), agents (registry, four-step registration, Concierge, dots), recordings
+(library, player, transcript, summary, storage), settings (LiveKit, Telnyx,
+calendars, S3/IPFS storage, recording, delivery, templates). Every screen and state
+is in `docs/design/prototype/` (`screens.html` lists them).
+
+## Capabilities and Constraints
+
+- **Real-time media and agents:** LiveKit rooms, LiveKit Agents, Egress Room
+  Composite (MP4 or HLS).
+- **Telnyx:** SMS, and inbound phone dial-in over a SIP trunk (audio-only, PIN).
+- **Recording storage:** S3-compatible (managed by KnowMe or the user's own bucket),
+  then pinned to IPFS; the CID is stored with the transcript.
+- **Calendars:** Google Calendar, Microsoft 365 / Outlook, iCloud / CalDAV.
+- **Shared meeting knowledge:** uploaded files and every transcript segment feed one
+## Product Principles
+
+1. **Follow-through over features:** a meeting succeeds when its follow-up is done
+   and delivered, not when it has more controls.
+2. **Agents are participants, and say so:** every agent is named, has a job, and is
+   visibly present when it acts.
+3. **Audiences are always explicit:** anything private (dot memory, the private
+   panel) says who can see it; nothing private leaks to the room.
+4. **Consent before capture:** recording starts only after the room agrees.
+5. **No account needed to join:** invitees and guests get a complete meeting without
+   signing up.
+
+== pins
+apps/web/package.json:22:    "@prometheus-ags/entity-graph-core": "4.3.0",
+apps/web/package.json:23:    "@prometheus-ags/entity-graph-react": "4.3.0",
+spikes/agentic-ui/hybrid/package.json:5:  "description": "c15 prototype H (hybrid): assistant-ui AG-UI runtime behind a Know Meet ChatSession port, entity-graph as the durable store (checkpoints + AG-UI event journal), Streamdown, A2UI. Standalone: not part of the root pnpm workspace.",
+spikes/agentic-ui/hybrid/package.json:24:    "@prometheus-ags/entity-graph-core": "4.3.0",
+spikes/agentic-ui/own/package.json:5:  "description": "c15 prototype O: own AG-UI client and reducer on @prometheus-ags/entity-graph, Streamdown, @a2ui/react. Standalone: not part of the root pnpm workspace.",
+spikes/agentic-ui/own/package.json:21:    "@prometheus-ags/entity-graph-core": "4.4.0",
+spikes/agentic-ui/own/package.json:22:    "@prometheus-ags/entity-graph-react": "4.4.0",
+46:prometheus_entity_management = "4.2.0" # React/core compatibility alias and maintained entity packages in generated shells

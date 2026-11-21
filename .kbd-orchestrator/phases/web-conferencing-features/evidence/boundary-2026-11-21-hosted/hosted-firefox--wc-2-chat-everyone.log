@@ -1,0 +1,61 @@
+
+Running 2 tests using 1 worker
+
+(node:94126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [hosted-firefox] › wc-2-chat-everyone.spec.ts:31:3 › WC-2 A message to everyone reaches every participant › A's message appears for B and C with the sent text and the label Everyone @WC-2 @value-critical @smoke @cross-engine (0ms)
+(node:94127) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [hosted-firefox] › wc-2-chat-everyone.spec.ts:61:3 › WC-2 A message to everyone reaches every participant › a message that was never sent does not appear in any panel or data channel @WC-2 @negative-control @cross-engine (0ms)
+
+
+  1) [hosted-firefox] › wc-2-chat-everyone.spec.ts:31:3 › WC-2 A message to everyone reaches every participant › A's message appears for B and C with the sent text and the label Everyone @WC-2 @value-critical @smoke @cross-engine 
+
+    Error: browserType.launch: Executable doesn't exist at /Users/gqadonis/Library/Caches/ms-playwright/firefox-1572/firefox/Nightly.app/Contents/MacOS/firefox
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     pnpm exec playwright install                           ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--72375-text-and-the-label-Everyone-hosted-firefox/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--72375-text-and-the-label-Everyone-hosted-firefox/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--72375-text-and-the-label-Everyone-hosted-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [hosted-firefox] › wc-2-chat-everyone.spec.ts:61:3 › WC-2 A message to everyone reaches every participant › a message that was never sent does not appear in any panel or data channel @WC-2 @negative-control @cross-engine 
+
+    Error: browserType.launch: Executable doesn't exist at /Users/gqadonis/Library/Caches/ms-playwright/firefox-1572/firefox/Nightly.app/Contents/MacOS/firefox
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     pnpm exec playwright install                           ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--9bd74-n-any-panel-or-data-channel-hosted-firefox/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--9bd74-n-any-panel-or-data-channel-hosted-firefox/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../../../Projects/know-me/know-meet/.kbd-orchestrator/phases/web-conferencing-features/evidence/boundary-2026-11-21-hosted/hosted-firefox--wc-2-chat-everyone/test-results/wc-2-chat-everyone-WC-2-A--9bd74-n-any-panel-or-data-channel-hosted-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [hosted-firefox] › wc-2-chat-everyone.spec.ts:31:3 › WC-2 A message to everyone reaches every participant › A's message appears for B and C with the sent text and the label Everyone @WC-2 @value-critical @smoke @cross-engine 
+    [hosted-firefox] › wc-2-chat-everyone.spec.ts:61:3 › WC-2 A message to everyone reaches every participant › a message that was never sent does not appear in any panel or data channel @WC-2 @negative-control @cross-engine 
+undefined
+/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/tests/release:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: playwright test wc-2-chat-everyone.spec.ts '--project=hosted-firefox'

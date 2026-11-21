@@ -1,0 +1,4082 @@
+[
+  {
+    "description": "  As a Know Meet user who relies on a keyboard or assistive technology\n  I need every in-scope screen to meet WCAG 2.2 AA in both themes\n  So that I can use the product as well as anyone else",
+    "elements": [
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-frame-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 24,
+        "name": "Every frame state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"frame\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:13:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-index-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 25,
+        "name": "Every index state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"index\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:19:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-auth-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 26,
+        "name": "Every auth state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"auth\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:25:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-join-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 27,
+        "name": "Every join state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"join\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:31:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-dashboard-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 28,
+        "name": "Every dashboard state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"dashboard\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:37:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 23000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-agents-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 29,
+        "name": "Every agents state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"agents\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:43:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 41000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-recordings-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 30,
+        "name": "Every recordings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"recordings\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:49:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 18000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-settings-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 31,
+        "name": "Every settings state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 19000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"settings\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 3000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:55:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;every-meet-state-passes-axe-in-both-themes-at-all-five-viewports-(320,-375,-768,-1024,-1440)",
+        "keyword": "Scenario Outline",
+        "line": 32,
+        "name": "Every meet state passes axe in both themes at all five viewports (320, 375, 768, 1024, 1440)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "axe analyses every in-scope inventory state of page \"meet\" in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:42:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:61:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "no WCAG 2.2 A or AA violation is reported",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the axe results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;keyboard-focus-is-shown-by-fill-on-the-app-frame-controls",
+        "keyword": "Scenario",
+        "line": 35,
+        "name": "Keyboard focus is shown by fill on the app frame controls",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "the home route is tabbed through from the top in each theme",
+            "result": {
+              "status": "passed",
+              "duration": 15160000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 37,
+            "name": "the skip link is the first focus stop",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 38,
+            "name": "every focused control has an accessible name",
+            "result": {
+              "status": "failed",
+              "duration": 3000000,
+              "error_message": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 16\n\n- Array []\n+ Array [\n+   Object {\n+     \"href\": \"\",\n+     \"name\": \"\",\n+     \"ring\": false,\n+     \"tag\": \"input\",\n+     \"theme\": \"dark\",\n+   },\n+   Object {\n+     \"href\": \"\",\n+     \"name\": \"\",\n+     \"ring\": false,\n+     \"tag\": \"input\",\n+     \"theme\": \"light\",\n+   },\n+ ]\n\n   at steps/accessibility.steps.ts:164\n\n  162 |   );\n  163 |   expect(stops.length).toBeGreaterThan(1);\n> 164 |   expect(stops.filter((s) => s.name.length === 0)).toEqual([]);\n      |                                                    ^\n  165 | });\n  166 |\n  167 | Then(\n\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:164:52)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:71:5"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "focus is shown by a fill change of at least 3:1 with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 11000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          },
+          {
+            "name": "@smoke",
+            "line": 34
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;scrollable-table-regions-on-index-are-named,-focusable-and-show-focus-by-fill",
+        "keyword": "Scenario Outline",
+        "line": 54,
+        "name": "Scrollable table regions on index are named, focusable and show focus by fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 23000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the scrollable table regions of page \"index\" are audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:78:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "every overflowing table region is a named, focusable region reachable by Tab",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "table region focus is a fill change with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "the scroll-region results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;scrollable-table-regions-on-dashboard-are-named,-focusable-and-show-focus-by-fill",
+        "keyword": "Scenario Outline",
+        "line": 55,
+        "name": "Scrollable table regions on dashboard are named, focusable and show focus by fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the scrollable table regions of page \"dashboard\" are audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:85:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "every overflowing table region is a named, focusable region reachable by Tab",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "table region focus is a fill change with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "the scroll-region results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;scrollable-table-regions-on-agents-are-named,-focusable-and-show-focus-by-fill",
+        "keyword": "Scenario Outline",
+        "line": 56,
+        "name": "Scrollable table regions on agents are named, focusable and show focus by fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the scrollable table regions of page \"agents\" are audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:92:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "every overflowing table region is a named, focusable region reachable by Tab",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "table region focus is a fill change with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "the scroll-region results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;scrollable-table-regions-on-recordings-are-named,-focusable-and-show-focus-by-fill",
+        "keyword": "Scenario Outline",
+        "line": 57,
+        "name": "Scrollable table regions on recordings are named, focusable and show focus by fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 11000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the scrollable table regions of page \"recordings\" are audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:99:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "every overflowing table region is a named, focusable region reachable by Tab",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "table region focus is a fill change with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "the scroll-region results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;scrollable-table-regions-on-settings-are-named,-focusable-and-show-focus-by-fill",
+        "keyword": "Scenario Outline",
+        "line": 58,
+        "name": "Scrollable table regions on settings are named, focusable and show focus by fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the scrollable table regions of page \"settings\" are audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/accessibility.steps.ts:240:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/accessibility.feature.spec.js:106:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "every overflowing table region is a named, focusable region reachable by Tab",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "table region focus is a fill change with no outline or box-shadow ring",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "the scroll-region results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "accessibility-gate-for-the-web-shell;the-gate-detects-injected-violations",
+        "keyword": "Scenario",
+        "line": 61,
+        "name": "The gate detects injected violations",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 62,
+            "name": "the home route is rendered in the light theme at 1440",
+            "result": {
+              "status": "passed",
+              "duration": 792000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 63,
+            "name": "a button without an accessible name and text with contrast below 4.5:1 are injected",
+            "result": {
+              "status": "passed",
+              "duration": 704000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 64,
+            "name": "axe reports a \"button-name\" violation and a \"color-contrast\" violation",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 8
+          },
+          {
+            "name": "@value-critical",
+            "line": 8
+          },
+          {
+            "name": "@ui",
+            "line": 8
+          },
+          {
+            "name": "@web",
+            "line": 8
+          },
+          {
+            "name": "@boundary-only",
+            "line": 8
+          },
+          {
+            "name": "@negative-control",
+            "line": 60
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "web-›-accessibility-gate-for-the-web-shell",
+    "line": 9,
+    "keyword": "Feature",
+    "name": "Accessibility gate for the web shell",
+    "tags": [
+      {
+        "name": "@a11y",
+        "line": 8
+      },
+      {
+        "name": "@value-critical",
+        "line": 8
+      },
+      {
+        "name": "@ui",
+        "line": 8
+      },
+      {
+        "name": "@web",
+        "line": 8
+      },
+      {
+        "name": "@boundary-only",
+        "line": 8
+      }
+    ],
+    "uri": "../../features/accessibility.feature"
+  },
+  {
+    "description": "  As a Know Meet user\n  I need controls whose boundaries and focus are shown by fill, never by lines\n  So that the product keeps its flat look and still meets WCAG 2.2 AA",
+    "elements": [
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-frame-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 32,
+        "name": "Every frame control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"frame\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:13:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-index-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 33,
+        "name": "Every index control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"index\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:20:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-auth-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 34,
+        "name": "Every auth control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"auth\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:27:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-join-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 35,
+        "name": "Every join control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"join\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:34:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-dashboard-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 36,
+        "name": "Every dashboard control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"dashboard\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:41:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 18000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-agents-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 37,
+        "name": "Every agents control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"agents\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:48:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-recordings-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 38,
+        "name": "Every recordings control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 11000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"recordings\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:55:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-settings-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 39,
+        "name": "Every settings control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"settings\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:62:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;every-meet-control-is-stroke-free-and-focus-is-a-fill-change",
+        "keyword": "Scenario Outline",
+        "line": 40,
+        "name": "Every meet control is stroke-free and focus is a fill change",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "every interactive control of page \"meet\" is audited in each theme at each viewport",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 320\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at renderCell (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/render-cell.ts:29:44)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:27:30)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:69:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "no control has a non-zero border or outline width",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "keyboard focus changes the control fill by at least 3:1 against its unfocused fill and the surface",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the flat-control results are recorded as evidence",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;the-audit-detects-injected-strokes",
+        "keyword": "Scenario",
+        "line": 43,
+        "name": "The audit detects injected strokes",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 44,
+            "name": "the home route is rendered in the dark theme at 1440 for the flat-control audit",
+            "result": {
+              "status": "passed",
+              "duration": 784000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 45,
+            "name": "a 1px border on buttons and a 2px outline on focused controls are injected",
+            "result": {
+              "status": "passed",
+              "duration": 5259000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 46,
+            "name": "the flat-control audit reports a border and an outline",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          },
+          {
+            "name": "@negative-control",
+            "line": 42
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;the-audit-composites-a-translucent-focus-fill-before-measuring-it",
+        "keyword": "Scenario",
+        "line": 49,
+        "name": "The audit composites a translucent focus fill before measuring it",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 7000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 50,
+            "name": "the home route is rendered in the dark theme at 1440 for the flat-control audit",
+            "result": {
+              "status": "passed",
+              "duration": 791000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 51,
+            "name": "every focused control takes a white fill at 6% opacity",
+            "result": {
+              "status": "passed",
+              "duration": 4761000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 52,
+            "name": "the flat-control audit reports every focus stop below 3:1",
+            "result": {
+              "status": "failed",
+              "duration": 4000000,
+              "error_message": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 24\n\n- Array []\n+ Array [\n+   \"a[Skip to content]\",\n+   \"a[Know Meet home]\",\n+   \"a[Start meeting]\",\n+   \"button#base-ui-_r_1_[Switch to light theme]\",\n+   \"a[Sign in]\",\n+   \"a[Start a meeting]\",\n+   \"a[Sign in]\",\n+   \"input#join-code[]\",\n+   \"button[Join]\",\n+   \"a[Sign in]\",\n+   \"a[About the Concierge]\",\n+   \"a[Try it as a guest]\",\n+   \"a[01Schedule & invitePick a time]\",\n+   \"a[02Meet with agentsYour dot and]\",\n+   \"a[03Record & transcribeThe trans]\",\n+   \"a[04Summary deliveredOn close: r]\",\n+   \"a[Know Meet home]\",\n+   \"a[Agents]\",\n+   \"a[Settings]\",\n+   \"a[Join as invitee]\",\n+   \"a[Skip to content]\",\n+   \"a[Know Meet home]\",\n+ ]\n\n   at steps/flat-controls.steps.ts:130\n\n  128 |     (s) => s.contrastToRest >= 3 && s.contrastToSurface >= 3,\n  129 |   );\n> 130 |   expect(unreported.map((s) => s.label)).toEqual([]);\n      |                                          ^\n  131 | });\n  132 |\n  133 | When(\n\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:130:42)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:86:5"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 633000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          },
+          {
+            "name": "@negative-control",
+            "line": 48
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change;the-audit-reads-a-focused-at-render-skip-link's-true-rest-fill",
+        "keyword": "Scenario",
+        "line": 55,
+        "name": "The audit reads a focused-at-render skip link's true rest fill",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 56,
+            "name": "the home route is rendered in the dark theme at 1440 for the flat-control audit",
+            "result": {
+              "status": "passed",
+              "duration": 824000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 57,
+            "name": "the skip link is focused and its focus fill is pinned to its rest fill",
+            "result": {
+              "status": "passed",
+              "duration": 5240000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 58,
+            "name": "the flat-control audit reports the skip link fill as unchanged",
+            "result": {
+              "status": "failed",
+              "duration": 2000000,
+              "error_message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\n   at steps/flat-controls.steps.ts:156\n\n  154 |   expect(\n  155 |     problems.some((p) => p.includes(\"Skip to content\") && p.includes(\"fill changes by only\")),\n> 156 |   ).toBe(true);\n      |     ^\n  157 | });\n  158 |\n\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/flat-controls.steps.ts:156:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/flat-controls.feature.spec.js:92:5"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 683000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@a11y",
+            "line": 15
+          },
+          {
+            "name": "@flat2",
+            "line": 15
+          },
+          {
+            "name": "@value-critical",
+            "line": 15
+          },
+          {
+            "name": "@ui",
+            "line": 15
+          },
+          {
+            "name": "@web",
+            "line": 15
+          },
+          {
+            "name": "@boundary-only",
+            "line": 15
+          },
+          {
+            "name": "@negative-control",
+            "line": 54
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "web-›-flat-2.0-controls-carry-no-strokes-and-focus-is-a-fill-change",
+    "line": 16,
+    "keyword": "Feature",
+    "name": "Flat 2.0 controls carry no strokes and focus is a fill change",
+    "tags": [
+      {
+        "name": "@a11y",
+        "line": 15
+      },
+      {
+        "name": "@flat2",
+        "line": 15
+      },
+      {
+        "name": "@value-critical",
+        "line": 15
+      },
+      {
+        "name": "@ui",
+        "line": 15
+      },
+      {
+        "name": "@web",
+        "line": 15
+      },
+      {
+        "name": "@boundary-only",
+        "line": 15
+      }
+    ],
+    "uri": "../../features/flat-controls.feature"
+  },
+  {
+    "description": "  As a Know Meet user\n  I need motion that matches the brand and stops when I ask for less motion\n  So that the product feels deliberate and never makes me uncomfortable",
+    "elements": [
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;the-theme-switch-transition-uses-the-tokenized-duration-and-easing",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "The theme switch transition uses the tokenized duration and easing",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "the home route is opened with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 752000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "the page body transitions background-color and color over token \"dur\" with easing token \"ease-standard\"",
+            "result": {
+              "status": "passed",
+              "duration": 42000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          },
+          {
+            "name": "@smoke",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;crossing-a-width-class-morphs-the-navigation-with-the-nav-tokens",
+        "keyword": "Scenario Outline",
+        "line": 36,
+        "name": "Crossing a width class morphs the navigation with the nav tokens",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 4000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the home route is opened at 1440 with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 763000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "the viewport is resized to 1000",
+            "result": {
+              "status": "passed",
+              "duration": 408000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the crossing animates over token \"dur-nav-morph\" with easing token \"ease-layout\" into the \"rail\" navigation using only transform and opacity",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;crossing-a-width-class-morphs-the-navigation-with-the-nav-tokens",
+        "keyword": "Scenario Outline",
+        "line": 37,
+        "name": "Crossing a width class morphs the navigation with the nav tokens",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the home route is opened at 1024 with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 748000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "the viewport is resized to 1023",
+            "result": {
+              "status": "passed",
+              "duration": 410000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the crossing animates over token \"dur-nav-morph\" with easing token \"ease-layout\" into the \"rail\" navigation using only transform and opacity",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;crossing-a-width-class-morphs-the-navigation-with-the-nav-tokens",
+        "keyword": "Scenario Outline",
+        "line": 38,
+        "name": "Crossing a width class morphs the navigation with the nav tokens",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 4000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the home route is opened at 1000 with no motion preference",
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "Error: No adopted viewport for width 1000\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at openHome (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:37:8)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:75:11)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/motion.feature.spec.js:31:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "the viewport is resized to 500",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the crossing animates over token \"dur-nav-morph\" with easing token \"ease-layout\" into the \"bar\" navigation using only transform and opacity",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 20000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;crossing-a-width-class-morphs-the-navigation-with-the-nav-tokens",
+        "keyword": "Scenario Outline",
+        "line": 39,
+        "name": "Crossing a width class morphs the navigation with the nav tokens",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 21000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the home route is opened at 600 with no motion preference",
+            "result": {
+              "status": "failed",
+              "duration": 0,
+              "error_message": "Error: No adopted viewport for width 600\n\n   at src/support/capture-environment.ts:51\n\n  49 | export function viewportFor(width: number): { width: number; height: number } {\n  50 |   const height = CAPTURE_ENVIRONMENT.viewportHeights[width];\n> 51 |   if (height === undefined) throw new Error(`No adopted viewport for width ${width}`);\n     |                                   ^\n  52 |   return { width, height };\n  53 | }\n  54 |\n\n    at viewportFor (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:51:35)\n    at contextOptions (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/src/support/capture-environment.ts:57:15)\n    at openHome (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:37:8)\n    at Object.<anonymous> (/Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/steps/motion.steps.ts:75:11)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:58:48\n    at BddStepInvoker.runWithAfterStepHooks (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:82:22)\n    at /Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:57:19\n    at BddStepInvoker.invoke (/Users/gqadonis/Projects/know-me/know-meet/node_modules/.pnpm/playwright-bdd@9.2.1_@playwright+test@1.65.0/node_modules/playwright-bdd/src/runtime/bddStepInvoker.ts:55:5)\n    at /Users/gqadonis/Projects/know-me/know-meet/tests/fidelity/.features-gen/web/motion.feature.spec.js:37:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "the viewport is resized to 599",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "the crossing animates over token \"dur-nav-morph\" with easing token \"ease-layout\" into the \"bar\" navigation using only transform and opacity",
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;resizing-inside-one-width-class-does-not-animate-the-navigation",
+        "keyword": "Scenario",
+        "line": 41,
+        "name": "Resizing inside one width class does not animate the navigation",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 42,
+            "name": "the home route is opened at 1440 with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 766000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 43,
+            "name": "the viewport is resized to 1100",
+            "result": {
+              "status": "passed",
+              "duration": 185000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "the \"inline\" navigation is shown with no animation",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;reduced-motion-makes-the-navigation-morph-instant",
+        "keyword": "Scenario",
+        "line": 46,
+        "name": "Reduced motion makes the navigation morph instant",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "the home route is opened at 1440 with prefers-reduced-motion set to reduce",
+            "result": {
+              "status": "passed",
+              "duration": 757000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "the viewport is resized to 500",
+            "result": {
+              "status": "passed",
+              "duration": 173000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 49,
+            "name": "the \"bar\" navigation is shown with no animation",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;reduced-motion-removes-transitions-and-stops-the-dot-animations",
+        "keyword": "Scenario",
+        "line": 51,
+        "name": "Reduced motion removes transitions and stops the dot animations",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 52,
+            "name": "the home route is opened with prefers-reduced-motion set to reduce",
+            "result": {
+              "status": "passed",
+              "duration": 719000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 53,
+            "name": "every transition and animation duration on the page is at most token \"dur-reduced-motion\"",
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 54,
+            "name": "no dot animation is running",
+            "result": {
+              "status": "passed",
+              "duration": 4000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;the-reduced-motion-check-fails-when-the-preference-is-not-set",
+        "keyword": "Scenario",
+        "line": 57,
+        "name": "The reduced-motion check fails when the preference is not set",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 58,
+            "name": "the home route is opened with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 765000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 59,
+            "name": "the reduced-motion duration check fails for the page body",
+            "result": {
+              "status": "passed",
+              "duration": 17000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          },
+          {
+            "name": "@negative-control",
+            "line": 56
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;the-token-check-fails-on-an-off-token-duration",
+        "keyword": "Scenario",
+        "line": 62,
+        "name": "The token check fails on an off-token duration",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 63,
+            "name": "the home route is opened with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 771000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 64,
+            "name": "a style giving the page body a 300ms transition is injected",
+            "result": {
+              "status": "passed",
+              "duration": 21000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "the tokenized-duration check fails for the page body",
+            "result": {
+              "status": "passed",
+              "duration": 19000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          },
+          {
+            "name": "@negative-control",
+            "line": 61
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;the-instant-morph-check-fails-when-motion-is-not-reduced",
+        "keyword": "Scenario",
+        "line": 68,
+        "name": "The instant-morph check fails when motion is not reduced",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 69,
+            "name": "the home route is opened at 1440 with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 749000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 70,
+            "name": "the viewport is resized to 500",
+            "result": {
+              "status": "passed",
+              "duration": 419000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 71,
+            "name": "the instant-morph check fails for the \"bar\" navigation",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          },
+          {
+            "name": "@negative-control",
+            "line": 67
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "motion-uses-the-design-tokens-and-honours-reduced-motion;the-nav-token-check-fails-on-an-off-token-morph-duration",
+        "keyword": "Scenario",
+        "line": 74,
+        "name": "The nav-token check fails on an off-token morph duration",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the motion tokens are read from \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 75,
+            "name": "the home route is opened at 1440 with no motion preference",
+            "result": {
+              "status": "passed",
+              "duration": 733000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 76,
+            "name": "a style giving the navigation morph a 500ms duration is injected",
+            "result": {
+              "status": "passed",
+              "duration": 21000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 77,
+            "name": "the viewport is resized to 1000",
+            "result": {
+              "status": "passed",
+              "duration": 858000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 78,
+            "name": "the nav-token check fails for the \"rail\" navigation",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@motion",
+            "line": 12
+          },
+          {
+            "name": "@ui",
+            "line": 12
+          },
+          {
+            "name": "@web",
+            "line": 12
+          },
+          {
+            "name": "@boundary-only",
+            "line": 12
+          },
+          {
+            "name": "@negative-control",
+            "line": 73
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "web-›-motion-uses-the-design-tokens-and-honours-reduced-motion",
+    "line": 13,
+    "keyword": "Feature",
+    "name": "Motion uses the design tokens and honours reduced motion",
+    "tags": [
+      {
+        "name": "@motion",
+        "line": 12
+      },
+      {
+        "name": "@ui",
+        "line": 12
+      },
+      {
+        "name": "@web",
+        "line": 12
+      },
+      {
+        "name": "@boundary-only",
+        "line": 12
+      }
+    ],
+    "uri": "../../features/motion.feature"
+  },
+  {
+    "description": "  As a Know Meet user in a browser\n  I need the web app to work without the desktop runtime\n  So that sharing one bundle with the desktop never breaks the web",
+    "elements": [
+      {
+        "description": "",
+        "id": "vs-5-plain-web-build-works-without-the-tauri-runtime;the-home-route-renders-cleanly-in-a-plain-browser",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "The home route renders cleanly in a plain browser",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the production web build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 2000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "a browser without the Tauri runtime opens the home route",
+            "result": {
+              "status": "passed",
+              "duration": 1079000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "the home route's main landmark and app bar are visible",
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "no console error or uncaught page error was logged",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "no code read the Tauri runtime globals",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "the console log and a screenshot are recorded as evidence",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@VS-5",
+            "line": 7
+          },
+          {
+            "name": "@value-critical",
+            "line": 7
+          },
+          {
+            "name": "@ui",
+            "line": 7
+          },
+          {
+            "name": "@web",
+            "line": 7
+          },
+          {
+            "name": "@smoke",
+            "line": 7
+          },
+          {
+            "name": "@boundary-only",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "vs-5-plain-web-build-works-without-the-tauri-runtime;an-unguarded-tauri-call-is-detected",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "An unguarded Tauri call is detected",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 23,
+            "name": "a scratch branch whose web entry calls the Tauri invoke API at startup without an isTauri() guard",
+            "result": {
+              "status": "passed",
+              "duration": 11719000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "the scratch build is served by Vite preview",
+            "result": {
+              "status": "passed",
+              "duration": 1022000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "a browser without the Tauri runtime opens the home route",
+            "result": {
+              "status": "passed",
+              "duration": 1052000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the smoke reports a Tauri global read, a console error or a blank page",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@VS-5",
+            "line": 7
+          },
+          {
+            "name": "@value-critical",
+            "line": 7
+          },
+          {
+            "name": "@ui",
+            "line": 7
+          },
+          {
+            "name": "@web",
+            "line": 7
+          },
+          {
+            "name": "@smoke",
+            "line": 7
+          },
+          {
+            "name": "@boundary-only",
+            "line": 7
+          },
+          {
+            "name": "@negative-control",
+            "line": 21
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "web-›-vs-5-plain-web-build-works-without-the-tauri-runtime",
+    "line": 8,
+    "keyword": "Feature",
+    "name": "VS-5 Plain web build works without the Tauri runtime",
+    "tags": [
+      {
+        "name": "@VS-5",
+        "line": 7
+      },
+      {
+        "name": "@value-critical",
+        "line": 7
+      },
+      {
+        "name": "@ui",
+        "line": 7
+      },
+      {
+        "name": "@web",
+        "line": 7
+      },
+      {
+        "name": "@smoke",
+        "line": 7
+      },
+      {
+        "name": "@boundary-only",
+        "line": 7
+      }
+    ],
+    "uri": "../../features/vs-5-web-without-tauri.feature"
+  },
+  {
+    "description": "  As the Know Meet design lead\n  I need one edit in tokens.json to reach every shell\n  So that the design can change without hand-editing three codebases",
+    "elements": [
+      {
+        "description": "",
+        "id": "vs-4-one-token-edit-propagates-to-web,-desktop-and-flutter-outputs;changing-one-dark-theme-colour-changes-exactly-its-three-outputs",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Changing one dark-theme colour changes exactly its three outputs",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "a scratch copy of \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "the generator outputs for the unmodified scratch copy are recorded in a scratch directory",
+            "result": {
+              "status": "passed",
+              "duration": 429000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "the dark theme token \"ember\" is changed to \"#123456\" in the scratch copy",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "the generator runs with \"pnpm --filter @know-meet/design-tokens generate\" on the scratch copy",
+            "result": {
+              "status": "passed",
+              "duration": 435000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the command exits 0",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the web CSS variable \"--ember\" for the dark theme is \"#123456\"",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the Tailwind theme value for \"ember\" in the dark theme is \"#123456\"",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "the Dart dark-theme constant for \"ember\" is the colour 0xFF123456",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "no other output line differs from the recorded outputs",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@VS-4",
+            "line": 5
+          },
+          {
+            "name": "@value-critical",
+            "line": 5
+          },
+          {
+            "name": "@cli",
+            "line": 5
+          },
+          {
+            "name": "@tokens",
+            "line": 5
+          },
+          {
+            "name": "@boundary-only",
+            "line": 5
+          },
+          {
+            "name": "@smoke",
+            "line": 15
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "vs-4-one-token-edit-propagates-to-web,-desktop-and-flutter-outputs;an-invalid-colour-stops-the-generator",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "An invalid colour stops the generator",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "a scratch copy of \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "the generator outputs for the unmodified scratch copy are recorded in a scratch directory",
+            "result": {
+              "status": "passed",
+              "duration": 417000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "the dark theme token \"ember\" is changed to \"not-a-colour\" in the scratch copy",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the generator runs on the scratch copy",
+            "result": {
+              "status": "passed",
+              "duration": 468000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "the command exits non-zero",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "its error output names the token \"ember\"",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@VS-4",
+            "line": 5
+          },
+          {
+            "name": "@value-critical",
+            "line": 5
+          },
+          {
+            "name": "@cli",
+            "line": 5
+          },
+          {
+            "name": "@tokens",
+            "line": 5
+          },
+          {
+            "name": "@boundary-only",
+            "line": 5
+          },
+          {
+            "name": "@negative-control",
+            "line": 25
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "vs-4-one-token-edit-propagates-to-web,-desktop-and-flutter-outputs;a-missing-output-directory-stops-the-generator",
+        "keyword": "Scenario",
+        "line": 33,
+        "name": "A missing output directory stops the generator",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "a scratch copy of \"docs/design/tokens.json\"",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "the generator outputs for the unmodified scratch copy are recorded in a scratch directory",
+            "result": {
+              "status": "passed",
+              "duration": 424000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 34,
+            "name": "the generator runs on the scratch copy with an output directory that does not exist",
+            "result": {
+              "status": "passed",
+              "duration": 489000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "the command exits non-zero",
+            "result": {
+              "status": "passed",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "no output file is written",
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@VS-4",
+            "line": 5
+          },
+          {
+            "name": "@value-critical",
+            "line": 5
+          },
+          {
+            "name": "@cli",
+            "line": 5
+          },
+          {
+            "name": "@tokens",
+            "line": 5
+          },
+          {
+            "name": "@boundary-only",
+            "line": 5
+          },
+          {
+            "name": "@negative-control",
+            "line": 32
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "cli-›-vs-4-one-token-edit-propagates-to-web,-desktop-and-flutter-outputs",
+    "line": 6,
+    "keyword": "Feature",
+    "name": "VS-4 One token edit propagates to web, desktop and Flutter outputs",
+    "tags": [
+      {
+        "name": "@VS-4",
+        "line": 5
+      },
+      {
+        "name": "@value-critical",
+        "line": 5
+      },
+      {
+        "name": "@cli",
+        "line": 5
+      },
+      {
+        "name": "@tokens",
+        "line": 5
+      },
+      {
+        "name": "@boundary-only",
+        "line": 5
+      }
+    ],
+    "uri": "../../features/vs-4-token-propagation.feature"
+  }
+]

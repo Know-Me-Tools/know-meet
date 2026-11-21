@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "2",
+  "generatedBy": "kbd-runtime",
+  "projectionContractVersion": 2,
+  "sourceRevision": 851,
+  "derivedRevision": 851,
+  "frontier": {
+    "e98b9092-a344-4157-beea-4f0645ff46dd": 851
+  },
+  "conflictCount": 0,
+  "phase": "web-conferencing-features",
+  "phaseId": "web-conferencing-features",
+  "parentPhase": null,
+  "last_updated": "2026-11-21T16:47:26.159631Z",
+  "last_updated_by": "kbd-runtime",
+  "changes_total": 11,
+  "changes_completed": 10,
+  "implementation_total": 11,
+  "implementation_completed": 10,
+  "completion": {
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 10,
+      "total": 11,
+      "status": "IN_PROGRESS"
+    },
+    "evidence": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    },
+    "publication": {
+      "status": "NOT_TRACKED",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "completionScopes": {
+    "completion": "phase",
+    "runCompletion": "run"
+  },
+  "runCompletion": {
+    "scope": "run",
+    "runId": "hybrid-shell-foundation-20261109T083641Z",
+    "primaryCounter": "implementation",
+    "implementation": {
+      "completed": 33,
+      "total": 37,
+      "status": "BLOCKED"
+    },
+    "evidence": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    },
+    "certification": {
+      "status": "BLOCKED",
+      "summary": "Fourth-cycle safety-stop; historical13.6 completion is preserved but current rule regression and acceptance failures block certification.",
+      "blockers": [
+        "hsf-c13-cycle4-acceptance",
+        "hsf-c13-cycle4-budget-exhausted",
+        "hsf-c13-cycle4-rule-regression",
+        "hsf-c13-isolated-review-approval"
+      ]
+    },
+    "publication": {
+      "status": "PENDING",
+      "summary": null,
+      "blockers": []
+    }
+  },
+  "changes": [
+    {
+      "id": "wc01-conferencing-scenarios",
+      "title": "Conferencing acceptance, designs, worktree and pins",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 6,
+      "tasks_done": 6,
+      "last_task_completed": "Add the adopted libraries to the web app and install them",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc02-conferencing-ports",
+      "title": "Conferencing domain types, port extensions and use cases",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Add recording consent use cases",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc03-realtime-adapter-features",
+      "title": "LiveKit adapter for share, chat, devices, audio and processors",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 5,
+      "tasks_done": 5,
+      "last_task_completed": "Implement the video processor hook",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc04-share-and-chat-ui",
+      "title": "Share control, chat panel and Enable audio prompt",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Add the Enable audio prompt",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc05-device-settings",
+      "title": "Lobby and in-room device settings",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 2,
+      "tasks_done": 2,
+      "last_task_completed": "Add in-room device settings with speaker selection",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc06-web-csp",
+      "title": "Hosted-only CSP widening with a desktop guard",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Regenerate the gateway security header",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc07-background-effects",
+      "title": "Background blur and image backgrounds",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 3,
+      "tasks_done": 3,
+      "last_task_completed": "Build the background effects picker",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc08-entity-graph-5-0-1",
+      "title": "Entity graph 5.0.1 from npm",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 5,
+      "tasks_done": 5,
+      "last_task_completed": "Refresh the lockfile with a clean install",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc09-local-history",
+      "title": "Local history of meetings and chats in PGlite",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 4,
+      "tasks_done": 4,
+      "last_task_completed": "Build the history screen with delete",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc10-local-recording",
+      "title": "Consented browser-local recording",
+      "status": "DONE",
+      "implementation_status": "COMPLETE",
+      "tasks_total": 5,
+      "tasks_done": 5,
+      "last_task_completed": "Build the recordings library and playback",
+      "next_task_pending": null,
+      "blockers": []
+    },
+    {
+      "id": "wc11-conferencing-boundary",
+      "title": "Single boundary run and go-live",
+      "status": "PENDING",
+      "implementation_status": "PENDING",
+      "tasks_total": 6,
+      "tasks_done": 2,
+      "last_task_completed": "Run the packaged scenarios against the built web image",
+      "next_task_pending": "Run accessibility, UI review and security review",
+      "blockers": []
+    }
+  ],
+  "children": {
+    "wc-boundary-defect-scope": {
+      "status": "DONE",
+      "changes_completed": 1,
+      "changes_total": 1,
+      "implementation_completed": 1,
+      "implementation_total": 1,
+      "certification_status": "NOT_TRACKED",
+      "handoff": null,
+      "completed_at": null
+    },
+    "wc-packaged-defect-scope": {
+      "status": "DONE",
+      "changes_completed": 0,
+      "changes_total": 0,
+      "implementation_completed": 0,
+      "implementation_total": 0,
+      "certification_status": "NOT_TRACKED",
+      "handoff": null,
+      "completed_at": null
+    }
+  },
+  "migrationStatus": null
+}

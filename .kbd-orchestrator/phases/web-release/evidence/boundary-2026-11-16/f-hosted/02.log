@@ -1,0 +1,4 @@
+$ /Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/check-livekit-url.sh served
+PASS served index.html carries a meta CSP
+PASS served CSP header names the shell LiveKit host
+PASS served meta CSP names the shell LiveKit host

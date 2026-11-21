@@ -1,0 +1,13 @@
+{
+  "mode": "gpu-headed",
+  "startedAt": "2026-11-20T22:22:40.862Z",
+  "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Max, Unspecified Version)",
+  "evaluateLatencyMs": 16,
+  "clickToActiveMs": 428,
+  "maxMainThreadGapMs": 502,
+  "maxGapStartsMsAfterClick": 593,
+  "longTasksAfterClick": 1,
+  "longTaskTotalMs": 495,
+  "longestTaskMs": 495,
+  "nodeObserveMs": 30134
+}

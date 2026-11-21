@@ -1,0 +1,82 @@
+$ docker compose -f tooling/release/compose.yaml up -d --wait
+ Image nginxinc/nginx-unprivileged:1.30.6-alpine-slim@sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6 Pulling 
+ a9986cd6f37d Pulling fs layer 0B
+ 04fa1e646fc9 Pulling fs layer 0B
+ 0cd2dfaf53a0 Pulling fs layer 0B
+ a13b50162360 Pulling fs layer 0B
+ 994fbca5f970 Pulling fs layer 0B
+ 0bb23ae5b1cb Pulling fs layer 0B
+ aa7a6bd1f4f9 Pulling fs layer 0B
+ a2d67277492f Pulling fs layer 0B
+ 994fbca5f970 Waiting 0B
+ a13b50162360 Waiting 0B
+ 0bb23ae5b1cb Waiting 0B
+ aa7a6bd1f4f9 Waiting 0B
+ a2d67277492f Waiting 0B
+ a9986cd6f37d Downloading 48.51kB
+ 04fa1e646fc9 Downloading 48.55kB
+ 0cd2dfaf53a0 Downloading 2.795kB
+ 0cd2dfaf53a0 Verifying Checksum 0B
+ 0cd2dfaf53a0 Download complete 0B
+ a9986cd6f37d Downloading 3.587MB
+ a13b50162360 Downloading 628B
+ a13b50162360 Verifying Checksum 0B
+ a13b50162360 Download complete 0B
+ a9986cd6f37d Verifying Checksum 0B
+ a9986cd6f37d Download complete 0B
+ a9986cd6f37d Extracting 65.54kB
+ 04fa1e646fc9 Downloading 2.654MB
+ 04fa1e646fc9 Verifying Checksum 0B
+ 04fa1e646fc9 Download complete 0B
+ 994fbca5f970 Downloading 967B
+ 994fbca5f970 Verifying Checksum 0B
+ 994fbca5f970 Download complete 0B
+ 0bb23ae5b1cb Downloading 405B
+ 0bb23ae5b1cb Verifying Checksum 0B
+ 0bb23ae5b1cb Download complete 0B
+ a9986cd6f37d Extracting 4.188MB
+ aa7a6bd1f4f9 Downloading 1.203kB
+ aa7a6bd1f4f9 Verifying Checksum 0B
+ aa7a6bd1f4f9 Download complete 0B
+ a9986cd6f37d Pull complete 0B
+ 04fa1e646fc9 Extracting 65.54kB
+ a2d67277492f Downloading 1.399kB
+ a2d67277492f Verifying Checksum 0B
+ a2d67277492f Download complete 0B
+ 04fa1e646fc9 Extracting 4.678MB
+ 04fa1e646fc9 Pull complete 0B
+ 0cd2dfaf53a0 Extracting 2.795kB
+ 0cd2dfaf53a0 Extracting 2.795kB
+ 0cd2dfaf53a0 Pull complete 0B
+ a13b50162360 Extracting 628B
+ a13b50162360 Extracting 628B
+ a13b50162360 Pull complete 0B
+ 994fbca5f970 Extracting 967B
+ 994fbca5f970 Extracting 967B
+ 994fbca5f970 Pull complete 0B
+ 0bb23ae5b1cb Extracting 405B
+ 0bb23ae5b1cb Extracting 405B
+ 0bb23ae5b1cb Pull complete 0B
+ aa7a6bd1f4f9 Extracting 1.203kB
+ aa7a6bd1f4f9 Extracting 1.203kB
+ aa7a6bd1f4f9 Pull complete 0B
+ a2d67277492f Extracting 1.399kB
+ a2d67277492f Extracting 1.399kB
+ a2d67277492f Pull complete 0B
+ Image nginxinc/nginx-unprivileged:1.30.6-alpine-slim@sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6 Pulled 
+ Network know-meet-release_default Creating 
+ Network know-meet-release_default Creating 
+ Network know-meet-release_default Created 
+ Network know-meet-release_default Created 
+ Container know-meet-release-token-service-1 Creating 
+ Container know-meet-release-web-1 Creating 
+ Container know-meet-release-web-1 Created 
+ Container know-meet-release-token-service-1 Created 
+ Container know-meet-release-proxy-1 Creating 
+ Container know-meet-release-proxy-1 Created 
+ Container know-meet-release-web-1 Starting 
+ Container know-meet-release-token-service-1 Starting 
+ Container know-meet-release-web-1 Started 
+ Container know-meet-release-token-service-1 Started 
+ Container know-meet-release-proxy-1 Starting 
+Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint know-meet-release-proxy-1 (9304f43e5d4c3f4269825f6f1bbe2f222f8454e64754e7c2cc2e744f8b8d1122): Bind for 0.0.0.0:8080 failed: port is already allocated
