@@ -53,6 +53,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     required this.focus,
     required this.onFocus,
     required this.focusPlaceholder,
+    required this.action,
+    required this.actionHov,
+    required this.onAction,
+    required this.actionFocus,
+    required this.onActionFocus,
     required this.sliderThumb,
     required this.pipGreen,
     required this.pipAmber,
@@ -121,6 +126,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     focus: Color(0xFFFFFFFF),
     onFocus: Color(0xFF0B0F14),
     focusPlaceholder: Color(0xFF4B5563),
+    action: Color(0xFFE8EDF3),
+    actionHov: Color(0xFFC9D1DB),
+    onAction: Color(0xFF0B0F14),
+    actionFocus: Color(0xFF0889A8),
+    onActionFocus: Color(0xFF0B0F14),
     sliderThumb: Color(0xFFFFFFFF),
     pipGreen: Color(0xFF22C55E),
     pipAmber: Color(0xFFF59E0B),
@@ -189,6 +199,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     focus: Color(0xFF0B0F14),
     onFocus: Color(0xFFFFFFFF),
     focusPlaceholder: Color(0xFFC3CAD4),
+    action: Color(0xFF0B0F14),
+    actionHov: Color(0xFF2A3140),
+    onAction: Color(0xFFFFFFFF),
+    actionFocus: Color(0xFF0889A8),
+    onActionFocus: Color(0xFF0B0F14),
     sliderThumb: Color(0xFF0B0F14),
     pipGreen: Color(0xFF166534),
     pipAmber: Color(0xFFB45309),
@@ -256,6 +271,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
   final Color focus;
   final Color onFocus;
   final Color focusPlaceholder;
+  final Color action;
+  final Color actionHov;
+  final Color onAction;
+  final Color actionFocus;
+  final Color onActionFocus;
   final Color sliderThumb;
   final Color pipGreen;
   final Color pipAmber;
@@ -324,6 +344,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
     Color? focus,
     Color? onFocus,
     Color? focusPlaceholder,
+    Color? action,
+    Color? actionHov,
+    Color? onAction,
+    Color? actionFocus,
+    Color? onActionFocus,
     Color? sliderThumb,
     Color? pipGreen,
     Color? pipAmber,
@@ -391,6 +416,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       focus: focus ?? this.focus,
       onFocus: onFocus ?? this.onFocus,
       focusPlaceholder: focusPlaceholder ?? this.focusPlaceholder,
+      action: action ?? this.action,
+      actionHov: actionHov ?? this.actionHov,
+      onAction: onAction ?? this.onAction,
+      actionFocus: actionFocus ?? this.actionFocus,
+      onActionFocus: onActionFocus ?? this.onActionFocus,
       sliderThumb: sliderThumb ?? this.sliderThumb,
       pipGreen: pipGreen ?? this.pipGreen,
       pipAmber: pipAmber ?? this.pipAmber,
@@ -463,6 +493,11 @@ final class KmPalette extends ThemeExtension<KmPalette> {
       focus: Color.lerp(focus, other.focus, t) ?? focus,
       onFocus: Color.lerp(onFocus, other.onFocus, t) ?? onFocus,
       focusPlaceholder: Color.lerp(focusPlaceholder, other.focusPlaceholder, t) ?? focusPlaceholder,
+      action: Color.lerp(action, other.action, t) ?? action,
+      actionHov: Color.lerp(actionHov, other.actionHov, t) ?? actionHov,
+      onAction: Color.lerp(onAction, other.onAction, t) ?? onAction,
+      actionFocus: Color.lerp(actionFocus, other.actionFocus, t) ?? actionFocus,
+      onActionFocus: Color.lerp(onActionFocus, other.onActionFocus, t) ?? onActionFocus,
       sliderThumb: Color.lerp(sliderThumb, other.sliderThumb, t) ?? sliderThumb,
       pipGreen: Color.lerp(pipGreen, other.pipGreen, t) ?? pipGreen,
       pipAmber: Color.lerp(pipAmber, other.pipAmber, t) ?? pipAmber,

@@ -4,14 +4,16 @@
 //   secondary   → .btn (raised card fill)
 //   outline     → .btn as well (Flat 2.0 has no outlines)
 //   ghost       → .btn-ghost / .icon-btn
+//   action      → neutral clickable button: ink (light) / paper (dark), operator 2026-11-21
 //   destructive → .btn-danger
 //   link        → inline ember text link
-// Focus is the `focus` fill with `on-focus` content on every variant (D-6, lib/focus.ts).
+// Focus is the `focus` fill with `on-focus` content on every variant (D-6, lib/focus.ts),
+// except `action`, whose rest fill equals `focus`; it focuses to `action-focus` (cyan).
 // Ghost/icon pressed (aria-pressed) is `selected`. Sizes keep the 44px target
 // (`size-target`); `sm` and `xs` are for pointer: fine layouts only.
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
-import { focusFillClass } from "#lib/focus";
+import { actionFocusFillClass, focusFillClass } from "#lib/focus";
 import { cn } from "#lib/utils";
 
 const buttonVariants = cva(
@@ -26,6 +28,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-(--shadow-card) hover:not-disabled:bg-accent aria-expanded:bg-accent",
         ghost:
           "bg-transparent text-foreground hover:not-disabled:bg-accent aria-expanded:bg-accent aria-pressed:bg-selected aria-pressed:text-on-selected",
+        action:
+          "bg-action text-on-action hover:not-disabled:bg-action-hov aria-expanded:bg-selected aria-expanded:text-on-selected",
         destructive:
           "bg-destructive text-destructive-foreground hover:not-disabled:bg-danger-btn-hov",
         link: "min-h-0! bg-transparent px-0! text-ember-text underline-offset-[3px] hover:underline",
@@ -57,7 +61,11 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size }), focusFillClass, className)}
+      className={cn(
+        buttonVariants({ variant, size }),
+        variant === "action" ? actionFocusFillClass : focusFillClass,
+        className,
+      )}
       {...props}
     />
   );

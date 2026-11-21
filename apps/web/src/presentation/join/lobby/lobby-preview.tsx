@@ -24,10 +24,15 @@ import type { DevicePreview } from "./use-device-preview";
 const PREVIEW_TEXT_ID = "lobby-preview-text";
 const DEVICE_ERROR_ID = "lobby-device-error";
 
-/** Rest uses the `control` fill (>= 3:1 on every level); off uses `control-invalid`. */
+/**
+ * On uses the `action` fill (ink in light, paper in dark; operator 2026-11-21, gray read as
+ * disabled) and focuses to `action-focus`, because `focus` equals that fill; off uses
+ * `control-invalid`.
+ */
 const toggleClass = cn(
   "inline-flex min-h-size-control-h items-center gap-s2 rounded-base px-s4 font-semibold transition-colors duration-(--dur-fast) ease-standard",
-  "data-[state=on]:bg-control data-[state=on]:text-on-control [@media(hover:hover)]:data-[state=on]:hover:bg-control-hov",
+  "data-[state=on]:bg-action data-[state=on]:text-on-action [@media(hover:hover)]:data-[state=on]:hover:bg-action-hov",
+  "data-[state=on]:focus-visible:bg-action-focus! data-[state=on]:focus-visible:text-on-action-focus!",
   "data-[state=off]:bg-control-invalid data-[state=off]:text-on-control-invalid",
   "aria-disabled:cursor-not-allowed aria-disabled:opacity-50",
   focusFillClass,

@@ -197,6 +197,29 @@ export const PAIRS = [
       `Focus change: focus fill against the unfocused ${what} (>= 3:1, operator D-6)`,
     ),
   ),
+  // ---- Action buttons (operator 2026-11-21): neutral clickable buttons (room controls,
+  // lobby toggles) use the strongest neutral, ink in light and paper in dark, so they never
+  // read as disabled. Their focus is the brand cyan, because `focus` equals the rest fill.
+  ...CONTROL_SURFACES.map((s) =>
+    ui(`action-fill-vs-${s}`, "action", [s], `Action button fill against ${s}`),
+  ),
+  text("on-action-on-action", "on-action", ["action"], "Action button label and icon"),
+  text("on-action-on-action-hov", "on-action", ["action-hov"], "Action button label on hover"),
+  ...CONTROL_SURFACES.map((s) =>
+    ui(`action-focus-vs-${s}`, "action-focus", [s], `Action button focus fill against ${s}`),
+  ),
+  ui(
+    "action-focus-vs-unfocused-action",
+    "action-focus",
+    ["action"],
+    "Focus change: action focus fill against the unfocused action fill (>= 3:1, operator D-6)",
+  ),
+  text(
+    "on-action-focus-on-action-focus",
+    "on-action-focus",
+    ["action-focus"],
+    "Action button label and icon while focused",
+  ),
   ui(
     "check-glyph-on-selected",
     "on-selected",
