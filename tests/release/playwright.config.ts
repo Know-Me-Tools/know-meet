@@ -12,8 +12,14 @@
  *   pnpm --filter @know-meet/release-tests exec playwright test --project=packaged
  *   pnpm --filter @know-meet/release-tests exec playwright test --project=hosted
  * Evidence goes to KM_EVIDENCE_DIR (a new dated folder per run if unset).
+ *
+ * WC additions (web-conferencing-features, wc01 task 1.1): the WC-2, WC-3, WC-6 and WC-7
+ * specs also run in Firefox and WebKit. Those tests carry @cross-engine; the
+ * *-firefox and *-webkit projects select only that tag. Firefox and WebKit have
+ * no fake-media flags, so cross-engine tests join with microphone and camera off.
  */
 import { defineConfig, devices } from "@playwright/test";
+import { AUTO_SELECT_SCREEN_ARGS, FAKE_MEDIA_ARGS } from "./src/browser-args.ts";
 
 const PACKAGED_BASE_URL = process.env["KM_RELEASE_BASE_URL"] ?? "http://localhost:8080";
 const HOSTED_BASE_URL = "https://meet.know-me.tools";
@@ -25,14 +31,29 @@ if (process.env["KM_EVIDENCE_DIR"] === undefined || process.env["KM_EVIDENCE_DIR
 }
 const EVIDENCE_DIR = process.env["KM_EVIDENCE_DIR"];
 
-/** Chromium fake camera and microphone; the fake UI flag auto-accepts the prompt. */
-const FAKE_MEDIA_ARGS = ["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"];
-
 const chromiumWithFakeMedia = {
   ...devices["Desktop Chrome"],
   permissions: ["camera", "microphone"],
-  launchOptions: { args: FAKE_MEDIA_ARGS },
+  launchOptions: { args: [...FAKE_MEDIA_ARGS, ...AUTO_SELECT_SCREEN_ARGS] },
 };
+
+function crossEngineProjects(prefix: string, baseURL: string) {
+  const exclude = prefix === "packaged" ? /@hosted-only/ : /@packaged-only/;
+  return [
+    {
+      name: `${prefix}-firefox`,
+      grep: /@cross-engine/,
+      grepInvert: exclude,
+      use: { ...devices["Desktop Firefox"], baseURL },
+    },
+    {
+      name: `${prefix}-webkit`,
+      grep: /@cross-engine/,
+      grepInvert: exclude,
+      use: { ...devices["Desktop Safari"], baseURL },
+    },
+  ];
+}
 
 export default defineConfig({
   testDir: ".",
@@ -67,5 +88,7 @@ export default defineConfig({
       grepInvert: /@packaged-only/,
       use: { ...chromiumWithFakeMedia, baseURL: HOSTED_BASE_URL },
     },
+    ...crossEngineProjects("packaged", PACKAGED_BASE_URL),
+    ...crossEngineProjects("hosted", HOSTED_BASE_URL),
   ],
 });

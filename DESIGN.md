@@ -6,14 +6,14 @@ same look on every surface.** Product context is in [PRODUCT.md](PRODUCT.md).
 
 ## Sources of truth (in precedence order)
 
-1. `docs/design/tokens.json` (v1.5.0): every value. Generated outputs come only from
+1. `docs/design/tokens.json` (v1.6.0): every value. Generated outputs come only from
    `pnpm --filter @know-meet/design-tokens generate`: web `tokens.css`, `theme.css`
    (Tailwind 4), `shadcn.css`, Flutter `tokens.g.dart` (`KmPalette`, `KmTokens`) and
    `km_theme.g.dart` (`buildKmTheme`). Never hand-edit a generated file.
 2. This file: rules that tokens alone cannot carry (control states, layout, motion).
 3. `docs/design/brand-guide.html`, then `docs/design/prototype/` (visual reference,
    revision v2: renders tokens v1.5.0, the Flat 2.0 rules and the adaptive navigation
-   below), then `docs/design/live/` (room layout reference). The root `live/` folder
+   below; v1.6.0 only adds `meter-fill`, which the frozen prototype does not use), then `docs/design/live/` (room layout reference). The root `live/` folder
    is not a source. `docs/design/prototype-v1-archive/` is the frozen pre-v2 copy
    (history only, never a source).
 
@@ -111,6 +111,7 @@ must honour the same parameter (request to ui-engineer and bdd-quality).
 | `switch-track` | `= control` | `= control` | Switch off track |
 | `pip-green/amber/red` | status hues | darker text hues | Status pips inside chips |
 | `speak-person/agent/phone`, `on-speak` | `#E8532A` `#0891B2` `#15803D`, `#0B0F14` | same | Speaking badge on a room tile |
+| `meter-fill` | `#22C55E` | `#166534` | Microphone level meter value on its `muted` track (5.42 / 4.94:1); never `green` (2.28:1 in light). Tokens v1.6.0, operator 2026-11-18 |
 
 Web: `bg-control text-on-control`, `bg-selected`, `bg-focus`, etc. (Tailwind
 `@theme inline`), or shadcn `bg-input` (= control) and `bg-ring` (= focus). `--input`
@@ -242,11 +243,13 @@ inline links plus the app-bar actions fit without truncation.
 
 ### Destinations
 
-Five, in this order, same icons and labels on every surface: Home (`home`), Meetings
+Full app (signed-in build): five, in this order, same icons and labels on every
+surface: Home (`home`), Meetings
 (`calendar`), Recordings (`film`), Agents (`agent-add`), Settings (`settings`).
 Navigation appears wherever the app bar appears (home, dashboard, agents,
 recordings, settings, including signed-out gates). It never appears in the meeting
-room, sign-in or join flows.
+room, sign-in or join flows. The hosted build has its own three destinations
+("Hosted build navigation" below); everything else in this section applies to both.
 
 ### Anatomy and states
 
@@ -310,6 +313,51 @@ the class changes layout only, never the DOM order. Skip link stays the first
 focusable element. Flutter uses `NavigationBar`/`NavigationRail`-equivalent kit
 widgets with `Semantics(selected: true)` on the current item.
 
+### Hosted build navigation (operator 2026-11-18)
+
+Decision `batch2-approval-web-conferencing-features`. The hosted build (`HOSTED_BUILD`,
+signed out) shows the adaptive navigation with **three** destinations. Width classes,
+anatomy, sizes, safe areas, semantics and resize motion are exactly the sections above;
+only the list and the app bar contents differ.
+
+| Order | Label | Icon | Route | Current (`aria-current="page"`) when the path is |
+|---|---|---|---|---|
+| 1 | Home | `home` | `/` | `/` |
+| 2 | History | `clock` | `/history` | `/history` or `/history/...` (a meeting detail) |
+| 3 | Recordings | `film` | `/recordings` | `/recordings` or `/recordings/...` |
+
+- **Where:** on `/`, `/history*` and `/recordings*`. Never on `/join` or `/meet` (lobby,
+  room, meeting-ended view stay as they are). History and Recordings items carry
+  `km-nav-history` and `km-nav-recordings` (scenario contract) as well as `km-nav-item`.
+- **App bar:** stays minimal: brand, then (expanded only) the three inline links, then
+  the theme toggle. No Start meeting, no account menu.
+- **Compact (< 600), bottom bar:** three equal items, each a third of the bar width
+  (125 at 375, 106 at 320) and the full bar height; indicator, icon, label and gap as
+  the five-item bar.
+- **Medium (600 to 1023), rail:** the three items stacked from the top, 80 x 64 each.
+- **Expanded (>= 1024), inline links:** three pill links after the brand.
+- **States (Flat 2.0; focus is a fill, never an outline, ring or shadow; elevation here
+  means a fill step, never a shadow).** Ratios dark / light, all in the contrast record:
+
+| State | Item fill | Content | Measured |
+|---|---|---|---|
+| Rest | transparent (`bg-2` bar and rail, `bg` inline) | icon and label `fg-sub` | 8.26 / 7.56 on `bg-2` |
+| Hover (`@media (hover: hover)`) | indicator `card-hov` | as rest | supplementary |
+| Current | indicator `selected` | icon `on-selected`, label `fg` | indicator vs `bg-2` 5.82 / 5.28, vs `bg` 6.17 / 3.92; icon 6.17 / 5.28 |
+| Focus (`:focus-visible`), current or not | whole item (radius 12) `focus`; the indicator drops into it | icon and label `on-focus` | vs `bg-2` 18.11 / 19.22, vs `bg` 19.22 / 14.25, vs the current indicator 3.11 / 3.64 |
+
+  State order as everywhere: focus, then current (selected), then hover, then rest.
+  Current is exposed to assistive technology by `aria-current`; visually the indicator
+  fill is the cue (as in the five-item nav) and the page heading repeats the label.
+- **Motion:** the bar <-> rail <-> inline morph uses `dur-nav-morph`, `dur-nav-label`,
+  `dur-reflow` and `ease-layout`, once per crossing of 600 or 1024, `transform` and
+  `opacity` only, with the view-transition rules above. Under
+  `prefers-reduced-motion: reduce` every change is instant (no view transition).
+- **Content:** at compact the page gets bottom padding equal to the bar height plus the
+  safe area, and toasts sit `s4` above the bar; at medium the content column is
+  `viewport - rail` (RV-21 overflow rules apply).
+- Flutter has no hosted build; its five-destination spec is unchanged.
+
 ### Safe areas and targets
 
 - Web: `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`
@@ -361,13 +409,36 @@ layout animates once per crossing; continuous resizing inside a class never anim
   view transition entirely; Flutter checks `MediaQuery.disableAnimationsOf(context)`
   and uses `Duration.zero`.
 
+## Room control bar below 768 (operator 2026-11-18)
+
+Decision `batch2-approval-web-conferencing-features`, item 4. With Share, Chat and
+Settings the room bar holds seven controls (408px at 48px plus gaps), more than 375.
+Below 768 (`bp-767`) the bar keeps the prototype behaviour (`docs/design/live/assets/room.css`):
+
+- One row that scrolls sideways in its own region: `flex-wrap: nowrap`,
+  `justify-content: flex-start`, `overflow-x: auto`, padding `s2 s3 s3`, gap `s2`;
+  control groups do not wrap; scrollbar hidden (`scrollbar-width: none`).
+- No "More" overflow menu. Controls keep their prototype size (48 x 48 minimum; labels
+  visually hidden below 900, accessible names kept) and their order; nothing reorders.
+- The page itself never scrolls sideways (`scrollWidth == clientWidth` at 375, A-5);
+  only the bar does.
+- Keyboard: every control is a tab stop, so the scroller is not one; a focused control
+  scrolls fully into view with `scroll-padding-inline: s3` so it never sits flush to
+  the edge. Focus is the control's `focus` fill as usual.
+- Touch: `overscroll-behavior-x: contain` on the bar, so a sideways swipe at its end
+  never triggers the browser's back gesture mid-meeting.
+- Reduced motion: scrolling a focused control into view is instant
+  (`scroll-behavior: auto`).
+- At 768 and wider the bar is centred and unchanged.
+
 ## Verification hooks
 
-- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (258 pairs, including the four `surface-step` pairs).
+- Contrast: `node packages/design-tokens/scripts/contrast-record.mjs` (259 pairs after the v1.6.0 regeneration, including the four `surface-step` pairs).
 - Fidelity: the oracle compares against baselines captured from prototype v2, so
   this file's rules are the reference, not exceptions (`thresholds.json` ADJ-1 to
   ADJ-3 superseded; ADJ-4 contract amendment pending).
 - Checklist for reviews (also the Kimi Code fallback when Impeccable is unavailable):
   no stroke utilities; every control on an allowed surface; every state from the
   table; nav identical across web and Flutter at 375, 768 and 1024 in both themes;
-  reduced motion instant.
+  hosted nav shows exactly three destinations; room bar scrolls sideways below 768
+  with no page overflow; reduced motion instant.

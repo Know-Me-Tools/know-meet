@@ -8,9 +8,15 @@
 # for this origin only.
 # Negative control: the same header assertions run against the packaged static image alone, without
 # the Gateway filter, must FAIL for Strict-Transport-Security.
+# Web CSP (phase web-conferencing-features, wc06-web-csp/6.3, WC-10): the generated policy now also
+# carries script-src 'wasm-unsafe-eval', worker-src 'self' blob:, media-src blob: and img-src blob:;
+# connect-src is exactly the previous release's and no 'unsafe-eval' is added. The desktop policy
+# in tauri.conf.json is unchanged.
 # Executed by tests/release/headers.spec.ts: the positive scenario in the hosted project only; the
-# negative control in the packaged project only. The expected CSP is the build:hosted artifact (wr06
-# task 6.3), passed to the run by path.
+# desktop-policy and negative-control scenarios in the packaged project only. The expected CSP is the
+# build:hosted artifact (wr06 task 6.3) and the previous release's value is saved before the build;
+# both are passed to the run by path (KM_RELEASE_CSP_FILE, KM_RELEASE_PREVIOUS_CSP_FILE; a missing
+# input is BLOCKED).
 @WR-3 @value-critical @release @boundary-only
 Feature: WR-3 Valid TLS and security headers at the public URL
   As a visitor opening the meeting site
@@ -32,7 +38,18 @@ Feature: WR-3 Valid TLS and security headers at the public URL
     And each response denies framing by X-Frame-Options DENY or frame-ancestors 'none'
     And each response carries a Referrer-Policy
     And each response carries a Permissions-Policy allowing camera and microphone for this origin only
+    And each Content-Security-Policy lists script-src 'wasm-unsafe-eval'
+    And each Content-Security-Policy lists worker-src 'self' and blob:
+    And each Content-Security-Policy lists media-src blob: and img-src blob:
+    And each Content-Security-Policy keeps connect-src exactly as the previous release served it
+    And no Content-Security-Policy adds 'unsafe-eval'
     And the certificate issuer, its expiry and the header dump are recorded as evidence
+
+  @packaged
+  Scenario: The desktop policy is unchanged by the web policy
+    When tauri.conf.json is read
+    Then app.security.csp equals the committed desktop policy exactly
+    And it is not the hosted policy
 
   @packaged @negative-control
   Scenario: The same header assertions fail for HSTS on the bare static image

@@ -5,6 +5,7 @@
 import { Outlet, useLocation } from "@tanstack/react-router";
 import { HOSTED_BUILD } from "../build-mode";
 import { AppBar } from "./app-bar";
+import { DESTINATIONS, HOSTED_DESTINATIONS } from "./destinations";
 import { type FocusedFlow, FocusedFooter, FocusedTopBar } from "./focused-top-bar";
 import { useWidthClass } from "./use-width-class";
 
@@ -18,17 +19,20 @@ function Main() {
 
 /**
  * App bar with the adaptive primary navigation (bar / rail / inline). The hosted
- * build has one product page, so its bar is the brand and the theme toggle only,
- * and no navigation class is set (the layout reserves no room for a nav).
+ * build shows three destinations (Home, History, Recordings) and a minimal bar:
+ * brand, the navigation and the theme toggle (DESIGN.md "Hosted build navigation").
+ * Only framed routes (`/`, `/history`, `/recordings` in the hosted build) use this
+ * layout, so the navigation never appears on `/join` or `/meet`.
  */
 export function FramedLayout() {
   const widthClass = useWidthClass();
   return (
-    <div
-      className="km-framed flex flex-1 flex-col"
-      data-nav-class={HOSTED_BUILD ? undefined : widthClass}
-    >
-      <AppBar widthClass={widthClass} withNav={!HOSTED_BUILD} minimal={HOSTED_BUILD} />
+    <div className="km-framed flex flex-1 flex-col" data-nav-class={widthClass}>
+      <AppBar
+        widthClass={widthClass}
+        destinations={HOSTED_BUILD ? HOSTED_DESTINATIONS : DESTINATIONS}
+        minimal={HOSTED_BUILD}
+      />
       <Main />
     </div>
   );

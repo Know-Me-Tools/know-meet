@@ -5,10 +5,10 @@
   "sourceFileLastCommit": "e62ad61bb0997d8eeca24364af5c087d55eea90a",
   "sourceFileLastCommitDate": "2026-10-19",
   "sourcePackageVersion": "knowme-builder 2.0.0-alpha.5",
-  "sha256": "0c2f7f60a768c121fcbf8264b42969f68b3dce301d3b176c55ea31a3e7b53a3c",
+  "sha256": "066267600a983242a96e6fd499ce65e35f16316d8fdafec93c5fad122fb87e8a",
   "copiedAt": "2026-11-09",
   "copiedBy": "know-meet-team/build-platform (c01 task 1.2)",
-  "policy": "Byte-identical copy. Never edit it here; re-copy from the reference and update sha256. tooling/repo-rules/src/check-pins.ts fails lint when the digest or any derived pin drifts.",
+  "policy": "Know Meet fork of the reference copy since 2026-11-18 (operator decision: diverge locally). Base: byte-identical copy at sha256 0c2f7f60a768c121fcbf8264b42969f68b3dce301d3b176c55ea31a3e7b53a3c. Local additions: entity_graph 5.0.1, livekit_track_processors 0.8.3, mediapipe_tasks_vision 0.10.14, pglite 0.5.16 (web-conferencing-features task 1.5). When re-copying from the reference, re-apply these lines and update sha256. tooling/repo-rules/src/check-pins.ts fails lint when the digest or any derived pin drifts.",
   "derived": {
     "rust-toolchain.toml": "toolchain.rust",
     "package.json#packageManager": "toolchain.pnpm",
@@ -16,5 +16,7 @@
     "package.json#engines.pnpm": "toolchain.pnpm",
     "package.json#devDependencies.typescript": "toolchain.typescript",
     ".github/workflows/ci.yml (node-version-file, flutter-version)": "toolchain.node, toolchain.flutter"
-  }
+  },
+  "divergedAt": "2026-11-18",
+  "divergedBy": "know-meet-team/build-platform (web-conferencing-features task 1.5)"
 }

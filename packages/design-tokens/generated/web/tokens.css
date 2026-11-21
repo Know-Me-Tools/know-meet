@@ -52,6 +52,7 @@
   --pip-green: #22C55E;
   --pip-amber: #F59E0B;
   --pip-red: #EF4444;
+  --meter-fill: #22C55E;
   --speak-person: #E8532A;
   --speak-agent: #0891B2;
   --speak-phone: #15803D;
@@ -296,6 +297,7 @@
   --pip-green: #166534;
   --pip-amber: #B45309;
   --pip-red: #DC2626;
+  --meter-fill: #166534;
   --scrim: rgba(11, 15, 20, 0.4);
   --shadow-float: none;
   --shadow-card: none;

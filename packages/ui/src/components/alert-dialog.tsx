@@ -1,10 +1,13 @@
 // TJ-ARCH-MOB-001 compliant
 // The prototype's confirm dialog (KM.confirm in docs/design/prototype): the same
 // surface as Dialog, without a close button; cancel is the raised `.btn`, the
-// action is primary (or destructive for irreversible actions).
+// action is primary (or destructive for irreversible actions). While open, everything
+// outside the dialog is inert (lib/inert-outside.ts), so focus cannot leave it.
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import type * as React from "react";
+import { createContext, useCallback, useContext, useLayoutEffect, useState } from "react";
 import { Button } from "#components/button";
+import { inertOutside } from "#lib/inert-outside";
 import {
   centredPopupClass,
   overlayDescriptionClass,
@@ -14,8 +17,35 @@ import {
 } from "#lib/overlay-styles";
 import { cn } from "#lib/utils";
 
-function AlertDialog({ ...props }: AlertDialogPrimitive.Root.Props) {
-  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
+/** Whether the enclosing AlertDialog is open (controlled or not); read by the content. */
+const AlertDialogOpenContext = createContext(false);
+
+function AlertDialog({
+  open,
+  defaultOpen = false,
+  onOpenChange,
+  ...props
+}: AlertDialogPrimitive.Root.Props) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  type OpenChange = NonNullable<AlertDialogPrimitive.Root.Props["onOpenChange"]>;
+  const handleOpenChange = useCallback<OpenChange>(
+    (next, details) => {
+      setUncontrolledOpen(next);
+      onOpenChange?.(next, details);
+    },
+    [onOpenChange],
+  );
+  return (
+    <AlertDialogOpenContext value={open ?? uncontrolledOpen}>
+      <AlertDialogPrimitive.Root
+        data-slot="alert-dialog"
+        {...(open === undefined ? {} : { open })}
+        defaultOpen={defaultOpen}
+        onOpenChange={handleOpenChange}
+        {...props}
+      />
+    </AlertDialogOpenContext>
+  );
 }
 
 function AlertDialogTrigger({ ...props }: AlertDialogPrimitive.Trigger.Props) {
@@ -39,14 +69,30 @@ function AlertDialogOverlay({ className, ...props }: AlertDialogPrimitive.Backdr
 function AlertDialogContent({
   className,
   size = "default",
+  ref,
   ...props
 }: AlertDialogPrimitive.Popup.Props & {
   size?: "default" | "sm";
+  ref?: React.Ref<HTMLDivElement>;
 }) {
+  const open = useContext(AlertDialogOpenContext);
+  const [popup, setPopup] = useState<HTMLDivElement | null>(null);
+  // A layout effect, so inert is lifted in the same commit that closes the dialog,
+  // before Base UI returns focus to the trigger behind it.
+  useLayoutEffect(() => (open && popup !== null ? inertOutside(popup) : undefined), [open, popup]);
+  const popupRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setPopup(node);
+      if (typeof ref === "function") ref(node);
+      else if (ref !== null && ref !== undefined) ref.current = node;
+    },
+    [ref],
+  );
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Popup
+        ref={popupRef}
         data-slot="alert-dialog-content"
         data-size={size}
         className={cn(

@@ -5,12 +5,14 @@
  * silently skipping an adopted scenario.
  */
 import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 export const ENV = {
   baseUrl: "KM_RELEASE_BASE_URL",
   staticUrl: "KM_RELEASE_STATIC_URL",
   defaultBuildUrl: "KM_RELEASE_DEFAULT_BUILD_URL",
   cspFile: "KM_RELEASE_CSP_FILE",
+  previousCspFile: "KM_RELEASE_PREVIOUS_CSP_FILE",
   tokenTtlSeconds: "KM_RELEASE_TOKEN_TTL_SECONDS",
   rateLimitBurst: "KM_RELEASE_RATE_LIMIT_BURST",
   rateLimitRefillSeconds: "KM_RELEASE_RATE_LIMIT_REFILL_SECONDS",
@@ -84,4 +86,30 @@ export function abuseLimits(): AbuseLimits {
 /** Image digests of the run, recorded with WR-1 evidence. Optional input, recorded as given. */
 export function imageDigests(): string {
   return read(ENV.imageDigests) ?? "not provided";
+}
+
+/**
+ * The hosted CSP header value of the previous release (main at the phase base),
+ * as the runner saved it before building. WC-10 diffs the new value against it.
+ */
+export function previousCsp(): string {
+  const path = required(
+    ENV.previousCspFile,
+    "path of the CSP header value the previous release served",
+  );
+  const value = readFileSync(path, "utf8").trim();
+  if (value === "") throw blocked(`${path} is empty`);
+  return value;
+}
+
+/** The repository root, for specs that read committed files (lockfile, tauri.conf.json). */
+export function repoRoot(): string {
+  return fileURLToPath(new URL("../../../", import.meta.url));
+}
+
+/** app.security.csp from apps/desktop/src-tauri/tauri.conf.json, as committed. */
+export function desktopCsp(): unknown {
+  const path = `${repoRoot()}apps/desktop/src-tauri/tauri.conf.json`;
+  const parsed: unknown = JSON.parse(readFileSync(path, "utf8"));
+  return (parsed as { app?: { security?: { csp?: unknown } } }).app?.security?.csp;
 }

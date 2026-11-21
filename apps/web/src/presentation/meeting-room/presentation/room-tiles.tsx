@@ -6,36 +6,20 @@
 // the local tile shows the local camera mirrored and never plays the local microphone.
 // With no video the tile shows the initials avatar on `tile`. Muted is a badge (red-soft on
 // an avatar, the opaque danger fill over video, O-6) and part of the tile name. Speaking is
-// not shown: the port carries no speaking signal (gap reported in wr05).
+// not shown: the port carries no speaking signal (gap reported in wr05). The local tile
+// reports what its published camera carries in `data-video-processor` (none,
+// background-blur, virtual-background; scenario contract WC-4).
 import type { RealtimeRoom } from "@know-meet/application";
-import type {
-  LocalParticipant,
-  Participant,
-  ParticipantIdentity,
-  RemoteParticipant,
-  TrackKind,
-} from "@know-meet/domain";
+import type { LocalParticipant, Participant, RemoteParticipant } from "@know-meet/domain";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { cn } from "@know-meet/ui/lib/utils";
-import { type ReactNode, type RefObject, useEffect, useRef } from "react";
+import type { ReactNode } from "react";
 import { initialsOf, showsVideo, tileName } from "../../guest-meeting/participant-labels";
+import type { VideoProcessorName } from "./background/background-options";
+import { useMediaBinding } from "./use-media-binding";
 
 const tileClass =
   "relative isolate aspect-[16/10] min-h-[180px] overflow-hidden rounded-tile bg-tile text-foreground max-bp481:aspect-[4/3] max-bp481:min-h-[160px]";
-
-function useMediaBinding<T extends HTMLMediaElement>(
-  room: RealtimeRoom,
-  identity: ParticipantIdentity,
-  kind: TrackKind,
-): RefObject<T | null> {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    const element = ref.current;
-    if (element === null) return undefined;
-    return room.attachMedia({ identity, kind }, element);
-  }, [room, identity, kind]);
-  return ref;
-}
 
 function MutedBadge({
   overVideo,
@@ -101,9 +85,11 @@ function TileBody({
 export function LocalTile({
   room,
   local,
+  processor,
 }: {
   readonly room: RealtimeRoom;
   readonly local: LocalParticipant;
+  readonly processor: VideoProcessorName;
 }) {
   const videoRef = useMediaBinding<HTMLVideoElement>(room, local.identity, "camera");
   return (
@@ -112,6 +98,7 @@ export function LocalTile({
       role="group"
       aria-label={tileName(local)}
       data-testid="km-local-tile"
+      data-video-processor={processor}
       className={tileClass}
     >
       <TileBody

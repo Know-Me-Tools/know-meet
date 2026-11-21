@@ -18,11 +18,11 @@ importers:
         specifier: 1.0.4
         version: 1.0.4(zod@3.25.76)
       '@prometheus-ags/entity-graph-core':
-        specifier: 4.4.0
-        version: 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 5.0.1
+        version: 5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@prometheus-ags/entity-graph-react':
-        specifier: 4.4.0
-        version: 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 5.0.1
+        version: 5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@streamdown/code':
         specifier: 2.0.0
         version: 2.0.0(react@19.2.7)
@@ -169,11 +169,11 @@ packages:
   '@preact/signals-core@1.14.5':
     resolution: {integrity: sha512-vcRv7Ityz5JVmeiVqIluLFzT/PDS/AlhHUpw3/aUWqcVUs6bDGIPXE/6RSC4evBNWYvnniozg5Syfj33al3gkg==}
 
-  '@prometheus-ags/entity-graph-core@4.4.0':
-    resolution: {integrity: sha512-mjQuwA78wKdKijWZ1LrYeqqaP8U5h82d3To2Cmi1rWsOBeBd67oixdTupWY7uckRzOSD0ctkxbPVKc65XR91dw==}
+  '@prometheus-ags/entity-graph-core@5.0.1':
+    resolution: {integrity: sha512-CO2sPu9WJiNufzXSVlSTtAUUnScKH0Sm6ST+Qbd4Bd6jzhHA9sdqBkrEwWN/TnWp4Z4U/u0hDWYhWBVMMmrd5w==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
-      '@ag-ui/core': '>=0.0.30'
+      '@ag-ui/core': ^1.0.0
       '@tauri-apps/plugin-sql': '>=2.0.0'
       loro-crdt: '>=1.0.0'
     peerDependenciesMeta:
@@ -184,12 +184,12 @@ packages:
       loro-crdt:
         optional: true
 
-  '@prometheus-ags/entity-graph-react@4.4.0':
-    resolution: {integrity: sha512-osS+QyPMODhiNcDvFmVcxlSBXyeOlQ2jq7t4V7M0oeC+QjxrT62qq7aQh56W21/YgN0NXlHVK6KUAPi5GSEOKQ==}
+  '@prometheus-ags/entity-graph-react@5.0.1':
+    resolution: {integrity: sha512-I/EzSY7I1FqWv8crmEHQ5aMcS4obg39bNO5G+ULTQ7ntKitTtH9b5GM+9EnLELhVugFKVNslMgfRKKjzB1mUMw==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
-      '@ag-ui/core': '>=0.0.30'
-      '@prometheus-ags/entity-graph-core': ^4.4.0
+      '@ag-ui/core': ^1.0.0
+      '@prometheus-ags/entity-graph-core': ^5.0.1
       '@tauri-apps/plugin-sql': '>=2.0.0'
       loro-crdt: '>=1.0.0'
       react: '>=19.0.0 <20.0.0'
@@ -1802,7 +1802,7 @@ snapshots:
 
   '@preact/signals-core@1.14.5': {}
 
-  '@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-core@5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
       immer: 11.2.9
       zustand: 5.1.0(@types/react@19.2.7)(immer@11.2.9)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
@@ -1813,9 +1813,9 @@ snapshots:
       - react
       - use-sync-external-store
 
-  '@prometheus-ags/entity-graph-react@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-react@5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@prometheus-ags/entity-graph-core@5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.2.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
-      '@prometheus-ags/entity-graph-core': 4.4.0(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+      '@prometheus-ags/entity-graph-core': 5.0.1(@ag-ui/core@1.0.4(zod@3.25.76))(@types/react@19.2.7)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@tanstack/react-table': 9.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/react-virtual': 3.14.26(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/table-core': 9.3.1

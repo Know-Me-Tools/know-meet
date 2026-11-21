@@ -449,3 +449,28 @@ light text values changed). Open for the owner: dark `bg-2` (app bar, nav, menus
 1.06:1 above `bg`; `control-hov` is not in the record (dark hover fill is 2.54:1 on `card`,
 was 2.74 in v1.4.0); light `control-placeholder` now sits within 1.2:1 of the value text
 (placeholders keep the "e.g." rule).
+
+## G. Batch 2 approval, web conferencing (2026-11-18, tokens.json v1.6.0)
+
+Operator decision `batch2-approval-web-conferencing-features`, item 3. Shapes:
+`docs/design/shapes/web-conferencing/` (README question 2, device-settings).
+
+### G1. New colour role
+
+| Key | Dark | Light | Job | Ratio on `muted` (dark / light) |
+|---|---|---|---|---|
+| `meter-fill` | `#22C55E` (= `green`) | `#166534` (= `green-text`) | Microphone level meter value on its `muted` track (lobby, room Audio and video pane) | 5.42 / 4.94 (3:1 required, SC 1.4.11) |
+
+Why: the prototype meter fill is `green` on `muted`, 2.28:1 in light (dark 5.42:1), an
+existing SC 1.4.11 failure. The new role fixes light and leaves dark unchanged. This is
+an intentional difference from the frozen prototype (light theme only): the prototype
+keeps `green`; app code uses `meter-fill`.
+
+Pair added to `packages/design-tokens/scripts/contrast-pairs.mjs` as
+`meter-fill-on-muted` (kind `ui`). Not yet regenerated: `generate` and the contrast
+record run at the phase boundary (VLBV), which also refreshes
+`generated/web/*.css`, `generated/flutter/*.g.dart`, `generated/manifest.json` and
+`docs/design/tokens.css`. Expected record: 259 pairs.
+
+Recapture needed: light-theme lobby and room-settings cells that show the meter (new
+surfaces in this phase; no existing baseline renders the meter in-scope).

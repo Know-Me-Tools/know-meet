@@ -1,6 +1,8 @@
 // TJ-ARCH-MOB-001 compliant
 // Prototype icon set (docs/design/prototype/assets/km.js ICONS, generated from it
-// verbatim): 24 viewBox outline family, 1.75 stroke, round caps and joins. Glyph
+// verbatim; `speaker`, `speaker-off`, `background` and `image` were added in wc04 on
+// the same grid, shapes README question 5, `speaker-off` slashed like `mic-off`):
+// 24 viewBox outline family, 1.75 stroke, round caps and joins. Glyph
 // strokes are part of the drawing, not control outlines (Flat 2.0 bans control
 // strokes only). Decorative by default: the visible label or the control's
 // aria-label names the action.
@@ -30,6 +32,29 @@ const PATHS = {
     <>
       <rect x="3" y="4" width="18" height="12" rx="2" />
       <path d="M8 20h8M12 16v4M12 13V7M9 10l3-3 3 3" />
+    </>
+  ),
+  speaker: (
+    <>
+      <path d="M12 5.5v13l-4.5-4H4v-5h3.5z" />
+      <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" />
+    </>
+  ),
+  "speaker-off": (
+    <path d="M12 9.5V5.5L7.5 9.5H4v5h3.5l4.5 4V14M16.5 9.5a4 4 0 0 1 .8 4M3 3l18 18" />
+  ),
+  background: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="12" cy="10.5" r="2.5" />
+      <path d="M7.5 20a4.5 4.5 0 0 1 9 0" />
+    </>
+  ),
+  image: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="9" cy="9.5" r="1.5" />
+      <path d="M21 15.5l-5-5L5 20" />
     </>
   ),
   cc: (

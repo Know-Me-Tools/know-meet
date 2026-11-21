@@ -1,12 +1,15 @@
 // TJ-ARCH-MOB-001 compliant
-// meet.html `nav.controls` for the guest room (acceptance R2-R5, R9; section 3): the clock
-// (left, hidden below 900), the media group centred (mic, camera) and the end group (Copy
-// join link in the Invite slot, O-4; Leave). Labels show under the icon from 900px; below
-// that they are visually hidden (still in the name) and controls are 48px, and the four
-// controls fit one row at 375 without a sideways scroller. Mic and camera are action
-// buttons whose name and label change, with no aria-pressed (K-1); `data-state` carries
-// on/off. Rest uses the `control` fill, off `control-invalid`, Leave `danger-btn`, so every
-// control boundary meets 3:1 on the stage. Leave opens the prototype dialog (O-7).
+// meet.html `nav.controls` for the guest room (acceptance R2-R5, R9; section 3; wc04):
+// the clock (left, hidden below 900), the media group (mic, camera, Share, then Record,
+// wc10 task 10.4, prototype order) and the end
+// group (the panel controls: Chat, then the Settings slot wc05 fills; Copy join link in
+// the Invite slot, O-4; Leave). Mic, camera and Share are action buttons whose name and
+// label change, with no aria-pressed (K-1); `data-state` carries on/off. Leave opens the
+// prototype dialog (O-7).
+// Below 768 (DESIGN.md "Room control bar below 768") the bar is one row that scrolls
+// sideways in its own region: no wrap, start-aligned, hidden scrollbar, contained
+// overscroll, and a focused control scrolls into view clear of the edge. Every control
+// stays a tab stop, so the scroller itself is not one. At 768 and wider it is unchanged.
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -18,42 +21,17 @@ import {
   AlertDialogTrigger,
 } from "@know-meet/ui/components/alert-dialog";
 import { Button } from "@know-meet/ui/components/button";
-import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
-import { focusFillClass } from "@know-meet/ui/lib/focus";
+import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { cn } from "@know-meet/ui/lib/utils";
 import type * as React from "react";
 import { useEffect, useState } from "react";
 import { ROOM_COPY } from "../../guest-meeting/meeting-copy";
 import { formatDuration } from "../../workspace/application/format";
-
-const ctlClass = cn(
-  "relative grid min-h-14 min-w-16 flex-none content-center justify-items-center gap-0.5 rounded-base px-2 py-1.5 transition-colors duration-(--dur-fast) ease-standard",
-  "max-bp1024:min-w-[54px] max-bp900:min-h-12 max-bp900:min-w-12 max-bp900:px-3 max-bp900:py-0",
-  "data-[tone=rest]:bg-control data-[tone=rest]:text-on-control [@media(hover:hover)]:data-[tone=rest]:hover:bg-control-hov",
-  "data-[tone=off]:bg-control-invalid data-[tone=off]:text-on-control-invalid",
-  "data-[tone=leave]:bg-danger-btn data-[tone=leave]:text-on-danger [@media(hover:hover)]:data-[tone=leave]:hover:bg-danger-btn-hov",
-  focusFillClass,
-);
-
-const labelClass =
-  "block text-xs font-semibold whitespace-nowrap max-bp900:absolute max-bp900:size-px max-bp900:overflow-hidden max-bp900:[clip:rect(0_0_0_0)]";
-
-type CtlTone = "rest" | "off" | "leave";
-
-interface CtlProps extends Omit<React.ComponentProps<"button">, "children"> {
-  readonly icon: KmIconName;
-  readonly label: string;
-  readonly tone: CtlTone;
-}
-
-function Ctl({ icon, label, tone, className, ...props }: CtlProps) {
-  return (
-    <button type="button" data-tone={tone} className={cn(ctlClass, className)} {...props}>
-      <KmIcon name={icon} />
-      <span className={labelClass}>{label}</span>
-    </button>
-  );
-}
+import { Ctl, ctlClass, ctlLabelClass } from "./room-control";
+import {
+  ScreenShareControl,
+  type ScreenShareControlProps,
+} from "./screen-share/screen-share-control";
 
 /** meet.html `.clock` (role timer): time since you joined, mm:ss. */
 function RoomClock({ startedAt }: { readonly startedAt: number }) {
@@ -88,7 +66,7 @@ function LeaveControl({ onLeave }: { readonly onLeave: () => void }) {
         }
       >
         <KmIcon name="leave" />
-        <span className={labelClass}>Leave</span>
+        <span className={ctlLabelClass}>Leave</span>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -114,12 +92,29 @@ function LeaveControl({ onLeave }: { readonly onLeave: () => void }) {
   );
 }
 
+const barClass = cn(
+  "grid min-w-0 grid-cols-[1fr_auto_1fr] items-center gap-s3 px-s5 pt-s3 pb-s4",
+  "max-bp900:flex max-bp900:justify-center",
+  "max-bp768:flex-nowrap max-bp768:justify-start max-bp768:gap-s2 max-bp768:overflow-x-auto max-bp768:overscroll-x-contain max-bp768:scroll-px-s3 max-bp768:px-s3 max-bp768:pt-s2 max-bp768:pb-s3",
+  "max-bp768:[scrollbar-width:none] max-bp768:[&::-webkit-scrollbar]:hidden",
+);
+
+const groupClass = "flex flex-none flex-nowrap items-center gap-s2";
+
 export interface RoomControlsProps {
   readonly startedAt: number;
   readonly micOn: boolean;
   readonly cameraOn: boolean;
   readonly onToggleMic: () => void;
   readonly onToggleCamera: () => void;
+  readonly share: ScreenShareControlProps;
+  /** The Record control (`km-room-record`, wc10), after Share in the media group. */
+  readonly recordControl: React.ReactNode;
+  /**
+   * Controls that open a room side-sheet pane, in bar order: Chat (wc04), then
+   * Settings (`km-room-settings`, wc05). Rendered at the start of the end group.
+   */
+  readonly panelControls: React.ReactNode;
   readonly onCopyLink: () => void;
   readonly onLeave: () => void;
 }
@@ -127,14 +122,11 @@ export interface RoomControlsProps {
 export function RoomControls(props: RoomControlsProps) {
   const { micOn, cameraOn } = props;
   return (
-    <nav
-      aria-label="Meeting controls"
-      className="grid grid-cols-[1fr_auto_1fr] items-center gap-s3 px-s5 pt-s3 pb-s4 max-bp900:flex max-bp900:justify-center max-bp768:gap-s2 max-bp768:px-s3 max-bp768:pt-s2 max-bp768:pb-s3"
-    >
+    <nav aria-label="Meeting controls" className={barClass}>
       <div className="flex items-center max-bp900:hidden">
         <RoomClock startedAt={props.startedAt} />
       </div>
-      <div className="flex items-center gap-s2">
+      <div className={groupClass}>
         <Ctl
           icon={micOn ? "mic" : "mic-off"}
           label={micOn ? "Mute" : "Unmute"}
@@ -152,8 +144,11 @@ export function RoomControls(props: RoomControlsProps) {
           data-state={cameraOn ? "on" : "off"}
           onClick={props.onToggleCamera}
         />
+        <ScreenShareControl {...props.share} />
+        {props.recordControl}
       </div>
-      <div className="flex items-center justify-end gap-s2">
+      <div className={cn(groupClass, "justify-end")}>
+        {props.panelControls}
         <Ctl icon="link" label="Copy join link" tone="rest" onClick={props.onCopyLink} />
         <LeaveControl onLeave={props.onLeave} />
       </div>

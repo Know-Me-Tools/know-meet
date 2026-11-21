@@ -7,7 +7,7 @@ import {
   type AttachableTrack,
   createMediaBindings,
   type TrackResolver,
-} from "../../src/media-bindings.ts";
+} from "../../src/realtime-room/application/media-bindings.ts";
 
 interface RecordingTrack extends AttachableTrack {
   readonly calls: string[];

@@ -1,7 +1,12 @@
 // wr04 task 4.1: SDK facts become domain snapshots with stable references.
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { ConnectionState } from "@know-meet/domain";
+import {
+  type ConnectionState,
+  DEFAULT_ACTIVE_DEVICES,
+  NO_BACKGROUND_EFFECT_STATE,
+  NOTHING_SUPPORTED,
+} from "@know-meet/domain";
 import {
   CONNECTED,
   CONNECTION_LOST,
@@ -9,14 +14,14 @@ import {
   LEFT,
   RECONNECTING,
   toLiveConnection,
-} from "../../src/connection-mapping.ts";
+} from "../../src/realtime-room/domain/connection-mapping.ts";
 import {
   INITIAL_SNAPSHOT,
   nextSnapshot,
   type ParticipantFacts,
   type RoomFacts,
   UNPUBLISHED,
-} from "../../src/snapshot-mapping.ts";
+} from "../../src/realtime-room/domain/snapshot-mapping.ts";
 
 function participant(identity: string, microphoneMuted = false, name?: string): ParticipantFacts {
   return {
@@ -32,7 +37,18 @@ function facts(
   remotes: readonly ParticipantFacts[] = [],
   local: ParticipantFacts | null = participant("guest-a"),
 ): RoomFacts {
-  return { connection, local, remotes };
+  return {
+    connection,
+    local,
+    remotes,
+    screenShares: [],
+    chat: INITIAL_SNAPSHOT.chat,
+    availableDevices: INITIAL_SNAPSHOT.devices.available,
+    activeDevices: DEFAULT_ACTIVE_DEVICES,
+    audioPlayback: "allowed",
+    backgroundEffect: NO_BACKGROUND_EFFECT_STATE,
+    support: NOTHING_SUPPORTED,
+  };
 }
 
 describe("snapshot mapping", () => {

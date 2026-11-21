@@ -66,6 +66,7 @@ KmPalette _fromScheme(ColorScheme c) {
     pipGreen: c.tertiary,
     pipAmber: c.tertiary,
     pipRed: c.error,
+    meterFill: c.tertiary,
     speakPerson: c.primary,
     speakAgent: c.secondary,
     speakPhone: c.tertiary,

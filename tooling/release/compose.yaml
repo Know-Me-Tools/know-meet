@@ -1,7 +1,7 @@
 # Local stack for the packaged release run (wr07 task 7.4; used by wr09 task 9.2).
 # Two locally built images plus a test-only proxy that applies the cluster route split:
-#   http://localhost:8080   same-origin entry: /api/* -> token-service, everything else -> web
-#   http://127.0.0.1:8081   the static web image alone, no proxy (WR-3 negative control)
+#   http://localhost:${KM_PROXY_PORT:-8080}   same-origin entry: /api/* -> token-service, everything else -> web
+#   http://127.0.0.1:${KM_STATIC_PORT:-8081}   the static web image alone, no proxy (WR-3 negative control)
 # The token service is not published; it is reachable only through the proxy.
 #
 # Run from the repository root (no value is written to any file; see tooling/release/README.md):
@@ -23,7 +23,7 @@ services:
         # must be the same URL the token service returns: one variable feeds both.
         KM_LIVEKIT_URL: ${LIVEKIT_URL:?set LIVEKIT_URL to the public wss:// URL}
     ports:
-      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:${KM_STATIC_PORT:-8081}:8080"
     cap_drop:
       - ALL
     security_opt:
@@ -65,7 +65,7 @@ services:
     # Pinned by tag and by the multi-arch index digest Docker Hub reports for that tag.
     image: nginxinc/nginx-unprivileged:1.30.6-alpine-slim@sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:${KM_PROXY_PORT:-8080}:8080"
     volumes:
       - ./proxy/nginx-split.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:

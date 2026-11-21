@@ -2,7 +2,7 @@
  * Gate 16.3 follow-up: the Worker-backed Streamdown highlighter never highlights on the main
  * thread while the worker works, keeps Streamdown's sync-or-callback contract, coalesces
  * identical requests, caches only complete blocks, and falls back to the main-thread plugin when
- * no worker can be created or the worker fails. Also: the entity-graph 4.4.0 live-layer overlay.
+ * no worker can be created or the worker fails. Also: the entity-graph 5.0.1 live-layer overlay.
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";

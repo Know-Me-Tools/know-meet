@@ -38,6 +38,9 @@ importers:
       '@base-ui/react':
         specifier: 1.9.0
         version: 1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@electric-sql/pglite':
+        specifier: 0.5.16
+        version: 0.5.16
       '@know-meet/application':
         specifier: workspace:*
         version: link:../../packages/application
@@ -53,12 +56,18 @@ importers:
       '@know-meet/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@livekit/track-processors':
+        specifier: 0.8.3
+        version: 0.8.3(@types/dom-mediacapture-transform@0.1.12)(livekit-client@2.24.1(@types/dom-mediacapture-record@1.0.22))
+      '@mediapipe/tasks-vision':
+        specifier: 0.10.14
+        version: 0.10.14
       '@prometheus-ags/entity-graph-core':
-        specifier: 4.3.0
-        version: 4.3.0(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 5.0.1
+        version: 5.0.1(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@prometheus-ags/entity-graph-react':
-        specifier: 4.3.0
-        version: 4.3.0(@prometheus-ags/entity-graph-core@4.3.0(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.3.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+        specifier: 5.0.1
+        version: 5.0.1(@prometheus-ags/entity-graph-core@5.0.1(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.3.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@shadcn/react':
         specifier: 0.3.1
         version: 0.3.1(@types/react@19.3.0)(react@19.2.7)
@@ -126,6 +135,9 @@ importers:
       '@playwright/test':
         specifier: 1.65.0
         version: 1.65.0
+      '@types/dom-mediacapture-transform':
+        specifier: 0.1.12
+        version: 0.1.12
       '@types/node':
         specifier: 26.5.1
         version: 26.5.1
@@ -171,6 +183,9 @@ importers:
       '@know-meet/domain':
         specifier: workspace:*
         version: link:../domain
+      '@livekit/track-processors':
+        specifier: 0.8.3
+        version: 0.8.3(@types/dom-mediacapture-transform@0.1.12)(livekit-client@2.24.1(@types/dom-mediacapture-record@1.0.22))
       livekit-client:
         specifier: 2.24.1
         version: 2.24.1(@types/dom-mediacapture-record@1.0.22)
@@ -178,6 +193,9 @@ importers:
       '@types/dom-mediacapture-record':
         specifier: 1.0.22
         version: 1.0.22
+      '@types/dom-mediacapture-transform':
+        specifier: 0.1.12
+        version: 0.1.12
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -545,6 +563,9 @@ packages:
   '@dotenvx/primitives@0.8.0':
     resolution: {integrity: sha512-VYJy0uhFm9zTJ1TxBaW/pA8bjbOM/OttaNMwZ1RHG4JKyRG7DhSdiqD1ipQoAyoD22olUtxbP78W9xY3Wd11bg==}
 
+  '@electric-sql/pglite@0.5.16':
+    resolution: {integrity: sha512-Nj8KcIsJL748W408U2N8q4+9IlONdpRIU8MJypIAAINMJ5nqKyqpX7Mgg/5XKkXiAib3AoZGR6hnJFlrlLBrcg==}
+
   '@emnapi/core@1.11.1':
     resolution: {integrity: sha512-RSvbQmHzdKzNsLYa/wHrbc3KN4sYLKAdPZxqiM2HATqv/SBk2/ENSHpvXGaLOMcsAyz0poEGqkmmKYG3OWiJEQ==}
 
@@ -730,11 +751,20 @@ packages:
   '@livekit/protocol@1.53.0':
     resolution: {integrity: sha512-dM562Q7sEQbJ9ZghjIpcVuRxRApGNwJW/JfXRub+dJT8J1cC2Tep0SyYkDzOawix7+0x969fnjXt0qEZOxkjbQ==}
 
+  '@livekit/track-processors@0.8.3':
+    resolution: {integrity: sha512-68hetu9AV0mHjOM4UDSgdJRjpckcy2LFxEYh4iN1X6niP2qiaQCz826wDKn7ULl4a+czyfAkiN9gzwKuRCOlUQ==}
+    peerDependencies:
+      '@types/dom-mediacapture-transform': ^0.1.9
+      livekit-client: ^1.12.0 || ^2.1.0
+
   '@ls-lint/ls-lint@2.3.2':
     resolution: {integrity: sha512-8GPo2oRjpEEX/soVzWqb692mwrt9iKs3Z9xK7abSonyizmSVsdLwSQWS4OmqPIwwKdungwhNkzsmPwNFg9gSgg==}
     cpu: [x64, arm64, s390x, ppc64le]
     os: [darwin, linux, win32]
     hasBin: true
+
+  '@mediapipe/tasks-vision@0.10.14':
+    resolution: {integrity: sha512-vOifgZhkndgybdvoRITzRkIueWWSiCKuEUXXK6Q4FaJsFvRJuwgg++vqFUMlL0Uox62U5aEXFhHxlhV7Ja5e3Q==}
 
   '@modelcontextprotocol/core@2.4.0':
     resolution: {integrity: sha512-z8QBKqdfXLPzkLQuG4xp8hrVEMm1PZ1IgxMN2sMbJiFiAKOWXnAzogXn2W4aqIBlP1ea6U5yiqVquvUNM1Cj6Q==}
@@ -771,11 +801,11 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  '@prometheus-ags/entity-graph-core@4.3.0':
-    resolution: {integrity: sha512-SW7JdzqmoqbXK9ekLpFEs+AXi8x/qmiyodJCSTkgyIEZ8dP8qt6CAPgozKlJjOvuJyRw8HTe5AhG9ehSR7wEqQ==}
+  '@prometheus-ags/entity-graph-core@5.0.1':
+    resolution: {integrity: sha512-CO2sPu9WJiNufzXSVlSTtAUUnScKH0Sm6ST+Qbd4Bd6jzhHA9sdqBkrEwWN/TnWp4Z4U/u0hDWYhWBVMMmrd5w==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
-      '@ag-ui/core': '>=0.0.30'
+      '@ag-ui/core': ^1.0.0
       '@tauri-apps/plugin-sql': '>=2.0.0'
       loro-crdt: '>=1.0.0'
     peerDependenciesMeta:
@@ -786,12 +816,12 @@ packages:
       loro-crdt:
         optional: true
 
-  '@prometheus-ags/entity-graph-react@4.3.0':
-    resolution: {integrity: sha512-1T+pvy3wkKtjV2GKqGEe1KC6fIKOoyxc2Prp7E1l8i5vIOhizEIWx5LsrUDouWUpWfAEuBt048MNZkOFVX36jA==}
+  '@prometheus-ags/entity-graph-react@5.0.1':
+    resolution: {integrity: sha512-I/EzSY7I1FqWv8crmEHQ5aMcS4obg39bNO5G+ULTQ7ntKitTtH9b5GM+9EnLELhVugFKVNslMgfRKKjzB1mUMw==}
     engines: {node: ^22.14.0 || ^24.0.0 || >=26.0.0}
     peerDependencies:
-      '@ag-ui/core': '>=0.0.30'
-      '@prometheus-ags/entity-graph-core': ^4.3.0
+      '@ag-ui/core': ^1.0.0
+      '@prometheus-ags/entity-graph-core': ^5.0.1
       '@tauri-apps/plugin-sql': '>=2.0.0'
       loro-crdt: '>=1.0.0'
       react: '>=19.0.0 <20.0.0'
@@ -1421,6 +1451,12 @@ packages:
 
   '@types/dom-mediacapture-record@1.0.22':
     resolution: {integrity: sha512-mUMZLK3NvwRLcAAT9qmcK+9p7tpU2FHdDsntR3YI4+GY88XrgG4XiE7u1Q2LAN2/FZOz/tdMDC3GQCR4T8nFuw==}
+
+  '@types/dom-mediacapture-transform@0.1.12':
+    resolution: {integrity: sha512-d7/QsLRwF864A5mgIM/YrfiglHoYn7zgCcAoJgW404r+2DwnNr7EBbLnCWpmOMgH8y0te73L1AV6H1bmauaWFw==}
+
+  '@types/dom-webcodecs@0.1.19':
+    resolution: {integrity: sha512-+yFUIDUaASFz0vQpWBErPxun/Lb+F0TdrlTsj50gm7K797YzEx2TmV6fEiwciHyFNghlZYPgQXH5qRcwMHcJFQ==}
 
   '@types/hast@3.0.5':
     resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
@@ -3364,6 +3400,8 @@ snapshots:
 
   '@dotenvx/primitives@0.8.0': {}
 
+  '@electric-sql/pglite@0.5.16': {}
+
   '@emnapi/core@1.11.1':
     dependencies:
       '@emnapi/wasi-threads': 1.2.2
@@ -3558,7 +3596,15 @@ snapshots:
     dependencies:
       '@bufbuild/protobuf': 1.10.1
 
+  '@livekit/track-processors@0.8.3(@types/dom-mediacapture-transform@0.1.12)(livekit-client@2.24.1(@types/dom-mediacapture-record@1.0.22))':
+    dependencies:
+      '@mediapipe/tasks-vision': 0.10.14
+      '@types/dom-mediacapture-transform': 0.1.12
+      livekit-client: 2.24.1(@types/dom-mediacapture-record@1.0.22)
+
   '@ls-lint/ls-lint@2.3.2': {}
+
+  '@mediapipe/tasks-vision@0.10.14': {}
 
   '@modelcontextprotocol/core@2.4.0':
     dependencies:
@@ -3594,7 +3640,7 @@ snapshots:
     dependencies:
       playwright: 1.65.0
 
-  '@prometheus-ags/entity-graph-core@4.3.0(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-core@5.0.1(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
       immer: 11.2.9
       zustand: 5.0.14(@types/react@19.3.0)(immer@11.2.9)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
@@ -3603,9 +3649,9 @@ snapshots:
       - react
       - use-sync-external-store
 
-  '@prometheus-ags/entity-graph-react@4.3.0(@prometheus-ags/entity-graph-core@4.3.0(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.3.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
+  '@prometheus-ags/entity-graph-react@5.0.1(@prometheus-ags/entity-graph-core@5.0.1(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7)))(@types/react@19.3.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))':
     dependencies:
-      '@prometheus-ags/entity-graph-core': 4.3.0(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
+      '@prometheus-ags/entity-graph-core': 5.0.1(@types/react@19.3.0)(react@19.2.7)(use-sync-external-store@1.7.0(react@19.2.7))
       '@tanstack/react-table': 9.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/react-virtual': 3.14.26(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/table-core': 9.3.1
@@ -4123,6 +4169,12 @@ snapshots:
   '@types/d3-timer@3.0.2': {}
 
   '@types/dom-mediacapture-record@1.0.22': {}
+
+  '@types/dom-mediacapture-transform@0.1.12':
+    dependencies:
+      '@types/dom-webcodecs': 0.1.19
+
+  '@types/dom-webcodecs@0.1.19': {}
 
   '@types/hast@3.0.5':
     dependencies:

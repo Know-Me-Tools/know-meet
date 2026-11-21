@@ -45,6 +45,11 @@ function Toast({ className, ...props }: ToastPrimitive.Root.Props) {
   return (
     <ToastPrimitive.Root
       data-slot="toast"
+      // The prototype's `.toast` is not a Tab stop: its text is announced by the live
+      // region and its close or action button keeps its own tab stop. Base UI 1.9 makes
+      // the root tabIndex 0, which left a focus stop with no visible change (WC-13,
+      // 2026-11-20). -1 still lets Base UI focus it from its F6 shortcut.
+      tabIndex={-1}
       className={cn(
         "group/toast pointer-events-auto absolute right-0 bottom-0 z-[calc(1000-var(--toast-index))] w-full origin-bottom rounded-base bg-foreground text-background shadow-(--shadow-float) will-change-transform select-none",
         "[--gap:var(--s2)] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:var(--s3)] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]",

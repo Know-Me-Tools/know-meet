@@ -5,7 +5,8 @@
 // bar. Views: in the room while connecting, connected or reconnecting (R0-R6); "You were
 // disconnected" when the connection could not be restored (R7); "You left the meeting"
 // after Leave, or with the reload line when this page load never joined (R8; a reload ends
-// the media session). The root carries `km-screen-meet` in every view.
+// the media session). The root carries `km-screen-meet` in every view, and mirrors the
+// room's audio playback flag in `data-can-playback-audio` (WC-12 scenario contract).
 // Leaving this screen any other way (browser Back, a typed URL) also leaves the meeting, so a
 // guest is never left publishing camera and microphone from a page that no longer shows the room.
 import { isInRoom } from "@know-meet/domain";
@@ -59,7 +60,10 @@ export function MeetingRoomScreen({ themeControl }: { readonly themeControl: Rea
   useLeaveOnUnmount(services);
 
   return (
-    <div data-testid="km-screen-meet">
+    <div
+      data-testid="km-screen-meet"
+      data-can-playback-audio={snapshot.audioPlayback === "allowed" ? "true" : "false"}
+    >
       {live ? (
         <RoomView
           services={services}

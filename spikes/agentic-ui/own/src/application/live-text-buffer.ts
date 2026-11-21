@@ -5,7 +5,7 @@
  * entry once the store holds the message's settled text.
  *
  * Published text lives in a LiveTextOverlay port. In the app that is the
- * entity-graph 4.4.0 render-only live layer (infrastructure/entity-graph-live-text.ts);
+ * entity-graph 5.0.1 render-only live layer (infrastructure/entity-graph-live-text.ts);
  * the in-memory overlay below keeps this class usable without a graph (tests).
  */
 import type { LiveTextOverlay } from "./ports.ts";
