@@ -53,9 +53,18 @@ interface RoomViewProps {
   readonly code: string;
   readonly blockedAtJoin: readonly TrackKind[];
   readonly themeControl: React.ReactNode;
+  /** Leaves and waits for history to be saved (useLeaveAndSave). */
+  readonly onLeave: () => void;
 }
 
-export function RoomView({ services, snapshot, code, blockedAtJoin, themeControl }: RoomViewProps) {
+export function RoomView({
+  services,
+  snapshot,
+  code,
+  blockedAtJoin,
+  themeControl,
+  onLeave,
+}: RoomViewProps) {
   const { room, useCases } = services;
   const { local, remotes, connection } = snapshot;
   const conferencing = useConferencing(services);
@@ -155,7 +164,7 @@ export function RoomView({ services, snapshot, code, blockedAtJoin, themeControl
             </>
           }
           onCopyLink={() => copyJoinLink(code, announce)}
-          onLeave={() => void useCases.leave()}
+          onLeave={onLeave}
         />
         <ConsentPrompt
           prompt={rec.recording.prompt}

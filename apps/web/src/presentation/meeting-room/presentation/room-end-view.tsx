@@ -6,6 +6,7 @@
 // are already released: the room disconnected. Focus moves to the h1.
 import { BrandMark } from "@know-meet/ui/components/brand-mark";
 import { Button } from "@know-meet/ui/components/button";
+import { Spinner } from "@know-meet/ui/components/spinner";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
 import { cn } from "@know-meet/ui/lib/utils";
 import { Link, useNavigate } from "@tanstack/react-router";
@@ -25,6 +26,24 @@ interface RoomEndViewProps {
   readonly reason: EndReason;
   readonly code: string | null;
   readonly themeControl: React.ReactNode;
+  /**
+   * True right after Leave while this device's history is still being written (WC-7): the
+   * actions wait, so the person cannot navigate away before the meeting is saved.
+   */
+  readonly saving?: boolean;
+}
+
+function SavingLine() {
+  return (
+    <p
+      role="status"
+      data-testid="km-room-end-saving"
+      className="inline-flex items-center gap-s2 text-muted-foreground"
+    >
+      <Spinner aria-hidden="true" role="presentation" className="size-5" />
+      <span>{ROOM_COPY.savingHistory}</span>
+    </p>
+  );
 }
 
 const HEADINGS: Readonly<Record<EndReason, string>> = {
@@ -60,7 +79,7 @@ function EndBar({ themeControl }: { readonly themeControl: React.ReactNode }) {
   );
 }
 
-export function RoomEndView({ reason, code, themeControl }: RoomEndViewProps) {
+export function RoomEndView({ reason, code, themeControl, saving = false }: RoomEndViewProps) {
   const navigate = useNavigate();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { busy, error, start } = useStartMeeting();
@@ -95,7 +114,11 @@ export function RoomEndView({ reason, code, themeControl }: RoomEndViewProps) {
           {error === null ? null : (
             <ErrorCard copy={startErrorCopy(error)} className="w-full text-left" />
           )}
-          <div className="flex w-full flex-wrap justify-center gap-s2 max-bp768:grid">
+          {saving ? <SavingLine /> : null}
+          <div
+            hidden={saving}
+            className="flex w-full flex-wrap justify-center gap-s2 max-bp768:grid"
+          >
             {rejoin === null ? null : (
               <Button type="button" onClick={rejoin}>
                 Rejoin

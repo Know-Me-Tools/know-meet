@@ -75,6 +75,19 @@ async function meetingExists(tx: SqlRunner, id: MeetingHistoryId): Promise<boole
 }
 
 /**
+ * One write statement, run as a transaction so `adaptPglite` flushes it to IndexedDB before
+ * it resolves. A bare `query` stays in memory until a later statement, so the last write of a
+ * session, its end time, was lost on a reload (WC-7 hosted, evidence/wc7-diag-2026-11-21).
+ */
+function writeOne<T>(
+  db: HistoryDatabase,
+  sql: string,
+  params?: readonly unknown[],
+): Promise<{ readonly rows: T[] }> {
+  return db.transaction((tx) => tx.query<T>(sql, params));
+}
+
+/**
  * The `HistoryRepository` over PGlite on `idb://` (wc09 task 9.2). It talks to the
  * database only through `HistoryDatabase`, opens it on first use, and never touches the
  * network. See `ports.ts` for the contract this implements.
@@ -189,7 +202,8 @@ export function createPgliteHistoryRepository(
 
   const createMeeting = async (session: MeetingSession) => {
     const outcome = await run(undefined, async (db) => {
-      const inserted = await db.query<{ id: string }>(
+      const inserted = await writeOne<{ id: string }>(
+        db,
         `INSERT INTO meeting_session
            (id, room_code, title, joined_at, left_at, end_reason, participants)
          VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb)
@@ -214,7 +228,8 @@ export function createPgliteHistoryRepository(
 
   const updateMeeting = async (session: MeetingSession) => {
     const outcome = await runWrite(async (db) => {
-      const updated = await db.query<{ id: string }>(
+      const updated = await writeOne<{ id: string }>(
+        db,
         `UPDATE meeting_session
            SET title = $2, left_at = $3, end_reason = $4, participants = $5::jsonb
          WHERE id = $1
@@ -272,7 +287,8 @@ export function createPgliteHistoryRepository(
 
   const deleteMeeting = async (id: MeetingHistoryId) => {
     const outcome = await run(undefined, async (db) => {
-      const removed = await db.query<{ id: string }>(
+      const removed = await writeOne<{ id: string }>(
+        db,
         "DELETE FROM meeting_session WHERE id = $1 RETURNING id",
         [id],
       );
@@ -284,7 +300,7 @@ export function createPgliteHistoryRepository(
   };
 
   const deleteAll = async () => {
-    const outcome = await run(undefined, (db) => db.query("DELETE FROM meeting_session"));
+    const outcome = await run(undefined, (db) => writeOne(db, "DELETE FROM meeting_session"));
     if (!outcome.ok) return outcome;
     changes.publish({ kind: "cleared" });
     return ok(undefined);

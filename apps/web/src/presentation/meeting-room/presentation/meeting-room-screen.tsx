@@ -18,6 +18,7 @@ import { useDocumentTitle } from "../../shared/use-document-title";
 import { useHashRoute } from "../../shared/use-hash-route";
 import { type EndReason, RoomEndView } from "./room-end-view";
 import { RoomView } from "./room-view";
+import { useLeaveAndSave } from "./use-leave-and-save";
 
 function endReason(status: string, reason: string | null, code: string | null): EndReason {
   if (status === "disconnected") return reason === "connection-lost" ? "disconnected" : "left";
@@ -58,29 +59,36 @@ export function MeetingRoomScreen({ themeControl }: { readonly themeControl: Rea
   const live = code !== null && (isInRoom(connection) || connection.status === "connecting");
   useDocumentTitle(code === null ? "Meeting — Know Meet" : `Meeting ${code} — Know Meet`);
   useLeaveOnUnmount(services);
+  const { saving, leave } = useLeaveAndSave(services.useCases);
 
   return (
     <div
       data-testid="km-screen-meet"
       data-can-playback-audio={snapshot.audioPlayback === "allowed" ? "true" : "false"}
     >
-      {live ? (
+      {live && !saving ? (
         <RoomView
           services={services}
           snapshot={snapshot}
           code={code}
           blockedAtJoin={readBlockedDevices(route)}
           themeControl={themeControl}
+          onLeave={leave}
         />
       ) : (
         <RoomEndView
-          reason={endReason(
-            connection.status,
-            connection.status === "disconnected" ? connection.reason : null,
-            code,
-          )}
+          reason={
+            saving
+              ? "left"
+              : endReason(
+                  connection.status,
+                  connection.status === "disconnected" ? connection.reason : null,
+                  code,
+                )
+          }
           code={code}
           themeControl={themeControl}
+          saving={saving}
         />
       )}
     </div>
