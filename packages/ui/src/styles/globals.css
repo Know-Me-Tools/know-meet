@@ -58,6 +58,24 @@
     text-underline-offset: 3px;
   }
 
+  /* Clickable things show the hand (operator 2026-11-21). Tailwind 4's preflight leaves
+     buttons on the default arrow; this base rule restores the pointer for every enabled
+     control. Utilities sit in a later layer, so `disabled:cursor-not-allowed` still wins. */
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  a[href],
+  summary,
+  select:not(:disabled),
+  label[for],
+  input:is([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"]):not(
+    :disabled
+  ) {
+    cursor: pointer;
+  }
+
   /* Flat 2.0 focus (DESIGN.md, D-6): keyboard focus is a fill, never an outline.
      Kit components set their own `focus-visible:bg-focus!` (lib/focus.ts); this
      zero-specificity fallback gives every other focusable element the same fill so

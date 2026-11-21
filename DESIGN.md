@@ -107,6 +107,9 @@ must honour the same parameter (request to ui-engineer and bdd-quality).
 | `selected` / `on-selected` | `#FA5F30` / `#0B0F14` | `#C13E1E` / `#FFFFFF` | Checked, pressed, current, selected |
 | `focus` / `on-focus` | `#FFFFFF` / `#0B0F14` | `#0B0F14` / `#FFFFFF` | Keyboard focus fill and its content |
 | `focus-placeholder` | `#4B5563` | `#C3CAD4` | Placeholder in a focused empty field |
+| `action` / `on-action` | `#E8EDF3` / `#0B0F14` | `#0B0F14` / `#FFFFFF` | Neutral clickable button (room bar, lobby toggles): the strongest neutral, never gray |
+| `action-hov` | `#C9D1DB` | `#2A3140` | Action button hover |
+| `action-focus` / `on-action-focus` | `#0889A8` / `#0B0F14` | same | Action button focus (its rest fill equals `focus`) |
 | `slider-thumb` | `#FFFFFF` | `#0B0F14` | Slider thumb |
 | `switch-track` | `= control` | `= control` | Switch off track |
 | `pip-green/amber/red` | status hues | darker text hues | Status pips inside chips |
@@ -145,6 +148,7 @@ and never takes focus fill.
 | Primary button | `ember-btn` + `on-ember` | `ember-btn-hov` | n/a | `focus` + `on-focus` | n/a |
 | Secondary button | `card` + `fg` (text identifies) | `card-hov` | n/a | `focus` + `on-focus` | n/a |
 | Ghost / icon button | transparent, icon `fg` | `card-hov` | pressed: `selected` | `focus` + `on-focus` | n/a |
+| Action button (room bar control, lobby device toggle, kit `variant="action"`) | `action` + `on-action` | `action-hov` | open or sharing: `selected` + `on-selected` (label or icon also changes) | `action-focus` + `on-action-focus` | n/a |
 | Danger button | `danger-btn` + `on-danger` | `danger-btn-hov` | n/a | `focus` + `on-focus` | n/a |
 | Interactive card, list row, link | surface ladder (text identifies) | `card-hov` | n/a | whole card `focus`, all text `on-focus` | n/a |
 | Text link in running copy (no class, outside nav) | `ember-text` on the surrounding fill | n/a | n/a | highlight: `focus` fill behind the text run (3px past the glyphs, radius 4, per line fragment, no layout shift) + `on-focus` text (RV-24) | n/a |
@@ -162,6 +166,16 @@ Rules that follow from the table:
   boundary - the button's text is sufficient"). Their selected and focus states are
   still fills that pass 3:1. If the owner wants every button on `control`, it is one
   mapping change (`--secondary`), not a component change.
+- **Buttons never look disabled (operator 2026-11-21).** A gray fill reads as
+  disabled, so a neutral button that acts (mute, camera, share, record, chat,
+  settings, copy link) is `action`: ink in light, paper in dark (14:1 and 16:1 on the
+  page). `control` stays for fields and selection controls (inputs, selects, boxes,
+  radios, switches, sliders, segmented tracks, chips), where the fill is the 3:1
+  boundary. Disabled is `opacity: 0.5` plus `cursor: not-allowed`, never a gray fill.
+  Flutter adopts `action` in a follow-up change.
+- **Clickable things show the pointer.** Every enabled button, link, tab, menu item,
+  option, select, label for a control and checkbox, radio, range or file input shows
+  `cursor: pointer` (kit base layer); disabled shows `not-allowed`.
 - **State is never colour alone.** Selected segments and chips add a check icon;
   invalid fields add the error line; switches move the thumb.
 - **Placeholders.** A 3:1 fill boundary leaves no room for a dim placeholder, so

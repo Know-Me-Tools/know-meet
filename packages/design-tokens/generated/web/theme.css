@@ -176,6 +176,11 @@
   --color-focus: var(--focus);
   --color-on-focus: var(--on-focus);
   --color-focus-placeholder: var(--focus-placeholder);
+  --color-action: var(--action);
+  --color-action-hov: var(--action-hov);
+  --color-on-action: var(--on-action);
+  --color-action-focus: var(--action-focus);
+  --color-on-action-focus: var(--on-action-focus);
   --color-slider-thumb: var(--slider-thumb);
   --color-pip-green: var(--pip-green);
   --color-pip-amber: var(--pip-amber);

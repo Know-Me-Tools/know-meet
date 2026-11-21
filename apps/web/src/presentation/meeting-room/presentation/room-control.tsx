@@ -1,10 +1,12 @@
 // TJ-ARCH-MOB-001 compliant
 // meet.html `.ctl`: one room bar control, icon over a label. Labels show under the icon
 // from 900px; below that they are visually hidden (still in the name) and controls are
-// 48 x 48. Tones (Flat 2.0, every boundary >= 3:1 on the stage by fill): rest `control`,
-// off `control-invalid`, active `selected` + `on-selected` (sharing, or the panel this
+// 48 x 48. Tones (Flat 2.0, every boundary >= 3:1 on the stage by fill): rest `action`
+// (ink in light, paper in dark, operator 2026-11-21: gray read as disabled), off
+// `control-invalid`, active `selected` + `on-selected` (sharing, or the panel this
 // control opens is showing; DESIGN.md room bar panel-open state), leave `danger-btn`.
-// Focus is the `focus` fill and wins over every tone. An unavailable control keeps its
+// Focus wins over every tone: the `focus` fill, except on rest, whose fill equals
+// `focus`, so rest focuses to `action-focus` (cyan). An unavailable control keeps its
 // tab stop (aria-disabled, opacity 0.5) so its explanation can still be reached.
 import { KmIcon, type KmIconName } from "@know-meet/ui/components/km-icon";
 import { focusFillClass } from "@know-meet/ui/lib/focus";
@@ -14,7 +16,8 @@ import type * as React from "react";
 export const ctlClass = cn(
   "relative grid min-h-14 min-w-16 flex-none content-center justify-items-center gap-0.5 rounded-base px-2 py-1.5 transition-colors duration-(--dur-fast) ease-standard",
   "max-bp1024:min-w-[54px] max-bp900:min-h-12 max-bp900:min-w-12 max-bp900:px-3 max-bp900:py-0",
-  "data-[tone=rest]:bg-control data-[tone=rest]:text-on-control [@media(hover:hover)]:data-[tone=rest]:hover:bg-control-hov",
+  "data-[tone=rest]:bg-action data-[tone=rest]:text-on-action [@media(hover:hover)]:data-[tone=rest]:hover:bg-action-hov",
+  "data-[tone=rest]:focus-visible:bg-action-focus! data-[tone=rest]:focus-visible:text-on-action-focus!",
   "data-[tone=off]:bg-control-invalid data-[tone=off]:text-on-control-invalid",
   "data-[tone=active]:bg-selected data-[tone=active]:text-on-selected",
   "data-[tone=leave]:bg-danger-btn data-[tone=leave]:text-on-danger [@media(hover:hover)]:data-[tone=leave]:hover:bg-danger-btn-hov",

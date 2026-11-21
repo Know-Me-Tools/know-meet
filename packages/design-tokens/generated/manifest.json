@@ -3,12 +3,12 @@
   "source": {
     "path": "docs/design/tokens.json",
     "version": "1.6.0",
-    "sha256": "4cf835801d9c61df5cbee86c4cd58b725d3ed2cb4a64b4f527ce81714d8d2313"
+    "sha256": "7da48b3ad8a28b1efd19c26cd6d36a6ea62b2ccebb6a01a20ec85710022b0b31"
   },
   "outputs": [
     {
       "path": "packages/design-tokens/generated/web/tokens.css",
-      "sha256": "654d06e8d64d995006b5baacdbd53fa438755aa5b91b224236f54ff5cbc83b4a"
+      "sha256": "26691b3a398772741493df39e8b81d9c6395f30ea60bf9abd27a366218686d61"
     },
     {
       "path": "packages/design-tokens/generated/web/fonts.css",
@@ -16,7 +16,7 @@
     },
     {
       "path": "packages/design-tokens/generated/web/theme.css",
-      "sha256": "a80955b3b48afc7c24dfdd5169b85d4c1008104e1cba121f0919d60a05695347"
+      "sha256": "a8a7742ea7908d9366804b246271023b4abf2cbf52e51a026318ab488969c110"
     },
     {
       "path": "packages/design-tokens/generated/web/shadcn.css",
@@ -24,7 +24,7 @@
     },
     {
       "path": "packages/design-tokens/generated/flutter/tokens.g.dart",
-      "sha256": "39bfc3ef0c6109b0559c02a7e0b64f2377e754e112a7d958999f6c6aa6c3690b"
+      "sha256": "5ffa8b3470cba0b22c1f1b994c28b27a76f36205d92c63b15f5c6cf572ff52a0"
     },
     {
       "path": "packages/design-tokens/generated/flutter/km_theme.g.dart",
@@ -32,7 +32,7 @@
     },
     {
       "path": "docs/design/tokens.css",
-      "sha256": "96933e7ac2809930145dcac8a40072b8cd523416e59db17000d2ec7b342aefb4"
+      "sha256": "d5382659545124cdac7fd93ce7e090a335b31f725586f6f91da01299106d5db2"
     }
   ]
 }

@@ -51,6 +51,11 @@
   --km-focus: #FFFFFF;
   --km-on-focus: #0B0F14;
   --km-focus-placeholder: #4B5563;
+  --km-action: #E8EDF3;
+  --km-action-hov: #C9D1DB;
+  --km-on-action: #0B0F14;
+  --km-action-focus: #0889A8;
+  --km-on-action-focus: #0B0F14;
   --km-slider-thumb: #FFFFFF;
   --km-pip-green: #22C55E;
   --km-pip-amber: #F59E0B;
@@ -296,6 +301,11 @@
   --km-focus: #0B0F14;
   --km-on-focus: #FFFFFF;
   --km-focus-placeholder: #C3CAD4;
+  --km-action: #0B0F14;
+  --km-action-hov: #2A3140;
+  --km-on-action: #FFFFFF;
+  --km-action-focus: #0889A8;
+  --km-on-action-focus: #0B0F14;
   --km-slider-thumb: #0B0F14;
   --km-pip-green: #166534;
   --km-pip-amber: #B45309;
