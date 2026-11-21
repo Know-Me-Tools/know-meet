@@ -116,15 +116,16 @@ class _CtlButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final KmPalette p = context.km;
     final bool pressedPanel = ctl.tone == _CtlTone.panel && (ctl.pressed ?? false);
-    // DESIGN.md: a pressed control is the `selected` fill; hover `card-hov`
-    // (leave: `danger-btn-hov`); keyboard focus is the `focus` fill.
+    // DESIGN.md room bar, the same tones as the web `Ctl`: rest `action` (ink in
+    // light, paper in dark; operator 2026-11-21, gray read as disabled) with
+    // `action-hov` and the `action-focus` fill; off `control-invalid`; a pressed
+    // panel control `selected`; leave `danger-btn`. Focus wins over every tone.
     KmStateColors colors(Set<WidgetState> s) => switch (ctl.tone) {
       _CtlTone.leave => KmStateColors.resolve(p, s,
           rest: p.dangerBtn, restOn: p.onDanger, hover: p.dangerBtnHov),
       _CtlTone.off => KmStateColors.resolve(p, s,
-          rest: p.redSoft, restOn: p.fg, hover: p.cardHov),
-      _ => KmStateColors.resolve(p, s,
-          rest: p.card, restOn: p.fg, hover: p.cardHov),
+          rest: p.controlInvalid, restOn: p.onControlInvalid),
+      _ => KmStateColors.action(p, s),
     };
     Widget body(Color fg) => Column(
       mainAxisSize: MainAxisSize.min,

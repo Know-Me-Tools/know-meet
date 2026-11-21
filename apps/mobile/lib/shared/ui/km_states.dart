@@ -107,6 +107,8 @@ final class KmStateColors {
 
   /// [rest]/[restOn] and [hover] come from the component's row in the
   /// DESIGN.md state table; focus, selected and invalid are the shared roles.
+  /// [focus]/[focusOn] replace the shared focus fill only where it would equal
+  /// the rest fill (the `action` role focuses to `action-focus`).
   factory KmStateColors.resolve(
     KmPalette p,
     Set<WidgetState> s, {
@@ -116,10 +118,12 @@ final class KmStateColors {
     Color? hoverOn,
     Color? selected,
     Color? selectedOn,
+    Color? focus,
+    Color? focusOn,
   }) {
     final bool enabled = !s.contains(WidgetState.disabled);
     if (enabled && s.contains(WidgetState.focused)) {
-      return KmStateColors(p.focus, p.onFocus);
+      return KmStateColors(focus ?? p.focus, focusOn ?? p.onFocus);
     }
     if (s.contains(WidgetState.error)) {
       return KmStateColors(p.controlInvalid, p.onControlInvalid);
@@ -141,6 +145,20 @@ final class KmStateColors {
         rest: p.control,
         restOn: p.onControl,
         hover: p.controlHov,
+      );
+
+  /// A neutral clickable button (`action`: ink in light, paper in dark;
+  /// operator 2026-11-21, gray read as disabled). Its rest fill equals
+  /// `focus`, so keyboard focus is `action-focus`.
+  factory KmStateColors.action(KmPalette p, Set<WidgetState> s) =>
+      KmStateColors.resolve(
+        p,
+        s,
+        rest: p.action,
+        restOn: p.onAction,
+        hover: p.actionHov,
+        focus: p.actionFocus,
+        focusOn: p.onActionFocus,
       );
 
   /// A text-identified control on the surface ladder (nav item, tab, list
