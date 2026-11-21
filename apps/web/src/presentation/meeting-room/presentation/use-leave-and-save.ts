@@ -5,10 +5,12 @@
 // were still being written, and a reload or a closed tab in that moment lost them (hosted
 // run 2026-11-21, evidence/wc7-diag-2026-11-21). While `saving` is true the end view shows a
 // saving line instead of its actions. A storage stall never traps the person: after
-// SAVE_WAIT_MS the end view is offered anyway.
+// SAVE_WAIT_MS the end view is offered anyway. The wait is long because a first meeting in
+// WebKit measured about 3.3 s to create the store and about 0.5 s per write (probe
+// 2026-11-21, evidence/wc7-diag-2026-11-21/probe), so 5 s cut normal saves short.
 import { useCallback, useState } from "react";
 
-const SAVE_WAIT_MS = 5_000;
+const SAVE_WAIT_MS = 15_000;
 
 interface Leaver {
   leave(): Promise<void>;
