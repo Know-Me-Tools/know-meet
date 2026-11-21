@@ -75,7 +75,8 @@ async function heartbeatGap(page: Page, mark: number): Promise<number> {
     const w = window as unknown as { __kmBeats?: number[] };
     const beats = [since, ...(w.__kmBeats ?? []).filter((t) => t > since), performance.now()];
     let gap = 0;
-    for (let i = 1; i < beats.length; i++) gap = Math.max(gap, beats[i] - beats[i - 1]);
+    for (let i = 1; i < beats.length; i++)
+      gap = Math.max(gap, (beats[i] ?? 0) - (beats[i - 1] ?? 0));
     return Math.round(gap);
   }, mark);
 }
