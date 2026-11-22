@@ -1,9 +1,0 @@
-
-Running 2 tests using 1 worker
-
-(node:31590) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-  ✓  1 [hosted-firefox] › wc-2-chat-everyone.spec.ts:31:3 › WC-2 A message to everyone reaches every participant › A's message appears for B and C with the sent text and the label Everyone @WC-2 @value-critical @smoke @cross-engine (8.8s)
-  ✓  2 [hosted-firefox] › wc-2-chat-everyone.spec.ts:61:3 › WC-2 A message to everyone reaches every participant › a message that was never sent does not appear in any panel or data channel @WC-2 @negative-control @cross-engine (40.3s)
-
-  2 passed (52.5s)

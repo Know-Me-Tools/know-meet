@@ -1,9 +1,0 @@
-
-Running 2 tests using 1 worker
-
-(node:31190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-  ✓  1 [hosted] › wc-5-device-choice.spec.ts:34:3 › WC-5 Chosen microphone and camera are the ones used › the lobby shows level and preview; lobby choices are active after join; switching in the room switches the device @WC-5 @value-critical @smoke (7.9s)
-  ✓  2 [hosted] › wc-5-device-choice.spec.ts:124:3 › WC-5 Chosen microphone and camera are the ones used › without a choice the default device is active @WC-5 @negative-control (4.2s)
-
-  2 passed (13.5s)

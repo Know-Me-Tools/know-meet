@@ -1,5 +1,0 @@
-$ node scripts/build-hosted.ts
-build:hosted failed: The hosted build needs KM_LIVEKIT_URL: the public LiveKit signalling URL, for example wss://livekit.example.com. It is not a secret. Without it the Content-Security-Policy would block every meeting connection.
-/Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/apps/web:
-[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @know-meet/web@0.1.0 build:hosted: `node scripts/build-hosted.ts`
-Exit status 1

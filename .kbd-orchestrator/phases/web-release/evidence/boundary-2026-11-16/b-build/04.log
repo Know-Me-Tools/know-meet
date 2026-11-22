@@ -1,2 +1,0 @@
-$ node tooling/release/src/render-gateway-headers.ts --check
-OK /Users/gqadonis/.claude/worktrees/know-meet-web-release/infra/k8s/overlays/production/security-headers.yaml matches /Users/gqadonis/.claude/worktrees/know-meet-web-release/apps/web/dist-hosted-csp.txt

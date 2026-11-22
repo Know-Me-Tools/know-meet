@@ -42,3 +42,12 @@ local.properties
 *.keystore
 android/key.properties
 **/android/key.properties
+
+# Raw run evidence stays local; commit summaries only (decision 2026-11-16, web-release)
+*.har
+.kbd-orchestrator/**/evidence/**/playwright.json
+.kbd-orchestrator/**/evidence/**/*.log
+.kbd-orchestrator/**/evidence/**/test-results/
+.kbd-orchestrator/**/evidence/**/html/
+.kbd-orchestrator/**/evidence/**/playwright-report/
+.kbd-orchestrator/**/evidence/**/trace.zip
