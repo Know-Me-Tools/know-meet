@@ -1,5 +1,26 @@
 # Release notes: conferencing features on the web
 
+## 2026-11-22: web conferencing hardening
+
+Live at **https://meet.know-me.tools** from merge `13cdb9eb`.
+
+- **Background effects.** “Preparing background effects…” appears only when
+  preparation takes longer than 400 ms. The picker is announced as busy while
+  the selected effect loads. If effects are unavailable, the message explains
+  whether the browser lacks support or graphics acceleration.
+- **Keyboard focus on notifications.** Press F6 to move visible focus to the
+  frontmost notification. Tab or Shift+Tab can return focus to the original
+  control, including after pressing F6 again.
+- **Meeting history.** The “Saving this meeting…” status after leaving passed
+  the accessibility audit while visible and is marked as a polite status for
+  assistive technology.
+
+The packaged boundary passed 16 Chromium tests across seven scenarios. The
+review included 24 screenshots across four widths and both themes. After
+deployment, 11 hosted Chromium tests passed across screen sharing, background
+effects, device selection, local recording, and Enable audio. Local recording
+was checked as a regression.
+
 ## 2026-11-21: screen share, chat, effects, devices, local history and recordings
 
 Live at **https://meet.know-me.tools** from merge `8eb98147`. Still guests only: no
