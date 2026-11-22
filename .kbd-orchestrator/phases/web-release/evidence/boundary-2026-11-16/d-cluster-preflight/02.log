@@ -1,5 +1,0 @@
-$ /Users/gqadonis/Projects/know-me/know-meet/.kbd-orchestrator/phases/web-release/evidence/boundary-2026-11-16/check-livekit-url.sh local
-PASS repository variable KM_LIVEKIT_URL equals shell LIVEKIT_URL
-PASS build CSP file names the shell LiveKit host (wss and https)
-PASS committed Gateway CSP header names the shell LiveKit host
-PASS Gateway CSP header names exactly one wss host

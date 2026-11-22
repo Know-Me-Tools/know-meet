@@ -1,2 +1,0 @@
-$ node tooling/release/src/scan-artifacts.ts
-ERROR manifests-unsupported-yaml a manifest uses YAML the scan cannot read

@@ -1,1 +1,0 @@
-FAIL differs /Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/infra/k8s/overlays/production/security-headers.yaml does not match /Users/gqadonis/.claude/worktrees/know-meet-web-conferencing-features/apps/web/dist-hosted-csp.txt

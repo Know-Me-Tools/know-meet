@@ -1,9 +1,0 @@
-
-Running 2 tests using 1 worker
-
-(node:97036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-  ✓  1 [hosted] › wc-8-local-recording.spec.ts:36:3 › WC-8 A consented recording runs, saves locally and plays back › nothing records before B answers; after B agrees both show the indicator; 20 s later the library has one playable recording @WC-8 @value-critical @smoke (37.0s)
-  ✓  2 [hosted] › wc-8-local-recording.spec.ts:131:3 › WC-8 A consented recording runs, saves locally and plays back › the recording-egress detector flags a deliberate WebM upload @WC-8 @negative-control (370ms)
-
-  2 passed (39.7s)
