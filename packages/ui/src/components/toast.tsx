@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import type * as React from "react";
 import { Button } from "#components/button";
-import { invertedFocusFillClass } from "#lib/focus";
+import { invertedFocusFillClass, toastFocusFillClass, toastFocusTextClass } from "#lib/focus";
 import { cn } from "#lib/utils";
 
 const toast = ToastPrimitive.createToastManager();
@@ -28,10 +28,49 @@ function ToastPortal({ ...props }: ToastPrimitive.Portal.Props) {
   return <ToastPrimitive.Portal data-slot="toast-portal" {...props} />;
 }
 
-function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {
+/**
+ * Base UI focuses the viewport on F6. The viewport is a transparent, full-width container that
+ * cannot show focus, so focus moves on to the frontmost toast, which shows the focus fill; with
+ * no toast, focus returns where it was (HD-4, web-conferencing-hardening).
+ */
+function forwardViewportFocus(event: React.FocusEvent<HTMLDivElement>) {
+  if (event.target !== event.currentTarget) return;
+  const toasts = [...event.currentTarget.querySelectorAll<HTMLElement>('[data-slot="toast"]')];
+  const frontmost =
+    toasts.find((el) => getComputedStyle(el).getPropertyValue("--toast-index").trim() === "0") ??
+    toasts[0];
+  if (frontmost !== undefined) {
+    frontmost.focus();
+    return;
+  }
+  const previous = event.relatedTarget;
+  if (previous instanceof HTMLElement) previous.focus({ preventScroll: true });
+  else event.currentTarget.blur();
+}
+
+/**
+ * Base UI's window listener saves the active element as the return target on every F6, so an F6
+ * pressed on a toast made the toast its own return target and Tab could not leave (SC 2.1.2).
+ * Inside the viewport F6 goes no further, and the first return target stands.
+ */
+function keepReturnTarget(event: React.KeyboardEvent<HTMLDivElement>) {
+  if (event.key !== "F6") return;
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+function ToastViewport({ className, onFocus, onKeyDown, ...props }: ToastPrimitive.Viewport.Props) {
   return (
     <ToastPrimitive.Viewport
       data-slot="toast-viewport"
+      onFocus={(event) => {
+        onFocus?.(event);
+        forwardViewportFocus(event);
+      }}
+      onKeyDown={(event) => {
+        onKeyDown?.(event);
+        keepReturnTarget(event);
+      }}
       className={cn(
         "pointer-events-none fixed inset-x-0 bottom-s6 z-(--z-toast) mx-auto w-[min(var(--spacing-size-toast-w),calc(100vw-32px))] outline-none max-bp768:bottom-[calc(var(--km-bottom-bar-h,0px)+var(--spacing-s4))]",
         className,
@@ -51,6 +90,7 @@ function Toast({ className, ...props }: ToastPrimitive.Root.Props) {
       // 2026-11-20). -1 still lets Base UI focus it from its F6 shortcut.
       tabIndex={-1}
       className={cn(
+        toastFocusFillClass,
         "group/toast pointer-events-auto absolute right-0 bottom-0 z-[calc(1000-var(--toast-index))] w-full origin-bottom rounded-base bg-foreground text-background shadow-(--shadow-float) will-change-transform select-none",
         "[--gap:var(--s2)] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:var(--s3)] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]",
         "h-(--height) [transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_var(--dur)_var(--ease-out),opacity_var(--dur)_var(--ease-out),height_var(--dur-fast)_var(--ease-standard)]",
@@ -90,7 +130,7 @@ function ToastTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
       data-slot="toast-title"
-      className={cn("text-sm font-medium text-background", className)}
+      className={cn("text-sm font-medium text-background", toastFocusTextClass, className)}
       {...props}
     />
   );
@@ -100,7 +140,7 @@ function ToastDescription({ className, ...props }: ToastPrimitive.Description.Pr
   return (
     <ToastPrimitive.Description
       data-slot="toast-description"
-      className={cn("text-sm font-regular text-background", className)}
+      className={cn("text-sm font-regular text-background", toastFocusTextClass, className)}
       {...props}
     />
   );
@@ -116,6 +156,7 @@ function ToastAction({
       data-slot="toast-action"
       render={render}
       className={cn(
+        toastFocusTextClass,
         "shrink-0 text-background underline underline-offset-[3px] hover:not-disabled:bg-[color-mix(in_srgb,var(--background)_14%,transparent)]",
         invertedFocusFillClass,
         className,
@@ -137,6 +178,7 @@ function ToastClose({
       aria-label="Close toast"
       render={render}
       className={cn(
+        toastFocusTextClass,
         "relative shrink-0 text-background after:absolute after:-inset-2 after:content-[''] hover:not-disabled:bg-[color-mix(in_srgb,var(--background)_14%,transparent)]",
         invertedFocusFillClass,
         className,

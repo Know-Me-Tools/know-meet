@@ -1,4 +1,4 @@
-import type { ConferencingSupport, Support } from "@know-meet/domain";
+import type { BackgroundEffectsCause, ConferencingSupport, Support } from "@know-meet/domain";
 
 /**
  * What this browser can do, read without loading the media SDK, so the lobby (through the
@@ -14,9 +14,12 @@ export interface SupportOptions {
 }
 
 export function detectConferencingSupport(options: SupportOptions): ConferencingSupport {
+  // Without an installed processor the browser cannot run effects whatever its graphics.
+  const cause = options.backgroundEffects ? backgroundEffectsCause() : "browser";
   return {
     screenShare: toSupport(canShareScreen()),
-    backgroundEffects: toSupport(options.backgroundEffects && canProcessBackground()),
+    backgroundEffects: toSupport(cause === null),
+    backgroundEffectsCause: cause,
     speakerSelection: toSupport(canSelectSpeaker()),
   };
 }
@@ -50,7 +53,7 @@ export function isSafariBased(userAgent: string): boolean {
   return /safari|applewebkit/.test(ua);
 }
 
-let backgroundProbe: boolean | null = null;
+let backgroundProbe: { readonly cause: BackgroundEffectsCause | null } | null = null;
 
 /**
  * Mirrors `supportsBackgroundProcessors()` in @livekit/track-processors 0.8.3 (the
@@ -63,43 +66,59 @@ let backgroundProbe: boolean | null = null;
  * milliseconds a frame, so the meeting stops responding for as long as an effect is on
  * (evidence/wc4-profile-2026-11-20). There the feature is reported unsupported and the
  * camera works normally.
+ *
+ * Returns why effects cannot run (W3, web-conferencing-hardening), or null when they can:
+ * `browser` for a missing feature, including no WebGL2 context at all; `graphics` when
+ * WebGL2 exists but runs in software, which turning on hardware acceleration usually fixes.
  */
-function canProcessBackground(): boolean {
-  backgroundProbe ??= probeBackgroundProcessing();
-  return backgroundProbe;
+function backgroundEffectsCause(): BackgroundEffectsCause | null {
+  backgroundProbe ??= { cause: probeBackgroundProcessing() };
+  return backgroundProbe.cause;
 }
 
-function probeBackgroundProcessing(): boolean {
-  if (typeof document === "undefined") return false;
-  const segmenter =
-    "OffscreenCanvas" in globalThis &&
-    "VideoFrame" in globalThis &&
-    "createImageBitmap" in globalThis &&
-    hasHardwareWebGl2();
+function probeBackgroundProcessing(): BackgroundEffectsCause | null {
+  if (typeof document === "undefined") return "browser";
   const streams =
     "MediaStreamTrackGenerator" in globalThis && "MediaStreamTrackProcessor" in globalThis;
   const fallback =
     typeof HTMLCanvasElement !== "undefined" &&
     "VideoFrame" in globalThis &&
     "captureStream" in HTMLCanvasElement.prototype;
-  return segmenter && (streams || fallback);
+  const features =
+    "OffscreenCanvas" in globalThis &&
+    globalThis.OffscreenCanvas !== undefined &&
+    "VideoFrame" in globalThis &&
+    "createImageBitmap" in globalThis &&
+    (streams || fallback);
+  if (!features) return "browser";
+  const webgl = webGl2Kind();
+  if (webgl === "none") return "browser";
+  return webgl === "software" ? "graphics" : null;
 }
 
 /** Renderer names browsers report for software WebGL. */
 const SOFTWARE_RENDERER = /swiftshader|llvmpipe|softpipe|software|basic render driver/i;
 
+type WebGl2Kind = "none" | "software" | "hardware";
+
 /**
- * A WebGL2 context the browser does not flag as slow. `failIfMajorPerformanceCaveat` refuses a
- * context the browser would back with software; the renderer name catches browsers that
- * still grant one. A browser that hides the renderer name is judged by the caveat alone.
+ * What WebGL2 this browser offers. `failIfMajorPerformanceCaveat` refuses a context the browser
+ * would back with software; a context granted only without it is software. The renderer name
+ * catches browsers that grant a software context anyway. A browser that hides the renderer name
+ * is judged by the caveat alone.
  */
-function hasHardwareWebGl2(): boolean {
-  const gl = document
+function webGl2Kind(): WebGl2Kind {
+  const fast = document
     .createElement("canvas")
     .getContext("webgl2", { failIfMajorPerformanceCaveat: true });
-  if (gl === null) return false;
-  const info = gl.getExtension("WEBGL_debug_renderer_info");
-  const renderer = info === null ? "" : String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL));
-  gl.getExtension("WEBGL_lose_context")?.loseContext();
-  return !SOFTWARE_RENDERER.test(renderer);
+  if (fast === null) {
+    const any = document.createElement("canvas").getContext("webgl2");
+    if (any === null) return "none";
+    any.getExtension("WEBGL_lose_context")?.loseContext();
+    return "software";
+  }
+  const info = fast.getExtension("WEBGL_debug_renderer_info");
+  const renderer = info === null ? "" : String(fast.getParameter(info.UNMASKED_RENDERER_WEBGL));
+  fast.getExtension("WEBGL_lose_context")?.loseContext();
+  return SOFTWARE_RENDERER.test(renderer) ? "software" : "hardware";
 }

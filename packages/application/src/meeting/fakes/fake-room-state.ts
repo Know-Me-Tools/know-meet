@@ -16,6 +16,7 @@ import type { RoomCredentials, RoomSnapshot } from "../ports.ts";
 export const FAKE_SUPPORT: ConferencingSupport = {
   screenShare: "supported",
   backgroundEffects: "supported",
+  backgroundEffectsCause: null,
   speakerSelection: "supported",
 };
 

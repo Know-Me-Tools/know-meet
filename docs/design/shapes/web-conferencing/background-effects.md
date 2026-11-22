@@ -96,11 +96,13 @@ selection, and the dot alone is sufficient.
 | Ready, None selected | All five cards enabled; None checked. |
 | Effect selected | That card checked; preview shows the processed track. Polite announcement "Background: Blur." (or the image name). |
 | First load (model and WASM fetching, typically under 2 s) | The chosen card checks immediately; status line shows a spinner and "Loading background effects..." ; the group gets `aria-busy="true"`; the preview keeps the plain camera until the first processed frame. Other cards stay operable (a new choice replaces the pending one). |
+| Preparing (on join and when the camera turns on, also with the pane closed) | Once preparation has run past 400 ms with no effect applied: status line with a spinner and "Preparing background effects…". The group is not busy and every card stays operable. Faster preparations, and camera-on with an effect applied, show nothing. |
 | Camera off | Cards enabled; choosing one is remembered and applies when the camera starts. Status line: "Your camera is off. The background applies when you turn it on." |
 | Camera blocked or no camera | Group disabled (`aria-disabled` on the group, cards `opacity 0.5`), status: "Background effects need a camera." |
 | Device switched | The effect is re-applied to the new camera track (task 7.2); no UI change except a brief return to the plain frame. |
 | Failed to start (files did not load, CSP, GPU error) | Selection returns to None; status line with `alert` icon in `red-text`: "Background effects could not start, so your camera is shown as is. Reload the page to try again." Announced politely once. |
-| Unsupported (`supportsBackgroundProcessors()` false) | No radio group. The section shows the heading and the note: "This browser can't run background effects. Your camera works normally. Effects work in current Chrome, Edge, Firefox and Safari on a computer." |
+| Unsupported: browser (a feature the effect engine needs is missing, including no WebGL2 context) | No radio group. The section shows the heading and the note: "This browser can't run background effects. Your camera works normally. Effects work in current Chrome, Edge, Firefox and Safari on a computer." |
+| Unsupported: graphics (WebGL2 runs in software; repair 9) | No radio group. The note: "Background effects need graphics acceleration, which is off in this browser. Your camera works normally. Turn on hardware acceleration in your browser's settings, then reload the page." (W3, web-conferencing-hardening, operator 2026-11-21: one note per cause.) |
 | Phone browser where support is unknown | Same gate as unsupported: the support check decides. If supported, the section shows as on desktop with no promise about quality. |
 | Reduced motion | No crossfade on the preview when an effect starts; spinner replaced by the static `clock` glyph with the same text. |
 
@@ -110,6 +112,7 @@ selection, and the dot alone is sufficient.
 - Card names: "None", "Blur", "Ground", "Dusk", "Tide".
 - Accessible names: "None", "Blur your background", "Image background: Ground"
   (and so on), so a screen reader hears what the image is for.
+- Preparing: "Preparing background effects…"
 - Loading: "Loading background effects..."
 - Failure and unsupported copy as in the table (cause, then what still works, then
   the fix).

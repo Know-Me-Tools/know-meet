@@ -15,7 +15,7 @@
 // Scenario contract: radiogroup "Background", km-effect-off, km-effect-blur,
 // km-effect-image-option, km-effect-status (data-state = the status), km-effect-unavailable.
 import type { ConferencingUseCases } from "@know-meet/application";
-import type { BackgroundEffectState, Support } from "@know-meet/domain";
+import type { BackgroundEffectState, BackgroundEffectsCause, Support } from "@know-meet/domain";
 import { KmIcon } from "@know-meet/ui/components/km-icon";
 import { RadioGroup, RadioGroupItem } from "@know-meet/ui/components/radio-group";
 import { Spinner } from "@know-meet/ui/components/spinner";
@@ -110,6 +110,8 @@ function StatusLine({ status }: { readonly status: BackgroundStatus }) {
 interface BackgroundSectionProps {
   readonly state: BackgroundEffectState;
   readonly support: Support;
+  /** Why effects are unsupported (W3); null when supported. */
+  readonly cause: BackgroundEffectsCause | null;
   /** The camera is publishing now. */
   readonly cameraOn: boolean;
   /** No camera to apply an effect to (blocked by the browser, or none connected). */
@@ -121,14 +123,24 @@ interface BackgroundSectionProps {
 export function BackgroundSection({
   state,
   support,
+  cause,
   cameraOn,
   noCamera,
   conferencing,
   announce,
 }: BackgroundSectionProps) {
   const supported = support === "supported";
+  // W2: an applied effect only hides "Preparing". It must not feed the trigger: choosing None
+  // would then read as a reason to prepare and attach the engine again.
+  const effectApplied = state.effect.kind !== "none" && state.status === "active";
   const preparing = usePrepareBackground(conferencing, supported && cameraOn && !noCamera);
-  const choice = useBackgroundChoice(state, cameraOn, conferencing, announce, preparing);
+  const choice = useBackgroundChoice(
+    state,
+    cameraOn,
+    conferencing,
+    announce,
+    preparing && !effectApplied,
+  );
   return (
     <section aria-labelledby={HEADING_ID} className="grid gap-s3 pt-s2">
       <h3 id={HEADING_ID} className={sectionHeadingClass}>
@@ -142,9 +154,8 @@ export function BackgroundSection({
           <RadioGroup
             aria-labelledby={HEADING_ID}
             aria-describedby={HINT_ID}
-            aria-busy={
-              choice.status === "loading" || choice.status === "preparing" ? true : undefined
-            }
+            // W1: busy only while a chosen effect loads; while preparing every choice works.
+            aria-busy={choice.status === "loading" ? true : undefined}
             aria-disabled={noCamera ? true : undefined}
             disabled={noCamera}
             value={choice.checked}
@@ -165,7 +176,11 @@ export function BackgroundSection({
           className="flex items-start gap-s2 rounded-base bg-surface p-s3 text-sm text-foreground"
         >
           <KmIcon name="info" className="mt-0.5 size-4 flex-none text-muted-foreground" />
-          <span>{BACKGROUND_COPY.unsupported}</span>
+          <span>
+            {cause === "graphics"
+              ? BACKGROUND_COPY.unsupportedGraphics
+              : BACKGROUND_COPY.unsupportedBrowser}
+          </span>
         </div>
       )}
     </section>

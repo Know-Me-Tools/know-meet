@@ -10,6 +10,19 @@ export const focusFillClass = "outline-none focus-visible:bg-focus! focus-visibl
 export const invertedFocusFillClass =
   "outline-none focus-visible:bg-background! focus-visible:text-foreground!";
 
+/**
+ * A toast root that holds focus (F6, web-conferencing-hardening HD-4). The toast is inverted
+ * (`foreground` fill), so neither `focus` (equal to it in light) nor the page ground (equal to
+ * the page) can show focus; the brand cyan contrasts with the toast and the page in both themes.
+ * `focus:` rather than `focus-visible:`: the root is reached only by F6 or the Tab guard
+ * (tabIndex -1), and focus moved by script after F6 would not always match :focus-visible.
+ */
+export const toastFocusFillClass =
+  "outline-none focus:bg-action-focus! focus:text-on-action-focus!";
+
+/** Text inside a focused toast root follows the focus fill. */
+export const toastFocusTextClass = "group-focus/toast:text-on-action-focus!";
+
 /** Resting control fill whose boundary meets SC 1.4.11 by fill (>= 3:1). */
 export const controlFillClass = "bg-control text-on-control hover:not-disabled:bg-control-hov";
 

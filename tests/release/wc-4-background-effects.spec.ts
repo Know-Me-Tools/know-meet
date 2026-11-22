@@ -257,8 +257,10 @@ test.describe("WC-4 Blur and image backgrounds show remotely and turn off cleanl
 
         await openRoomSettings(a.page);
         await expect(a.page.getByTestId(EFFECTS.unavailable)).toBeVisible();
+        // Amended by web-conferencing-hardening task 2.5 (W3): software WebGL gets the graphics
+        // note, which names the fix. This is WC-4's only recorded oracle change.
         await expect(a.page.getByTestId(EFFECTS.unavailable)).toContainText(
-          /aren.t available on this device/,
+          /Turn on hardware acceleration/,
         );
         await expect(a.page.getByRole("radiogroup", { name: EFFECTS.groupName })).toHaveCount(0);
         await expect(a.page.getByTestId(EFFECTS.blur)).toHaveCount(0);

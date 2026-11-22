@@ -10,6 +10,9 @@ export const BACKGROUND_COPY = {
   cameraOff: "Your camera is off. The background applies when you turn it on.",
   failed:
     "Background effects could not start, so your camera is shown as is. Reload the page to try again.",
-  unsupported:
-    "Background effects aren’t available on this device. Your camera works normally. Effects need graphics acceleration, which current Chrome, Edge, Firefox and Safari on a computer usually have.",
+  // W3 (web-conferencing-hardening): one note per cause, each with what still works and a fix.
+  unsupportedBrowser:
+    "This browser can’t run background effects. Your camera works normally. Effects work in current Chrome, Edge, Firefox and Safari on a computer.",
+  unsupportedGraphics:
+    "Background effects need graphics acceleration, which is off in this browser. Your camera works normally. Turn on hardware acceleration in your browser’s settings, then reload the page.",
 } as const;

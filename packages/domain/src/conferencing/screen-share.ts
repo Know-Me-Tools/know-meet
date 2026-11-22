@@ -31,12 +31,22 @@ export function isSharingLocally(shares: readonly ScreenShare[]): boolean {
  */
 export type Support = "supported" | "unsupported";
 
+/**
+ * Why background effects are unsupported, so the note can name a fix (W3,
+ * web-conferencing-hardening): `browser` when the browser lacks a feature the effect engine
+ * needs (including no WebGL2 context at all); `graphics` when WebGL2 exists but runs in software,
+ * which turning on hardware acceleration usually fixes.
+ */
+export type BackgroundEffectsCause = "browser" | "graphics";
+
 /** What this browser can do beyond microphone and camera. */
 export interface ConferencingSupport {
   /** `getDisplayMedia` exists. Phone browsers usually lack it. */
   readonly screenShare: Support;
   /** The background processor's requirements are met (WC-4). */
   readonly backgroundEffects: Support;
+  /** The cause when `backgroundEffects` is unsupported; null when supported. */
+  readonly backgroundEffectsCause: BackgroundEffectsCause | null;
   /** `HTMLMediaElement.setSinkId` exists, so a speaker can be chosen (WC-6). */
   readonly speakerSelection: Support;
 }
@@ -44,6 +54,7 @@ export interface ConferencingSupport {
 export const NOTHING_SUPPORTED: ConferencingSupport = {
   screenShare: "unsupported",
   backgroundEffects: "unsupported",
+  backgroundEffectsCause: "browser",
   speakerSelection: "unsupported",
 };
 

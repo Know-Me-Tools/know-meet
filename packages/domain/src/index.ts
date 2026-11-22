@@ -76,6 +76,7 @@ export {
 } from "./conferencing/recording-consent.ts";
 export {
   type AudioPlayback,
+  type BackgroundEffectsCause,
   type ConferencingSupport,
   isSharingLocally,
   type MediaSource,

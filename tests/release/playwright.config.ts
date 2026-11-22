@@ -92,8 +92,16 @@ export default defineConfig({
   projects: [
     {
       name: "packaged",
-      grepInvert: /@hosted-only/,
+      grepInvert: /@hosted-only|@gpu/,
       use: { ...chromiumWithFakeMedia, baseURL: PACKAGED_BASE_URL },
+    },
+    // Headed Chromium on the host GPU (web-conferencing-hardening HD-1): on a software GPU the
+    // background effect engine freezes the page, so the Preparing path is observable only here.
+    // Runs on the operator's Mac, not in CI.
+    {
+      name: "packaged-gpu",
+      grep: /@gpu/,
+      use: { ...chromiumWithFakeMedia, headless: false, baseURL: PACKAGED_BASE_URL },
     },
     {
       name: "hosted",
