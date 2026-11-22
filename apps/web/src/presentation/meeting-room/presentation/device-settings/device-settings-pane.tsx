@@ -100,6 +100,7 @@ export function DeviceSettingsPane({
           <BackgroundSection
             state={snapshot.backgroundEffect}
             support={support.backgroundEffects}
+            cause={support.backgroundEffectsCause}
             cameraOn={cameraOn}
             noCamera={noCamera}
             conferencing={conferencing}

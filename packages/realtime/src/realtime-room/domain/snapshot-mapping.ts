@@ -132,6 +132,7 @@ function sameSupport(a: ConferencingSupport, b: ConferencingSupport): boolean {
   return (
     a.screenShare === b.screenShare &&
     a.backgroundEffects === b.backgroundEffects &&
+    a.backgroundEffectsCause === b.backgroundEffectsCause &&
     a.speakerSelection === b.speakerSelection
   );
 }

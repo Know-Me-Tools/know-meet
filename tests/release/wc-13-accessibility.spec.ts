@@ -31,9 +31,13 @@ import {
 import { prepareListener, tourSurfaces } from "./src/wc-a11y-tour.ts";
 import {
   closeAll,
+  contextDefaults,
   expectRemoteCount,
+  joinRoom,
   joinRoomWithoutUserActivation,
+  newParticipant,
   type Participant,
+  startRoom,
 } from "./src/wc-room.ts";
 import {
   AUDIO_PROMPT,
@@ -45,6 +49,12 @@ import {
   RECORDING,
   SHARE,
 } from "./src/wc-test-ids.ts";
+import {
+  auditSavingLine,
+  expectSavingAuditPasses,
+  SAVING_ATTEMPTS,
+  savingAuditIsComplete,
+} from "./src/wh-saving.ts";
 
 const WC13_TIMEOUT_MS = 20 * 60 * 1000;
 const TAGS = ["@WC-13", "@value-critical", "@packaged-only"];
@@ -172,6 +182,37 @@ test.describe("WC-13 New controls are accessible and match the approved designs"
         "the stroke scan reports the bordered card",
       ).toBe(true);
       expect(audit.problems.length, "the audit as a whole fails").toBeGreaterThan(0);
+    },
+  );
+
+  // HD-5 (web-conferencing-hardening): the saving line after Leave, audited while it shows.
+  test(
+    "the saving line after Leave passes axe and is a polite status",
+    { tag: ["@WC-13", "@HD-5", "@packaged-only"] },
+    async ({ browser, baseURL }, testInfo) => {
+      test.setTimeout(SAVING_ATTEMPTS * 4 * 60 * 1000);
+      const contextOptions = contextDefaults(baseURL);
+      for (let attempt = 1; attempt <= SAVING_ATTEMPTS; attempt += 1) {
+        const a = await newParticipant(browser, "Guest A", testInfo, { contextOptions });
+        const b = await newParticipant(browser, "Guest B", testInfo, { contextOptions });
+        try {
+          await a.page.setViewportSize(DESKTOP);
+          const code = await startRoom(a);
+          await joinRoom(b, code);
+          await expectRemoteCount(a.page, 1, "context A");
+          const audit = await auditSavingLine(a.page);
+          await attachJson(testInfo, `hd-5-saving-audit-${attempt}.json`, audit);
+          if (savingAuditIsComplete(audit)) {
+            expectSavingAuditPasses(audit);
+            return;
+          }
+        } finally {
+          await closeAll([a, b]);
+        }
+      }
+      throw new Error(
+        "BLOCKED: in every attempt the saving line was gone before the scan finished",
+      );
     },
   );
 });
