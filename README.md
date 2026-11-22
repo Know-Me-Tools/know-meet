@@ -24,8 +24,8 @@ transcript, summary and action items.
 ## What is live today
 
 https://meet.know-me.tools runs **real video meetings for guests**. No account, no
-download. The first release (2026-11-16) brought meetings; the conferencing release
-(2026-11-21) added the rest of this list.
+download. The first web release went live on Nov 16, 2026. More conferencing
+features followed on Nov 21.
 
 - Start a meeting from the home page and share its code or link.
 - Others join by code or link, check camera and microphone in the lobby, and meet.
@@ -33,8 +33,8 @@ download. The first release (2026-11-16) brought meetings; the conferencing rele
 - In the room: mute, camera on or off, copy the join link, leave.
 - **Share your screen**, a window or a tab, and stop sharing.
 - **Chat** with everyone, or privately with one person.
-- **Blur your background or replace it with an image.** Browsers without graphics
-  acceleration are told effects aren't available; the meeting keeps working.
+- **Blur your background or replace it with an image.** The settings explain
+  whether browser support or graphics acceleration is missing.
 - **Choose your microphone, camera and speaker**, with levels and a preview, before
   and during a meeting. An "Enable audio" prompt appears when the browser blocks sound.
 - **History on this device.** Each meeting you join, who was there and its chat are
@@ -45,8 +45,9 @@ download. The first release (2026-11-16) brought meetings; the conferencing rele
 Everything else this README describes (dots, registered agents, the Concierge,
 transcription, server-side recording, delivery at close, calendars, sign-in) is the
 product direction and is **not** live; the prototype above shows it with sample
-data. See the release notes: [conferencing](docs/release/web-conferencing-release-notes.md)
-and [first release](docs/release/web-release-notes.md).
+data. The [Nov 22 web update](docs/release/web-conferencing-release-notes.md#2026-11-22-web-conferencing-hardening)
+refined background effects feedback and made keyboard focus visible on
+notifications. See also the [first web release](docs/release/web-release-notes.md).
 
 ## What happens in a meeting
 

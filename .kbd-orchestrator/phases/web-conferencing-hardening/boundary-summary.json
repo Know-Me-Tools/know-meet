@@ -1,0 +1,103 @@
+{
+  "kind": "know-meet.public-boundary-summary",
+  "phase": "web-conferencing-hardening",
+  "disposition": "CLOSED",
+  "verdict": "PASS",
+  "closedAtRevision": 934,
+  "method": "VLBV",
+  "contractDigest": "67e662a377a99cda0c72c8a5ea5daa99c37ae414509f14547bad59c33d5900c8",
+  "canonicalEvidenceDigest": "a5adbee06e44caafd47e1719bfdc8e31e5e6a235f5ce6e63db5a9223b7ef716a",
+  "pullRequest": "https://github.com/Know-Me-Tools/know-meet/pull/24",
+  "testedTree": "7645a855d2a7cf142eb25b593f0ae44695301fde",
+  "releaseCommit": "13cdb9eb4364f4980c543c5a4a2f0670da746a4b",
+  "deploymentPinCommit": "39b4da91d218f3c4777ebb5342a8771765ec714c",
+  "repairAttempts": 6,
+  "packaged": {
+    "scenariosPassed": 7,
+    "testsPassed": 16,
+    "testsSkipped": 0,
+    "typecheck": "PASS",
+    "unitTests": "PASS",
+    "lint": "PASS"
+  },
+  "closingReviews": {
+    "code": "PASS",
+    "ui": "PASS",
+    "screenshotCount": 24
+  },
+  "hosted": {
+    "status": "PASS",
+    "testsPassed": 11,
+    "testsSkipped": 0,
+    "specs": [
+      {
+        "id": "WC-1",
+        "spec": "wc-1-screen-share",
+        "status": "PASS",
+        "testsPassed": 2
+      },
+      {
+        "id": "WC-4",
+        "spec": "wc-4-background-effects",
+        "status": "PASS",
+        "testsPassed": 3
+      },
+      {
+        "id": "WC-5",
+        "spec": "wc-5-device-choice",
+        "status": "PASS",
+        "testsPassed": 2
+      },
+      {
+        "id": "WC-8",
+        "spec": "wc-8-local-recording",
+        "status": "PASS",
+        "testsPassed": 2
+      },
+      {
+        "id": "WC-12",
+        "spec": "wc-12-enable-audio",
+        "status": "PASS",
+        "testsPassed": 2
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "HD-1",
+      "status": "PASS"
+    },
+    {
+      "id": "HD-2",
+      "status": "PASS"
+    },
+    {
+      "id": "HD-4",
+      "status": "PASS"
+    },
+    {
+      "id": "HD-5",
+      "status": "PASS"
+    },
+    {
+      "id": "HD-6",
+      "status": "PASS"
+    },
+    {
+      "id": "WC-4",
+      "status": "PASS"
+    },
+    {
+      "id": "WC-8",
+      "status": "PASS"
+    },
+    {
+      "id": "WC-13",
+      "status": "PASS"
+    },
+    {
+      "id": "HD-7",
+      "status": "PASS"
+    }
+  ]
+}
