@@ -1,4 +1,5 @@
 import type { ParticipantIdentity } from "../meeting/participant.ts";
+import type { RecorderFailureReason } from "./conferencing-error.ts";
 
 /**
  * Recording consent (PRODUCT.md principle 4, contract decision D2). Any participant may ask
@@ -39,6 +40,11 @@ export type RecordingStopReason =
 /** Every way a recording can end for this client, including ones nobody announced. */
 export type RecordingEndReason = RecordingStopReason | "recorder-left" | "disconnected";
 
+export interface AdmissionChallenge {
+  /** Set on targeted prompts after the initial roster. An answer must echo it. */
+  readonly admissionId?: number;
+}
+
 /**
  * Messages on the room's reserved consent topic. The sender is never part of the payload;
  * the transport supplies it (`ConsentEnvelope.from`), so a client cannot answer for another.
@@ -50,22 +56,22 @@ export type RecordingEndReason = RecordingStopReason | "recorder-left" | "discon
  * - `record-started` and `record-stopped` drive everyone's indicator.
  */
 export type ConsentMessage =
-  | {
+  | (AdmissionChallenge & {
       readonly type: "record-request";
       readonly requestId: RecordingRequestId;
       readonly phase: "asking" | "running";
-    }
-  | {
+    })
+  | (AdmissionChallenge & {
       readonly type: "record-answer";
       readonly requestId: RecordingRequestId;
       readonly answer: "agreed";
-    }
-  | {
+    })
+  | (AdmissionChallenge & {
       readonly type: "record-answer";
       readonly requestId: RecordingRequestId;
       readonly answer: "declined";
       readonly reason: DeclineReason;
-    }
+    })
   | {
       readonly type: "record-withdrawn";
       readonly requestId: RecordingRequestId;
@@ -88,11 +94,17 @@ export interface ConsentEnvelope {
 export type ConsentNotice =
   | { readonly kind: "declined"; readonly by: ParticipantIdentity; readonly reason: DeclineReason }
   | { readonly kind: "request-not-sent" }
-  | { readonly kind: "recorder-failed" }
+  | { readonly kind: "recorder-failed"; readonly reason?: RecorderFailureReason }
   | { readonly kind: "recording-stopped"; readonly reason: RecordingEndReason };
 
 /** This participant's answer to a recording that is already running elsewhere. */
 export type LocalConsent = "asked" | "agreed" | "declined";
+
+/** The initial roster is bound by the request itself. Later arrivals also echo a challenge. */
+export type ParticipantAdmissions = ReadonlyMap<
+  ParticipantIdentity,
+  AdmissionChallenge & { readonly admissionKey: string | undefined }
+>;
 
 /**
  * The recording situation as this client sees it.
@@ -100,8 +112,7 @@ export type LocalConsent = "asked" | "agreed" | "declined";
  * - `idle`: nothing asked or recording.
  * - `requesting`: this participant asked; `awaiting` have not answered, `agreed` said yes.
  * - `prompted`: another participant asked; `answer` is null until this one answers.
- * - `local-starting`: everyone agreed; the indicator was announced and the recorder is
- *   starting.
+ * - `local-starting`: everyone agreed; the encoder is preparing for live capture.
  * - `local-recording`: this browser records. `pending` are late joiners not yet answered.
  * - `remote-recording`: another participant's browser records.
  */
@@ -110,37 +121,37 @@ export type RecordingConsentState =
   | {
       readonly status: "requesting";
       readonly requestId: RecordingRequestId;
+      readonly admissions: ParticipantAdmissions;
       readonly awaiting: readonly ParticipantIdentity[];
       readonly agreed: readonly ParticipantIdentity[];
     }
   | {
       readonly status: "prompted";
       readonly requestId: RecordingRequestId;
+      readonly admissionId?: number;
       readonly requester: ParticipantIdentity;
       readonly answer: "agreed" | null;
     }
   | {
       readonly status: "local-starting" | "local-recording";
       readonly requestId: RecordingRequestId;
+      readonly admissions: ParticipantAdmissions;
       readonly consented: readonly ParticipantIdentity[];
       readonly pending: readonly ParticipantIdentity[];
     }
   | {
       readonly status: "remote-recording";
       readonly requestId: RecordingRequestId;
+      readonly admissionId?: number;
       readonly recorder: ParticipantIdentity;
       readonly localConsent: LocalConsent;
     };
 
 export const CONSENT_IDLE: RecordingConsentState = { status: "idle", notice: null };
 
-/** True while a recording runs or is starting anywhere in the room: show the indicator. */
+/** True while a recording runs anywhere in the room. */
 export function isRecordingIndicatorOn(state: RecordingConsentState): boolean {
-  return (
-    state.status === "local-starting" ||
-    state.status === "local-recording" ||
-    state.status === "remote-recording"
-  );
+  return state.status === "local-recording" || state.status === "remote-recording";
 }
 
 /** The question this participant must answer now, or null when there is none. */
@@ -149,6 +160,8 @@ export interface ConsentPrompt {
   readonly requester: ParticipantIdentity;
   /** True when the recording is already running (late joiner, D2). */
   readonly running: boolean;
+  /** This recorder sent a prompt scoped to this arrival. */
+  readonly admissionBound?: true;
 }
 
 export function consentPrompt(state: RecordingConsentState): ConsentPrompt | null {
@@ -156,7 +169,12 @@ export function consentPrompt(state: RecordingConsentState): ConsentPrompt | nul
     return { requestId: state.requestId, requester: state.requester, running: false };
   }
   if (state.status === "remote-recording" && state.localConsent === "asked") {
-    return { requestId: state.requestId, requester: state.recorder, running: true };
+    return {
+      requestId: state.requestId,
+      requester: state.recorder,
+      running: true,
+      ...(state.admissionId === undefined ? {} : { admissionBound: true as const }),
+    };
   }
   return null;
 }
@@ -210,7 +228,8 @@ function decodeFields(
     case "record-request": {
       const phase = fields["phase"];
       if (phase !== "asking" && phase !== "running") return null;
-      return { type: "record-request", requestId, phase };
+      const challenge = decodeChallenge(fields);
+      return challenge && { type: "record-request", requestId, phase, ...challenge };
     }
     case "record-answer":
       return decodeAnswer(fields, requestId);
@@ -235,9 +254,19 @@ function decodeAnswer(
   fields: Readonly<Record<string, unknown>>,
   requestId: RecordingRequestId,
 ): ConsentMessage | null {
-  if (fields["answer"] === "agreed") return { type: "record-answer", requestId, answer: "agreed" };
+  const challenge = decodeChallenge(fields);
+  if (!challenge) return null;
+  if (fields["answer"] === "agreed") {
+    return { type: "record-answer", requestId, answer: "agreed", ...challenge };
+  }
   if (fields["answer"] !== "declined") return null;
   const reason = fields["reason"];
   if (reason !== "person" && reason !== "busy") return null;
-  return { type: "record-answer", requestId, answer: "declined", reason };
+  return { type: "record-answer", requestId, answer: "declined", reason, ...challenge };
+}
+
+function decodeChallenge(fields: Readonly<Record<string, unknown>>): AdmissionChallenge | null {
+  const id = fields["admissionId"];
+  if (id === undefined) return {};
+  return typeof id === "number" && Number.isSafeInteger(id) && id > 0 ? { admissionId: id } : null;
 }

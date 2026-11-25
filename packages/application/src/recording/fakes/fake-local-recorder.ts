@@ -43,10 +43,13 @@ export function createFakeLocalRecorder(support: Support = "supported"): FakeLoc
       finalised += 1;
       for (const listener of listeners) listener(reason);
     },
-    start: async (requestId) => {
+    prepare: async () => {
       const failure = nextStartFailure;
       nextStartFailure = null;
       if (failure !== null) return err(conferencingErrors.recorderFailed(failure));
+      return ok(undefined);
+    },
+    start: (requestId) => {
       current = requestId;
       started = [...started, requestId];
       return ok(undefined);

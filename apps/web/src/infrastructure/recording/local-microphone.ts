@@ -27,7 +27,7 @@ export const captureMicrophoneFromBrowser: CaptureMicrophone = async (deviceId) 
 
 export interface LocalMicrophoneFeed {
   /** Follows the snapshot: the chosen device, and silence while the participant is muted. */
-  sync(snapshot: RoomSnapshot): void;
+  sync(snapshot: RoomSnapshot, eligible: boolean, admitted?: boolean): Promise<void>;
   dispose(): void;
 }
 
@@ -47,27 +47,41 @@ export function createLocalMicrophoneFeed(
   let device: string | null | undefined;
   let attempt = 0;
   let muted = false;
+  let admitted = false;
   let disposed = false;
+  let acquiring = Promise.resolve();
 
   const release = (): void => {
     for (const track of stream?.getTracks() ?? []) track.stop();
     stream = null;
   };
 
-  const apply = (): void => mixer.setSource(LOCAL_MICROPHONE_KEY, stream, muted ? 0 : 1);
+  const apply = (): void =>
+    mixer.setSource(LOCAL_MICROPHONE_KEY, admitted ? stream : null, muted ? 0 : 1);
 
   return {
-    sync: (snapshot) => {
+    sync: (snapshot, eligible, live = true) => {
+      if (disposed) return Promise.resolve();
+      admitted = live;
+      if (!eligible) {
+        attempt += 1;
+        device = undefined;
+        release();
+        apply();
+        return Promise.resolve();
+      }
       muted = snapshot.local?.microphone.muted ?? true;
       const wanted = snapshot.devices.active.microphone;
       if (wanted === device) {
         apply();
-        return;
+        return acquiring;
       }
+      release();
+      apply();
       device = wanted;
       attempt += 1;
       const mine = attempt;
-      void capture(wanted).then((next) => {
+      acquiring = capture(wanted).then((next) => {
         if (disposed || mine !== attempt) {
           for (const track of next?.getTracks() ?? []) track.stop();
           return;
@@ -76,6 +90,7 @@ export function createLocalMicrophoneFeed(
         stream = next;
         apply();
       });
+      return acquiring;
     },
     dispose: () => {
       disposed = true;

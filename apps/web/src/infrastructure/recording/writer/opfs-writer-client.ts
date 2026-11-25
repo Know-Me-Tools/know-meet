@@ -2,86 +2,76 @@
 import { conferencingErrors, err, ok, type RecorderFailed, type Result } from "@know-meet/domain";
 import type { WriterEvent, WriterFailure, WriterRequest } from "./writer-protocol";
 
-/**
- * Appends a recording to one OPFS file through the writer worker. Nothing here reaches a
- * network: the file lives in the origin's private file system.
- */
+/** Appends encoded data only to the local recording worker's OPFS file. */
 export interface RecordingWriter {
-  /** Opens (creating) the file and takes the recording lock. Call once. */
   open(fileName: string, lockName: string): Promise<Result<void, RecorderFailed>>;
-  /** Queues a chunk, in order. Hands the buffer to the worker; do not use it afterwards. */
   append(chunk: ArrayBuffer): void;
-  /** Flushes and closes. Resolves with the bytes written; never rejects, never hangs. */
+  /** Settles on the worker’s close receipt or crash, independently of capture cutoff. */
   close(): Promise<number>;
-  /** Called once if the worker stops writing by itself; the file is already closed. */
+  /** First observed failure, including one that occurs after close was requested. */
   onFailed(listener: (reason: WriterFailure, size: number) => void): () => void;
-}
-
-const CLOSE_TIMEOUT_MS = 10_000;
-
-function recorderFailure(reason: WriterFailure): RecorderFailed {
-  return conferencingErrors.recorderFailed(
-    reason === "quota-exceeded"
-      ? "quota-exceeded"
-      : reason === "storage-unavailable"
-        ? "storage-unavailable"
-        : "failed",
-  );
 }
 
 export function createOpfsWriter(): RecordingWriter {
   let worker: Worker | null = null;
   let settleOpen: ((result: Result<void, RecorderFailed>) => void) | null = null;
   let settleClose: ((size: number) => void) | null = null;
+  let closing: Promise<number> | null = null;
   let finalSize = 0;
+  let failure: WriterFailure | null = null;
   let ended = false;
-  const failedListeners = new Set<(reason: WriterFailure, size: number) => void>();
+  const listeners = new Set<(reason: WriterFailure, size: number) => void>();
 
-  const send = (request: WriterRequest, transfer: Transferable[] = []): void => {
-    worker?.postMessage(request, transfer);
+  const reportFailure = (reason: WriterFailure): void => {
+    if (failure !== null) return;
+    failure = reason;
+    settleOpen?.(err(conferencingErrors.recorderFailed(reason)));
+    settleOpen = null;
+    for (const listener of [...listeners]) listener(reason, finalSize);
   };
 
-  const stopWorker = (): void => {
+  const finish = (size: number): void => {
+    ended = true;
+    finalSize = size;
     worker?.terminate();
     worker = null;
+    settleClose?.(size);
+    settleClose = null;
   };
 
   const onEvent = (event: WriterEvent): void => {
+    if (ended) return;
     switch (event.type) {
       case "opened":
         settleOpen?.(ok(undefined));
         settleOpen = null;
         return;
-      case "closed":
-        ended = true;
+      case "failing":
         finalSize = event.size;
-        settleClose?.(event.size);
-        settleClose = null;
-        stopWorker();
+        reportFailure(event.reason);
         return;
       case "failed":
-        ended = true;
         finalSize = event.size;
-        if (settleOpen !== null) {
-          settleOpen(err(recorderFailure(event.reason)));
-          settleOpen = null;
-        } else {
-          for (const listener of [...failedListeners]) listener(event.reason, event.size);
-        }
-        settleClose?.(event.size);
-        settleClose = null;
-        stopWorker();
+        reportFailure(event.reason);
+        finish(event.size);
+        return;
+      case "closed":
+        finish(event.size);
         return;
     }
   };
 
   const onWorkerCrash = (): void => onEvent({ type: "failed", reason: "failed", size: finalSize });
+  const send = (message: WriterRequest, transfer: Transferable[] = []): void => {
+    try {
+      worker?.postMessage(message, transfer);
+    } catch {
+      onWorkerCrash();
+    }
+  };
 
   return {
     open: (fileName, lockName) => {
-      if (typeof Worker === "undefined") {
-        return Promise.resolve(err(conferencingErrors.recorderFailed("storage-unavailable")));
-      }
       return new Promise((resolve) => {
         try {
           worker = new Worker(new URL("./opfs-writer-worker.ts", import.meta.url), {
@@ -102,29 +92,23 @@ export function createOpfsWriter(): RecordingWriter {
       });
     },
     append: (chunk) => {
-      if (ended) return;
-      send({ type: "append", chunk }, [chunk]);
+      if (!ended && failure === null) send({ type: "append", chunk }, [chunk]);
     },
     close: () => {
       if (ended || worker === null) return Promise.resolve(finalSize);
-      return new Promise<number>((resolve) => {
-        const timer = setTimeout(() => {
-          settleClose = null;
-          ended = true;
-          stopWorker();
-          resolve(finalSize);
-        }, CLOSE_TIMEOUT_MS);
-        settleClose = (size) => {
-          clearTimeout(timer);
-          resolve(size);
-        };
+      if (closing === null) {
+        closing = new Promise<number>((resolve) => {
+          settleClose = resolve;
+        });
         send({ type: "close" });
-      });
+      }
+      return closing;
     },
     onFailed: (listener) => {
-      failedListeners.add(listener);
+      if (failure !== null) listener(failure, finalSize);
+      listeners.add(listener);
       return () => {
-        failedListeners.delete(listener);
+        listeners.delete(listener);
       };
     },
   };

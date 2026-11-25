@@ -19,8 +19,7 @@ export const RECORD_COPY = {
   controlStop: "Stop rec",
   // Same as the visible label (prototype copy), so voice control users can say it (SC 2.5.3).
   controlStopName: "Stop rec",
-  unsupported:
-    "This browser can't record meetings. Recording works in current Chrome, Edge, Firefox and Safari on a computer.",
+  unsupported: "Recording is unavailable in this browser. Try Chrome on a computer.",
   busyPrompted: "Answer the open recording question first.",
   indicator: "Recording",
   indicatorName: "This meeting is being recorded",
@@ -33,7 +32,7 @@ export const RECORD_COPY = {
   promptAgree: "Agree to recording",
   promptDecline: "Don't record",
   runningTitle: "This meeting is being recorded",
-  runningAgree: "Agree and stay",
+  runningAgree: "Agree to recording",
   runningDecline: "Decline and stop it",
   startedHere: "You're recording this meeting. It's saved only in this browser.",
   startedElsewhere: "Recording started. Everyone in the meeting sees the recording notice.",
@@ -70,8 +69,10 @@ export function promptText(requester: string): string {
   return `${requester} wants to record this meeting in their own browser. The file stays on their device and is never uploaded. Recording starts only if everyone agrees.`;
 }
 
-export function runningText(recorder: string): string {
-  return `${recorder} is recording this meeting in their own browser. If you decline, the recording stops for everyone; what was recorded before you joined is kept.`;
+export function runningText(recorder: string, admissionBound: boolean): string {
+  const recording = `${recorder} is recording in their browser.`;
+  const inclusion = admissionBound ? " The recording includes you only after you agree." : "";
+  return `${recording}${inclusion} You can use the meeting while you decide. Declining stops the recording.`;
 }
 
 export function waitingText(awaiting: string): string {
@@ -79,7 +80,7 @@ export function waitingText(awaiting: string): string {
 }
 
 export function lateJoinerText(pending: string): string {
-  return `${pending} just joined and is being asked. If they decline, the recording stops and what was recorded is kept.`;
+  return `Waiting for consent from ${pending}. They stay out of the recording until they agree. A decline ends the recording.`;
 }
 
 export function remoteBusyText(recorder: string): string {
@@ -112,7 +113,11 @@ export function noticeText(notice: ConsentNotice, nameOf: NameOf): string {
     case "request-not-sent":
       return "Your request didn't reach everyone, so nothing was recorded. Check your connection and try again.";
     case "recorder-failed":
-      return "This browser couldn't start recording, so nothing was recorded. Try again, or try current Chrome on a computer.";
+      if (notice.reason === "unsupported") return RECORD_COPY.unsupported;
+      if (notice.reason === "quota-exceeded") {
+        return "Recording stopped because browser storage ran out. Saved material stays on this device. Free up storage before trying again.";
+      }
+      return "Recording failed. Check Recordings for any playable part, then try again.";
     case "recording-stopped":
       return STOPPED_BECAUSE[notice.reason];
   }

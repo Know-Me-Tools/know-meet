@@ -30,6 +30,7 @@ let handle: SyncAccessHandleLike | null = null;
 let offset = 0;
 let releaseLock: (() => void) | null = null;
 let finished = false;
+let firstFailure: WriterFailure | null = null;
 
 function post(event: WriterEvent): void {
   scope.postMessage(event);
@@ -56,40 +57,47 @@ function release(): void {
   done?.();
 }
 
-/** Flushes and closes the file, keeping what was written. Never throws. */
-function closeFile(): number {
+function failureOf(error: unknown): WriterFailure {
+  return isDomError(error, "QuotaExceededError") ? "quota-exceeded" : "failed";
+}
+
+function reportFailure(reason: WriterFailure): void {
+  if (firstFailure !== null) return;
+  firstFailure = reason;
+  post({ type: "failing", reason, size: offset });
+}
+
+/** Preserve the written prefix and report a failing flush before waiting for close. */
+function finish(reason?: WriterFailure): void {
+  finished = true;
+  if (reason !== undefined) reportFailure(reason);
   const open = handle;
   handle = null;
   if (open !== null) {
     try {
       open.flush();
-    } catch {
-      // The bytes already written stay; a failed flush cannot make them worse.
+    } catch (error) {
+      reportFailure(failureOf(error));
     }
     try {
       open.close();
-    } catch {
-      // Closing a handle that already failed has nothing left to release.
+    } catch (error) {
+      reportFailure(failureOf(error));
     }
   }
   release();
-  return offset;
-}
-
-function failureOf(error: unknown): WriterFailure {
-  return isDomError(error, "QuotaExceededError") ? "quota-exceeded" : "failed";
-}
-
-function fail(reason: WriterFailure): void {
-  finished = true;
-  post({ type: "failed", reason, size: closeFile() });
+  post(
+    firstFailure === null
+      ? { type: "closed", size: offset }
+      : { type: "failed", reason: firstFailure, size: offset },
+  );
 }
 
 async function open(request: Extract<WriterRequest, { type: "open" }>): Promise<void> {
   try {
     await holdLock(request.lockName);
   } catch {
-    fail("storage-unavailable");
+    finish("storage-unavailable");
     return;
   }
   let directory: DirectoryHandleLike;
@@ -99,7 +107,7 @@ async function open(request: Extract<WriterRequest, { type: "open" }>): Promise<
     handle = await file.createSyncAccessHandle();
     offset = handle.getSize();
   } catch {
-    fail("storage-unavailable");
+    finish("storage-unavailable");
     return;
   }
   post({ type: "opened" });
@@ -115,7 +123,7 @@ function append(chunk: ArrayBuffer): void {
       const count = open.write(bytes.subarray(written), { at: offset });
       // A write that accepts nothing is how a full disk shows when no error is thrown.
       if (count <= 0) {
-        fail("quota-exceeded");
+        finish("quota-exceeded");
         return;
       }
       written += count;
@@ -124,7 +132,7 @@ function append(chunk: ArrayBuffer): void {
     open.flush();
   } catch (error) {
     // A partly written chunk still counts: `offset` follows the bytes that landed.
-    fail(failureOf(error));
+    finish(failureOf(error));
   }
 }
 
@@ -143,12 +151,11 @@ scope.addEventListener("message", (event) => {
           append(request.chunk);
           return;
         case "close":
-          finished = true;
-          post({ type: "closed", size: closeFile() });
+          finish();
           return;
       }
     })
     .catch(() => {
-      if (!finished) fail("failed");
+      if (!finished) finish("failed");
     });
 });

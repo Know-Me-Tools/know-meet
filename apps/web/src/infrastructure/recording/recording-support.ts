@@ -53,6 +53,7 @@ export function hasRecordingStorage(): boolean {
 export function detectRecordingSupport(): Support {
   if (
     typeof MediaRecorder === "undefined" ||
+    typeof MediaRecorder.isTypeSupported !== "function" ||
     typeof AudioContext === "undefined" ||
     typeof HTMLCanvasElement === "undefined" ||
     typeof HTMLCanvasElement.prototype.captureStream !== "function" ||

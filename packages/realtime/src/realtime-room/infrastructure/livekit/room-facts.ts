@@ -49,6 +49,7 @@ export function readRoomFacts(
 function readParticipant(participant: Participant): ParticipantFacts {
   return {
     identity: participant.identity,
+    admissionKey: participant.sid,
     name: participant.name,
     microphone: readTrack(participant, Track.Source.Microphone),
     camera: readTrack(participant, Track.Source.Camera),

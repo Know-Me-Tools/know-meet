@@ -7,7 +7,7 @@
 // while this browser records). When another recording or question is open, or the
 // browser cannot record, the control keeps its tab stop but is unavailable
 // (aria-disabled, reason linked by aria-describedby); a press announces the reason.
-import { useId } from "react";
+import { useId, useRef } from "react";
 import { Ctl } from "../room-control";
 import { RECORD_COPY } from "./recording-copy";
 import type { RecordAction } from "./use-recording-ui";
@@ -19,6 +19,7 @@ interface RecordControlProps {
 
 export function RecordControl({ action, onPress }: RecordControlProps) {
   const reasonId = useId();
+  const pressedStop = useRef<{ source: "pointer" | "key"; stop: () => void } | null>(null);
   const recording = action.kind === "stop";
   const label =
     action.kind === "stop"
@@ -44,7 +45,33 @@ export function RecordControl({ action, onPress }: RecordControlProps) {
         data-state={recording ? "on" : "off"}
         aria-disabled={blocked ? true : undefined}
         aria-describedby={blocked ? reasonId : undefined}
-        onClick={onPress}
+        onPointerDown={(event) => {
+          pressedStop.current =
+            recording && event.isPrimary && event.button === 0
+              ? { source: "pointer", stop: onPress }
+              : null;
+        }}
+        onPointerCancel={() => {
+          pressedStop.current = null;
+        }}
+        onKeyDown={(event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          if (event.repeat) {
+            event.preventDefault();
+            return;
+          }
+          pressedStop.current = recording ? { source: "key", stop: onPress } : null;
+        }}
+        onBlur={() => {
+          pressedStop.current = null;
+        }}
+        onClick={(event) => {
+          // An encoder failure can change the button back to Record while Stop is pressed.
+          const pressed = pressedStop.current;
+          pressedStop.current = null;
+          if (pressed?.source === (event.detail === 0 ? "key" : "pointer")) pressed.stop();
+          else onPress();
+        }}
       />
       {blocked ? (
         <span id={reasonId} className="sr-only">

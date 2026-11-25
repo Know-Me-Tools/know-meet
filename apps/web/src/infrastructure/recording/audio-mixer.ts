@@ -38,6 +38,11 @@ function signatureOf(tracks: readonly MediaStreamTrack[]): string {
 export function createAudioMixer(): AudioMixer {
   const context = new AudioContext({ latencyHint: "playback" });
   const destination = context.createMediaStreamDestination();
+  // The encoder needs audio samples while meeting inputs are gated during startup.
+  const silence = context.createConstantSource();
+  silence.offset.value = 0;
+  silence.connect(destination);
+  silence.start();
   const sources = new Map<string, Source>();
 
   const remove = (key: string): void => {
@@ -79,6 +84,8 @@ export function createAudioMixer(): AudioMixer {
     },
     close: async () => {
       for (const key of [...sources.keys()]) remove(key);
+      silence.stop();
+      silence.disconnect();
       for (const track of destination.stream.getTracks()) track.stop();
       await context.close().catch(() => undefined);
     },

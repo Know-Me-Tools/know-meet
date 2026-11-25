@@ -9,15 +9,16 @@ import type { AttachableTrack, TrackResolver } from "../../application/media-bin
  *   muted; the SDK restarts it in place).
  * - Local microphone and local screen-share audio: never, so a participant does not hear
  *   themselves.
- * - Remote media of any source: the track only while subscribed.
+ * - Remote media of any source: the subscribed track for the requested admission, if specified.
  */
 export function createTrackResolver(room: Room | null): TrackResolver {
   return (target) => {
     if (room === null) return null;
     if (target.identity === room.localParticipant.identity) return localTrack(room, target);
-    const publication = room.remoteParticipants
-      .get(target.identity)
-      ?.getTrackPublication(sourceOf(target.kind));
+    const remote = room.remoteParticipants.get(target.identity);
+    if (remote === undefined) return null;
+    if (target.admissionKey !== undefined && target.admissionKey !== remote.sid) return null;
+    const publication = remote.getTrackPublication(sourceOf(target.kind));
     if (publication === undefined || !publication.isSubscribed) return null;
     return publication.track ?? null;
   };

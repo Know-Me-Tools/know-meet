@@ -24,6 +24,7 @@ import {
   clockTime,
   detailFacts,
   downloadFilename,
+  isPlayableRecording,
   recordedMs,
   recordingTitle,
 } from "../application/recording-format";
@@ -51,7 +52,7 @@ function ConditionFor({ row }: { readonly row: LibraryRow }) {
     const at = row.endedAt === null ? "" : ` at ${clockTime(row.endedAt)}`;
     return (
       <ConditionNote tone="amber">
-        Browser storage ran out, so recording stopped{at}. Everything up to then was saved.
+        Browser storage ran out, so recording stopped{at}. You can play the part that was saved.
       </ConditionNote>
     );
   }
@@ -82,6 +83,14 @@ function PlaybackArea({
   readonly playback: RecordingPlayback;
   readonly row: LibraryRow;
 }) {
+  if (row.state === "unusable") {
+    return (
+      <StageMessage>
+        <KmIcon name="alert" className="mt-px flex-none text-red-text" />
+        <span>Recording failed and there is no playable clip. You can delete this entry.</span>
+      </StageMessage>
+    );
+  }
   switch (playback.status) {
     case "ready": {
       const ms = recordedMs(row);
@@ -101,9 +110,7 @@ function PlaybackArea({
       return (
         <StageMessage>
           <KmIcon name="record" className="mt-px flex-none text-red-text" />
-          <span>
-            This recording is still being written in another tab. It can play once it ends.
-          </span>
+          <span>This recording is still in progress or saving. Check back once it finishes.</span>
         </StageMessage>
       );
     case "missing":
@@ -140,7 +147,7 @@ interface RecordingDetailViewProps {
 }
 
 export function RecordingDetailView({ row, onDeleted }: RecordingDetailViewProps) {
-  const playable = row.state !== "missing" && row.state !== "recording";
+  const playable = isPlayableRecording(row.state);
   const playback = useRecordingPlayback(playable ? row.id : null);
   const remover = useDeleteRecording();
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -181,7 +188,7 @@ export function RecordingDetailView({ row, onDeleted }: RecordingDetailViewProps
       <div className="grid w-full max-w-[960px] gap-s4 max-bp1024:max-w-[720px]">
         <PlaybackArea playback={shown} row={row} />
         <div className="flex flex-wrap gap-s3 max-bp768:grid max-bp768:grid-cols-[minmax(0,1fr)]">
-          {playback.status === "ready" ? (
+          {playable && playback.status === "ready" ? (
             <a
               href={playback.url}
               download={downloadFilename(row)}

@@ -11,6 +11,7 @@ import {
   ok,
   type ParticipantIdentity,
   type RecorderFailed,
+  type RecorderFailureReason,
   type RecordingBusy,
   type RecordingConsentState,
   type RecordingRequestId,
@@ -18,7 +19,7 @@ import {
   transitionConsent,
 } from "@know-meet/domain";
 import type { RealtimeRoom, RoomSnapshot } from "../meeting/ports.ts";
-import type { LocalRecorder } from "./ports.ts";
+import type { LocalRecorder, RecordingCapturePolicy } from "./ports.ts";
 
 export interface RecordingConsentPorts {
   readonly room: RealtimeRoom;
@@ -38,9 +39,8 @@ export type RecordRequestError = RecordingBusy | RecorderFailed | ConnectionLost
  * stop, plus the late-joiner prompt and stop-on-decline, driven by the room and the
  * recorder. State is read like the room: `getSnapshot` plus `subscribe`.
  *
- * Every event is handled in order, one at a time, together with the commands it produced,
- * so a decline can never overtake the start it should prevent. A failed send or recorder
- * call is fed back to the rules, which always move away from recording.
+ * Consent changes reach live inputs synchronously. The prepared encoder admits live inputs
+ * only after the announcement. Room messages stay ordered independently of file finalization.
  */
 export interface RecordingConsent {
   getSnapshot(): RecordingConsentState;
@@ -64,68 +64,165 @@ export interface RecordingConsent {
 export function createRecordingConsent(ports: RecordingConsentPorts): RecordingConsent {
   const { room, recorder } = ports;
   let state: RecordingConsentState = CONSENT_IDLE;
-  let chain: Promise<void> = Promise.resolve();
-  let known: ReadonlySet<ParticipantIdentity> = identitiesOf(room.getSnapshot());
+  let sendTail = Promise.resolve();
+  let roomGeneration = 0;
+  let admissionId = 0;
+  let disposed = false;
+  let capture: CaptureSession | null = null;
+  let lastCaptureId: RecordingRequestId | null = null;
+  let known = admissionKeysOf(room.getSnapshot());
   let wasInRoom = isInRoom(room.getSnapshot().connection);
   const listeners = new Set<() => void>();
+  const pending = new Set<Promise<void>>();
 
-  const setState = (next: RecordingConsentState): void => {
-    if (next === state) return;
-    state = next;
-    for (const listener of listeners) listener();
+  const track = (work: Promise<void>): void => {
+    pending.add(work);
+    void work.finally(() => pending.delete(work));
   };
 
-  /** Runs one command; a thrown error counts as a failure, like an error result. */
-  const run = async (command: ConsentCommand): Promise<boolean> => {
-    try {
-      if (command.type === "send") {
+  const settled = async (): Promise<void> => {
+    while (pending.size > 0) await Promise.all([...pending]);
+  };
+
+  // The transport captures the room when called. Drop queued sends from a departed room.
+  const send = (command: Extract<ConsentCommand, { type: "send" }>): Promise<boolean> => {
+    const generation = roomGeneration;
+    const result = sendTail.then(async () => {
+      if (generation !== roomGeneration || disposed) return false;
+      if (command.message.type === "record-started" && capture?.id !== command.message.requestId) {
+        return true;
+      }
+      try {
         return (await room.sendConsentMessage(command.message, command.to)).ok;
+      } catch {
+        return false;
       }
-      if (command.type === "start-recorder") return (await recorder.start(command.requestId)).ok;
-      return (await recorder.stop()).ok;
+    });
+    sendTail = result.then(() => undefined);
+    return result;
+  };
+
+  const recorderFailure = (reason: RecorderFailureReason, id?: RecordingRequestId): void => {
+    if (disposed) return;
+    if (capture && (id === undefined || capture.id === id)) {
+      dispatch({ type: "recorder-stopped-itself", reason });
+    } else if (state.status === "idle" && id !== undefined && id === lastCaptureId) {
+      dispatch({ type: "recorder-stopped-itself", reason });
+    }
+  };
+
+  const finish = async (id: RecordingRequestId): Promise<void> => {
+    try {
+      const result = await recorder.stop(id);
+      if (!result.ok) recorderFailure(result.error.reason, id);
     } catch {
-      return false;
+      recorderFailure("failed", id);
     }
   };
 
-  const step = async (event: ConsentEvent): Promise<void> => {
-    const next = transitionConsent(state, event);
-    setState(next.state);
-    for (const command of next.commands) {
-      if (!(await run(command))) {
-        await step({ type: "command-failed", command });
-        return;
+  const prepare = async (session: CaptureSession): Promise<void> => {
+    const command = { type: "prepare-recorder", requestId: session.id } as const;
+    try {
+      const result = await recorder.prepare(session.id, session.policy);
+      if (capture !== session) return;
+      if (result.ok) dispatch({ type: "recorder-prepared" });
+      else dispatch({ type: "command-failed", command, reason: result.error.reason });
+    } catch {
+      if (capture === session) dispatch({ type: "command-failed", command, reason: "failed" });
+    }
+  };
+
+  const start = (session: CaptureSession): void => {
+    const command = { type: "start-recorder", requestId: session.id } as const;
+    try {
+      const result = recorder.start(session.id);
+      if (capture !== session) return;
+      if (result.ok) dispatch({ type: "recorder-started" });
+      else dispatch({ type: "command-failed", command, reason: result.error.reason });
+    } catch {
+      if (capture === session) dispatch({ type: "command-failed", command, reason: "failed" });
+    }
+  };
+
+  const run = async (commands: readonly ConsentCommand[], owner: CaptureSession | null) => {
+    const generation = roomGeneration;
+    for (const command of commands) {
+      if (command.type === "stop-recorder") {
+        if (owner) track(finish(owner.id));
+      } else if (command.type === "send") {
+        const sent = await send(command);
+        if (disposed || generation !== roomGeneration) return;
+        if (!sent) {
+          if (expectsSendResult(state, command)) dispatch({ type: "command-failed", command });
+          return;
+        }
+      } else if (owner && capture === owner) {
+        if (command.type === "prepare-recorder") await prepare(owner);
+        else start(owner);
       }
-      if (command.type === "start-recorder") await step({ type: "recorder-started" });
     }
   };
 
-  const dispatch = (event: ConsentEvent): void => {
-    chain = chain.then(() => step(event)).catch(() => undefined);
+  function dispatch(event: ConsentEvent): void {
+    const previous = state;
+    const next = transitionConsent(state, event);
+    state = next.state;
+    const oldCapture = capture;
+    if (state.status === "local-starting" || state.status === "local-recording") {
+      if (!capture) {
+        capture = createCapture(state.requestId, room, () => state);
+        lastCaptureId = state.requestId;
+      }
+    } else {
+      capture = null;
+      if (state.status !== "idle" || state.notice?.kind === "recorder-failed") lastCaptureId = null;
+      oldCapture?.abort();
+    }
+    if (next.commands.length > 0) track(run(next.commands, capture ?? oldCapture));
+    if (state !== previous) {
+      capture?.changed();
+      for (const listener of listeners) listener();
+    }
+  }
+
+  const disconnected = (): void => {
+    roomGeneration++;
+    sendTail = Promise.resolve();
+    dispatch({ type: "disconnected" });
+    lastCaptureId = null;
   };
 
   const onRoomChange = (): void => {
     const snapshot = room.getSnapshot();
     const inRoom = isInRoom(snapshot.connection);
-    const current = identitiesOf(snapshot);
-    if (wasInRoom && !inRoom) dispatch({ type: "disconnected" });
-    if (inRoom) {
-      for (const identity of known)
-        if (!current.has(identity)) dispatch({ type: "left", identity });
-      for (const identity of current)
-        if (!known.has(identity)) dispatch({ type: "joined", identity });
-    }
-    known = current;
+    const previous = known;
+    known = admissionKeysOf(snapshot);
+    const departed = wasInRoom && !inRoom;
     wasInRoom = inRoom;
+    if (departed) disconnected();
+    if (inRoom) {
+      for (const [identity, admissionKey] of known) {
+        const replaced = previous.has(identity) && previous.get(identity) !== admissionKey;
+        if (replaced && (state.status === "prompted" || state.status === "remote-recording")) {
+          dispatch({ type: "left", identity });
+        }
+        if (replaced || !previous.has(identity)) {
+          dispatch({ type: "joined", identity, admissionId: ++admissionId, admissionKey });
+        }
+      }
+      for (const identity of previous.keys()) {
+        if (!known.has(identity)) dispatch({ type: "left", identity });
+      }
+    }
   };
 
   const unsubscribeRoom = room.subscribe(onRoomChange);
-  const unsubscribeConsent = room.onConsentMessage((envelope) =>
-    dispatch({ type: "received", envelope }),
-  );
-  const unsubscribeRecorder = recorder.onStoppedItself((reason) =>
-    dispatch({ type: "recorder-stopped-itself", reason }),
-  );
+  const unsubscribeConsent = room.onConsentMessage((envelope) => {
+    // Reconcile the current admission before accepting an answer, even in a room callback.
+    if (envelope.message.type === "record-answer") onRoomChange();
+    dispatch({ type: "received", envelope });
+  });
+  const unsubscribeRecorder = recorder.onStoppedItself(recorderFailure);
 
   return {
     getSnapshot: () => state,
@@ -137,30 +234,121 @@ export function createRecordingConsent(ports: RecordingConsentPorts): RecordingC
     },
     request: () => {
       const snapshot = room.getSnapshot();
-      if (snapshot.connection.status !== "connected") return err(meetingErrors.connectionLost());
+      if (disposed || snapshot.connection.status !== "connected") {
+        return err(meetingErrors.connectionLost());
+      }
       if (recorder.support === "unsupported")
         return err(conferencingErrors.recorderFailed("unsupported"));
       if (state.status !== "idle") return err(conferencingErrors.recordingBusy());
       const present = snapshot.remotes.map((remote) => remote.identity);
-      dispatch({ type: "request", requestId: ports.newRequestId(), present });
+      dispatch({
+        type: "request",
+        requestId: ports.newRequestId(),
+        present,
+        admissionKeys: admissionKeysOf(snapshot),
+      });
       return ok(undefined);
     },
     answer: (answer) => dispatch({ type: "answer", answer }),
     withdraw: () => dispatch({ type: "withdraw" }),
     stop: () => dispatch({ type: "stop" }),
     dismissNotice: () => dispatch({ type: "dismiss-notice" }),
-    settled: () => chain,
-    dispose: async () => {
-      unsubscribeRoom();
-      unsubscribeConsent();
-      unsubscribeRecorder();
-      dispatch({ type: "disconnected" });
-      await chain;
+    settled,
+    dispose: () => {
+      if (!disposed) {
+        disposed = true;
+        unsubscribeRoom();
+        unsubscribeConsent();
+        unsubscribeRecorder();
+        disconnected();
+        listeners.clear();
+      }
+      return settled();
+    },
+  };
+}
+
+interface CaptureSession {
+  readonly id: RecordingRequestId;
+  readonly policy: RecordingCapturePolicy;
+  abort(): void;
+  changed(): void;
+}
+
+function createCapture(
+  id: RecordingRequestId,
+  room: RealtimeRoom,
+  current: () => RecordingConsentState,
+): CaptureSession {
+  const controller = new AbortController();
+  const listeners = new Set<() => void>();
+  return {
+    id,
+    policy: {
+      signal: controller.signal,
+      allows: (identity, admissionKey) => {
+        const state = current();
+        if (controller.signal.aborted) return false;
+        if (state.status !== "local-recording" && state.status !== "local-starting") return false;
+        const snapshot = room.getSnapshot();
+        if (state.requestId !== id || !isInRoom(snapshot.connection)) return false;
+        if (snapshot.local?.identity === identity) return true;
+        const remote = snapshot.remotes.find((participant) => participant.identity === identity);
+        return (
+          remote !== undefined &&
+          state.consented.includes(identity) &&
+          state.admissions.get(identity)?.admissionKey === remote.admissionKey &&
+          (admissionKey === undefined || admissionKey === remote.admissionKey)
+        );
+      },
+      subscribe: (listener) => {
+        listeners.add(listener);
+        return () => {
+          listeners.delete(listener);
+        };
+      },
+    },
+    changed: () => {
+      for (const listener of listeners) listener();
+    },
+    abort: () => {
+      controller.abort();
       listeners.clear();
     },
   };
 }
 
-function identitiesOf(snapshot: RoomSnapshot): ReadonlySet<ParticipantIdentity> {
-  return new Set(snapshot.remotes.map((remote) => remote.identity));
+function expectsSendResult(
+  state: RecordingConsentState,
+  { to, message }: Extract<ConsentCommand, { type: "send" }>,
+): boolean {
+  if (state.status === "idle" || message.requestId !== state.requestId) return false;
+  switch (message.type) {
+    case "record-request":
+      if (state.status !== "requesting") return false;
+      return (
+        to.kind === "everyone" ||
+        (state.awaiting.includes(to.to) &&
+          state.admissions.get(to.to)?.admissionId === message.admissionId)
+      );
+    case "record-answer":
+      if (to.kind !== "private") return false;
+      if (
+        (state.status === "prompted" && state.requester === to.to) ||
+        (state.status === "remote-recording" && state.recorder === to.to)
+      ) {
+        return state.admissionId === message.admissionId;
+      }
+      return false;
+    case "record-started":
+      return state.status === "local-starting";
+    default:
+      return false;
+  }
+}
+
+function admissionKeysOf(
+  snapshot: RoomSnapshot,
+): ReadonlyMap<ParticipantIdentity, string | undefined> {
+  return new Map(snapshot.remotes.map((remote) => [remote.identity, remote.admissionKey] as const));
 }

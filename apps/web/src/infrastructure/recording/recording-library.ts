@@ -36,6 +36,7 @@ export interface RecordingLibraryOptions {
   readonly changes: RecordingChangeBus;
   /** The id this tab is recording right now, or null. */
   readonly localActiveId: () => RecordingRequestId | null;
+  readonly localSaving: (id: RecordingRequestId) => boolean;
   readonly isPersisted: () => Promise<boolean>;
   readonly requestPersistence: () => Promise<boolean>;
 }
@@ -50,6 +51,7 @@ function stateOf(
   writing: boolean,
 ): RecordingState {
   if (writing) return "recording";
+  if (row?.endReason === "unusable" || file?.size === 0) return "unusable";
   if (file === undefined) return "missing";
   if (row === null || row.endReason === null || row.endReason === "failed") return "incomplete";
   return row.endReason === "storage-full" ? "stopped-early" : "complete";
@@ -126,22 +128,22 @@ export function createRecordingLibrary(options: RecordingLibraryOptions): Record
     ]);
     signal?.throwIfAborted();
     const active = options.localActiveId();
-    // Without the Web Locks API only this tab's own recording is known to be running.
-    const isWriting = (id: string): boolean => (held === null ? active === id : held.has(id));
+    const isHere = (id: RecordingRequestId): boolean => active === id || options.localSaving(id);
+    const isWriting = (id: RecordingRequestId): boolean => isHere(id) || held?.has(id) === true;
     const entries: LocalRecording[] = [];
     const seen = new Set<string>();
     for (const row of rows ?? []) {
       seen.add(row.fileName);
       const link = links.get(row.id);
       entries.push(
-        describeRow(row, files.get(row.fileName), link, isWriting(row.id), active === row.id),
+        describeRow(row, files.get(row.fileName), link, isWriting(row.id), isHere(row.id)),
       );
     }
     for (const [name, file] of files) {
       if (seen.has(name)) continue;
       const id = idOfFile(name);
       if (id === null) continue;
-      entries.push(describeOrphan(id, file, links.get(id), isWriting(id), active === id));
+      entries.push(describeOrphan(id, file, links.get(id), isWriting(id), isHere(id)));
     }
     entries.sort((a, b) => b.startedAt - a.startedAt || (a.id < b.id ? 1 : -1));
     return ok(entries);
@@ -182,6 +184,7 @@ export function createRecordingLibrary(options: RecordingLibraryOptions): Record
       if (entry === null || entry.state === "missing")
         return err({ code: "recording-file-missing" });
       if (entry.state === "recording") return err({ code: "recording-in-progress" });
+      if (entry.state === "unusable") return err(failed());
       const file = await openRecordingFile(`${id}.${extensionFor(entry.mimeType)}`);
       if (file === null) return err({ code: "recording-file-missing" });
       // A typed view of the same bytes: the blob is a lazy slice, nothing is copied.

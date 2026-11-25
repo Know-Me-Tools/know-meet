@@ -1,5 +1,10 @@
 // TJ-ARCH-MOB-001 compliant
-import type { RealtimeRoom, RoomSnapshot } from "@know-meet/application";
+import type {
+  MediaTarget,
+  RealtimeRoom,
+  RecordingCapturePolicy,
+  RoomSnapshot,
+} from "@know-meet/application";
 import { type DesiredMedia, desiredMedia } from "./desired-media";
 
 /** One bound hidden media element and what it shows. */
@@ -21,6 +26,7 @@ export interface MediaBindings {
 }
 
 interface Entry {
+  readonly target: MediaTarget;
   readonly bound: BoundMedia;
   readonly detach: () => void;
 }
@@ -45,7 +51,10 @@ function kindOf(desired: DesiredMedia): BoundMedia["kind"] {
  * subscribed later, so an element keeps up without help from here. Elements are never added
  * to the document.
  */
-export function createMediaBindings(room: RealtimeRoom): MediaBindings {
+export function createMediaBindings(
+  room: RealtimeRoom,
+  allows: RecordingCapturePolicy["allows"] | undefined,
+): MediaBindings {
   const entries = new Map<string, Entry>();
   let order: readonly string[] = [];
 
@@ -59,7 +68,7 @@ export function createMediaBindings(room: RealtimeRoom): MediaBindings {
 
   return {
     sync: (snapshot) => {
-      const wanted = desiredMedia(snapshot);
+      const wanted = desiredMedia(snapshot, allows);
       const keys = new Set(wanted.map((desired) => desired.key));
       for (const key of [...entries.keys()]) if (!keys.has(key)) drop(key);
       for (const desired of wanted) {
@@ -72,6 +81,7 @@ export function createMediaBindings(room: RealtimeRoom): MediaBindings {
         const detach = room.attachMedia(desired.target, element);
         void element.play().catch(() => undefined);
         entries.set(desired.key, {
+          target: desired.target,
           bound: {
             key: desired.key,
             medium: desired.medium,
@@ -87,7 +97,9 @@ export function createMediaBindings(room: RealtimeRoom): MediaBindings {
     current: () =>
       order.flatMap((key) => {
         const entry = entries.get(key);
-        return entry === undefined ? [] : [entry.bound];
+        if (entry === undefined) return [];
+        if (allows?.(entry.target.identity, entry.target.admissionKey) === false) return [];
+        return [entry.bound];
       }),
     dispose: () => {
       for (const key of [...entries.keys()]) drop(key);

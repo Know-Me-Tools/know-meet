@@ -1,54 +1,18 @@
 import type { ParticipantIdentity } from "../meeting/participant.ts";
 import { type ChatAudience, EVERYONE, privateTo } from "./chat-message.ts";
-import type { RecorderFailureReason } from "./conferencing-error.ts";
+import type { ConsentCommand, ConsentEvent, ConsentStep } from "./consent-transition-types.ts";
 import type {
-  ConsentAnswer,
+  AdmissionChallenge,
   ConsentEnvelope,
   ConsentMessage,
   ConsentNotice,
+  ParticipantAdmissions,
   RecordingConsentState,
   RecordingRequestId,
   RecordingStopReason,
 } from "./recording-consent.ts";
 
-/**
- * Everything that can move the consent state. `request` to `dismiss-notice` are this
- * participant's actions; `received`, `joined`, `left` and `disconnected` come from the
- * room; `recorder-*` and `command-failed` report how the last commands went.
- */
-export type ConsentEvent =
-  | {
-      readonly type: "request";
-      readonly requestId: RecordingRequestId;
-      /** The remote participants present now. */
-      readonly present: readonly ParticipantIdentity[];
-    }
-  | { readonly type: "answer"; readonly answer: ConsentAnswer }
-  | { readonly type: "withdraw" }
-  | { readonly type: "stop" }
-  | { readonly type: "dismiss-notice" }
-  | { readonly type: "received"; readonly envelope: ConsentEnvelope }
-  | { readonly type: "joined"; readonly identity: ParticipantIdentity }
-  | { readonly type: "left"; readonly identity: ParticipantIdentity }
-  | { readonly type: "disconnected" }
-  | { readonly type: "recorder-started" }
-  | { readonly type: "recorder-stopped-itself"; readonly reason: RecorderFailureReason }
-  | { readonly type: "command-failed"; readonly command: ConsentCommand };
-
-/**
- * Side effects the caller performs, in order, stopping at the first that fails and then
- * reporting `command-failed`. `stop-recorder` finalises and keeps what was written, and
- * does nothing when the recorder is not running.
- */
-export type ConsentCommand =
-  | { readonly type: "send"; readonly to: ChatAudience; readonly message: ConsentMessage }
-  | { readonly type: "start-recorder"; readonly requestId: RecordingRequestId }
-  | { readonly type: "stop-recorder" };
-
-export interface ConsentStep {
-  readonly state: RecordingConsentState;
-  readonly commands: readonly ConsentCommand[];
-}
+export type { ConsentCommand, ConsentEvent, ConsentStep } from "./consent-transition-types.ts";
 
 type State<S extends RecordingConsentState["status"]> = Extract<
   RecordingConsentState,
@@ -57,9 +21,8 @@ type State<S extends RecordingConsentState["status"]> = Extract<
 type LocalRecorderState = State<"local-starting" | "local-recording">;
 
 /**
- * The consent rules as a pure function. The recorder is started only by the command
- * emitted when the last present participant agreed, and only after the `record-started`
- * announcement; any failure on the way leads away from recording, never towards it.
+ * Prepare the encoder after everyone agrees. Admit live inputs after the successful
+ * start announcement.
  */
 export function transitionConsent(state: RecordingConsentState, event: ConsentEvent): ConsentStep {
   if (event.type === "disconnected") return onDisconnected(state);
@@ -100,6 +63,56 @@ const withAdded = (
   identity: ParticipantIdentity,
 ): readonly ParticipantIdentity[] => (list.includes(identity) ? list : [...list, identity]);
 
+function challenge(admissionId: number | undefined): AdmissionChallenge {
+  return admissionId === undefined ? {} : { admissionId };
+}
+
+function requestChallenge(message: ConsentMessage): AdmissionChallenge {
+  return message.type === "record-request" ? challenge(message.admissionId) : {};
+}
+
+function askArrival(
+  state: State<"requesting"> | LocalRecorderState,
+  { identity, admissionId, admissionKey }: Extract<ConsentEvent, { type: "joined" }>,
+): ConsentStep {
+  const admissions = new Map(state.admissions).set(identity, { admissionId, admissionKey });
+  const next =
+    state.status === "requesting"
+      ? {
+          ...state,
+          admissions,
+          awaiting: withAdded(state.awaiting, identity),
+          agreed: without(state.agreed, identity),
+        }
+      : {
+          ...state,
+          admissions,
+          pending: withAdded(state.pending, identity),
+          consented: without(state.consented, identity),
+        };
+  return {
+    state: next,
+    commands: [
+      send(privateTo(identity), {
+        type: "record-request",
+        requestId: state.requestId,
+        admissionId,
+        phase: state.status === "local-recording" ? "running" : "asking",
+      }),
+    ],
+  };
+}
+
+function removeAdmission(
+  admissions: ParticipantAdmissions,
+  identity: ParticipantIdentity,
+): ParticipantAdmissions {
+  if (!admissions.has(identity)) return admissions;
+  const remaining = new Map(admissions);
+  remaining.delete(identity);
+  return remaining;
+}
+
 /** Another participant's request while this client is busy: answer "busy" so they stop waiting. */
 const declineBusy = (state: RecordingConsentState, envelope: ConsentEnvelope): ConsentStep => ({
   state,
@@ -109,6 +122,7 @@ const declineBusy = (state: RecordingConsentState, envelope: ConsentEnvelope): C
       requestId: envelope.message.requestId,
       answer: "declined",
       reason: "busy",
+      ...requestChallenge(envelope.message),
     }),
   ],
 });
@@ -119,6 +133,7 @@ const askAboutRunningRecording = (envelope: ConsentEnvelope): RecordingConsentSt
   requestId: envelope.message.requestId,
   recorder: envelope.from,
   localConsent: "asked",
+  ...requestChallenge(envelope.message),
 });
 
 /** Stop capturing first, then tell everyone. */
@@ -134,16 +149,14 @@ const stopRecording = (
   ],
 });
 
-/** Announce first, so nobody is recorded without an indicator, then start. */
+/** Start the encoder without admitting meeting inputs. */
 const startRecording = (
   requestId: RecordingRequestId,
   consented: readonly ParticipantIdentity[],
+  admissions: ParticipantAdmissions,
 ): ConsentStep => ({
-  state: { status: "local-starting", requestId, consented, pending: [] },
-  commands: [
-    send(EVERYONE, { type: "record-started", requestId }),
-    { type: "start-recorder", requestId },
-  ],
+  state: { status: "local-starting", requestId, consented, pending: [], admissions },
+  commands: [{ type: "prepare-recorder", requestId }],
 });
 
 function onDisconnected(state: RecordingConsentState): ConsentStep {
@@ -160,15 +173,24 @@ function onDisconnected(state: RecordingConsentState): ConsentStep {
 // ---- per state ----------------------------------------------------------------------------
 
 function fromIdle(state: State<"idle">, event: ConsentEvent): ConsentStep {
+  if (event.type === "recorder-stopped-itself") {
+    return stay(idle({ kind: "recorder-failed", reason: event.reason }));
+  }
   if (event.type === "dismiss-notice") return stay(state.notice === null ? state : idle(null));
   if (event.type === "request") {
-    if (event.present.length === 0) return startRecording(event.requestId, []);
+    const admissions: ParticipantAdmissions = new Map(
+      event.present.map(
+        (identity) => [identity, { admissionKey: event.admissionKeys?.get(identity) }] as const,
+      ),
+    );
+    if (event.present.length === 0) return startRecording(event.requestId, [], admissions);
     return {
       state: {
         status: "requesting",
         requestId: event.requestId,
         awaiting: event.present,
         agreed: [],
+        admissions,
       },
       commands: [
         send(EVERYONE, { type: "record-request", requestId: event.requestId, phase: "asking" }),
@@ -182,6 +204,7 @@ function fromIdle(state: State<"idle">, event: ConsentEvent): ConsentStep {
       status: "prompted",
       requestId: message.requestId,
       requester: event.envelope.from,
+      ...challenge(message.admissionId),
       answer: null,
     });
   }
@@ -200,15 +223,11 @@ function fromRequesting(state: State<"requesting">, event: ConsentEvent): Consen
         commands: [send(EVERYONE, { type: "record-withdrawn", requestId, reason: "cancelled" })],
       };
     case "joined":
-      return {
-        state: { ...state, awaiting: withAdded(state.awaiting, event.identity) },
-        commands: [
-          send(privateTo(event.identity), { type: "record-request", requestId, phase: "asking" }),
-        ],
-      };
+      return askArrival(state, event);
     case "left":
       return startIfEveryoneAgreed({
         ...state,
+        admissions: removeAdmission(state.admissions, event.identity),
         awaiting: without(state.awaiting, event.identity),
         agreed: without(state.agreed, event.identity),
       });
@@ -240,7 +259,12 @@ function requestingReceived(state: State<"requesting">, envelope: ConsentEnvelop
     };
   }
   if (message.type !== "record-answer" || message.requestId !== state.requestId) return stay(state);
-  if (!state.awaiting.includes(from)) return stay(state);
+  if (
+    !state.awaiting.includes(from) ||
+    state.admissions.get(from)?.admissionId !== message.admissionId
+  ) {
+    return stay(state);
+  }
   if (message.answer === "declined") {
     return {
       state: idle({ kind: "declined", by: from, reason: message.reason }),
@@ -262,11 +286,11 @@ function requestingReceived(state: State<"requesting">, envelope: ConsentEnvelop
 
 function startIfEveryoneAgreed(state: State<"requesting">): ConsentStep {
   if (state.awaiting.length > 0) return stay(state);
-  return startRecording(state.requestId, state.agreed);
+  return startRecording(state.requestId, state.agreed, state.admissions);
 }
 
 function fromPrompted(state: State<"prompted">, event: ConsentEvent): ConsentStep {
-  const { requestId, requester } = state;
+  const { requestId, requester, admissionId } = state;
   switch (event.type) {
     case "answer":
       if (state.answer !== null) return stay(state);
@@ -274,7 +298,12 @@ function fromPrompted(state: State<"prompted">, event: ConsentEvent): ConsentSte
         return {
           state: { ...state, answer: "agreed" },
           commands: [
-            send(privateTo(requester), { type: "record-answer", requestId, answer: "agreed" }),
+            send(privateTo(requester), {
+              type: "record-answer",
+              requestId,
+              answer: "agreed",
+              ...challenge(admissionId),
+            }),
           ],
         };
       }
@@ -286,6 +315,7 @@ function fromPrompted(state: State<"prompted">, event: ConsentEvent): ConsentSte
             requestId,
             answer: "declined",
             reason: "person",
+            ...challenge(admissionId),
           }),
         ],
       };
@@ -304,12 +334,24 @@ function promptedReceived(state: State<"prompted">, envelope: ConsentEnvelope): 
   const { message, from } = envelope;
   const fromRequester = from === state.requester && message.requestId === state.requestId;
   if (fromRequester) {
+    if (
+      message.type === "record-request" &&
+      (message.admissionId ?? 0) > (state.admissionId ?? 0)
+    ) {
+      return message.phase === "running"
+        ? stay(askAboutRunningRecording(envelope))
+        : stay({ ...state, ...challenge(message.admissionId), answer: null });
+    }
     if (message.type === "record-withdrawn") return stay(idle(null));
+    if (message.type === "record-stopped") {
+      return stay(idle({ kind: "recording-stopped", reason: message.reason }));
+    }
     if (message.type === "record-started") {
       return stay({
         status: "remote-recording",
         requestId: state.requestId,
         recorder: from,
+        ...challenge(state.admissionId),
         localConsent: state.answer === "agreed" ? "agreed" : "asked",
       });
     }
@@ -319,7 +361,12 @@ function promptedReceived(state: State<"prompted">, envelope: ConsentEnvelope): 
   if (message.type === "record-started") {
     const original: ConsentEnvelope = {
       from: state.requester,
-      message: { type: "record-request", requestId: state.requestId, phase: "asking" },
+      message: {
+        type: "record-request",
+        requestId: state.requestId,
+        phase: "asking",
+        ...challenge(state.admissionId),
+      },
     };
     return declineBusy(askAboutRunningRecording(envelope), original);
   }
@@ -332,36 +379,44 @@ function fromLocalRecorder(state: LocalRecorderState, event: ConsentEvent): Cons
     case "stop":
       return stopRecording(requestId, "recorder-stopped", null);
     case "joined":
-      return {
-        state: { ...state, pending: withAdded(state.pending, event.identity) },
-        commands: [
-          send(privateTo(event.identity), { type: "record-request", requestId, phase: "running" }),
-        ],
-      };
+      return askArrival(state, event);
     case "left":
       return stay({
         ...state,
+        admissions: removeAdmission(state.admissions, event.identity),
         consented: without(state.consented, event.identity),
         pending: without(state.pending, event.identity),
       });
+    case "recorder-prepared":
+      return state.status === "local-starting"
+        ? {
+            state,
+            commands: [
+              send(EVERYONE, { type: "record-started", requestId }),
+              { type: "start-recorder", requestId },
+            ],
+          }
+        : stay(state);
     case "recorder-started":
       return state.status === "local-starting"
         ? stay({ ...state, status: "local-recording" })
         : stay(state);
     case "recorder-stopped-itself":
-      return {
-        state: idle({ kind: "recorder-failed" }),
-        commands: [
-          send(EVERYONE, { type: "record-stopped", requestId, reason: "recorder-failed" }),
-        ],
-      };
+      return stopRecording(requestId, "recorder-failed", {
+        kind: "recorder-failed",
+        reason: event.reason,
+      });
     case "command-failed":
-      // A failed announcement, recorder start or late-joiner prompt: someone may be recorded
-      // without knowing. Stop.
+      if (event.command.type === "send" && event.command.message.type === "record-request") {
+        // A missing prompt leaves that arrival excluded while the consented recording continues.
+        return stay(state);
+      }
       return stopRecording(
         requestId,
         state.status === "local-starting" ? "recorder-failed" : "consent-error",
-        { kind: "recorder-failed" },
+        event.reason
+          ? { kind: "recorder-failed", reason: event.reason }
+          : { kind: "recorder-failed" },
       );
     case "received":
       return localRecorderReceived(state, event.envelope);
@@ -375,7 +430,8 @@ function localRecorderReceived(state: LocalRecorderState, envelope: ConsentEnvel
   if (message.type === "record-request") return declineBusy(state, envelope);
   if (message.type !== "record-answer" || message.requestId !== state.requestId) return stay(state);
   const isParticipant = state.pending.includes(from) || state.consented.includes(from);
-  if (!isParticipant) return stay(state);
+  if (!isParticipant || state.admissions.get(from)?.admissionId !== message.admissionId)
+    return stay(state);
   if (message.answer === "declined") {
     return stopRecording(state.requestId, "participant-declined", {
       kind: "recording-stopped",
@@ -400,7 +456,7 @@ function fromRemoteRecording(state: State<"remote-recording">, event: ConsentEve
           : { type: "record-answer", requestId, answer: "declined", reason: "person" };
       return {
         state: { ...state, localConsent: event.answer },
-        commands: [send(privateTo(recorder), message)],
+        commands: [send(privateTo(recorder), { ...message, ...challenge(state.admissionId) })],
       };
     }
     case "left":
@@ -424,6 +480,12 @@ function remoteRecordingReceived(
   const { message, from } = envelope;
   const fromRecorder = from === state.recorder && message.requestId === state.requestId;
   if (fromRecorder) {
+    if (
+      message.type === "record-request" &&
+      (message.admissionId ?? 0) > (state.admissionId ?? 0)
+    ) {
+      return stay(askAboutRunningRecording(envelope));
+    }
     if (message.type === "record-stopped") {
       return stay(idle({ kind: "recording-stopped", reason: message.reason }));
     }

@@ -21,6 +21,7 @@ import {
   type NameOf,
   noticeText,
   RECORD_COPY,
+  runningText,
   waitingText,
 } from "./recording-copy";
 
@@ -53,7 +54,46 @@ interface RecordingNoticeProps {
 }
 
 export function RecordingNotice({ recording, nameOf }: RecordingNoticeProps) {
-  const { state, notice } = recording;
+  const { state, notice, prompt, support } = recording;
+
+  if (prompt?.running === true) {
+    return (
+      <Note
+        icon="record"
+        tone="record"
+        role="group"
+        aria-label={RECORD_COPY.runningTitle}
+        data-testid="km-recording-consent-prompt"
+        text={
+          <>
+            <p className="font-semibold">{RECORD_COPY.runningTitle}</p>
+            <p className="text-muted-foreground">
+              {runningText(nameOf(prompt.requester), prompt.admissionBound === true)}
+            </p>
+          </>
+        }
+        action={
+          <div className="flex flex-wrap gap-s2">
+            <Button
+              type="button"
+              variant="secondary"
+              data-testid="km-recording-consent-decline"
+              onClick={() => recording.answer("declined")}
+            >
+              {RECORD_COPY.runningDecline}
+            </Button>
+            <Button
+              type="button"
+              data-testid="km-recording-consent-agree"
+              onClick={() => recording.answer("agreed")}
+            >
+              {RECORD_COPY.runningAgree}
+            </Button>
+          </div>
+        }
+      />
+    );
+  }
 
   if (state.status === "requesting") {
     return (
@@ -88,7 +128,11 @@ export function RecordingNotice({ recording, nameOf }: RecordingNoticeProps) {
     );
   }
 
-  if (notice === null) return null;
+  if (notice === null) {
+    return support === "unsupported" && state.status === "idle" ? (
+      <Note icon="alert" tone="warn" text={<p>{RECORD_COPY.unsupported}</p>} action={null} />
+    ) : null;
+  }
   const declined = notice.kind === "declined";
   return (
     <Note

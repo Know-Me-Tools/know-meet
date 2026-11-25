@@ -74,6 +74,8 @@ export interface RoomSnapshot {
 
 /** Which participant's which medium a media element should play. */
 export interface MediaTarget {
+  /** A recording binding belongs to this admission even if the participant identity is reused. */
+  readonly admissionKey?: string;
   readonly identity: ParticipantIdentity;
   readonly kind: MediaSource;
 }

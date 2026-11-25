@@ -1,64 +1,47 @@
 // TJ-ARCH-MOB-001 compliant
-import type { MediaTarget, RoomSnapshot } from "@know-meet/application";
+import type { MediaTarget, RecordingCapturePolicy, RoomSnapshot } from "@know-meet/application";
+import type { Participant, ParticipantIdentity } from "@know-meet/domain";
 
-/** One medium the recording needs from the room, as the snapshot says it exists now. */
 export interface DesiredMedia {
-  /** Stable while the medium exists; the binding is kept as long as the key is. */
+  /** Stable only for this publication kind and this participant admission. */
   readonly key: string;
   readonly target: MediaTarget;
   readonly medium: "video" | "audio";
-  /** The name drawn on the tile, empty for audio. */
   readonly label: string;
 }
 
-/**
- * Which media to bind for the recording: every participant's camera (a tile even when the
- * camera is off), every screen share this client receives (a tile), and the remote
- * microphones and share audio (mixed, not drawn).
- *
- * The local microphone is not here on purpose: the room never hands a participant their
- * own microphone through `attachMedia`, so it is captured separately (`local-microphone`).
- */
-export function desiredMedia(snapshot: RoomSnapshot): readonly DesiredMedia[] {
-  const media: DesiredMedia[] = [];
-  const names = new Map<string, string>();
-  if (snapshot.local !== null) names.set(snapshot.local.identity, snapshot.local.displayName);
-  for (const remote of snapshot.remotes) names.set(remote.identity, remote.displayName);
+function mediumFor(person: Participant, kind: MediaTarget["kind"]): DesiredMedia {
+  const { identity } = person;
+  const admissionKey = person.kind === "remote" ? person.admissionKey : undefined;
+  const medium = kind === "camera" || kind === "screen-share" ? "video" : "audio";
+  return {
+    key: JSON.stringify([identity, admissionKey, kind]),
+    target: admissionKey === undefined ? { identity, kind } : { identity, kind, admissionKey },
+    medium,
+    label: medium === "video" ? person.displayName : "",
+  };
+}
 
-  const people = [...(snapshot.local === null ? [] : [snapshot.local]), ...snapshot.remotes];
+/** Decide eligibility before creating a tile, attaching a source, or drawing an identity. */
+export function desiredMedia(
+  snapshot: RoomSnapshot,
+  allows: RecordingCapturePolicy["allows"] | undefined,
+): readonly DesiredMedia[] {
+  const media: DesiredMedia[] = [];
+  const people = snapshot.local === null ? snapshot.remotes : [snapshot.local, ...snapshot.remotes];
+  const eligible = new Map<ParticipantIdentity, Participant>();
   for (const person of people) {
-    media.push({
-      key: `camera:${person.identity}`,
-      target: { identity: person.identity, kind: "camera" },
-      medium: "video",
-      label: person.displayName,
-    });
-    if (person.kind === "remote") {
-      media.push({
-        key: `microphone:${person.identity}`,
-        target: { identity: person.identity, kind: "microphone" },
-        medium: "audio",
-        label: "",
-      });
-    }
+    const admission = person.kind === "remote" ? person.admissionKey : undefined;
+    if (!(allows?.(person.identity, admission) ?? person.kind === "local")) continue;
+    eligible.set(person.identity, person);
+    media.push(mediumFor(person, "camera"));
+    if (person.kind === "remote") media.push(mediumFor(person, "microphone"));
   }
   for (const share of snapshot.screenShares) {
-    if (!share.subscribed) continue;
-    const name = names.get(share.identity) ?? "";
-    media.push({
-      key: `screen-share:${share.identity}`,
-      target: { identity: share.identity, kind: "screen-share" },
-      medium: "video",
-      label: name,
-    });
-    if (share.hasAudio && !share.isLocal) {
-      media.push({
-        key: `screen-share-audio:${share.identity}`,
-        target: { identity: share.identity, kind: "screen-share-audio" },
-        medium: "audio",
-        label: "",
-      });
-    }
+    const person = eligible.get(share.identity);
+    if (!share.subscribed || person === undefined) continue;
+    media.push(mediumFor(person, "screen-share"));
+    if (share.hasAudio && !share.isLocal) media.push(mediumFor(person, "screen-share-audio"));
   }
   return media;
 }
