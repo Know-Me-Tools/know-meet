@@ -1,0 +1,77 @@
+{
+  "phase": "web-recording-consent",
+  "boundary": "B5",
+  "attempt": 10,
+  "candidateTree": "7f6745199830bb67aac8f46bd387d1b5de5a2bd9",
+  "contractDigest": "6f4f5abe52f95bae1d8b7efd9bae233c0040288d0ea1f8ae4bddc39db5b20ddb",
+  "closureEvidenceSha256": "56815444c791b167b2e7e50fa1691f524ad5f71eecc72a2663e416c4666eba12",
+  "commands": [
+    {
+      "id": "install",
+      "exitCode": 0
+    },
+    {
+      "id": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "id": "test",
+      "exitCode": 0
+    },
+    {
+      "id": "lint",
+      "exitCode": 0
+    },
+    {
+      "id": "hosted-build",
+      "exitCode": 0
+    },
+    {
+      "id": "compose-build",
+      "exitCode": 0
+    },
+    {
+      "id": "compose-start",
+      "exitCode": 0
+    },
+    {
+      "id": "recording-controls",
+      "exitCode": 0
+    },
+    {
+      "id": "recording-scenarios",
+      "exitCode": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "RC-1",
+      "status": "PASS"
+    },
+    {
+      "id": "RC-2",
+      "status": "PASS"
+    },
+    {
+      "id": "RC-3",
+      "status": "PASS"
+    },
+    {
+      "id": "RC-4",
+      "status": "PASS"
+    },
+    {
+      "id": "RC-5",
+      "status": "PASS"
+    }
+  ],
+  "chromium": {
+    "passed": 29,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "controlsPassed": 7
+  },
+  "shortClipAudioEndpointDifferenceMs": 99,
+  "trackEndpointToleranceMs": 200
+}

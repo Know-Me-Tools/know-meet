@@ -1,0 +1,16 @@
+{
+  "phase": "web-recording-consent",
+  "contractAmendments": 12,
+  "contractCausedBlockedAtClosure": 0,
+  "notExercisedAtClosure": 0,
+  "repairAttempts": {
+    "used": 10,
+    "allowed": 10
+  },
+  "postClosureEscapesKnown": 0,
+  "closingReviews": {
+    "critical": 0,
+    "warnings": 1,
+    "suggestions": 1
+  }
+}
