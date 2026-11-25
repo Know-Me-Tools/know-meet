@@ -4,7 +4,7 @@ import type { RoomRecording } from "./room-recording";
 
 export interface RoomRecordingDependencies {
   readonly recording: RoomRecording;
-  /** Told the room code after a join and null after a leave, for the recordings index. */
+  /** Told the room code after a join and null when Leave starts, for the recordings index. */
   readonly setRoomCode: (code: string | null) => void;
 }
 
@@ -29,10 +29,12 @@ export function withRoomRecording(
       }
       return result;
     },
-    leave: async () => {
-      await recording.end();
+    leave: () => {
+      // End capture before disconnecting. The old recording retains its own room code
+      // and can finish saving after a new room has joined.
+      void recording.end();
       setRoomCode(null);
-      await inner.leave();
+      return inner.leave();
     },
   };
 }

@@ -37,8 +37,8 @@ export function readCompositePalette(root: HTMLElement): CompositePalette {
 }
 
 export interface FrameCompositor {
-  /** Draws the current grid of the given tiles. Call once per frame. */
-  draw(tiles: readonly BoundMedia[]): void;
+  /** Draws the grid and reports whether a decoded source frame entered it. */
+  draw(tiles: readonly BoundMedia[]): boolean;
 }
 
 function initialsOf(name: string): string {
@@ -114,21 +114,24 @@ export function createFrameCompositor(
     ctx.fillText(label, x + TAG_PADDING, y + TAG_HEIGHT / 2, width - 2 * TAG_PADDING);
   }
 
-  function drawTile(tile: BoundMedia, rect: TileRect): void {
+  function drawTile(tile: BoundMedia, rect: TileRect): boolean {
     ctx.save();
     ctx.beginPath();
     ctx.rect(rect.x, rect.y, rect.width, rect.height);
     ctx.clip();
-    if (hasFrame(tile.element)) {
+    const element = tile.element;
+    const drewFrame = hasFrame(element);
+    if (drewFrame) {
       ctx.fillStyle = palette.background;
       ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-      const target = fit(tile.element, rect, tile.kind === "camera");
-      ctx.drawImage(tile.element, target.x, target.y, target.width, target.height);
+      const target = fit(element, rect, tile.kind === "camera");
+      ctx.drawImage(element, target.x, target.y, target.width, target.height);
     } else {
       drawPlaceholder(tile, rect);
     }
     drawTag(tile.label, rect);
     ctx.restore();
+    return drewFrame;
   }
 
   return {
@@ -137,10 +140,12 @@ export function createFrameCompositor(
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       const videoTiles = tiles.filter((tile) => tile.medium === "video");
       const rects = computeGridLayout(videoTiles.length, canvas.width, canvas.height, GAP);
+      let drewFrame = false;
       videoTiles.forEach((tile, index) => {
         const rect = rects[index];
-        if (rect !== undefined) drawTile(tile, rect);
+        if (rect !== undefined && drawTile(tile, rect)) drewFrame = true;
       });
+      return drewFrame;
     },
   };
 }

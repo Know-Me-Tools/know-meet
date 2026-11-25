@@ -139,7 +139,10 @@ export function createTextStreams(host: SessionHost): TextStreams {
     audience: ChatAudience,
   ): Promise<Result<{ readonly id: string; readonly timestamp: number }, MessageSendError>> => {
     try {
-      const options = textSendOptions(topic, audience);
+      const streamOptions = textSendOptions(topic, audience);
+      // Consent packets are small control messages. Keep their wire payload stable for the
+      // independent receive and delivery-fault witnesses used by the recording boundary.
+      const options = channel === "consent" ? { ...streamOptions, compress: false } : streamOptions;
       const info = await session.room.localParticipant.sendText(text, options);
       return ok({ id: info.id, timestamp: info.timestamp });
     } catch (error) {

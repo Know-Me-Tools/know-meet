@@ -61,7 +61,7 @@ export {
   type NoteInserted,
 } from "./notes/note-feed.ts";
 export type { CapabilitySource, NoteRepository } from "./notes/ports.ts";
-export type { LocalRecorder } from "./recording/ports.ts";
+export type { LocalRecorder, RecordingCapturePolicy } from "./recording/ports.ts";
 export {
   createRecordingConsent,
   type RecordingConsent,

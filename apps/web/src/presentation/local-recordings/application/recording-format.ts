@@ -11,7 +11,12 @@ export type RecordingCondition =
   | "complete"
   | "stopped-early"
   | "incomplete"
+  | "unusable"
   | "missing";
+
+export function isPlayableRecording(condition: RecordingCondition): boolean {
+  return condition === "complete" || condition === "stopped-early" || condition === "incomplete";
+}
 
 export interface RecordingFacts {
   readonly roomCode: string | null;

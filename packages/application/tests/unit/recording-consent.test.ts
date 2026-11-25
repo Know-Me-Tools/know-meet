@@ -135,7 +135,7 @@ describe("requesting a recording", () => {
   });
 });
 
-describe("late joiner (D2)", () => {
+describe("late joiner opt-in", () => {
   async function recordingWithB() {
     const context = await setup([B]);
     context.consent.request();
@@ -152,8 +152,14 @@ describe("late joiner (D2)", () => {
     room.setRemote(remote(C));
     await consent.settled();
     const last = room.sentConsent().at(-1);
+    assert.ok(last?.message.type === "record-request" && last.message.admissionId !== undefined);
     assert.deepEqual(last, {
-      message: { type: "record-request", requestId: FIRST, phase: "running" },
+      message: {
+        type: "record-request",
+        requestId: FIRST,
+        phase: "running",
+        admissionId: last.message.admissionId,
+      },
       to: { kind: "private", to: C },
     });
     assert.equal(recorder.recording(), FIRST);
@@ -162,9 +168,18 @@ describe("late joiner (D2)", () => {
   it("stops for everyone and keeps the file when the late joiner declines", async () => {
     const { room, recorder, consent } = await recordingWithB();
     room.setRemote(remote(C));
+    await consent.settled();
+    const prompt = room.sentConsent().at(-1)?.message;
+    assert.ok(prompt?.type === "record-request" && prompt.admissionId !== undefined);
     room.deliverConsent({
       from: C,
-      message: { type: "record-answer", requestId: FIRST, answer: "declined", reason: "person" },
+      message: {
+        type: "record-answer",
+        requestId: FIRST,
+        answer: "declined",
+        reason: "person",
+        admissionId: prompt.admissionId,
+      },
     });
     await consent.settled();
     assert.equal(recorder.recording(), null);

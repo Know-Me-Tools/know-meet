@@ -2,7 +2,7 @@
 import { parseRecordingRequestId, type RecordingRequestId } from "@know-meet/domain";
 import type { HistoryDatabase } from "../../history/history-database";
 import { migrateHistory } from "../../history/history-schema";
-import type { RecordingIndexWriter } from "../library-types";
+import type { RecordingIndexWriter, StoredRecordingEndReason } from "../library-types";
 import type { RecordingChangeBus } from "./recording-change-bus";
 
 /** One row of the `recording` table, as the library reads it. */
@@ -14,7 +14,7 @@ export interface IndexedRecording {
   readonly startedAt: number;
   readonly endedAt: number | null;
   readonly sizeBytes: number;
-  readonly endReason: "stopped" | "storage-full" | "failed" | null;
+  readonly endReason: StoredRecordingEndReason | null;
 }
 
 /** The history session a recording is linked to. */
@@ -56,7 +56,12 @@ function toNumber(value: unknown): number | null {
 }
 
 function toEndReason(value: string | null): IndexedRecording["endReason"] {
-  return value === "stopped" || value === "storage-full" || value === "failed" ? value : null;
+  return value === "stopped" ||
+    value === "storage-full" ||
+    value === "failed" ||
+    value === "unusable"
+    ? value
+    : null;
 }
 
 function toIndexed(row: IndexRow): IndexedRecording | null {

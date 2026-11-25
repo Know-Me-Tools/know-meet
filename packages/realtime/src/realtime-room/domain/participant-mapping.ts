@@ -17,6 +17,7 @@ export interface TrackFacts {
 
 export interface ParticipantFacts {
   readonly identity: string;
+  readonly admissionKey?: string;
   /** The name from the access token; empty or missing falls back to the identity. */
   readonly name: string | undefined;
   readonly microphone: TrackFacts;
@@ -70,6 +71,7 @@ export function toRemote(facts: ParticipantFacts): RemoteParticipant {
   return {
     kind: "remote",
     identity: toParticipantIdentity(facts.identity),
+    ...(facts.admissionKey === undefined ? {} : { admissionKey: facts.admissionKey }),
     displayName: displayNameOf(facts),
     microphone: { muted: facts.microphone.muted, subscribed: facts.microphone.subscribed },
     camera: { muted: facts.camera.muted, subscribed: facts.camera.subscribed },
@@ -97,6 +99,7 @@ function sameLocal(a: LocalParticipant, b: LocalParticipant): boolean {
 function sameRemote(a: RemoteParticipant, b: RemoteParticipant): boolean {
   return (
     a.identity === b.identity &&
+    a.admissionKey === b.admissionKey &&
     a.displayName === b.displayName &&
     a.microphone.muted === b.microphone.muted &&
     a.microphone.subscribed === b.microphone.subscribed &&

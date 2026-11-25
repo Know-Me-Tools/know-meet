@@ -32,6 +32,8 @@ export interface LocalParticipant {
 }
 
 export interface RemoteParticipant {
+  /** Opaque transport identity of this particular room admission, when available. */
+  readonly admissionKey?: string;
   readonly kind: "remote";
   readonly identity: ParticipantIdentity;
   readonly displayName: string;

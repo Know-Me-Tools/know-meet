@@ -1,6 +1,6 @@
 // TJ-ARCH-MOB-001 compliant
-import type { RealtimeRoom } from "@know-meet/application";
-import { type AudioMixer, createAudioMixer } from "./audio-mixer";
+import type { RealtimeRoom, RecordingCapturePolicy } from "@know-meet/application";
+import { createAudioMixer } from "./audio-mixer";
 import { type FrameClock, startFrameClock } from "./frame-clock";
 import { createFrameCompositor, readCompositePalette } from "./frame-compositor";
 import {
@@ -18,53 +18,89 @@ import {
   VIDEO_BITS_PER_SECOND,
 } from "./recording-constants";
 import type { ChosenFormat } from "./recording-support";
+import { observeVideoProgress, type VideoProgress } from "./video-progress";
 
 export interface CompositePipelineOptions {
   readonly room: RealtimeRoom;
+  readonly capture: RecordingCapturePolicy | undefined;
   readonly format: ChosenFormat;
   readonly captureMicrophone: CaptureMicrophone;
-  /** One encoded chunk, in order, about every second. */
   readonly onChunk: (chunk: Blob) => void;
-  /** The encoder failed; the pipeline is not usable afterwards. */
   readonly onError: () => void;
 }
 
-/**
- * The picture and sound of one recording (wc10 task 10.1): a canvas grid of the room's
- * video tiles and one mixed audio track, encoded by `MediaRecorder`.
- *
- *   room.attachMedia ──> hidden <video> per camera / share ──> canvas grid ──┐
- *                                                                              ├─> MediaStream ─> MediaRecorder ─> onChunk
- *   room.attachMedia ──> hidden <audio> per remote mic ──> WebAudio mix ──────┤
- *   local microphone (own capture, gain 0 while muted) ──────────────────────┘
- *
- * The room is only read through `RealtimeRoom`, so no media SDK is imported here.
- */
 export interface CompositePipeline {
-  /** Starts drawing and encoding. Call once. */
-  start(): void;
-  /**
-   * Stops drawing and encoding and resolves once the last chunk was handed to `onChunk`.
-   * Safe to call twice.
-   */
+  /** Prepare the speaking participant’s recorder-only mic before the first encoded frame. */
+  prepare(): Promise<void>;
+  /** Start the native encoder on a blank canvas and a mixer with no sources. */
+  startEncoder(): Promise<boolean>;
+  /** Attach live room sources after the start announcement succeeds. */
+  startCapture(): void;
+  /** Cuts all live inputs in this call. The promise waits only for previously admitted output. */
   finish(): Promise<void>;
-  /** Releases the elements, the audio graph and the capture. Call after `finish`. */
-  dispose(): Promise<void>;
+  /** Source times retained for checking expected visual change during finalization. */
+  videoProgress(): VideoProgress | undefined;
 }
 
-const FINISH_TIMEOUT_MS = 5000;
-/** Audio sources are re-read this often, to notice a track that was replaced. */
+// A recorder that never acknowledges start must release pending startup and its resources.
+const ENCODER_START_TIMEOUT_MS = 5000;
+// A missing final stop event leaves no usable completion receipt from the encoder.
+const ENCODER_DRAIN_TIMEOUT_MS = 5000;
 const AUDIO_SYNC_FRAMES = COMPOSITE_FPS * 2;
 
 export function createCompositePipeline(options: CompositePipelineOptions): CompositePipeline {
-  const { room } = options;
+  const { room, capture } = options;
   const canvas = document.createElement("canvas");
   canvas.width = COMPOSITE_WIDTH;
   canvas.height = COMPOSITE_HEIGHT;
   const compositor = createFrameCompositor(canvas, readCompositePalette(document.documentElement));
-  const bindings = createMediaBindings(room);
-  const mixer: AudioMixer = createAudioMixer();
+  const sourceProgress = observeVideoProgress(canvas);
+  const bindings = createMediaBindings(
+    room,
+    capture && ((identity, admission) => capture.allows(identity, admission)),
+  );
+  const mixer = createAudioMixer();
   const microphone = createLocalMicrophoneFeed(mixer, options.captureMicrophone);
+
+  let videoTracks: MediaStreamTrack[] = [];
+  let recorder: MediaRecorder;
+  try {
+    videoTracks = canvas.captureStream(COMPOSITE_FPS).getVideoTracks();
+    const stream = new MediaStream([...videoTracks, ...mixer.stream.getAudioTracks()]);
+    recorder = new MediaRecorder(stream, {
+      mimeType: options.format.mimeType,
+      videoBitsPerSecond: VIDEO_BITS_PER_SECOND,
+      audioBitsPerSecond: AUDIO_BITS_PER_SECOND,
+    });
+  } catch (error) {
+    for (const track of videoTracks) track.stop();
+    void mixer.close();
+    throw error;
+  }
+
+  let clock: FrameClock | null = null;
+  let frames = 0;
+  let unsubscribeRoom: (() => void) | undefined;
+  let unsubscribeConsent: (() => void) | undefined;
+  let ended = false;
+  let started = false;
+  let captureStartedAt: number | undefined;
+  let startupTimer: ReturnType<typeof setTimeout> | undefined;
+  let drainTimer: ReturnType<typeof setTimeout> | undefined;
+  let outputClosed = false;
+  let resolveStart: (started: boolean) => void;
+  const encoderStarted = new Promise<boolean>((resolve) => {
+    resolveStart = resolve;
+  });
+  let resolveDrained: () => void;
+  const drained = new Promise<void>((resolve) => {
+    resolveDrained = resolve;
+  });
+
+  const settleStart = (success: boolean): void => {
+    clearTimeout(startupTimer);
+    resolveStart(success);
+  };
 
   const syncAudio = (): void => {
     const keys = new Set<string>([LOCAL_MICROPHONE_KEY]);
@@ -77,96 +113,120 @@ export function createCompositePipeline(options: CompositePipelineOptions): Comp
     mixer.keepOnly(keys);
   };
 
+  const drawCapture = (): void => {
+    const drewSourceFrame = compositor.draw(bindings.current());
+    if (drewSourceFrame && captureStartedAt !== undefined)
+      sourceProgress.observe(performance.now() - captureStartedAt);
+  };
+
   const syncRoom = (): void => {
+    if (ended || capture?.signal.aborted) return;
     const snapshot = room.getSnapshot();
     bindings.sync(snapshot);
-    microphone.sync(snapshot);
+    const local = snapshot.local;
+    void microphone.sync(snapshot, local !== null && (capture?.allows(local.identity) ?? true));
     syncAudio();
+    drawCapture();
   };
 
-  syncRoom();
-  compositor.draw(bindings.current());
+  const drawFrame = (): void => {
+    if (ended || capture?.signal.aborted) return;
+    if (captureStartedAt === undefined) {
+      compositor.draw([]);
+      return;
+    }
+    frames += 1;
+    if (frames % AUDIO_SYNC_FRAMES === 0) syncAudio();
+    drawCapture();
+  };
 
-  const videoTrack = canvas.captureStream(COMPOSITE_FPS).getVideoTracks();
-  const stream = new MediaStream([...videoTrack, ...mixer.stream.getAudioTracks()]);
-  let recorder: MediaRecorder;
-  try {
-    recorder = new MediaRecorder(stream, {
-      mimeType: options.format.mimeType,
-      videoBitsPerSecond: VIDEO_BITS_PER_SECOND,
-      audioBitsPerSecond: AUDIO_BITS_PER_SECOND,
-    });
-  } catch (error) {
-    // The encoder refused the format: release what was opened above before reporting it.
-    microphone.dispose();
-    bindings.dispose();
-    for (const track of stream.getTracks()) track.stop();
-    void mixer.close();
-    throw error;
-  }
   recorder.addEventListener("dataavailable", (event) => {
-    if (event.data.size > 0) options.onChunk(event.data);
+    if (!outputClosed && event.data.size > 0) options.onChunk(event.data);
   });
-  recorder.addEventListener("error", () => options.onError());
-
-  let clock: FrameClock | null = null;
-  let frames = 0;
-  let unsubscribe: (() => void) | null = null;
-  let finishing: Promise<void> | null = null;
-  let disposed = false;
-
-  const stopClock = (): void => {
-    clock?.stop();
-    clock = null;
-    unsubscribe?.();
-    unsubscribe = null;
-  };
+  // A browser can dispatch a queued start during error or stop cleanup. An inactive
+  // recorder must never produce a successful startup receipt.
+  recorder.addEventListener("start", () => settleStart(!ended && recorder.state === "recording"), {
+    once: true,
+  });
+  recorder.addEventListener("error", () => {
+    settleStart(false);
+    options.onError();
+  });
+  recorder.addEventListener(
+    "stop",
+    () => {
+      settleStart(false);
+      outputClosed = true;
+      clearTimeout(drainTimer);
+      resolveDrained();
+      if (!ended) options.onError();
+    },
+    { once: true },
+  );
 
   return {
-    start: () => {
-      void mixer.resume();
-      unsubscribe = room.subscribe(syncRoom);
-      clock = startFrameClock(COMPOSITE_FPS, () => {
-        frames += 1;
-        if (frames % AUDIO_SYNC_FRAMES === 0) syncAudio();
-        compositor.draw(bindings.current());
-      });
+    prepare: async () => {
+      const snapshot = room.getSnapshot();
+      const local = snapshot.local;
+      if (local === null || local.microphone.muted || capture?.allows(local.identity) === false) {
+        return;
+      }
+      // A browser permission or device request may settle after cancellation. The feed
+      // releases a late track itself; saving and a later start need not wait for it.
+      await Promise.race([microphone.sync(snapshot, true, false), drained]);
+    },
+    startEncoder: () => {
+      if (ended || capture?.signal.aborted) throw new Error("Recording was canceled");
       recorder.start(RECORDER_TIMESLICE_MS);
+      started = true;
+      startupTimer = setTimeout(() => settleStart(false), ENCODER_START_TIMEOUT_MS);
+      // Keep feeding the canvas while the encoder is pending. Live sources still wait
+      // for startCapture, after the room announcement succeeds.
+      clock = startFrameClock(COMPOSITE_FPS, drawFrame);
+      drawFrame();
+      void mixer.resume();
+      return encoderStarted;
+    },
+    startCapture: () => {
+      if (!started || ended || recorder.state !== "recording" || capture?.signal.aborted)
+        throw new Error("Encoder is unavailable");
+      unsubscribeRoom = room.subscribe(syncRoom);
+      unsubscribeConsent = capture?.subscribe(syncRoom);
+      captureStartedAt = performance.now();
+      syncRoom();
     },
     finish: () => {
-      finishing ??= new Promise<void>((resolve) => {
-        stopClock();
-        if (recorder.state === "inactive") {
-          resolve();
-          return;
-        }
-        const timer = setTimeout(resolve, FINISH_TIMEOUT_MS);
-        // The encoder fires its last `dataavailable` before `stop`.
-        recorder.addEventListener(
-          "stop",
-          () => {
-            clearTimeout(timer);
-            resolve();
-          },
-          { once: true },
-        );
-        try {
-          recorder.stop();
-        } catch {
-          clearTimeout(timer);
-          resolve();
-        }
-      });
-      return finishing;
-    },
-    dispose: async () => {
-      if (disposed) return;
-      disposed = true;
-      stopClock();
+      if (ended) return drained;
+      ended = true;
+      settleStart(false);
+      clock?.stop();
+      unsubscribeRoom?.();
+      unsubscribeConsent?.();
       microphone.dispose();
       bindings.dispose();
-      for (const track of stream.getTracks()) track.stop();
-      await mixer.close();
+      mixer.keepOnly(new Set());
+      try {
+        if (started && !outputClosed) {
+          drainTimer = setTimeout(() => {
+            outputClosed = true;
+            options.onError();
+            resolveDrained();
+          }, ENCODER_DRAIN_TIMEOUT_MS);
+        }
+        if (recorder.state !== "inactive") recorder.stop();
+        if (!started) resolveDrained();
+      } catch {
+        clearTimeout(drainTimer);
+        outputClosed = true;
+        options.onError();
+        resolveDrained();
+      } finally {
+        // The mixer owns only its destination track. Input tracks belong to the meeting.
+        for (const track of videoTracks) track.stop();
+        void mixer.close();
+      }
+      return drained;
     },
+    videoProgress: sourceProgress.evidence,
   };
 }

@@ -9,10 +9,19 @@ import type { RecordingRequestId, Result, Support } from "@know-meet/domain";
  * - `stopped-early`: storage ran full; everything written before that is kept.
  * - `incomplete`: never finalised (the tab closed or crashed) or ended on an error. What
  *   was written is kept and plays up to where it stops.
+ * - `unusable`: this attempt produced no playable clip. Any bytes remain on the device.
  * - `missing`: the library still lists it but its file is gone (cleared by the browser or
  *   the person). It can only be removed from the list.
  */
-export type RecordingState = "recording" | "complete" | "stopped-early" | "incomplete" | "missing";
+export type RecordingState =
+  | "recording"
+  | "complete"
+  | "stopped-early"
+  | "incomplete"
+  | "unusable"
+  | "missing";
+
+export type StoredRecordingEndReason = "stopped" | "storage-full" | "failed" | "unusable";
 
 export interface LocalRecording {
   /** The recording request id; it also names the file. */
@@ -93,6 +102,6 @@ export interface RecordingIndexWriter {
     readonly id: RecordingRequestId;
     readonly endedAt: number;
     readonly sizeBytes: number;
-    readonly endReason: "stopped" | "storage-full" | "failed";
+    readonly endReason: StoredRecordingEndReason;
   }): Promise<void>;
 }

@@ -67,6 +67,11 @@ const MIGRATIONS: readonly (readonly string[])[] = [
     `CREATE INDEX IF NOT EXISTS recording_newest_first
        ON recording (started_at DESC, id DESC)`,
   ],
+  [
+    "ALTER TABLE recording DROP CONSTRAINT IF EXISTS recording_end_reason_check",
+    `ALTER TABLE recording ADD CONSTRAINT recording_end_reason_check
+       CHECK (end_reason IN ('stopped', 'storage-full', 'failed', 'unusable'))`,
+  ],
 ];
 
 const VERSION_KEY = "schema_version";

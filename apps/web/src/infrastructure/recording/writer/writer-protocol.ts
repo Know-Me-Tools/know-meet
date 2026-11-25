@@ -14,11 +14,12 @@ export type WriterRequest =
 export type WriterFailure = "quota-exceeded" | "storage-unavailable" | "failed";
 
 /**
- * Messages the worker sends back. After `failed` the file is already closed and the lock
+ * `failing` reports the first failure immediately, before flush and close. After `failed` the file is already closed and the lock
  * released: what was written is kept, `size` bytes of it. The worker then ignores every
  * further request.
  */
 export type WriterEvent =
   | { readonly type: "opened" }
   | { readonly type: "closed"; readonly size: number }
+  | { readonly type: "failing"; readonly reason: WriterFailure; readonly size: number }
   | { readonly type: "failed"; readonly reason: WriterFailure; readonly size: number };

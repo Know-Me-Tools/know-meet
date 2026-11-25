@@ -16,8 +16,9 @@ export function FormatChip({ mimeType }: { readonly mimeType: string }) {
 const CONDITION_CHIP: Partial<
   Record<RecordingCondition, { readonly label: string; readonly tone: "amber" | "red" }>
 > = {
-  "stopped-early": { label: "Stopped early", tone: "amber" },
+  "stopped-early": { label: "Incomplete", tone: "amber" },
   incomplete: { label: "Incomplete", tone: "red" },
+  unusable: { label: "Recording failed", tone: "red" },
   missing: { label: "File missing", tone: "red" },
 };
 

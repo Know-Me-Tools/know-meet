@@ -17,6 +17,7 @@ import { type Recordings, useRecordingPlayback } from "../../../app/recordings/h
 import {
   clockTime,
   downloadFilename,
+  isPlayableRecording,
   metaLine,
   recordedMs,
   recordingTitle,
@@ -34,7 +35,7 @@ const linkFocusClass = cn(
 
 /** The object URL of a playable file for its poster and download; null otherwise. */
 function usePosterUrl(row: LibraryRow): string | null {
-  const playable = row.state !== "recording" && row.state !== "missing";
+  const playable = isPlayableRecording(row.state);
   const playback = useRecordingPlayback(playable ? row.id : null);
   return playback.status === "ready" ? playback.url : null;
 }
@@ -130,7 +131,7 @@ export function InProgressItem({
     <RecordingPoster url={null} variant={layout === "list" ? "thumb" : "card"}>
       <span className="inline-flex items-center gap-1.5 rounded-pill bg-red-soft px-2.5 py-1 text-xs font-semibold text-foreground">
         <span className="size-size-pip flex-none rounded-round bg-pip-red" />
-        Recording now
+        Recording or saving
       </span>
     </RecordingPoster>
   );
@@ -140,7 +141,7 @@ export function InProgressItem({
       <span className="text-sm text-muted-foreground">
         Started {clockTime(row.startedAt)} {where}
       </span>
-      <span className="sr-only">Recording now {where}</span>
+      <span className="sr-only">Recording or saving {where}</span>
     </span>
   );
   return (

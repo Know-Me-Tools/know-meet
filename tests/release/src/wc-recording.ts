@@ -20,16 +20,20 @@ import { RECORDING } from "./wc-test-ids.ts";
 
 export const RECORD_WINDOW_MS = 20_000;
 export const DURATION_TOLERANCE_MS = 3_000;
+export const SAVE_READY_MS = 20_000;
 
 export async function requestRecording(page: Page): Promise<void> {
   await page.getByTestId(RECORDING.control).click();
 }
 
-export async function stopRecording(page: Page): Promise<void> {
+export async function stopRecording(page: Page): Promise<number> {
   const control = page.getByTestId(RECORDING.control);
   await expect(control).toHaveAttribute("data-state", "on");
+  const cutoffAt = Date.now();
   await control.click();
   await expect(control).toHaveAttribute("data-state", "off");
+  await expectIndicator(page, false, "the local recording indicator clears");
+  return cutoffAt;
 }
 
 export async function answerConsent(page: Page, agree: boolean): Promise<void> {
@@ -91,10 +95,34 @@ export async function notRecordingProbe(
  */
 export async function openLibraryAfterLeaving(page: Page): Promise<void> {
   await leave(page);
+  await openLibrary(page);
+}
+
+export async function openLibrary(page: Page): Promise<void> {
   await reachNavigation(page);
   await page.getByTestId(RECORDING.nav).click();
   await expect(page).toHaveURL(/\/recordings(?:#|$)/);
   await expect(page.getByTestId(RECORDING.library)).toBeVisible();
+}
+
+/** A library item is linked only after the writer's in-progress row becomes terminal. */
+export async function waitForSavedRecording(
+  page: Page,
+  cutoffAt: number,
+  before: readonly OpfsEntry[],
+): Promise<OpfsEntry[]> {
+  const remaining = cutoffAt + SAVE_READY_MS - Date.now();
+  expect(
+    remaining,
+    "the recording must finish within the 20 s cutoff-to-save window",
+  ).toBeGreaterThan(0);
+  await expect(page.getByTestId(RECORDING.item), "one terminal library item appears").toHaveCount(
+    1,
+    {
+      timeout: remaining,
+    },
+  );
+  return addedFiles(before, await opfsEntries(page));
 }
 
 export interface LibraryItem {

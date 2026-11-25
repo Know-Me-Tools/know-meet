@@ -23,6 +23,7 @@ export function composeRecordings(history: HistoryServices): RecordingsServices 
     index,
     changes,
     localActiveId: () => recorder?.activeRequestId() ?? null,
+    localSaving: (id) => recorder?.isSaving(id) ?? false,
     isPersisted: readStoragePersisted,
     requestPersistence: requestStoragePersistence,
   });

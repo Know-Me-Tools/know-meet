@@ -87,8 +87,9 @@ export function createRoomRecording(ports: RoomRecordingPorts): RoomRecording {
     end: async () => {
       const previous = detach();
       if (previous === null) return;
+      const ending = previous.dispose();
       emit();
-      await previous.dispose();
+      await ending;
     },
     request: () => consent?.request() ?? err(meetingErrors.connectionLost()),
     answer: (answer) => consent?.answer(answer),
