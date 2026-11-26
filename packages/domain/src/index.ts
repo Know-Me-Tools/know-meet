@@ -54,6 +54,22 @@ export {
   toDeviceId,
 } from "./conferencing/devices.ts";
 export {
+  type LocalSpeechProblem,
+  type LocalSpeechProfile,
+  type LocalSpeechSetupEvent,
+  type LocalSpeechSetupState,
+  updateLocalSpeechSetup,
+} from "./conferencing/local-speech-setup.ts";
+export {
+  LocalTranscriptionFence,
+  type TranscriptionGrant,
+  type TranscriptionLease,
+  type TranscriptionRequest,
+  type TranscriptionRoster,
+  type TranscriptionSource,
+  type TranscriptionState,
+} from "./conferencing/local-transcription-fence.ts";
+export {
   CONSENT_IDLE,
   CONSENT_PROTOCOL_VERSION,
   type ConsentAnswer,

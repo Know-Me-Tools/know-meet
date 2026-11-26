@@ -35,6 +35,12 @@ ls:
   apps/desktop/src-tauri/src: *rust-tree
 
 ignore:
+  # Files looked up by their upstream Transformers.js model names.
+  - apps/web/public/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/generation_config.json
+  - apps/web/public/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/onnx/decoder_model_merged_q4.onnx
+  - apps/web/public/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/onnx/encoder_model.onnx
+  - apps/web/public/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/preprocessor_config.json
+  - apps/web/public/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/tokenizer_config.json
   - .git
   - node_modules
   - apps/web/node_modules

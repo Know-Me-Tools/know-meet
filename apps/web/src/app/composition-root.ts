@@ -55,13 +55,17 @@ export async function composeApp(view: Window): Promise<AppServices> {
   // Recordings open their files and index on first use too (wc10).
   const recordings = composeRecordings(history);
   registerRecordingEntities(recordings.library);
+  const session = HOSTED_BUILD ? createSignedOutSession() : createLocalStorageSession(view);
   return {
     theme,
-    notes: { createNote: (title) => feed.create(title), draftStore: createNoteDraftStore() },
+    notes: {
+      createNote: (title) => feed.create(title),
+      draftStore: createNoteDraftStore(),
+    },
     // The hosted build has no sign-in: km-auth is never read, so it changes nothing visible.
-    session: HOSTED_BUILD ? createSignedOutSession() : createLocalStorageSession(view),
+    session,
     layout,
-    meeting: composeMeeting(history, recordings),
+    meeting: composeMeeting(history, recordings, () => session.current() === null),
     history,
     recordings,
   };

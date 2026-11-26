@@ -1,0 +1,12 @@
+{
+  "phase": "web-local-transcription",
+  "contractAmendments": 5,
+  "contractCausedBlocked": 0,
+  "notExercisedInitial": 3,
+  "notExercisedAtClosure": 0,
+  "repairAttemptsUsed": 4,
+  "repairAttemptsAllowed": 4,
+  "postClosureEscapesObserved": 0,
+  "initialReviewFindings": {"critical": 3, "warning": 1},
+  "unresolvedReviewFindings": {"critical": 0, "warning": 0}
+}

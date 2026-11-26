@@ -10,6 +10,7 @@ export {
   createLiveKitRealtimeRoom,
   type LiveKitRealtimeRoomOptions,
 } from "./infrastructure/livekit/create-livekit-realtime-room.ts";
+export type { LiveKitLocalSpeechRoomPort } from "./infrastructure/livekit/local-speech-room-port.ts";
 export type {
   BackgroundAssetPaths,
   ProcessedBackgroundEffect,

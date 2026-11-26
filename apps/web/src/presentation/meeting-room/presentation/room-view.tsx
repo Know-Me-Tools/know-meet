@@ -26,6 +26,7 @@ import { useChat } from "./chat/use-chat";
 import { DeviceSettingsPane } from "./device-settings/device-settings-pane";
 import { SettingsControl } from "./device-settings/settings-control";
 import { EnableAudioPrompt } from "./enable-audio-prompt";
+import { LocalTranscriptPanel } from "./local-transcript/local-transcript-panel";
 import { ConsentPrompt } from "./recording/consent-prompt";
 import { RecordControl } from "./recording/record-control";
 import { RecordingIndicator } from "./recording/recording-indicator";
@@ -115,6 +116,9 @@ export function RoomView({
             <EnableAudioPrompt conferencing={conferencing} announce={announce} />
           ) : null}
           <RecordingNotice recording={rec.recording} nameOf={rec.nameOf} />
+          {services.localTranscript ? (
+            <LocalTranscriptPanel services={services.localTranscript} />
+          ) : null}
         </div>
         <div className="relative grid min-h-0 grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)]">
           <RoomStage

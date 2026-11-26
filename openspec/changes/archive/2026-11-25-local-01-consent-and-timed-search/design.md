@@ -1,0 +1,9 @@
+## Proposed boundary
+Existing web room adapter exposes exactly the consented per-person input handles through the port; UI and domain do not import LiveKit types. Make admission generation, cut-off, queued-block discard and visible gaps explicit. Prefer separate per-source worker input; if safe track isolation is unavailable, pause. Model scripts and artifacts need an approved exact origin, license/size, digest and worker limits before first select-to-download.
+
+A scoped worker handles live ASR and device pressure without interfering with the call. Select a small English speech model after static capability and artifact fit assessment. Stable timestamps, finalized segments, and revisioned handoff support plain text lookup without model generation. If a media or worker fault occurs, show a specific reason and do not switch to another transport or service. Existing browser-local recorder and its consent state stay separate.
+
+Reuse the IndexedDB-backed local PGlite worker pattern; add a scoped transcript store with append-only schema migrations where appropriate. Persist opted-in model settings without persistence of permission, and distinguish kept text from a temporary transcript; local retrieval/deletion must not alter independently saved video. Focus on supported browser, language and exact scope rather than imposing a fleet latency guarantee.
+
+## Verification and ownership
+Three user-facing VLBV scenarios in the delta constitute the bounded acceptance candidate. Use the already-established phase-end workflow once on the exact candidate after separately authorized execution. Reviewer independently observes audio admission and network destinations, fixture truth/timestamp, and retained local storage outcome. No artifact is approved from an in-memory demo, acceptance runner or subjective screenshot alone. Preserve all preexisting recorder tests and release behavior.
