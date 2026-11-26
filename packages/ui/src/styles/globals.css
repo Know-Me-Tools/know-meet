@@ -10,6 +10,7 @@
 @import "@know-meet/design-tokens/theme.css";
 @import "@know-meet/design-tokens/shadcn.css";
 @import "./presence.css";
+@import "tw-shimmer";
 
 /* Kit sources (relative to this file). Apps add their own @source if needed. */
 @source "../components";
@@ -161,4 +162,29 @@
     }
   }
   /* biome-ignore-end lint/complexity/noImportantStyles: reduced motion must override every component and utility duration (WCAG 2.3.3) */
+}
+
+@custom-variant data-open (&:where([data-state="open"], [data-open]:not([data-open="false"])));
+
+@custom-variant data-closed (
+  &:where([data-state="closed"], [data-closed]:not([data-closed="false"]))
+);
+
+@theme inline {
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height, var(--collapsible-panel-height, auto));
+    }
+  }
+  @keyframes collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height, var(--collapsible-panel-height, auto));
+    }
+    to {
+      height: 0;
+    }
+  }
 }
