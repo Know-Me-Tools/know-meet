@@ -15,11 +15,11 @@ resources:
 # nothing else in this block. Never `latest`.
 images:
   - name: ghcr.io/know-me-tools/know-meet-web
-    newTag: ec36aad7d418892493591328be2ad6c94e585234
-    digest: sha256:7ea38e176d46cc182f05827dd6376bff5ba6d733b9164b09e15c9b4e2b8d380c
+    newTag: 5c6d97c644ef0610d3eaedf45e0a12c49b6cbb21
+    digest: sha256:4664716ff440aa68e4883e9d306308c5ea68a7d519545df3b57043a8acad7a3d
   - name: ghcr.io/know-me-tools/know-meet-token-service
-    newTag: ec36aad7d418892493591328be2ad6c94e585234
-    digest: sha256:64e85e8d5910ec6155db459afe56e3f8b3c579d6d0b9cba3973023561bd9f4c6
+    newTag: 5c6d97c644ef0610d3eaedf45e0a12c49b6cbb21
+    digest: sha256:c9b75b1764f1c2736bcf8de9f54bdd08dd9c62a07424dc1b714898f74c461694
 
 # Copies each generated header value (security-headers.yaml, a local-config ConfigMap that
 # kustomize reads but does not emit) into the ResponseHeaderModifier of every HTTPS rule.
