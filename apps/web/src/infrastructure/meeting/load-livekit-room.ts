@@ -1,5 +1,6 @@
 // TJ-ARCH-MOB-001 compliant
 import type { RealtimeRoom } from "@know-meet/application";
+import type { LiveKitRealtimeRoomOptions } from "@know-meet/realtime";
 import { BACKGROUND_ASSET_PATHS } from "./background-asset-paths";
 
 /**
@@ -10,11 +11,14 @@ import { BACKGROUND_ASSET_PATHS } from "./background-asset-paths";
  * the room reports `backgroundEffects` supported. `composeMeeting` passes the matching
  * `backgroundEffects: true` to the lazy room; the two must agree.
  */
-export async function loadLiveKitRoom(): Promise<RealtimeRoom> {
+export async function loadLiveKitRoom(
+  options: Pick<LiveKitRealtimeRoomOptions, "onLocalSpeechRoom"> = {},
+): Promise<RealtimeRoom> {
   const { createLiveKitRealtimeRoom, createBackgroundProcessorHook } = await import(
     "@know-meet/realtime"
   );
   return createLiveKitRealtimeRoom({
+    ...options,
     videoProcessor: createBackgroundProcessorHook(BACKGROUND_ASSET_PATHS),
   });
 }

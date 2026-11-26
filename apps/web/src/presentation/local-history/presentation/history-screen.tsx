@@ -14,10 +14,13 @@ import { Toaster, toast } from "@know-meet/ui/components/toast";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { useHistoryStorage, useMeetingHistoryList } from "../../../app/history/hooks";
+import { useSession } from "../../../app/routes/use-session";
+import { useMeetingServices } from "../../guest-meeting/meeting-services";
 import { ScreenPage } from "../../shared/screen-page";
 import { resolveHistoryView } from "../application/history-route";
 import { HistoryDetailView, NotFoundDetailView } from "./history-detail-view";
 import { HistoryListView } from "./history-list-view";
+import { LocalTranscriptLibrary } from "./local-transcript-library";
 
 function focusPageHeading(): void {
   const heading = document.querySelector<HTMLElement>("main h1");
@@ -42,6 +45,8 @@ export function HistoryScreen() {
   const view = resolveHistoryView(hash);
   const list = useMeetingHistoryList();
   const storage = useHistoryStorage();
+  const { localTranscript } = useMeetingServices();
+  const { user } = useSession();
   /** The row to focus when the list shows again: the one opened, or the one after a deleted one. */
   const returnRow = useRef<MeetingHistoryId | null>(null);
   const previousHash = useRef(hash);
@@ -75,7 +80,12 @@ export function HistoryScreen() {
     <Toaster>
       <ScreenPage data-testid="km-screen-history">
         {view.kind === "list" ? (
-          <HistoryListView list={list} storage={storage.status} />
+          <>
+            <HistoryListView list={list} storage={storage.status} />
+            {localTranscript !== undefined && localTranscript !== null && user === null ? (
+              <LocalTranscriptLibrary services={localTranscript} />
+            ) : null}
+          </>
         ) : view.kind === "detail" ? (
           <HistoryDetailView
             key={view.id}

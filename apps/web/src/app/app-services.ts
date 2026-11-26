@@ -2,6 +2,7 @@
 import type { MeetingUseCases, RealtimeRoom, ThemeStore } from "@know-meet/application";
 import { createContext, use } from "react";
 import type { SessionSource } from "../infrastructure/session/local-session";
+import type { LocalTranscriptServices } from "../presentation/guest-meeting/local-transcript-services";
 import type { NotesServices } from "../presentation/notes/notes-services";
 import type { WidthClassStore } from "./frame/width-class-store";
 import type { HistoryServices } from "./history/history-services";
@@ -18,6 +19,7 @@ export interface MeetingServices {
   readonly useCases: MeetingUseCases;
   readonly room: RealtimeRoom;
   readonly recording: RoomRecording;
+  readonly localTranscript: LocalTranscriptServices | null;
 }
 
 /** Everything the composition root wires: use cases and stores, never raw adapters. */

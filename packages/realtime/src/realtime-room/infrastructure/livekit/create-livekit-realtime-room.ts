@@ -11,6 +11,10 @@ import { createStartAudio } from "./audio-playback.ts";
 import { createBackgroundEffects } from "./background-effect.ts";
 import { createConnectionLifecycle } from "./connection-lifecycle.ts";
 import { createDevices } from "./devices.ts";
+import {
+  createLocalSpeechRoomPort,
+  type LiveKitLocalSpeechRoomPort,
+} from "./local-speech-room-port.ts";
 import { createSetMediaEnabled } from "./media-control.ts";
 import { readRoomFacts } from "./room-facts.ts";
 import { createSetScreenShareEnabled } from "./screen-share.ts";
@@ -34,6 +38,8 @@ export interface LiveKitRealtimeRoomOptions {
    * and only `none` is accepted. The lazy room must be told the same (`backgroundEffects`).
    */
   readonly videoProcessor?: VideoProcessorHook;
+  /** Optional browser-local speech feature; no hooks are installed when it is absent. */
+  readonly onLocalSpeechRoom?: (port: LiveKitLocalSpeechRoomPort | null) => void;
 }
 
 /**
@@ -75,11 +81,32 @@ export function createLiveKitRealtimeRoom(options: LiveKitRealtimeRoomOptions = 
   const devices = createDevices(host, catalog, support);
   const text = createTextStreams(host);
   const effects = createBackgroundEffects(host, options.videoProcessor, support);
+  let localSpeech: LiveKitLocalSpeechRoomPort | null = null;
   const lifecycle = createConnectionLifecycle(host, {
     roomOptionsFor: (connectOptions) =>
       devices.roomOptionsFor(baseRoomOptions, connectOptions.devices),
-    onSessionStart: (session) => text.attach(session),
+    onSessionStart: (session) => {
+      text.attach(session);
+      if (options.onLocalSpeechRoom !== undefined) {
+        try {
+          localSpeech = createLocalSpeechRoomPort(session.room);
+          options.onLocalSpeechRoom(localSpeech);
+        } catch {
+          localSpeech?.close();
+          localSpeech = null;
+        }
+      }
+    },
     onSessionReset: () => {
+      if (localSpeech !== null) {
+        localSpeech.close();
+        localSpeech = null;
+        try {
+          options.onLocalSpeechRoom?.(null);
+        } catch {
+          /* meeting remains independent */
+        }
+      }
       text.reset();
       effects.reset();
     },

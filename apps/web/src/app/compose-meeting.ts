@@ -4,8 +4,10 @@ import { createHttpTokenIssuer } from "../infrastructure/meeting/http-token-issu
 import { createLazyRealtimeRoom } from "../infrastructure/meeting/lazy-realtime-room";
 import { loadLiveKitRoom } from "../infrastructure/meeting/load-livekit-room";
 import type { MeetingServices } from "./app-services";
+import { HOSTED_BUILD } from "./build-mode";
 import type { HistoryServices } from "./history/history-services";
 import { withMeetingHistory } from "./history/with-meeting-history";
+import { composeLocalTranscript } from "./local-transcript/compose-local-transcript";
 import { newRecordingRequestId } from "./recordings/new-recording-request-id";
 import type { RecordingsServices } from "./recordings/recordings-services";
 import { createRoomRecording } from "./recordings/room-recording";
@@ -26,8 +28,17 @@ import { withRoomRecording } from "./recordings/with-room-recording";
 export function composeMeeting(
   history: HistoryServices,
   recordings: RecordingsServices,
+  canUseGuestStorage: () => boolean,
+  localSpeechOptions: Parameters<typeof loadLiveKitRoom>[0] = {},
 ): MeetingServices {
-  const room = createLazyRealtimeRoom(loadLiveKitRoom, { backgroundEffects: true });
+  const transcript = HOSTED_BUILD ? composeLocalTranscript(canUseGuestStorage) : null;
+  const options =
+    transcript === null
+      ? localSpeechOptions
+      : { ...localSpeechOptions, onLocalSpeechRoom: transcript.attach };
+  const room = createLazyRealtimeRoom(() => loadLiveKitRoom(options), {
+    backgroundEffects: true,
+  });
   let roomCode: string | null = null;
   const recording = createRoomRecording({
     room,
@@ -46,9 +57,15 @@ export function composeMeeting(
   });
   if (typeof addEventListener === "function") {
     addEventListener("pagehide", () => {
+      transcript?.attach(null);
       void recording.end();
       void useCases.endHistorySession();
     });
   }
-  return { useCases, room, recording };
+  return {
+    useCases,
+    room,
+    recording,
+    localTranscript: transcript?.services ?? null,
+  };
 }

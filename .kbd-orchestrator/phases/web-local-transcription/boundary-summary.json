@@ -1,0 +1,134 @@
+{
+  "phase": "web-local-transcription",
+  "boundary": "B5",
+  "attempt": 4,
+  "candidateTree": "6760d392c0506c1a967a42be21d5a56f3d52c69c",
+  "contractDigest": "5b3fd2c9e1570a109fb98607051740ab22ef77d850b70323bf75d6e1df3fc118",
+  "contractRevision": 6,
+  "closureEvidenceSha256": "e336bbdb0415412a184ce73f940ca5d09703898ea3d478586ad9f11440fb83ea",
+  "commands": [
+    {
+      "id": "host-runner-install",
+      "exitCode": 0
+    },
+    {
+      "id": "existing-packaged-build",
+      "exitCode": 0
+    },
+    {
+      "id": "existing-packaged-start",
+      "exitCode": 0
+    },
+    {
+      "id": "local-transcription-controls",
+      "exitCode": 0
+    },
+    {
+      "id": "local-transcription-scenarios",
+      "exitCode": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "KMT-1",
+      "status": "PASS",
+      "controls": [
+        "PASS"
+      ],
+      "sourceAttempt": 4
+    },
+    {
+      "id": "KMT-2",
+      "status": "PASS",
+      "controls": [
+        "PASS"
+      ],
+      "sourceAttempt": 2
+    },
+    {
+      "id": "KMT-3",
+      "status": "PASS",
+      "controls": [
+        "PASS"
+      ],
+      "sourceAttempt": 2
+    }
+  ],
+  "packagedStackRestored": true,
+  "carryForwardBasis": "The packaged image IDs, application sources, browser, model and synthetic fixture matched. KMT-2 and KMT-3 did not exercise the two-remote branch or the withdrawal observer repaired only for KMT-1.",
+  "browser": {
+    "engine": "Chromium",
+    "revision": 1254,
+    "mode": "headed",
+    "hardware": "MacBookPro18,2",
+    "architecture": "arm64"
+  },
+  "model": {
+    "assetRevision": "c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c",
+    "manifestSha256": "b1925afbeae0e5039d7a71684fc3bdd3303a6ad47069ec2dfc06225abb6dfea9"
+  },
+  "workerPcmWindowsAtOrAfterWithdrawalReceipt": 0,
+  "independentReview": {
+    "verdict": "PASS",
+    "priorFindingsResolved": 4,
+    "unresolvedCritical": 0
+  },
+  "publicationVerification": {
+    "candidateTree": "1d93cd85bfd83a2a25c3b4b52fcd6355bd3604fa",
+    "packetReceiptSha256": "a1c60aac35f85ad1fa40cc657af43262449685b7cd7e7611c1f479e61c7f1238",
+    "commands": [
+      {
+        "id": "host-runner-install",
+        "exitCode": 0
+      },
+      {
+        "id": "existing-packaged-build",
+        "exitCode": 0
+      },
+      {
+        "id": "existing-packaged-start",
+        "exitCode": 0
+      },
+      {
+        "id": "local-transcription-controls",
+        "exitCode": 0
+      },
+      {
+        "id": "local-transcription-scenarios",
+        "exitCode": 0
+      }
+    ],
+    "repositoryRules": "PASS",
+    "scopedTypecheck": "PASS",
+    "packagedStackRestored": true,
+    "candidateTreeNote": "The publication commit adds this verification record to the tested tree. It preserves the tested application, assets, fixtures, and tooling bytes.",
+    "controls": [
+      {
+        "id": "KMT-1",
+        "status": "PASS"
+      },
+      {
+        "id": "KMT-2",
+        "status": "PASS"
+      },
+      {
+        "id": "KMT-3",
+        "status": "PASS"
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "KMT-1",
+        "status": "PASS"
+      },
+      {
+        "id": "KMT-2",
+        "status": "PASS"
+      },
+      {
+        "id": "KMT-3",
+        "status": "PASS"
+      }
+    ]
+  }
+}

@@ -5,10 +5,12 @@
 // screen uses the same pattern with NotesServicesContext).
 import type { MeetingUseCases, RealtimeRoom, RoomSnapshot } from "@know-meet/application";
 import { createContext, use, useSyncExternalStore } from "react";
+import type { LocalTranscriptServices } from "./local-transcript-services";
 
 export interface MeetingServicesView {
   readonly useCases: MeetingUseCases;
   readonly room: RealtimeRoom;
+  readonly localTranscript?: LocalTranscriptServices | null;
 }
 
 export const MeetingServicesContext = createContext<MeetingServicesView | null>(null);

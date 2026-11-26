@@ -1,3 +1,4 @@
+export type { LiveKitLocalSpeechRoomPort } from "./realtime-room/index.ts";
 export {
   type BackgroundAssetPaths,
   createBackgroundProcessorHook,

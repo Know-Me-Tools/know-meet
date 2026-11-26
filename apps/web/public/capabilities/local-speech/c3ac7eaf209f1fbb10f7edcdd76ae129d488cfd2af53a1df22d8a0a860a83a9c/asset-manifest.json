@@ -1,0 +1,18 @@
+{
+  "assetRevision": "c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c",
+  "bundle": "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/runtime/transformers.js",
+  "modelRoot": "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/",
+  "modelKey": "whisper-tiny-en",
+  "wasmRoot": "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/runtime/wasm/",
+  "files": [
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/config.json",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/generation_config.json",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/onnx/decoder_model_merged_q4.onnx",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/onnx/encoder_model.onnx",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/preprocessor_config.json",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/tokenizer.json",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/models/whisper-tiny-en/tokenizer_config.json",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/runtime/wasm/ort-wasm-simd-threaded.jsep.mjs",
+    "/capabilities/local-speech/c3ac7eaf209f1fbb10f7edcdd76ae129d488cfd2af53a1df22d8a0a860a83a9c/vendor/runtime/wasm/ort-wasm-simd-threaded.jsep.wasm"
+  ]
+}
